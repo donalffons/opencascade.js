@@ -1,0 +1,264 @@
+typedef double Standard_Real;
+typedef boolean Standard_Boolean;
+
+interface BRepPrimAPI_MakeSphere{
+	void BRepPrimAPI_MakeSphere([Const]Standard_Real R); 
+	void BRepPrimAPI_MakeSphere([Const,Ref] gp_Ax2 Axes, [Const]Standard_Real R); 
+	
+	[Ref] BRepPrim_Sphere Sphere();
+};
+BRepPrimAPI_MakeSphere implements BRepPrimAPI_MakeOneAxis;
+
+interface BRepPrimAPI_MakeCylinder{
+	//  Standard_EXPORT BRepPrimAPI_MakeCylinder(const gp_Ax2& Axes, const Standard_Real R, const Standard_Real H);
+	void BRepPrimAPI_MakeCylinder([Const,Ref] gp_Ax2 Axes, [Const]Standard_Real R, [Const] Standard_Real H);
+};
+BRepPrimAPI_MakeCylinder implements BRepPrimAPI_MakeOneAxis;
+
+interface BRepPrimAPI_MakeOneAxis{
+	void Build();
+};
+BRepPrimAPI_MakeOneAxis implements BRepBuilderAPI_MakeShape;
+
+interface BRepBuilderAPI_MakeShape{
+	[Const, Ref] TopoDS_Shape Shape(); 
+};
+
+interface BRepPrim_Sphere{
+};
+
+interface TopoDS_Shape{
+	void TopoDS_Shape();
+};
+
+interface GProp_GProps{
+	void GProp_GProps();
+	Standard_Real Mass();
+};
+
+interface BRepGProp{
+	// Standard_False is created using #define macro
+	// this is static method / namespace
+	// value assignment in arguments
+	// void VolumeProperties ([Const,Ref] TopoDS_Shape S, [Ref] GProp_GProps VProps, [Const] Standard_Boolean OnlyClosed = Standard_False); 
+	void VolumeProperties ([Const,Ref] TopoDS_Shape S, [Ref] GProp_GProps VProps);
+};
+
+// tesselator for visualization
+interface Tesselator{
+	void Tesselator([Const,Ref] TopoDS_Shape aShape);
+	DOMString ExportShapeToThreejs();
+};
+
+// BRepMesh_IncrementalMesh.hxx
+interface BRepMesh_IncrementalMesh{
+	// constructor automatically call to perform meshing
+	void BRepMesh_IncrementalMesh([Const, Ref] TopoDS_Shape theShape, [Const] Standard_Real theLinDeflection);
+};
+
+
+interface TopoDS_Face{
+	void TopoDS_Face();
+};
+
+
+//
+// for bottle example 
+//
+interface BRepPrimAPI_MakePrism{
+//  Standard_EXPORT BRepPrimAPI_MakePrism(const TopoDS_Shape& S, const gp_Vec& V, const Standard_Boolean Copy = Standard_False, const Standard_Boolean Canonize = Standard_True);
+	void BRepPrimAPI_MakePrism([Const, Ref] TopoDS_Shape S, [Const, Ref] gp_Vec V);
+};
+BRepPrimAPI_MakePrism implements BRepPrimAPI_MakeSweep;
+
+interface BRepPrimAPI_MakeSweep{
+};
+BRepPrimAPI_MakeSweep implements BRepBuilderAPI_MakeShape; 
+
+interface gp_Vec{
+//  gp_Vec(const Standard_Real Xv, const Standard_Real Yv, const Standard_Real Zv);	
+	void gp_Vec( [Const]Standard_Real Xv, [Const]Standard_Real Yv, [Const]Standard_Real Zv);
+};
+
+
+interface gp_Pnt{
+//     gp_Pnt(const Standard_Real Xp, const Standard_Real Yp, const Standard_Real Zp);
+	void gp_Pnt([Const]Standard_Real Xp, [Const]Standard_Real Yp, [Const]Standard_Real Zp);
+	void SetX ([Const] Standard_Real X);
+	void SetY ([Const] Standard_Real Y);
+	void SetZ ([Const] Standard_Real Z);
+};
+
+
+interface GC_MakeArcOfCircle{
+	//Standard_EXPORT GC_MakeArcOfCircle(const gp_Pnt& P1, const gp_Pnt& P2, const gp_Pnt& P3);
+	void GC_MakeArcOfCircle([Const, Ref] gp_Pnt P1, [Const, Ref] gp_Pnt P2, [Const, Ref] gp_Pnt P3 );
+};
+
+interface GC_MakeSegment{
+	//   Standard_EXPORT GC_MakeSegment(const gp_Pnt& P1, const gp_Pnt& P2);
+	void GC_MakeSegment([Const, Ref] gp_Pnt P1, [Const, Ref] gp_Pnt P2);
+};
+
+
+interface TopoDS_Edge{
+	void TopoDS_Edge();
+};
+interface TopoDS_Wire{
+	void TopoDS_Wire();
+};
+
+
+interface gp_Ax1{
+	void gp_Ax1();
+};
+
+
+
+interface gp_Ax2{
+	//  Standard_EXPORT gp_Ax2(const gp_Pnt& P, const gp_Dir& V);
+	void gp_Ax2();
+	void gp_Ax2([Const,Ref]gp_Pnt P, [Const,Ref]gp_Dir V);
+};
+
+
+
+interface gp{
+	//const gp_Ax1&  gp::OX(){
+	//  static gp_Ax1 gp_OX(gp_Pnt(0,0,0),gp_Dir(1,0,0));
+	//  return gp_OX;
+	//}
+
+	[Const, Ref] gp_Ax1 OX();
+  	[Const,Ref] gp_Dir DZ();
+};
+
+interface gp_Dir{
+	void gp_Dir();
+};
+
+interface gp_Trsf{
+	void gp_Trsf();
+	//   Standard_EXPORT   void SetMirror (const gp_Ax1& A1) ;
+	void SetMirror([Const, Ref]gp_Ax1 A1);
+	//   Standard_EXPORT   void SetMirror (const gp_Ax2& A2) ;
+};
+
+interface BRepBuilderAPI_Transform{
+	//   Standard_EXPORT BRepBuilderAPI_Transform(const TopoDS_Shape& S, const gp_Trsf& T, const Standard_Boolean Copy = Standard_False);
+	void BRepBuilderAPI_Transform([Const, Ref]TopoDS_Shape S, [Const, Ref]gp_Trsf T);
+};
+BRepBuilderAPI_Transform implements BRepBuilderAPI_ModifyShape;
+
+interface BRepBuilderAPI_ModifyShape{
+
+};
+BRepBuilderAPI_ModifyShape implements BRepBuilderAPI_MakeShape;
+
+interface TopoDS{
+  [Const, Ref] TopoDS_Wire Wire([Const, Ref] TopoDS_Shape S);
+
+   //static  const  TopoDS_Edge& Edge (const TopoDS_Shape& S);
+	//inline static TopoDS_Edge& Edge(TopoDS_Shape&);
+	[Const, Ref] TopoDS_Edge Edge([Const, Ref] TopoDS_Shape S);
+};
+
+
+interface BRepBuilderAPI_MakeFace{
+	//  Standard_EXPORT BRepBuilderAPI_MakeFace(const TopoDS_Wire& W, const Standard_Boolean OnlyPlane = Standard_False);
+
+	void BRepBuilderAPI_MakeFace([Const, Ref]TopoDS_Wire W, [Const] optional Standard_Boolean OnlyPlane = false);
+	//	  Standard_EXPORT  const  TopoDS_Face& Face()  const;
+	[Const,Ref] TopoDS_Face Face();
+};
+
+interface BRepFilletAPI_MakeFillet{
+	//   Standard_EXPORT BRepFilletAPI_MakeFillet(const TopoDS_Shape& S, const ChFi3d_FilletShape FShape = ChFi3d_Rational);
+	void BRepFilletAPI_MakeFillet([Const, Ref]TopoDS_Shape S);
+	//   Standard_EXPORT   void Add (const Standard_Real Radius, const TopoDS_Edge& E) ;
+	void Add([Const] Standard_Real Radius, [Const,Ref]TopoDS_Edge E);
+};
+BRepFilletAPI_MakeFillet implements BRepFilletAPI_LocalOperation;
+
+interface BRepFilletAPI_LocalOperation{};
+BRepFilletAPI_LocalOperation implements BRepBuilderAPI_MakeShape;
+
+
+interface TopExp_Explorer{
+	//  Standard_EXPORT TopExp_Explorer(const TopoDS_Shape& S, const TopAbs_ShapeEnum ToFind, const TopAbs_ShapeEnum ToAvoid = TopAbs_SHAPE);
+	void TopExp_Explorer([Const,Ref]TopoDS_Shape S,[Const]TopAbs_ShapeEnum ToFind);
+
+    Standard_Boolean More();
+    void Next();
+
+    [Const,Ref] TopoDS_Shape Current();
+};
+
+
+// ENUM
+enum TopAbs_ShapeEnum{
+"TopAbs_COMPOUND",
+"TopAbs_COMPSOLID",
+"TopAbs_SOLID",
+"TopAbs_SHELL",
+"TopAbs_FACE",
+"TopAbs_WIRE",
+"TopAbs_EDGE",
+"TopAbs_VERTEX",
+"TopAbs_SHAPE"
+};
+
+interface BRepAlgoAPI_Fuse{
+	//   Standard_EXPORT BRepAlgoAPI_Fuse(const TopoDS_Shape& S1, const TopoDS_Shape& S2);
+	void BRepAlgoAPI_Fuse([Const,Ref] TopoDS_Shape S1, [Const,Ref] TopoDS_Shape S2);
+};
+BRepAlgoAPI_Fuse implements BRepAlgoAPI_BooleanOperation;
+
+interface BRepAlgoAPI_Cut{
+	void BRepAlgoAPI_Cut([Const,Ref] TopoDS_Shape S1, [Const,Ref] TopoDS_Shape S2);
+};
+BRepAlgoAPI_Cut implements BRepAlgoAPI_BooleanOperation;
+
+interface BRepAlgoAPI_BooleanOperation{
+};
+BRepAlgoAPI_BooleanOperation implements BRepBuilderAPI_MakeShape;
+
+interface gp_Lin{
+    void gp_Lin();
+    void gp_Lin([Const,Ref]gp_Ax1 A1);
+};
+
+interface gp_Circ{};
+interface gp_Elips{};
+interface gp_Hypr{};
+
+interface BRepBuilderAPI_MakeEdge{
+	// Standard_EXPORT BRepBuilderAPI_MakeEdge(const gp_Lin& L);
+	// Standard_EXPORT BRepBuilderAPI_MakeEdge(const gp_Circ& L);
+	// Standard_EXPORT BRepBuilderAPI_MakeEdge(const gp_Elips& L); 
+	// Standard_EXPORT BRepBuilderAPI_MakeEdge(const gp_Hypr& L);
+
+	//void BRepBuilderAPI_MakeEdge([Const, Ref] gp_Circ L);
+	//  Standard_EXPORT BRepBuilderAPI_MakeEdge(const gp_Pnt& P1, const gp_Pnt& P2);
+	void BRepBuilderAPI_MakeEdge([Const,Ref]gp_Pnt P1, [Const,Ref] gp_Pnt P2);
+	// Standard_EXPORT operator TopoDS_Edge() const;
+	//[Operator="="]void TopoDS_Edge();
+	//  Standard_EXPORT  const  TopoDS_Edge& Edge()  const;
+	[Const, Ref] TopoDS_Edge Edge();
+};
+
+interface BRepBuilderAPI_MakeWire{
+	//Standard_EXPORT BRepBuilderAPI_MakeWire(const TopoDS_Edge& E1, const TopoDS_Edge& E2, const TopoDS_Edge& E3);
+	void BRepBuilderAPI_MakeWire();
+	void BRepBuilderAPI_MakeWire([Const, Ref]TopoDS_Edge E1, [Const, Ref]TopoDS_Edge E2, [Const, Ref]TopoDS_Edge E3);
+	//   Standard_EXPORT   void Add (const TopoDS_Wire& W) ;
+	void Add ([Const, Ref] TopoDS_Wire W);
+	//   Standard_EXPORT  const  TopoDS_Wire& Wire()  const;
+	[Const, Ref] TopoDS_Wire Wire();
+};
+BRepBuilderAPI_MakeWire implements BRepBuilderAPI_MakeShape;
+
+
+
+
+
