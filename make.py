@@ -1,5 +1,7 @@
 import copy
+import multiprocessing
 import os
+import patch
 import requests
 import shutil
 import sys
@@ -64,18 +66,18 @@ def build():
   if not os.path.exists('build'):
     os.makedirs('build')
   os.chdir('build')
+  targetfile = "occt.tar.gz"
 
   ######################################
   if not os.path.exists('occt.tar.gz'):
     stage("downloading OCCT...")
     url = "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=0858125fd4ef81ca2965e1aa2f49c5960d7dcc62;sf=tgz"
     myfile = requests.get(url, stream=True)
-    targetfile = "occt.tar.gz"
     open(targetfile, 'wb').write(myfile.content)
 
   ######################################
   if not os.path.exists('occt'):
-    stage("extracting OCCT...")
+    stage("extracting OCCT, patching...")
     tar = tarfile.open(targetfile, "r:gz")
     tar.extractall("occt")
     tar.close()
@@ -84,6 +86,8 @@ def build():
     files = os.listdir(source)
     for f in files:
       shutil.move(source+f, dest)
+    pset = patch.fromfile("../patches/CMakeLists.txt.patch")
+    pset.apply()
 
   ######################################
   stage("checking EMSCRIPTEN...")
@@ -116,14 +120,14 @@ def build():
   emcc_args = args.split(' ')
   emcc_args += ['-s', 'TOTAL_MEMORY=%d' % (64*1024*1024)] # default 64MB. Compile with ALLOW_MEMORY_GROWTH if you want a growable heap (slower though).
   #emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1'] # resizable heap, with some amount of slowness
-  emcc_args += '-s EXPORT_NAME="oce" -s MODULARIZE=1'.split(' ')
+  emcc_args += '-s EXPORT_NAME="opencascade" -s MODULARIZE=1'.split(' ')
 
-  target = 'oce.js' if not wasm else 'oce.wasm.js'
+  target = 'opencascade.js' if not wasm else 'opencascade.wasm.js'
 
   ######################################
   stage('generate bindings...')
 
-  Popen([emscripten.PYTHON, os.path.join(EMSCRIPTEN_ROOT, 'tools', 'webidl_binder.py'), os.path.join(this_dir, 'oce.idl'), 'glue']).communicate()
+  Popen([emscripten.PYTHON, os.path.join(EMSCRIPTEN_ROOT, 'tools', 'webidl_binder.py'), os.path.join(this_dir, 'opencascade.idl'), 'glue']).communicate()
   assert os.path.exists('glue.js')
   assert os.path.exists('glue.cpp')
 
@@ -579,6 +583,114 @@ def build():
     args += ['-include', include]
   emscripten.Building.emcc('glue.cpp', args, 'glue.o')
   assert(os.path.exists('glue.o'))
+
+  if not os.path.exists('build'):
+    os.makedirs('build')
+  os.chdir('build')
+
+  # Configure with CMake on Windows, and with configure on Unix.
+  cmake_build = False
+
+  if cmake_build:
+    stage('Configure via CMake')
+    emscripten.Building.configure([
+      emscripten.PYTHON,
+      os.path.join(EMSCRIPTEN_ROOT, 'emcmake'),
+      'cmake',
+      '../occt/',
+      '-DCMAKE_BUILD_TYPE=Debug',
+      '-DBUILD_MODULE_Draw=OFF',
+      '-D3RDPARTY_FREETYPE_DIR=/home/sebastian/Projects/OCCT_WA/freetype-2.10.0',
+      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=/home/sebastian/Projects/OCCT_WA/freetype-2.10.0/include/freetype',
+      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_ft2build=/home/sebastian/Projects/OCCT_WA/freetype-2.10.0/include',
+      '-D3RDPARTY_FREETYPE_LIBRARY_DIR=/home/sebastian/Projects/OCCT_WA/freetype-2.10.0/build',
+      '-DBUILD_LIBRARY_TYPE=Static',
+      '-DBUILD_MODULE_Draw=OFF',
+      '-DCMAKE_CXX_FLAGS="-DIGNORE_NO_ATOMICS=1 -frtti"',
+      '-D3RDPARTY_INCLUDE_DIRS=/home/sebastian/Projects/OCCT_WA/GL/'
+    ])
+
+  make_build = False
+  if make_build:
+    stage('Make')
+
+    CORES = multiprocessing.cpu_count()
+
+    emscripten.Building.make(['make', '-j', str(CORES)])
+
+  stage('Link')
+
+  bullet_libs = [
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKBO.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKBRep.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKBin.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKBinL.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKBinTObj.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKBinXCAF.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKBool.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKCAF.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKCDF.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKFeat.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKFillet.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKG2d.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKG3d.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKGeomAlgo.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKGeomBase.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKHLR.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKIGES.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKLCAF.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKMath.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKMesh.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKMeshVS.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKOffset.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKOpenGl.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKPrim.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKRWMesh.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKSTEP.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKSTEP209.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKSTEPAttr.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKSTEPBase.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKSTL.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKService.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKShHealing.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKStd.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKStdL.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKTObj.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKTopAlgo.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKV3d.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKVCAF.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKVRML.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXCAF.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXDEIGES.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXDESTEP.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXMesh.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXSBase.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXml.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXmlL.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXmlTObj.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXmlXCAF.a'),
+    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKernel.a'),
+    os.path.join('..', 'Tesselator.cpp'),
+  ]
+
+  stage('emcc: ' + ' '.join(emcc_args))
+  os.chdir('..')
+  if not os.path.exists('js'):
+    os.makedirs('js')
+
+  temp = os.path.join('.', 'js', target)
+  emscripten.Building.emcc('-DNOTHING_WAKA_WAKA', emcc_args + ['glue.o'] + bullet_libs + myincludes[:len(myincludes)-2] + ['--js-transform', 'python %s' % os.path.join('..', 'bundle.py')], temp)
+  # emscripten.Building.emcc('-DEMANGLE_SUPPORT=1', emcc_args + ['glue.o'] + bullet_libs + ['--js-transform', 'python %s' % os.path.join('..', 'bundle.py')], temp)
+
+  assert os.path.exists(temp), 'Failed to create script code'
+
+  stage('wrap')
+
+  wrapped = '''
+// This is opencascade.js, a port of Bullet Physics to JavaScript. zlib licensed.
+''' + open(temp).read()
+
+  open(temp, 'w').write(wrapped)
 
 if __name__ == '__main__':
   build()
