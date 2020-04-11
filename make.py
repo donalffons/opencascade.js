@@ -38,6 +38,7 @@ INCLUDES = [
   os.path.join('.', 'occt', 'src', 'TopoDS', 'TopoDS.hxx'),
   os.path.join('.', 'occt', 'src', 'TopoDS', 'TopoDS_Shape.hxx'),
   os.path.join('.', 'occt', 'src', 'TopoDS', 'TopoDS_Wire.hxx'),
+  os.path.join('.', 'occt', 'src', 'STEPControl', 'STEPControl_Reader.hxx'),
   os.path.join('.', 'Tesselator.h')
 ]
 
@@ -106,7 +107,7 @@ def build():
   wasm = 'wasm' in sys.argv
   closure = 'closure' in sys.argv
   add_function_support = 'add_func' in sys.argv
-  args = '-s ERROR_ON_UNDEFINED_SYMBOLS=0 -std=c++1z -O3 --llvm-lto 1 -s NO_EXIT_RUNTIME=1 -s NO_FILESYSTEM=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
+  args = '-s ERROR_ON_UNDEFINED_SYMBOLS=0 -std=c++1z -O3 --llvm-lto 1 -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
   if add_function_support:
     args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
   if not wasm:
@@ -121,6 +122,7 @@ def build():
   emcc_args += ['-s', 'TOTAL_MEMORY=%d' % (64*1024*1024)] # default 64MB. Compile with ALLOW_MEMORY_GROWTH if you want a growable heap (slower though).
   emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1'] # resizable heap, with some amount of slowness
   emcc_args += '-s EXPORT_NAME="opencascade" -s MODULARIZE=1'.split(' ')
+  emcc_args += ['-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]']
 
   target = 'opencascade.js' if not wasm else 'opencascade.wasm.js'
 

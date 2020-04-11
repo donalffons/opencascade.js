@@ -258,7 +258,19 @@ interface BRepBuilderAPI_MakeWire{
 };
 BRepBuilderAPI_MakeWire implements BRepBuilderAPI_MakeShape;
 
+enum IFSelect_ReturnStatus{
+	"IFSelect_RetVoid",
+	"IFSelect_RetDone",
+	"IFSelect_RetError",
+	"IFSelect_RetFail",
+	"IFSelect_RetStop"
+};
 
+interface XSControl_Reader {
+	IFSelect_ReturnStatus ReadFile ([Const] DOMString filename);
+};
 
-
-
+interface STEPControl_Reader {
+	void STEPControl_Reader();
+};
+STEPControl_Reader implements XSControl_Reader;
