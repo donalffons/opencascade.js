@@ -119,7 +119,7 @@ def build():
     args += ' -s NO_DYNAMIC_EXECUTION=1'
   emcc_args = args.split(' ')
   emcc_args += ['-s', 'TOTAL_MEMORY=%d' % (64*1024*1024)] # default 64MB. Compile with ALLOW_MEMORY_GROWTH if you want a growable heap (slower though).
-  #emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1'] # resizable heap, with some amount of slowness
+  emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1'] # resizable heap, with some amount of slowness
   emcc_args += '-s EXPORT_NAME="opencascade" -s MODULARIZE=1'.split(' ')
 
   target = 'opencascade.js' if not wasm else 'opencascade.wasm.js'
