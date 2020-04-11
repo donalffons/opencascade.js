@@ -692,6 +692,11 @@ def build():
 
   open(temp, 'w').write(wrapped)
 
+  os.chdir('..')
+  if os.path.exists('dist'):
+    shutil.rmtree('dist')
+  shutil.copytree(os.path.join('build', 'js'), 'dist')
+
 if __name__ == '__main__':
   build()
 

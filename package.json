@@ -1,0 +1,8 @@
+{
+  "name": "opencascade.js",
+  "version": "1.0.0",
+  "main": "dist/opencascade.wasm.js",
+  "repository": "git@github.com:donalffons/opencascade.js.git",
+  "author": "Sebastian Alff <donalffons@gmail.com>",
+  "license": "MIT"
+}
