@@ -589,7 +589,7 @@ def build():
   os.chdir('build')
 
   # Configure with CMake on Windows, and with configure on Unix.
-  cmake_build = False
+  cmake_build = True
 
   if cmake_build:
     stage('Configure via CMake')
@@ -610,7 +610,7 @@ def build():
       '-D3RDPARTY_INCLUDE_DIRS=/home/sebastian/Projects/OCCT_WA/GL/'
     ])
 
-  make_build = False
+  make_build = True
   if make_build:
     stage('Make')
 
