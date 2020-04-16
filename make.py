@@ -127,6 +127,13 @@ def build():
   emcc_args += '-s EXPORT_NAME="opencascade" -s MODULARIZE=1'.split(' ')
   emcc_args += ['-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]']
 
+  # Debugging options
+  # emcc_args += ['-s', 'ASSERTIONS=2']
+  # emcc_args += ['-s', 'STACK_OVERFLOW_CHECK=1']
+  # emcc_args += ['-s', 'DEMANGLE_SUPPORT=1']
+  # emcc_args += ['-s', 'DISABLE_EXCEPTION_CATCHING=0']
+  # emcc_args += ['-g']
+
   target = 'opencascade.js' if not wasm else 'opencascade.wasm.js'
 
   ######################################
