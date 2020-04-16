@@ -39,7 +39,13 @@ INCLUDES = [
   os.path.join('.', 'occt', 'src', 'TopoDS', 'TopoDS_Shape.hxx'),
   os.path.join('.', 'occt', 'src', 'TopoDS', 'TopoDS_Wire.hxx'),
   os.path.join('.', 'occt', 'src', 'STEPControl', 'STEPControl_Reader.hxx'),
-  os.path.join('.', 'Tesselator.h')
+  os.path.join('.', 'occt', 'src', 'XSControl', 'XSControl_Reader.hxx'),
+  os.path.join('.', 'occt', 'src', 'Poly', 'Poly_Connect.hxx'),
+  os.path.join('.', 'occt', 'src', 'TColgp', 'TColgp_Array1OfDir.hxx'),
+  os.path.join('.', 'occt', 'src', 'StdPrs', 'StdPrs_ToolTriangulatedShape.hxx'),
+  os.path.join('.', 'occt', 'src', 'IGESControl', 'IGESControl_Reader.hxx'),
+  os.path.join('.', 'Tesselator.h'),
+  os.path.join('.', 'typedefs.h')
 ]
 
 # Utilities
@@ -108,7 +114,9 @@ def build():
   wasm = 'wasm' in sys.argv
   closure = 'closure' in sys.argv
   add_function_support = 'add_func' in sys.argv
-  args = '-s ERROR_ON_UNDEFINED_SYMBOLS=0 -std=c++1z -O3 --llvm-lto 1 -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
+  args = '-std=c++1z -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
+  args += ' -O1'
+  # args += ' -O3 --llvm-lto 1'
   if add_function_support:
     args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
   if not wasm:

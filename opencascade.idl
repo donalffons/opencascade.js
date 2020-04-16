@@ -1,5 +1,6 @@
 typedef double Standard_Real;
 typedef boolean Standard_Boolean;
+typedef long Standard_Integer;
 
 interface BRepPrimAPI_MakeSphere{
 	void BRepPrimAPI_MakeSphere([Const]Standard_Real R); 
@@ -27,8 +28,58 @@ interface BRepBuilderAPI_MakeShape{
 interface BRepPrim_Sphere{
 };
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Shape{
 	void TopoDS_Shape();
+	Standard_Boolean IsNull();
+	void Nullify();
+	[Const, Ref] TopLoc_Location Location();
+	// void Location([Const, Ref] TopLoc_Location theLoc);
+	[Value] TopoDS_Shape Located([Const, Ref] TopLoc_Location theLoc);
+	TopAbs_Orientation Orientation();
+	// void Orientation(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Oriented(TopAbs_Orientation theOrient);
+	// [Const, Ref] Handle_TopoDS_TShape TShape();
+	TopAbs_ShapeEnum ShapeType();
+	Standard_Boolean Free();
+	// void Free(Standard_Boolean theIsFree);
+	Standard_Boolean Locked();
+	// void Locked(Standard_Boolean theIsLocked);
+	Standard_Boolean Modified();
+	// void Modified(Standard_Boolean theIsModified);
+	Standard_Boolean Checked();
+	// void Checked(Standard_Boolean theIsChecked);
+	Standard_Boolean Orientable();
+	// void Orientable([Const] Standard_Boolean theIsOrientable);
+	Standard_Boolean Closed();
+	// void Closed(Standard_Boolean theIsClosed);
+	Standard_Boolean Infinite();
+	// void Infinite(Standard_Boolean theIsInfinite);
+	Standard_Boolean Convex();
+	// void Convex(Standard_Boolean theIsConvex);
+	void Move([Const, Ref] TopLoc_Location thePosition);
+	[Value] TopoDS_Shape Moved([Const, Ref] TopLoc_Location thePosition);
+	void Reverse();
+	[Value] TopoDS_Shape Reversed();
+	void Complement();
+	[Value] TopoDS_Shape Complemented();
+	void Compose(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Composed(TopAbs_Orientation theOrient);
+	Standard_Integer NbChildren();
+	Standard_Boolean IsPartner([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsSame([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsEqual([Const, Ref] TopoDS_Shape theOther);
+	// Standard_Boolean operator == ([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsNotEqual([Const, Ref] TopoDS_Shape theOther);
+	Standard_Integer HashCode(Standard_Integer theUpperBound);
+	void EmptyCopy();
+	[Value] TopoDS_Shape EmptyCopied();
+	// void TShape([Const, Ref] Handle_TopoDS_TShape theTShape);
+	// void DumpJson(
+	// 	[Ref] Standard_Ostream theOstream,
+	// 	[Const] Standard_Integer theDepth = -1
+	// );
 };
 
 interface GProp_GProps{
@@ -52,6 +103,7 @@ interface Tesselator{
 
 // BRepMesh_IncrementalMesh.hxx
 interface BRepMesh_IncrementalMesh{
+	void BRepMesh_IncrementalMesh();
 	// constructor automatically call to perform meshing
 	void BRepMesh_IncrementalMesh([Const, Ref] TopoDS_Shape theShape, [Const] Standard_Real theLinDeflection);
 };
@@ -60,6 +112,7 @@ interface BRepMesh_IncrementalMesh{
 interface TopoDS_Face{
 	void TopoDS_Face();
 };
+TopoDS_Face implements TopoDS_Shape;
 
 
 //
@@ -80,13 +133,81 @@ interface gp_Vec{
 	void gp_Vec( [Const]Standard_Real Xv, [Const]Standard_Real Yv, [Const]Standard_Real Zv);
 };
 
-
-interface gp_Pnt{
-//     gp_Pnt(const Standard_Real Xp, const Standard_Real Yp, const Standard_Real Zp);
-	void gp_Pnt([Const]Standard_Real Xp, [Const]Standard_Real Yp, [Const]Standard_Real Zp);
-	void SetX ([Const] Standard_Real X);
-	void SetY ([Const] Standard_Real Y);
-	void SetZ ([Const] Standard_Real Z);
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface gp_Pnt {
+	void gp_Pnt();
+	// void gp_Pnt([Const, Ref] gp_XYZ Coord);
+	void gp_Pnt(
+		[Const] Standard_Real Xp,
+		[Const] Standard_Real Yp,
+		[Const] Standard_Real Zp
+	);
+	void SetCoord(
+		[Const] Standard_Integer Index,
+		[Const] Standard_Real Xi
+	);
+	void SetCoord(
+		[Const] Standard_Real Xp,
+		[Const] Standard_Real Yp,
+		[Const] Standard_Real Zp
+	);
+	void SetX([Const] Standard_Real X);
+	void SetY([Const] Standard_Real Y);
+	void SetZ([Const] Standard_Real Z);
+	// void SetXYZ([Const, Ref] gp_XYZ Coord);
+	Standard_Real Coord([Const] Standard_Integer Index);
+	// void Coord(
+	//   [Ref] Standard_Real Xp,
+	//   [Ref] Standard_Real Yp,
+	//   [Ref] Standard_Real Zp
+	// );
+	Standard_Real X();
+	Standard_Real Y();
+	Standard_Real Z();
+	// [Const, Ref] gp_XYZ XYZ();
+	// [Const, Ref] gp_XYZ Coord();
+	// [Ref] gp_XYZ ChangeCoord();
+	void BaryCenter(
+		[Const] Standard_Real Alpha,
+		[Const, Ref] gp_Pnt P,
+		[Const] Standard_Real Beta
+	);
+	Standard_Boolean IsEqual(
+		[Const, Ref] gp_Pnt Other,
+		[Const] Standard_Real LinearTolerance
+	);
+	Standard_Real Distance([Const, Ref] gp_Pnt Other);
+	Standard_Real SquareDistance([Const, Ref] gp_Pnt Other);
+	void Mirror([Const, Ref] gp_Pnt P);
+	// [Value] gp_Pnt Mirrored([Const, Ref] gp_Pnt P);
+	// void Mirror([Const, Ref] gp_Ax1 A1);
+	// [Value] gp_Pnt Mirrored([Const, Ref] gp_Ax1 A1);
+	// void Mirror([Const, Ref] gp_Ax2 A2);
+	// [Value] gp_Pnt Mirrored([Const, Ref] gp_Ax2 A1);
+	void Rotate(
+		[Const, Ref] gp_Ax1 A1,
+		[Const] Standard_Real Ang
+	);
+	[Value] gp_Pnt Rotated(
+		[Const, Ref] gp_Ax1 A1,
+		[Const] Standard_Real Ang
+	);
+	void Scale(
+		[Const, Ref] gp_Pnt P,
+		[Const] Standard_Real S
+	);
+	[Value] gp_Pnt Scaled(
+		[Const, Ref] gp_Pnt P,
+		[Const] Standard_Real S
+	);
+	void Transform([Const, Ref] gp_Trsf T);
+	[Value] gp_Pnt Transformed([Const, Ref] gp_Trsf T);
+	[Value] gp_Pnt Translated([Const, Ref] gp_Vec V);
+	[Value] gp_Pnt Translated(
+		[Const, Ref] gp_Pnt P1,
+		[Const, Ref] gp_Pnt P2
+	);
 };
 
 
@@ -133,8 +254,97 @@ interface gp{
   	[Const,Ref] gp_Dir DZ();
 };
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 interface gp_Dir{
 	void gp_Dir();
+	void gp_Dir([Const, Ref] gp_Vec V);
+	// void gp_Dir([Const, Ref] gp_XYZ Coord);
+	void gp_Dir(
+		[Const] Standard_Real Xv,
+		[Const] Standard_Real Yv,
+		[Const] Standard_Real Zv
+	);
+	void SetCoord(
+		[Const] Standard_Integer Index,
+		[Const] Standard_Real Xi
+	);
+	void SetCoord(
+		[Const] Standard_Real Xv,
+		[Const] Standard_Real Yv,
+		[Const] Standard_Real Zv
+	);
+	void SetX([Const] Standard_Real X);
+	void SetY([Const] Standard_Real Y);
+	void SetZ([Const] Standard_Real Z);
+	// void SetXYZ([Const, Ref] gp_XYZ Coord);
+	Standard_Real Coord([Const] Standard_Integer Index);
+	// void Coord(
+	//   [Ref] Standard_Real Xv,
+	//   [Ref] Standard_Real Yv,
+	//   [Ref] Standard_Real Zv
+	// );
+	Standard_Real X();
+	Standard_Real Y();
+	Standard_Real Z();
+	// [Const, Ref] gp_XYZ XYZ();
+	Standard_Boolean IsEqual(
+		[Const, Ref] gp_Dir Other,
+		[Const] Standard_Real AngularTolerance
+	);
+	Standard_Boolean IsNormal(
+		[Const, Ref] gp_Dir Other,
+		[Const] Standard_Real AngularTolerance
+	);
+	Standard_Boolean IsOpposite(
+		[Const, Ref] gp_Dir Other,
+		[Const] Standard_Real AngularTolerance
+	);
+	Standard_Boolean IsParallel(
+		[Const, Ref] gp_Dir Other,
+		[Const] Standard_Real AngularTolerance
+	);
+	Standard_Real Angle([Const, Ref] gp_Dir Other);
+	Standard_Real AngleWithRef(
+		[Const, Ref] gp_Dir Other,
+		[Const, Ref] gp_Dir VRef
+	);
+	void Cross([Const, Ref] gp_Dir Right);
+	// void operator ^= ([Const, Ref] gp_Dir Right);
+	[Value] gp_Dir Crossed([Const, Ref] gp_Dir Right);
+	// [Value] gp_Dir operator ^ ([Const, Ref] Right);
+	void CrossCross(
+		[Const, Ref] gp_Dir V1,
+		[Const, Ref] gp_Dir V2
+	);
+	[Value] gp_Dir CrossCrossed(
+		[Const, Ref] gp_Dir V1,
+		[Const, Ref] gp_Dir V2
+	);
+	Standard_Real Dot([Const, Ref] gp_Dir Other);
+	// void Standard_Real operator * ([Const, Ref] gp_Dir Other);
+	Standard_Real DotCross(
+		[Const, Ref] gp_Dir V1,
+		[Const, Ref] gp_Dir V2
+	);
+	[Value] gp_Dir Reversed();
+	// [Value] gp_Dir operator -();
+	void Mirror([Const, Ref] gp_Dir V);
+	[Value] gp_Dir Mirrored([Const, Ref] gp_Dir V);
+	// void Mirror([Const, Ref] gp_Ax1 A1);
+	// [Value] gp_Dir Mirrored([Const, Ref] gp_Ax1 A1);
+	// void Mirror([Const ,Ref] gp_Ax2 A2);
+	// [Value] gp_Dir Mirrored([Const, Ref] gp_Ax2 A1);
+	void Rotate(
+		[Const, Ref] gp_Ax1 A1,
+		[Const] Standard_Real Ang
+	);
+	[Value] gp_Dir Rotated(
+		[Const, Ref] gp_Ax1 A1,
+		[Const] Standard_Real Ang
+	);
+	void Transform([Const, Ref] gp_Trsf T);
+	[Value] gp_Dir Transformed([Const, Ref] gp_Trsf T);
 };
 
 interface gp_Trsf{
@@ -155,14 +365,18 @@ interface BRepBuilderAPI_ModifyShape{
 };
 BRepBuilderAPI_ModifyShape implements BRepBuilderAPI_MakeShape;
 
-interface TopoDS{
-  [Const, Ref] TopoDS_Wire Wire([Const, Ref] TopoDS_Shape S);
-
-   //static  const  TopoDS_Edge& Edge (const TopoDS_Shape& S);
-	//inline static TopoDS_Edge& Edge(TopoDS_Shape&);
-	[Const, Ref] TopoDS_Edge Edge([Const, Ref] TopoDS_Shape S);
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface TopoDS {
+	// [Const, Ref] TopoDS_Vertex Vertex([Const, Ref] TopoDS_Shape S);
+  [Const, Ref] static TopoDS_Edge Edge([Const, Ref] TopoDS_Shape S);
+  [Const, Ref] static TopoDS_Wire Wire([Const, Ref] TopoDS_Shape S);
+  [Const, Ref] static TopoDS_Face Face([Const, Ref] TopoDS_Shape S);
+  // [Const, Ref] TopoDS_Shell Shell([Const, Ref] TopoDS_Shape S);
+  // [Const, Ref] TopoDS_Solid Solid([Const, Ref] TopoDS_Shape S);
+  // [Const, Ref] TopoDS_CompSolid CompSolid([Const, Ref] TopoDS_Shape S);
+  // [Const, Ref] TopoDS_Compound Compound([Const, Ref] TopoDS_Shape S);
 };
-
 
 interface BRepBuilderAPI_MakeFace{
 	//  Standard_EXPORT BRepBuilderAPI_MakeFace(const TopoDS_Wire& W, const Standard_Boolean OnlyPlane = Standard_False);
@@ -183,29 +397,245 @@ BRepFilletAPI_MakeFillet implements BRepFilletAPI_LocalOperation;
 interface BRepFilletAPI_LocalOperation{};
 BRepFilletAPI_LocalOperation implements BRepBuilderAPI_MakeShape;
 
-
-interface TopExp_Explorer{
-	//  Standard_EXPORT TopExp_Explorer(const TopoDS_Shape& S, const TopAbs_ShapeEnum ToFind, const TopAbs_ShapeEnum ToAvoid = TopAbs_SHAPE);
-	void TopExp_Explorer([Const,Ref]TopoDS_Shape S,[Const]TopAbs_ShapeEnum ToFind);
-
-    Standard_Boolean More();
-    void Next();
-
-    [Const,Ref] TopoDS_Shape Current();
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface TopExp_Explorer {
+	void TopExp_Explorer();
+	void TopExp_Explorer(
+		[Const, Ref] TopoDS_Shape S,
+		[Const] TopAbs_ShapeEnum ToFind,
+		[Const] optional TopAbs_ShapeEnum ToAvoid = "TopAbs_SHAPE"
+	);
+	void Init(
+		[Const, Ref] TopoDS_Shape S,
+		[Const] TopAbs_ShapeEnum ToFind,
+		[Const] optional TopAbs_ShapeEnum ToAvoid = "TopAbs_SHAPE"
+	);
+	Standard_Boolean More();
+	void Next();
+	[Const, Ref] TopoDS_Shape Current();
+	void ReInit();
+	Standard_Integer Depth();
+	void Clear();
+	void Destroy();
 };
 
+interface TopLoc_Location {
+	void TopLoc_Location();
+	void TopLoc_Location([Const, Ref] gp_Trsf T);
+	void Identity();
+	Standard_Integer FirstPower();
+	[Const, Ref] TopLoc_Location NextLocation();
+	[Const, Ref] gp_Trsf Transformation();
+};
 
-// ENUM
-enum TopAbs_ShapeEnum{
-"TopAbs_COMPOUND",
-"TopAbs_COMPSOLID",
-"TopAbs_SOLID",
-"TopAbs_SHELL",
-"TopAbs_FACE",
-"TopAbs_WIRE",
-"TopAbs_EDGE",
-"TopAbs_VERTEX",
-"TopAbs_SHAPE"
+interface BRep_Tool {
+	static Standard_Boolean IsClosed([Const, Ref] TopoDS_Shape S);
+	[Const, Ref] static Handle_Poly_Triangulation Triangulation(
+		[Const, Ref] TopoDS_Face F,
+		[Ref] TopLoc_Location L
+	);
+};
+
+interface Handle_Poly_Triangulation {
+	void Handle_Poly_Triangulation();
+	boolean IsNull();
+	void Nullify();
+	Poly_Triangulation get();
+};
+
+interface TColgp_Array1OfPnt {
+	void TColgp_Array1OfPnt();
+	void TColgp_Array1OfPnt(
+		[Const] Standard_Integer theLower,
+		[Const] Standard_Integer theUpper
+	);
+	Standard_Integer Length();
+	Standard_Integer Lower();
+	Standard_Integer Upper();
+	[Const, Ref] gp_Pnt Value([Const] Standard_Integer theIndex);
+};
+
+interface TColgp_Array1OfDir {
+	void TColgp_Array1OfDir();
+	void TColgp_Array1OfDir(
+		[Const] Standard_Integer theLower,
+		[Const] Standard_Integer theUpper
+	);
+	Standard_Integer Length();
+	Standard_Integer Lower();
+	Standard_Integer Upper();
+	[Const, Ref] gp_Dir Value([Const] Standard_Integer theIndex);
+};
+
+interface Poly_Array1OfTriangle {
+	void Poly_Array1OfTriangle();
+	void Poly_Array1OfTriangle(
+		[Const] Standard_Integer theLower,
+		[Const] Standard_Integer theUpper
+	);
+	Standard_Integer Length();
+	Standard_Integer Lower();
+	Standard_Integer Upper();
+	[Const, Ref] Poly_Triangle Value([Const] Standard_Integer theIndex);
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Poly_Triangulation {
+	void Poly_Triangulation(
+		[Const] Standard_Integer nbNodes,
+		[Const] Standard_Integer nbTriangles,
+		[Const] Standard_Boolean UVNodes
+	);
+	// void Poly_Triangulation(
+	// 	[Const, Ref] TColgp_Array1OfPnt Nodes,
+	// 	[Const, Ref] Poly_Array1OfTriangle Triangles
+	// );
+	// void Poly_Triangulation(
+	// 	[Const, Ref] TColgp_Array1OfPnt Nodes,
+	// 	[Const, Ref] TColgp_Array1OfPnt2d UVNodes,
+	// 	[Const, Ref] Poly_Array1OfTriangle Triangles
+	// );
+	[Value] Handle_Poly_Triangulation Copy();
+	void Poly_Triangulation([Const, Ref] Handle_Poly_Triangulation theTriangulation);
+	//Standard_Real Deflection();
+	void Deflection([Const] Standard_Real theDeflection);
+	void RemoveUVNodes();
+	Standard_Integer NbNodes();
+	Standard_Integer NbTriangles();
+	Standard_Boolean HasUVNodes();
+	[Const, Ref] TColgp_Array1OfPnt Nodes();
+	// [Ref] TColgp_Array1OfPnt ChangeNodes();
+	// [Const, Ref] gp_Pnt Node([Const] Standard_Integer theIndex);
+	// [Ref] gp_Pnt ChangeNode([Const] Standard_Integer theIndex);
+	// [Const, Ref] TColgp_Array1OfPnt2d UVNodes();
+	// [Ref] TColgp_Array1OfPnt2d ChangeUVNodes();
+	// [Const, Ref] gp_Pnt2d UVNode([Const] Standard_Integer theIndex);
+	[Const, Ref] Poly_Array1OfTriangle Triangles();
+	// [Ref] Poly_Array1OfTriangle ChangeTriangles();
+	// [Const, Ref] Poly_Triangle Triangle([Const] Standard_Integer theIndex);
+	// [Ref] Poly_Triangle ChangeTriangle([Const] Standard_Integer theIndex);
+	// void SetNormals([Const, Ref] Handle_TShort_HArray1OfShortReal theNormals);
+	// [Const, Ref] TShort_Array1OfShortReal Normals();
+	// [Ref] TShort_Array1OfShortReal ChangeNormals();
+	Standard_Boolean HasNormals();
+	[Value] gp_Dir Normal([Const] Standard_Integer theIndex);
+	void SetNormal(
+		[Const] Standard_Integer theIndex,
+		[Const, Ref] gp_Dir theNormal
+	);
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Poly_Triangle {
+	void Poly_Triangle();
+	void Poly_Triangle(
+		[Const] Standard_Integer N1,
+		[Const] Standard_Integer N2,
+		[Const] Standard_Integer N3
+	);
+	void Set(
+		[Const] Standard_Integer N1,
+		[Const] Standard_Integer N2,
+		[Const] Standard_Integer N3
+	);
+	void Set(
+		[Const] Standard_Integer Index,
+		[Const] Standard_Integer Node
+	);
+	// void Get(
+	// 	[Ref] Standard_Integer N1,
+	// 	[Ref] Standard_Integer N2,
+	// 	[Ref] Standard_Integer N3
+	// );
+	Standard_Integer Value([Const] Standard_Integer Index);
+	Standard_Integer ChangeValue([Const] Standard_Integer Index);
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Poly_Connect {
+	void Poly_Connect();
+	void Poly_Connect([Const, Ref] Handle_Poly_Triangulation theTriangulation);
+	void Load([Const, Ref] Handle_Poly_Triangulation theTriangulation);
+	[Const, Ref] Handle_Poly_Triangulation Triangulation();
+	Standard_Integer Triangle([Const] Standard_Integer N);
+	void Triangles(
+		[Const] Standard_Integer T,
+		Standard_Integer t1,
+		Standard_Integer t2,
+		Standard_Integer t3
+	);
+	void Nodes(
+		[Const] Standard_Integer T,
+		Standard_Integer t1,
+		Standard_Integer t2,
+		Standard_Integer t3
+	);
+	void Initialize([Const] Standard_Integer N);
+	Standard_Boolean More();
+	void Next();
+	Standard_Integer Value();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface StdPrs_ToolTriangulatedShape {
+	void StdPrs_ToolTriangulatedShape();
+	static Standard_Boolean IsTriangulated([Const, Ref] TopoDS_Shape theShape);
+	static Standard_Boolean IsClosed([Const, Ref] TopoDS_Shape theShape);
+	static void ComputeNormals(
+		[Const, Ref] TopoDS_Face theFace,
+		[Const, Ref] Handle_Poly_Triangulation theTris
+	);
+	static void ComputeNormals(
+		[Const, Ref] TopoDS_Face theFace,
+		[Const, Ref] Handle_Poly_Triangulation theTris,
+		[Ref] Poly_Connect thePolyConnect
+	);
+	static void Normal(
+		[Const, Ref] TopoDS_Face theFace,
+		[Ref] Poly_Connect thePolyConnect,
+		[Ref] TColgp_Array1OfDir theNormals
+	);
+	// static Standard_Boolean IsTessellated(
+	// 	[Const, Ref] TopoDS_Shape theShape,
+	// 	[Const, Ref] Handle_Prs3d_Drawer theDrawer
+	// );
+	// static Standard_Boolean Tessellate(
+	// 	[Const, Ref] TopoDS_Shape theShape,
+	// 	[Const, Ref] Handle_Prs3d_Drawer theDrawer
+	// );
+	// static void ClearOnOwnDeflectionChange(
+	// 	[Const, Ref] TopoDS_Shape theShape,
+	// 	[Const, Ref] Handle_Prs3d_Drawer,
+	// 	[Const] Standard_Boolean theToResetCoeff
+	// );
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+enum TopAbs_Orientation {
+	"TopAbs_FORWARD",
+	"TopAbs_REVERSED",
+	"TopAbs_INTERNAL",
+	"TopAbs_EXTERNAL"
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+enum TopAbs_ShapeEnum {
+	"TopAbs_COMPOUND",
+	"TopAbs_COMPSOLID",
+	"TopAbs_SOLID",
+	"TopAbs_SHELL",
+	"TopAbs_FACE",
+	"TopAbs_WIRE",
+	"TopAbs_EDGE",
+	"TopAbs_VERTEX",
+	"TopAbs_SHAPE"
 };
 
 interface BRepAlgoAPI_Fuse{
@@ -267,10 +697,18 @@ enum IFSelect_ReturnStatus{
 };
 
 interface XSControl_Reader {
+	void XSControl_Reader();
 	IFSelect_ReturnStatus ReadFile ([Const] DOMString filename);
+	[Value] TopoDS_Shape OneShape();
+	Standard_Integer TransferRoots();
 };
 
 interface STEPControl_Reader {
 	void STEPControl_Reader();
 };
 STEPControl_Reader implements XSControl_Reader;
+
+interface IGESControl_Reader {
+	void IGESControl_Reader();
+};
+IGESControl_Reader implements XSControl_Reader;
