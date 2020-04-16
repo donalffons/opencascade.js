@@ -177,7 +177,6 @@ def build():
   if cmake_build:
     stage('Configure via CMake')
     emscripten.Building.configure([
-      emscripten.PYTHON,
       os.path.join(EMSCRIPTEN_ROOT, 'emcmake'),
       'cmake',
       '../occt/',
