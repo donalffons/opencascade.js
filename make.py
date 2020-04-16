@@ -208,8 +208,8 @@ def build():
     os.makedirs('js')
 
   temp = os.path.join('.', 'js', target)
-  emscripten.Building.emcc('-DNOTHING_WAKA_WAKA', emcc_args + ['glue.o'] + bullet_libs + myincludes[:len(myincludes)-2] + ['--js-transform', 'python %s' % os.path.join('..', 'bundle.py')], temp)
-  # emscripten.Building.emcc('-DEMANGLE_SUPPORT=1', emcc_args + ['glue.o'] + bullet_libs + ['--js-transform', 'python %s' % os.path.join('..', 'bundle.py')], temp)
+  emscripten.Building.emcc('-DNOTHING_WAKA_WAKA', emcc_args + ['glue.o'] + opencascade_libs + myincludes[:len(myincludes)-2] + ['--js-transform', 'python %s' % os.path.join('..', 'bundle.py')], temp)
+  # emscripten.Building.emcc('-DEMANGLE_SUPPORT=1', emcc_args + ['glue.o'] + opencascade_libs + ['--js-transform', 'python %s' % os.path.join('..', 'bundle.py')], temp)
 
   assert os.path.exists(temp), 'Failed to create script code'
 
