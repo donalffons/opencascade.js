@@ -216,7 +216,7 @@ def build():
   stage('wrap')
 
   wrapped = '''
-// This is opencascade.js, a port of Bullet Physics to JavaScript. zlib licensed.
+// This is opencascade.js.
 ''' + open(temp).read()
 
   open(temp, 'w').write(wrapped)
