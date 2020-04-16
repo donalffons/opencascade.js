@@ -175,15 +175,15 @@ def build():
       'cmake',
       '../occt/',
       '-DCMAKE_BUILD_TYPE=Debug',
-      '-DBUILD_MODULE_Draw=OFF',
       '-D3RDPARTY_FREETYPE_DIR=/home/sebastian/Projects/OCCT_WA/freetype-2.10.0',
       '-D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=/home/sebastian/Projects/OCCT_WA/freetype-2.10.0/include/freetype',
       '-D3RDPARTY_FREETYPE_INCLUDE_DIR_ft2build=/home/sebastian/Projects/OCCT_WA/freetype-2.10.0/include',
       '-D3RDPARTY_FREETYPE_LIBRARY_DIR=/home/sebastian/Projects/OCCT_WA/freetype-2.10.0/build',
       '-DBUILD_LIBRARY_TYPE=Static',
-      '-DBUILD_MODULE_Draw=OFF',
       '-DCMAKE_CXX_FLAGS="-DIGNORE_NO_ATOMICS=1 -frtti"',
-      '-D3RDPARTY_INCLUDE_DIRS=/home/sebastian/Projects/OCCT_WA/GL/'
+      '-D3RDPARTY_INCLUDE_DIRS=/home/sebastian/Projects/OCCT_WA/regal/src/apitrace/thirdparty/khronos/\;/home/sebastian/Projects/OCCT_WA/fontconfig',
+      '-DUSE_GLES2=ON',
+      '-DBUILD_MODULE_Draw=OFF'
     ])
 
   make_build = True
