@@ -89,6 +89,8 @@ def build():
       shutil.move(source+f, dest)
     pset = patch.fromfile("../patches/CMakeLists.txt.patch")
     pset.apply()
+    pset = patch.fromfile("../patches/OSD_Path.cxx.patch")
+    pset.apply()
 
   ######################################
   stage("checking EMSCRIPTEN...")
