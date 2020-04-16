@@ -63,7 +63,6 @@ def stage(text):
 
 def build():
   this_dir = os.getcwd()
-  # shutil.rmtree("build")
   if not os.path.exists('build'):
     os.makedirs('build')
   os.chdir('build')
