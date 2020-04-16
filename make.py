@@ -196,58 +196,11 @@ def build():
 
   stage('Link')
 
-  bullet_libs = [
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKBO.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKBRep.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKBin.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKBinL.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKBinTObj.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKBinXCAF.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKBool.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKCAF.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKCDF.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKFeat.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKFillet.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKG2d.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKG3d.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKGeomAlgo.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKGeomBase.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKHLR.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKIGES.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKLCAF.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKMath.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKMesh.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKMeshVS.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKOffset.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKOpenGl.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKPrim.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKRWMesh.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKSTEP.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKSTEP209.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKSTEPAttr.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKSTEPBase.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKSTL.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKService.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKShHealing.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKStd.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKStdL.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKTObj.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKTopAlgo.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKV3d.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKVCAF.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKVRML.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXCAF.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXDEIGES.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXDESTEP.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXMesh.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXSBase.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXml.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXmlL.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXmlTObj.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKXmlXCAF.a'),
-    os.path.join('build', 'lin32', 'clang', 'libd', 'libTKernel.a'),
-    os.path.join('..', 'Tesselator.cpp'),
-  ]
+  opencascade_libs = os.listdir(os.path.join('.', 'lin32', 'clang', 'libd'))
+  opencascade_libs = [os.path.join('.', 'build', 'lin32', 'clang', 'libd', s) for s in opencascade_libs]
+  opencascade_libs.extend([
+    os.path.join('..', 'Tesselator.cpp')
+  ])
 
   stage('emcc: ' + ' '.join(emcc_args))
   os.chdir('..')
