@@ -96,6 +96,8 @@ def build():
     pset.apply()
     pset = patch.fromfile("../patches/OSD_Path.cxx.patch")
     pset.apply()
+    pset = patch.fromfile("../patches/OSD_Process.cxx.patch")
+    pset.apply()
 
   ######################################
   stage("checking EMSCRIPTEN...")
