@@ -11,10 +11,7 @@ You can build OpenCascade.js yourself, as follows:
 
 1. Get Emscripten from http://emscripten.org and set it up. See http://kripken.github.io/emscripten-site/docs/getting_started/
 
-2. Run the build script,
-`python2 make.py` for the JavaScript version and `python2 make.py wasm` for the WebAssembly version.
-ri
-tten to the `dist` folder.
+2. Run the build script, `python2 make.py` for the JavaScript version and `python2 make.py wasm` for the WebAssembly version. Build results are written to the `dist` folder.
 
 # Exposing additional OpenCascade API parts
 
