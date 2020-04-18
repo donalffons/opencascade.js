@@ -99,6 +99,33 @@ def build():
     pset = patch.fromfile("../patches/OSD_Process.cxx.patch")
     pset.apply()
 
+  if not os.path.exists('regal'):
+    stage("downloading and extracting regal...")
+    url = "https://github.com/p3/regal/archive/master.tar.gz"
+    myfile = requests.get(url, stream=True)
+    open("regal.tar.gz", 'wb').write(myfile.content)
+    tar = tarfile.open("regal.tar.gz", "r:gz")
+    tar.extractall("regal")
+    tar.close()
+
+  if not os.path.exists('freetype'):
+    stage("downloading and extracting freetype...")
+    url = "https://git.savannah.gnu.org/cgit/freetype/freetype2.git/snapshot/freetype2-VER-2-10-1.tar.gz"
+    myfile = requests.get(url, stream=True)
+    open("freetype.tar.gz", 'wb').write(myfile.content)
+    tar = tarfile.open("freetype.tar.gz", "r:gz")
+    tar.extractall("freetype")
+    tar.close()
+
+  if not os.path.exists('fontconfig'):
+    stage("downloading and extracting fontconfig...")
+    url = "https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/2.13.92/fontconfig-2.13.92.tar.gz"
+    myfile = requests.get(url, stream=True)
+    open("fontconfig.tar.gz", 'wb').write(myfile.content)
+    tar = tarfile.open("fontconfig.tar.gz", "r:gz")
+    tar.extractall("fontconfig")
+    tar.close()
+
   ######################################
   stage("checking EMSCRIPTEN...")
   EMSCRIPTEN_ROOT = os.environ.get('EMSCRIPTEN')
@@ -117,8 +144,7 @@ def build():
   closure = 'closure' in sys.argv
   add_function_support = 'add_func' in sys.argv
   args = '-std=c++1z -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
-  args += ' -O1'
-  # args += ' -O3 --llvm-lto 1'
+  args += ' -O3'
   if add_function_support:
     args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
   if not wasm:
@@ -173,7 +199,6 @@ def build():
     os.makedirs('build')
   os.chdir('build')
 
-  # Configure with CMake on Windows, and with configure on Unix.
   cmake_build = True
 
   if cmake_build:
@@ -182,14 +207,12 @@ def build():
       os.path.join(EMSCRIPTEN_ROOT, 'emcmake'),
       'cmake',
       '../occt/',
-      '-DCMAKE_BUILD_TYPE=Debug',
-      '-D3RDPARTY_FREETYPE_DIR=/home/sebastian/Projects/OCCT_WA/freetype-2.10.0',
-      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=/home/sebastian/Projects/OCCT_WA/freetype-2.10.0/include/freetype',
-      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_ft2build=/home/sebastian/Projects/OCCT_WA/freetype-2.10.0/include',
-      '-D3RDPARTY_FREETYPE_LIBRARY_DIR=/home/sebastian/Projects/OCCT_WA/freetype-2.10.0/build',
+      '-DCMAKE_BUILD_TYPE=Release',
+      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=../freetype/freetype2-VER-2-10-1/include/freetype',
+      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_ft2build=../freetype/freetype2-VER-2-10-1/include',
       '-DBUILD_LIBRARY_TYPE=Static',
       '-DCMAKE_CXX_FLAGS="-DIGNORE_NO_ATOMICS=1 -frtti"',
-      '-D3RDPARTY_INCLUDE_DIRS=/home/sebastian/Projects/OCCT_WA/regal/src/apitrace/thirdparty/khronos/\;/home/sebastian/Projects/OCCT_WA/fontconfig',
+      '-D3RDPARTY_INCLUDE_DIRS=../regal/regal-master/src/apitrace/thirdparty/khronos/\;../fontconfig/fontconfig-2.13.92',
       '-DUSE_GLES2=ON',
       '-DBUILD_MODULE_Draw=OFF'
     ])
@@ -204,8 +227,8 @@ def build():
 
   stage('Link')
 
-  opencascade_libs = os.listdir(os.path.join('.', 'lin32', 'clang', 'libd'))
-  opencascade_libs = [os.path.join('.', 'build', 'lin32', 'clang', 'libd', s) for s in opencascade_libs]
+  opencascade_libs = os.listdir(os.path.join('.', 'lin32', 'clang', 'lib'))
+  opencascade_libs = [os.path.join('.', 'build', 'lin32', 'clang', 'lib', s) for s in opencascade_libs]
   opencascade_libs.extend([
     os.path.join('..', 'Tesselator.cpp')
   ])
