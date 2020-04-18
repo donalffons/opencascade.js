@@ -1,6 +1,7 @@
 typedef double Standard_Real;
 typedef boolean Standard_Boolean;
 typedef long Standard_Integer;
+typedef DOMString Standard_CString;
 
 interface BRepPrimAPI_MakeSphere{
 	void BRepPrimAPI_MakeSphere([Const]Standard_Real R); 
@@ -628,9 +629,34 @@ interface BRep_Tool {
 
 interface Handle_Poly_Triangulation {
 	void Handle_Poly_Triangulation();
+	void Handle_Poly_Triangulation(Poly_Triangulation thePtr);
 	boolean IsNull();
 	void Nullify();
 	Poly_Triangulation get();
+};
+
+interface Handle_XSControl_WorkSession {
+	void Handle_XSControl_WorkSession();
+	void Handle_XSControl_WorkSession(XSControl_WorkSession thePtr);
+	boolean IsNull();
+	void Nullify();
+	XSControl_WorkSession get();
+};
+
+interface Handle_Transfer_TransientProcess {
+	void Handle_Transfer_TransientProcess();
+	void Handle_Transfer_TransientProcess(Transfer_TransientProcess thePtr);
+	boolean IsNull();
+	void Nullify();
+	Transfer_TransientProcess get();
+};
+
+interface Handle_Message_ProgressIndicator {
+	void Handle_Message_ProgressIndicator();
+	void Handle_Message_ProgressIndicator(Message_ProgressIndicator thePtr);
+	boolean IsNull();
+	void Nullify();
+	Message_ProgressIndicator get();
 };
 
 interface TColgp_Array1OfPnt {
@@ -679,6 +705,105 @@ interface TColStd_Array1OfReal {
 	Standard_Integer Lower();
 	Standard_Integer Upper();
 	Standard_Real Value([Const] Standard_Integer theIndex);
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface XSControl_WorkSession {
+	void XSControl_WorkSession();
+	void ClearData([Const] Standard_Integer theMode);
+	Standard_Boolean SelectNorm([Const] Standard_CString theNormName);
+	// void SetController([Const, Ref] Handle_XSControl_Controller theCtl);
+	// Standard_CString SelectedNorm([Const] optional Standard_Boolean theRsc = false);
+	// Handle_XSControl_Controller NormAdaptor();
+	// const NCollection_DataMap<TCollection_AsciiString, Handle(Standard_Transient)> & Context() const
+	// void SetAllContext (const NCollection_DataMap<TCollection_AsciiString, Handle(Standard_Transient)>& theContext);
+	void ClearContext();
+	// Standard_Boolean PrintTransferStatus(
+	// 	[Const] Standard_Integer theNum,
+	// 	[Const] Standard_Boolean theWri,
+	// 	[Const, Ref] Handle_Message_Messenger theS
+	// );
+	void InitTransferReader([Const] Standard_Integer theMode);
+	// void SetTransferReader([Const, Ref] Handle_XSControl_TransferReader theTR);
+	// [Const, Ref] Handle_XSControl_TransferReader TransferReader();
+	[Value] Handle_Transfer_TransientProcess MapReader();
+	Standard_Boolean SetMapReader([Const, Ref] Handle_Transfer_TransientProcess theTP);
+	// [Value] Handle_Standard_Transient Result(
+	// 	[Const, Ref] Handle_Standard_Transient,
+	// 	[Const] Standard_Integer theMode
+	// );
+	// Standard_Integer TransferReadOne([Const, Ref] Handle_Standard_Transient theEnts);
+	Standard_Integer TransferReadRoots();
+	// [Value] Handle_Interface_InterfaceModel NewModel();
+	// [Const, Ref] Handle_XSControl_TransferWriter TransferWriter();
+	// Standard_Boolean SetMapWriter([Const, Ref] Handle_Transfer_FinderProcess theFP);
+	IFSelect_ReturnStatus TransferWriteShape(
+		[Const, Ref] TopoDS_Shape theShape,
+		[Const] optional Standard_Boolean theCompGraph = true
+	);
+	// [Value] Interface_CheckIterator TransferWriteCheckList();
+	// [Ref] Handle_XSControl_Vars Vars();
+	// void SetVars([Const, Ref] Handle_XSControl_Vars theVars);
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Transfer_ProcessForTransient {
+	void Transfer_ProcessForTransient();
+	[Value] Handle_Message_ProgressIndicator GetProgress();
+	void SetProgress([Const, Ref] Handle_Message_ProgressIndicator theProgess);
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Transfer_TransientProcess {
+	void Transfer_TransientProcess([Const] optional Standard_Integer nb = 10000);
+	// void SetModel([Const, Ref] Handle_Interface_InterfaceModel model);
+	// [Value] Handle_Interface_InterfaceModel Model();
+	// void SetGraph([Const, Ref] Handle_Interface_HGraph HG);
+	Standard_Boolean HasGraph();
+	// [Value] Handle_Interface_HGraph HGraph();
+	// [Const, Ref] Interface_Graph Graph();
+	// void SetContext(
+	// 	[Const] Standard_CString name,
+	// 	[Const, Ref] Handle_Standard_Transient ctx
+	// );
+	// Standard_Boolean GetContext(
+	// 	[Const] Standard_CString name,
+	// 	[Const, Ref] Handle_Standard_Type type,
+	// 	[Ref] Handle_Standard_Transient ctx
+	// );
+	// NCollection_DataMap<TCollection_AsciiString, Handle(Standard_Transient)>& Context();
+	// void PrintTrace(
+	// 	[Const, Ref] Handle_Standard_Transient start,
+	// 	[Const, Ref] Handle_Message_Messenger S
+	// );
+	// Standard_Integer CheckNum([Const, Ref] Handle_Standard_Transient);
+	// [Value] Interface_EntityIterator TypedSharings(
+	// 	[Const, Ref] Handle_Standard_Transient start,
+	// 	[Const, Ref] Handle_Standard_Type type
+	// );
+	// Standard_Boolean IsDataLoaded([Const, Ref] Handle_Standard_Transient ent);
+	// Standard_Boolean IsDataFail([Const, Ref] Handle_Standard_Transient ent);
+	// void PrintStats(
+	// 	[Const] Standard_Integer mode,
+	// 	[Const, Ref] Handle_Message_Messenger S
+	// );
+	// [Value] Handle_TColStd_HSequenceOTransient RootsForTransfer();
+};
+Transfer_TransientProcess implements Transfer_ProcessForTransient;
+
+interface Message_ProgressIndicator {
+	Standard_Real GetPosition();
+	Standard_Real GetValue();
+	Standard_Boolean NewScope([Const] Standard_CString name);
+	Standard_Boolean NewScope(
+		[Const] Standard_Real span,
+		[Const] Standard_CString name
+	);
+	Standard_Boolean EndScope();
+	void Reset();
 };
 
 // Full interface
@@ -899,9 +1024,50 @@ enum IFSelect_ReturnStatus{
 
 interface XSControl_Reader {
 	void XSControl_Reader();
+	void XSControl_Reader([Const] Standard_CString norm);
+	void XSControl_Reader(
+		[Const, Ref] Handle_XSControl_WorkSession WS,
+		Standard_Boolean scratch
+	);
+	Standard_Boolean SetNorm([Const] Standard_CString norm);
+	void SetWS(
+		[Const, Ref] Handle_XSControl_WorkSession WS,
+		[Const] optional Standard_Boolean scratch = true
+	);
+	[Value] Handle_XSControl_WorkSession WS();
 	IFSelect_ReturnStatus ReadFile ([Const] DOMString filename);
-	[Value] TopoDS_Shape OneShape();
+	// [Value] Handle_Interface_InterfaceModel Model();
+	// [Value] Handle_TColStd_HSequenceOfTransient GiveList(
+	// 	[Const] optional Standard_CString first = "",
+	// 	[Const] optional Standard_CString second = ""
+	// );
+	// [Value] Handle_TColStd_HSequenceOfTransient GiveList(
+	// 	[Const] Standard_CString first,
+	// 	[Const, Ref] Handle_Standard_Transient ent
+	// );
+	Standard_Integer NbRootsForTransfer();
+	// Handle_Standard_Transient RootForTransfer([Const] optional Standard_Integer num = 1);
+	Standard_Boolean TransferOneRoot([Const] optional Standard_Integer num = 1);
+	Standard_Boolean TransferOne([Const] Standard_Integer num);
+	// Standard_Boolean TransferEntity([Const, Ref] Handle_Standard_Transient start);
+	// Standard_Integer TransferList([Const, Ref] Handle_TColStd_HSequenceOfTransient list);
 	Standard_Integer TransferRoots();
+	void ClearShapes();
+	Standard_Integer NbShapes();
+	[Value] TopoDS_Shape Shape([Const] optional Standard_Integer num = 1);
+	[Value] TopoDS_Shape OneShape();
+	// void PrintCheckLoad(
+	// 	[Const] Standard_Boolean failsonly,
+	// 	[Const] IFSelect_PrintCount mode
+	// );
+	// void PrintCheckTransfer(
+	// 	[Const] Standard_Boolean failsonly,
+	// 	[Const] IFSelect_PrintCount mode
+	// );
+	void PrintStatsTransfer(
+		[Const] Standard_Integer what,
+		[Const] optional Standard_Integer mode = 0
+	);
 };
 
 interface STEPControl_Reader {
