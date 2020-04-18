@@ -44,6 +44,8 @@ INCLUDES = [
   os.path.join('.', 'occt', 'src', 'TColgp', 'TColgp_Array1OfDir.hxx'),
   os.path.join('.', 'occt', 'src', 'StdPrs', 'StdPrs_ToolTriangulatedShape.hxx'),
   os.path.join('.', 'occt', 'src', 'IGESControl', 'IGESControl_Reader.hxx'),
+  os.path.join('.', 'occt', 'src', 'Bnd', 'Bnd_OBB.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepBndLib', 'BRepBndLib.hxx'),
   os.path.join('.', 'Tesselator.h'),
   os.path.join('.', 'typedefs.h')
 ]
@@ -92,12 +94,10 @@ def build():
     files = os.listdir(source)
     for f in files:
       shutil.move(source+f, dest)
-    pset = patch.fromfile("../patches/CMakeLists.txt.patch")
-    pset.apply()
-    pset = patch.fromfile("../patches/OSD_Path.cxx.patch")
-    pset.apply()
-    pset = patch.fromfile("../patches/OSD_Process.cxx.patch")
-    pset.apply()
+    patch.fromfile("../patches/CMakeLists.txt.patch").apply()
+    pset = patch.fromfile("../patches/OSD_Path.cxx.patch").apply()
+    pset = patch.fromfile("../patches/OSD_Process.cxx.patch").apply()
+    pset = patch.fromfile("../patches/Bnd_Box.hxx.patch").apply()
 
   if not os.path.exists('regal'):
     stage("downloading and extracting regal...")
@@ -144,7 +144,7 @@ def build():
   closure = 'closure' in sys.argv
   add_function_support = 'add_func' in sys.argv
   args = '-std=c++1z -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
-  args += ' -O3'
+  #args += ' -O3'
   if add_function_support:
     args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
   if not wasm:

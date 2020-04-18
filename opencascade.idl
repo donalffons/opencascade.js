@@ -114,6 +114,195 @@ interface TopoDS_Face{
 };
 TopoDS_Face implements TopoDS_Shape;
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Bnd_Box {
+	void Bnd_Box();
+	void Bnd_Box(
+		[Const, Ref] gp_Pnt theMin,
+		[Const, Ref] gp_Pnt theMax
+	);
+	void SetWhole();
+	void SetVoid();
+	void Set([Const, Ref] gp_Pnt P);
+	void Set(
+		[Const, Ref] gp_Pnt P,
+		[Const, Ref] gp_Dir D
+	);
+	void Update(
+		[Const] Standard_Real aXMin,
+		[Const] Standard_Real aYMin,
+		[Const] Standard_Real aZMin,
+		[Const] Standard_Real aXMax,
+		[Const] Standard_Real aYMax,
+		[Const] Standard_Real aZMax
+	);
+	void Update(
+		[Const] Standard_Real X,
+		[Const] Standard_Real Y,
+		[Const] Standard_Real Z
+	);
+	Standard_Real GetGap();
+	void SetGap([Const] Standard_Real Tol);
+	void Enlarge([Const] Standard_Real Tol);
+	// void Get(
+	// 	[Ref] Standard_Real theXmin,
+	// 	[Ref] Standard_Real theYmin,
+	// 	[Ref] Standard_Real theZmin,
+	// 	[Ref] Standard_Real theXmax,
+	// 	[Ref] Standard_Real theYmax,
+	// 	[Ref] Standard_Real theZmax
+	// );
+	Standard_Real GetXmin();
+	Standard_Real GetXmax();
+	Standard_Real GetYmin();
+	Standard_Real GetYmax();
+	Standard_Real GetZmin();
+	Standard_Real GetZmax();
+	[Value] gp_Pnt CornerMin();
+	[Value] gp_Pnt CornerMax();
+	void OpenXmin();
+	void OpenXmax();
+	void OpenYmin();
+	void OpenYmax();
+	void OpenZmin();
+	void OpenZmax();
+	Standard_Boolean IsOpen();
+	Standard_Boolean IsOpenXmin();
+	Standard_Boolean IsOpenXmax();
+	Standard_Boolean IsOpenYmin();
+	Standard_Boolean IsOpenYmax();
+	Standard_Boolean IsOpenZmin();
+	Standard_Boolean IsOpenZmax();
+	Standard_Boolean IsWhole();
+	Standard_Boolean IsVoid();
+	Standard_Boolean IsXThin([Const] Standard_Real tol);
+	Standard_Boolean IsYThin([Const] Standard_Real tol);
+	Standard_Boolean IsZThin([Const] Standard_Real tol);
+	Standard_Boolean IsThin([Const] Standard_Real tol);
+	[Value] Bnd_Box Transformed([Const, Ref] gp_Trsf T);
+	void Add([Const, Ref] Bnd_Box Other);
+	// void Add([Const, Ref] gp_Pnt P);
+	void Add(
+		[Const, Ref] gp_Pnt P,
+		[Const, Ref] gp_Dir D
+	);
+	// void Add([Const, Ref] gp_Dir D);
+	Standard_Boolean IsOut([Const, Ref] gp_Pnt P);
+	// Standard_Boolean IsOut([Const, Ref] gp_Lin L);
+	// Standard_Boolean IsOut([Const, Ref] gp_Pln L);
+	// Standard_Boolean IsOut([Const, Ref] Bnd_Box Other);
+	Standard_Boolean IsOut(
+		[Const, Ref] Bnd_Box Other,
+		[Const, Ref] gp_Trsf T
+	);
+	Standard_Boolean IsOut(
+		[Const, Ref] gp_Trsf T1,
+		[Const, Ref] Bnd_Box Other,
+		[Const, Ref] gp_Trsf T2
+	);
+	// Standard_Boolean IsOut(
+	// 	[Const, Ref] gp_Pnt P1,
+	// 	[Const, Ref] gp_Pnt P2,
+	// 	[Const, Ref] gp_Dir D
+	// );
+	Standard_Real Distance([Const, Ref] Bnd_Box Other);
+	void Dump();
+	Standard_Real SquareExtent();
+	[Value] Bnd_Box FinitePart();
+	Standard_Boolean HasFinitePart();
+	// void DumpJson(
+	// 	[Ref] Standard_OStream theOStream,
+	// 	[Const] optional Standard_Integer theDepth -1
+	// );
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Bnd_OBB {
+	void Bnd_OBB();
+	void Bnd_OBB(
+		[Const, Ref] gp_Pnt theCenter,
+		[Const, Ref] gp_Dir theXDirection,
+		[Const, Ref] gp_Dir theYDirection,
+		[Const, Ref] gp_Dir theZDirection,
+		[Const] Standard_Real theHXSize,
+		[Const] Standard_Real theHYSize,
+		[Const] Standard_Real theHZSize
+	);
+	void Bnd_OBB([Const, Ref] Bnd_Box theBox);
+	void ReBuild(
+		[Const, Ref] TColgp_Array1OfPnt theListOfPoints,
+		[Const] TColStd_Array1OfReal theListOfTolerances,
+		[Const] optional Standard_Boolean theIsOptimal = false
+	);
+	void SetCenter([Const, Ref] gp_Pnt theCenter);
+	void SetXComponent(
+		[Const, Ref] gp_Dir theXDirection,
+		[Const] Standard_Real theHXSize
+	);
+	void SetYComponent(
+		[Const, Ref] gp_Dir theYDirection,
+		[Const] Standard_Real theHYSize
+	);
+	void SetZComponent(
+		[Const, Ref] gp_Dir theZDirection,
+		[Const] Standard_Real theHZSize
+	);
+	// [Value] gp_Ax3 Position();
+	// [Const, Ref] gp_XYZ Center();
+	// [Const, Ref] gp_XYZ XDirection();
+	// [Const, Ref] gp_XYZ YDirection();
+	// [Const, Ref] gp_XYZ ZDirection();
+	Standard_Real XHSize();
+	Standard_Real YHSize();
+	Standard_Real ZHSize();
+	Standard_Boolean IsVoid();
+	void SetVoid();
+	void SetAABox([Const] Standard_Boolean theFlag);
+	Standard_Boolean IsAABox();
+	void Enlarge([Const] Standard_Real theGapAdd);
+	Standard_Boolean GetVertex(gp_Pnt theP);
+	Standard_Real SquareExtent();
+	Standard_Boolean IsOut([Const, Ref] Bnd_OBB theOther);
+	// Standard_Boolean IsOut([Const, Ref] gp_Pnt theP);
+	Standard_Boolean IsCompletelyInside([Const, Ref] Bnd_OBB theOther);
+	void Add([Const, Ref] Bnd_OBB theOther);
+	// void Add([Const, Ref] gp_Pnt theP);
+	// void DumpJson(
+	// 	[Ref] Standard_OStream theOStream,
+	// 	[Const] Standard_Integer theDepth = -1
+	// );
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepBndLib {
+	void BRepBndLib();
+	static void Add(
+		[Const, Ref] TopoDS_Shape S,
+		[Ref] Bnd_Box B,
+		[Const] optional Standard_Boolean useTriangulation = true
+	);
+	static void AddClose(
+		[Const, Ref] TopoDS_Shape S,
+		[Ref] Bnd_Box B
+	);
+	static void AddOptimal(
+		[Const, Ref] TopoDS_Shape S,
+		[Ref] Bnd_Box B,
+		[Const] optional Standard_Boolean useTriangulation = true,
+		[Const] optional Standard_Boolean useShapeToerance = false
+	);
+	static void AddOBB(
+		[Const, Ref] TopoDS_Shape theS,
+		[Ref] Bnd_OBB theOBB,
+		[Const] optional Standard_Boolean theIsTriangulationUsed = true,
+		[Const] optional Standard_Boolean theIsOptimal = false,
+		[Const] optional Standard_Boolean theIsShapeToleranceUsed = true
+	);
+};
+
 
 //
 // for bottle example 
@@ -478,6 +667,18 @@ interface Poly_Array1OfTriangle {
 	Standard_Integer Lower();
 	Standard_Integer Upper();
 	[Const, Ref] Poly_Triangle Value([Const] Standard_Integer theIndex);
+};
+
+interface TColStd_Array1OfReal {
+	void TColStd_Array1OfReal();
+	void TColStd_Array1OfReal(
+		[Const] Standard_Integer theLower,
+		[Const] Standard_Integer theUpper
+	);
+	Standard_Integer Length();
+	Standard_Integer Lower();
+	Standard_Integer Upper();
+	Standard_Real Value([Const] Standard_Integer theIndex);
 };
 
 // Full interface

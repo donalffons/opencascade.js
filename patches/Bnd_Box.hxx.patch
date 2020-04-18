@@ -1,0 +1,15 @@
+--- ./occt/src/Bnd/Bnd_Box.hxx	2020-04-18 17:30:13.423325325 +0200
++++ ./occt/src/Bnd/Bnd_Box.hxx	2020-04-18 17:30:26.883344141 +0200
+@@ -134,6 +134,12 @@
+   //! Standard_ConstructionError exception will be thrown if the box is void.
+   //! if IsVoid()
+   Standard_EXPORT void Get (Standard_Real& theXmin, Standard_Real& theYmin, Standard_Real& theZmin, Standard_Real& theXmax, Standard_Real& theYmax, Standard_Real& theZmax) const;
++  Standard_EXPORT Standard_Real GetXmin() { return Xmin; }
++  Standard_EXPORT Standard_Real GetXmax() { return Xmax; }
++  Standard_EXPORT Standard_Real GetYmin() { return Ymin; }
++  Standard_EXPORT Standard_Real GetYmax() { return Ymax; }
++  Standard_EXPORT Standard_Real GetZmin() { return Zmin; }
++  Standard_EXPORT Standard_Real GetZmax() { return Zmax; }
+   
+   //! Returns the lower corner of this bounding box. The gap is included.
+   //! If this bounding box is infinite (i.e. "open"), returned values
