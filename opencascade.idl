@@ -83,9 +83,26 @@ interface TopoDS_Shape{
 	// );
 };
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 interface GProp_GProps{
 	void GProp_GProps();
+	void GProp_GProps([Const, Ref] gp_Pnt SystemLocation);
+	void Add(
+		[Const, Ref] GProp_GProps Item,
+		[Const] optional Standard_Real Density = 1.0
+	);
 	Standard_Real Mass();
+	[Value] gp_Pnt CentreOfMass();
+	// [Value] gp_Mat MatrixOfInertia();
+	// void StaticMoments(
+	// 	[Ref] Standard_Real Ix,
+	// 	[Ref] Standard_Real Iy,
+	// 	[Ref] Standard_Real Iz
+	// );
+	Standard_Real MomentOfInertia([Const, Ref] gp_Ax1 A1);
+	// GProp_PrincipalProps PrincipalProperties();
+	Standard_Real RadiusOfGyration([Const, Ref] gp_Ax1 A);
 };
 
 // Full interface
