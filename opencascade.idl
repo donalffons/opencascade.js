@@ -88,12 +88,139 @@ interface GProp_GProps{
 	Standard_Real Mass();
 };
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 interface BRepGProp{
-	// Standard_False is created using #define macro
-	// this is static method / namespace
-	// value assignment in arguments
-	// void VolumeProperties ([Const,Ref] TopoDS_Shape S, [Ref] GProp_GProps VProps, [Const] Standard_Boolean OnlyClosed = Standard_False); 
-	void VolumeProperties ([Const,Ref] TopoDS_Shape S, [Ref] GProp_GProps VProps);
+	static void LinearProperties(
+		[Const, Ref] TopoDS_Shape S,
+		[Ref] GProp_GProps LProps,
+		[Const] optional Standard_Boolean SkipShared = false,
+		[Const] optional Standard_Boolean UseTriangulation = false
+	);
+	static void SurfaceProperties(
+		[Const, Ref] TopoDS_Shape S,
+		[Ref] GProp_GProps SProps,
+		[Const] optional Standard_Boolean SkipShared = false,
+		[Const] optional Standard_Boolean UseTriangulation = false
+	);
+	static Standard_Real SurfaceProperties2(
+		[Const, Ref] TopoDS_Shape S,
+		[Ref] GProp_GProps SProps,
+		[Const] Standard_Real Eps,
+		[Const] optional Standard_Boolean SkipShared = false
+	);
+	static void VolumeProperties(
+		[Const, Ref] TopoDS_Shape S,
+		[Ref] GProp_GProps VProps,
+		[Const] optional Standard_Boolean OnlyClosed = false,
+		[Const] optional Standard_Boolean SkipShared = false,
+		[Const] optional Standard_Boolean UseTriangulation = false
+	);
+	static Standard_Real VolumeProperties2(
+		[Const, Ref] TopoDS_Shape S,
+		[Ref] GProp_GProps VProps,
+		[Const] Standard_Real Eps,
+		[Const] optional Standard_Boolean OnlyClosed = false,
+		[Const] optional Standard_Boolean SkipShared = false
+	);
+	static Standard_Real VolumePropertiesGK(
+		[Const, Ref] TopoDS_Shape S,
+		[Ref] GProp_GProps VProps,
+		[Const] optional Standard_Real Eps = 0.001,
+		[Const] optional Standard_Boolean OnlyClosed = false,
+		[Const] optional Standard_Boolean IsUseSpan = false,
+		[Const] optional Standard_Boolean CGFlag = false,
+		[Const] optional Standard_Boolean IFlag = false,
+		[Const] optional Standard_Boolean SkipShared = false
+	);
+	static Standard_Real VolumePropertiesGK2(
+		[Const, Ref] TopoDS_Shape S,
+		[Ref] GProp_GProps VProps,
+		[Const, Ref] gp_Pln thePln,
+		[Const] optional Standard_Real Eps = 0.001,
+		[Const] optional Standard_Boolean OnlyClosed = false,
+		[Const] optional Standard_Boolean IsUseSpan = false,
+		[Const] optional Standard_Boolean CGFlag = false,
+		[Const] optional Standard_Boolean IFlag = false,
+		[Const] optional Standard_Boolean SkipShared = false
+	);
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface gp_Pln{
+	void gp_Pln();
+	// void gp_Pln([Const, Ref] gp_Ax3 A3);
+	void gp_Pln(
+		[Const, Ref] gp_Pnt P,
+		[Const, Ref] gp_Dir V
+	);
+	void Coefficients(
+		Standard_Real A,
+		Standard_Real B,
+		Standard_Real C,
+		Standard_Real D
+	);
+	void SetAxis([Const, Ref] gp_Ax1 A1);
+	void SetLocation([Const, Ref] gp_Pnt Loc);
+	// void SetPosition([Const, Ref] gp_Ax3 A3);
+	void UReverse();
+	void VReverse();
+	Standard_Boolean Direct();
+	[Const, Ref] gp_Ax1 Axis();
+	[Const, Ref] gp_Pnt Location();
+	// [Const, Ref] gp_Ax3 Position();
+	Standard_Real Distance([Const, Ref] gp_Pnt P);
+	// Standard_Real Distance([Const, Ref] gp_Lin L);
+	// Standard_Real Distance([Const, Ref] gp_Pln Other);
+	Standard_Real SquareDistance([Const, Ref] gp_Pnt P);
+	// Standard_Real SquareDistance([Const, Ref] gp_Lin L);
+	// Standard_Real SquareDistance([Const, Ref] gp_Pln Other);
+	[Value] gp_Ax1 XAxis();
+	[Value] gp_Ax1 YAxis();
+	Standard_Boolean Contains(
+		[Const, Ref] gp_Pnt P,
+		[Const] Standard_Real LinearTolerance
+	);
+	Standard_Boolean Contains(
+		[Const, Ref] gp_Lin L,
+		[Const] Standard_Real LinearTolerance,
+		[Const] Standard_Real AngularTolerance
+	);
+	void Mirror([Const, Ref] gp_Pnt P);
+	[Value] gp_Pln Mirrored([Const, Ref] gp_Pnt P);
+	// void Mirror([Const, Ref] gp_Ax1 A1);
+	// [Value] gp_Pln Mirrored([Const, Ref] gp_Ax1 A1);
+	// void Mirror([Const, Ref] gp_Ax2 A2);
+	// [Value] gp_Pln Mirrored([Const, Ref] gp_Ax2 A2);
+	void Rotate(
+		[Const, Ref] gp_Ax1 A1,
+		[Const] Standard_Real Ang
+	);
+	[Value] gp_Pln Rotated(
+		[Const, Ref] gp_Ax1 A1,
+		[Const] Standard_Real Ang
+	);
+	void Scale(
+		[Const, Ref] gp_Pnt P,
+		[Const] Standard_Real S
+	);
+	[Value] gp_Pln Scaled(
+		[Const, Ref] gp_Pnt P,
+		[Const] Standard_Real S
+	);
+	void Transform([Const, Ref] gp_Trsf T);
+	[Value] gp_Pln Transformed([Const, Ref] gp_Trsf T);
+	void Translate([Const, Ref] gp_Vec V);
+	[Value] gp_Pln Translated([Const, Ref] gp_Vec V);
+	void Translate(
+		[Const, Ref] gp_Pnt P1,
+		[Const, Ref] gp_Pnt P2
+	);
+	[Value] gp_Pln Translated(
+		[Const, Ref] gp_Pnt P1,
+		[Const, Ref] gp_Pnt P2
+	);
 };
 
 // tesselator for visualization
