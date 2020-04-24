@@ -99,6 +99,7 @@ def build():
     pset = patch.fromfile("../patches/OSD_Path.cxx.patch").apply()
     pset = patch.fromfile("../patches/OSD_Process.cxx.patch").apply()
     pset = patch.fromfile("../patches/Bnd_Box.hxx.patch").apply()
+    pset = patch.fromfile("../patches/BRepGProp.hxx.patch").apply()
 
   if not os.path.exists('regal'):
     stage("downloading and extracting regal...")
