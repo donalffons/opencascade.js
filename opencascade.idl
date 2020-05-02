@@ -976,14 +976,14 @@ interface Poly_Triangulation {
 	Standard_Integer NbTriangles();
 	Standard_Boolean HasUVNodes();
 	[Const, Ref] TColgp_Array1OfPnt Nodes();
-	// [Ref] TColgp_Array1OfPnt ChangeNodes();
+	[Ref] TColgp_Array1OfPnt ChangeNodes();
 	// [Const, Ref] gp_Pnt Node([Const] Standard_Integer theIndex);
 	// [Ref] gp_Pnt ChangeNode([Const] Standard_Integer theIndex);
 	// [Const, Ref] TColgp_Array1OfPnt2d UVNodes();
 	// [Ref] TColgp_Array1OfPnt2d ChangeUVNodes();
 	// [Const, Ref] gp_Pnt2d UVNode([Const] Standard_Integer theIndex);
 	[Const, Ref] Poly_Array1OfTriangle Triangles();
-	// [Ref] Poly_Array1OfTriangle ChangeTriangles();
+	[Ref] Poly_Array1OfTriangle ChangeTriangles();
 	// [Const, Ref] Poly_Triangle Triangle([Const] Standard_Integer theIndex);
 	// [Ref] Poly_Triangle ChangeTriangle([Const] Standard_Integer theIndex);
 	// void SetNormals([Const, Ref] Handle_TShort_HArray1OfShortReal theNormals);
