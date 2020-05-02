@@ -1087,6 +1087,70 @@ interface StdPrs_ToolTriangulatedShape {
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepBuilderAPI_Sewing {
+	void BRepBuilderAPI_Sewing(
+		[Const] optional Standard_Real tolerance = 1e-6,
+		[Const] optional Standard_Boolean option1 = true,
+		[Const] optional Standard_Boolean option2 = true,
+		[Const] optional Standard_Boolean option3 = true,
+		[Const] optional Standard_Boolean option4 = false
+	);
+	void Init(
+		[Const] optional Standard_Real tolerance = 1e-6,
+		[Const] optional Standard_Boolean option1 = true,
+		[Const] optional Standard_Boolean option2 = true,
+		[Const] optional Standard_Boolean option3 = true,
+		[Const] optional Standard_Boolean option4 = false
+	);
+	void Load([Const, Ref] TopoDS_Shape shape);
+	void Add([Const, Ref] TopoDS_Shape shape);
+	void Perform([Const, Ref] optional Handle_Message_ProgressIndicator thePI);
+	[Const, Ref] TopoDS_Shape SewedShape();
+	// void SetContext([Const, Ref] Handle_BRepTools_ReShape theContext);
+	// [Const, Ref] Handle_BRepTools_ReShape GetContext();
+	Standard_Integer NbFreeEdges();
+	[Const, Ref] TopoDS_Edge FreeEdge([Const] Standard_Integer index);
+	Standard_Integer NbMultipleEdges();
+	[Const, Ref] TopoDS_Edge MultipleEdge([Const] Standard_Integer index);
+	Standard_Integer NbContigousEdges();
+	[Const, Ref] TopoDS_Edge ContigousEdge([Const] Standard_Integer index);
+	// [Const, Ref] TopTools_ListOfShape ContigousEdgeCouple([Const] Standard_Integer index);
+	Standard_Boolean IsSectionBound([Const, Ref] TopoDS_Edge section);
+	[Const, Ref] TopoDS_Edge SectionToBoundary([Const, Ref] TopoDS_Edge section);
+	Standard_Integer NbDegeneratedShapes();
+	[Const, Ref] TopoDS_Shape DegeneratedShape([Const] Standard_Integer index);
+	Standard_Boolean IsDegenerated([Const, Ref] TopoDS_Shape shape);
+	Standard_Boolean IsModified([Const, Ref] TopoDS_Shape shape);
+	[Const, Ref] TopoDS_Shape Modified([Const, Ref] TopoDS_Shape shape);
+	Standard_Boolean IsModifiedSubShape([Const, Ref] TopoDS_Shape shape);
+	[Value] TopoDS_Shape ModifiedSubShape([Const, Ref] TopoDS_Shape shape);
+	void Dump();
+	Standard_Integer NbDeletedFaces();
+	[Const, Ref] TopoDS_Face DeletedFace([Const] Standard_Integer index);
+	[Value] TopoDS_Face WhichFace(
+		[Const, Ref] TopoDS_Edge theEdg,
+		[Const] optional Standard_Integer index = 1
+	);
+	Standard_Boolean SameParameterMode();
+	void SetSameParameterMode([Const] Standard_Boolean SameParameterMode);
+	Standard_Real Tolerance();
+	void SetTolerance([Const] Standard_Real theToler);
+	Standard_Real MinTolerance();
+	void SetMinTolerance([Const] Standard_Real theMinToler);
+	Standard_Real MaxTolerance();
+	void SetMaxTolerance([Const] Standard_Real theMaxToler);
+	Standard_Boolean FaceMode();
+	void SetFaceMode([Const] Standard_Boolean theFaceMode);
+	Standard_Boolean FloatingEdgesMode();
+	void SetFloatingEdgesMode([Const] Standard_Boolean theFloatingEdgesMode);
+	Standard_Boolean LocalTolerancesMode();
+	void SetLocalTolerancesMode([Const] Standard_Boolean theLocalTolerancesMode);
+	void SetNonManifoldMode([Const] Standard_Boolean theNonManifoldMode);
+	Standard_Boolean NonManifoldMode();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 interface BRepAdaptor_Surface {
 	void BRepAdaptor_Surface();
 	void BRepAdaptor_Surface(
