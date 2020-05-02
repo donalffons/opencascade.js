@@ -1271,6 +1271,16 @@ interface BRepAdaptor_Surface {
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
+interface StlAPI_Reader {
+	void StlAPI_Reader();
+	Standard_Boolean Read(
+		[Ref] TopoDS_Shape theShape,
+		[Const] Standard_CString theFileName
+	);
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 enum TopAbs_Orientation {
 	"TopAbs_FORWARD",
 	"TopAbs_REVERSED",
