@@ -259,12 +259,6 @@ interface BRepMesh_IncrementalMesh{
 	void BRepMesh_IncrementalMesh([Const, Ref] TopoDS_Shape theShape, [Const] Standard_Real theLinDeflection);
 };
 
-
-interface TopoDS_Face{
-	void TopoDS_Face();
-};
-TopoDS_Face implements TopoDS_Shape;
-
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface Bnd_Box {
@@ -561,20 +555,45 @@ interface GC_MakeSegment{
 	void GC_MakeSegment([Const, Ref] gp_Pnt P1, [Const, Ref] gp_Pnt P2);
 };
 
-
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Edge{
 	void TopoDS_Edge();
 };
+TopoDS_Edge implements TopoDS_Shape;
+
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Wire{
 	void TopoDS_Wire();
 };
+TopoDS_Wire implements TopoDS_Shape;
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface TopoDS_Compound {
+	void TopoDS_Compound();
+};
+TopoDS_Compound implements TopoDS_Shape;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface TopoDS_Face{
+	void TopoDS_Face();
+};
+TopoDS_Face implements TopoDS_Shape;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface TopoDS_Vertex {
+	void TopoDS_Vertex();
+};
+TopoDS_Vertex implements TopoDS_Shape;
 
 interface gp_Ax1{
 	void gp_Ax1();
 };
-
-
 
 interface gp_Ax2{
 	//  Standard_EXPORT gp_Ax2(const gp_Pnt& P, const gp_Dir& V);
