@@ -49,6 +49,8 @@ INCLUDES = [
   os.path.join('.', 'occt', 'src', 'gp', 'gp_Pln.hxx'),
   os.path.join('.', 'occt', 'src', 'StlAPI', 'StlAPI_Reader.hxx'),
   os.path.join('.', 'occt', 'src', 'BRepBuilderAPI', 'BRepBuilderAPI_Sewing.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepBuilderAPI', 'BRepBuilderAPI_MakeVertex.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepBuilderAPI', 'BRepBuilderAPI_MakePolygon.hxx'),
   os.path.join('.', 'Tesselator.h'),
   os.path.join('.', 'typedefs.h')
 ]
