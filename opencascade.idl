@@ -22,8 +22,14 @@ interface BRepPrimAPI_MakeOneAxis{
 };
 BRepPrimAPI_MakeOneAxis implements BRepBuilderAPI_MakeShape;
 
-interface BRepBuilderAPI_MakeShape{
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepBuilderAPI_MakeShape {
+	void Build();
 	[Const, Ref] TopoDS_Shape Shape(); 
+	// [Const, Ref] TopTools_ListOfShape Generated([Const, Ref] TopoDS_Shape S);
+	// [Const, Ref] TopTools_ListOfShape Modified([Const, Ref] TopoDS_Shape S);
+	Standard_Boolean IsDeleted([Const, Ref] TopoDS_Shape S);
 };
 
 interface BRepPrim_Sphere{
