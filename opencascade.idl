@@ -727,7 +727,7 @@ BRepBuilderAPI_ModifyShape implements BRepBuilderAPI_MakeShape;
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS {
-	// [Const, Ref] TopoDS_Vertex Vertex([Const, Ref] TopoDS_Shape S);
+	[Const, Ref] TopoDS_Vertex Vertex([Const, Ref] TopoDS_Shape S);
   [Const, Ref] static TopoDS_Edge Edge([Const, Ref] TopoDS_Shape S);
   [Const, Ref] static TopoDS_Wire Wire([Const, Ref] TopoDS_Shape S);
   [Const, Ref] static TopoDS_Face Face([Const, Ref] TopoDS_Shape S);
