@@ -932,6 +932,98 @@ interface BRepAdaptor_Curve{
 };
 BRepAdaptor_Curve implements Adaptor3d_Curve;
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface GCPnts_TangentialDeflection{
+	void GCPnts_TangentialDeflection();
+	void GCPnts_TangentialDeflection(
+		[Const, Ref] Adaptor3d_Curve C,
+		[Const] Standard_Real AngularDeflection,
+		[Const] Standard_Real CurvatureDeflection,
+		[Const] optional Standard_Integer MinimumOfPoints = 2,
+		[Const] optional Standard_Real UTol = 1.0e-9,
+		[Const] optional Standard_Real theMinLen = 1.0e-7
+	);
+	void GCPnts_TangentialDeflection(
+		[Const, Ref] Adaptor3d_Curve C,
+		[Const] Standard_Real FirstParameter,
+		[Const] Standard_Real LastParameter,
+		[Const] Standard_Real AngularDeflection,
+		[Const] Standard_Real CurvatureDeflection,
+		[Const] Standard_Integer MinimumOfPoints,
+		[Const] Standard_Real UTol,
+		[Const] Standard_Real theMinLen
+	);
+	// void GCPnts_TangentialDeflection(
+	// 	[Const, Ref] Adaptor2d_Curve C,
+	// 	[Const] Standard_Real AngularDeflection,
+	// 	[Const] Standard_Real CurvatureDeflection,
+	// 	[Const] optional Standard_Integer MinimumOfPoints = 2,
+	// 	[Const] optional Standard_Real UTol = 1.0e-9,
+	// 	[Const] optional Standard_Real theMinLen = 1.0e-7
+	// );
+	// void GCPnts_TangentialDeflection(
+	// 	[Const, Ref] Adaptor2d_Curve C,
+	// 	[Const] Standard_Real FirstParameter,
+	// 	[Const] Standard_Real LastParameter,
+	// 	[Const] Standard_Real AngularDeflection,
+	// 	[Const] Standard_Real CurvatureDeflection,
+	// 	[Const] optional Standard_Integer MinimumOfPoints = 2,
+	// 	[Const] optional Standard_Real UTol = 1.0e-9,
+	// 	[Const] optional Standard_Real theMinLen = 1.0e-7
+	// );
+	void Initialize(
+		[Const, Ref] Adaptor3d_Curve C,
+		[Const] Standard_Real AngularDeflection,
+		[Const] Standard_Real CurvatureDeflection,
+		[Const] optional Standard_Integer MinimumOfPoints = 2,
+		[Const] optional Standard_Real UTol = 1.0e-9,
+		[Const] optional Standard_Real theMinLen = 1.0e-7
+	);
+	void Initialize(
+		[Const, Ref] Adaptor3d_Curve C,
+		[Const] Standard_Real FirstParameter,
+		[Const] Standard_Real LastParameter,
+		[Const] Standard_Real AngularDeflection,
+		[Const] Standard_Real CurvatureDeflection,
+		[Const] Standard_Integer MinimumOfPoints,
+		[Const] Standard_Real UTol,
+		[Const] Standard_Real theMinLen
+	);
+	// void Initialize(
+	// 	[Const, Ref] Adaptor2d_Curve C,
+	// 	[Const] Standard_Real AngularDeflection,
+	// 	[Const] Standard_Real CurvatureDeflection,
+	// 	[Const] optional Standard_Integer MinimumOfPoints = 2,
+	// 	[Const] optional Standard_Real UTol = 1.0e-9,
+	// 	[Const] optional Standard_Real theMinLen = 1.0e-7
+	// );
+	// void Initialize(
+	// 	[Const, Ref] Adaptor2d_Curve C,
+	// 	[Const] Standard_Real FirstParameter,
+	// 	[Const] Standard_Real LastParameter,
+	// 	[Const] Standard_Real AngularDeflection,
+	// 	[Const] Standard_Real CurvatureDeflection,
+	// 	[Const] optional Standard_Integer MinimumOfPoints = 2,
+	// 	[Const] optional Standard_Real UTol = 1.0e-9,
+	// 	[Const] optional Standard_Real theMinLen = 1.0e-7
+	// );
+	Standard_Integer AddPoint(
+		[Const, Ref] gp_Pnt thePnt,
+		[Const] Standard_Real theParam,
+		[Const] optional Standard_Boolean theIsReplace = true
+	);
+	Standard_Integer NbPoints();
+	Standard_Real Parameter([Const] Standard_Integer I);
+	[Value] gp_Pnt Value([Const] Standard_Integer I);
+	Standard_Real ArcAngularStep(
+		[Const] Standard_Real theRadius,
+		[Const] Standard_Real theLinearDeflection,
+		[Const] Standard_Real theAngularDeflection,
+		[Const] Standard_Real theMinLength
+	);
+};
+
 interface BRep_Tool {
 	static Standard_Boolean IsClosed([Const, Ref] TopoDS_Shape S);
 	[Const, Ref] static Handle_Poly_Triangulation Triangulation(
