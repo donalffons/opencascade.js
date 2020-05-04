@@ -1324,6 +1324,16 @@ interface Handle_Geom_Curve{
 	Geom_Curve get();
 };
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Poly_Polygon3D{
+	void Handle_Poly_Polygon3D();
+	void Handle_Poly_Polygon3D(Poly_Polygon3D thePtr);
+	boolean IsNull();
+	void Nullify();
+	Poly_Polygon3D get();
+};
+
 interface Handle_Poly_Triangulation {
 	void Handle_Poly_Triangulation();
 	void Handle_Poly_Triangulation(Poly_Triangulation thePtr);
