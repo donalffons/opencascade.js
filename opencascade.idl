@@ -788,6 +788,68 @@ interface TopLoc_Location {
 	[Const, Ref] gp_Trsf Transformation();
 };
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Adaptor3d_Curve {
+	Standard_Real FirstParameter();
+	Standard_Real LastParameter();
+	// [Value] GeomAbs_Shape Continuity();
+	// Standard_Integer NbIntervals([Const] GeomAbs_Shape S);
+	// void Intervals(
+	// 	[Ref] TColStd_Array1OfReal T,
+	// 	[Const] GeomAbs_Shape S
+	// );
+	// [Value] Handle_Adaptor3d_HCurve Trim(
+	// 	[Const] Standard_Real First,
+	// 	[Const] Standard_Real Last,
+	// 	[Const] Standard_Real Tol
+	// );
+	Standard_Boolean IsClosed();
+	Standard_Boolean IsPeriodic();
+	Standard_Real Period();
+	[Value] gp_Pnt Value([Const] Standard_Real U);
+	void D0(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P
+	);
+	void D1(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1
+	);
+	void D2(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2
+	);
+	void D3(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2,
+		[Ref] gp_Vec V3
+	);
+	void DN(
+		[Const] Standard_Real U,
+		[Const] Standard_Integer N
+	);
+	Standard_Real Resolution([Const] Standard_Real R3d);
+	// [Value] GeomAbs_CurveType GetType();
+	[Value] gp_Lin Line();
+	[Value] gp_Circ Circle();
+	// [Value] gp_Elips Ellipse();
+	// [Value] gp_Hypr Hyperbola();
+	// [Value] gp_Parab Parabola();
+	Standard_Integer Degree();
+	Standard_Boolean IsRational();
+	Standard_Integer NbPoles();
+	Standard_Integer NbKnots();
+	// [Value] Handle_Geom_BezierCurve Bezier();
+	// [Value] Handle_Geom_BSplineCurve BSpline();
+	// [Value] Handle_Geom_OffsetCurve OffsetCurve();
+};
+
 interface BRep_Tool {
 	static Standard_Boolean IsClosed([Const, Ref] TopoDS_Shape S);
 	[Const, Ref] static Handle_Poly_Triangulation Triangulation(
