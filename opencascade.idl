@@ -1314,6 +1314,16 @@ interface Poly_Polygon3D{
 	[Ref] TColStd_Array1OfReal ChangeParameters();
 };
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom_Curve{
+	void Handle_Geom_Curve();
+	void Handle_Geom_Curve(Geom_Curve thePtr);
+	boolean IsNull();
+	void Nullify();
+	Geom_Curve get();
+};
+
 interface Handle_Poly_Triangulation {
 	void Handle_Poly_Triangulation();
 	void Handle_Poly_Triangulation(Poly_Triangulation thePtr);
