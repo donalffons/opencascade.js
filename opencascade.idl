@@ -850,6 +850,88 @@ interface Adaptor3d_Curve {
 	// [Value] Handle_Geom_OffsetCurve OffsetCurve();
 };
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepAdaptor_Curve{
+	void BRepAdaptor_Curve();
+	void BRepAdaptor_Curve([Const, Ref] TopoDS_Edge E);
+	void BRepAdaptor_Curve(
+		[Const, Ref] TopoDS_Edge E,
+		[Const, Ref] TopoDS_Face F
+	);
+	void Reset();
+	void Initialize([Const, Ref] TopoDS_Edge E);
+	void Initialize(
+		[Const, Ref] TopoDS_Edge E,
+		[Const, Ref] TopoDS_Face F
+	);
+	[Const, Ref] gp_Trsf Trsf();
+	Standard_Boolean Is3DCurve();
+	Standard_Boolean IsCurveOnSurface();
+	// [Const, Ref] GeomAdaptor_Curve Curve();
+	// [Const, Ref] Adaptor3d_CurveOnSurface CurveOnSurface();
+	[Const, Ref] TopoDS_Edge Edge();
+	Standard_Real Tolerance();
+	Standard_Real FirstParameter();
+	Standard_Real LastParameter();
+	// [Value] GeomAbs_Shape Continuity();
+	// Standard_Integer NbIntervals([Const] GeomAbs_Shape S);
+	// void Intervals(
+	// 	[Ref] TColStd_Array1OfReal T,
+	// 	[Const] GeomAbs_Shape S
+	// );
+	// [Value] Handle_Adaptor3d_HCurve Trim(
+	// 	[Const] Standard_Real First,
+	// 	[Const] Standard_Real Last,
+	// 	[Const] Standard_Real Tol
+	// );
+	Standard_Boolean IsClosed();
+	Standard_Boolean IsPeriodic();
+	Standard_Real Period();
+	[Value] gp_Pnt Value([Const] Standard_Real U);
+	void D0(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P
+	);
+	void D1(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1
+	);
+	void D2(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2
+	);
+	void D3(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2,
+		[Ref] gp_Vec V3
+	);
+	void DN(
+		[Const] Standard_Real U,
+		[Const] Standard_Integer N
+	);
+	Standard_Real Resolution([Const] Standard_Real R3d);
+	// [Value] GeomAbs_CurveType GetType();
+	[Value] gp_Lin Line();
+	[Value] gp_Circ Circle();
+	// [Value] gp_Elips Ellipse();
+	// [Value] gp_Hypr Hyperbola();
+	// [Value] gp_Parab Parabola();
+	Standard_Integer Degree();
+	Standard_Boolean IsRational();
+	Standard_Integer NbPoles();
+	Standard_Integer NbKnots();
+	// [Value] Handle_Geom_BezierCurve Bezier();
+	// [Value] Handle_Geom_BSplineCurve BSpline();
+	// [Value] Handle_Geom_OffsetCurve OffsetCurve();
+};
+BRepAdaptor_Curve implements Adaptor3d_Curve;
+
 interface BRep_Tool {
 	static Standard_Boolean IsClosed([Const, Ref] TopoDS_Shape S);
 	[Const, Ref] static Handle_Poly_Triangulation Triangulation(
