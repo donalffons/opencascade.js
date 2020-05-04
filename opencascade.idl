@@ -1296,6 +1296,22 @@ interface BRep_Tool {
 	);
 };
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Poly_Polygon3D{
+	void Poly_Polygon3D([Const, Ref] TColgp_Array1OfPnt Nodes);
+	void Poly_Polygon3D(
+		[Const, Ref] TColgp_Array1OfPnt Nodes,
+		[Const, Ref] TColStd_Array1OfReal Parameters
+	);
+	[Value] Handle_Poly_Polygon3D Copy();
+	Standard_Real Deflection();
+	// void Deflection([Const] Standard_Real D);
+	Standard_Integer NbNodes();
+	[Const, Ref] TColgp_Array1OfPnt Nodes();
+	Standard_Boolean HasParameters();
+	[Const, Ref] TColStd_Array1OfReal Parameters();
+	[Ref] TColStd_Array1OfReal ChangeParameters();
 };
 
 interface Handle_Poly_Triangulation {
