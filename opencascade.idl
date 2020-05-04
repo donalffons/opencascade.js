@@ -1024,6 +1024,53 @@ interface GCPnts_TangentialDeflection{
 	);
 };
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Geom_Curve{
+	void Reverse();
+	Standard_Real ReversedParameter([Const] Standard_Real U);
+	Standard_Real TransformedParameter(
+		[Const] Standard_Real U,
+		[Const, Ref] gp_Trsf T
+	);
+	Standard_Real ParametricTransformation([Const, Ref] gp_Trsf T);
+	[Value] Handle_Geom_Curve Reversed();
+	Standard_Real FirstParameter();
+	Standard_Real LastParameter();
+	Standard_Boolean IsClosed();
+	Standard_Boolean IsPeriodic();
+	Standard_Real Period();
+	// [Value] GeomAbs_Shape Continuity();
+	Standard_Boolean IsCN([Const] Standard_Integer N);
+	void D0(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P
+	);
+	void D1(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1
+	);
+	void D2(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2
+	);
+	void D3(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2,
+		[Ref] gp_Vec V3
+	);
+	void DN(
+		[Const] Standard_Real U,
+		[Const] Standard_Integer N
+	);
+	[Value] gp_Pnt Value([Const] Standard_Real U);
+};
+
 interface BRep_Tool {
 	static Standard_Boolean IsClosed([Const, Ref] TopoDS_Shape S);
 	[Const, Ref] static Handle_Poly_Triangulation Triangulation(
