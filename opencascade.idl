@@ -2214,6 +2214,7 @@ interface gp_Lin{
 interface gp_Circ{};
 interface gp_Elips{};
 interface gp_Hypr{};
+interface gp_Parab{};
 
 interface BRepBuilderAPI_MakeEdge{
 	// Standard_EXPORT BRepBuilderAPI_MakeEdge(const gp_Lin& L);
