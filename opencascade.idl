@@ -246,12 +246,6 @@ interface gp_Pln{
 	);
 };
 
-// tesselator for visualization
-interface Tesselator{
-	void Tesselator([Const,Ref] TopoDS_Shape aShape);
-	DOMString ExportShapeToThreejs();
-};
-
 // BRepMesh_IncrementalMesh.hxx
 interface BRepMesh_IncrementalMesh{
 	void BRepMesh_IncrementalMesh();
