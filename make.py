@@ -157,7 +157,7 @@ def build():
   if add_function_support:
     args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
   if not wasm:
-    args += ' -s WASM=0 -s AGGRESSIVE_VARIABLE_ELIMINATION=1 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s SINGLE_FILE=1 -s LEGACY_VM_SUPPORT=1'
+    args += ' -s WASM=0 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s SINGLE_FILE=1 -s LEGACY_VM_SUPPORT=1'
   else:
     #args += ''' -s WASM=1 -s BINARYEN_IGNORE_IMPLICIT_TRAPS=1 -s BINARYEN_TRAP_MODE="clamp"'''
     args += ''' -s WASM=1 -s BINARYEN_IGNORE_IMPLICIT_TRAPS=1'''
@@ -168,8 +168,12 @@ def build():
   emcc_args = args.split(' ')
   emcc_args += ['-s', 'TOTAL_MEMORY=%d' % (64*1024*1024)] # default 64MB. Compile with ALLOW_MEMORY_GROWTH if you want a growable heap (slower though).
   emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1'] # resizable heap, with some amount of slowness
-  emcc_args += '-s EXPORT_NAME="opencascade" -s MODULARIZE=1'.split(' ')
+  emcc_args += '-s EXPORT_NAME="opencascade"'.split(' ')
+  emcc_args += '-s MODULARIZE=1'.split(' ')
   emcc_args += ['-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]']
+  emcc_args += ['-s', 'EXPORT_ES6=1']
+  emcc_args += ['-s', 'USE_ES6_IMPORT_META=0']
+  emcc_args += ['-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1']
 
   # Debugging options
   # emcc_args += ['-s', 'ASSERTIONS=2']
@@ -261,9 +265,9 @@ def build():
   open(temp, 'w').write(wrapped)
 
   os.chdir('..')
-  if os.path.exists('dist'):
-    shutil.rmtree('dist')
-  shutil.copytree(os.path.join('build', 'js'), 'dist')
+  shutil.copyfile(os.path.join('build', 'js', 'opencascade.js'), os.path.join('dist', 'opencascade.js'))
+  shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.js'), os.path.join('dist', 'opencascade.wasm.js'))
+  shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.wasm'), os.path.join('dist', 'opencascade.wasm.wasm'))
 
 if __name__ == '__main__':
   build()
