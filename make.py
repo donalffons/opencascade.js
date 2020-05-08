@@ -54,7 +54,6 @@ INCLUDES = [
   os.path.join('.', 'occt', 'src', 'Geom', 'Geom_Curve.hxx'),
   os.path.join('.', 'occt', 'src', 'BRepAdaptor', 'BRepAdaptor_Curve.hxx'),
   os.path.join('.', 'occt', 'src', 'GCPnts', 'GCPnts_TangentialDeflection.hxx'),
-  os.path.join('.', 'Tesselator.h'),
   os.path.join('.', 'typedefs.h')
 ]
 
@@ -239,9 +238,6 @@ def build():
 
   opencascade_libs = os.listdir(os.path.join('.', 'lin32', 'clang', 'lib'))
   opencascade_libs = [os.path.join('.', 'build', 'lin32', 'clang', 'lib', s) for s in opencascade_libs]
-  opencascade_libs.extend([
-    os.path.join('..', 'Tesselator.cpp')
-  ])
 
   stage('emcc: ' + ' '.join(emcc_args))
   os.chdir('..')
