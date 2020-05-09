@@ -6,35 +6,36 @@ This is OpenCascade.js - a port of the [OpenCascade](https://www.opencascade.com
 # Use it
 
 1. Add the library as a dependency to your project
- ```sh
- # with yarn
- yarn add opencascade.js
 
- # with npm
- npm install opencascade.js
- ```
+    ```sh
+    # with yarn
+    yarn add opencascade.js
+    # with npm
+    npm install opencascade.js
+    ```
+
 2. Assuming that you use webpack in your project, you need to add the following configuration to your `webpack.config.js`
 
-  ``` javascript
-  module: {
-    rules: [
-      {
-        test: /opencascade\.wasm\.wasm$/,
-        type: "javascript/auto",
-        loader: "file-loader"
-      }
-    ]
-  }
-  ```
-  This will make sure that the path to the opencascade WASM file is made available by webpack. This is required in order for `WebAssembly.InstantiateStreaming` to work.
+    ``` javascript
+    module: {
+      rules: [
+        {
+          test: /opencascade\.wasm\.wasm$/,
+          type: "javascript/auto",
+          loader: "file-loader"
+        }
+      ]
+    }
+    ```
+    This will make sure that the path to the opencascade WASM file is made available by webpack. This is required in order for `WebAssembly.InstantiateStreaming` to work.
 
 3. Use the library in your project:
-``` javascript
-import { initOpenCascade } from "opencascade.js";
-initOpenCascade().then(openCascade => {
-  // use it!
-});
-```
+    ``` javascript
+    import { initOpenCascade } from "opencascade.js";
+    initOpenCascade().then(openCascade => {
+      // use it!
+    });
+    ```
 
 # Build it
 
