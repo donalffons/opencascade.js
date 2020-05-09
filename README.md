@@ -25,9 +25,17 @@ This is OpenCascade.js - a port of the [OpenCascade](https://www.opencascade.com
           loader: "file-loader"
         }
       ]
+    },
+    node: {
+      fs: "empty"
     }
     ```
-    This will make sure that the path to the opencascade WASM file is made available by webpack. This is required in order for `WebAssembly.InstantiateStreaming` to work.
+    This will
+    
+    * make sure that the path to the opencascade WASM file is made available by webpack. This is required to enable support for `WebAssembly.InstantiateStreaming` & Co.
+    * stops webpack from complaining about `fs`being undefined in the Emscripten-generated loading script.
+    
+    For more info, see [here](https://gist.github.com/surma/b2705b6cca29357ebea1c9e6e15684cc).
 
 3. Use the library in your project:
     ``` javascript
