@@ -1,7 +1,7 @@
 OpenCascade.js
 ==============
 
-This is OpenCascade.js - a port of the [OpenCascade](https://www.opencascade.com/) CAD library to JavaScript and WebAssembly via emScripten.
+This is OpenCascade.js - a port of the [OpenCascade](https://www.opencascade.com/) CAD library to JavaScript and WebAssembly via Emscripten.
 
 # Use it
 
