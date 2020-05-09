@@ -1,6 +1,6 @@
 {
   "name": "opencascade.js",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A port of the OpenCascade CAD library to JavaScript and WebAssembly via Emscripten.",
   "main": "index.js",
   "repository": "git@github.com:donalffons/opencascade.js.git",
