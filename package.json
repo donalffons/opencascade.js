@@ -1,6 +1,6 @@
 {
   "name": "opencascade.js",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "index.js",
   "repository": "git@github.com:donalffons/opencascade.js.git",
   "author": "Sebastian Alff <donalffons@gmail.com>",
