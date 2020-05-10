@@ -572,9 +572,29 @@ interface GC_MakeArcOfCircle {
 	[Const, Ref] Handle_Geom_TrimmedCurve Value();
 };
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 interface GC_MakeSegment{
-	//   Standard_EXPORT GC_MakeSegment(const gp_Pnt& P1, const gp_Pnt& P2);
-	void GC_MakeSegment([Const, Ref] gp_Pnt P1, [Const, Ref] gp_Pnt P2);
+	void GC_MakeSegment(
+		[Const, Ref] gp_Pnt P1,
+		[Const, Ref] gp_Pnt P2
+	);
+	void GC_MakeSegment(
+		[Const, Ref] gp_Lin Line,
+		[Const] Standard_Real U1,
+		[Const] Standard_Real U2
+	);
+	// void GC_MakeSegment(
+	// 	[Const, Ref] gp_Lin Line,
+	// 	[Const, Ref] gp_Pnt Point,
+	// 	[Const] Standard_Real Ulast
+	// );
+	// void GC_MakeSegment(
+	// 	[Const, Ref] gp_Lin Line,
+	// 	[Const, Ref] gp_Pnt P1,
+	// 	[Const, Ref] gp_Pnt P2
+	// );
+	[Const, Ref] Handle_Geom_TrimmedCurve Value();
 };
 
 // Full interface
