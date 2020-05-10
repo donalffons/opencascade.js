@@ -272,7 +272,9 @@ def build():
   open(temp, 'w').write(wrapped)
 
   os.chdir('..')
+  if not wasm:
   shutil.copyfile(os.path.join('build', 'js', 'opencascade.js'), os.path.join('dist', 'opencascade.js'))
+  else:
   shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.js'), os.path.join('dist', 'opencascade.wasm.js'))
   shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.wasm'), os.path.join('dist', 'opencascade.wasm.wasm'))
 
