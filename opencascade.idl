@@ -2653,3 +2653,53 @@ interface IGESControl_Reader {
 	void IGESControl_Reader();
 };
 IGESControl_Reader implements XSControl_Reader;
+
+interface TopTools_ListOfShape {
+	void TopTools_ListOfShape();
+	[Ref] TopoDS_Shape Append([Const, Ref] TopoDS_Shape theItem);
+};
+
+interface BRepOffsetAPI_MakeOffsetShape {
+};
+BRepOffsetAPI_MakeOffsetShape implements BRepBuilderAPI_MakeShape;
+
+interface BRepOffsetAPI_MakeThickSolid {
+	void BRepOffsetAPI_MakeThickSolid();
+	void MakeThickSolidByJoin(
+		[Const, Ref] TopoDS_Shape S,
+		[Const, Ref] TopTools_ListOfShape ClosingFaces,
+		[Const] Standard_Real Offset,
+		[Const] Standard_Real Tol
+	);
+};
+BRepOffsetAPI_MakeThickSolid implements BRepOffsetAPI_MakeOffsetShape;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+enum BRepOffset_Mode {
+	"BRepOffset_Skin",
+	"BRepOffset_Pipe",
+	"BRepOffset_RectoVerso"
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+enum GeomAbs_JoinType
+{
+	"GeomAbs_Arc",
+	"GeomAbs_Tangent",
+	"GeomAbs_Intersection"
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+enum GeomAbs_Shape
+{
+	"GeomAbs_C0",
+	"GeomAbs_G1",
+	"GeomAbs_C1",
+	"GeomAbs_G2",
+	"GeomAbs_C2",
+	"GeomAbs_C3",
+	"GeomAbs_CN"
+};
