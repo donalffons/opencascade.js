@@ -27,8 +27,6 @@ BRepPrimAPI_MakeOneAxis implements BRepBuilderAPI_MakeShape;
 interface BRepBuilderAPI_MakeShape {
 	void Build();
 	[Const, Ref] TopoDS_Shape Shape(); 
-	// [Const, Ref] TopTools_ListOfShape Generated([Const, Ref] TopoDS_Shape S);
-	// [Const, Ref] TopTools_ListOfShape Modified([Const, Ref] TopoDS_Shape S);
 	Standard_Boolean IsDeleted([Const, Ref] TopoDS_Shape S);
 };
 
@@ -645,14 +643,9 @@ interface gp_Ax2{
 
 
 
-interface gp{
-	//const gp_Ax1&  gp::OX(){
-	//  static gp_Ax1 gp_OX(gp_Pnt(0,0,0),gp_Dir(1,0,0));
-	//  return gp_OX;
-	//}
-
-	[Const, Ref] gp_Ax1 OX();
-  	[Const,Ref] gp_Dir DZ();
+interface gp {
+	[Const, Ref] static gp_Ax1 OX();
+	[Const,Ref] static gp_Dir DZ();
 };
 
 // Full interface
@@ -750,14 +743,15 @@ interface gp_Dir{
 
 interface gp_Trsf{
 	void gp_Trsf();
-	//   Standard_EXPORT   void SetMirror (const gp_Ax1& A1) ;
 	void SetMirror([Const, Ref]gp_Ax1 A1);
-	//   Standard_EXPORT   void SetMirror (const gp_Ax2& A2) ;
 };
 
 interface BRepBuilderAPI_Transform{
-	//   Standard_EXPORT BRepBuilderAPI_Transform(const TopoDS_Shape& S, const gp_Trsf& T, const Standard_Boolean Copy = Standard_False);
-	void BRepBuilderAPI_Transform([Const, Ref]TopoDS_Shape S, [Const, Ref]gp_Trsf T);
+	void BRepBuilderAPI_Transform(
+		[Const, Ref] TopoDS_Shape S,
+		[Const, Ref] gp_Trsf T,
+		[Const] optional Standard_Boolean Copy = false
+	);
 };
 BRepBuilderAPI_Transform implements BRepBuilderAPI_ModifyShape;
 
@@ -788,9 +782,7 @@ interface BRepBuilderAPI_MakeFace{
 };
 
 interface BRepFilletAPI_MakeFillet{
-	//   Standard_EXPORT BRepFilletAPI_MakeFillet(const TopoDS_Shape& S, const ChFi3d_FilletShape FShape = ChFi3d_Rational);
 	void BRepFilletAPI_MakeFillet([Const, Ref]TopoDS_Shape S);
-	//   Standard_EXPORT   void Add (const Standard_Real Radius, const TopoDS_Edge& E) ;
 	void Add([Const] Standard_Real Radius, [Const,Ref]TopoDS_Edge E);
 };
 BRepFilletAPI_MakeFillet implements BRepFilletAPI_LocalOperation;
@@ -2469,9 +2461,11 @@ enum GeomAbs_SurfaceType
 	"GeomAbs_OtherSurface"
 };
 
-interface BRepAlgoAPI_Fuse{
-	//   Standard_EXPORT BRepAlgoAPI_Fuse(const TopoDS_Shape& S1, const TopoDS_Shape& S2);
-	void BRepAlgoAPI_Fuse([Const,Ref] TopoDS_Shape S1, [Const,Ref] TopoDS_Shape S2);
+interface BRepAlgoAPI_Fuse {
+	void BRepAlgoAPI_Fuse(
+		[Const, Ref] TopoDS_Shape S1,
+		[Const, Ref] TopoDS_Shape S2
+	);
 };
 BRepAlgoAPI_Fuse implements BRepAlgoAPI_BooleanOperation;
 
@@ -2495,27 +2489,29 @@ interface gp_Hypr{};
 interface gp_Parab{};
 
 interface BRepBuilderAPI_MakeEdge{
-	// Standard_EXPORT BRepBuilderAPI_MakeEdge(const gp_Lin& L);
-	// Standard_EXPORT BRepBuilderAPI_MakeEdge(const gp_Circ& L);
-	// Standard_EXPORT BRepBuilderAPI_MakeEdge(const gp_Elips& L); 
-	// Standard_EXPORT BRepBuilderAPI_MakeEdge(const gp_Hypr& L);
-
-	//void BRepBuilderAPI_MakeEdge([Const, Ref] gp_Circ L);
-	//  Standard_EXPORT BRepBuilderAPI_MakeEdge(const gp_Pnt& P1, const gp_Pnt& P2);
-	void BRepBuilderAPI_MakeEdge([Const,Ref]gp_Pnt P1, [Const,Ref] gp_Pnt P2);
-	// Standard_EXPORT operator TopoDS_Edge() const;
-	//[Operator="="]void TopoDS_Edge();
-	//  Standard_EXPORT  const  TopoDS_Edge& Edge()  const;
+	void BRepBuilderAPI_MakeEdge([Const, Ref] Handle_Geom_Curve C);
+	void BRepBuilderAPI_MakeEdge(
+		[Const, Ref] Handle_Geom2d_Curve L,
+		[Const, Ref] Handle_Geom_Surface S
+	);
 	[Const, Ref] TopoDS_Edge Edge();
 };
 
 interface BRepBuilderAPI_MakeWire{
-	//Standard_EXPORT BRepBuilderAPI_MakeWire(const TopoDS_Edge& E1, const TopoDS_Edge& E2, const TopoDS_Edge& E3);
 	void BRepBuilderAPI_MakeWire();
-	void BRepBuilderAPI_MakeWire([Const, Ref]TopoDS_Edge E1, [Const, Ref]TopoDS_Edge E2, [Const, Ref]TopoDS_Edge E3);
-	//   Standard_EXPORT   void Add (const TopoDS_Wire& W) ;
+	void BRepBuilderAPI_MakeWire(
+		[Const, Ref] TopoDS_Edge E
+	);
+	void BRepBuilderAPI_MakeWire(
+		[Const, Ref] TopoDS_Edge E1,
+		[Const, Ref] TopoDS_Edge E2
+	);
+	void BRepBuilderAPI_MakeWire(
+		[Const, Ref] TopoDS_Edge E1,
+		[Const, Ref] TopoDS_Edge E2,
+		[Const, Ref] TopoDS_Edge E3
+	);
 	void Add ([Const, Ref] TopoDS_Wire W);
-	//   Standard_EXPORT  const  TopoDS_Wire& Wire()  const;
 	[Const, Ref] TopoDS_Wire Wire();
 };
 BRepBuilderAPI_MakeWire implements BRepBuilderAPI_MakeShape;
