@@ -2520,6 +2520,16 @@ interface BRepBuilderAPI_MakeWire{
 };
 BRepBuilderAPI_MakeWire implements BRepBuilderAPI_MakeShape;
 
+interface BRepLib {
+	Standard_Boolean BuildCurve3d(
+		[Const, Ref] TopoDS_Edge E,
+		[Const] optional Standard_Real Tolerance = 1.0e-5,
+		[Const] optional GeomAbs_Shape Continuity = "GeomAbs_C1",
+		[Const] optional Standard_Integer MaxDegree = 14,
+		[Const] optional Standard_Integer MaxSegment = 0
+	);
+};
+
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface BRepBuilderAPI_MakeVertex {
