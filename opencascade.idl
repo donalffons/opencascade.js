@@ -1121,7 +1121,7 @@ interface BRep_Tool {
 	// 	[Const, Ref] TopoDS_Face F,
 	// 	[Ref] TopLoc_Location L
 	// );
-	// [Value] Handle_Geom_Surface Surface([Const, Ref] TopoDS_Face F);
+	[Value] Handle_Geom_Surface Surface([Const, Ref] TopoDS_Face F);
 	[Const, Ref] static Handle_Poly_Triangulation Triangulation(
 		[Const, Ref] TopoDS_Face F,
 		[Ref] TopLoc_Location L
