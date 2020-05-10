@@ -54,7 +54,13 @@ INCLUDES = [
   os.path.join('.', 'occt', 'src', 'Geom', 'Geom_Curve.hxx'),
   os.path.join('.', 'occt', 'src', 'BRepAdaptor', 'BRepAdaptor_Curve.hxx'),
   os.path.join('.', 'occt', 'src', 'GCPnts', 'GCPnts_TangentialDeflection.hxx'),
+  os.path.join('.', 'occt', 'src', 'Geom', 'Geom_Plane.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepOffsetAPI', 'BRepOffsetAPI_MakeThickSolid.hxx'),
+  os.path.join('.', 'occt', 'src', 'Geom', 'Geom_CylindricalSurface.hxx'),
+  os.path.join('.', 'occt', 'src', 'Geom2d', 'Geom2d_Ellipse.hxx'),
+  os.path.join('.', 'occt', 'src', 'Geom2d', 'Geom2d_TrimmedCurve.hxx'),
   os.path.join('.', 'occt', 'src', 'GCE2d', 'GCE2d_MakeSegment.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepLib', 'BRepLib.hxx'),
   os.path.join('.', 'typedefs.h')
 ]
 
