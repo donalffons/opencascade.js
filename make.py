@@ -273,10 +273,10 @@ def build():
 
   os.chdir('..')
   if not wasm:
-  shutil.copyfile(os.path.join('build', 'js', 'opencascade.js'), os.path.join('dist', 'opencascade.js'))
+    shutil.copyfile(os.path.join('build', 'js', 'opencascade.js'), os.path.join('dist', 'opencascade.js'))
   else:
-  shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.js'), os.path.join('dist', 'opencascade.wasm.js'))
-  shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.wasm'), os.path.join('dist', 'opencascade.wasm.wasm'))
+    shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.js'), os.path.join('dist', 'opencascade.wasm.js'))
+    shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.wasm'), os.path.join('dist', 'opencascade.wasm.wasm'))
 
 if __name__ == '__main__':
   build()
