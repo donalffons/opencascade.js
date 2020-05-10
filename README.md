@@ -3,6 +3,8 @@ OpenCascade.js
 
 This is OpenCascade.js - a port of the [OpenCascade](https://www.opencascade.com/) CAD library to JavaScript and WebAssembly via Emscripten.
 
+See [here](https://github.com/donalffons/opencascade.js-examples) for examples on how to use this library.
+
 # Use it
 
 1. Add the library as a dependency to your project
