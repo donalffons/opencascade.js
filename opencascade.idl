@@ -1594,6 +1594,16 @@ interface Handle_Geom_Curve{
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom_TrimmedCurve{
+	void Handle_Geom_TrimmedCurve();
+	void Handle_Geom_TrimmedCurve(Geom_TrimmedCurve thePtr);
+	boolean IsNull();
+	void Nullify();
+	Geom_TrimmedCurve get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 interface Handle_Poly_Polygon3D{
 	void Handle_Poly_Polygon3D();
 	void Handle_Poly_Polygon3D(Poly_Polygon3D thePtr);
