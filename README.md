@@ -44,7 +44,7 @@ See [here](https://github.com/donalffons/opencascade.js-examples) for examples o
     This will
 
     * make sure that the path to the opencascade WASM file is made available by webpack. This is required to enable support for `WebAssembly.InstantiateStreaming` & Co.
-    * stops webpack from complaining about `fs`being undefined in the Emscripten-generated loading script.
+    * stop webpack from complaining about `fs` being undefined in the Emscripten-generated loading script.
     
     For more info, see [here](https://gist.github.com/surma/b2705b6cca29357ebea1c9e6e15684cc).
 
@@ -55,17 +55,18 @@ See [here](https://github.com/donalffons/opencascade.js-examples) for examples o
       // use it!
     });
     ```
+    This code will load the WebAssembly version of the library.
 
 # Build it
 
-You may encounter build issues when there are whitespaces in the path to OpenCascade.js. Its best to avoid those.
+You may encounter build issues if there are whitespaces in the path to OpenCascade.js. Its best to avoid those.
 
 You can build OpenCascade.js yourself, as follows:
 
-1. Get Emscripten from http://emscripten.org and set it up. See http://kripken.github.io/emscripten-site/docs/getting_started/
+1. Get [Emscripten](http://emscripten.org) and [set it up](http://kripken.github.io/emscripten-site/docs/getting_started/).
 
 2. Run the build script, `python2 make.py` for the JavaScript version and `python2 make.py wasm` for the WebAssembly version. Build results are written to the `dist` folder.
 
-# Exposing additional OpenCascade API parts
+# Exposing additional OpenCascade API's
 
-Certain parts of the OpenCascade API are already exposed. If you need additional API parts, go ahead and edit the `opencascade.idl` file. This file defined the exposed parts of the interface via the WebIDL Interface Description Language.
+Certain parts of the OpenCascade API are already exposed. If you need additional API's, go ahead and edit the `opencascade.idl` file. This file defines the exposed parts of the interface via the WebIDL Interface Description Language.
