@@ -1356,6 +1356,232 @@ interface Poly_Polygon3D{
 	[Ref] TColStd_Array1OfReal ChangeParameters();
 };
 
+interface GCE2d_MakeSegment {
+	void GCE2d_MakeSegment(
+		[Const, Ref] gp_Pnt2d P1,
+		[Const, Ref] gp_Pnt2d P2
+	);
+	[Const, Ref] Handle_Geom2d_TrimmedCurve Value();
+};
+
+interface Geom_BoundedCurve {
+};
+Geom_BoundedCurve implements Geom_Curve;
+
+interface Geom2d_Ellipse {
+	void Geom2d_Ellipse(
+		[Const, Ref] gp_Ax2d MajorAxis,
+		[Const] Standard_Real MajorRadius,
+		[Const] Standard_Real MinorRadius,
+		[Const] optional Standard_Boolean Sense = true
+	);
+};
+Geom2d_Ellipse implements Geom2d_Conic;
+
+interface Geom2d_TrimmedCurve {
+	void Geom2d_TrimmedCurve(
+		[Const, Ref] Handle_Geom2d_Curve C,
+		[Const] Standard_Real U1,
+		[Const] Standard_Real U2,
+		[Const] optional Standard_Boolean Sense = true,
+		[Const] optional Standard_Boolean theAdjustPeriodic = true
+	);
+};
+Geom2d_TrimmedCurve implements Geom2d_BoundedCurve;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Geom_TrimmedCurve {
+	void Geom_TrimmedCurve(
+		[Const, Ref] Handle_Geom_Curve C,
+		[Const] Standard_Real U1,
+		[Const] Standard_Real U2,
+		[Const] optional Standard_Boolean Sense = true,
+		[Const] optional Standard_Boolean theAdjustPeriodic = true
+	);
+	void Reverse();
+	Standard_Real ReversedParameter([Const] Standard_Real U);
+	void SetTrim(
+		[Const] Standard_Real U1,
+		[Const] Standard_Real U2,
+		[Const] optional Standard_Boolean Sense = true,
+		[Const] optional Standard_Boolean theAdjust = true
+	);
+	[Value] Handle_Geom_Curve BasisCurve();
+	// [Value] GeomAbs_Shape Continuity();
+	Standard_Boolean IsCN([Const] Standard_Integer N);
+	Standard_Real FirstParameter();
+	Standard_Boolean IsClosed();
+	Standard_Boolean IsPeriodic();
+	Standard_Real Period();
+	Standard_Real LastParameter();
+	[Value] gp_Pnt StartPoint();
+	void D0(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P
+	);
+	void D1(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1
+	);
+	void D2(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2
+	);
+	void D3(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2,
+		[Ref] gp_Vec V3
+	);
+	void DN(
+		[Const] Standard_Real U,
+		[Const] Standard_Integer N
+	);
+	void Transform([Const, Ref] gp_Trsf T);
+	Standard_Real TransformedParameter(
+		[Const] Standard_Real U,
+		[Const, Ref] gp_Trsf T
+	);
+	Standard_Real ParametricTransformation([Const, Ref] gp_Trsf T);
+	// [Value] Handle_Geom_Geometry Copy();
+};
+Geom_TrimmedCurve implements Geom_BoundedCurve;
+
+interface Standard_Transient {
+	[Const] DOMString get_type_name();
+	[Const, Ref] Handle_Standard_Type DynamicType();
+};
+
+interface Standard_Type {
+	[Const] DOMString Name();
+};
+Standard_Type implements Standard_Transient;
+
+interface Geom_Geometry {
+};
+Geom_Geometry implements Standard_Transient;
+
+interface Geom_Surface {
+};
+Geom_Surface implements Geom_Geometry;
+
+interface Geom_ElementarySurface {
+	[Value] gp_Pnt Location();
+};
+Geom_ElementarySurface implements Geom_Surface;
+
+interface Geom_Plane {
+};
+Geom_Plane implements Geom_ElementarySurface;
+
+interface gp_Ax3 {
+	void gp_Ax3();
+};
+
+interface gp_Pnt2d {
+	void gp_Pnt2d();
+	// void gp_Pnt2d([Const, Ref] gp_XY Coord);
+	void gp_Pnt2d(
+		[Const] Standard_Real Xp,
+		[Const] Standard_Real Yp
+	);
+	Standard_Real X();
+	Standard_Real Y();
+};
+
+interface gp_Dir2d {
+	void gp_Dir2d();
+	// void gp_Dir2d([Const, Ref] gp_Vec2d V);
+	// void gp_Dir2d([Const, Ref] gp_XY Coord);
+	void gp_Dir2d(
+		[Const] Standard_Real Xv,
+		[Const] Standard_Real Yv
+	);
+};
+
+interface gp_Ax2d {
+	void gp_Ax2d();
+	void gp_Ax2d(
+		[Const, Ref] gp_Pnt2d P,
+		[Const, Ref] gp_Dir2d V
+	);
+};
+
+interface Geom_CylindricalSurface {
+	void Geom_CylindricalSurface(
+		[Const, Ref] gp_Ax3 A3,
+		[Const] Standard_Real Radius
+	);
+};
+
+interface Geom2d_Curve {
+	Standard_Real Period();
+	[Value] gp_Pnt2d Value([Const] Standard_Real U);
+};
+
+interface Geom2d_BoundedCurve {
+};
+Geom2d_BoundedCurve implements Geom2d_Curve;
+
+interface Geom2d_Conic {
+};
+Geom2d_Conic implements Geom2d_Curve;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom2d_TrimmedCurve{
+	void Handle_Geom2d_TrimmedCurve();
+	void Handle_Geom2d_TrimmedCurve(Geom2d_TrimmedCurve thePtr);
+	boolean IsNull();
+	void Nullify();
+	Geom2d_TrimmedCurve get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom2d_Curve{
+	void Handle_Geom2d_Curve();
+	void Handle_Geom2d_Curve(Geom2d_Curve thePtr);
+	boolean IsNull();
+	void Nullify();
+	Geom2d_Curve get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Standard_Type{
+	void Handle_Standard_Type();
+	void Handle_Standard_Type(Standard_Type thePtr);
+	boolean IsNull();
+	void Nullify();
+	Standard_Type get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom_Plane{
+	void Handle_Geom_Plane();
+	void Handle_Geom_Plane(Geom_Plane thePtr);
+	boolean IsNull();
+	void Nullify();
+	Geom_Plane get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom_Surface{
+	void Handle_Geom_Surface();
+	void Handle_Geom_Surface(Geom_Surface thePtr);
+	boolean IsNull();
+	void Nullify();
+	Geom_Surface get();
+};
+
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface Handle_Geom_Curve{
