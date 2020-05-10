@@ -2524,7 +2524,19 @@ interface BRepLib {
 		[Const] optional Standard_Integer MaxDegree = 14,
 		[Const] optional Standard_Integer MaxSegment = 0
 	);
+	static Standard_Boolean BuildCurves3d([Const, Ref] TopoDS_Shape S);
 };
+
+interface BRepOffsetAPI_ThruSections {
+	void BRepOffsetAPI_ThruSections(
+		[Const] optional Standard_Boolean isSolid = true,
+		[Const] optional Standard_Boolean ruled = false,
+		[Const] optional Standard_Real pres3d = 1.0e-6
+	);
+	void AddWire([Const, Ref] TopoDS_Wire wire);
+	void CheckCompatibility([Const] optional Standard_Boolean check = true);
+};
+BRepOffsetAPI_ThruSections implements BRepBuilderAPI_MakeShape;
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
