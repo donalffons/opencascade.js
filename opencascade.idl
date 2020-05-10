@@ -538,10 +538,38 @@ interface gp_Pnt {
 	);
 };
 
-
-interface GC_MakeArcOfCircle{
-	//Standard_EXPORT GC_MakeArcOfCircle(const gp_Pnt& P1, const gp_Pnt& P2, const gp_Pnt& P3);
-	void GC_MakeArcOfCircle([Const, Ref] gp_Pnt P1, [Const, Ref] gp_Pnt P2, [Const, Ref] gp_Pnt P3 );
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface GC_MakeArcOfCircle {
+	void GC_MakeArcOfCircle(
+		[Const, Ref] gp_Circ Circ,
+		[Const] Standard_Real Alpha1,
+		[Const] Standard_Real Alpha2,
+		[Const] Standard_Boolean Sense
+	);
+	// void GC_MakeArcOfCircle(
+	// 	[Const, Ref] gp_Circ Circ,
+	// 	[Const, Ref] gp_Pnt P,
+	// 	[Const] Standard_Real Alpha,
+	// 	[Const] Standard_Boolean Sense
+	// );
+	// void GC_MakeArcOfCircle(
+	// 	[Const, Ref] gp_Circ Circ,
+	// 	[Const, Ref] gp_Pnt P1,
+	// 	[Const, Ref] gp_Pnt P2,
+	// 	[Const] Standard_Boolean Sense
+	// );
+	void GC_MakeArcOfCircle(
+		[Const, Ref] gp_Pnt P1,
+		[Const, Ref] gp_Pnt P2,
+		[Const, Ref] gp_Pnt P3
+	);
+	// void GC_MakeArcOfCircle(
+	// 	[Const, Ref] gp_Pnt P1,
+	// 	[Const, Ref] gp_Vec V,
+	// 	[Const, Ref] gp_Pnt P3
+	// );
+	[Const, Ref] Handle_Geom_TrimmedCurve Value();
 };
 
 interface GC_MakeSegment{
