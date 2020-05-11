@@ -5,15 +5,21 @@ typedef DOMString Standard_CString;
 
 interface BRepPrimAPI_MakeSphere{
 	void BRepPrimAPI_MakeSphere([Const]Standard_Real R); 
-	void BRepPrimAPI_MakeSphere([Const,Ref] gp_Ax2 Axes, [Const]Standard_Real R); 
+	void BRepPrimAPI_MakeSphere(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const] Standard_Real R
+	);
 	
 	[Ref] BRepPrim_Sphere Sphere();
 };
 BRepPrimAPI_MakeSphere implements BRepPrimAPI_MakeOneAxis;
 
 interface BRepPrimAPI_MakeCylinder{
-	//  Standard_EXPORT BRepPrimAPI_MakeCylinder(const gp_Ax2& Axes, const Standard_Real R, const Standard_Real H);
-	void BRepPrimAPI_MakeCylinder([Const,Ref] gp_Ax2 Axes, [Const]Standard_Real R, [Const] Standard_Real H);
+	void BRepPrimAPI_MakeCylinder(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const] Standard_Real R,
+		[Const] Standard_Real H
+	);
 };
 BRepPrimAPI_MakeCylinder implements BRepPrimAPI_MakeOneAxis;
 
@@ -247,8 +253,10 @@ interface gp_Pln{
 // BRepMesh_IncrementalMesh.hxx
 interface BRepMesh_IncrementalMesh{
 	void BRepMesh_IncrementalMesh();
-	// constructor automatically call to perform meshing
-	void BRepMesh_IncrementalMesh([Const, Ref] TopoDS_Shape theShape, [Const] Standard_Real theLinDeflection);
+	void BRepMesh_IncrementalMesh(
+		[Const, Ref] TopoDS_Shape theShape,
+		[Const] Standard_Real theLinDeflection
+	);
 };
 
 // Full interface
@@ -440,13 +448,11 @@ interface BRepBndLib {
 	);
 };
 
-
-//
-// for bottle example 
-//
 interface BRepPrimAPI_MakePrism{
-//  Standard_EXPORT BRepPrimAPI_MakePrism(const TopoDS_Shape& S, const gp_Vec& V, const Standard_Boolean Copy = Standard_False, const Standard_Boolean Canonize = Standard_True);
-	void BRepPrimAPI_MakePrism([Const, Ref] TopoDS_Shape S, [Const, Ref] gp_Vec V);
+	void BRepPrimAPI_MakePrism(
+		[Const, Ref] TopoDS_Shape S,
+		[Const, Ref] gp_Vec V
+	);
 };
 BRepPrimAPI_MakePrism implements BRepPrimAPI_MakeSweep;
 
@@ -455,8 +461,11 @@ interface BRepPrimAPI_MakeSweep{
 BRepPrimAPI_MakeSweep implements BRepBuilderAPI_MakeShape; 
 
 interface gp_Vec{
-//  gp_Vec(const Standard_Real Xv, const Standard_Real Yv, const Standard_Real Zv);	
-	void gp_Vec( [Const]Standard_Real Xv, [Const]Standard_Real Yv, [Const]Standard_Real Zv);
+	void gp_Vec(
+		[Const]Standard_Real Xv,
+		[Const]Standard_Real Yv,
+		[Const]Standard_Real Zv
+	);
 };
 
 // Full interface
@@ -636,12 +645,12 @@ interface gp_Ax1{
 };
 
 interface gp_Ax2{
-	//  Standard_EXPORT gp_Ax2(const gp_Pnt& P, const gp_Dir& V);
 	void gp_Ax2();
-	void gp_Ax2([Const,Ref]gp_Pnt P, [Const,Ref]gp_Dir V);
+	void gp_Ax2(
+		[Const,Ref]gp_Pnt P,
+		[Const,Ref]gp_Dir V
+	);
 };
-
-
 
 interface gp {
 	[Const, Ref] static gp_Ax1 OX();
@@ -774,10 +783,10 @@ interface TopoDS {
 };
 
 interface BRepBuilderAPI_MakeFace{
-	//  Standard_EXPORT BRepBuilderAPI_MakeFace(const TopoDS_Wire& W, const Standard_Boolean OnlyPlane = Standard_False);
-
-	void BRepBuilderAPI_MakeFace([Const, Ref]TopoDS_Wire W, [Const] optional Standard_Boolean OnlyPlane = false);
-	//	  Standard_EXPORT  const  TopoDS_Face& Face()  const;
+	void BRepBuilderAPI_MakeFace(
+		[Const, Ref]TopoDS_Wire W,
+		[Const] optional Standard_Boolean OnlyPlane = false
+	);
 	[Const,Ref] TopoDS_Face Face();
 };
 
@@ -2470,7 +2479,10 @@ interface BRepAlgoAPI_Fuse {
 BRepAlgoAPI_Fuse implements BRepAlgoAPI_BooleanOperation;
 
 interface BRepAlgoAPI_Cut{
-	void BRepAlgoAPI_Cut([Const,Ref] TopoDS_Shape S1, [Const,Ref] TopoDS_Shape S2);
+	void BRepAlgoAPI_Cut(
+		[Const, Ref] TopoDS_Shape S1,
+		[Const, Ref] TopoDS_Shape S2
+	);
 };
 BRepAlgoAPI_Cut implements BRepAlgoAPI_BooleanOperation;
 
@@ -2480,7 +2492,7 @@ BRepAlgoAPI_BooleanOperation implements BRepBuilderAPI_MakeShape;
 
 interface gp_Lin{
     void gp_Lin();
-    void gp_Lin([Const,Ref]gp_Ax1 A1);
+    void gp_Lin([Const, Ref] gp_Ax1 A1);
 };
 
 interface gp_Circ{};
