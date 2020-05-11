@@ -5,5 +5,5 @@
   "main": "index.js",
   "author": "Sebastian Alff <donalffons@gmail.com>",
   "license": "LGPL-2.1-only",
-  "repository": "github:donalffons/opencascade.js",
+  "repository": "github:donalffons/opencascade.js"
 }
