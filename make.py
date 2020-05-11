@@ -164,18 +164,17 @@ def build():
   args += ' --llvm-lto 3'
   if add_function_support:
     args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
-  if not wasm:
-    args += ' -s WASM=0 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s SINGLE_FILE=1 -s LEGACY_VM_SUPPORT=1'
-  else:
-    #args += ''' -s WASM=1 -s BINARYEN_IGNORE_IMPLICIT_TRAPS=1 -s BINARYEN_TRAP_MODE="clamp"'''
+  if wasm:
     args += ''' -s WASM=1'''
+  else:
+    args += ' -s WASM=0 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s SINGLE_FILE=1 -s LEGACY_VM_SUPPORT=1'
   if closure:
-    args += ' --closure 1 -s IGNORE_CLOSURE_COMPILER_ERRORS=1' # closure complains about the bullet Node class (Node is a DOM thing too)
+    args += ' --closure 1 -s IGNORE_CLOSURE_COMPILER_ERRORS=1'
   else:
     args += ' -s NO_DYNAMIC_EXECUTION=1'
   emcc_args = args.split(' ')
-  emcc_args += ['-s', 'TOTAL_MEMORY=%d' % (64*1024*1024)] # default 64MB. Compile with ALLOW_MEMORY_GROWTH if you want a growable heap (slower though).
-  emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1'] # resizable heap, with some amount of slowness
+  emcc_args += ['-s', 'TOTAL_MEMORY=%d' % (64*1024*1024)]
+  emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1']
   emcc_args += '-s EXPORT_NAME="opencascade"'.split(' ')
   emcc_args += '-s MODULARIZE=1'.split(' ')
   emcc_args += ['-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]']
