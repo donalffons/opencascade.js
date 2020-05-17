@@ -113,6 +113,14 @@ interface GProp_GProps{
 	Standard_Real MomentOfInertia([Const, Ref] gp_Ax1 A1);
 	// GProp_PrincipalProps PrincipalProperties();
 	Standard_Real RadiusOfGyration([Const, Ref] gp_Ax1 A);
+	void StaticMoments(
+		Standard_Real Ix,
+		Standard_Real Iy,
+		Standard_Real Iz
+	);
+	// Standard_Real MomentOfInertia([Const, Ref] gp_Ax1);
+	// [Value] GProp_PrincipalProps PrincipalProperties();
+	// Standard_Real RadiusOfGyration([Const, Ref] gp_Ax1 A);
 };
 
 // Full interface
