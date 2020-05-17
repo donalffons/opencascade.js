@@ -98,10 +98,6 @@ interface TopoDS_Shape{
 interface GProp_GProps{
 	void GProp_GProps();
 	void GProp_GProps([Const, Ref] gp_Pnt SystemLocation);
-	void Add(
-		[Const, Ref] GProp_GProps Item,
-		[Const] optional Standard_Real Density = 1.0
-	);
 	Standard_Real Mass();
 	[Value] gp_Pnt CentreOfMass();
 	// [Value] gp_Mat MatrixOfInertia();
