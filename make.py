@@ -62,6 +62,9 @@ INCLUDES = [
   os.path.join('.', 'occt', 'src', 'GCE2d', 'GCE2d_MakeSegment.hxx'),
   os.path.join('.', 'occt', 'src', 'BRepLib', 'BRepLib.hxx'),
   os.path.join('.', 'occt', 'src', 'BRepOffsetAPI', 'BRepOffsetAPI_ThruSections.hxx'),
+  os.path.join('.', 'occt', 'src', 'ShapeFix', 'ShapeFix_Face.hxx'),
+  os.path.join('.', 'occt', 'src', 'ShapeFix', 'ShapeFix_Shape.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepBuilderAPI', 'BRepBuilderAPI_MakeSolid.hxx'),
   os.path.join('.', 'typedefs.h')
 ]
 

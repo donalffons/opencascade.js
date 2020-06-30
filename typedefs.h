@@ -20,3 +20,4 @@ typedef Handle(Geom_TrimmedCurve) Handle_Geom_TrimmedCurve;
 typedef Handle(Geom_Surface) Handle_Geom_Surface;
 typedef Handle(Standard_Type) Handle_Standard_Type;
 typedef Handle(Geom_Plane) Handle_Geom_Plane;
+typedef Handle(ShapeFix_Shell) Handle_ShapeFix_Shell;
