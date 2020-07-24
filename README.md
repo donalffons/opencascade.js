@@ -59,13 +59,33 @@ See [here](https://github.com/donalffons/opencascade.js-examples) for examples o
 
 # Build it
 
-You may encounter build issues if there are whitespaces in the path to OpenCascade.js. Its best to avoid those.
+You can build OpenCascade.js yourself. The easiest way to do that is to use the provided Docker image, which sets up a small Ubuntu container within your host system, which is correctly configured for building the library. Follow these steps:
 
-You can build OpenCascade.js yourself, as follows:
+1. Get [Docker](https://www.docker.com/) and install it
 
-1. Get [Emscripten](http://emscripten.org) and [set it up](http://kripken.github.io/emscripten-site/docs/getting_started/).
+2. Build the container. Open a command prompt or terminal in the directory of `opencascade.js` and enter:
+    ```
+    docker build -t opencascade.js .
+    ```
+    This will build the container with the instructions given in the `Dockerfile` and give it the tag (name) `opencascade.js`.
 
-2. Run the build script, `python2 make.py` for the JavaScript version and `python2 make.py wasm` for the WebAssembly version. Build results are written to the `dist` folder.
+3. Run the build. If you're on Linux, enter:
+    ```
+    docker run -it \
+      -v "$(pwd)/build/":"/opencascade/build/" \
+      -v "$(pwd)/dist/":"/opencascade/dist/" \
+      -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
+      opencascade.js
+    ```
+    Or on windows
+    ```
+    docker run -it ^
+      -v "%cd%\build\":"/opencascade/build/" ^
+      -v "%cd%\dist\":"/opencascade/dist/" ^
+      -v "%cd%\emscripten-cache\":"/emscripten/upstream/emscripten/cache/" ^
+      opencascade.js
+    ```
+    This command will run the container and will also set up 3 directories, which will be shared with your host system. This speeds up your development process, as temporary build files (in the `build` folder) and emscripten cache files (in the `emscripten-cache` folder) will be written and saved on your host machine's disk. The resulting build files are output to the `dist` folder.
 
 # Exposing additional OpenCascade API's
 
