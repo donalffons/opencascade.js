@@ -2843,6 +2843,61 @@ interface BRepBuilderAPI_MakeSolid {
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
+interface STEPControl_Writer {
+	void STEPControl_Writer();
+	// void STEPControl_Writer(
+	// 	[Const, Ref] Handle_XSControl_WorkSession WS,
+	// 	[Const] optional Standard_Boolean scratch = true
+	// );
+	void SetTolerance([Const] Standard_Real Tol);
+	void UnsetTolerance();
+	// void SetWS(
+	// 	[Const, Ref] Handle_XSControl_WorkSession WS,
+	// 	[Const] Standard_Boolean scratch = true
+	// );
+	// [Value] Handle_XSControl_WorkSession WS();
+	// [Value] Handle_StepData_StepModel Model([Const] Standard_Boolean newone = false);
+	[Value] IFSelect_ReturnStatus Transfer(
+		[Const, Ref] TopoDS_Shape sh,
+		[Const] STEPControl_StepModelType mode,
+		[Const] optional Standard_Boolean compgraph = true
+	);
+	[Value] IFSelect_ReturnStatus Write(
+		[Const] DOMString filename
+	);
+	void PrintStatsTransfer(
+		[Const] Standard_Integer what,
+		[Const] optional Standard_Integer mode = 0
+	);
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+enum STEPControl_StepModelType
+{
+	"STEPControl_AsIs",
+	"STEPControl_ManifoldSolidBrep",
+	"STEPControl_BrepWithVoids",
+	"STEPControl_FacetedBrep",
+	"STEPControl_FacetedBrepAndBrepWithVoids",
+	"STEPControl_ShellBasedSurfaceModel",
+	"STEPControl_GeometricCurveSet",
+	"STEPControl_Hybrid"
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+enum IFSelect_ReturnStatus
+{
+	"IFSelect_RetVoid",
+	"IFSelect_RetDone",
+	"IFSelect_RetError",
+	"IFSelect_RetFail",
+	"IFSelect_RetStop"
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 enum BRepOffset_Mode {
 	"BRepOffset_Skin",
 	"BRepOffset_Pipe",
