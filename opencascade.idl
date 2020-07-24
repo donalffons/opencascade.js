@@ -2052,6 +2052,18 @@ interface TColStd_Array1OfReal {
 	Standard_Real Value([Const] Standard_Integer theIndex);
 };
 
+interface TColStd_Array1OfInteger {
+	void TColStd_Array1OfInteger();
+	void TColStd_Array1OfInteger(
+		[Const] Standard_Integer theLower,
+		[Const] Standard_Integer theUpper
+	);
+	Standard_Integer Length();
+	Standard_Integer Lower();
+	Standard_Integer Upper();
+	Standard_Integer Value([Const] Standard_Integer theIndex);
+};
+
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface XSControl_WorkSession {
@@ -3211,6 +3223,23 @@ interface STEPControl_Writer {
 		[Const] Standard_Integer what,
 		[Const] optional Standard_Integer mode = 0
 	);
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Poly_PolygonOnTriangulation {
+	void Poly_PolygonOnTriangulation([Const, Ref] TColStd_Array1OfInteger Nodes);
+	void Poly_PolygonOnTriangulation(
+		[Const, Ref] TColStd_Array1OfInteger Nodes,
+		[Const, Ref] TColStd_Array1OfReal Parameters
+	);
+	// [Value] Handle_Poly_PolygonOnTriangulation Copy();
+	// Standard_Real Deflection();
+	void Deflection([Const] Standard_Real D);
+	Standard_Integer NbNodes();
+	[Const, Ref] TColStd_Array1OfInteger Nodes();
+	Standard_Boolean HasParameters();
+	// Handle_TColStd_HArray1OfReal Parameters();
 };
 
 // Full interface
