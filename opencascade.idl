@@ -3,31 +3,6 @@ typedef boolean Standard_Boolean;
 typedef long Standard_Integer;
 typedef DOMString Standard_CString;
 
-interface BRepPrimAPI_MakeSphere{
-	void BRepPrimAPI_MakeSphere([Const]Standard_Real R); 
-	void BRepPrimAPI_MakeSphere(
-		[Const, Ref] gp_Ax2 Axes,
-		[Const] Standard_Real R
-	);
-	
-	[Ref] BRepPrim_Sphere Sphere();
-};
-BRepPrimAPI_MakeSphere implements BRepPrimAPI_MakeOneAxis;
-
-interface BRepPrimAPI_MakeCylinder{
-	void BRepPrimAPI_MakeCylinder(
-		[Const, Ref] gp_Ax2 Axes,
-		[Const] Standard_Real R,
-		[Const] Standard_Real H
-	);
-};
-BRepPrimAPI_MakeCylinder implements BRepPrimAPI_MakeOneAxis;
-
-interface BRepPrimAPI_MakeOneAxis{
-	void Build();
-};
-BRepPrimAPI_MakeOneAxis implements BRepBuilderAPI_MakeShape;
-
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface BRepBuilderAPI_MakeShape {
@@ -36,7 +11,394 @@ interface BRepBuilderAPI_MakeShape {
 	Standard_Boolean IsDeleted([Const, Ref] TopoDS_Shape S);
 };
 
-interface BRepPrim_Sphere{
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepPrimAPI_MakeBox {
+	void BRepPrimAPI_MakeBox(
+		[Const] Standard_Real dx,
+		[Const] Standard_Real dy,
+		[Const] Standard_Real dz
+	);
+	// void BRepPrimAPI_MakeBox(
+	// 	[Const, Ref] gp_Pnt P,
+	// 	[Const] Standard_Real dx,
+	// 	[Const] Standard_Real dy,
+	// 	[Const] Standard_Real dz
+	// );
+	void BRepPrimAPI_MakeBox(
+		[Const, Ref] gp_Pnt P1,
+		[Const, Ref] gp_Pnt P2
+	);
+	void BRepPrimAPI_MakeBox(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const] Standard_Real dx,
+		[Const] Standard_Real dy,
+		[Const] Standard_Real dz
+	);
+	// BRepPrim_Wedge Wedge();
+	void Build();
+	[Const, Ref] TopoDS_Shell Shell();
+	[Const, Ref] TopoDS_Solid Solid();
+	[Const, Ref] TopoDS_Face BottomFace();
+	[Const, Ref] TopoDS_Face BackFace();
+	[Const, Ref] TopoDS_Face FrontFace();
+	[Const, Ref] TopoDS_Face LeftFace();
+	[Const, Ref] TopoDS_Face RightFace();
+	[Const, Ref] TopoDS_Face TopFace();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepPrimAPI_MakeCone {
+	void BRepPrimAPI_MakeCone(
+		[Const] Standard_Real R1,
+		[Const] Standard_Real R2,
+		[Const] Standard_Real H
+	);
+	void BRepPrimAPI_MakeCone(
+		[Const] Standard_Real R1,
+		[Const] Standard_Real R2,
+		[Const] Standard_Real H,
+		[Const] Standard_Real angle
+	);
+	// void BRepPrimAPI_MakeCone(
+	// 	[Const, Ref] gp_Ax2 Axes,
+	// 	[Const] Standard_Real R1,
+	// 	[Const] Standard_Real R2,
+	// 	[Const] Standard_Real H
+	// );
+	void BRepPrimAPI_MakeCone(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const] Standard_Real R1,
+		[Const] Standard_Real R2,
+		[Const] Standard_Real H,
+		[Const] Standard_Real angle
+	);
+	// [Value] Standard_Address OneAxis();
+	// [Ref] BRepPrim_Cone Cone();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepPrimAPI_MakeCylinder {
+	void BRepPrimAPI_MakeCylinder(
+		[Const] Standard_Real R,
+		[Const] Standard_Real H
+	);
+	// void BRepPrimAPI_MakeCylinder(
+	// 	[Const] Standard_Real R,
+	// 	[Const] Standard_Real H,
+	// 	[Const] Standard_Real angle
+	// );
+	void BRepPrimAPI_MakeCylinder(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const] Standard_Real R,
+		[Const] Standard_Real H
+	);
+	void BRepPrimAPI_MakeCylinder(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const] Standard_Real R,
+		[Const] Standard_Real H,
+		[Const] Standard_Real Angle
+	);
+	// [Value] Standard_Address OneAxis();
+	// [Ref] BRepPrim_Cylinder Cylinder();
+};
+BRepPrimAPI_MakeCylinder implements BRepPrimAPI_MakeOneAxis;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepPrimAPI_MakeHalfSpace {
+	// void BRepPrimAPI_MakeHalfSpace(
+	// 	[Const, Ref] TopoDS_Face Face,
+	// 	[Const, Ref] gp_Pnt RefPnt
+	// );
+	void BRepPrimAPI_MakeHalfSpace(
+		[Const, Ref] TopoDS_Shell Shell,
+		[Const, Ref] gp_Pnt RefPnt
+	);
+	[Const, Ref] TopoDS_Solid Solid();
+};
+BRepPrimAPI_MakeCylinder implements BRepBuilderAPI_MakeShape;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepPrimAPI_MakeOneAxis {
+	// void Standard_Address OneAxis();
+	void Build();
+	[Const, Ref] TopoDS_Face Face();
+	[Const, Ref] TopoDS_Shell Shell();
+	[Const, Ref] TopoDS_Solid Solid();
+};
+BRepPrimAPI_MakeOneAxis implements BRepBuilderAPI_MakeShape;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepPrimAPI_MakeSweep {
+	[Value] TopoDS_Shape FirstShape();
+	[Value] TopoDS_Shape LastShape();
+};
+BRepPrimAPI_MakeSweep implements BRepBuilderAPI_MakeShape;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepPrimAPI_MakePrism {
+	// void BRepPrimAPI_MakePrism(
+	// 	[Const, Ref] TopoDS_Shape S,
+	// 	[Const, Ref] gp_Vec V,
+	// 	[Const] optional Standard_Boolean Copy = false,
+	// 	[Const] optional Standard_Boolean Canonize = true
+	// );
+	void BRepPrimAPI_MakePrism(
+		[Const, Ref] TopoDS_Shape S,
+		[Const, Ref] gp_Dir D,
+		[Const] optional Standard_Boolean Inf = true,
+		[Const] optional Standard_Boolean Copy = false,
+		[Const] optional Standard_Boolean Canonize = true
+	);
+	// [Const, Ref] BRepSweep_Prism Prism();
+	void Build();
+	[Const, Ref] TopTools_ListOfShape Generated([Const, Ref] TopoDS_Shape S);
+	Standard_Boolean IsDeleted([Const, Ref] TopoDS_Shape S);
+	[Value] TopoDS_Shape FirstShape([Const, Ref] TopoDS_Shape theShape);
+	[Value] TopoDS_Shape LastShape([Const, Ref] TopoDS_Shape theShape);
+};
+BRepPrimAPI_MakePrism implements BRepPrimAPI_MakeSweep;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepPrimAPI_MakeRevol {
+	void BRepPrimAPI_MakeRevol(
+		[Const, Ref] TopoDS_Shape S,
+		[Const, Ref] gp_Ax1 A,
+		[Const] Standard_Real D,
+		[Const] Standard_Boolean Copy
+	);
+	void BRepPrimAPI_MakeRevol(
+		[Const, Ref] TopoDS_Shape S,
+		[Const, Ref] gp_Ax1 A,
+		[Const] Standard_Boolean Copy
+	);
+	// [Const, Ref] BRepSweep_Revol Revol();
+	void Build();
+	[Const, Ref] TopTools_ListOfShape Generated([Const, Ref] TopoDS_Shape S);
+	Standard_Boolean IsDeleted([Const, Ref] TopoDS_Shape S);
+	[Value] TopoDS_Shape FirstShape([Const, Ref] TopoDS_Shape theShape);
+	[Value] TopoDS_Shape LastShape([Const, Ref] TopoDS_Shape theShape);
+	Standard_Boolean HasDegenerated();
+	[Const, Ref] TopTools_ListOfShape Degenerated();
+};
+BRepPrimAPI_MakeRevol implements BRepPrimAPI_MakeSweep;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepPrimAPI_MakeRevolution {
+	void BRepPrimAPI_MakeRevolution([Const, Ref] Handle_Geom_Curve Meridian);
+	void BRepPrimAPI_MakeRevolution(
+		[Const, Ref] Handle_Geom_Curve Meridian,
+		[Const] Standard_Real angle
+	);
+	// void BRepPrimAPI_MakeRevolution(
+	// 	[Const, Ref] Handle_Geom_Curve Meridian,
+	// 	[Const] Standard_Real VMin,
+	// 	[Const] Standard_Real VMax
+	// );
+	// void BRepPrimAPI_MakeRevolution(
+	// 	[Const, Ref] Handle_Geom_Curve Meridian,
+	// 	[Const] Standard_Real VMin,
+	// 	[Const] Standard_Real VMax,
+	// 	[Const] Standard_Real angle
+	// );
+	void BRepPrimAPI_MakeRevolution(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const, Ref] Handle_Geom_Curve Meridian,
+		[Const] Standard_Real angle
+	);
+	void BRepPrimAPI_MakeRevolution(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const, Ref] Handle_Geom_Curve Meridian,
+		[Const] Standard_Real VMin,
+		[Const] Standard_Real VMax
+	);
+	void BRepPrimAPI_MakeRevolution(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const, Ref] Handle_Geom_Curve Meridian,
+		[Const] Standard_Real VMin,
+		[Const] Standard_Real VMax,
+		[Const] Standard_Real angle
+	);
+	// [Value] Standard_Address OneAxis();
+	// [Ref] BRepPrim_Revolution Revolution();
+};
+BRepPrimAPI_MakeRevolution implements BRepPrimAPI_MakeOneAxis;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepPrimAPI_MakeSphere {
+	void BRepPrimAPI_MakeSphere([Const]Standard_Real R);
+	// void BRepPrimAPI_MakeSphere(
+	// 	[Const] Standard_Real R,
+	// 	[Const] Standard_Real angle
+	// );
+	// void BRepPrimAPI_MakeSphere(
+	// 	[Const] Standard_Real R,
+	// 	[Const] Standard_Real angle1,
+	// 	[Const] Standard_Real angle2
+	// );
+	// void BRepPrimAPI_MakeSphere(
+	// 	[Const] Standard_Real R,
+	// 	[Const] Standard_Real angle1,
+	// 	[Const] Standard_Real angle2,
+	// 	[Const] Standard_Real angle3
+	// );
+	// void BRepPrimAPI_MakeSphere(
+	// 	[Const, Ref] gp_Pnt Center,
+	// 	[Const] Standard_Real R
+	// );
+	// void BRepPrimAPI_MakeSphere(
+	// 	[Const, Ref] gp_Pnt Center,
+	// 	[Const] Standard_Real R,
+	// 	[Const] Standard_Real angle
+	// );
+	// void BRepPrimAPI_MakeSphere(
+	// 	[Const, Ref] gp_Pnt Center,
+	// 	[Const] Standard_Real R,
+	// 	[Const] Standard_Real angle1,
+	// 	[Const] Standard_Real angle2
+	// );
+	// void BRepPrimAPI_MakeSphere(
+	// 	[Const, Ref] gp_Pnt Center,
+	// 	[Const] Standard_Real R,
+	// 	[Const] Standard_Real angle1,
+	// 	[Const] Standard_Real angle2,
+	// 	[Const] Standard_Real angle3
+	// );
+	void BRepPrimAPI_MakeSphere(
+		[Const, Ref] gp_Ax2 Axis,
+		[Const] Standard_Real R
+	);
+	void BRepPrimAPI_MakeSphere(
+		[Const, Ref] gp_Ax2 Axis,
+		[Const] Standard_Real R,
+		[Const] Standard_Real angle
+	);
+	void BRepPrimAPI_MakeSphere(
+		[Const, Ref] gp_Ax2 Axis,
+		[Const] Standard_Real R,
+		[Const] Standard_Real angle1,
+		[Const] Standard_Real angle2
+	);
+	void BRepPrimAPI_MakeSphere(
+		[Const, Ref] gp_Ax2 Axis,
+		[Const] Standard_Real R,
+		[Const] Standard_Real angle1,
+		[Const] Standard_Real angle2,
+		[Const] Standard_Real angle3
+	);
+	// [Value] Standard_Address OneAxis();
+	[Ref] BRepPrim_Sphere Sphere();
+};
+BRepPrimAPI_MakeSphere implements BRepPrimAPI_MakeOneAxis;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepPrimAPI_MakeTorus {
+	// void BRepPrimAPI_MakeTorus(
+	// 	[Const] Standard_Real R1,
+	// 	[Const] Standard_Real R2
+	// );
+	// void BRepPrimAPI_MakeTorus(
+	// 	[Const] Standard_Real R1,
+	// 	[Const] Standard_Real R2,
+	// 	[Const] Standard_Real angle
+	// );
+	// void BRepPrimAPI_MakeTorus(
+	// 	[Const] Standard_Real R1,
+	// 	[Const] Standard_Real R2,
+	// 	[Const] Standard_Real angle1,
+	// 	[Const] Standard_Real angle2
+	// );
+	// void BRepPrimAPI_MakeTorus(
+	// 	[Const] Standard_Real R1,
+	// 	[Const] Standard_Real R2,
+	// 	[Const] Standard_Real angle1,
+	// 	[Const] Standard_Real angle2,
+	// 	[Const] Standard_Real angle
+	// );
+	void BRepPrimAPI_MakeTorus(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const] Standard_Real R1,
+		[Const] Standard_Real R2
+	);
+	void BRepPrimAPI_MakeTorus(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const] Standard_Real R1,
+		[Const] Standard_Real R2,
+		[Const] Standard_Real angle
+	);
+	void BRepPrimAPI_MakeTorus(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const] Standard_Real R1,
+		[Const] Standard_Real R2,
+		[Const] Standard_Real angle1,
+		[Const] Standard_Real angle2
+	);
+	void BRepPrimAPI_MakeTorus(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const] Standard_Real R1,
+		[Const] Standard_Real R2,
+		[Const] Standard_Real angle1,
+		[Const] Standard_Real angle2,
+		[Const] Standard_Real angle
+	);
+	// [Value] Standard_Address OneAxis();
+	// [Ref] BRepPrim_Torus Torus();
+};
+BRepPrimAPI_MakeTorus implements BRepPrimAPI_MakeOneAxis;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface BRepPrimAPI_MakeWedge {
+	void BRepPrimAPI_MakeWedge(
+		[Const] Standard_Real dx,
+		[Const] Standard_Real dy,
+		[Const] Standard_Real dz,
+		[Const] Standard_Real ltx
+	);
+	void BRepPrimAPI_MakeWedge(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const] Standard_Real dx,
+		[Const] Standard_Real dy,
+		[Const] Standard_Real dz,
+		[Const] Standard_Real ltx
+	);
+	void BRepPrimAPI_MakeWedge(
+		[Const] Standard_Real dx,
+		[Const] Standard_Real dy,
+		[Const] Standard_Real dz,
+		[Const] Standard_Real xmin,
+		[Const] Standard_Real zmin,
+		[Const] Standard_Real xmax,
+		[Const] Standard_Real zmax
+	);
+	void BRepPrimAPI_MakeWedge(
+		[Const, Ref] gp_Ax2 Axes,
+		[Const] Standard_Real dx,
+		[Const] Standard_Real dy,
+		[Const] Standard_Real dz,
+		[Const] Standard_Real xmin,
+		[Const] Standard_Real zmin,
+		[Const] Standard_Real xmax,
+		[Const] Standard_Real zmax
+	);
+	// [Ref] BRepPrim_Wedge Wedge();
+	void Build();
+	[Const, Ref] TopoDS_Shell Shell();
+	[Const, Ref] TopoDS_Solid Solid();
+};
+BRepPrimAPI_MakeWedge implements BRepBuilderAPI_MakeShape;
+
+interface BRepPrim_Sphere {
 };
 
 // Full interface
@@ -451,18 +813,6 @@ interface BRepBndLib {
 		[Const] optional Standard_Boolean theIsShapeToleranceUsed = true
 	);
 };
-
-interface BRepPrimAPI_MakePrism{
-	void BRepPrimAPI_MakePrism(
-		[Const, Ref] TopoDS_Shape S,
-		[Const, Ref] gp_Vec V
-	);
-};
-BRepPrimAPI_MakePrism implements BRepPrimAPI_MakeSweep;
-
-interface BRepPrimAPI_MakeSweep{
-};
-BRepPrimAPI_MakeSweep implements BRepBuilderAPI_MakeShape; 
 
 interface gp_Vec{
 	void gp_Vec(

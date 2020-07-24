@@ -66,6 +66,15 @@ INCLUDES = [
   os.path.join('.', 'occt', 'src', 'ShapeFix', 'ShapeFix_Shape.hxx'),
   os.path.join('.', 'occt', 'src', 'BRepBuilderAPI', 'BRepBuilderAPI_MakeSolid.hxx'),
   os.path.join('.', 'occt', 'src', 'STEPControl', 'STEPControl_Writer.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepPrimAPI', 'BRepPrimAPI_MakeBox.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepPrimAPI', 'BRepPrimAPI_MakeCone.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepPrimAPI', 'BRepPrimAPI_MakeHalfSpace.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepPrimAPI', 'BRepPrimAPI_MakePrism.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepPrimAPI', 'BRepPrimAPI_MakeRevol.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepPrimAPI', 'BRepPrimAPI_MakeRevolution.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepPrimAPI', 'BRepPrimAPI_MakeSphere.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepPrimAPI', 'BRepPrimAPI_MakeTorus.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepPrimAPI', 'BRepPrimAPI_MakeWedge.hxx'),
   os.path.join('.', 'typedefs.h')
 ]
 
