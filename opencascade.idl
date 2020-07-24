@@ -2617,14 +2617,6 @@ interface BRepBuilderAPI_MakePolygon {
 };
 BRepBuilderAPI_MakePolygon implements BRepBuilderAPI_MakeShape;
 
-enum IFSelect_ReturnStatus{
-	"IFSelect_RetVoid",
-	"IFSelect_RetDone",
-	"IFSelect_RetError",
-	"IFSelect_RetFail",
-	"IFSelect_RetStop"
-};
-
 interface XSControl_Reader {
 	void XSControl_Reader();
 	void XSControl_Reader([Const] Standard_CString norm);
@@ -2857,12 +2849,12 @@ interface STEPControl_Writer {
 	// );
 	// [Value] Handle_XSControl_WorkSession WS();
 	// [Value] Handle_StepData_StepModel Model([Const] Standard_Boolean newone = false);
-	[Value] IFSelect_ReturnStatus Transfer(
+	IFSelect_ReturnStatus Transfer(
 		[Const, Ref] TopoDS_Shape sh,
 		[Const] STEPControl_StepModelType mode,
 		[Const] optional Standard_Boolean compgraph = true
 	);
-	[Value] IFSelect_ReturnStatus Write(
+	IFSelect_ReturnStatus Write(
 		[Const] DOMString filename
 	);
 	void PrintStatsTransfer(
@@ -2887,21 +2879,20 @@ enum STEPControl_StepModelType
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
-enum IFSelect_ReturnStatus
-{
+enum BRepOffset_Mode {
+	"BRepOffset_Skin",
+	"BRepOffset_Pipe",
+	"BRepOffset_RectoVerso"
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+enum IFSelect_ReturnStatus{
 	"IFSelect_RetVoid",
 	"IFSelect_RetDone",
 	"IFSelect_RetError",
 	"IFSelect_RetFail",
 	"IFSelect_RetStop"
-};
-
-// Full interface
-// fd47711d682be943f0e0a13d1fb54911b0499c31
-enum BRepOffset_Mode {
-	"BRepOffset_Skin",
-	"BRepOffset_Pipe",
-	"BRepOffset_RectoVerso"
 };
 
 // Full interface
