@@ -73,6 +73,7 @@ You can build OpenCascade.js yourself. The easiest way to do that is to use the 
     ```
     docker run -it \
       -v "$(pwd)/build/":"/opencascade/build/" \
+      -v "$(pwd)/node_modules/":"/opencascade/node_modules/" \
       -v "$(pwd)/dist/":"/opencascade/dist/" \
       -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
       opencascade.js
@@ -81,11 +82,12 @@ You can build OpenCascade.js yourself. The easiest way to do that is to use the 
     ```
     docker run -it ^
       -v "%cd%\build\":"/opencascade/build/" ^
+      -v "%cd%\node_modules\":"/opencascade/node_modules/" ^
       -v "%cd%\dist\":"/opencascade/dist/" ^
       -v "%cd%\emscripten-cache\":"/emscripten/upstream/emscripten/cache/" ^
       opencascade.js
     ```
-    This command will run the container and will also set up 3 directories, which will be shared with your host system. This speeds up your development process, as temporary build files (in the `build` folder) and emscripten cache files (in the `emscripten-cache` folder) will be written and saved on your host machine's disk. The resulting build files are output to the `dist` folder.
+    This command will run the container and will also set up 4 directories, which will be shared with your host system. This speeds up your development process, as temporary build files (in the `build` and `node_modules' folders) and emscripten cache files (in the `emscripten-cache` folder) will be written and saved on your host machine's disk. The resulting build files are output to the `dist` folder.
 
 # Exposing additional OpenCascade API's
 

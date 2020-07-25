@@ -2,3 +2,5 @@
 yarn-error.log
 .vscode/
 /emscripten-cache/
+/node_modules/
+/types/

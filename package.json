@@ -5,5 +5,13 @@
   "main": "index.js",
   "author": "Sebastian Alff <donalffons@gmail.com>",
   "license": "LGPL-2.1-only",
-  "repository": "github:donalffons/opencascade.js"
+  "repository": "github:donalffons/opencascade.js",
+  "devDependencies": {
+    "webidl2ts": "^1.0.1"
+  },
+  "scripts": {
+    "preGenerateTypes": "node preTypes.js",
+    "generateTypes": "yarn preGenerateTypes && webidl2ts -i ./types/opencascade.idl -n opencascade -ed -o ./types/opencascade.d.ts && node postTypes.js"
+  },
+  "types": "./index.d.ts"
 }
