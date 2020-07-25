@@ -3,7 +3,10 @@ OpenCascade.js
 
 This is OpenCascade.js - a port of the [OpenCascade](https://www.opencascade.com/) CAD library to JavaScript and WebAssembly via Emscripten.
 
-See [here](https://github.com/donalffons/opencascade.js-examples) for examples on how to use this library.
+# Projects & Examples:
+
+* [OpenCascade.js-examples](https://github.com/donalffons/opencascade.js-examples) contains general examples on how to use the library.
+* [CascadeStudio](https://zalo.github.io/CascadeStudio/) is a SCAD (Scripted-Computer-Aided-Design) editor, which runs in the browser.
 
 # Use it
 
