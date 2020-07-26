@@ -2924,6 +2924,14 @@ interface BRepAlgoAPI_Cut{
 };
 BRepAlgoAPI_Cut implements BRepAlgoAPI_BooleanOperation;
 
+interface BRepAlgoAPI_Common {
+	void BRepAlgoAPI_Common(
+		[Const, Ref] TopoDS_Shape S1,
+		[Const, Ref] TopoDS_Shape S2
+	);
+};
+BRepAlgoAPI_Common implements BRepAlgoAPI_BooleanOperation;
+
 interface BRepAlgoAPI_BooleanOperation{
 };
 BRepAlgoAPI_BooleanOperation implements BRepBuilderAPI_MakeShape;
