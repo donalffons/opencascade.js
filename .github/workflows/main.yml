@@ -1,0 +1,107 @@
+name: opencascade.js - Build Bindings
+
+on:
+  push
+
+jobs:
+  build:
+    name: Build OpenCascade Bindings
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      # Attempt to Load Build Cache
+      - name: Cache Intermediate Build Products
+        id: cache-build
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-build-intermediates
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ./build
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-
+
+      # Attempt to Load Node Module Cache
+      - name: Cache Intermediate Node Products
+        id: cache-build-2
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-intermediates
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ./node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-
+
+      # Attempt to Load Node Module Cache
+      - name: Cache Intermediate Emscripten Products
+        id: cache-build-3
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-emscripten-intermediates
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ./emscripten-cache
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-
+
+      # Attempt to Load Node Module Cache
+      - name: Cache Intermediate Dist Products
+        id: cache-build-4
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-dist-intermediates
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ./dist
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-
+
+      # Debug
+      - name: Debug Print Files
+        run: |
+          ls
+          ls build
+          ls dist
+          ls emscripten-cache
+          ls node_modules
+          ls github/workspace
+
+      #- name: Build Bindings  
+      #  uses: docker://zalo/opencascade.js:latest
+      #  #with:
+      #  #  entrypoint: /opt/box/box
+      #  #  args: version
+      # Build the docker container
+      - name: Build OpenCascade.js Docker Container
+        #if: steps.cache-pip.outputs.cache-hit != 'true'
+        run: docker build -t opencascade.js .
+
+      # Build the docker container
+      - name: Build OpenCascade.js Docker Container
+        #if: steps.cache-pip.outputs.cache-hit != 'true'
+        run: |
+          docker run -it
+          -v "$(pwd)/build/":"/opencascade/build/" 
+          -v "$(pwd)/node_modules/":"/opencascade/node_modules/" 
+          -v "$(pwd)/dist/":"/opencascade/dist/" 
+          -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" 
+          opencascade.js
+
+      # Debug
+      - name: Debug Print Files
+        run: |
+          ls
+          ls build
+          ls dist
+          ls emscripten-cache
+          ls node_modules
+          ls github/workspace
+
+      # Upload the build results in-case...
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: Build Products
+          path: dist

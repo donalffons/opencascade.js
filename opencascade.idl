@@ -46,6 +46,7 @@ interface BRepPrimAPI_MakeBox {
 	[Const, Ref] TopoDS_Face RightFace();
 	[Const, Ref] TopoDS_Face TopFace();
 };
+BRepPrimAPI_MakeBox implements BRepBuilderAPI_MakeShape;
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
@@ -77,6 +78,7 @@ interface BRepPrimAPI_MakeCone {
 	// [Value] Standard_Address OneAxis();
 	// [Ref] BRepPrim_Cone Cone();
 };
+BRepPrimAPI_MakeCone implements BRepBuilderAPI_MakeShape;
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
@@ -104,7 +106,7 @@ interface BRepPrimAPI_MakeCylinder {
 	// [Value] Standard_Address OneAxis();
 	// [Ref] BRepPrim_Cylinder Cylinder();
 };
-BRepPrimAPI_MakeCylinder implements BRepPrimAPI_MakeOneAxis;
+BRepPrimAPI_MakeCylinder implements BRepBuilderAPI_MakeShape;
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
@@ -119,7 +121,7 @@ interface BRepPrimAPI_MakeHalfSpace {
 	);
 	[Const, Ref] TopoDS_Solid Solid();
 };
-BRepPrimAPI_MakeCylinder implements BRepBuilderAPI_MakeShape;
+BRepPrimAPI_MakeHalfSpace implements BRepBuilderAPI_MakeShape;
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
