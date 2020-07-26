@@ -1,7 +1,7 @@
 name: opencascade.js - Build Library
 
 on:
-  workflow_dispatch
+  push
 
 jobs:
   build:
