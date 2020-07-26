@@ -21,7 +21,7 @@ declare module opencascade {
         Shape(): TopoDS_Shape;
         IsDeleted(S: TopoDS_Shape): Standard_Boolean;
     }
-    class BRepPrimAPI_MakeBox {
+    class BRepPrimAPI_MakeBox extends BRepBuilderAPI_MakeShape {
         constructor(dx: Standard_Real, dy: Standard_Real, dz: Standard_Real);
         constructor(P1: gp_Pnt, P2: gp_Pnt);
         constructor(Axes: gp_Ax2, dx: Standard_Real, dy: Standard_Real, dz: Standard_Real);
@@ -35,7 +35,7 @@ declare module opencascade {
         RightFace(): TopoDS_Face;
         TopFace(): TopoDS_Face;
     }
-    class BRepPrimAPI_MakeCone {
+    class BRepPrimAPI_MakeCone extends BRepBuilderAPI_MakeShape {
         constructor(R1: Standard_Real, R2: Standard_Real, H: Standard_Real);
         constructor(R1: Standard_Real, R2: Standard_Real, H: Standard_Real, angle: Standard_Real);
         constructor(Axes: gp_Ax2, R1: Standard_Real, R2: Standard_Real, H: Standard_Real, angle: Standard_Real);
@@ -45,7 +45,7 @@ declare module opencascade {
         constructor(Axes: gp_Ax2, R: Standard_Real, H: Standard_Real);
         constructor(Axes: gp_Ax2, R: Standard_Real, H: Standard_Real, Angle: Standard_Real);
     }
-    class BRepPrimAPI_MakeHalfSpace {
+    class BRepPrimAPI_MakeHalfSpace extends BRepBuilderAPI_MakeShape {
         constructor(Shell: TopoDS_Shell, RefPnt: gp_Pnt);
         Solid(): TopoDS_Solid;
     }
@@ -279,6 +279,9 @@ declare module opencascade {
     }
     class gp_Vec {
         constructor(Xv: Standard_Real, Yv: Standard_Real, Zv: Standard_Real);
+        X(): Standard_Real;
+        Y(): Standard_Real;
+        Z(): Standard_Real;
     }
     class gp_Pnt {
         constructor();
@@ -305,6 +308,18 @@ declare module opencascade {
         Transformed(T: gp_Trsf): gp_Pnt;
         Translated(V: gp_Vec): gp_Pnt;
         Translated(P1: gp_Pnt, P2: gp_Pnt): gp_Pnt;
+    }
+    class gp_XYZ {
+        constructor(X: Standard_Real, Y: Standard_Real, Z: Standard_Real);
+        SetCoord(Xp: Standard_Real, Yp: Standard_Real, Zp: Standard_Real): void;
+        SetX(X: Standard_Real): void;
+        SetY(Y: Standard_Real): void;
+        SetZ(Z: Standard_Real): void;
+        Coord(Index: Standard_Integer): Standard_Real;
+        X(): Standard_Real;
+        Y(): Standard_Real;
+        Z(): Standard_Real;
+        IsEqual(Other: gp_XYZ, Tolerance: Standard_Real): Standard_Boolean;
     }
     class GC_MakeArcOfCircle {
         constructor(Circ: gp_Circ, Alpha1: Standard_Real, Alpha2: Standard_Real, Sense: Standard_Boolean);
@@ -333,6 +348,7 @@ declare module opencascade {
     }
     class gp_Ax1 {
         constructor();
+        constructor(P: gp_Pnt, V: gp_Dir);
     }
     class gp_Ax2 {
         constructor();
@@ -378,6 +394,17 @@ declare module opencascade {
     class gp_Trsf {
         constructor();
         SetMirror(A1: gp_Ax1): void;
+        SetTranslation(V: gp_Vec): void;
+        SetTranslationPart(V: gp_Vec): void;
+        SetRotation(A1: gp_Ax1, Ang: Standard_Real): void;
+        SetScaleFactor(S: Standard_Real): void;
+        Multiply(T: gp_Trsf): void;
+        PreMultiply(T: gp_Trsf): void;
+        Value(Row: Standard_Integer, Col: Standard_Integer): Standard_Real;
+        Inverted(): gp_Trsf;
+        TranslationPart(): gp_XYZ;
+        ScaleFactor(): Standard_Real;
+        Multiplied(T: gp_Trsf): gp_Trsf;
     }
     class BRepBuilderAPI_Transform {
         constructor(S: TopoDS_Shape, T: gp_Trsf, Copy?: Standard_Boolean);
@@ -515,6 +542,7 @@ declare module opencascade {
         IsGeometric(E: TopoDS_Edge): Standard_Boolean;
         Curve(E: TopoDS_Edge, L: TopLoc_Location, First: Standard_Real, Last: Standard_Real): Handle_Geom_Curve;
         Polygon3D(E: TopoDS_Edge, L: TopLoc_Location): Handle_Poly_Polygon3D;
+        PolygonOnTriangulation(E: TopoDS_Edge, T: Handle_Poly_Triangulation, L: TopLoc_Location): Handle_Poly_PolygonOnTriangulation;
         IsClosed(E: TopoDS_Edge, F: TopoDS_Face): Standard_Boolean;
         IsClosed(E: TopoDS_Edge, T: Handle_Poly_Triangulation, L: TopLoc_Location): Standard_Boolean;
         SameParameter(E: TopoDS_Edge): Standard_Boolean;
@@ -683,6 +711,13 @@ declare module opencascade {
         IsNull(): boolean;
         Nullify(): void;
         get(): Poly_Triangulation;
+    }
+    class Handle_Poly_PolygonOnTriangulation {
+        constructor();
+        constructor(thePtr: Poly_PolygonOnTriangulation);
+        IsNull(): boolean;
+        Nullify(): void;
+        get(): Poly_PolygonOnTriangulation;
     }
     class Handle_XSControl_WorkSession {
         constructor();
