@@ -1109,9 +1109,9 @@ interface gp_Dir{
 interface gp_Trsf{
 	void gp_Trsf();
 	void SetMirror([Const, Ref]gp_Ax1 A1);
-	void SetTranslation([Const, Ref] gp_Vec V);
-	void SetRotation([Const, Ref] gp_Ax1 &A1, [Const] Standard_Real Ang);
-	void SetScaleFactor([Const] Standard_Real S);
+	void SetTranslation([Const, Ref]gp_Vec V);
+	void SetRotation([Const, Ref]gp_Ax1 A1, [Const]Standard_Real Ang);
+	void SetScaleFactor([Const]Standard_Real S);
 };
 
 interface BRepBuilderAPI_Transform{
