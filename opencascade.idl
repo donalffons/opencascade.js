@@ -1565,11 +1565,11 @@ interface BRep_Tool {
 	// 	[Ref] TopLoc_Location L,
 	// 	[Const] Standard_Integer Index
 	// );
-	//[Const, Ref] static Handle_Poly_PolygonOnTriangulation PolygonOnTriangulation(
-	//	[Const, Ref] TopoDS_Edge E,
-	//	[Ref] Handle_Poly_Triangulation T,
-	//	[Const, Ref] TopLoc_Location L
-	//);
+	[Const, Ref] static Handle_Poly_PolygonOnTriangulation PolygonOnTriangulation(
+		[Const, Ref] TopoDS_Edge E,
+		[Ref] Handle_Poly_Triangulation T,
+		[Const, Ref] TopLoc_Location L
+	);
 	// [Const, Ref] Handle_Poly_PolygonOnTriangulation PolygonOnTriangulation(
 	// 	[Const, Ref] TopoDS_Edge E,
 	// 	[Ref] Handle_Poly_PolygonOnTriangulation P,
@@ -1983,6 +1983,14 @@ interface Handle_Poly_Triangulation {
 	boolean IsNull();
 	void Nullify();
 	Poly_Triangulation get();
+};
+
+interface Handle_Poly_PolygonOnTriangulation {
+	void Handle_Poly_PolygonOnTriangulation();
+	void Handle_Poly_PolygonOnTriangulation(Poly_PolygonOnTriangulation thePtr);
+	boolean IsNull();
+	void Nullify();
+	Poly_PolygonOnTriangulation get();
 };
 
 interface Handle_XSControl_WorkSession {
