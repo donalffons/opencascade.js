@@ -62,26 +62,31 @@ jobs:
         run: |
           ls
 
-      #- name: Build Bindings  
-      #  uses: docker://zalo/opencascade.js:latest
-      #  #with:
-      #  #  entrypoint: /opt/box/box
-      #  #  args: version
-      # Build the docker container
-      - name: Build OpenCascade.js Docker Container
-        #if: steps.cache-pip.outputs.cache-hit != 'true'
-        run: docker build -t opencascade.js .
+      ## Build the docker container
+      #- name: Build OpenCascade.js Docker Container
+      #  #if: steps.cache-pip.outputs.cache-hit != 'true'
+      #  run: docker build -t opencascade.js .
+
+      - uses: whoan/docker-build-with-cache-action@v5
+        with:
+          registry: docker.pkg.github.com
+          image_name: opencascade.js Compiler
+          image_tag: opencascade.js
+
+      - name: Debug Print Files
+        run: |
+          ls
 
       # Build the docker container
-      - name: Build OpenCascade.js Docker Container
+      - name: Build OpenCascade.js Bindings
         #if: steps.cache-pip.outputs.cache-hit != 'true'
         run: |
-          docker run -it
-          -v "$(pwd)/build/":"/opencascade/build/" 
-          -v "$(pwd)/node_modules/":"/opencascade/node_modules/" 
-          -v "$(pwd)/dist/":"/opencascade/dist/" 
-          -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" 
-          opencascade.js
+          docker run -it \
+            -v "$(pwd)/build/":"/opencascade/build/" \
+            -v "$(pwd)/node_modules/":"/opencascade/node_modules/" \
+            -v "$(pwd)/dist/":"/opencascade/dist/" \
+            -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
+            opencascade.js
 
       # Debug
       - name: Debug Print Files
