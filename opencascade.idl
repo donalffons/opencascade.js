@@ -1565,7 +1565,7 @@ interface BRep_Tool {
 	// 	[Ref] TopLoc_Location L,
 	// 	[Const] Standard_Integer Index
 	// );
-	[Const, Ref] Handle_Poly_PolygonOnTriangulation PolygonOnTriangulation(
+	[Const, Ref] static Handle_Poly_PolygonOnTriangulation PolygonOnTriangulation(
 		[Const, Ref] TopoDS_Edge E,
 		[Ref] Handle_Poly_Triangulation T,
 		[Const, Ref] TopLoc_Location L
