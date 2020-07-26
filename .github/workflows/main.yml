@@ -70,7 +70,7 @@ jobs:
             -v "$(pwd)/node_modules/":"/opencascade/node_modules/" \
             -v "$(pwd)/dist/":"/opencascade/dist/" \
             -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
-            zalo/opencascade.js
+            docker.pkg.github.com/zalo/opencascade.js/opencascade.js
 
       # Debug
       - name: Debug Print Files
