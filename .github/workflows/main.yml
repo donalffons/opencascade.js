@@ -61,11 +61,6 @@ jobs:
       - name: Debug Print Files
         run: |
           ls
-          ls build
-          ls dist
-          ls emscripten-cache
-          ls node_modules
-          ls github/workspace
 
       #- name: Build Bindings  
       #  uses: docker://zalo/opencascade.js:latest
@@ -96,12 +91,11 @@ jobs:
           ls dist
           ls emscripten-cache
           ls node_modules
-          ls github/workspace
 
       # Upload the build results in-case...
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v2
-        if: ${{ always() }}
+        #if: ${{ always() }}
         with:
           name: Build Products
           path: dist
