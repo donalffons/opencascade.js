@@ -106,7 +106,7 @@ interface BRepPrimAPI_MakeCylinder {
 	// [Value] Standard_Address OneAxis();
 	// [Ref] BRepPrim_Cylinder Cylinder();
 };
-BRepPrimAPI_MakeCylinder implements BRepBuilderAPI_MakeShape;
+BRepPrimAPI_MakeCylinder implements BRepPrimAPI_MakeOneAxis;
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
@@ -822,6 +822,9 @@ interface gp_Vec{
 		[Const]Standard_Real Yv,
 		[Const]Standard_Real Zv
 	);
+	Standard_Real X();
+	Standard_Real Y();
+	Standard_Real Z();
 };
 
 // Full interface
@@ -898,6 +901,45 @@ interface gp_Pnt {
 	[Value] gp_Pnt Translated(
 		[Const, Ref] gp_Pnt P1,
 		[Const, Ref] gp_Pnt P2
+	);
+};
+
+interface gp_XYZ {
+	//void gp_XYZ();
+	// void gp_Pnt([Const, Ref] gp_XYZ Coord);
+	void gp_XYZ(
+		[Const] Standard_Real X,
+		[Const] Standard_Real Y,
+		[Const] Standard_Real Z
+	);
+	//void SetCoord(
+	//	[Const] Standard_Integer Index,
+	//	[Const] Standard_Real Xi
+	//);
+	void SetCoord(
+		[Const] Standard_Real Xp,
+		[Const] Standard_Real Yp,
+		[Const] Standard_Real Zp
+	);
+	void SetX([Const] Standard_Real X);
+	void SetY([Const] Standard_Real Y);
+	void SetZ([Const] Standard_Real Z);
+	// void SetXYZ([Const, Ref] gp_XYZ Coord);
+	Standard_Real Coord([Const] Standard_Integer Index);
+	// void Coord(
+	//   [Ref] Standard_Real Xp,
+	//   [Ref] Standard_Real Yp,
+	//   [Ref] Standard_Real Zp
+	// );
+	Standard_Real X();
+	Standard_Real Y();
+	Standard_Real Z();
+	// [Const, Ref] gp_XYZ XYZ();
+	// [Const, Ref] gp_XYZ Coord();
+	// [Ref] gp_XYZ ChangeCoord();
+	Standard_Boolean IsEqual(
+		[Const, Ref] gp_XYZ Other,
+		[Const] Standard_Real Tolerance
 	);
 };
 
@@ -1110,8 +1152,16 @@ interface gp_Trsf{
 	void gp_Trsf();
 	void SetMirror([Const, Ref]gp_Ax1 A1);
 	void SetTranslation([Const, Ref]gp_Vec V);
+	void SetTranslationPart([Const, Ref]gp_Vec V);
 	void SetRotation([Const, Ref]gp_Ax1 A1, [Const]Standard_Real Ang);
 	void SetScaleFactor([Const]Standard_Real S);
+	void Multiply([Const, Ref]gp_Trsf T);
+	void PreMultiply([Const, Ref]gp_Trsf T);
+	[Const] Standard_Real Value ([Const] Standard_Integer Row, [Const] Standard_Integer Col);
+	[Value] gp_Trsf Inverted();
+	[Const, Ref] gp_XYZ TranslationPart();
+	[Const] Standard_Real ScaleFactor();
+	[Value] gp_Trsf Multiplied([Const, Ref]gp_Trsf T);
 };
 
 interface BRepBuilderAPI_Transform{
