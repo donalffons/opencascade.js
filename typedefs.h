@@ -4,6 +4,7 @@
 #include <XSControl_WorkSession.hxx>
 #include <Transfer_TransientProcess.hxx>
 #include <Poly_Polygon3D.hxx>
+#include <Poly_PolygonOnTriangulation.hxx>
 #include <Geom_Curve.hxx>
 #include <Geom_TrimmedCurve.hxx>
 #include <Geom_Surface.hxx>
@@ -15,6 +16,7 @@ typedef Handle(XSControl_WorkSession) Handle_XSControl_WorkSession;
 typedef Handle(Transfer_TransientProcess) Handle_Tansfer_TransientProcess;
 typedef Handle(Message_ProgressIndicator) Handle_Message_ProgressIndicator;
 typedef Handle(Poly_Polygon3D) Handle_Poly_Polygon3D;
+typedef Handle(Poly_PolygonOnTriangulation) Handle_Poly_PolygonOnTriangulation;
 typedef Handle(Geom_Curve) Handle_Geom_Curve;
 typedef Handle(Geom_TrimmedCurve) Handle_Geom_TrimmedCurve;
 typedef Handle(Geom_Surface) Handle_Geom_Surface;

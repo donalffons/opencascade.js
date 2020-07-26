@@ -70,7 +70,7 @@ jobs:
       - uses: whoan/docker-build-with-cache-action@v5
         with:
           registry: docker.pkg.github.com
-          image_name: opencascade.js Compiler
+          image_name: opencascade.js
           image_tag: opencascade.js
 
       - name: Debug Print Files
