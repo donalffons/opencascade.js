@@ -70,7 +70,7 @@ jobs:
             -v "$(pwd)/node_modules/":"/opencascade/node_modules/" \
             -v "$(pwd)/dist/":"/opencascade/dist/" \
             -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
-            opencascade.js/opencascade.js
+            zalo/opencascade.js
 
       # Debug
       - name: Debug Print Files
