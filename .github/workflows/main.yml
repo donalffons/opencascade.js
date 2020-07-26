@@ -1,11 +1,11 @@
-name: opencascade.js - Build Bindings
+name: opencascade.js - Build Library
 
 on:
-  push
+  workflow_dispatch
 
 jobs:
   build:
-    name: Build OpenCascade Bindings
+    name: Build OpenCascade.js
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -33,7 +33,7 @@ jobs:
           path: ./node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-
 
-      # Attempt to Load Node Module Cache
+      # Attempt to Load Emscripten Cache
       - name: Cache Intermediate Emscripten Products
         id: cache-build-3
         uses: actions/cache@v2
@@ -43,7 +43,7 @@ jobs:
           path: ./emscripten-cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}-
 
-      # Attempt to Load Node Module Cache
+      # Attempt to Load Dist Cache
       - name: Cache Intermediate Dist Products
         id: cache-build-4
         uses: actions/cache@v2
@@ -75,6 +75,7 @@ jobs:
             -v "$(pwd)/dist/":"/opencascade/dist/" \
             -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
             my_awesome_image
+      # I'm not thrilled that this says my_awesome_image, but this is what works :(
 
       # Debug
       - name: Debug Print Files
@@ -85,10 +86,22 @@ jobs:
           ls emscripten-cache
           ls node_modules
 
-      # Upload the build results in-case...
+      # Upload the build results in-case the push fails...
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v2
         #if: ${{ always() }}
         with:
           name: Build Products
           path: dist
+
+    - name: Commit Build Artifacts in dist
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add dist/*
+        git commit -m "Build OpenCascade.js"
+
+    - name: Push Changes to Master
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}

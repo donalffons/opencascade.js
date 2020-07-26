@@ -1040,6 +1040,10 @@ TopoDS_Vertex implements TopoDS_Shape;
 
 interface gp_Ax1{
 	void gp_Ax1();
+	void gp_Ax1(
+		[Const,Ref]gp_Pnt P,
+		[Const,Ref]gp_Dir V
+	);
 };
 
 interface gp_Ax2{
