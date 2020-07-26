@@ -20,7 +20,6 @@ jobs:
         env:
           cache-name: cache-build-intermediates
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
           path: ./build
           key: ${{ runner.os }}-build-${{ env.cache-name }}-
 
@@ -31,7 +30,6 @@ jobs:
         env:
           cache-name: cache-node-intermediates
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
           path: ./node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-
 
@@ -42,7 +40,6 @@ jobs:
         env:
           cache-name: cache-emscripten-intermediates
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
           path: ./emscripten-cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}-
 
@@ -53,21 +50,11 @@ jobs:
         env:
           cache-name: cache-dist-intermediates
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
           path: ./dist
           key: ${{ runner.os }}-build-${{ env.cache-name }}-
 
-      # Debug
-      - name: Debug Print Files
-        run: |
-          ls
-
-      ## Build the docker container
-      #- name: Build OpenCascade.js Docker Container
-      #  #if: steps.cache-pip.outputs.cache-hit != 'true'
-      #  run: docker build -t opencascade.js .
-
-      - uses: whoan/docker-build-with-cache-action@v5
+      - name: Build OpenCascade.js Docker Image
+        uses: whoan/docker-build-with-cache-action@v5
         with:
           registry: docker.pkg.github.com
           username: zalo
@@ -75,15 +62,10 @@ jobs:
           image_name: opencascade.js
           image_tag: opencascade.js
 
-      - name: Debug Print Files
-        run: |
-          ls
-
       # Build the docker container
       - name: Build OpenCascade.js Bindings
-        #if: steps.cache-pip.outputs.cache-hit != 'true'
         run: |
-          docker run -it \
+          docker run \
             -v "$(pwd)/build/":"/opencascade/build/" \
             -v "$(pwd)/node_modules/":"/opencascade/node_modules/" \
             -v "$(pwd)/dist/":"/opencascade/dist/" \
