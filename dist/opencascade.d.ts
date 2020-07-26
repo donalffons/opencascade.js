@@ -974,6 +974,9 @@ declare module opencascade {
     class BRepAlgoAPI_Cut {
         constructor(S1: TopoDS_Shape, S2: TopoDS_Shape);
     }
+    class BRepAlgoAPI_Common extends BRepAlgoAPI_BooleanOperation {
+        constructor(S1: TopoDS_Shape, S2: TopoDS_Shape);
+    }
     class BRepAlgoAPI_BooleanOperation {
     }
     class gp_Lin {
