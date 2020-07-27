@@ -35,7 +35,7 @@ declare module opencascade {
         RightFace(): TopoDS_Face;
         TopFace(): TopoDS_Face;
     }
-    class BRepPrimAPI_MakeCone {
+    class BRepPrimAPI_MakeCone extends BRepPrimAPI_MakeOneAxis {
         constructor(R1: Standard_Real, R2: Standard_Real, H: Standard_Real);
         constructor(R1: Standard_Real, R2: Standard_Real, H: Standard_Real, angle: Standard_Real);
         constructor(Axes: gp_Ax2, R1: Standard_Real, R2: Standard_Real, H: Standard_Real, angle: Standard_Real);
@@ -60,7 +60,7 @@ declare module opencascade {
         LastShape(): TopoDS_Shape;
     }
     class BRepPrimAPI_MakePrism extends BRepPrimAPI_MakeSweep {
-        constructor(S: TopoDS_Shape, D: gp_Dir, Inf?: Standard_Boolean, Copy?: Standard_Boolean, Canonize?: Standard_Boolean);
+        constructor(S: TopoDS_Shape, V: gp_Vec, Copy?: Standard_Boolean, Canonize?: Standard_Boolean);
         Build(): void;
         Generated(S: TopoDS_Shape): TopTools_ListOfShape;
         IsDeleted(S: TopoDS_Shape): Standard_Boolean;
