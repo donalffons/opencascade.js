@@ -1067,7 +1067,7 @@ interface GC_MakeCircle {
 		[Const, Ref] gp_Ax2 A2, 
 		[Const] Standard_Real Radius
 	);
-	[Const, Ref] Handle_Geom_Circle Value();
+	[Const, Ref] Handle_Geom_Curve Value();
 };
 
 // Full interface
@@ -1081,7 +1081,7 @@ interface GC_MakeEllipse {
 		[Const] Standard_Real MajorRadius,
 		[Const] Standard_Real MinorRadius
 	);
-	[Const, Ref] Handle_Geom_Ellipse Value();
+	[Const, Ref] Handle_Geom_Curve Value();
 };
 
 // Full interface
@@ -1095,7 +1095,7 @@ interface GC_MakeHyperbola {
 		[Const] Standard_Real MajorRadius,
 		[Const] Standard_Real MinorRadius
 	);
-	[Const, Ref] Handle_Geom_Hyperbola Value();
+	[Const, Ref] Handle_Geom_Curve Value();
 };
 
 // Full interface
