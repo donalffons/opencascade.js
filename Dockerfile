@@ -7,8 +7,9 @@ RUN pip install patch requests
 
 WORKDIR /emscripten/
 RUN git clone https://github.com/emscripten-core/emsdk.git .
-RUN ./emsdk install 1.39.11 && \
-    ./emsdk activate 1.39.11
+RUN \
+  ./emsdk install 1.39.20 && \
+  ./emsdk activate 1.39.20
 
 SHELL ["/bin/bash", "-c"]
 

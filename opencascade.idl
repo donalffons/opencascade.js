@@ -78,7 +78,7 @@ interface BRepPrimAPI_MakeCone {
 	// [Value] Standard_Address OneAxis();
 	// [Ref] BRepPrim_Cone Cone();
 };
-BRepPrimAPI_MakeCone implements BRepBuilderAPI_MakeShape;
+BRepPrimAPI_MakeCone implements BRepPrimAPI_MakeOneAxis;
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31

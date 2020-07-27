@@ -21,7 +21,7 @@ declare module opencascade {
         Shape(): TopoDS_Shape;
         IsDeleted(S: TopoDS_Shape): Standard_Boolean;
     }
-    class BRepPrimAPI_MakeBox extends BRepBuilderAPI_MakeShape {
+    class BRepPrimAPI_MakeBox {
         constructor(dx: Standard_Real, dy: Standard_Real, dz: Standard_Real);
         constructor(P1: gp_Pnt, P2: gp_Pnt);
         constructor(Axes: gp_Ax2, dx: Standard_Real, dy: Standard_Real, dz: Standard_Real);
@@ -35,7 +35,7 @@ declare module opencascade {
         RightFace(): TopoDS_Face;
         TopFace(): TopoDS_Face;
     }
-    class BRepPrimAPI_MakeCone extends BRepBuilderAPI_MakeShape {
+    class BRepPrimAPI_MakeCone extends BRepPrimAPI_MakeOneAxis {
         constructor(R1: Standard_Real, R2: Standard_Real, H: Standard_Real);
         constructor(R1: Standard_Real, R2: Standard_Real, H: Standard_Real, angle: Standard_Real);
         constructor(Axes: gp_Ax2, R1: Standard_Real, R2: Standard_Real, H: Standard_Real, angle: Standard_Real);
@@ -45,7 +45,7 @@ declare module opencascade {
         constructor(Axes: gp_Ax2, R: Standard_Real, H: Standard_Real);
         constructor(Axes: gp_Ax2, R: Standard_Real, H: Standard_Real, Angle: Standard_Real);
     }
-    class BRepPrimAPI_MakeHalfSpace extends BRepBuilderAPI_MakeShape {
+    class BRepPrimAPI_MakeHalfSpace {
         constructor(Shell: TopoDS_Shell, RefPnt: gp_Pnt);
         Solid(): TopoDS_Solid;
     }
@@ -279,33 +279,6 @@ declare module opencascade {
     }
     class gp_Vec {
         constructor(Xv: Standard_Real, Yv: Standard_Real, Zv: Standard_Real);
-        X(): Standard_Real;
-        Y(): Standard_Real;
-        Z(): Standard_Real;
-    }
-    class Geom_Circle {
-        constructor(C: gp_Circ);
-        constructor(A2: gp_Ax2, Radius: Standard_Real);
-        Radius(): Standard_Real;
-    }
-    class Geom_Ellipse extends Geom_Conic {
-        constructor(C: gp_Elips);
-        constructor(A2: gp_Ax2, MajorRadius: Standard_Real, MinorRadius: Standard_Real);
-        MajorRadius(): Standard_Real;
-        MinorRadius(): Standard_Real;
-    }
-    class Geom_Hyperbola extends Geom_Conic {
-        constructor(C: gp_Hypr);
-        constructor(A2: gp_Ax2, MajorRadius: Standard_Real, MinorRadius: Standard_Real);
-        MajorRadius(): Standard_Real;
-        MinorRadius(): Standard_Real;
-    }
-    class Geom_Parabola extends Geom_Conic {
-        constructor(C: gp_Parab);
-        constructor(A2: gp_Ax2, Focal: Standard_Real);
-        Focal(): Standard_Real;
-    }
-    class Geom_Conic extends Geom_Curve {
     }
     class gp_Pnt {
         constructor();
@@ -333,18 +306,6 @@ declare module opencascade {
         Translated(V: gp_Vec): gp_Pnt;
         Translated(P1: gp_Pnt, P2: gp_Pnt): gp_Pnt;
     }
-    class gp_XYZ {
-        constructor(X: Standard_Real, Y: Standard_Real, Z: Standard_Real);
-        SetCoord(Xp: Standard_Real, Yp: Standard_Real, Zp: Standard_Real): void;
-        SetX(X: Standard_Real): void;
-        SetY(Y: Standard_Real): void;
-        SetZ(Z: Standard_Real): void;
-        Coord(Index: Standard_Integer): Standard_Real;
-        X(): Standard_Real;
-        Y(): Standard_Real;
-        Z(): Standard_Real;
-        IsEqual(Other: gp_XYZ, Tolerance: Standard_Real): Standard_Boolean;
-    }
     class GC_MakeArcOfCircle {
         constructor(Circ: gp_Circ, Alpha1: Standard_Real, Alpha2: Standard_Real, Sense: Standard_Boolean);
         constructor(P1: gp_Pnt, P2: gp_Pnt, P3: gp_Pnt);
@@ -353,25 +314,6 @@ declare module opencascade {
     class GC_MakeSegment {
         constructor(P1: gp_Pnt, P2: gp_Pnt);
         constructor(Line: gp_Lin, U1: Standard_Real, U2: Standard_Real);
-        Value(): Handle_Geom_TrimmedCurve;
-    }
-    class GC_MakeCircle {
-        constructor(Circ: gp_Circ);
-        constructor(A2: gp_Ax2, Radius: Standard_Real);
-        Value(): Handle_Geom_Circle;
-    }
-    class GC_MakeEllipse {
-        constructor(E: gp_Elips);
-        constructor(A2: gp_Ax2, MajorRadius: Standard_Real, MinorRadius: Standard_Real);
-        Value(): Handle_Geom_Ellipse;
-    }
-    class GC_MakeHyperbola {
-        constructor(E: gp_Hypr);
-        constructor(A2: gp_Ax2, MajorRadius: Standard_Real, MinorRadius: Standard_Real);
-        Value(): Handle_Geom_Hyperbola;
-    }
-    class GC_MakeArcOfParabola {
-        constructor(Parab: gp_Parab, Alpha1: Standard_Real, Alpha2: Standard_Real, Sense: Standard_Boolean);
         Value(): Handle_Geom_TrimmedCurve;
     }
     class TopoDS_Edge {
@@ -391,7 +333,6 @@ declare module opencascade {
     }
     class gp_Ax1 {
         constructor();
-        constructor(P: gp_Pnt, V: gp_Dir);
     }
     class gp_Ax2 {
         constructor();
@@ -437,17 +378,6 @@ declare module opencascade {
     class gp_Trsf {
         constructor();
         SetMirror(A1: gp_Ax1): void;
-        SetTranslation(V: gp_Vec): void;
-        SetTranslationPart(V: gp_Vec): void;
-        SetRotation(A1: gp_Ax1, Ang: Standard_Real): void;
-        SetScaleFactor(S: Standard_Real): void;
-        Multiply(T: gp_Trsf): void;
-        PreMultiply(T: gp_Trsf): void;
-        Value(Row: Standard_Integer, Col: Standard_Integer): Standard_Real;
-        Inverted(): gp_Trsf;
-        TranslationPart(): gp_XYZ;
-        ScaleFactor(): Standard_Real;
-        Multiplied(T: gp_Trsf): gp_Trsf;
     }
     class BRepBuilderAPI_Transform {
         constructor(S: TopoDS_Shape, T: gp_Trsf, Copy?: Standard_Boolean);
@@ -513,8 +443,6 @@ declare module opencascade {
         IsRational(): Standard_Boolean;
         NbPoles(): Standard_Integer;
         NbKnots(): Standard_Integer;
-        Bezier(): Handle_Geom_BezierCurve;
-        BSpline(): Handle_Geom_BSplineCurve;
     }
     class BRepAdaptor_Curve {
         constructor();
@@ -546,8 +474,6 @@ declare module opencascade {
         IsRational(): Standard_Boolean;
         NbPoles(): Standard_Integer;
         NbKnots(): Standard_Integer;
-        Bezier(): Handle_Geom_BezierCurve;
-        BSpline(): Handle_Geom_BSplineCurve;
     }
     class GCPnts_TangentialDeflection {
         constructor();
@@ -589,7 +515,6 @@ declare module opencascade {
         IsGeometric(E: TopoDS_Edge): Standard_Boolean;
         Curve(E: TopoDS_Edge, L: TopLoc_Location, First: Standard_Real, Last: Standard_Real): Handle_Geom_Curve;
         Polygon3D(E: TopoDS_Edge, L: TopLoc_Location): Handle_Poly_Polygon3D;
-        PolygonOnTriangulation(E: TopoDS_Edge, T: Handle_Poly_Triangulation, L: TopLoc_Location): Handle_Poly_PolygonOnTriangulation;
         IsClosed(E: TopoDS_Edge, F: TopoDS_Face): Standard_Boolean;
         IsClosed(E: TopoDS_Edge, T: Handle_Poly_Triangulation, L: TopLoc_Location): Standard_Boolean;
         SameParameter(E: TopoDS_Edge): Standard_Boolean;
@@ -647,40 +572,6 @@ declare module opencascade {
         Transform(T: gp_Trsf): void;
         TransformedParameter(U: Standard_Real, T: gp_Trsf): Standard_Real;
         ParametricTransformation(T: gp_Trsf): Standard_Real;
-    }
-    class Geom_BezierCurve extends Geom_Curve {
-        constructor(CurvePoles: TColgp_Array1OfPnt, PoleWeights: TColStd_Array1OfReal);
-        Reverse(): void;
-        ReversedParameter(U: Standard_Real): Standard_Real;
-        IsCN(N: Standard_Integer): Standard_Boolean;
-        FirstParameter(): Standard_Real;
-        IsClosed(): Standard_Boolean;
-        IsPeriodic(): Standard_Boolean;
-        Period(): Standard_Real;
-        LastParameter(): Standard_Real;
-        StartPoint(): gp_Pnt;
-        D0(U: Standard_Real, P: gp_Pnt): void;
-        D1(U: Standard_Real, P: gp_Pnt, V1: gp_Vec): void;
-        D2(U: Standard_Real, P: gp_Pnt, V1: gp_Vec, V2: gp_Vec): void;
-        D3(U: Standard_Real, P: gp_Pnt, V1: gp_Vec, V2: gp_Vec, V3: gp_Vec): void;
-        Transform(T: gp_Trsf): void;
-    }
-    class Geom_BSplineCurve extends Geom_Curve {
-        constructor(Poles: TColgp_Array1OfPnt, Weights: TColStd_Array1OfReal, Knots: TColStd_Array1OfReal, Multiplicities: TColStd_Array1OfInteger, Degree: Standard_Integer, Periodic?: Standard_Boolean, CheckRational?: Standard_Boolean);
-        Reverse(): void;
-        ReversedParameter(U: Standard_Real): Standard_Real;
-        IsCN(N: Standard_Integer): Standard_Boolean;
-        FirstParameter(): Standard_Real;
-        IsClosed(): Standard_Boolean;
-        IsPeriodic(): Standard_Boolean;
-        Period(): Standard_Real;
-        LastParameter(): Standard_Real;
-        StartPoint(): gp_Pnt;
-        D0(U: Standard_Real, P: gp_Pnt): void;
-        D1(U: Standard_Real, P: gp_Pnt, V1: gp_Vec): void;
-        D2(U: Standard_Real, P: gp_Pnt, V1: gp_Vec, V2: gp_Vec): void;
-        D3(U: Standard_Real, P: gp_Pnt, V1: gp_Vec, V2: gp_Vec, V3: gp_Vec): void;
-        Transform(T: gp_Trsf): void;
     }
     class Standard_Transient {
         get_type_name(): string;
@@ -775,41 +666,6 @@ declare module opencascade {
         Nullify(): void;
         get(): Geom_TrimmedCurve;
     }
-    class Handle_Geom_Circle {
-        constructor();
-        constructor(thePtr: Geom_Circle);
-        IsNull(): boolean;
-        Nullify(): void;
-        get(): Geom_Circle;
-    }
-    class Handle_Geom_Ellipse {
-        constructor();
-        constructor(thePtr: Geom_Ellipse);
-        IsNull(): boolean;
-        Nullify(): void;
-        get(): Geom_Ellipse;
-    }
-    class Handle_Geom_Hyperbola {
-        constructor();
-        constructor(thePtr: Geom_Hyperbola);
-        IsNull(): boolean;
-        Nullify(): void;
-        get(): Geom_Hyperbola;
-    }
-    class Handle_Geom_BezierCurve {
-        constructor();
-        constructor(thePtr: Geom_BezierCurve);
-        IsNull(): boolean;
-        Nullify(): void;
-        get(): Geom_BezierCurve;
-    }
-    class Handle_Geom_BSplineCurve {
-        constructor();
-        constructor(thePtr: Geom_BSplineCurve);
-        IsNull(): boolean;
-        Nullify(): void;
-        get(): Geom_BSplineCurve;
-    }
     class Handle_Poly_Polygon3D {
         constructor();
         constructor(thePtr: Poly_Polygon3D);
@@ -827,13 +683,6 @@ declare module opencascade {
         IsNull(): boolean;
         Nullify(): void;
         get(): Poly_Triangulation;
-    }
-    class Handle_Poly_PolygonOnTriangulation {
-        constructor();
-        constructor(thePtr: Poly_PolygonOnTriangulation);
-        IsNull(): boolean;
-        Nullify(): void;
-        get(): Poly_PolygonOnTriangulation;
     }
     class Handle_XSControl_WorkSession {
         constructor();
@@ -879,7 +728,6 @@ declare module opencascade {
         Lower(): Standard_Integer;
         Upper(): Standard_Integer;
         Value(theIndex: Standard_Integer): Poly_Triangle;
-        SetValue(Index: Standard_Integer, Value: Poly_Triangle): void;
     }
     class TColStd_Array1OfReal {
         constructor();
@@ -1091,9 +939,6 @@ declare module opencascade {
     class BRepAlgoAPI_Cut {
         constructor(S1: TopoDS_Shape, S2: TopoDS_Shape);
     }
-    class BRepAlgoAPI_Common extends BRepAlgoAPI_BooleanOperation {
-        constructor(S1: TopoDS_Shape, S2: TopoDS_Shape);
-    }
     class BRepAlgoAPI_BooleanOperation {
     }
     class gp_Lin {
@@ -1101,33 +946,12 @@ declare module opencascade {
         constructor(A1: gp_Ax1);
     }
     class gp_Circ {
-        constructor();
-        constructor(A2: gp_Ax2, Radius: Standard_Real);
-        Radius(): Standard_Real;
-        Length(): Standard_Real;
-        Area(): Standard_Real;
     }
     class gp_Elips {
-        constructor();
-        constructor(A2: gp_Ax2, MajorRadius: Standard_Real, MinorRadius: Standard_Real);
-        Eccentricity(): Standard_Real;
-        Focal(): Standard_Real;
-        Area(): Standard_Real;
-        MajorRadius(): Standard_Real;
-        MinorRadius(): Standard_Real;
     }
     class gp_Hypr {
-        constructor();
-        constructor(A2: gp_Ax2, MajorRadius: Standard_Real, MinorRadius: Standard_Real);
-        Eccentricity(): Standard_Real;
-        Focal(): Standard_Real;
-        MajorRadius(): Standard_Real;
-        MinorRadius(): Standard_Real;
     }
     class gp_Parab {
-        constructor();
-        constructor(A2: gp_Ax2, Focal: Standard_Real);
-        Focal(): Standard_Real;
     }
     class BRepBuilderAPI_MakeEdge {
         constructor(C: Handle_Geom_Curve);

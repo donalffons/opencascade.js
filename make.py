@@ -175,15 +175,12 @@ def build():
 
   ######################################
   stage("checking EMSCRIPTEN...")
-  EMSCRIPTEN_ROOT = os.environ.get('EMSCRIPTEN')
-  if not EMSCRIPTEN_ROOT:
-    emcc = which('emcc')
-    EMSCRIPTEN_ROOT = os.path.dirname(emcc)
-  if not EMSCRIPTEN_ROOT:
-    print("ERROR: EMSCRIPTEN_ROOT environment variable (which should be equal to emscripten's root dir) not found")
+  envEMSDK = os.environ.get('EMSDK')
+  if not envEMSDK:
+    print("ERROR: envEMSDK environment variable not found")
     sys.exit(1)
-  sys.path.append(EMSCRIPTEN_ROOT)
-  import tools.shared as emscripten
+  sys.path.append(os.path.join(envEMSDK, 'upstream', 'emscripten'))
+  import tools.building as emscripten
   
   ######################################
   stage("build settings...")
@@ -225,7 +222,7 @@ def build():
   ######################################
   stage('generate bindings...')
 
-  Popen([emscripten.PYTHON, os.path.join(EMSCRIPTEN_ROOT, 'tools', 'webidl_binder.py'), os.path.join(this_dir, 'opencascade.idl'), 'glue']).communicate()
+  Popen([emscripten.PYTHON, os.path.join(envEMSDK, 'upstream', 'emscripten', 'tools', 'webidl_binder.py'), os.path.join(this_dir, 'opencascade.idl'), 'glue']).communicate()
   assert os.path.exists('glue.js')
   assert os.path.exists('glue.cpp')
 
@@ -243,7 +240,7 @@ def build():
   args = copy.deepcopy(myincludes)
   for include in INCLUDES:
     args += ['-include', include]
-  emscripten.Building.emcc('glue.cpp', args, 'glue.o')
+  emscripten.emcc('glue.cpp', args, 'glue.o')
   assert(os.path.exists('glue.o'))
 
   if not os.path.exists('build'):
@@ -254,8 +251,7 @@ def build():
 
   if cmake_build:
     stage('Configure via CMake')
-    emscripten.Building.configure([
-      os.path.join(EMSCRIPTEN_ROOT, 'emcmake'),
+    emscripten.configure([
       'cmake',
       '../occt/',
       '-DCMAKE_BUILD_TYPE=Release',
@@ -277,7 +273,7 @@ def build():
 
     CORES = multiprocessing.cpu_count()
 
-    emscripten.Building.make(['make', '-j', str(CORES)])
+    emscripten.make(['make', '-j', str(CORES)])
 
   stage('Link')
 
@@ -290,7 +286,7 @@ def build():
     os.makedirs('js')
 
   temp = os.path.join('.', 'js', target)
-  emscripten.Building.emcc('-DNOTHING_WAKA_WAKA', emcc_args + ['glue.o'] + opencascade_libs + myincludes[:len(myincludes)-2] + ['--js-transform', 'python %s' % os.path.join('..', 'bundle.py')], temp)
+  emscripten.emcc('-DNOTHING_WAKA_WAKA', emcc_args + ['glue.o'] + opencascade_libs + myincludes[:len(myincludes)-2] + ['--js-transform', 'python %s' % os.path.join('..', 'bundle.py')], temp)
 
   assert os.path.exists(temp), 'Failed to create script code'
 
