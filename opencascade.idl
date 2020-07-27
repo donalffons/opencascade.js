@@ -2234,7 +2234,7 @@ interface Handle_Geom_Circle{
 	void Handle_Geom_Circle(Geom_Circle thePtr);
 	boolean IsNull();
 	void Nullify();
-	Handle_Geom_Circle get();
+	Geom_Circle get();
 };
 
 // Full interface
@@ -2244,7 +2244,7 @@ interface Handle_Geom_Ellipse{
 	void Handle_Geom_Ellipse(Geom_Ellipse thePtr);
 	boolean IsNull();
 	void Nullify();
-	Handle_Geom_Ellipse get();
+	Geom_Ellipse get();
 };
 
 // Full interface
@@ -2254,7 +2254,7 @@ interface Handle_Geom_Hyperbola{
 	void Handle_Geom_Hyperbola(Geom_Hyperbola thePtr);
 	boolean IsNull();
 	void Nullify();
-	Handle_Geom_Hyperbola get();
+	Geom_Hyperbola get();
 };
 
 // Full interface
