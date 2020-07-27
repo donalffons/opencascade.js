@@ -837,7 +837,7 @@ interface Geom_Circle{
 	);
 	Standard_Real Radius();
 };
-Geom_Circle implements Geom_Conic
+Geom_Circle implements Geom_Conic;
 
 interface Geom_Ellipse {
 	void Geom_Ellipse(
@@ -851,7 +851,7 @@ interface Geom_Ellipse {
 	Standard_Real MajorRadius();
 	Standard_Real MinorRadius();
 };
-Geom_Ellipse implements Geom_Conic
+Geom_Ellipse implements Geom_Conic;
 
 interface Geom_Hyperbola {
 	void Geom_Hyperbola(
@@ -865,7 +865,7 @@ interface Geom_Hyperbola {
 	Standard_Real MajorRadius();
 	Standard_Real MinorRadius();
 };
-Geom_Hyperbola implements Geom_Conic
+Geom_Hyperbola implements Geom_Conic;
 
 interface Geom_Parabola {
 	void Geom_Parabola(
@@ -880,7 +880,7 @@ interface Geom_Parabola {
 Geom_Parabola implements Geom_Conic
 
 interface Geom_Conic {}
-Geom_Circle implements Geom_Curve
+Geom_Circle implements Geom_Curve;
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
