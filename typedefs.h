@@ -6,6 +6,8 @@
 #include <Poly_Polygon3D.hxx>
 #include <Poly_PolygonOnTriangulation.hxx>
 #include <Geom_Curve.hxx>
+#include <Geom_BezierCurve.hxx>
+#include <Geom_BSplineCurve.hxx>
 #include <Geom_TrimmedCurve.hxx>
 #include <Geom_Surface.hxx>
 #include <Standard_Type.hxx>
@@ -18,6 +20,8 @@ typedef Handle(Message_ProgressIndicator) Handle_Message_ProgressIndicator;
 typedef Handle(Poly_Polygon3D) Handle_Poly_Polygon3D;
 typedef Handle(Poly_PolygonOnTriangulation) Handle_Poly_PolygonOnTriangulation;
 typedef Handle(Geom_Curve) Handle_Geom_Curve;
+typedef Handle(Geom_BezierCurve) Handle_Geom_BezierCurve;
+typedef Handle(Geom_BSplineCurve) Handle_Geom_BSplineCurve;
 typedef Handle(Geom_TrimmedCurve) Handle_Geom_TrimmedCurve;
 typedef Handle(Geom_Surface) Handle_Geom_Surface;
 typedef Handle(Standard_Type) Handle_Standard_Type;

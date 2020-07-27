@@ -54,6 +54,8 @@ INCLUDES = [
   os.path.join('.', 'occt', 'src', 'BRepBuilderAPI', 'BRepBuilderAPI_MakeVertex.hxx'),
   os.path.join('.', 'occt', 'src', 'BRepBuilderAPI', 'BRepBuilderAPI_MakePolygon.hxx'),
   os.path.join('.', 'occt', 'src', 'Geom', 'Geom_Curve.hxx'),
+  os.path.join('.', 'occt', 'src', 'Geom', 'Geom_BezierCurve.hxx'),
+  os.path.join('.', 'occt', 'src', 'Geom', 'Geom_BSplineCurve.hxx'),
   os.path.join('.', 'occt', 'src', 'BRepAdaptor', 'BRepAdaptor_Curve.hxx'),
   os.path.join('.', 'occt', 'src', 'GCPnts', 'GCPnts_TangentialDeflection.hxx'),
   os.path.join('.', 'occt', 'src', 'Geom', 'Geom_Plane.hxx'),

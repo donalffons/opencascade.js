@@ -827,16 +827,6 @@ interface gp_Vec{
 	Standard_Real Z();
 };
 
-interface gp_Circ{
-	void gp_Circ(
-		[Const, Ref] gp_Ax2 A2,
-		[Const] Standard_Real Radius
-	);
-	Standard_Real Radius();
-	Standard_Real Length();
-	Standard_Real Area();
-};
-
 interface Geom_Circle{
 	void Geom_Circle(
 		[Const, Ref] gp_Circ C
@@ -1322,8 +1312,8 @@ interface Adaptor3d_Curve {
 	Standard_Boolean IsRational();
 	Standard_Integer NbPoles();
 	Standard_Integer NbKnots();
-	// [Value] Handle_Geom_BezierCurve Bezier();
-	// [Value] Handle_Geom_BSplineCurve BSpline();
+	[Value] Handle_Geom_BezierCurve Bezier();
+	[Value] Handle_Geom_BSplineCurve BSpline();
 	// [Value] Handle_Geom_OffsetCurve OffsetCurve();
 };
 
@@ -1403,8 +1393,8 @@ interface BRepAdaptor_Curve{
 	Standard_Boolean IsRational();
 	Standard_Integer NbPoles();
 	Standard_Integer NbKnots();
-	// [Value] Handle_Geom_BezierCurve Bezier();
-	// [Value] Handle_Geom_BSplineCurve BSpline();
+	[Value] Handle_Geom_BezierCurve Bezier();
+	[Value] Handle_Geom_BSplineCurve BSpline();
 	// [Value] Handle_Geom_OffsetCurve OffsetCurve();
 };
 BRepAdaptor_Curve implements Adaptor3d_Curve;
@@ -1887,6 +1877,60 @@ interface Geom_TrimmedCurve {
 };
 Geom_TrimmedCurve implements Geom_BoundedCurve;
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Geom_BSplineCurve {
+	void Geom_BSplineCurve(
+		[Const, Ref] TColgp_Array1OfPnt Poles,
+		[Const, Ref] TColStd_Array1OfReal Weights,
+		[Const, Ref] TColStd_Array1OfReal Knots, 
+		[Const, Ref] TColStd_Array1OfInteger Multiplicities,
+		[Const] Standard_Integer Degree,
+		[Const] optional Standard_Boolean Periodic = false,
+		[Const] optional Standard_Boolean CheckRational = true)
+	);
+	void Reverse();
+	Standard_Real ReversedParameter([Const] Standard_Real U);
+
+	// [Value] GeomAbs_Shape Continuity();
+	Standard_Boolean IsCN([Const] Standard_Integer N);
+	Standard_Real FirstParameter();
+	Standard_Boolean IsClosed();
+	Standard_Boolean IsPeriodic();
+	Standard_Real Period();
+	Standard_Real LastParameter();
+	[Value] gp_Pnt StartPoint();
+	void D0(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P
+	);
+	void D1(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1
+	);
+	void D2(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2
+	);
+	void D3(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2,
+		[Ref] gp_Vec V3
+	);
+	[Ref, Const] gp_Vec DN(
+		[Const] Standard_Real U,
+		[Const] Standard_Integer N
+	);
+	void Transform([Const, Ref] gp_Trsf T);
+	// [Value] Handle_Geom_Geometry Copy();
+};
+Geom_BSplineCurve implements Geom_Curve;
+
 interface Standard_Transient {
 	[Const] DOMString get_type_name();
 	[Const, Ref] Handle_Standard_Type DynamicType();
@@ -2039,6 +2083,26 @@ interface Handle_Geom_TrimmedCurve{
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom_BezierCurve {
+	void Handle_Geom_BezierCurve();
+	void Handle_Geom_BezierCurve(Geom_BezierCurve thePtr);
+	boolean IsNull();
+	void Nullify();
+	Geom_BezierCurve get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom_BSplineCurve {
+	void Handle_Geom_BSplineCurve();
+	void Handle_Geom_BSplineCurve(Geom_BSplineCurve thePtr);
+	boolean IsNull();
+	void Nullify();
+	Geom_BSplineCurve get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 interface Handle_Poly_Polygon3D{
 	void Handle_Poly_Polygon3D();
 	void Handle_Poly_Polygon3D(Poly_Polygon3D thePtr);
@@ -2101,7 +2165,13 @@ interface TColgp_Array1OfPnt {
 	Standard_Integer Length();
 	Standard_Integer Lower();
 	Standard_Integer Upper();
-	[Const, Ref] gp_Pnt Value([Const] Standard_Integer theIndex);
+	[Const, Ref] gp_Pnt Value(
+		[Const] Standard_Integer theIndex
+	);
+	void SetValue(
+		[Const] Standard_Integer Index,
+		[Const, Ref] gp_Pnt Value
+	);
 };
 
 interface TColgp_Array1OfDir {
@@ -2114,6 +2184,10 @@ interface TColgp_Array1OfDir {
 	Standard_Integer Lower();
 	Standard_Integer Upper();
 	[Const, Ref] gp_Dir Value([Const] Standard_Integer theIndex);
+	void SetValue(
+		[Const] Standard_Integer Index,
+		[Const, Ref] gp_Dir Value
+	);
 };
 
 interface Poly_Array1OfTriangle {
@@ -2126,6 +2200,10 @@ interface Poly_Array1OfTriangle {
 	Standard_Integer Lower();
 	Standard_Integer Upper();
 	[Const, Ref] Poly_Triangle Value([Const] Standard_Integer theIndex);
+	void SetValue(
+		[Const] Standard_Integer Index,
+		[Const, Ref] Poly_Triangle Value
+	);
 };
 
 interface TColStd_Array1OfReal {
@@ -2150,6 +2228,10 @@ interface TColStd_Array1OfInteger {
 	Standard_Integer Lower();
 	Standard_Integer Upper();
 	Standard_Integer Value([Const] Standard_Integer theIndex);
+	void SetValue(
+		[Const] Standard_Integer Index,
+		[Const, Ref] Standard_Integer Value
+	);
 };
 
 // Full interface
@@ -2962,7 +3044,17 @@ interface gp_Lin{
     void gp_Lin([Const, Ref] gp_Ax1 A1);
 };
 
-interface gp_Circ{};
+interface gp_Circ {
+	void gp_Circ();
+	void gp_Circ(
+		[Const, Ref] gp_Ax2 A2,
+		[Const] Standard_Real Radius
+	);
+	Standard_Real Radius();
+	Standard_Real Length();
+	Standard_Real Area();
+};
+
 interface gp_Elips{};
 interface gp_Hypr{};
 interface gp_Parab{};
