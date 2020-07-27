@@ -6,6 +6,10 @@
 #include <Poly_Polygon3D.hxx>
 #include <Poly_PolygonOnTriangulation.hxx>
 #include <Geom_Curve.hxx>
+#include <Geom_Circle.hxx>
+#include <Geom_Ellipse.hxx>
+#include <Geom_Hyperbola.hxx>
+#include <Geom_Parabola.hxx>
 #include <Geom_BezierCurve.hxx>
 #include <Geom_BSplineCurve.hxx>
 #include <Geom_TrimmedCurve.hxx>
@@ -23,6 +27,9 @@ typedef Handle(Geom_Curve) Handle_Geom_Curve;
 typedef Handle(Geom_BezierCurve) Handle_Geom_BezierCurve;
 typedef Handle(Geom_BSplineCurve) Handle_Geom_BSplineCurve;
 typedef Handle(Geom_TrimmedCurve) Handle_Geom_TrimmedCurve;
+typedef Handle(Geom_Circle) Handle_Geom_Circle;
+typedef Handle(Geom_Ellipse) Handle_Geom_Ellipse;
+typedef Handle(Geom_Hyperbola) Handle_Geom_Hyperbola;
 typedef Handle(Geom_Surface) Handle_Geom_Surface;
 typedef Handle(Standard_Type) Handle_Standard_Type;
 typedef Handle(Geom_Plane) Handle_Geom_Plane;

@@ -1059,6 +1059,59 @@ interface GC_MakeSegment{
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
+interface GC_MakeCircle {
+	void GC_MakeCircle(
+		[Const, Ref] gp_Circ Circ
+	);
+	void GC_MakeCircle(
+		[Const, Ref] gp_Ax2 A2, 
+		[Const] Standard_Real Radius
+	);
+	[Const, Ref] Handle_Geom_Circle Value();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface GC_MakeEllipse {
+	void GC_MakeEllipse(
+		[Const, Ref] gp_Elips E
+	);
+	void GC_MakeEllipse(
+		[Const, Ref] gp_Ax2 A2, 
+		[Const] Standard_Real MajorRadius,
+		[Const] Standard_Real MinorRadius
+	);
+	[Const, Ref] Handle_Geom_Ellipse Value();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface GC_MakeHyperbola {
+	void GC_MakeHyperbola(
+		[Const, Ref] gp_Hypr E
+	);
+	void GC_MakeHyperbola(
+		[Const, Ref] gp_Ax2 A2, 
+		[Const] Standard_Real MajorRadius,
+		[Const] Standard_Real MinorRadius
+	);
+	[Const, Ref] Handle_Geom_Hyperbola Value();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface GC_MakeArcOfParabola {
+	void GC_MakeArcOfParabola(
+		[Const, Ref] gp_Parab Parab,
+		[Const] Standard_Real Alpha1,
+		[Const] Standard_Real Alpha2,
+		[Const] Standard_Boolean Sense
+	);
+	[Const, Ref] Handle_Geom_TrimmedCurve Value();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Edge{
 	void TopoDS_Edge();
 };
@@ -2172,6 +2225,36 @@ interface Handle_Geom_TrimmedCurve{
 	boolean IsNull();
 	void Nullify();
 	Geom_TrimmedCurve get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom_Circle{
+	void Handle_Geom_Circle();
+	void Handle_Geom_Circle(Geom_Circle thePtr);
+	boolean IsNull();
+	void Nullify();
+	Handle_Geom_Circle get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom_Ellipse{
+	void Handle_Geom_Ellipse();
+	void Handle_Geom_Ellipse(Geom_Ellipse thePtr);
+	boolean IsNull();
+	void Nullify();
+	Handle_Geom_Ellipse get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom_Hyperbola{
+	void Handle_Geom_Hyperbola();
+	void Handle_Geom_Hyperbola(Geom_Hyperbola thePtr);
+	boolean IsNull();
+	void Nullify();
+	Handle_Geom_Hyperbola get();
 };
 
 // Full interface
