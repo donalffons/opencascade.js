@@ -1887,7 +1887,7 @@ interface Geom_BSplineCurve {
 		[Const, Ref] TColStd_Array1OfInteger Multiplicities,
 		[Const] Standard_Integer Degree,
 		[Const] optional Standard_Boolean Periodic = false,
-		[Const] optional Standard_Boolean CheckRational = true)
+		[Const] optional Standard_Boolean CheckRational = true
 	);
 	void Reverse();
 	Standard_Real ReversedParameter([Const] Standard_Real U);
