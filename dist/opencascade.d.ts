@@ -355,6 +355,25 @@ declare module opencascade {
         constructor(Line: gp_Lin, U1: Standard_Real, U2: Standard_Real);
         Value(): Handle_Geom_TrimmedCurve;
     }
+    class GC_MakeCircle {
+        constructor(Circ: gp_Circ);
+        constructor(A2: gp_Ax2, Radius: Standard_Real);
+        Value(): Handle_Geom_Circle;
+    }
+    class GC_MakeEllipse {
+        constructor(E: gp_Elips);
+        constructor(A2: gp_Ax2, MajorRadius: Standard_Real, MinorRadius: Standard_Real);
+        Value(): Handle_Geom_Ellipse;
+    }
+    class GC_MakeHyperbola {
+        constructor(E: gp_Hypr);
+        constructor(A2: gp_Ax2, MajorRadius: Standard_Real, MinorRadius: Standard_Real);
+        Value(): Handle_Geom_Hyperbola;
+    }
+    class GC_MakeArcOfParabola {
+        constructor(Parab: gp_Parab, Alpha1: Standard_Real, Alpha2: Standard_Real, Sense: Standard_Boolean);
+        Value(): Handle_Geom_TrimmedCurve;
+    }
     class TopoDS_Edge {
         constructor();
     }
@@ -755,6 +774,27 @@ declare module opencascade {
         IsNull(): boolean;
         Nullify(): void;
         get(): Geom_TrimmedCurve;
+    }
+    class Handle_Geom_Circle {
+        constructor();
+        constructor(thePtr: Geom_Circle);
+        IsNull(): boolean;
+        Nullify(): void;
+        get(): Geom_Circle;
+    }
+    class Handle_Geom_Ellipse {
+        constructor();
+        constructor(thePtr: Geom_Ellipse);
+        IsNull(): boolean;
+        Nullify(): void;
+        get(): Geom_Ellipse;
+    }
+    class Handle_Geom_Hyperbola {
+        constructor();
+        constructor(thePtr: Geom_Hyperbola);
+        IsNull(): boolean;
+        Nullify(): void;
+        get(): Geom_Hyperbola;
     }
     class Handle_Geom_BezierCurve {
         constructor();
