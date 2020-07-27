@@ -3151,7 +3151,7 @@ interface gp_Circ {
 interface gp_Elips{
 	void gp_Elips();
 	void gp_Elips(
-		[Const, Ref] gp_Ax2& A2,
+		[Const, Ref] gp_Ax2 A2,
 		[Const] Standard_Real MajorRadius,
 		[Const] Standard_Real MinorRadius
 	);
@@ -3164,7 +3164,7 @@ interface gp_Elips{
 interface gp_Hypr{
 	void gp_Hypr();
 	void gp_Hypr(
-		[Const, Ref] gp_Ax2& A2,
+		[Const, Ref] gp_Ax2 A2,
 		[Const] Standard_Real MajorRadius,
 		[Const] Standard_Real MinorRadius
 	);
@@ -3176,7 +3176,7 @@ interface gp_Hypr{
 interface gp_Parab{
 	void gp_Parab();
 	void gp_Parab(
-		[Const, Ref] gp_Ax2& A2,
+		[Const, Ref] gp_Ax2 A2,
 		[Const] Standard_Real Focal
 	);
 	Standard_Real Focal();
