@@ -46,6 +46,7 @@ interface BRepPrimAPI_MakeBox {
 	[Const, Ref] TopoDS_Face RightFace();
 	[Const, Ref] TopoDS_Face TopFace();
 };
+BRepPrimAPI_MakeBox implements BRepBuilderAPI_MakeShape;
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
@@ -120,7 +121,7 @@ interface BRepPrimAPI_MakeHalfSpace {
 	);
 	[Const, Ref] TopoDS_Solid Solid();
 };
-BRepPrimAPI_MakeCylinder implements BRepBuilderAPI_MakeShape;
+BRepPrimAPI_MakeHalfSpace implements BRepBuilderAPI_MakeShape;
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
@@ -144,18 +145,19 @@ BRepPrimAPI_MakeSweep implements BRepBuilderAPI_MakeShape;
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface BRepPrimAPI_MakePrism {
-	// void BRepPrimAPI_MakePrism(
-	// 	[Const, Ref] TopoDS_Shape S,
-	// 	[Const, Ref] gp_Vec V,
-	// 	[Const] optional Standard_Boolean Copy = false,
-	// 	[Const] optional Standard_Boolean Canonize = true
-	// );
 	void BRepPrimAPI_MakePrism(
 		[Const, Ref] TopoDS_Shape S,
 		[Const, Ref] gp_Vec V,
 		[Const] optional Standard_Boolean Copy = false,
 		[Const] optional Standard_Boolean Canonize = true
 	);
+	//void BRepPrimAPI_MakePrism(
+	//	[Const, Ref] TopoDS_Shape S,
+	//	[Const, Ref] gp_Dir D,
+	//	[Const] optional Standard_Boolean Inf = true,
+	//	[Const] optional Standard_Boolean Copy = false,
+	//	[Const] optional Standard_Boolean Canonize = true
+	//);
 	// [Const, Ref] BRepSweep_Prism Prism();
 	void Build();
 	[Const, Ref] TopTools_ListOfShape Generated([Const, Ref] TopoDS_Shape S);
@@ -820,7 +822,65 @@ interface gp_Vec{
 		[Const]Standard_Real Yv,
 		[Const]Standard_Real Zv
 	);
+	Standard_Real X();
+	Standard_Real Y();
+	Standard_Real Z();
 };
+
+interface Geom_Circle{
+	void Geom_Circle(
+		[Const, Ref] gp_Circ C
+	);
+	void Geom_Circle(
+		[Const, Ref] gp_Ax2 A2,
+		[Const] Standard_Real Radius
+	);
+	Standard_Real Radius();
+};
+Geom_Circle implements Geom_Conic;
+
+interface Geom_Ellipse {
+	void Geom_Ellipse(
+		[Const, Ref] gp_Elips C
+	);
+	void Geom_Ellipse(
+		[Const, Ref] gp_Ax2 A2,
+		[Const] Standard_Real MajorRadius,
+		[Const] Standard_Real MinorRadius
+	);
+	Standard_Real MajorRadius();
+	Standard_Real MinorRadius();
+};
+Geom_Ellipse implements Geom_Conic;
+
+interface Geom_Hyperbola {
+	void Geom_Hyperbola(
+		[Const, Ref] gp_Hypr C
+	);
+	void Geom_Hyperbola(
+		[Const, Ref] gp_Ax2 A2,
+		[Const] Standard_Real MajorRadius,
+		[Const] Standard_Real MinorRadius
+	);
+	Standard_Real MajorRadius();
+	Standard_Real MinorRadius();
+};
+Geom_Hyperbola implements Geom_Conic;
+
+interface Geom_Parabola {
+	void Geom_Parabola(
+		[Const, Ref] gp_Parab C
+	);
+	void Geom_Parabola(
+		[Const, Ref] gp_Ax2 A2,
+		[Const] Standard_Real Focal
+	);
+	Standard_Real Focal();
+};
+Geom_Parabola implements Geom_Conic;
+
+interface Geom_Conic {};
+Geom_Conic implements Geom_Curve;
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
@@ -899,6 +959,45 @@ interface gp_Pnt {
 	);
 };
 
+interface gp_XYZ {
+	//void gp_XYZ();
+	// void gp_Pnt([Const, Ref] gp_XYZ Coord);
+	void gp_XYZ(
+		[Const] Standard_Real X,
+		[Const] Standard_Real Y,
+		[Const] Standard_Real Z
+	);
+	//void SetCoord(
+	//	[Const] Standard_Integer Index,
+	//	[Const] Standard_Real Xi
+	//);
+	void SetCoord(
+		[Const] Standard_Real Xp,
+		[Const] Standard_Real Yp,
+		[Const] Standard_Real Zp
+	);
+	void SetX([Const] Standard_Real X);
+	void SetY([Const] Standard_Real Y);
+	void SetZ([Const] Standard_Real Z);
+	// void SetXYZ([Const, Ref] gp_XYZ Coord);
+	Standard_Real Coord([Const] Standard_Integer Index);
+	// void Coord(
+	//   [Ref] Standard_Real Xp,
+	//   [Ref] Standard_Real Yp,
+	//   [Ref] Standard_Real Zp
+	// );
+	Standard_Real X();
+	Standard_Real Y();
+	Standard_Real Z();
+	// [Const, Ref] gp_XYZ XYZ();
+	// [Const, Ref] gp_XYZ Coord();
+	// [Ref] gp_XYZ ChangeCoord();
+	Standard_Boolean IsEqual(
+		[Const, Ref] gp_XYZ Other,
+		[Const] Standard_Real Tolerance
+	);
+};
+
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface GC_MakeArcOfCircle {
@@ -960,6 +1059,59 @@ interface GC_MakeSegment{
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
+interface GC_MakeCircle {
+	void GC_MakeCircle(
+		[Const, Ref] gp_Circ Circ
+	);
+	void GC_MakeCircle(
+		[Const, Ref] gp_Ax2 A2, 
+		[Const] Standard_Real Radius
+	);
+	[Const, Ref] Handle_Geom_Circle Value();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface GC_MakeEllipse {
+	void GC_MakeEllipse(
+		[Const, Ref] gp_Elips E
+	);
+	void GC_MakeEllipse(
+		[Const, Ref] gp_Ax2 A2, 
+		[Const] Standard_Real MajorRadius,
+		[Const] Standard_Real MinorRadius
+	);
+	[Const, Ref] Handle_Geom_Ellipse Value();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface GC_MakeHyperbola {
+	void GC_MakeHyperbola(
+		[Const, Ref] gp_Hypr E
+	);
+	void GC_MakeHyperbola(
+		[Const, Ref] gp_Ax2 A2, 
+		[Const] Standard_Real MajorRadius,
+		[Const] Standard_Real MinorRadius
+	);
+	[Const, Ref] Handle_Geom_Hyperbola Value();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface GC_MakeArcOfParabola {
+	void GC_MakeArcOfParabola(
+		[Const, Ref] gp_Parab Parab,
+		[Const] Standard_Real Alpha1,
+		[Const] Standard_Real Alpha2,
+		[Const] Standard_Boolean Sense
+	);
+	[Const, Ref] Handle_Geom_TrimmedCurve Value();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Edge{
 	void TopoDS_Edge();
 };
@@ -996,6 +1148,10 @@ TopoDS_Vertex implements TopoDS_Shape;
 
 interface gp_Ax1{
 	void gp_Ax1();
+	void gp_Ax1(
+		[Const,Ref]gp_Pnt P,
+		[Const,Ref]gp_Dir V
+	);
 };
 
 interface gp_Ax2{
@@ -1107,6 +1263,17 @@ interface gp_Dir{
 interface gp_Trsf{
 	void gp_Trsf();
 	void SetMirror([Const, Ref]gp_Ax1 A1);
+	void SetTranslation([Const, Ref]gp_Vec V);
+	void SetTranslationPart([Const, Ref]gp_Vec V);
+	void SetRotation([Const, Ref]gp_Ax1 A1, [Const]Standard_Real Ang);
+	void SetScaleFactor([Const]Standard_Real S);
+	void Multiply([Const, Ref]gp_Trsf T);
+	void PreMultiply([Const, Ref]gp_Trsf T);
+	[Const] Standard_Real Value ([Const] Standard_Integer Row, [Const] Standard_Integer Col);
+	[Value] gp_Trsf Inverted();
+	[Const, Ref] gp_XYZ TranslationPart();
+	[Const] Standard_Real ScaleFactor();
+	[Value] gp_Trsf Multiplied([Const, Ref]gp_Trsf T);
 };
 
 interface BRepBuilderAPI_Transform{
@@ -1242,8 +1409,8 @@ interface Adaptor3d_Curve {
 	Standard_Boolean IsRational();
 	Standard_Integer NbPoles();
 	Standard_Integer NbKnots();
-	// [Value] Handle_Geom_BezierCurve Bezier();
-	// [Value] Handle_Geom_BSplineCurve BSpline();
+	[Value] Handle_Geom_BezierCurve Bezier();
+	[Value] Handle_Geom_BSplineCurve BSpline();
 	// [Value] Handle_Geom_OffsetCurve OffsetCurve();
 };
 
@@ -1323,8 +1490,8 @@ interface BRepAdaptor_Curve{
 	Standard_Boolean IsRational();
 	Standard_Integer NbPoles();
 	Standard_Integer NbKnots();
-	// [Value] Handle_Geom_BezierCurve Bezier();
-	// [Value] Handle_Geom_BSplineCurve BSpline();
+	[Value] Handle_Geom_BezierCurve Bezier();
+	[Value] Handle_Geom_BSplineCurve BSpline();
 	// [Value] Handle_Geom_OffsetCurve OffsetCurve();
 };
 BRepAdaptor_Curve implements Adaptor3d_Curve;
@@ -1560,11 +1727,11 @@ interface BRep_Tool {
 	// 	[Ref] TopLoc_Location L,
 	// 	[Const] Standard_Integer Index
 	// );
-	// [Const, Ref] Handle_Poly_PolygonOnTriangulation PolygonOnTriangulation(
-	// 	[Const, Ref] TopoDS_Edge E,
-	// 	[Ref] Handle_Poly_Triangulation T,
-	// 	[Const, Ref] TopLoc_Location L
-	// );
+	[Const, Ref] static Handle_Poly_PolygonOnTriangulation PolygonOnTriangulation(
+		[Const, Ref] TopoDS_Edge E,
+		[Ref] Handle_Poly_Triangulation T,
+		[Const, Ref] TopLoc_Location L
+	);
 	// [Const, Ref] Handle_Poly_PolygonOnTriangulation PolygonOnTriangulation(
 	// 	[Const, Ref] TopoDS_Edge E,
 	// 	[Ref] Handle_Poly_PolygonOnTriangulation P,
@@ -1807,6 +1974,109 @@ interface Geom_TrimmedCurve {
 };
 Geom_TrimmedCurve implements Geom_BoundedCurve;
 
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Geom_BezierCurve {
+	void Geom_BezierCurve(
+		[Const, Ref] TColgp_Array1OfPnt CurvePoles,
+		[Const, Ref] TColStd_Array1OfReal PoleWeights
+	);
+	void Reverse();
+	Standard_Real ReversedParameter([Const] Standard_Real U);
+
+	// [Value] GeomAbs_Shape Continuity();
+	Standard_Boolean IsCN([Const] Standard_Integer N);
+	Standard_Real FirstParameter();
+	Standard_Boolean IsClosed();
+	Standard_Boolean IsPeriodic();
+	Standard_Real Period();
+	Standard_Real LastParameter();
+	[Value] gp_Pnt StartPoint();
+	void D0(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P
+	);
+	void D1(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1
+	);
+	void D2(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2
+	);
+	void D3(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2,
+		[Ref] gp_Vec V3
+	);
+	//[Const] gp_Vec DN(
+	//	[Const] Standard_Real U,
+	//	[Const] Standard_Integer N
+	//);
+	void Transform([Const, Ref] gp_Trsf T);
+	// [Value] Handle_Geom_Geometry Copy();
+};
+Geom_BezierCurve implements Geom_Curve;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Geom_BSplineCurve {
+	void Geom_BSplineCurve(
+		[Const, Ref] TColgp_Array1OfPnt Poles,
+		[Const, Ref] TColStd_Array1OfReal Weights,
+		[Const, Ref] TColStd_Array1OfReal Knots, 
+		[Const, Ref] TColStd_Array1OfInteger Multiplicities,
+		[Const] Standard_Integer Degree,
+		[Const] optional Standard_Boolean Periodic = false,
+		[Const] optional Standard_Boolean CheckRational = true
+	);
+	void Reverse();
+	Standard_Real ReversedParameter([Const] Standard_Real U);
+
+	// [Value] GeomAbs_Shape Continuity();
+	Standard_Boolean IsCN([Const] Standard_Integer N);
+	Standard_Real FirstParameter();
+	Standard_Boolean IsClosed();
+	Standard_Boolean IsPeriodic();
+	Standard_Real Period();
+	Standard_Real LastParameter();
+	[Value] gp_Pnt StartPoint();
+	void D0(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P
+	);
+	void D1(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1
+	);
+	void D2(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2
+	);
+	void D3(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2,
+		[Ref] gp_Vec V3
+	);
+	//[Ref, Const] gp_Vec DN(
+	//	[Const] Standard_Real U,
+	//	[Const] Standard_Integer N
+	//);
+	void Transform([Const, Ref] gp_Trsf T);
+	// [Value] Handle_Geom_Geometry Copy();
+};
+Geom_BSplineCurve implements Geom_Curve;
+
 interface Standard_Transient {
 	[Const] DOMString get_type_name();
 	[Const, Ref] Handle_Standard_Type DynamicType();
@@ -1959,6 +2229,56 @@ interface Handle_Geom_TrimmedCurve{
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom_Circle{
+	void Handle_Geom_Circle();
+	void Handle_Geom_Circle(Geom_Circle thePtr);
+	boolean IsNull();
+	void Nullify();
+	Geom_Circle get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom_Ellipse{
+	void Handle_Geom_Ellipse();
+	void Handle_Geom_Ellipse(Geom_Ellipse thePtr);
+	boolean IsNull();
+	void Nullify();
+	Geom_Ellipse get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom_Hyperbola{
+	void Handle_Geom_Hyperbola();
+	void Handle_Geom_Hyperbola(Geom_Hyperbola thePtr);
+	boolean IsNull();
+	void Nullify();
+	Geom_Hyperbola get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom_BezierCurve {
+	void Handle_Geom_BezierCurve();
+	void Handle_Geom_BezierCurve(Geom_BezierCurve thePtr);
+	boolean IsNull();
+	void Nullify();
+	Geom_BezierCurve get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Handle_Geom_BSplineCurve {
+	void Handle_Geom_BSplineCurve();
+	void Handle_Geom_BSplineCurve(Geom_BSplineCurve thePtr);
+	boolean IsNull();
+	void Nullify();
+	Geom_BSplineCurve get();
+};
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
 interface Handle_Poly_Polygon3D{
 	void Handle_Poly_Polygon3D();
 	void Handle_Poly_Polygon3D(Poly_Polygon3D thePtr);
@@ -1978,6 +2298,14 @@ interface Handle_Poly_Triangulation {
 	boolean IsNull();
 	void Nullify();
 	Poly_Triangulation get();
+};
+
+interface Handle_Poly_PolygonOnTriangulation {
+	void Handle_Poly_PolygonOnTriangulation();
+	void Handle_Poly_PolygonOnTriangulation(Poly_PolygonOnTriangulation thePtr);
+	boolean IsNull();
+	void Nullify();
+	Poly_PolygonOnTriangulation get();
 };
 
 interface Handle_XSControl_WorkSession {
@@ -2013,7 +2341,13 @@ interface TColgp_Array1OfPnt {
 	Standard_Integer Length();
 	Standard_Integer Lower();
 	Standard_Integer Upper();
-	[Const, Ref] gp_Pnt Value([Const] Standard_Integer theIndex);
+	[Const, Ref] gp_Pnt Value(
+		[Const] Standard_Integer theIndex
+	);
+	//void SetValue(
+	//	[Const] Standard_Integer Index,
+	//	[Const, Ref] gp_Pnt Value
+	//);
 };
 
 interface TColgp_Array1OfDir {
@@ -2026,6 +2360,10 @@ interface TColgp_Array1OfDir {
 	Standard_Integer Lower();
 	Standard_Integer Upper();
 	[Const, Ref] gp_Dir Value([Const] Standard_Integer theIndex);
+	//void SetValue(
+	//	[Const] Standard_Integer Index,
+	//	[Const, Ref] gp_Dir Value
+	//);
 };
 
 interface Poly_Array1OfTriangle {
@@ -2038,6 +2376,10 @@ interface Poly_Array1OfTriangle {
 	Standard_Integer Lower();
 	Standard_Integer Upper();
 	[Const, Ref] Poly_Triangle Value([Const] Standard_Integer theIndex);
+	void SetValue(
+		[Const] Standard_Integer Index,
+		[Const, Ref] Poly_Triangle Value
+	);
 };
 
 interface TColStd_Array1OfReal {
@@ -2062,6 +2404,10 @@ interface TColStd_Array1OfInteger {
 	Standard_Integer Lower();
 	Standard_Integer Upper();
 	Standard_Integer Value([Const] Standard_Integer theIndex);
+	//void SetValue(
+	//	[Const] Standard_Integer Index,
+	//	[Const, Ref] Standard_Integer Value
+	//);
 };
 
 // Full interface
@@ -2857,6 +3203,14 @@ interface BRepAlgoAPI_Cut{
 };
 BRepAlgoAPI_Cut implements BRepAlgoAPI_BooleanOperation;
 
+interface BRepAlgoAPI_Common {
+	void BRepAlgoAPI_Common(
+		[Const, Ref] TopoDS_Shape S1,
+		[Const, Ref] TopoDS_Shape S2
+	);
+};
+BRepAlgoAPI_Common implements BRepAlgoAPI_BooleanOperation;
+
 interface BRepAlgoAPI_BooleanOperation{
 };
 BRepAlgoAPI_BooleanOperation implements BRepBuilderAPI_MakeShape;
@@ -2866,10 +3220,50 @@ interface gp_Lin{
     void gp_Lin([Const, Ref] gp_Ax1 A1);
 };
 
-interface gp_Circ{};
-interface gp_Elips{};
-interface gp_Hypr{};
-interface gp_Parab{};
+interface gp_Circ {
+	void gp_Circ();
+	void gp_Circ(
+		[Const, Ref] gp_Ax2 A2,
+		[Const] Standard_Real Radius
+	);
+	Standard_Real Radius();
+	Standard_Real Length();
+	Standard_Real Area();
+};
+
+interface gp_Elips{
+	void gp_Elips();
+	void gp_Elips(
+		[Const, Ref] gp_Ax2 A2,
+		[Const] Standard_Real MajorRadius,
+		[Const] Standard_Real MinorRadius
+	);
+	Standard_Real Eccentricity();
+	Standard_Real Focal();
+	Standard_Real Area();
+	Standard_Real MajorRadius();
+	Standard_Real MinorRadius();
+};
+interface gp_Hypr{
+	void gp_Hypr();
+	void gp_Hypr(
+		[Const, Ref] gp_Ax2 A2,
+		[Const] Standard_Real MajorRadius,
+		[Const] Standard_Real MinorRadius
+	);
+	Standard_Real Eccentricity();
+	Standard_Real Focal();
+	Standard_Real MajorRadius();
+	Standard_Real MinorRadius();
+};
+interface gp_Parab{
+	void gp_Parab();
+	void gp_Parab(
+		[Const, Ref] gp_Ax2 A2,
+		[Const] Standard_Real Focal
+	);
+	Standard_Real Focal();
+};
 
 interface BRepBuilderAPI_MakeEdge{
 	void BRepBuilderAPI_MakeEdge([Const, Ref] Handle_Geom_Curve C);
