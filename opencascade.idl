@@ -879,7 +879,7 @@ interface Geom_Parabola {
 };
 Geom_Parabola implements Geom_Conic;
 
-interface Geom_Conic {}
+interface Geom_Conic {};
 Geom_Conic implements Geom_Curve;
 
 // Full interface
