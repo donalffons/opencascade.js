@@ -877,7 +877,7 @@ interface Geom_Parabola {
 	);
 	Standard_Real Focal();
 };
-Geom_Parabola implements Geom_Conic
+Geom_Parabola implements Geom_Conic;
 
 interface Geom_Conic {}
 Geom_Circle implements Geom_Curve;
