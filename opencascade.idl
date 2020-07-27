@@ -145,19 +145,19 @@ BRepPrimAPI_MakeSweep implements BRepBuilderAPI_MakeShape;
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface BRepPrimAPI_MakePrism {
-	// void BRepPrimAPI_MakePrism(
-	// 	[Const, Ref] TopoDS_Shape S,
-	// 	[Const, Ref] gp_Vec V,
-	// 	[Const] optional Standard_Boolean Copy = false,
-	// 	[Const] optional Standard_Boolean Canonize = true
-	// );
 	void BRepPrimAPI_MakePrism(
 		[Const, Ref] TopoDS_Shape S,
-		[Const, Ref] gp_Dir D,
-		[Const] optional Standard_Boolean Inf = true,
+		[Const, Ref] gp_Vec V,
 		[Const] optional Standard_Boolean Copy = false,
 		[Const] optional Standard_Boolean Canonize = true
 	);
+	//void BRepPrimAPI_MakePrism(
+	//	[Const, Ref] TopoDS_Shape S,
+	//	[Const, Ref] gp_Dir D,
+	//	[Const] optional Standard_Boolean Inf = true,
+	//	[Const] optional Standard_Boolean Copy = false,
+	//	[Const] optional Standard_Boolean Canonize = true
+	//);
 	// [Const, Ref] BRepSweep_Prism Prism();
 	void Build();
 	[Const, Ref] TopTools_ListOfShape Generated([Const, Ref] TopoDS_Shape S);
@@ -825,6 +825,27 @@ interface gp_Vec{
 	Standard_Real X();
 	Standard_Real Y();
 	Standard_Real Z();
+};
+
+interface gp_Circ{
+	void gp_Circ(
+		[Const, Ref] gp_Ax2 A2,
+		[Const] Standard_Real Radius
+	);
+	Standard_Real Radius();
+	Standard_Real Length();
+	Standard_Real Area();
+};
+
+interface Geom_Circle{
+	void Geom_Circle(
+		[Const, Ref] gp_Circ C
+	);
+	void Geom_Circle(
+		[Const, Ref] gp_Ax2 A2,
+		[Const] Standard_Real Radius
+	);
+	Standard_Real Radius();
 };
 
 // Full interface
