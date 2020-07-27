@@ -1961,10 +1961,10 @@ interface Geom_BezierCurve {
 		[Ref] gp_Vec V2,
 		[Ref] gp_Vec V3
 	);
-	[Ref, Const] gp_Vec DN(
-		[Const] Standard_Real U,
-		[Const] Standard_Integer N
-	);
+	//[Const] gp_Vec DN(
+	//	[Const] Standard_Real U,
+	//	[Const] Standard_Integer N
+	//);
 	void Transform([Const, Ref] gp_Trsf T);
 	// [Value] Handle_Geom_Geometry Copy();
 };
@@ -2015,10 +2015,10 @@ interface Geom_BSplineCurve {
 		[Ref] gp_Vec V2,
 		[Ref] gp_Vec V3
 	);
-	[Ref, Const] gp_Vec DN(
-		[Const] Standard_Real U,
-		[Const] Standard_Integer N
-	);
+	//[Ref, Const] gp_Vec DN(
+	//	[Const] Standard_Real U,
+	//	[Const] Standard_Integer N
+	//);
 	void Transform([Const, Ref] gp_Trsf T);
 	// [Value] Handle_Geom_Geometry Copy();
 };
