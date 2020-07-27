@@ -3155,7 +3155,7 @@ interface gp_Elips{
 		[Const] Standard_Real MajorRadius,
 		[Const] Standard_Real MinorRadius
 	);
-	Standard_Real Eccentricity(();
+	Standard_Real Eccentricity();
 	Standard_Real Focal();
 	Standard_Real Area();
 	Standard_Real MajorRadius();
@@ -3168,7 +3168,7 @@ interface gp_Hypr{
 		[Const] Standard_Real MajorRadius,
 		[Const] Standard_Real MinorRadius
 	);
-	Standard_Real Eccentricity(();
+	Standard_Real Eccentricity();
 	Standard_Real Focal();
 	Standard_Real MajorRadius();
 	Standard_Real MinorRadius();
