@@ -837,6 +837,50 @@ interface Geom_Circle{
 	);
 	Standard_Real Radius();
 };
+Geom_Circle implements Geom_Conic
+
+interface Geom_Ellipse {
+	void Geom_Ellipse(
+		[Const, Ref] gp_Elips C
+	);
+	void Geom_Ellipse(
+		[Const, Ref] gp_Ax2 A2,
+		[Const] Standard_Real MajorRadius,
+		[Const] Standard_Real MinorRadius
+	);
+	Standard_Real MajorRadius();
+	Standard_Real MinorRadius();
+};
+Geom_Ellipse implements Geom_Conic
+
+interface Geom_Hyperbola {
+	void Geom_Hyperbola(
+		[Const, Ref] gp_Hypr C
+	);
+	void Geom_Hyperbola(
+		[Const, Ref] gp_Ax2 A2,
+		[Const] Standard_Real MajorRadius,
+		[Const] Standard_Real MinorRadius
+	);
+	Standard_Real MajorRadius();
+	Standard_Real MinorRadius();
+};
+Geom_Hyperbola implements Geom_Conic
+
+interface Geom_Parabola {
+	void Geom_Parabola(
+		[Const, Ref] gp_Parab C
+	);
+	void Geom_Parabola(
+		[Const, Ref] gp_Ax2 A2,
+		[Const] Standard_Real Focal
+	);
+	Standard_Real Focal();
+};
+Geom_Parabola implements Geom_Conic
+
+interface Geom_Conic {}
+Geom_Circle implements Geom_Curve
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
@@ -1876,6 +1920,55 @@ interface Geom_TrimmedCurve {
 	// [Value] Handle_Geom_Geometry Copy();
 };
 Geom_TrimmedCurve implements Geom_BoundedCurve;
+
+// Full interface
+// fd47711d682be943f0e0a13d1fb54911b0499c31
+interface Geom_BezierCurve {
+	void Geom_BezierCurve(
+		[Const, Ref] TColgp_Array1OfPnt CurvePoles,
+		[Const, Ref] TColStd_Array1OfReal PoleWeights
+	);
+	void Reverse();
+	Standard_Real ReversedParameter([Const] Standard_Real U);
+
+	// [Value] GeomAbs_Shape Continuity();
+	Standard_Boolean IsCN([Const] Standard_Integer N);
+	Standard_Real FirstParameter();
+	Standard_Boolean IsClosed();
+	Standard_Boolean IsPeriodic();
+	Standard_Real Period();
+	Standard_Real LastParameter();
+	[Value] gp_Pnt StartPoint();
+	void D0(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P
+	);
+	void D1(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1
+	);
+	void D2(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2
+	);
+	void D3(
+		[Const] Standard_Real U,
+		[Ref] gp_Pnt P,
+		[Ref] gp_Vec V1,
+		[Ref] gp_Vec V2,
+		[Ref] gp_Vec V3
+	);
+	[Ref, Const] gp_Vec DN(
+		[Const] Standard_Real U,
+		[Const] Standard_Integer N
+	);
+	void Transform([Const, Ref] gp_Trsf T);
+	// [Value] Handle_Geom_Geometry Copy();
+};
+Geom_BezierCurve implements Geom_Curve;
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
@@ -3055,9 +3148,39 @@ interface gp_Circ {
 	Standard_Real Area();
 };
 
-interface gp_Elips{};
-interface gp_Hypr{};
-interface gp_Parab{};
+interface gp_Elips{
+	void gp_Elips();
+	void gp_Elips(
+		[Const, Ref] gp_Ax2& A2,
+		[Const] Standard_Real MajorRadius,
+		[Const] Standard_Real MinorRadius
+	);
+	Standard_Real Eccentricity(();
+	Standard_Real Focal();
+	Standard_Real Area();
+	Standard_Real MajorRadius();
+	Standard_Real MinorRadius();
+};
+interface gp_Hypr{
+	void gp_Hypr();
+	void gp_Hypr(
+		[Const, Ref] gp_Ax2& A2,
+		[Const] Standard_Real MajorRadius,
+		[Const] Standard_Real MinorRadius
+	);
+	Standard_Real Eccentricity(();
+	Standard_Real Focal();
+	Standard_Real MajorRadius();
+	Standard_Real MinorRadius();
+};
+interface gp_Parab{
+	void gp_Parab();
+	void gp_Parab(
+		[Const, Ref] gp_Ax2& A2,
+		[Const] Standard_Real Focal
+	);
+	Standard_Real Focal();
+};
 
 interface BRepBuilderAPI_MakeEdge{
 	void BRepBuilderAPI_MakeEdge([Const, Ref] Handle_Geom_Curve C);
