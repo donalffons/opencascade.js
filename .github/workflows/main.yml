@@ -99,7 +99,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add dist/*
-          git commit -m "Build OpenCascade.js"
+          git diff-index --quiet HEAD || git commit -m "Build OpenCascade.js"
 
       - name: Push Changes to Master
         uses: ad-m/github-push-action@master
