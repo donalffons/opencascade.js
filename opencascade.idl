@@ -2431,8 +2431,8 @@ interface XSControl_WorkSession {
 	// void SetController([Const, Ref] Handle_XSControl_Controller theCtl);
 	// Standard_CString SelectedNorm([Const] optional Standard_Boolean theRsc = false);
 	// Handle_XSControl_Controller NormAdaptor();
-	// const NCollection_DataMap<TCollection_AsciiString, Handle(Standard_Transient)> & Context() const
-	// void SetAllContext (const NCollection_DataMap<TCollection_AsciiString, Handle(Standard_Transient)>& theContext);
+	// [Const, Ref] NCollection_DataMap<TCollection_AsciiString, Handle(Standard_Transient)> Context() const
+	// void SetAllContext (const NCollection_DataMap<TCollection_AsciiString, [Const, Ref] Handle(Standard_Transient)> theContext);
 	void ClearContext();
 	// Standard_Boolean PrintTransferStatus(
 	// 	[Const] Standard_Integer theNum,
@@ -2489,7 +2489,7 @@ interface Transfer_TransientProcess {
 	// 	[Const, Ref] Handle_Standard_Type type,
 	// 	[Ref] Handle_Standard_Transient ctx
 	// );
-	// NCollection_DataMap<TCollection_AsciiString, Handle(Standard_Transient)>& Context();
+	// NCollection_DataMap<TCollection_AsciiString, [Const, Ref] Handle(Standard_Transient)> Context();
 	// void PrintTrace(
 	// 	[Const, Ref] Handle_Standard_Transient start,
 	// 	[Const, Ref] Handle_Message_Messenger S
@@ -3349,7 +3349,7 @@ interface BRepOffsetAPI_MakePipeShell {
 	);
 	void SetMode([Const] optional Standard_Boolean IsFrenet = false);
 	void SetMode(
-		[Const] TopoDS_Wire &AuxiliarySpine, 
+		[Const, Ref] TopoDS_Wire AuxiliarySpine, 
 		[Const] Standard_Boolean CurvilinearEquivalence, 
 		[Const] optional BRepFill_TypeOfContact KeepContact = "BRepFill_NoContact"
 	);
