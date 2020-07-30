@@ -110,6 +110,11 @@ declare module opencascade {
     }
     class BRepPrim_Sphere {
     }
+    class GeomAPI_PointsToBSpline {
+        constructor(Points: TColgp_Array1OfPnt, DegMin?: Standard_Integer, DegMax?: Standard_Integer, Continuity?: GeomAbs_Shape, Tol3D?: Standard_Real);
+        Curve(): Handle_Geom_BSplineCurve;
+        IsDone(): Standard_Boolean;
+    }
     class TopoDS_Shape {
         constructor();
         IsNull(): Standard_Boolean;
@@ -1152,6 +1157,27 @@ declare module opencascade {
         AddWire(wire: TopoDS_Wire): void;
         CheckCompatibility(check?: Standard_Boolean): void;
     }
+    class BRepOffsetAPI_MakePipe extends BRepBuilderAPI_MakeShape {
+        constructor(Spine: TopoDS_Wire, Profile: TopoDS_Shape);
+        Build(): void;
+        Generated(SSpine: TopoDS_Shape, SProfile: TopoDS_Shape): TopoDS_Shape;
+        FirstShape(): TopoDS_Shape;
+        LastShape(): TopoDS_Shape;
+        ErrorOnSurface(): Standard_Real;
+    }
+    class BRepOffsetAPI_MakePipeShell {
+        constructor(Spine: TopoDS_Wire);
+        SetMode(AuxiliarySpine: TopoDS_Wire, CurvilinearEquivalence: Standard_Boolean, KeepContact?: BRepFill_TypeOfContact): void;
+        Add(Profile: TopoDS_Shape, WithContact?: Standard_Boolean, WithCorrection?: Standard_Boolean): void;
+        Build(): void;
+        MakeSolid(): Standard_Boolean;
+        Generated(S: TopoDS_Shape): TopTools_ListOfShape;
+        FirstShape(): TopoDS_Shape;
+        LastShape(): TopoDS_Shape;
+        ErrorOnSurface(): Standard_Real;
+        GetStatus(): BRepBuilderAPI_PipeError;
+        IsReady(): Standard_Boolean;
+    }
     class BRepBuilderAPI_MakeVertex extends BRepBuilderAPI_MakeShape {
         constructor(P: gp_Pnt);
         Vertex(): TopoDS_Vertex;
@@ -1312,4 +1338,6 @@ declare module opencascade {
     type GeomAbs_JoinType = "GeomAbs_Arc" | "GeomAbs_Tangent" | "GeomAbs_Intersection";
     type GeomAbs_Shape = "GeomAbs_C0" | "GeomAbs_G1" | "GeomAbs_C1" | "GeomAbs_G2" | "GeomAbs_C2" | "GeomAbs_C3" | "GeomAbs_CN";
     type ShapeExtend_Status = "ShapeExtend_OK" | "ShapeExtend_DONE1" | "ShapeExtend_DONE2" | "ShapeExtend_DONE3" | "ShapeExtend_DONE4" | "ShapeExtend_DONE5" | "ShapeExtend_DONE6" | "ShapeExtend_DONE7" | "ShapeExtend_DONE8" | "ShapeExtend_DONE" | "ShapeExtend_FAIL1" | "ShapeExtend_FAIL2" | "ShapeExtend_FAIL3" | "ShapeExtend_FAIL4" | "ShapeExtend_FAIL5" | "ShapeExtend_FAIL6" | "ShapeExtend_FAIL7" | "ShapeExtend_FAIL8" | "ShapeExtend_FAIL";
+    type BRepBuilderAPI_PipeError = "BRepBuilderAPI_PipeDone" | "BRepBuilderAPI_PipeNotDone" | "BRepBuilderAPI_PlaneNotIntersectGuide" | "BRepBuilderAPI_ImpossibleContact";
+    type BRepFill_TypeOfContact = "BRepFill_NoContact" | "BRepFill_Contact" | "BRepFill_ContactOnBorder";
 }
