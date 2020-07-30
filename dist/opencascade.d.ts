@@ -863,6 +863,7 @@ declare module opencascade {
         Lower(): Standard_Integer;
         Upper(): Standard_Integer;
         Value(theIndex: Standard_Integer): gp_Pnt;
+        SetValue(Index: Standard_Integer, Value: gp_Pnt): void;
     }
     class TColgp_Array1OfDir {
         constructor();
