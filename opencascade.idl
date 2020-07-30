@@ -3348,23 +3348,23 @@ interface BRepOffsetAPI_MakePipeShell {
 		[Const, Ref] TopoDS_Wire Spine
 	);
 	void SetMode (
-		[Const] optional Standard_Boolean IsFrenet=Standard_False
+		[Const] optional Standard_Boolean IsFrenet = Standard_False
 	);
 	void SetMode(
 		[Const] TopoDS_Wire &AuxiliarySpine, 
 		[Const] Standard_Boolean CurvilinearEquivalence, 
-		[Const] optional BRepFill_TypeOfContact KeepContact="BRepFill_NoContact"
+		[Const] optional BRepFill_TypeOfContact KeepContact = "BRepFill_NoContact"
 	);
 	void Add (
 		[Const, Ref] TopoDS_Shape Profile, 
-		[Const] optional Standard_Boolean WithContact=Standard_False, 
-		[Const] optional Standard_Boolean WithCorrection=Standard_False
+		[Const] optional Standard_Boolean WithContact = Standard_False, 
+		[Const] optional Standard_Boolean WithCorrection = Standard_False
 	);
 	void Add (
 		[Const, Ref] TopoDS_Shape Profile, 
 		[Const, Ref] TopoDS_Vertex Location, 
-		[Const] optional Standard_Boolean WithContact=Standard_False, 
-		[Const] optional Standard_Boolean WithCorrection=Standard_False
+		[Const] optional Standard_Boolean WithContact = Standard_False, 
+		[Const] optional Standard_Boolean WithCorrection = Standard_False
 	);
 	void Build();
 	[Const] Standard_Boolean MakeSolid();
