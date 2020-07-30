@@ -2344,10 +2344,10 @@ interface TColgp_Array1OfPnt {
 	[Const, Ref] gp_Pnt Value(
 		[Const] Standard_Integer theIndex
 	);
-	//void SetValue(
-	//	[Const] Standard_Integer Index,
-	//	[Const, Ref] gp_Pnt Value
-	//);
+	void SetValue(
+		[Const] Standard_Integer Index,
+		[Const, Ref] gp_Pnt Value
+	);
 };
 
 interface TColgp_Array1OfDir {
