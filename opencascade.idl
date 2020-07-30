@@ -403,6 +403,18 @@ BRepPrimAPI_MakeWedge implements BRepBuilderAPI_MakeShape;
 interface BRepPrim_Sphere {
 };
 
+interface GeomAPI_PointsToBSpline {
+	void GeomAPI_PointsToBSpline(
+		[Const, Ref] TColgp_Array1OfPnt Points, 
+		[Const] optional Standard_Integer DegMin = 3, 
+		[Const] optional Standard_Integer DegMax = 8, 
+		[Const] optional GeomAbs_Shape Continuity = "GeomAbs_C2", 
+		[Const] optional Standard_Real Tol3D = 1.0e-3
+	);
+	[Const, Ref] Handle_Geom_BSplineCurve Curve();
+	[Const] Standard_Boolean IsDone();
+};
+
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Shape{
@@ -3315,6 +3327,58 @@ interface BRepOffsetAPI_ThruSections {
 };
 BRepOffsetAPI_ThruSections implements BRepBuilderAPI_MakeShape;
 
+interface BRepOffsetAPI_MakePipe {
+	void BRepOffsetAPI_MakePipe(
+		[Const, Ref] TopoDS_Wire Spine,
+		[Const, Ref] TopoDS_Shape Profile
+	);
+	void Build();
+	[Const, Ref] TopoDS_Shape Generated(
+		[Const, Ref] TopoDS_Shape SSpine,
+		[Const, Ref] TopoDS_Shape SProfile
+	);
+	[Value] TopoDS_Shape FirstShape([Const, Ref] TopoDS_Shape theShape);
+	[Value] TopoDS_Shape LastShape([Const, Ref] TopoDS_Shape theShape);
+	[Const] Standard_Real ErrorOnSurface();
+};
+BRepOffsetAPI_MakePipe implements BRepBuilderAPI_MakeShape;
+
+interface BRepOffsetAPI_MakePipeShell {
+	void BRepOffsetAPI_MakePipeShell(
+		[Const, Ref] TopoDS_Wire Spine
+	);
+	void SetMode (
+		[Const] optional Standard_Boolean IsFrenet=Standard_False
+	);
+	void SetMode(
+		[Const] TopoDS_Wire &AuxiliarySpine, 
+		[Const] Standard_Boolean CurvilinearEquivalence, 
+		[Const] optional BRepFill_TypeOfContact KeepContact="BRepFill_NoContact"
+	);
+	void Add (
+		[Const, Ref] TopoDS_Shape Profile, 
+		[Const] optional Standard_Boolean WithContact=Standard_False, 
+		[Const] optional Standard_Boolean WithCorrection=Standard_False
+	);
+	void Add (
+		[Const, Ref] TopoDS_Shape Profile, 
+		[Const, Ref] TopoDS_Vertex Location, 
+		[Const] optional Standard_Boolean WithContact=Standard_False, 
+		[Const] optional Standard_Boolean WithCorrection=Standard_False
+	);
+	void Build();
+	[Const] Standard_Boolean MakeSolid();
+	[Const, Ref] TopoDS_Shape Generated(
+		[Const, Ref] TopoDS_Shape S
+	);
+	[Value] TopoDS_Shape FirstShape([Const, Ref] TopoDS_Shape theShape);
+	[Value] TopoDS_Shape LastShape([Const, Ref] TopoDS_Shape theShape);
+	[Const] Standard_Real ErrorOnSurface();
+	[Const] BRepBuilderAPI_PipeError GetStatus();
+	[Const] Standard_Boolean IsReady();
+};
+BRepOffsetAPI_MakePipe implements BRepBuilderAPI_MakeShape;
+
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface BRepBuilderAPI_MakeVertex {
@@ -3710,4 +3774,11 @@ enum ShapeExtend_Status {
 	"ShapeExtend_FAIL7",
 	"ShapeExtend_FAIL8",
 	"ShapeExtend_FAIL"
+};
+
+enum BRepBuilderAPI_PipeError {
+	"BRepBuilderAPI_PipeDone", 
+	"BRepBuilderAPI_PipeNotDone", 
+	"BRepBuilderAPI_PlaneNotIntersectGuide", 
+	"BRepBuilderAPI_ImpossibleContact"
 };
