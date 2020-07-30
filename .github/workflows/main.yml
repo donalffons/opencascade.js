@@ -57,7 +57,7 @@ jobs:
         uses: whoan/docker-build-with-cache-action@v5
         with:
           registry: docker.pkg.github.com
-          username: zalo
+          username: donalffons
           password: "${{ secrets.GITHUB_TOKEN }}"
           image_name: opencascade.js
           #image_tag: opencascade.js
@@ -99,7 +99,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add dist/*
-          git commit -m "Build OpenCascade.js"
+          git diff-index --quiet HEAD || git commit -m "Build OpenCascade.js"
 
       - name: Push Changes to Master
         uses: ad-m/github-push-action@master
