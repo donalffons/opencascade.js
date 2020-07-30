@@ -3780,3 +3780,9 @@ enum BRepBuilderAPI_PipeError {
 	"BRepBuilderAPI_PlaneNotIntersectGuide", 
 	"BRepBuilderAPI_ImpossibleContact"
 };
+
+enum BRepFill_TypeOfContact {
+	"BRepFill_NoContact",
+	"BRepFill_Contact",
+	"BRepFill_ContactOnBorder",
+}
