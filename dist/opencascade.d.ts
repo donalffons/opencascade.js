@@ -668,6 +668,7 @@ declare module opencascade {
         D1(U: Standard_Real, P: gp_Pnt, V1: gp_Vec): void;
         D2(U: Standard_Real, P: gp_Pnt, V1: gp_Vec, V2: gp_Vec): void;
         D3(U: Standard_Real, P: gp_Pnt, V1: gp_Vec, V2: gp_Vec, V3: gp_Vec): void;
+        DN(U: Standard_Real, N: Standard_Integer): gp_Vec;
         Transform(T: gp_Trsf): void;
     }
     class Geom_BSplineCurve extends Geom_Curve {
@@ -685,6 +686,7 @@ declare module opencascade {
         D1(U: Standard_Real, P: gp_Pnt, V1: gp_Vec): void;
         D2(U: Standard_Real, P: gp_Pnt, V1: gp_Vec, V2: gp_Vec): void;
         D3(U: Standard_Real, P: gp_Pnt, V1: gp_Vec, V2: gp_Vec, V3: gp_Vec): void;
+        DN(U: Standard_Real, N: Standard_Integer): gp_Vec;
         Transform(T: gp_Trsf): void;
     }
     class Standard_Transient {
