@@ -403,6 +403,18 @@ BRepPrimAPI_MakeWedge implements BRepBuilderAPI_MakeShape;
 interface BRepPrim_Sphere {
 };
 
+interface GeomAPI_PointsToBSpline {
+	void GeomAPI_PointsToBSpline(
+		[Const, Ref] TColgp_Array1OfPnt Points, 
+		[Const] optional Standard_Integer DegMin = 3, 
+		[Const] optional Standard_Integer DegMax = 8, 
+		[Const] optional GeomAbs_Shape Continuity = "GeomAbs_C2", 
+		[Const] optional Standard_Real Tol3D = 1.0e-3
+	);
+	[Const, Ref] Handle_Geom_BSplineCurve Curve();
+	[Const] Standard_Boolean IsDone();
+};
+
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Shape{
@@ -1114,6 +1126,49 @@ interface GC_MakeArcOfParabola {
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Edge{
 	void TopoDS_Edge();
+	Standard_Boolean IsNull();
+	void Nullify();
+	[Const, Ref] TopLoc_Location Location();
+	// void Location([Const, Ref] TopLoc_Location theLoc);
+	[Value] TopoDS_Shape Located([Const, Ref] TopLoc_Location theLoc);
+	TopAbs_Orientation Orientation();
+	// void Orientation(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Oriented(TopAbs_Orientation theOrient);
+	// [Const, Ref] Handle_TopoDS_TShape TShape();
+	TopAbs_ShapeEnum ShapeType();
+	Standard_Boolean Free();
+	// void Free(Standard_Boolean theIsFree);
+	Standard_Boolean Locked();
+	// void Locked(Standard_Boolean theIsLocked);
+	Standard_Boolean Modified();
+	// void Modified(Standard_Boolean theIsModified);
+	Standard_Boolean Checked();
+	// void Checked(Standard_Boolean theIsChecked);
+	Standard_Boolean Orientable();
+	// void Orientable([Const] Standard_Boolean theIsOrientable);
+	Standard_Boolean Closed();
+	// void Closed(Standard_Boolean theIsClosed);
+	Standard_Boolean Infinite();
+	// void Infinite(Standard_Boolean theIsInfinite);
+	Standard_Boolean Convex();
+	// void Convex(Standard_Boolean theIsConvex);
+	void Move([Const, Ref] TopLoc_Location thePosition);
+	[Value] TopoDS_Shape Moved([Const, Ref] TopLoc_Location thePosition);
+	void Reverse();
+	[Value] TopoDS_Shape Reversed();
+	void Complement();
+	[Value] TopoDS_Shape Complemented();
+	void Compose(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Composed(TopAbs_Orientation theOrient);
+	Standard_Integer NbChildren();
+	Standard_Boolean IsPartner([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsSame([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsEqual([Const, Ref] TopoDS_Shape theOther);
+	// Standard_Boolean operator == ([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsNotEqual([Const, Ref] TopoDS_Shape theOther);
+	Standard_Integer HashCode(Standard_Integer theUpperBound);
+	void EmptyCopy();
+	[Value] TopoDS_Shape EmptyCopied();
 };
 TopoDS_Edge implements TopoDS_Shape;
 
@@ -1122,6 +1177,49 @@ TopoDS_Edge implements TopoDS_Shape;
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Wire{
 	void TopoDS_Wire();
+	Standard_Boolean IsNull();
+	void Nullify();
+	[Const, Ref] TopLoc_Location Location();
+	// void Location([Const, Ref] TopLoc_Location theLoc);
+	[Value] TopoDS_Shape Located([Const, Ref] TopLoc_Location theLoc);
+	TopAbs_Orientation Orientation();
+	// void Orientation(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Oriented(TopAbs_Orientation theOrient);
+	// [Const, Ref] Handle_TopoDS_TShape TShape();
+	TopAbs_ShapeEnum ShapeType();
+	Standard_Boolean Free();
+	// void Free(Standard_Boolean theIsFree);
+	Standard_Boolean Locked();
+	// void Locked(Standard_Boolean theIsLocked);
+	Standard_Boolean Modified();
+	// void Modified(Standard_Boolean theIsModified);
+	Standard_Boolean Checked();
+	// void Checked(Standard_Boolean theIsChecked);
+	Standard_Boolean Orientable();
+	// void Orientable([Const] Standard_Boolean theIsOrientable);
+	Standard_Boolean Closed();
+	// void Closed(Standard_Boolean theIsClosed);
+	Standard_Boolean Infinite();
+	// void Infinite(Standard_Boolean theIsInfinite);
+	Standard_Boolean Convex();
+	// void Convex(Standard_Boolean theIsConvex);
+	void Move([Const, Ref] TopLoc_Location thePosition);
+	[Value] TopoDS_Shape Moved([Const, Ref] TopLoc_Location thePosition);
+	void Reverse();
+	[Value] TopoDS_Shape Reversed();
+	void Complement();
+	[Value] TopoDS_Shape Complemented();
+	void Compose(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Composed(TopAbs_Orientation theOrient);
+	Standard_Integer NbChildren();
+	Standard_Boolean IsPartner([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsSame([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsEqual([Const, Ref] TopoDS_Shape theOther);
+	// Standard_Boolean operator == ([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsNotEqual([Const, Ref] TopoDS_Shape theOther);
+	Standard_Integer HashCode(Standard_Integer theUpperBound);
+	void EmptyCopy();
+	[Value] TopoDS_Shape EmptyCopied();
 };
 TopoDS_Wire implements TopoDS_Shape;
 
@@ -1129,6 +1227,49 @@ TopoDS_Wire implements TopoDS_Shape;
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Compound {
 	void TopoDS_Compound();
+	Standard_Boolean IsNull();
+	void Nullify();
+	[Const, Ref] TopLoc_Location Location();
+	// void Location([Const, Ref] TopLoc_Location theLoc);
+	[Value] TopoDS_Shape Located([Const, Ref] TopLoc_Location theLoc);
+	TopAbs_Orientation Orientation();
+	// void Orientation(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Oriented(TopAbs_Orientation theOrient);
+	// [Const, Ref] Handle_TopoDS_TShape TShape();
+	TopAbs_ShapeEnum ShapeType();
+	Standard_Boolean Free();
+	// void Free(Standard_Boolean theIsFree);
+	Standard_Boolean Locked();
+	// void Locked(Standard_Boolean theIsLocked);
+	Standard_Boolean Modified();
+	// void Modified(Standard_Boolean theIsModified);
+	Standard_Boolean Checked();
+	// void Checked(Standard_Boolean theIsChecked);
+	Standard_Boolean Orientable();
+	// void Orientable([Const] Standard_Boolean theIsOrientable);
+	Standard_Boolean Closed();
+	// void Closed(Standard_Boolean theIsClosed);
+	Standard_Boolean Infinite();
+	// void Infinite(Standard_Boolean theIsInfinite);
+	Standard_Boolean Convex();
+	// void Convex(Standard_Boolean theIsConvex);
+	void Move([Const, Ref] TopLoc_Location thePosition);
+	[Value] TopoDS_Shape Moved([Const, Ref] TopLoc_Location thePosition);
+	void Reverse();
+	[Value] TopoDS_Shape Reversed();
+	void Complement();
+	[Value] TopoDS_Shape Complemented();
+	void Compose(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Composed(TopAbs_Orientation theOrient);
+	Standard_Integer NbChildren();
+	Standard_Boolean IsPartner([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsSame([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsEqual([Const, Ref] TopoDS_Shape theOther);
+	// Standard_Boolean operator == ([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsNotEqual([Const, Ref] TopoDS_Shape theOther);
+	Standard_Integer HashCode(Standard_Integer theUpperBound);
+	void EmptyCopy();
+	[Value] TopoDS_Shape EmptyCopied();
 };
 TopoDS_Compound implements TopoDS_Shape;
 
@@ -1136,6 +1277,49 @@ TopoDS_Compound implements TopoDS_Shape;
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Face{
 	void TopoDS_Face();
+	Standard_Boolean IsNull();
+	void Nullify();
+	[Const, Ref] TopLoc_Location Location();
+	// void Location([Const, Ref] TopLoc_Location theLoc);
+	[Value] TopoDS_Shape Located([Const, Ref] TopLoc_Location theLoc);
+	TopAbs_Orientation Orientation();
+	// void Orientation(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Oriented(TopAbs_Orientation theOrient);
+	// [Const, Ref] Handle_TopoDS_TShape TShape();
+	TopAbs_ShapeEnum ShapeType();
+	Standard_Boolean Free();
+	// void Free(Standard_Boolean theIsFree);
+	Standard_Boolean Locked();
+	// void Locked(Standard_Boolean theIsLocked);
+	Standard_Boolean Modified();
+	// void Modified(Standard_Boolean theIsModified);
+	Standard_Boolean Checked();
+	// void Checked(Standard_Boolean theIsChecked);
+	Standard_Boolean Orientable();
+	// void Orientable([Const] Standard_Boolean theIsOrientable);
+	Standard_Boolean Closed();
+	// void Closed(Standard_Boolean theIsClosed);
+	Standard_Boolean Infinite();
+	// void Infinite(Standard_Boolean theIsInfinite);
+	Standard_Boolean Convex();
+	// void Convex(Standard_Boolean theIsConvex);
+	void Move([Const, Ref] TopLoc_Location thePosition);
+	[Value] TopoDS_Shape Moved([Const, Ref] TopLoc_Location thePosition);
+	void Reverse();
+	[Value] TopoDS_Shape Reversed();
+	void Complement();
+	[Value] TopoDS_Shape Complemented();
+	void Compose(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Composed(TopAbs_Orientation theOrient);
+	Standard_Integer NbChildren();
+	Standard_Boolean IsPartner([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsSame([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsEqual([Const, Ref] TopoDS_Shape theOther);
+	// Standard_Boolean operator == ([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsNotEqual([Const, Ref] TopoDS_Shape theOther);
+	Standard_Integer HashCode(Standard_Integer theUpperBound);
+	void EmptyCopy();
+	[Value] TopoDS_Shape EmptyCopied();
 };
 TopoDS_Face implements TopoDS_Shape;
 
@@ -1143,6 +1327,49 @@ TopoDS_Face implements TopoDS_Shape;
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Vertex {
 	void TopoDS_Vertex();
+	Standard_Boolean IsNull();
+	void Nullify();
+	[Const, Ref] TopLoc_Location Location();
+	// void Location([Const, Ref] TopLoc_Location theLoc);
+	[Value] TopoDS_Shape Located([Const, Ref] TopLoc_Location theLoc);
+	TopAbs_Orientation Orientation();
+	// void Orientation(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Oriented(TopAbs_Orientation theOrient);
+	// [Const, Ref] Handle_TopoDS_TShape TShape();
+	TopAbs_ShapeEnum ShapeType();
+	Standard_Boolean Free();
+	// void Free(Standard_Boolean theIsFree);
+	Standard_Boolean Locked();
+	// void Locked(Standard_Boolean theIsLocked);
+	Standard_Boolean Modified();
+	// void Modified(Standard_Boolean theIsModified);
+	Standard_Boolean Checked();
+	// void Checked(Standard_Boolean theIsChecked);
+	Standard_Boolean Orientable();
+	// void Orientable([Const] Standard_Boolean theIsOrientable);
+	Standard_Boolean Closed();
+	// void Closed(Standard_Boolean theIsClosed);
+	Standard_Boolean Infinite();
+	// void Infinite(Standard_Boolean theIsInfinite);
+	Standard_Boolean Convex();
+	// void Convex(Standard_Boolean theIsConvex);
+	void Move([Const, Ref] TopLoc_Location thePosition);
+	[Value] TopoDS_Shape Moved([Const, Ref] TopLoc_Location thePosition);
+	void Reverse();
+	[Value] TopoDS_Shape Reversed();
+	void Complement();
+	[Value] TopoDS_Shape Complemented();
+	void Compose(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Composed(TopAbs_Orientation theOrient);
+	Standard_Integer NbChildren();
+	Standard_Boolean IsPartner([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsSame([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsEqual([Const, Ref] TopoDS_Shape theOther);
+	// Standard_Boolean operator == ([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsNotEqual([Const, Ref] TopoDS_Shape theOther);
+	Standard_Integer HashCode(Standard_Integer theUpperBound);
+	void EmptyCopy();
+	[Value] TopoDS_Shape EmptyCopied();
 };
 TopoDS_Vertex implements TopoDS_Shape;
 
@@ -2014,10 +2241,10 @@ interface Geom_BezierCurve {
 		[Ref] gp_Vec V2,
 		[Ref] gp_Vec V3
 	);
-	//[Const] gp_Vec DN(
-	//	[Const] Standard_Real U,
-	//	[Const] Standard_Integer N
-	//);
+	[Value] gp_Vec DN(
+		[Const] Standard_Real U,
+		[Const] Standard_Integer N
+	);
 	void Transform([Const, Ref] gp_Trsf T);
 	// [Value] Handle_Geom_Geometry Copy();
 };
@@ -2068,10 +2295,10 @@ interface Geom_BSplineCurve {
 		[Ref] gp_Vec V2,
 		[Ref] gp_Vec V3
 	);
-	//[Ref, Const] gp_Vec DN(
-	//	[Const] Standard_Real U,
-	//	[Const] Standard_Integer N
-	//);
+	[Value] gp_Vec DN(
+		[Const] Standard_Real U,
+		[Const] Standard_Integer N
+	);
 	void Transform([Const, Ref] gp_Trsf T);
 	// [Value] Handle_Geom_Geometry Copy();
 };
@@ -2344,10 +2571,10 @@ interface TColgp_Array1OfPnt {
 	[Const, Ref] gp_Pnt Value(
 		[Const] Standard_Integer theIndex
 	);
-	//void SetValue(
-	//	[Const] Standard_Integer Index,
-	//	[Const, Ref] gp_Pnt Value
-	//);
+	void SetValue(
+		[Const] Standard_Integer Index,
+		[Const, Ref] gp_Pnt Value
+	);
 };
 
 interface TColgp_Array1OfDir {
@@ -2419,8 +2646,8 @@ interface XSControl_WorkSession {
 	// void SetController([Const, Ref] Handle_XSControl_Controller theCtl);
 	// Standard_CString SelectedNorm([Const] optional Standard_Boolean theRsc = false);
 	// Handle_XSControl_Controller NormAdaptor();
-	// const NCollection_DataMap<TCollection_AsciiString, Handle(Standard_Transient)> & Context() const
-	// void SetAllContext (const NCollection_DataMap<TCollection_AsciiString, Handle(Standard_Transient)>& theContext);
+	// [Const, Ref] NCollection_DataMap<TCollection_AsciiString, Handle(Standard_Transient)> Context() const
+	// void SetAllContext (const NCollection_DataMap<TCollection_AsciiString, [Const, Ref] Handle(Standard_Transient)> theContext);
 	void ClearContext();
 	// Standard_Boolean PrintTransferStatus(
 	// 	[Const] Standard_Integer theNum,
@@ -2477,7 +2704,7 @@ interface Transfer_TransientProcess {
 	// 	[Const, Ref] Handle_Standard_Type type,
 	// 	[Ref] Handle_Standard_Transient ctx
 	// );
-	// NCollection_DataMap<TCollection_AsciiString, Handle(Standard_Transient)>& Context();
+	// NCollection_DataMap<TCollection_AsciiString, [Const, Ref] Handle(Standard_Transient)> Context();
 	// void PrintTrace(
 	// 	[Const, Ref] Handle_Standard_Transient start,
 	// 	[Const, Ref] Handle_Message_Messenger S
@@ -3315,6 +3542,57 @@ interface BRepOffsetAPI_ThruSections {
 };
 BRepOffsetAPI_ThruSections implements BRepBuilderAPI_MakeShape;
 
+interface BRepOffsetAPI_MakePipe {
+	void BRepOffsetAPI_MakePipe(
+		[Const, Ref] TopoDS_Wire Spine,
+		[Const, Ref] TopoDS_Shape Profile
+	);
+	void Build();
+	[Value] TopoDS_Shape Generated(
+		[Const, Ref] TopoDS_Shape SSpine,
+		[Const, Ref] TopoDS_Shape SProfile
+	);
+	[Value] TopoDS_Shape FirstShape();
+	[Value] TopoDS_Shape LastShape();
+	[Const] Standard_Real ErrorOnSurface();
+};
+BRepOffsetAPI_MakePipe implements BRepBuilderAPI_MakeShape;
+
+interface BRepOffsetAPI_MakePipeShell {
+	void BRepOffsetAPI_MakePipeShell(
+		[Const, Ref] TopoDS_Wire Spine
+	);
+	//void SetMode([Const] optional Standard_Boolean IsFrenet = false);
+	void SetMode(
+		[Const, Ref] TopoDS_Wire AuxiliarySpine, 
+		[Const] Standard_Boolean CurvilinearEquivalence, 
+		[Const] optional BRepFill_TypeOfContact KeepContact = "BRepFill_NoContact"
+	);
+	void Add(
+		[Const, Ref] TopoDS_Shape Profile, 
+		[Const] optional Standard_Boolean WithContact = false, 
+		[Const] optional Standard_Boolean WithCorrection = false
+	);
+	//void Add(
+	//	[Const, Ref] TopoDS_Shape Profile, 
+	//	[Const, Ref] TopoDS_Vertex Location, 
+	//	[Const] optional Standard_Boolean WithContact = false, 
+	//	[Const] optional Standard_Boolean WithCorrection = false
+	//);
+	void Build();
+	[Const] Standard_Boolean MakeSolid();
+	[Value] TopTools_ListOfShape Generated(
+		[Const, Ref] TopoDS_Shape S
+	);
+	[Value] TopoDS_Shape FirstShape();
+	[Value] TopoDS_Shape LastShape();
+	[Value] TopoDS_Shape Shape();
+	[Const] Standard_Real ErrorOnSurface();
+	[Const] BRepBuilderAPI_PipeError GetStatus();
+	[Const] Standard_Boolean IsReady();
+};
+BRepOffsetAPI_MakePipe implements BRepBuilderAPI_MakeShape;
+
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface BRepBuilderAPI_MakeVertex {
@@ -3523,7 +3801,52 @@ interface ShapeFix_Shape {
 	Standard_Integer FixVertexTolMode();
 };
 
-interface TopoDS_Shell {};
+interface TopoDS_Shell {
+	void TopoDS_Shell();
+	Standard_Boolean IsNull();
+	void Nullify();
+	[Const, Ref] TopLoc_Location Location();
+	// void Location([Const, Ref] TopLoc_Location theLoc);
+	[Value] TopoDS_Shape Located([Const, Ref] TopLoc_Location theLoc);
+	TopAbs_Orientation Orientation();
+	// void Orientation(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Oriented(TopAbs_Orientation theOrient);
+	// [Const, Ref] Handle_TopoDS_TShape TShape();
+	TopAbs_ShapeEnum ShapeType();
+	Standard_Boolean Free();
+	// void Free(Standard_Boolean theIsFree);
+	Standard_Boolean Locked();
+	// void Locked(Standard_Boolean theIsLocked);
+	Standard_Boolean Modified();
+	// void Modified(Standard_Boolean theIsModified);
+	Standard_Boolean Checked();
+	// void Checked(Standard_Boolean theIsChecked);
+	Standard_Boolean Orientable();
+	// void Orientable([Const] Standard_Boolean theIsOrientable);
+	Standard_Boolean Closed();
+	// void Closed(Standard_Boolean theIsClosed);
+	Standard_Boolean Infinite();
+	// void Infinite(Standard_Boolean theIsInfinite);
+	Standard_Boolean Convex();
+	// void Convex(Standard_Boolean theIsConvex);
+	void Move([Const, Ref] TopLoc_Location thePosition);
+	[Value] TopoDS_Shape Moved([Const, Ref] TopLoc_Location thePosition);
+	void Reverse();
+	[Value] TopoDS_Shape Reversed();
+	void Complement();
+	[Value] TopoDS_Shape Complemented();
+	void Compose(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Composed(TopAbs_Orientation theOrient);
+	Standard_Integer NbChildren();
+	Standard_Boolean IsPartner([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsSame([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsEqual([Const, Ref] TopoDS_Shape theOther);
+	// Standard_Boolean operator == ([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsNotEqual([Const, Ref] TopoDS_Shape theOther);
+	Standard_Integer HashCode(Standard_Integer theUpperBound);
+	void EmptyCopy();
+	[Value] TopoDS_Shape EmptyCopied();
+};
 TopoDS_Shell implements TopoDS_Shape;
 
 // Full interface
@@ -3555,11 +3878,97 @@ interface ShapeFix_Shell {
 
 interface TopoDS_CompSolid {
 	void TopoDS_CompSolid();
+	Standard_Boolean IsNull();
+	void Nullify();
+	[Const, Ref] TopLoc_Location Location();
+	// void Location([Const, Ref] TopLoc_Location theLoc);
+	[Value] TopoDS_Shape Located([Const, Ref] TopLoc_Location theLoc);
+	TopAbs_Orientation Orientation();
+	// void Orientation(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Oriented(TopAbs_Orientation theOrient);
+	// [Const, Ref] Handle_TopoDS_TShape TShape();
+	TopAbs_ShapeEnum ShapeType();
+	Standard_Boolean Free();
+	// void Free(Standard_Boolean theIsFree);
+	Standard_Boolean Locked();
+	// void Locked(Standard_Boolean theIsLocked);
+	Standard_Boolean Modified();
+	// void Modified(Standard_Boolean theIsModified);
+	Standard_Boolean Checked();
+	// void Checked(Standard_Boolean theIsChecked);
+	Standard_Boolean Orientable();
+	// void Orientable([Const] Standard_Boolean theIsOrientable);
+	Standard_Boolean Closed();
+	// void Closed(Standard_Boolean theIsClosed);
+	Standard_Boolean Infinite();
+	// void Infinite(Standard_Boolean theIsInfinite);
+	Standard_Boolean Convex();
+	// void Convex(Standard_Boolean theIsConvex);
+	void Move([Const, Ref] TopLoc_Location thePosition);
+	[Value] TopoDS_Shape Moved([Const, Ref] TopLoc_Location thePosition);
+	void Reverse();
+	[Value] TopoDS_Shape Reversed();
+	void Complement();
+	[Value] TopoDS_Shape Complemented();
+	void Compose(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Composed(TopAbs_Orientation theOrient);
+	Standard_Integer NbChildren();
+	Standard_Boolean IsPartner([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsSame([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsEqual([Const, Ref] TopoDS_Shape theOther);
+	// Standard_Boolean operator == ([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsNotEqual([Const, Ref] TopoDS_Shape theOther);
+	Standard_Integer HashCode(Standard_Integer theUpperBound);
+	void EmptyCopy();
+	[Value] TopoDS_Shape EmptyCopied();
 };
 TopoDS_CompSolid implements TopoDS_Shape;
 
 interface TopoDS_Solid {
 	void TopoDS_Solid();
+	Standard_Boolean IsNull();
+	void Nullify();
+	[Const, Ref] TopLoc_Location Location();
+	// void Location([Const, Ref] TopLoc_Location theLoc);
+	[Value] TopoDS_Shape Located([Const, Ref] TopLoc_Location theLoc);
+	TopAbs_Orientation Orientation();
+	// void Orientation(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Oriented(TopAbs_Orientation theOrient);
+	// [Const, Ref] Handle_TopoDS_TShape TShape();
+	TopAbs_ShapeEnum ShapeType();
+	Standard_Boolean Free();
+	// void Free(Standard_Boolean theIsFree);
+	Standard_Boolean Locked();
+	// void Locked(Standard_Boolean theIsLocked);
+	Standard_Boolean Modified();
+	// void Modified(Standard_Boolean theIsModified);
+	Standard_Boolean Checked();
+	// void Checked(Standard_Boolean theIsChecked);
+	Standard_Boolean Orientable();
+	// void Orientable([Const] Standard_Boolean theIsOrientable);
+	Standard_Boolean Closed();
+	// void Closed(Standard_Boolean theIsClosed);
+	Standard_Boolean Infinite();
+	// void Infinite(Standard_Boolean theIsInfinite);
+	Standard_Boolean Convex();
+	// void Convex(Standard_Boolean theIsConvex);
+	void Move([Const, Ref] TopLoc_Location thePosition);
+	[Value] TopoDS_Shape Moved([Const, Ref] TopLoc_Location thePosition);
+	void Reverse();
+	[Value] TopoDS_Shape Reversed();
+	void Complement();
+	[Value] TopoDS_Shape Complemented();
+	void Compose(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Composed(TopAbs_Orientation theOrient);
+	Standard_Integer NbChildren();
+	Standard_Boolean IsPartner([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsSame([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsEqual([Const, Ref] TopoDS_Shape theOther);
+	// Standard_Boolean operator == ([Const, Ref] TopoDS_Shape theOther);
+	Standard_Boolean IsNotEqual([Const, Ref] TopoDS_Shape theOther);
+	Standard_Integer HashCode(Standard_Integer theUpperBound);
+	void EmptyCopy();
+	[Value] TopoDS_Shape EmptyCopied();
 };
 TopoDS_Solid implements TopoDS_Shape;
 
@@ -3710,4 +4119,17 @@ enum ShapeExtend_Status {
 	"ShapeExtend_FAIL7",
 	"ShapeExtend_FAIL8",
 	"ShapeExtend_FAIL"
+};
+
+enum BRepBuilderAPI_PipeError {
+	"BRepBuilderAPI_PipeDone", 
+	"BRepBuilderAPI_PipeNotDone", 
+	"BRepBuilderAPI_PlaneNotIntersectGuide", 
+	"BRepBuilderAPI_ImpossibleContact"
+};
+
+enum BRepFill_TypeOfContact {
+	"BRepFill_NoContact",
+	"BRepFill_Contact",
+	"BRepFill_ContactOnBorder",
 };
