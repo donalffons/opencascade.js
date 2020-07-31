@@ -1130,10 +1130,10 @@ interface TopoDS_Edge{
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
 	// void Location([Const, Ref] TopLoc_Location theLoc);
-	[Value] TopoDS_Edge Located([Const, Ref] TopLoc_Location theLoc);
+	[Value] TopoDS_Shape Located([Const, Ref] TopLoc_Location theLoc);
 	TopAbs_Orientation Orientation();
 	// void Orientation(TopAbs_Orientation theOrient);
-	[Value] TopoDS_Edge Oriented(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Oriented(TopAbs_Orientation theOrient);
 	// [Const, Ref] Handle_TopoDS_TShape TShape();
 	TopAbs_ShapeEnum ShapeType();
 	Standard_Boolean Free();
@@ -1153,13 +1153,13 @@ interface TopoDS_Edge{
 	Standard_Boolean Convex();
 	// void Convex(Standard_Boolean theIsConvex);
 	void Move([Const, Ref] TopLoc_Location thePosition);
-	[Value] TopoDS_Edge Moved([Const, Ref] TopLoc_Location thePosition);
+	[Value] TopoDS_Shape Moved([Const, Ref] TopLoc_Location thePosition);
 	void Reverse();
-	[Value] TopoDS_Edge Reversed();
+	[Value] TopoDS_Shape Reversed();
 	void Complement();
-	[Value] TopoDS_Edge Complemented();
+	[Value] TopoDS_Shape Complemented();
 	void Compose(TopAbs_Orientation theOrient);
-	[Value] TopoDS_Edge Composed(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Composed(TopAbs_Orientation theOrient);
 	Standard_Integer NbChildren();
 	Standard_Boolean IsPartner([Const, Ref] TopoDS_Shape theOther);
 	Standard_Boolean IsSame([Const, Ref] TopoDS_Shape theOther);
@@ -1168,7 +1168,7 @@ interface TopoDS_Edge{
 	Standard_Boolean IsNotEqual([Const, Ref] TopoDS_Shape theOther);
 	Standard_Integer HashCode(Standard_Integer theUpperBound);
 	void EmptyCopy();
-	[Value] TopoDS_Edge EmptyCopied();
+	[Value] TopoDS_Shape EmptyCopied();
 };
 TopoDS_Edge implements TopoDS_Shape;
 
@@ -1181,10 +1181,10 @@ interface TopoDS_Wire{
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
 	// void Location([Const, Ref] TopLoc_Location theLoc);
-	[Value] TopoDS_Wire Located([Const, Ref] TopLoc_Location theLoc);
+	[Value] TopoDS_Shape Located([Const, Ref] TopLoc_Location theLoc);
 	TopAbs_Orientation Orientation();
 	// void Orientation(TopAbs_Orientation theOrient);
-	[Value] TopoDS_Wire Oriented(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Oriented(TopAbs_Orientation theOrient);
 	// [Const, Ref] Handle_TopoDS_TShape TShape();
 	TopAbs_ShapeEnum ShapeType();
 	Standard_Boolean Free();
@@ -1204,13 +1204,13 @@ interface TopoDS_Wire{
 	Standard_Boolean Convex();
 	// void Convex(Standard_Boolean theIsConvex);
 	void Move([Const, Ref] TopLoc_Location thePosition);
-	[Value] TopoDS_Wire Moved([Const, Ref] TopLoc_Location thePosition);
+	[Value] TopoDS_Shape Moved([Const, Ref] TopLoc_Location thePosition);
 	void Reverse();
-	[Value] TopoDS_Wire Reversed();
+	[Value] TopoDS_Shape Reversed();
 	void Complement();
-	[Value] TopoDS_Wire Complemented();
+	[Value] TopoDS_Shape Complemented();
 	void Compose(TopAbs_Orientation theOrient);
-	[Value] TopoDS_Wire Composed(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Composed(TopAbs_Orientation theOrient);
 	Standard_Integer NbChildren();
 	Standard_Boolean IsPartner([Const, Ref] TopoDS_Shape theOther);
 	Standard_Boolean IsSame([Const, Ref] TopoDS_Shape theOther);
@@ -1219,7 +1219,7 @@ interface TopoDS_Wire{
 	Standard_Boolean IsNotEqual([Const, Ref] TopoDS_Shape theOther);
 	Standard_Integer HashCode(Standard_Integer theUpperBound);
 	void EmptyCopy();
-	[Value] TopoDS_Wire EmptyCopied();
+	[Value] TopoDS_Shape EmptyCopied();
 };
 TopoDS_Wire implements TopoDS_Shape;
 
@@ -1231,10 +1231,10 @@ interface TopoDS_Compound {
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
 	// void Location([Const, Ref] TopLoc_Location theLoc);
-	[Value] TopoDS_Compound Located([Const, Ref] TopLoc_Location theLoc);
+	[Value] TopoDS_Shape Located([Const, Ref] TopLoc_Location theLoc);
 	TopAbs_Orientation Orientation();
 	// void Orientation(TopAbs_Orientation theOrient);
-	[Value] TopoDS_Compound Oriented(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Oriented(TopAbs_Orientation theOrient);
 	// [Const, Ref] Handle_TopoDS_TShape TShape();
 	TopAbs_ShapeEnum ShapeType();
 	Standard_Boolean Free();
@@ -1254,13 +1254,13 @@ interface TopoDS_Compound {
 	Standard_Boolean Convex();
 	// void Convex(Standard_Boolean theIsConvex);
 	void Move([Const, Ref] TopLoc_Location thePosition);
-	[Value] TopoDS_Compound Moved([Const, Ref] TopLoc_Location thePosition);
+	[Value] TopoDS_Shape Moved([Const, Ref] TopLoc_Location thePosition);
 	void Reverse();
-	[Value] TopoDS_Compound Reversed();
+	[Value] TopoDS_Shape Reversed();
 	void Complement();
-	[Value] TopoDS_Compound Complemented();
+	[Value] TopoDS_Shape Complemented();
 	void Compose(TopAbs_Orientation theOrient);
-	[Value] TopoDS_Compound Composed(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Composed(TopAbs_Orientation theOrient);
 	Standard_Integer NbChildren();
 	Standard_Boolean IsPartner([Const, Ref] TopoDS_Shape theOther);
 	Standard_Boolean IsSame([Const, Ref] TopoDS_Shape theOther);
@@ -1269,7 +1269,7 @@ interface TopoDS_Compound {
 	Standard_Boolean IsNotEqual([Const, Ref] TopoDS_Shape theOther);
 	Standard_Integer HashCode(Standard_Integer theUpperBound);
 	void EmptyCopy();
-	[Value] TopoDS_Compound EmptyCopied();
+	[Value] TopoDS_Shape EmptyCopied();
 };
 TopoDS_Compound implements TopoDS_Shape;
 
@@ -1281,10 +1281,10 @@ interface TopoDS_Face{
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
 	// void Location([Const, Ref] TopLoc_Location theLoc);
-	[Value] TopoDS_Face Located([Const, Ref] TopLoc_Location theLoc);
+	[Value] TopoDS_Shape Located([Const, Ref] TopLoc_Location theLoc);
 	TopAbs_Orientation Orientation();
 	// void Orientation(TopAbs_Orientation theOrient);
-	[Value] TopoDS_Face Oriented(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Oriented(TopAbs_Orientation theOrient);
 	// [Const, Ref] Handle_TopoDS_TShape TShape();
 	TopAbs_ShapeEnum ShapeType();
 	Standard_Boolean Free();
@@ -1304,13 +1304,13 @@ interface TopoDS_Face{
 	Standard_Boolean Convex();
 	// void Convex(Standard_Boolean theIsConvex);
 	void Move([Const, Ref] TopLoc_Location thePosition);
-	[Value] TopoDS_Face Moved([Const, Ref] TopLoc_Location thePosition);
+	[Value] TopoDS_Shape Moved([Const, Ref] TopLoc_Location thePosition);
 	void Reverse();
-	[Value] TopoDS_Face Reversed();
+	[Value] TopoDS_Shape Reversed();
 	void Complement();
-	[Value] TopoDS_Face Complemented();
+	[Value] TopoDS_Shape Complemented();
 	void Compose(TopAbs_Orientation theOrient);
-	[Value] TopoDS_Face Composed(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Composed(TopAbs_Orientation theOrient);
 	Standard_Integer NbChildren();
 	Standard_Boolean IsPartner([Const, Ref] TopoDS_Shape theOther);
 	Standard_Boolean IsSame([Const, Ref] TopoDS_Shape theOther);
@@ -1319,7 +1319,7 @@ interface TopoDS_Face{
 	Standard_Boolean IsNotEqual([Const, Ref] TopoDS_Shape theOther);
 	Standard_Integer HashCode(Standard_Integer theUpperBound);
 	void EmptyCopy();
-	[Value] TopoDS_Face EmptyCopied();
+	[Value] TopoDS_Shape EmptyCopied();
 };
 TopoDS_Face implements TopoDS_Shape;
 
@@ -1331,10 +1331,10 @@ interface TopoDS_Vertex {
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
 	// void Location([Const, Ref] TopLoc_Location theLoc);
-	[Value] TopoDS_Vertex Located([Const, Ref] TopLoc_Location theLoc);
+	[Value] TopoDS_Shape Located([Const, Ref] TopLoc_Location theLoc);
 	TopAbs_Orientation Orientation();
 	// void Orientation(TopAbs_Orientation theOrient);
-	[Value] TopoDS_Vertex Oriented(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Oriented(TopAbs_Orientation theOrient);
 	// [Const, Ref] Handle_TopoDS_TShape TShape();
 	TopAbs_ShapeEnum ShapeType();
 	Standard_Boolean Free();
@@ -1354,13 +1354,13 @@ interface TopoDS_Vertex {
 	Standard_Boolean Convex();
 	// void Convex(Standard_Boolean theIsConvex);
 	void Move([Const, Ref] TopLoc_Location thePosition);
-	[Value] TopoDS_Vertex Moved([Const, Ref] TopLoc_Location thePosition);
+	[Value] TopoDS_Shape Moved([Const, Ref] TopLoc_Location thePosition);
 	void Reverse();
-	[Value] TopoDS_Vertex Reversed();
+	[Value] TopoDS_Shape Reversed();
 	void Complement();
-	[Value] TopoDS_Vertex Complemented();
+	[Value] TopoDS_Shape Complemented();
 	void Compose(TopAbs_Orientation theOrient);
-	[Value] TopoDS_Vertex Composed(TopAbs_Orientation theOrient);
+	[Value] TopoDS_Shape Composed(TopAbs_Orientation theOrient);
 	Standard_Integer NbChildren();
 	Standard_Boolean IsPartner([Const, Ref] TopoDS_Shape theOther);
 	Standard_Boolean IsSame([Const, Ref] TopoDS_Shape theOther);
@@ -1369,7 +1369,7 @@ interface TopoDS_Vertex {
 	Standard_Boolean IsNotEqual([Const, Ref] TopoDS_Shape theOther);
 	Standard_Integer HashCode(Standard_Integer theUpperBound);
 	void EmptyCopy();
-	[Value] TopoDS_Vertex EmptyCopied();
+	[Value] TopoDS_Shape EmptyCopied();
 };
 TopoDS_Vertex implements TopoDS_Shape;
 
