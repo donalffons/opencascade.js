@@ -637,6 +637,17 @@ interface BRepMesh_IncrementalMesh{
 		[Const, Ref] TopoDS_Shape theShape,
 		[Const] Standard_Real theLinDeflection
 	);
+	void BRepMesh_IncrementalMesh(
+		[Const, Ref] TopoDS_Shape theShape,
+		[Const] Standard_Real theLinDeflection,
+		[Const] Standard_Boolean isRelative
+	);
+	void BRepMesh_IncrementalMesh(
+		[Const, Ref] TopoDS_Shape theShape,
+		[Const] Standard_Real theLinDeflection,
+		[Const] Standard_Boolean isRelative,
+		[Const] Standard_Real theAngDeflection
+	);
 };
 
 // Full interface
