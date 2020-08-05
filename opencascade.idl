@@ -1532,10 +1532,17 @@ interface TopoDS {
 
 interface BRepBuilderAPI_MakeFace{
 	void BRepBuilderAPI_MakeFace(
-		[Const, Ref]TopoDS_Wire W,
-		[Const] optional Standard_Boolean OnlyPlane = false
+		[Const, Ref]TopoDS_Wire W
 	);
+	
+	void BRepBuilderAPI_MakeFace(
+		[Const, Ref]TopoDS_Face F,
+		[Const, Ref]TopoDS_Wire W
+	);
+
 	[Const,Ref] TopoDS_Face Face();
+	void Add([Const,Ref]TopoDS_Wire W);
+	[Const] BRepBuilderAPI_FaceError Error();
 };
 
 interface BRepFilletAPI_MakeFillet{
@@ -4138,5 +4145,13 @@ enum BRepBuilderAPI_PipeError {
 enum BRepFill_TypeOfContact {
 	"BRepFill_NoContact",
 	"BRepFill_Contact",
-	"BRepFill_ContactOnBorder",
+	"BRepFill_ContactOnBorder"
+};
+
+enum BRepBuilderAPI_FaceError {
+	"BRepBuilderAPI_FaceDone",
+	"BRepBuilderAPI_NoFace",
+	"BRepBuilderAPI_NotPlanar",
+	"BRepBuilderAPI_CurveProjectionFailed",
+	"BRepBuilderAPI_ParametersOutOfRange"
 };
