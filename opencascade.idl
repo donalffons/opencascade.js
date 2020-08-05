@@ -2205,6 +2205,9 @@ Geom_TrimmedCurve implements Geom_BoundedCurve;
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface Geom_BezierCurve {
 	void Geom_BezierCurve(
+		[Const, Ref] TColgp_Array1OfPnt CurvePoles
+	);
+	void Geom_BezierCurve(
 		[Const, Ref] TColgp_Array1OfPnt CurvePoles,
 		[Const, Ref] TColStd_Array1OfReal PoleWeights
 	);
@@ -2619,6 +2622,10 @@ interface TColStd_Array1OfReal {
 	Standard_Integer Lower();
 	Standard_Integer Upper();
 	Standard_Real Value([Const] Standard_Integer theIndex);
+	void SetValue(
+		[Const] Standard_Integer Index,
+		[Const, Ref] Standard_Real Value
+	);
 };
 
 interface TColStd_Array1OfInteger {
