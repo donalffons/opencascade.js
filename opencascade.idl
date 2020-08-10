@@ -419,6 +419,7 @@ interface GeomAPI_PointsToBSpline {
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Shape{
 	void TopoDS_Shape();
+	void TopoDS_Shape([Const, Ref] T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
