@@ -384,6 +384,7 @@ declare module opencascade {
     }
     class TopoDS_Edge {
         constructor();
+        constructor(T2: TopoDS_Edge);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -418,6 +419,7 @@ declare module opencascade {
     }
     class TopoDS_Wire {
         constructor();
+        constructor(T2: TopoDS_Wire);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -452,6 +454,7 @@ declare module opencascade {
     }
     class TopoDS_Compound extends TopoDS_Shape {
         constructor();
+        constructor(T2: TopoDS_Compound);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -486,6 +489,7 @@ declare module opencascade {
     }
     class TopoDS_Face {
         constructor();
+        constructor(T2: TopoDS_Face);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -520,6 +524,7 @@ declare module opencascade {
     }
     class TopoDS_Vertex extends TopoDS_Shape {
         constructor();
+        constructor(T2: TopoDS_Vertex);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -1449,6 +1454,7 @@ declare module opencascade {
     }
     class TopoDS_Shell extends TopoDS_Shape {
         constructor();
+        constructor(T2: TopoDS_Shell);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -1501,6 +1507,7 @@ declare module opencascade {
     }
     class TopoDS_CompSolid extends TopoDS_Shape {
         constructor();
+        constructor(T2: TopoDS_CompSolid);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -1535,6 +1542,7 @@ declare module opencascade {
     }
     class TopoDS_Solid extends TopoDS_Shape {
         constructor();
+        constructor(T2: TopoDS_Solid);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
