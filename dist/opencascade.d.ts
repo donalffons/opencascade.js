@@ -200,6 +200,8 @@ declare module opencascade {
     class BRepMesh_IncrementalMesh {
         constructor();
         constructor(theShape: TopoDS_Shape, theLinDeflection: Standard_Real);
+        constructor(theShape: TopoDS_Shape, theLinDeflection: Standard_Real, isRelative: Standard_Boolean);
+        constructor(theShape: TopoDS_Shape, theLinDeflection: Standard_Real, isRelative: Standard_Boolean, theAngDeflection: Standard_Real);
     }
     class Bnd_Box {
         constructor();
@@ -625,8 +627,11 @@ declare module opencascade {
         Compound(S: TopoDS_Shape): TopoDS_Compound;
     }
     class BRepBuilderAPI_MakeFace {
-        constructor(W: TopoDS_Wire, OnlyPlane?: Standard_Boolean);
+        constructor(W: TopoDS_Wire);
+        constructor(F: TopoDS_Face, W: TopoDS_Wire);
         Face(): TopoDS_Face;
+        Add(W: TopoDS_Wire): void;
+        Error(): BRepBuilderAPI_FaceError;
     }
     class BRepFilletAPI_MakeFillet {
         constructor(S: TopoDS_Shape);
@@ -809,6 +814,7 @@ declare module opencascade {
         ParametricTransformation(T: gp_Trsf): Standard_Real;
     }
     class Geom_BezierCurve extends Geom_Curve {
+        constructor(CurvePoles: TColgp_Array1OfPnt);
         constructor(CurvePoles: TColgp_Array1OfPnt, PoleWeights: TColStd_Array1OfReal);
         Reverse(): void;
         ReversedParameter(U: Standard_Real): Standard_Real;
@@ -1051,6 +1057,7 @@ declare module opencascade {
         Lower(): Standard_Integer;
         Upper(): Standard_Integer;
         Value(theIndex: Standard_Integer): Standard_Real;
+        SetValue(Index: Standard_Integer, Value: Standard_Real): void;
     }
     class TColStd_Array1OfInteger {
         constructor();
@@ -1059,6 +1066,7 @@ declare module opencascade {
         Lower(): Standard_Integer;
         Upper(): Standard_Integer;
         Value(theIndex: Standard_Integer): Standard_Integer;
+        SetValue(Index: Standard_Integer, Value: Standard_Integer): void;
     }
     class XSControl_WorkSession {
         constructor();
@@ -1592,4 +1600,5 @@ declare module opencascade {
     type ShapeExtend_Status = "ShapeExtend_OK" | "ShapeExtend_DONE1" | "ShapeExtend_DONE2" | "ShapeExtend_DONE3" | "ShapeExtend_DONE4" | "ShapeExtend_DONE5" | "ShapeExtend_DONE6" | "ShapeExtend_DONE7" | "ShapeExtend_DONE8" | "ShapeExtend_DONE" | "ShapeExtend_FAIL1" | "ShapeExtend_FAIL2" | "ShapeExtend_FAIL3" | "ShapeExtend_FAIL4" | "ShapeExtend_FAIL5" | "ShapeExtend_FAIL6" | "ShapeExtend_FAIL7" | "ShapeExtend_FAIL8" | "ShapeExtend_FAIL";
     type BRepBuilderAPI_PipeError = "BRepBuilderAPI_PipeDone" | "BRepBuilderAPI_PipeNotDone" | "BRepBuilderAPI_PlaneNotIntersectGuide" | "BRepBuilderAPI_ImpossibleContact";
     type BRepFill_TypeOfContact = "BRepFill_NoContact" | "BRepFill_Contact" | "BRepFill_ContactOnBorder";
+    type BRepBuilderAPI_FaceError = "BRepBuilderAPI_FaceDone" | "BRepBuilderAPI_NoFace" | "BRepBuilderAPI_NotPlanar" | "BRepBuilderAPI_CurveProjectionFailed" | "BRepBuilderAPI_ParametersOutOfRange";
 }

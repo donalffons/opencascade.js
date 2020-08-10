@@ -637,6 +637,17 @@ interface BRepMesh_IncrementalMesh{
 		[Const, Ref] TopoDS_Shape theShape,
 		[Const] Standard_Real theLinDeflection
 	);
+	void BRepMesh_IncrementalMesh(
+		[Const, Ref] TopoDS_Shape theShape,
+		[Const] Standard_Real theLinDeflection,
+		[Const] Standard_Boolean isRelative
+	);
+	void BRepMesh_IncrementalMesh(
+		[Const, Ref] TopoDS_Shape theShape,
+		[Const] Standard_Real theLinDeflection,
+		[Const] Standard_Boolean isRelative,
+		[Const] Standard_Real theAngDeflection
+	);
 };
 
 // Full interface
@@ -1532,10 +1543,17 @@ interface TopoDS {
 
 interface BRepBuilderAPI_MakeFace{
 	void BRepBuilderAPI_MakeFace(
-		[Const, Ref]TopoDS_Wire W,
-		[Const] optional Standard_Boolean OnlyPlane = false
+		[Const, Ref]TopoDS_Wire W
 	);
+	
+	void BRepBuilderAPI_MakeFace(
+		[Const, Ref]TopoDS_Face F,
+		[Const, Ref]TopoDS_Wire W
+	);
+
 	[Const,Ref] TopoDS_Face Face();
+	void Add([Const,Ref]TopoDS_Wire W);
+	[Const] BRepBuilderAPI_FaceError Error();
 };
 
 interface BRepFilletAPI_MakeFillet{
@@ -2205,6 +2223,9 @@ Geom_TrimmedCurve implements Geom_BoundedCurve;
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface Geom_BezierCurve {
 	void Geom_BezierCurve(
+		[Const, Ref] TColgp_Array1OfPnt CurvePoles
+	);
+	void Geom_BezierCurve(
 		[Const, Ref] TColgp_Array1OfPnt CurvePoles,
 		[Const, Ref] TColStd_Array1OfReal PoleWeights
 	);
@@ -2619,6 +2640,10 @@ interface TColStd_Array1OfReal {
 	Standard_Integer Lower();
 	Standard_Integer Upper();
 	Standard_Real Value([Const] Standard_Integer theIndex);
+	void SetValue(
+		[Const] Standard_Integer Index,
+		[Const] Standard_Real Value
+	);
 };
 
 interface TColStd_Array1OfInteger {
@@ -2631,10 +2656,10 @@ interface TColStd_Array1OfInteger {
 	Standard_Integer Lower();
 	Standard_Integer Upper();
 	Standard_Integer Value([Const] Standard_Integer theIndex);
-	//void SetValue(
-	//	[Const] Standard_Integer Index,
-	//	[Const, Ref] Standard_Integer Value
-	//);
+	void SetValue(
+		[Const] Standard_Integer Index,
+		[Const] Standard_Integer Value
+	);
 };
 
 // Full interface
@@ -4131,5 +4156,13 @@ enum BRepBuilderAPI_PipeError {
 enum BRepFill_TypeOfContact {
 	"BRepFill_NoContact",
 	"BRepFill_Contact",
-	"BRepFill_ContactOnBorder",
+	"BRepFill_ContactOnBorder"
+};
+
+enum BRepBuilderAPI_FaceError {
+	"BRepBuilderAPI_FaceDone",
+	"BRepBuilderAPI_NoFace",
+	"BRepBuilderAPI_NotPlanar",
+	"BRepBuilderAPI_CurveProjectionFailed",
+	"BRepBuilderAPI_ParametersOutOfRange"
 };
