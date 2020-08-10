@@ -1138,7 +1138,7 @@ interface GC_MakeArcOfParabola {
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Edge{
 	void TopoDS_Edge();
-	void TopoDS_Edge([Const, Ref] TopoDS_Shape T2);
+	void TopoDS_Edge([Const, Ref] TopoDS_Edge T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -1190,7 +1190,7 @@ TopoDS_Edge implements TopoDS_Shape;
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Wire{
 	void TopoDS_Wire();
-	void TopoDS_Wire([Const, Ref] TopoDS_Shape T2);
+	void TopoDS_Wire([Const, Ref] TopoDS_Wire T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -1241,7 +1241,7 @@ TopoDS_Wire implements TopoDS_Shape;
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Compound {
 	void TopoDS_Compound();
-	void TopoDS_Compound([Const, Ref] TopoDS_Shape T2);
+	void TopoDS_Compound([Const, Ref] TopoDS_Compound T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -1292,7 +1292,7 @@ TopoDS_Compound implements TopoDS_Shape;
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Face{
 	void TopoDS_Face();
-	void TopoDS_Face([Const, Ref] TopoDS_Shape T2);
+	void TopoDS_Face([Const, Ref] TopoDS_Face T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -1343,7 +1343,7 @@ TopoDS_Face implements TopoDS_Shape;
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Vertex {
 	void TopoDS_Vertex();
-	void TopoDS_Vertex([Const, Ref] TopoDS_Shape T2);
+	void TopoDS_Vertex([Const, Ref] TopoDS_Vertex T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -3834,7 +3834,7 @@ interface ShapeFix_Shape {
 
 interface TopoDS_Shell {
 	void TopoDS_Shell();
-	void TopoDS_Shell([Const, Ref] TopoDS_Shape T2);
+	void TopoDS_Shell([Const, Ref] TopoDS_Shell T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -3910,7 +3910,7 @@ interface ShapeFix_Shell {
 
 interface TopoDS_CompSolid {
 	void TopoDS_CompSolid();
-	void TopoDS_CompSolid([Const, Ref] TopoDS_Shape T2);
+	void TopoDS_CompSolid([Const, Ref] TopoDS_CompSolid T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -3959,7 +3959,7 @@ TopoDS_CompSolid implements TopoDS_Shape;
 
 interface TopoDS_Solid {
 	void TopoDS_Solid();
-	void TopoDS_Solid([Const, Ref] TopoDS_Shape T2);
+	void TopoDS_Solid([Const, Ref] TopoDS_Solid T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
