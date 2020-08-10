@@ -117,6 +117,7 @@ declare module opencascade {
     }
     class TopoDS_Shape {
         constructor();
+        constructor(T2: TopoDS_Shape);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
