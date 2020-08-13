@@ -1400,10 +1400,14 @@ declare module opencascade {
     class TopTools_ListOfShape {
         constructor();
         Append(theItem: TopoDS_Shape): TopoDS_Shape;
+        First(): TopoDS_Shape;
+        Last(): TopoDS_Shape;
     }
     class BRepOffsetAPI_MakeOffsetShape extends BRepBuilderAPI_MakeShape {
         constructor();
-        constructor(S: TopoDS_Shape, Offset: Standard_Real, Tol: Standard_Real, Mode?: BRepOffset_Mode, Intersection?: Standard_Boolean, SelfInter?: Standard_Boolean, Join?: GeomAbs_JoinType, RemoveIntEdges?: Standard_Boolean);
+        PerformBySimple(theS: TopoDS_Shape, theOffsetValue: Standard_Real): void;
+        PerformByJoin(S: TopoDS_Shape, Offset: Standard_Real, Tol: Standard_Real, Mode?: BRepOffset_Mode, Intersection?: Standard_Boolean, SelfInter?: Standard_Boolean, Join?: GeomAbs_JoinType, RemoveIntEdges?: Standard_Boolean): void;
+        Shape(): TopoDS_Shape;
     }
     class BRepOffsetAPI_MakeThickSolid extends BRepOffsetAPI_MakeOffsetShape {
         constructor();
