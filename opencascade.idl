@@ -3758,11 +3758,17 @@ IGESControl_Reader implements XSControl_Reader;
 interface TopTools_ListOfShape {
 	void TopTools_ListOfShape();
 	[Ref] TopoDS_Shape Append([Const, Ref] TopoDS_Shape theItem);
+	[Value] TopoDS_Shape First();
+	[Value] TopoDS_Shape Last();
 };
 
 interface BRepOffsetAPI_MakeOffsetShape {
 	void BRepOffsetAPI_MakeOffsetShape();
-	void BRepOffsetAPI_MakeOffsetShape(
+	void PerformBySimple(
+		[Const, Ref] TopoDS_Shape theS, 
+		[Const] Standard_Real theOffsetValue
+	);
+	void PerformByJoin(
 		[Const, Ref] TopoDS_Shape S, 
 		[Const] Standard_Real Offset, 
 		[Const] Standard_Real Tol, 
@@ -3772,6 +3778,7 @@ interface BRepOffsetAPI_MakeOffsetShape {
 		[Const] optional GeomAbs_JoinType Join="GeomAbs_Arc",
 		[Const] optional Standard_Boolean RemoveIntEdges=false
 	);
+	[Value] TopoDS_Shape Shape();
 };
 BRepOffsetAPI_MakeOffsetShape implements BRepBuilderAPI_MakeShape;
 
