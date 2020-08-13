@@ -1568,6 +1568,22 @@ interface BRepFilletAPI_MakeFillet{
 };
 BRepFilletAPI_MakeFillet implements BRepFilletAPI_LocalOperation;
 
+interface BRepFilletAPI_MakeChamfer{
+	void BRepFilletAPI_MakeChamfer([Const, Ref]TopoDS_Shape S);
+	void Add(
+		[Const] Standard_Real Dis,
+		[Const,Ref]TopoDS_Edge E,
+		[Const,Ref]TopoDS_Face F
+	);
+	void Add(
+		[Const] Standard_Real Dis1,
+		[Const] Standard_Real Dis2,
+		[Const,Ref]TopoDS_Edge E,
+		[Const,Ref]TopoDS_Face F
+	);
+};
+BRepFilletAPI_MakeChamfer implements BRepFilletAPI_LocalOperation;
+
 interface BRepFilletAPI_LocalOperation{};
 BRepFilletAPI_LocalOperation implements BRepBuilderAPI_MakeShape;
 
