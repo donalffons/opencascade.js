@@ -1572,8 +1572,7 @@ interface BRepFilletAPI_MakeChamfer{
 	void BRepFilletAPI_MakeChamfer([Const, Ref]TopoDS_Shape S);
 	void Add(
 		[Const] Standard_Real Dis,
-		[Const,Ref]TopoDS_Edge E,
-		[Const,Ref]TopoDS_Face F
+		[Const,Ref]TopoDS_Edge E
 	);
 	void Add(
 		[Const] Standard_Real Dis1,
