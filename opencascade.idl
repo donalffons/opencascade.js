@@ -3761,6 +3761,17 @@ interface TopTools_ListOfShape {
 };
 
 interface BRepOffsetAPI_MakeOffsetShape {
+	void BRepOffsetAPI_MakeOffsetShape();
+	void BRepOffsetAPI_MakeOffsetShape(
+		[Const, Ref] TopoDS_Shape S, 
+		[Const] Standard_Real Offset, 
+		[Const] Standard_Real Tol, 
+		[Const] optional BRepOffset_Mode Mode="BRepOffset_Skin",
+		[Const] optional Standard_Boolean Intersection=false,
+		[Const] optional Standard_Boolean SelfInter=false,
+		[Const] optional GeomAbs_JoinType Join="GeomAbs_Arc",
+		[Const] optional Standard_Boolean RemoveIntEdges=false
+	);
 };
 BRepOffsetAPI_MakeOffsetShape implements BRepBuilderAPI_MakeShape;
 
