@@ -1551,7 +1551,7 @@ interface BRepBuilderAPI_MakeFace{
 	void BRepBuilderAPI_MakeFace(
 		[Const, Ref]TopoDS_Wire W
 	);
-	
+
 	void BRepBuilderAPI_MakeFace(
 		[Const, Ref]TopoDS_Face F,
 		[Const, Ref]TopoDS_Wire W
