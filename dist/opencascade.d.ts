@@ -643,6 +643,11 @@ declare module opencascade {
         constructor(S: TopoDS_Shape);
         Add(Radius: Standard_Real, E: TopoDS_Edge): void;
     }
+    class BRepFilletAPI_MakeChamfer {
+        constructor(S: TopoDS_Shape);
+        Add(Dis: Standard_Real, E: TopoDS_Edge): void;
+        Add(Dis1: Standard_Real, Dis2: Standard_Real, E: TopoDS_Edge, F: TopoDS_Face): void;
+    }
     class BRepFilletAPI_LocalOperation {
     }
     class TopExp_Explorer {
@@ -1397,6 +1402,8 @@ declare module opencascade {
         Append(theItem: TopoDS_Shape): TopoDS_Shape;
     }
     class BRepOffsetAPI_MakeOffsetShape extends BRepBuilderAPI_MakeShape {
+        constructor();
+        constructor(S: TopoDS_Shape, Offset: Standard_Real, Tol: Standard_Real, Mode?: BRepOffset_Mode, Intersection?: Standard_Boolean, SelfInter?: Standard_Boolean, Join?: GeomAbs_JoinType, RemoveIntEdges?: Standard_Boolean);
     }
     class BRepOffsetAPI_MakeThickSolid extends BRepOffsetAPI_MakeOffsetShape {
         constructor();
