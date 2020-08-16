@@ -2,6 +2,7 @@ typedef double Standard_Real;
 typedef boolean Standard_Boolean;
 typedef long Standard_Integer;
 typedef DOMString Standard_CString;
+typedef VoidPtr Standard_OStream;
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
@@ -464,10 +465,10 @@ interface TopoDS_Shape{
 	void EmptyCopy();
 	[Value] TopoDS_Shape EmptyCopied();
 	// void TShape([Const, Ref] Handle_TopoDS_TShape theTShape);
-	// void DumpJson(
-	// 	[Ref] Standard_Ostream theOstream,
-	// 	[Const] Standard_Integer theDepth = -1
-	// );
+	void DumpJson(
+		[Ref]   Standard_OStream theFSStream,
+		[Const] Standard_Integer theDepth = -1
+	);
 };
 
 // Full interface
