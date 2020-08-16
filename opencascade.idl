@@ -467,7 +467,7 @@ interface TopoDS_Shape{
 	// void TShape([Const, Ref] Handle_TopoDS_TShape theTShape);
 	void DumpJson(
 		[Ref]   Standard_OStream theFSStream,
-		[Const] Standard_Integer theDepth = -1
+		[Const] optional Standard_Integer theDepth = -1
 	);
 };
 
