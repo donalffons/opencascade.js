@@ -185,6 +185,62 @@ def build():
     sys.exit(1)
   sys.path.append(os.path.join(envEMSDK, 'upstream', 'emscripten'))
   import tools.building as emscripten
+
+  ######################################
+  # stage('generate bindings...')
+
+  # Popen([emscripten.PYTHON, os.path.join(envEMSDK, 'upstream', 'emscripten', 'tools', 'webidl_binder.py'), os.path.join(this_dir, 'opencascade.idl'), 'glue']).communicate()
+  # assert os.path.exists('glue.js')
+  # assert os.path.exists('glue.cpp')
+
+  #####################################
+  stage('Build bindings')
+
+  myincludes = [x[1] for x in os.walk(os.path.join('.', 'occt', 'src'))][0]
+  myincludes = ['-I./occt/src/{0}'.format(s) for s in myincludes]
+  myincludes.extend([
+    '-I./../',
+    '-c',
+    '-std=c++1z',
+  ])
+
+  args = copy.deepcopy(myincludes)
+  for include in INCLUDES:
+    args += ['-include', include]
+  # emscripten.emcc('glue.cpp', args, 'glue.o')
+  # assert(os.path.exists('glue.o'))
+
+  if not os.path.exists('build'):
+    os.makedirs('build')
+  os.chdir('build')
+
+  cmake_build = True
+
+  if cmake_build:
+    stage('Configure via CMake')
+    emscripten.configure([
+      'cmake',
+      '../occt/',
+      '-DCMAKE_BUILD_TYPE=Release',
+      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=../freetype/freetype2-VER-2-10-1/include/freetype',
+      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_ft2build=../freetype/freetype2-VER-2-10-1/include',
+      '-DBUILD_LIBRARY_TYPE=Static',
+      '-DCMAKE_CXX_FLAGS="-DIGNORE_NO_ATOMICS=1 -frtti"',
+      '-D3RDPARTY_INCLUDE_DIRS=../regal/regal-master/src/apitrace/thirdparty/khronos/\;../fontconfig/fontconfig-2.13.92',
+      '-DUSE_GLES2=ON',
+      '-DBUILD_MODULE_Draw=OFF',
+      '-DBUILD_ADDITIONAL_TOOLKITS=OFF',
+      '-DBUILD_MODULE_Visualization=OFF',
+      '-DBUILD_MODULE_ApplicationFramework=OFF'
+    ])
+
+  ###############
+  stage('Make')
+
+  CORES = multiprocessing.cpu_count()
+
+  emscripten.make(['make', '-j', str(CORES)])
+
   
   ######################################
   stage("build settings...")
@@ -213,71 +269,13 @@ def build():
   emcc_args += ['-s', 'EXPORT_ES6=1']
   emcc_args += ['-s', 'USE_ES6_IMPORT_META=0']
   emcc_args += ['-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1']
-
+  
   # Debugging options
   # emcc_args += ['-s', 'ASSERTIONS=2']
   # emcc_args += ['-s', 'STACK_OVERFLOW_CHECK=1']
   # emcc_args += ['-s', 'DEMANGLE_SUPPORT=1']
   # emcc_args += ['-s', 'DISABLE_EXCEPTION_CATCHING=0']
   # emcc_args += ['-g']
-
-  target = 'opencascade.js' if not wasm else 'opencascade.wasm.js'
-
-  ######################################
-  stage('generate bindings...')
-
-  Popen([emscripten.PYTHON, os.path.join(envEMSDK, 'upstream', 'emscripten', 'tools', 'webidl_binder.py'), os.path.join(this_dir, 'opencascade.idl'), 'glue']).communicate()
-  assert os.path.exists('glue.js')
-  assert os.path.exists('glue.cpp')
-
-  ######################################
-  stage('Build bindings')
-
-  myincludes = [x[1] for x in os.walk(os.path.join('.', 'occt', 'src'))][0]
-  myincludes = ['-I./occt/src/{0}'.format(s) for s in myincludes]
-  myincludes.extend([
-    '-I./../',
-    '-c',
-    '-std=c++1z',
-  ])
-
-  args = copy.deepcopy(myincludes)
-  for include in INCLUDES:
-    args += ['-include', include]
-  emscripten.emcc('glue.cpp', args, 'glue.o')
-  assert(os.path.exists('glue.o'))
-
-  if not os.path.exists('build'):
-    os.makedirs('build')
-  os.chdir('build')
-
-  cmake_build = True
-
-  if cmake_build:
-    stage('Configure via CMake')
-    emscripten.configure([
-      'cmake',
-      '../occt/',
-      '-DCMAKE_BUILD_TYPE=Release',
-      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=../freetype/freetype2-VER-2-10-1/include/freetype',
-      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_ft2build=../freetype/freetype2-VER-2-10-1/include',
-      '-DBUILD_LIBRARY_TYPE=Static',
-      '-DCMAKE_CXX_FLAGS="-DIGNORE_NO_ATOMICS=1 -frtti"',
-      '-D3RDPARTY_INCLUDE_DIRS=../regal/regal-master/src/apitrace/thirdparty/khronos/\;../fontconfig/fontconfig-2.13.92',
-      '-DUSE_GLES2=ON',
-      '-DBUILD_MODULE_Draw=OFF',
-      '-DBUILD_ADDITIONAL_TOOLKITS=OFF',
-      '-DBUILD_MODULE_Visualization=OFF',
-      '-DBUILD_MODULE_ApplicationFramework=OFF'
-    ])
-
-  make_build = True
-  if make_build:
-    stage('Make')
-
-    CORES = multiprocessing.cpu_count()
-
-    emscripten.make(['make', '-j', str(CORES)])
 
   stage('Link')
 
@@ -289,10 +287,17 @@ def build():
   if not os.path.exists('js'):
     os.makedirs('js')
 
+  target = 'opencascade.js' if not wasm else 'opencascade.wasm.js'
   temp = os.path.join('.', 'js', target)
-  emscripten.emcc('-DNOTHING_WAKA_WAKA', emcc_args + ['glue.o'] + opencascade_libs + myincludes[:len(myincludes)-2] + ['--js-transform', 'python %s' % os.path.join('..', 'bundle.py')], temp)
+  shutil.copyfile(os.path.join('..', 'main.cpp'), os.path.join('.', 'main.cpp'))
 
-  assert os.path.exists(temp), 'Failed to create script code'
+  includePrefix = os.path.join("occt", "src")
+  includePaths = ["Standard", "TopoDS", "TopAbs", "TopLoc", "gp", "NCollection"]
+  includeArgs = []
+  for path in includePaths:
+    includeArgs.append('-I' + os.path.join(includePrefix, path))
+
+  emscripten.emcc('main.cpp', ['--bind'] + includeArgs, temp)
 
   stage('wrap')
 
