@@ -291,8 +291,8 @@ def build():
   temp = os.path.join('.', 'js', target)
   shutil.copyfile(os.path.join('..', 'main.cpp'), os.path.join('.', 'main.cpp'))
 
-  includePrefix = os.path.join("occt", "src")
-  includePaths = ["Standard", "TopoDS", "TopAbs", "TopLoc", "gp", "NCollection"]
+  includePrefix = os.path.join(".", "occt", "src")
+  includePaths = os.listdir(includePrefix)
   includeArgs = []
   for path in includePaths:
     includeArgs.append('-I' + os.path.join(includePrefix, path))
