@@ -1,9 +1,9 @@
 FROM ubuntu:18.04
 
 RUN apt update -y
-RUN apt install -y build-essential python2.7 python-pip git cmake bash curl npm
+RUN apt install -y build-essential python3.8 python3-pip git cmake bash curl npm
 
-RUN pip install patch requests
+RUN python3.8 -m pip install patch requests
 
 WORKDIR /emscripten/
 RUN git clone https://github.com/emscripten-core/emsdk.git .
@@ -32,6 +32,6 @@ COPY . .
 
 ENTRYPOINT \
   source /emscripten/emsdk_env.sh &&\
-  python2.7 make.py && \
-  python2.7 make.py wasm && \
+  python3.8 make.py && \
+  python3.8 make.py wasm && \
   yarn && yarn generateTypes

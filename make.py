@@ -239,8 +239,10 @@ def build():
 
   CORES = multiprocessing.cpu_count()
 
-  emscripten.make(['make', '-j', str(CORES)])
+  make_build = True
 
+  if make_build:
+    emscripten.make(['make', '-j', str(CORES)])
   
   ######################################
   stage("build settings...")
@@ -289,15 +291,18 @@ def build():
 
   target = 'opencascade.js' if not wasm else 'opencascade.wasm.js'
   temp = os.path.join('.', 'js', target)
-  shutil.copyfile(os.path.join('..', 'main.cpp'), os.path.join('.', 'main.cpp'))
+  shutil.copytree(os.path.join('..', 'embind'), os.path.join('.', 'embind'), dirs_exist_ok=True)
 
   includePrefix = os.path.join(".", "occt", "src")
   includePaths = os.listdir(includePrefix)
-  includeArgs = []
+  includeArgs = [
+    '-I' + os.path.join('.', 'occt', 'src'),
+  ]
   for path in includePaths:
-    includeArgs.append('-I' + os.path.join(includePrefix, path))
+    includeArgs.append('-I' + os.path.join(".", includePrefix, path))
 
-  emscripten.emcc('main.cpp', ['--bind'] + includeArgs + opencascade_libs, temp)
+  emccArgs = ['--bind'] + includeArgs + opencascade_libs
+  emscripten.emcc(os.path.join('.', 'embind', 'main.cpp'), emccArgs, temp)
 
   stage('wrap')
 
