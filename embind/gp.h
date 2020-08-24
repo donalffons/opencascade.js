@@ -1,4 +1,4 @@
-// gp_Pnt
+// gp_Pnt, OCCT V7_4_0p1
   class_<gp_Pnt>("gp_Pnt")
     .function("SetCoord_1", select_overload<void (const Standard_Integer, const Standard_Real)>(&gp_Pnt::SetCoord))
     .function("SetCoord_2", select_overload<void (const Standard_Real, const Standard_Real, const Standard_Real)>(&gp_Pnt::SetCoord))

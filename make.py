@@ -129,7 +129,7 @@ def build():
   ######################################
   if not os.path.exists('occt.tar.gz'):
     stage("downloading OCCT...")
-    url = "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=fd47711d682be943f0e0a13d1fb54911b0499c31;sf=tgz"
+    url = "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=33d9a6fa21ca4fa711da7066655aa2ba854545ee;sf=tgz"
     myfile = requests.get(url, stream=True)
     open(targetfile, 'wb').write(myfile.content)
 
