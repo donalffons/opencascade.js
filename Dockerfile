@@ -8,8 +8,8 @@ RUN python3.8 -m pip install patch requests
 WORKDIR /emscripten/
 RUN git clone https://github.com/emscripten-core/emsdk.git .
 RUN \
-  ./emsdk install 1.39.20 && \
-  ./emsdk activate 1.39.20
+  ./emsdk install 2.0.1 && \
+  ./emsdk activate 2.0.1
 
 SHELL ["/bin/bash", "-c"]
 
