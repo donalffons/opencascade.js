@@ -1,2 +1,12 @@
+// BRepPrim_Builder
+// BRepPrim_Cone
+// BRepPrim_Cylinder
+// BRepPrim_Direction
+// BRepPrim_FaceBuilder
+// BRepPrim_GWedge
+// BRepPrim_OneAxis
+// BRepPrim_Revolution
+// BRepPrim_Sphere
 // BRepPrim_Torus
-class_ <BRepPrim_Torus>("BRepPrim_Torus");
+  class_ <BRepPrim_Torus>("BRepPrim_Torus");
+// BRepPrim_Wedge

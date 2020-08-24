@@ -1,4 +1,31 @@
-// gp_Pnt, OCCT V7_4_0p1
+// gp_Ax1
+// gp_Ax22d
+// gp_Ax2d
+// gp_Ax2
+// gp_Ax3
+// gp_Circ2d
+// gp_Circ
+// gp_Cone
+// gp_Cylinder
+// gp_Dir2d
+// gp_Dir
+// gp_Elips2d
+// gp_Elips
+// gp_EulerSequence
+// gp_GTrsf2d
+// gp_GTrsf
+// gp
+// gp_Hypr2d
+// gp_Hypr
+// gp_Lin2d
+// gp_Lin
+// gp_Mat2d
+// gp_Mat
+// gp_Parab2d
+// gp_Parab
+// gp_Pln
+// gp_Pnt2d
+// gp_Pnt, full interface OCCT V7_4_0p1
   class_<gp_Pnt>("gp_Pnt")
     .function("SetCoord_1", select_overload<void (const Standard_Integer, const Standard_Real)>(&gp_Pnt::SetCoord))
     .function("SetCoord_2", select_overload<void (const Standard_Real, const Standard_Real, const Standard_Real)>(&gp_Pnt::SetCoord))
@@ -38,21 +65,21 @@
     .function("Translated_2", select_overload<gp_Pnt (const gp_Pnt&, const gp_Pnt&) const>(&gp_Pnt::Translated))
     ;
 
-  // overloaded constructors
-  struct gp_Pnt_1 : public gp_Pnt {
-    gp_Pnt_1() : gp_Pnt() {}
-  };
-  class_<gp_Pnt_1, base<gp_Pnt>>("gp_Pnt_1")
-    .constructor<>();
+  overloadedConstructor(gp_Pnt, gp_Pnt_1, (), (), ());
+  overloadedConstructor(gp_Pnt, gp_Pnt_2, (const gp_XYZ& Coord), (Coord), (const gp_XYZ&));
+  overloadedConstructor(gp_Pnt, gp_Pnt_3, (const Standard_Real Xp, const Standard_Real Yp, const Standard_Real Zp), (Xp, Yp, Zp), (const Standard_Real, const Standard_Real, const Standard_Real));
 
-  struct gp_Pnt_2 : public gp_Pnt {
-    gp_Pnt_2(const gp_XYZ& Coord) : gp_Pnt(Coord) {}
-  };
-  class_<gp_Pnt_2, base<gp_Pnt>>("gp_Pnt_2")
-    .constructor<const gp_XYZ&>();
-
-  struct gp_Pnt_3 : public gp_Pnt {
-    gp_Pnt_3(const Standard_Real Xp, const Standard_Real Yp, const Standard_Real Zp) : gp_Pnt(Xp, Yp, Zp) {}
-  };
-  class_<gp_Pnt_3, base<gp_Pnt>>("gp_Pnt_3")
-    .constructor<const Standard_Real, const Standard_Real, const Standard_Real>();
+// gp_Quaternion
+// gp_QuaternionNLerp
+// gp_QuaternionSLerp
+// gp_Sphere
+// gp_Torus
+// gp_Trsf2d
+// gp_TrsfForm
+// gp_Trsf
+// gp_TrsfNLerp
+// gp_Vec2d
+// gp_Vec
+// gp_VectorWithNullMagnitude
+// gp_XY
+// gp_XYZ
