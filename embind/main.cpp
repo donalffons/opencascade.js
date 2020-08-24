@@ -3,13 +3,12 @@
 
 using namespace emscripten;
 
-#include "BRepPrim/BRepPrim_Torus.hxx"
 #include "BRepPrimAPI/BRepPrimAPI_MakeTorus.hxx"
 
-// BRepPrimAPI
 EMSCRIPTEN_BINDINGS(opencascadejs) {
   #include "BRepPrim.h"
   #include "BRepPrimAPI.h"
+  #include "gp.h"
 }
 
 float lerp(float a, float b, float t) {
