@@ -639,6 +639,11 @@ declare module opencascade {
         Add(W: TopoDS_Wire): void;
         Error(): BRepBuilderAPI_FaceError;
     }
+    class BRepFilletAPI_MakeFillet2d {
+        constructor(F: TopoDS_Face);
+        AddFillet(V: TopoDS_Vertex, Radius: Standard_Real): void;
+        Status(): ChFi2d_ConstructionError;
+    }
     class BRepFilletAPI_MakeFillet {
         constructor(S: TopoDS_Shape);
         Add(Radius: Standard_Real, E: TopoDS_Edge): void;
@@ -1628,4 +1633,5 @@ declare module opencascade {
     type BRepBuilderAPI_PipeError = "BRepBuilderAPI_PipeDone" | "BRepBuilderAPI_PipeNotDone" | "BRepBuilderAPI_PlaneNotIntersectGuide" | "BRepBuilderAPI_ImpossibleContact";
     type BRepFill_TypeOfContact = "BRepFill_NoContact" | "BRepFill_Contact" | "BRepFill_ContactOnBorder";
     type BRepBuilderAPI_FaceError = "BRepBuilderAPI_FaceDone" | "BRepBuilderAPI_NoFace" | "BRepBuilderAPI_NotPlanar" | "BRepBuilderAPI_CurveProjectionFailed" | "BRepBuilderAPI_ParametersOutOfRange";
+    type ChFi2d_ConstructionError = "ChFi2d_NotPlanar" | "ChFi2d_NoFace" | "ChFi2d_InitialisationError" | "ChFi2d_ParametersError" | "ChFi2d_Ready" | "ChFi2d_IsDone" | "ChFi2d_ComputationError" | "ChFi2d_ConnexionError" | "ChFi2d_TangencyError" | "ChFi2d_FirstEdgeDegenerated" | "ChFi2d_LastEdgeDegenerated" | "ChFi2d_BothEdgesDegenerated" | "ChFi2d_NotAuthorized";
 }
