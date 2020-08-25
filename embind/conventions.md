@@ -18,7 +18,8 @@ The file structure for this folder should be as follows:
 
 ### Overloaded Functions
 
-* OpenCascade makes heavy use of overloaded functions. JavaScript supports overloading by number of arguments only. C++ supports overloading by return type, by number of arguments and by type of arguments. To solve this incompatibility, all overloads of a functions should be postfixed with integers.
+* OpenCascade makes heavy use of overloaded functions. JavaScript supports overloading by number of arguments only. C++ supports overloading by return type, by number of arguments and by type of arguments. To solve this incompatibility, all overloads of a function should be postfixed with integers.
+
   E.g. the class `gp_Pnt` has the following overloads for the function `SetCoord`:
   ```cpp
   void SetCoord (const Standard_Integer Index, const Standard_Real Xi);
@@ -36,6 +37,7 @@ The file structure for this folder should be as follows:
 ### Overloaded Constructors
 * In JavaScript, a constructor is called when creating a new instance using `var pnt = new gp_Pnt();`. Therefore, different overloaded constructors cannot be exposed as simply as with the previous method.
 * Instead, for each overloaded constructor, a separate sub-class has to be created, which inherits from the main class and only contains the "overloaded" constructor.
+
   E.g. the class gp_Pnt has the following overloads for its constructor:
   ```cpp
   gp_Pnt();
