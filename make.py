@@ -25,6 +25,7 @@ INCLUDES = [
   os.path.join('.', 'occt', 'src', 'BRepFilletAPI', 'BRepFilletAPI_LocalOperation.hxx'),
   os.path.join('.', 'occt', 'src', 'BRepFilletAPI', 'BRepFilletAPI_MakeFillet.hxx'),
   os.path.join('.', 'occt', 'src', 'BRepFilletAPI', 'BRepFilletAPI_MakeChamfer.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepFilletAPI', 'BRepFilletAPI_MakeFillet2d.hxx'),
   os.path.join('.', 'occt', 'src', 'BRepMesh', 'BRepMesh_IncrementalMesh.hxx'),
   os.path.join('.', 'occt', 'src', 'BRepPrimAPI', 'BRepPrimAPI_MakeCylinder.hxx'),
   os.path.join('.', 'occt', 'src', 'BRepPrimAPI', 'BRepPrimAPI_MakeOneAxis.hxx'),
