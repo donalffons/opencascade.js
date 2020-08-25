@@ -1,5 +1,7 @@
 # Code conventions for Embind
 
+Please see [here](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html) for more in-depth information on Embind.
+
 ## Which files should be used to create bindings
 
 * Build the project once (using the instructions in [README.md](https://github.com/donalffons/opencascade.js/blob/master/README.md)). This will create a `build` folder in the main directory.
