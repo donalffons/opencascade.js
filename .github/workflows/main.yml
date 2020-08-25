@@ -114,6 +114,7 @@ jobs:
         run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
 
       - name: Push Changes to branch
-        uses: ad-m/github-push-action@$BRANCH_NAME
+        uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: $BRANCH_NAME
