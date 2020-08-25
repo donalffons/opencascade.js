@@ -74,3 +74,13 @@ The file structure for this folder should be as follows:
   overloadedConstructor(gp_Pnt, gp_Pnt_3, (const Standard_Real Xp, const Standard_Real Yp, const Standard_Real Zp), (Xp, Yp, Zp), (const Standard_Real, const Standard_Real, const Standard_Real));
   ```
   
+### Operators
+
+Operators should be exposed according to the following convention:
+* Casting
+  ```cpp
+  class_<BRepBuilderAPI_MakeShape, base<BRepBuilderAPI_Command>>("BRepBuilderAPI_MakeShape")
+    // ...
+    .function("_operator_TopoDS_Shape", &BRepBuilderAPI_MakeShape::operator TopoDS_Shape)
+    // ...
+  ```
