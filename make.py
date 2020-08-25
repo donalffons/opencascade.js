@@ -214,7 +214,7 @@ def build():
     os.makedirs('build')
   os.chdir('build')
 
-  cmake_build = False
+  cmake_build = True
 
   if cmake_build:
     stage('Configure via CMake')
@@ -239,7 +239,7 @@ def build():
 
   CORES = multiprocessing.cpu_count()
 
-  make_build = False
+  make_build = True
 
   if make_build:
     emscripten.make(['make', '-j', str(CORES)])
