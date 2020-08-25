@@ -23,7 +23,20 @@ for className in cppHeader.classes:
     if hasOverloads:
       const = " const" if method["const"] else ""
       paramTypes = list(map(lambda p : p["type"], method["parameters"]))
-      functionParam = "select_overload<" + method["rtnType"] + " (" + ", ".join(paramTypes) + ")" + const + ">(&" + className + "::" + method["name"] + ")"
+
+      needCast = False
+      for param in method["parameters"]:
+        if param["reference"] and not param["constant"]:
+          needCast = True
+      if needCast:
+        castParamTypes = list(map(lambda p : p["type"] if p["constant"] else "const " + p["type"], method["parameters"]))
+        cast_start = "reinterpret_cast<" + method["rtnType"] + " (" + className + "::*)(" + ", ".join(castParamTypes) + ")" + const + ">("
+        cast_end = ")"
+      else:
+        cast_start = ""
+        cast_end = ""
+
+      functionParam = cast_start + "select_overload<" + method["rtnType"] + " (" + ", ".join(paramTypes) + ")" + const + ">(&" + className + "::" + method["name"] + ")" + cast_end
     else:
       functionParam = "&" + className + "::" + method["name"]
 
