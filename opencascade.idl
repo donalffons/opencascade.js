@@ -1563,6 +1563,13 @@ interface BRepBuilderAPI_MakeFace{
 	[Const] BRepBuilderAPI_FaceError Error();
 };
 
+interface BRepFilletAPI_MakeFillet2d{
+	void BRepFilletAPI_MakeFillet2d([Const, Ref]TopoDS_Face F);
+	void AddFillet([Const,Ref]TopoDS_Vertex V, [Const] Standard_Real Radius);
+	[Const] ChFi2d_ConstructionError Status();
+};
+BRepFilletAPI_MakeFillet2d implements BRepBuilderAPI_MakeShape;
+
 interface BRepFilletAPI_MakeFillet{
 	void BRepFilletAPI_MakeFillet([Const, Ref]TopoDS_Shape S);
 	void Add([Const] Standard_Real Radius, [Const,Ref]TopoDS_Edge E);
@@ -4226,4 +4233,20 @@ enum BRepBuilderAPI_FaceError {
 	"BRepBuilderAPI_NotPlanar",
 	"BRepBuilderAPI_CurveProjectionFailed",
 	"BRepBuilderAPI_ParametersOutOfRange"
+};
+
+enum ChFi2d_ConstructionError {
+	"ChFi2d_NotPlanar",
+	"ChFi2d_NoFace",
+	"ChFi2d_InitialisationError",	
+	"ChFi2d_ParametersError",	
+	"ChFi2d_Ready",	
+	"ChFi2d_IsDone",
+	"ChFi2d_ComputationError",
+	"ChFi2d_ConnexionError",
+	"ChFi2d_TangencyError",
+	"ChFi2d_FirstEdgeDegenerated",
+	"ChFi2d_LastEdgeDegenerated",
+	"ChFi2d_BothEdgesDegenerated",
+	"ChFi2d_NotAuthorized"
 };
