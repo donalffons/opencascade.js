@@ -1403,6 +1403,13 @@ declare module opencascade {
         First(): TopoDS_Shape;
         Last(): TopoDS_Shape;
     }
+    class BRepOffsetAPI_MakeOffset extends BRepBuilderAPI_MakeShape {
+        constructor();
+        constructor(Spine: TopoDS_Wire, Join?: GeomAbs_JoinType, IsOpenResult?: Standard_Boolean);
+        AddWire(Spine: TopoDS_Wire): void;
+        Perform(Offset: Standard_Real, Alt?: Standard_Real): void;
+        Shape(): TopoDS_Shape;
+    }
     class BRepOffsetAPI_MakeOffsetShape extends BRepBuilderAPI_MakeShape {
         constructor();
         PerformBySimple(theS: TopoDS_Shape, theOffsetValue: Standard_Real): void;
