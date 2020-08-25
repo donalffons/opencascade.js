@@ -3763,6 +3763,24 @@ interface TopTools_ListOfShape {
 	[Value] TopoDS_Shape Last();
 };
 
+interface BRepOffsetAPI_MakeOffset {
+	void BRepOffsetAPI_MakeOffset();
+	void BRepOffsetAPI_MakeOffset(
+		[Const, Ref] TopoDS_Wire Spine, 
+		[Const] optional GeomAbs_JoinType Join="GeomAbs_Arc",
+		[Const] optional Standard_Boolean IsOpenResult=false
+	);
+	void AddWire(
+		[Const, Ref] TopoDS_Wire Spine
+	);
+	void Perform(
+		[Const] Standard_Real Offset, 
+		[Const] optional Standard_Real Alt = 0.0
+	);
+	[Value] TopoDS_Shape Shape();
+};
+BRepOffsetAPI_MakeOffset implements BRepBuilderAPI_MakeShape;
+
 interface BRepOffsetAPI_MakeOffsetShape {
 	void BRepOffsetAPI_MakeOffsetShape();
 	void PerformBySimple(
