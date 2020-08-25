@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import CppHeaderParser
 try:
-  cppHeader = CppHeaderParser.CppHeader("/home/sebastian/Projects/fiverr/2020-02-10_maxmanufacture_-_CAD_viewer/project/opencascade.js/build/occt/src/gp/gp_Pnt.hxx")
+  cppHeader = CppHeaderParser.CppHeader("./build/occt/src/gp/gp_Pnt.hxx")
 except CppHeaderParser.CppParseError as e:
   print(e)
   sys.exit(1)
