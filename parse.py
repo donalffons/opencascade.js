@@ -16,7 +16,6 @@ for className in cppHeader.classes:
     overloads = [row for row in publicMethods if row["name"] == method["name"]]
     hasOverloads = True if len(overloads) > 1 else False
     overloadIndex = overloads.index(method) + 1
-
     overloadPostfix = "" if not hasOverloads else "_" + str(overloadIndex)
 
     nameParam = "\"" + method["name"] + overloadPostfix + "\""
@@ -42,3 +41,20 @@ for className in cppHeader.classes:
 
     print("  .function(" + nameParam + ", " + functionParam + ")")
   print(";")
+
+for className in cppHeader.classes:
+  publicMethods = cppHeader.classes[className]["methods"]["public"]
+  for method in publicMethods:
+    if not method["constructor"]:
+      continue
+
+    overloads = [row for row in publicMethods if row["name"] == method["name"]]
+    hasOverloads = True if len(overloads) > 1 else False
+    overloadIndex = overloads.index(method) + 1
+    overloadPostfix = "" if not hasOverloads else "_" + str(overloadIndex)
+
+    paramsFull = list(map(lambda p : p["type"] + " " + p["name"], method["parameters"]))
+    paramsName = list(map(lambda p : p["name"], method["parameters"]))
+    paramsType = list(map(lambda p : p["type"], method["parameters"]))
+
+    print("  overloadedConstructor(" + className + ", " + className + overloadPostfix + ", (" + ", ".join(paramsFull) + "), (" + ", ".join(paramsName) + "), (" + ", ".join(paramsType) + "))")
