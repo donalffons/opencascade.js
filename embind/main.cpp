@@ -1,10 +1,12 @@
-// quick_example.cpp
 #include <emscripten/bind.h>
-
 using namespace emscripten;
 
 #include "gp/gp_Circ.hxx"
+#include "gp/gp_Elips.hxx"
+#include "gp/gp_Hypr.hxx"
 #include "gp/gp_Lin.hxx"
+#include "gp/gp_Parab.hxx"
+#include "BRepBuilderAPI/BRepBuilderAPI_MakeEdge.hxx"
 #include "BRepPrimAPI/BRepPrimAPI_MakeTorus.hxx"
 #include "GC/GC_MakeArcOfCircle.hxx"
 #include "GC/GC_MakeSegment.hxx"
