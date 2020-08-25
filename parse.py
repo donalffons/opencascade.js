@@ -19,8 +19,6 @@ for className in cppHeader.classes:
 
     overloadPostfix = "" if not hasOverloads else "_" + str(overloadIndex)
 
-    # print(method.keys())
-
     nameParam = "\"" + method["name"] + overloadPostfix + "\""
     if hasOverloads:
       const = " const" if method["const"] else ""

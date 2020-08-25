@@ -11,6 +11,9 @@ using namespace emscripten;
 #include "GC/GC_MakeArcOfCircle.hxx"
 #include "GC/GC_MakeSegment.hxx"
 
+#define Standard_EXPORT
+#define Standard_NODISCARD
+
 #define really_unparen(...) __VA_ARGS__
 #define invoke(expr) expr
 #define unparen(args) invoke(really_unparen args)
