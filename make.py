@@ -6,6 +6,7 @@ import requests
 import shutil
 import sys
 import tarfile
+import subprocess
 from subprocess import Popen, PIPE, STDOUT
 
 stage_counter = 0
@@ -181,17 +182,17 @@ def build():
   stage("checking EMSCRIPTEN...")
   envEMSDK = os.environ.get('EMSDK')
   if not envEMSDK:
-    print("ERROR: envEMSDK environment variable not found")
+    print("ERROR: envEMSDK environment> variable not found")
     sys.exit(1)
   sys.path.append(os.path.join(envEMSDK, 'upstream', 'emscripten'))
   import tools.building as emscripten
 
   ######################################
-  # stage('generate bindings...')
+  stage('generate bindings...')
 
-  # Popen([emscripten.PYTHON, os.path.join(envEMSDK, 'upstream', 'emscripten', 'tools', 'webidl_binder.py'), os.path.join(this_dir, 'opencascade.idl'), 'glue']).communicate()
-  # assert os.path.exists('glue.js')
-  # assert os.path.exists('glue.cpp')
+  os.chdir('..')
+  subprocess.call(['./parseAll.py'])
+  os.chdir('build')
 
   #####################################
   stage('Build bindings')
@@ -207,8 +208,6 @@ def build():
   args = copy.deepcopy(myincludes)
   for include in INCLUDES:
     args += ['-include', include]
-  # emscripten.emcc('glue.cpp', args, 'glue.o')
-  # assert(os.path.exists('glue.o'))
 
   if not os.path.exists('build'):
     os.makedirs('build')
