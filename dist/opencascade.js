@@ -669,8 +669,8 @@ var wasmMemory;
 // so this creates a (non-native-wasm) table for us.
 
 var wasmTable = new WebAssembly.Table({
-  'initial': 6540,
-  'maximum': 6540,
+  'initial': 6610,
+  'maximum': 6610,
   'element': 'anyfunc'
 });
 
@@ -1291,11 +1291,11 @@ function updateGlobalBufferAndViews(buf) {
 }
 
 var STATIC_BASE = 1024,
-    STACK_BASE = 6781888,
+    STACK_BASE = 6783392,
     STACKTOP = STACK_BASE,
-    STACK_MAX = 1539008,
-    DYNAMIC_BASE = 6781888,
-    DYNAMICTOP_PTR = 1538848;
+    STACK_MAX = 1540512,
+    DYNAMIC_BASE = 6783392,
+    DYNAMICTOP_PTR = 1540352;
 
 assert(STACK_BASE % 16 === 0, 'stack must start aligned');
 assert(DYNAMIC_BASE % 16 === 0, 'heap must start aligned');
@@ -1858,7 +1858,7 @@ var ASM_CONSTS = {
 
 
 
-// STATICTOP = STATIC_BASE + 1537984;
+// STATICTOP = STATIC_BASE + 1539488;
 /* global initializers */  __ATINIT__.push({ func: function() { ___wasm_call_ctors() } });
 
 
@@ -6357,7 +6357,7 @@ var ASM_CONSTS = {
     }
 
   function _emscripten_get_sbrk_ptr() {
-      return 1538848;
+      return 1540352;
     }
 
   
@@ -9490,6 +9490,17 @@ function invoke_iiiddddi(index,a1,a2,a3,a4,a5,a6,a7) {
   }
 }
 
+function invoke_vidddi(index,a1,a2,a3,a4,a5) {
+  var sp = stackSave();
+  try {
+    dynCall_vidddi(index,a1,a2,a3,a4,a5);
+  } catch(e) {
+    stackRestore(sp);
+    if (e !== e+0 && e !== 'longjmp') throw e;
+    _setThrew(1, 0);
+  }
+}
+
 function invoke_viiiiiiiiiiidd(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13) {
   var sp = stackSave();
   try {
@@ -9604,17 +9615,6 @@ function invoke_didi(index,a1,a2,a3) {
   var sp = stackSave();
   try {
     return dynCall_didi(index,a1,a2,a3);
-  } catch(e) {
-    stackRestore(sp);
-    if (e !== e+0 && e !== 'longjmp') throw e;
-    _setThrew(1, 0);
-  }
-}
-
-function invoke_vidddi(index,a1,a2,a3,a4,a5) {
-  var sp = stackSave();
-  try {
-    dynCall_vidddi(index,a1,a2,a3,a4,a5);
   } catch(e) {
     stackRestore(sp);
     if (e !== e+0 && e !== 'longjmp') throw e;
