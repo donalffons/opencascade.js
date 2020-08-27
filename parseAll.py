@@ -81,6 +81,27 @@ occtFiles = [
   "BRepFilletAPI_MakeFillet2d.hxx",
   "BRepFilletAPI_MakeFillet.hxx",
 
+  # BRepLib
+  "BRepLib_CheckCurveOnSurface.hxx",
+  "BRepLib_Command.hxx",
+  "BRepLib_EdgeError.hxx",
+  "BRepLib_FaceError.hxx",
+  "BRepLib_FindSurface.hxx",
+  "BRepLib_FuseEdges.hxx",
+  "BRepLib.hxx",
+  "BRepLib_MakeEdge2d.hxx",
+  "BRepLib_MakeEdge.hxx",
+  "BRepLib_MakeFace.hxx",
+  "BRepLib_MakePolygon.hxx",
+  "BRepLib_MakeShape.hxx",
+  "BRepLib_MakeShell.hxx",
+  "BRepLib_MakeSolid.hxx",
+  "BRepLib_MakeVertex.hxx",
+  "BRepLib_MakeWire.hxx",
+  "BRepLib_ShapeModification.hxx",
+  "BRepLib_ShellError.hxx",
+  "BRepLib_WireError.hxx",
+
   # BRepOffsetAPI
   "BRepOffsetAPI_DraftAngle.hxx",
   "BRepOffsetAPI_FindContigousEdges.hxx",
