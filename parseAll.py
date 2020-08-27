@@ -99,7 +99,37 @@ occtFiles = [
   "gp_Vec.hxx",
   "gp_VectorWithNullMagnitude.hxx",
   "gp_XY.hxx",
-  "gp_XYZ.hxx"
+  "gp_XYZ.hxx",
+
+  # TopoDS
+  "TopoDS_AlertWithShape.hxx",
+  "TopoDS_Builder.hxx",
+  "TopoDS_Compound.hxx",
+  "TopoDS_CompSolid.hxx",
+  "TopoDS_Edge.hxx",
+  "TopoDS_Face.hxx",
+  "TopoDS_FrozenShape.hxx",
+  "TopoDS_HShape.hxx",
+  "TopoDS.hxx",
+  "TopoDS_Iterator.hxx",
+  "TopoDS_ListIteratorOfListOfShape.hxx",
+  "TopoDS_ListOfShape.hxx",
+  "TopoDS_LockedShape.hxx",
+  "TopoDS_Shape.hxx",
+  "TopoDS_Shell.hxx",
+  "TopoDS_Solid.hxx",
+  "TopoDS_TCompound.hxx",
+  "TopoDS_TCompSolid.hxx",
+  "TopoDS_TEdge.hxx",
+  "TopoDS_TFace.hxx",
+  "TopoDS_TShape.hxx",
+  "TopoDS_TShell.hxx",
+  "TopoDS_TSolid.hxx",
+  "TopoDS_TVertex.hxx",
+  "TopoDS_TWire.hxx",
+  "TopoDS_UnCompatibleShapes.hxx",
+  "TopoDS_Vertex.hxx",
+  "TopoDS_Wire.hxx"
 ]
 
 for occtFile in occtFiles:
