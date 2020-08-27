@@ -6,7 +6,7 @@
 #include "./BRepBuilderAPI/BRepBuilderAPI_EdgeError.h"
 #include "./BRepBuilderAPI/BRepBuilderAPI_FaceError.h"
 // #include "./BRepBuilderAPI/BRepBuilderAPI_FastSewing.h"
-// #include "./BRepBuilderAPI/BRepBuilderAPI_FindPlane.h"
+#include "./BRepBuilderAPI/BRepBuilderAPI_FindPlane.h"
 #include "./BRepBuilderAPI/BRepBuilderAPI_GTransform.h"
 // #include "./BRepBuilderAPI/BRepBuilderAPI.h"
 #include "./BRepBuilderAPI/BRepBuilderAPI_MakeEdge2d.h"
