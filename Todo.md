@@ -2,7 +2,6 @@
 
 * check errors
 * operators
-* Handle(...) return type
 * expose destructors in a good way
 
 # General Todo's

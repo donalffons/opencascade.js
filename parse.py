@@ -23,6 +23,7 @@ try:
   inputFile = open(args.input, "r").read()
   inputFile = re.sub(r'(.*)(DEFINE_STANDARD_HANDLE[^\n]*)(.*)', r'\1\3', inputFile)
   inputFile = re.sub(r'(.*)(DEFINE_STANDARD_ALLOC[^\n]*)(.*)', r'\1\3', inputFile)
+  inputFile = re.sub(r'(.*)Handle\(([^\)]+)\)(.*)', r'\1 Handle_\2 \3', inputFile)
   cppHeader = CppHeaderParser.CppHeader(inputFile, "string")
   outputFile = open(args.output, "w")
 except CppHeaderParser.CppParseError as e:
@@ -77,10 +78,6 @@ for className in cppHeader.classes:
 
       if method["template"]:
         printMessage("    WARNING: Cannot handle template methods")
-        printMessage("    done")
-        continue
-      if method["name"] == "Handle":
-        printMessage("    WARNING: Cannot handle \"Handle(...)\" return type")
         printMessage("    done")
         continue
 
