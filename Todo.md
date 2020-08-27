@@ -2,3 +2,4 @@
 
 * inheritance
 * check errors
+* handle operators

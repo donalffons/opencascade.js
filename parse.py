@@ -4,6 +4,8 @@ import CppHeaderParser
 import sys
 import argparse
 import os
+import re
+
 parser = argparse.ArgumentParser(description='Convert C++ Header files to Emcsripten Embind code.')
 parser.add_argument('input', metavar='input', help='C++ input file')
 parser.add_argument('output', metavar='output', help='File with Embind code to produce')
@@ -37,10 +39,16 @@ for className in cppHeader.classes:
     overloadIndex = overloads.index(method) + 1
     overloadPostfix = "" if not hasOverloads else "_" + str(overloadIndex)
 
-    returnType = method["rtnType"] if not method["rtnType"].startswith("static") else method["rtnType"][6:]
-    returnType = returnType.strip()
-    returnType = returnType if not returnType.startswith("inline") else returnType[6:]
-    returnType = returnType.strip()
+    methodName = method["name"]
+    returnType = method["rtnType"]
+    if methodName.startswith("operator"):
+      print("    WARNING: Cannot handle operators")
+      print("    done")
+      continue
+
+    returnType = re.sub(r'(\W|^)(static)(.*)', r'\1\3', returnType)
+    returnType = re.sub(r'(\W|^)(inline)(.*)', r'\1\3', returnType)
+    returnType = re.sub(r'(\W|^)(virtual)(.*)', r'\1\3', returnType)
 
     allowRawPointers = ", allow_raw_pointers()" if method["returns_pointer"] else ""
 
@@ -48,15 +56,15 @@ for className in cppHeader.classes:
     castParamTypes = list(map(lambda p : p["type"] if p["constant"] else "const " + p["type"], method["parameters"]))
     cast_start = "reinterpret_cast<" + returnType + " (" + className + "::*)(" + ", ".join(castParamTypes) + ")" + const + ">("
     cast_end = ")"
-
+    
     if hasOverloads:
       paramTypes = list(map(lambda p : p["type"], method["parameters"]))
 
-      functionParam = cast_start + "select_overload<" + returnType + " (" + ", ".join(paramTypes) + ")" + const + ">(&" + className + "::" + method["name"] + ")" + cast_end
+      functionParam = cast_start + "select_overload<" + returnType + " (" + ", ".join(paramTypes) + ")" + const + ">(&" + className + "::" + methodName + ")" + cast_end
     else:
-      functionParam = cast_start + "&" + className + "::" + method["name"] + cast_end
+      functionParam = cast_start + "&" + className + "::" + methodName + cast_end
 
-    nameParam = "\"" + method["name"] + overloadPostfix + "\""
+    nameParam = "\"" + methodName.replace(" ", "_") + overloadPostfix + "\""
     outputFile.write("  .function(" + nameParam + ", " + functionParam + allowRawPointers + ")" + os.linesep)
     print("    done")
   print("  done")
