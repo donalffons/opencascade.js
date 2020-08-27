@@ -36,6 +36,11 @@ occtFiles = [
   "BRepBuilderAPI_VertexInspector.hxx",
   "BRepBuilderAPI_WireError.hxx",
 
+  "BRepFilletAPI_LocalOperation.hxx",
+  "BRepFilletAPI_MakeChamfer.hxx",
+  "BRepFilletAPI_MakeFillet2d.hxx",
+  "BRepFilletAPI_MakeFillet.hxx",
+
   # GC
   "GC_MakeArcOfCircle.hxx",
   "GC_MakeArcOfEllipse.hxx",

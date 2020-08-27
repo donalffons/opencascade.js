@@ -54,6 +54,12 @@ using namespace emscripten;
 #include "BRepBuilderAPI_VertexInspector.hxx"
 #include "BRepBuilderAPI_WireError.hxx"
 
+// BRepFilletAPI
+#include "BRepFilletAPI_LocalOperation.hxx"
+#include "BRepFilletAPI_MakeChamfer.hxx"
+#include "BRepFilletAPI_MakeFillet2d.hxx"
+#include "BRepFilletAPI_MakeFillet.hxx"
+
 // GC
 #include "GC_MakeArcOfCircle.hxx"
 #include "GC_MakeArcOfEllipse.hxx"
