@@ -81,6 +81,24 @@ occtFiles = [
   "BRepFilletAPI_MakeFillet2d.hxx",
   "BRepFilletAPI_MakeFillet.hxx",
 
+  # BRepOffsetAPI
+  "BRepOffsetAPI_DraftAngle.hxx",
+  "BRepOffsetAPI_FindContigousEdges.hxx",
+  "BRepOffsetAPI_MakeDraft.hxx",
+  "BRepOffsetAPI_MakeEvolved.hxx",
+  "BRepOffsetAPI_MakeFilling.hxx",
+  "BRepOffsetAPI_MakeOffset.hxx",
+  "BRepOffsetAPI_MakeOffsetShape.hxx",
+  "BRepOffsetAPI_MakePipe.hxx",
+  "BRepOffsetAPI_MakePipeShell.hxx",
+  "BRepOffsetAPI_MakeThickSolid.hxx",
+  "BRepOffsetAPI_MiddlePath.hxx",
+  "BRepOffsetAPI_NormalProjection.hxx",
+  "BRepOffsetAPI_SequenceOfSequenceOfReal.hxx",
+  "BRepOffsetAPI_SequenceOfSequenceOfShape.hxx",
+  "BRepOffsetAPI_Sewing.hxx",
+  "BRepOffsetAPI_ThruSections.hxx",
+
   # BRepPrimAPI
   "BRepPrimAPI_MakeBox.hxx",
   "BRepPrimAPI_MakeCone.hxx",
