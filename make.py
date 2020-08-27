@@ -300,7 +300,7 @@ def build():
   for path in includePaths:
     includeArgs.append('-I' + os.path.join(".", includePrefix, path))
 
-  emccArgs = ['--bind'] + includeArgs + opencascade_libs
+  emccArgs = ['--bind'] + includeArgs + opencascade_libs + emcc_args
   emscripten.emcc(os.path.join('.', 'embind', 'main.cpp'), emccArgs, temp)
 
   stage('wrap')
