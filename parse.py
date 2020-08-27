@@ -27,13 +27,20 @@ except CppHeaderParser.CppParseError as e:
   sys.exit(1)
 
 for className in cppHeader.classes:
+  theClass = cppHeader.classes[className]
   printMessage("processing class " + className)
-  if len(cppHeader.classes[className]["inherits"]) > 0:
-    baseClass = ", base<" + cppHeader.classes[className]["inherits"][0]["class"] + ">"
+
+  if "template" in theClass:
+    printMessage("  WARNING: Cannot handle template classes")
+    printMessage("done")
+    continue
+
+  if len(theClass["inherits"]) > 0:
+    baseClass = ", base<" + theClass["inherits"][0]["class"] + ">"
   else:
     baseClass = ""
   outputFile.write("class_<" + className + baseClass + ">(\"" + className + "\")" + os.linesep)
-  publicMethods = cppHeader.classes[className]["methods"]["public"]
+  publicMethods = theClass["methods"]["public"]
 
   constructors = [row for row in publicMethods if row["name"] == className]
   hasOverloadedConstructors = True if len(constructors) > 1 else False
@@ -41,10 +48,11 @@ for className in cppHeader.classes:
 
   printMessage("  processing methods")
   for method in publicMethods:
-    if hasOverloadedConstructors and method["constructor"]:
+    if hasOverloadedConstructors and method["name"] == className:
       continue
 
-    if method["constructor"]:
+    if method["name"] == className:
+      printMessage("    processing constructor " + method["name"])
       paramTypes = list(map(lambda p : p["type"], method["parameters"]))
       outputFile.write("  .constructor<" + ", ".join(paramTypes) + ">()" + os.linesep)
     else:
@@ -98,12 +106,7 @@ for className in cppHeader.classes:
   if hasOverloadedConstructors:
     printMessage("  processing overloaded constructors")
     for method in publicMethods:
-      if not method["constructor"]:
-        continue
-
       if not method["name"] == className:
-        printMessage("    WARNING: Constructor incorrectly identified")
-        printMessage("    done")
         continue
 
       printMessage("    processing constructor " + method["name"])

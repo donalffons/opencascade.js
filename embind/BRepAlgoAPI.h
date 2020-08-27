@@ -5,6 +5,6 @@
 // #include "./BRepAlgoAPI/BRepAlgoAPI_Common.h"
 // #include "./BRepAlgoAPI/BRepAlgoAPI_Cut.h"
 // #include "./BRepAlgoAPI/BRepAlgoAPI_Defeaturing.h"
-// #include "./BRepAlgoAPI/BRepAlgoAPI_Fuse.h"
+#include "./BRepAlgoAPI/BRepAlgoAPI_Fuse.h"
 // #include "./BRepAlgoAPI/BRepAlgoAPI_Section.h"
 #include "./BRepAlgoAPI/BRepAlgoAPI_Splitter.h"

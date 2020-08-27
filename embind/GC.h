@@ -11,7 +11,7 @@
 #include "./GC/GC_MakeMirror.h"
 #include "./GC/GC_MakePlane.h"
 #include "./GC/GC_MakeRotation.h"
-// #include "./GC/GC_MakeScale.h"
+#include "./GC/GC_MakeScale.h"
 #include "./GC/GC_MakeSegment.h"
 #include "./GC/GC_MakeTranslation.h"
 #include "./GC/GC_MakeTrimmedCone.h"
