@@ -21,7 +21,11 @@ except CppHeaderParser.CppParseError as e:
 
 for className in cppHeader.classes:
   print("processing class " + className)
-  outputFile.write("class_<" + className + ">(\"" + className + "\")" + os.linesep)
+  if len(cppHeader.classes[className]["inherits"]) > 0:
+    baseClass = ", base<" + cppHeader.classes[className]["inherits"][0]["class"] + ">"
+  else:
+    baseClass = ""
+  outputFile.write("class_<" + className + baseClass + ">(\"" + className + "\")" + os.linesep)
   publicMethods = cppHeader.classes[className]["methods"]["public"]
   print("  processing methods")
   for method in publicMethods:
