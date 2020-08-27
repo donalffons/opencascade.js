@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/python3.8
+
 import CppHeaderParser
 import sys
 import argparse
