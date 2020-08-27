@@ -83,4 +83,12 @@ for className in cppHeader.classes:
   print("  done")
   print("done")
 
+for enum in cppHeader.enums:
+  print("processing class " + enum["name"])
+  outputFile.write("enum_<" + enum["name"] + ">(\"" + enum["name"] + "\")" + os.linesep)
+  for value in enum["values"]:
+    outputFile.write("  .value(\"" + value["name"] + "\", " + enum["name"] + "::" + value["name"] + ")" + os.linesep)
+  outputFile.write(";" + os.linesep)
+  print("done")
+
 outputFile.close()
