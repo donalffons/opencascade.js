@@ -283,6 +283,14 @@ occtFiles = [
   "gp_XY.hxx",
   "gp_XYZ.hxx",
 
+  # STEPControl
+  "STEPControl_ActorRead.hxx",
+  "STEPControl_ActorWrite.hxx",
+  "STEPControl_Controller.hxx",
+  "STEPControl_Reader.hxx",
+  "STEPControl_StepModelType.hxx",
+  "STEPControl_Writer.hxx",
+
   # TopExp
   "TopExp_Explorer.hxx",
   "TopExp.hxx",

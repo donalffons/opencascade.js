@@ -340,6 +340,14 @@ using namespace emscripten;
 #include "gp_XY.hxx"
 #include "gp_XYZ.hxx"
 
+// STEPControl
+#include "STEPControl_ActorRead.hxx"
+#include "STEPControl_ActorWrite.hxx"
+#include "STEPControl_Controller.hxx"
+#include "STEPControl_Reader.hxx"
+#include "STEPControl_StepModelType.hxx"
+#include "STEPControl_Writer.hxx"
+
 // TopExp
 #include "TopExp_Explorer.hxx"
 #include "TopExp.hxx"
@@ -462,4 +470,5 @@ EMSCRIPTEN_BINDINGS(opencascadejs) {
   #include "./TopExp.h"
   #include "./TopoDS.h"
   #include "./TopTools.h"
+  #include "./STEPControl.h"
 }
