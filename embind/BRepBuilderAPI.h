@@ -1,7 +1,7 @@
 #include "./BRepBuilderAPI/BRepBuilderAPI_BndBoxTreeSelector.h"
 #include "./BRepBuilderAPI/BRepBuilderAPI_CellFilter.h"
 #include "./BRepBuilderAPI/BRepBuilderAPI_Collect.h"
-// #include "./BRepBuilderAPI/BRepBuilderAPI_Command.h"
+#include "./BRepBuilderAPI/BRepBuilderAPI_Command.h"
 #include "./BRepBuilderAPI/BRepBuilderAPI_Copy.h"
 #include "./BRepBuilderAPI/BRepBuilderAPI_EdgeError.h"
 #include "./BRepBuilderAPI/BRepBuilderAPI_FaceError.h"

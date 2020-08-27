@@ -44,7 +44,6 @@ for className in cppHeader.classes:
 
   constructors = [row for row in publicMethods if row["name"] == className]
   hasOverloadedConstructors = True if len(constructors) > 1 else False
-  printMessage(hasOverloadedConstructors)
 
   printMessage("  processing methods")
   for method in publicMethods:
@@ -57,6 +56,18 @@ for className in cppHeader.classes:
       outputFile.write("  .constructor<" + ", ".join(paramTypes) + ">()" + os.linesep)
     else:
       printMessage("    processing method " + method["name"])
+
+      methodName = method["name"]
+      returnType = method["rtnType"]
+      if methodName.startswith("operator"):
+        printMessage("    WARNING: Cannot handle operators")
+        printMessage("  done")
+        continue
+      if methodName == "Standard_DEPRECATED":
+        printMessage("    WARNING: Ignoring...")
+        printMessage("    done")
+        continue
+
       if method["template"]:
         printMessage("    WARNING: Cannot handle template methods")
         printMessage("    done")
@@ -70,13 +81,6 @@ for className in cppHeader.classes:
       hasOverloads = True if len(overloads) > 1 else False
       overloadIndex = overloads.index(method) + 1
       overloadPostfix = "" if not hasOverloads else "_" + str(overloadIndex)
-
-      methodName = method["name"]
-      returnType = method["rtnType"]
-      if methodName.startswith("operator"):
-        printMessage("    WARNING: Cannot handle operators")
-        printMessage("    done")
-        continue
 
       returnType = re.sub(r'(\W|^)(static)(.*)', r'\1\3', returnType)
       returnType = re.sub(r'(\W|^)(inline)(.*)', r'\1\3', returnType)
