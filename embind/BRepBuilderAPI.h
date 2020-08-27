@@ -21,7 +21,7 @@
 #include "./BRepBuilderAPI/BRepBuilderAPI_ModifyShape.h"
 #include "./BRepBuilderAPI/BRepBuilderAPI_NurbsConvert.h"
 #include "./BRepBuilderAPI/BRepBuilderAPI_PipeError.h"
-// #include "./BRepBuilderAPI/BRepBuilderAPI_Sewing.h"
+#include "./BRepBuilderAPI/BRepBuilderAPI_Sewing.h"
 #include "./BRepBuilderAPI/BRepBuilderAPI_ShapeModification.h"
 #include "./BRepBuilderAPI/BRepBuilderAPI_ShellError.h"
 #include "./BRepBuilderAPI/BRepBuilderAPI_Transform.h"

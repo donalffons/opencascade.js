@@ -4,3 +4,4 @@
 * operators
 * Handle(...) return type
 * incorrectly identified constructors
+* expose destructors in a good way

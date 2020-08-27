@@ -20,7 +20,10 @@ def printMessage(text, level="DEBUG"):
     print(text)
 
 try:
-  cppHeader = CppHeaderParser.CppHeader(args.input)
+  inputFile = open(args.input, "r").read()
+  inputFile = re.sub(r'(.*)(DEFINE_STANDARD_HANDLE[^\n]*)(.*)', r'\1\3', inputFile)
+  inputFile = re.sub(r'(.*)(DEFINE_STANDARD_ALLOC[^\n]*)(.*)', r'\1\3', inputFile)
+  cppHeader = CppHeaderParser.CppHeader(inputFile, "string")
   outputFile = open(args.output, "w")
 except CppHeaderParser.CppParseError as e:
   print(e)
@@ -51,7 +54,11 @@ for className in cppHeader.classes:
       continue
 
     if method["name"] == className:
-      printMessage("    processing constructor " + method["name"])
+      printMessage("    processing " + ("constructor" if not method["destructor"] else "destructor"))
+      if method["destructor"]:
+        printMessage("    WARNING: Ignoring destructors")
+        printMessage("    done")
+        continue
       paramTypes = list(map(lambda p : p["type"], method["parameters"]))
       outputFile.write("  .constructor<" + ", ".join(paramTypes) + ">()" + os.linesep)
     else:
