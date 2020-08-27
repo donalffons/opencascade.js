@@ -36,6 +36,7 @@ occtFiles = [
   "BRepBuilderAPI_VertexInspector.hxx",
   "BRepBuilderAPI_WireError.hxx",
 
+  # BRepFilletAPI
   "BRepFilletAPI_LocalOperation.hxx",
   "BRepFilletAPI_MakeChamfer.hxx",
   "BRepFilletAPI_MakeFillet2d.hxx",
@@ -105,6 +106,11 @@ occtFiles = [
   "gp_VectorWithNullMagnitude.hxx",
   "gp_XY.hxx",
   "gp_XYZ.hxx",
+
+  # TopExp
+  "TopExp_Explorer.hxx",
+  "TopExp.hxx",
+  "TopExp_Stack.hxx",
 
   # TopoDS
   "TopoDS_AlertWithShape.hxx",

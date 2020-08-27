@@ -125,6 +125,11 @@ using namespace emscripten;
 #include "gp_XY.hxx"
 #include "gp_XYZ.hxx"
 
+// TopExp
+#include "TopExp_Explorer.hxx"
+#include "TopExp.hxx"
+#include "TopExp_Stack.hxx"
+
 // TopoDS
 #include "TopoDS_AlertWithShape.hxx"
 #include "TopoDS_Builder.hxx"
