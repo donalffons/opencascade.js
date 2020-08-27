@@ -105,6 +105,7 @@ using namespace emscripten;
 
 #define Standard_EXPORT
 #define Standard_NODISCARD
+#define DEFINE_STANDARD_ALLOC
 
 #define really_unparen(...) __VA_ARGS__
 #define invoke(expr) expr
