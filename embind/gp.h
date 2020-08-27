@@ -25,33 +25,18 @@
 // gp_Parab
 // gp_Pln
 // gp_Pnt2d
-// gp_Pnt
 #include "./gp/gp_Pnt.h"
-// gp_Quaternion
 #include "./gp/gp_Quaternion.h"
-// gp_QuaternionNLerp
 // #include "./gp/gp_QuaternionNLerp.h"
-// gp_QuaternionSLerp
 // #include "./gp/gp_QuaternionSLerp.h"
-// gp_Sphere
 #include "./gp/gp_Sphere.h"
-// gp_Torus
 #include "./gp/gp_Torus.h"
-// gp_Trsf2d
 #include "./gp/gp_Trsf2d.h"
-// gp_TrsfForm
 #include "./gp/gp_TrsfForm.h"
-// gp_Trsf
 #include "./gp/gp_Trsf.h"
-// gp_TrsfNLerp
 // #include "./gp/gp_TrsfNLerp.h"
-// gp_Vec2d
 #include "./gp/gp_Vec2d.h"
-// gp_Vec
 #include "./gp/gp_Vec.h"
-// gp_VectorWithNullMagnitude
 #include "./gp/gp_VectorWithNullMagnitude.h"
-// gp_XY
 #include "./gp/gp_XY.h"
-// gp_XYZ
 #include "./gp/gp_XYZ.h"
