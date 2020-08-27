@@ -669,8 +669,8 @@ var wasmMemory;
 // so this creates a (non-native-wasm) table for us.
 
 var wasmTable = new WebAssembly.Table({
-  'initial': 7157,
-  'maximum': 7157,
+  'initial': 7295,
+  'maximum': 7295,
   'element': 'anyfunc'
 });
 
@@ -1291,11 +1291,11 @@ function updateGlobalBufferAndViews(buf) {
 }
 
 var STATIC_BASE = 1024,
-    STACK_BASE = 6807584,
+    STACK_BASE = 6810368,
     STACKTOP = STACK_BASE,
-    STACK_MAX = 1564704,
-    DYNAMIC_BASE = 6807584,
-    DYNAMICTOP_PTR = 1564544;
+    STACK_MAX = 1567488,
+    DYNAMIC_BASE = 6810368,
+    DYNAMICTOP_PTR = 1567328;
 
 assert(STACK_BASE % 16 === 0, 'stack must start aligned');
 assert(DYNAMIC_BASE % 16 === 0, 'heap must start aligned');
@@ -1858,7 +1858,7 @@ var ASM_CONSTS = {
 
 
 
-// STATICTOP = STATIC_BASE + 1563680;
+// STATICTOP = STATIC_BASE + 1566464;
 /* global initializers */  __ATINIT__.push({ func: function() { ___wasm_call_ctors() } });
 
 
@@ -6357,7 +6357,7 @@ var ASM_CONSTS = {
     }
 
   function _emscripten_get_sbrk_ptr() {
-      return 1564544;
+      return 1567328;
     }
 
   
