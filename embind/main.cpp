@@ -1,6 +1,18 @@
 #include <emscripten/bind.h>
 using namespace emscripten;
 
+// BRepAlgoAPI
+#include "BRepAlgoAPI_Algo.hxx"
+#include "BRepAlgoAPI_BooleanOperation.hxx"
+#include "BRepAlgoAPI_BuilderAlgo.hxx"
+#include "BRepAlgoAPI_Check.hxx"
+#include "BRepAlgoAPI_Common.hxx"
+#include "BRepAlgoAPI_Cut.hxx"
+#include "BRepAlgoAPI_Defeaturing.hxx"
+#include "BRepAlgoAPI_Fuse.hxx"
+#include "BRepAlgoAPI_Section.hxx"
+#include "BRepAlgoAPI_Splitter.hxx"
+
 // BRepBuilderAPI
 #include "BRepBuilderAPI_BndBoxTreeSelector.hxx"
 #include "BRepBuilderAPI_CellFilter.hxx"
