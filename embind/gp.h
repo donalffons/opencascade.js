@@ -34,7 +34,7 @@
 #include "./gp/gp_Trsf2d.h"
 #include "./gp/gp_TrsfForm.h"
 #include "./gp/gp_Trsf.h"
-// #include "./gp/gp_TrsfNLerp.h"
+#include "./gp/gp_TrsfNLerp.h"
 #include "./gp/gp_Vec2d.h"
 #include "./gp/gp_Vec.h"
 #include "./gp/gp_VectorWithNullMagnitude.h"
