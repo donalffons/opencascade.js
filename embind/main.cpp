@@ -340,6 +340,15 @@ using namespace emscripten;
 #include "gp_XY.hxx"
 #include "gp_XYZ.hxx"
 
+// IGESControl
+#include "IGESControl_ActorWrite.hxx"
+#include "IGESControl_AlgoContainer.hxx"
+#include "IGESControl_Controller.hxx"
+#include "IGESControl_IGESBoundary.hxx"
+#include "IGESControl_Reader.hxx"
+#include "IGESControl_ToolContainer.hxx"
+#include "IGESControl_Writer.hxx"
+
 // STEPControl
 #include "STEPControl_ActorRead.hxx"
 #include "STEPControl_ActorWrite.hxx"
@@ -467,8 +476,9 @@ EMSCRIPTEN_BINDINGS(opencascadejs) {
   #include "./Geom.h"
   #include "./Geom2d.h"
   #include "./gp.h"
+  #include "./IGESControl.h"
+  #include "./STEPControl.h"
   #include "./TopExp.h"
   #include "./TopoDS.h"
   #include "./TopTools.h"
-  #include "./STEPControl.h"
 }

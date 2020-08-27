@@ -283,6 +283,14 @@ occtFiles = [
   "gp_XY.hxx",
   "gp_XYZ.hxx",
 
+  "IGESControl_ActorWrite.hxx",
+  "IGESControl_AlgoContainer.hxx",
+  "IGESControl_Controller.hxx",
+  "IGESControl_IGESBoundary.hxx",
+  "IGESControl_Reader.hxx",
+  "IGESControl_ToolContainer.hxx",
+  "IGESControl_Writer.hxx",
+
   # STEPControl
   "STEPControl_ActorRead.hxx",
   "STEPControl_ActorWrite.hxx",
