@@ -190,6 +190,23 @@ using namespace emscripten;
 #include "GC_MakeTrimmedCylinder.hxx"
 #include "GC_Root.hxx"
 
+// GCE2d
+#include "GCE2d_MakeArcOfCircle.hxx"
+#include "GCE2d_MakeArcOfEllipse.hxx"
+#include "GCE2d_MakeArcOfHyperbola.hxx"
+#include "GCE2d_MakeArcOfParabola.hxx"
+#include "GCE2d_MakeCircle.hxx"
+#include "GCE2d_MakeEllipse.hxx"
+#include "GCE2d_MakeHyperbola.hxx"
+#include "GCE2d_MakeLine.hxx"
+#include "GCE2d_MakeMirror.hxx"
+#include "GCE2d_MakeParabola.hxx"
+#include "GCE2d_MakeRotation.hxx"
+#include "GCE2d_MakeScale.hxx"
+#include "GCE2d_MakeSegment.hxx"
+#include "GCE2d_MakeTranslation.hxx"
+#include "GCE2d_Root.hxx"
+
 // Geom
 #include "Geom_Axis1Placement.hxx"
 #include "Geom_Axis2Placement.hxx"
