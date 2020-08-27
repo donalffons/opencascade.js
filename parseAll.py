@@ -42,6 +42,20 @@ occtFiles = [
   "BRepFilletAPI_MakeFillet2d.hxx",
   "BRepFilletAPI_MakeFillet.hxx",
 
+  # BRepPrimAPI
+  "BRepPrimAPI_MakeBox.hxx",
+  "BRepPrimAPI_MakeCone.hxx",
+  "BRepPrimAPI_MakeCylinder.hxx",
+  "BRepPrimAPI_MakeHalfSpace.hxx",
+  "BRepPrimAPI_MakeOneAxis.hxx",
+  "BRepPrimAPI_MakePrism.hxx",
+  "BRepPrimAPI_MakeRevol.hxx",
+  "BRepPrimAPI_MakeRevolution.hxx",
+  "BRepPrimAPI_MakeSphere.hxx",
+  "BRepPrimAPI_MakeSweep.hxx",
+  "BRepPrimAPI_MakeTorus.hxx",
+  "BRepPrimAPI_MakeWedge.hxx",
+
   # GC
   "GC_MakeArcOfCircle.hxx",
   "GC_MakeArcOfEllipse.hxx",
