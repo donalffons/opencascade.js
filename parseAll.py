@@ -36,6 +36,27 @@ occtFiles = [
   "BRepBuilderAPI_VertexInspector.hxx",
   "BRepBuilderAPI_WireError.hxx",
 
+  # GC
+  "GC_MakeArcOfCircle.hxx",
+  "GC_MakeArcOfEllipse.hxx",
+  "GC_MakeArcOfHyperbola.hxx",
+  "GC_MakeArcOfParabola.hxx",
+  "GC_MakeCircle.hxx",
+  "GC_MakeConicalSurface.hxx",
+  "GC_MakeCylindricalSurface.hxx",
+  "GC_MakeEllipse.hxx",
+  "GC_MakeHyperbola.hxx",
+  "GC_MakeLine.hxx",
+  "GC_MakeMirror.hxx",
+  "GC_MakePlane.hxx",
+  "GC_MakeRotation.hxx",
+  "GC_MakeScale.hxx",
+  "GC_MakeSegment.hxx",
+  "GC_MakeTranslation.hxx",
+  "GC_MakeTrimmedCone.hxx",
+  "GC_MakeTrimmedCylinder.hxx",
+  "GC_Root.hxx",
+
   # gp
   "gp_Ax1.hxx",
   "gp_Ax22d.hxx",

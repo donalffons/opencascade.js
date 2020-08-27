@@ -46,6 +46,10 @@ for className in cppHeader.classes:
         print("    WARNING: Cannot handle template methods")
         print("    done")
         continue
+      if method["name"] == "Handle":
+        print("    WARNING: Cannot handle \"Handle(...)\" return type")
+        print("    done")
+        continue
 
       overloads = [row for row in publicMethods if row["name"] == method["name"]]
       hasOverloads = True if len(overloads) > 1 else False
@@ -88,6 +92,11 @@ for className in cppHeader.classes:
     print("  processing overloaded constructors")
     for method in publicMethods:
       if not method["constructor"]:
+        continue
+
+      if not method["name"] == className:
+        print("    WARNING: Constructor incorrectly identified")
+        print("    done")
         continue
 
       print("    processing constructor " + method["name"])
