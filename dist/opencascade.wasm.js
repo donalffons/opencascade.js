@@ -669,8 +669,8 @@ var wasmMemory;
 // so this creates a (non-native-wasm) table for us.
 
 var wasmTable = new WebAssembly.Table({
-  'initial': 6514,
-  'maximum': 6514,
+  'initial': 6540,
+  'maximum': 6540,
   'element': 'anyfunc'
 });
 
