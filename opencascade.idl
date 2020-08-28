@@ -4070,6 +4070,21 @@ interface Poly_PolygonOnTriangulation {
 	// Handle_TColStd_HArray1OfReal Parameters();
 };
 
+interface BRepBuilderAPI_Copy{
+  void BRepBuilderAPI_Copy();
+  void BRepBuilderAPI_Copy(
+    [Const, Ref] TopoDS_Shape S,
+		[Const] optional Standard_Boolean copyGeom = true,
+    [Const] optional Standard_Boolean copyMesh = false
+  );
+
+  void Perform(
+    [Const, Ref] TopoDS_Shape S,
+    [Const] optional Standard_Boolean copyGeom = true,
+    [Const] optional Standard_Boolean copyMesh = false
+  );
+};
+
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 enum STEPControl_StepModelType
