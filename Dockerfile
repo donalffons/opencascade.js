@@ -32,6 +32,6 @@ COPY . .
 
 ENTRYPOINT \
   source /emscripten/emsdk_env.sh &&\
-  python3.8 make.py && \
+  # python3.8 make.py && \
   python3.8 make.py wasm && \
   yarn && yarn generateTypes
