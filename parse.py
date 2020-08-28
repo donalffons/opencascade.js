@@ -94,7 +94,7 @@ for className in cppHeader.classes:
 
       const = " const" if method["const"] else ""
       castParamTypes = list(map(lambda p : p["type"] if p["constant"] else "const " + p["type"], method["parameters"]))
-      cast_start = "reinterpret_cast<" + returnType + " (" + className + "::*)(" + ", ".join(castParamTypes) + ")" + const + ">("
+      cast_start = "reinterpret_cast<" + returnType + " (" + (className + "::" if not method["static"] else "") + "*)(" + ", ".join(castParamTypes) + ")" + const + ">("
       cast_end = ")"
       
       if hasOverloads:
@@ -105,7 +105,7 @@ for className in cppHeader.classes:
         functionParam = cast_start + "&" + className + "::" + methodName + cast_end
 
       nameParam = "\"" + methodName.replace(" ", "_") + overloadPostfix + "\""
-      outputFile.write("  .function(" + nameParam + ", " + functionParam + allowRawPointers + ")" + os.linesep)
+      outputFile.write(("  .function(" if not method["static"] else "  .class_function(") + nameParam + ", " + functionParam + allowRawPointers + ")" + os.linesep)
     printMessage("    done")
   printMessage("  done")
 
@@ -123,9 +123,9 @@ for className in cppHeader.classes:
       overloadIndex = overloads.index(method) + 1
       overloadPostfix = "" if not hasOverloads else "_" + str(overloadIndex)
 
-      paramsFull = list(map(lambda p : p["type"] + " " + p["name"], method["parameters"]))
-      paramsName = list(map(lambda p : p["name"], method["parameters"]))
-      paramsType = list(map(lambda p : p["type"], method["parameters"]))
+      paramsFull = list(map(lambda p : p["type"] + " " + ( p["name"] if not p["name"] == "&" else "&param"), method["parameters"]))
+      paramsName = list(map(lambda p : p["name"] if not p["name"] == "&" else "param", method["parameters"]))
+      paramsType = list(map(lambda p : p["type"] if not p["name"] == "&" else p["type"]+"&", method["parameters"]))
 
       outputFile.write("  overloadedConstructor(" + className + ", " + className + overloadPostfix + ", (" + ", ".join(paramsFull) + "), (" + ", ".join(paramsName) + "), (" + ", ".join(paramsType) + "));" + os.linesep)
       printMessage("    done")
