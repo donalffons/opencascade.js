@@ -463,6 +463,34 @@ using namespace emscripten;
   class_<overloadedClass, base<baseClass>>(#overloadedClass) \
     .constructor<unparen(parameterTypes)>();
 
+#define handleType(className, handleClassName) \
+  class_<handleClassName>(#handleClassName) \
+    .constructor<>() \
+    .function("Nullify", &handleClassName::Nullify) \
+    .function("IsNull", &handleClassName::IsNull) \
+    .function("reset", &handleClassName::reset, allow_raw_pointers()) \
+    .function("operator_assign_1", select_overload<handleClassName&(const handleClassName&)>(&handleClassName::operator=)) \
+    .function("operator_assign_2", select_overload<handleClassName&(const className*)>(&handleClassName::operator=), allow_raw_pointers()) \
+    .function("operator_assign_3", select_overload<handleClassName&(handleClassName&&)>(&handleClassName::operator=)) \
+    .function("get", select_overload<className*()const>(&handleClassName::get), allow_raw_pointers()) \
+    .function("operator_dereference", &handleClassName::operator->, allow_raw_pointers()) \
+    .function("operator_indirect", &handleClassName::operator*) \
+    .function("operator_bool", &handleClassName::operator bool)
+    ;
+#define handleTypeAbstract(className, handleClassName) \
+  class_<handleClassName>(#handleClassName) \
+    .constructor<>() \
+    .function("Nullify", &handleClassName::Nullify) \
+    .function("IsNull", &handleClassName::IsNull) \
+    .function("reset", &handleClassName::reset, allow_raw_pointers()) \
+    .function("operator_assign_1", select_overload<handleClassName&(const handleClassName&)>(&handleClassName::operator=)) \
+    .function("operator_assign_2", select_overload<handleClassName&(const className*)>(&handleClassName::operator=), allow_raw_pointers()) \
+    .function("operator_assign_3", select_overload<handleClassName&(handleClassName&&)>(&handleClassName::operator=)) \
+    .function("get", select_overload<className*()const>(&handleClassName::get), allow_raw_pointers()) \
+    .function("operator_dereference", &handleClassName::operator->, allow_raw_pointers()) \
+    .function("operator_bool", &handleClassName::operator bool)
+    ;
+
 typedef Handle(Geom_BezierCurve) Handle_Geom_BezierCurve;
 typedef Handle(Geom_BSplineCurve) Handle_Geom_BSplineCurve;
 typedef Handle(Geom_Circle) Handle_Geom_Circle;
@@ -479,15 +507,28 @@ typedef Handle(Poly_Triangulation) Handle_Poly_Triangulation;
 typedef Handle(Standard_Type) Handle_Standard_Type;
 typedef Handle(TColStd_HSequenceOfTransient) Handle_TColStd_HSequenceOfTransient;
 typedef Handle(Transfer_TransientProcess) Handle_Tansfer_TransientProcess;
-typedef Handle(XSControl_WorkSession) Handle_XSControl_WorkSession;
 
-typedef Handle(TopOpeBRepBuild_HBuilder) Handle_TopOpeBRepBuild_HBuilder;
 typedef Handle(Law_Function) Handle_Law_Function;
 typedef Handle(TopOpeBRepBuild_HBuilder) Handle_TopOpeBRepBuild_HBuilder;
+typedef Handle(XSControl_WorkSession) Handle_XSControl_WorkSession;
 
 EMSCRIPTEN_BINDINGS(opencascadejs) {
-  class_<Handle_Geom_Curve>("Handle_Geom_Curve");
-  class_<Handle_Geom_TrimmedCurve>("Handle_Geom_TrimmedCurve");
+  handleTypeAbstract(Geom_Curve, Handle_Geom_Curve);
+  handleType(Geom_TrimmedCurve, Handle_Geom_TrimmedCurve);
+  handleType(Geom_BezierCurve, Handle_Geom_BezierCurve);
+  handleType(Geom_BSplineCurve, Handle_Geom_BSplineCurve);
+  handleType(Geom_Circle, Handle_Geom_Circle);
+  handleType(Geom_Ellipse, Handle_Geom_Ellipse);
+  handleType(Geom_Hyperbola, Handle_Geom_Hyperbola);
+  handleType(Geom_Plane, Handle_Geom_Plane);
+  handleTypeAbstract(Geom_Surface, Handle_Geom_Surface);
+  handleTypeAbstract(Message_ProgressIndicator, Handle_Message_ProgressIndicator);
+  handleType(Poly_Polygon3D, Handle_Poly_Polygon3D);
+  handleType(Poly_PolygonOnTriangulation, Handle_Poly_PolygonOnTriangulation);
+  handleType(Poly_Triangulation, Handle_Poly_Triangulation);
+  handleType(Standard_Type, Handle_Standard_Type);
+  handleType(TColStd_HSequenceOfTransient, Handle_TColStd_HSequenceOfTransient);
+  handleType(Transfer_TransientProcess, Handle_Transfer_TransientProcess);
   
   #include "./BRep.h"
   #include "./BRepAlgoAPI.h"
