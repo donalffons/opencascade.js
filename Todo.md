@@ -3,6 +3,7 @@
 * check errors
 * operators
 * expose destructors in a good way
+* BRepAlgoAPI_Fuse seems wrong
 
 # General Todo's
 

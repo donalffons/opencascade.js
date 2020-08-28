@@ -134,6 +134,16 @@ occtFiles = [
   "BRepPrimAPI_MakeTorus.hxx",
   "BRepPrimAPI_MakeWedge.hxx",
 
+  # ChFi3d
+  "ChFi3d_Builder_0.hxx",
+  "ChFi3d_Builder.hxx",
+  "ChFi3d_ChBuilder.hxx",
+  "ChFi3d_FilBuilder.hxx",
+  "ChFi3d_FilletShape.hxx",
+  "ChFi3d.hxx",
+  "ChFi3d_SearchSing.hxx",
+
+  # Geom
   "Geom_Axis1Placement.hxx",
   "Geom_Axis2Placement.hxx",
   "Geom_AxisPlacement.hxx",
@@ -382,6 +392,12 @@ occtFiles = [
   "STEPControl_StepModelType.hxx",
   "STEPControl_Writer.hxx",
 
+  # TopAbs
+  "TopAbs.hxx",
+  "TopAbs_Orientation.hxx",
+  "TopAbs_ShapeEnum.hxx",
+  "TopAbs_State.hxx",
+
   # TopExp
   "TopExp_Explorer.hxx",
   "TopExp.hxx",
@@ -396,12 +412,13 @@ occtFiles = [
   "TopoDS_Face.hxx",
   "TopoDS_FrozenShape.hxx",
   "TopoDS_HShape.hxx",
-  "TopoDS.hxx",
+
+  # "TopoDS.hxx",
   "TopoDS_Iterator.hxx",
   "TopoDS_ListIteratorOfListOfShape.hxx",
   "TopoDS_ListOfShape.hxx",
   "TopoDS_LockedShape.hxx",
-  "TopoDS_Shape.hxx",
+  # "TopoDS_Shape.hxx",
   "TopoDS_Shell.hxx",
   "TopoDS_Solid.hxx",
   "TopoDS_TCompound.hxx",

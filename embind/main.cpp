@@ -190,6 +190,15 @@ using namespace emscripten;
 #include "BRepPrimAPI_MakeTorus.hxx"
 #include "BRepPrimAPI_MakeWedge.hxx"
 
+// ChFi3d
+#include "ChFi3d_Builder_0.hxx"
+#include "ChFi3d_Builder.hxx"
+#include "ChFi3d_ChBuilder.hxx"
+#include "ChFi3d_FilBuilder.hxx"
+#include "ChFi3d_FilletShape.hxx"
+#include "ChFi3d.hxx"
+#include "ChFi3d_SearchSing.hxx"
+
 // GC
 #include "GC_MakeArcOfCircle.hxx"
 #include "GC_MakeArcOfEllipse.hxx"
@@ -440,6 +449,12 @@ using namespace emscripten;
 #include "STEPControl_StepModelType.hxx"
 #include "STEPControl_Writer.hxx"
 
+// TopAbs
+#include "TopAbs.hxx"
+#include "TopAbs_Orientation.hxx"
+#include "TopAbs_ShapeEnum.hxx"
+#include "TopAbs_State.hxx"
+
 // TopExp
 #include "TopExp_Explorer.hxx"
 #include "TopExp.hxx"
@@ -611,6 +626,7 @@ EMSCRIPTEN_BINDINGS(opencascadejs) {
   #include "./BRepLib.h"
   #include "./BRepOffsetAPI.h"
   #include "./BRepPrimAPI.h"
+  #include "./ChFi3d.h"
   #include "./GC.h"
   #include "./GCE2d.h"
   #include "./Geom.h"
@@ -619,6 +635,7 @@ EMSCRIPTEN_BINDINGS(opencascadejs) {
   #include "./IGESControl.h"
   #include "./Standard.h"
   #include "./STEPControl.h"
+  #include "./TopAbs.h"
   #include "./TopExp.h"
   #include "./TopoDS.h"
   #include "./TopTools.h"
