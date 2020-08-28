@@ -28,7 +28,7 @@ occtFiles = [
   "BRep_PolygonOnTriangulation.hxx",
   "BRep_TEdge.hxx",
   "BRep_TFace.hxx",
-  "BRep_Tool.hxx",
+  # "BRep_Tool.hxx",
   "BRep_TVertex.hxx",
 
   # BRepAlgoAPI
@@ -403,6 +403,17 @@ occtFiles = [
   "TopExp.hxx",
   "TopExp_Stack.hxx",
 
+  # TopLoc
+  "TopLoc_Datum3D.hxx",
+  "TopLoc_IndexedMapOfLocation.hxx",
+  "TopLoc_ItemLocation.hxx",
+  "TopLoc_Location.hxx",
+  "TopLoc_MapIteratorOfMapOfLocation.hxx",
+  "TopLoc_MapLocationHasher.hxx",
+  "TopLoc_MapOfLocation.hxx",
+  "TopLoc_SListNodeOfItemLocation.hxx",
+  "TopLoc_SListOfItemLocation.hxx",
+
   # TopoDS
   "TopoDS_AlertWithShape.hxx",
   "TopoDS_Builder.hxx",
@@ -434,6 +445,7 @@ occtFiles = [
   "TopoDS_Vertex.hxx",
   "TopoDS_Wire.hxx",
 
+  # TopTools
   "TopTools_Array1OfListOfShape.hxx",
   "TopTools_Array1OfShape.hxx",
   "TopTools_Array2OfShape.hxx",

@@ -460,6 +460,17 @@ using namespace emscripten;
 #include "TopExp.hxx"
 #include "TopExp_Stack.hxx"
 
+// TopLoc
+#include "TopLoc_Datum3D.hxx"
+#include "TopLoc_IndexedMapOfLocation.hxx"
+#include "TopLoc_ItemLocation.hxx"
+#include "TopLoc_Location.hxx"
+#include "TopLoc_MapIteratorOfMapOfLocation.hxx"
+#include "TopLoc_MapLocationHasher.hxx"
+#include "TopLoc_MapOfLocation.hxx"
+#include "TopLoc_SListNodeOfItemLocation.hxx"
+#include "TopLoc_SListOfItemLocation.hxx"
+
 // TopoDS
 #include "TopoDS_AlertWithShape.hxx"
 #include "TopoDS_Builder.hxx"
@@ -545,6 +556,13 @@ using namespace emscripten;
 #include "BRepPrimAPI/BRepPrimAPI_MakeTorus.hxx"
 #include "GC/GC_MakeArcOfCircle.hxx"
 #include "GC/GC_MakeSegment.hxx"
+
+// https://github.com/emscripten-core/emscripten/issues/5587
+namespace emscripten {
+  namespace internal {
+    template<> void raw_destructor<BRepAlgoAPI_Algo>(BRepAlgoAPI_Algo* ptr) { /* do nothing */ }
+  }
+}
 
 #define Standard_EXPORT
 #define Standard_NODISCARD
@@ -637,6 +655,7 @@ EMSCRIPTEN_BINDINGS(opencascadejs) {
   #include "./STEPControl.h"
   #include "./TopAbs.h"
   #include "./TopExp.h"
+  #include "./TopLoc.h"
   #include "./TopoDS.h"
   #include "./TopTools.h"
 }

@@ -21,5 +21,5 @@
 #include "./BRep/BRep_PolygonOnTriangulation.h"
 #include "./BRep/BRep_TEdge.h"
 #include "./BRep/BRep_TFace.h"
-// #include "./BRep/BRep_Tool.h"
+#include "./BRep/BRep_Tool.h"
 #include "./BRep/BRep_TVertex.h"

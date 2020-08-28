@@ -1,4 +1,4 @@
-// #include "./BRepAlgoAPI/BRepAlgoAPI_Algo.h"
+#include "./BRepAlgoAPI/BRepAlgoAPI_Algo.h"
 #include "./BRepAlgoAPI/BRepAlgoAPI_BooleanOperation.h"
 #include "./BRepAlgoAPI/BRepAlgoAPI_BuilderAlgo.h"
 #include "./BRepAlgoAPI/BRepAlgoAPI_Check.h"
