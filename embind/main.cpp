@@ -546,11 +546,8 @@ using namespace emscripten;
   class_<overloadedClass, base<baseClass>>(#overloadedClass) \
     .constructor<unparen(parameterTypes)>();
 
-#define _APPEND(name, n) name##n
-#define APPEND(name, n) _APPEND(name, n)
-#define STR(x) #x
-
 #define handleType(className, handleClassName) \
+  typedef Handle(className) Handle_ ## handleClassName; \
   class_<handleClassName>(#handleClassName) \
     .function("Nullify", &handleClassName::Nullify) \
     .function("IsNull", &handleClassName::IsNull) \
@@ -563,11 +560,12 @@ using namespace emscripten;
     .function("operator_indirect", &handleClassName::operator*) \
     .function("operator_bool", &handleClassName::operator bool) \
     ; \
-  overloadedConstructor(handleClassName, APPEND(handleClassName, _1), (), (), ()); \
-  overloadedConstructor(handleClassName, APPEND(handleClassName, _2), (const className* thePtr), (thePtr), (const className*)); \
-  overloadedConstructor(handleClassName, APPEND(handleClassName, _3), (const handleClassName& theHandle), (theHandle), (const handleClassName&));
+  overloadedConstructor(handleClassName, handleClassName ## _1, (), (), ()); \
+  overloadedConstructor(handleClassName, handleClassName ## _2, (const className* thePtr), (thePtr), (const className*)); \
+  overloadedConstructor(handleClassName, handleClassName ## _3, (const handleClassName& theHandle), (theHandle), (const handleClassName&));
 
 #define handleTypeAbstract(className, handleClassName) \
+  typedef Handle(className) Handle_ ## handleClassName; \
   class_<handleClassName>(#handleClassName) \
     .function("Nullify", &handleClassName::Nullify) \
     .function("IsNull", &handleClassName::IsNull) \
@@ -579,27 +577,9 @@ using namespace emscripten;
     .function("operator_dereference", &handleClassName::operator->, allow_raw_pointers()) \
     .function("operator_bool", &handleClassName::operator bool) \
     ; \
-  overloadedConstructor(handleClassName, APPEND(handleClassName, _1), (), (), ()); \
-  overloadedConstructor(handleClassName, APPEND(handleClassName, _2), (const className* thePtr), (thePtr), (const className*)); \
-  overloadedConstructor(handleClassName, APPEND(handleClassName, _3), (const handleClassName& theHandle), (theHandle), (const handleClassName&));
-
-typedef Handle(Geom_BezierCurve) Handle_Geom_BezierCurve;
-typedef Handle(Geom_BSplineCurve) Handle_Geom_BSplineCurve;
-typedef Handle(Geom_Circle) Handle_Geom_Circle;
-typedef Handle(Geom_Curve) Handle_Geom_Curve;
-typedef Handle(Geom_Ellipse) Handle_Geom_Ellipse;
-typedef Handle(Geom_Hyperbola) Handle_Geom_Hyperbola;
-typedef Handle(Geom_Plane) Handle_Geom_Plane;
-typedef Handle(Geom_Surface) Handle_Geom_Surface;
-typedef Handle(Geom_TrimmedCurve) Handle_Geom_TrimmedCurve;
-typedef Handle(Message_ProgressIndicator) Handle_Message_ProgressIndicator;
-typedef Handle(Poly_Polygon3D) Handle_Poly_Polygon3D;
-typedef Handle(Poly_PolygonOnTriangulation) Handle_Poly_PolygonOnTriangulation;
-typedef Handle(Poly_Triangulation) Handle_Poly_Triangulation;
-typedef Handle(Standard_Transient) Handle_Standard_Transient;
-typedef Handle(Standard_Type) Handle_Standard_Type;
-typedef Handle(TColStd_HSequenceOfTransient) Handle_TColStd_HSequenceOfTransient;
-typedef Handle(Transfer_TransientProcess) Handle_Tansfer_TransientProcess;
+  overloadedConstructor(handleClassName, handleClassName ## _1, (), (), ()); \
+  overloadedConstructor(handleClassName, handleClassName ## _2, (const className* thePtr), (thePtr), (const className*)); \
+  overloadedConstructor(handleClassName, handleClassName ## _3, (const handleClassName& theHandle), (theHandle), (const handleClassName&));
 
 typedef Handle(Law_Function) Handle_Law_Function;
 typedef Handle(TopOpeBRepBuild_HBuilder) Handle_TopOpeBRepBuild_HBuilder;
