@@ -10,7 +10,7 @@
 // #include "./Standard/Standard_Condition.h"
 #include "./Standard/Standard_ConstructionError.h"
 #include "./Standard/Standard_CString.h"
-#include "./Standard/Standard_DefineAlloc.h"
+// #include "./Standard/Standard_DefineAlloc.h"
 #include "./Standard/Standard_DefineException.h"
 #include "./Standard/Standard_DefineHandle.h"
 #include "./Standard/Standard_DimensionError.h"
