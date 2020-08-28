@@ -88,3 +88,63 @@ Operators should be exposed according to the following convention:
     .function("_operator_TopoDS_Shape", &BRepBuilderAPI_MakeShape::operator TopoDS_Shape)
     // ...
   ```
+
+| C++                                                                     | JS                            |
+|-------------------------------------------------------------------------|-------------------------------|
+| Arithmetic                                                              |                               |
+| R& K::operator =(S b);                                                  | operator_assign(b)            |
+| R K::operator +(S b);                                                   | operator_add(b)               |
+| R K::operator -(S b);                                                   | operator_sub(b)               |
+| R K::operator +();                                                      | operator_unaryPlus()          |
+| R K::operator -();                                                      | operator_unaryMinus()         |
+| R K::operator *(S b);                                                   | operator_mul(b)               |
+| R K::operator /(S b);                                                   | operator_div(b)               |
+| R K::operator %(S b);                                                   | operator_mod(b)               |
+| R& K::operator ++();                                                    | operator_incPre()             |
+| R K::operator ++(int);                                                  | operator_incPost()            |
+| R& K::operator --();                                                    | operator_decPre()             |
+| R K::operator --(int);                                                  | operator_decPost()            |
+| Comparison                                                              |                               |
+| bool K::operator ==(S const& b) const;                                  | operator_isEqual(b)           |
+| bool K::operator !=(S const& b); bool K::operator !=(S const& b) const; | operator_isUnequal(b)         |
+| bool K::operator >(S const& b) const;                                   | operator_isGreater(b)         |
+| bool K::operator <(S const& b) const;                                   | operator_isLess(b)            |
+| bool K::operator >=(S const& b) const;                                  | operator_isGreaterEqual(b)    |
+| bool K::operator <=(S const& b) const;                                  | operator_isLessEqual(b)       |
+| std::weak_equality K::operator <=>(const S &b);                         | operator_isThreeWay(b)        |
+| Logical                                                                 |                               |
+| bool K::operator !();                                                   | operator_not(b)               |
+| bool K::operator &&(S b);                                               | operator_and(b)               |
+| bool K::operator \|\|(S b);                                             | operator_or(b)                |
+| Bitwise                                                                 |                               |
+| R K::operator ~();                                                      | operator_bitwiseNot()         |
+| R K::operator &(S b);                                                   | operator_bitwiseAnd(b)        |
+| R K::operator \|(S b);                                                  | operator_bitwiseOr(b)         |
+| R K::operator ^(S b);                                                   | operator_bitwiseXor(b)        |
+| R K::operator <<(S b);                                                  | operator_bitwiseShiftLeft(b)  |
+| R K::operator >>(S b);                                                  | operator_bitwiseShiftRight(b) |
+| Compound Assigment                                                      |                               |
+| R& K::operator +=(S b);                                                 | operator_assignAdd(b)         |
+| R& K::operator -=(S b);                                                 | operator_assignSub(b)         |
+| R& K::operator *=(S b);                                                 | operator_assignMul(b)         |
+| R& K::operator /=(S b);                                                 | operator_assignDiv(b)         |
+| R& K::operator %=(S b);                                                 | operator_assignMod(b)         |
+| R& K::operator &=(S b);                                                 | operator_assignBitwiseAnd(b)  |
+| R& K::operator \|=(S b);                                                | operator_assignBitwiseOr(b)   |
+| R& K::operator ^=(S b);                                                 | operator_assignBitwiseXor(b)  |
+| R& K::operator <<=(S b);                                                | operator_assignShiftLeft(b)   |
+| R& K::operator >>=(S b);                                                | operator_assignShiftRight(b)  |
+| Member / Pointer                                                        |                               |
+| R& K::operator [](S b);                                                 | operator_subscript(b)         |
+| R& K::operator *();                                                     | operator_indirect()           |
+| R* K::operator &();                                                     | operator_address(b)           |
+| R* K::operator ->();                                                    | operator_dereference()        |
+| R& K::operator ->*(S b);                                                |                               |
+| Other                                                                   |                               |
+| R K::operator ()(S a, T b, ...);                                        | operator_call(a, b, ...)      |
+| R K::operator ,(S b);                                                   | operator_comma(b)             |
+| K::operator R();                                                        | operator_R()                  |
+| void* K::operator new(size_t x);                                        | ?                             |
+| void* K::operator new[](size_t a);                                      | ?                             |
+| void K::operator delete(void *a);                                       | ?                             |
+| void K::operator delete[](void *a);                                     | ?                             |
