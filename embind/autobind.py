@@ -5,59 +5,29 @@ import clang.cindex
 import os
 import io
 
-blackList = [
-  # Multiple base classes
-  "Poly_HArray1OfTriangle",
-  "ChFiDS_HData",
-  "TColStd_HArray1OfInteger",
-  "TShort_HSequenceOfShortReal",
-  "Storage_HSeqOfRoot",
-  "TColStd_HSequenceOfAsciiString",
-  "StdLPersistent_HArray1OfPersistent",
-  "TColgp_HArray1OfPnt",
-  "TColgp_HSequenceOfXYZ",
-  "TColgp_HSequenceOfPnt",
-  "TColgp_HSequenceOfDir",
-  "TColgp_HSequenceOfVec",
-  "Geom_HSequenceOfBSplineSurface",
-  "TColStd_HSequenceOfInteger",
-  "IMeshData_Face",
-  "IMeshData_Edge",
-  "IMeshData_Wire",
-  "TColgp_HSequenceOfXY",
-  "Contap_TheHSequenceOfPoint",
-  "TColStd_HSequenceOfHExtendedString",
-  "TColStd_HArray1OfBoolean",
-  "TColStd_HSequenceOfHAsciiString",
-  "TColStd_HSequenceOfReal",
-  "TColGeom_HSequenceOfCurve",
-  "TColGeom_HSequenceOfBoundedCurve",
-  "TColGeom2d_HSequenceOfBoundedCurve",
-  "TColGeom2d_HSequenceOfCurve",
-  "TColStd_HSequenceOfTransient",
-  "Transfer_HSequenceOfFinder",
-  "Interface_HSequenceOfCheck",
-  "StepElement_HSequenceOfElementMaterial",
-  "StepFEA_HSequenceOfElementGeometricRelationship",
-  "StepFEA_HSequenceOfElementRepresentation",
-  "StepElement_HSequenceOfCurveElementSectionDefinition",
-  "GeomFill_HSequenceOfAx2",
-  "TColStd_HArray1OfAsciiString",
-  "TopTools_HSequenceOfShape",
-  "TColStd_HSequenceOfExtendedString",
-  "TColStd_HArray1OfCharacter",
-  "TColQuantity_HArray1OfLength",
-  "TColQuantity_HArray2OfLength",
-  "Graphic3d_MediaTextureSet",
-  "ViewerTest_EventManager",
-]
-
 occtFiles = []
 includePaths = []
 for dirpath, dirnames, filenames in os.walk("../build/occt/src"):
   includePaths.append(str(dirpath))
   for item in filenames:
-    if item.endswith(".hxx") and not item.startswith("IVtkDraw") and item.startswith("gp_Pnt"):
+    if (
+      item.endswith(".hxx")
+      and not item.startswith("IVtk")
+      and not item.startswith("vtk")
+      and not item.startswith("Interface")
+      and not item.startswith("Xw")
+      and not item.startswith("OSD")
+      and not item.startswith("BVH")
+      and not item.startswith("WNT")
+      and not item.startswith("WNT")
+      and not item.startswith("BOP")
+      and not item.startswith("IntPatch")
+      and not item.startswith("OpenGl")
+      and not item.startswith("AIS")
+      and not item.startswith("D3D")
+      and not item.startswith("Aspect")
+      and not item.startswith("Standard_Atomic")
+    ):
       occtFiles.append(str(os.path.join(dirpath, item)))
 
 includePathArgs = list(map(lambda x: "-I" + x, includePaths)) + ["-I/usr/include/linux", "-I/usr/include/c++/7/tr1", "-I/emscripten/upstream/emscripten/system/include"]
@@ -83,7 +53,7 @@ for child in children:
     newChildren.append(child)
 
 print("creating bindings...")
-outputFile = open("./bindings.cpp", "w")
+outputFile = open("../build/bindings.cpp", "w")
 
 def getClassBinding(className, children):
   baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
@@ -145,6 +115,17 @@ def getStandardConstructorBinding(children):
   argTypes = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
   return "    .constructor<" + argTypes + ">()" + os.linesep
 
+def getFullSingleArgumentBinding(arg):
+  argChildren = list(arg.get_children())
+  argBinding = ""
+  if len(argChildren) > 1 and argChildren[1].kind == clang.cindex.CursorKind.INTEGER_LITERAL:
+    const = "const " if list(arg.get_tokens())[0].spelling == "const" else ""
+    arrayCount = list(argChildren[1].get_tokens())[0].spelling
+    argBinding = const + argChildren[0].type.spelling + " (&" + arg.spelling + ")[" + arrayCount + "]"
+  else:
+    argBinding = arg.type.spelling + " " + arg.spelling
+  return argBinding
+
 def getOverloadedConstructorsBinding(className, children):
   constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(constructors) == 1:
@@ -155,7 +136,7 @@ def getOverloadedConstructorsBinding(className, children):
     raise Exception("Something weird happened")
   for constructor in constructors:
     overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
-    args = ", ".join(list(map(lambda x: x.type.spelling + " " + x.spelling, list(constructor.get_arguments()))))
+    args = ", ".join(list(map(getFullSingleArgumentBinding, list(constructor.get_arguments()))))
     argNames = ", ".join(list(map(lambda x: x.spelling, list(constructor.get_arguments()))))
     argTypes = ", ".join(list(map(lambda x: x.type.spelling, list(constructor.get_arguments()))))
 
@@ -182,13 +163,20 @@ outputFile.write(preamble + os.linesep + os.linesep)
 outputFile.write("EMSCRIPTEN_BINDINGS(opencascadejs) {" + os.linesep)
 
 for o in newChildren:
-  if o.kind == clang.cindex.CursorKind.CLASS_DECL and not o.spelling in blackList and o.spelling == "gp_Pnt":
+  if o.kind == clang.cindex.CursorKind.CLASS_DECL:
     theClass = o
 
-    outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
-    outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
-    outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
-    outputFile.write("  ;" + os.linesep)
-    outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
+    if theClass.spelling.startswith("TColgp"):
+      continue
+
+    try:
+      outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
+      outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
+      outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
+      outputFile.write("  ;" + os.linesep)
+      outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
+    except Exception as e:
+      print(str(e))
+      continue
 
 outputFile.write("}" + os.linesep)

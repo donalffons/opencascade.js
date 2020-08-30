@@ -26,25 +26,25 @@ RUN \
 ENV NODE_PATH $NVM_DIR/versions/node/$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
 
-WORKDIR /opencascade/
 
+WORKDIR /clang/
 RUN python3.8 -m pip install -Iv clang==10.0.1
 RUN apt-get update && apt-get install -y \
  xz-utils \
  curl \
  && rm -rf /var/lib/apt/lists/*
-#Getting prebuilt binary from llvm 
 RUN curl -SL https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.0/clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz \
  | tar -xJC . && \
  mv clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04 clang_10 && \
- PATH=/clang_10/bin:$PATH && \
- LD_LIBRARY_PATH=/clang_10/lib:$LD_LIBRARY_PATH
-RUN PATH=/opencascade/clang_10/lib:$PATH
-RUN LD_LIBRARY_PATH=/opencascade/clang_10/lib:$LD_LIBRARY_PATHLD_LIBRARY_PATH
+ PATH=/clang/clang_10/bin:$PATH && \
+ LD_LIBRARY_PATH=/clang/clang_10/lib:$LD_LIBRARY_PATH
+RUN PATH=/clang/clang_10/lib:$PATH
+RUN LD_LIBRARY_PATH=/clang/clang_10/lib:$LD_LIBRARY_PATHLD_LIBRARY_PATH
 RUN \
   cd clang_10/lib && \
   ln -s libclang.so.10 libclang-10.so
 
+WORKDIR /opencascade/
 COPY . .
 
 ENTRYPOINT \
