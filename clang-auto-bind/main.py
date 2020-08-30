@@ -115,23 +115,45 @@ def getSingleMethodBinding(className, method, allOverloads):
 def getMethodsBinding(className, children):
   methodsBinding = ""
   for child in children:
-    allOverloads = [m for m in children if m.spelling == child.spelling]
+    allOverloads = [m for m in children if m.spelling == child.spelling and m.access_specifier == clang.cindex.AccessSpecifier.PUBLIC]
     methodsBinding += getSingleMethodBinding(className, child, allOverloads)
   return methodsBinding
 
-def getDefaultConstructorBinding(children):
-  constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR,children))
-  defaultConstructor = next((x for x in constructors if x.is_default_constructor()), None)
-  if not defaultConstructor or not defaultConstructor.access_specifier == clang.cindex.AccessSpecifier.PUBLIC:
+def getStandardConstructorBinding(children):
+  constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
+  if not len(constructors) == 1:
     return ""
-  return "  .constructor<>();" + os.linesep
-  
+  standardConstructor = constructors[0]
+  if not standardConstructor:
+    return ""
+  argTypes = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
+  return "  .constructor<" + argTypes + ">();" + os.linesep
+
+def getOverloadedConstructorsBinding(className, children):
+  constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
+  if len(constructors) == 1:
+    return ""
+  constructorBindings = ""
+  allOverloads = [m for m in children if m.kind == clang.cindex.CursorKind.CONSTRUCTOR and m.access_specifier == clang.cindex.AccessSpecifier.PUBLIC]
+  if len(allOverloads) == 1:
+    raise Exception("Something weird happened")
+  for constructor in constructors:
+    overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
+    args = ", ".join(list(map(lambda x: x.type.spelling + " " + x.spelling, list(constructor.get_arguments()))))
+    argNames = ", ".join(list(map(lambda x: x.spelling, list(constructor.get_arguments()))))
+
+    constructorBindings += "  struct " + constructor.spelling + overloadPostfix + " : public " + constructor.spelling + " {" + os.linesep
+    constructorBindings += "    " + constructor.spelling + overloadPostfix + "(" + args + ") : " + constructor.spelling + "(" + argNames + ") {}" + os.linesep
+    constructorBindings += "  }" + os.linesep
+  return constructorBindings
+
 for o in newChildren:
   if o.kind == clang.cindex.CursorKind.CLASS_DECL and not o.spelling in blackList:
     theClass = o
 
     outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
-    outputFile.write(getDefaultConstructorBinding(list(theClass.get_children())))
+    outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
     outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
-
     outputFile.write(";" + os.linesep)
+    outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
+
