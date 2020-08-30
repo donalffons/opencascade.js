@@ -1,3 +1,5 @@
+#!/usr/bin/python3.8
+
 import sys
 import clang.cindex
 import os
@@ -59,9 +61,9 @@ for dirpath, dirnames, filenames in os.walk("../build/occt/src"):
       occtFiles.append(str(os.path.join(dirpath, item)))
 
 includePathArgs = list(map(lambda x: "-I" + x, includePaths)) + ["-I/usr/include/linux", "-I/usr/include/c++/7/tr1", "-I/emscripten/upstream/emscripten/system/include"]
-includeDirectives = os.linesep.join(map(lambda x: "#include \"" + x + "\"", occtFiles))
+includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", occtFiles))
 
-clang.cindex.Config.library_path = "../clang_10/lib"
+clang.cindex.Config.library_path = "/clang/clang_10/lib"
 index = clang.cindex.Index.create()
 tu = index.parse("main.h", ["-x", "c++", "-ferror-limit=10000"] + includePathArgs, [["main.h", includeDirectives]])
 
@@ -166,14 +168,17 @@ def getOverloadedConstructorsBinding(className, children):
   return constructorBindings
 
 outputFile.write(includeDirectives + os.linesep)
-destructorFix = '''
+preamble = '''
+#include <emscripten/bind.h>
+using namespace emscripten;
+
 // https://github.com/emscripten-core/emscripten/issues/5587
 namespace emscripten {
   namespace internal {
-    template<> void raw_destructor<BRepAlgoAPI_Algo>(BRepAlgoAPI_Algo* ptr) { /* do nothing */ }
+    // template<> void raw_destructor<BRepAlgoAPI_Algo>(BRepAlgoAPI_Algo* ptr) { /* do nothing */ }
   }
 }'''
-outputFile.write(destructorFix + os.linesep + os.linesep)
+outputFile.write(preamble + os.linesep + os.linesep)
 outputFile.write("EMSCRIPTEN_BINDINGS(opencascadejs) {" + os.linesep)
 
 for o in newChildren:
@@ -186,4 +191,4 @@ for o in newChildren:
     outputFile.write("  ;" + os.linesep)
     outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
 
-outputFile.write("  }" + os.linesep)
+outputFile.write("}" + os.linesep)

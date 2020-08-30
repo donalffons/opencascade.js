@@ -191,8 +191,9 @@ def build():
   stage('generate bindings...')
 
   os.chdir('..')
-  subprocess.call(['./parseAll.py'])
-  os.chdir('build')
+  os.chdir('embind')
+  subprocess.call(['./autobind.py'])
+  os.chdir('../build')
 
   #####################################
   stage('Build bindings')
@@ -301,7 +302,7 @@ def build():
     includeArgs.append('-I' + os.path.join(".", includePrefix, path))
 
   emccArgs = ['--bind'] + includeArgs + opencascade_libs + emcc_args
-  emscripten.emcc(os.path.join('.', 'embind', 'main.cpp'), emccArgs, temp)
+  emscripten.emcc(os.path.join('.', 'embind', 'bindings.cpp'), emccArgs, temp)
 
   stage('wrap')
 
