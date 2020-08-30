@@ -59,7 +59,7 @@ for dirpath, dirnames, filenames in os.walk("../build/occt/src"):
       occtFiles.append(str(os.path.join(dirpath, item)))
 
 includePathArgs = list(map(lambda x: "-I" + x, includePaths)) + ["-I/usr/include/linux", "-I/usr/include/c++/7/tr1", "-I/emscripten/upstream/emscripten/system/include"]
-includeDirectives = "\n".join(map(lambda x: "#include \"" + x + "\"", occtFiles))
+includeDirectives = os.linesep.join(map(lambda x: "#include \"" + x + "\"", occtFiles))
 
 clang.cindex.Config.library_path = "../clang_10/lib"
 index = clang.cindex.Index.create()
@@ -93,7 +93,7 @@ def getClassBinding(className, children):
   else:
     baseClass = ""
 
-  return "class_<" + className + baseClass + ">(\"" + className + "\")" + os.linesep
+  return "  class_<" + className + baseClass + ">(\"" + className + "\")" + os.linesep
 
 def getSingleMethodBinding(className, method, allOverloads):
   if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD:
@@ -109,7 +109,7 @@ def getSingleMethodBinding(className, method, allOverloads):
       args = ", ".join(list(map(lambda x: x.type.spelling + " " + x.spelling, list(method.get_arguments()))))
       functor = "select_overload<" + returnType + " (" + args + ") " + const + ">(&" + className + "::" + method.spelling + ")"
 
-    return "  .function(\"" + method.spelling + overloadPostfix + "\", " + functor + ")" + os.linesep
+    return "    .function(\"" + method.spelling + overloadPostfix + "\", " + functor + ")" + os.linesep
   return ""
 
 def getMethodsBinding(className, children):
@@ -127,7 +127,7 @@ def getStandardConstructorBinding(children):
   if not standardConstructor:
     return ""
   argTypes = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
-  return "  .constructor<" + argTypes + ">();" + os.linesep
+  return "    .constructor<" + argTypes + ">()" + os.linesep
 
 def getOverloadedConstructorsBinding(className, children):
   constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
@@ -143,13 +143,24 @@ def getOverloadedConstructorsBinding(className, children):
     argNames = ", ".join(list(map(lambda x: x.spelling, list(constructor.get_arguments()))))
     argTypes = ", ".join(list(map(lambda x: x.type.spelling, list(constructor.get_arguments()))))
 
-    constructorBindings += "  struct " + constructor.spelling + overloadPostfix + " : public " + constructor.spelling + " {" + os.linesep
-    constructorBindings += "    " + constructor.spelling + overloadPostfix + "(" + args + ") : " + constructor.spelling + "(" + argNames + ") {}" + os.linesep
-    constructorBindings += "  };" + os.linesep
-    constructorBindings += "  class_<" + constructor.spelling + overloadPostfix + ">(\"" + constructor.spelling + overloadPostfix + "\")" + os.linesep
-    constructorBindings += "    .constructor<" + argTypes + ">()" + os.linesep
-    constructorBindings += "  ;" + os.linesep
+    constructorBindings += "    struct " + constructor.spelling + overloadPostfix + " : public " + constructor.spelling + " {" + os.linesep
+    constructorBindings += "      " + constructor.spelling + overloadPostfix + "(" + args + ") : " + constructor.spelling + "(" + argNames + ") {}" + os.linesep
+    constructorBindings += "    };" + os.linesep
+    constructorBindings += "    class_<" + constructor.spelling + overloadPostfix + ">(\"" + constructor.spelling + overloadPostfix + "\")" + os.linesep
+    constructorBindings += "      .constructor<" + argTypes + ">()" + os.linesep
+    constructorBindings += "    ;" + os.linesep
   return constructorBindings
+
+outputFile.write(includeDirectives + os.linesep)
+destructorFix = '''
+// https://github.com/emscripten-core/emscripten/issues/5587
+namespace emscripten {
+  namespace internal {
+    template<> void raw_destructor<BRepAlgoAPI_Algo>(BRepAlgoAPI_Algo* ptr) { /* do nothing */ }
+  }
+}'''
+outputFile.write(destructorFix + os.linesep + os.linesep)
+outputFile.write("EMSCRIPTEN_BINDINGS(opencascadejs) {" + os.linesep)
 
 for o in newChildren:
   if o.kind == clang.cindex.CursorKind.CLASS_DECL and not o.spelling in blackList:
@@ -158,5 +169,7 @@ for o in newChildren:
     outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
     outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
     outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
-    outputFile.write(";" + os.linesep)
+    outputFile.write("  ;" + os.linesep)
     outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
+
+outputFile.write("  }" + os.linesep)
