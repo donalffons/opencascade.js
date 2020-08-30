@@ -118,7 +118,9 @@ def getStandardConstructorBinding(children):
 def getFullSingleArgumentBinding(arg):
   argChildren = list(arg.get_children())
   argBinding = ""
-  if len(argChildren) > 1 and argChildren[1].kind == clang.cindex.CursorKind.INTEGER_LITERAL:
+  hasDefaultValue = any(x.spelling == "=" for x in list(arg.get_tokens()))
+  isArray = not hasDefaultValue and len(argChildren) > 1 and argChildren[1].kind == clang.cindex.CursorKind.INTEGER_LITERAL
+  if isArray:
     const = "const " if list(arg.get_tokens())[0].spelling == "const" else ""
     arrayCount = list(argChildren[1].get_tokens())[0].spelling
     argBinding = const + argChildren[0].type.spelling + " (&" + arg.spelling + ")[" + arrayCount + "]"
@@ -166,10 +168,9 @@ for o in newChildren:
   if o.kind == clang.cindex.CursorKind.CLASS_DECL:
     theClass = o
 
-    if ((
+    if (
       not theClass.spelling.startswith("gp") and
-      not theClass.spelling.startswith("GC")) or
-      theClass.spelling == "GCPnts_TangentialDeflection"
+      not theClass.spelling.startswith("GC")
     ):
       continue
 
