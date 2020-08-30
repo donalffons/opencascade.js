@@ -55,7 +55,7 @@ includePaths = []
 for dirpath, dirnames, filenames in os.walk("../build/occt/src"):
   includePaths.append(str(dirpath))
   for item in filenames:
-    if item.endswith(".hxx") and not item.startswith("IVtkDraw"):
+    if item.endswith(".hxx") and not item.startswith("IVtkDraw") and item.startswith("gp_Pnt"):
       occtFiles.append(str(os.path.join(dirpath, item)))
 
 includePathArgs = list(map(lambda x: "-I" + x, includePaths)) + ["-I/usr/include/linux", "-I/usr/include/c++/7/tr1", "-I/emscripten/upstream/emscripten/system/include"]
@@ -95,6 +95,17 @@ def getClassBinding(className, children):
 
   return "  class_<" + className + baseClass + ">(\"" + className + "\")" + os.linesep
 
+def getCastBindings(className, method):
+  args = list(method.get_arguments())
+  needCast = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE and not x.type.is_const_qualified() for x in args)
+  returnType = method.result_type.spelling
+  const = "const" if method.is_const_method() else ""
+  classQualifier = ( className + "::" if not method.is_static_method() else "" ) + "*"
+  if needCast:
+    castedArgTypes = list(map(lambda x: ("const " if not x.type.is_const_qualified() else "") + x.type.spelling, args))
+    return ["reinterpret_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
+  return ["", ""]
+
 def getSingleMethodBinding(className, method, allOverloads):
   if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD:
     if method.spelling.startswith("operator"):
@@ -109,12 +120,15 @@ def getSingleMethodBinding(className, method, allOverloads):
       args = ", ".join(list(map(lambda x: x.type.spelling + " " + x.spelling, list(method.get_arguments()))))
       functor = "select_overload<" + returnType + " (" + args + ") " + const + ">(&" + className + "::" + method.spelling + ")"
 
-    return "    .function(\"" + method.spelling + overloadPostfix + "\", " + functor + ")" + os.linesep
+    cast = getCastBindings(className, method)
+    return "    .function(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ")" + os.linesep
   return ""
 
 def getMethodsBinding(className, children):
   methodsBinding = ""
   for child in children:
+    if not child.spelling == "Coord":
+      continue
     allOverloads = [m for m in children if m.spelling == child.spelling and m.access_specifier == clang.cindex.AccessSpecifier.PUBLIC]
     methodsBinding += getSingleMethodBinding(className, child, allOverloads)
   return methodsBinding
@@ -163,7 +177,7 @@ outputFile.write(destructorFix + os.linesep + os.linesep)
 outputFile.write("EMSCRIPTEN_BINDINGS(opencascadejs) {" + os.linesep)
 
 for o in newChildren:
-  if o.kind == clang.cindex.CursorKind.CLASS_DECL and not o.spelling in blackList:
+  if o.kind == clang.cindex.CursorKind.CLASS_DECL and not o.spelling in blackList and o.spelling == "gp_Pnt":
     theClass = o
 
     outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
