@@ -141,10 +141,14 @@ def getOverloadedConstructorsBinding(className, children):
     overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
     args = ", ".join(list(map(lambda x: x.type.spelling + " " + x.spelling, list(constructor.get_arguments()))))
     argNames = ", ".join(list(map(lambda x: x.spelling, list(constructor.get_arguments()))))
+    argTypes = ", ".join(list(map(lambda x: x.type.spelling, list(constructor.get_arguments()))))
 
     constructorBindings += "  struct " + constructor.spelling + overloadPostfix + " : public " + constructor.spelling + " {" + os.linesep
     constructorBindings += "    " + constructor.spelling + overloadPostfix + "(" + args + ") : " + constructor.spelling + "(" + argNames + ") {}" + os.linesep
-    constructorBindings += "  }" + os.linesep
+    constructorBindings += "  };" + os.linesep
+    constructorBindings += "  class_<" + constructor.spelling + overloadPostfix + ">(\"" + constructor.spelling + overloadPostfix + "\")" + os.linesep
+    constructorBindings += "    .constructor<" + argTypes + ">()" + os.linesep
+    constructorBindings += "  ;" + os.linesep
   return constructorBindings
 
 for o in newChildren:
@@ -156,4 +160,3 @@ for o in newChildren:
     outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
     outputFile.write(";" + os.linesep)
     outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
-
