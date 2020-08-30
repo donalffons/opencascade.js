@@ -69,7 +69,7 @@ def getClassBinding(className, children):
 
 def getCastBindings(className, method):
   args = list(method.get_arguments())
-  needCast = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE and not x.type.is_const_qualified() for x in args)
+  needCast = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE and not any(y.spelling == "const" for y in list(x.get_tokens())) for x in args)
   returnType = method.result_type.spelling
   const = "const" if method.is_const_method() else ""
   classQualifier = ( className + "::" if not method.is_static_method() else "" ) + "*"
@@ -92,15 +92,18 @@ def getSingleMethodBinding(className, method, allOverloads):
       args = ", ".join(list(map(lambda x: x.type.spelling + " " + x.spelling, list(method.get_arguments()))))
       functor = "select_overload<" + returnType + " (" + args + ") " + const + ">(&" + className + "::" + method.spelling + ")"
 
+    if method.is_static_method():
+      functionCommand = "class_function"
+    else:
+      functionCommand = "function"
+
     cast = getCastBindings(className, method)
-    return "    .function(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ")" + os.linesep
+    return "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())" + os.linesep
   return ""
 
 def getMethodsBinding(className, children):
   methodsBinding = ""
   for child in children:
-    if not child.spelling == "Coord":
-      continue
     allOverloads = [m for m in children if m.spelling == child.spelling and m.access_specifier == clang.cindex.AccessSpecifier.PUBLIC]
     methodsBinding += getSingleMethodBinding(className, child, allOverloads)
   return methodsBinding
@@ -145,7 +148,7 @@ def getOverloadedConstructorsBinding(className, children):
     constructorBindings += "    struct " + constructor.spelling + overloadPostfix + " : public " + constructor.spelling + " {" + os.linesep
     constructorBindings += "      " + constructor.spelling + overloadPostfix + "(" + args + ") : " + constructor.spelling + "(" + argNames + ") {}" + os.linesep
     constructorBindings += "    };" + os.linesep
-    constructorBindings += "    class_<" + constructor.spelling + overloadPostfix + ">(\"" + constructor.spelling + overloadPostfix + "\")" + os.linesep
+    constructorBindings += "    class_<" + constructor.spelling + overloadPostfix + ", base<" + constructor.spelling + ">>(\"" + constructor.spelling + overloadPostfix + "\")" + os.linesep
     constructorBindings += "      .constructor<" + argTypes + ">()" + os.linesep
     constructorBindings += "    ;" + os.linesep
   return constructorBindings
