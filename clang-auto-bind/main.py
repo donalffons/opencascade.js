@@ -3,12 +3,59 @@ import clang.cindex
 import os
 import io
 
+blackList = [
+  # Multiple base classes
+  "Poly_HArray1OfTriangle",
+  "ChFiDS_HData",
+  "TColStd_HArray1OfInteger",
+  "TShort_HSequenceOfShortReal",
+  "Storage_HSeqOfRoot",
+  "TColStd_HSequenceOfAsciiString",
+  "StdLPersistent_HArray1OfPersistent",
+  "TColgp_HArray1OfPnt",
+  "TColgp_HSequenceOfXYZ",
+  "TColgp_HSequenceOfPnt",
+  "TColgp_HSequenceOfDir",
+  "TColgp_HSequenceOfVec",
+  "Geom_HSequenceOfBSplineSurface",
+  "TColStd_HSequenceOfInteger",
+  "IMeshData_Face",
+  "IMeshData_Edge",
+  "IMeshData_Wire",
+  "TColgp_HSequenceOfXY",
+  "Contap_TheHSequenceOfPoint",
+  "TColStd_HSequenceOfHExtendedString",
+  "TColStd_HArray1OfBoolean",
+  "TColStd_HSequenceOfHAsciiString",
+  "TColStd_HSequenceOfReal",
+  "TColGeom_HSequenceOfCurve",
+  "TColGeom_HSequenceOfBoundedCurve",
+  "TColGeom2d_HSequenceOfBoundedCurve",
+  "TColGeom2d_HSequenceOfCurve",
+  "TColStd_HSequenceOfTransient",
+  "Transfer_HSequenceOfFinder",
+  "Interface_HSequenceOfCheck",
+  "StepElement_HSequenceOfElementMaterial",
+  "StepFEA_HSequenceOfElementGeometricRelationship",
+  "StepFEA_HSequenceOfElementRepresentation",
+  "StepElement_HSequenceOfCurveElementSectionDefinition",
+  "GeomFill_HSequenceOfAx2",
+  "TColStd_HArray1OfAsciiString",
+  "TopTools_HSequenceOfShape",
+  "TColStd_HSequenceOfExtendedString",
+  "TColStd_HArray1OfCharacter",
+  "TColQuantity_HArray1OfLength",
+  "TColQuantity_HArray2OfLength",
+  "Graphic3d_MediaTextureSet",
+  "ViewerTest_EventManager",
+]
+
 occtFiles = []
 includePaths = []
 for dirpath, dirnames, filenames in os.walk("../build/occt/src"):
   includePaths.append(str(dirpath))
   for item in filenames:
-    if item.endswith(".hxx") and not item.startswith("IVtkDraw") and item.startswith("gp_Pnt"):
+    if item.endswith(".hxx") and not item.startswith("IVtkDraw"):
       occtFiles.append(str(os.path.join(dirpath, item)))
 
 includePathArgs = list(map(lambda x: "-I" + x, includePaths)) + ["-I/usr/include/linux", "-I/usr/include/c++/7/tr1", "-I/emscripten/upstream/emscripten/system/include"]
@@ -37,11 +84,9 @@ print("creating bindings...")
 outputFile = open("./bindings.cpp", "w")
 
 def getClassBinding(className, children):
-  baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER, children))
+  baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(baseSpec) > 1:
-    raise "cannot handle multiple base classes"
-  if len(baseSpec) > 0 and not baseSpec[0].access_specifier == clang.cindex.AccessSpecifier.PUBLIC:
-    raise "cannot handle non-public base classes"
+    raise Exception("cannot handle multiple base classes (" + className + ")")
 
   if len(baseSpec) > 0:
     baseClass = ", base<" + baseSpec[0].type.spelling + ">"
@@ -82,10 +127,8 @@ def getDefaultConstructorBinding(children):
   return "  .constructor<>();" + os.linesep
   
 for o in newChildren:
-  if o.kind == clang.cindex.CursorKind.CLASS_DECL and o.spelling == "gp_Pnt":
+  if o.kind == clang.cindex.CursorKind.CLASS_DECL and not o.spelling in blackList:
     theClass = o
-
-    # print(theClass.spelling)
 
     outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
     outputFile.write(getDefaultConstructorBinding(list(theClass.get_children())))
