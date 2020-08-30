@@ -166,7 +166,18 @@ for o in newChildren:
   if o.kind == clang.cindex.CursorKind.CLASS_DECL:
     theClass = o
 
-    if theClass.spelling.startswith("TColgp"):
+    if ((
+      not theClass.spelling.startswith("gp") and
+      not theClass.spelling.startswith("GC")) or
+      theClass.spelling == "GCPnts_TangentialDeflection"
+    ):
+      continue
+
+    # error: undefined symbol
+    if (
+      theClass.spelling == "GCPnts_DistFunction" or
+      theClass.spelling == "GCPnts_DistFunction2d"
+    ):
       continue
 
     try:
