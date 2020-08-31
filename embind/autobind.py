@@ -20,7 +20,8 @@ for dirpath, dirnames, filenames in os.walk("../build/occt/src"):
       and not item.startswith("BVH")
       and not item.startswith("WNT")
       and not item.startswith("WNT")
-      and not item.startswith("BOP")
+      and not item.startswith("BOPTools")
+      and not item.startswith("BOPDS")
       and not item.startswith("IntPatch")
       and not item.startswith("OpenGl")
       and not item.startswith("AIS")
@@ -69,12 +70,12 @@ def getClassBinding(className, children):
 
 def getCastBindings(className, method):
   args = list(method.get_arguments())
-  needCast = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE and not any(y.spelling == "const" for y in list(x.get_tokens())) for x in args)
+  needCast = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE for x in args)
   returnType = method.result_type.spelling
   const = "const" if method.is_const_method() else ""
   classQualifier = ( className + "::" if not method.is_static_method() else "" ) + "*"
   if needCast:
-    castedArgTypes = list(map(lambda x: ("const " if not x.type.is_const_qualified() else "") + x.type.spelling, args))
+    castedArgTypes = list(map(getSingleArgumentBinding(False), args))
     return ["reinterpret_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
   return ["", ""]
 
@@ -90,7 +91,7 @@ def getSingleMethodBinding(className, method, allOverloads):
       returnType = method.result_type.spelling
       const = "const" if method.is_const_method() else ""
       args = ", ".join(list(map(lambda x: x.type.spelling + " " + x.spelling, list(method.get_arguments()))))
-      functor = "select_overload<" + returnType + " (" + args + ") " + const + ">(&" + className + "::" + method.spelling + ")"
+      functor = "(" + returnType + " (" + ((className + "::") if not method.is_static_method() else "") + "*)(" + args + ") " + const + ") &" + className + "::" + method.spelling
 
     if method.is_static_method():
       functionCommand = "class_function"
@@ -104,7 +105,10 @@ def getSingleMethodBinding(className, method, allOverloads):
 def getMethodsBinding(className, children):
   methodsBinding = ""
   for child in children:
-    allOverloads = [m for m in children if m.spelling == child.spelling and m.access_specifier == clang.cindex.AccessSpecifier.PUBLIC]
+    # error: private copy constructor used in this function
+    if className == "BRepClass3d_SolidExplorer" and child.spelling == "GetTree":
+      continue
+    allOverloads = [m for m in children if m.spelling == child.spelling]
     methodsBinding += getSingleMethodBinding(className, child, allOverloads)
   return methodsBinding
 
@@ -118,18 +122,26 @@ def getStandardConstructorBinding(children):
   argTypes = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
   return "    .constructor<" + argTypes + ">()" + os.linesep
 
-def getFullSingleArgumentBinding(arg):
-  argChildren = list(arg.get_children())
-  argBinding = ""
-  hasDefaultValue = any(x.spelling == "=" for x in list(arg.get_tokens()))
-  isArray = not hasDefaultValue and len(argChildren) > 1 and argChildren[1].kind == clang.cindex.CursorKind.INTEGER_LITERAL
-  if isArray:
-    const = "const " if list(arg.get_tokens())[0].spelling == "const" else ""
-    arrayCount = list(argChildren[1].get_tokens())[0].spelling
-    argBinding = const + argChildren[0].type.spelling + " (&" + arg.spelling + ")[" + arrayCount + "]"
-  else:
-    argBinding = arg.type.spelling + " " + arg.spelling
-  return argBinding
+def getSingleArgumentBinding(argNames = True):
+  def f(arg):
+    argChildren = list(arg.get_children())
+    argBinding = ""
+    hasDefaultValue = any(x.spelling == "=" for x in list(arg.get_tokens()))
+    isArray = not hasDefaultValue and len(argChildren) > 1 and argChildren[1].kind == clang.cindex.CursorKind.INTEGER_LITERAL
+    if isArray:
+      const = "const " if list(arg.get_tokens())[0].spelling == "const" else ""
+      arrayCount = list(argChildren[1].get_tokens())[0].spelling
+      argBinding = const + argChildren[0].type.spelling + " (&" + (arg.spelling if argNames else "") + ")[" + arrayCount + "]"
+    else:
+      typename = arg.type.spelling
+      if arg.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE:
+        tokenList = list(arg.get_tokens())
+        isConstRef = len(tokenList) > 0 and tokenList[0].spelling == "const"
+        if not isConstRef:
+          typename = "const " + arg.type.spelling
+      argBinding = typename + ((" " + arg.spelling) if argNames else "")
+    return argBinding
+  return f
 
 def getOverloadedConstructorsBinding(className, children):
   constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
@@ -141,9 +153,12 @@ def getOverloadedConstructorsBinding(className, children):
     raise Exception("Something weird happened")
   for constructor in constructors:
     overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
-    args = ", ".join(list(map(getFullSingleArgumentBinding, list(constructor.get_arguments()))))
+    if not overloadPostfix == "_2":
+      continue
+
+    args = ", ".join(list(map(getSingleArgumentBinding(True), list(constructor.get_arguments()))))
     argNames = ", ".join(list(map(lambda x: x.spelling, list(constructor.get_arguments()))))
-    argTypes = ", ".join(list(map(lambda x: x.type.spelling, list(constructor.get_arguments()))))
+    argTypes = ", ".join(list(map(getSingleArgumentBinding(False), list(constructor.get_arguments()))))
 
     constructorBindings += "    struct " + constructor.spelling + overloadPostfix + " : public " + constructor.spelling + " {" + os.linesep
     constructorBindings += "      " + constructor.spelling + overloadPostfix + "(" + args + ") : " + constructor.spelling + "(" + argNames + ") {}" + os.linesep
@@ -153,19 +168,20 @@ def getOverloadedConstructorsBinding(className, children):
     constructorBindings += "    ;" + os.linesep
   return constructorBindings
 
+def getEpilog(theClass):
+  nonPublicDestructor = any(x.kind == clang.cindex.CursorKind.DESTRUCTOR and not x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC for x in list(theClass.get_children()))
+  if nonPublicDestructor:
+    return "namespace emscripten { namespace internal { template<> void raw_destructor<" + theClass.spelling + ">(" + theClass.spelling + "* ptr) { /* do nothing */ } } }" + os.linesep
+  return ""
+
 outputFile.write(includeDirectives + os.linesep)
 preamble = '''
 #include <emscripten/bind.h>
 using namespace emscripten;
-
-// https://github.com/emscripten-core/emscripten/issues/5587
-namespace emscripten {
-  namespace internal {
-    // template<> void raw_destructor<BRepAlgoAPI_Algo>(BRepAlgoAPI_Algo* ptr) { /* do nothing */ }
-  }
-}'''
-outputFile.write(preamble + os.linesep + os.linesep)
+'''
+outputFile.write(preamble + os.linesep)
 outputFile.write("EMSCRIPTEN_BINDINGS(opencascadejs) {" + os.linesep)
+epilog = ""
 
 for o in newChildren:
   if o.kind == clang.cindex.CursorKind.CLASS_DECL:
@@ -173,7 +189,8 @@ for o in newChildren:
 
     if (
       not theClass.spelling.startswith("gp") and
-      not theClass.spelling.startswith("GC")
+      not theClass.spelling.startswith("GC") and
+      not theClass.spelling.startswith("BRep")
     ):
       continue
 
@@ -184,14 +201,36 @@ for o in newChildren:
     ):
       continue
 
+    # error: no matching function for call to 'operator new'
+    if theClass.spelling.startswith("BRepMeshData_"):
+      continue
+
+    # error: address of overloaded function 'XXX' does not match required type 'XXX'
+    # Seems to have to do with a template method present
+    if (
+      theClass.spelling == "gp_VectorWithNullMagnitude" or
+      theClass.spelling == "BRepTest_Objects"
+    ):
+      continue
+
+    # error: incomplete type 'BOPAlgo_PaveFiller' used in type trait expression
+    if theClass.spelling == "BOPAlgo_PaveFiller":
+      continue
+
+    # []-arrays are not bound properly
+    if theClass.spelling == "BRepGProp_Gauss":
+      continue
+
     try:
       outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
       outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
       outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
       outputFile.write("  ;" + os.linesep)
       outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
+      epilog += getEpilog(theClass)
     except Exception as e:
       print(str(e))
       continue
 
-outputFile.write("}" + os.linesep)
+outputFile.write("}" + os.linesep + os.linesep)
+outputFile.write(epilog + os.linesep)
