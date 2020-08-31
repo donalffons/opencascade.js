@@ -231,6 +231,10 @@ for o in newChildren:
     if theClass.spelling == "BRepGProp_Gauss":
       continue
 
+    # error: call to deleted constructor of 'std::__2::basic_ostream<char>'
+    if theClass.spelling == "BRepFeat":
+      continue
+
     # try:
     outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
     abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
@@ -246,4 +250,4 @@ for o in newChildren:
     #   continue
 
 outputFile.write("}" + os.linesep + os.linesep)
-outputFile.write(epilog + os.linesep)
+outputFile.write(epilog)
