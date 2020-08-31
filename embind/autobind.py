@@ -177,6 +177,9 @@ def getEpilog(theClass):
     return "namespace emscripten { namespace internal { template<> void raw_destructor<" + theClass.spelling + ">(" + theClass.spelling + "* ptr) { /* do nothing */ } } }" + os.linesep
   return ""
 
+def isAbstractClass(theClass):
+  return any(child.kind == clang.cindex.CursorKind.CXX_METHOD and child.is_pure_virtual_method() for child in list(theClass.get_children()))
+
 outputFile.write(includeDirectives + os.linesep)
 preamble = '''
 #include <emscripten/bind.h>
@@ -226,10 +229,13 @@ for o in newChildren:
 
     try:
       outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
-      outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
+      abstract = isAbstractClass(theClass)
+      if not abstract:
+        outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
       outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
       outputFile.write("  ;" + os.linesep)
-      outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
+      if not abstract:
+        outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
       epilog += getEpilog(theClass)
     except Exception as e:
       print(str(e))
