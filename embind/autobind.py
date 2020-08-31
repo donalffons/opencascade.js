@@ -235,19 +235,51 @@ for o in newChildren:
     if theClass.spelling == "BRepFeat":
       continue
 
-    # try:
-    outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
-    abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
-    if not abstract:
-      outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
-    outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
-    outputFile.write("  ;" + os.linesep)
-    if not abstract:
-      outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
-    epilog += getEpilog(theClass)
-    # except Exception as e:
-    #   print(str(e))
-    #   continue
+    # error: undefined symbol: _ZN24BRepTest_XXX
+    if theClass.spelling.startswith("BRepTest"):
+      continue
+
+    # error: undefined symbol: _ZN23BRepFeat_MakeLinearForm16TransformShapeFUEi
+    if theClass.spelling == "BRepFeat_MakeLinearForm":
+      continue
+
+    # error: undefined symbol: _ZN17BRepApprox_Approx7PerformEv
+    if theClass.spelling == "BRepApprox_Approx":
+      continue
+
+    # error: undefined symbol: _ZNK18BRepGProp_VinertGK15GetAbsolutErrorEv
+    if theClass.spelling == "BRepGProp_VinertGK":
+      continue
+
+    # error: undefined symbol: _ZNK21BRepOffset_MakeOffset10GetAnalyseEv
+    if theClass.spelling == "BRepOffset_MakeOffset":
+      continue
+
+    # error: undefined symbol: _ZNK32BRepOffsetAPI_FindContigousEdges7NbEdgesEv
+    if theClass.spelling == "BRepOffsetAPI_FindContigousEdges":
+      continue
+
+    # error: undefined symbol: _ZNK63BRepApprox_ResConstraintOfMyGradientbisOfTheComputeLineOfApprox5ErrorEv
+    if theClass.spelling == "BRepApprox_ResConstraintOfMyGradientbisOfTheComputeLineOfApprox":
+      continue
+
+    # error: undefined symbol: _ZNK66BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox5ErrorEv
+    if theClass.spelling == "BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox":
+      continue
+
+    try:
+      outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
+      abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
+      if not abstract:
+        outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
+      outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
+      outputFile.write("  ;" + os.linesep)
+      if not abstract:
+        outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
+      epilog += getEpilog(theClass)
+    except Exception as e:
+      print(str(e))
+      continue
 
 outputFile.write("}" + os.linesep + os.linesep)
 outputFile.write(epilog)
