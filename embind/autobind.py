@@ -177,7 +177,7 @@ def getEpilog(theClass):
 
 def isAbstractClass(theClass, allClasses):
   baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, list(theClass.get_children())))
-  baseClasses = list(map(lambda y: next((x for x in allClasses if x.spelling == y.type.spelling), None), baseSpec))
+  baseClasses = list(map(lambda y: next((x for x in allClasses if x.spelling == y.type.spelling)), baseSpec))
 
   return any(child.kind == clang.cindex.CursorKind.CXX_METHOD and child.is_pure_virtual_method() for child in list(theClass.get_children())) or any(isAbstractClass(bc, allClasses) for bc in baseClasses)
 
@@ -228,19 +228,19 @@ for o in newChildren:
     if theClass.spelling == "BRepGProp_Gauss":
       continue
 
-    try:
-      outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
-      abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
-      if not abstract:
-        outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
-      outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
-      outputFile.write("  ;" + os.linesep)
-      if not abstract:
-        outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
-      epilog += getEpilog(theClass)
-    except Exception as e:
-      print(str(e))
-      continue
+    # try:
+    outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
+    abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
+    if not abstract:
+      outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
+    outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
+    outputFile.write("  ;" + os.linesep)
+    if not abstract:
+      outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
+    epilog += getEpilog(theClass)
+    # except Exception as e:
+    #   print(str(e))
+    #   continue
 
 outputFile.write("}" + os.linesep + os.linesep)
 outputFile.write(epilog + os.linesep)
