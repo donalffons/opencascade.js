@@ -122,7 +122,7 @@ def getStandardConstructorBinding(children):
   argTypes = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
   return "    .constructor<" + argTypes + ">()" + os.linesep
 
-def getSingleArgumentBinding(argNames = True):
+def getSingleArgumentBinding(argNames = True, isConstructor = False):
   def f(arg):
     argChildren = list(arg.get_children())
     argBinding = ""
@@ -141,7 +141,10 @@ def getSingleArgumentBinding(argNames = True):
           if arg.type.spelling[-2] == "*" or "".join(arg.type.spelling.rsplit("&", 1)).strip() in ["Standard_Boolean", "Standard_Real", "Standard_Integer"]: # types that can be copied
             typename = "".join(arg.type.spelling.rsplit("&", 1))
           else:
-            typename = arg.type.spelling
+            if isConstructor:
+              typename = arg.type.spelling
+            else:
+              typename = "const " + arg.type.spelling
       argBinding = typename + ((" " + arg.spelling) if argNames else "")
     return argBinding
   return f
@@ -157,9 +160,9 @@ def getOverloadedConstructorsBinding(className, children):
   for constructor in constructors:
     overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
 
-    args = ", ".join(list(map(getSingleArgumentBinding(True), list(constructor.get_arguments()))))
+    args = ", ".join(list(map(getSingleArgumentBinding(True, True), list(constructor.get_arguments()))))
     argNames = ", ".join(list(map(lambda x: x.spelling, list(constructor.get_arguments()))))
-    argTypes = ", ".join(list(map(getSingleArgumentBinding(False), list(constructor.get_arguments()))))
+    argTypes = ", ".join(list(map(getSingleArgumentBinding(False, True), list(constructor.get_arguments()))))
 
     constructorBindings += "    struct " + constructor.spelling + overloadPostfix + " : public " + constructor.spelling + " {" + os.linesep
     constructorBindings += "      " + constructor.spelling + overloadPostfix + "(" + args + ") : " + constructor.spelling + "(" + argNames + ") {}" + os.linesep
