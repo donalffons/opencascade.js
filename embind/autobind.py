@@ -156,8 +156,6 @@ def getOverloadedConstructorsBinding(className, children):
     raise Exception("Something weird happened")
   for constructor in constructors:
     overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
-    if not overloadPostfix == "_2":
-      continue
 
     args = ", ".join(list(map(getSingleArgumentBinding(True), list(constructor.get_arguments()))))
     argNames = ", ".join(list(map(lambda x: x.spelling, list(constructor.get_arguments()))))
