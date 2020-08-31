@@ -175,8 +175,11 @@ def getEpilog(theClass):
     return "namespace emscripten { namespace internal { template<> void raw_destructor<" + theClass.spelling + ">(" + theClass.spelling + "* ptr) { /* do nothing */ } } }" + os.linesep
   return ""
 
-def isAbstractClass(theClass):
-  return any(child.kind == clang.cindex.CursorKind.CXX_METHOD and child.is_pure_virtual_method() for child in list(theClass.get_children()))
+def isAbstractClass(theClass, allClasses):
+  baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, list(theClass.get_children())))
+  baseClasses = list(map(lambda y: next((x for x in allClasses if x.spelling == y.type.spelling), None), baseSpec))
+
+  return any(child.kind == clang.cindex.CursorKind.CXX_METHOD and child.is_pure_virtual_method() for child in list(theClass.get_children())) or any(isAbstractClass(bc, allClasses) for bc in baseClasses)
 
 outputFile.write(includeDirectives + os.linesep)
 preamble = '''
@@ -227,7 +230,7 @@ for o in newChildren:
 
     try:
       outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
-      abstract = isAbstractClass(theClass)
+      abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
       if not abstract:
         outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
       outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
