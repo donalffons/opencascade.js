@@ -138,7 +138,10 @@ def getSingleArgumentBinding(argNames = True):
         tokenList = list(arg.get_tokens())
         isConstRef = len(tokenList) > 0 and tokenList[0].spelling == "const"
         if not isConstRef:
-          typename = "const " + arg.type.spelling
+          if arg.type.spelling[-2] == "*" or "".join(arg.type.spelling.rsplit("&", 1)).strip() in ["Standard_Boolean", "Standard_Real", "Standard_Integer"]: # types that can be copied
+            typename = "".join(arg.type.spelling.rsplit("&", 1))
+          else:
+            typename = "const " + arg.type.spelling
       argBinding = typename + ((" " + arg.spelling) if argNames else "")
     return argBinding
   return f
