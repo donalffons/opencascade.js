@@ -141,7 +141,7 @@ def getSingleArgumentBinding(argNames = True):
           if arg.type.spelling[-2] == "*" or "".join(arg.type.spelling.rsplit("&", 1)).strip() in ["Standard_Boolean", "Standard_Real", "Standard_Integer"]: # types that can be copied
             typename = "".join(arg.type.spelling.rsplit("&", 1))
           else:
-            typename = "const " + arg.type.spelling
+            typename = arg.type.spelling
       argBinding = typename + ((" " + arg.spelling) if argNames else "")
     return argBinding
   return f
