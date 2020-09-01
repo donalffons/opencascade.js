@@ -53,6 +53,7 @@ ENTRYPOINT \
     /opencascade/node_modules/* /opencascade/node_modules/.* \
     /opencascade/dist/* /opencascade/dist/.* \
     /emscripten/upstream/* /emscripten/upstream/.* \
+    2> /dev/null \
   && \
   source /emscripten/emsdk_env.sh && \
   # python3.8 make.py && \
