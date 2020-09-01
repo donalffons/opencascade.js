@@ -200,7 +200,8 @@ for o in newChildren:
     if (
       not theClass.spelling.startswith("gp") and
       not theClass.spelling.startswith("GC") and
-      not theClass.spelling.startswith("BRep")
+      not theClass.spelling.startswith("BRep") and
+      not theClass.spelling.startswith("Geom")
     ):
       continue
 
@@ -231,8 +232,11 @@ for o in newChildren:
     if theClass.spelling == "BRepGProp_Gauss":
       continue
 
-    # error: call to deleted constructor of 'std::__2::basic_ostream<char>'
-    if theClass.spelling == "BRepFeat":
+    # error: call to deleted constructor of 'std::__2::basic_Xstream<char>'
+    if (
+      theClass.spelling == "BRepFeat" or
+      theClass.spelling == "GeomTools_UndefinedTypeHandler"
+    ):
       continue
 
     # error: undefined symbol: _ZN24BRepTest_XXX
@@ -267,6 +271,20 @@ for o in newChildren:
     if theClass.spelling == "BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox":
       continue
 
+    # error: undefined symbol
+    if (
+      theClass.spelling.startswith("GeometryTest") or
+      theClass.spelling.startswith("GeomliteTest") or
+      theClass.spelling.startswith("GeomInt") or
+      theClass.spelling.startswith("GeomAPI") or
+      theClass.spelling.startswith("Geom2dAPI") or
+      theClass.spelling.startswith("Geom2dInt") or
+      theClass.spelling.startswith("GeomFill") or
+      theClass.spelling.startswith("Geom2dHatch") or
+      theClass.spelling.startswith("Geom2dGcc")
+    ):
+      continue
+
     try:
       outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
       abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
@@ -283,7 +301,7 @@ for o in newChildren:
 
 print("generating bindings for handle types...")
 
-handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle"), children))
+handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle") and x.spelling.startswith("Handle_"), children))
 filteredHandleTypedefs = []
 for child in handleTypedefs:
   if not any(x.underlying_typedef_type.spelling == child.underlying_typedef_type.spelling for x in filteredHandleTypedefs):
@@ -292,7 +310,6 @@ for child in handleTypedefs:
 for handleTypedef in handleTypedefs:
   # error: ?
   if (
-    handleTypedef.spelling == "MoniTool_ValueInterpret" or
     handleTypedef.spelling == "Handle_Font_BRepFont"
   ):
     continue
