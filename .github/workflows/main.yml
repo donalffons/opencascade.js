@@ -21,7 +21,7 @@ jobs:
           cache-name: cache-build-intermediates
         with:
           path: ./build
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-3
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-2
 
       # Attempt to Load Node Module Cache
       - name: Cache Intermediate Node Products
@@ -31,7 +31,7 @@ jobs:
           cache-name: cache-node-intermediates
         with:
           path: ./node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-3
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-2
 
       # Attempt to Load Emscripten Cache
       - name: Cache Intermediate Emscripten Products
@@ -41,7 +41,7 @@ jobs:
           cache-name: cache-emscripten-intermediates
         with:
           path: ./emscripten-cache
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-3
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-2
 
       # Attempt to Load Dist Cache
       - name: Cache Intermediate Dist Products
@@ -51,7 +51,7 @@ jobs:
           cache-name: cache-dist-intermediates
         with:
           path: ./dist
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-3
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-2
 
       - name: Build OpenCascade.js Docker Image
         uses: whoan/docker-build-with-cache-action@v5
