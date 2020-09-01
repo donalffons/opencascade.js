@@ -202,7 +202,8 @@ for o in newChildren:
       not theClass.spelling.startswith("gp") and
       not theClass.spelling.startswith("GC") and
       not theClass.spelling.startswith("BRep") and
-      not theClass.spelling.startswith("Geom")
+      not theClass.spelling.startswith("Geom") and
+      not theClass.spelling.startswith("Standard")
     ):
       continue
 
@@ -284,6 +285,10 @@ for o in newChildren:
       theClass.spelling.startswith("Geom2dHatch") or
       theClass.spelling.startswith("Geom2dGcc")
     ):
+      continue
+
+    # error: array 'new' cannot have initialization arguments
+    if theClass.spelling == "Standard_ErrorHandler":
       continue
 
     try:
