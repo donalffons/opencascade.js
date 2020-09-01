@@ -9,8 +9,6 @@ import tarfile
 import subprocess
 from subprocess import Popen, PIPE, STDOUT
 
-sys.exit()
-
 stage_counter = 0
 
 INCLUDES = [
