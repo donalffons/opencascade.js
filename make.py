@@ -120,203 +120,214 @@ def stage(text):
   print("=" * len(text))
   print("")
 
+def list_files(startpath):
+  for root, dirs, files in os.walk(startpath):
+    level = root.replace(startpath, '').count(os.sep)
+    indent = ' ' * 4 * (level)
+    print('{}{}/'.format(indent, os.path.basename(root)))
+    subindent = ' ' * 4 * (level + 1)
+    for f in files:
+      print('{}{}'.format(subindent, f))
+
 def build():
   this_dir = os.getcwd()
-  if not os.path.exists('build'):
-    os.makedirs('build')
-  os.chdir('build')
-  targetfile = "occt.tar.gz"
+  list_files(os.getcwd())
 
-  ######################################
-  if not os.path.exists('occt.tar.gz'):
-    stage("downloading OCCT...")
-    url = "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=33d9a6fa21ca4fa711da7066655aa2ba854545ee;sf=tgz"
-    myfile = requests.get(url, stream=True)
-    open(targetfile, 'wb').write(myfile.content)
+#   if not os.path.exists('build'):
+#     os.makedirs('build')
+#   os.chdir('build')
+#   targetfile = "occt.tar.gz"
 
-  ######################################
-  if not os.path.exists('occt'):
-    stage("extracting OCCT, patching...")
-    tar = tarfile.open(targetfile, "r:gz")
-    tar.extractall("occt")
-    tar.close()
-    source = "occt/" + os.listdir("occt")[0] + "/"
-    dest = "occt"
-    files = os.listdir(source)
-    for f in files:
-      shutil.move(source+f, dest)
-    patch.fromfile("../patches/CMakeLists.txt.patch").apply()
-    pset = patch.fromfile("../patches/OSD_Path.cxx.patch").apply()
-    pset = patch.fromfile("../patches/OSD_Process.cxx.patch").apply()
-    pset = patch.fromfile("../patches/Bnd_Box.hxx.patch").apply()
-    pset = patch.fromfile("../patches/BRepGProp.hxx.patch").apply()
+#   ######################################
+#   if not os.path.exists('occt.tar.gz'):
+#     stage("downloading OCCT...")
+#     url = "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=33d9a6fa21ca4fa711da7066655aa2ba854545ee;sf=tgz"
+#     myfile = requests.get(url, stream=True)
+#     open(targetfile, 'wb').write(myfile.content)
 
-  if not os.path.exists('regal'):
-    stage("downloading and extracting regal...")
-    url = "https://github.com/p3/regal/archive/master.tar.gz"
-    myfile = requests.get(url, stream=True)
-    open("regal.tar.gz", 'wb').write(myfile.content)
-    tar = tarfile.open("regal.tar.gz", "r:gz")
-    tar.extractall("regal")
-    tar.close()
+#   ######################################
+#   if not os.path.exists('occt'):
+#     stage("extracting OCCT, patching...")
+#     tar = tarfile.open(targetfile, "r:gz")
+#     tar.extractall("occt")
+#     tar.close()
+#     source = "occt/" + os.listdir("occt")[0] + "/"
+#     dest = "occt"
+#     files = os.listdir(source)
+#     for f in files:
+#       shutil.move(source+f, dest)
+#     patch.fromfile("../patches/CMakeLists.txt.patch").apply()
+#     pset = patch.fromfile("../patches/OSD_Path.cxx.patch").apply()
+#     pset = patch.fromfile("../patches/OSD_Process.cxx.patch").apply()
+#     pset = patch.fromfile("../patches/Bnd_Box.hxx.patch").apply()
+#     pset = patch.fromfile("../patches/BRepGProp.hxx.patch").apply()
 
-  if not os.path.exists('freetype'):
-    stage("downloading and extracting freetype...")
-    url = "https://git.savannah.gnu.org/cgit/freetype/freetype2.git/snapshot/freetype2-VER-2-10-1.tar.gz"
-    myfile = requests.get(url, stream=True)
-    open("freetype.tar.gz", 'wb').write(myfile.content)
-    tar = tarfile.open("freetype.tar.gz", "r:gz")
-    tar.extractall("freetype")
-    tar.close()
+#   if not os.path.exists('regal'):
+#     stage("downloading and extracting regal...")
+#     url = "https://github.com/p3/regal/archive/master.tar.gz"
+#     myfile = requests.get(url, stream=True)
+#     open("regal.tar.gz", 'wb').write(myfile.content)
+#     tar = tarfile.open("regal.tar.gz", "r:gz")
+#     tar.extractall("regal")
+#     tar.close()
 
-  if not os.path.exists('fontconfig'):
-    stage("downloading and extracting fontconfig...")
-    url = "https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/2.13.92/fontconfig-2.13.92.tar.gz"
-    myfile = requests.get(url, stream=True)
-    open("fontconfig.tar.gz", 'wb').write(myfile.content)
-    tar = tarfile.open("fontconfig.tar.gz", "r:gz")
-    tar.extractall("fontconfig")
-    tar.close()
+#   if not os.path.exists('freetype'):
+#     stage("downloading and extracting freetype...")
+#     url = "https://git.savannah.gnu.org/cgit/freetype/freetype2.git/snapshot/freetype2-VER-2-10-1.tar.gz"
+#     myfile = requests.get(url, stream=True)
+#     open("freetype.tar.gz", 'wb').write(myfile.content)
+#     tar = tarfile.open("freetype.tar.gz", "r:gz")
+#     tar.extractall("freetype")
+#     tar.close()
 
-  ######################################
-  stage("checking EMSCRIPTEN...")
-  envEMSDK = os.environ.get('EMSDK')
-  if not envEMSDK:
-    print("ERROR: envEMSDK environment> variable not found")
-    sys.exit(1)
-  sys.path.append(os.path.join(envEMSDK, 'upstream', 'emscripten'))
-  import tools.building as emscripten
+#   if not os.path.exists('fontconfig'):
+#     stage("downloading and extracting fontconfig...")
+#     url = "https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/2.13.92/fontconfig-2.13.92.tar.gz"
+#     myfile = requests.get(url, stream=True)
+#     open("fontconfig.tar.gz", 'wb').write(myfile.content)
+#     tar = tarfile.open("fontconfig.tar.gz", "r:gz")
+#     tar.extractall("fontconfig")
+#     tar.close()
 
-  #####################################
-  stage('Build bindings')
+#   ######################################
+#   stage("checking EMSCRIPTEN...")
+#   envEMSDK = os.environ.get('EMSDK')
+#   if not envEMSDK:
+#     print("ERROR: envEMSDK environment> variable not found")
+#     sys.exit(1)
+#   sys.path.append(os.path.join(envEMSDK, 'upstream', 'emscripten'))
+#   import tools.building as emscripten
 
-  myincludes = [x[1] for x in os.walk(os.path.join('.', 'occt', 'src'))][0]
-  myincludes = ['-I./occt/src/{0}'.format(s) for s in myincludes]
-  myincludes.extend([
-    '-I./../',
-    '-c',
-    '-std=c++1z',
-  ])
+#   #####################################
+#   stage('Build bindings')
 
-  args = copy.deepcopy(myincludes)
-  for include in INCLUDES:
-    args += ['-include', include]
+#   myincludes = [x[1] for x in os.walk(os.path.join('.', 'occt', 'src'))][0]
+#   myincludes = ['-I./occt/src/{0}'.format(s) for s in myincludes]
+#   myincludes.extend([
+#     '-I./../',
+#     '-c',
+#     '-std=c++1z',
+#   ])
 
-  if not os.path.exists('build'):
-    os.makedirs('build')
-  os.chdir('build')
+#   args = copy.deepcopy(myincludes)
+#   for include in INCLUDES:
+#     args += ['-include', include]
 
-  cmake_build = True
+#   if not os.path.exists('build'):
+#     os.makedirs('build')
+#   os.chdir('build')
 
-  if cmake_build:
-    stage('Configure via CMake')
-    emscripten.configure([
-      'cmake',
-      '../occt/',
-      '-DCMAKE_BUILD_TYPE=Release',
-      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=../freetype/freetype2-VER-2-10-1/include/freetype',
-      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_ft2build=../freetype/freetype2-VER-2-10-1/include',
-      '-DBUILD_LIBRARY_TYPE=Static',
-      '-DCMAKE_CXX_FLAGS="-DIGNORE_NO_ATOMICS=1 -frtti"',
-      '-D3RDPARTY_INCLUDE_DIRS=../regal/regal-master/src/apitrace/thirdparty/khronos/\;../fontconfig/fontconfig-2.13.92',
-      '-DUSE_GLES2=ON',
-      '-DBUILD_MODULE_Draw=OFF',
-      '-DBUILD_ADDITIONAL_TOOLKITS=OFF',
-      '-DBUILD_MODULE_Visualization=OFF',
-      '-DBUILD_MODULE_ApplicationFramework=OFF'
-    ])
+#   cmake_build = True
 
-  ###############
-  stage('Make')
+#   if cmake_build:
+#     stage('Configure via CMake')
+#     emscripten.configure([
+#       'cmake',
+#       '../occt/',
+#       '-DCMAKE_BUILD_TYPE=Release',
+#       '-D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=../freetype/freetype2-VER-2-10-1/include/freetype',
+#       '-D3RDPARTY_FREETYPE_INCLUDE_DIR_ft2build=../freetype/freetype2-VER-2-10-1/include',
+#       '-DBUILD_LIBRARY_TYPE=Static',
+#       '-DCMAKE_CXX_FLAGS="-DIGNORE_NO_ATOMICS=1 -frtti"',
+#       '-D3RDPARTY_INCLUDE_DIRS=../regal/regal-master/src/apitrace/thirdparty/khronos/\;../fontconfig/fontconfig-2.13.92',
+#       '-DUSE_GLES2=ON',
+#       '-DBUILD_MODULE_Draw=OFF',
+#       '-DBUILD_ADDITIONAL_TOOLKITS=OFF',
+#       '-DBUILD_MODULE_Visualization=OFF',
+#       '-DBUILD_MODULE_ApplicationFramework=OFF'
+#     ])
 
-  CORES = multiprocessing.cpu_count()
+#   ###############
+#   stage('Make')
 
-  make_build = True
+#   CORES = multiprocessing.cpu_count()
 
-  if make_build:
-    emscripten.make(['make', '-j', str(CORES)])
+#   make_build = True
 
-  ######################################
-  stage('generate bindings...')
+#   if make_build:
+#     emscripten.make(['make', '-j', str(CORES)])
 
-  os.chdir('../../embind')
-  subprocess.call(['./autobind.py'])
-  os.chdir('../build')
+#   ######################################
+#   stage('generate bindings...')
+
+#   os.chdir('../../embind')
+#   subprocess.call(['./autobind.py'])
+#   os.chdir('../build')
   
-  ######################################
-  stage("build settings...")
-  wasm = 'wasm' in sys.argv
-  closure = 'closure' in sys.argv
-  add_function_support = 'add_func' in sys.argv
-  args = '-std=c++1z -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
-  args += ' -O3'
-  if add_function_support:
-    args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
-  if wasm:
-    args += ''' -s WASM=1'''
-  else:
-    args += ' -s WASM=0 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s SINGLE_FILE=1 -s LEGACY_VM_SUPPORT=1'
-  if closure:
-    args += ' --closure 1 -s IGNORE_CLOSURE_COMPILER_ERRORS=1'
-  else:
-    args += ' -s NO_DYNAMIC_EXECUTION=1'
-  emcc_args = args.split(' ')
-  emcc_args += ['-s', 'TOTAL_MEMORY=%d' % (64*1024*1024)]
-  emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1']
-  emcc_args += '-s EXPORT_NAME="opencascade"'.split(' ')
-  emcc_args += '-s MODULARIZE=1'.split(' ')
-  emcc_args += ['-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]']
-  emcc_args += ['-s', 'EXPORT_ES6=1']
-  emcc_args += ['-s', 'USE_ES6_IMPORT_META=0']
-  emcc_args += ['-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1']
+#   ######################################
+#   stage("build settings...")
+#   wasm = 'wasm' in sys.argv
+#   closure = 'closure' in sys.argv
+#   add_function_support = 'add_func' in sys.argv
+#   args = '-std=c++1z -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
+#   args += ' -O3'
+#   if add_function_support:
+#     args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
+#   if wasm:
+#     args += ''' -s WASM=1'''
+#   else:
+#     args += ' -s WASM=0 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s SINGLE_FILE=1 -s LEGACY_VM_SUPPORT=1'
+#   if closure:
+#     args += ' --closure 1 -s IGNORE_CLOSURE_COMPILER_ERRORS=1'
+#   else:
+#     args += ' -s NO_DYNAMIC_EXECUTION=1'
+#   emcc_args = args.split(' ')
+#   emcc_args += ['-s', 'TOTAL_MEMORY=%d' % (64*1024*1024)]
+#   emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1']
+#   emcc_args += '-s EXPORT_NAME="opencascade"'.split(' ')
+#   emcc_args += '-s MODULARIZE=1'.split(' ')
+#   emcc_args += ['-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]']
+#   emcc_args += ['-s', 'EXPORT_ES6=1']
+#   emcc_args += ['-s', 'USE_ES6_IMPORT_META=0']
+#   emcc_args += ['-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1']
   
-  # Debugging options
-  # emcc_args += ['-s', 'ASSERTIONS=2']
-  # emcc_args += ['-s', 'STACK_OVERFLOW_CHECK=1']
-  # emcc_args += ['-s', 'DEMANGLE_SUPPORT=1']
-  # emcc_args += ['-s', 'DISABLE_EXCEPTION_CATCHING=0']
-  # emcc_args += ['-g']
+#   # Debugging options
+#   # emcc_args += ['-s', 'ASSERTIONS=2']
+#   # emcc_args += ['-s', 'STACK_OVERFLOW_CHECK=1']
+#   # emcc_args += ['-s', 'DEMANGLE_SUPPORT=1']
+#   # emcc_args += ['-s', 'DISABLE_EXCEPTION_CATCHING=0']
+#   # emcc_args += ['-g']
 
-  stage('Link')
+#   stage('Link')
 
-  os.chdir('build')
-  opencascade_libs = os.listdir(os.path.join('.', 'lin32', 'clang', 'lib'))
-  opencascade_libs = [os.path.join('.', 'build', 'lin32', 'clang', 'lib', s) for s in opencascade_libs]
+#   os.chdir('build')
+#   opencascade_libs = os.listdir(os.path.join('.', 'lin32', 'clang', 'lib'))
+#   opencascade_libs = [os.path.join('.', 'build', 'lin32', 'clang', 'lib', s) for s in opencascade_libs]
 
-  stage('emcc: ' + ' '.join(emcc_args))
-  os.chdir('..')
-  if not os.path.exists('js'):
-    os.makedirs('js')
+#   stage('emcc: ' + ' '.join(emcc_args))
+#   os.chdir('..')
+#   if not os.path.exists('js'):
+#     os.makedirs('js')
 
-  target = 'opencascade.js' if not wasm else 'opencascade.wasm.js'
-  temp = os.path.join('.', 'js', target)
-  shutil.copytree(os.path.join('..', 'embind'), os.path.join('.', 'embind'), dirs_exist_ok=True)
+#   target = 'opencascade.js' if not wasm else 'opencascade.wasm.js'
+#   temp = os.path.join('.', 'js', target)
+#   shutil.copytree(os.path.join('..', 'embind'), os.path.join('.', 'embind'), dirs_exist_ok=True)
 
-  includePrefix = os.path.join(".", "occt", "src")
-  includePaths = os.listdir(includePrefix)
-  includeArgs = [
-    '-I' + os.path.join('.', 'occt', 'src'),
-  ]
-  for path in includePaths:
-    includeArgs.append('-I' + os.path.join(".", includePrefix, path))
+#   includePrefix = os.path.join(".", "occt", "src")
+#   includePaths = os.listdir(includePrefix)
+#   includeArgs = [
+#     '-I' + os.path.join('.', 'occt', 'src'),
+#   ]
+#   for path in includePaths:
+#     includeArgs.append('-I' + os.path.join(".", includePrefix, path))
 
-  emccArgs = ['--bind'] + includeArgs + opencascade_libs + emcc_args
-  emscripten.emcc(os.path.join('.', 'bindings.cpp'), emccArgs, temp)
+#   emccArgs = ['--bind'] + includeArgs + opencascade_libs + emcc_args
+#   emscripten.emcc(os.path.join('.', 'bindings.cpp'), emccArgs, temp)
 
-  stage('wrap')
+#   stage('wrap')
 
-  wrapped = '''
-// This is opencascade.js.
-''' + open(temp).read()
+#   wrapped = '''
+# // This is opencascade.js.
+# ''' + open(temp).read()
 
-  open(temp, 'w').write(wrapped)
+#   open(temp, 'w').write(wrapped)
 
-  os.chdir('..')
-  if not wasm:
-    shutil.copyfile(os.path.join('build', 'js', 'opencascade.js'), os.path.join('dist', 'opencascade.js'))
-  else:
-    shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.js'), os.path.join('dist', 'opencascade.wasm.js'))
-    shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.wasm'), os.path.join('dist', 'opencascade.wasm.wasm'))
+#   os.chdir('..')
+#   if not wasm:
+#     shutil.copyfile(os.path.join('build', 'js', 'opencascade.js'), os.path.join('dist', 'opencascade.js'))
+#   else:
+#     shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.js'), os.path.join('dist', 'opencascade.wasm.js'))
+#     shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.wasm'), os.path.join('dist', 'opencascade.wasm.wasm'))
 
 if __name__ == '__main__':
   build()
