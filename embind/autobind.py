@@ -43,7 +43,7 @@ tu = index.parse("main.h", ["-x", "c++", "-ferror-limit=10000"] + includePathArg
 #   for d in tu.diagnostics:
 #     print("  " + d.format())
 
-print("filtering...")
+print("filtering, sorting...")
 
 children = list(tu.cursor.get_children())
 newChildren = []
@@ -52,6 +52,7 @@ for child in children:
     continue
   if not any(x.spelling == child.spelling for x in newChildren):
     newChildren.append(child)
+newChildren = sorted(newChildren, key=lambda x: x.spelling)
 
 print("creating bindings...")
 outputFile = open("../build/bindings.cpp", "w")
