@@ -249,8 +249,8 @@ def build():
   closure = 'closure' in sys.argv
   add_function_support = 'add_func' in sys.argv
   args = '-std=c++1z -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
-  args += ' -O3'
-  args += ' --llvm-lto 3'
+  # args += ' -O3'
+  # args += ' --llvm-lto 3'
   if add_function_support:
     args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
   if wasm:
@@ -280,6 +280,7 @@ def build():
 
   stage('Link')
 
+  os.chdir('build')
   opencascade_libs = os.listdir(os.path.join('.', 'lin32', 'clang', 'lib'))
   opencascade_libs = [os.path.join('.', 'build', 'lin32', 'clang', 'lib', s) for s in opencascade_libs]
 
