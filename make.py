@@ -239,8 +239,7 @@ def build():
   ######################################
   stage('generate bindings...')
 
-  os.chdir('..')
-  os.chdir('embind')
+  os.chdir('../../embind')
   subprocess.call(['./autobind.py'])
   os.chdir('../build')
   
