@@ -187,14 +187,6 @@ def build():
   sys.path.append(os.path.join(envEMSDK, 'upstream', 'emscripten'))
   import tools.building as emscripten
 
-  ######################################
-  stage('generate bindings...')
-
-  os.chdir('..')
-  os.chdir('embind')
-  subprocess.call(['./autobind.py'])
-  os.chdir('../build')
-
   #####################################
   stage('Build bindings')
 
@@ -243,6 +235,14 @@ def build():
 
   if make_build:
     emscripten.make(['make', '-j', str(CORES)])
+
+  ######################################
+  stage('generate bindings...')
+
+  os.chdir('..')
+  os.chdir('embind')
+  subprocess.call(['./autobind.py'])
+  os.chdir('../build')
   
   ######################################
   stage("build settings...")
