@@ -48,14 +48,14 @@ WORKDIR /opencascade/
 COPY . .
 
 ENTRYPOINT \
-  rm -fr \
-    /opencascade/build/* /opencascade/build/.* \
-    /opencascade/node_modules/* /opencascade/node_modules/.* \
-    /opencascade/dist/* /opencascade/dist/.* \
-    /emscripten/upstream/* /emscripten/upstream/.* \
-    2> /dev/null \
-  && \
+  # # clear build caches
+  # rm -fr \
+  #   /opencascade/build/* /opencascade/build/.* \
+  #   /opencascade/node_modules/* /opencascade/node_modules/.* \
+  #   /opencascade/dist/* /opencascade/dist/.* \
+  #   /emscripten/upstream/emscripten/cache/* /emscripten/upstream/emscripten/cache/.* \
+  #   2> /dev/null \
+  # && \
   source /emscripten/emsdk_env.sh && \
-  # python3.8 make.py && \
   python3.8 make.py wasm && \
   yarn && yarn generateTypes
