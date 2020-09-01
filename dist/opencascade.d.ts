@@ -1624,6 +1624,11 @@ declare module opencascade {
         Nodes(): TColStd_Array1OfInteger;
         HasParameters(): Standard_Boolean;
     }
+    class BRepBuilderAPI_Copy {
+        constructor();
+        constructor(S: TopoDS_Shape, copyGeom?: Standard_Boolean, copyMesh?: Standard_Boolean);
+        Perform(S: TopoDS_Shape, copyGeom?: Standard_Boolean, copyMesh?: Standard_Boolean): void;
+    }
     type STEPControl_StepModelType = "STEPControl_AsIs" | "STEPControl_ManifoldSolidBrep" | "STEPControl_BrepWithVoids" | "STEPControl_FacetedBrep" | "STEPControl_FacetedBrepAndBrepWithVoids" | "STEPControl_ShellBasedSurfaceModel" | "STEPControl_GeometricCurveSet" | "STEPControl_Hybrid";
     type BRepOffset_Mode = "BRepOffset_Skin" | "BRepOffset_Pipe" | "BRepOffset_RectoVerso";
     type IFSelect_ReturnStatus = "IFSelect_RetVoid" | "IFSelect_RetDone" | "IFSelect_RetError" | "IFSelect_RetFail" | "IFSelect_RetStop";

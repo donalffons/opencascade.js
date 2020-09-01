@@ -101,6 +101,7 @@ INCLUDES = [
   os.path.join('.', 'occt', 'src', 'BRepPrimAPI', 'BRepPrimAPI_MakeTorus.hxx'),
   os.path.join('.', 'occt', 'src', 'BRepPrimAPI', 'BRepPrimAPI_MakeWedge.hxx'),
   os.path.join('.', 'occt', 'src', 'Poly', 'Poly_PolygonOnTriangulation.hxx'),
+  os.path.join('.', 'occt', 'src', 'BRepBuilderAPI', 'BRepBuilderAPI_Copy.hxx'),
   os.path.join('.', 'typedefs.h')
 ]
 
