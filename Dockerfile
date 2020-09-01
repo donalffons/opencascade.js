@@ -50,11 +50,10 @@ COPY . .
 ENTRYPOINT \
   # clear build caches
   rm -fr \
-    /opencascade/build/* /opencascade/build/.* \
-    /opencascade/node_modules/* /opencascade/node_modules/.* \
-    /opencascade/dist/* /opencascade/dist/.* \
-    /emscripten/upstream/emscripten/cache/* /emscripten/upstream/emscripten/cache/.* \
-    2> /dev/null
+    /opencascade/build/* \
+    /opencascade/node_modules/* \
+    /opencascade/dist/* \
+    /emscripten/upstream/emscripten/cache/*
   # && \
   # source /emscripten/emsdk_env.sh && \
   # python3.8 make.py wasm && \
