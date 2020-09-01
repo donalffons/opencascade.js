@@ -9,16 +9,6 @@ import tarfile
 import subprocess
 from subprocess import Popen, PIPE, STDOUT
 
-os.system("rm -r /opencascade/build/*")
-os.system("rm -r /opencascade/build/.*")
-os.system("rm -r /opencascade/node_modules/*")
-os.system("rm -r /opencascade/node_modules/.*")
-os.system("rm -r /opencascade/dist/*")
-os.system("rm -r /opencascade/dist/.*")
-os.system("rm -r /emscripten/upstream/emscripten/cache/*")
-os.system("rm -r /emscripten/upstream/emscripten/cache/.*")
-sys.exit()
-
 stage_counter = 0
 
 INCLUDES = [
