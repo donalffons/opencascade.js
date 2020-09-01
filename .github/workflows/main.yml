@@ -53,14 +53,14 @@ jobs:
       #     path: ./dist
       #     key: ${{ runner.os }}-build-${{ env.cache-name }}-2
 
-      # - name: Build OpenCascade.js Docker Image
-      #   uses: whoan/docker-build-with-cache-action@v5
-      #   with:
-      #     registry: docker.pkg.github.com
-      #     username: donalffons
-      #     password: "${{ secrets.GITHUB_TOKEN }}"
-      #     image_name: opencascade.js
-      #     #image_tag: opencascade.js
+      - name: Build OpenCascade.js Docker Image
+        uses: whoan/docker-build-with-cache-action@v5
+        with:
+          registry: docker.pkg.github.com
+          username: donalffons
+          password: "${{ secrets.GITHUB_TOKEN }}"
+          image_name: opencascade.js
+          #image_tag: opencascade.js
 
       # Debug
       - name: Print Available Docker Images
