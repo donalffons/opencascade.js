@@ -127,6 +127,7 @@ def build():
   os.chdir('build')
   targetfile = "occt.tar.gz"
 
+  os.system("rm occt.tar.gz")
   ######################################
   if not os.path.exists('occt.tar.gz'):
     stage("downloading OCCT...")
@@ -134,6 +135,7 @@ def build():
     myfile = requests.get(url, stream=True)
     open(targetfile, 'wb').write(myfile.content)
 
+  os.system("rm -fr occt")
   ######################################
   if not os.path.exists('occt'):
     stage("extracting OCCT, patching...")
@@ -151,6 +153,7 @@ def build():
     pset = patch.fromfile("../patches/Bnd_Box.hxx.patch").apply()
     pset = patch.fromfile("../patches/BRepGProp.hxx.patch").apply()
 
+  os.system("rm -fr regal")
   if not os.path.exists('regal'):
     stage("downloading and extracting regal...")
     url = "https://github.com/p3/regal/archive/master.tar.gz"
@@ -160,6 +163,7 @@ def build():
     tar.extractall("regal")
     tar.close()
 
+  os.system("rm -fr freetype")
   if not os.path.exists('freetype'):
     stage("downloading and extracting freetype...")
     url = "https://git.savannah.gnu.org/cgit/freetype/freetype2.git/snapshot/freetype2-VER-2-10-1.tar.gz"
@@ -169,6 +173,7 @@ def build():
     tar.extractall("freetype")
     tar.close()
 
+  os.system("rm -fr fontconfig")
   if not os.path.exists('fontconfig'):
     stage("downloading and extracting fontconfig...")
     url = "https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/2.13.92/fontconfig-2.13.92.tar.gz"
