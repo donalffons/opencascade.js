@@ -281,5 +281,36 @@ for o in newChildren:
       print(str(e))
       continue
 
+print("generating bindings for handle types...")
+
+handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle"), children))
+filteredHandleTypedefs = []
+for child in handleTypedefs:
+  if not any(x.underlying_typedef_type.spelling == child.underlying_typedef_type.spelling for x in filteredHandleTypedefs):
+    filteredHandleTypedefs.append(child)
+
+for handleTypedef in handleTypedefs:
+  # error: ?
+  if (
+    handleTypedef.spelling == "MoniTool_ValueInterpret" or
+    handleTypedef.spelling == "Handle_Font_BRepFont"
+  ):
+    continue
+
+  handleType = handleTypedef.underlying_typedef_type.spelling
+  handleName = handleTypedef.spelling
+  targetType = handleTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
+  outputFile.write("  class_<" + handleName + ">(\"" + handleName + "\")" + os.linesep)
+  outputFile.write("    .function(\"Nullify\", &" + handleName + "::Nullify)" + os.linesep)
+  outputFile.write("    .function(\"IsNull\", &" + handleName + "::IsNull)" + os.linesep)
+  outputFile.write("    .function(\"reset\", &" + handleName + "::reset, allow_raw_pointers())" + os.linesep)
+  outputFile.write("    .function(\"operator_assign_1\", select_overload<" + handleName + "&(const " + handleName + "&)>(&" + handleName + "::operator=))" + os.linesep)
+  outputFile.write("    .function(\"operator_assign_2\", select_overload<" + handleName + "&(const " + targetType + "*)>(&" + handleName + "::operator=), allow_raw_pointers())" + os.linesep)
+  outputFile.write("    .function(\"operator_assign_3\", select_overload<" + handleName + "&(" + handleName + "&&)>(&" + handleName + "::operator=))" + os.linesep)
+  outputFile.write("    .function(\"get\", select_overload<" + targetType + "*()const>(&" + handleName + "::get), allow_raw_pointers())" + os.linesep)
+  outputFile.write("    .function(\"operator_dereference\", &" + handleName + "::operator->, allow_raw_pointers())" + os.linesep)
+  outputFile.write("    .function(\"operator_bool\", &" + handleName + "::operator bool)" + os.linesep)
+  outputFile.write("  ;" + os.linesep)
+
 outputFile.write("}" + os.linesep + os.linesep)
 outputFile.write(epilog)
