@@ -32,9 +32,9 @@ for dirpath, dirnames, filenames in os.walk("../build/occt/src"):
       occtFiles.append(str(os.path.join(dirpath, item)))
 
 includePathArgs = list(map(lambda x: "-I" + x, includePaths)) + ["-I/usr/include/linux", "-I/usr/include/c++/7/tr1", "-I/emscripten/upstream/emscripten/system/include"]
-includeDirectives = list(filter(lambda x: not x in ["ChFiKPart_ComputeData_FilPlnCon.hxx"], includeDirectives))
+includeDirectives = list(filter(lambda x: not x in ["ChFiKPart_ComputeData_FilPlnCon.hxx"], occtFiles))
 includeDirectives.append("ChFiKPart_ComputeData_FilPlnCon.hxx")
-includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", occtFiles))
+includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", includeDirectives))
 
 clang.cindex.Config.library_path = "/clang/clang_10/lib"
 index = clang.cindex.Index.create()
