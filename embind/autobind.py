@@ -311,6 +311,10 @@ for o in newChildren:
     if theClass.spelling == "Standard_ErrorHandler":
       continue
 
+    # error: address of overloaded function 'Append' does not match required type 'void (const int &)'
+    if theClass.spelling == "Geom_HSequenceOfBSplineSurface":
+      continue
+
     try:
       outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
       abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
