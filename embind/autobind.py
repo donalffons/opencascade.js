@@ -32,8 +32,26 @@ for dirpath, dirnames, filenames in os.walk("../build/occt/src"):
       occtFiles.append(str(os.path.join(dirpath, item)))
 
 includePathArgs = list(map(lambda x: "-I" + x, includePaths)) + ["-I/usr/include/linux", "-I/usr/include/c++/7/tr1", "-I/emscripten/upstream/emscripten/system/include"]
-includeDirectives = list(filter(lambda x: not x in ["ChFiKPart_ComputeData_FilPlnCon.hxx"], occtFiles))
-includeDirectives.append("ChFiKPart_ComputeData_FilPlnCon.hxx")
+finalFiles = [
+  "ChFiKPart_ComputeData.hxx",
+  "ChFiKPart_ComputeData_CS.hxx",
+  "ChFiKPart_ComputeData_ChAsymPlnCon.hxx",
+  "ChFiKPart_ComputeData_ChAsymPlnCyl.hxx",
+  "ChFiKPart_ComputeData_ChAsymPlnPln.hxx",
+  "ChFiKPart_ComputeData_ChPlnCon.hxx",
+  "ChFiKPart_ComputeData_ChPlnCyl.hxx",
+  "ChFiKPart_ComputeData_ChPlnPln.hxx",
+  "ChFiKPart_ComputeData_Fcts.hxx",
+  "ChFiKPart_ComputeData_FilPlnCon.hxx",
+  "ChFiKPart_ComputeData_FilPlnCyl.hxx",
+  "ChFiKPart_ComputeData_FilPlnPln.hxx",
+  "ChFiKPart_ComputeData_Rotule.hxx",
+  "ChFiKPart_ComputeData_Sphere.hxx",
+  "ChFiKPart_DataMapIteratorOfRstMap.hxx",
+  "ChFiKPart_RstMap.hxx",
+]
+includeDirectives = list(filter(lambda x: not x in finalFiles, occtFiles))
+includeDirectives = includeDirectives + finalFiles
 includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", includeDirectives))
 
 clang.cindex.Config.library_path = "/clang/clang_10/lib"
