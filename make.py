@@ -253,6 +253,9 @@ def build():
   os.chdir('../../embind')
   subprocess.call(['./autobind.py'])
   os.chdir('../build')
+
+  with open("./bindings.cpp", 'r') as fin:
+    print(fin.read())
   
   ######################################
   stage("build settings...")
