@@ -131,7 +131,6 @@ def list_files(startpath):
 
 def build():
   this_dir = os.getcwd()
-  list_files(os.getcwd())
 
   if not os.path.exists('build'):
     os.makedirs('build')
@@ -324,6 +323,8 @@ def build():
 ''' + open(temp).read()
 
   open(temp, 'w').write(wrapped)
+
+  list_files(os.path.join(os.getcwd(), ".."))
 
   if not wasm:
     shutil.copyfile(os.path.join('build', 'js', 'opencascade.js'), os.path.join('dist', 'opencascade.js'))
