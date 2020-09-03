@@ -120,15 +120,6 @@ def stage(text):
   print("=" * len(text))
   print("")
 
-def list_files(startpath):
-  for root, dirs, files in os.walk(startpath):
-    level = root.replace(startpath, '').count(os.sep)
-    indent = ' ' * 4 * (level)
-    print('{}{}/'.format(indent, os.path.basename(root)))
-    subindent = ' ' * 4 * (level + 1)
-    for f in files:
-      print('{}{}'.format(subindent, f))
-
 def build():
   this_dir = os.getcwd()
 
@@ -252,9 +243,6 @@ def build():
   os.chdir('../../embind')
   subprocess.call(['./autobind.py'])
   os.chdir('../build')
-
-  with open("./bindings.cpp", 'r') as fin:
-    print(fin.read())
   
   ######################################
   stage("build settings...")
@@ -323,8 +311,10 @@ def build():
 ''' + open(temp).read()
 
   open(temp, 'w').write(wrapped)
-
-  list_files(os.path.join(os.getcwd(), ".."))
+  
+  files = [f for f in os.listdir('.') if os.path.isfile(f)]
+  for f in files:
+    print(f)
 
   if not wasm:
     shutil.copyfile(os.path.join('build', 'js', 'opencascade.js'), os.path.join('dist', 'opencascade.js'))
