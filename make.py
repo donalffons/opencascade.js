@@ -315,6 +315,13 @@ def build():
   os.chdir("..")
   if not os.path.exists('dist'):
     os.makedirs('dist')
+    
+  print("----------")
+  print(os.getcwd())
+  print("----------")
+  print(os.system("ls -hl"))
+  print("----------")
+  print(os.system("ls -hl .."))
 
   if not wasm:
     shutil.copyfile(os.path.join('build', 'js', 'opencascade.js'), os.path.join('dist', 'opencascade.js'))
