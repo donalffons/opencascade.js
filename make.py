@@ -312,6 +312,7 @@ def build():
 
   open(temp, 'w').write(wrapped)
   
+  os.chdir("..")
   if not os.path.exists('dist'):
     os.makedirs('dist')
 
