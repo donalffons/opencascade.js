@@ -250,7 +250,7 @@ def build():
   closure = 'closure' in sys.argv
   add_function_support = 'add_func' in sys.argv
   args = '-std=c++1z -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
-  # args += ' -O3'
+  args += ' -O3'
   if add_function_support:
     args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
   if wasm:
@@ -269,7 +269,7 @@ def build():
   emcc_args += ['-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]']
   emcc_args += ['-s', 'EXPORT_ES6=1']
   emcc_args += ['-s', 'USE_ES6_IMPORT_META=0']
-  # emcc_args += ['-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1']
+  emcc_args += ['-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1']
   
   # Debugging options
   # emcc_args += ['-s', 'ASSERTIONS=2']
