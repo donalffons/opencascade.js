@@ -50,9 +50,6 @@ COPY . .
 ENTRYPOINT \
   source /emscripten/emsdk_env.sh && \
   ls -hl && \
-  ls -hl dist && \
-  ls -hl build/ && \
-  ls -hl build/js/ && \
   python3.8 make.py wasm && \
   ls -hl && \
   ls -hl dist && \
