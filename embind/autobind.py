@@ -222,7 +222,8 @@ using namespace emscripten;
         not theClass.spelling.startswith("GC") and
         not theClass.spelling.startswith("BRep") and
         not theClass.spelling.startswith("Geom") and
-        not theClass.spelling.startswith("Standard")
+        not theClass.spelling.startswith("Standard") and
+        not theClass.spelling.startswith("Top")
       ):
         continue
 
@@ -312,6 +313,26 @@ using namespace emscripten;
 
       # error: address of overloaded function 'Append' does not match required type 'void (const int &)'
       if theClass.spelling == "Geom_HSequenceOfBSplineSurface":
+        continue
+
+      # error: no matching constructor for initialization of 'TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference'
+      if theClass.spelling == "TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference":
+        continue
+
+      # error: no matching constructor for initialization of 'TopOpeBRep_HArray1OfLineInter'
+      if theClass.spelling == "TopOpeBRep_HArray1OfLineInter":
+        continue
+
+      # error: no matching constructor for initialization of 'TopOpeBRep_HArray1OfVPointInter'
+      if theClass.spelling == "TopOpeBRep_HArray1OfVPointInter":
+        continue
+
+      # error: no matching constructor for initialization of 'TopTools_HArray1OfListOfShape'
+      if theClass.spelling == "TopTools_HArray1OfListOfShape":
+        continue
+
+      # error: undefined symbol: _ZN24TopOpeBRepBuild_Builder114GFillSplitsPVSERK12TopoDS_ShapeRK21TopOpeBRepBuild_GTopoR23TopOpeBRepBuild_PaveSet (referenced by top-level compiled C/C++ code)
+      if theClass.spelling == "TopOpeBRepBuild_Builder":
         continue
 
       try:
