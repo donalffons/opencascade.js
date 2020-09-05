@@ -2124,10 +2124,10 @@ interface BRep_Tool {
 	// 	[Const, Ref] Handle_Geom_Surface S,
 	// 	[Const, Ref] TopLoc_Location L
 	// );
-	// [Value] static gp_Pnt2d Parameters(
-	// 	[Const, Ref] TopoDS_Vertex V,
-	// 	[Const, Ref] TopoDS_Face F
-	// );
+	[Value] static gp_Pnt2d Parameters(
+		[Const, Ref] TopoDS_Vertex V,
+		[Const, Ref] TopoDS_Face F
+	);
 	static Standard_Real MaxTolerance(
 		[Const, Ref] TopoDS_Shape theShape,
 		[Const] TopAbs_ShapeEnum theSubShape
