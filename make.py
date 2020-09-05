@@ -322,8 +322,6 @@ def build():
     shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.js'), os.path.join('dist', 'opencascade.wasm.js'))
     shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.wasm'), os.path.join('dist', 'opencascade.wasm.wasm'))
 
-  print(os.system("ls -hl build/js/"))
-
 if __name__ == '__main__':
   build()
 
