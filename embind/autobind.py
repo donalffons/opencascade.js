@@ -5,59 +5,6 @@ import clang.cindex
 import os
 import io
 
-occtFiles = []
-includePaths = []
-for dirpath, dirnames, filenames in os.walk("../build/occt/src"):
-  includePaths.append(str(dirpath))
-  for item in filenames:
-    if (
-      item.endswith(".hxx")
-      and not item.startswith("IVtk")
-      and not item.startswith("vtk")
-      and not item.startswith("Interface")
-      and not item.startswith("Xw")
-      and not item.startswith("OSD")
-      and not item.startswith("BVH")
-      and not item.startswith("WNT")
-      and not item.startswith("WNT")
-      and not item.startswith("BOPTools")
-      and not item.startswith("BOPDS")
-      and not item.startswith("IntPatch")
-      and not item.startswith("OpenGl")
-      and not item.startswith("AIS")
-      and not item.startswith("D3D")
-      and not item.startswith("Aspect")
-      and not item.startswith("Standard_Atomic")
-    ):
-      occtFiles.append(str(os.path.join(dirpath, item)))
-
-includePathArgs = list(map(lambda x: "-I" + x, includePaths)) + ["-I/usr/include/linux", "-I/usr/include/c++/7/tr1", "-I/emscripten/upstream/emscripten/system/include"]
-includeDirectives = list(sorted(occtFiles))
-includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", includeDirectives))
-
-clang.cindex.Config.library_path = "/clang/clang_10/lib"
-index = clang.cindex.Index.create()
-tu = index.parse("main.h", ["-x", "c++", "-ferror-limit=10000"] + includePathArgs, [["main.h", includeDirectives]])
-
-# if len(list(tu.diagnostics)) > 0:
-#   print("Diagnostic Messages:")
-#   for d in tu.diagnostics:
-#     print("  " + d.format())
-
-print("filtering, sorting...")
-
-children = list(tu.cursor.get_children())
-newChildren = []
-for child in children:
-  if len(list(child.get_children())) == 0:
-    continue
-  if not any(x.spelling == child.spelling for x in newChildren):
-    newChildren.append(child)
-newChildren = sorted(newChildren, key=lambda x: x.spelling)
-
-print("creating bindings...")
-outputFile = open("../build/bindings.cpp", "w")
-
 def getClassBinding(className, children):
   baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(baseSpec) > 1:
@@ -186,159 +133,262 @@ def isAbstractClass(theClass, allClasses):
 
   return any(child.kind == clang.cindex.CursorKind.CXX_METHOD and child.is_pure_virtual_method() for child in list(theClass.get_children())) or any(isAbstractClass(bc, allClasses) for bc in baseClasses)
 
-outputFile.write(includeDirectives + os.linesep)
-preamble = '''
+def main():
+  occtFiles = []
+  includePaths = []
+  for dirpath, dirnames, filenames in os.walk("../build/occt/src"):
+    includePaths.append(str(dirpath))
+    for item in filenames:
+      if (
+        item.endswith(".hxx")
+        and not item.startswith("IVtk")
+        and not item.startswith("vtk")
+        and not item.startswith("Interface")
+        and not item.startswith("Xw")
+        and not item.startswith("OSD")
+        and not item.startswith("BVH")
+        and not item.startswith("WNT")
+        and not item.startswith("WNT")
+        and not item.startswith("BOPTools")
+        and not item.startswith("BOPDS")
+        and not item.startswith("IntPatch")
+        and not item.startswith("OpenGl")
+        and not item.startswith("AIS")
+        and not item.startswith("D3D")
+        and not item.startswith("Aspect")
+        and not item.startswith("Standard_Atomic")
+      ):
+        occtFiles.append(str(os.path.join(dirpath, item)))
+
+  includePathArgs = list(map(lambda x: "-I" + x, includePaths)) + ["-I/usr/include/linux", "-I/usr/include/c++/7/tr1", "-I/emscripten/upstream/emscripten/system/include"]
+  includeDirectives = list(sorted(occtFiles))
+  includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", includeDirectives))
+
+  libFolder = "/clang/clang_10/lib"
+  clang.cindex.Config.library_path = libFolder
+  index = clang.cindex.Index.create()
+  tu = index.parse("main.h", ["-x", "c++", "-ferror-limit=10000"] + includePathArgs, [["main.h", includeDirectives]])
+
+  # if len(list(tu.diagnostics)) > 0:
+  #   print("Diagnostic Messages:")
+  #   for d in tu.diagnostics:
+  #     print("  " + d.format())
+
+  print("filtering, sorting...")
+
+  children = list(tu.cursor.get_children())
+  newChildren = []
+  for child in children:
+    if len(list(child.get_children())) == 0:
+      continue
+    if not any(x.spelling == child.spelling for x in newChildren):
+      newChildren.append(child)
+  newChildren = sorted(newChildren, key=lambda x: x.spelling)
+
+  print("creating bindings...")
+  outputFile = open("../build/bindings.cpp", "w")
+  outputFile.write(includeDirectives + os.linesep)
+  preamble = '''
 #include <emscripten/bind.h>
 using namespace emscripten;
-'''
-outputFile.write(preamble + os.linesep)
-outputFile.write("EMSCRIPTEN_BINDINGS(opencascadejs) {" + os.linesep)
-epilog = ""
+  '''
+  outputFile.write(preamble + os.linesep)
+  outputFile.write("EMSCRIPTEN_BINDINGS(opencascadejs) {" + os.linesep)
+  epilog = ""
 
-for o in newChildren:
-  if o.kind == clang.cindex.CursorKind.CLASS_DECL:
-    theClass = o
+  for o in newChildren:
+    if o.kind == clang.cindex.CursorKind.CLASS_DECL:
+      theClass = o
 
+      if (
+        not theClass.spelling.startswith("gp") and
+        not theClass.spelling.startswith("GC") and
+        not theClass.spelling.startswith("BRep") and
+        not theClass.spelling.startswith("Geom") and
+        not theClass.spelling.startswith("Standard")
+      ):
+        continue
+
+      # error: undefined symbol
+      if (
+        theClass.spelling == "GCPnts_DistFunction" or
+        theClass.spelling == "GCPnts_DistFunction2d"
+      ):
+        continue
+
+      # error: no matching function for call to 'operator new'
+      if theClass.spelling.startswith("BRepMeshData_"):
+        continue
+
+      # error: address of overloaded function 'XXX' does not match required type 'XXX'
+      # Seems to have to do with a template method present
+      if (
+        theClass.spelling == "gp_VectorWithNullMagnitude" or
+        theClass.spelling == "BRepTest_Objects"
+      ):
+        continue
+
+      # error: incomplete type 'BOPAlgo_PaveFiller' used in type trait expression
+      if theClass.spelling == "BOPAlgo_PaveFiller":
+        continue
+
+      # []-arrays are not bound properly
+      if theClass.spelling == "BRepGProp_Gauss":
+        continue
+
+      # error: call to deleted constructor of 'std::__2::basic_Xstream<char>'
+      if (
+        theClass.spelling == "BRepFeat" or
+        theClass.spelling == "GeomTools_UndefinedTypeHandler"
+      ):
+        continue
+
+      # error: undefined symbol: _ZN24BRepTest_XXX
+      if theClass.spelling.startswith("BRepTest"):
+        continue
+
+      # error: undefined symbol: _ZN23BRepFeat_MakeLinearForm16TransformShapeFUEi
+      if theClass.spelling == "BRepFeat_MakeLinearForm":
+        continue
+
+      # error: undefined symbol: _ZN17BRepApprox_Approx7PerformEv
+      if theClass.spelling == "BRepApprox_Approx":
+        continue
+
+      # error: undefined symbol: _ZNK18BRepGProp_VinertGK15GetAbsolutErrorEv
+      if theClass.spelling == "BRepGProp_VinertGK":
+        continue
+
+      # error: undefined symbol: _ZNK21BRepOffset_MakeOffset10GetAnalyseEv
+      if theClass.spelling == "BRepOffset_MakeOffset":
+        continue
+
+      # error: undefined symbol: _ZNK32BRepOffsetAPI_FindContigousEdges7NbEdgesEv
+      if theClass.spelling == "BRepOffsetAPI_FindContigousEdges":
+        continue
+
+      # error: undefined symbol: _ZNK63BRepApprox_ResConstraintOfMyGradientbisOfTheComputeLineOfApprox5ErrorEv
+      if theClass.spelling == "BRepApprox_ResConstraintOfMyGradientbisOfTheComputeLineOfApprox":
+        continue
+
+      # error: undefined symbol: _ZNK66BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox5ErrorEv
+      if theClass.spelling == "BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox":
+        continue
+
+      # error: undefined symbol
+      if (
+        theClass.spelling.startswith("GeometryTest") or
+        theClass.spelling.startswith("GeomliteTest") or
+        theClass.spelling.startswith("GeomInt") or
+        theClass.spelling.startswith("GeomAPI") or
+        theClass.spelling.startswith("Geom2dAPI") or
+        theClass.spelling.startswith("Geom2dInt") or
+        theClass.spelling.startswith("GeomFill") or
+        theClass.spelling.startswith("Geom2dHatch") or
+        theClass.spelling.startswith("Geom2dGcc")
+      ):
+        continue
+
+      # error: array 'new' cannot have initialization arguments
+      if theClass.spelling == "Standard_ErrorHandler":
+        continue
+
+      # error: address of overloaded function 'Append' does not match required type 'void (const int &)'
+      if theClass.spelling == "Geom_HSequenceOfBSplineSurface":
+        continue
+
+      try:
+        outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
+        abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
+        if not abstract:
+          outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
+        outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
+        outputFile.write("  ;" + os.linesep)
+        if not abstract:
+          outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
+        epilog += getEpilog(theClass)
+      except Exception as e:
+        print(str(e))
+        continue
+
+  print("generating bindings for handle types...")
+
+  handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle") and x.spelling.startswith("Handle_"), children))
+  filteredHandleTypedefs = []
+  for child in handleTypedefs:
+    if not any(x.underlying_typedef_type.spelling == child.underlying_typedef_type.spelling for x in filteredHandleTypedefs):
+      filteredHandleTypedefs.append(child)
+
+  for handleTypedef in handleTypedefs:
+    # error: ?
     if (
-      not theClass.spelling.startswith("gp") and
-      not theClass.spelling.startswith("GC") and
-      not theClass.spelling.startswith("BRep") and
-      not theClass.spelling.startswith("Geom") and
-      not theClass.spelling.startswith("Standard")
+      handleTypedef.spelling == "Handle_Font_BRepFont" or
+      handleTypedef.spelling == "Handle_PCDM_Reader" or
+      handleTypedef.spelling == "Handle_PCDM_ReadWriter_1"
     ):
       continue
 
-    # error: undefined symbol
-    if (
-      theClass.spelling == "GCPnts_DistFunction" or
-      theClass.spelling == "GCPnts_DistFunction2d"
-    ):
-      continue
+    handleName = handleTypedef.spelling
+    targetType = handleTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
+    outputFile.write("  class_<" + handleName + ">(\"" + handleName + "\")" + os.linesep)
+    outputFile.write("    .function(\"Nullify\", &" + handleName + "::Nullify)" + os.linesep)
+    outputFile.write("    .function(\"IsNull\", &" + handleName + "::IsNull)" + os.linesep)
+    outputFile.write("    .function(\"reset\", &" + handleName + "::reset, allow_raw_pointers())" + os.linesep)
+    outputFile.write("    .function(\"operator_assign_1\", select_overload<" + handleName + "&(const " + handleName + "&)>(&" + handleName + "::operator=))" + os.linesep)
+    outputFile.write("    .function(\"operator_assign_2\", select_overload<" + handleName + "&(const " + targetType + "*)>(&" + handleName + "::operator=), allow_raw_pointers())" + os.linesep)
+    outputFile.write("    .function(\"operator_assign_3\", select_overload<" + handleName + "&(" + handleName + "&&)>(&" + handleName + "::operator=))" + os.linesep)
+    outputFile.write("    .function(\"get\", select_overload<" + targetType + "*()const>(&" + handleName + "::get), allow_raw_pointers())" + os.linesep)
+    outputFile.write("    .function(\"operator_dereference\", &" + handleName + "::operator->, allow_raw_pointers())" + os.linesep)
+    outputFile.write("    .function(\"operator_bool\", &" + handleName + "::operator bool)" + os.linesep)
+    outputFile.write("  ;" + os.linesep)
 
-    # error: no matching function for call to 'operator new'
-    if theClass.spelling.startswith("BRepMeshData_"):
-      continue
+    class Object(object):
+      def get_arguments(self):
+        return self.arguments
+      def get_tokens(self):
+        return self.tokens
+      def get_children(self):
+        return self.children
 
-    # error: address of overloaded function 'XXX' does not match required type 'XXX'
-    # Seems to have to do with a template method present
-    if (
-      theClass.spelling == "gp_VectorWithNullMagnitude" or
-      theClass.spelling == "BRepTest_Objects"
-    ):
-      continue
+    oc1 = Object()
+    oc1.spelling = handleName
+    oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc1.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc1.arguments = []
 
-    # error: incomplete type 'BOPAlgo_PaveFiller' used in type trait expression
-    if theClass.spelling == "BOPAlgo_PaveFiller":
-      continue
+    oc2 = Object()
+    oc2.spelling = handleName
+    oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc2arg1type = Object()
+    oc2arg1type.spelling = "const " + targetType + "*"
+    oc2arg1type.kind = None
+    oc2arg1 = Object()
+    oc2arg1.type = oc2arg1type
+    oc2arg1.spelling = "thePtr"
+    oc2arg1.tokens = []
+    oc2arg1.children = []
+    oc2.arguments = [oc2arg1]
 
-    # []-arrays are not bound properly
-    if theClass.spelling == "BRepGProp_Gauss":
-      continue
+    oc3 = Object()
+    oc3.spelling = handleName
+    oc3.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc3.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc3arg1type = Object()
+    oc3arg1type.spelling = "const " + handleName + "&"
+    oc3arg1type.kind = None
+    oc3arg1 = Object()
+    oc3arg1.type = oc3arg1type
+    oc3arg1.spelling = "theHandle"
+    oc3arg1.tokens = []
+    oc3arg1.children = []
+    oc3.arguments = [oc3arg1]
 
-    # error: call to deleted constructor of 'std::__2::basic_Xstream<char>'
-    if (
-      theClass.spelling == "BRepFeat" or
-      theClass.spelling == "GeomTools_UndefinedTypeHandler"
-    ):
-      continue
+    outputFile.write(getOverloadedConstructorsBinding(handleName, [
+      oc1, oc2, oc3
+    ]))
 
-    # error: undefined symbol: _ZN24BRepTest_XXX
-    if theClass.spelling.startswith("BRepTest"):
-      continue
+  outputFile.write("}" + os.linesep + os.linesep)
+  outputFile.write(epilog)
 
-    # error: undefined symbol: _ZN23BRepFeat_MakeLinearForm16TransformShapeFUEi
-    if theClass.spelling == "BRepFeat_MakeLinearForm":
-      continue
-
-    # error: undefined symbol: _ZN17BRepApprox_Approx7PerformEv
-    if theClass.spelling == "BRepApprox_Approx":
-      continue
-
-    # error: undefined symbol: _ZNK18BRepGProp_VinertGK15GetAbsolutErrorEv
-    if theClass.spelling == "BRepGProp_VinertGK":
-      continue
-
-    # error: undefined symbol: _ZNK21BRepOffset_MakeOffset10GetAnalyseEv
-    if theClass.spelling == "BRepOffset_MakeOffset":
-      continue
-
-    # error: undefined symbol: _ZNK32BRepOffsetAPI_FindContigousEdges7NbEdgesEv
-    if theClass.spelling == "BRepOffsetAPI_FindContigousEdges":
-      continue
-
-    # error: undefined symbol: _ZNK63BRepApprox_ResConstraintOfMyGradientbisOfTheComputeLineOfApprox5ErrorEv
-    if theClass.spelling == "BRepApprox_ResConstraintOfMyGradientbisOfTheComputeLineOfApprox":
-      continue
-
-    # error: undefined symbol: _ZNK66BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox5ErrorEv
-    if theClass.spelling == "BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox":
-      continue
-
-    # error: undefined symbol
-    if (
-      theClass.spelling.startswith("GeometryTest") or
-      theClass.spelling.startswith("GeomliteTest") or
-      theClass.spelling.startswith("GeomInt") or
-      theClass.spelling.startswith("GeomAPI") or
-      theClass.spelling.startswith("Geom2dAPI") or
-      theClass.spelling.startswith("Geom2dInt") or
-      theClass.spelling.startswith("GeomFill") or
-      theClass.spelling.startswith("Geom2dHatch") or
-      theClass.spelling.startswith("Geom2dGcc")
-    ):
-      continue
-
-    # error: array 'new' cannot have initialization arguments
-    if theClass.spelling == "Standard_ErrorHandler":
-      continue
-
-    # error: address of overloaded function 'Append' does not match required type 'void (const int &)'
-    if theClass.spelling == "Geom_HSequenceOfBSplineSurface":
-      continue
-
-    try:
-      outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
-      abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
-      if not abstract:
-        outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
-      outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
-      outputFile.write("  ;" + os.linesep)
-      if not abstract:
-        outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
-      epilog += getEpilog(theClass)
-    except Exception as e:
-      print(str(e))
-      continue
-
-print("generating bindings for handle types...")
-
-handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle") and x.spelling.startswith("Handle_"), children))
-filteredHandleTypedefs = []
-for child in handleTypedefs:
-  if not any(x.underlying_typedef_type.spelling == child.underlying_typedef_type.spelling for x in filteredHandleTypedefs):
-    filteredHandleTypedefs.append(child)
-
-for handleTypedef in handleTypedefs:
-  # error: ?
-  if (
-    handleTypedef.spelling == "Handle_Font_BRepFont"
-  ):
-    continue
-
-  handleType = handleTypedef.underlying_typedef_type.spelling
-  handleName = handleTypedef.spelling
-  targetType = handleTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
-  outputFile.write("  class_<" + handleName + ">(\"" + handleName + "\")" + os.linesep)
-  outputFile.write("    .function(\"Nullify\", &" + handleName + "::Nullify)" + os.linesep)
-  outputFile.write("    .function(\"IsNull\", &" + handleName + "::IsNull)" + os.linesep)
-  outputFile.write("    .function(\"reset\", &" + handleName + "::reset, allow_raw_pointers())" + os.linesep)
-  outputFile.write("    .function(\"operator_assign_1\", select_overload<" + handleName + "&(const " + handleName + "&)>(&" + handleName + "::operator=))" + os.linesep)
-  outputFile.write("    .function(\"operator_assign_2\", select_overload<" + handleName + "&(const " + targetType + "*)>(&" + handleName + "::operator=), allow_raw_pointers())" + os.linesep)
-  outputFile.write("    .function(\"operator_assign_3\", select_overload<" + handleName + "&(" + handleName + "&&)>(&" + handleName + "::operator=))" + os.linesep)
-  outputFile.write("    .function(\"get\", select_overload<" + targetType + "*()const>(&" + handleName + "::get), allow_raw_pointers())" + os.linesep)
-  outputFile.write("    .function(\"operator_dereference\", &" + handleName + "::operator->, allow_raw_pointers())" + os.linesep)
-  outputFile.write("    .function(\"operator_bool\", &" + handleName + "::operator bool)" + os.linesep)
-  outputFile.write("  ;" + os.linesep)
-
-outputFile.write("}" + os.linesep + os.linesep)
-outputFile.write(epilog)
+main()
