@@ -332,7 +332,10 @@ using namespace emscripten;
         continue
 
       # error: undefined symbol: _ZN24TopOpeBRepBuild_Builder114GFillSplitsPVSERK12TopoDS_ShapeRK21TopOpeBRepBuild_GTopoR23TopOpeBRepBuild_PaveSet (referenced by top-level compiled C/C++ code)
-      if theClass.spelling == "TopOpeBRepBuild_Builder":
+      if (
+        theClass.spelling == "TopOpeBRepBuild_Builder" or
+        theClass.spelling == "TopOpeBRepBuild_Builder1" or
+      ):
         continue
 
       try:
