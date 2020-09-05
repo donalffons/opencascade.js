@@ -139,11 +139,106 @@ def getEpilog(theClass):
     return "namespace emscripten { namespace internal { template<> void raw_destructor<" + theClass.spelling + ">(" + theClass.spelling + "* ptr) { /* do nothing */ } } }" + os.linesep
   return ""
 
+def getPureVirtualMethods(theClass):
+  return list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_METHOD and x.is_pure_virtual_method(), list(theClass.get_children())))
+
 def isAbstractClass(theClass, allClasses):
   baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, list(theClass.get_children())))
   baseClasses = list(map(lambda y: next((x for x in allClasses if x.spelling == y.type.spelling)), baseSpec))
 
-  return any(child.kind == clang.cindex.CursorKind.CXX_METHOD and child.is_pure_virtual_method() for child in list(theClass.get_children())) or any(isAbstractClass(bc, allClasses) for bc in baseClasses)
+  pureVirtualMethods = getPureVirtualMethods(theClass)
+  if len(pureVirtualMethods) > 0:
+    return True
+  
+  pvmsInBaseClasses = list(map(lambda x: getPureVirtualMethods(x), baseClasses))
+
+  numPureVirtualMethods = 0
+  numImplementedPureVirtualMethods = 0
+  for bc in pvmsInBaseClasses:
+    for bcPvm in bc:
+      numPureVirtualMethods += 1
+      if bcPvm.spelling in list(map(lambda x: x.spelling, list(theClass.get_children()))):
+        numImplementedPureVirtualMethods += 1
+  
+  return numPureVirtualMethods > numImplementedPureVirtualMethods
+
+def generateHandleTypes(outputFile, children):
+  print("generating bindings for handle types...")
+
+  handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle") and x.spelling.startswith("Handle_"), children))
+  filteredHandleTypedefs = []
+  for child in handleTypedefs:
+    if not any(x.underlying_typedef_type.spelling == child.underlying_typedef_type.spelling for x in filteredHandleTypedefs):
+      filteredHandleTypedefs.append(child)
+
+  for handleTypedef in handleTypedefs:
+    # error: ?
+    if (
+      handleTypedef.spelling == "Handle_Font_BRepFont" or
+      handleTypedef.spelling == "Handle_PCDM_Reader" or
+      handleTypedef.spelling == "Handle_PCDM_ReadWriter_1"
+    ):
+      continue
+
+    handleName = handleTypedef.spelling
+    targetType = handleTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
+    outputFile.write("  class_<" + handleName + ">(\"" + handleName + "\")" + os.linesep)
+    outputFile.write("    .function(\"Nullify\", &" + handleName + "::Nullify)" + os.linesep)
+    outputFile.write("    .function(\"IsNull\", &" + handleName + "::IsNull)" + os.linesep)
+    outputFile.write("    .function(\"reset\", &" + handleName + "::reset, allow_raw_pointers())" + os.linesep)
+    outputFile.write("    .function(\"operator_assign_1\", select_overload<" + handleName + "&(const " + handleName + "&)>(&" + handleName + "::operator=))" + os.linesep)
+    outputFile.write("    .function(\"operator_assign_2\", select_overload<" + handleName + "&(const " + targetType + "*)>(&" + handleName + "::operator=), allow_raw_pointers())" + os.linesep)
+    outputFile.write("    .function(\"operator_assign_3\", select_overload<" + handleName + "&(" + handleName + "&&)>(&" + handleName + "::operator=))" + os.linesep)
+    outputFile.write("    .function(\"get\", select_overload<" + targetType + "*()const>(&" + handleName + "::get), allow_raw_pointers())" + os.linesep)
+    outputFile.write("    .function(\"operator_dereference\", &" + handleName + "::operator->, allow_raw_pointers())" + os.linesep)
+    outputFile.write("    .function(\"operator_bool\", &" + handleName + "::operator bool)" + os.linesep)
+    outputFile.write("  ;" + os.linesep)
+
+    class Object(object):
+      def get_arguments(self):
+        return self.arguments
+      def get_tokens(self):
+        return self.tokens
+      def get_children(self):
+        return self.children
+
+    oc1 = Object()
+    oc1.spelling = handleName
+    oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc1.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc1.arguments = []
+
+    oc2 = Object()
+    oc2.spelling = handleName
+    oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc2arg1type = Object()
+    oc2arg1type.spelling = "const " + targetType + "*"
+    oc2arg1type.kind = None
+    oc2arg1 = Object()
+    oc2arg1.type = oc2arg1type
+    oc2arg1.spelling = "thePtr"
+    oc2arg1.tokens = []
+    oc2arg1.children = []
+    oc2.arguments = [oc2arg1]
+
+    oc3 = Object()
+    oc3.spelling = handleName
+    oc3.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc3.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc3arg1type = Object()
+    oc3arg1type.spelling = "const " + handleName + "&"
+    oc3arg1type.kind = None
+    oc3arg1 = Object()
+    oc3arg1.type = oc3arg1type
+    oc3arg1.spelling = "theHandle"
+    oc3arg1.tokens = []
+    oc3arg1.children = []
+    oc3.arguments = [oc3arg1]
+
+    outputFile.write(getOverloadedConstructorsBinding(handleName, [
+      oc1, oc2, oc3
+    ]))
 
 def main():
   occtFiles = []
@@ -352,82 +447,7 @@ using namespace emscripten;
         print(str(e))
         continue
 
-  print("generating bindings for handle types...")
-
-  handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle") and x.spelling.startswith("Handle_"), children))
-  filteredHandleTypedefs = []
-  for child in handleTypedefs:
-    if not any(x.underlying_typedef_type.spelling == child.underlying_typedef_type.spelling for x in filteredHandleTypedefs):
-      filteredHandleTypedefs.append(child)
-
-  for handleTypedef in handleTypedefs:
-    # error: ?
-    if (
-      handleTypedef.spelling == "Handle_Font_BRepFont" or
-      handleTypedef.spelling == "Handle_PCDM_Reader" or
-      handleTypedef.spelling == "Handle_PCDM_ReadWriter_1"
-    ):
-      continue
-
-    handleName = handleTypedef.spelling
-    targetType = handleTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
-    outputFile.write("  class_<" + handleName + ">(\"" + handleName + "\")" + os.linesep)
-    outputFile.write("    .function(\"Nullify\", &" + handleName + "::Nullify)" + os.linesep)
-    outputFile.write("    .function(\"IsNull\", &" + handleName + "::IsNull)" + os.linesep)
-    outputFile.write("    .function(\"reset\", &" + handleName + "::reset, allow_raw_pointers())" + os.linesep)
-    outputFile.write("    .function(\"operator_assign_1\", select_overload<" + handleName + "&(const " + handleName + "&)>(&" + handleName + "::operator=))" + os.linesep)
-    outputFile.write("    .function(\"operator_assign_2\", select_overload<" + handleName + "&(const " + targetType + "*)>(&" + handleName + "::operator=), allow_raw_pointers())" + os.linesep)
-    outputFile.write("    .function(\"operator_assign_3\", select_overload<" + handleName + "&(" + handleName + "&&)>(&" + handleName + "::operator=))" + os.linesep)
-    outputFile.write("    .function(\"get\", select_overload<" + targetType + "*()const>(&" + handleName + "::get), allow_raw_pointers())" + os.linesep)
-    outputFile.write("    .function(\"operator_dereference\", &" + handleName + "::operator->, allow_raw_pointers())" + os.linesep)
-    outputFile.write("    .function(\"operator_bool\", &" + handleName + "::operator bool)" + os.linesep)
-    outputFile.write("  ;" + os.linesep)
-
-    class Object(object):
-      def get_arguments(self):
-        return self.arguments
-      def get_tokens(self):
-        return self.tokens
-      def get_children(self):
-        return self.children
-
-    oc1 = Object()
-    oc1.spelling = handleName
-    oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
-    oc1.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
-    oc1.arguments = []
-
-    oc2 = Object()
-    oc2.spelling = handleName
-    oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
-    oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
-    oc2arg1type = Object()
-    oc2arg1type.spelling = "const " + targetType + "*"
-    oc2arg1type.kind = None
-    oc2arg1 = Object()
-    oc2arg1.type = oc2arg1type
-    oc2arg1.spelling = "thePtr"
-    oc2arg1.tokens = []
-    oc2arg1.children = []
-    oc2.arguments = [oc2arg1]
-
-    oc3 = Object()
-    oc3.spelling = handleName
-    oc3.kind = clang.cindex.CursorKind.CONSTRUCTOR
-    oc3.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
-    oc3arg1type = Object()
-    oc3arg1type.spelling = "const " + handleName + "&"
-    oc3arg1type.kind = None
-    oc3arg1 = Object()
-    oc3arg1.type = oc3arg1type
-    oc3arg1.spelling = "theHandle"
-    oc3arg1.tokens = []
-    oc3arg1.children = []
-    oc3.arguments = [oc3arg1]
-
-    outputFile.write(getOverloadedConstructorsBinding(handleName, [
-      oc1, oc2, oc3
-    ]))
+  generateHandleTypes(outputFile, children)
 
   outputFile.write("}" + os.linesep + os.linesep)
   outputFile.write(epilog)
