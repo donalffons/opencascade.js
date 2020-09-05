@@ -782,6 +782,7 @@ declare module opencascade {
         HasContinuity(E: TopoDS_Edge): Standard_Boolean;
         Parameter(V: TopoDS_Vertex, E: TopoDS_Edge): Standard_Real;
         Parameter(V: TopoDS_Vertex, E: TopoDS_Edge, F: TopoDS_Face): Standard_Real;
+        Pnt(V: TopoDS_Vertex): gp_Pnt;
         Parameters(V: TopoDS_Vertex, F: TopoDS_Face): gp_Pnt2d;
         MaxTolerance(theShape: TopoDS_Shape, theSubShape: TopAbs_ShapeEnum): Standard_Real;
     }
