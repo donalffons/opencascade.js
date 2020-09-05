@@ -24,8 +24,13 @@ def getCastBindings(className, method):
   const = "const" if method.is_const_method() else ""
   classQualifier = ( className + "::" if not method.is_static_method() else "" ) + "*"
   if needCast:
-    castedArgTypes = list(map(getSingleArgumentBinding(False), args))
-    return ["reinterpret_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
+    castedArgResults = list(map(getSingleArgumentBinding(False), args))
+    somethingChanged = any(map(lambda x: x[1], castedArgResults))
+    castedArgTypes = list(map(lambda x: x[0], castedArgResults))
+    if somethingChanged:
+      return ["reinterpret_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
+    else:
+      return ["static_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
   return ["", ""]
 
 def getSingleMethodBinding(className, method, allOverloads):
@@ -34,6 +39,8 @@ def getSingleMethodBinding(className, method, allOverloads):
       return ""
     overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(method) + 1)
 
+    if method.result_type.spelling.startswith("Standard_OStream"):
+      return ""
     if len(allOverloads) == 1:
       functor = "&" + className + "::" + method.spelling
     else:
@@ -77,10 +84,12 @@ def getSingleArgumentBinding(argNames = True, isConstructor = False):
     argBinding = ""
     hasDefaultValue = any(x.spelling == "=" for x in list(arg.get_tokens()))
     isArray = not hasDefaultValue and len(argChildren) > 1 and argChildren[1].kind == clang.cindex.CursorKind.INTEGER_LITERAL
+    changed = False
     if isArray:
       const = "const " if list(arg.get_tokens())[0].spelling == "const" else ""
       arrayCount = list(argChildren[1].get_tokens())[0].spelling
       argBinding = const + argChildren[0].type.spelling + " (&" + (arg.spelling if argNames else "") + ")[" + arrayCount + "]"
+      changed = True
     else:
       typename = arg.type.spelling
       if arg.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE:
@@ -89,13 +98,16 @@ def getSingleArgumentBinding(argNames = True, isConstructor = False):
         if not isConstRef:
           if arg.type.spelling[-2] == "*" or "".join(arg.type.spelling.rsplit("&", 1)).strip() in ["Standard_Boolean", "Standard_Real", "Standard_Integer"]: # types that can be copied
             typename = "".join(arg.type.spelling.rsplit("&", 1))
+            changed = True
           else:
             if isConstructor:
               typename = arg.type.spelling
+              changed = True
             else:
               typename = "const " + arg.type.spelling
+              changed = True
       argBinding = typename + ((" " + arg.spelling) if argNames else "")
-    return argBinding
+    return [argBinding, changed]
   return f
 
 def getOverloadedConstructorsBinding(className, children):
@@ -109,9 +121,9 @@ def getOverloadedConstructorsBinding(className, children):
   for constructor in constructors:
     overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
 
-    args = ", ".join(list(map(getSingleArgumentBinding(True, True), list(constructor.get_arguments()))))
+    args = ", ".join(list(map(lambda x: getSingleArgumentBinding(True, True)(x)[0], list(constructor.get_arguments()))))
     argNames = ", ".join(list(map(lambda x: x.spelling, list(constructor.get_arguments()))))
-    argTypes = ", ".join(list(map(getSingleArgumentBinding(False, True), list(constructor.get_arguments()))))
+    argTypes = ", ".join(list(map(lambda x: getSingleArgumentBinding(False, True)(x)[0], list(constructor.get_arguments()))))
 
     constructorBindings += "    struct " + constructor.spelling + overloadPostfix + " : public " + constructor.spelling + " {" + os.linesep
     constructorBindings += "      " + constructor.spelling + overloadPostfix + "(" + args + ") : " + constructor.spelling + "(" + argNames + ") {}" + os.linesep
@@ -160,19 +172,24 @@ def main():
       ):
         occtFiles.append(str(os.path.join(dirpath, item)))
 
-  includePathArgs = list(map(lambda x: "-I" + x, includePaths)) + ["-I/usr/include/linux", "-I/usr/include/c++/7/tr1", "-I/emscripten/upstream/emscripten/system/include"]
+  includePathArgs = [
+    "-I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed/",
+    "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed/",
+    "-I/clang/clang_10/include/c++/v1/",
+    "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/7/include/",
+    ] + list(map(lambda x: "-I" + x, includePaths))
   includeDirectives = list(sorted(occtFiles))
   includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", includeDirectives))
 
   libFolder = "/clang/clang_10/lib"
   clang.cindex.Config.library_path = libFolder
   index = clang.cindex.Index.create()
-  tu = index.parse("main.h", ["-x", "c++", "-ferror-limit=10000"] + includePathArgs, [["main.h", includeDirectives]])
+  tu = index.parse("main.h", ["-x", "c++", "-ferror-limit=1000000", "-stdlib=libc++"] + includePathArgs, [["main.h", includeDirectives]])
 
-  # if len(list(tu.diagnostics)) > 0:
-  #   print("Diagnostic Messages:")
-  #   for d in tu.diagnostics:
-  #     print("  " + d.format())
+  if len(list(tu.diagnostics)) > 0:
+    print("Diagnostic Messages:")
+    for d in tu.diagnostics:
+      print("  " + d.format())
 
   print("filtering, sorting...")
 
