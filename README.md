@@ -98,6 +98,8 @@ You can build OpenCascade.js yourself. The easiest way to do that is to use the 
     ```
     This command will run the container and will also set up some directories, which will be shared with your host system. This speeds up your development process, as temporary build files will be written and saved on your host machine's disk. The resulting build files are output to the `dist` folder.
 
+4. You have to run the `docker build` and `docker run` commands after each change, for every build.
+
 # Exposing additional OpenCascade APIs
 
 Emscripten's Embind system is used to expose OpenCascade APIs to JavaScript. The Embind definitions are located in the `embind` folder. Please look at the [code conventions document](https://github.com/donalffons/opencascade.js/blob/master/embind/conventions.md) for best practices on how to expose additional APIs.
