@@ -82,7 +82,8 @@ You can build OpenCascade.js yourself. The easiest way to do that is to use the 
       -v "$(pwd)/build/":"/opencascade/build/" \
       -v "$(pwd)/node_modules/":"/opencascade/node_modules/" \
       -v "$(pwd)/dist/":"/opencascade/dist/" \
-      -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
+      -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/ \
+      -v "$(pwd)/embind/":"/opencascade/embind/" \
       opencascade.js
     ```
     Or on windows
@@ -92,9 +93,10 @@ You can build OpenCascade.js yourself. The easiest way to do that is to use the 
       -v "%cd%\node_modules":"/opencascade/node_modules/" ^
       -v "%cd%\dist":"/opencascade/dist/" ^
       -v "%cd%\emscripten-cache":"/emscripten/upstream/emscripten/cache/" ^
+      -v "%cd%\embind":"/opencascade/embind/" ^
       opencascade.js
     ```
-    This command will run the container and will also set up 4 directories, which will be shared with your host system. This speeds up your development process, as temporary build files (in the `build` and `node_modules` folders) and emscripten cache files (in the `emscripten-cache` folder) will be written and saved on your host machine's disk. The resulting build files are output to the `dist` folder.
+    This command will run the container and will also set up some directories, which will be shared with your host system. This speeds up your development process, as temporary build files will be written and saved on your host machine's disk. The resulting build files are output to the `dist` folder.
 
 # Exposing additional OpenCascade APIs
 
