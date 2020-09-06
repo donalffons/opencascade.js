@@ -162,7 +162,7 @@ def isAbstractClass(theClass, allClasses):
   
   return numPureVirtualMethods > numImplementedPureVirtualMethods
 
-def generateHandleTypes(outputFile, children):
+def generateHandleTypeBindings(outputFile, children):
   print("generating bindings for handle types...")
 
   handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle") and x.spelling.startswith("Handle_"), children))
@@ -240,74 +240,9 @@ def generateHandleTypes(outputFile, children):
       oc1, oc2, oc3
     ]))
 
-def main():
-  occtFiles = []
-  includePaths = []
-  for dirpath, dirnames, filenames in os.walk("../build/occt/src"):
-    includePaths.append(str(dirpath))
-    for item in filenames:
-      if (
-        item.endswith(".hxx")
-        and not item.startswith("IVtk")
-        and not item.startswith("vtk")
-        and not item.startswith("Interface")
-        and not item.startswith("Xw")
-        and not item.startswith("OSD")
-        and not item.startswith("BVH")
-        and not item.startswith("WNT")
-        and not item.startswith("WNT")
-        and not item.startswith("BOPTools")
-        and not item.startswith("BOPDS")
-        and not item.startswith("IntPatch")
-        and not item.startswith("OpenGl")
-        and not item.startswith("AIS")
-        and not item.startswith("D3D")
-        and not item.startswith("Aspect")
-        and not item.startswith("Standard_Atomic")
-      ):
-        occtFiles.append(str(os.path.join(dirpath, item)))
-
-  includePathArgs = [
-    "-I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed/",
-    "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed/",
-    "-I/clang/clang_10/include/c++/v1/",
-    "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/7/include/",
-    ] + list(map(lambda x: "-I" + x, includePaths))
-  includeDirectives = list(sorted(occtFiles))
-  includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", includeDirectives))
-
-  libFolder = "/clang/clang_10/lib"
-  clang.cindex.Config.library_path = libFolder
-  index = clang.cindex.Index.create()
-  tu = index.parse("main.h", ["-x", "c++", "-ferror-limit=1000000", "-stdlib=libc++"] + includePathArgs, [["main.h", includeDirectives]])
-
-  if len(list(tu.diagnostics)) > 0:
-    print("Diagnostic Messages:")
-    for d in tu.diagnostics:
-      print("  " + d.format())
-
-  print("filtering, sorting...")
-
-  children = list(tu.cursor.get_children())
-  newChildren = []
-  for child in children:
-    if len(list(child.get_children())) == 0:
-      continue
-    if not any(x.spelling == child.spelling for x in newChildren):
-      newChildren.append(child)
-  newChildren = sorted(newChildren, key=lambda x: x.spelling)
-
-  print("creating bindings...")
-  outputFile = open("../build/bindings.cpp", "w")
-  outputFile.write(includeDirectives + os.linesep)
-  preamble = '''
-#include <emscripten/bind.h>
-using namespace emscripten;
-  '''
-  outputFile.write(preamble + os.linesep)
-  outputFile.write("EMSCRIPTEN_BINDINGS(opencascadejs) {" + os.linesep)
+def generateClassBindings(newChildren, outputFile):
+  print("generating bindings for classes...")
   epilog = ""
-
   for o in newChildren:
     if o.kind == clang.cindex.CursorKind.CLASS_DECL:
       theClass = o
@@ -446,8 +381,87 @@ using namespace emscripten;
       except Exception as e:
         print(str(e))
         continue
+  return epilog
 
-  generateHandleTypes(outputFile, children)
+def generateEnumBindings(newChildren, outputFile):
+  print("generating bindings for enums...")
+  for enum in newChildren:
+    if enum.kind == clang.cindex.CursorKind.ENUM_DECL:
+      outputFile.write("enum_<" + enum.spelling + ">(\"" + enum.spelling + "\")" + os.linesep)
+      for enumChild in list(enum.get_children()):
+        outputFile.write("  .value(\"" + enumChild.spelling + "\", " + enum.spelling + "::" + enumChild.spelling + ")" + os.linesep)
+      outputFile.write(";" + os.linesep)
+
+def main():
+  occtFiles = []
+  includePaths = []
+  for dirpath, dirnames, filenames in os.walk("../build/occt/src"):
+    includePaths.append(str(dirpath))
+    for item in filenames:
+      if (
+        item.endswith(".hxx")
+        and not item.startswith("IVtk")
+        and not item.startswith("vtk")
+        and not item.startswith("Interface")
+        and not item.startswith("Xw")
+        and not item.startswith("OSD")
+        and not item.startswith("BVH")
+        and not item.startswith("WNT")
+        and not item.startswith("WNT")
+        and not item.startswith("BOPTools")
+        and not item.startswith("BOPDS")
+        and not item.startswith("IntPatch")
+        and not item.startswith("OpenGl")
+        and not item.startswith("AIS")
+        and not item.startswith("D3D")
+        and not item.startswith("Aspect")
+        and not item.startswith("Standard_Atomic")
+      ):
+        occtFiles.append(str(os.path.join(dirpath, item)))
+
+  includePathArgs = [
+    "-I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed/",
+    "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed/",
+    "-I/clang/clang_10/include/c++/v1/",
+    "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/7/include/",
+    ] + list(map(lambda x: "-I" + x, includePaths))
+  includeDirectives = list(sorted(occtFiles))
+  includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", includeDirectives))
+
+  libFolder = "/clang/clang_10/lib"
+  clang.cindex.Config.library_path = libFolder
+  index = clang.cindex.Index.create()
+  tu = index.parse("main.h", ["-x", "c++", "-ferror-limit=1000000", "-stdlib=libc++"] + includePathArgs, [["main.h", includeDirectives]])
+
+  if len(list(tu.diagnostics)) > 0:
+    print("Diagnostic Messages:")
+    for d in tu.diagnostics:
+      print("  " + d.format())
+
+  print("filtering, sorting...")
+
+  children = list(tu.cursor.get_children())
+  newChildren = []
+  for child in children:
+    if len(list(child.get_children())) == 0:
+      continue
+    if not any(x.spelling == child.spelling for x in newChildren):
+      newChildren.append(child)
+  newChildren = sorted(newChildren, key=lambda x: x.spelling)
+
+  print("creating bindings...")
+  outputFile = open("../build/bindings.cpp", "w")
+  outputFile.write(includeDirectives + os.linesep)
+  preamble = '''
+#include <emscripten/bind.h>
+using namespace emscripten;
+  '''
+  outputFile.write(preamble + os.linesep)
+  outputFile.write("EMSCRIPTEN_BINDINGS(opencascadejs) {" + os.linesep)
+
+  epilog = generateClassBindings(newChildren, outputFile)
+  generateHandleTypeBindings(outputFile, children)
+  generateEnumBindings(newChildren, outputFile)
 
   outputFile.write("}" + os.linesep + os.linesep)
   outputFile.write(epilog)
