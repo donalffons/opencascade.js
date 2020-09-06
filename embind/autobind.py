@@ -357,10 +357,6 @@ def generateClassBindings(newChildren, outputFile):
       if theClass.spelling == "TopOpeBRep_HArray1OfVPointInter":
         continue
 
-      # error: no matching constructor for initialization of 'TopTools_HArray1OfListOfShape'
-      if theClass.spelling == "TopTools_HArray1OfListOfShape":
-        continue
-
       # error: undefined symbol: _ZN24TopOpeBRepBuild_Builder114GFillSplitsPVSERK12TopoDS_ShapeRK21TopOpeBRepBuild_GTopoR23TopOpeBRepBuild_PaveSet (referenced by top-level compiled C/C++ code)
       if (
         theClass.spelling == "TopOpeBRepBuild_Builder" or
