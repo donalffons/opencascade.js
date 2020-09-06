@@ -387,10 +387,10 @@ def generateEnumBindings(newChildren, outputFile):
   print("generating bindings for enums...")
   for enum in newChildren:
     if enum.kind == clang.cindex.CursorKind.ENUM_DECL:
-      outputFile.write("enum_<" + enum.spelling + ">(\"" + enum.spelling + "\")" + os.linesep)
+      outputFile.write("  enum_<" + enum.spelling + ">(\"" + enum.spelling + "\")" + os.linesep)
       for enumChild in list(enum.get_children()):
-        outputFile.write("  .value(\"" + enumChild.spelling + "\", " + enum.spelling + "::" + enumChild.spelling + ")" + os.linesep)
-      outputFile.write(";" + os.linesep)
+        outputFile.write("    .value(\"" + enumChild.spelling + "\", " + enum.spelling + "::" + enumChild.spelling + ")" + os.linesep)
+      outputFile.write("  ;" + os.linesep)
 
 def main():
   occtFiles = []
