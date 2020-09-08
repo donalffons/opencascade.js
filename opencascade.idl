@@ -2,6 +2,7 @@ typedef double Standard_Real;
 typedef boolean Standard_Boolean;
 typedef long Standard_Integer;
 typedef DOMString Standard_CString;
+//typedef VoidPtr Standard_OStream;
 
 // Full interface
 // fd47711d682be943f0e0a13d1fb54911b0499c31
@@ -419,6 +420,7 @@ interface GeomAPI_PointsToBSpline {
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Shape{
 	void TopoDS_Shape();
+	void TopoDS_Shape([Const, Ref] TopoDS_Shape T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -463,10 +465,10 @@ interface TopoDS_Shape{
 	void EmptyCopy();
 	[Value] TopoDS_Shape EmptyCopied();
 	// void TShape([Const, Ref] Handle_TopoDS_TShape theTShape);
-	// void DumpJson(
-	// 	[Ref] Standard_Ostream theOstream,
-	// 	[Const] Standard_Integer theDepth = -1
-	// );
+	//void DumpJson(
+	//	[Ref]   Standard_OStream theFSStream,
+	//	[Const] optional Standard_Integer theDepth = -1
+	//);
 };
 
 // Full interface
@@ -1137,6 +1139,7 @@ interface GC_MakeArcOfParabola {
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Edge{
 	void TopoDS_Edge();
+	void TopoDS_Edge([Const, Ref] TopoDS_Edge T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -1188,6 +1191,7 @@ TopoDS_Edge implements TopoDS_Shape;
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Wire{
 	void TopoDS_Wire();
+	void TopoDS_Wire([Const, Ref] TopoDS_Wire T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -1238,6 +1242,7 @@ TopoDS_Wire implements TopoDS_Shape;
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Compound {
 	void TopoDS_Compound();
+	void TopoDS_Compound([Const, Ref] TopoDS_Compound T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -1288,6 +1293,7 @@ TopoDS_Compound implements TopoDS_Shape;
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Face{
 	void TopoDS_Face();
+	void TopoDS_Face([Const, Ref] TopoDS_Face T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -1338,6 +1344,7 @@ TopoDS_Face implements TopoDS_Shape;
 // fd47711d682be943f0e0a13d1fb54911b0499c31
 interface TopoDS_Vertex {
 	void TopoDS_Vertex();
+	void TopoDS_Vertex([Const, Ref] TopoDS_Vertex T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -1545,7 +1552,7 @@ interface BRepBuilderAPI_MakeFace{
 	void BRepBuilderAPI_MakeFace(
 		[Const, Ref]TopoDS_Wire W
 	);
-	
+
 	void BRepBuilderAPI_MakeFace(
 		[Const, Ref]TopoDS_Face F,
 		[Const, Ref]TopoDS_Wire W
@@ -1556,11 +1563,33 @@ interface BRepBuilderAPI_MakeFace{
 	[Const] BRepBuilderAPI_FaceError Error();
 };
 
+interface BRepFilletAPI_MakeFillet2d{
+	void BRepFilletAPI_MakeFillet2d([Const, Ref]TopoDS_Face F);
+	void AddFillet([Const,Ref]TopoDS_Vertex V, [Const] Standard_Real Radius);
+	[Const] ChFi2d_ConstructionError Status();
+};
+BRepFilletAPI_MakeFillet2d implements BRepBuilderAPI_MakeShape;
+
 interface BRepFilletAPI_MakeFillet{
 	void BRepFilletAPI_MakeFillet([Const, Ref]TopoDS_Shape S);
 	void Add([Const] Standard_Real Radius, [Const,Ref]TopoDS_Edge E);
 };
 BRepFilletAPI_MakeFillet implements BRepFilletAPI_LocalOperation;
+
+interface BRepFilletAPI_MakeChamfer{
+	void BRepFilletAPI_MakeChamfer([Const, Ref]TopoDS_Shape S);
+	void Add(
+		[Const] Standard_Real Dis,
+		[Const,Ref]TopoDS_Edge E
+	);
+	void Add(
+		[Const] Standard_Real Dis1,
+		[Const] Standard_Real Dis2,
+		[Const,Ref]TopoDS_Edge E,
+		[Const,Ref]TopoDS_Face F
+	);
+};
+BRepFilletAPI_MakeChamfer implements BRepFilletAPI_LocalOperation;
 
 interface BRepFilletAPI_LocalOperation{};
 BRepFilletAPI_LocalOperation implements BRepBuilderAPI_MakeShape;
@@ -2095,10 +2124,13 @@ interface BRep_Tool {
 	// 	[Const, Ref] Handle_Geom_Surface S,
 	// 	[Const, Ref] TopLoc_Location L
 	// );
-	// [Value] static gp_Pnt2d Parameters(
-	// 	[Const, Ref] TopoDS_Vertex V,
-	// 	[Const, Ref] TopoDS_Face F
-	// );
+	[Value] static gp_Pnt Pnt(
+		[Const, Ref] TopoDS_Vertex V
+	);
+	[Value] static gp_Pnt2d Parameters(
+		[Const, Ref] TopoDS_Vertex V,
+		[Const, Ref] TopoDS_Face F
+	);
 	static Standard_Real MaxTolerance(
 		[Const, Ref] TopoDS_Shape theShape,
 		[Const] TopAbs_ShapeEnum theSubShape
@@ -3737,9 +3769,45 @@ IGESControl_Reader implements XSControl_Reader;
 interface TopTools_ListOfShape {
 	void TopTools_ListOfShape();
 	[Ref] TopoDS_Shape Append([Const, Ref] TopoDS_Shape theItem);
+	[Value] TopoDS_Shape First();
+	[Value] TopoDS_Shape Last();
 };
 
+interface BRepOffsetAPI_MakeOffset {
+	void BRepOffsetAPI_MakeOffset();
+	void BRepOffsetAPI_MakeOffset(
+		[Const, Ref] TopoDS_Wire Spine, 
+		[Const] optional GeomAbs_JoinType Join="GeomAbs_Arc",
+		[Const] optional Standard_Boolean IsOpenResult=false
+	);
+	void AddWire(
+		[Const, Ref] TopoDS_Wire Spine
+	);
+	void Perform(
+		[Const] Standard_Real Offset, 
+		[Const] optional Standard_Real Alt = 0.0
+	);
+	[Value] TopoDS_Shape Shape();
+};
+BRepOffsetAPI_MakeOffset implements BRepBuilderAPI_MakeShape;
+
 interface BRepOffsetAPI_MakeOffsetShape {
+	void BRepOffsetAPI_MakeOffsetShape();
+	void PerformBySimple(
+		[Const, Ref] TopoDS_Shape theS, 
+		[Const] Standard_Real theOffsetValue
+	);
+	void PerformByJoin(
+		[Const, Ref] TopoDS_Shape S, 
+		[Const] Standard_Real Offset, 
+		[Const] Standard_Real Tol, 
+		[Const] optional BRepOffset_Mode Mode="BRepOffset_Skin",
+		[Const] optional Standard_Boolean Intersection=false,
+		[Const] optional Standard_Boolean SelfInter=false,
+		[Const] optional GeomAbs_JoinType Join="GeomAbs_Arc",
+		[Const] optional Standard_Boolean RemoveIntEdges=false
+	);
+	[Value] TopoDS_Shape Shape();
 };
 BRepOffsetAPI_MakeOffsetShape implements BRepBuilderAPI_MakeShape;
 
@@ -3828,6 +3896,7 @@ interface ShapeFix_Shape {
 
 interface TopoDS_Shell {
 	void TopoDS_Shell();
+	void TopoDS_Shell([Const, Ref] TopoDS_Shell T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -3903,6 +3972,7 @@ interface ShapeFix_Shell {
 
 interface TopoDS_CompSolid {
 	void TopoDS_CompSolid();
+	void TopoDS_CompSolid([Const, Ref] TopoDS_CompSolid T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -3951,6 +4021,7 @@ TopoDS_CompSolid implements TopoDS_Shape;
 
 interface TopoDS_Solid {
 	void TopoDS_Solid();
+	void TopoDS_Solid([Const, Ref] TopoDS_Solid T2);
 	Standard_Boolean IsNull();
 	void Nullify();
 	[Const, Ref] TopLoc_Location Location();
@@ -4180,4 +4251,20 @@ enum BRepBuilderAPI_FaceError {
 	"BRepBuilderAPI_NotPlanar",
 	"BRepBuilderAPI_CurveProjectionFailed",
 	"BRepBuilderAPI_ParametersOutOfRange"
+};
+
+enum ChFi2d_ConstructionError {
+	"ChFi2d_NotPlanar",
+	"ChFi2d_NoFace",
+	"ChFi2d_InitialisationError",	
+	"ChFi2d_ParametersError",	
+	"ChFi2d_Ready",	
+	"ChFi2d_IsDone",
+	"ChFi2d_ComputationError",
+	"ChFi2d_ConnexionError",
+	"ChFi2d_TangencyError",
+	"ChFi2d_FirstEdgeDegenerated",
+	"ChFi2d_LastEdgeDegenerated",
+	"ChFi2d_BothEdgesDegenerated",
+	"ChFi2d_NotAuthorized"
 };
