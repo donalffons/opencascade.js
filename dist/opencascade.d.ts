@@ -117,6 +117,7 @@ declare module opencascade {
     }
     class TopoDS_Shape {
         constructor();
+        constructor(T2: TopoDS_Shape);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -383,6 +384,7 @@ declare module opencascade {
     }
     class TopoDS_Edge {
         constructor();
+        constructor(T2: TopoDS_Edge);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -417,6 +419,7 @@ declare module opencascade {
     }
     class TopoDS_Wire {
         constructor();
+        constructor(T2: TopoDS_Wire);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -451,6 +454,7 @@ declare module opencascade {
     }
     class TopoDS_Compound extends TopoDS_Shape {
         constructor();
+        constructor(T2: TopoDS_Compound);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -485,6 +489,7 @@ declare module opencascade {
     }
     class TopoDS_Face {
         constructor();
+        constructor(T2: TopoDS_Face);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -519,6 +524,7 @@ declare module opencascade {
     }
     class TopoDS_Vertex extends TopoDS_Shape {
         constructor();
+        constructor(T2: TopoDS_Vertex);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -633,9 +639,19 @@ declare module opencascade {
         Add(W: TopoDS_Wire): void;
         Error(): BRepBuilderAPI_FaceError;
     }
+    class BRepFilletAPI_MakeFillet2d {
+        constructor(F: TopoDS_Face);
+        AddFillet(V: TopoDS_Vertex, Radius: Standard_Real): void;
+        Status(): ChFi2d_ConstructionError;
+    }
     class BRepFilletAPI_MakeFillet {
         constructor(S: TopoDS_Shape);
         Add(Radius: Standard_Real, E: TopoDS_Edge): void;
+    }
+    class BRepFilletAPI_MakeChamfer {
+        constructor(S: TopoDS_Shape);
+        Add(Dis: Standard_Real, E: TopoDS_Edge): void;
+        Add(Dis1: Standard_Real, Dis2: Standard_Real, E: TopoDS_Edge, F: TopoDS_Face): void;
     }
     class BRepFilletAPI_LocalOperation {
     }
@@ -766,6 +782,8 @@ declare module opencascade {
         HasContinuity(E: TopoDS_Edge): Standard_Boolean;
         Parameter(V: TopoDS_Vertex, E: TopoDS_Edge): Standard_Real;
         Parameter(V: TopoDS_Vertex, E: TopoDS_Edge, F: TopoDS_Face): Standard_Real;
+        Pnt(V: TopoDS_Vertex): gp_Pnt;
+        Parameters(V: TopoDS_Vertex, F: TopoDS_Face): gp_Pnt2d;
         MaxTolerance(theShape: TopoDS_Shape, theSubShape: TopAbs_ShapeEnum): Standard_Real;
     }
     class Poly_Polygon3D {
@@ -1389,8 +1407,21 @@ declare module opencascade {
     class TopTools_ListOfShape {
         constructor();
         Append(theItem: TopoDS_Shape): TopoDS_Shape;
+        First(): TopoDS_Shape;
+        Last(): TopoDS_Shape;
+    }
+    class BRepOffsetAPI_MakeOffset extends BRepBuilderAPI_MakeShape {
+        constructor();
+        constructor(Spine: TopoDS_Wire, Join?: GeomAbs_JoinType, IsOpenResult?: Standard_Boolean);
+        AddWire(Spine: TopoDS_Wire): void;
+        Perform(Offset: Standard_Real, Alt?: Standard_Real): void;
+        Shape(): TopoDS_Shape;
     }
     class BRepOffsetAPI_MakeOffsetShape extends BRepBuilderAPI_MakeShape {
+        constructor();
+        PerformBySimple(theS: TopoDS_Shape, theOffsetValue: Standard_Real): void;
+        PerformByJoin(S: TopoDS_Shape, Offset: Standard_Real, Tol: Standard_Real, Mode?: BRepOffset_Mode, Intersection?: Standard_Boolean, SelfInter?: Standard_Boolean, Join?: GeomAbs_JoinType, RemoveIntEdges?: Standard_Boolean): void;
+        Shape(): TopoDS_Shape;
     }
     class BRepOffsetAPI_MakeThickSolid extends BRepOffsetAPI_MakeOffsetShape {
         constructor();
@@ -1448,6 +1479,7 @@ declare module opencascade {
     }
     class TopoDS_Shell extends TopoDS_Shape {
         constructor();
+        constructor(T2: TopoDS_Shell);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -1500,6 +1532,7 @@ declare module opencascade {
     }
     class TopoDS_CompSolid extends TopoDS_Shape {
         constructor();
+        constructor(T2: TopoDS_CompSolid);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -1534,6 +1567,7 @@ declare module opencascade {
     }
     class TopoDS_Solid extends TopoDS_Shape {
         constructor();
+        constructor(T2: TopoDS_Solid);
         IsNull(): Standard_Boolean;
         Nullify(): void;
         Location(): TopLoc_Location;
@@ -1606,4 +1640,5 @@ declare module opencascade {
     type BRepBuilderAPI_PipeError = "BRepBuilderAPI_PipeDone" | "BRepBuilderAPI_PipeNotDone" | "BRepBuilderAPI_PlaneNotIntersectGuide" | "BRepBuilderAPI_ImpossibleContact";
     type BRepFill_TypeOfContact = "BRepFill_NoContact" | "BRepFill_Contact" | "BRepFill_ContactOnBorder";
     type BRepBuilderAPI_FaceError = "BRepBuilderAPI_FaceDone" | "BRepBuilderAPI_NoFace" | "BRepBuilderAPI_NotPlanar" | "BRepBuilderAPI_CurveProjectionFailed" | "BRepBuilderAPI_ParametersOutOfRange";
+    type ChFi2d_ConstructionError = "ChFi2d_NotPlanar" | "ChFi2d_NoFace" | "ChFi2d_InitialisationError" | "ChFi2d_ParametersError" | "ChFi2d_Ready" | "ChFi2d_IsDone" | "ChFi2d_ComputationError" | "ChFi2d_ConnexionError" | "ChFi2d_TangencyError" | "ChFi2d_FirstEdgeDegenerated" | "ChFi2d_LastEdgeDegenerated" | "ChFi2d_BothEdgesDegenerated" | "ChFi2d_NotAuthorized";
 }
