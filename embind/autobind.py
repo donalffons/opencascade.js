@@ -5,6 +5,153 @@ import clang.cindex
 import os
 import io
 
+def processIncludeFile(filename):
+  if (
+    filename.endswith(".hxx")
+    and not filename.startswith("IVtk")
+    and not filename.startswith("vtk")
+    and not filename.startswith("Interface")
+    and not filename.startswith("Xw")
+    and not filename.startswith("OSD")
+    and not filename.startswith("BVH")
+    and not filename.startswith("WNT")
+    and not filename.startswith("WNT")
+    and not filename.startswith("BOPTools")
+    and not filename.startswith("BOPDS")
+    and not filename.startswith("IntPatch")
+    and not filename.startswith("OpenGl")
+    and not filename.startswith("AIS")
+    and not filename.startswith("D3D")
+    and not filename.startswith("Aspect")
+    and not filename.startswith("Standard_Atomic")
+  ):
+    return True
+  return False
+
+def processClass(theClass):
+  if (
+    not theClass.spelling.startswith("gp") and
+    not theClass.spelling.startswith("GC") and
+    not theClass.spelling.startswith("BRep") and
+    not theClass.spelling.startswith("Geom") and
+    not theClass.spelling.startswith("Standard") and
+    not theClass.spelling.startswith("Top")
+  ):
+    return False
+
+  # error: undefined symbol
+  if (
+    theClass.spelling == "GCPnts_DistFunction" or
+    theClass.spelling == "GCPnts_DistFunction2d"
+  ):
+    return False
+
+  # error: no matching function for call to 'operator new'
+  if theClass.spelling.startswith("BRepMeshData_"):
+    return False
+
+  # error: address of overloaded function 'XXX' does not match required type 'XXX'
+  # Seems to have to do with a template method present
+  if (
+    theClass.spelling == "gp_VectorWithNullMagnitude" or
+    theClass.spelling == "BRepTest_Objects"
+  ):
+    return False
+
+  # error: incomplete type 'BOPAlgo_PaveFiller' used in type trait expression
+  if theClass.spelling == "BOPAlgo_PaveFiller":
+    return False
+
+  # []-arrays are not bound properly
+  if theClass.spelling == "BRepGProp_Gauss":
+    return False
+
+  # error: call to deleted constructor of 'std::__2::basic_Xstream<char>'
+  if (
+    theClass.spelling == "BRepFeat" or
+    theClass.spelling == "GeomTools_UndefinedTypeHandler"
+  ):
+    return False
+
+  # error: undefined symbol: _ZN24BRepTest_XXX
+  if theClass.spelling.startswith("BRepTest"):
+    return False
+
+  # error: undefined symbol: _ZN23BRepFeat_MakeLinearForm16TransformShapeFUEi
+  if theClass.spelling == "BRepFeat_MakeLinearForm":
+    return False
+
+  # error: undefined symbol: _ZN17BRepApprox_Approx7PerformEv
+  if theClass.spelling == "BRepApprox_Approx":
+    return False
+
+  # error: undefined symbol: _ZNK18BRepGProp_VinertGK15GetAbsolutErrorEv
+  if theClass.spelling == "BRepGProp_VinertGK":
+    return False
+
+  # error: undefined symbol: _ZNK21BRepOffset_MakeOffset10GetAnalyseEv
+  if theClass.spelling == "BRepOffset_MakeOffset":
+    return False
+
+  # error: undefined symbol: _ZNK32BRepOffsetAPI_FindContigousEdges7NbEdgesEv
+  if theClass.spelling == "BRepOffsetAPI_FindContigousEdges":
+    return False
+
+  # error: undefined symbol: _ZNK63BRepApprox_ResConstraintOfMyGradientbisOfTheComputeLineOfApprox5ErrorEv
+  if theClass.spelling == "BRepApprox_ResConstraintOfMyGradientbisOfTheComputeLineOfApprox":
+    return False
+
+  # error: undefined symbol: _ZNK66BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox5ErrorEv
+  if theClass.spelling == "BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox":
+    return False
+
+  # error: undefined symbol
+  if (
+    theClass.spelling.startswith("GeometryTest") or
+    theClass.spelling.startswith("GeomliteTest") or
+    theClass.spelling.startswith("GeomInt") or
+    theClass.spelling.startswith("GeomAPI") or
+    theClass.spelling.startswith("Geom2dAPI") or
+    theClass.spelling.startswith("Geom2dInt") or
+    theClass.spelling.startswith("GeomFill") or
+    theClass.spelling.startswith("Geom2dHatch") or
+    theClass.spelling.startswith("Geom2dGcc")
+  ):
+    return False
+
+  # error: array 'new' cannot have initialization arguments
+  if theClass.spelling == "Standard_ErrorHandler":
+    return False
+
+  # error: address of overloaded function 'Append' does not match required type 'void (const int &)'
+  if theClass.spelling == "Geom_HSequenceOfBSplineSurface":
+    return False
+
+  # error: undefined symbol: _ZN24TopOpeBRepBuild_Builder114GFillSplitsPVSERK12TopoDS_ShapeRK21TopOpeBRepBuild_GTopoR23TopOpeBRepBuild_PaveSet (referenced by top-level compiled C/C++ code)
+  if (
+    theClass.spelling == "TopOpeBRepBuild_Builder" or
+    theClass.spelling == "TopOpeBRepBuild_Builder1"
+  ):
+    return False
+  
+  return True
+
+def processHandleTypedef(handleTypedef):
+  # error: ?
+  if (
+    handleTypedef.spelling == "Handle_Font_BRepFont" or
+    handleTypedef.spelling == "Handle_PCDM_Reader" or
+    handleTypedef.spelling == "Handle_PCDM_ReadWriter_1"
+  ):
+    return False
+  return True
+
+def processMethod(className, child):
+  # error: private copy constructor used in this function
+  if className == "BRepClass3d_SolidExplorer" and child.spelling == "GetTree":
+    return False
+  return True
+
 def getClassBinding(className, children):
   baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(baseSpec) > 1:
@@ -61,18 +208,20 @@ def getSingleMethodBinding(className, method, allOverloads):
 def getMethodsBinding(className, children):
   methodsBinding = ""
   for child in children:
-    # error: private copy constructor used in this function
-    if className == "BRepClass3d_SolidExplorer" and child.spelling == "GetTree":
+    if not processMethod(className, child):
       continue
     allOverloads = [m for m in children if m.spelling == child.spelling]
     methodsBinding += getSingleMethodBinding(className, child, allOverloads)
   return methodsBinding
 
 def getStandardConstructorBinding(children):
-  constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
-  if not len(constructors) == 1:
+  constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR, children))
+  if len(constructors) == 0:
+    return "    .constructor<>()" + os.linesep
+  publicConstructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
+  if not len(publicConstructors) > 1:
     return ""
-  standardConstructor = constructors[0]
+  standardConstructor = publicConstructors[0]
   if not standardConstructor:
     return ""
   argTypes = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
@@ -172,12 +321,7 @@ def generateHandleTypeBindings(outputFile, children):
       filteredHandleTypedefs.append(child)
 
   for handleTypedef in handleTypedefs:
-    # error: ?
-    if (
-      handleTypedef.spelling == "Handle_Font_BRepFont" or
-      handleTypedef.spelling == "Handle_PCDM_Reader" or
-      handleTypedef.spelling == "Handle_PCDM_ReadWriter_1"
-    ):
+    if not processHandleTypedef(handleTypedef):
       continue
 
     handleName = handleTypedef.spelling
@@ -247,109 +391,7 @@ def generateClassBindings(newChildren, outputFile):
     if o.kind == clang.cindex.CursorKind.CLASS_DECL:
       theClass = o
 
-      if (
-        not theClass.spelling.startswith("gp") and
-        not theClass.spelling.startswith("GC") and
-        not theClass.spelling.startswith("BRep") and
-        not theClass.spelling.startswith("Geom") and
-        not theClass.spelling.startswith("Standard") and
-        not theClass.spelling.startswith("Top")
-      ):
-        continue
-
-      # error: undefined symbol
-      if (
-        theClass.spelling == "GCPnts_DistFunction" or
-        theClass.spelling == "GCPnts_DistFunction2d"
-      ):
-        continue
-
-      # error: no matching function for call to 'operator new'
-      if theClass.spelling.startswith("BRepMeshData_"):
-        continue
-
-      # error: address of overloaded function 'XXX' does not match required type 'XXX'
-      # Seems to have to do with a template method present
-      if (
-        theClass.spelling == "gp_VectorWithNullMagnitude" or
-        theClass.spelling == "BRepTest_Objects"
-      ):
-        continue
-
-      # error: incomplete type 'BOPAlgo_PaveFiller' used in type trait expression
-      if theClass.spelling == "BOPAlgo_PaveFiller":
-        continue
-
-      # []-arrays are not bound properly
-      if theClass.spelling == "BRepGProp_Gauss":
-        continue
-
-      # error: call to deleted constructor of 'std::__2::basic_Xstream<char>'
-      if (
-        theClass.spelling == "BRepFeat" or
-        theClass.spelling == "GeomTools_UndefinedTypeHandler"
-      ):
-        continue
-
-      # error: undefined symbol: _ZN24BRepTest_XXX
-      if theClass.spelling.startswith("BRepTest"):
-        continue
-
-      # error: undefined symbol: _ZN23BRepFeat_MakeLinearForm16TransformShapeFUEi
-      if theClass.spelling == "BRepFeat_MakeLinearForm":
-        continue
-
-      # error: undefined symbol: _ZN17BRepApprox_Approx7PerformEv
-      if theClass.spelling == "BRepApprox_Approx":
-        continue
-
-      # error: undefined symbol: _ZNK18BRepGProp_VinertGK15GetAbsolutErrorEv
-      if theClass.spelling == "BRepGProp_VinertGK":
-        continue
-
-      # error: undefined symbol: _ZNK21BRepOffset_MakeOffset10GetAnalyseEv
-      if theClass.spelling == "BRepOffset_MakeOffset":
-        continue
-
-      # error: undefined symbol: _ZNK32BRepOffsetAPI_FindContigousEdges7NbEdgesEv
-      if theClass.spelling == "BRepOffsetAPI_FindContigousEdges":
-        continue
-
-      # error: undefined symbol: _ZNK63BRepApprox_ResConstraintOfMyGradientbisOfTheComputeLineOfApprox5ErrorEv
-      if theClass.spelling == "BRepApprox_ResConstraintOfMyGradientbisOfTheComputeLineOfApprox":
-        continue
-
-      # error: undefined symbol: _ZNK66BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox5ErrorEv
-      if theClass.spelling == "BRepApprox_ResConstraintOfMyGradientOfTheComputeLineBezierOfApprox":
-        continue
-
-      # error: undefined symbol
-      if (
-        theClass.spelling.startswith("GeometryTest") or
-        theClass.spelling.startswith("GeomliteTest") or
-        theClass.spelling.startswith("GeomInt") or
-        theClass.spelling.startswith("GeomAPI") or
-        theClass.spelling.startswith("Geom2dAPI") or
-        theClass.spelling.startswith("Geom2dInt") or
-        theClass.spelling.startswith("GeomFill") or
-        theClass.spelling.startswith("Geom2dHatch") or
-        theClass.spelling.startswith("Geom2dGcc")
-      ):
-        continue
-
-      # error: array 'new' cannot have initialization arguments
-      if theClass.spelling == "Standard_ErrorHandler":
-        continue
-
-      # error: address of overloaded function 'Append' does not match required type 'void (const int &)'
-      if theClass.spelling == "Geom_HSequenceOfBSplineSurface":
-        continue
-
-      # error: undefined symbol: _ZN24TopOpeBRepBuild_Builder114GFillSplitsPVSERK12TopoDS_ShapeRK21TopOpeBRepBuild_GTopoR23TopOpeBRepBuild_PaveSet (referenced by top-level compiled C/C++ code)
-      if (
-        theClass.spelling == "TopOpeBRepBuild_Builder" or
-        theClass.spelling == "TopOpeBRepBuild_Builder1"
-      ):
+      if not processClass(theClass):
         continue
 
       try:
@@ -382,25 +424,7 @@ def main():
   for dirpath, dirnames, filenames in os.walk("../build/occt/src"):
     includePaths.append(str(dirpath))
     for item in filenames:
-      if (
-        item.endswith(".hxx")
-        and not item.startswith("IVtk")
-        and not item.startswith("vtk")
-        and not item.startswith("Interface")
-        and not item.startswith("Xw")
-        and not item.startswith("OSD")
-        and not item.startswith("BVH")
-        and not item.startswith("WNT")
-        and not item.startswith("WNT")
-        and not item.startswith("BOPTools")
-        and not item.startswith("BOPDS")
-        and not item.startswith("IntPatch")
-        and not item.startswith("OpenGl")
-        and not item.startswith("AIS")
-        and not item.startswith("D3D")
-        and not item.startswith("Aspect")
-        and not item.startswith("Standard_Atomic")
-      ):
+      if processIncludeFile(item):
         occtFiles.append(str(os.path.join(dirpath, item)))
 
   includePathArgs = [
@@ -442,6 +466,7 @@ using namespace emscripten;
   '''
   outputFile.write(preamble + os.linesep)
   outputFile.write("EMSCRIPTEN_BINDINGS(opencascadejs) {" + os.linesep)
+  outputFile.write("#include \"../embind/manualBindings.h\"" + os.linesep)
 
   epilog = generateClassBindings(newChildren, outputFile)
   generateHandleTypeBindings(outputFile, children)
