@@ -219,7 +219,7 @@ def getStandardConstructorBinding(children):
   if len(constructors) == 0:
     return "    .constructor<>()" + os.linesep
   publicConstructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
-  if not len(publicConstructors) > 1:
+  if len(publicConstructors) > 1:
     return ""
   standardConstructor = publicConstructors[0]
   if not standardConstructor:
