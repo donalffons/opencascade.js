@@ -152,10 +152,13 @@ def processMethod(className, child):
     return False
   return True
 
+class MultipleBaseClassException(Exception):
+  pass
+
 def getClassBinding(className, children):
   baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(baseSpec) > 1:
-    raise Exception("cannot handle multiple base classes (" + className + ")")
+    raise MultipleBaseClassException("cannot handle multiple base classes (" + className + ")")
 
   if len(baseSpec) > 0:
     baseClass = ", base<" + baseSpec[0].type.spelling + ">"
@@ -219,7 +222,7 @@ def getStandardConstructorBinding(children):
   if len(constructors) == 0:
     return "    .constructor<>()" + os.linesep
   publicConstructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
-  if len(publicConstructors) > 1:
+  if len(publicConstructors) == 0 or len(publicConstructors) > 1:
     return ""
   standardConstructor = publicConstructors[0]
   if not standardConstructor:
@@ -404,7 +407,7 @@ def generateClassBindings(newChildren, outputFile):
         if not abstract:
           outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
         epilog += getEpilog(theClass)
-      except Exception as e:
+      except MultipleBaseClassException as e:
         print(str(e))
         continue
   return epilog
