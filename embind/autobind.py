@@ -35,7 +35,9 @@ def processClass(theClass):
     not theClass.spelling.startswith("BRep") and
     not theClass.spelling.startswith("Geom") and
     not theClass.spelling.startswith("Standard") and
-    not theClass.spelling.startswith("Top")
+    not theClass.spelling.startswith("Top") and
+    not theClass.spelling.startswith("Poly") and
+    not theClass.spelling.startswith("StdPrs")
   ):
     return False
 
@@ -132,6 +134,10 @@ def processClass(theClass):
     theClass.spelling == "TopOpeBRepBuild_Builder" or
     theClass.spelling == "TopOpeBRepBuild_Builder1"
   ):
+    return False
+
+  # error: no suitable member 'operator delete' in 'Poly_CoherentTriPtr'
+  if theClass.spelling == "Poly_CoherentTriPtr":
     return False
   
   return True
