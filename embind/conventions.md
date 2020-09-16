@@ -2,17 +2,12 @@
 
 Please see [here](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html) for more in-depth information on Embind.
 
-## Which files should be used to create bindings
+## How to create bindings
 
 * Build the project once (using the instructions in [README.md](https://github.com/donalffons/opencascade.js/blob/master/README.md)). This will create a `build` folder in the main directory.
 * The include files of OpenCascade should be used to create bindings. Those are located in the sub-folders of `./build/occt/src/`.
-
-## File structure for `embind` folder
-
-The file structure for this folder should be as follows:
-* A header file should be created for each module of OpenCascade. Each module has its own sub-folder in `./build/occt/src/`. I.e. the include file `gp/gp_Pnt.hxx` belongs to the module `gp`. Therefore, a header file `gp.h` should be created in this folder.
-* The binding definitions in those header files should be in alphabetical order.
-* Don't forget to `#include` the newly created header file in `main.cpp`, also in alphabetical order.
+* Many bindings are created automatically using the `autobind.py` script. The `process*` functions at the top of that file can be used to enable / disable the auto-generation for certain files and entities.
+* Currently, not all bindings can be generated automatically. In particular, most template classes and typedef'd types cannot be bound using the autobind script. For those entities, manual bindings must be defined in the `manualBindings.h` file.
 
 ## Conventions for bindings
 
