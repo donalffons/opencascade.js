@@ -25,9 +25,15 @@ These are sorted by priority (according to my gut feeling...)
 * Probably, it would be a good idea to have one module for each folder in `build/occt/src`.
 * It would be great, if the user of this library could chose between debug and release version of the library.
 
+# 5. ThreeJS-Integration
+
+* Built-in ThreeJS integration would be super cool.
+* That integration layer should be kept as thin and as flexible as possible.
+* A flexible and powerful tessellation system would be a good starting point. Some first steps have already been done and are available in the examples repository.
+* At some point, multi-threaded tessellation would be super cool.
+* An integration with React-Three-Fiber would be extremely nice.
+
 # General / Other
 
 * tidy up make.py
-* Multi-threaded tessellation would be super cool
-* React-Three-Fiber integration would be awesome
 * Experiment with opencascade's built-in visualization and see if it works with Emscripten and if it's any good. Create example.
