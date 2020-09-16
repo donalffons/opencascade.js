@@ -60,7 +60,7 @@ jobs:
           username: donalffons
           password: "${{ secrets.GITHUB_TOKEN }}"
           image_name: opencascade.js
-          build_extra_args: "--no-cache"
+          # build_extra_args: "--no-cache" # activate this if you want to disable the docker cache
           #image_tag: opencascade.js
 
       # Debug
