@@ -5,6 +5,25 @@ import clang.cindex
 import os
 import io
 
+# This exception indicates that a certain class has multiple base classes. This is not (easily) possible to represent in JavaScript
+class MultipleBaseClassException(Exception):
+  pass
+
+# processIncludeFile
+# processClass
+# processMethod
+# processHandleTypedef
+#
+# These functions are called by the auto-bind algorithm before each entity is processed. If the function returns true, the entity will be processes (e.g. the bindings for the class will be auto-generated). If the function returns false, the entity will not be processes (e.g. auto-bindings for the class will be skipped).
+# This is helpful for two reasaons:
+# 1. The auto-binding system is far from perfect and in some cases it fails to generate valid binding code. In that case, you can just disable processing for a certain entity. It is always possible to create manual bindings in that case.
+# 2. The auto-binding system takes quite a bit of time to execute. For development and debugging purposes, it is therefore nice to be able to generate bindings for a certain entity only - ignoring everything else. This speeds things up, quite a bit.
+
+# indicates if an include file should be processed (returns True) or not (returns False)
+# parameters:
+#   filename (string): file name
+# returns:
+#   bool
 def processIncludeFile(filename):
   if (
     filename.endswith(".hxx")
@@ -28,6 +47,11 @@ def processIncludeFile(filename):
     return True
   return False
 
+# indicates if bindings for a class should be generated (returns True) or not (returns False)
+# parameters:
+#   theClass (libclang class decl object): the class
+# returns:
+#   bool
 def processClass(theClass):
   if (
     not theClass.spelling.startswith("gp") and
@@ -142,6 +166,23 @@ def processClass(theClass):
   
   return True
 
+# indicates if bindings for a method should be generated (returns True) or not (returns False)
+# parameters:
+#   className (string): name of the class
+#   child (libclang method decl object): the method
+# returns:
+#   bool
+def processMethod(className, child):
+  # error: private copy constructor used in this function
+  if className == "BRepClass3d_SolidExplorer" and child.spelling == "GetTree":
+    return False
+  return True
+
+# indicates if bindings for a handle typedef should be generated (returns True) or not (returns False)
+# parameters:
+#   handleTypedef (libclang typedef object): the typedef
+# returns:
+#   bool
 def processHandleTypedef(handleTypedef):
   # error: ?
   if (
@@ -152,15 +193,12 @@ def processHandleTypedef(handleTypedef):
     return False
   return True
 
-def processMethod(className, child):
-  # error: private copy constructor used in this function
-  if className == "BRepClass3d_SolidExplorer" and child.spelling == "GetTree":
-    return False
-  return True
-
-class MultipleBaseClassException(Exception):
-  pass
-
+# Generates the header of the bindings for a class (i.e. 'class_<...>("...")') and returns it as a string
+# parameters:
+#   className (string): the name of the class
+#   children (libclang list of class children): the children of the class
+# returns:
+#   string
 def getClassBinding(className, children):
   baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(baseSpec) > 1:
@@ -173,7 +211,13 @@ def getClassBinding(className, children):
 
   return "  class_<" + className + baseClass + ">(\"" + className + "\")" + os.linesep
 
-def getCastBindings(className, method):
+# Generates cast bindings for a method. Some methods neet to be reinterpret_cast'd or static_cast'd
+# parameters:
+#   className (string): the name of the class
+#   method (libclang method decl): the method
+# returns:
+#   string
+def getCastMethodBindings(className, method):
   args = list(method.get_arguments())
   needCast = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE for x in args)
   returnType = method.result_type.spelling
@@ -189,6 +233,13 @@ def getCastBindings(className, method):
       return ["static_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
   return ["", ""]
 
+# Generates bindings for a single method
+# parameters:
+#   className (string): the name of the class
+#   method (libclang method decl): the method
+#   allOverloads (list of libclang method decl): all overloads of the method (i.e. methods with the same name but different signatures)
+# returns:
+#   string
 def getSingleMethodBinding(className, method, allOverloads):
   if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD:
     if method.spelling.startswith("operator"):
@@ -210,32 +261,16 @@ def getSingleMethodBinding(className, method, allOverloads):
     else:
       functionCommand = "function"
 
-    cast = getCastBindings(className, method)
+    cast = getCastMethodBindings(className, method)
     return "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())" + os.linesep
   return ""
 
-def getMethodsBinding(className, children):
-  methodsBinding = ""
-  for child in children:
-    if not processMethod(className, child):
-      continue
-    allOverloads = [m for m in children if m.spelling == child.spelling]
-    methodsBinding += getSingleMethodBinding(className, child, allOverloads)
-  return methodsBinding
-
-def getStandardConstructorBinding(children):
-  constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR, children))
-  if len(constructors) == 0:
-    return "    .constructor<>()" + os.linesep
-  publicConstructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
-  if len(publicConstructors) == 0 or len(publicConstructors) > 1:
-    return ""
-  standardConstructor = publicConstructors[0]
-  if not standardConstructor:
-    return ""
-  argTypes = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
-  return "    .constructor<" + argTypes + ">()" + os.linesep
-
+# Generates bindings for a single argument of a function
+# parameters:
+#   argNames (bool): include argument name (if False, only the type will be generated without the name)
+#   isConstructor (bool): is the function / method a constructor? Constructors must be handled differently from normal methods.
+# returns:
+#   string
 def getSingleArgumentBinding(argNames = True, isConstructor = False):
   def f(arg):
     argChildren = list(arg.get_children())
@@ -268,6 +303,45 @@ def getSingleArgumentBinding(argNames = True, isConstructor = False):
     return [argBinding, changed]
   return f
 
+# Generates bindings for a number of methods
+# parameters:
+#   className (string): the name of the class
+#   children (libclang list of children): the children of the class
+# returns:
+#   string
+def getMethodsBinding(className, children):
+  methodsBinding = ""
+  for child in children:
+    if not processMethod(className, child):
+      continue
+    allOverloads = [m for m in children if m.spelling == child.spelling]
+    methodsBinding += getSingleMethodBinding(className, child, allOverloads)
+  return methodsBinding
+
+# Generates bindings for a "simple" constructor, i.e. using Embind's ".constructor<...>()" tag. Simple constructors can be used, when no overloads of the constructor exsist.
+# parameters:
+#   children (libclang list of children): the children of the class
+# returns:
+#   string
+def getSimpleConstructorBinding(children):
+  constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR, children))
+  if len(constructors) == 0:
+    return "    .constructor<>()" + os.linesep
+  publicConstructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
+  if len(publicConstructors) == 0 or len(publicConstructors) > 1:
+    return ""
+  standardConstructor = publicConstructors[0]
+  if not standardConstructor:
+    return ""
+  argTypes = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
+  return "    .constructor<" + argTypes + ">()" + os.linesep
+
+# Generates bindings for all overloaded constructors. Overloaded constructors are represented by deriving sub-classes from the parentClass (named parentClass_1, for example) and implementing only the given overloaded constructor as the default / simple constructor.
+# parameters:
+#   className (string): the name of the class
+#   children (libclang list of children): the children of the class
+# returns:
+#   string
 def getOverloadedConstructorsBinding(className, children):
   constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(constructors) == 1:
@@ -291,15 +365,31 @@ def getOverloadedConstructorsBinding(className, children):
     constructorBindings += "    ;" + os.linesep
   return constructorBindings
 
-def getEpilog(theClass):
+# Generates the 'epilog' for a class, i.e. some text that will be appended at the end of the bindings file. This is currently used to fix compile errors with non-public destructors: https://github.com/emscripten-core/emscripten/issues/5587
+# parameters:
+#   theClass (libclang class decl object): the class for which to create the epilog
+# returns:
+#   string
+def getEpilogForClass(theClass):
   nonPublicDestructor = any(x.kind == clang.cindex.CursorKind.DESTRUCTOR and not x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC for x in list(theClass.get_children()))
   if nonPublicDestructor:
     return "namespace emscripten { namespace internal { template<> void raw_destructor<" + theClass.spelling + ">(" + theClass.spelling + "* ptr) { /* do nothing */ } } }" + os.linesep
   return ""
 
+# Returns all purely virtual methods of a class
+# parameters:
+#   theClass (libclang class decl object): the class
+# returns:
+#   list of lblang method objects
 def getPureVirtualMethods(theClass):
   return list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_METHOD and x.is_pure_virtual_method(), list(theClass.get_children())))
 
+# Returns True if a class is abstract, else False. Currently, this analysis is onyl done for one level in the class hierarchy, i.e. a class is abstract if it has at least one purely virtual method or one of its base-classes has at least one purely virtual methods. Other hierarchy levels are ignored at the moment.
+# parameters:
+#   theClass (libclang class decl object): the class
+#   allClasses (list of libclang class decl objects): all other classes
+# returns:
+#   boolean
 def isAbstractClass(theClass, allClasses):
   baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, list(theClass.get_children())))
   baseClasses = list(map(lambda y: next((x for x in allClasses if x.spelling == y.type.spelling)), baseSpec))
@@ -320,6 +410,12 @@ def isAbstractClass(theClass, allClasses):
   
   return numPureVirtualMethods > numImplementedPureVirtualMethods
 
+# Generates bindings for all handle types. Handle types are typedef-specializations of the opencascade::handle<...> template class.
+# parameters:
+#   outputFile (python file object): output file
+#   children (list of libclang objects): all libclang objects
+# returns:
+#   None
 def generateHandleTypeBindings(outputFile, children):
   print("generating bindings for handle types...")
 
@@ -393,6 +489,12 @@ def generateHandleTypeBindings(outputFile, children):
       oc1, oc2, oc3
     ]))
 
+# Generates bindings for all classes (with some exceptions).
+# parameters:
+#   newChildren (list of libclang objects): all libclang objects
+#   outputFile (python file object): output file
+# returns:
+#   None
 def generateClassBindings(newChildren, outputFile):
   print("generating bindings for classes...")
   epilog = ""
@@ -407,17 +509,23 @@ def generateClassBindings(newChildren, outputFile):
         outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
         abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
         if not abstract:
-          outputFile.write(getStandardConstructorBinding(list(theClass.get_children())))
+          outputFile.write(getSimpleConstructorBinding(list(theClass.get_children())))
         outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
         outputFile.write("  ;" + os.linesep)
         if not abstract:
           outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
-        epilog += getEpilog(theClass)
+        epilog += getEpilogForClass(theClass)
       except MultipleBaseClassException as e:
         print(str(e))
         continue
   return epilog
 
+# Generates bindings for all enums
+# parameters:
+#   newChildren (list of libclang objects): all libclang objects
+#   outputFile (python file object): output file
+# returns:
+#   None
 def generateEnumBindings(newChildren, outputFile):
   print("generating bindings for enums...")
   for enum in newChildren:
@@ -427,6 +535,10 @@ def generateEnumBindings(newChildren, outputFile):
         outputFile.write("    .value(\"" + enumChild.spelling + "\", " + enum.spelling + "::" + enumChild.spelling + ")" + os.linesep)
       outputFile.write("  ;" + os.linesep)
 
+# The entry point of the auto-binding algorithm.
+# parameters:
+# returns:
+#   None
 def main():
   occtFiles = []
   includePaths = []
