@@ -1,7 +1,0 @@
-// #include "./IGESControl/IGESControl_ActorWrite.h"
-#include "./IGESControl/IGESControl_AlgoContainer.h"
-// #include "./IGESControl/IGESControl_Controller.h"
-#include "./IGESControl/IGESControl_IGESBoundary.h"
-// #include "./IGESControl/IGESControl_Reader.h"
-#include "./IGESControl/IGESControl_ToolContainer.h"
-// #include "./IGESControl/IGESControl_Writer.h"
