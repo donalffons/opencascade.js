@@ -177,10 +177,6 @@ def processClass(theClass):
   # error: undefined symbol: _ZNK22STEPSelections_Counter3POPEv (referenced by top-level compiled C/C++ code)
   if theClass.spelling == "STEPSelections_Counter":
     return False
-
-  # C-string issue with ReadFile method: https://github.com/emscripten-core/emscripten/issues/4475
-  if theClass.spelling == "XSControl_Reader":
-    return False
   
   return True
 
@@ -211,6 +207,14 @@ def processHandleTypedef(handleTypedef):
     return False
   return True
 
+# indicates if bindings for an enum should be generated (returns True) or not (returns False)
+# parameters:
+#   enum (libclang enum object): the enum
+# returns:
+#   bool
+def processEnum(enum):
+  return True
+
 # Generates the header of the bindings for a class (i.e. 'class_<...>("...")') and returns it as a string
 # parameters:
 #   className (string): the name of the class
@@ -237,11 +241,13 @@ def getClassBinding(className, children):
 #   string
 def getCastMethodBindings(className, method):
   args = list(method.get_arguments())
-  needCast = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE for x in args)
+  hasConstCharArg = any(any(x.spelling == "Standard_CString" for x in a.get_tokens()) for a in args)
+  hasRefArg = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE for x in args)
+  needReinterpretCast = hasConstCharArg or hasRefArg
   returnType = method.result_type.spelling
   const = "const" if method.is_const_method() else ""
   classQualifier = ( className + "::" if not method.is_static_method() else "" ) + "*"
-  if needCast:
+  if needReinterpretCast:
     castedArgResults = list(map(getSingleArgumentBinding(False), args))
     somethingChanged = any(map(lambda x: x[1], castedArgResults))
     castedArgTypes = list(map(lambda x: x[0], castedArgResults))
@@ -317,6 +323,9 @@ def getSingleArgumentBinding(argNames = True, isConstructor = False):
             else:
               typename = "const " + arg.type.spelling
               changed = True
+      if any(x.spelling == "Standard_CString" for x in arg.get_tokens()):
+        typename = "std::string"
+        changed = True
       argBinding = typename + ((" " + arg.spelling) if argNames else "")
     return [argBinding, changed]
   return f
@@ -372,7 +381,7 @@ def getOverloadedConstructorsBinding(className, children):
     overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
 
     args = ", ".join(list(map(lambda x: getSingleArgumentBinding(True, True)(x)[0], list(constructor.get_arguments()))))
-    argNames = ", ".join(list(map(lambda x: x.spelling, list(constructor.get_arguments()))))
+    argNames = ", ".join(list(map(lambda x: x.spelling if not any(y.spelling == "Standard_CString" for y in x.get_tokens()) else x.spelling + ".c_str()", list(constructor.get_arguments()))))
     argTypes = ", ".join(list(map(lambda x: getSingleArgumentBinding(False, True)(x)[0], list(constructor.get_arguments()))))
 
     constructorBindings += "    struct " + constructor.spelling + overloadPostfix + " : public " + constructor.spelling + " {" + os.linesep
@@ -548,6 +557,8 @@ def generateEnumBindings(newChildren, outputFile):
   print("generating bindings for enums...")
   for enum in newChildren:
     if enum.kind == clang.cindex.CursorKind.ENUM_DECL:
+      if not processEnum(enum):
+        continue
       outputFile.write("  enum_<" + enum.spelling + ">(\"" + enum.spelling + "\")" + os.linesep)
       for enumChild in list(enum.get_children()):
         outputFile.write("    .value(\"" + enumChild.spelling + "\", " + enum.spelling + "::" + enumChild.spelling + ")" + os.linesep)
