@@ -61,7 +61,10 @@ def processClass(theClass):
     not theClass.spelling.startswith("Standard") and
     not theClass.spelling.startswith("Top") and
     not theClass.spelling.startswith("Poly") and
-    not theClass.spelling.startswith("StdPrs")
+    not theClass.spelling.startswith("StdPrs") and
+    not theClass.spelling.startswith("STEP") and
+    not theClass.spelling.startswith("IGES") and
+    not theClass.spelling.startswith("XSControl")
   ):
     return False
 
@@ -162,6 +165,21 @@ def processClass(theClass):
 
   # error: no suitable member 'operator delete' in 'Poly_CoherentTriPtr'
   if theClass.spelling == "Poly_CoherentTriPtr":
+    return False
+
+  # error: constexpr variable 'types' must be initialized by a constant expression
+  # and many others...
+  if (
+    theClass.spelling.startswith("IGES") and not theClass.spelling.startswith("IGESControl")
+  ):
+    return False
+
+  # error: undefined symbol: _ZNK22STEPSelections_Counter3POPEv (referenced by top-level compiled C/C++ code)
+  if theClass.spelling == "STEPSelections_Counter":
+    return False
+
+  # C-string issue with ReadFile method: https://github.com/emscripten-core/emscripten/issues/4475
+  if theClass.spelling == "XSControl_Reader":
     return False
   
   return True
