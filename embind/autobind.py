@@ -73,6 +73,10 @@ def processClass(theClass):
   ):
     return False
 
+  # error: undefined symbol: a hundred times
+  if theClass.spelling.startswith("Draw"):
+    return False
+
   # error: undefined symbol
   if (
     theClass.spelling == "GCPnts_DistFunction" or
