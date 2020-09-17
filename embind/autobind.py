@@ -85,7 +85,16 @@ def processClass(theClass):
     theClass.spelling.startswith("DNaming") or
     theClass.spelling.startswith("DPrs") or
     theClass.spelling == "DDataStd" or
-    theClass.spelling.startswith("DBRep")
+    theClass.spelling.startswith("DBRep") or
+    theClass.spelling == "AdvApp2Var" or
+    theClass.spelling == "AdvApp2Var_Iso" or
+    theClass.spelling.startswith("AppDef") or
+    theClass.spelling.startswith("DDataStd") or
+    theClass.spelling.startswith("DDocStd") or
+    theClass.spelling == "DsgPrs_RadiusPresentation" or
+    theClass.spelling == "BSplCLib" or
+    theClass.spelling == "BlendFunc" or
+    theClass.spelling == "AppDef_TheResol"
   ):
     return False
 
