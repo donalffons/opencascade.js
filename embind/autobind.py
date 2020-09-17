@@ -64,7 +64,12 @@ def processClass(theClass):
     not theClass.spelling.startswith("StdPrs") and
     not theClass.spelling.startswith("STEP") and
     not theClass.spelling.startswith("IGES") and
-    not theClass.spelling.startswith("XSControl")
+    not theClass.spelling.startswith("XSControl") and
+    not theClass.spelling.startswith("A") and
+    not theClass.spelling.startswith("B") and
+    not theClass.spelling.startswith("C") and
+    not theClass.spelling.startswith("D") and
+    not theClass.spelling.startswith("E")
   ):
     return False
 
@@ -177,6 +182,10 @@ def processClass(theClass):
   # error: undefined symbol: _ZNK22STEPSelections_Counter3POPEv (referenced by top-level compiled C/C++ code)
   if theClass.spelling == "STEPSelections_Counter":
     return False
+
+  # error: undefined symbol: _ZN23DrawDim_PlanarDimension19get_type_descriptorEv (referenced by top-level compiled C/C++ code)
+  if theClass.spelling == "DrawDim_PlanarDimension":
+    return False
   
   return True
 
@@ -243,13 +252,14 @@ def getCastMethodBindings(className, method):
   args = list(method.get_arguments())
   hasConstCharArg = any(any(x.spelling == "Standard_CString" for x in a.get_tokens()) for a in args)
   hasRefArg = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE for x in args)
-  needReinterpretCast = hasConstCharArg or hasRefArg
-  returnType = method.result_type.spelling
+  hasRefRetVal = method.result_type.kind == clang.cindex.TypeKind.LVALUEREFERENCE
+  needReinterpretCast = hasConstCharArg or hasRefArg or hasRefRetVal
+  returnType = method.result_type.spelling if not hasRefRetVal else method.result_type.spelling[:-1] + "*"
   const = "const" if method.is_const_method() else ""
   classQualifier = ( className + "::" if not method.is_static_method() else "" ) + "*"
   if needReinterpretCast:
     castedArgResults = list(map(getSingleArgumentBinding(False), args))
-    somethingChanged = any(map(lambda x: x[1], castedArgResults))
+    somethingChanged = any(map(lambda x: x[1], castedArgResults)) or hasRefRetVal
     castedArgTypes = list(map(lambda x: x[0], castedArgResults))
     if somethingChanged:
       return ["reinterpret_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
@@ -409,7 +419,7 @@ def getEpilogForClass(theClass):
 # returns:
 #   list of lblang method objects
 def getPureVirtualMethods(theClass):
-  return list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_METHOD and x.is_pure_virtual_method(), list(theClass.get_children())))
+  return list(filter(lambda x: x.is_pure_virtual_method(), list(theClass.get_children())))
 
 # Returns True if a class is abstract, else False. Currently, this analysis is onyl done for one level in the class hierarchy, i.e. a class is abstract if it has at least one purely virtual method or one of its base-classes has at least one purely virtual methods. Other hierarchy levels are ignored at the moment.
 # parameters:
@@ -424,18 +434,12 @@ def isAbstractClass(theClass, allClasses):
   pureVirtualMethods = getPureVirtualMethods(theClass)
   if len(pureVirtualMethods) > 0:
     return True
-  
-  pvmsInBaseClasses = list(map(lambda x: getPureVirtualMethods(x), baseClasses))
 
-  numPureVirtualMethods = 0
-  numImplementedPureVirtualMethods = 0
-  for bc in pvmsInBaseClasses:
-    for bcPvm in bc:
-      numPureVirtualMethods += 1
-      if bcPvm.spelling in list(map(lambda x: x.spelling, list(theClass.get_children()))):
-        numImplementedPureVirtualMethods += 1
+  for bc in baseClasses:
+    if isAbstractClass(bc, allClasses):
+      return True
   
-  return numPureVirtualMethods > numImplementedPureVirtualMethods
+  return False
 
 # Generates bindings for all handle types. Handle types are typedef-specializations of the opencascade::handle<...> template class.
 # parameters:
@@ -596,17 +600,6 @@ def main():
     for d in tu.diagnostics:
       print("  " + d.format())
 
-  print("filtering, sorting...")
-
-  children = list(tu.cursor.get_children())
-  newChildren = []
-  for child in children:
-    if len(list(child.get_children())) == 0:
-      continue
-    if not any(x.spelling == child.spelling for x in newChildren):
-      newChildren.append(child)
-  newChildren = sorted(newChildren, key=lambda x: x.spelling)
-
   print("creating bindings...")
   outputFile = open("../build/bindings.cpp", "w")
   outputFile.write(includeDirectives + os.linesep)
@@ -617,6 +610,16 @@ using namespace emscripten;
   outputFile.write(preamble + os.linesep)
   outputFile.write("EMSCRIPTEN_BINDINGS(opencascadejs) {" + os.linesep)
   outputFile.write("#include \"../embind/manualBindings.h\"" + os.linesep)
+
+  print("filtering, sorting...")
+  children = list(tu.cursor.get_children())
+  newChildren = []
+  for child in children:
+    if len(list(child.get_children())) == 0:
+      continue
+    if not any(x.spelling == child.spelling for x in newChildren):
+      newChildren.append(child)
+  newChildren = sorted(newChildren, key=lambda x: x.spelling)
 
   epilog = generateClassBindings(newChildren, outputFile)
   generateHandleTypeBindings(outputFile, children)
