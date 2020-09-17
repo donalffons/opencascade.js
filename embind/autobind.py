@@ -74,7 +74,19 @@ def processClass(theClass):
     return False
 
   # error: undefined symbol: a hundred times
-  if theClass.spelling.startswith("Draw"):
+  if (
+    theClass.spelling.startswith("Draw") or
+    theClass.spelling == "BRep_Edge" or 
+    theClass.spelling == "BRep_Face" or
+    theClass.spelling.startswith("DDF") or
+    theClass.spelling.startswith("Cocoa") or
+    theClass.spelling.startswith("Bin") or
+    theClass.spelling.startswith("BOP") or
+    theClass.spelling.startswith("DNaming") or
+    theClass.spelling.startswith("DPrs") or
+    theClass.spelling == "DDataStd" or
+    theClass.spelling.startswith("DBRep")
+  ):
     return False
 
   # error: undefined symbol
