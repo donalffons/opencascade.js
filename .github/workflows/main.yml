@@ -71,10 +71,10 @@ jobs:
       - name: Build OpenCascade.js Bindings
         run: |
           docker run \
+          -v "$(pwd)/build/":"/opencascade/build/" \
+          -v "$(pwd)/dist/":"/opencascade/dist/" \
+          -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
           my_awesome_image
-      # -v "$(pwd)/build/":"/opencascade/build/" \
-      # -v "$(pwd)/dist/":"/opencascade/dist/" \
-      # -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
       # I'm not thrilled that this says my_awesome_image, but this is what works :(
 
       # Debug
