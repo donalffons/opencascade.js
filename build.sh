@@ -5,6 +5,7 @@ while true; do
     "Build docker image with tag 'opencascade.js'"
     "Build opencascade.js in docker container (run option 1 before using this option)"
     "Start opencascade.js docker container with a terminal for development & debugging (run option 1 before using this option)"
+    "Clear all caches"
     "Quit"
   )
 
@@ -19,10 +20,8 @@ while true; do
         echo "Building opencascade.js in docker container..."
         docker run -it \
           -v "$(pwd)/build/":"/opencascade/build/" \
-          -v "$(pwd)/node_modules/":"/opencascade/node_modules/" \
           -v "$(pwd)/dist/":"/opencascade/dist/" \
           -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
-          -v "$(pwd)/build/":"/opencascade/build/" \
           -v "$(pwd)/embind/":"/opencascade/embind/" \
           opencascade.js
         break
@@ -32,7 +31,6 @@ while true; do
         docker run -it \
           --entrypoint=/bin/bash \
           -v "$(pwd)/build/":"/opencascade/build/" \
-          -v "$(pwd)/node_modules/":"/opencascade/node_modules/" \
           -v "$(pwd)/dist/":"/opencascade/dist/" \
           -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
           -v "$(pwd)/build/":"/opencascade/build/" \
@@ -41,6 +39,11 @@ while true; do
         break
         ;;
       4)
+        echo "Clearing all caches..."
+        sudo rm build emscripten-cache -fr
+        break
+        ;;
+      5)
         echo "Bye..."
         exit
         ;;
