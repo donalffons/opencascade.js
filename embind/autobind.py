@@ -53,38 +53,6 @@ def processIncludeFile(filename):
 # returns:
 #   bool
 def processClass(theClass):
-  if (
-    not theClass.spelling.startswith("gp") and
-    not theClass.spelling.startswith("GC") and
-    not theClass.spelling.startswith("BRep") and
-    not theClass.spelling.startswith("Geom") and
-    not theClass.spelling.startswith("Standard") and
-    not theClass.spelling.startswith("Top") and
-    not theClass.spelling.startswith("Poly") and
-    not theClass.spelling.startswith("StdPrs") and
-    not theClass.spelling.startswith("STEP") and
-    not theClass.spelling.startswith("IGES") and
-    not theClass.spelling.startswith("XSControl") and
-    not theClass.spelling.startswith("A") and
-    not theClass.spelling.startswith("B") and
-    not theClass.spelling.startswith("C") and
-    not theClass.spelling.startswith("D") and
-    not theClass.spelling.startswith("E") and
-    not theClass.spelling.startswith("G") and
-    not theClass.spelling.startswith("H") and
-    not theClass.spelling.startswith("I") and
-    not theClass.spelling.startswith("J") and
-    not theClass.spelling.startswith("K") and
-    not theClass.spelling.startswith("L") and
-    not theClass.spelling.startswith("M") and
-    not theClass.spelling.startswith("N") and
-    not theClass.spelling.startswith("O") and
-    not theClass.spelling.startswith("P") and
-    not theClass.spelling.startswith("Q") and
-    not theClass.spelling.startswith("R")
-  ):
-    return False
-
   # error: undefined symbol: FT_Done_Face and many more
   if theClass.spelling.startswith("F") :
     return False
@@ -320,6 +288,94 @@ def processClass(theClass):
     theClass.spelling == "OSD_Path" or
     theClass.spelling == "QADNaming" or
     theClass.spelling == "MeshTest_CheckTopology"
+  ):
+    return False
+
+  # error: use of undeclared identifier 'TVertex'; did you mean 'ShapePersistent_BRep::TVertex'?
+  if theClass.spelling == "ShapePersistent_BRep":
+    return False
+
+  # error: use of undeclared identifier 'Curve'
+  if (
+    theClass.spelling == "ShapePersistent_Geom" or
+    theClass.spelling == "ShapePersistent_Geom2d_Curve" or
+    theClass.spelling == "ShapePersistent_Geom2d" or
+    theClass.spelling == "ShapePersistent_Geom_Curve"
+  ):
+    return False
+
+  # error: use of undeclared identifier 'Surface'
+  if theClass.spelling == "ShapePersistent_Geom_Surface":
+    return False
+
+  # error: unknown type name ...
+  if (
+    theClass.spelling == "ShapePersistent_Poly" or
+    theClass.spelling == "ShapePersistent_TopoDS" or
+    theClass.spelling == "StdPersistent_TopLoc"
+  ):
+    return False
+
+  # error: incomplete type 'Interface_ShareTool' used in type trait expression
+  if theClass.spelling == "StepData_DefaultGeneral":
+    return False
+
+  # error: no suitable member 'operator delete' in 'TDF_LabelNode'
+  if theClass.spelling == "TDF_LabelNode":
+    return False
+
+  # error: incomplete type 'Interface_ShareTool' used in type trait expression
+  if theClass.spelling == "StepData_GeneralModule":
+    return False
+
+  # error: constexpr variable 'types' must be initialized by a constant expression
+  if theClass.spelling == "TopClass_SolidExplorer":
+    return False
+
+  # error: calling function with incomplete return type 'OSD_FileIterator'
+  # error: constexpr variable 'types' must be initialized by a constant expression
+  if theClass.spelling == "UTL":
+    return False
+
+  # error: non-const lvalue reference to type 'const int **' cannot bind to a temporary of type 'const int **'
+  if (
+    theClass.spelling == "VrmlData_IndexedFaceSet" or
+    theClass.spelling == "VrmlData_IndexedLineSet" or
+    theClass.spelling == "VrmlData_Scene"
+  ):
+    return False
+
+  # error: duplicate symbol: DISCRETALGO
+  if theClass.spelling == "XBRepMesh":
+    return False
+
+  if (
+    theClass.spelling.startswith("ViewerTest") or
+    theClass.spelling.startswith("XDEDRAW") or
+    theClass.spelling.startswith("XSDRAW") or
+    theClass.spelling.startswith("SWDRAW") or
+    theClass.spelling == "ShapeFix_WireSegment" or
+    theClass.spelling == "ShapeFix_Edge" or
+    theClass.spelling == "StepFEA_SymmetricTensor43d" or
+    theClass.spelling == "TransferBRep" or
+    theClass.spelling == "StepToTopoDS_Builder" or
+    theClass.spelling == "StepData_FreeFormEntity" or
+    theClass.spelling == "StepData_UndefinedEntity" or
+    theClass.spelling == "TObjDRAW"
+  ):
+    return False
+
+  # error: undefined symbol
+  if theClass.spelling.startswith("TPrsStd"):
+    return False
+
+  # error: undefined symbol
+  if theClass.spelling == "XCAFApp_Application":
+    return False
+
+  if (
+    theClass.spelling == "math_NewtonMinimum" or
+    theClass.spelling == "math_NewtonFunctionSetRoot"
   ):
     return False
 
