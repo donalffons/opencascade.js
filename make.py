@@ -222,9 +222,9 @@ def build():
       '-D3RDPARTY_INCLUDE_DIRS=../regal/regal-master/src/apitrace/thirdparty/khronos/\;../fontconfig/fontconfig-2.13.92',
       '-DUSE_GLES2=ON',
       '-DBUILD_MODULE_Draw=OFF',
-      '-DBUILD_ADDITIONAL_TOOLKITS=OFF',
-      '-DBUILD_MODULE_Visualization=OFF',
-      '-DBUILD_MODULE_ApplicationFramework=OFF'
+      '-DBUILD_ADDITIONAL_TOOLKITS=ON',
+      '-DBUILD_MODULE_Visualization=ON',
+      '-DBUILD_MODULE_ApplicationFramework=ON'
     ])
 
   ###############
