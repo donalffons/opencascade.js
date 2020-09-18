@@ -70,11 +70,14 @@ def processClass(theClass):
     not theClass.spelling.startswith("C") and
     not theClass.spelling.startswith("D") and
     not theClass.spelling.startswith("E") and
-    not theClass.spelling.startswith("F") and
     not theClass.spelling.startswith("G") and
     not theClass.spelling.startswith("H") and
     not theClass.spelling.startswith("I")
   ):
+    return False
+
+  # error: undefined symbol: FT_Done_Face and many more
+  if theClass.spelling.startswith("F") :
     return False
 
   # error: undefined symbol: a hundred times
@@ -237,6 +240,19 @@ def processClass(theClass):
 
   # error: incomplete type 'Interface_GTool' used in type trait expression
   if theClass.spelling == "Interface_HGraph":
+    return False
+
+  if (
+    theClass.spelling.startswith("HLRTest") or
+    theClass.spelling.startswith("HLRBRep") or
+    theClass.spelling.startswith("IntCurveSurface_ThePolyhedronOfHI") or
+    theClass.spelling == "IFSelect_EditForm" or
+    theClass.spelling == "IFSelect_IntParam" or
+    theClass.spelling == "IntTools_PntOnFace" or
+    theClass.spelling.startswith("IntImpParGen") or
+    theClass.spelling.startswith("IFSelect_ContextModif") or
+    theClass.spelling.startswith("IntPolyh_MaillageAffinage")
+  ):
     return False
   
   return True
