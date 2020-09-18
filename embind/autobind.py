@@ -72,7 +72,16 @@ def processClass(theClass):
     not theClass.spelling.startswith("E") and
     not theClass.spelling.startswith("G") and
     not theClass.spelling.startswith("H") and
-    not theClass.spelling.startswith("I")
+    not theClass.spelling.startswith("I") and
+    not theClass.spelling.startswith("J") and
+    not theClass.spelling.startswith("K") and
+    not theClass.spelling.startswith("L") and
+    not theClass.spelling.startswith("M") and
+    not theClass.spelling.startswith("N") and
+    not theClass.spelling.startswith("O") and
+    not theClass.spelling.startswith("P") and
+    not theClass.spelling.startswith("Q") and
+    not theClass.spelling.startswith("R")
   ):
     return False
 
@@ -254,7 +263,66 @@ def processClass(theClass):
     theClass.spelling.startswith("IntPolyh_MaillageAffinage")
   ):
     return False
-  
+
+  # error: incomplete type 'Interface_ShareTool' used in type trait expression
+  if theClass.spelling == "RWHeaderSection_GeneralModule":
+    return False
+
+  # error: constexpr variable 'types' must be initialized by a constant expression
+  if theClass.spelling == "Prs3d_ToolQuadric":
+    return False
+
+  # error: constexpr variable 'types' must be initialized by a constant expression
+  if theClass.spelling == "OSD_FileNode":
+    return False
+
+  # error: constexpr variable 'types' must be initialized by a constant expression
+  if theClass.spelling == "OSD_File":
+    return False
+
+  # error: no matching function for call to 'operator new'
+  if theClass.spelling.startswith("NCollection"):
+    return False
+
+  # error: incomplete type 'AVStream' used in type trait expression
+  if theClass.spelling.startswith("Media"):
+    return False
+
+  # error: incomplete type 'Interface_ShareTool' used in type trait expression
+  if theClass.spelling == "RWStepAP214_GeneralModule":
+    return False
+
+  # error: constexpr variable 'types' must be initialized by a constant expression
+  if theClass.spelling.startswith("RWStepGeom"):
+    return False
+
+  # error: constexpr variable 'types' must be initialized by a constant expression
+  if (
+    theClass.spelling == "RWStepShape_RWBrepWithVoids" or
+    theClass.spelling == "RWStepShape_RWEdgeCurve" or
+    theClass.spelling == "RWStepShape_RWEdgeLoop" or
+    theClass.spelling == "RWStepShape_RWFaceBound"
+  ):
+    return False
+
+  if (
+    theClass.spelling == "LocOpe_Revol" or
+    theClass.spelling == "QANCollection" or
+    theClass.spelling == "MAT2d_CutCurve" or
+    theClass.spelling == "Law_Interpolate" or
+    theClass.spelling == "LocOpe_RevolutionForm" or
+    theClass.spelling == "MeshTest_CheckTopology" or
+    theClass.spelling == "ProjLib_ProjectOnSurface" or
+    theClass.spelling == "QABugs_PresentableObject" or
+    theClass.spelling == "QABugs" or
+    theClass.spelling == "QADraw" or
+    theClass.spelling == "MeshTest" or
+    theClass.spelling == "OSD_Path" or
+    theClass.spelling == "QADNaming" or
+    theClass.spelling == "MeshTest_CheckTopology"
+  ):
+    return False
+
   return True
 
 # indicates if bindings for a method should be generated (returns True) or not (returns False)
