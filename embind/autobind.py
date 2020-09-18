@@ -69,7 +69,11 @@ def processClass(theClass):
     not theClass.spelling.startswith("B") and
     not theClass.spelling.startswith("C") and
     not theClass.spelling.startswith("D") and
-    not theClass.spelling.startswith("E")
+    not theClass.spelling.startswith("E") and
+    not theClass.spelling.startswith("F") and
+    not theClass.spelling.startswith("G") and
+    not theClass.spelling.startswith("H") and
+    not theClass.spelling.startswith("I")
   ):
     return False
 
@@ -210,6 +214,29 @@ def processClass(theClass):
 
   # error: undefined symbol: _ZN23DrawDim_PlanarDimension19get_type_descriptorEv (referenced by top-level compiled C/C++ code)
   if theClass.spelling == "DrawDim_PlanarDimension":
+    return False
+
+  # error: incomplete type 'Interface_GTool' used in type trait expression
+  if theClass.spelling == "Interface_Graph":
+    return False
+  
+  # error: 'operator delete' is a protected member of 'Standard_Transient'
+  if theClass.spelling == "Font_BRepFont":
+    return False
+  
+  if theClass.spelling == "HLRBRep_CLProps":
+    return False
+
+  # error: incomplete type 'Interface_FileParameter' used in type trait expression
+  if theClass.spelling == "Interface_FileReaderData":
+    return False
+  
+  # error: incomplete type 'Interface_ShareTool' used in type trait expression
+  if theClass.spelling == "Interface_GeneralModule":
+    return False
+
+  # error: incomplete type 'Interface_GTool' used in type trait expression
+  if theClass.spelling == "Interface_HGraph":
     return False
   
   return True
