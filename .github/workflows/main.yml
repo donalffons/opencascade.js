@@ -72,7 +72,6 @@ jobs:
         run: |
           docker run \
             -v "$(pwd)/build/":"/opencascade/build/" \
-            -v "$(pwd)/node_modules/":"/opencascade/node_modules/" \
             -v "$(pwd)/dist/":"/opencascade/dist/" \
             -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
             my_awesome_image
