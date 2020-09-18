@@ -126,10 +126,13 @@ def build():
   if not os.path.exists('build'):
     os.makedirs('build')
   os.chdir('build')
-  targetfile = "occt.tar.gz"
+
+  stage("clearing build folder")
+  os.system("rm * -fr")
 
   ######################################
-  if not os.path.exists('occt.tar.gz'):
+  targetfile = "occt.tar.gz"
+  if not os.path.exists(targetfile):
     stage("downloading OCCT...")
     url = "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=33d9a6fa21ca4fa711da7066655aa2ba854545ee;sf=tgz"
     myfile = requests.get(url, stream=True)
