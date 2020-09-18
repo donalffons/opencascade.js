@@ -466,13 +466,15 @@ def getCastMethodBindings(className, method):
 #   allOverloads (list of libclang method decl): all overloads of the method (i.e. methods with the same name but different signatures)
 # returns:
 #   string
-def getSingleMethodBinding(className, method, allOverloads):
+def getSingleMethodBinding(className, method, allOverloads, outputDocFile):
   if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD:
     if method.spelling.startswith("operator"):
+      outputDocFile.write("![](https://via.placeholder.com/15/cc0000/000000?text=+) `" + method.spelling + "`" + os.linesep + os.linesep)
       return ""
     overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(method) + 1)
 
     if method.result_type.spelling.startswith("Standard_OStream"):
+      outputDocFile.write("![](https://via.placeholder.com/15/cc0000/000000?text=+) `" + method.spelling + "`" + os.linesep + os.linesep)
       return ""
     if len(allOverloads) == 1:
       functor = "&" + className + "::" + method.spelling
@@ -488,6 +490,7 @@ def getSingleMethodBinding(className, method, allOverloads):
       functionCommand = "function"
 
     cast = getCastMethodBindings(className, method)
+    outputDocFile.write("![](https://via.placeholder.com/15/00cc00/000000?text=+) `" + method.spelling + "`" + os.linesep + os.linesep)
     return "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())" + os.linesep
   return ""
 
@@ -538,13 +541,15 @@ def getSingleArgumentBinding(argNames = True, isConstructor = False):
 #   children (libclang list of children): the children of the class
 # returns:
 #   string
-def getMethodsBinding(className, children):
+def getMethodsBinding(className, children, outputDocFile):
   methodsBinding = ""
   for child in children:
     if not processMethod(className, child):
+      if child.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and child.kind == clang.cindex.CursorKind.CXX_METHOD:
+        outputDocFile.write("![](https://via.placeholder.com/15/cc0000/000000?text=+) `" + child.spelling + "`" + os.linesep + os.linesep)
       continue
     allOverloads = [m for m in children if m.spelling == child.spelling]
-    methodsBinding += getSingleMethodBinding(className, child, allOverloads)
+    methodsBinding += getSingleMethodBinding(className, child, allOverloads, outputDocFile)
   return methodsBinding
 
 # Generates bindings for a "simple" constructor, i.e. using Embind's ".constructor<...>()" tag. Simple constructors can be used, when no overloads of the constructor exsist.
@@ -718,29 +723,37 @@ def generateHandleTypeBindings(outputFile, children):
 #   outputFile (python file object): output file
 # returns:
 #   None
-def generateClassBindings(newChildren, outputFile):
+def generateClassBindings(newChildren, outputFile, outputDocFile):
   print("generating bindings for classes...")
   epilog = ""
   for o in newChildren:
     if o.kind == clang.cindex.CursorKind.CLASS_DECL:
       theClass = o
 
-      if not processClass(theClass):
-        continue
+      successfulBinding = False
+      if processClass(theClass):
+        try:
+          outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
+          outputDocFile.write("### ![](https://via.placeholder.com/15/00cc00/000000?text=+) `" + theClass.spelling + "`" + os.linesep + os.linesep)
+          outputDocFile.write("<details>" + os.linesep)
+          abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
+          if not abstract:
+            outputFile.write(getSimpleConstructorBinding(list(theClass.get_children())))
+          outputDocFile.write("  <summary>" + os.linesep)
+          outputDocFile.write("    Methods" + os.linesep)
+          outputDocFile.write("  </summary>" + os.linesep + os.linesep)
+          outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children()), outputDocFile))
+          outputFile.write("  ;" + os.linesep)
+          if not abstract:
+            outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
+          epilog += getEpilogForClass(theClass)
+          outputDocFile.write("</details>" + os.linesep + os.linesep)
+          successfulBinding = True
+        except MultipleBaseClassException as e:
+          print(str(e))
 
-      try:
-        outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
-        abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
-        if not abstract:
-          outputFile.write(getSimpleConstructorBinding(list(theClass.get_children())))
-        outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
-        outputFile.write("  ;" + os.linesep)
-        if not abstract:
-          outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
-        epilog += getEpilogForClass(theClass)
-      except MultipleBaseClassException as e:
-        print(str(e))
-        continue
+      if not successfulBinding:
+        outputDocFile.write("### ![](https://via.placeholder.com/15/cc0000/000000?text=+) `" + theClass.spelling + "`" + os.linesep + os.linesep)
   return epilog
 
 # Generates bindings for all enums
@@ -793,6 +806,7 @@ def main():
       print("  " + d.format())
 
   print("creating bindings...")
+  outputDocFile = open("../dist/OutputDocumentation.md", "w")
   outputFile = open("../build/bindings.cpp", "w")
   outputFile.write(includeDirectives + os.linesep)
   preamble = '''
@@ -813,7 +827,7 @@ using namespace emscripten;
       newChildren.append(child)
   newChildren = sorted(newChildren, key=lambda x: x.spelling)
 
-  epilog = generateClassBindings(newChildren, outputFile)
+  epilog = generateClassBindings(newChildren, outputFile, outputDocFile)
   generateHandleTypeBindings(outputFile, children)
   generateEnumBindings(newChildren, outputFile)
 
