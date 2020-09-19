@@ -807,9 +807,9 @@ def main():
       print("  " + d.format())
 
   print("creating bindings...")
-  outputDocFile = open("../dist/OutputDocumentation.md", "w")
+  outputDocFile = open("../dist/Supported APIs.md", "w")
   outputDocFile.write('''
-# OpenCascade.js Output Documentation
+# OpenCascade.js Supported APIs
 
 This is an overview over the currently supported parts of the OpenCascade API. Supported items are marked in green. Unsupported items are marked in red. All bindings listed here are created automatically. We are working hard on increasing support for as much as possible of the OpenCascade API.
 
