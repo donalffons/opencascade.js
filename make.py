@@ -123,6 +123,11 @@ def stage(text):
 def build():
   this_dir = os.getcwd()
 
+  stage("clearing dist folder")
+  os.chdir('dist')
+  os.system("rm * -fr")
+  os.chdir('..')
+
   if not os.path.exists('build'):
     os.makedirs('build')
   os.chdir('build')
