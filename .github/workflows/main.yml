@@ -75,7 +75,6 @@ jobs:
           ls build
           ls dist
           ls emscripten-cache
-          ls node_modules
 
       # Upload the build results in-case the push fails...
       - name: Upload Build Artifacts
