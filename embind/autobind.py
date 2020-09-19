@@ -5,6 +5,9 @@ import clang.cindex
 import os
 import io
 
+numExportedClasses = 0
+numIgnoredClasses = 0
+
 # This exception indicates that a certain class has multiple base classes. This is not (easily) possible to represent in JavaScript
 class MultipleBaseClassException(Exception):
   pass
@@ -723,6 +726,7 @@ def generateHandleTypeBindings(outputFile, children):
 # returns:
 #   None
 def generateClassBindings(newChildren, outputFile, outputDocFile):
+  global numExportedClasses, numIgnoredClasses
   print("generating bindings for classes...")
   epilog = ""
   for o in newChildren:
@@ -742,11 +746,13 @@ def generateClassBindings(newChildren, outputFile, outputDocFile):
           if not abstract:
             outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
           epilog += getEpilogForClass(theClass)
+          numExportedClasses += 1
           successfulBinding = True
         except MultipleBaseClassException as e:
           print(str(e))
 
       if not successfulBinding:
+        numIgnoredClasses += 1
         outputDocFile.write("### ![](https://bit.ly/3hIVfqr) `" + theClass.spelling + "`" + os.linesep + os.linesep)
   return epilog
 
@@ -843,3 +849,5 @@ using namespace emscripten;
   outputFile.write(epilog)
 
 main()
+print("numExportedClasses: " + str(numExportedClasses) + " (" + str(numExportedClasses/(numExportedClasses+numIgnoredClasses)*100) + "%)")
+print("numIgnoredClasses: " + str(numIgnoredClasses) + " (" + str(numIgnoredClasses/(numExportedClasses+numIgnoredClasses)*100) + "%)")
