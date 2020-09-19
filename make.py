@@ -253,82 +253,82 @@ def build():
   os.chdir('../build')
   
   ######################################
-#   stage("build settings...")
-#   wasm = 'wasm' in sys.argv
-#   closure = 'closure' in sys.argv
-#   add_function_support = 'add_func' in sys.argv
-#   args = '-std=c++1z -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
-#   args += ' -O3'
-#   if add_function_support:
-#     args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
-#   if wasm:
-#     args += ''' -s WASM=1'''
-#   else:
-#     args += ' -s WASM=0 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s SINGLE_FILE=1 -s LEGACY_VM_SUPPORT=1'
-#   if closure:
-#     args += ' --closure 1 -s IGNORE_CLOSURE_COMPILER_ERRORS=1'
-#   else:
-#     args += ' -s NO_DYNAMIC_EXECUTION=1'
-#   emcc_args = args.split(' ')
-#   emcc_args += ['-s', 'TOTAL_MEMORY=%d' % (64*1024*1024)]
-#   emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1']
-#   emcc_args += '-s EXPORT_NAME="opencascade"'.split(' ')
-#   emcc_args += '-s MODULARIZE=1'.split(' ')
-#   emcc_args += ['-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]']
-#   emcc_args += ['-s', 'EXPORT_ES6=1']
-#   emcc_args += ['-s', 'USE_ES6_IMPORT_META=0']
-#   emcc_args += ['-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1']
+  stage("build settings...")
+  wasm = 'wasm' in sys.argv
+  closure = 'closure' in sys.argv
+  add_function_support = 'add_func' in sys.argv
+  args = '-std=c++1z -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
+  args += ' -O3'
+  if add_function_support:
+    args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
+  if wasm:
+    args += ''' -s WASM=1'''
+  else:
+    args += ' -s WASM=0 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s SINGLE_FILE=1 -s LEGACY_VM_SUPPORT=1'
+  if closure:
+    args += ' --closure 1 -s IGNORE_CLOSURE_COMPILER_ERRORS=1'
+  else:
+    args += ' -s NO_DYNAMIC_EXECUTION=1'
+  emcc_args = args.split(' ')
+  emcc_args += ['-s', 'TOTAL_MEMORY=%d' % (64*1024*1024)]
+  emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1']
+  emcc_args += '-s EXPORT_NAME="opencascade"'.split(' ')
+  emcc_args += '-s MODULARIZE=1'.split(' ')
+  emcc_args += ['-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]']
+  emcc_args += ['-s', 'EXPORT_ES6=1']
+  emcc_args += ['-s', 'USE_ES6_IMPORT_META=0']
+  emcc_args += ['-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1']
   
-#   # Debugging options
-#   # emcc_args += ['-s', 'ASSERTIONS=2']
-#   # emcc_args += ['-s', 'STACK_OVERFLOW_CHECK=1']
-#   # emcc_args += ['-s', 'DEMANGLE_SUPPORT=1']
-#   # emcc_args += ['-s', 'DISABLE_EXCEPTION_CATCHING=0']
-#   # emcc_args += ['-g']
+  # Debugging options
+  # emcc_args += ['-s', 'ASSERTIONS=2']
+  # emcc_args += ['-s', 'STACK_OVERFLOW_CHECK=1']
+  # emcc_args += ['-s', 'DEMANGLE_SUPPORT=1']
+  # emcc_args += ['-s', 'DISABLE_EXCEPTION_CATCHING=0']
+  # emcc_args += ['-g']
 
-#   stage('Link')
+  stage('Link')
 
-#   os.chdir('build')
-#   opencascade_libs = os.listdir(os.path.join('.', 'lin32', 'clang', 'lib'))
-#   opencascade_libs = [os.path.join('.', 'build', 'lin32', 'clang', 'lib', s) for s in opencascade_libs]
+  os.chdir('build')
+  opencascade_libs = os.listdir(os.path.join('.', 'lin32', 'clang', 'lib'))
+  opencascade_libs = [os.path.join('.', 'build', 'lin32', 'clang', 'lib', s) for s in opencascade_libs]
 
-#   stage('emcc: ' + ' '.join(emcc_args))
-#   os.chdir('..')
-#   if not os.path.exists('js'):
-#     os.makedirs('js')
+  stage('emcc: ' + ' '.join(emcc_args))
+  os.chdir('..')
+  if not os.path.exists('js'):
+    os.makedirs('js')
 
-#   target = 'opencascade.js' if not wasm else 'opencascade.wasm.js'
-#   temp = os.path.join('.', 'js', target)
-#   shutil.copytree(os.path.join('..', 'embind'), os.path.join('.', 'embind'), dirs_exist_ok=True)
+  target = 'opencascade.js' if not wasm else 'opencascade.wasm.js'
+  temp = os.path.join('.', 'js', target)
+  shutil.copytree(os.path.join('..', 'embind'), os.path.join('.', 'embind'), dirs_exist_ok=True)
 
-#   includePrefix = os.path.join(".", "occt", "src")
-#   includePaths = os.listdir(includePrefix)
-#   includeArgs = [
-#     '-I' + os.path.join('.', 'occt', 'src'),
-#   ]
-#   for path in includePaths:
-#     includeArgs.append('-I' + os.path.join(".", includePrefix, path))
+  includePrefix = os.path.join(".", "occt", "src")
+  includePaths = os.listdir(includePrefix)
+  includeArgs = [
+    '-I' + os.path.join('.', 'occt', 'src'),
+  ]
+  for path in includePaths:
+    includeArgs.append('-I' + os.path.join(".", includePrefix, path))
 
-#   emccArgs = ['--bind'] + includeArgs + opencascade_libs + emcc_args
-#   emscripten.emcc(os.path.join('.', 'bindings.cpp'), emccArgs, temp)
+  emccArgs = ['--bind'] + includeArgs + opencascade_libs + emcc_args
+  emscripten.emcc(os.path.join('.', 'bindings.cpp'), emccArgs, temp)
 
-#   stage('wrap')
+  stage('wrap')
 
-#   wrapped = '''
-# // This is opencascade.js.
-# ''' + open(temp).read()
+  wrapped = '''
+// This is opencascade.js.
+''' + open(temp).read()
 
-#   open(temp, 'w').write(wrapped)
+  open(temp, 'w').write(wrapped)
   
-#   os.chdir("..")
-#   if not os.path.exists('dist'):
-#     os.makedirs('dist')
+  os.chdir("..")
+  if not os.path.exists('dist'):
+    os.makedirs('dist')
 
-#   if not wasm:
-#     shutil.copyfile(os.path.join('build', 'js', 'opencascade.js'), os.path.join('dist', 'opencascade.js'))
-#   else:
-#     shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.js'), os.path.join('dist', 'opencascade.wasm.js'))
-#     shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.wasm'), os.path.join('dist', 'opencascade.wasm.wasm'))
+  if not wasm:
+    shutil.copyfile(os.path.join('build', 'js', 'opencascade.js'), os.path.join('dist', 'opencascade.js'))
+  else:
+    shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.js'), os.path.join('dist', 'opencascade.wasm.js'))
+    shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.wasm'), os.path.join('dist', 'opencascade.wasm.wasm'))
 
 if __name__ == '__main__':
   build()
