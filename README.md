@@ -12,6 +12,14 @@ Current OCCT version: [V7_4_0p1](https://git.dev.opencascade.org/gitweb/?p=occt.
 * [OpenCascade.js-examples](https://github.com/donalffons/opencascade.js-examples) contains general examples on how to use the library.
 * [CascadeStudio](https://zalo.github.io/CascadeStudio/) is a SCAD (Scripted-Computer-Aided-Design) editor, which runs in the browser.
 
+# Which parts of the OpenCascade library are supported?
+
+The answer: 74.59%
+
+![](https://image-charts.com/chart?cht=p3&chs=700x250&chd=t:25.4,74.6&chl=Unsupported|Supported&chf=ps0-0,lg,45,ffeb3b,0.2,f44336,1|ps0-1,lg,45,8bc34a,0.2,009688,1)
+
+[Detailed list of supported classes](https://github.com/donalffons/opencascade.js/blob/embind/dist/OutputDocumentation.md)
+
 # Use it
 
 1. Add the library as a dependency to your project
@@ -102,4 +110,4 @@ You can build OpenCascade.js yourself. The easiest way to do that is to use the 
 
 # Exposing additional OpenCascade APIs
 
-Emscripten's Embind system is used to expose OpenCascade APIs to JavaScript. The Embind definitions are located in the `embind` folder. Please look at the [code conventions document](https://github.com/donalffons/opencascade.js/blob/master/embind/conventions.md) for best practices on how to expose additional APIs.
+Emscripten's Embind system is used to expose OpenCascade APIs to JavaScript. The Embind definitions are located in the `embind` folder. Please look at the [code conventions document](https://github.com/donalffons/opencascade.js/blob/embind/embind/conventions.md) for best practices on how to expose additional APIs.
