@@ -152,14 +152,17 @@ def processClass(theClass):
   if (
     theClass.spelling.startswith("GeometryTest") or
     theClass.spelling.startswith("GeomliteTest") or
-    theClass.spelling.startswith("GeomInt") or
     theClass.spelling.startswith("Geom2dAPI") or
     theClass.spelling.startswith("Geom2dInt") or
     theClass.spelling.startswith("Geom2dHatch") or
     theClass.spelling.startswith("Geom2dGcc") or
     theClass.spelling == "GeomFill_SweepSectionGenerator" or
     theClass.spelling == "GeomFill_FunctionGuide" or
-    theClass.spelling == "GeomAPI_Interpolate"
+    theClass.spelling == "GeomAPI_Interpolate" or
+    theClass.spelling == "GeomInt_IntSS" or
+    theClass.spelling == "GeomInt_WLApprox" or
+    theClass.spelling == "GeomInt_ResConstraintOfMyGradientbisOfTheComputeLineOfWLApprox" or
+    theClass.spelling == "GeomInt_ResConstraintOfMyGradientOfTheComputeLineBezierOfWLApprox"
   ):
     return False
 
