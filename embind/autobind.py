@@ -56,7 +56,6 @@ def processIncludeFile(filename):
 # returns:
 #   bool
 def processClass(theClass):
-  return False
   # error: undefined symbol: FT_Done_Face and many more
   if theClass.spelling.startswith("F") :
     return False
@@ -843,8 +842,8 @@ using namespace emscripten;
   newChildren = sorted(newChildren, key=lambda x: x.spelling)
 
   epilog = generateClassBindings(newChildren, outputFile, outputDocFile)
-  # generateHandleTypeBindings(outputFile, children)
-  # generateEnumBindings(newChildren, outputFile)
+  generateHandleTypeBindings(outputFile, children)
+  generateEnumBindings(newChildren, outputFile)
 
   outputFile.write("}" + os.linesep + os.linesep)
   outputFile.write(epilog)
