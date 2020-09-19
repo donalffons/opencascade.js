@@ -842,8 +842,8 @@ using namespace emscripten;
   newChildren = sorted(newChildren, key=lambda x: x.spelling)
 
   epilog = generateClassBindings(newChildren, outputFile, outputDocFile)
-  # generateHandleTypeBindings(outputFile, children)
-  # generateEnumBindings(newChildren, outputFile)
+  generateHandleTypeBindings(outputFile, children)
+  generateEnumBindings(newChildren, outputFile)
 
   outputFile.write("}" + os.linesep + os.linesep)
   outputFile.write(epilog)

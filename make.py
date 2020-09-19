@@ -330,6 +330,22 @@ def build():
     shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.js'), os.path.join('dist', 'opencascade.wasm.js'))
     shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.wasm'), os.path.join('dist', 'opencascade.wasm.wasm'))
 
-if __name__ == '__main__':
-  build()
+from threading import Thread
+from datetime import datetime
+import time
 
+stopThread = False
+
+def printAliveSignal():
+  while not stopThread:
+    current_time = datetime.now().strftime("%H:%M:%S")
+    print("I'm alive! Current Time =", current_time)
+    time.sleep(15)
+  return True
+
+if __name__ == '__main__':
+  process = Thread(target=printAliveSignal)
+  process.start()
+  build()
+  stopThread = True
+  process.join()
