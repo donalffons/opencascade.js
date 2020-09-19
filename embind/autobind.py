@@ -156,9 +156,10 @@ def processClass(theClass):
     theClass.spelling.startswith("GeomAPI") or
     theClass.spelling.startswith("Geom2dAPI") or
     theClass.spelling.startswith("Geom2dInt") or
-    theClass.spelling.startswith("GeomFill") or
     theClass.spelling.startswith("Geom2dHatch") or
-    theClass.spelling.startswith("Geom2dGcc")
+    theClass.spelling.startswith("Geom2dGcc") or
+    theClass.spelling == "GeomFill_SweepSectionGenerator" or
+    theClass.spelling == "GeomFill_FunctionGuide"
   ):
     return False
 
