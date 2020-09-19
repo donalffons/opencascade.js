@@ -24,16 +24,6 @@ jobs:
           path: ./build
           key: ${{ runner.os }}-build-${{ env.cache-name }}-2
 
-      # Attempt to Load Node Module Cache
-      - name: Cache Intermediate Node Products
-        id: cache-build-2
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-intermediates
-        with:
-          path: ./node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-2
-
       # Attempt to Load Emscripten Cache
       - name: Cache Intermediate Emscripten Products
         id: cache-build-3
