@@ -56,9 +56,6 @@ def processIncludeFile(filename):
 # returns:
 #   bool
 def processClass(theClass):
-  if not theClass.spelling.startswith("A"):
-    return
-
   # error: undefined symbol: FT_Done_Face and many more
   if theClass.spelling.startswith("F") :
     return False
