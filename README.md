@@ -22,7 +22,7 @@ As of right now, we support 74.59% of all classes defined in OpenCascade.
 
 [Detailed list of supported classes](dist/Supported%20APIs.md)
 
-This number does not include `typedef`'d template classes, as these are not yet supported by the build system. There is however support vor all `Handle_`-types (which specialize the `opencascade::handle<...>` template class).
+This number does not include `typedef`'d template classes, as these are not yet supported by the build system. There is however support for all `Handle_`-types (which specialize the `opencascade::handle<...>` template class).
 
 ## What if I need some parts of the OpenCascade library in my project that are currently not supported by the build system?
 
