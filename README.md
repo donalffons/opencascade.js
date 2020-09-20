@@ -9,8 +9,8 @@ Current OCCT version: [V7_4_0p1](https://git.dev.opencascade.org/gitweb/?p=occt.
 
 # Projects & Examples:
 
+* [CascadeStudio](https://github.com/zalo/CascadeStudio) is a SCAD (Scripted-Computer-Aided-Design) editor, which runs in the browser.
 * [OpenCascade.js-examples](https://github.com/donalffons/opencascade.js-examples) contains general examples on how to use the library.
-* [CascadeStudio](https://zalo.github.io/CascadeStudio/) is a SCAD (Scripted-Computer-Aided-Design) editor, which runs in the browser.
 
 # FAQ
 
@@ -20,13 +20,13 @@ As of right now, we supported 74.59% of all classes defined in OpenCascade.
 
 ![](https://image-charts.com/chart?cht=p3&chs=700x250&chd=t:25.4,74.6&chl=Unsupported|Supported&chf=ps0-0,lg,45,ffeb3b,0.2,f44336,1|ps0-1,lg,45,8bc34a,0.2,009688,1)
 
-[Detailed list of supported classes](https://github.com/donalffons/opencascade.js/blob/embind/dist/Supported%20APIs.md)
+[Detailed list of supported classes](dist/Supported%20APIs.md)
 
 This number does not include `typedef`'d template classes, as these are not yet supported by the build system. There is however support vor all `Handle_`-types (which specialize the `opencascade::handle<...>` template class).
 
 ## What if I need some parts of the OpenCascade library in my project that are currently not supported by the build system?
 
-Adding missing features is easy. Just go ahead and edit the [`manualBindings.h`](https://github.com/donalffons/opencascade.js/blob/embind/embind/manualBindings.h) header-file and add your custom bindings. Some examples are already in that file. A full overview of Emscripten's Embind system can be found [here](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html). Please try to stick to the [conventions](https://github.com/donalffons/opencascade.js/blob/embind/embind/conventions.md).
+Adding missing features is easy. Just go ahead and edit the [`manualBindings.h`](embind/manualBindings.h) header-file and add your custom bindings. Some examples are already in that file. A full overview of Emscripten's Embind system can be found [here](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html). Please try to stick to the [conventions](embind/conventions.md).
 
 You can also try to modify the binding auto-generation code, although this can be a slightly more difficult challenge.
 
@@ -41,7 +41,7 @@ No. This project is making almost no changes to the OpenCascade library, apart f
 
 ## Who is going to keep this project up-to-date with the OpenCascade library?
 
-This project is (hopefully) keeping itself (mostly) up-to-date with the OpenCascade library, since 99% of all bindings are generated automatically.
+This project is (hopefully) keeping itself (mostly) up-to-date with the OpenCascade library, since 99% of all bindings are generated automatically. The build-system downloads a tagged commit from the [OpenCascade git server](https://git.dev.opencascade.org/gitweb/?p=occt.git;a=summary), analyzes it and auto-generates all bindings.
 
 # Use it
 
@@ -131,6 +131,6 @@ You can build OpenCascade.js yourself. The easiest way to do that is to use the 
 
 4. You have to run the `docker build` and `docker run` commands after each change, for every build.
 
-# Exposing additional OpenCascade APIs
+# Contributing
 
-Emscripten's Embind system is used to expose OpenCascade APIs to JavaScript. The Embind definitions are located in the `embind` folder. Please look at the [code conventions document](https://github.com/donalffons/opencascade.js/blob/embind/embind/conventions.md) for best practices on how to expose additional APIs.
+Contributions are welcome! Feel free to have a look at the [todo-list](Todo.md) if you need some inspiration on what else needs to be done.
