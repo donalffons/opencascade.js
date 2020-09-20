@@ -18,7 +18,7 @@ The answer: 74.59%
 
 ![](https://image-charts.com/chart?cht=p3&chs=700x250&chd=t:25.4,74.6&chl=Unsupported|Supported&chf=ps0-0,lg,45,ffeb3b,0.2,f44336,1|ps0-1,lg,45,8bc34a,0.2,009688,1)
 
-[Detailed list of supported classes](https://github.com/donalffons/opencascade.js/blob/embind/dist/OutputDocumentation.md)
+[Detailed list of supported classes](https://github.com/donalffons/opencascade.js/blob/embind/dist/Supported%20APIs.md)
 
 # Use it
 
