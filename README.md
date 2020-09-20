@@ -34,7 +34,7 @@ Please make a pull request if you add or improve anything in this project.
 
 ## Is this a fork of the OpenCascade library?
 
-No. This project is making almost no changes to the OpenCascade library, apart from a few very small modifications which are applied as patches. All this project does is
+No. This project is making no changes to the OpenCascade library, apart from a few very small modifications which are applied as patches. All this project does is
 * Compile the OpenCascade library using the Emscripten compiler
 * Analyze the OpenCascade headers using libclang and auto-generate bind-code to expose the library to JavaScript
 * Link the WASM-binaries and provide some convenience functions so that you can easily use the library in your JavaScript projects
