@@ -787,10 +787,10 @@ def main():
         occtFiles.append(str(os.path.join(dirpath, item)))
 
   includePathArgs = [
-    "-I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed/",
-    "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed/",
+    "-I/usr/lib/gcc/x86_64-linux-gnu/10/include/",
+    "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/10/include/",
     "-I/clang/clang_10/include/c++/v1/",
-    "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/7/include/",
+    "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/10/include/",
     ] + list(map(lambda x: "-I" + x, includePaths))
   includeDirectives = list(sorted(occtFiles))
   includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", includeDirectives))

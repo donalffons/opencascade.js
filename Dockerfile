@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.10
 
 RUN apt update -y
 RUN apt install -y build-essential python3.8 python3-pip git cmake bash curl npm
@@ -12,20 +12,6 @@ RUN \
   ./emsdk activate 2.0.1
 
 SHELL ["/bin/bash", "-c"]
-
-RUN npm install -g yarn
-ENV NVM_DIR /usr/local/nvm
-RUN \
-  mkdir -p /usr/local/nvm && \
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-ENV NODE_VERSION v10
-RUN \
-  source $NVM_DIR/nvm.sh && \
-  nvm install $NODE_VERSION && \
-  nvm use --delete-prefix $NODE_VERSION
-ENV NODE_PATH $NVM_DIR/versions/node/$NODE_VERSION/lib/node_modules
-ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
-
 
 WORKDIR /clang/
 RUN python3.8 -m pip install -Iv clang==10.0.1
@@ -43,6 +29,8 @@ RUN LD_LIBRARY_PATH=/clang/clang_10/lib:$LD_LIBRARY_PATHLD_LIBRARY_PATH
 RUN \
   cd clang_10/lib && \
   ln -s libclang.so.10 libclang-10.so
+
+RUN apt-get update -y && apt-get install -y libtinfo5
 
 WORKDIR /opencascade/
 COPY . .
