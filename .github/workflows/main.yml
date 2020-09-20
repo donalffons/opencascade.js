@@ -6,8 +6,8 @@ on:
 jobs:
   build:
     name: Build OpenCascade.js
-    runs-on: self-hosted
-    # runs-on: ubuntu-latest
+    # runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -61,7 +61,7 @@ jobs:
       # Build the docker container
       - name: Build OpenCascade.js Bindings
         run: |
-          docker run \
+          docker run --cpuset-cpus 1 \
           -v "$(pwd)/build/":"/opencascade/build/" \
           -v "$(pwd)/dist/":"/opencascade/dist/" \
           -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
