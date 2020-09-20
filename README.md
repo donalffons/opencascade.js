@@ -12,13 +12,36 @@ Current OCCT version: [V7_4_0p1](https://git.dev.opencascade.org/gitweb/?p=occt.
 * [OpenCascade.js-examples](https://github.com/donalffons/opencascade.js-examples) contains general examples on how to use the library.
 * [CascadeStudio](https://zalo.github.io/CascadeStudio/) is a SCAD (Scripted-Computer-Aided-Design) editor, which runs in the browser.
 
-# Which parts of the OpenCascade library are supported?
+# FAQ
 
-The answer: 74.59%
+## Which parts of the OpenCascade library are supported?
+
+As of right now, we supported 74.59% of all classes defined in OpenCascade.
 
 ![](https://image-charts.com/chart?cht=p3&chs=700x250&chd=t:25.4,74.6&chl=Unsupported|Supported&chf=ps0-0,lg,45,ffeb3b,0.2,f44336,1|ps0-1,lg,45,8bc34a,0.2,009688,1)
 
 [Detailed list of supported classes](https://github.com/donalffons/opencascade.js/blob/embind/dist/Supported%20APIs.md)
+
+This number does not include `typedef`'d template classes, as these are not yet supported by the build system. There is however support vor all `Handle_`-types (which specialize the `opencascade::handle<...>` template class).
+
+## What if I need some parts of the OpenCascade library in my project that are currently not supported by the build system?
+
+Adding missing features is easy. Just go ahead and edit the [`manualBindings.h`](https://github.com/donalffons/opencascade.js/blob/embind/embind/manualBindings.h) header-file and add your custom bindings. Some examples are already in that file. A full overview of Emscripten's Embind system can be found [here](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html). Please try to stick to the [conventions](https://github.com/donalffons/opencascade.js/blob/embind/embind/conventions.md).
+
+You can also try to modify the binding auto-generation code, although this can be a slightly more difficult challenge.
+
+Please make a pull request if you add or improve anything in this project.
+
+## Is this a fork of the OpenCascade library?
+
+No. This project is making almost no changes to the OpenCascade library, apart from a few very small modifications which are applied as patches. All this project does is
+* Compile the OpenCascade library using the Emscripten compiler
+* Analyze the OpenCascade headers using libclang and auto-generate bind-code to expose the library to JavaScript
+* Link the WASM-binaries and provide some convenience functions so that you can easily use the library in your JavaScript projects
+
+## Who is going to keep this project up-to-date with the OpenCascade library?
+
+This project is (hopefully) keeping itself (mostly) up-to-date with the OpenCascade library, since 99% of all bindings are generated automatically.
 
 # Use it
 
