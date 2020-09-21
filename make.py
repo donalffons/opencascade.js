@@ -132,8 +132,8 @@ def build():
     os.makedirs('build')
   os.chdir('build')
 
-  stage("clearing build folder")
-  os.system("rm * -fr")
+  # stage("clearing build folder")
+  # os.system("rm * -fr")
 
   ######################################
   targetfile = "occt.tar.gz"
