@@ -10,8 +10,8 @@ RUN python3.8 -m pip install patch requests CppHeaderParser
 WORKDIR /emscripten/
 RUN git clone https://github.com/emscripten-core/emsdk.git .
 RUN \
-  ./emsdk install 2.0.1 && \
-  ./emsdk activate 2.0.1
+  ./emsdk install 2.0.4 && \
+  ./emsdk activate 2.0.4
 
 SHELL ["/bin/bash", "-c"]
 
