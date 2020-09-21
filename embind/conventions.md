@@ -13,7 +13,7 @@ Please see [here](https://emscripten.org/docs/porting/connecting_cpp_and_javascr
 
 ### Overloaded Functions
 
-* OpenCascade makes heavy use of overloaded functions. JavaScript supports overloading by number of arguments only. C++ supports overloading by return type, by number of arguments and by type of arguments. To solve this incompatibility, all overloads of a function should be postfixed with integers.
+* OpenCascade makes heavy use of overloaded functions. JavaScript supports overloading by number of arguments only. C++ supports overloading by return type, by number of arguments and by type of arguments. To solve this incompatibility, all overloads of a function should be postfixed with integers. The order of these integers should be according to the sequence of their definition in the class / header file.
 
   E.g. the class `gp_Pnt` has the following overloads for the function `SetCoord`:
   ```cpp
