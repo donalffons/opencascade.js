@@ -386,6 +386,35 @@ def processClass(theClass):
   ):
     return False
 
+  # error: call to implicitly-deleted copy constructor / private constructor
+  if (
+    theClass.spelling == "AIS_ViewController" or
+    theClass.spelling == "AdvApp2Var_Framework" or
+    theClass.spelling == "AdvApp2Var_Network" or
+    theClass.spelling == "Image_VideoRecorder" or
+    theClass.spelling == "IntTools_Context" or
+    theClass.spelling == "LDOMString" or
+    theClass.spelling == "VrmlData_Node" or
+    theClass.spelling == "LDOM_MemManager" or
+    theClass.spelling == "LDOM_Node"
+  ):
+    return False
+
+  # error: allocating an object of abstract class type
+  if (
+    theClass.spelling == "Graphic3d_CubeMap" or
+    theClass.spelling == "Storage_BaseDriver"
+  ):
+    return False
+
+  # error: undefined symbol: _ZN18GeomFill_NSectionsC2ERK20NCollection_SequenceIN11opencascade6handleI10Geom_CurveEEERKS0_IdEdd (referenced by top-level compiled C/C++ code)
+  if theClass.spelling == "GeomFill_NSections":
+    return False
+
+  # error: undefined symbol: _ZN21XCAFDoc_GeomToleranceC2ERKN11opencascade6handleIS_EE (referenced by top-level compiled C/C++ code)
+  if theClass.spelling == "XCAFDoc_GeomTolerance":
+    return False
+
   return True
 
 # indicates if bindings for a method should be generated (returns True) or not (returns False)
@@ -451,14 +480,13 @@ def getCastMethodBindings(className, method):
   args = list(method.get_arguments())
   hasConstCharArg = any(any(x.spelling == "Standard_CString" for x in a.get_tokens()) for a in args)
   hasRefArg = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE for x in args)
-  hasRefRetVal = method.result_type.kind == clang.cindex.TypeKind.LVALUEREFERENCE
-  needReinterpretCast = hasConstCharArg or hasRefArg or hasRefRetVal
-  returnType = method.result_type.spelling if not hasRefRetVal else method.result_type.spelling[:-1] + "*"
+  needReinterpretCast = hasConstCharArg or hasRefArg
+  returnType = method.result_type.spelling
   const = "const" if method.is_const_method() else ""
   classQualifier = ( className + "::" if not method.is_static_method() else "" ) + "*"
   if needReinterpretCast:
     castedArgResults = list(map(getSingleArgumentBinding(False), args))
-    somethingChanged = any(map(lambda x: x[1], castedArgResults)) or hasRefRetVal
+    somethingChanged = any(map(lambda x: x[1], castedArgResults))
     castedArgTypes = list(map(lambda x: x[0], castedArgResults))
     if somethingChanged:
       return ["reinterpret_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
@@ -633,12 +661,18 @@ def isAbstractClass(theClass, allClasses):
   pureVirtualMethods = getPureVirtualMethods(theClass)
   if len(pureVirtualMethods) > 0:
     return True
-
-  for bc in baseClasses:
-    if isAbstractClass(bc, allClasses):
-      return True
   
-  return False
+  pvmsInBaseClasses = list(map(lambda x: getPureVirtualMethods(x), baseClasses))
+
+  numPureVirtualMethods = 0
+  numImplementedPureVirtualMethods = 0
+  for bc in pvmsInBaseClasses:
+    for bcPvm in bc:
+      numPureVirtualMethods += 1
+      if bcPvm.spelling in list(map(lambda x: x.spelling, list(theClass.get_children()))):
+        numImplementedPureVirtualMethods += 1
+  
+  return numPureVirtualMethods > numImplementedPureVirtualMethods
 
 # Generates bindings for all handle types. Handle types are typedef-specializations of the opencascade::handle<...> template class.
 # parameters:
