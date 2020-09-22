@@ -336,16 +336,5 @@ import time
 
 stopThread = False
 
-def printAliveSignal():
-  while not stopThread:
-    current_time = datetime.now().strftime("%H:%M:%S")
-    print("I'm alive! Current Time = " + str(current_time), flush=True)
-    time.sleep(15)
-  return True
-
 if __name__ == '__main__':
-  process = Thread(target=printAliveSignal)
-  process.start()
   build()
-  stopThread = True
-  process.join()
