@@ -46,4 +46,5 @@ COPY . .
 
 ENTRYPOINT \
   source /emscripten/emsdk_env.sh && \
+  bash -c "./patience.sh &" && \
   python3.8 make.py wasm > /dev/null 2>&1
