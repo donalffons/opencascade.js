@@ -34,9 +34,6 @@ RUN \
 
 RUN apt-get update -y && apt-get install -y libtinfo5
 
-WORKDIR /opencascade/
-COPY . .
-
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
 RUN apt update -y && apt upgrade -y && apt install -y gcc-10
 
@@ -44,6 +41,9 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ENV KILL_PROCESS_TIMEOUT=300
 ENV KILL_ALL_PROCESSES_TIMEOUT=300
 
+WORKDIR /opencascade/
+COPY . .
+
 ENTRYPOINT \
   source /emscripten/emsdk_env.sh && \
-  python3.8 make.py wasm
+  python3.8 make.py wasm > /dev/null 2>&1
