@@ -18,7 +18,7 @@ while true; do
         ;;
       2)
         echo "Building opencascade.js in docker container..."
-        docker run -it \
+        docker run --init -it \
           -v "$(pwd)/build/":"/opencascade/build/" \
           -v "$(pwd)/dist/":"/opencascade/dist/" \
           -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
@@ -28,7 +28,7 @@ while true; do
         ;;
       3)
         echo "Starting opencascade.js docker container with a terminal for development & debugging..."
-        docker run -it \
+        docker run --init -it \
           --entrypoint=/bin/bash \
           -v "$(pwd)/build/":"/opencascade/build/" \
           -v "$(pwd)/dist/":"/opencascade/dist/" \
