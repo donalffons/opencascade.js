@@ -4,10 +4,9 @@ start=`date +%s`
 
 while true
 do
-	echo "patience is a virtue"
   end=`date +%s`
   runtime=$((end-start))
-  echo $runtime
+	echo "patience is a virtue ${runtime}"
 
-  sleep 300
+  sleep 60
 done
