@@ -6,8 +6,8 @@ on:
 jobs:
   build:
     name: Build OpenCascade.js
-    runs-on: self-hosted
-    # runs-on: ubuntu-latest
+    # runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -60,6 +60,7 @@ jobs:
 
       # Build the docker container
       - name: Build OpenCascade.js Bindings
+        timeout-minutes: 200
         run: |
           docker run --init \
           -v "$(pwd)/build/":"/opencascade/build/" \
@@ -79,7 +80,7 @@ jobs:
       # Upload the build results in-case the push fails...
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v2
-        #if: ${{ always() }}
+        if: ${{ always() }}
         with:
           name: Build Products
           path: dist
