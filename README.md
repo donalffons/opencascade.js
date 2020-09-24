@@ -16,9 +16,9 @@ Current OCCT version: [V7_4_0p1](https://git.dev.opencascade.org/gitweb/?p=occt.
 
 ## Which parts of the OpenCascade library are supported?
 
-As of right now, we support 74.59% of all classes defined in OpenCascade.
+As of right now, we support 74% of all classes defined in OpenCascade.
 
-![](https://image-charts.com/chart?cht=p3&chs=700x250&chd=t:25.4,74.6&chl=Unsupported\n(25.4%)|Supported\n(74.6%)&chf=ps0-0,lg,45,ffeb3b,0.2,f44336,1|ps0-1,lg,45,8bc34a,0.2,009688,1)
+![](https://image-charts.com/chart?cht=p3&chs=700x250&chd=t:25.6,74.4&chl=Unsupported\n(25.4%)|Supported\n(74.6%)&chf=ps0-0,lg,45,ffeb3b,0.2,f44336,1|ps0-1,lg,45,8bc34a,0.2,009688,1)
 
 [Detailed list of supported classes](dist/Supported%20APIs.md)
 
