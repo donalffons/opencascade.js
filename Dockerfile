@@ -1,26 +1,21 @@
-FROM phusion/baseimage:bionic-1.0.0
-
-CMD ["/sbin/my_init"]
+FROM emscripten/emsdk:2.0.4
 
 RUN apt update -y
-RUN apt install -y build-essential python3.8 python3-pip git cmake bash curl npm
+RUN apt install -y build-essential python3 python3-pip git cmake bash curl npm
 
-RUN python3.8 -m pip install patch requests CppHeaderParser
-
-WORKDIR /emscripten/
-RUN git clone https://github.com/emscripten-core/emsdk.git .
+WORKDIR /python/
+RUN apt install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev
+RUN curl -O https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tar.xz
+RUN tar -xf Python-3.8.2.tar.xz
 RUN \
-  ./emsdk install 2.0.4 && \
-  ./emsdk activate 2.0.4
+  cd Python-3.8.2 && \
+  ./configure --enable-optimizations && \
+  make -j 12 && make altinstall
 
-SHELL ["/bin/bash", "-c"]
+RUN python3.8 -m pip install patch requests
 
 WORKDIR /clang/
 RUN python3.8 -m pip install -Iv clang==10.0.1
-RUN apt-get update && apt-get install -y \
- xz-utils \
- curl \
- && rm -rf /var/lib/apt/lists/*
 RUN curl -SL https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.0/clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz \
  | tar -xJC . && \
  mv clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04 clang_10 && \
@@ -32,14 +27,7 @@ RUN \
   cd clang_10/lib && \
   ln -s libclang.so.10 libclang-10.so
 
-RUN apt-get update -y && apt-get install -y libtinfo5
-
-RUN add-apt-repository ppa:ubuntu-toolchain-r/test
-RUN apt update -y && apt upgrade -y && apt install -y gcc-10
-
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-ENV KILL_PROCESS_TIMEOUT=300
-ENV KILL_ALL_PROCESSES_TIMEOUT=300
+RUN apt install -y libncurses5 libncurses6 libncurses5-dev libncursesw5-dev
 
 WORKDIR /opencascade/
 COPY . .

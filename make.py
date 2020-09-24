@@ -249,7 +249,7 @@ def build():
   stage('generate bindings...')
 
   os.chdir('../../embind')
-  subprocess.call(['./autobind.py'])
+  subprocess.call(['python3.8', './autobind.py'])
   os.chdir('../build')
   
   ######################################
@@ -333,8 +333,6 @@ def build():
 from threading import Thread
 from datetime import datetime
 import time
-
-stopThread = False
 
 if __name__ == '__main__':
   build()
