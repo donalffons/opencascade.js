@@ -6,7 +6,8 @@ on:
 jobs:
   build:
     name: Build OpenCascade.js
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+    # runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -21,16 +22,6 @@ jobs:
           cache-name: cache-build-intermediates
         with:
           path: ./build
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-2
-
-      # Attempt to Load Node Module Cache
-      - name: Cache Intermediate Node Products
-        id: cache-build-2
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-intermediates
-        with:
-          path: ./node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-2
 
       # Attempt to Load Emscripten Cache
@@ -60,48 +51,49 @@ jobs:
           username: donalffons
           password: "${{ secrets.GITHUB_TOKEN }}"
           image_name: opencascade.js
+          # build_extra_args: "--no-cache" # activate this if you want to disable the docker cache
           #image_tag: opencascade.js
 
       # Debug
       - name: Print Available Docker Images
         run: docker image ls
 
-      # Build the docker container
-      - name: Build OpenCascade.js Bindings
-        run: |
-          docker run \
-            -v "$(pwd)/build/":"/opencascade/build/" \
-            -v "$(pwd)/node_modules/":"/opencascade/node_modules/" \
-            -v "$(pwd)/dist/":"/opencascade/dist/" \
-            -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
-            my_awesome_image
-      # I'm not thrilled that this says my_awesome_image, but this is what works :(
+      # # Build the docker container
+      # - name: Build OpenCascade.js Bindings
+      #   timeout-minutes: 200
+      #   run: |
+      #     docker run --init \
+      #     -v "$(pwd)/build/":"/opencascade/build/" \
+      #     -v "$(pwd)/dist/":"/opencascade/dist/" \
+      #     -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
+      #     my_awesome_image
+      # # I'm not thrilled that this says my_awesome_image, but this is what works :(
 
-      # Debug
-      - name: Debug Print Files
-        run: |
-          ls
-          ls build
-          ls dist
-          ls emscripten-cache
-          ls node_modules
+      # # Debug
+      # - name: Debug Print Files
+      #   run: |
+      #     ls
+      #     ls build
+      #     ls dist
+      #     ls emscripten-cache
 
-      # Upload the build results in-case the push fails...
-      - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v2
-        #if: ${{ always() }}
-        with:
-          name: Build Products
-          path: dist
+      # # Upload the build results in-case the push fails...
+      # - name: Upload Build Artifacts
+      #   uses: actions/upload-artifact@v2
+      #   if: ${{ always() }}
+      #   with:
+      #     name: Build Products
+      #     path: dist
 
-      - name: Commit Build Artifacts in dist
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add dist/*
-          git diff-index --quiet HEAD || git commit -m "Build OpenCascade.js"
+      # - name: Commit Build Artifacts in dist
+      #   run: |
+      #     git config --local user.email "action@github.com"
+      #     git config --local user.name "GitHub Action"
+      #     git add dist/*
+      #     git diff-index --quiet HEAD || git commit -m "Build OpenCascade.js"
 
-      - name: Push Changes to Master
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Push Changes to branch
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ github.ref }}

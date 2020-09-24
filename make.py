@@ -6,6 +6,7 @@ import requests
 import shutil
 import sys
 import tarfile
+import subprocess
 from subprocess import Popen, PIPE, STDOUT
 
 stage_counter = 0
@@ -126,15 +127,24 @@ def stage(text):
 
 def build():
   this_dir = os.getcwd()
+
+  stage("clearing dist folder")
+  os.chdir('dist')
+  os.system("rm * -fr")
+  os.chdir('..')
+
   if not os.path.exists('build'):
     os.makedirs('build')
   os.chdir('build')
-  targetfile = "occt.tar.gz"
+
+  # stage("clearing build folder")
+  # os.system("rm * -fr")
 
   ######################################
-  if not os.path.exists('occt.tar.gz'):
+  targetfile = "occt.tar.gz"
+  if not os.path.exists(targetfile):
     stage("downloading OCCT...")
-    url = "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=fd47711d682be943f0e0a13d1fb54911b0499c31;sf=tgz"
+    url = "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=33d9a6fa21ca4fa711da7066655aa2ba854545ee;sf=tgz"
     myfile = requests.get(url, stream=True)
     open(targetfile, 'wb').write(myfile.content)
 
@@ -186,56 +196,12 @@ def build():
   stage("checking EMSCRIPTEN...")
   envEMSDK = os.environ.get('EMSDK')
   if not envEMSDK:
-    print("ERROR: envEMSDK environment variable not found")
+    print("ERROR: envEMSDK environment> variable not found")
     sys.exit(1)
   sys.path.append(os.path.join(envEMSDK, 'upstream', 'emscripten'))
   import tools.building as emscripten
-  
-  ######################################
-  stage("build settings...")
-  wasm = 'wasm' in sys.argv
-  closure = 'closure' in sys.argv
-  add_function_support = 'add_func' in sys.argv
-  args = '-std=c++1z -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
-  args += ' -O3'
-  args += ' --llvm-lto 3'
-  if add_function_support:
-    args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
-  if wasm:
-    args += ''' -s WASM=1'''
-  else:
-    args += ' -s WASM=0 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s SINGLE_FILE=1 -s LEGACY_VM_SUPPORT=1'
-  if closure:
-    args += ' --closure 1 -s IGNORE_CLOSURE_COMPILER_ERRORS=1'
-  else:
-    args += ' -s NO_DYNAMIC_EXECUTION=1'
-  emcc_args = args.split(' ')
-  emcc_args += ['-s', 'TOTAL_MEMORY=%d' % (64*1024*1024)]
-  emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1']
-  emcc_args += '-s EXPORT_NAME="opencascade"'.split(' ')
-  emcc_args += '-s MODULARIZE=1'.split(' ')
-  emcc_args += ['-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]']
-  emcc_args += ['-s', 'EXPORT_ES6=1']
-  emcc_args += ['-s', 'USE_ES6_IMPORT_META=0']
-  emcc_args += ['-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1']
 
-  # Debugging options
-  # emcc_args += ['-s', 'ASSERTIONS=2']
-  # emcc_args += ['-s', 'STACK_OVERFLOW_CHECK=1']
-  # emcc_args += ['-s', 'DEMANGLE_SUPPORT=1']
-  # emcc_args += ['-s', 'DISABLE_EXCEPTION_CATCHING=0']
-  # emcc_args += ['-g']
-
-  target = 'opencascade.js' if not wasm else 'opencascade.wasm.js'
-
-  ######################################
-  stage('generate bindings...')
-
-  Popen([emscripten.PYTHON, os.path.join(envEMSDK, 'upstream', 'emscripten', 'tools', 'webidl_binder.py'), os.path.join(this_dir, 'opencascade.idl'), 'glue']).communicate()
-  assert os.path.exists('glue.js')
-  assert os.path.exists('glue.cpp')
-
-  ######################################
+  #####################################
   stage('Build bindings')
 
   myincludes = [x[1] for x in os.walk(os.path.join('.', 'occt', 'src'))][0]
@@ -249,8 +215,6 @@ def build():
   args = copy.deepcopy(myincludes)
   for include in INCLUDES:
     args += ['-include', include]
-  emscripten.emcc('glue.cpp', args, 'glue.o')
-  assert(os.path.exists('glue.o'))
 
   if not os.path.exists('build'):
     os.makedirs('build')
@@ -271,21 +235,65 @@ def build():
       '-D3RDPARTY_INCLUDE_DIRS=../regal/regal-master/src/apitrace/thirdparty/khronos/\;../fontconfig/fontconfig-2.13.92',
       '-DUSE_GLES2=ON',
       '-DBUILD_MODULE_Draw=OFF',
-      '-DBUILD_ADDITIONAL_TOOLKITS=OFF',
-      '-DBUILD_MODULE_Visualization=OFF',
-      '-DBUILD_MODULE_ApplicationFramework=OFF'
+      '-DBUILD_ADDITIONAL_TOOLKITS=ON',
+      '-DBUILD_MODULE_Visualization=ON',
+      '-DBUILD_MODULE_ApplicationFramework=ON'
     ])
 
+  ###############
+  stage('Make')
+
+  CORES = multiprocessing.cpu_count()
+
   make_build = True
+
   if make_build:
-    stage('Make')
-
-    CORES = multiprocessing.cpu_count()
-
     emscripten.make(['make', '-j', str(CORES)])
+
+  ######################################
+  stage('generate bindings...')
+
+  os.chdir('../../embind')
+  subprocess.call(['python3.8', './autobind.py'])
+  os.chdir('../build')
+  
+  ######################################
+  stage("build settings...")
+  wasm = 'wasm' in sys.argv
+  closure = 'closure' in sys.argv
+  add_function_support = 'add_func' in sys.argv
+  args = '-std=c++1z -s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=["UTF8ToString"]'
+  args += ' -O3'
+  if add_function_support:
+    args += ' -s RESERVED_FUNCTION_POINTERS=20 -s EXTRA_EXPORTED_RUNTIME_METHODS=["addFunction"]'  
+  if wasm:
+    args += ''' -s WASM=1'''
+  else:
+    args += ' -s WASM=0 -s ELIMINATE_DUPLICATE_FUNCTIONS=1 -s SINGLE_FILE=1 -s LEGACY_VM_SUPPORT=1'
+  if closure:
+    args += ' --closure 1 -s IGNORE_CLOSURE_COMPILER_ERRORS=1'
+  else:
+    args += ' -s NO_DYNAMIC_EXECUTION=1'
+  emcc_args = args.split(' ')
+  emcc_args += ['-s', 'TOTAL_MEMORY=%d' % (64*1024*1024)]
+  emcc_args += ['-s', 'ALLOW_MEMORY_GROWTH=1']
+  emcc_args += '-s EXPORT_NAME="opencascade"'.split(' ')
+  emcc_args += '-s MODULARIZE=1'.split(' ')
+  emcc_args += ['-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]']
+  emcc_args += ['-s', 'EXPORT_ES6=1']
+  emcc_args += ['-s', 'USE_ES6_IMPORT_META=0']
+  emcc_args += ['-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1']
+  
+  # Debugging options
+  # emcc_args += ['-s', 'ASSERTIONS=2']
+  # emcc_args += ['-s', 'STACK_OVERFLOW_CHECK=1']
+  # emcc_args += ['-s', 'DEMANGLE_SUPPORT=1']
+  # emcc_args += ['-s', 'DISABLE_EXCEPTION_CATCHING=0']
+  # emcc_args += ['-g']
 
   stage('Link')
 
+  os.chdir('build')
   opencascade_libs = os.listdir(os.path.join('.', 'lin32', 'clang', 'lib'))
   opencascade_libs = [os.path.join('.', 'build', 'lin32', 'clang', 'lib', s) for s in opencascade_libs]
 
@@ -294,10 +302,20 @@ def build():
   if not os.path.exists('js'):
     os.makedirs('js')
 
+  target = 'opencascade.js' if not wasm else 'opencascade.wasm.js'
   temp = os.path.join('.', 'js', target)
-  emscripten.emcc('-DNOTHING_WAKA_WAKA', emcc_args + ['glue.o'] + opencascade_libs + myincludes[:len(myincludes)-2] + ['--js-transform', 'python %s' % os.path.join('..', 'bundle.py')], temp)
+  shutil.copytree(os.path.join('..', 'embind'), os.path.join('.', 'embind'), dirs_exist_ok=True)
 
-  assert os.path.exists(temp), 'Failed to create script code'
+  includePrefix = os.path.join(".", "occt", "src")
+  includePaths = os.listdir(includePrefix)
+  includeArgs = [
+    '-I' + os.path.join('.', 'occt', 'src'),
+  ]
+  for path in includePaths:
+    includeArgs.append('-I' + os.path.join(".", includePrefix, path))
+
+  emccArgs = ['--bind'] + includeArgs + opencascade_libs + emcc_args
+  emscripten.emcc(os.path.join('.', 'bindings.cpp'), emccArgs, temp)
 
   stage('wrap')
 
@@ -306,14 +324,20 @@ def build():
 ''' + open(temp).read()
 
   open(temp, 'w').write(wrapped)
+  
+  os.chdir("..")
+  if not os.path.exists('dist'):
+    os.makedirs('dist')
 
-  os.chdir('..')
   if not wasm:
     shutil.copyfile(os.path.join('build', 'js', 'opencascade.js'), os.path.join('dist', 'opencascade.js'))
   else:
     shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.js'), os.path.join('dist', 'opencascade.wasm.js'))
     shutil.copyfile(os.path.join('build', 'js', 'opencascade.wasm.wasm'), os.path.join('dist', 'opencascade.wasm.wasm'))
 
+from threading import Thread
+from datetime import datetime
+import time
+
 if __name__ == '__main__':
   build()
-
