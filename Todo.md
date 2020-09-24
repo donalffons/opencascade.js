@@ -6,11 +6,11 @@
 * Allow for manual definitions of types for manually defined bindings
 * Add comments to typescript definitions
 
-## 2. Modularization / Dynamic Libraries (breaking changes)
+## 2. Modularization / Dynamic Libraries (potentially breaking changes)
 
 * Emscripten supports wasm-modules. Wasm-modules are separate wasm-files that can be loaded dynamically at run-time to add desired functionality.
 * As more and more parts of the opencascade library are exported, the file size will grow bigger and bigger. The size of all static library files of the optimized emscripten-compiled opencascade library (in the `build/build/lin32/clang/lib` folder) is currently 187.6 MiB. This is probably the rough order of magnitude for the emscripten-compiled wasm-version of the library. This is far too much for most web-applications.
-* To be able to use dynamic libraries, the initialization of the library (i.e. `new opencascade()`) must take place in a web-worker. Initializing the library in the main-thread will result in an error in Chrome and probably all major browsers. In most real-world applications, it would make sense to run openCascade computations in a separate worker-thread anyways. The additional complexity for setting this up should be kept at a minimum.
+* To be able to use dynamic libraries, the initialization of the library (i.e. `new opencascade()`) must(?) take place in a web-worker. Using Emscripten`s `dynamicLibraries` array when initializing on the main-thread will result in an error in Chrome and probably all major browsers (maybe there is a workaround?). In most real-world applications, it would make sense to run openCascade computations in a separate worker-thread anyways. The additional complexity for setting this up should be kept at a minimum.
 * It should be possible to select which parts of opencascade to load at run-time of the web application. The library therefore has to be broken up into separate modules.
 * Probably, it would be a good idea to have one module for each folder in `build/occt/src`.
 * It would be great, if the user of this library could chose between debug and release version of the library.
