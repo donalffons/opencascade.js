@@ -678,7 +678,8 @@ def isAbstractClass(theClass, allClasses):
 #   children (list of libclang objects): all libclang objects
 # returns:
 #   None
-def generateHandleTypeBindings(outputFile, children):
+def getHandleTypeBindings(children):
+  bindingsOutput = ""
   print("generating bindings for handle types...")
 
   handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle") and x.spelling.startswith("Handle_"), children))
@@ -693,17 +694,17 @@ def generateHandleTypeBindings(outputFile, children):
 
     handleName = handleTypedef.spelling
     targetType = handleTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
-    outputFile.write("  class_<" + handleName + ">(\"" + handleName + "\")" + os.linesep)
-    outputFile.write("    .function(\"Nullify\", &" + handleName + "::Nullify)" + os.linesep)
-    outputFile.write("    .function(\"IsNull\", &" + handleName + "::IsNull)" + os.linesep)
-    outputFile.write("    .function(\"reset\", &" + handleName + "::reset, allow_raw_pointers())" + os.linesep)
-    outputFile.write("    .function(\"operator_assign_1\", select_overload<" + handleName + "&(const " + handleName + "&)>(&" + handleName + "::operator=))" + os.linesep)
-    outputFile.write("    .function(\"operator_assign_2\", select_overload<" + handleName + "&(const " + targetType + "*)>(&" + handleName + "::operator=), allow_raw_pointers())" + os.linesep)
-    outputFile.write("    .function(\"operator_assign_3\", select_overload<" + handleName + "&(" + handleName + "&&)>(&" + handleName + "::operator=))" + os.linesep)
-    outputFile.write("    .function(\"get\", select_overload<" + targetType + "*()const>(&" + handleName + "::get), allow_raw_pointers())" + os.linesep)
-    outputFile.write("    .function(\"operator_dereference\", &" + handleName + "::operator->, allow_raw_pointers())" + os.linesep)
-    outputFile.write("    .function(\"operator_bool\", &" + handleName + "::operator bool)" + os.linesep)
-    outputFile.write("  ;" + os.linesep)
+    bindingsOutput += "  class_<" + handleName + ">(\"" + handleName + "\")" + os.linesep
+    bindingsOutput += "    .function(\"Nullify\", &" + handleName + "::Nullify)" + os.linesep
+    bindingsOutput += "    .function(\"IsNull\", &" + handleName + "::IsNull)" + os.linesep
+    bindingsOutput += "    .function(\"reset\", &" + handleName + "::reset, allow_raw_pointers())" + os.linesep
+    bindingsOutput += "    .function(\"operator_assign_1\", select_overload<" + handleName + "&(const " + handleName + "&)>(&" + handleName + "::operator=))" + os.linesep
+    bindingsOutput += "    .function(\"operator_assign_2\", select_overload<" + handleName + "&(const " + targetType + "*)>(&" + handleName + "::operator=), allow_raw_pointers())" + os.linesep
+    bindingsOutput += "    .function(\"operator_assign_3\", select_overload<" + handleName + "&(" + handleName + "&&)>(&" + handleName + "::operator=))" + os.linesep
+    bindingsOutput += "    .function(\"get\", select_overload<" + targetType + "*()const>(&" + handleName + "::get), allow_raw_pointers())" + os.linesep
+    bindingsOutput += "    .function(\"operator_dereference\", &" + handleName + "::operator->, allow_raw_pointers())" + os.linesep
+    bindingsOutput += "    .function(\"operator_bool\", &" + handleName + "::operator bool)" + os.linesep
+    bindingsOutput += "  ;" + os.linesep
 
     class Object(object):
       def get_arguments(self):
@@ -747,9 +748,11 @@ def generateHandleTypeBindings(outputFile, children):
     oc3arg1.children = []
     oc3.arguments = [oc3arg1]
 
-    outputFile.write(getOverloadedConstructorsBinding(handleName, [
+    bindingsOutput += getOverloadedConstructorsBinding(handleName, [
       oc1, oc2, oc3
-    ]))
+    ])
+
+  return [bindingsOutput]
 
 # Generates bindings for all classes (with some exceptions).
 # parameters:
@@ -757,10 +760,12 @@ def generateHandleTypeBindings(outputFile, children):
 #   outputFile (python file object): output file
 # returns:
 #   None
-def generateClassBindings(newChildren, outputFile, outputDocFile):
+def getClassBindings(newChildren):
   global numExportedClasses, numIgnoredClasses
+  bindingsOutput = ""
+  epilogOutput = ""
+  docsOutput = ""
   print("generating bindings for classes...")
-  epilog = ""
   for o in newChildren:
     if o.kind == clang.cindex.CursorKind.CLASS_DECL:
       theClass = o
@@ -768,16 +773,16 @@ def generateClassBindings(newChildren, outputFile, outputDocFile):
       successfulBinding = False
       if processClass(theClass):
         try:
-          outputFile.write(getClassBinding(theClass.spelling, list(theClass.get_children())))
-          outputDocFile.write("### ![](https://bit.ly/2El7GLC) `" + theClass.spelling + "`" + os.linesep + os.linesep)
+          bindingsOutput += getClassBinding(theClass.spelling, list(theClass.get_children()))
+          docsOutput += "### ![](https://bit.ly/2El7GLC) `" + theClass.spelling + "`" + os.linesep + os.linesep
           abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
           if not abstract:
-            outputFile.write(getSimpleConstructorBinding(list(theClass.get_children())))
-          outputFile.write(getMethodsBinding(theClass.spelling, list(theClass.get_children())))
-          outputFile.write("  ;" + os.linesep)
+            bindingsOutput += getSimpleConstructorBinding(list(theClass.get_children()))
+          bindingsOutput += getMethodsBinding(theClass.spelling, list(theClass.get_children()))
+          bindingsOutput += "  ;" + os.linesep
           if not abstract:
-            outputFile.write(getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children())))
-          epilog += getEpilogForClass(theClass)
+            bindingsOutput += getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children()))
+          epilogOutput += getEpilogForClass(theClass)
           numExportedClasses += 1
           successfulBinding = True
         except MultipleBaseClassException as e:
@@ -785,8 +790,12 @@ def generateClassBindings(newChildren, outputFile, outputDocFile):
 
       if not successfulBinding:
         numIgnoredClasses += 1
-        outputDocFile.write("### ![](https://bit.ly/3hIVfqr) `" + theClass.spelling + "`" + os.linesep + os.linesep)
-  return epilog
+        docsOutput += "### ![](https://bit.ly/3hIVfqr) `" + theClass.spelling + "`" + os.linesep + os.linesep
+  return [
+    bindingsOutput,
+    epilogOutput,
+    docsOutput
+  ]
 
 # Generates bindings for all enums
 # parameters:
@@ -794,16 +803,18 @@ def generateClassBindings(newChildren, outputFile, outputDocFile):
 #   outputFile (python file object): output file
 # returns:
 #   None
-def generateEnumBindings(newChildren, outputFile):
+def getEnumBindings(newChildren):
+  bindingsOutput = ""
   print("generating bindings for enums...")
   for enum in newChildren:
     if enum.kind == clang.cindex.CursorKind.ENUM_DECL:
       if not processEnum(enum):
         continue
-      outputFile.write("  enum_<" + enum.spelling + ">(\"" + enum.spelling + "\")" + os.linesep)
+      bindingsOutput += "  enum_<" + enum.spelling + ">(\"" + enum.spelling + "\")" + os.linesep
       for enumChild in list(enum.get_children()):
-        outputFile.write("    .value(\"" + enumChild.spelling + "\", " + enum.spelling + "::" + enumChild.spelling + ")" + os.linesep)
-      outputFile.write("  ;" + os.linesep)
+        bindingsOutput += "    .value(\"" + enumChild.spelling + "\", " + enum.spelling + "::" + enumChild.spelling + ")" + os.linesep
+      bindingsOutput += "  ;" + os.linesep
+  return [bindingsOutput]
 
 # The entry point of the auto-binding algorithm.
 # parameters:
@@ -874,12 +885,16 @@ using namespace emscripten;
       newChildren.append(child)
   newChildren = sorted(newChildren, key=lambda x: x.spelling)
 
-  epilog = generateClassBindings(newChildren, outputFile, outputDocFile)
-  generateHandleTypeBindings(outputFile, children)
-  generateEnumBindings(newChildren, outputFile)
+  classBindingsOutput, classEpilogOutput, classDocsOutput = getClassBindings(newChildren)
+  outputFile.write(classBindingsOutput)
+  outputDocFile.write(classDocsOutput)
+  handleBindingsOutput = getHandleTypeBindings(children)[0]
+  outputFile.write(handleBindingsOutput)
+  enumBindingsOutput = getEnumBindings(newChildren)[0]
+  outputFile.write(enumBindingsOutput)
 
   outputFile.write("}" + os.linesep + os.linesep)
-  outputFile.write(epilog)
+  outputFile.write(classEpilogOutput)
 
 main()
 print("numExportedClasses: " + str(numExportedClasses) + " (" + str(numExportedClasses/(numExportedClasses+numIgnoredClasses)*100) + "%)")
