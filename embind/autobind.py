@@ -770,7 +770,6 @@ def isAbstractClass(theClass, allClasses):
 
 # Generates bindings for all handle types. Handle types are typedef-specializations of the opencascade::handle<...> template class.
 # parameters:
-#   outputFile (python file object): output file
 #   children (list of libclang objects): all libclang objects
 # returns:
 #   None
@@ -853,7 +852,6 @@ def getHandleTypeBindings(children):
 # Generates bindings for all classes (with some exceptions).
 # parameters:
 #   newChildren (list of libclang objects): all libclang objects
-#   outputFile (python file object): output file
 # returns:
 #   None
 def getClassBindings(newChildren):
@@ -896,7 +894,6 @@ def getClassBindings(newChildren):
 # Generates bindings for all enums
 # parameters:
 #   newChildren (list of libclang objects): all libclang objects
-#   outputFile (python file object): output file
 # returns:
 #   None
 def getEnumBindings(newChildren):
@@ -963,15 +960,16 @@ This list only lists class definitions. It does not contain information about:
 ## List of supported API's
 
   ''')
-  outputFile = open("../build/bindings.cpp", "w")
-  outputFile.write(includeDirectives + os.linesep)
-  preamble = '''
+  bindingsFile = open("../build/bindings.cpp", "w")
+  bindingsFile.write(includeDirectives + '''
+
 #include <emscripten/bind.h>
 using namespace emscripten;
-  '''
-  outputFile.write(preamble + os.linesep)
-  outputFile.write("EMSCRIPTEN_BINDINGS(opencascadejs) {" + os.linesep)
-  outputFile.write("#include \"../embind/manualBindings.h\"" + os.linesep)
+
+EMSCRIPTEN_BINDINGS(opencascadejs) {
+  #include \"../embind/manualBindings.h\"
+
+''')
 
   print("filtering, sorting...")
   children = list(tu.cursor.get_children())
@@ -984,15 +982,15 @@ using namespace emscripten;
   newChildren = sorted(newChildren, key=lambda x: x.spelling)
 
   classBindingsOutput, classEpilogOutput, classDocsOutput = getClassBindings(newChildren)
-  outputFile.write(classBindingsOutput)
+  bindingsFile.write(classBindingsOutput)
   outputDocFile.write(classDocsOutput)
   handleBindingsOutput = getHandleTypeBindings(children)[0]
-  outputFile.write(handleBindingsOutput)
+  bindingsFile.write(handleBindingsOutput)
   enumBindingsOutput = getEnumBindings(newChildren)[0]
-  outputFile.write(enumBindingsOutput)
+  bindingsFile.write(enumBindingsOutput)
 
-  outputFile.write("}" + os.linesep + os.linesep)
-  outputFile.write(classEpilogOutput)
+  bindingsFile.write("}" + os.linesep + os.linesep)
+  bindingsFile.write(classEpilogOutput)
 
 main()
 print("numExportedClasses: " + str(numExportedClasses) + " (" + str(numExportedClasses/(numExportedClasses+numIgnoredClasses)*100) + "%)")
