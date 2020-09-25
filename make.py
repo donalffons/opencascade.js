@@ -310,6 +310,7 @@ def build():
   includePaths = os.listdir(includePrefix)
   includeArgs = [
     '-I' + os.path.join('.', 'occt', 'src'),
+    '-I' + os.path.join('.', 'regal', 'regal-master', 'src', 'apitrace', 'thirdparty', 'khronos')
   ]
   for path in includePaths:
     includeArgs.append('-I' + os.path.join(".", includePrefix, path))
