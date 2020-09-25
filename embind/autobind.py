@@ -130,6 +130,10 @@ def processIncludeFile(filename):
 # returns:
 #   bool
 def processClass(theClass):
+  if theClass.spelling.startswith("BRep"):
+    return True
+  return False
+
   # error: undefined symbol: FT_Done_Face and many more
   if theClass.spelling.startswith("F") :
     return False
@@ -558,11 +562,16 @@ def getClassBinding(className, children):
     raise MultipleBaseClassException("cannot handle multiple base classes (" + className + ")")
 
   if len(baseSpec) > 0:
-    baseClass = ", base<" + baseSpec[0].type.spelling + ">"
+    baseClassBinding = ", base<" + baseSpec[0].type.spelling + ">"
+    baseClassType = " extends " + baseSpec[0].type.spelling + " "
   else:
-    baseClass = ""
+    baseClassBinding = ""
+    baseClassType = ""
 
-  return "  class_<" + className + baseClass + ">(\"" + className + "\")" + os.linesep
+  return [
+    "  class_<" + className + baseClassBinding + ">(\"" + className + "\")" + os.linesep,
+    "  class " + className + baseClassType + "{" + os.linesep
+  ]
 
 # Generates cast bindings for a method. Some methods neet to be reinterpret_cast'd or static_cast'd
 # parameters:
@@ -684,15 +693,22 @@ def getMethodsBinding(className, children):
 def getSimpleConstructorBinding(children):
   constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR, children))
   if len(constructors) == 0:
-    return "    .constructor<>()" + os.linesep
+    return [
+      "    .constructor<>()" + os.linesep,
+      "    constructor();" + os.linesep
+    ]
   publicConstructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(publicConstructors) == 0 or len(publicConstructors) > 1:
-    return ""
+    return ["", ""]
   standardConstructor = publicConstructors[0]
   if not standardConstructor:
-    return ""
-  argTypes = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
-  return "    .constructor<" + argTypes + ">()" + os.linesep
+    return ["", ""]
+  argTypesBindings = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
+  argsTypes = ", ".join(list(map(lambda x: x.spelling + ": " + x.type.spelling.replace("&", "").replace("*", "").replace("const", "").strip(), list(standardConstructor.get_arguments()))))
+  return [
+    "    .constructor<" + argTypesBindings + ">()" + os.linesep,
+    "    constructor(" + argsTypes + ");" + os.linesep
+  ]
 
 # Generates bindings for all overloaded constructors. Overloaded constructors are represented by deriving sub-classes from the parentClass (named parentClass_1, for example) and implementing only the given overloaded constructor as the default / simple constructor.
 # parameters:
@@ -859,6 +875,7 @@ def getClassBindings(newChildren):
   bindingsOutput = ""
   epilogOutput = ""
   docsOutput = ""
+  classTypeOutput = ""
   print("generating bindings for classes...")
   for o in newChildren:
     if o.kind == clang.cindex.CursorKind.CLASS_DECL:
@@ -867,13 +884,18 @@ def getClassBindings(newChildren):
       successfulBinding = False
       if processClass(theClass):
         try:
-          bindingsOutput += getClassBinding(theClass.spelling, list(theClass.get_children()))
+          classBinding, classType = getClassBinding(theClass.spelling, list(theClass.get_children()))
+          bindingsOutput += classBinding
+          classTypeOutput += classType
           docsOutput += "### ![](https://bit.ly/2El7GLC) `" + theClass.spelling + "`" + os.linesep + os.linesep
           abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
           if not abstract:
-            bindingsOutput += getSimpleConstructorBinding(list(theClass.get_children()))
+            constructorBinding, constructorType = getSimpleConstructorBinding(list(theClass.get_children()))
+            bindingsOutput += constructorBinding
+            classTypeOutput += constructorType
           bindingsOutput += getMethodsBinding(theClass.spelling, list(theClass.get_children()))
           bindingsOutput += "  ;" + os.linesep
+          classTypeOutput += "  }" + os.linesep
           if not abstract:
             bindingsOutput += getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children()))
           epilogOutput += getEpilogForClass(theClass)
@@ -888,7 +910,8 @@ def getClassBindings(newChildren):
   return [
     bindingsOutput,
     epilogOutput,
-    docsOutput
+    docsOutput,
+    classTypeOutput
   ]
 
 # Generates bindings for all enums
@@ -946,8 +969,8 @@ def main():
 
   print("creating bindings...")
   outputDocFile = open("../dist/Supported APIs.md", "w")
-  outputDocFile.write('''
-# OpenCascade.js Supported APIs
+  outputDocFile.write(
+'''# OpenCascade.js Supported APIs
 
 This is an overview over the currently supported parts of the OpenCascade API. Supported items are marked in green. Unsupported items are marked in red. All bindings listed here are created automatically. We are working hard on increasing support for as much as possible of the OpenCascade API.
 
@@ -959,15 +982,37 @@ This list only lists class definitions. It does not contain information about:
 
 ## List of supported API's
 
-  ''')
+''')
   bindingsFile = open("../build/bindings.cpp", "w")
-  bindingsFile.write(includeDirectives + '''
-
+  bindingsFile.write(includeDirectives +
+'''
 #include <emscripten/bind.h>
 using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(opencascadejs) {
   #include \"../embind/manualBindings.h\"
+
+''')
+  typescriptFile = open("../dist/opencascade.d.ts", "w")
+  typescriptFile.write(
+'''export default opencascade;
+declare function opencascade<T>(target?: T): Promise<T & typeof opencascade>;
+declare module opencascade {
+  function destroy(obj: any): void;
+  function _malloc(size: number): number;
+  function _free(ptr: number): void;
+  const HEAP8: Int8Array;
+  const HEAP16: Int16Array;
+  const HEAP32: Int32Array;
+  const HEAPU8: Uint8Array;
+  const HEAPU16: Uint16Array;
+  const HEAPU32: Uint32Array;
+  const HEAPF32: Float32Array;
+  const HEAPF64: Float64Array;
+  type Standard_Real = number;
+  type Standard_Boolean = boolean;
+  type Standard_Integer = number;
+  type Standard_CString = string;
 
 ''')
 
@@ -981,14 +1026,16 @@ EMSCRIPTEN_BINDINGS(opencascadejs) {
       newChildren.append(child)
   newChildren = sorted(newChildren, key=lambda x: x.spelling)
 
-  classBindingsOutput, classEpilogOutput, classDocsOutput = getClassBindings(newChildren)
+  classBindingsOutput, classEpilogOutput, classDocsOutput, classTypeOutput = getClassBindings(newChildren)
   bindingsFile.write(classBindingsOutput)
+  typescriptFile.write(classTypeOutput)
   outputDocFile.write(classDocsOutput)
-  handleBindingsOutput = getHandleTypeBindings(children)[0]
-  bindingsFile.write(handleBindingsOutput)
-  enumBindingsOutput = getEnumBindings(newChildren)[0]
-  bindingsFile.write(enumBindingsOutput)
+  # handleBindingsOutput = getHandleTypeBindings(children)[0]
+  # bindingsFile.write(handleBindingsOutput)
+  # enumBindingsOutput = getEnumBindings(newChildren)[0]
+  # bindingsFile.write(enumBindingsOutput)
 
+  typescriptFile.write("}" + os.linesep)
   bindingsFile.write("}" + os.linesep + os.linesep)
   bindingsFile.write(classEpilogOutput)
 
