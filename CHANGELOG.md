@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.2
+* added constructors for `TColgp_Array1OfPnt` as manual bindings
+
+## v1.0.1
+* Updated builds
+
 ## v1.0.0
 * First version using Embind and automatically generated bindings.
 * Lots of breaking changes in this version. Most notably:
