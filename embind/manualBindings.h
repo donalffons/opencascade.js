@@ -107,6 +107,24 @@ class_<TColgp_Array1OfPnt>("TColgp_Array1OfPnt")
   .function("SetValue", &TColgp_Array1OfPnt::SetValue)
   .function("Resize", &TColgp_Array1OfPnt::Resize)
 ;
+  struct TColgp_Array1OfPnt_1 : public TColgp_Array1OfPnt {
+    TColgp_Array1OfPnt_1() : TColgp_Array1OfPnt() {}
+  };
+  class_<TColgp_Array1OfPnt_1, base<TColgp_Array1OfPnt>>("TColgp_Array1OfPnt_1")
+    .constructor<>()
+  ;
+  struct TColgp_Array1OfPnt_2 : public TColgp_Array1OfPnt {
+    TColgp_Array1OfPnt_2(const Standard_Integer theLower, const Standard_Integer theUpper) : TColgp_Array1OfPnt(theLower, theUpper) {}
+  };
+  class_<TColgp_Array1OfPnt_2, base<TColgp_Array1OfPnt>>("TColgp_Array1OfPnt_2")
+    .constructor<const Standard_Integer, const Standard_Integer>()
+  ;
+  struct TColgp_Array1OfPnt_3 : public TColgp_Array1OfPnt {
+    TColgp_Array1OfPnt_3(const TColgp_Array1OfPnt& theOther) : TColgp_Array1OfPnt(theOther) {}
+  };
+  class_<TColgp_Array1OfPnt_3, base<TColgp_Array1OfPnt>>("TColgp_Array1OfPnt_3")
+    .constructor<const TColgp_Array1OfPnt&>()
+  ;
 
 class_<Poly_Array1OfTriangle>("Poly_Array1OfTriangle")
   .function("begin", &Poly_Array1OfTriangle::begin)
