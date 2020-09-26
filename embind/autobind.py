@@ -849,13 +849,13 @@ def getHandleTypeBindings(children):
 
   return [bindingsOutput]
 
-def getTColStd_Array1OfTypeBindings(children):
+def getNCollection_Array1TypeBindings(children):
   bindingsOutput = ""
-  print("generating bindings for TColStd_Array1Of types...")
-  tColStd_ArrayOfTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.spelling.startswith("TColStd_Array1Of"), children))
-  for tColStd_ArrayOfTypedef in tColStd_ArrayOfTypedefs:
-    theName = tColStd_ArrayOfTypedef.spelling
-    theType = tColStd_ArrayOfTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
+  print("generating bindings for NCollection_Array1 types...")
+  nCollection_Array1Typedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("NCollection_Array1"), children))
+  for nCollection_Array1Typedef in nCollection_Array1Typedefs:
+    theName = nCollection_Array1Typedef.spelling
+    theType = nCollection_Array1Typedef.underlying_typedef_type.get_template_argument_type(0).spelling
     bindingsOutput += "  class_<" + theName + ">(\"" + theName + "\")" + os.linesep
     bindingsOutput += "    .function(\"begin\", &" + theName + "::begin)" + os.linesep
     bindingsOutput += "    .function(\"end\", &" + theName + "::end)" + os.linesep
@@ -1103,8 +1103,8 @@ EMSCRIPTEN_BINDINGS(opencascadejs) {
   bindingsFile.write(handleBindingsOutput)
   enumBindingsOutput = getEnumBindings(newChildren)[0]
   bindingsFile.write(enumBindingsOutput)
-  tColStd_Array1OfBindingsOutput = getTColStd_Array1OfTypeBindings(children)[0]
-  bindingsFile.write(tColStd_Array1OfBindingsOutput)
+  nCollection_Array1BindingsOutput = getNCollection_Array1TypeBindings(children)[0]
+  bindingsFile.write(nCollection_Array1BindingsOutput)
 
   bindingsFile.write("}" + os.linesep + os.linesep)
   bindingsFile.write(classEpilogOutput)
