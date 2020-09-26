@@ -58,6 +58,9 @@ jobs:
       - name: Print Available Docker Images
         run: docker image ls
 
+      - name: test
+        run: ls -al
+
       # # Build the docker container
       # - name: Build OpenCascade.js Bindings
       #   timeout-minutes: 200
