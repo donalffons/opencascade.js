@@ -768,6 +768,14 @@ def isAbstractClass(theClass, allClasses):
   
   return numPureVirtualMethods > numImplementedPureVirtualMethods
 
+class overloadedConstrutorObject(object):
+  def get_arguments(self):
+    return self.arguments
+  def get_tokens(self):
+    return self.tokens
+  def get_children(self):
+    return self.children
+
 # Generates bindings for all handle types. Handle types are typedef-specializations of the opencascade::handle<...> template class.
 # parameters:
 #   children (list of libclang objects): all libclang objects
@@ -801,42 +809,34 @@ def getHandleTypeBindings(children):
     bindingsOutput += "    .function(\"operator_bool\", &" + handleName + "::operator bool)" + os.linesep
     bindingsOutput += "  ;" + os.linesep
 
-    class Object(object):
-      def get_arguments(self):
-        return self.arguments
-      def get_tokens(self):
-        return self.tokens
-      def get_children(self):
-        return self.children
-
-    oc1 = Object()
+    oc1 = overloadedConstrutorObject()
     oc1.spelling = handleName
     oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
     oc1.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
     oc1.arguments = []
 
-    oc2 = Object()
+    oc2 = overloadedConstrutorObject()
     oc2.spelling = handleName
     oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
     oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
-    oc2arg1type = Object()
+    oc2arg1type = overloadedConstrutorObject()
     oc2arg1type.spelling = "const " + targetType + "*"
     oc2arg1type.kind = None
-    oc2arg1 = Object()
+    oc2arg1 = overloadedConstrutorObject()
     oc2arg1.type = oc2arg1type
     oc2arg1.spelling = "thePtr"
     oc2arg1.tokens = []
     oc2arg1.children = []
     oc2.arguments = [oc2arg1]
 
-    oc3 = Object()
+    oc3 = overloadedConstrutorObject()
     oc3.spelling = handleName
     oc3.kind = clang.cindex.CursorKind.CONSTRUCTOR
     oc3.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
-    oc3arg1type = Object()
+    oc3arg1type = overloadedConstrutorObject()
     oc3arg1type.spelling = "const " + handleName + "&"
     oc3arg1type.kind = None
-    oc3arg1 = Object()
+    oc3arg1 = overloadedConstrutorObject()
     oc3arg1.type = oc3arg1type
     oc3arg1.spelling = "theHandle"
     oc3arg1.tokens = []
@@ -847,6 +847,120 @@ def getHandleTypeBindings(children):
       oc1, oc2, oc3
     ])
 
+  return [bindingsOutput]
+
+def getTColStd_Array1OfTypeBindings(children):
+  bindingsOutput = ""
+  tColStd_ArrayOfTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.spelling.startswith("TColStd_Array1Of"), children))
+  for tColStd_ArrayOfTypedef in tColStd_ArrayOfTypedefs:
+    theName = tColStd_ArrayOfTypedef.spelling
+    theType = tColStd_ArrayOfTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
+    bindingsOutput += "  class_<" + theName + ">(\"" + theName + "\")" + os.linesep
+    bindingsOutput += "    .function(\"begin\", &" + theName + "::begin)" + os.linesep
+    bindingsOutput += "    .function(\"end\", &" + theName + "::end)" + os.linesep
+    bindingsOutput += "    .function(\"cbegin\", &" + theName + "::cbegin)" + os.linesep
+    bindingsOutput += "    .function(\"cend\", &" + theName + "::cend)" + os.linesep
+    bindingsOutput += "    .function(\"Init\", &" + theName + "::Init)" + os.linesep
+    bindingsOutput += "    .function(\"Size\", &" + theName + "::Size)" + os.linesep
+    bindingsOutput += "    .function(\"Length\", &" + theName + "::Length)" + os.linesep
+    bindingsOutput += "    .function(\"IsEmpty\", &" + theName + "::IsEmpty)" + os.linesep
+    bindingsOutput += "    .function(\"Lower\", &" + theName + "::Lower)" + os.linesep
+    bindingsOutput += "    .function(\"Upper\", &" + theName + "::Upper)" + os.linesep
+    bindingsOutput += "    .function(\"IsDeletable\", &" + theName + "::IsDeletable)" + os.linesep
+    bindingsOutput += "    .function(\"IsAllocated\", &" + theName + "::IsAllocated)" + os.linesep
+    bindingsOutput += "    .function(\"Assign\", &" + theName + "::Assign)" + os.linesep
+    bindingsOutput += "    .function(\"Move\", &" + theName + "::Move)" + os.linesep
+    bindingsOutput += "    // .function(\"operator_assign\", &" + theName + "::operator=)" + os.linesep
+    bindingsOutput += "    .function(\"First\", &" + theName + "::First)" + os.linesep
+    bindingsOutput += "    .function(\"ChangeFirst\", &" + theName + "::ChangeFirst)" + os.linesep
+    bindingsOutput += "    .function(\"Last\", &" + theName + "::Last)" + os.linesep
+    bindingsOutput += "    .function(\"ChangeLast\", &" + theName + "::ChangeLast)" + os.linesep
+    bindingsOutput += "    .function(\"Value\", &" + theName + "::Value)" + os.linesep
+    bindingsOutput += "    // .function(\"operator()_1\", ...)" + os.linesep
+    bindingsOutput += "    // .function(\"operator[]_1\", ...)" + os.linesep
+    bindingsOutput += "    .function(\"ChangeValue\", &" + theName + "::ChangeValue)" + os.linesep
+    bindingsOutput += "    // .function(\"operator()_2\", ...)" + os.linesep
+    bindingsOutput += "    // .function(\"operator[]_2\", ...)" + os.linesep
+    bindingsOutput += "    .function(\"SetValue\", &" + theName + "::SetValue)" + os.linesep
+    bindingsOutput += "    .function(\"Resize\", &" + theName + "::Resize)" + os.linesep
+    bindingsOutput += "  ;" + os.linesep
+
+    oc1 = overloadedConstrutorObject()
+    oc1.spelling = theName
+    oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc1.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc1.arguments = []
+
+    oc2 = overloadedConstrutorObject()
+    oc2.spelling = theName
+    oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc2arg1type = overloadedConstrutorObject()
+    oc2arg1type.spelling = "const Standard_Integer"
+    oc2arg1type.kind = None
+    oc2arg1 = overloadedConstrutorObject()
+    oc2arg1.type = oc2arg1type
+    oc2arg1.spelling = "theLower"
+    oc2arg1.tokens = []
+    oc2arg1.children = []
+    oc2arg2type = overloadedConstrutorObject()
+    oc2arg2type.spelling = "const Standard_Integer"
+    oc2arg2type.kind = None
+    oc2arg2 = overloadedConstrutorObject()
+    oc2arg2.type = oc2arg2type
+    oc2arg2.spelling = "theUpper"
+    oc2arg2.tokens = []
+    oc2arg2.children = []
+    oc2.arguments = [oc2arg1, oc2arg2]
+
+    oc3 = overloadedConstrutorObject()
+    oc3.spelling = theName
+    oc3.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc3.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc3arg1type = overloadedConstrutorObject()
+    oc3arg1type.spelling = "const " + theName + "&"
+    oc3arg1type.kind = None
+    oc3arg1 = overloadedConstrutorObject()
+    oc3arg1.type = oc3arg1type
+    oc3arg1.spelling = "theOther"
+    oc3arg1.tokens = []
+    oc3arg1.children = []
+    oc3.arguments = [oc3arg1]
+
+    oc4 = overloadedConstrutorObject()
+    oc4.spelling = theName
+    oc4.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc4.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc4arg1type = overloadedConstrutorObject()
+    oc4arg1type.spelling = "const " + theType + "&"
+    oc4arg1type.kind = None
+    oc4arg1 = overloadedConstrutorObject()
+    oc4arg1.type = oc4arg1type
+    oc4arg1.spelling = "theBegin"
+    oc4arg1.tokens = []
+    oc4arg1.children = []
+    oc4arg2type = overloadedConstrutorObject()
+    oc4arg2type.spelling = "const Standard_Integer"
+    oc4arg2type.kind = None
+    oc4arg2 = overloadedConstrutorObject()
+    oc4arg2.type = oc4arg2type
+    oc4arg2.spelling = "theLower"
+    oc4arg2.tokens = []
+    oc4arg2.children = []
+    oc4arg3type = overloadedConstrutorObject()
+    oc4arg3type.spelling = "const Standard_Integer"
+    oc4arg3type.kind = None
+    oc4arg3 = overloadedConstrutorObject()
+    oc4arg3.type = oc4arg2type
+    oc4arg3.spelling = "theUpper"
+    oc4arg3.tokens = []
+    oc4arg3.children = []
+    oc4.arguments = [oc4arg1, oc4arg2, oc4arg3]
+
+    bindingsOutput += getOverloadedConstructorsBinding(theName, [
+      oc1, oc2, oc3, oc4
+    ])
+  
   return [bindingsOutput]
 
 # Generates bindings for all classes (with some exceptions).
@@ -988,10 +1102,13 @@ EMSCRIPTEN_BINDINGS(opencascadejs) {
   bindingsFile.write(handleBindingsOutput)
   enumBindingsOutput = getEnumBindings(newChildren)[0]
   bindingsFile.write(enumBindingsOutput)
+  tColStd_Array1OfBindingsOutput = getTColStd_Array1OfTypeBindings(children)[0]
+  bindingsFile.write(tColStd_Array1OfBindingsOutput)
 
   bindingsFile.write("}" + os.linesep + os.linesep)
   bindingsFile.write(classEpilogOutput)
 
 main()
-print("numExportedClasses: " + str(numExportedClasses) + " (" + str(numExportedClasses/(numExportedClasses+numIgnoredClasses)*100) + "%)")
-print("numIgnoredClasses: " + str(numIgnoredClasses) + " (" + str(numIgnoredClasses/(numExportedClasses+numIgnoredClasses)*100) + "%)")
+den = (numExportedClasses+numIgnoredClasses)
+print("numExportedClasses: " + str(numExportedClasses) + " (" + str((numExportedClasses/den*100) if not den == 0 else 0) + "%)")
+print("numIgnoredClasses: " + str(numIgnoredClasses) + " (" + str((numIgnoredClasses/den*100) if not den == 0 else 0) + "%)")
