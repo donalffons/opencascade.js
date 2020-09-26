@@ -130,10 +130,6 @@ def processIncludeFile(filename):
 # returns:
 #   bool
 def processClass(theClass):
-  if theClass.spelling.startswith("BRep"):
-    return True
-  return False
-
   # error: undefined symbol: FT_Done_Face and many more
   if theClass.spelling.startswith("F") :
     return False
