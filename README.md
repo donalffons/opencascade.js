@@ -22,7 +22,7 @@ As of right now, approximately 72% of all classes defined in OpenCascade are sup
 
 [Detailed list of supported classes](dist/Supported%20APIs.md)
 
-This number does not include `typedef`'d template classes, as these are not yet supported by the build system. There is however support for all `Handle_`-types (which specialize the `opencascade::handle<...>` template class).
+Many `typedef`'d template classes are currently not supported by the build system. If you need support for a particular feature, feel free to add it yourself or [reach out](https://github.com/donalffons/opencascade.js/issues).
 
 ## What if I need some parts of the OpenCascade library in my project that are currently not supported by the build system?
 
@@ -34,14 +34,15 @@ Please make a pull request if you add or improve anything in this project.
 
 ## Is this a fork of the OpenCascade library?
 
-No. This project is making no changes to the OpenCascade library, apart from a few very small modifications which are applied as patches. All this project does is
-* Compile the OpenCascade library using the Emscripten compiler
-* Analyze the OpenCascade headers using libclang and auto-generate bind-code to expose the library to JavaScript
-* Link the WASM-binaries and provide some convenience functions so that you can easily use the library in your JavaScript projects
+No. This project is making no changes to the OpenCascade library, apart from few very small modifications which are applied as patches. All this project does is
+* Download a tagged commit from the [OpenCascade git server](https://git.dev.opencascade.org/gitweb/?p=occt.git;a=summary).
+* Compile the OpenCascade library using the Emscripten compiler.
+* Analyze the OpenCascade headers using libclang and auto-generate bind-code to expose the library to JavaScript.
+* Link the WASM-binaries and provide some convenience functions so that you can easily use the library in your JavaScript projects.
 
 ## Who is going to keep this project up-to-date with the OpenCascade library?
 
-This project is (hopefully) keeping itself (mostly) up-to-date with the OpenCascade library, since 99% of all bindings are generated automatically. The build-system downloads a tagged commit from the [OpenCascade git server](https://git.dev.opencascade.org/gitweb/?p=occt.git;a=summary), analyzes it and auto-generates all bindings.
+This project is (hopefully) keeping itself (mostly) up-to-date with the OpenCascade library, since most bindings are generated automatically.
 
 # Use it
 
@@ -97,39 +98,39 @@ This project is (hopefully) keeping itself (mostly) up-to-date with the OpenCasc
 
 # Build it
 
-You can build OpenCascade.js yourself. The easiest way to do that is to use the provided Docker image, which sets up a small Ubuntu container within your host system, which is correctly configured for building the library. Follow these steps:
+You can build OpenCascade.js yourself. The easiest way to do that is to build and run the docker container, which is correctly configured for building the library. Follow these steps:
 
-1. Get [Docker](https://www.docker.com/) and install it
+## On Linux
 
-2. Build the container. Open a command prompt or terminal in the directory of `opencascade.js` and enter:
+If you're using Linux (probably also if you're on MacOS), you may want to use the `build.sh` script. This is a helper-script, which will allow you to
+
+  * build the container
+  * execute the build
+  * open a shell inside the container
+  * clear your build cache
+
+## On Windows
+
+To build the container, open a command prompt or terminal in the directory of `opencascade.js` and enter:
+
     ```
     docker build -t opencascade.js .
     ```
-    This will build the container with the instructions given in the `Dockerfile` and give it the tag (name) `opencascade.js`.
 
-3. Run the build. If you're on Linux, enter:
-    ```
-    docker run -it \
-      -v "$(pwd)/build/":"/opencascade/build/" \
-      -v "$(pwd)/node_modules/":"/opencascade/node_modules/" \
-      -v "$(pwd)/dist/":"/opencascade/dist/" \
-      -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/ \
-      -v "$(pwd)/embind/":"/opencascade/embind/" \
-      opencascade.js
-    ```
-    Or on windows
+Then execute the build, while sharing several folders with your current directory:
+
     ```
     docker run -it ^
       -v "%cd%\build":"/opencascade/build/" ^
-      -v "%cd%\node_modules":"/opencascade/node_modules/" ^
       -v "%cd%\dist":"/opencascade/dist/" ^
       -v "%cd%\emscripten-cache":"/emscripten/upstream/emscripten/cache/" ^
       -v "%cd%\embind":"/opencascade/embind/" ^
       opencascade.js
     ```
-    This command will run the container and will also set up some directories, which will be shared with your host system. This speeds up your development process, as temporary build files will be written and saved on your host machine's disk. The resulting build files are output to the `dist` folder.
 
-4. You have to run the `docker build` and `docker run` commands after each change, for every build.
+## Re-building
+
+Currrently, you have to run the `docker build` and `docker run` commands after each change, for every build.
 
 # Contributing
 

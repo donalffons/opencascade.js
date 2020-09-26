@@ -1,4 +1,3 @@
-
 # OpenCascade.js Supported APIs
 
 This is an overview over the currently supported parts of the OpenCascade API. Supported items are marked in green. Unsupported items are marked in red. All bindings listed here are created automatically. We are working hard on increasing support for as much as possible of the OpenCascade API.
@@ -6,28 +5,147 @@ This is an overview over the currently supported parts of the OpenCascade API. S
 This list only lists class definitions. It does not contain information about:
 * Nested class definitions. Those are currently not supported.
 * Overloaded constructors. These are generally well supported.
-* `typedef`'d template classes. Currently, we support most of the `Handle_`-types (i.e. `opencascade::handle<...>`. Apart from that, there is little support.
+* `typedef`'d template classes. Currently, there is support for the following items. Apart from that, there is little support.
+  * Most `typedef`'d specializations of the `opencascade::handle<...>` class
+  * Most `typedef`'d specializations of the `NCollection_Array1<...>` class
+  * Most `typedef`'d specializations of the `NCollection_List<...>` class
 * Manually created bindings. These are not listed here.
 
 ## List of supported API's
 
-  ### ![](https://bit.ly/2El7GLC) `AIS_ColoredDrawer`
+### ![](https://bit.ly/3hIVfqr) `AIS`
 
-### ![](https://bit.ly/2El7GLC) `AIS_ColoredShape`
+### ![](https://bit.ly/3hIVfqr) `AIS_AngleDimension`
 
-### ![](https://bit.ly/2El7GLC) `AIS_GlobalStatus`
+### ![](https://bit.ly/3hIVfqr) `AIS_Animation`
 
-### ![](https://bit.ly/2El7GLC) `AIS_InteractiveContext`
+### ![](https://bit.ly/3hIVfqr) `AIS_AnimationCamera`
 
-### ![](https://bit.ly/2El7GLC) `AIS_InteractiveObject`
+### ![](https://bit.ly/3hIVfqr) `AIS_AnimationObject`
 
-### ![](https://bit.ly/2El7GLC) `AIS_Selection`
+### ![](https://bit.ly/3hIVfqr) `AIS_AttributeFilter`
 
-### ![](https://bit.ly/2El7GLC) `AIS_Shape`
+### ![](https://bit.ly/3hIVfqr) `AIS_Axis`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_BadEdgeFilter`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_C0RegularityFilter`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_CameraFrustum`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_Chamf2dDimension`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_Chamf3dDimension`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_Circle`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_ColorScale`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_ColoredDrawer`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_ColoredShape`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_ConcentricRelation`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_ConnectedInteractive`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_DiameterDimension`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_Dimension`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_DimensionOwner`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_EllipseRadiusDimension`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_EqualDistanceRelation`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_EqualRadiusRelation`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_ExclusionFilter`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_FixRelation`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_GlobalStatus`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_GraphicTool`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_IdenticRelation`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_InteractiveContext`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_InteractiveObject`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_LengthDimension`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_Line`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_Manipulator`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_ManipulatorObjectSequence`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_ManipulatorOwner`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_MaxRadiusDimension`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_MediaPlayer`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_MidPointRelation`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_MinRadiusDimension`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_MultipleConnectedInteractive`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_OffsetDimension`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_ParallelRelation`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_PerpendicularRelation`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_Plane`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_PlaneTrihedron`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_Point`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_PointCloud`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_PointCloudOwner`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_RadiusDimension`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_Relation`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_RubberBand`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_Selection`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_Shape`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_SignatureFilter`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_SymmetricRelation`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_TangentRelation`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_TextLabel`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_TexturedShape`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_Triangulation`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_Trihedron`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_TrihedronOwner`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_TypeFilter`
 
 ### ![](https://bit.ly/3hIVfqr) `AIS_ViewController`
 
-### ![](https://bit.ly/2El7GLC) `AIS_ViewInputBuffer`
+### ![](https://bit.ly/3hIVfqr) `AIS_ViewCube`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_ViewCubeOwner`
+
+### ![](https://bit.ly/3hIVfqr) `AIS_ViewInputBuffer`
 
 ### ![](https://bit.ly/2El7GLC) `APIHeaderSection_EditHeader`
 
@@ -229,23 +347,43 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/2El7GLC) `Approx_SweepFunction`
 
-### ![](https://bit.ly/2El7GLC) `Aspect_Background`
+### ![](https://bit.ly/3hIVfqr) `Aspect_AspectFillAreaDefinitionError`
 
-### ![](https://bit.ly/2El7GLC) `Aspect_CircularGrid`
+### ![](https://bit.ly/3hIVfqr) `Aspect_AspectLineDefinitionError`
 
-### ![](https://bit.ly/2El7GLC) `Aspect_GenId`
+### ![](https://bit.ly/3hIVfqr) `Aspect_AspectMarkerDefinitionError`
 
-### ![](https://bit.ly/2El7GLC) `Aspect_GradientBackground`
+### ![](https://bit.ly/3hIVfqr) `Aspect_Background`
 
-### ![](https://bit.ly/2El7GLC) `Aspect_Grid`
+### ![](https://bit.ly/3hIVfqr) `Aspect_CircularGrid`
 
-### ![](https://bit.ly/2El7GLC) `Aspect_RectangularGrid`
+### ![](https://bit.ly/3hIVfqr) `Aspect_DisplayConnection`
 
-### ![](https://bit.ly/2El7GLC) `Aspect_Touch`
+### ![](https://bit.ly/3hIVfqr) `Aspect_DisplayConnectionDefinitionError`
 
-### ![](https://bit.ly/2El7GLC) `Aspect_VKeySet`
+### ![](https://bit.ly/3hIVfqr) `Aspect_GenId`
 
-### ![](https://bit.ly/2El7GLC) `Aspect_Window`
+### ![](https://bit.ly/3hIVfqr) `Aspect_GradientBackground`
+
+### ![](https://bit.ly/3hIVfqr) `Aspect_GraphicDeviceDefinitionError`
+
+### ![](https://bit.ly/3hIVfqr) `Aspect_Grid`
+
+### ![](https://bit.ly/3hIVfqr) `Aspect_IdentDefinitionError`
+
+### ![](https://bit.ly/3hIVfqr) `Aspect_NeutralWindow`
+
+### ![](https://bit.ly/3hIVfqr) `Aspect_RectangularGrid`
+
+### ![](https://bit.ly/3hIVfqr) `Aspect_Touch`
+
+### ![](https://bit.ly/3hIVfqr) `Aspect_VKeySet`
+
+### ![](https://bit.ly/3hIVfqr) `Aspect_Window`
+
+### ![](https://bit.ly/3hIVfqr) `Aspect_WindowDefinitionError`
+
+### ![](https://bit.ly/3hIVfqr) `Aspect_WindowError`
 
 ### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertAcquiredSelfIntersection`
 
@@ -377,9 +515,39 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/3hIVfqr) `BOPAlgo_WireSplitter`
 
+### ![](https://bit.ly/3hIVfqr) `BOPDS_CommonBlock`
+
 ### ![](https://bit.ly/3hIVfqr) `BOPDS_CoupleOfPaveBlocks`
 
 ### ![](https://bit.ly/3hIVfqr) `BOPDS_Curve`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_DS`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_FaceInfo`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_IndexRange`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_Interf`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfEE`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfEF`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfEZ`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfFF`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfFZ`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfVE`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfVF`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfVV`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfVZ`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfZZ`
 
 ### ![](https://bit.ly/3hIVfqr) `BOPDS_Pair`
 
@@ -389,13 +557,35 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/3hIVfqr) `BOPDS_PaveBlock`
 
+### ![](https://bit.ly/3hIVfqr) `BOPDS_PaveMapHasher`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_Point`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_ShapeInfo`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_SubIterator`
+
+### ![](https://bit.ly/3hIVfqr) `BOPDS_Tools`
+
 ### ![](https://bit.ly/3hIVfqr) `BOPTest`
 
 ### ![](https://bit.ly/3hIVfqr) `BOPTest_DrawableShape`
 
 ### ![](https://bit.ly/3hIVfqr) `BOPTest_Objects`
 
+### ![](https://bit.ly/3hIVfqr) `BOPTools_AlgoTools`
+
+### ![](https://bit.ly/3hIVfqr) `BOPTools_AlgoTools2D`
+
+### ![](https://bit.ly/3hIVfqr) `BOPTools_AlgoTools3D`
+
 ### ![](https://bit.ly/3hIVfqr) `BOPTools_ConnexityBlock`
+
+### ![](https://bit.ly/3hIVfqr) `BOPTools_CoupleOfShape`
+
+### ![](https://bit.ly/3hIVfqr) `BOPTools_Set`
+
+### ![](https://bit.ly/3hIVfqr) `BOPTools_SetMapHasher`
 
 ### ![](https://bit.ly/2El7GLC) `BRepAdaptor_CompCurve`
 
@@ -1688,6 +1878,10 @@ This list only lists class definitions. It does not contain information about:
 ### ![](https://bit.ly/2El7GLC) `Convert_SphereToBSplineSurface`
 
 ### ![](https://bit.ly/2El7GLC) `Convert_TorusToBSplineSurface`
+
+### ![](https://bit.ly/3hIVfqr) `D3DHost_FrameBuffer`
+
+### ![](https://bit.ly/3hIVfqr) `D3DHost_GraphicDriver`
 
 ### ![](https://bit.ly/3hIVfqr) `DBRep`
 
@@ -4591,6 +4785,14 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/2El7GLC) `IMeshTools_ShapeVisitor`
 
+### ![](https://bit.ly/3hIVfqr) `IVtkDraw`
+
+### ![](https://bit.ly/3hIVfqr) `IVtkOCC_ViewerSelector`
+
+### ![](https://bit.ly/3hIVfqr) `IVtk_IView`
+
+### ![](https://bit.ly/3hIVfqr) `IVtk_Interface`
+
 ### ![](https://bit.ly/2El7GLC) `Image_AlienPixMap`
 
 ### ![](https://bit.ly/2El7GLC) `Image_Diff`
@@ -4673,15 +4875,75 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/3hIVfqr) `IntImpParGen_ImpTool`
 
+### ![](https://bit.ly/2El7GLC) `IntPatch_ALine`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_ALineToWLine`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_ArcFunction`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_CSFunction`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_CurvIntSurf`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_GLine`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_HCurve2dTool`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_HInterTool`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_ImpImpIntersection`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_ImpPrmIntersection`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_InterferencePolyhedron`
+
 ### ![](https://bit.ly/2El7GLC) `IntPatch_Intersection`
 
 ### ![](https://bit.ly/2El7GLC) `IntPatch_Line`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_LineConstructor`
 
 ### ![](https://bit.ly/2El7GLC) `IntPatch_Point`
 
 ### ![](https://bit.ly/2El7GLC) `IntPatch_PointLine`
 
+### ![](https://bit.ly/2El7GLC) `IntPatch_PolyArc`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_PolyLine`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_Polygo`
+
+### ![](https://bit.ly/3hIVfqr) `IntPatch_Polyhedron`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_PolyhedronTool`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_PrmPrmIntersection`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_PrmPrmIntersection_T3Bits`
+
+### ![](https://bit.ly/3hIVfqr) `IntPatch_RLine`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_RstInt`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_SpecialPoints`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_TheIWLineOfTheIWalking`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_TheIWalking`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_ThePathPointOfTheSOnBounds`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_TheSOnBounds`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_TheSearchInside`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_TheSegmentOfTheSOnBounds`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_TheSurfFunction`
+
 ### ![](https://bit.ly/2El7GLC) `IntPatch_WLine`
+
+### ![](https://bit.ly/2El7GLC) `IntPatch_WLineTool`
 
 ### ![](https://bit.ly/2El7GLC) `IntPolyh_Couple`
 
@@ -4799,17 +5061,29 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/2El7GLC) `Interface_BitMap`
 
+### ![](https://bit.ly/2El7GLC) `Interface_Category`
+
 ### ![](https://bit.ly/2El7GLC) `Interface_Check`
+
+### ![](https://bit.ly/2El7GLC) `Interface_CheckFailure`
 
 ### ![](https://bit.ly/2El7GLC) `Interface_CheckIterator`
 
+### ![](https://bit.ly/2El7GLC) `Interface_CheckTool`
+
 ### ![](https://bit.ly/2El7GLC) `Interface_CopyControl`
 
+### ![](https://bit.ly/2El7GLC) `Interface_CopyMap`
+
 ### ![](https://bit.ly/2El7GLC) `Interface_CopyTool`
+
+### ![](https://bit.ly/2El7GLC) `Interface_EntityCluster`
 
 ### ![](https://bit.ly/2El7GLC) `Interface_EntityIterator`
 
 ### ![](https://bit.ly/2El7GLC) `Interface_EntityList`
+
+### ![](https://bit.ly/2El7GLC) `Interface_FileParameter`
 
 ### ![](https://bit.ly/3hIVfqr) `Interface_FileReaderData`
 
@@ -4817,9 +5091,15 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/2El7GLC) `Interface_FloatWriter`
 
+### ![](https://bit.ly/2El7GLC) `Interface_GTool`
+
 ### ![](https://bit.ly/2El7GLC) `Interface_GeneralLib`
 
 ### ![](https://bit.ly/3hIVfqr) `Interface_GeneralModule`
+
+### ![](https://bit.ly/2El7GLC) `Interface_GlobalNodeOfGeneralLib`
+
+### ![](https://bit.ly/2El7GLC) `Interface_GlobalNodeOfReaderLib`
 
 ### ![](https://bit.ly/3hIVfqr) `Interface_Graph`
 
@@ -4833,7 +5113,11 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/2El7GLC) `Interface_IntList`
 
+### ![](https://bit.ly/2El7GLC) `Interface_IntVal`
+
 ### ![](https://bit.ly/2El7GLC) `Interface_InterfaceError`
+
+### ![](https://bit.ly/2El7GLC) `Interface_InterfaceMismatch`
 
 ### ![](https://bit.ly/2El7GLC) `Interface_InterfaceModel`
 
@@ -4843,13 +5127,37 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/2El7GLC) `Interface_MapAsciiStringHasher`
 
+### ![](https://bit.ly/2El7GLC) `Interface_NodeOfGeneralLib`
+
+### ![](https://bit.ly/2El7GLC) `Interface_NodeOfReaderLib`
+
+### ![](https://bit.ly/2El7GLC) `Interface_ParamList`
+
+### ![](https://bit.ly/2El7GLC) `Interface_ParamSet`
+
 ### ![](https://bit.ly/2El7GLC) `Interface_Protocol`
 
 ### ![](https://bit.ly/2El7GLC) `Interface_ReaderLib`
 
 ### ![](https://bit.ly/2El7GLC) `Interface_ReaderModule`
 
+### ![](https://bit.ly/2El7GLC) `Interface_ReportEntity`
+
+### ![](https://bit.ly/2El7GLC) `Interface_STAT`
+
+### ![](https://bit.ly/2El7GLC) `Interface_ShareFlags`
+
+### ![](https://bit.ly/2El7GLC) `Interface_ShareTool`
+
+### ![](https://bit.ly/2El7GLC) `Interface_SignLabel`
+
 ### ![](https://bit.ly/2El7GLC) `Interface_SignType`
+
+### ![](https://bit.ly/2El7GLC) `Interface_Static`
+
+### ![](https://bit.ly/2El7GLC) `Interface_TypedValue`
+
+### ![](https://bit.ly/2El7GLC) `Interface_UndefinedContent`
 
 ### ![](https://bit.ly/2El7GLC) `Interval`
 
@@ -5223,19 +5531,223 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/2El7GLC) `NLPlate_NLPlate`
 
+### ![](https://bit.ly/2El7GLC) `OSD`
+
 ### ![](https://bit.ly/2El7GLC) `OSD_Chronometer`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Directory`
+
+### ![](https://bit.ly/2El7GLC) `OSD_DirectoryIterator`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Disk`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Environment`
 
 ### ![](https://bit.ly/2El7GLC) `OSD_Error`
 
+### ![](https://bit.ly/2El7GLC) `OSD_Exception`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_ACCESS_VIOLATION`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_ARRAY_BOUNDS_EXCEEDED`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_CTRL_BREAK`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_FLT_DENORMAL_OPERAND`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_FLT_DIVIDE_BY_ZERO`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_FLT_INEXACT_RESULT`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_FLT_INVALID_OPERATION`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_FLT_OVERFLOW`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_FLT_STACK_CHECK`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_FLT_UNDERFLOW`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_ILLEGAL_INSTRUCTION`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_INT_DIVIDE_BY_ZERO`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_INT_OVERFLOW`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_INVALID_DISPOSITION`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_IN_PAGE_ERROR`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_NONCONTINUABLE_EXCEPTION`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_PRIV_INSTRUCTION`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_STACK_OVERFLOW`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Exception_STATUS_NO_MEMORY`
+
 ### ![](https://bit.ly/3hIVfqr) `OSD_File`
+
+### ![](https://bit.ly/2El7GLC) `OSD_FileIterator`
 
 ### ![](https://bit.ly/3hIVfqr) `OSD_FileNode`
 
+### ![](https://bit.ly/2El7GLC) `OSD_Host`
+
+### ![](https://bit.ly/2El7GLC) `OSD_MAllocHook`
+
+### ![](https://bit.ly/2El7GLC) `OSD_MemInfo`
+
+### ![](https://bit.ly/2El7GLC) `OSD_OSDError`
+
 ### ![](https://bit.ly/3hIVfqr) `OSD_Path`
+
+### ![](https://bit.ly/2El7GLC) `OSD_PerfMeter`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Process`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Protection`
+
+### ![](https://bit.ly/2El7GLC) `OSD_SIGBUS`
+
+### ![](https://bit.ly/2El7GLC) `OSD_SIGHUP`
+
+### ![](https://bit.ly/2El7GLC) `OSD_SIGILL`
+
+### ![](https://bit.ly/2El7GLC) `OSD_SIGINT`
+
+### ![](https://bit.ly/2El7GLC) `OSD_SIGKILL`
+
+### ![](https://bit.ly/2El7GLC) `OSD_SIGQUIT`
+
+### ![](https://bit.ly/2El7GLC) `OSD_SIGSEGV`
+
+### ![](https://bit.ly/2El7GLC) `OSD_SIGSYS`
+
+### ![](https://bit.ly/2El7GLC) `OSD_SharedLibrary`
+
+### ![](https://bit.ly/2El7GLC) `OSD_Signal`
 
 ### ![](https://bit.ly/2El7GLC) `OSD_Thread`
 
 ### ![](https://bit.ly/2El7GLC) `OSD_Timer`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Aspects`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_AspectsProgram`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_AspectsSprite`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_AspectsTextureSet`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_BackgroundArray`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_CappingAlgo`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_CappingPlaneResource`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Caps`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Clipping`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_ClippingIterator`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_ClippingState`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Context`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Element`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Flipper`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Font`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_FrameBuffer`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_FrameStats`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_FrameStatsPrs`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_GraduatedTrihedron`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_GraphicDriver`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Group`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_IndexBuffer`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_LayerList`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_LightSourceState`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_LineAttributes`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_MaterialState`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_ModelWorldState`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_NamedResource`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_OitState`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_PointSprite`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_PrimitiveArray`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_ProjectionState`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_RaytraceGeometry`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Resource`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Sampler`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_SetOfPrograms`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_SetOfShaderPrograms`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_ShaderManager`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_ShaderObject`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_ShaderProgram`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_ShaderUniformLocation`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_StateCounter`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_StateInterface`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_StencilTest`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Structure`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_StructureShadow`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Text`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_TextBuilder`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Texture`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_TextureBufferArb`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_TextureFormat`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_TextureSet`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_TriangleSet`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_VariableSetterSelector`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_VertexBuffer`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_VertexBufferCompat`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Window`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_Workspace`
+
+### ![](https://bit.ly/3hIVfqr) `OpenGl_WorldViewState`
 
 ### ![](https://bit.ly/2El7GLC) `PCDM`
 
@@ -10473,6 +10985,8 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/2El7GLC) `Vrml_WWWInline`
 
+### ![](https://bit.ly/2El7GLC) `WNT_ClassDefinitionError`
+
 ### ![](https://bit.ly/3hIVfqr) `XBRepMesh`
 
 ### ![](https://bit.ly/3hIVfqr) `XCAFApp_Application`
@@ -10835,6 +11349,8 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/2El7GLC) `XmlXCAFDrivers_DocumentStorageDriver`
 
+### ![](https://bit.ly/3hIVfqr) `Xw_Window`
+
 ### ![](https://bit.ly/2El7GLC) `gce_MakeCirc`
 
 ### ![](https://bit.ly/2El7GLC) `gce_MakeCirc2d`
@@ -11019,15 +11535,13 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/2El7GLC) `math_GlobOptMin`
 
-### ![](https://bit.ly/2El7GLC) `math_Householder`
-
-### ![](https://bit.ly/2El7GLC) `math_IntegerVector`
+### ![](https://bit.ly/3hIVfqr) `math_IntegerVector`
 
 ### ![](https://bit.ly/2El7GLC) `math_Jacobi`
 
 ### ![](https://bit.ly/2El7GLC) `math_KronrodSingleIntegration`
 
-### ![](https://bit.ly/2El7GLC) `math_Matrix`
+### ![](https://bit.ly/3hIVfqr) `math_Matrix`
 
 ### ![](https://bit.ly/2El7GLC) `math_MultipleVarFunction`
 
@@ -11061,5 +11575,5 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/2El7GLC) `math_ValueAndWeight`
 
-### ![](https://bit.ly/2El7GLC) `math_Vector`
+### ![](https://bit.ly/3hIVfqr) `math_Vector`
 

@@ -1197,15 +1197,17 @@ def main():
 
   print("creating bindings...")
   outputDocFile = open("../dist/Supported APIs.md", "w")
-  outputDocFile.write(
-'''# OpenCascade.js Supported APIs
+  outputDocFile.write('''# OpenCascade.js Supported APIs
 
 This is an overview over the currently supported parts of the OpenCascade API. Supported items are marked in green. Unsupported items are marked in red. All bindings listed here are created automatically. We are working hard on increasing support for as much as possible of the OpenCascade API.
 
 This list only lists class definitions. It does not contain information about:
 * Nested class definitions. Those are currently not supported.
 * Overloaded constructors. These are generally well supported.
-* `typedef`'d template classes. Currently, we support most of the `Handle_`-types (i.e. `opencascade::handle<...>`. Apart from that, there is little support.
+* `typedef`'d template classes. Currently, there is support for the following items. Apart from that, there is little support.
+  * Most `typedef`'d specializations of the `opencascade::handle<...>` class
+  * Most `typedef`'d specializations of the `NCollection_Array1<...>` class
+  * Most `typedef`'d specializations of the `NCollection_List<...>` class
 * Manually created bindings. These are not listed here.
 
 ## List of supported API's
