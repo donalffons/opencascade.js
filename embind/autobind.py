@@ -1142,6 +1142,7 @@ def getEnumBindings(newChildren):
 # returns:
 #   None
 def main():
+  global numIgnoredClasses
   occtFiles = []
   includePaths = []
   for dirpath, dirnames, filenames in os.walk("../build/occt/src"):
@@ -1149,6 +1150,9 @@ def main():
     for item in filenames:
       if processIncludeFile(item):
         occtFiles.append(str(os.path.join(dirpath, item)))
+      else:
+        if item.endswith(".hxx"):
+          numIgnoredClasses += 1 # ...assuming one class per c++ header file
 
   includePathArgs = [
     "-I/emsdk/upstream/emscripten/system/include/",
