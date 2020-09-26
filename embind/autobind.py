@@ -559,6 +559,10 @@ def processTypedef(typedef):
   if typedef.spelling == "OpenGl_ListOfStructure":
     return False
 
+  # Generates error "Cannot register type 'TColQuantity_Array1OfLength' twice" during initialization of the WASM file. Seems to be conflicting with 'TColStd_Array1OfReal'. Can be reproduced by including these two bindings in one bindings-file.
+  if typedef.spelling == "TColQuantity_Array1OfLength":
+    return False
+
   return True
 
 # indicates if bindings for an enum should be generated (returns True) or not (returns False)
