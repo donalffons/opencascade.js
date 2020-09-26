@@ -25,6 +25,7 @@
 * Investigate errors for currently disabled entities
 * Auto-bind operators according to conventions.md
 * Auto-generate for typedefs of template classes
+* Look through `NCollection` module and generate auto-bindings for all entities inside.
 
 ## 4. Build System and Versioning (non-breaking changes)
 
