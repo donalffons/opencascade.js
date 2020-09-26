@@ -19,6 +19,7 @@
 ## 3. Testing (non-breaking changes)
 
 * Currently, there are no automatic tests in the library. There has already been [one reported issue](https://github.com/donalffons/opencascade.js/issues/11), in which Emscripten succesfully generated a WASM binary, which was unusable from JavaScript.
+* It would be cool to run MakeBottle as a separate Github Action unit test (triggered on each commit etc.)
 
 ## 3. Auto-Binding (non-breaking changes)
 
