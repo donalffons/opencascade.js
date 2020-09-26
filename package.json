@@ -8,5 +8,5 @@
   "repository": "github:donalffons/opencascade.js",
   "devDependencies": {},
   "scripts": {},
-  "types": "./dist/opencascade.d.ts"
+  "types": "dist/opencascade.d.ts"
 }
