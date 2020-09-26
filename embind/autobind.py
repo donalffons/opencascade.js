@@ -585,7 +585,7 @@ def getClassBinding(className, children):
     baseClassType = " extends " + baseSpec[0].type.spelling + " "
   else:
     baseClassBinding = ""
-    baseClassType = ""
+    baseClassType = " "
 
   return [
     "  class_<" + className + baseClassBinding + ">(\"" + className + "\")" + os.linesep,
@@ -723,10 +723,13 @@ def getSimpleConstructorBinding(children):
   if not standardConstructor:
     return ["", ""]
   argTypesBindings = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
-  argsTypes = ", ".join(list(map(lambda x: x.spelling + ": " + x.type.spelling.replace("&", "").replace("*", "").replace("const", "").strip(), list(standardConstructor.get_arguments()))))
+  # TYPESCRIPT WIP
+  # argsTypes = ", ".join(list(map(lambda x: x.spelling + ": " + x.type.spelling.replace("&", "").replace("*", "").replace("const", "").strip(), list(standardConstructor.get_arguments()))))
   return [
     "    .constructor<" + argTypesBindings + ">()" + os.linesep,
-    "    constructor(" + argsTypes + ");" + os.linesep
+    # TYPESCRIPT WIP
+    # "    constructor(" + argsTypes + ");" + os.linesep,
+    "    constructor();" + os.linesep
   ]
 
 # Generates bindings for all overloaded constructors. Overloaded constructors are represented by deriving sub-classes from the parentClass (named parentClass_1, for example) and implementing only the given overloaded constructor as the default / simple constructor.
