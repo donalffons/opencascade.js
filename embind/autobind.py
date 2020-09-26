@@ -863,6 +863,7 @@ def getHandleTypeBindings(children):
 
 def getTColStd_Array1OfTypeBindings(children):
   bindingsOutput = ""
+  print("generating bindings for TColStd_Array1Of types...")
   tColStd_ArrayOfTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.spelling.startswith("TColStd_Array1Of"), children))
   for tColStd_ArrayOfTypedef in tColStd_ArrayOfTypedefs:
     theName = tColStd_ArrayOfTypedef.spelling
