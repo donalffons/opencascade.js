@@ -509,6 +509,25 @@ def processClass(theClass):
   if theClass.spelling == "OpenGl_GraphicDriver":
     return False
 
+  # error: undefined symbol
+  if (
+    theClass.spelling == "D3DHost_FrameBuffer" or
+    theClass.spelling == "D3DHost_GraphicDriver" or
+    theClass.spelling.startswith("AIS") or
+    theClass.spelling.startswith("Aspect") or
+    theClass.spelling == "IntPatch_Polyhedron" or
+    theClass.spelling == "IVtkOCC_ViewerSelector" or
+    theClass.spelling == "IVtkDraw" or
+    theClass.spelling == "IntPatch_RLine" or
+    theClass.spelling == "IVtk_Interface" or
+    theClass.spelling == "IVtk_IView" or
+    theClass.spelling == "OpenGl_VertexBuffer" or
+    theClass.spelling == "OpenGl_ShaderProgram" or
+    theClass.spelling.startswith("OpenGl") or
+    theClass.spelling == "Xw_Window"
+  ):
+    return False
+
   return True
 
 # indicates if bindings for a method should be generated (returns True) or not (returns False)
