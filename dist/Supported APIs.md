@@ -5,7 +5,10 @@ This is an overview over the currently supported parts of the OpenCascade API. S
 This list only lists class definitions. It does not contain information about:
 * Nested class definitions. Those are currently not supported.
 * Overloaded constructors. These are generally well supported.
-* `typedef`'d template classes. Currently, we support most of the `Handle_`-types (i.e. `opencascade::handle<...>`. Apart from that, there is little support.
+* `typedef`'d template classes. Currently, there is support for the following items. Apart from that, there is little support.
+  * Most `typedef`'d specializations of the `opencascade::handle<...>` class
+  * Most `typedef`'d specializations of the `NCollection_Array1<...>` class
+  * Most `typedef`'d specializations of the `NCollection_List<...>` class
 * Manually created bindings. These are not listed here.
 
 ## List of supported API's
