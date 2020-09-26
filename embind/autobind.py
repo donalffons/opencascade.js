@@ -523,19 +523,23 @@ def processMethod(className, child):
     return False
   return True
 
-# indicates if bindings for a handle typedef should be generated (returns True) or not (returns False)
+# indicates if bindings for a typedef should be generated (returns True) or not (returns False)
 # parameters:
-#   handleTypedef (libclang typedef object): the typedef
+#   typedef (libclang typedef object): the typedef
 # returns:
 #   bool
-def processHandleTypedef(handleTypedef):
+def processTypedef(typedef):
   # error: ?
   if (
-    handleTypedef.spelling == "Handle_Font_BRepFont" or
-    handleTypedef.spelling == "Handle_PCDM_Reader" or
-    handleTypedef.spelling == "Handle_PCDM_ReadWriter_1"
+    typedef.spelling == "Handle_Font_BRepFont" or
+    typedef.spelling == "Handle_PCDM_Reader" or
+    typedef.spelling == "Handle_PCDM_ReadWriter_1"
   ):
     return False
+
+  if typedef.spelling == "OpenGl_ListOfStructure":
+    return False
+
   return True
 
 # indicates if bindings for an enum should be generated (returns True) or not (returns False)
@@ -792,7 +796,7 @@ def getHandleTypeBindings(children):
       filteredHandleTypedefs.append(child)
 
   for handleTypedef in handleTypedefs:
-    if not processHandleTypedef(handleTypedef):
+    if not processTypedef(handleTypedef):
       continue
 
     handleName = handleTypedef.spelling
@@ -854,6 +858,9 @@ def getNCollection_Array1TypeBindings(children):
   print("generating bindings for NCollection_Array1 types...")
   nCollection_Array1Typedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("NCollection_Array1"), children))
   for nCollection_Array1Typedef in nCollection_Array1Typedefs:
+    if not processTypedef(nCollection_Array1Typedef):
+      continue
+
     theName = nCollection_Array1Typedef.spelling
     theType = nCollection_Array1Typedef.underlying_typedef_type.get_template_argument_type(0).spelling
     bindingsOutput += "  class_<" + theName + ">(\"" + theName + "\")" + os.linesep
@@ -960,6 +967,93 @@ def getNCollection_Array1TypeBindings(children):
 
     bindingsOutput += getOverloadedConstructorsBinding(theName, [
       oc1, oc2, oc3, oc4
+    ])
+  
+  return [bindingsOutput]
+
+def getNCollection_ListTypeBindings(children):
+  bindingsOutput = ""
+  print("generating bindings for NCollection_List types...")
+
+  bindingsOutput += "  class_<NCollection_BaseList>(\"NCollection_BaseList\")" + os.linesep
+  bindingsOutput += "    .function(\"Extent\", &NCollection_BaseList::Extent)" + os.linesep
+  bindingsOutput += "    .function(\"IsEmpty\", &NCollection_BaseList::IsEmpty)" + os.linesep
+  bindingsOutput += "    .function(\"Allocator\", &NCollection_BaseList::Allocator)" + os.linesep
+  bindingsOutput += "  ;" + os.linesep
+
+  nCollection_ListTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("NCollection_List") and not x.underlying_typedef_type.spelling.endswith("::Iterator"), children))
+  for nCollection_ListTypedef in nCollection_ListTypedefs:
+    if not processTypedef(nCollection_ListTypedef):
+      continue
+
+    theName = nCollection_ListTypedef.spelling
+    theType = nCollection_ListTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
+
+    bindingsOutput += "  class_<" + theName + ">(\"" + theName + "\")" + os.linesep
+    bindingsOutput += "    .function(\"begin\", &" + theName + "::begin)" + os.linesep
+    bindingsOutput += "    .function(\"end\", &" + theName + "::end)" + os.linesep
+    bindingsOutput += "    .function(\"cbegin\", &" + theName + "::cbegin)" + os.linesep
+    bindingsOutput += "    .function(\"cend\", &" + theName + "::cend)" + os.linesep
+    bindingsOutput += "    .function(\"Size\", &" + theName + "::Size)" + os.linesep
+    bindingsOutput += "    .function(\"Assign\", static_cast<" + theName + "& (" + theName + "::*) (const " + theName + "&) >((" + theName + "& (" + theName + "::*)(const " + theName + "&) ) &" + theName + "::Assign))" + os.linesep
+    bindingsOutput += "    .function(\"operator_assign\", static_cast<" + theName + "& (" + theName + "::*) (const " + theName + "&) >((" + theName + "& (" + theName + "::*)(const " + theName + "&) ) &" + theName + "::operator=))" + os.linesep
+    bindingsOutput += "    .function(\"Clear\", &" + theName + "::Clear)" + os.linesep
+    bindingsOutput += "    .function(\"First_1\", static_cast<const " + theType + "& (" + theName + "::*) () const>((const " + theType + "& (" + theName + "::*)() const) &" + theName + "::First))" + os.linesep
+    bindingsOutput += "    .function(\"First_2\", static_cast<" + theType + "& (" + theName + "::*) () >((" + theType + "& (" + theName + "::*)() ) &" + theName + "::First))" + os.linesep
+    bindingsOutput += "    .function(\"Last_1\", static_cast<const " + theType + "& (" + theName + "::*) () const>((const " + theType + "& (" + theName + "::*)() const) &" + theName + "::Last))" + os.linesep
+    bindingsOutput += "    .function(\"Last_2\", static_cast<" + theType + "& (" + theName + "::*) () >((" + theType + "& (" + theName + "::*)() ) &" + theName + "::Last))" + os.linesep
+    bindingsOutput += "    .function(\"Append_1\", static_cast<" + theType + "& (" + theName + "::*) (const " + theType + "&) >((" + theType + "& (" + theName + "::*)(const " + theType + "&) ) &" + theName + "::Append))" + os.linesep
+    bindingsOutput += "    // .function(\"Append_2\", ...)" + os.linesep
+    bindingsOutput += "    .function(\"Append_3\", static_cast<void (" + theName + "::*) (" + theName + "&) >((void (" + theName + "::*)(" + theName + "&) ) &" + theName + "::Append))" + os.linesep
+    bindingsOutput += "    .function(\"Prepend_1\", static_cast<" + theType + "& (" + theName + "::*) (const " + theType + "&) >((" + theType + "& (" + theName + "::*)(const " + theType + "&) ) &" + theName + "::Prepend))" + os.linesep
+    bindingsOutput += "    .function(\"Prepend_2\", static_cast<void (" + theName + "::*) (" + theName + "&) >((void (" + theName + "::*)(" + theName + "&) ) &" + theName + "::Prepend))" + os.linesep
+    bindingsOutput += "    .function(\"RemoveFirst\", &" + theName + "::RemoveFirst)" + os.linesep
+    bindingsOutput += "    // .function(\"Remove_1\", ...)" + os.linesep
+    bindingsOutput += "    // .function(\"Remove_2\", ...)" + os.linesep
+    bindingsOutput += "    // .function(\"InsertBefore_1\", ...)" + os.linesep
+    bindingsOutput += "    // .function(\"InsertBefore_2\", ...)" + os.linesep
+    bindingsOutput += "    // .function(\"InsertAfter_1\", ...)" + os.linesep
+    bindingsOutput += "    // .function(\"InsertAfter_2\", ...)" + os.linesep
+    bindingsOutput += "    .function(\"Reverse\", &" + theName + "::Reverse)" + os.linesep
+    bindingsOutput += "    // .function(\"Contains\", ...)" + os.linesep
+    bindingsOutput += "  ;" + os.linesep
+
+    oc1 = overloadedConstrutorObject()
+    oc1.spelling = theName
+    oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc1.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc1.arguments = []
+
+    oc2 = overloadedConstrutorObject()
+    oc2.spelling = theName
+    oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc2arg1type = overloadedConstrutorObject()
+    oc2arg1type.spelling = "const Handle(NCollection_BaseAllocator)&"
+    oc2arg1type.kind = None
+    oc2arg1 = overloadedConstrutorObject()
+    oc2arg1.type = oc2arg1type
+    oc2arg1.spelling = "theAllocator"
+    oc2arg1.tokens = []
+    oc2arg1.children = []
+    oc2.arguments = [oc2arg1]
+
+    oc3 = overloadedConstrutorObject()
+    oc3.spelling = theName
+    oc3.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc3.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc3arg1type = overloadedConstrutorObject()
+    oc3arg1type.spelling = "const " + theName + "&"
+    oc3arg1type.kind = None
+    oc3arg1 = overloadedConstrutorObject()
+    oc3arg1.type = oc3arg1type
+    oc3arg1.spelling = "theOther"
+    oc3arg1.tokens = []
+    oc3arg1.children = []
+    oc3.arguments = [oc3arg1]
+
+    bindingsOutput += getOverloadedConstructorsBinding(theName, [
+      oc1, oc2, oc3
     ])
   
   return [bindingsOutput]
@@ -1105,6 +1199,8 @@ EMSCRIPTEN_BINDINGS(opencascadejs) {
   bindingsFile.write(enumBindingsOutput)
   nCollection_Array1BindingsOutput = getNCollection_Array1TypeBindings(children)[0]
   bindingsFile.write(nCollection_Array1BindingsOutput)
+  nCollection_ListBindingsOutput = getNCollection_ListTypeBindings(children)[0]
+  bindingsFile.write(nCollection_ListBindingsOutput)
 
   bindingsFile.write("}" + os.linesep + os.linesep)
   bindingsFile.write(classEpilogOutput)
