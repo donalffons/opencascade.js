@@ -58,9 +58,6 @@ jobs:
       - name: Print Available Docker Images
         run: docker image ls
 
-      - name: test
-        run: ls -al
-
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
