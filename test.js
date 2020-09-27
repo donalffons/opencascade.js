@@ -1,5 +1,11 @@
-console.log("let's do some testing...")
+import opencascade from "./dist/opencascade.wasm.js";
 
-test('test description', () => {
-  expect(1).toBe(1);
-});
+jest.setTimeout(30000);
+
+const BottleExample = async () => {
+  const oc = await new opencascade();
+}
+
+test('promise throws', async () => {
+  await BottleExample();
+})

@@ -7,9 +7,15 @@
   "license": "LGPL-2.1-only",
   "repository": "github:donalffons/opencascade.js",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
     "jest": "^26.4.2"
   },
   "scripts": {
     "test": "jest"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/actions-runner/"
+    ]
   }
 }
