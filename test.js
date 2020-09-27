@@ -82,7 +82,7 @@ const makeBottle = (openCascade, myWidth, myHeight, myThickness) => {
     }
   }
 
-  const facesToRemove = new openCascade.TopTools_ListOfShape();
+  const facesToRemove = new openCascade.TopTools_ListOfShape_1();
   facesToRemove.Append_1(faceToRemove);
   const s = myBody.Shape();
   myBody = new openCascade.BRepOffsetAPI_MakeThickSolid_1();
@@ -140,17 +140,9 @@ const makeBottle = (openCascade, myWidth, myHeight, myThickness) => {
 }
 
 const BottleExample = async () => {
-  try {
-    console.log("STARTING");
-
-    const oc = await (await new opencascade()).ready;
-    const width = 50, height = 70, thickness = 30;
-    makeBottle(oc, width, height, thickness);
-
-    console.log("DONE");
-  } catch (error) {
-    throw new Error(error.toString());
-  }
+  const oc = await((await new opencascade()).ready);
+  const width = 50, height = 70, thickness = 30;
+  makeBottle(oc, width, height, thickness);
 }
 
 test('Bottle Example', async () => {
