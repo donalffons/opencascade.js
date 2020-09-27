@@ -115,7 +115,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           lfs: true
-      - name: Build Docker Image
       - uses: whoan/docker-build-with-cache-action@v5
         with:
           username: donalffons
