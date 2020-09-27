@@ -143,7 +143,7 @@ const BottleExample = async () => {
   try {
     console.log("STARTING");
 
-    const oc = await new opencascade();
+    const oc = await (await new opencascade()).ready;
     const width = 50, height = 70, thickness = 30;
     makeBottle(oc, width, height, thickness);
 
