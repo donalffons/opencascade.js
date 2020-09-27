@@ -7,8 +7,14 @@
   "license": "LGPL-2.1-only",
   "repository": "github:donalffons/opencascade.js",
   "devDependencies": {
+    "@babel/core": "^7.11.6",
     "@babel/plugin-transform-modules-commonjs": "^7.10.4",
-    "jest": "^26.4.2"
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/runtime": "^7.11.2",
+    "jest": "^26.4.2",
+    "opencascade.js-examples": "https://github.com/donalffons/opencascade.js-examples.git",
+    "three": "^0.120.1"
   },
   "scripts": {
     "test": "jest"
