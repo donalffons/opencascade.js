@@ -122,7 +122,5 @@ jobs:
           password: "${{ secrets.GITHUB_TOKEN }}"
           registry: docker.pkg.github.com
           image_name: opencascade.js
-      - name: List Docker Images
-        run: docker image ls
       - name: Run Tests
         run: docker run --init -v "$(pwd)/build/":"/opencascade/build/" -v "$(pwd)/dist/":"/opencascade/dist/" -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" -v "$(pwd)/embind/":"/opencascade/embind/" opencascade.js test
