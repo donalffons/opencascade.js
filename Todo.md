@@ -49,3 +49,7 @@
 * Experiment with opencascade's built-in visualization and see if it works with Emscripten and if it's any good. Create example.
 * Auto-generate some kind of documentation, which parts of the OpenCascade API have been exposed. Maybe with some percentage-indication that gives potential users a feeling for how much of OpenCascade can be used via JavaScript. That shouldn't be too hard to implement using the autobind script...
 * Test with NodeJS runtime and write up some recommendations on how to use the library there.
+
+## Examples
+
+* Add polygon test from test suite to examples repo.
