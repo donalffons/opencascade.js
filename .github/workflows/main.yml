@@ -118,10 +118,4 @@ jobs:
       - name: Build docker image
         run: docker build . -t opencascade.js
       - name: Run Tests
-        run: \
-          docker run --init \
-          -v "$(pwd)/build/":"/opencascade/build/" \
-          -v "$(pwd)/dist/":"/opencascade/dist/" \
-          -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
-          -v "$(pwd)/embind/":"/opencascade/embind/" \
-          opencascade.js test
+        run: docker run --init -v "$(pwd)/build/":"/opencascade/build/" -v "$(pwd)/dist/":"/opencascade/dist/" -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" -v "$(pwd)/embind/":"/opencascade/embind/" opencascade.js test
