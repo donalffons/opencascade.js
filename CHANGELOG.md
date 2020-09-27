@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.1.1
+* Removed support for `TColQuantity_Array1OfLength` and `TopoDS_ListOfShape`, as they cause errors during initialization of the library.
+
 ## v1.1.0
 * More accurate way of counting supported and unsupported classes
 * Removed support for classes `Aspect_Background`, `Aspect_CircularGrid`, `Aspect_GenId`, `Aspect_GradientBackground`, `Aspect_Grid`, `Aspect_RectangularGrid`, `Aspect_Touch`, `Aspect_VKeySet`, `Aspect_Window`, `math_Householder`, `math_IntegerVector`, `math_Matrix`, `math_Vector` due to an error (breaking change)
