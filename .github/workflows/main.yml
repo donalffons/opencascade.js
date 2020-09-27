@@ -5,8 +5,8 @@ on:
 
 jobs:
   build:
-    name: Build OpenCascade.js
-    # runs-on: self-hosted
+    # name: Build OpenCascade.js
+    runs-on: self-hosted
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
