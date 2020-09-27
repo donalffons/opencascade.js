@@ -1,6 +1,6 @@
 import opencascade from "./dist/opencascade.wasm.js";
 
-jest.setTimeout(30000);
+jest.setTimeout(300000);
 
 const BottleExample = async () => {
   const oc = await new opencascade();
