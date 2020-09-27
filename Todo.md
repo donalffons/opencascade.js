@@ -13,7 +13,7 @@
 * To be able to use dynamic libraries, the initialization of the library (i.e. `new opencascade()`) must(?) take place in a web-worker. Using Emscripten`s `dynamicLibraries` array when initializing on the main-thread will result in an error in Chrome and probably all major browsers (maybe there is a workaround?). In most real-world applications, it would make sense to run openCascade computations in a separate worker-thread anyways. The additional complexity for setting this up should be kept at a minimum.
 * It should be possible to select which parts of opencascade to load at run-time of the web application. The library therefore has to be broken up into separate modules.
 * Probably, it would be a good idea to have one module for each folder in `build/occt/src`.
-* It would be great, if the user of this library could chose between debug and release version of the library.
+* It would be great, if the user of this library could chose between debug and release version of the library. Debug versions should have support for source maps and DWARF debugging.
 * Modularization will leed to smaller binaries, which will result in shorter build times per binary, which will hopefully bring the build system back to life.
 
 ## 3. Testing (non-breaking changes)
