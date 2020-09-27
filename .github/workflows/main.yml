@@ -58,12 +58,15 @@ jobs:
       - name: Print Available Docker Images
         run: docker image ls
 
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14.12.0'
-      - run: yarn install
-      - run: yarn test
+      - name: Run Tests
+        run: |
+          docker run --init \
+            -v "$(pwd)/build/":"/opencascade/build/" \
+            -v "$(pwd)/dist/":"/opencascade/dist/" \
+            -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
+            -v "$(pwd)/embind/":"/opencascade/embind/" \
+            opencascade.js test
+      # I'm not thrilled that this says my_awesome_image, but this is what works :(
 
       # # Build the docker container
       # - name: Build OpenCascade.js Bindings
