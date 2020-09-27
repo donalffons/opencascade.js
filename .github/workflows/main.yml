@@ -6,8 +6,8 @@ on:
 jobs:
   build:
     name: Build OpenCascade.js
-    runs-on: self-hosted
-    # runs-on: ubuntu-latest
+    # runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -43,29 +43,30 @@ jobs:
         with:
           path: ./dist
           key: ${{ runner.os }}-build-${{ env.cache-name }}-2
+          
 
-      - name: Build OpenCascade.js Docker Image
-        uses: whoan/docker-build-with-cache-action@v5
-        with:
-          registry: docker.pkg.github.com
-          username: donalffons
-          password: "${{ secrets.GITHUB_TOKEN }}"
-          image_name: opencascade.js
-          build_extra_args: "--no-cache" # activate this if you want to disable the docker cache
-          #image_tag: opencascade.js
+      # - name: Build OpenCascade.js Docker Image
+      #   uses: whoan/docker-build-with-cache-action@v5
+      #   with:
+      #     registry: docker.pkg.github.com
+      #     username: donalffons
+      #     password: "${{ secrets.GITHUB_TOKEN }}"
+      #     image_name: opencascade.js
+      #     # build_extra_args: "--no-cache" # activate this if you want to disable the docker cache
+      #     #image_tag: opencascade.js
 
-      # Debug
-      - name: Print Available Docker Images
-        run: docker image ls
+      # # Debug
+      # - name: Print Available Docker Images
+      #   run: docker image ls
 
-      - name: Run Tests
-        run: |
-          docker run --init \
-            -v "$(pwd)/build/":"/opencascade/build/" \
-            -v "$(pwd)/dist/":"/opencascade/dist/" \
-            -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
-            -v "$(pwd)/embind/":"/opencascade/embind/" \
-            my_awesome_image test
+      # - name: Run Tests
+      #   run: |
+      #     docker run --init \
+      #       -v "$(pwd)/build/":"/opencascade/build/" \
+      #       -v "$(pwd)/dist/":"/opencascade/dist/" \
+      #       -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
+      #       -v "$(pwd)/embind/":"/opencascade/embind/" \
+      #       my_awesome_image test
 
       # # Build the docker container
       # - name: Build OpenCascade.js Bindings
@@ -106,3 +107,21 @@ jobs:
       #   with:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #     branch: ${{ github.ref }}
+  test:
+    name: Test OpenCascade.js
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Build docker image
+        run: docker build . -t opencascade.js
+      - name: Run Tests
+        run: \
+          docker run --init \
+          -v "$(pwd)/build/":"/opencascade/build/" \
+          -v "$(pwd)/dist/":"/opencascade/dist/" \
+          -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
+          -v "$(pwd)/embind/":"/opencascade/embind/" \
+          opencascade.js test
