@@ -6,6 +6,6 @@ const BottleExample = async () => {
   const oc = await new opencascade();
 }
 
-test('promise throws', async () => {
+test('Bottle Example', async () => {
   await BottleExample();
 })
