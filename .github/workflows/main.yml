@@ -115,7 +115,11 @@ jobs:
         uses: actions/checkout@v2
         with:
           lfs: true
-      - name: Build docker image
-        run: docker build . -t opencascade.js
+      - uses: whoan/docker-build-with-cache-action@v5
+        with:
+          username: donalffons
+          password: "${{ secrets.GITHUB_TOKEN }}"
+          registry: docker.pkg.github.com
+          image_name: opencascade.js
       - name: Run Tests
         run: docker run --init -v "$(pwd)/build/":"/opencascade/build/" -v "$(pwd)/dist/":"/opencascade/dist/" -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" -v "$(pwd)/embind/":"/opencascade/embind/" opencascade.js test
