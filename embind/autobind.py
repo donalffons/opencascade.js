@@ -587,7 +587,14 @@ def getClassBinding(className, children):
   if len(baseSpec) > 1:
     raise MultipleBaseClassException("cannot handle multiple base classes (" + className + ")")
 
+  genTypes = True
   if len(baseSpec) > 0:
+    if "<" in baseSpec[0].type.spelling:
+      genTypes = False
+      print("Cannot generate types for class with template class as base class (" + className + ")")
+    if ":" in baseSpec[0].type.spelling:
+      genTypes = False
+      print("Cannot generate types for class with colon operator in base class (" + className + ")")
     baseClassBinding = ", base<" + baseSpec[0].type.spelling + ">"
     baseClassType = " extends " + baseSpec[0].type.spelling + " "
   else:
@@ -596,7 +603,8 @@ def getClassBinding(className, children):
 
   return [
     "  class_<" + className + baseClassBinding + ">(\"" + className + "\")" + os.linesep,
-    "  class " + className + baseClassType + "{" + os.linesep
+    ("class " + className + baseClassType + "{" + os.linesep) if genTypes else "",
+    ("  " + className + ": typeof " + className + ";" + os.linesep) if genTypes else ""
   ]
 
 # Generates cast bindings for a method. Some methods neet to be reinterpret_cast'd or static_cast'd
@@ -1109,7 +1117,8 @@ def getClassBindings(newChildren):
   bindingsOutput = ""
   epilogOutput = ""
   docsOutput = ""
-  classTypeOutput = ""
+  classTypeDefOutput = ""
+  classTypeListOutput = ""
   print("generating bindings for classes...")
   for o in newChildren:
     if o.kind == clang.cindex.CursorKind.CLASS_DECL:
@@ -1118,18 +1127,19 @@ def getClassBindings(newChildren):
       successfulBinding = False
       if processClass(theClass):
         try:
-          classBinding, classType = getClassBinding(theClass.spelling, list(theClass.get_children()))
+          classBinding, classTypeDef, classTypeList = getClassBinding(theClass.spelling, list(theClass.get_children()))
           bindingsOutput += classBinding
-          classTypeOutput += classType
+          classTypeDefOutput += classTypeDef
+          classTypeListOutput += classTypeList
           docsOutput += "### ![](https://bit.ly/2El7GLC) `" + theClass.spelling + "`" + os.linesep + os.linesep
           abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
           if not abstract:
             constructorBinding, constructorType = getSimpleConstructorBinding(list(theClass.get_children()))
             bindingsOutput += constructorBinding
-            classTypeOutput += constructorType
+            # classTypeOutput += constructorType
           bindingsOutput += getMethodsBinding(theClass.spelling, list(theClass.get_children()))
           bindingsOutput += "  ;" + os.linesep
-          classTypeOutput += "  }" + os.linesep
+          classTypeDefOutput += "}" + os.linesep + os.linesep
           if not abstract:
             bindingsOutput += getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children()))
           epilogOutput += getEpilogForClass(theClass)
@@ -1145,7 +1155,8 @@ def getClassBindings(newChildren):
     bindingsOutput,
     epilogOutput,
     docsOutput,
-    classTypeOutput
+    classTypeDefOutput,
+    classTypeListOutput
   ]
 
 # Generates bindings for all enums
@@ -1235,24 +1246,21 @@ EMSCRIPTEN_BINDINGS(opencascadejs) {
 ''')
   typescriptFile = open("../dist/opencascade.d.ts", "w")
   typescriptFile.write(
-'''export default opencascade;
-declare function opencascade<T>(target?: T): Promise<T & typeof opencascade>;
-declare module opencascade {
-  function destroy(obj: any): void;
-  function _malloc(size: number): number;
-  function _free(ptr: number): void;
-  const HEAP8: Int8Array;
-  const HEAP16: Int16Array;
-  const HEAP32: Int32Array;
-  const HEAPU8: Uint8Array;
-  const HEAPU16: Uint16Array;
-  const HEAPU32: Uint32Array;
-  const HEAPF32: Float32Array;
-  const HEAPF64: Float64Array;
-  type Standard_Real = number;
-  type Standard_Boolean = boolean;
-  type Standard_Integer = number;
-  type Standard_CString = string;
+'''export declare function initOpenCascade(): Promise<opencascade>;
+
+export interface opencascade {
+  ready: Promise<opencascade>;
+  
+  _malloc: (size: number) => number;
+  _free: (ptr: number) => void;
+  HEAP8: Int8Array;
+  HEAP16: Int16Array;
+  HEAP32: Int32Array;
+  HEAPU8: Uint8Array;
+  HEAPU16: Uint16Array;
+  HEAPU32: Uint32Array;
+  HEAPF32: Float32Array;
+  HEAPF64: Float64Array;
 
 ''')
 
@@ -1266,9 +1274,9 @@ declare module opencascade {
       newChildren.append(child)
   newChildren = sorted(newChildren, key=lambda x: x.spelling)
 
-  classBindingsOutput, classEpilogOutput, classDocsOutput, classTypeOutput = getClassBindings(newChildren)
+  classBindingsOutput, classEpilogOutput, classDocsOutput, classTypeDefOutput, classTypeListOutput = getClassBindings(newChildren)
   bindingsFile.write(classBindingsOutput)
-  typescriptFile.write(classTypeOutput)
+  typescriptFile.write(classTypeListOutput)
   outputDocFile.write(classDocsOutput)
   handleBindingsOutput = getHandleTypeBindings(children)[0]
   bindingsFile.write(handleBindingsOutput)
@@ -1279,7 +1287,7 @@ declare module opencascade {
   nCollection_ListBindingsOutput = getNCollection_ListTypeBindings(children)[0]
   bindingsFile.write(nCollection_ListBindingsOutput)
 
-  typescriptFile.write("}" + os.linesep)
+  typescriptFile.write("}" + os.linesep + os.linesep + classTypeDefOutput)
   bindingsFile.write("}" + os.linesep + os.linesep)
   bindingsFile.write(classEpilogOutput)
 
