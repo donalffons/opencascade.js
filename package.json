@@ -13,7 +13,7 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/runtime": "^7.11.2",
     "jest": "^26.4.2",
-    "opencascade.js-examples": "https://github.com/donalffons/opencascade.js-examples.git",
+    "opencascade.js-examples": "git://github.com/donalffons/opencascade.js-examples.git#master",
     "three": "^0.120.1"
   },
   "scripts": {
