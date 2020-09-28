@@ -6,6 +6,22 @@
   "author": "Sebastian Alff <donalffons@gmail.com>",
   "license": "LGPL-2.1-only",
   "repository": "github:donalffons/opencascade.js",
-  "devDependencies": {},
-  "scripts": {}
+  "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/runtime": "^7.11.2",
+    "jest": "^26.4.2",
+    "opencascade.js-examples": "git://github.com/donalffons/opencascade.js-examples.git#master",
+    "three": "^0.120.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/actions-runner/"
+    ]
+  }
 }
