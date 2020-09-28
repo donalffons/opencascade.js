@@ -7,7 +7,7 @@
   "license": "LGPL-2.1-only",
   "repository": "github:donalffons/opencascade.js",
   "devDependencies": {
-    "@babel/core": "^7.11.6",
+    "@babel/core": "^7.0.0-0",
     "@babel/plugin-transform-modules-commonjs": "^7.10.4",
     "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
