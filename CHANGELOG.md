@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.1.2 (unreleased)
+* CI-Testing system implemented, which uses some of the code in the `opencascade-examples` repository (but can also define stand-alone tests).
+
 ## v1.1.1
 * Removed support for `TColQuantity_Array1OfLength` and `TopoDS_ListOfShape`, as they cause errors during initialization of the library.
 
