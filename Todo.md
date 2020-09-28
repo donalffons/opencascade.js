@@ -13,12 +13,13 @@
 * To be able to use dynamic libraries, the initialization of the library (i.e. `new opencascade()`) must(?) take place in a web-worker. Using Emscripten`s `dynamicLibraries` array when initializing on the main-thread will result in an error in Chrome and probably all major browsers (maybe there is a workaround?). In most real-world applications, it would make sense to run openCascade computations in a separate worker-thread anyways. The additional complexity for setting this up should be kept at a minimum.
 * It should be possible to select which parts of opencascade to load at run-time of the web application. The library therefore has to be broken up into separate modules.
 * Probably, it would be a good idea to have one module for each folder in `build/occt/src`.
-* It would be great, if the user of this library could chose between debug and release version of the library.
+* It would be great, if the user of this library could chose between debug and release version of the library. Debug versions should have support for source maps and DWARF debugging.
 * Modularization will leed to smaller binaries, which will result in shorter build times per binary, which will hopefully bring the build system back to life.
 
 ## 3. Testing (non-breaking changes)
 
 * Currently, there are no automatic tests in the library. There has already been [one reported issue](https://github.com/donalffons/opencascade.js/issues/11), in which Emscripten succesfully generated a WASM binary, which was unusable from JavaScript.
+* It would be cool to run MakeBottle as a separate Github Action unit test (triggered on each commit etc.)
 
 ## 3. Auto-Binding (non-breaking changes)
 
@@ -48,3 +49,5 @@
 * Experiment with opencascade's built-in visualization and see if it works with Emscripten and if it's any good. Create example.
 * Auto-generate some kind of documentation, which parts of the OpenCascade API have been exposed. Maybe with some percentage-indication that gives potential users a feeling for how much of OpenCascade can be used via JavaScript. That shouldn't be too hard to implement using the autobind script...
 * Test with NodeJS runtime and write up some recommendations on how to use the library there.
+* Add polygon test from test suite to examples repo.
+* Re-organize folder structure, so that all relevant code is contained inside one sub-folder. The `docker run -v` command can then pick that folder as a shared volume. It will not be necessary to rebuild the container before each run.

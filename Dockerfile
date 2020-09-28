@@ -29,7 +29,9 @@ RUN \
 
 RUN apt install -y libncurses5 libncurses6 libncurses5-dev libncursesw5-dev
 
+RUN npm install --global yarn
+
 WORKDIR /opencascade/
 COPY . .
 
-ENTRYPOINT ["./execBuild.sh"]
+ENTRYPOINT ["./run.sh"]

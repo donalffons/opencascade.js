@@ -562,6 +562,9 @@ def processTypedef(typedef):
   # Generates error "Cannot register type 'TColQuantity_Array1OfLength' twice" during initialization of the WASM file. Seems to be conflicting with 'TColStd_Array1OfReal'. Can be reproduced by including these two bindings in one bindings-file.
   if typedef.spelling == "TColQuantity_Array1OfLength":
     return False
+  # Same as above, but with TopoDS_ListOfShape / TopTools_ListOfShape
+  if typedef.spelling == "TopoDS_ListOfShape":
+    return False
 
   return True
 
