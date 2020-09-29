@@ -8230,6 +8230,9 @@ export interface opencascade {
 class APIHeaderSection_EditHeader extends IFSelect_Editor {
 }
 
+/**
+ * This class allows to consult and prepare/edit data stored in a Step Model Header
+ */
 class APIHeaderSection_MakeHeader {
 }
 
@@ -8237,9 +8240,15 @@ class APIHeaderSection_MakeHeader_1 extends APIHeaderSection_MakeHeader {}
 
 class APIHeaderSection_MakeHeader_2 extends APIHeaderSection_MakeHeader {}
 
+/**
+ * Root class for 2D curves on which geometric algorithms work. An adapted curve is an interface between the services provided by a curve, and those required of the curve by algorithms, which use it. A derived concrete class is provided: Geom2dAdaptor_Curve for a curve from the Geom2d package.
+ */
 class Adaptor2d_Curve2d {
 }
 
+/**
+ * Root class for 2D curves manipulated by handles, on which geometric algorithms work. An adapted curve is an interface between the services provided by a curve, and those required of the curve by algorithms, which use it. A derived specific class is provided: Geom2dAdaptor_HCurve for a curve from the Geom2d package.
+ */
 class Adaptor2d_HCurve2d extends Standard_Transient {
 }
 
@@ -8257,6 +8266,9 @@ class Adaptor2d_HOffsetCurve_1 extends Adaptor2d_HOffsetCurve {}
 
 class Adaptor2d_HOffsetCurve_2 extends Adaptor2d_HOffsetCurve {}
 
+/**
+ * Use by the TopolTool to trim a surface.
+ */
 class Adaptor2d_Line2d extends Adaptor2d_Curve2d {
 }
 
@@ -8264,6 +8276,9 @@ class Adaptor2d_Line2d_1 extends Adaptor2d_Line2d {}
 
 class Adaptor2d_Line2d_2 extends Adaptor2d_Line2d {}
 
+/**
+ * Defines an Offset curve (algorithmic 2d curve).
+ */
 class Adaptor2d_OffsetCurve extends Adaptor2d_Curve2d {
 }
 
@@ -8275,9 +8290,15 @@ class Adaptor2d_OffsetCurve_3 extends Adaptor2d_OffsetCurve {}
 
 class Adaptor2d_OffsetCurve_4 extends Adaptor2d_OffsetCurve {}
 
+/**
+ * Root class for 3D curves on which geometric algorithms work. An adapted curve is an interface between the services provided by a curve and those required of the curve by algorithms which use it. Two derived concrete classes are provided: - GeomAdaptor_Curve for a curve from the Geom package - Adaptor3d_CurveOnSurface for a curve lying on a surface from the Geom package.
+ */
 class Adaptor3d_Curve {
 }
 
+/**
+ * An interface between the services provided by a curve lying on a surface from the package Geom and those required of the curve by algorithms which use it. The curve is defined as a 2D curve from the Geom2d package, in the parametric space of the surface.
+ */
 class Adaptor3d_CurveOnSurface extends Adaptor3d_Curve {
 }
 
@@ -8287,6 +8308,9 @@ class Adaptor3d_CurveOnSurface_2 extends Adaptor3d_CurveOnSurface {}
 
 class Adaptor3d_CurveOnSurface_3 extends Adaptor3d_CurveOnSurface {}
 
+/**
+ * Root class for 3D curves manipulated by handles, on which geometric algorithms work. An adapted curve is an interface between the services provided by a curve and those required of the curve by algorithms which use it. Two derived concrete classes are provided: - GeomAdaptor_HCurve for a curve from the Geom package - Adaptor3d_HCurveOnSurface for a curve lying on a surface from the Geom package.
+ */
 class Adaptor3d_HCurve extends Standard_Transient {
 }
 
@@ -8304,6 +8328,9 @@ class Adaptor3d_HIsoCurve_1 extends Adaptor3d_HIsoCurve {}
 
 class Adaptor3d_HIsoCurve_2 extends Adaptor3d_HIsoCurve {}
 
+/**
+ * Root class for surfaces manipulated by handles, on which geometric algorithms work. An adapted surface is an interface between the services provided by a surface and those required of the surface by algorithms which use it. A derived concrete class is provided: GeomAdaptor_HSurface for a surface from the Geom package.
+ */
 class Adaptor3d_HSurface extends Standard_Transient {
 }
 
@@ -8317,9 +8344,15 @@ class Adaptor3d_HVertex_1 extends Adaptor3d_HVertex {}
 
 class Adaptor3d_HVertex_2 extends Adaptor3d_HVertex {}
 
+/**
+ * Used to find the points U(t) = U0 or V(t) = V0 in order to determine the Cn discontinuities of an Adpator_CurveOnSurface relativly to the discontinuities of the surface. Used to find the roots of the functions
+ */
 class Adaptor3d_InterFunc extends math_FunctionWithDerivative {
 }
 
+/**
+ * Defines an isoparametric curve on a surface. The type of isoparametric curve (U or V) is defined with the enumeration IsoType from GeomAbs if NoneIso is given an error is raised.
+ */
 class Adaptor3d_IsoCurve extends Adaptor3d_Curve {
 }
 
@@ -8331,9 +8364,15 @@ class Adaptor3d_IsoCurve_3 extends Adaptor3d_IsoCurve {}
 
 class Adaptor3d_IsoCurve_4 extends Adaptor3d_IsoCurve {}
 
+/**
+ * Root class for surfaces on which geometric algorithms work. An adapted surface is an interface between the services provided by a surface and those required of the surface by algorithms which use it. A derived concrete class is provided: GeomAdaptor_Surface for a surface from the Geom package. The Surface class describes the standard behaviour of a surface for generic algorithms.
+ */
 class Adaptor3d_Surface {
 }
 
+/**
+ * This class provides a default topological tool, based on the Umin,Vmin,Umax,Vmax of an HSurface from Adaptor3d. All methods and fields may be redefined when inheriting from this class. This class is used to instantiate algorithmes as Intersection, outlines,...
+ */
 class Adaptor3d_TopolTool extends Standard_Transient {
 }
 
@@ -8341,6 +8380,9 @@ class Adaptor3d_TopolTool_1 extends Adaptor3d_TopolTool {}
 
 class Adaptor3d_TopolTool_2 extends Adaptor3d_TopolTool {}
 
+/**
+ * Perform the approximation of <Func> F(U,V) Arguments are : Num1DSS, Num2DSS, Num3DSS :The numbers of 1,2,3 dimensional subspaces OneDTol, TwoDTol, ThreeDTol: The tolerance of approximation in each subspaces OneDTolFr, TwoDTolFr, ThreeDTolFr: The tolerance of approximation on the boundarys in each subspaces [FirstInU, LastInU]: The Bounds in U of the Approximation [FirstInV, LastInV]: The Bounds in V of the Approximation FavorIso : Give preference to extract u-iso or v-iso on F(U,V) This can be usefull to optimize the <Func> methode ContInU, ContInV : Continuity waiting in u and v PrecisCode : Precision on approximation's error mesurement 1 : Fast computation and average precision 2 : Average computation and good precision 3 : Slow computation and very good precision MaxDegInU : Maximum u-degree waiting in U MaxDegInV : Maximum u-degree waiting in V Warning: MaxDegInU (resp. MaxDegInV) must be >= 2*iu (resp. iv) + 1, where iu (resp. iv) = 0 if ContInU (resp. ContInV) = GeomAbs_C0, = 1 if = GeomAbs_C1, = 2 if = GeomAbs_C2. MaxPatch : Maximun number of Patch waiting number of Patch is number of u span * number of v span Func : The external method to evaluate F(U,V) Crit : To (re)defined condition of convergence UChoice, VChoice : To define the way in U (or V) Knot insertion Warning: for the moment, the result is a 3D Surface so Num1DSS and Num2DSS must be equals to 0 and Num3DSS must be equal to 1. Warning: the Function of type EvaluatorFunc2Var from Approx must be a subclass of AdvApp2Var_EvaluatorFunc2Var
+ */
 class AdvApp2Var_ApproxAFunc2Var {
 }
 
@@ -8351,6 +8393,9 @@ class AdvApp2Var_ApproxAFunc2Var_2 extends AdvApp2Var_ApproxAFunc2Var {}
 class AdvApp2Var_ApproxF2var {
 }
 
+/**
+ * contains all the parameters for approximation ( tolerancy, computing option, ...)
+ */
 class AdvApp2Var_Context {
 }
 
@@ -8358,9 +8403,15 @@ class AdvApp2Var_Context_1 extends AdvApp2Var_Context {}
 
 class AdvApp2Var_Context_2 extends AdvApp2Var_Context {}
 
+/**
+ * this class contains a given criterion to be satisfied
+ */
 class AdvApp2Var_Criterion {
 }
 
+/**
+ * /
+ */
 class AdvApp2Var_Data {
 }
 
@@ -8370,6 +8421,9 @@ class AdvApp2Var_EvaluatorFunc2Var {
 class AdvApp2Var_MathBase {
 }
 
+/**
+ * used to store constraints on a (Ui,Vj) point
+ */
 class AdvApp2Var_Node {
 }
 
@@ -8379,6 +8433,9 @@ class AdvApp2Var_Node_2 extends AdvApp2Var_Node {}
 
 class AdvApp2Var_Node_3 extends AdvApp2Var_Node {}
 
+/**
+ * used to store results on a domain [Ui,Ui+1]x[Vj,Vj+1]
+ */
 class AdvApp2Var_Patch {
 }
 
@@ -8389,6 +8446,9 @@ class AdvApp2Var_Patch_2 extends AdvApp2Var_Patch {}
 class AdvApp2Var_SysBase {
 }
 
+/**
+ * this approximate a given function
+ */
 class AdvApprox_ApproxAFunction {
 }
 
@@ -8396,36 +8456,66 @@ class AdvApprox_ApproxAFunction_1 extends AdvApprox_ApproxAFunction {}
 
 class AdvApprox_ApproxAFunction_2 extends AdvApprox_ApproxAFunction {}
 
+/**
+ * to choose the way of cutting in approximation
+ */
 class AdvApprox_Cutting {
 }
 
+/**
+ * if Cutting is necessary in [a,b], we cut at (a+b) / 2.
+ */
 class AdvApprox_DichoCutting extends AdvApprox_Cutting {
 }
 
+/**
+ * Interface for a class implementing a function to be approximated by AdvApprox_ApproxAFunction
+ */
 class AdvApprox_EvaluatorFunction {
 }
 
+/**
+ * inherits class Cutting; contains a list of preferential points (pi)i and a list of Recommended points used in cutting management. if Cutting is necessary in [a,b], we cut at the di nearest from (a+b)/2
+ */
 class AdvApprox_PrefAndRec extends AdvApprox_Cutting {
 }
 
+/**
+ * inherits class Cutting; contains a list of preferential points (di)i if Cutting is necessary in [a,b], we cut at the di nearest from (a+b)/2.
+ */
 class AdvApprox_PrefCutting extends AdvApprox_Cutting {
 }
 
+/**
+ * Approximate a function on an intervall [First,Last] The result is a simple polynomial whose degree is as low as possible to satisfy the required tolerance and the maximum degree. The maximum error and the averrage error resulting from approximating the function by the polynomial are computed
+ */
 class AdvApprox_SimpleApprox {
 }
 
+/**
+ * Bspline approximation of a surface.
+ */
 class AppBlend_Approx {
 }
 
+/**
+ * Class describing a continous 3d and/or function f(u). This class must be provided by the user to use the approximation algorithm FittingCurve.
+ */
 class AppCont_Function {
 }
 
 class AppCont_LeastSquare {
 }
 
+/**
+ * Parallel Approximation in n curves. This package gives all the algorithms used to approximate a MultiLine described by the tool MLineTool. The result of the approximation will be a MultiCurve.
+ */
 class AppParCurves {
 }
 
+/**
+ * associates an index and a constraint for an object. This couple is used by AppDef_TheVariational when performing approximations.
+ */
 class AppParCurves_ConstraintCouple {
 }
 
@@ -8433,6 +8523,9 @@ class AppParCurves_ConstraintCouple_1 extends AppParCurves_ConstraintCouple {}
 
 class AppParCurves_ConstraintCouple_2 extends AppParCurves_ConstraintCouple {}
 
+/**
+ * This class describes a MultiBSpCurve approximating a Multiline. Just as a Multiline is a set of a given number of lines, a MultiBSpCurve is a set of a specified number of bsplines defined by: - A specified number of MultiPoints - the poles of a specified number of curves - The degree of approximation identical for each of the specified number of curves.
+ */
 class AppParCurves_MultiBSpCurve extends AppParCurves_MultiCurve {
 }
 
@@ -8444,6 +8537,9 @@ class AppParCurves_MultiBSpCurve_3 extends AppParCurves_MultiBSpCurve {}
 
 class AppParCurves_MultiBSpCurve_4 extends AppParCurves_MultiBSpCurve {}
 
+/**
+ * This class describes a MultiCurve approximating a Multiline. As a Multiline is a set of n lines, a MultiCurve is a set of n curves. These curves are Bezier curves. A MultiCurve is composed of m MultiPoint. The approximating degree of these n curves is the same for each one.
+ */
 class AppParCurves_MultiCurve {
 }
 
@@ -8453,6 +8549,9 @@ class AppParCurves_MultiCurve_2 extends AppParCurves_MultiCurve {}
 
 class AppParCurves_MultiCurve_3 extends AppParCurves_MultiCurve {}
 
+/**
+ * This class describes Points composing a MultiPoint. These points can be 2D or 3D. The user must first give the 3D Points and then the 2D Points. They are Poles of a Bezier Curve. This class is used either to define data input or results when performing the approximation of several lines in parallel.
+ */
 class AppParCurves_MultiPoint {
 }
 
@@ -8466,24 +8565,39 @@ class AppParCurves_MultiPoint_4 extends AppParCurves_MultiPoint {}
 
 class AppParCurves_MultiPoint_5 extends AppParCurves_MultiPoint {}
 
+/**
+ * Legacy class defining resources name for lite OCAF documents
+ */
 class AppStdL_Application extends TDocStd_Application {
 }
 
+/**
+ * Legacy class defining resources name for standard OCAF documents
+ */
 class AppStd_Application extends TDocStd_Application {
 }
 
+/**
+ * This class intended to build knots sequence on discrete set of points for further approximation into bspline curve.
+ */
 class ApproxInt_KnotTools {
 }
 
 class ApproxInt_SvSurfaces {
 }
 
+/**
+ * Makes an approximation for HCurve2d from Adaptor3d
+ */
 class Approx_Curve2d {
 }
 
 class Approx_Curve3d {
 }
 
+/**
+ * Approximation of curve on surface
+ */
 class Approx_CurveOnSurface {
 }
 
@@ -8491,6 +8605,9 @@ class Approx_CurveOnSurface_1 extends Approx_CurveOnSurface {}
 
 class Approx_CurveOnSurface_2 extends Approx_CurveOnSurface {}
 
+/**
+ * Approximation of a Curve to make its parameter be its curvilinear abscissa If the curve is a curve on a surface S, C2D is the corresponding Pcurve, we considere the curve is given by its representation S(C2D(u)) If the curve is a curve on 2 surfaces S1 and S2 and C2D1 C2D2 are the two corresponding Pcurve, we considere the curve is given by its representation 1/2(S1(C2D1(u) + S2 (C2D2(u)))
+ */
 class Approx_CurvilinearParameter {
 }
 
@@ -8500,6 +8617,9 @@ class Approx_CurvilinearParameter_2 extends Approx_CurvilinearParameter {}
 
 class Approx_CurvilinearParameter_3 extends Approx_CurvilinearParameter {}
 
+/**
+ * defines an abstract curve with curvilinear parametrization
+ */
 class Approx_CurvlinFunc extends Standard_Transient {
 }
 
@@ -8526,6 +8646,9 @@ class Approx_FitAndDivide2d_2 extends Approx_FitAndDivide2d {}
 class Approx_MCurvesToBSpCurve {
 }
 
+/**
+ * Approximation of a PCurve on a surface to make its parameter be the same that the parameter of a given 3d reference curve.
+ */
 class Approx_SameParameter {
 }
 
@@ -8535,12 +8658,21 @@ class Approx_SameParameter_2 extends Approx_SameParameter {}
 
 class Approx_SameParameter_3 extends Approx_SameParameter {}
 
+/**
+ * Approximation of an Surface S(u,v) (and eventually associate 2d Curves) defined by section's law.
+ */
 class Approx_SweepApproximation {
 }
 
+/**
+ * defined the function used by SweepApproximation to perform sweeping application.
+ */
 class Approx_SweepFunction extends Standard_Transient {
 }
 
+/**
+ * The Curve from BRepAdaptor allows to use a Wire of the BRep topology like a 3D curve. Warning: With this class of curve, C0 and C1 continuities are not assumed. So be careful with some algorithm! Please note that BRepAdaptor_CompCurve cannot be periodic curve at all (even if it contains single periodic edge).
+ */
 class BRepAdaptor_CompCurve extends Adaptor3d_Curve {
 }
 
@@ -8550,6 +8682,9 @@ class BRepAdaptor_CompCurve_2 extends BRepAdaptor_CompCurve {}
 
 class BRepAdaptor_CompCurve_3 extends BRepAdaptor_CompCurve {}
 
+/**
+ * The Curve from BRepAdaptor allows to use an Edge of the BRep topology like a 3D curve.
+ */
 class BRepAdaptor_Curve extends Adaptor3d_Curve {
 }
 
@@ -8559,6 +8694,9 @@ class BRepAdaptor_Curve_2 extends BRepAdaptor_Curve {}
 
 class BRepAdaptor_Curve_3 extends BRepAdaptor_Curve {}
 
+/**
+ * The Curve2d from BRepAdaptor allows to use an Edge on a Face like a 2d curve. (curve in the parametric space).
+ */
 class BRepAdaptor_Curve2d extends Geom2dAdaptor_Curve {
 }
 
@@ -8594,6 +8732,9 @@ class BRepAdaptor_HSurface_1 extends BRepAdaptor_HSurface {}
 
 class BRepAdaptor_HSurface_2 extends BRepAdaptor_HSurface {}
 
+/**
+ * The Surface from BRepAdaptor allows to use a Face of the BRep topology look like a 3D surface.
+ */
 class BRepAdaptor_Surface extends Adaptor3d_Surface {
 }
 
@@ -8601,12 +8742,21 @@ class BRepAdaptor_Surface_1 extends BRepAdaptor_Surface {}
 
 class BRepAdaptor_Surface_2 extends BRepAdaptor_Surface {}
 
+/**
+ * The BRepAlgo package provides a full range of services to perform Old Boolean Operations in Open CASCADE. Attention: The New Boolean Operation has replaced the Old Boolean Operations algorithm in the BrepAlgoAPI package in Open CASCADE.
+ */
 class BRepAlgo {
 }
 
+/**
+ * Provides the root interface for the API algorithms
+ */
 class BRepAlgoAPI_Algo extends BRepBuilderAPI_MakeShape {
 }
 
+/**
+ * The root API class for performing Boolean Operations on arbitrary shapes.
+ */
 class BRepAlgoAPI_BooleanOperation extends BRepAlgoAPI_BuilderAlgo {
 }
 
@@ -8614,6 +8764,9 @@ class BRepAlgoAPI_BooleanOperation_1 extends BRepAlgoAPI_BooleanOperation {}
 
 class BRepAlgoAPI_BooleanOperation_2 extends BRepAlgoAPI_BooleanOperation {}
 
+/**
+ * The class contains API level of the General Fuse algorithm.
+ */
 class BRepAlgoAPI_BuilderAlgo extends BRepAlgoAPI_Algo {
 }
 
@@ -8621,6 +8774,9 @@ class BRepAlgoAPI_BuilderAlgo_1 extends BRepAlgoAPI_BuilderAlgo {}
 
 class BRepAlgoAPI_BuilderAlgo_2 extends BRepAlgoAPI_BuilderAlgo {}
 
+/**
+ * The class Check provides a diagnostic tool for checking the validity of the single shape or couple of shapes. The shapes are checked on: - Topological validity; - Small edges; - Self-interference; - Validity for Boolean operation of certain type (for couple of shapes only).
+ */
 class BRepAlgoAPI_Check extends BOPAlgo_Options {
 }
 
@@ -8630,6 +8786,9 @@ class BRepAlgoAPI_Check_2 extends BRepAlgoAPI_Check {}
 
 class BRepAlgoAPI_Check_3 extends BRepAlgoAPI_Check {}
 
+/**
+ * The class provides Boolean common operation between arguments and tools (Boolean Intersection).
+ */
 class BRepAlgoAPI_Common extends BRepAlgoAPI_BooleanOperation {
 }
 
@@ -8641,6 +8800,9 @@ class BRepAlgoAPI_Common_3 extends BRepAlgoAPI_Common {}
 
 class BRepAlgoAPI_Common_4 extends BRepAlgoAPI_Common {}
 
+/**
+ * The class Cut provides Boolean cut operation between arguments and tools (Boolean Subtraction).
+ */
 class BRepAlgoAPI_Cut extends BRepAlgoAPI_BooleanOperation {
 }
 
@@ -8652,9 +8814,15 @@ class BRepAlgoAPI_Cut_3 extends BRepAlgoAPI_Cut {}
 
 class BRepAlgoAPI_Cut_4 extends BRepAlgoAPI_Cut {}
 
+/**
+ * The BRepAlgoAPI_Defeaturing algorithm is the API algorithm intended for removal of the unwanted parts from the shape. The unwanted parts (or features) can be holes, protrusions, gaps, chamfers, fillets etc. The shape itself is not modified, the new shape is built as the result.
+ */
 class BRepAlgoAPI_Defeaturing extends BRepAlgoAPI_Algo {
 }
 
+/**
+ * The class provides Boolean fusion operation between arguments and tools (Boolean Union).
+ */
 class BRepAlgoAPI_Fuse extends BRepAlgoAPI_BooleanOperation {
 }
 
@@ -8666,6 +8834,9 @@ class BRepAlgoAPI_Fuse_3 extends BRepAlgoAPI_Fuse {}
 
 class BRepAlgoAPI_Fuse_4 extends BRepAlgoAPI_Fuse {}
 
+/**
+ * The algorithm is to build a Secton operation between arguments and tools. The result of Section operation consists of vertices and edges. The result of Section operation contains: 1. new vertices that are subjects of V/V, E/E, E/F, F/F interferences 2. vertices that are subjects of V/E, V/F interferences 3. new edges that are subjects of F/F interferences 4. edges that are Common Blocks
+ */
 class BRepAlgoAPI_Section extends BRepAlgoAPI_BooleanOperation {
 }
 
@@ -8685,6 +8856,9 @@ class BRepAlgoAPI_Section_7 extends BRepAlgoAPI_Section {}
 
 class BRepAlgoAPI_Section_8 extends BRepAlgoAPI_Section {}
 
+/**
+ * The class contains API level of the **Splitter** algorithm, which allows splitting a group of arbitrary shapes by the other group of arbitrary shapes. The arguments of the operation are divided on two groups: *Objects* - shapes that will be split; *Tools* - shapes by which the *Objects* will be split. The result of the operation contains only the split parts of the shapes from the group of *Objects*. The split parts of the shapes from the group of *Tools* are excluded from the result. The shapes can be split by the other shapes from the same group (in case these shapes are interfering).
+ */
 class BRepAlgoAPI_Splitter extends BRepAlgoAPI_BuilderAlgo {
 }
 
@@ -8692,30 +8866,57 @@ class BRepAlgoAPI_Splitter_1 extends BRepAlgoAPI_Splitter {}
 
 class BRepAlgoAPI_Splitter_2 extends BRepAlgoAPI_Splitter {}
 
+/**
+ * SD to store descendants and ascendants of Shapes.
+ */
 class BRepAlgo_AsDes extends Standard_Transient {
 }
 
+/**
+ * The abstract class BooleanOperation is the root class of Boolean operations. A BooleanOperation object stores the two shapes in preparation for the Boolean operation specified in one of the classes inheriting from this one. These include: - Common - Cut - Fuse - Section.
+ */
 class BRepAlgo_BooleanOperation extends BRepBuilderAPI_MakeShape {
 }
 
+/**
+ * Describes functions for performing a topological common operation (Boolean intersection). A Common object provides the framework for: - defining the construction of a common shape, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepAlgo_Common extends BRepAlgo_BooleanOperation {
 }
 
+/**
+ * Describes functions for performing a topological cut operation (Boolean subtraction). A Cut object provides the framework for: - defining the construction of a cut shape, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepAlgo_Cut extends BRepAlgo_BooleanOperation {
 }
 
+/**
+ * Builds all the faces limited with a set of non jointing and planars wires. if <ControlOrientation> is false The Wires must have correct orientations. Sinon orientation des wires de telle sorte que les faces ne soient pas infinies et qu'elles soient disjointes.
+ */
 class BRepAlgo_FaceRestrictor {
 }
 
+/**
+ * Describes functions for performing a topological fusion operation (Boolean union). A Fuse object provides the framework for: - defining the construction of a fused shape, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepAlgo_Fuse extends BRepAlgo_BooleanOperation {
 }
 
+/**
+ * Stores link between a shape <S> and a shape <NewS> obtained from <S>. <NewS> is an image of <S>.
+ */
 class BRepAlgo_Image {
 }
 
+/**
+ * Builds the loops from a set of edges on a face.
+ */
 class BRepAlgo_Loop {
 }
 
+/**
+ * This class makes the projection of a wire on a shape.
+ */
 class BRepAlgo_NormalProjection {
 }
 
@@ -8723,6 +8924,9 @@ class BRepAlgo_NormalProjection_1 extends BRepAlgo_NormalProjection {}
 
 class BRepAlgo_NormalProjection_2 extends BRepAlgo_NormalProjection {}
 
+/**
+ * Construction of the section lines between two shapes. For this Boolean operation, each face of the first shape is intersected by each face of the second shape. The resulting intersection edges are brought together into a compound object, but not chained or grouped into wires. Computation of the intersection of two Shapes or Surfaces The two parts involved in this Boolean operation may be defined from geometric surfaces: the most common use is the computation of the planar section of a shape. A Section object provides the framework for: - defining the shapes to be intersected, and the computation options, - implementing the construction algorithm, and - consulting the result. Example : giving two shapes S1,S2 accessing faces, let compute the section edges R on S1,S2, performing approximation on new curves, performing PCurve on part 1 but not on part 2 : Standard_Boolean PerformNow = Standard_False; BRepBoolAPI_Section S(S1,S2,PerformNow); S.ComputePCurveOn1(Standard_True); S.Approximation(Standard_True); S.Build(); TopoDS_Shape R = S.Shape(); On Null Shapes of geometries, NotDone() is called.
+ */
 class BRepAlgo_Section extends BRepAlgo_BooleanOperation {
 }
 
@@ -8876,15 +9080,27 @@ class BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox_2 extends BRepApprox
 
 class BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox_3 extends BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox {}
 
+/**
+ * Function to approximate by AppSurface for Surface/Surface contact.
+ */
 class BRepBlend_AppFunc extends BRepBlend_AppFuncRoot {
 }
 
+/**
+ * Function to approximate by AppSurface
+ */
 class BRepBlend_AppFuncRoot extends Approx_SweepFunction {
 }
 
+/**
+ * Function to approximate by AppSurface for Curve/Surface contact.
+ */
 class BRepBlend_AppFuncRst extends BRepBlend_AppFuncRoot {
 }
 
+/**
+ * Function to approximate by AppSurface for Edge/Face (Curve/Curve contact).
+ */
 class BRepBlend_AppFuncRstRst extends BRepBlend_AppFuncRoot {
 }
 
@@ -8895,6 +9111,9 @@ class BRepBlend_AppSurf_1 extends BRepBlend_AppSurf {}
 
 class BRepBlend_AppSurf_2 extends BRepBlend_AppSurf {}
 
+/**
+ * Used to Approximate the blending surfaces.
+ */
 class BRepBlend_AppSurface extends AppBlend_Approx {
 }
 
@@ -8904,6 +9123,9 @@ class BRepBlend_BlendTool {
 class BRepBlend_CSWalking {
 }
 
+/**
+ * Function of reframing between a point and a curve. valid in cases of constant and progressive radius. This function is used to find a solution on a done point of the curve 1 when using RstRstConsRad or CSConstRad... The vector <X> used in Value, Values and Derivatives methods has to be the vector of the parametric coordinates w, U where w is the parameter on the guide line, U are the parametric coordinates of a point on the partner curve 2.
+ */
 class BRepBlend_CurvPointRadInv extends Blend_CurvPointFuncInv {
 }
 
@@ -8927,6 +9149,9 @@ class BRepBlend_HCurveTool {
 class BRepBlend_Line extends Standard_Transient {
 }
 
+/**
+ * Definition of an intersection point between a line and a restriction on a surface. Such a point is contains geometrical informations (see the Value method) and logical informations.
+ */
 class BRepBlend_PointOnRst {
 }
 
@@ -8934,42 +9159,78 @@ class BRepBlend_PointOnRst_1 extends BRepBlend_PointOnRst {}
 
 class BRepBlend_PointOnRst_2 extends BRepBlend_PointOnRst {}
 
+/**
+ * Copy of CSConstRad with a pcurve on surface as support.
+ */
 class BRepBlend_RstRstConstRad extends Blend_RstRstFunction {
 }
 
+/**
+ * Function to approximate by AppSurface for Edge/Edge and evolutif radius
+ */
 class BRepBlend_RstRstEvolRad extends Blend_RstRstFunction {
 }
 
+/**
+ * This class processes the data resulting from Blend_CSWalking but it takes in consideration the Surface supporting the curve to detect the breakpoint.
+ */
 class BRepBlend_RstRstLineBuilder {
 }
 
+/**
+ * Function of reframing between a restriction surface of the surface and a curve. Class used to compute a solution of the surfRstConstRad problem on a done restriction of the surface. The vector <X> used in Value, Values and Derivatives methods has to be the vector of the parametric coordinates wguide, wcurv, wrst where wguide is the parameter on the guide line, wcurv is the parameter on the curve, wrst is the parameter on the restriction on the surface.
+ */
 class BRepBlend_SurfCurvConstRadInv extends Blend_SurfCurvFuncInv {
 }
 
+/**
+ * Function of reframing between a surface restriction of the surface and a curve. Class used to compute a solution of the surfRstConstRad problem on a done restriction of the surface. The vector <X> used in Value, Values and Derivatives methods has to be the vector of the parametric coordinates wguide, wcurv, wrst where wguide is the parameter on the guide line, wcurv is the parameter on the curve, wrst is the parameter on the restriction on the surface.
+ */
 class BRepBlend_SurfCurvEvolRadInv extends Blend_SurfCurvFuncInv {
 }
 
+/**
+ * Function of reframing between a point and a surface. This function is used to find a solution on a done point of the curve when using SurfRstConsRad or CSConstRad... The vector <X> used in Value, Values and Derivatives methods has to be the vector of the parametric coordinates w, U, V where w is the parameter on the guide line, U,V are the parametric coordinates of a point on the partner surface.
+ */
 class BRepBlend_SurfPointConstRadInv extends Blend_SurfPointFuncInv {
 }
 
+/**
+ * Function of reframing between a point and a surface. This function is used to find a solution on a done point of the curve when using SurfRstConsRad or CSConstRad... The vector <X> used in Value, Values and Derivatives methods has to be the vector of the parametric coordinates w, U, V where w is the parameter on the guide line, U,V are the parametric coordinates of a point on the partner surface.
+ */
 class BRepBlend_SurfPointEvolRadInv extends Blend_SurfPointFuncInv {
 }
 
+/**
+ * Copy of CSConstRad with pcurve on surface as support.
+ */
 class BRepBlend_SurfRstConstRad extends Blend_SurfRstFunction {
 }
 
+/**
+ * Function to approximate by AppSurface for Edge/Face and evolutif radius
+ */
 class BRepBlend_SurfRstEvolRad extends Blend_SurfRstFunction {
 }
 
+/**
+ * This class processes data resulting from Blend_CSWalking taking in consideration the Surface supporting the curve to detect the breakpoint.
+ */
 class BRepBlend_SurfRstLineBuilder {
 }
 
 class BRepBlend_Walking {
 }
 
+/**
+ * This package provides the bounding boxes for curves and surfaces from BRepAdaptor. Functions to add a topological shape to a bounding box
+ */
 class BRepBndLib {
 }
 
+/**
+ * The BRepBuilderAPI package provides an Application Programming Interface for the BRep topology data structure.
+ */
 class BRepBuilderAPI {
 }
 
@@ -8978,9 +9239,15 @@ class BRepBuilderAPI {
 class BRepBuilderAPI_Collect {
 }
 
+/**
+ * Root class for all commands in BRepBuilderAPI.
+ */
 class BRepBuilderAPI_Command {
 }
 
+/**
+ * Duplication of a shape. A Copy object provides a framework for: - defining the construction of a duplicate shape, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepBuilderAPI_Copy extends BRepBuilderAPI_ModifyShape {
 }
 
@@ -8988,9 +9255,15 @@ class BRepBuilderAPI_Copy_1 extends BRepBuilderAPI_Copy {}
 
 class BRepBuilderAPI_Copy_2 extends BRepBuilderAPI_Copy {}
 
+/**
+ * This class performs fast sewing of surfaces (faces). It supposes that all surfaces are finite and are naturally restricted by their bounds. Moreover, it supposes that stitched together surfaces have the same parameterization along common boundaries, therefore it does not perform time-consuming check for SameParameter property of edges.
+ */
 class BRepBuilderAPI_FastSewing extends Standard_Transient {
 }
 
+/**
+ * Describes functions to find the plane in which the edges of a given shape are located. A FindPlane object provides a framework for: - extracting the edges of a given shape, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepBuilderAPI_FindPlane {
 }
 
@@ -8998,6 +9271,9 @@ class BRepBuilderAPI_FindPlane_1 extends BRepBuilderAPI_FindPlane {}
 
 class BRepBuilderAPI_FindPlane_2 extends BRepBuilderAPI_FindPlane {}
 
+/**
+ * Geometric transformation on a shape. The transformation to be applied is defined as a gp_GTrsf transformation. It may be: - a transformation equivalent to a gp_Trsf transformation, the most common case: you should , however, use a BRepAPI_Transform object to perform this kind of transformation; or - an affinity, or - more generally, any type of point transformation which may be defined by a three row, four column matrix of transformation. In the last two cases, the underlying geometry of the following shapes may change: - a curve which supports an edge of the shape, or - a surface which supports a face of the shape; For example, a circle may be transformed into an ellipse when applying an affinity transformation. The transformation is applied to: - all the curves which support edges of the shape, and - all the surfaces which support faces of the shape. A GTransform object provides a framework for: - defining the geometric transformation to be applied, - implementing the transformation algorithm, and - consulting the result.
+ */
 class BRepBuilderAPI_GTransform extends BRepBuilderAPI_ModifyShape {
 }
 
@@ -9005,6 +9281,9 @@ class BRepBuilderAPI_GTransform_1 extends BRepBuilderAPI_GTransform {}
 
 class BRepBuilderAPI_GTransform_2 extends BRepBuilderAPI_GTransform {}
 
+/**
+ * Provides methods to build edges.
+ */
 class BRepBuilderAPI_MakeEdge extends BRepBuilderAPI_MakeShape {
 }
 
@@ -9078,6 +9357,9 @@ class BRepBuilderAPI_MakeEdge_34 extends BRepBuilderAPI_MakeEdge {}
 
 class BRepBuilderAPI_MakeEdge_35 extends BRepBuilderAPI_MakeEdge {}
 
+/**
+ * Provides methods to build edges.
+ */
 class BRepBuilderAPI_MakeEdge2d extends BRepBuilderAPI_MakeShape {
 }
 
@@ -9137,6 +9419,9 @@ class BRepBuilderAPI_MakeEdge2d_27 extends BRepBuilderAPI_MakeEdge2d {}
 
 class BRepBuilderAPI_MakeEdge2d_28 extends BRepBuilderAPI_MakeEdge2d {}
 
+/**
+ * Provides methods to build faces.
+ */
 class BRepBuilderAPI_MakeFace extends BRepBuilderAPI_MakeShape {
 }
 
@@ -9184,6 +9469,9 @@ class BRepBuilderAPI_MakeFace_21 extends BRepBuilderAPI_MakeFace {}
 
 class BRepBuilderAPI_MakeFace_22 extends BRepBuilderAPI_MakeFace {}
 
+/**
+ * Describes functions to build polygonal wires. A polygonal wire can be built from any number of points or vertices, and consists of a sequence of connected rectilinear edges. When a point or vertex is added to the polygon if it is identic to the previous point no edge is built. The method added can be used to test it. Construction of a Polygonal Wire You can construct: - a complete polygonal wire by defining all its points or vertices (limited to four), or - an empty polygonal wire and add its points or vertices in sequence (unlimited number). A MakePolygon object provides a framework for: - initializing the construction of a polygonal wire, - adding points or vertices to the polygonal wire under construction, and - consulting the result.
+ */
 class BRepBuilderAPI_MakePolygon extends BRepBuilderAPI_MakeShape {
 }
 
@@ -9201,9 +9489,15 @@ class BRepBuilderAPI_MakePolygon_6 extends BRepBuilderAPI_MakePolygon {}
 
 class BRepBuilderAPI_MakePolygon_7 extends BRepBuilderAPI_MakePolygon {}
 
+/**
+ * This is the root class for all shape constructions. It stores the result.
+ */
 class BRepBuilderAPI_MakeShape extends BRepBuilderAPI_Command {
 }
 
+/**
+ * Describes functions to build a shape corresponding to the skin of a surface. Note that the term shell in the class name has the same definition as that of a shell in STEP, in other words the skin of a shape, and not a solid model defined by surface and thickness. If you want to build the second sort of shell, you must use BRepOffsetAPI_MakeOffsetShape. A shell is made of a series of faces connected by their common edges. If the underlying surface of a face is not C2 continuous and the flag Segment is True, MakeShell breaks the surface down into several faces which are all C2 continuous and which are connected along the non-regular curves on the surface. The resulting shell contains all these faces. Construction of a Shell from a non-C2 continuous Surface A MakeShell object provides a framework for: - defining the construction of a shell, - implementing the construction algorithm, and - consulting the result. Warning The connected C2 faces in the shell resulting from a decomposition of the surface are not sewn. For a sewn result, you need to use BRepOffsetAPI_Sewing. For a shell with thickness, you need to use BRepOffsetAPI_MakeOffsetShape.
+ */
 class BRepBuilderAPI_MakeShell extends BRepBuilderAPI_MakeShape {
 }
 
@@ -9213,6 +9507,9 @@ class BRepBuilderAPI_MakeShell_2 extends BRepBuilderAPI_MakeShell {}
 
 class BRepBuilderAPI_MakeShell_3 extends BRepBuilderAPI_MakeShell {}
 
+/**
+ * Describes functions to build a solid from shells. A solid is made of one shell, or a series of shells, which do not intersect each other. One of these shells constitutes the outside skin of the solid. It may be closed (a finite solid) or open (an infinite solid). Other shells form hollows (cavities) in these previous ones. Each must bound a closed volume. A MakeSolid object provides a framework for: - defining and implementing the construction of a solid, and - consulting the result.
+ */
 class BRepBuilderAPI_MakeSolid extends BRepBuilderAPI_MakeShape {
 }
 
@@ -9230,9 +9527,15 @@ class BRepBuilderAPI_MakeSolid_6 extends BRepBuilderAPI_MakeSolid {}
 
 class BRepBuilderAPI_MakeSolid_7 extends BRepBuilderAPI_MakeSolid {}
 
+/**
+ * Describes functions to build BRepBuilder vertices directly from 3D geometric points. A vertex built using a MakeVertex object is only composed of a 3D point and a default precision value (Precision::Confusion()). Later on, 2D representations can be added, for example, when inserting a vertex in an edge. A MakeVertex object provides a framework for: - defining and implementing the construction of a vertex, and - consulting the result.
+ */
 class BRepBuilderAPI_MakeVertex extends BRepBuilderAPI_MakeShape {
 }
 
+/**
+ * Describes functions to build wires from edges. A wire can be built from any number of edges. To build a wire you first initialize the construction, then add edges in sequence. An unlimited number of edges can be added. The initialization of construction is done with: - no edge (an empty wire), or - edges of an existing wire, or - up to four connectable edges. In order to be added to a wire under construction, an edge (unless it is the first one) must satisfy the following condition: one of its vertices must be geometrically coincident with one of the vertices of the wire (provided that the highest tolerance factor is assigned to the two vertices). It could also be the same vertex. - The given edge is shared by the wire if it contains: - two vertices, identical to two vertices of the wire under construction (a general case of the wire closure), or - one vertex, identical to a vertex of the wire under construction; the other vertex not being geometrically coincident with another vertex of the wire. - In other cases, when one of the vertices of the edge is simply geometrically coincident with a vertex of the wire under construction (provided that the highest tolerance factor is assigned to the two vertices), the given edge is first copied and the coincident vertex is replaced in this new edge, by the coincident vertex of the wire. Note: it is possible to build non manifold wires using this construction tool. A MakeWire object provides a framework for: - initializing the construction of a wire, - adding edges to the wire under construction, and - consulting the result.
+ */
 class BRepBuilderAPI_MakeWire extends BRepBuilderAPI_MakeShape {
 }
 
@@ -9250,9 +9553,15 @@ class BRepBuilderAPI_MakeWire_6 extends BRepBuilderAPI_MakeWire {}
 
 class BRepBuilderAPI_MakeWire_7 extends BRepBuilderAPI_MakeWire {}
 
+/**
+ * Implements the methods of MakeShape for the constant topology modifications. The methods are implemented when the modification uses a Modifier from BRepTools. Some of them have to be redefined if the modification is implemented with another tool (see Transform from BRepBuilderAPI for example). The BRepBuilderAPI package provides the following frameworks to perform modifications of this sort: - BRepBuilderAPI_Copy to produce the copy of a shape, - BRepBuilderAPI_Transform and BRepBuilderAPI_GTransform to apply a geometric transformation to a shape, - BRepBuilderAPI_NurbsConvert to convert the whole geometry of a shape into NURBS geometry, - BRepOffsetAPI_DraftAngle to build a tapered shape.
+ */
 class BRepBuilderAPI_ModifyShape extends BRepBuilderAPI_MakeShape {
 }
 
+/**
+ * Conversion of the complete geometry of a shape (all 3D analytical representation of surfaces and curves) into NURBS geometry (execpt for Planes). For example, all curves supporting edges of the basis shape are converted into BSpline curves, and all surfaces supporting its faces are converted into BSpline surfaces.
+ */
 class BRepBuilderAPI_NurbsConvert extends BRepBuilderAPI_ModifyShape {
 }
 
@@ -9260,9 +9569,15 @@ class BRepBuilderAPI_NurbsConvert_1 extends BRepBuilderAPI_NurbsConvert {}
 
 class BRepBuilderAPI_NurbsConvert_2 extends BRepBuilderAPI_NurbsConvert {}
 
+/**
+ * Provides methods to
+ */
 class BRepBuilderAPI_Sewing extends Standard_Transient {
 }
 
+/**
+ * Geometric transformation on a shape. The transformation to be applied is defined as a gp_Trsf transformation, i.e. a transformation which does not modify the underlying geometry of shapes. The transformation is applied to: - all curves which support edges of a shape, and - all surfaces which support its faces. A Transform object provides a framework for: - defining the geometric transformation to be applied, - implementing the transformation algorithm, and - consulting the results.
+ */
 class BRepBuilderAPI_Transform extends BRepBuilderAPI_ModifyShape {
 }
 
@@ -9270,12 +9585,21 @@ class BRepBuilderAPI_Transform_1 extends BRepBuilderAPI_Transform {}
 
 class BRepBuilderAPI_Transform_2 extends BRepBuilderAPI_Transform {}
 
+/**
+ * Class BRepBuilderAPI_VertexInspector derived from NCollection_CellFilter_InspectorXYZ This class define the Inspector interface for CellFilter algorithm, working with gp_XYZ points in 3d space. Used in search of coincidence points with a certain tolerance.
+ */
 class BRepBuilderAPI_VertexInspector extends NCollection_CellFilter_InspectorXYZ {
 }
 
+/**
+ * This package provides tools to check the validity of the BRep.
+ */
 class BRepCheck {
 }
 
+/**
+ * A framework to check the overall validity of a shape. For a shape to be valid in Open CASCADE, it - or its component subshapes - must respect certain criteria. These criteria are checked by the function IsValid. Once you have determined whether a shape is valid or not, you can diagnose its specific anomalies and correct them using the services of the ShapeAnalysis, ShapeUpgrade, and ShapeFix packages.
+ */
 class BRepCheck_Analyzer {
 }
 
@@ -9291,6 +9615,9 @@ class BRepCheck_Result extends Standard_Transient {
 class BRepCheck_Shell extends BRepCheck_Result {
 }
 
+/**
+ * The class is to check a solid.
+ */
 class BRepCheck_Solid extends BRepCheck_Result {
 }
 
@@ -9310,6 +9637,9 @@ class BRepClass3d {
 class BRepClass3d_Intersector3d {
 }
 
+/**
+ * Provides an algorithm to classify a point in a solid.
+ */
 class BRepClass3d_SClassifier {
 }
 
@@ -9317,6 +9647,9 @@ class BRepClass3d_SClassifier_1 extends BRepClass3d_SClassifier {}
 
 class BRepClass3d_SClassifier_2 extends BRepClass3d_SClassifier {}
 
+/**
+ * Provides an algorithm to classify a point in a solid.
+ */
 class BRepClass3d_SolidClassifier extends BRepClass3d_SClassifier {
 }
 
@@ -9326,6 +9659,9 @@ class BRepClass3d_SolidClassifier_2 extends BRepClass3d_SolidClassifier {}
 
 class BRepClass3d_SolidClassifier_3 extends BRepClass3d_SolidClassifier {}
 
+/**
+ * Provide an exploration of a BRep Shape for the classification. Provide access to the special UB tree to obtain fast search.
+ */
 class BRepClass3d_SolidExplorer {
 }
 
@@ -9336,6 +9672,9 @@ class BRepClass3d_SolidExplorer_2 extends BRepClass3d_SolidExplorer {}
 class BRepClass3d_SolidPassiveClassifier {
 }
 
+/**
+ * This class is used to send the description of an Edge to the classifier. It contains an Edge and a Face. So the PCurve of the Edge can be found.
+ */
 class BRepClass_Edge {
 }
 
@@ -9353,6 +9692,9 @@ class BRepClass_FClassifier_1 extends BRepClass_FClassifier {}
 
 class BRepClass_FClassifier_2 extends BRepClass_FClassifier {}
 
+/**
+ * Provides Constructors with a Face.
+ */
 class BRepClass_FaceClassifier extends BRepClass_FClassifier {
 }
 
@@ -9364,15 +9706,24 @@ class BRepClass_FaceClassifier_3 extends BRepClass_FaceClassifier {}
 
 class BRepClass_FaceClassifier_4 extends BRepClass_FaceClassifier {}
 
+/**
+ * Provide an exploration of a BRep Face for the classification. Return UV edges.
+ */
 class BRepClass_FaceExplorer {
 }
 
 class BRepClass_FacePassiveClassifier {
 }
 
+/**
+ * Intersect an Edge with a segment. Implement the Intersector2d required by the classifier.
+ */
 class BRepClass_Intersector extends Geom2dInt_IntConicCurveOfGInter {
 }
 
+/**
+ * This class provides tools to compute minimum distance between two Shapes (Compound,CompSolid, Solid, Shell, Face, Wire, Edge, Vertex).
+ */
 class BRepExtrema_DistShapeShape {
 }
 
@@ -9382,6 +9733,9 @@ class BRepExtrema_DistShapeShape_2 extends BRepExtrema_DistShapeShape {}
 
 class BRepExtrema_DistShapeShape_3 extends BRepExtrema_DistShapeShape {}
 
+/**
+ * This class allows to compute minimum distance between two shapes (face edge vertex) and is used in DistShapeShape class.
+ */
 class BRepExtrema_DistanceSS {
 }
 
@@ -9433,6 +9787,9 @@ class BRepExtrema_OverlapTool_2 extends BRepExtrema_OverlapTool {}
 class BRepExtrema_Poly {
 }
 
+/**
+ * Tool class for detection of self-sections in the given shape. This class is based on BRepExtrema_OverlapTool and thus uses shape tessellation to detect incorrect mesh fragments (pairs of overlapped triangles belonging to different faces). Thus, a result depends critically on the quality of mesh generator (e.g., BREP mesh is not always a good choice, because it can contain gaps between adjacent face triangulations, which may not share vertices on common edge; thus false overlap can be detected). As a result, this tool can be used for relatively fast approximated test which provides sub-set of potentially overlapped faces.
+ */
 class BRepExtrema_SelfIntersection extends BRepExtrema_ElementFilter {
 }
 
@@ -9440,6 +9797,9 @@ class BRepExtrema_SelfIntersection_1 extends BRepExtrema_SelfIntersection {}
 
 class BRepExtrema_SelfIntersection_2 extends BRepExtrema_SelfIntersection {}
 
+/**
+ * Tool class for shape proximity detection. For two given shapes and given tolerance (offset from the mesh) the algorithm allows to determine whether or not they are overlapped. The algorithm input consists of any shapes which can be decomposed into individual faces (used as basic shape elements). High performance is achieved through the use of existing triangulation of faces. So poly triangulation (with the desired deflection) should already be built. Note that solution is approximate (and corresponds to the deflection used for triangulation).
+ */
 class BRepExtrema_ShapeProximity {
 }
 
@@ -9447,6 +9807,9 @@ class BRepExtrema_ShapeProximity_1 extends BRepExtrema_ShapeProximity {}
 
 class BRepExtrema_ShapeProximity_2 extends BRepExtrema_ShapeProximity {}
 
+/**
+ * This class is used to store information relative to the minimum distance between two shapes.
+ */
 class BRepExtrema_SolutionElem {
 }
 
@@ -9458,6 +9821,9 @@ class BRepExtrema_SolutionElem_3 extends BRepExtrema_SolutionElem {}
 
 class BRepExtrema_SolutionElem_4 extends BRepExtrema_SolutionElem {}
 
+/**
+ * Triangle set corresponding to specific face.
+ */
 class BRepExtrema_TriangleSet extends BVH_PrimitiveSet3d {
 }
 
@@ -9472,12 +9838,21 @@ class BRepExtrema_UnCompatibleShape_1 extends BRepExtrema_UnCompatibleShape {}
 
 class BRepExtrema_UnCompatibleShape_2 extends BRepExtrema_UnCompatibleShape {}
 
+/**
+ * Provides a basic tool to implement features topological operations. The main goal of the algorithm is to perform the result of the operation according to the kept parts of the tool. Input data: a) DS; b) The kept parts of the tool; If the map of the kept parts of the tool is not filled boolean operation of the given type will be performed; c) Operation required. Steps: a) Fill myShapes, myRemoved maps; b) Rebuild edges and faces; c) Build images of the object; d) Build the result of the operation. Result: Result shape of the operation required.
+ */
 class BRepFeat_Builder extends BOPAlgo_BOP {
 }
 
+/**
+ * Provides general functions to build form features. Form features can be depressions or protrusions and include the following types: - Cylinder - Draft Prism - Prism - Revolved feature - Pipe In each case, you have a choice of operation type between the following: - removing matter (a Boolean cut: Fuse setting 0) - adding matter (Boolean fusion: Fuse setting 1) The semantics of form feature creation is based on the construction of shapes: - along a length - up to a limiting face - from a limiting face to a height - above and/or below a plane The shape defining construction of the feature can be either the supporting edge or the concerned area of a face. In case of the supporting edge, this contour can be attached to a face of the basis shape by binding. When the contour is bound to this face, the information that the contour will slide on the face becomes available to the relevant class methods. In case of the concerned area of a face, you could, for example, cut it out and move it to a different height which will define the limiting face of a protrusion or depression. Topological definition with local operations of this sort makes calculations simpler and faster than a global operation. The latter would entail a second phase of removing unwanted matter to get the same result.
+ */
 class BRepFeat_Form extends BRepBuilderAPI_MakeShape {
 }
 
+/**
+ * One of the most significant aspects of BRepFeat functionality is the use of local operations as opposed to global ones. In a global operation, you would first construct a form of the type you wanted in your final feature, and then remove matter so that it could fit into your initial basis object. In a local operation, however, you specify the domain of the feature construction with aspects of the shape on which the feature is being created. These semantics are expressed in terms of a member shape of the basis shape from which - or up to which - matter will be added or removed. As a result, local operations make calculations simpler and faster than global operations. Glueing uses wires or edges of a face in the basis shape. These are to become a part of the feature. They are first cut out and then projected to a plane outside or inside the basis shape. By rebuilding the initial shape incorporating the edges and the faces of the tool, protrusion features can be constructed.
+ */
 class BRepFeat_Gluer extends BRepBuilderAPI_MakeShape {
 }
 
@@ -9485,9 +9860,15 @@ class BRepFeat_Gluer_1 extends BRepFeat_Gluer {}
 
 class BRepFeat_Gluer_2 extends BRepFeat_Gluer {}
 
+/**
+ * Provides a tool to make cylindrical holes on a shape.
+ */
 class BRepFeat_MakeCylindricalHole extends BRepFeat_Builder {
 }
 
+/**
+ * Describes functions to build draft prism topologies from basis shape surfaces. These can be depressions or protrusions. The semantics of draft prism feature creation is based on the construction of shapes: - along a length - up to a limiting face - from a limiting face to a height. The shape defining construction of the draft prism feature can be either the supporting edge or the concerned area of a face. In case of the supporting edge, this contour can be attached to a face of the basis shape by binding. When the contour is bound to this face, the information that the contour will slide on the face becomes available to the relevant class methods. In case of the concerned area of a face, you could, for example, cut it out and move it to a different height which will define the limiting face of a protrusion or depression.
+ */
 class BRepFeat_MakeDPrism extends BRepFeat_Form {
 }
 
@@ -9495,6 +9876,9 @@ class BRepFeat_MakeDPrism_1 extends BRepFeat_MakeDPrism {}
 
 class BRepFeat_MakeDPrism_2 extends BRepFeat_MakeDPrism {}
 
+/**
+ * Constructs compound shapes with pipe features. These can be depressions or protrusions. The semantics of pipe feature creation is based on the construction of shapes: - along a length - up to a limiting face - from a limiting face to a height. The shape defining construction of the pipe feature can be either the supporting edge or the concerned area of a face. In case of the supporting edge, this contour can be attached to a face of the basis shape by binding. When the contour is bound to this face, the information that the contour will slide on the face becomes available to the relevant class methods. In case of the concerned area of a face, you could, for example, cut it out and move it to a different height which will define the limiting face of a protrusion or depression.
+ */
 class BRepFeat_MakePipe extends BRepFeat_Form {
 }
 
@@ -9502,6 +9886,9 @@ class BRepFeat_MakePipe_1 extends BRepFeat_MakePipe {}
 
 class BRepFeat_MakePipe_2 extends BRepFeat_MakePipe {}
 
+/**
+ * Describes functions to build prism features. These can be depressions or protrusions. The semantics of prism feature creation is based on the construction of shapes: - along a length - up to a limiting face - from a limiting face to a height. The shape defining construction of the prism feature can be either the supporting edge or the concerned area of a face. In case of the supporting edge, this contour can be attached to a face of the basis shape by binding. When the contour is bound to this face, the information that the contour will slide on the face becomes available to the relevant class methods. In case of the concerned area of a face, you could, for example, cut it out and move it to a different height which will define the limiting face of a protrusion or depression.
+ */
 class BRepFeat_MakePrism extends BRepFeat_Form {
 }
 
@@ -9509,6 +9896,9 @@ class BRepFeat_MakePrism_1 extends BRepFeat_MakePrism {}
 
 class BRepFeat_MakePrism_2 extends BRepFeat_MakePrism {}
 
+/**
+ * Describes functions to build revolved shells from basis shapes.
+ */
 class BRepFeat_MakeRevol extends BRepFeat_Form {
 }
 
@@ -9516,6 +9906,9 @@ class BRepFeat_MakeRevol_1 extends BRepFeat_MakeRevol {}
 
 class BRepFeat_MakeRevol_2 extends BRepFeat_MakeRevol {}
 
+/**
+ * MakeRevolutionForm Generates a surface of revolution in the feature as it slides along a revolved face in the basis shape. The semantics of mechanical features is built around giving thickness to a contour. This thickness can either be unilateral - on one side of the contour - or bilateral - on both sides. As in the semantics of form features, the thickness is defined by construction of shapes in specific contexts. The development contexts differ, however,in case of mechanical features. Here they include extrusion: - to a limiting face of the basis shape - to or from a limiting plane - to a height.
+ */
 class BRepFeat_MakeRevolutionForm extends BRepFeat_RibSlot {
 }
 
@@ -9523,9 +9916,15 @@ class BRepFeat_MakeRevolutionForm_1 extends BRepFeat_MakeRevolutionForm {}
 
 class BRepFeat_MakeRevolutionForm_2 extends BRepFeat_MakeRevolutionForm {}
 
+/**
+ * Provides functions to build mechanical features. Mechanical features include ribs - protrusions and grooves (or slots) - depressions along planar (linear) surfaces or revolution surfaces. The semantics of mechanical features is built around giving thickness to a contour. This thickness can either be unilateral - on one side of the contour - or bilateral - on both sides. As in the semantics of form features, the thickness is defined by construction of shapes in specific contexts. The development contexts differ, however,in case of mechanical features. Here they include extrusion: - to a limiting face of the basis shape - to or from a limiting plane - to a height.
+ */
 class BRepFeat_RibSlot extends BRepBuilderAPI_MakeShape {
 }
 
+/**
+ * One of the most significant aspects of BRepFeat functionality is the use of local operations as opposed to global ones. In a global operation, you would first construct a form of the type you wanted in your final feature, and then remove matter so that it could fit into your initial basis object. In a local operation, however, you specify the domain of the feature construction with aspects of the shape on which the feature is being created. These semantics are expressed in terms of a member shape of the basis shape from which - or up to which - matter will be added or removed. As a result, local operations make calculations simpler and faster than global operations. In BRepFeat, the semantics of local operations define features constructed from a contour or a part of the basis shape referred to as the tool. In a SplitShape object, wires or edges of a face in the basis shape to be used as a part of the feature are cut out and projected to a plane outside or inside the basis shape. By rebuilding the initial shape incorporating the edges and the faces of the tool, protrusion or depression features can be constructed.
+ */
 class BRepFeat_SplitShape extends BRepBuilderAPI_MakeShape {
 }
 
@@ -9536,12 +9935,21 @@ class BRepFeat_SplitShape_2 extends BRepFeat_SplitShape {}
 class BRepFill {
 }
 
+/**
+ * Build Location Law, with a Wire. In the case of guided contour and trihedron by reduced curvilinear abscissa
+ */
 class BRepFill_ACRLaw extends BRepFill_LocationLaw {
 }
 
+/**
+ * Constructs an evolved volume from a spine (wire or face) and a profile ( wire).
+ */
 class BRepFill_AdvancedEvolved {
 }
 
+/**
+ * Evaluate the 3dCurve and the PCurves described in a MultiLine from BRepFill. The parametrization of those curves is not imposed by the Bissectrice. The parametrization is given approximatively by the abscissa of the curve3d.
+ */
 class BRepFill_ApproxSeewing {
 }
 
@@ -9549,6 +9957,9 @@ class BRepFill_ApproxSeewing_1 extends BRepFill_ApproxSeewing {}
 
 class BRepFill_ApproxSeewing_2 extends BRepFill_ApproxSeewing {}
 
+/**
+ * Constructs a sequence of Wires (with good orientation and origin) agreed each other so that the surface passing through these sections is not twisted
+ */
 class BRepFill_CompatibleWires {
 }
 
@@ -9563,6 +9974,9 @@ class BRepFill_ComputeCLine_1 extends BRepFill_ComputeCLine {}
 
 class BRepFill_ComputeCLine_2 extends BRepFill_ComputeCLine {}
 
+/**
+ * same as CurveConstraint from GeomPlate with BRepAdaptor_Surface instead of GeomAdaptor_Surface
+ */
 class BRepFill_CurveConstraint extends GeomPlate_CurveConstraint {
 }
 
@@ -9573,9 +9987,15 @@ class BRepFill_CurveConstraint_2 extends BRepFill_CurveConstraint {}
 class BRepFill_Draft {
 }
 
+/**
+ * Build Location Law, with a Wire.
+ */
 class BRepFill_DraftLaw extends BRepFill_Edge3DLaw {
 }
 
+/**
+ * Build Location Law, with a Wire.
+ */
 class BRepFill_Edge3DLaw extends BRepFill_LocationLaw {
 }
 
@@ -9586,9 +10006,15 @@ class BRepFill_EdgeFaceAndOrder_1 extends BRepFill_EdgeFaceAndOrder {}
 
 class BRepFill_EdgeFaceAndOrder_2 extends BRepFill_EdgeFaceAndOrder {}
 
+/**
+ * Build Location Law, with a Wire and a Surface.
+ */
 class BRepFill_EdgeOnSurfLaw extends BRepFill_LocationLaw {
 }
 
+/**
+ * Constructs an evolved volume from a spine (wire or face) and a profile ( wire).
+ */
 class BRepFill_Evolved {
 }
 
@@ -9598,6 +10024,9 @@ class BRepFill_Evolved_2 extends BRepFill_Evolved {}
 
 class BRepFill_Evolved_3 extends BRepFill_Evolved {}
 
+/**
+ * A structure containing Face and Order of constraint
+ */
 class BRepFill_FaceAndOrder {
 }
 
@@ -9605,15 +10034,27 @@ class BRepFill_FaceAndOrder_1 extends BRepFill_FaceAndOrder {}
 
 class BRepFill_FaceAndOrder_2 extends BRepFill_FaceAndOrder {}
 
+/**
+ * N-Side Filling This algorithm avoids to build a face from: * a set of edges defining the bounds of the face and some constraints the surface support has to satisfy * a set of edges and points defining some constraints the support surface has to satisfy * an initial surface to deform for satisfying the constraints * a set of parameters to control the constraints.
+ */
 class BRepFill_Filling {
 }
 
+/**
+ * Compute a topological surface ( a shell) using generating wires. The face of the shell will be ruled surfaces passing by the wires. The wires must have the same number of edges.
+ */
 class BRepFill_Generator {
 }
 
+/**
+ * Location Law on a Wire.
+ */
 class BRepFill_LocationLaw extends Standard_Transient {
 }
 
+/**
+ * Class used to compute the 3d curve and the two 2d curves resulting from the intersection of a surface of linear extrusion( Bissec, Dz) and the 2 faces. This 3 curves will have the same parametrization as the Bissectrice. This class is to be send to an approximation routine.
+ */
 class BRepFill_MultiLine extends AppCont_Function {
 }
 
@@ -9621,6 +10062,9 @@ class BRepFill_MultiLine_1 extends BRepFill_MultiLine {}
 
 class BRepFill_MultiLine_2 extends BRepFill_MultiLine {}
 
+/**
+ * Build Section Law, with N Sections
+ */
 class BRepFill_NSections extends BRepFill_SectionLaw {
 }
 
@@ -9628,6 +10072,9 @@ class BRepFill_NSections_1 extends BRepFill_NSections {}
 
 class BRepFill_NSections_2 extends BRepFill_NSections {}
 
+/**
+ * this class is used to find the generating shapes of an OffsetWire.
+ */
 class BRepFill_OffsetAncestors {
 }
 
@@ -9635,6 +10082,9 @@ class BRepFill_OffsetAncestors_1 extends BRepFill_OffsetAncestors {}
 
 class BRepFill_OffsetAncestors_2 extends BRepFill_OffsetAncestors {}
 
+/**
+ * Constructs a Offset Wire to a spine (wire or face). Offset direction will be to outer region in case of positive offset value and to inner region in case of negative offset value. Inner/Outer region for open wire is defined by the following rule: when we go along the wire (taking into account of edges orientation) then outer region will be on the right side, inner region will be on the left side. In case of closed wire, inner region will always be inside the wire (at that, edges orientation is not taken into account). The Wire or the Face must be planar and oriented correctly.
+ */
 class BRepFill_OffsetWire {
 }
 
@@ -9642,6 +10092,9 @@ class BRepFill_OffsetWire_1 extends BRepFill_OffsetWire {}
 
 class BRepFill_OffsetWire_2 extends BRepFill_OffsetWire {}
 
+/**
+ * Create a shape by sweeping a shape (the profile) along a wire (the spine).
+ */
 class BRepFill_Pipe {
 }
 
@@ -9649,9 +10102,15 @@ class BRepFill_Pipe_1 extends BRepFill_Pipe {}
 
 class BRepFill_Pipe_2 extends BRepFill_Pipe {}
 
+/**
+ * Computes a topological shell using some wires (spines and profiles) and diplacement option Perform general sweeping construction
+ */
 class BRepFill_PipeShell extends Standard_Transient {
 }
 
+/**
+ * To store section definition
+ */
 class BRepFill_Section {
 }
 
@@ -9659,9 +10118,15 @@ class BRepFill_Section_1 extends BRepFill_Section {}
 
 class BRepFill_Section_2 extends BRepFill_Section {}
 
+/**
+ * Build Section Law, with an Vertex, or an Wire
+ */
 class BRepFill_SectionLaw extends Standard_Transient {
 }
 
+/**
+ * Place a shape in a local axis coordinate
+ */
 class BRepFill_SectionPlacement {
 }
 
@@ -9669,6 +10134,9 @@ class BRepFill_SectionPlacement_1 extends BRepFill_SectionPlacement {}
 
 class BRepFill_SectionPlacement_2 extends BRepFill_SectionPlacement {}
 
+/**
+ * Build Section Law, with an Vertex, or an Wire
+ */
 class BRepFill_ShapeLaw extends BRepFill_SectionLaw {
 }
 
@@ -9678,9 +10146,15 @@ class BRepFill_ShapeLaw_2 extends BRepFill_ShapeLaw {}
 
 class BRepFill_ShapeLaw_3 extends BRepFill_ShapeLaw {}
 
+/**
+ * Topological Sweep Algorithm Computes an Sweep shell using a generating wire, an SectionLaw and an LocationLaw.
+ */
 class BRepFill_Sweep {
 }
 
+/**
+ * Geometric Tool using to construct Offset Wires.
+ */
 class BRepFill_TrimEdgeTool {
 }
 
@@ -9688,21 +10162,39 @@ class BRepFill_TrimEdgeTool_1 extends BRepFill_TrimEdgeTool {}
 
 class BRepFill_TrimEdgeTool_2 extends BRepFill_TrimEdgeTool {}
 
+/**
+ * Trims sets of faces in the corner to make proper parts of pipe
+ */
 class BRepFill_TrimShellCorner {
 }
 
+/**
+ * Compute the Pcurves and the 3d curves resulting of the trimming of a face by an extruded surface.
+ */
 class BRepFill_TrimSurfaceTool {
 }
 
+/**
+ * Construction of fillets on the edges of a Shell.
+ */
 class BRepFilletAPI_LocalOperation extends BRepBuilderAPI_MakeShape {
 }
 
+/**
+ * Describes functions to build chamfers on edges of a shell or solid. Chamfered Edge of a Shell or Solid A MakeChamfer object provides a framework for: - initializing the construction algorithm with a given shape, - acquiring the data characterizing the chamfers, - building the chamfers and constructing the resulting shape, and - consulting the result.
+ */
 class BRepFilletAPI_MakeChamfer extends BRepFilletAPI_LocalOperation {
 }
 
+/**
+ * Describes functions to build fillets on the broken edges of a shell or solid. A MakeFillet object provides a framework for: - initializing the construction algorithm with a given shape, - acquiring the data characterizing the fillets, - building the fillets and constructing the resulting shape, and - consulting the result.
+ */
 class BRepFilletAPI_MakeFillet extends BRepFilletAPI_LocalOperation {
 }
 
+/**
+ * Describes functions to build fillets and chamfers on the vertices of a planar face. Fillets and Chamfers on the Vertices of a Planar Face A MakeFillet2d object provides a framework for: - initializing the construction algorithm with a given face, - acquiring the data characterizing the fillets and chamfers, - building the fillets and chamfers, and constructing the resulting shape, and - consulting the result. Warning Only segments of straight lines and arcs of circles are treated. BSplines are not processed.
+ */
 class BRepFilletAPI_MakeFillet2d extends BRepBuilderAPI_MakeShape {
 }
 
@@ -9710,9 +10202,15 @@ class BRepFilletAPI_MakeFillet2d_1 extends BRepFilletAPI_MakeFillet2d {}
 
 class BRepFilletAPI_MakeFillet2d_2 extends BRepFilletAPI_MakeFillet2d {}
 
+/**
+ * Provides global functions to compute a shape's global properties for lines, surfaces or volumes, and bring them together with the global properties already computed for a geometric system. The global properties computed for a system are : - its mass, - its center of mass, - its matrix of inertia, - its moment about an axis, - its radius of gyration about an axis, - and its principal properties of inertia such as principal axis, principal moments, principal radius of gyration.
+ */
 class BRepGProp {
 }
 
+/**
+ * Computes the global properties of bounded curves in 3D space. The curve must have at least a continuity C1. It can be a curve as defined in the template CurveTool from package GProp. This template gives the minimum of methods required to evaluate the global properties of a curve 3D with the algorithmes of GProp.
+ */
 class BRepGProp_Cinert extends GProp_GProps {
 }
 
@@ -9720,6 +10218,9 @@ class BRepGProp_Cinert_1 extends BRepGProp_Cinert {}
 
 class BRepGProp_Cinert_2 extends BRepGProp_Cinert {}
 
+/**
+ * Arc iterator. Returns only Forward and Reversed edges from the face in an undigested order.
+ */
 class BRepGProp_Domain {
 }
 
@@ -9727,6 +10228,9 @@ class BRepGProp_Domain_1 extends BRepGProp_Domain {}
 
 class BRepGProp_Domain_2 extends BRepGProp_Domain {}
 
+/**
+ * Provides the required methods to instantiate CGProps from GProp with a Curve from BRepAdaptor.
+ */
 class BRepGProp_EdgeTool {
 }
 
@@ -9737,12 +10241,21 @@ class BRepGProp_Face_1 extends BRepGProp_Face {}
 
 class BRepGProp_Face_2 extends BRepGProp_Face {}
 
+/**
+ * Computes the global properties of of polylines represented by set of points. This class is used for computation of global properties of edge, which has no exact geometry (3d or 2d curve), but has any of allowed polygons.
+ */
 class BRepGProp_MeshCinert extends GProp_GProps {
 }
 
+/**
+ * Computes the global properties of a surface mesh. The mesh can be interpreted as just a surface or as a piece of volume limited by this surface.
+ */
 class BRepGProp_MeshProps extends GProp_GProps {
 }
 
+/**
+ * Computes the global properties of a face in 3D space. The face 's requirements to evaluate the global properties are defined in the template FaceTool from package GProp.
+ */
 class BRepGProp_Sinert extends GProp_GProps {
 }
 
@@ -9756,12 +10269,21 @@ class BRepGProp_Sinert_4 extends BRepGProp_Sinert {}
 
 class BRepGProp_Sinert_5 extends BRepGProp_Sinert {}
 
+/**
+ * This class represents the integrand function for the outer integral computation. The returned value represents the integral of UFunction. It depends on the value type and the flag IsByPoint.
+ */
 class BRepGProp_TFunction extends math_Function {
 }
 
+/**
+ * This class represents the integrand function for computation of an inner integral. The returned value depends on the value type and the flag IsByPoint.
+ */
 class BRepGProp_UFunction extends math_Function {
 }
 
+/**
+ * Computes the global properties of a geometric solid (3D closed region of space) delimited with : . a surface . a point and a surface . a plane and a surface
+ */
 class BRepGProp_Vinert extends GProp_GProps {
 }
 
@@ -9791,9 +10313,15 @@ class BRepGProp_Vinert_12 extends BRepGProp_Vinert {}
 
 class BRepGProp_Vinert_13 extends BRepGProp_Vinert {}
 
+/**
+ * Computes the intersection between a face and a curve. To intersect one curve with shape method Init(Shape, curve, tTol) should be used. To intersect a few curves with specified shape it is necessary to load shape one time using method Load(shape, tol) and find intersection points for each curve using method Init(curve). For iteration by intersection points method More() and Next() should be used.
+ */
 class BRepIntCurveSurface_Inter {
 }
 
+/**
+ * These global functions compute the degree of continuity of a curve built by concatenation of two edges at their junction point.
+ */
 class BRepLProp {
 }
 
@@ -9821,9 +10349,15 @@ class BRepLProp_SLProps_3 extends BRepLProp_SLProps {}
 class BRepLProp_SurfaceTool {
 }
 
+/**
+ * The BRepLib package provides general utilities for BRep.
+ */
 class BRepLib {
 }
 
+/**
+ * Computes the max distance between edge and its 2d representation on the face.
+ */
 class BRepLib_CheckCurveOnSurface {
 }
 
@@ -9831,9 +10365,15 @@ class BRepLib_CheckCurveOnSurface_1 extends BRepLib_CheckCurveOnSurface {}
 
 class BRepLib_CheckCurveOnSurface_2 extends BRepLib_CheckCurveOnSurface {}
 
+/**
+ * Root class for all commands in BRepLib.
+ */
 class BRepLib_Command {
 }
 
+/**
+ * Provides an algorithm to find a Surface through a set of edges.
+ */
 class BRepLib_FindSurface {
 }
 
@@ -9841,9 +10381,15 @@ class BRepLib_FindSurface_1 extends BRepLib_FindSurface {}
 
 class BRepLib_FindSurface_2 extends BRepLib_FindSurface {}
 
+/**
+ * This class can detect vertices in a face that can be considered useless and then perform the fuse of the edges and remove the useless vertices. By useles vertices, we mean : * vertices that have exactly two connex edges * the edges connex to the vertex must have exactly the same 2 connex faces . * The edges connex to the vertex must have the same geometric support.
+ */
 class BRepLib_FuseEdges {
 }
 
+/**
+ * Provides methods to build edges.
+ */
 class BRepLib_MakeEdge extends BRepLib_MakeShape {
 }
 
@@ -9917,6 +10463,9 @@ class BRepLib_MakeEdge_34 extends BRepLib_MakeEdge {}
 
 class BRepLib_MakeEdge_35 extends BRepLib_MakeEdge {}
 
+/**
+ * Provides methods to build edges.
+ */
 class BRepLib_MakeEdge2d extends BRepLib_MakeShape {
 }
 
@@ -9976,6 +10525,9 @@ class BRepLib_MakeEdge2d_27 extends BRepLib_MakeEdge2d {}
 
 class BRepLib_MakeEdge2d_28 extends BRepLib_MakeEdge2d {}
 
+/**
+ * Provides methods to build faces.
+ */
 class BRepLib_MakeFace extends BRepLib_MakeShape {
 }
 
@@ -10023,6 +10575,9 @@ class BRepLib_MakeFace_21 extends BRepLib_MakeFace {}
 
 class BRepLib_MakeFace_22 extends BRepLib_MakeFace {}
 
+/**
+ * Class to build polygonal wires.
+ */
 class BRepLib_MakePolygon extends BRepLib_MakeShape {
 }
 
@@ -10040,9 +10595,15 @@ class BRepLib_MakePolygon_6 extends BRepLib_MakePolygon {}
 
 class BRepLib_MakePolygon_7 extends BRepLib_MakePolygon {}
 
+/**
+ * This is the root class for all shape constructions. It stores the result.
+ */
 class BRepLib_MakeShape extends BRepLib_Command {
 }
 
+/**
+ * Provides methos to build shells.
+ */
 class BRepLib_MakeShell extends BRepLib_MakeShape {
 }
 
@@ -10052,6 +10613,9 @@ class BRepLib_MakeShell_2 extends BRepLib_MakeShell {}
 
 class BRepLib_MakeShell_3 extends BRepLib_MakeShell {}
 
+/**
+ * Makes a solid from compsolid or shells.
+ */
 class BRepLib_MakeSolid extends BRepLib_MakeShape {
 }
 
@@ -10069,9 +10633,15 @@ class BRepLib_MakeSolid_6 extends BRepLib_MakeSolid {}
 
 class BRepLib_MakeSolid_7 extends BRepLib_MakeSolid {}
 
+/**
+ * Provides methods to build vertices.
+ */
 class BRepLib_MakeVertex extends BRepLib_MakeShape {
 }
 
+/**
+ * Provides methods to build wires.
+ */
 class BRepLib_MakeWire extends BRepLib_MakeShape {
 }
 
@@ -10089,9 +10659,15 @@ class BRepLib_MakeWire_6 extends BRepLib_MakeWire {}
 
 class BRepLib_MakeWire_7 extends BRepLib_MakeWire {}
 
+/**
+ * BisectingLocus generates and contains the Bisecting_Locus of a set of lines from Geom2d, defined by <ExploSet>.
+ */
 class BRepMAT2d_BisectingLocus {
 }
 
+/**
+ * Construct an explorer from wires, face, set of curves from Geom2d to compute the bisecting Locus.
+ */
 class BRepMAT2d_Explorer {
 }
 
@@ -10099,6 +10675,9 @@ class BRepMAT2d_Explorer_1 extends BRepMAT2d_Explorer {}
 
 class BRepMAT2d_Explorer_2 extends BRepMAT2d_Explorer {}
 
+/**
+ * Constucts links between the Wire or the Face of the explorer and the BasicElts contained in the bisecting locus.
+ */
 class BRepMAT2d_LinkTopoBilo {
 }
 
@@ -10106,12 +10685,21 @@ class BRepMAT2d_LinkTopoBilo_1 extends BRepMAT2d_LinkTopoBilo {}
 
 class BRepMAT2d_LinkTopoBilo_2 extends BRepMAT2d_LinkTopoBilo {}
 
+/**
+ * Class provides base fuctionality for algorithms building face triangulation. Performs initialization of BRepMesh_DataStructureOfDelaun and nodes map structures.
+ */
 class BRepMesh_BaseMeshAlgo extends IMeshTools_MeshAlgo {
 }
 
+/**
+ * Auxiliary class extending UV range splitter in order to generate internal nodes for NURBS surface.
+ */
 class BRepMesh_BoundaryParamsRangeSplitter extends BRepMesh_NURBSRangeSplitter {
 }
 
+/**
+ * Describes a 2d circle with a size of only 3 Standard_Real numbers instead of gp who needs 7 Standard_Real numbers.
+ */
 class BRepMesh_Circle {
 }
 
@@ -10119,9 +10707,15 @@ class BRepMesh_Circle_1 extends BRepMesh_Circle {}
 
 class BRepMesh_Circle_2 extends BRepMesh_Circle {}
 
+/**
+ * Auxilary class to find circles shot by the given point.
+ */
 class BRepMesh_CircleInspector extends NCollection_CellFilter_InspectorXY {
 }
 
+/**
+ * Create sort and destroy the circles used in triangulation.
+ */
 class BRepMesh_CircleTool {
 }
 
@@ -10129,18 +10723,33 @@ class BRepMesh_CircleTool_1 extends BRepMesh_CircleTool {}
 
 class BRepMesh_CircleTool_2 extends BRepMesh_CircleTool {}
 
+/**
+ * Auxilary class intended for classification of points regarding internals of discrete face.
+ */
 class BRepMesh_Classifier extends Standard_Transient {
 }
 
+/**
+ * Auxiliary class extending default range splitter in order to generate internal nodes for conical surface.
+ */
 class BRepMesh_ConeRangeSplitter extends BRepMesh_DefaultRangeSplitter {
 }
 
+/**
+ * Class provides base fuctionality to build face triangulation using Dealunay approach. Performs generation of mesh using raw data from model.
+ */
 class BRepMesh_ConstrainedBaseMeshAlgo extends BRepMesh_BaseMeshAlgo {
 }
 
+/**
+ * Class implemeting default context of BRepMesh algorithm. Initializes context by default algorithms.
+ */
 class BRepMesh_Context extends IMeshTools_Context {
 }
 
+/**
+ * Auxiliary class performing tessellation of passed edge according to specified parameters.
+ */
 class BRepMesh_CurveTessellator extends IMeshTools_CurveTessellator {
 }
 
@@ -10148,21 +10757,39 @@ class BRepMesh_CurveTessellator_1 extends BRepMesh_CurveTessellator {}
 
 class BRepMesh_CurveTessellator_2 extends BRepMesh_CurveTessellator {}
 
+/**
+ * Class provides base fuctionality to build face triangulation using custom triangulation algorithm. Performs generation of mesh using raw data from model.
+ */
 class BRepMesh_CustomBaseMeshAlgo extends BRepMesh_ConstrainedBaseMeshAlgo {
 }
 
+/**
+ * Auxiliary class extending default range splitter in order to generate internal nodes for cylindrical surface.
+ */
 class BRepMesh_CylinderRangeSplitter extends BRepMesh_DefaultRangeSplitter {
 }
 
+/**
+ * Describes the data structure necessary for the mesh algorithms in two dimensions plane or on surface by meshing in UV space.
+ */
 class BRepMesh_DataStructureOfDelaun extends Standard_Transient {
 }
 
+/**
+ * Default tool to define range of discrete face model and obtain grid points distributed within this range.
+ */
 class BRepMesh_DefaultRangeSplitter {
 }
 
+/**
+ * Auxiliary tool encompassing methods to compute deflection of shapes.
+ */
 class BRepMesh_Deflection extends Standard_Transient {
 }
 
+/**
+ * Compute the Delaunay's triangulation with the algorithm of Watson.
+ */
 class BRepMesh_Delaun {
 }
 
@@ -10176,15 +10803,27 @@ class BRepMesh_Delaun_4 extends BRepMesh_Delaun {}
 
 class BRepMesh_Delaun_5 extends BRepMesh_Delaun {}
 
+/**
+ * Class provides base fuctionality to build face triangulation using Dealunay approach. Performs generation of mesh using raw data from model.
+ */
 class BRepMesh_DelaunayBaseMeshAlgo extends BRepMesh_ConstrainedBaseMeshAlgo {
 }
 
+/**
+ * This class intended to setup / retrieve default triangulation algorithm. Use BRepMesh_DiscretFactory::Get() static method to retrieve global Factory instance. Use BRepMesh_DiscretFactory::Discret() method to retrieve meshing tool.
+ */
 class BRepMesh_DiscretFactory {
 }
 
+/**
+ * This is a common interface for meshing algorithms instantiated by Mesh Factory and implemented by plugins.
+ */
 class BRepMesh_DiscretRoot extends Standard_Transient {
 }
 
+/**
+ * Light weighted structure representing link of the mesh.
+ */
 class BRepMesh_Edge extends BRepMesh_OrientedEdge {
 }
 
@@ -10192,21 +10831,36 @@ class BRepMesh_Edge_1 extends BRepMesh_Edge {}
 
 class BRepMesh_Edge_2 extends BRepMesh_Edge {}
 
+/**
+ * Class implements functionality of edge discret tool. Performs check of the edges for existing Poly_PolygonOnTriangulation. In case if it fits specified deflection, restores data structure using it, else clears edges from outdated data.
+ */
 class BRepMesh_EdgeDiscret extends IMeshTools_ModelAlgo {
 }
 
+/**
+ * Auxiliary class implements functionality retrieving tessellated representation of an edge stored in polygon.
+ */
 class BRepMesh_EdgeTessellationExtractor extends IMeshTools_CurveTessellator {
 }
 
+/**
+ * Auxiliary class checking wires of target face for self-intersections. Explodes wires of discrete face on sets of segments using tessellation data stored in model. Each segment is then checked for intersection with other ones. All collisions are registerd and returned as result of check.
+ */
 class BRepMesh_FaceChecker extends Standard_Transient {
 }
 
+/**
+ * Class implements functionality starting triangulation of model's faces. Each face is processed separately and can be executed in parallel mode. Uses mesh algo factory passed as initializer to create instance of triangulation algorithm according to type of surface of target face.
+ */
 class BRepMesh_FaceDiscret extends IMeshTools_ModelAlgo {
 }
 
 class BRepMesh_FastDiscret {
 }
 
+/**
+ * Tool class accumulating common geometrical functions as well as functionality using shape geometry to produce data necessary for tessellation. General aim is to calculate discretization points for the given curve or iso curve of surface according to the specified parameters.
+ */
 class BRepMesh_GeomTool {
 }
 
@@ -10214,6 +10868,9 @@ class BRepMesh_GeomTool_1 extends BRepMesh_GeomTool {}
 
 class BRepMesh_GeomTool_2 extends BRepMesh_GeomTool {}
 
+/**
+ * Builds the mesh of a shape with respect of their correctly triangulated parts
+ */
 class BRepMesh_IncrementalMesh extends BRepMesh_DiscretRoot {
 }
 
@@ -10223,27 +10880,51 @@ class BRepMesh_IncrementalMesh_2 extends BRepMesh_IncrementalMesh {}
 
 class BRepMesh_IncrementalMesh_3 extends BRepMesh_IncrementalMesh {}
 
+/**
+ * Default implementation of IMeshTools_MeshAlgoFactory providing algorithms of different compexity depending on type of target surface.
+ */
 class BRepMesh_MeshAlgoFactory extends IMeshTools_MeshAlgoFactory {
 }
 
+/**
+ * Auxiliary tool providing API for manipulation with BRepMesh_DataStructureOfDelaun.
+ */
 class BRepMesh_MeshTool extends Standard_Transient {
 }
 
+/**
+ * Class implements interface representing tool for discrete model building.
+ */
 class BRepMesh_ModelBuilder extends IMeshTools_ModelBuilder {
 }
 
+/**
+ * Class implements functionality of model healer tool. Iterates over model's faces and checks consistency of their wires, i.e.whether wires are closed and do not contain self - intersections. In case if wire contains disconnected parts, ends of adjacent edges forming the gaps are connected in parametric space forcibly. The notion of this operation is to create correct discrete model defined relatively parametric space of target face taking into account connectivity and tolerances of 3D space only. This means that there are no specific computations are made for the sake of determination of U and V tolerance. Registers intersections on edges forming the face's shape and tries to amplify discrete represenation by decreasing of deflection for the target edge. Checks can be performed in parallel mode.
+ */
 class BRepMesh_ModelHealer extends IMeshTools_ModelAlgo {
 }
 
+/**
+ * Class implements functionality of model post-processing tool. Stores polygons on triangulations to TopoDS_Edge.
+ */
 class BRepMesh_ModelPostProcessor extends IMeshTools_ModelAlgo {
 }
 
+/**
+ * Class implements functionality of model pre-processing tool. Nullifies existing polygonal data in case if model elements have IMeshData_Outdated status.
+ */
 class BRepMesh_ModelPreProcessor extends IMeshTools_ModelAlgo {
 }
 
+/**
+ * Auxiliary class extending UV range splitter in order to generate internal nodes for NURBS surface.
+ */
 class BRepMesh_NURBSRangeSplitter extends BRepMesh_UVParamRangeSplitter {
 }
 
+/**
+ * Light weighted structure representing simple link.
+ */
 class BRepMesh_OrientedEdge {
 }
 
@@ -10251,9 +10932,15 @@ class BRepMesh_OrientedEdge_1 extends BRepMesh_OrientedEdge {}
 
 class BRepMesh_OrientedEdge_2 extends BRepMesh_OrientedEdge {}
 
+/**
+ * This class represents a pair of integer indices to store element indices connected to link. It is restricted to store more than two indices in it.
+ */
 class BRepMesh_PairOfIndex {
 }
 
+/**
+ * Describes a selector and an iterator on a selector of components of a mesh.
+ */
 class BRepMesh_SelectorOfDataStructureOfDelaun extends Standard_Transient {
 }
 
@@ -10261,18 +10948,33 @@ class BRepMesh_SelectorOfDataStructureOfDelaun_1 extends BRepMesh_SelectorOfData
 
 class BRepMesh_SelectorOfDataStructureOfDelaun_2 extends BRepMesh_SelectorOfDataStructureOfDelaun {}
 
+/**
+ * Auxiliary class providing functionality to compute, retrieve and store data to TopoDS and model shape.
+ */
 class BRepMesh_ShapeTool extends Standard_Transient {
 }
 
+/**
+ * Builds discrete model of a shape by adding faces and free edges. Computes deflection for corresponded shape and checks whether it fits existing polygonal representation. If not, cleans shape from outdated info.
+ */
 class BRepMesh_ShapeVisitor extends IMeshTools_ShapeVisitor {
 }
 
+/**
+ * Auxiliary class extending default range splitter in order to generate internal nodes for spherical surface.
+ */
 class BRepMesh_SphereRangeSplitter extends BRepMesh_DefaultRangeSplitter {
 }
 
+/**
+ * Auxiliary class extending UV range splitter in order to generate internal nodes for NURBS surface.
+ */
 class BRepMesh_TorusRangeSplitter extends BRepMesh_UVParamRangeSplitter {
 }
 
+/**
+ * Light weighted structure representing triangle of mesh consisting of oriented links.
+ */
 class BRepMesh_Triangle {
 }
 
@@ -10280,9 +10982,15 @@ class BRepMesh_Triangle_1 extends BRepMesh_Triangle {}
 
 class BRepMesh_Triangle_2 extends BRepMesh_Triangle {}
 
+/**
+ * Intended to generate internal mesh nodes using UV parameters of boundary discrete points.
+ */
 class BRepMesh_UVParamRangeSplitter extends BRepMesh_DefaultRangeSplitter {
 }
 
+/**
+ * Light weighted structure representing vertex of the mesh in parametric space. Vertex could be associated with 3d point stored in external map.
+ */
 class BRepMesh_Vertex {
 }
 
@@ -10292,15 +11000,27 @@ class BRepMesh_Vertex_2 extends BRepMesh_Vertex {}
 
 class BRepMesh_Vertex_3 extends BRepMesh_Vertex {}
 
+/**
+ * Class intended for fast searching of the coincidence points.
+ */
 class BRepMesh_VertexInspector extends NCollection_CellFilter_InspectorXY {
 }
 
+/**
+ * Describes data structure intended to keep mesh nodes defined in UV space and implements functionality providing their uniqueness regarding their position.
+ */
 class BRepMesh_VertexTool extends Standard_Transient {
 }
 
+/**
+ * Auxiliary tools for offset algorithms
+ */
 class BRepOffset {
 }
 
+/**
+ * Taper-adding transformations on a shape. The resulting shape is constructed by defining one face to be tapered after another one, as well as the geometric properties of their tapered transformation. Each tapered transformation is propagated along the series of faces which are tangential to one another and which contains the face to be tapered. This algorithm is useful in the construction of molds or dies. It facilitates the removal of the article being produced. A DraftAngle object provides a framework for: - initializing the construction algorithm with a given shape, - acquiring the data characterizing the faces to be tapered, - implementing the construction algorithm, and - consulting the results. Warning - This algorithm treats planar, cylindrical and conical faces. - Do not use shapes, which with a draft angle added to a face would modify the topology. This would, for example, involve creation of new vertices, edges or faces, or suppression of existing vertices, edges or faces. - Any face, which is continuous in tangency with the face to be tapered, will also be tapered. These connected faces must also respect the above criteria.
+ */
 class BRepOffsetAPI_DraftAngle extends BRepBuilderAPI_ModifyShape {
 }
 
@@ -10308,9 +11028,15 @@ class BRepOffsetAPI_DraftAngle_1 extends BRepOffsetAPI_DraftAngle {}
 
 class BRepOffsetAPI_DraftAngle_2 extends BRepOffsetAPI_DraftAngle {}
 
+/**
+ * Build a draft surface along a wire
+ */
 class BRepOffsetAPI_MakeDraft extends BRepBuilderAPI_MakeShape {
 }
 
+/**
+ * Describes functions to build evolved shapes. An evolved shape is built from a planar spine (face or wire) and a profile (wire). The evolved shape is the unlooped sweep (pipe) of the profile along the spine. Self-intersections are removed. A MakeEvolved object provides a framework for: - defining the construction of an evolved shape, - implementing the construction algorithm, and - consulting the result. Computes an Evolved by 1 - sweeping a profile along a spine. 2 - removing the self-intersections.
+ */
 class BRepOffsetAPI_MakeEvolved extends BRepBuilderAPI_MakeShape {
 }
 
@@ -10318,9 +11044,15 @@ class BRepOffsetAPI_MakeEvolved_1 extends BRepOffsetAPI_MakeEvolved {}
 
 class BRepOffsetAPI_MakeEvolved_2 extends BRepOffsetAPI_MakeEvolved {}
 
+/**
+ * N-Side Filling This algorithm avoids to build a face from: * a set of edges defining the bounds of the face and some constraints the surface of the face has to satisfy * a set of edges and points defining some constraints the support surface has to satisfy * an initial surface to deform for satisfying the constraints * a set of parameters to control the constraints.
+ */
 class BRepOffsetAPI_MakeFilling extends BRepBuilderAPI_MakeShape {
 }
 
+/**
+ * Describes algorithms for offsetting wires from a set of wires contained in a planar face. A MakeOffset object provides a framework for: - defining the construction of an offset, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepOffsetAPI_MakeOffset extends BRepBuilderAPI_MakeShape {
 }
 
@@ -10330,6 +11062,9 @@ class BRepOffsetAPI_MakeOffset_2 extends BRepOffsetAPI_MakeOffset {}
 
 class BRepOffsetAPI_MakeOffset_3 extends BRepOffsetAPI_MakeOffset {}
 
+/**
+ * Describes functions to build a shell out of a shape. The result is an unlooped shape parallel to the source shape. A MakeOffsetShape object provides a framework for: - defining the construction of a shell - implementing the construction algorithm - consulting the result.
+ */
 class BRepOffsetAPI_MakeOffsetShape extends BRepBuilderAPI_MakeShape {
 }
 
@@ -10337,6 +11072,9 @@ class BRepOffsetAPI_MakeOffsetShape_1 extends BRepOffsetAPI_MakeOffsetShape {}
 
 class BRepOffsetAPI_MakeOffsetShape_2 extends BRepOffsetAPI_MakeOffsetShape {}
 
+/**
+ * Describes functions to build pipes. A pipe is built a basis shape (called the profile) along a wire (called the spine) by sweeping. The profile must not contain solids. A MakePipe object provides a framework for: - defining the construction of a pipe, - implementing the construction algorithm, and - consulting the result. Warning The MakePipe class implements pipe constructions with G1 continuous spines only.
+ */
 class BRepOffsetAPI_MakePipe extends BRepPrimAPI_MakeSweep {
 }
 
@@ -10344,9 +11082,15 @@ class BRepOffsetAPI_MakePipe_1 extends BRepOffsetAPI_MakePipe {}
 
 class BRepOffsetAPI_MakePipe_2 extends BRepOffsetAPI_MakePipe {}
 
+/**
+ * This class provides for a framework to construct a shell or a solid along a spine consisting in a wire. To produce a solid, the initial wire must be closed. Two approaches are used: - definition by section - by a section and a scaling law - by addition of successive intermediary sections - definition by sweep mode. - pseudo-Frenet - constant - binormal constant - normal defined by a surface support - normal defined by a guiding contour. The two global approaches can also be combined. You can also close the surface later in order to form a solid. Warning: some limitations exist -- Mode with auxilary spine is incompatible with hometetic laws -- Mode with auxilary spine and keep contact produce only CO surface.
+ */
 class BRepOffsetAPI_MakePipeShell extends BRepPrimAPI_MakeSweep {
 }
 
+/**
+ * Describes functions to build hollowed solids. A hollowed solid is built from an initial solid and a set of faces on this solid, which are to be removed. The remaining faces of the solid become the walls of the hollowed solid, their thickness defined at the time of construction. the solid is built from an initial solid <S> and a set of faces {Fi} from <S>, builds a solid composed by two shells closed by the {Fi}. First shell <SS> is composed by all the faces of <S> expected {Fi}. Second shell is the offset shell of <SS>. A MakeThickSolid object provides a framework for: - defining the cross-section of a hollowed solid, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepOffsetAPI_MakeThickSolid extends BRepOffsetAPI_MakeOffsetShape {
 }
 
@@ -10354,9 +11098,15 @@ class BRepOffsetAPI_MakeThickSolid_1 extends BRepOffsetAPI_MakeThickSolid {}
 
 class BRepOffsetAPI_MakeThickSolid_2 extends BRepOffsetAPI_MakeThickSolid {}
 
+/**
+ * Describes functions to build a middle path of a pipe-like shape
+ */
 class BRepOffsetAPI_MiddlePath extends BRepBuilderAPI_MakeShape {
 }
 
+/**
+ * A framework to define projection onto a shape according to the normal from each point to be projected. The target shape is a face, and the source shape is an edge or a wire.
+ */
 class BRepOffsetAPI_NormalProjection extends BRepBuilderAPI_MakeShape {
 }
 
@@ -10364,9 +11114,15 @@ class BRepOffsetAPI_NormalProjection_1 extends BRepOffsetAPI_NormalProjection {}
 
 class BRepOffsetAPI_NormalProjection_2 extends BRepOffsetAPI_NormalProjection {}
 
+/**
+ * Describes functions to build a loft. This is a shell or a solid passing through a set of sections in a given sequence. Usually sections are wires, but the first and the last sections may be vertices (punctual sections).
+ */
 class BRepOffsetAPI_ThruSections extends BRepBuilderAPI_MakeShape {
 }
 
+/**
+ * Analyses the shape to find the parts of edges connecting the convex, concave or tangent faces.
+ */
 class BRepOffset_Analyse {
 }
 
@@ -10374,9 +11130,15 @@ class BRepOffset_Analyse_1 extends BRepOffset_Analyse {}
 
 class BRepOffset_Analyse_2 extends BRepOffset_Analyse {}
 
+/**
+ * Computes the intersections betwwen edges on a face stores result is SD as AsDes from BRepOffset.
+ */
 class BRepOffset_Inter2d {
 }
 
+/**
+ * Computes the intersection face face in a set of faces Store the result in a SD as AsDes.
+ */
 class BRepOffset_Inter3d {
 }
 
@@ -10390,6 +11152,9 @@ class BRepOffset_Interval_2 extends BRepOffset_Interval {}
 class BRepOffset_MakeLoops {
 }
 
+/**
+ * Limitations: According to the algorithm nature result depends on the smoothness of input data. Smooth (G1-continuity) input shape will lead to the good result.
+ */
 class BRepOffset_MakeSimpleOffset {
 }
 
@@ -10397,6 +11162,9 @@ class BRepOffset_MakeSimpleOffset_1 extends BRepOffset_MakeSimpleOffset {}
 
 class BRepOffset_MakeSimpleOffset_2 extends BRepOffset_MakeSimpleOffset {}
 
+/**
+ * This class compute elemenary offset surface. Evaluate the offset generated : 1 - from a face. 2 - from an edge. 3 - from a vertex.
+ */
 class BRepOffset_Offset {
 }
 
@@ -10412,12 +11180,18 @@ class BRepOffset_Offset_5 extends BRepOffset_Offset {}
 
 class BRepOffset_Offset_6 extends BRepOffset_Offset {}
 
+/**
+ * This class represents mechanism of simple offset algorithm i. e. topology-preserve offset construction without intersection.
+ */
 class BRepOffset_SimpleOffset extends BRepTools_Modification {
 }
 
 class BRepOffset_Tool {
 }
 
+/**
+ * Describes functions to build parallelepiped boxes. A MakeBox object provides a framework for: - defining the construction of a box, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepPrimAPI_MakeBox extends BRepBuilderAPI_MakeShape {
 }
 
@@ -10429,6 +11203,9 @@ class BRepPrimAPI_MakeBox_3 extends BRepPrimAPI_MakeBox {}
 
 class BRepPrimAPI_MakeBox_4 extends BRepPrimAPI_MakeBox {}
 
+/**
+ * Describes functions to build cones or portions of cones. A MakeCone object provides a framework for: - defining the construction of a cone, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepPrimAPI_MakeCone extends BRepPrimAPI_MakeOneAxis {
 }
 
@@ -10440,6 +11217,9 @@ class BRepPrimAPI_MakeCone_3 extends BRepPrimAPI_MakeCone {}
 
 class BRepPrimAPI_MakeCone_4 extends BRepPrimAPI_MakeCone {}
 
+/**
+ * Describes functions to build cylinders or portions of cylinders. A MakeCylinder object provides a framework for: - defining the construction of a cylinder, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepPrimAPI_MakeCylinder extends BRepPrimAPI_MakeOneAxis {
 }
 
@@ -10451,6 +11231,9 @@ class BRepPrimAPI_MakeCylinder_3 extends BRepPrimAPI_MakeCylinder {}
 
 class BRepPrimAPI_MakeCylinder_4 extends BRepPrimAPI_MakeCylinder {}
 
+/**
+ * Describes functions to build half-spaces. A half-space is an infinite solid, limited by a surface. It is built from a face or a shell, which bounds it, and with a reference point, which specifies the side of the surface where the matter of the half-space is located. A half-space is a tool commonly used in topological operations to cut another shape. A MakeHalfSpace object provides a framework for: - defining and implementing the construction of a half-space, and - consulting the result.
+ */
 class BRepPrimAPI_MakeHalfSpace extends BRepBuilderAPI_MakeShape {
 }
 
@@ -10458,9 +11241,15 @@ class BRepPrimAPI_MakeHalfSpace_1 extends BRepPrimAPI_MakeHalfSpace {}
 
 class BRepPrimAPI_MakeHalfSpace_2 extends BRepPrimAPI_MakeHalfSpace {}
 
+/**
+ * The abstract class MakeOneAxis is the root class of algorithms used to construct rotational primitives.
+ */
 class BRepPrimAPI_MakeOneAxis extends BRepBuilderAPI_MakeShape {
 }
 
+/**
+ * Describes functions to build linear swept topologies, called prisms. A prism is defined by: - a basis shape, which is swept, and - a sweeping direction, which is: - a vector for finite prisms, or - a direction for infinite or semi-infinite prisms. The basis shape must not contain any solids. The profile generates objects according to the following rules: - Vertices generate Edges - Edges generate Faces. - Wires generate Shells. - Faces generate Solids. - Shells generate Composite Solids A MakePrism object provides a framework for: - defining the construction of a prism, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepPrimAPI_MakePrism extends BRepPrimAPI_MakeSweep {
 }
 
@@ -10468,6 +11257,9 @@ class BRepPrimAPI_MakePrism_1 extends BRepPrimAPI_MakePrism {}
 
 class BRepPrimAPI_MakePrism_2 extends BRepPrimAPI_MakePrism {}
 
+/**
+ * Class to make revolved sweep topologies.
+ */
 class BRepPrimAPI_MakeRevol extends BRepPrimAPI_MakeSweep {
 }
 
@@ -10475,6 +11267,9 @@ class BRepPrimAPI_MakeRevol_1 extends BRepPrimAPI_MakeRevol {}
 
 class BRepPrimAPI_MakeRevol_2 extends BRepPrimAPI_MakeRevol {}
 
+/**
+ * Describes functions to build revolved shapes. A MakeRevolution object provides a framework for: - defining the construction of a revolved shape, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepPrimAPI_MakeRevolution extends BRepPrimAPI_MakeOneAxis {
 }
 
@@ -10494,6 +11289,9 @@ class BRepPrimAPI_MakeRevolution_7 extends BRepPrimAPI_MakeRevolution {}
 
 class BRepPrimAPI_MakeRevolution_8 extends BRepPrimAPI_MakeRevolution {}
 
+/**
+ * Describes functions to build spheres or portions of spheres. A MakeSphere object provides a framework for: - defining the construction of a sphere, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepPrimAPI_MakeSphere extends BRepPrimAPI_MakeOneAxis {
 }
 
@@ -10521,9 +11319,15 @@ class BRepPrimAPI_MakeSphere_11 extends BRepPrimAPI_MakeSphere {}
 
 class BRepPrimAPI_MakeSphere_12 extends BRepPrimAPI_MakeSphere {}
 
+/**
+ * The abstract class MakeSweep is the root class of swept primitives. Sweeps are objects you obtain by sweeping a profile along a path. The profile can be any topology and the path is usually a curve or a wire. The profile generates objects according to the following rules: - Vertices generate Edges - Edges generate Faces. - Wires generate Shells. - Faces generate Solids. - Shells generate Composite Solids. You are not allowed to sweep Solids and Composite Solids. Two kinds of sweeps are implemented in the BRepPrimAPI package: - The linear sweep called a Prism - The rotational sweep called a Revol Swept constructions along complex profiles such as BSpline curves are also available in the BRepOffsetAPI package..
+ */
 class BRepPrimAPI_MakeSweep extends BRepBuilderAPI_MakeShape {
 }
 
+/**
+ * Describes functions to build tori or portions of tori. A MakeTorus object provides a framework for: - defining the construction of a torus, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepPrimAPI_MakeTorus extends BRepPrimAPI_MakeOneAxis {
 }
 
@@ -10543,6 +11347,9 @@ class BRepPrimAPI_MakeTorus_7 extends BRepPrimAPI_MakeTorus {}
 
 class BRepPrimAPI_MakeTorus_8 extends BRepPrimAPI_MakeTorus {}
 
+/**
+ * Describes functions to build wedges, i.e. boxes with inclined faces. A MakeWedge object provides a framework for: - defining the construction of a wedge, - implementing the construction algorithm, and - consulting the result.
+ */
 class BRepPrimAPI_MakeWedge extends BRepBuilderAPI_MakeShape {
 }
 
@@ -10554,6 +11361,9 @@ class BRepPrimAPI_MakeWedge_3 extends BRepPrimAPI_MakeWedge {}
 
 class BRepPrimAPI_MakeWedge_4 extends BRepPrimAPI_MakeWedge {}
 
+/**
+ * implements the abstract Builder with the BRep Builder
+ */
 class BRepPrim_Builder {
 }
 
@@ -10561,6 +11371,9 @@ class BRepPrim_Builder_1 extends BRepPrim_Builder {}
 
 class BRepPrim_Builder_2 extends BRepPrim_Builder {}
 
+/**
+ * Implement the cone primitive.
+ */
 class BRepPrim_Cone extends BRepPrim_Revolution {
 }
 
@@ -10578,6 +11391,9 @@ class BRepPrim_Cone_6 extends BRepPrim_Cone {}
 
 class BRepPrim_Cone_7 extends BRepPrim_Cone {}
 
+/**
+ * Cylinder primitive.
+ */
 class BRepPrim_Cylinder extends BRepPrim_Revolution {
 }
 
@@ -10593,6 +11409,9 @@ class BRepPrim_Cylinder_5 extends BRepPrim_Cylinder {}
 
 class BRepPrim_Cylinder_6 extends BRepPrim_Cylinder {}
 
+/**
+ * The FaceBuilder is an algorithm to build a BRep Face from a Geom Surface.
+ */
 class BRepPrim_FaceBuilder {
 }
 
@@ -10602,6 +11421,9 @@ class BRepPrim_FaceBuilder_2 extends BRepPrim_FaceBuilder {}
 
 class BRepPrim_FaceBuilder_3 extends BRepPrim_FaceBuilder {}
 
+/**
+ * A wedge is defined by :
+ */
 class BRepPrim_GWedge {
 }
 
@@ -10611,12 +11433,21 @@ class BRepPrim_GWedge_2 extends BRepPrim_GWedge {}
 
 class BRepPrim_GWedge_3 extends BRepPrim_GWedge {}
 
+/**
+ * Algorithm to build primitives with one axis of revolution.
+ */
 class BRepPrim_OneAxis {
 }
 
+/**
+ * Implement the OneAxis algoritm for a revolution surface.
+ */
 class BRepPrim_Revolution extends BRepPrim_OneAxis {
 }
 
+/**
+ * Implements the sphere primitive
+ */
 class BRepPrim_Sphere extends BRepPrim_Revolution {
 }
 
@@ -10626,6 +11457,9 @@ class BRepPrim_Sphere_2 extends BRepPrim_Sphere {}
 
 class BRepPrim_Sphere_3 extends BRepPrim_Sphere {}
 
+/**
+ * Implements the torus primitive
+ */
 class BRepPrim_Torus extends BRepPrim_Revolution {
 }
 
@@ -10635,6 +11469,9 @@ class BRepPrim_Torus_2 extends BRepPrim_Torus {}
 
 class BRepPrim_Torus_3 extends BRepPrim_Torus {}
 
+/**
+ * Provides constructors without Builders.
+ */
 class BRepPrim_Wedge extends BRepPrim_GWedge {
 }
 
@@ -10644,6 +11481,9 @@ class BRepPrim_Wedge_2 extends BRepPrim_Wedge {}
 
 class BRepPrim_Wedge_3 extends BRepPrim_Wedge {}
 
+/**
+ * The Projection class provides conical and cylindrical projections of Edge or Wire on a Shape from TopoDS. The result will be a Edge or Wire from TopoDS.
+ */
 class BRepProj_Projection {
 }
 
@@ -10651,15 +11491,27 @@ class BRepProj_Projection_1 extends BRepProj_Projection {}
 
 class BRepProj_Projection_2 extends BRepProj_Projection {}
 
+/**
+ * implements the abstract Builder with the BRep Builder
+ */
 class BRepSweep_Builder {
 }
 
+/**
+ * This class provides iteration services required by the Generating Line (TopoDS Shape) of a BRepSweep. This tool is used to iterate on the direct sub-shapes of a Shape.
+ */
 class BRepSweep_Iterator {
 }
 
+/**
+ * This a generic class is used to build Sweept primitives with a generating "shape" and a directing "line".
+ */
 class BRepSweep_NumLinearRegularSweep {
 }
 
+/**
+ * Provides natural constructors to build BRepSweep translated swept Primitives.
+ */
 class BRepSweep_Prism {
 }
 
@@ -10667,6 +11519,9 @@ class BRepSweep_Prism_1 extends BRepSweep_Prism {}
 
 class BRepSweep_Prism_2 extends BRepSweep_Prism {}
 
+/**
+ * Provides natural constructors to build BRepSweep rotated swept Primitives.
+ */
 class BRepSweep_Revol {
 }
 
@@ -10674,24 +11529,45 @@ class BRepSweep_Revol_1 extends BRepSweep_Revol {}
 
 class BRepSweep_Revol_2 extends BRepSweep_Revol {}
 
+/**
+ * Provides an algorithm to build object by Rotation sweep.
+ */
 class BRepSweep_Rotation extends BRepSweep_Trsf {
 }
 
+/**
+ * Provides the indexation and type analysis services required by the TopoDS generating Shape of BRepSweep.
+ */
 class BRepSweep_Tool {
 }
 
+/**
+ * Provides an algorithm to build object by translation sweep.
+ */
 class BRepSweep_Translation extends BRepSweep_Trsf {
 }
 
+/**
+ * This class is inherited from NumLinearRegularSweep to implement the simple swept primitives built moving a Shape with a Trsf. It often is possible to build the constructed subshapes by a simple move of the generating subshapes (shared topology and geometry). So two ways of construction are proposed :
+ */
 class BRepSweep_Trsf extends BRepSweep_NumLinearRegularSweep {
 }
 
+/**
+ * provides methods to transfer BRep entity from CASCADE to IGESBRep.
+ */
 class BRepToIGESBRep_Entity extends BRepToIGES_BREntity {
 }
 
+/**
+ * provides methods to transfer BRep entity from CASCADE to IGES.
+ */
 class BRepToIGES_BREntity {
 }
 
+/**
+ * This class implements the transfer of Shape Entities from Geom To IGES. These can be : . Vertex . Edge . Wire
+ */
 class BRepToIGES_BRShell extends BRepToIGES_BREntity {
 }
 
@@ -10699,6 +11575,9 @@ class BRepToIGES_BRShell_1 extends BRepToIGES_BRShell {}
 
 class BRepToIGES_BRShell_2 extends BRepToIGES_BRShell {}
 
+/**
+ * This class implements the transfer of Shape Entities from Geom To IGES. These can be : . Vertex . Edge . Wire
+ */
 class BRepToIGES_BRSolid extends BRepToIGES_BREntity {
 }
 
@@ -10706,6 +11585,9 @@ class BRepToIGES_BRSolid_1 extends BRepToIGES_BRSolid {}
 
 class BRepToIGES_BRSolid_2 extends BRepToIGES_BRSolid {}
 
+/**
+ * This class implements the transfer of Shape Entities from Geom To IGES. These can be : . Vertex . Edge . Wire
+ */
 class BRepToIGES_BRWire extends BRepToIGES_BREntity {
 }
 
@@ -10713,18 +11595,33 @@ class BRepToIGES_BRWire_1 extends BRepToIGES_BRWire {}
 
 class BRepToIGES_BRWire_2 extends BRepToIGES_BRWire {}
 
+/**
+ * The BRepTools package provides utilities for BRep data structures.
+ */
 class BRepTools {
 }
 
+/**
+ * Defines a modification of the geometry by a GTrsf from gp. All methods return True and transform the geometry.
+ */
 class BRepTools_GTrsfModification extends BRepTools_Modification {
 }
 
+/**
+ * The history keeps the following relations between the input shapes (S1, ..., Sm) and output shapes (T1, ..., Tn): 1) an output shape Tj is generated from an input shape Si: Tj <= G(Si); 2) a output shape Tj is modified from an input shape Si: Tj <= M(Si); 3) an input shape (Si) is removed: R(Si) == 1.
+ */
 class BRepTools_History extends Standard_Transient {
 }
 
+/**
+ * Defines geometric modifications to a shape, i.e. changes to faces, edges and vertices.
+ */
 class BRepTools_Modification extends Standard_Transient {
 }
 
+/**
+ * Performs geometric modifications on a shape.
+ */
 class BRepTools_Modifier {
 }
 
@@ -10734,15 +11631,27 @@ class BRepTools_Modifier_2 extends BRepTools_Modifier {}
 
 class BRepTools_Modifier_3 extends BRepTools_Modifier {}
 
+/**
+ * Defines a modification of the geometry by a Trsf from gp. All methods return True and transform the geometry.
+ */
 class BRepTools_NurbsConvertModification extends BRepTools_Modification {
 }
 
+/**
+ * A Tool to glue faces at common edges and reconstruct shells.
+ */
 class BRepTools_Quilt {
 }
 
+/**
+ * Rebuilds a Shape by making pre-defined substitutions on some of its components
+ */
 class BRepTools_ReShape extends Standard_Transient {
 }
 
+/**
+ * Contains a Shape and all its subshapes, locations and geometries.
+ */
 class BRepTools_ShapeSet extends TopTools_ShapeSet {
 }
 
@@ -10750,12 +11659,21 @@ class BRepTools_ShapeSet_1 extends BRepTools_ShapeSet {}
 
 class BRepTools_ShapeSet_2 extends BRepTools_ShapeSet {}
 
+/**
+ * A tool to substitute subshapes by other shapes.
+ */
 class BRepTools_Substitution {
 }
 
+/**
+ * Describes a modification that uses a gp_Trsf to change the geometry of a shape. All functions return true and transform the geometry of the shape.
+ */
 class BRepTools_TrsfModification extends BRepTools_Modification {
 }
 
+/**
+ * The WireExplorer is a tool to explore the edges of a wire in a connection order.
+ */
 class BRepTools_WireExplorer {
 }
 
@@ -10787,69 +11705,135 @@ class BRepTopAdaptor_TopolTool_1 extends BRepTopAdaptor_TopolTool {}
 
 class BRepTopAdaptor_TopolTool_2 extends BRepTopAdaptor_TopolTool {}
 
+/**
+ * A framework providing advanced tolerance control. It is used to build Shapes. If tolerance control is required, you are advised to: 1. build a default precision for topology, using the classes provided in the BRepAPI package 2. update the tolerance of the resulting shape. Note that only vertices, edges and faces have meaningful tolerance control. The tolerance value must always comply with the condition that face tolerances are more restrictive than edge tolerances which are more restrictive than vertex tolerances. In other words: Tol(Vertex) >= Tol(Edge) >= Tol(Face). Other rules in setting tolerance include: - you can open up tolerance but should never restrict it - an edge cannot be included within the fusion of the tolerance spheres of two vertices
+ */
 class BRep_Builder extends TopoDS_Builder {
 }
 
+/**
+ * Representation of a curve by a 3D curve.
+ */
 class BRep_Curve3D extends BRep_GCurve {
 }
 
+/**
+ * Defines a continuity between two surfaces.
+ */
 class BRep_CurveOn2Surfaces extends BRep_CurveRepresentation {
 }
 
+/**
+ * Representation of a curve by two pcurves on a closed surface.
+ */
 class BRep_CurveOnClosedSurface extends BRep_CurveOnSurface {
 }
 
+/**
+ * Representation of a curve by a curve in the parametric space of a surface.
+ */
 class BRep_CurveOnSurface extends BRep_GCurve {
 }
 
+/**
+ * Root class for the curve representations. Contains a location.
+ */
 class BRep_CurveRepresentation extends Standard_Transient {
 }
 
+/**
+ * Root class for the geometric curves representation. Contains a range. Contains a first and a last parameter.
+ */
 class BRep_GCurve extends BRep_CurveRepresentation {
 }
 
+/**
+ * Representation by a parameter on a 3D curve.
+ */
 class BRep_PointOnCurve extends BRep_PointRepresentation {
 }
 
+/**
+ * Representation by a parameter on a curve on a surface.
+ */
 class BRep_PointOnCurveOnSurface extends BRep_PointsOnSurface {
 }
 
+/**
+ * Representation by two parameters on a surface.
+ */
 class BRep_PointOnSurface extends BRep_PointsOnSurface {
 }
 
+/**
+ * Root class for the points representations. Contains a location and a parameter.
+ */
 class BRep_PointRepresentation extends Standard_Transient {
 }
 
+/**
+ * Root for points on surface.
+ */
 class BRep_PointsOnSurface extends BRep_PointRepresentation {
 }
 
+/**
+ * Representation by a 3D polygon.
+ */
 class BRep_Polygon3D extends BRep_CurveRepresentation {
 }
 
+/**
+ * Representation by two 2d polygons in the parametric space of a surface.
+ */
 class BRep_PolygonOnClosedSurface extends BRep_PolygonOnSurface {
 }
 
+/**
+ * A representation by two arrays of nodes on a triangulation.
+ */
 class BRep_PolygonOnClosedTriangulation extends BRep_PolygonOnTriangulation {
 }
 
+/**
+ * Representation of a 2D polygon in the parametric space of a surface.
+ */
 class BRep_PolygonOnSurface extends BRep_CurveRepresentation {
 }
 
+/**
+ * A representation by an array of nodes on a triangulation.
+ */
 class BRep_PolygonOnTriangulation extends BRep_CurveRepresentation {
 }
 
+/**
+ * The TEdge from BRep is inherited from the TEdge from TopoDS. It contains the geometric data.
+ */
 class BRep_TEdge extends TopoDS_TEdge {
 }
 
+/**
+ * The Tface from BRep is based on the TFace from TopoDS. The TFace contains :
+ */
 class BRep_TFace extends TopoDS_TFace {
 }
 
+/**
+ * The TVertex from BRep inherits from the TVertex from TopoDS. It contains the geometric data.
+ */
 class BRep_TVertex extends TopoDS_TVertex {
 }
 
+/**
+ * Provides class methods to access to the geometry of BRep shapes.
+ */
 class BRep_Tool {
 }
 
+/**
+ * A cache class for Bezier and B-spline curves.
+ */
 class BSplCLib_Cache extends Standard_Transient {
 }
 
@@ -10860,33 +11844,60 @@ class BSplCLib_Cache_2 extends BSplCLib_Cache {}
 class BSplCLib_EvaluatorFunction {
 }
 
+/**
+ * BSplSLib B-spline surface Library This package provides an implementation of geometric functions for rational and non rational, periodic and non periodic B-spline surface computation.
+ */
 class BSplSLib {
 }
 
+/**
+ * A cache class for Bezier and B-spline surfaces.
+ */
 class BSplSLib_Cache extends Standard_Transient {
 }
 
 class BSplSLib_EvaluatorFunction {
 }
 
+/**
+ * Command-queue for parallel building of BVH nodes.
+ */
 class BVH_BuildQueue {
 }
 
+/**
+ * Wrapper for BVH build thread.
+ */
 class BVH_BuildThread extends Standard_Transient {
 }
 
+/**
+ * A non-template class for using as base for BVH_Builder (just to have a named base class).
+ */
 class BVH_BuilderTransient extends Standard_Transient {
 }
 
+/**
+ * A non-template class for using as base for BVH_Object (just to have a named base class).
+ */
 class BVH_ObjectTransient extends Standard_Transient {
 }
 
+/**
+ * Abstract properties of geometric object.
+ */
 class BVH_Properties extends Standard_Transient {
 }
 
+/**
+ * A non-template class for using as base for BVH_TreeBase (just to have a named base class).
+ */
 class BVH_TreeBaseTransient extends Standard_Transient {
 }
 
+/**
+ * Root class
+ */
 class BiTgte_Blend {
 }
 
@@ -10894,6 +11905,9 @@ class BiTgte_Blend_1 extends BiTgte_Blend {}
 
 class BiTgte_Blend_2 extends BiTgte_Blend {}
 
+/**
+ * private class used to create a filler rolling on an edge.
+ */
 class BiTgte_CurveOnEdge extends Adaptor3d_Curve {
 }
 
@@ -10901,6 +11915,9 @@ class BiTgte_CurveOnEdge_1 extends BiTgte_CurveOnEdge {}
 
 class BiTgte_CurveOnEdge_2 extends BiTgte_CurveOnEdge {}
 
+/**
+ * private class used to create a filler rolling on an edge.
+ */
 class BiTgte_CurveOnVertex extends Adaptor3d_Curve {
 }
 
@@ -10922,15 +11939,27 @@ class BiTgte_HCurveOnVertex_1 extends BiTgte_HCurveOnVertex {}
 
 class BiTgte_HCurveOnVertex_2 extends BiTgte_HCurveOnVertex {}
 
+/**
+ * This package provides the bisecting line between two geometric elements.
+ */
 class Bisector {
 }
 
+/**
+ * Bisec provides the bisecting line between two elements This line is trimed by a point <P> and it's contained in the domain defined by the two vectors <V1>, <V2> and <Sense>.
+ */
 class Bisector_Bisec {
 }
 
+/**
+ * This class provides the bisecting line between two geometric elements.The elements are Circles,Lines or Points.
+ */
 class Bisector_BisecAna extends Bisector_Curve {
 }
 
+/**
+ * Construct the bisector between two curves. The curves can intersect only in their extremities.
+ */
 class Bisector_BisecCC extends Bisector_Curve {
 }
 
@@ -10938,6 +11967,9 @@ class Bisector_BisecCC_1 extends Bisector_BisecCC {}
 
 class Bisector_BisecCC_2 extends Bisector_BisecCC {}
 
+/**
+ * Provides the bisector between a point and a curve. the curvature on the curve has to be monoton. the point can't be on the curve exept at the extremitys.
+ */
 class Bisector_BisecPC extends Bisector_Curve {
 }
 
@@ -10950,9 +11982,15 @@ class Bisector_BisecPC_3 extends Bisector_BisecPC {}
 class Bisector_Curve extends Geom2d_Curve {
 }
 
+/**
+ * H(v) = (T1 .P2(v) - P1) * ||T(v)|| - 2 2 (T(v).P2(v) - P1) * ||T1||
+ */
 class Bisector_FunctionH extends math_FunctionWithDerivative {
 }
 
+/**
+ * 2 2 F(u) = (PC(u) - PBis1(u)) + (PC(u) - PBis2(u))
+ */
 class Bisector_FunctionInter extends math_FunctionWithDerivative {
 }
 
@@ -10960,6 +11998,9 @@ class Bisector_FunctionInter_1 extends Bisector_FunctionInter {}
 
 class Bisector_FunctionInter_2 extends Bisector_FunctionInter {}
 
+/**
+ * Intersection between two <Bisec> from Bisector.
+ */
 class Bisector_Inter extends IntRes2d_Intersection {
 }
 
@@ -10974,6 +12015,9 @@ class Bisector_PointOnBis_1 extends Bisector_PointOnBis {}
 
 class Bisector_PointOnBis_2 extends Bisector_PointOnBis {}
 
+/**
+ * Polygon of PointOnBis
+ */
 class Bisector_PolyBis {
 }
 
@@ -10989,9 +12033,15 @@ class BlendFunc_ChAsym extends Blend_Function {
 class BlendFunc_ChAsymInv extends Blend_FuncInv {
 }
 
+/**
+ * Class for a function used to compute a chamfer with two constant distances on a surface's boundary
+ */
 class BlendFunc_ChamfInv extends BlendFunc_GenChamfInv {
 }
 
+/**
+ * Class for a function used to compute a "ordinary" chamfer: when distances from spine to surfaces are constant
+ */
 class BlendFunc_Chamfer extends BlendFunc_GenChamfer {
 }
 
@@ -11001,18 +12051,33 @@ class BlendFunc_ConstRad extends Blend_Function {
 class BlendFunc_ConstRadInv extends Blend_FuncInv {
 }
 
+/**
+ * Class for a function used to compute a symmetric chamfer with constant throat that is the height of isosceles triangle in section
+ */
 class BlendFunc_ConstThroat extends BlendFunc_GenChamfer {
 }
 
+/**
+ * Class for a function used to compute a ConstThroat chamfer on a surface's boundary
+ */
 class BlendFunc_ConstThroatInv extends BlendFunc_GenChamfInv {
 }
 
+/**
+ * Class for a function used to compute a chamfer with constant throat: the section of chamfer is right-angled triangle, the first of two surfaces (where is the top of the chamfer) is virtually moved inside the solid by offset operation, the apex of the section is on the intersection curve between moved surface and second surface, right angle is at the top of the chamfer, the length of the leg from apex to top is constant - it is throat
+ */
 class BlendFunc_ConstThroatWithPenetration extends BlendFunc_ConstThroat {
 }
 
+/**
+ * Class for a function used to compute a ConstThroatWithPenetration chamfer on a surface's boundary
+ */
 class BlendFunc_ConstThroatWithPenetrationInv extends BlendFunc_ConstThroatInv {
 }
 
+/**
+ * This function calculates point (pts) on the curve of intersection between the normal to a curve (guide) in a chosen parameter and a surface (surf), so that pts was at a given distance from the guide. X(1),X(2) are the parameters U,V of pts on surf.
+ */
 class BlendFunc_Corde {
 }
 
@@ -11022,9 +12087,15 @@ class BlendFunc_EvolRad extends Blend_Function {
 class BlendFunc_EvolRadInv extends Blend_FuncInv {
 }
 
+/**
+ * Deferred class for a function used to compute a general chamfer on a surface's boundary
+ */
 class BlendFunc_GenChamfInv extends Blend_FuncInv {
 }
 
+/**
+ * Deferred class for a function used to compute a general chamfer
+ */
 class BlendFunc_GenChamfer extends Blend_Function {
 }
 
@@ -11034,21 +12105,39 @@ class BlendFunc_Ruled extends Blend_Function {
 class BlendFunc_RuledInv extends Blend_FuncInv {
 }
 
+/**
+ * used to store the "gradient of gradient"
+ */
 class BlendFunc_Tensor {
 }
 
+/**
+ * Deferred class for a function used to compute a blending surface between two surfaces, using a guide line. The vector <X> used in Value, Values and Derivatives methods has to be the vector of the parametric coordinates U1,V1, U2,V2, of the extremities of a section on the first and second surface.
+ */
 class Blend_AppFunction extends math_FunctionSetWithDerivatives {
 }
 
+/**
+ * Deferred class for a function used to compute a blending surface between a surface and a curve, using a guide line. The vector <X> used in Value, Values and Derivatives methods may be the vector of the parametric coordinates U,V, W of the extremities of a section on the surface and the curve.
+ */
 class Blend_CSFunction extends Blend_AppFunction {
 }
 
+/**
+ * Deferred class for a function used to compute a blending surface between a surface and a curve, using a guide line. This function is used to find a solution on a done point of the curve. The vector <X> used in Value, Values and Derivatives methods has to be the vector of the parametric coordinates w, U, V where w is the parameter on the guide line, U,V are the parametric coordinates of a point on the partner surface.
+ */
 class Blend_CurvPointFuncInv extends math_FunctionSetWithDerivatives {
 }
 
+/**
+ * Deferred class for a function used to compute a blending surface between two surfaces, using a guide line. This function is used to find a solution on a restriction of one of the surface. The vector <X> used in Value, Values and Derivatives methods has to be the vector of the parametric coordinates t,w,U,V where t is the parameter on the curve on surface, w is the parameter on the guide line, U,V are the parametric coordinates of a point on the partner surface.
+ */
 class Blend_FuncInv extends math_FunctionSetWithDerivatives {
 }
 
+/**
+ * Deferred class for a function used to compute a blending surface between two surfaces, using a guide line. The vector <X> used in Value, Values and Derivatives methods has to be the vector of the parametric coordinates U1,V1, U2,V2, of the extremities of a section on the first and second surface.
+ */
 class Blend_Function extends Blend_AppFunction {
 }
 
@@ -11073,27 +12162,51 @@ class Blend_Point_8 extends Blend_Point {}
 
 class Blend_Point_9 extends Blend_Point {}
 
+/**
+ * Deferred class for a function used to compute a blending surface between a surface and a pcurve on an other Surface, using a guide line. The vector <X> used in Value, Values and Derivatives methods may be the vector of the parametric coordinates U,V, W of the extremities of a section on the surface and the curve.
+ */
 class Blend_RstRstFunction extends Blend_AppFunction {
 }
 
+/**
+ * Deferred class for a function used to compute a blending surface between a surface and a curve, using a guide line. This function is used to find a solution on a done restriction of the surface.
+ */
 class Blend_SurfCurvFuncInv extends math_FunctionSetWithDerivatives {
 }
 
+/**
+ * Deferred class for a function used to compute a blending surface between a surface and a curve, using a guide line. This function is used to find a solution on a done point of the curve.
+ */
 class Blend_SurfPointFuncInv extends math_FunctionSetWithDerivatives {
 }
 
+/**
+ * Deferred class for a function used to compute a blending surface between a surface and a pcurve on an other Surface, using a guide line. The vector <X> used in Value, Values and Derivatives methods may be the vector of the parametric coordinates U,V, W of the extremities of a section on the surface and the curve.
+ */
 class Blend_SurfRstFunction extends Blend_AppFunction {
 }
 
+/**
+ * The BndLib package provides functions to add a geometric primitive to a bounding box. Note: these functions work with gp objects, optionally limited by parameter values. If the curves and surfaces provided by the gp package are not explicitly parameterized, they still have an implicit parameterization, similar to that which they infer for the equivalent Geom or Geom2d objects. Add : Package to compute the bounding boxes for elementary objects from gp in 2d and 3d .
+ */
 class BndLib {
 }
 
+/**
+ * Computes the bounding box for a curve in 2d . Functions to add a 2D curve to a bounding box. The 2D curve is defined from a Geom2d curve.
+ */
 class BndLib_Add2dCurve {
 }
 
+/**
+ * Computes the bounding box for a curve in 3d. Functions to add a 3D curve to a bounding box. The 3D curve is defined from a Geom curve.
+ */
 class BndLib_Add3dCurve {
 }
 
+/**
+ * computes the box from a surface Functions to add a surface to a bounding box. The surface is defined from a Geom surface.
+ */
 class BndLib_AddSurface {
 }
 
@@ -11125,12 +12238,21 @@ class Bnd_B3f_1 extends Bnd_B3f {}
 
 class Bnd_B3f_2 extends Bnd_B3f {}
 
+/**
+ * A tool to compare a bounding box or a plane with a set of bounding boxes. It sorts the set of bounding boxes to give the list of boxes which intersect the element being compared. The boxes being sorted generally bound a set of shapes, while the box being compared bounds a shape to be compared. The resulting list of intersecting boxes therefore gives the list of items which potentially intersect the shape to be compared.
+ */
 class Bnd_BoundSortBox {
 }
 
+/**
+ * A tool to compare a 2D bounding box with a set of 2D bounding boxes. It sorts the set of bounding boxes to give the list of boxes which intersect the element being compared. The boxes being sorted generally bound a set of shapes, while the box being compared bounds a shape to be compared. The resulting list of intersecting boxes therefore gives the list of items which potentially intersect the shape to be compared.
+ */
 class Bnd_BoundSortBox2d {
 }
 
+/**
+ * Describes a bounding box in 3D space. A bounding box is parallel to the axes of the coordinates system. If it is finite, it is defined by the three intervals: - [ Xmin,Xmax ], - [ Ymin,Ymax ], - [ Zmin,Zmax ]. A bounding box may be infinite (i.e. open) in one or more directions. It is said to be: - OpenXmin if it is infinite on the negative side of the "X Direction"; - OpenXmax if it is infinite on the positive side of the "X Direction"; - OpenYmin if it is infinite on the negative side of the "Y Direction"; - OpenYmax if it is infinite on the positive side of the "Y Direction"; - OpenZmin if it is infinite on the negative side of the "Z Direction"; - OpenZmax if it is infinite on the positive side of the "Z Direction"; - WholeSpace if it is infinite in all six directions. In this case, any point of the space is inside the box; - Void if it is empty. In this case, there is no point included in the box. A bounding box is defined by: - six bounds (Xmin, Xmax, Ymin, Ymax, Zmin and Zmax) which limit the bounding box if it is finite, - eight flags (OpenXmin, OpenXmax, OpenYmin, OpenYmax, OpenZmin, OpenZmax, WholeSpace and Void) which describe the bounding box if it is infinite or empty, and - a gap, which is included on both sides in any direction when consulting the finite bounds of the box.
+ */
 class Bnd_Box {
 }
 
@@ -11138,9 +12260,15 @@ class Bnd_Box_1 extends Bnd_Box {}
 
 class Bnd_Box_2 extends Bnd_Box {}
 
+/**
+ * Describes a bounding box in 2D space. A bounding box is parallel to the axes of the coordinates system. If it is finite, it is defined by the two intervals: - [ Xmin,Xmax ], and - [ Ymin,Ymax ]. A bounding box may be infinite (i.e. open) in one or more directions. It is said to be: - OpenXmin if it is infinite on the negative side of the "X Direction"; - OpenXmax if it is infinite on the positive side of the "X Direction"; - OpenYmin if it is infinite on the negative side of the "Y Direction"; - OpenYmax if it is infinite on the positive side of the "Y Direction"; - WholeSpace if it is infinite in all four directions. In this case, any point of the space is inside the box; - Void if it is empty. In this case, there is no point included in the box. A bounding box is defined by four bounds (Xmin, Xmax, Ymin and Ymax) which limit the bounding box if it is finite, six flags (OpenXmin, OpenXmax, OpenYmin, OpenYmax, WholeSpace and Void) which describe the bounding box if it is infinite or empty, and - a gap, which is included on both sides in any direction when consulting the finite bounds of the box.
+ */
 class Bnd_Box2d {
 }
 
+/**
+ * The class describes the Oriented Bounding Box (OBB), much tighter enclosing volume for the shape than the Axis Aligned Bounding Box (AABB). The OBB is defined by a center of the box, the axes and the halves of its three dimensions. The OBB can be used more effectively than AABB as a rejection mechanism for non-interfering objects.
+ */
 class Bnd_OBB {
 }
 
@@ -11150,6 +12278,9 @@ class Bnd_OBB_2 extends Bnd_OBB {}
 
 class Bnd_OBB_3 extends Bnd_OBB {}
 
+/**
+ * This class describes a range in 1D space restricted by two real values. A range can be void indicating there is no point included in the range.
+ */
 class Bnd_Range {
 }
 
@@ -11157,6 +12288,9 @@ class Bnd_Range_1 extends Bnd_Range {}
 
 class Bnd_Range_2 extends Bnd_Range {}
 
+/**
+ * This class represents a bounding sphere of a geometric entity (triangle, segment of line or whatever else).
+ */
 class Bnd_Sphere {
 }
 
@@ -11164,6 +12298,9 @@ class Bnd_Sphere_1 extends Bnd_Sphere {}
 
 class Bnd_Sphere_2 extends Bnd_Sphere {}
 
+/**
+ * Defines a set of static methods operating with bounding boxes
+ */
 class Bnd_Tools {
 }
 
@@ -11173,6 +12310,9 @@ class CDF {
 class CDF_Application extends CDM_Application {
 }
 
+/**
+ * A directory is a collection of documents. There is only one instance of a given document in a directory. put.
+ */
 class CDF_Directory extends Standard_Transient {
 }
 
@@ -11186,9 +12326,15 @@ class CDF_DirectoryIterator_2 extends CDF_DirectoryIterator {}
 class CDF_FWOSDriver extends CDF_MetaDataDriver {
 }
 
+/**
+ * this class list the method that must be available for a specific DBMS
+ */
 class CDF_MetaDataDriver extends Standard_Transient {
 }
 
+/**
+ * This exception is used in the deferred methods. Programmer implementing such methods may use this exception or any exception inheriting MetaDataDriverError.
+ */
 class CDF_MetaDataDriverError extends Standard_Failure {
 }
 
@@ -11211,6 +12357,9 @@ class CDF_StoreList extends Standard_Transient {
 class CDM_Application extends Standard_Transient {
 }
 
+/**
+ * An applicative document is an instance of a class inheriting CDM_Document. These documents have the following properties: - they can have references to other documents. - the modifications of a document are propagated to the referencing documents. - a document can be stored in different formats, with or without a persistent model. - the drivers for storing and retrieving documents are plugged in when necessary. - a document has a modification counter. This counter is incremented when the document is modified. When a document is stored, the current counter value is memorized as the last storage version of the document. A document is considered to be modified when the counter value is different from the storage version. Once the document is saved the storage version and the counter value are identical. The document is now not considered to be modified. - a reference is a link between two documents. A reference has two components: the "From Document" and the "To Document". When a reference is created, an identifier of the reference is generated. This identifier is unique in the scope of the From Document and is conserved during storage and retrieval. This means that the referenced document will be always accessible through this identifier. - a reference memorizes the counter value of the To Document when the reference is created. The From Document is considered to be up to date relative to the To Document when the reference counter value is equal to the To Document counter value. - retrieval of a document having references does not imply the retrieving of the referenced documents.
+ */
 class CDM_Document extends Standard_Transient {
 }
 
@@ -11223,6 +12372,9 @@ class CDM_Reference extends Standard_Transient {
 class CDM_ReferenceIterator {
 }
 
+/**
+ * the algorithm computes a point on a curve at a given distance from another point on the curve
+ */
 class CPnts_AbscissaPoint {
 }
 
@@ -11236,12 +12388,21 @@ class CPnts_AbscissaPoint_4 extends CPnts_AbscissaPoint {}
 
 class CPnts_AbscissaPoint_5 extends CPnts_AbscissaPoint {}
 
+/**
+ * for implementation, compute values for Gauss
+ */
 class CPnts_MyGaussFunction extends math_Function {
 }
 
+/**
+ * Implements a function for the Newton algorithm to find the solution of Integral(F) = L (compute Length and Derivative of the curve for Newton)
+ */
 class CPnts_MyRootFunction extends math_FunctionWithDerivative {
 }
 
+/**
+ * This class defines an algorithm to create a set of points (with a given chordal deviation) at the positions of constant deflection of a given parametrized curve or a trimmed circle. The continuity of the curve must be at least C2.
+ */
 class CPnts_UniformDeflection {
 }
 
@@ -11255,9 +12416,15 @@ class CPnts_UniformDeflection_4 extends CPnts_UniformDeflection {}
 
 class CPnts_UniformDeflection_5 extends CPnts_UniformDeflection {}
 
+/**
+ * This package implements functions for basis geometric computation on curves and surfaces. The tolerance criterions used in this package are Resolution from package gp and RealEpsilon from class Real of package Standard.
+ */
 class CSLib {
 }
 
+/**
+ * *** Class2d : Low level algorithm for 2d classification this class was moved from package BRepTopAdaptor
+ */
 class CSLib_Class2d {
 }
 
@@ -11268,9 +12435,15 @@ class CSLib_Class2d_2 extends CSLib_Class2d {}
 class CSLib_NormalPolyDef extends math_FunctionWithDerivative {
 }
 
+/**
+ * This package contains the algorithms used to build fillets or chamfers on planar wire.
+ */
 class ChFi2d {
 }
 
+/**
+ * An analytical algorithm for calculation of the fillets. It is implemented for segments and arcs of circle only.
+ */
 class ChFi2d_AnaFilletAlgo {
 }
 
@@ -11280,6 +12453,9 @@ class ChFi2d_AnaFilletAlgo_2 extends ChFi2d_AnaFilletAlgo {}
 
 class ChFi2d_AnaFilletAlgo_3 extends ChFi2d_AnaFilletAlgo {}
 
+/**
+ * This class contains the algorithm used to build fillet on planar wire.
+ */
 class ChFi2d_Builder {
 }
 
@@ -11287,6 +12463,9 @@ class ChFi2d_Builder_1 extends ChFi2d_Builder {}
 
 class ChFi2d_Builder_2 extends ChFi2d_Builder {}
 
+/**
+ * A class making a chamfer between two linear edges.
+ */
 class ChFi2d_ChamferAPI {
 }
 
@@ -11296,6 +12475,9 @@ class ChFi2d_ChamferAPI_2 extends ChFi2d_ChamferAPI {}
 
 class ChFi2d_ChamferAPI_3 extends ChFi2d_ChamferAPI {}
 
+/**
+ * An interface class for 2D fillets. Open CASCADE provides two algorithms for 2D fillets: ChFi2d_Builder - it constructs a fillet or chamfer for linear and circular edges of a face. ChFi2d_FilletAPI - it encapsulates two algorithms: ChFi2d_AnaFilletAlgo - analytical constructor of the fillet. It works only for linear and circular edges, having a common point. ChFi2d_FilletAlgo - iteration recursive method constructing the fillet edge for any type of edges including ellipses and b-splines. The edges may even have no common point.
+ */
 class ChFi2d_FilletAPI {
 }
 
@@ -11305,6 +12487,9 @@ class ChFi2d_FilletAPI_2 extends ChFi2d_FilletAPI {}
 
 class ChFi2d_FilletAPI_3 extends ChFi2d_FilletAPI {}
 
+/**
+ * Algorithm that creates fillet edge: arc tangent to two edges in the start and in the end vertices. Initial edges must be located on the plane and must be connected by the end or start points (shared vertices are not obligatory). Created fillet arc is created with the given radius, that is useful in sketcher applications.
+ */
 class ChFi2d_FilletAlgo {
 }
 
@@ -11314,21 +12499,39 @@ class ChFi2d_FilletAlgo_2 extends ChFi2d_FilletAlgo {}
 
 class ChFi2d_FilletAlgo_3 extends ChFi2d_FilletAlgo {}
 
+/**
+ * creation of spatial fillets on a solid.
+ */
 class ChFi3d {
 }
 
+/**
+ * Root class for calculation of surfaces (fillets, chamfers) destined to smooth edges of a gap on a Shape and the reconstruction of the Shape.
+ */
 class ChFi3d_Builder {
 }
 
+/**
+ * construction tool for 3D chamfers on edges (on a solid).
+ */
 class ChFi3d_ChBuilder extends ChFi3d_Builder {
 }
 
+/**
+ * Tool of construction of fillets 3d on edges (on a solid).
+ */
 class ChFi3d_FilBuilder extends ChFi3d_Builder {
 }
 
+/**
+ * Searches singularities on fillet. F(t) = (C1(t) - C2(t)).(C1'(t) - C2'(t));
+ */
 class ChFi3d_SearchSing extends math_FunctionWithDerivative {
 }
 
+/**
+ * Provides data specific to chamfers distances on each of faces.
+ */
 class ChFiDS_ChamfSpine extends ChFiDS_Spine {
 }
 
@@ -11336,18 +12539,33 @@ class ChFiDS_ChamfSpine_1 extends ChFiDS_ChamfSpine {}
 
 class ChFiDS_ChamfSpine_2 extends ChFiDS_ChamfSpine {}
 
+/**
+ * A Section of fillet.
+ */
 class ChFiDS_CircSection {
 }
 
+/**
+ * point start/end of fillet common to 2 adjacent filets and to an edge on one of 2 faces participating in the construction of the fillet
+ */
 class ChFiDS_CommonPoint {
 }
 
+/**
+ * Elementary Spine for cheminements and approximations.
+ */
 class ChFiDS_ElSpine extends Adaptor3d_Curve {
 }
 
+/**
+ * interference face/fillet
+ */
 class ChFiDS_FaceInterference {
 }
 
+/**
+ * Provides data specific to the fillets - vector or rule of evolution (C2).
+ */
 class ChFiDS_FilSpine extends ChFiDS_Spine {
 }
 
@@ -11362,12 +12580,21 @@ class ChFiDS_HElSpine_1 extends ChFiDS_HElSpine {}
 
 class ChFiDS_HElSpine_2 extends ChFiDS_HElSpine {}
 
+/**
+ * Encapsulation of IndexedDataMapOfShapeListOfShape.
+ */
 class ChFiDS_Map {
 }
 
+/**
+ * Storage of a curve and its 2 faces or surfaces of support.
+ */
 class ChFiDS_Regul {
 }
 
+/**
+ * Contains information necessary for construction of a 3D fillet or chamfer:
+ */
 class ChFiDS_Spine extends Standard_Transient {
 }
 
@@ -11375,21 +12602,36 @@ class ChFiDS_Spine_1 extends ChFiDS_Spine {}
 
 class ChFiDS_Spine_2 extends ChFiDS_Spine {}
 
+/**
+ * Data characterising a band of fillet.
+ */
 class ChFiDS_Stripe extends Standard_Transient {
 }
 
+/**
+ * encapsulation of IndexedDataMapOfVertexListOfStripe
+ */
 class ChFiDS_StripeMap {
 }
 
+/**
+ * data structure for all information related to the fillet and to 2 faces vis a vis
+ */
 class ChFiDS_SurfData extends Standard_Transient {
 }
 
+/**
+ * Methodes de classe permettant de remplir une SurfData dans les cas particuliers de conges suivants: - cylindre entre 2 surfaces planes, - tore/sphere entre un plan et un cylindre othogonal, - tore/sphere entre un plan et un cone othogonal,
+ */
 class ChFiKPart_ComputeData {
 }
 
 class Contap_ArcFunction extends math_FunctionWithDerivative {
 }
 
+/**
+ * This class provides the computation of the contours for quadric surfaces.
+ */
 class Contap_ContAna {
 }
 
@@ -11410,6 +12652,9 @@ class Contap_Contour_6 extends Contap_Contour {}
 
 class Contap_Contour_7 extends Contap_Contour {}
 
+/**
+ * Tool for the intersection between 2 surfaces. Regroupe pour l instant les methodes hors Adaptor3d...
+ */
 class Contap_HContTool {
 }
 
@@ -11419,6 +12664,9 @@ class Contap_HCurve2dTool {
 class Contap_Line {
 }
 
+/**
+ * Definition of a vertex on the contour line. Most of the time, such a point is an intersection between the contour and a restriction of the surface. When it is not tyhe method IsOnArc return False. Such a point is contains geometrical informations (see the Value method) and logical informations.
+ */
 class Contap_Point {
 }
 
@@ -11426,9 +12674,15 @@ class Contap_Point_1 extends Contap_Point {}
 
 class Contap_Point_2 extends Contap_Point {}
 
+/**
+ * This class describes the function on a parametric surface. the form of the function is F(u,v) = 0 where u and v are the parameteric coordinates of a point on the surface, to compute the contours of the surface.
+ */
 class Contap_SurfFunction extends math_FunctionSetWithDerivatives {
 }
 
+/**
+ * Internal tool used to compute the normal and its derivatives.
+ */
 class Contap_SurfProps {
 }
 
@@ -11460,6 +12714,9 @@ class Contap_TheSearchInside_2 extends Contap_TheSearchInside {}
 class Contap_TheSegmentOfTheSearch {
 }
 
+/**
+ * This algorithm converts a circle into a rational B-spline curve. The circle is a Circ2d from package gp and its parametrization is : P (U) = Loc + R * (Cos(U) * Xdir + Sin(U) * YDir) where Loc is the center of the circle Xdir and Ydir are the normalized directions of the local cartesian coordinate system of the circle. The parametrization range for the circle is U [0, 2Pi].
+ */
 class Convert_CircleToBSplineCurve extends Convert_ConicToBSplineCurve {
 }
 
@@ -11467,12 +12724,21 @@ class Convert_CircleToBSplineCurve_1 extends Convert_CircleToBSplineCurve {}
 
 class Convert_CircleToBSplineCurve_2 extends Convert_CircleToBSplineCurve {}
 
+/**
+ * Converts a list of connecting Bezier Curves 2d to a BSplineCurve 2d. if possible, the continuity of the BSpline will be increased to more than C0.
+ */
 class Convert_CompBezierCurves2dToBSplineCurve2d {
 }
 
+/**
+ * An algorithm to convert a sequence of adjacent non-rational Bezier curves into a BSpline curve. A CompBezierCurvesToBSplineCurve object provides a framework for: - defining the sequence of adjacent non-rational Bezier curves to be converted into a BSpline curve, - implementing the computation algorithm, and - consulting the results. Warning Do not attempt to convert rational Bezier curves using this type of algorithm.
+ */
 class Convert_CompBezierCurvesToBSplineCurve {
 }
 
+/**
+ * Convert a serie of Polynomial N-Dimensional Curves that are have continuity CM to an N-Dimensional Bspline Curve that has continuity CM. (to convert an function (curve) polynomial by span in a BSpline) This class uses the following arguments : NumCurves : the number of Polynomial Curves Continuity: the requested continuity for the n-dimensional Spline Dimension : the dimension of the Spline MaxDegree : maximum allowed degree for each composite polynomial segment. NumCoeffPerCurve : the number of coefficient per segments = degree - 1 Coefficients : the coefficients organized in the following way [1..<myNumPolynomials>][1..myMaxDegree +1][1..myDimension] that is : index [n,d,i] is at slot (n-1) * (myMaxDegree + 1) * myDimension + (d-1) * myDimension + i PolynomialIntervals : nth polynomial represents a polynomial between myPolynomialIntervals->Value(n,0) and myPolynomialIntervals->Value(n,1) TrueIntervals : the nth polynomial has to be mapped linearly to be defined on the following interval : myTrueIntervals->Value(n) and myTrueIntervals->Value(n+1) so that it represent adequatly the function with the required continuity
+ */
 class Convert_CompPolynomialToPoles {
 }
 
@@ -11482,6 +12748,9 @@ class Convert_CompPolynomialToPoles_2 extends Convert_CompPolynomialToPoles {}
 
 class Convert_CompPolynomialToPoles_3 extends Convert_CompPolynomialToPoles {}
 
+/**
+ * This algorithm converts a bounded Cone into a rational B-spline surface. The cone a Cone from package gp. Its parametrization is : P (U, V) = Loc + V * Zdir + (R + V*Tan(Ang)) * (Cos(U)*Xdir + Sin(U)*Ydir) where Loc is the location point of the cone, Xdir, Ydir and Zdir are the normalized directions of the local cartesian coordinate system of the cone (Zdir is the direction of the Cone's axis) , Ang is the cone semi-angle. The U parametrization range is [0, 2PI]. KeyWords : Convert, Cone, BSplineSurface.
+ */
 class Convert_ConeToBSplineSurface extends Convert_ElementarySurfaceToBSplineSurface {
 }
 
@@ -11489,9 +12758,15 @@ class Convert_ConeToBSplineSurface_1 extends Convert_ConeToBSplineSurface {}
 
 class Convert_ConeToBSplineSurface_2 extends Convert_ConeToBSplineSurface {}
 
+/**
+ * Root class for algorithms which convert a conic curve into a BSpline curve (CircleToBSplineCurve, EllipseToBSplineCurve, HyperbolaToBSplineCurve, ParabolaToBSplineCurve). These algorithms all work on 2D curves from the gp package and compute all the data needed to construct a BSpline curve equivalent to the conic curve. This data consists of: - the degree of the curve, - the periodic characteristics of the curve, - a poles table with associated weights, - a knots table with associated multiplicities. The abstract class ConicToBSplineCurve provides a framework for storing and consulting this computed data. The data may then be used to construct a Geom2d_BSplineCurve curvSuper class of the following classes : This abstract class implements the methods to get the geometric representation of the B-spline curve equivalent to the conic. The B-spline is computed at the creation time in the sub classes. The B-spline curve is defined with its degree, its control points (Poles), its weights, its knots and their multiplicity. All the geometric entities used in this package are defined in 2D space. KeyWords : Convert, Conic, BSplineCurve, 2D.
+ */
 class Convert_ConicToBSplineCurve {
 }
 
+/**
+ * This algorithm converts a bounded cylinder into a rational B-spline surface. The cylinder is a Cylinder from package gp. The parametrization of the cylinder is : P (U, V) = Loc + V * Zdir + Radius * (Xdir*Cos(U) + Ydir*Sin(U)) where Loc is the location point of the cylinder, Xdir, Ydir and Zdir are the normalized directions of the local cartesian coordinate system of the cylinder (Zdir is the direction of the cylinder's axis). The U parametrization range is U [0, 2PI]. KeyWords : Convert, Cylinder, BSplineSurface.
+ */
 class Convert_CylinderToBSplineSurface extends Convert_ElementarySurfaceToBSplineSurface {
 }
 
@@ -11499,9 +12774,15 @@ class Convert_CylinderToBSplineSurface_1 extends Convert_CylinderToBSplineSurfac
 
 class Convert_CylinderToBSplineSurface_2 extends Convert_CylinderToBSplineSurface {}
 
+/**
+ * Root class for algorithms which convert an elementary surface (cylinder, cone, sphere or torus) into a BSpline surface (CylinderToBSplineSurface, ConeToBSplineSurface, SphereToBSplineSurface, TorusToBSplineSurface). These algorithms all work on elementary surfaces from the gp package and compute all the data needed to construct a BSpline surface equivalent to the cylinder, cone, sphere or torus. This data consists of the following: - degrees in the u and v parametric directions, - periodic characteristics in the u and v parametric directions, - a poles table with associated weights, - a knots table (for the u and v parametric directions) with associated multiplicities. The abstract class ElementarySurfaceToBSplineSurface provides a framework for storing and consulting this computed data. This data may then be used to construct a Geom_BSplineSurface surface, for example. All those classes define algorithmes to convert an ElementarySurface into a B-spline surface. This abstract class implements the methods to get the geometric representation of the B-spline surface. The B-spline representation is computed at the creation time in the sub classes. The B-spline surface is defined with its degree in the parametric U and V directions, its control points (Poles), its weights, its knots and their multiplicity. KeyWords : Convert, ElementarySurface, BSplineSurface.
+ */
 class Convert_ElementarySurfaceToBSplineSurface {
 }
 
+/**
+ * This algorithm converts a ellipse into a rational B-spline curve. The ellipse is represented an Elips2d from package gp with the parametrization : P (U) = Loc + (MajorRadius * Cos(U) * Xdir + MinorRadius * Sin(U) * Ydir) where Loc is the center of the ellipse, Xdir and Ydir are the normalized directions of the local cartesian coordinate system of the ellipse. The parametrization range is U [0, 2PI]. KeyWords : Convert, Ellipse, BSplineCurve, 2D .
+ */
 class Convert_EllipseToBSplineCurve extends Convert_ConicToBSplineCurve {
 }
 
@@ -11509,6 +12790,9 @@ class Convert_EllipseToBSplineCurve_1 extends Convert_EllipseToBSplineCurve {}
 
 class Convert_EllipseToBSplineCurve_2 extends Convert_EllipseToBSplineCurve {}
 
+/**
+ * Convert a grid of Polynomial Surfaces that are have continuity CM to an Bspline Surface that has continuity CM
+ */
 class Convert_GridPolynomialToPoles {
 }
 
@@ -11516,12 +12800,21 @@ class Convert_GridPolynomialToPoles_1 extends Convert_GridPolynomialToPoles {}
 
 class Convert_GridPolynomialToPoles_2 extends Convert_GridPolynomialToPoles {}
 
+/**
+ * This algorithm converts a hyperbola into a rational B-spline curve. The hyperbola is an Hypr2d from package gp with the parametrization : P (U) = Loc + (MajorRadius * Cosh(U) * Xdir + MinorRadius * Sinh(U) * Ydir) where Loc is the location point of the hyperbola, Xdir and Ydir are the normalized directions of the local cartesian coordinate system of the hyperbola. KeyWords : Convert, Hyperbola, BSplineCurve, 2D .
+ */
 class Convert_HyperbolaToBSplineCurve extends Convert_ConicToBSplineCurve {
 }
 
+/**
+ * This algorithm converts a parabola into a non rational B-spline curve. The parabola is a Parab2d from package gp with the parametrization P (U) = Loc + F * (U*U * Xdir + 2 * U * Ydir) where Loc is the apex of the parabola, Xdir is the normalized direction of the symmetry axis of the parabola, Ydir is the normalized direction of the directrix and F is the focal length. KeyWords : Convert, Parabola, BSplineCurve, 2D .
+ */
 class Convert_ParabolaToBSplineCurve extends Convert_ConicToBSplineCurve {
 }
 
+/**
+ * This algorithm converts a bounded Sphere into a rational B-spline surface. The sphere is a Sphere from package gp. The parametrization of the sphere is P (U, V) = Loc + Radius * Sin(V) * Zdir + Radius * Cos(V) * (Cos(U)*Xdir + Sin(U)*Ydir) where Loc is the center of the sphere Xdir, Ydir and Zdir are the normalized directions of the local cartesian coordinate system of the sphere. The parametrization range is U [0, 2PI] and V [-PI/2, PI/2]. KeyWords : Convert, Sphere, BSplineSurface.
+ */
 class Convert_SphereToBSplineSurface extends Convert_ElementarySurfaceToBSplineSurface {
 }
 
@@ -11531,6 +12824,9 @@ class Convert_SphereToBSplineSurface_2 extends Convert_SphereToBSplineSurface {}
 
 class Convert_SphereToBSplineSurface_3 extends Convert_SphereToBSplineSurface {}
 
+/**
+ * This algorithm converts a bounded Torus into a rational B-spline surface. The torus is a Torus from package gp. The parametrization of the torus is : P (U, V) = Loc + MinorRadius * Sin(V) * Zdir + (MajorRadius+MinorRadius*Cos(V)) * (Cos(U)*Xdir + Sin(U)*Ydir) where Loc is the center of the torus, Xdir, Ydir and Zdir are the normalized directions of the local cartesian coordinate system of the Torus. The parametrization range is U [0, 2PI], V [0, 2PI]. KeyWords : Convert, Torus, BSplineSurface.
+ */
 class Convert_TorusToBSplineSurface extends Convert_ElementarySurfaceToBSplineSurface {
 }
 
@@ -11563,102 +12859,189 @@ class Draft_Modification extends BRepTools_Modification {
 class Draft_VertexInfo {
 }
 
+/**
+ * Describes Standard Presentations for DsgIHM objects
+ */
 class DsgPrs {
 }
 
+/**
+ * A framework for displaying angles.
+ */
 class DsgPrs_AnglePresentation {
 }
 
+/**
+ * Framework for display of 2D chamfers.
+ */
 class DsgPrs_Chamf2dPresentation {
 }
 
+/**
+ * A framework to define display of relations of concentricity.
+ */
 class DsgPrs_ConcentricPresentation {
 }
 
+/**
+ * A framework for displaying an XYZ trihedron.
+ */
 class DsgPrs_DatumPrs extends Prs3d_Root {
 }
 
+/**
+ * A framework for displaying diameters in shapes.
+ */
 class DsgPrs_DiameterPresentation {
 }
 
 class DsgPrs_EllipseRadiusPresentation {
 }
 
+/**
+ * A framework to display equal distances between shapes and a given plane. The distance is the length of a projection from the shape to the plane. These distances are used to compare two shapes by this vector alone.
+ */
 class DsgPrs_EqualDistancePresentation {
 }
 
+/**
+ * A framework to define display of equality in radii.
+ */
 class DsgPrs_EqualRadiusPresentation {
 }
 
+/**
+ * A framework for displaying radii of fillets.
+ */
 class DsgPrs_FilletRadiusPresentation {
 }
 
+/**
+ * class which draws the presentation of Fixed objects
+ */
 class DsgPrs_FixPresentation {
 }
 
 class DsgPrs_IdenticPresentation {
 }
 
+/**
+ * Framework for displaying lengths. The length displayed is indicated by line segments and text alone or by a combination of line segment, text and arrows at either or both of its ends.
+ */
 class DsgPrs_LengthPresentation {
 }
 
 class DsgPrs_MidPointPresentation {
 }
 
+/**
+ * A framework to define display of offsets.
+ */
 class DsgPrs_OffsetPresentation {
 }
 
+/**
+ * A framework to define display of relations of parallelism between shapes.
+ */
 class DsgPrs_ParalPresentation {
 }
 
+/**
+ * A framework to define display of perpendicular constraints between shapes.
+ */
 class DsgPrs_PerpenPresentation {
 }
 
+/**
+ * A framework to define display of shaded planes.
+ */
 class DsgPrs_ShadedPlanePresentation {
 }
 
+/**
+ * A framework to define display of the normal to the surface of a shape.
+ */
 class DsgPrs_ShapeDirPresentation {
 }
 
+/**
+ * A framework to define display of symbols.
+ */
 class DsgPrs_SymbPresentation {
 }
 
+/**
+ * A framework to define display of symmetry between shapes.
+ */
 class DsgPrs_SymmetricPresentation {
 }
 
+/**
+ * A framework to define display of tangents.
+ */
 class DsgPrs_TangentPresentation {
 }
 
+/**
+ * A framework for displaying the axes of an XYZ trihedron.
+ */
 class DsgPrs_XYZAxisPresentation {
 }
 
+/**
+ * A framework for displaying the planes of an XYZ trihedron.
+ */
 class DsgPrs_XYZPlanePresentation {
 }
 
+/**
+ * Provides functions for basic geometric computations on elementary curves such as conics and lines in 2D and 3D space. This includes: - calculation of a point or derived vector on a 2D or 3D curve where: - the curve is provided by the gp package, or defined in reference form (as in the gp package), and - the point is defined by a parameter, - evaluation of the parameter corresponding to a point on a 2D or 3D curve from gp, - various elementary computations which allow you to position parameterized values within the period of a curve. Notes: - ElCLib stands for Elementary Curves Library. - If the curves provided by the gp package are not explicitly parameterized, they still have an implicit parameterization, analogous to that which they infer for the equivalent Geom or Geom2d curves.
+ */
 class ElCLib {
 }
 
+/**
+ * Provides functions for basic geometric computation on elementary surfaces. This includes: - calculation of a point or derived vector on a surface where the surface is provided by the gp package, or defined in canonical form (as in the gp package), and the point is defined with a parameter, - evaluation of the parameters corresponding to a point on an elementary surface from gp, - calculation of isoparametric curves on an elementary surface defined in canonical form (as in the gp package). Notes: - ElSLib stands for Elementary Surfaces Library. - If the surfaces provided by the gp package are not explicitly parameterized, they still have an implicit parameterization, similar to that which they infer on the equivalent Geom surfaces. Note: ElSLib stands for Elementary Surfaces Library.
+ */
 class ElSLib {
 }
 
+/**
+ * This package describes the data structure of any expression, relation or function used in mathematics. It also describes the assignment of variables. Standard mathematical functions are implemented such as trigonometrics, hyperbolics, and log functions.
+ */
 class Expr {
 }
 
+/**
+ * Describes an interpreter for GeneralExpressions, GeneralFunctions, and GeneralRelations defined in package Expr.
+ */
 class ExprIntrp {
 }
 
 class ExprIntrp_Analysis {
 }
 
+/**
+ * This class permits, from a string, to create any kind of expression of package Expr by using built-in functions such as Sin,Cos, etc, and by creating variables.
+ */
 class ExprIntrp_GenExp extends ExprIntrp_Generator {
 }
 
+/**
+ * Implements an interpreter for defining functions. All its functionnalities can be found in class GenExp.
+ */
 class ExprIntrp_GenFct extends ExprIntrp_Generator {
 }
 
+/**
+ * Implements an interpreter for equations or system of equations made of expressions of package Expr.
+ */
 class ExprIntrp_GenRel extends ExprIntrp_Generator {
 }
 
+/**
+ * Implements general services for interpretation of expressions.
+ */
 class ExprIntrp_Generator extends Standard_Transient {
 }
 
@@ -11690,9 +13073,15 @@ class Expr_ArgSinh extends Expr_UnaryExpression {
 class Expr_ArgTanh extends Expr_UnaryExpression {
 }
 
+/**
+ * Defines all binary expressions. The order of the two operands is significant.
+ */
 class Expr_BinaryExpression extends Expr_GeneralExpression {
 }
 
+/**
+ * Defines the use of a binary function in an expression with given arguments.
+ */
 class Expr_BinaryFunction extends Expr_BinaryExpression {
 }
 
@@ -11730,12 +13119,21 @@ class Expr_ExprFailure_2 extends Expr_ExprFailure {}
 class Expr_FunctionDerivative extends Expr_GeneralFunction {
 }
 
+/**
+ * Defines the general purposes of any expression.
+ */
 class Expr_GeneralExpression extends Standard_Transient {
 }
 
+/**
+ * Defines the general purposes of any function.
+ */
 class Expr_GeneralFunction extends Standard_Transient {
 }
 
+/**
+ * Defines the general purposes of any relation between expressions.
+ */
 class Expr_GeneralRelation extends Standard_Transient {
 }
 
@@ -11778,15 +13176,24 @@ class Expr_LogOf10 extends Expr_UnaryExpression {
 class Expr_LogOfe extends Expr_UnaryExpression {
 }
 
+/**
+ * Describes any numeric constant known by a special name (as PI, e,...).
+ */
 class Expr_NamedConstant extends Expr_NamedExpression {
 }
 
+/**
+ * Describe an expression used by its name (as constants or variables). A single reference is made to a NamedExpression in every Expression (i.e. a NamedExpression is shared).
+ */
 class Expr_NamedExpression extends Expr_GeneralExpression {
 }
 
 class Expr_NamedFunction extends Expr_GeneralFunction {
 }
 
+/**
+ * This class describes any variable of an expression. Assignment is treated directly in this class.
+ */
 class Expr_NamedUnknown extends Expr_NamedExpression {
 }
 
@@ -11804,12 +13211,18 @@ class Expr_NotEvaluable_1 extends Expr_NotEvaluable {}
 
 class Expr_NotEvaluable_2 extends Expr_NotEvaluable {}
 
+/**
+ * This class describes any reel value defined in an expression.
+ */
 class Expr_NumericValue extends Expr_GeneralExpression {
 }
 
 class Expr_PolyExpression extends Expr_GeneralExpression {
 }
 
+/**
+ * Defines the use of an n-ary function in an expression with given arguments.
+ */
 class Expr_PolyFunction extends Expr_PolyExpression {
 }
 
@@ -11820,9 +13233,15 @@ class Expr_Product_1 extends Expr_Product {}
 
 class Expr_Product_2 extends Expr_Product {}
 
+/**
+ * Iterates on NamedUnknowns in a GeneralRelation.
+ */
 class Expr_RUIterator {
 }
 
+/**
+ * Iterates on every basic relation contained in a GeneralRelation.
+ */
 class Expr_RelationIterator {
 }
 
@@ -11863,12 +13282,18 @@ class Expr_Tanh extends Expr_UnaryExpression {
 class Expr_UnaryExpression extends Expr_GeneralExpression {
 }
 
+/**
+ * Defines the use of an unary function in an expression with a given argument.
+ */
 class Expr_UnaryFunction extends Expr_UnaryExpression {
 }
 
 class Expr_UnaryMinus extends Expr_UnaryExpression {
 }
 
+/**
+ * Describes an iterator on NamedUnknowns contained in any GeneralExpression.
+ */
 class Expr_UnknownIterator {
 }
 
@@ -11964,6 +13389,9 @@ class Extrema_EPCOfExtPC2d_2 extends Extrema_EPCOfExtPC2d {}
 
 class Extrema_EPCOfExtPC2d_3 extends Extrema_EPCOfExtPC2d {}
 
+/**
+ * It calculates all the distance between two curves. These distances can be maximum or minimum.
+ */
 class Extrema_ExtCC {
 }
 
@@ -11973,6 +13401,9 @@ class Extrema_ExtCC_2 extends Extrema_ExtCC {}
 
 class Extrema_ExtCC_3 extends Extrema_ExtCC {}
 
+/**
+ * It calculates all the distance between two curves. These distances can be maximum or minimum.
+ */
 class Extrema_ExtCC2d {
 }
 
@@ -11982,6 +13413,9 @@ class Extrema_ExtCC2d_2 extends Extrema_ExtCC2d {}
 
 class Extrema_ExtCC2d_3 extends Extrema_ExtCC2d {}
 
+/**
+ * It calculates all the extremum distances between a curve and a surface. These distances can be minimum or maximum.
+ */
 class Extrema_ExtCS {
 }
 
@@ -11991,6 +13425,9 @@ class Extrema_ExtCS_2 extends Extrema_ExtCS {}
 
 class Extrema_ExtCS_3 extends Extrema_ExtCS {}
 
+/**
+ * It calculates all the distance between two elementary curves. These distances can be maximum or minimum.
+ */
 class Extrema_ExtElC {
 }
 
@@ -12008,6 +13445,9 @@ class Extrema_ExtElC_6 extends Extrema_ExtElC {}
 
 class Extrema_ExtElC_7 extends Extrema_ExtElC {}
 
+/**
+ * It calculates all the distance between two elementary curves. These distances can be maximum or minimum.
+ */
 class Extrema_ExtElC2d {
 }
 
@@ -12031,6 +13471,9 @@ class Extrema_ExtElC2d_9 extends Extrema_ExtElC2d {}
 
 class Extrema_ExtElC2d_10 extends Extrema_ExtElC2d {}
 
+/**
+ * It calculates all the distances between a curve and a surface. These distances can be maximum or minimum.
+ */
 class Extrema_ExtElCS {
 }
 
@@ -12058,6 +13501,9 @@ class Extrema_ExtElCS_11 extends Extrema_ExtElCS {}
 
 class Extrema_ExtElCS_12 extends Extrema_ExtElCS {}
 
+/**
+ * It calculates all the distances between 2 elementary surfaces. These distances can be maximum or minimum.
+ */
 class Extrema_ExtElSS {
 }
 
@@ -12093,6 +13539,9 @@ class Extrema_ExtPC2d_2 extends Extrema_ExtPC2d {}
 
 class Extrema_ExtPC2d_3 extends Extrema_ExtPC2d {}
 
+/**
+ * It calculates all the distances between a point and an elementary curve. These distances can be minimum or maximum.
+ */
 class Extrema_ExtPElC {
 }
 
@@ -12108,6 +13557,9 @@ class Extrema_ExtPElC_5 extends Extrema_ExtPElC {}
 
 class Extrema_ExtPElC_6 extends Extrema_ExtPElC {}
 
+/**
+ * It calculates all the distances between a point and an elementary curve. These distances can be minimum or maximum.
+ */
 class Extrema_ExtPElC2d {
 }
 
@@ -12123,6 +13575,9 @@ class Extrema_ExtPElC2d_5 extends Extrema_ExtPElC2d {}
 
 class Extrema_ExtPElC2d_6 extends Extrema_ExtPElC2d {}
 
+/**
+ * It calculates all the extremum distances between a point and a surface. These distances can be minimum or maximum.
+ */
 class Extrema_ExtPElS {
 }
 
@@ -12138,6 +13593,9 @@ class Extrema_ExtPElS_5 extends Extrema_ExtPElS {}
 
 class Extrema_ExtPElS_6 extends Extrema_ExtPElS {}
 
+/**
+ * It calculates all the extremum (minimum and maximum) distances between a point and a linear extrusion surface.
+ */
 class Extrema_ExtPExtS extends Standard_Transient {
 }
 
@@ -12147,6 +13605,9 @@ class Extrema_ExtPExtS_2 extends Extrema_ExtPExtS {}
 
 class Extrema_ExtPExtS_3 extends Extrema_ExtPExtS {}
 
+/**
+ * It calculates all the extremum (minimum and maximum) distances between a point and a surface of revolution.
+ */
 class Extrema_ExtPRevS extends Standard_Transient {
 }
 
@@ -12156,6 +13617,9 @@ class Extrema_ExtPRevS_2 extends Extrema_ExtPRevS {}
 
 class Extrema_ExtPRevS_3 extends Extrema_ExtPRevS {}
 
+/**
+ * It calculates all the extremum distances between a point and a surface. These distances can be minimum or maximum.
+ */
 class Extrema_ExtPS {
 }
 
@@ -12165,6 +13629,9 @@ class Extrema_ExtPS_2 extends Extrema_ExtPS {}
 
 class Extrema_ExtPS_3 extends Extrema_ExtPS {}
 
+/**
+ * It calculates all the extremum distances between two surfaces. These distances can be minimum or maximum.
+ */
 class Extrema_ExtSS {
 }
 
@@ -12174,6 +13641,9 @@ class Extrema_ExtSS_2 extends Extrema_ExtSS {}
 
 class Extrema_ExtSS_3 extends Extrema_ExtSS {}
 
+/**
+ * Function to find extrema of the distance between a curve and a surface.
+ */
 class Extrema_FuncExtCS extends math_FunctionSetWithDerivatives {
 }
 
@@ -12181,6 +13651,9 @@ class Extrema_FuncExtCS_1 extends Extrema_FuncExtCS {}
 
 class Extrema_FuncExtCS_2 extends Extrema_FuncExtCS {}
 
+/**
+ * Function to find extrema of the distance between two surfaces.
+ */
 class Extrema_FuncExtSS extends math_FunctionSetWithDerivatives {
 }
 
@@ -12188,9 +13661,15 @@ class Extrema_FuncExtSS_1 extends Extrema_FuncExtSS {}
 
 class Extrema_FuncExtSS_2 extends Extrema_FuncExtSS {}
 
+/**
+ * Functional for search of extremum of the square Euclidean distance between point P and surface S, starting from approximate solution (u0, v0).
+ */
 class Extrema_FuncPSDist extends math_MultipleVarFunctionWithGradient {
 }
 
+/**
+ * Functional for search of extremum of the distance between point P and surface S, starting from approximate solution (u0, v0).
+ */
 class Extrema_FuncPSNorm extends math_FunctionSetWithDerivatives {
 }
 
@@ -12198,6 +13677,9 @@ class Extrema_FuncPSNorm_1 extends Extrema_FuncPSNorm {}
 
 class Extrema_FuncPSNorm_2 extends Extrema_FuncPSNorm {}
 
+/**
+ * It calculates all the extremum distances between acurve and a surface. These distances can be minimum or maximum.
+ */
 class Extrema_GenExtCS {
 }
 
@@ -12207,6 +13689,9 @@ class Extrema_GenExtCS_2 extends Extrema_GenExtCS {}
 
 class Extrema_GenExtCS_3 extends Extrema_GenExtCS {}
 
+/**
+ * It calculates all the extremum distances between a point and a surface. These distances can be minimum or maximum.
+ */
 class Extrema_GenExtPS {
 }
 
@@ -12216,6 +13701,9 @@ class Extrema_GenExtPS_2 extends Extrema_GenExtPS {}
 
 class Extrema_GenExtPS_3 extends Extrema_GenExtPS {}
 
+/**
+ * It calculates all the extremum distances between two surfaces. These distances can be minimum or maximum.
+ */
 class Extrema_GenExtSS {
 }
 
@@ -12225,6 +13713,9 @@ class Extrema_GenExtSS_2 extends Extrema_GenExtSS {}
 
 class Extrema_GenExtSS_3 extends Extrema_GenExtSS {}
 
+/**
+ * With two close points it calculates the distance between two surfaces. This distance can be a minimum or a maximum.
+ */
 class Extrema_GenLocateExtCS {
 }
 
@@ -12232,9 +13723,15 @@ class Extrema_GenLocateExtCS_1 extends Extrema_GenLocateExtCS {}
 
 class Extrema_GenLocateExtCS_2 extends Extrema_GenLocateExtCS {}
 
+/**
+ * With a close point, it calculates the distance between a point and a surface. Criteria type is defined in "Perform" method.
+ */
 class Extrema_GenLocateExtPS {
 }
 
+/**
+ * With two close points it calculates the distance between two surfaces. This distance can be a minimum or a maximum.
+ */
 class Extrema_GenLocateExtSS {
 }
 
@@ -12242,6 +13739,9 @@ class Extrema_GenLocateExtSS_1 extends Extrema_GenLocateExtSS {}
 
 class Extrema_GenLocateExtSS_2 extends Extrema_GenLocateExtSS {}
 
+/**
+ * This class implements function which calculate Eucluidean distance between point on curve and point on other curve in case of C1 and C2 continuity is C0.
+ */
 class Extrema_GlobOptFuncCCC0 extends math_MultipleVarFunction {
 }
 
@@ -12249,6 +13749,9 @@ class Extrema_GlobOptFuncCCC0_1 extends Extrema_GlobOptFuncCCC0 {}
 
 class Extrema_GlobOptFuncCCC0_2 extends Extrema_GlobOptFuncCCC0 {}
 
+/**
+ * This class implements function which calculate Eucluidean distance between point on curve and point on other curve in case of C1 and C2 continuity is C1.
+ */
 class Extrema_GlobOptFuncCCC1 extends math_MultipleVarFunctionWithGradient {
 }
 
@@ -12256,6 +13759,9 @@ class Extrema_GlobOptFuncCCC1_1 extends Extrema_GlobOptFuncCCC1 {}
 
 class Extrema_GlobOptFuncCCC1_2 extends Extrema_GlobOptFuncCCC1 {}
 
+/**
+ * This class implements function which calculate Eucluidean distance between point on curve and point on other curve in case of C1 and C2 continuity is C2.
+ */
 class Extrema_GlobOptFuncCCC2 extends math_MultipleVarFunctionWithHessian {
 }
 
@@ -12263,6 +13769,9 @@ class Extrema_GlobOptFuncCCC2_1 extends Extrema_GlobOptFuncCCC2 {}
 
 class Extrema_GlobOptFuncCCC2_2 extends Extrema_GlobOptFuncCCC2 {}
 
+/**
+ * This class implements function which calculate square Eucluidean distance between point on curve and point on surface in case of continuity is C2.
+ */
 class Extrema_GlobOptFuncCS extends math_MultipleVarFunctionWithHessian {
 }
 
@@ -12290,9 +13799,15 @@ class Extrema_LocEPCOfLocateExtPC2d_2 extends Extrema_LocEPCOfLocateExtPC2d {}
 
 class Extrema_LocEPCOfLocateExtPC2d_3 extends Extrema_LocEPCOfLocateExtPC2d {}
 
+/**
+ * It calculates the distance between two curves with a close point; these distances can be maximum or minimum.
+ */
 class Extrema_LocateExtCC {
 }
 
+/**
+ * It calculates the distance between two curves with a close point; these distances can be maximum or minimum.
+ */
 class Extrema_LocateExtCC2d {
 }
 
@@ -12370,6 +13885,9 @@ class Extrema_POnCurv2d_1 extends Extrema_POnCurv2d {}
 
 class Extrema_POnCurv2d_2 extends Extrema_POnCurv2d {}
 
+/**
+ * Definition of a point on surface.
+ */
 class Extrema_POnSurf {
 }
 
@@ -12377,6 +13895,9 @@ class Extrema_POnSurf_1 extends Extrema_POnSurf {}
 
 class Extrema_POnSurf_2 extends Extrema_POnSurf {}
 
+/**
+ * Data container for point on surface parameters. These parameters are required to compute an initial approximation for extrema computation.
+ */
 class Extrema_POnSurfParams extends Extrema_POnSurf {
 }
 
@@ -12384,6 +13905,9 @@ class Extrema_POnSurfParams_1 extends Extrema_POnSurfParams {}
 
 class Extrema_POnSurfParams_2 extends Extrema_POnSurfParams {}
 
+/**
+ * Implements construction algorithms for an arc of circle in the plane. The result is a Geom2d_TrimmedCurve curve. A MakeArcOfCircle object provides a framework for: - defining the construction of the arc of circle, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed arc of circle.
+ */
 class GCE2d_MakeArcOfCircle extends GCE2d_Root {
 }
 
@@ -12397,6 +13921,9 @@ class GCE2d_MakeArcOfCircle_4 extends GCE2d_MakeArcOfCircle {}
 
 class GCE2d_MakeArcOfCircle_5 extends GCE2d_MakeArcOfCircle {}
 
+/**
+ * Implements construction algorithms for an arc of ellipse in the plane. The result is a Geom2d_TrimmedCurve curve. A MakeArcOfEllipse object provides a framework for: - defining the construction of the arc of ellipse, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed arc of ellipse.
+ */
 class GCE2d_MakeArcOfEllipse extends GCE2d_Root {
 }
 
@@ -12406,6 +13933,9 @@ class GCE2d_MakeArcOfEllipse_2 extends GCE2d_MakeArcOfEllipse {}
 
 class GCE2d_MakeArcOfEllipse_3 extends GCE2d_MakeArcOfEllipse {}
 
+/**
+ * Implements construction algorithms for an arc of hyperbola in the plane. The result is a Geom2d_TrimmedCurve curve. A MakeArcOfHyperbola object provides a framework for: - defining the construction of the arc of hyperbola, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed arc of hyperbola.
+ */
 class GCE2d_MakeArcOfHyperbola extends GCE2d_Root {
 }
 
@@ -12415,6 +13945,9 @@ class GCE2d_MakeArcOfHyperbola_2 extends GCE2d_MakeArcOfHyperbola {}
 
 class GCE2d_MakeArcOfHyperbola_3 extends GCE2d_MakeArcOfHyperbola {}
 
+/**
+ * Implements construction algorithms for an arc of parabola in the plane. The result is a Geom2d_TrimmedCurve curve. A MakeArcOfParabola object provides a framework for: - defining the construction of the arc of parabola, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed arc of parabola.
+ */
 class GCE2d_MakeArcOfParabola extends GCE2d_Root {
 }
 
@@ -12424,6 +13957,9 @@ class GCE2d_MakeArcOfParabola_2 extends GCE2d_MakeArcOfParabola {}
 
 class GCE2d_MakeArcOfParabola_3 extends GCE2d_MakeArcOfParabola {}
 
+/**
+ * This class implements the following algorithms used to create Circle from Geom2d.
+ */
 class GCE2d_MakeCircle extends GCE2d_Root {
 }
 
@@ -12443,6 +13979,9 @@ class GCE2d_MakeCircle_7 extends GCE2d_MakeCircle {}
 
 class GCE2d_MakeCircle_8 extends GCE2d_MakeCircle {}
 
+/**
+ * This class implements the following algorithms used to create Ellipse from Geom2d. * Create an Ellipse from two apex and the center. Defines an ellipse in 2D space. The parametrization range is [0,2*PI]. The ellipse is a closed and periodic curve. The center of the ellipse is the "Location" point of its axis placement "XAxis". The "XAxis" of the ellipse defines the origin of the parametrization, it is the major axis of the ellipse. The YAxis is the minor axis of the ellipse.
+ */
 class GCE2d_MakeEllipse extends GCE2d_Root {
 }
 
@@ -12454,6 +13993,9 @@ class GCE2d_MakeEllipse_3 extends GCE2d_MakeEllipse {}
 
 class GCE2d_MakeEllipse_4 extends GCE2d_MakeEllipse {}
 
+/**
+ * This class implements the following algorithms used to create Hyperbola from Geom2d. * Create an Hyperbola from two apex and the center. Defines the main branch of an hyperbola. The parameterization range is ]-infinite,+infinite[ It is possible to get the other branch and the two conjugate branches of the main branch.
+ */
 class GCE2d_MakeHyperbola extends GCE2d_Root {
 }
 
@@ -12465,6 +14007,9 @@ class GCE2d_MakeHyperbola_3 extends GCE2d_MakeHyperbola {}
 
 class GCE2d_MakeHyperbola_4 extends GCE2d_MakeHyperbola {}
 
+/**
+ * This class implements the following algorithms used to create a Line from Geom2d. * Create a Line parallel to another and passing through a point. * Create a Line passing through 2 points.
+ */
 class GCE2d_MakeLine extends GCE2d_Root {
 }
 
@@ -12480,6 +14025,9 @@ class GCE2d_MakeLine_5 extends GCE2d_MakeLine {}
 
 class GCE2d_MakeLine_6 extends GCE2d_MakeLine {}
 
+/**
+ * This class implements elementary construction algorithms for a symmetrical transformation in 2D space about a point or axis. The result is a Geom2d_Transformation transformation. A MakeMirror object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class GCE2d_MakeMirror {
 }
 
@@ -12491,6 +14039,9 @@ class GCE2d_MakeMirror_3 extends GCE2d_MakeMirror {}
 
 class GCE2d_MakeMirror_4 extends GCE2d_MakeMirror {}
 
+/**
+ * This class implements the following algorithms used to create Parabola from Geom2d. * Create an Parabola from two apex and the center. Defines the parabola in the parameterization range : ]-infinite,+infinite[ The vertex of the parabola is the "Location" point of the local coordinate system "XAxis" of the parabola. The "XAxis" of the parabola is its axis of symmetry. The "Xaxis" is oriented from the vertex of the parabola to the Focus of the parabola. The equation of the parabola in the local coordinate system is Y**2 = (2*P) * X P is the distance between the focus and the directrix of the parabola called Parameter). The focal length F = P/2 is the distance between the vertex and the focus of the parabola.
+ */
 class GCE2d_MakeParabola extends GCE2d_Root {
 }
 
@@ -12504,12 +14055,21 @@ class GCE2d_MakeParabola_4 extends GCE2d_MakeParabola {}
 
 class GCE2d_MakeParabola_5 extends GCE2d_MakeParabola {}
 
+/**
+ * This class implements an elementary construction algorithm for a rotation in 2D space. The result is a Geom2d_Transformation transformation. A MakeRotation object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class GCE2d_MakeRotation {
 }
 
+/**
+ * This class implements an elementary construction algorithm for a scaling transformation in 2D space. The result is a Geom2d_Transformation transformation. A MakeScale object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class GCE2d_MakeScale {
 }
 
+/**
+ * Implements construction algorithms for a line segment in the plane. The result is a Geom2d_TrimmedCurve curve. A MakeSegment object provides a framework for: - defining the construction of the line segment, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed line segment.
+ */
 class GCE2d_MakeSegment extends GCE2d_Root {
 }
 
@@ -12523,6 +14083,9 @@ class GCE2d_MakeSegment_4 extends GCE2d_MakeSegment {}
 
 class GCE2d_MakeSegment_5 extends GCE2d_MakeSegment {}
 
+/**
+ * This class implements elementary construction algorithms for a translation in 2D space. The result is a Geom2d_Transformation transformation. A MakeTranslation object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class GCE2d_MakeTranslation {
 }
 
@@ -12530,9 +14093,15 @@ class GCE2d_MakeTranslation_1 extends GCE2d_MakeTranslation {}
 
 class GCE2d_MakeTranslation_2 extends GCE2d_MakeTranslation {}
 
+/**
+ * This class implements the common services for all classes of gce which report error.
+ */
 class GCE2d_Root {
 }
 
+/**
+ * Provides an algorithm to compute a point on a curve situated at a given distance from another point on the curve, the distance being measured along the curve (curvilinear abscissa on the curve). This algorithm is also used to compute the length of a curve. An AbscissaPoint object provides a framework for: - defining the point to compute - implementing the construction algorithm - consulting the result.
+ */
 class GCPnts_AbscissaPoint {
 }
 
@@ -12554,12 +14123,21 @@ class GCPnts_AbscissaPoint_8 extends GCPnts_AbscissaPoint {}
 
 class GCPnts_AbscissaPoint_9 extends GCPnts_AbscissaPoint {}
 
+/**
+ * The same as class GCPnts_DistFunction2d, but it can be used in minimization algorithms that requires multi variable function
+ */
 class GCPnts_DistFunction2dMV extends math_MultipleVarFunction {
 }
 
+/**
+ * The same as class GCPnts_DistFunction, but it can be used in minimization algorithms that requires multi variable function
+ */
 class GCPnts_DistFunctionMV extends math_MultipleVarFunction {
 }
 
+/**
+ * This class provides an algorithm to compute a uniform abscissa distribution of points on a curve, i.e. a sequence of equidistant points. The distance between two consecutive points is measured along the curve. The distribution is defined: - either by the curvilinear distance between two consecutive points - or by a number of points.
+ */
 class GCPnts_QuasiUniformAbscissa {
 }
 
@@ -12573,6 +14151,9 @@ class GCPnts_QuasiUniformAbscissa_4 extends GCPnts_QuasiUniformAbscissa {}
 
 class GCPnts_QuasiUniformAbscissa_5 extends GCPnts_QuasiUniformAbscissa {}
 
+/**
+ * This class computes a distribution of points on a curve. The points may respect the deflection. The algorithm is not based on the classical prediction (with second derivative of curve), but either on the evaluation of the distance between the mid point and the point of mid parameter of the two points, or the distance between the mid point and the point at parameter 0.5 on the cubic interpolation of the two points and their tangents. Note: this algorithm is faster than a GCPnts_UniformDeflection algorithm, and is able to work with non-"C2" continuous curves. However, it generates more points in the distribution.
+ */
 class GCPnts_QuasiUniformDeflection {
 }
 
@@ -12586,6 +14167,9 @@ class GCPnts_QuasiUniformDeflection_4 extends GCPnts_QuasiUniformDeflection {}
 
 class GCPnts_QuasiUniformDeflection_5 extends GCPnts_QuasiUniformDeflection {}
 
+/**
+ * Computes a set of points on a curve from package Adaptor3d such as between two successive points P1(u1)and P2(u2) :
+ */
 class GCPnts_TangentialDeflection {
 }
 
@@ -12599,6 +14183,9 @@ class GCPnts_TangentialDeflection_4 extends GCPnts_TangentialDeflection {}
 
 class GCPnts_TangentialDeflection_5 extends GCPnts_TangentialDeflection {}
 
+/**
+ * This class allows to compute a uniform distribution of points on a curve (ie the points will all be equally distant).
+ */
 class GCPnts_UniformAbscissa {
 }
 
@@ -12620,6 +14207,9 @@ class GCPnts_UniformAbscissa_8 extends GCPnts_UniformAbscissa {}
 
 class GCPnts_UniformAbscissa_9 extends GCPnts_UniformAbscissa {}
 
+/**
+ * Provides an algorithm to compute a distribution of points on a 'C2' continuous curve. The algorithm respects a criterion of maximum deflection between the curve and the polygon that results from the computed points. Note: This algorithm is relatively time consuming. A GCPnts_QuasiUniformDeflection algorithm is quicker; it can also work with non-'C2' continuous curves, but it generates more points in the distribution.
+ */
 class GCPnts_UniformDeflection {
 }
 
@@ -12633,6 +14223,9 @@ class GCPnts_UniformDeflection_4 extends GCPnts_UniformDeflection {}
 
 class GCPnts_UniformDeflection_5 extends GCPnts_UniformDeflection {}
 
+/**
+ * Implements construction algorithms for an arc of circle in 3D space. The result is a Geom_TrimmedCurve curve. A MakeArcOfCircle object provides a framework for: - defining the construction of the arc of circle, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed arc of circle.
+ */
 class GC_MakeArcOfCircle extends GC_Root {
 }
 
@@ -12646,6 +14239,9 @@ class GC_MakeArcOfCircle_4 extends GC_MakeArcOfCircle {}
 
 class GC_MakeArcOfCircle_5 extends GC_MakeArcOfCircle {}
 
+/**
+ * Implements construction algorithms for an arc of ellipse in 3D space. The result is a Geom_TrimmedCurve curve. A MakeArcOfEllipse object provides a framework for: - defining the construction of the arc of ellipse, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed arc of ellipse.
+ */
 class GC_MakeArcOfEllipse extends GC_Root {
 }
 
@@ -12655,6 +14251,9 @@ class GC_MakeArcOfEllipse_2 extends GC_MakeArcOfEllipse {}
 
 class GC_MakeArcOfEllipse_3 extends GC_MakeArcOfEllipse {}
 
+/**
+ * Implements construction algorithms for an arc of hyperbola in 3D space. The result is a Geom_TrimmedCurve curve. A MakeArcOfHyperbola object provides a framework for: - defining the construction of the arc of hyperbola, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed arc of hyperbola.
+ */
 class GC_MakeArcOfHyperbola extends GC_Root {
 }
 
@@ -12664,6 +14263,9 @@ class GC_MakeArcOfHyperbola_2 extends GC_MakeArcOfHyperbola {}
 
 class GC_MakeArcOfHyperbola_3 extends GC_MakeArcOfHyperbola {}
 
+/**
+ * Implements construction algorithms for an arc of parabola in 3D space. The result is a Geom_TrimmedCurve curve. A MakeArcOfParabola object provides a framework for: - defining the construction of the arc of parabola, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed arc of parabola.
+ */
 class GC_MakeArcOfParabola extends GC_Root {
 }
 
@@ -12673,6 +14275,9 @@ class GC_MakeArcOfParabola_2 extends GC_MakeArcOfParabola {}
 
 class GC_MakeArcOfParabola_3 extends GC_MakeArcOfParabola {}
 
+/**
+ * This class implements the following algorithms used to create Cirlec from Geom.
+ */
 class GC_MakeCircle extends GC_Root {
 }
 
@@ -12692,6 +14297,9 @@ class GC_MakeCircle_7 extends GC_MakeCircle {}
 
 class GC_MakeCircle_8 extends GC_MakeCircle {}
 
+/**
+ * This class implements the following algorithms used to create a ConicalSurface from Geom. * Create a ConicalSurface parallel to another and passing through a point. * Create a ConicalSurface parallel to another at a distance <Dist>. * Create a ConicalSurface by 4 points. * Create a ConicalSurface by its axis and 2 points. * Create a ConicalSurface by 2 points and 2 radius. The local coordinate system of the ConicalSurface is defined with an axis placement (see class ElementarySurface).
+ */
 class GC_MakeConicalSurface extends GC_Root {
 }
 
@@ -12703,6 +14311,9 @@ class GC_MakeConicalSurface_3 extends GC_MakeConicalSurface {}
 
 class GC_MakeConicalSurface_4 extends GC_MakeConicalSurface {}
 
+/**
+ * This class implements the following algorithms used to create a CylindricalSurface from Geom. * Create a CylindricalSurface parallel to another and passing through a point. * Create a CylindricalSurface parallel to another at a distance <Dist>. * Create a CylindricalSurface passing through 3 points. * Create a CylindricalSurface by its axis and radius. * Create a cylindricalSurface by its circular base. The local coordinate system of the CylindricalSurface is defined with an axis placement (see class ElementarySurface).
+ */
 class GC_MakeCylindricalSurface extends GC_Root {
 }
 
@@ -12720,6 +14331,9 @@ class GC_MakeCylindricalSurface_6 extends GC_MakeCylindricalSurface {}
 
 class GC_MakeCylindricalSurface_7 extends GC_MakeCylindricalSurface {}
 
+/**
+ * This class implements construction algorithms for an ellipse in 3D space. The result is a Geom_Ellipse ellipse. A MakeEllipse object provides a framework for: - defining the construction of the ellipse, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed ellipse.
+ */
 class GC_MakeEllipse extends GC_Root {
 }
 
@@ -12729,6 +14343,9 @@ class GC_MakeEllipse_2 extends GC_MakeEllipse {}
 
 class GC_MakeEllipse_3 extends GC_MakeEllipse {}
 
+/**
+ * This class implements construction algorithms for a hyperbola in 3D space. The result is a Geom_Hyperbola hyperbola. A MakeHyperbola object provides a framework for: - defining the construction of the hyperbola, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed hyperbola. To define the main branch of an hyperbola. The parameterization range is ]-infinite,+infinite[ It is possible to get the other branch and the two conjugate branches of the main branch.
+ */
 class GC_MakeHyperbola extends GC_Root {
 }
 
@@ -12738,6 +14355,9 @@ class GC_MakeHyperbola_2 extends GC_MakeHyperbola {}
 
 class GC_MakeHyperbola_3 extends GC_MakeHyperbola {}
 
+/**
+ * This class implements the following algorithms used to create a Line from Geom. * Create a Line parallel to another and passing through a point. * Create a Line passing through 2 points. A MakeLine object provides a framework for: - defining the construction of the line, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed line.
+ */
 class GC_MakeLine extends GC_Root {
 }
 
@@ -12751,6 +14371,9 @@ class GC_MakeLine_4 extends GC_MakeLine {}
 
 class GC_MakeLine_5 extends GC_MakeLine {}
 
+/**
+ * This class implements elementary construction algorithms for a symmetrical transformation in 3D space about a point, axis or plane. The result is a Geom_Transformation transformation. A MakeMirror object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class GC_MakeMirror {
 }
 
@@ -12766,6 +14389,9 @@ class GC_MakeMirror_5 extends GC_MakeMirror {}
 
 class GC_MakeMirror_6 extends GC_MakeMirror {}
 
+/**
+ * This class implements the following algorithms used to create a Plane from gp. * Create a Plane parallel to another and passing through a point. * Create a Plane passing through 3 points. * Create a Plane by its normal A MakePlane object provides a framework for: - defining the construction of the plane, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed plane.
+ */
 class GC_MakePlane extends GC_Root {
 }
 
@@ -12783,6 +14409,9 @@ class GC_MakePlane_6 extends GC_MakePlane {}
 
 class GC_MakePlane_7 extends GC_MakePlane {}
 
+/**
+ * This class implements elementary construction algorithms for a rotation in 3D space. The result is a Geom_Transformation transformation. A MakeRotation object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class GC_MakeRotation {
 }
 
@@ -12792,9 +14421,15 @@ class GC_MakeRotation_2 extends GC_MakeRotation {}
 
 class GC_MakeRotation_3 extends GC_MakeRotation {}
 
+/**
+ * This class implements an elementary construction algorithm for a scaling transformation in 3D space. The result is a Geom_Transformation transformation (a scaling transformation with the center point <Point> and the scaling value <Scale>). A MakeScale object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class GC_MakeScale {
 }
 
+/**
+ * Implements construction algorithms for a line segment in 3D space. Makes a segment of Line from the 2 points <P1> and <P2>. The result is a Geom_TrimmedCurve curve. A MakeSegment object provides a framework for: - defining the construction of the line segment, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed line segment.
+ */
 class GC_MakeSegment extends GC_Root {
 }
 
@@ -12806,6 +14441,9 @@ class GC_MakeSegment_3 extends GC_MakeSegment {}
 
 class GC_MakeSegment_4 extends GC_MakeSegment {}
 
+/**
+ * This class implements elementary construction algorithms for a translation in 3D space. The result is a Geom_Transformation transformation. A MakeTranslation object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class GC_MakeTranslation {
 }
 
@@ -12813,6 +14451,9 @@ class GC_MakeTranslation_1 extends GC_MakeTranslation {}
 
 class GC_MakeTranslation_2 extends GC_MakeTranslation {}
 
+/**
+ * Implements construction algorithms for a trimmed cone limited by two planes orthogonal to its axis. The result is a Geom_RectangularTrimmedSurface surface. A MakeTrimmedCone provides a framework for: - defining the construction of the trimmed cone, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed trimmed cone.
+ */
 class GC_MakeTrimmedCone extends GC_Root {
 }
 
@@ -12820,6 +14461,9 @@ class GC_MakeTrimmedCone_1 extends GC_MakeTrimmedCone {}
 
 class GC_MakeTrimmedCone_2 extends GC_MakeTrimmedCone {}
 
+/**
+ * Implements construction algorithms for a trimmed cylinder limited by two planes orthogonal to its axis. The result is a Geom_RectangularTrimmedSurface surface. A MakeTrimmedCylinder provides a framework for: - defining the construction of the trimmed cylinder, - implementing the construction algorithm, and - consulting the results. In particular, the Value function returns the constructed trimmed cylinder.
+ */
 class GC_MakeTrimmedCylinder extends GC_Root {
 }
 
@@ -12829,12 +14473,21 @@ class GC_MakeTrimmedCylinder_2 extends GC_MakeTrimmedCylinder {}
 
 class GC_MakeTrimmedCylinder_3 extends GC_MakeTrimmedCylinder {}
 
+/**
+ * This class implements the common services for all classes of gce which report error.
+ */
 class GC_Root {
 }
 
+/**
+ * This package defines algorithmes to compute the global properties of a set of points, a curve, a surface, a solid (non infinite region of space delimited with geometric entities), a compound geometric system (heterogeneous composition of the previous entities).
+ */
 class GProp {
 }
 
+/**
+ * Computes the global properties of bounded curves in 3D space. It can be an elementary curve from package gp such as Lin, Circ, Elips, Parab .
+ */
 class GProp_CelGProps extends GProp_GProps {
 }
 
@@ -12846,6 +14499,9 @@ class GProp_CelGProps_3 extends GProp_CelGProps {}
 
 class GProp_CelGProps_4 extends GProp_CelGProps {}
 
+/**
+ * Implements a general mechanism to compute the global properties of a "compound geometric system" in 3d space by composition of the global properties of "elementary geometric entities" such as (curve, surface, solid, set of points). It is possible to compose the properties of several "compound geometric systems" too.
+ */
 class GProp_GProps {
 }
 
@@ -12853,9 +14509,15 @@ class GProp_GProps_1 extends GProp_GProps {}
 
 class GProp_GProps_2 extends GProp_GProps {}
 
+/**
+ * A framework to analyze a collection - or cloud - of points and to verify if they are coincident, collinear or coplanar within a given precision. If so, it also computes the mean point, the mean line or the mean plane of the points. If not, it computes the minimal box which includes all the points.
+ */
 class GProp_PEquation {
 }
 
+/**
+ * A framework for computing the global properties of a set of points. A point mass is attached to each point. The global mass of the system is the sum of each individual mass. By default, the point mass is equal to 1 and the mass of a system composed of N points is equal to N. Warning A framework of this sort provides functions to handle sets of points easily. But, like any GProp_GProps object, by using the Add function, it can theoretically bring together the computed global properties and those of a system more complex than a set of points . The mass of each point and the density of each component of the composed system must be coherent. Note that this coherence cannot be checked. Nonetheless, you are advised to restrict your use of a GProp_PGProps object to a set of points and to create a GProp_GProps object in order to bring together global properties of different systems.
+ */
 class GProp_PGProps extends GProp_GProps {
 }
 
@@ -12869,9 +14531,15 @@ class GProp_PGProps_4 extends GProp_PGProps {}
 
 class GProp_PGProps_5 extends GProp_PGProps {}
 
+/**
+ * A framework to present the principal properties of inertia of a system of which global properties are computed by a GProp_GProps object. There is always a set of axes for which the products of inertia of a geometric system are equal to 0; i.e. the matrix of inertia of the system is diagonal. These axes are the principal axes of inertia. Their origin is coincident with the center of mass of the system. The associated moments are called the principal moments of inertia. This sort of presentation object is created, filled and returned by the function PrincipalProperties for any GProp_GProps object, and can be queried to access the result. Note: The system whose principal properties of inertia are returned by this framework is referred to as the current system. The current system, however, is retained neither by this presentation framework nor by the GProp_GProps object which activates it.
+ */
 class GProp_PrincipalProps {
 }
 
+/**
+ * Computes the global properties of a bounded elementary surface in 3d (surface of the gp package)
+ */
 class GProp_SelGProps extends GProp_GProps {
 }
 
@@ -12885,6 +14553,9 @@ class GProp_SelGProps_4 extends GProp_SelGProps {}
 
 class GProp_SelGProps_5 extends GProp_SelGProps {}
 
+/**
+ * This exception is raised when a method makes reference to an undefined inertia axis of symmetry.
+ */
 class GProp_UndefinedAxis extends Standard_DomainError {
 }
 
@@ -12892,6 +14563,9 @@ class GProp_UndefinedAxis_1 extends GProp_UndefinedAxis {}
 
 class GProp_UndefinedAxis_2 extends GProp_UndefinedAxis {}
 
+/**
+ * Computes the global properties and the volume of a geometric solid (3D closed region of space) The solid can be elementary(definition in the gp package)
+ */
 class GProp_VelGProps extends GProp_GProps {
 }
 
@@ -12905,6 +14579,9 @@ class GProp_VelGProps_4 extends GProp_VelGProps {}
 
 class GProp_VelGProps_5 extends GProp_VelGProps {}
 
+/**
+ * Describes functions for building a 2D circle - tangential to 2 curves, or - tangential to a curve and passing through a point, or - passing through 2 points, and with its center on a curve. For these analytic algorithms, curves are circles or lines. A Circ2d2TanOn object provides a framework for: - defining the construction of 2D circles(s), - implementing the construction algorithm, and - consulting the result(s).
+ */
 class GccAna_Circ2d2TanOn {
 }
 
@@ -12932,6 +14609,9 @@ class GccAna_Circ2d2TanOn_11 extends GccAna_Circ2d2TanOn {}
 
 class GccAna_Circ2d2TanOn_12 extends GccAna_Circ2d2TanOn {}
 
+/**
+ * This class implements the algorithms used to create 2d circles tangent to 2 points/lines/circles and with a given radius. For each construction methods arguments are: - Two Qualified elements for tangency constraints. (for example EnclosedCirc if we want the solution inside the argument EnclosedCirc). - Two Reals. One (Radius) for the radius and the other (Tolerance) for the tolerance. Tolerance is only used for the limit cases. For example : We want to create a circle inside a circle C1 and inside a circle C2 with a radius Radius and a tolerance Tolerance. If we do not use Tolerance it is impossible to find a solution in the following case : C2 is inside C1 and there is no intersection point between the two circles. With Tolerance it gives a solution if the lowest distance between C1 and C2 is lower than or equal Tolerance.
+ */
 class GccAna_Circ2d2TanRad {
 }
 
@@ -12947,6 +14627,9 @@ class GccAna_Circ2d2TanRad_5 extends GccAna_Circ2d2TanRad {}
 
 class GccAna_Circ2d2TanRad_6 extends GccAna_Circ2d2TanRad {}
 
+/**
+ * This class implements the algorithms used to create 2d circles tangent to 3 points/lines/circles. The arguments of all construction methods are : - The three qualified elements for the tangency constraints (QualifiedCirc, QualifiedLine, Points). - A real Tolerance. Tolerance is only used in the limit cases. For example : We want to create a circle tangent to an UnqualifiedCirc C1 and an UnqualifiedCirc C2 and an UnqualifiedCirc C3 with a tolerance Tolerance. If we do not use Tolerance it is impossible to find a solution in the following case : C2 is inside C1 and there is no intersection point between the two circles, and C3 is completly outside C1. With Tolerance we will find a solution if the lowest distance between C1 and C2 is lower than or equal Tolerance.
+ */
 class GccAna_Circ2d3Tan {
 }
 
@@ -12970,9 +14653,15 @@ class GccAna_Circ2d3Tan_9 extends GccAna_Circ2d3Tan {}
 
 class GccAna_Circ2d3Tan_10 extends GccAna_Circ2d3Tan {}
 
+/**
+ * This class describes functions for building bisecting curves between two 2D circles. A bisecting curve between two circles is a curve such that each of its points is at the same distance from the two circles. It can be an ellipse, hyperbola, circle or line, depending on the relative position of the two circles. The algorithm computes all the elementary curves which are solutions. There is no solution if the two circles are coincident. A Circ2dBisec object provides a framework for: - defining the construction of the bisecting curves, - implementing the construction algorithm, and consulting the result.
+ */
 class GccAna_Circ2dBisec {
 }
 
+/**
+ * This class implements the algorithms used to create 2d circles tangent to an entity and centered on a point. The arguments of all construction methods are : - The qualified element for the tangency constrains (QualifiedCirc, Line, Point). - The center point Pcenter. - A real Tolerance. Tolerance is only used in the limits cases. For example : We want to create a circle tangent to an EnclosedCirc C1 with a tolerance Tolerance. If we did not used Tolerance it is impossible to find a solution in the the following case : Pcenter is outside C1. With Tolerance we will give a solution if the distance between C1 and Pcenter is lower than or equal Tolerance.
+ */
 class GccAna_Circ2dTanCen {
 }
 
@@ -12982,6 +14671,9 @@ class GccAna_Circ2dTanCen_2 extends GccAna_Circ2dTanCen {}
 
 class GccAna_Circ2dTanCen_3 extends GccAna_Circ2dTanCen {}
 
+/**
+ * This class implements the algorithms used to create a 2d circle tangent to a 2d entity, centered on a curv and with a given radius. The arguments of all construction methods are : - The qualified element for the tangency constrains (QualifiedCirc, QualifiedLin, Points). - The Center element (circle, line). - A real Tolerance. Tolerance is only used in the limits cases. For example : We want to create a circle tangent to an OutsideCirc C1 centered on a line OnLine with a radius Radius and with a tolerance Tolerance. If we did not use Tolerance it is impossible to find a solution in the the following case : OnLine is outside C1. There is no intersection point between C1 and OnLine. The distance between the line and the circle is greater than Radius. With Tolerance we will give a solution if the distance between C1 and OnLine is lower than or equal Tolerance.
+ */
 class GccAna_Circ2dTanOnRad {
 }
 
@@ -12997,9 +14689,15 @@ class GccAna_Circ2dTanOnRad_5 extends GccAna_Circ2dTanOnRad {}
 
 class GccAna_Circ2dTanOnRad_6 extends GccAna_Circ2dTanOnRad {}
 
+/**
+ * Describes functions for building bisecting curves between a 2D line and a 2D circle. A bisecting curve between a circle and a line is a curve such that each of its points is at the same distance from the circle and the line. It can be a parabola or a line, depending of the relative position of the line and the circle. The algorithm computes all the elementary curves which are solutions. A CircLin2dBisec object provides a framework for: - defining the construction of the bisecting curves, - implementing the construction algorithm, and - consulting the result.
+ */
 class GccAna_CircLin2dBisec {
 }
 
+/**
+ * Describes functions for building a bisecting curve between a 2D circle and a point. A bisecting curve between a circle and a point is such a curve that each of its points is at the same distance from the circle and the point. It can be an ellipse, hyperbola, circle or line, depending on the relative position of the point and the circle. The algorithm computes all the elementary curves which are solutions. A CircPnt2dBisec object provides a framework for: - defining the construction of the bisecting curves, - implementing the construction algorithm, and - consulting the result.
+ */
 class GccAna_CircPnt2dBisec {
 }
 
@@ -13007,6 +14705,9 @@ class GccAna_CircPnt2dBisec_1 extends GccAna_CircPnt2dBisec {}
 
 class GccAna_CircPnt2dBisec_2 extends GccAna_CircPnt2dBisec {}
 
+/**
+ * This class implements the algorithms used to create 2d lines tangent to 2 other elements which can be circles or points. Describes functions for building a 2D line: - tangential to 2 circles, or - tangential to a circle and passing through a point, or - passing through 2 points. A Lin2d2Tan object provides a framework for: - defining the construction of 2D line(s), - implementing the construction algorithm, and consulting the result(s). Some constructors may check the type of the qualified argument and raise BadQualifier Error in case of incorrect couple (qualifier, curv). For example: "EnclosedCirc".
+ */
 class GccAna_Lin2d2Tan {
 }
 
@@ -13016,9 +14717,15 @@ class GccAna_Lin2d2Tan_2 extends GccAna_Lin2d2Tan {}
 
 class GccAna_Lin2d2Tan_3 extends GccAna_Lin2d2Tan {}
 
+/**
+ * Describes functions for building bisecting lines between two 2D lines. A bisecting line between two lines is such that each of its points is at the same distance from the two lines. If the two lines are secant, there are two orthogonal bisecting lines which share the angles made by the two straight lines in two equal parts. If D1 and D2 are the unit vectors of the two straight lines, those of the two bisecting lines are collinear with the following vectors: - D1 + D2 for the "internal" bisecting line, - D1 - D2 for the "external" bisecting line. If the two lines are parallel, the (unique) bisecting line is the straight line equidistant from the two straight lines. If the two straight lines are coincident, the algorithm returns the first straight line as the solution. A Lin2dTanObl object provides a framework for: - defining the construction of the bisecting lines, - implementing the construction algorithm, and - consulting the result.
+ */
 class GccAna_Lin2dBisec {
 }
 
+/**
+ * This class implements the algorithms used to create 2d line tangent to a circle or a point and making an angle with a line. The angle is in radians. The origin of the solution is the tangency point with the first argument. Its direction is making an angle Angle with the second argument.
+ */
 class GccAna_Lin2dTanObl {
 }
 
@@ -13026,6 +14733,9 @@ class GccAna_Lin2dTanObl_1 extends GccAna_Lin2dTanObl {}
 
 class GccAna_Lin2dTanObl_2 extends GccAna_Lin2dTanObl {}
 
+/**
+ * This class implements the algorithms used to create 2d line tangent to a circle or a point and parallel to another line. The solution has the same orientation as the second argument. Describes functions for building a 2D line parallel to a line and: - tangential to a circle, or - passing through a point. A Lin2dTanPar object provides a framework for: - defining the construction of 2D line(s), - implementing the construction algorithm, and consulting the result(s).
+ */
 class GccAna_Lin2dTanPar {
 }
 
@@ -13033,6 +14743,9 @@ class GccAna_Lin2dTanPar_1 extends GccAna_Lin2dTanPar {}
 
 class GccAna_Lin2dTanPar_2 extends GccAna_Lin2dTanPar {}
 
+/**
+ * This class implements the algorithms used to create 2d lines tangent to a circle or a point and perpendicular to a line or a circle. Describes functions for building a 2D line perpendicular to a line and: - tangential to a circle, or - passing through a point. A Lin2dTanPer object provides a framework for: - defining the construction of 2D line(s), - implementing the construction algorithm, and - consulting the result(s).
+ */
 class GccAna_Lin2dTanPer {
 }
 
@@ -13044,6 +14757,9 @@ class GccAna_Lin2dTanPer_3 extends GccAna_Lin2dTanPer {}
 
 class GccAna_Lin2dTanPer_4 extends GccAna_Lin2dTanPer {}
 
+/**
+ * Describes functions for building bisecting curves between a 2D line and a point. A bisecting curve between a line and a point is such a curve that each of its points is at the same distance from the circle and the point. It can be a parabola or a line, depending on the relative position of the line and the circle. There is always one unique solution. A LinPnt2dBisec object provides a framework for: - defining the construction of the bisecting curve, - implementing the construction algorithm, and - consulting the result.
+ */
 class GccAna_LinPnt2dBisec {
 }
 
@@ -13054,9 +14770,15 @@ class GccAna_NoSolution_1 extends GccAna_NoSolution {}
 
 class GccAna_NoSolution_2 extends GccAna_NoSolution {}
 
+/**
+ * This class implements the algorithms used to create the bisecting line between two 2d points Describes functions for building a bisecting line between two 2D points. The bisecting line between two points is the bisector of the segment which joins the two points, if these are not coincident. The algorithm does not find a solution if the two points are coincident. A Pnt2dBisec object provides a framework for: - defining the construction of the bisecting line, - implementing the construction algorithm, and consulting the result.
+ */
 class GccAna_Pnt2dBisec {
 }
 
+/**
+ * This package provides an implementation of the qualified entities useful to create 2d entities with geometric constraints. The qualifier explains which subfamily of solutions we want to obtain. It uses the following law: the matter/the interior side is at the left of the line, if we go from the beginning to the end. The qualifiers are: Enclosing : the solution(s) must enclose the argument. Enclosed : the solution(s) must be enclosed in the argument. Outside : both the solution(s) and the argument must be outside to each other. Unqualified : the position is undefined, so give all the solutions. The use of a qualifier is always required if such subfamilies exist. For example, it is not used for a point. Note: the interior of a curve is defined as the left-hand side of the curve in relation to its orientation.
+ */
 class GccEnt {
 }
 
@@ -13067,36 +14789,69 @@ class GccEnt_BadQualifier_1 extends GccEnt_BadQualifier {}
 
 class GccEnt_BadQualifier_2 extends GccEnt_BadQualifier {}
 
+/**
+ * Creates a qualified 2d Circle. A qualified 2D circle is a circle (gp_Circ2d circle) with a qualifier which specifies whether the solution of a construction algorithm using the qualified circle (as an argument): - encloses the circle, or - is enclosed by the circle, or - is built so that both the circle and it are external to one another, or - is undefined (all solutions apply).
+ */
 class GccEnt_QualifiedCirc {
 }
 
+/**
+ * Describes a qualified 2D line. A qualified 2D line is a line (gp_Lin2d line) with a qualifier which specifies whether the solution of a construction algorithm using the qualified line (as an argument): - is 'enclosed' by the line, or - is built so that both the line and it are external to one another, or - is undefined (all solutions apply). Note: the interior of a line is defined as the left-hand side of the line in relation to its orientation (i.e. when moving from the start to the end of the curve).
+ */
 class GccEnt_QualifiedLin {
 }
 
+/**
+ * Describes a circle as a bisecting curve between two 2D geometric objects (such as circles or points).
+ */
 class GccInt_BCirc extends GccInt_Bisec {
 }
 
+/**
+ * Describes an ellipse as a bisecting curve between two 2D geometric objects (such as circles or points).
+ */
 class GccInt_BElips extends GccInt_Bisec {
 }
 
+/**
+ * Describes a hyperbola as a bisecting curve between two 2D geometric objects (such as circles or points).
+ */
 class GccInt_BHyper extends GccInt_Bisec {
 }
 
+/**
+ * Describes a line as a bisecting curve between two 2D geometric objects (such as lines, circles or points).
+ */
 class GccInt_BLine extends GccInt_Bisec {
 }
 
+/**
+ * Describes a parabola as a bisecting curve between two 2D geometric objects (such as lines, circles or points).
+ */
 class GccInt_BParab extends GccInt_Bisec {
 }
 
+/**
+ * Describes a point as a bisecting object between two 2D geometric objects.
+ */
 class GccInt_BPoint extends GccInt_Bisec {
 }
 
+/**
+ * The deferred class GccInt_Bisec is the root class for elementary bisecting loci between two simple geometric objects (i.e. circles, lines or points). Bisecting loci between two geometric objects are such that each of their points is at the same distance from the two geometric objects. It is typically a curve, such as a line, circle or conic. Generally there is more than one elementary object which is the solution to a bisecting loci problem: each solution is described with one elementary bisecting locus. For example, the bisectors of two secant straight lines are two perpendicular straight lines. The GccInt package provides concrete implementations of the following elementary derived bisecting loci: - lines, circles, ellipses, hyperbolas and parabolas, and - points (not used in this context). The GccAna package provides numerous algorithms for computing the bisecting loci between circles, lines or points, whose solutions are these types of elementary bisecting locus.
+ */
 class GccInt_Bisec extends Standard_Transient {
 }
 
+/**
+ * this package contains the geometric definition of 2d curves compatible with the Adaptor package templates.
+ */
 class Geom2dAdaptor {
 }
 
+/**
+ * An interface between the services provided by any curve from the package Geom2d and those required of the curve by algorithms which use it.
+ */
 class Geom2dAdaptor_Curve extends Adaptor2d_Curve2d {
 }
 
@@ -13113,6 +14868,9 @@ class Geom2dAdaptor_GHCurve_1 extends Geom2dAdaptor_GHCurve {}
 
 class Geom2dAdaptor_GHCurve_2 extends Geom2dAdaptor_GHCurve {}
 
+/**
+ * Provides an interface between the services provided by any curve from the package Geom2d and those required of the curve by algorithms, which use it.
+ */
 class Geom2dAdaptor_HCurve extends Geom2dAdaptor_GHCurve {
 }
 
@@ -13124,9 +14882,15 @@ class Geom2dAdaptor_HCurve_3 extends Geom2dAdaptor_HCurve {}
 
 class Geom2dAdaptor_HCurve_4 extends Geom2dAdaptor_HCurve {}
 
+/**
+ * This package provides an implementation of algorithmes to do the conversion between equivalent geometric entities from package Geom2d. It gives the possibility : . to obtain the B-spline representation of bounded curves. . to split a B-spline curve into several B-spline curves with some constraints of continuity, . to convert a B-spline curve into several Bezier curves or surfaces. All the geometric entities used in this package are bounded. References : . Generating the Bezier Points of B-spline curves and surfaces (Wolfgang Bohm) CAGD volume 13 number 6 november 1981 . On NURBS: A Survey (Leslie Piegl) IEEE Computer Graphics and Application January 1991 . Curve and surface construction using rational B-splines (Leslie Piegl and Wayne Tiller) CAD Volume 19 number 9 november 1987 . A survey of curve and surface methods in CAGD (Wolfgang BOHM) CAGD 1 1984
+ */
 class Geom2dConvert {
 }
 
+/**
+ * A framework to convert a 2D curve to a BSpline. This is done by approximation within a given tolerance.
+ */
 class Geom2dConvert_ApproxCurve {
 }
 
@@ -13134,9 +14898,15 @@ class Geom2dConvert_ApproxCurve_1 extends Geom2dConvert_ApproxCurve {}
 
 class Geom2dConvert_ApproxCurve_2 extends Geom2dConvert_ApproxCurve {}
 
+/**
+ * An algorithm to determine points at which a BSpline curve should be split in order to obtain arcs of the same continuity. If you require curves with a minimum continuity for your computation, it is useful to know the points between which an arc has a continuity of a given order. The continuity order is given at the construction time. For a BSpline curve, the discontinuities are localized at the knot values. Between two knot values the BSpline is infinitely and continuously differentiable. At a given knot, the continuity is equal to: Degree - Mult, where Degree is the degree of the BSpline curve and Mult is the multiplicity of the knot. It is possible to compute the arcs which correspond to this splitting using the global function SplitBSplineCurve provided by the package Geom2dConvert. A BSplineCurveKnotSplitting object provides a framework for: - defining the curve to be analysed and the required degree of continuity, - implementing the computation algorithm, and - consulting the results.
+ */
 class Geom2dConvert_BSplineCurveKnotSplitting {
 }
 
+/**
+ * An algorithm to convert a BSpline curve into a series of adjacent Bezier curves. A BSplineCurveToBezierCurve object provides a framework for: - defining the BSpline curve to be converted - implementing the construction algorithm, and - consulting the results. References : Generating the Bezier points of B-spline curves and surfaces (Wolfgang Bohm) CAD volume 13 number 6 november 1981
+ */
 class Geom2dConvert_BSplineCurveToBezierCurve {
 }
 
@@ -13144,6 +14914,9 @@ class Geom2dConvert_BSplineCurveToBezierCurve_1 extends Geom2dConvert_BSplineCur
 
 class Geom2dConvert_BSplineCurveToBezierCurve_2 extends Geom2dConvert_BSplineCurveToBezierCurve {}
 
+/**
+ * This algorithm converts and concat several curve in an BSplineCurve
+ */
 class Geom2dConvert_CompCurveToBSplineCurve {
 }
 
@@ -13151,9 +14924,15 @@ class Geom2dConvert_CompCurveToBSplineCurve_1 extends Geom2dConvert_CompCurveToB
 
 class Geom2dConvert_CompCurveToBSplineCurve_2 extends Geom2dConvert_CompCurveToBSplineCurve {}
 
+/**
+ * Interface for calculation of values and derivatives for different kinds of curves in 2D. Works both with adaptors and curves.
+ */
 class Geom2dEvaluator_Curve extends Standard_Transient {
 }
 
+/**
+ * Allows to calculate values and derivatives for offset curves in 2D
+ */
 class Geom2dEvaluator_OffsetCurve extends Geom2dEvaluator_Curve {
 }
 
@@ -13170,21 +14949,36 @@ class Geom2dLProp_CLProps2d_2 extends Geom2dLProp_CLProps2d {}
 
 class Geom2dLProp_CLProps2d_3 extends Geom2dLProp_CLProps2d {}
 
+/**
+ * An algorithm for computing local properties of a curve. These properties include: - the maximum and minimum curvatures - the inflection points. A CurAndInf2d object provides the framework for: - defining the curve to be analyzed - implementing the computation algorithms - consulting the results.
+ */
 class Geom2dLProp_CurAndInf2d extends LProp_CurAndInf {
 }
 
 class Geom2dLProp_Curve2dTool {
 }
 
+/**
+ * Function used to find the extremas of curvature in 2d.
+ */
 class Geom2dLProp_FuncCurExt extends math_FunctionWithDerivative {
 }
 
+/**
+ * Function used to find the inflections in 2d.
+ */
 class Geom2dLProp_FuncCurNul extends math_FunctionWithDerivative {
 }
 
+/**
+ * Computes the locals extremas of curvature and the inflections of a bounded curve in 2d.
+ */
 class Geom2dLProp_NumericCurInf2d {
 }
 
+/**
+ * This class implements the transfer of the Curve Entity from Geom2d To IGES. These can be : Curve . BoundedCurve * BSplineCurve * BezierCurve * TrimmedCurve . Conic * Circle * Ellipse * Hyperbloa * Line * Parabola . OffsetCurve
+ */
 class Geom2dToIGES_Geom2dCurve extends Geom2dToIGES_Geom2dEntity {
 }
 
@@ -13192,6 +14986,9 @@ class Geom2dToIGES_Geom2dCurve_1 extends Geom2dToIGES_Geom2dCurve {}
 
 class Geom2dToIGES_Geom2dCurve_2 extends Geom2dToIGES_Geom2dCurve {}
 
+/**
+ * provides methods to transfer Geom2d entity from CASCADE to IGES.
+ */
 class Geom2dToIGES_Geom2dEntity {
 }
 
@@ -13199,6 +14996,9 @@ class Geom2dToIGES_Geom2dEntity_1 extends Geom2dToIGES_Geom2dEntity {}
 
 class Geom2dToIGES_Geom2dEntity_2 extends Geom2dToIGES_Geom2dEntity {}
 
+/**
+ * This class implements the transfer of the Point Entity from Geom2d to IGES . These are : . 2dPoint * 2dCartesianPoint
+ */
 class Geom2dToIGES_Geom2dPoint extends Geom2dToIGES_Geom2dEntity {
 }
 
@@ -13206,6 +15006,9 @@ class Geom2dToIGES_Geom2dPoint_1 extends Geom2dToIGES_Geom2dPoint {}
 
 class Geom2dToIGES_Geom2dPoint_2 extends Geom2dToIGES_Geom2dPoint {}
 
+/**
+ * This class implements the transfer of the Vector from Geom2d to IGES . These can be : . Vector * Direction * VectorWithMagnitude
+ */
 class Geom2dToIGES_Geom2dVector extends Geom2dToIGES_Geom2dEntity {
 }
 
@@ -13213,6 +15016,9 @@ class Geom2dToIGES_Geom2dVector_1 extends Geom2dToIGES_Geom2dVector {}
 
 class Geom2dToIGES_Geom2dVector_2 extends Geom2dToIGES_Geom2dVector {}
 
+/**
+ * Describes an axis in 2D space. An axis is defined by: - its origin, also termed the "Location point" of the axis, - its unit vector, termed the "Direction" of the axis. Note: Geom2d_AxisPlacement axes provide the same kind of "geometric" services as gp_Ax2d axes but have more complex data structures. The geometric objects provided by the Geom2d package use gp_Ax2d objects to include axes in their data structures, or to define an axis of symmetry or axis of rotation. Geom2d_AxisPlacement axes are used in a context where they can be shared by several objects contained inside a common data structure.
+ */
 class Geom2d_AxisPlacement extends Geom2d_Geometry {
 }
 
@@ -13220,6 +15026,9 @@ class Geom2d_AxisPlacement_1 extends Geom2d_AxisPlacement {}
 
 class Geom2d_AxisPlacement_2 extends Geom2d_AxisPlacement {}
 
+/**
+ * Describes a BSpline curve. A BSpline curve can be: - uniform or non-uniform, - rational or non-rational, - periodic or non-periodic. A BSpline curve is defined by: - its degree; the degree for a Geom2d_BSplineCurve is limited to a value (25) which is defined and controlled by the system. This value is returned by the function MaxDegree; - its periodic or non-periodic nature; - a table of poles (also called control points), with their associated weights if the BSpline curve is rational. The poles of the curve are "control points" used to deform the curve. If the curve is non-periodic, the first pole is the start point of the curve, and the last pole is the end point of the curve. The segment, which joins the first pole to the second pole, is the tangent to the curve at its start point, and the segment, which joins the last pole to the second-from-last pole, is the tangent to the curve at its end point. If the curve is periodic, these geometric properties are not verified. It is more difficult to give a geometric signification to the weights but they are useful for providing exact representations of the arcs of a circle or ellipse. Moreover, if the weights of all the poles are equal, the curve has a polynomial equation; it is therefore a non-rational curve. - a table of knots with their multiplicities. For a Geom2d_BSplineCurve, the table of knots is an increasing sequence of reals without repetition; the multiplicities define the repetition of the knots. A BSpline curve is a piecewise polynomial or rational curve. The knots are the parameters of junction points between two pieces. The multiplicity Mult(i) of the knot Knot(i) of the BSpline curve is related to the degree of continuity of the curve at the knot Knot(i), which is equal to Degree - Mult(i) where Degree is the degree of the BSpline curve. If the knots are regularly spaced (i.e. the difference between two consecutive knots is a constant), three specific and frequently used cases of knot distribution can be identified: - "uniform" if all multiplicities are equal to 1, - "quasi-uniform" if all multiplicities are equal to 1, except the first and the last knot which have a multiplicity of Degree + 1, where Degree is the degree of the BSpline curve, - "Piecewise Bezier" if all multiplicities are equal to Degree except the first and last knot which have a multiplicity of Degree + 1, where Degree is the degree of the BSpline curve. A curve of this type is a concatenation of arcs of Bezier curves. If the BSpline curve is not periodic: - the bounds of the Poles and Weights tables are 1 and NbPoles, where NbPoles is the number of poles of the BSpline curve, - the bounds of the Knots and Multiplicities tables are 1 and NbKnots, where NbKnots is the number of knots of the BSpline curve. If the BSpline curve is periodic, and if there are k periodic knots and p periodic poles, the period is: period = Knot(k + 1) - Knot(1) and the poles and knots tables can be considered as infinite tables, such that: - Knot(i+k) = Knot(i) + period - Pole(i+p) = Pole(i) Note: data structures of a periodic BSpline curve are more complex than those of a non-periodic one. Warnings : In this class we consider that a weight value is zero if Weight <= Resolution from package gp. For two parametric values (or two knot values) U1, U2 we consider that U1 = U2 if Abs (U2 - U1) <= Epsilon (U1). For two weights values W1, W2 we consider that W1 = W2 if Abs (W2 - W1) <= Epsilon (W1). The method Epsilon is defined in the class Real from package Standard.
+ */
 class Geom2d_BSplineCurve extends Geom2d_BoundedCurve {
 }
 
@@ -13227,6 +15036,9 @@ class Geom2d_BSplineCurve_1 extends Geom2d_BSplineCurve {}
 
 class Geom2d_BSplineCurve_2 extends Geom2d_BSplineCurve {}
 
+/**
+ * Describes a rational or non-rational Bezier curve - a non-rational Bezier curve is defined by a table of poles (also called control points), - a rational Bezier curve is defined by a table of poles with varying weights. These data are manipulated by two parallel arrays: - the poles table, which is an array of gp_Pnt2d points, and - the weights table, which is an array of reals. The bounds of these arrays are 1 and "the number of poles" of the curve. The poles of the curve are "control points" used to deform the curve. The first pole is the start point of the curve, and the last pole is the end point of the curve. The segment which joins the first pole to the second pole is the tangent to the curve at its start point, and the segment which joins the last pole to the second-from-last pole is the tangent to the curve at its end point. It is more difficult to give a geometric signification to the weights but they are useful for providing exact representations of the arcs of a circle or ellipse. Moreover, if the weights of all the poles are equal, the curve is polynomial; it is therefore a non-rational curve. The non-rational curve is a special and frequently used case. The weights are defined and used only in case of a rational curve. The degree of a Bezier curve is equal to the number of poles, minus 1. It must be greater than or equal to 1. However, the degree of a Geom2d_BezierCurve curve is limited to a value (25) which is defined and controlled by the system. This value is returned by the function MaxDegree. The parameter range for a Bezier curve is [ 0, 1 ]. If the first and last control points of the Bezier curve are the same point then the curve is closed. For example, to create a closed Bezier curve with four control points, you have to give a set of control points P1, P2, P3 and P1. The continuity of a Bezier curve is infinite. It is not possible to build a Bezier curve with negative weights. We consider that a weight value is zero if it is less than or equal to gp::Resolution(). We also consider that two weight values W1 and W2 are equal if: |W2 - W1| <= gp::Resolution(). Warning - When considering the continuity of a closed Bezier curve at the junction point, remember that a curve of this type is never periodic. This means that the derivatives for the parameter u = 0 have no reason to be the same as the derivatives for the parameter u = 1 even if the curve is closed. - The length of a Bezier curve can be null.
+ */
 class Geom2d_BezierCurve extends Geom2d_BoundedCurve {
 }
 
@@ -13234,9 +15046,15 @@ class Geom2d_BezierCurve_1 extends Geom2d_BezierCurve {}
 
 class Geom2d_BezierCurve_2 extends Geom2d_BezierCurve {}
 
+/**
+ * The abstract class BoundedCurve describes the common behavior of bounded curves in 2D space. A bounded curve is limited by two finite values of the parameter, termed respectively "first parameter" and "last parameter". The "first parameter" gives the "start point" of the bounded curve, and the "last parameter" gives the "end point" of the bounded curve. The length of a bounded curve is finite. The Geom2d package provides three concrete classes of bounded curves: - two frequently used mathematical formulations of complex curves: - Geom2d_BezierCurve, - Geom2d_BSplineCurve, and - Geom2d_TrimmedCurve to trim a curve, i.e. to only take part of the curve limited by two values of the parameter of the basis curve.
+ */
 class Geom2d_BoundedCurve extends Geom2d_Curve {
 }
 
+/**
+ * Describes a point in 2D space. A Geom2d_CartesianPoint is defined by a gp_Pnt2d point, with its two Cartesian coordinates X and Y.
+ */
 class Geom2d_CartesianPoint extends Geom2d_Point {
 }
 
@@ -13244,6 +15062,9 @@ class Geom2d_CartesianPoint_1 extends Geom2d_CartesianPoint {}
 
 class Geom2d_CartesianPoint_2 extends Geom2d_CartesianPoint {}
 
+/**
+ * Describes a circle in the plane (2D space). A circle is defined by its radius and, as with any conic curve, is positioned in the plane with a coordinate system (gp_Ax22d object) where the origin is the center of the circle. The coordinate system is the local coordinate system of the circle. The orientation (direct or indirect) of the local coordinate system gives an explicit orientation to the circle, determining the direction in which the parameter increases along the circle. The Geom2d_Circle circle is parameterized by an angle: P(U) = O + R*Cos(U)*XDir + R*Sin(U)*YDir where: - P is the point of parameter U, - O, XDir and YDir are respectively the origin, "X Direction" and "Y Direction" of its local coordinate system, - R is the radius of the circle. The "X Axis" of the local coordinate system therefore defines the origin of the parameter of the circle. The parameter is the angle with this "X Direction". A circle is a closed and periodic curve. The period is 2.*Pi and the parameter range is [ 0,2.*Pi [. See Also GCE2d_MakeCircle which provides functions for more complex circle constructions gp_Ax22d and gp_Circ2d for an equivalent, non-parameterized data structure.
+ */
 class Geom2d_Circle extends Geom2d_Conic {
 }
 
@@ -13253,12 +15074,21 @@ class Geom2d_Circle_2 extends Geom2d_Circle {}
 
 class Geom2d_Circle_3 extends Geom2d_Circle {}
 
+/**
+ * The abstract class Conic describes the common behavior of conic curves in 2D space and, in particular, their general characteristics. The Geom2d package provides four specific classes of conics: Geom2d_Circle, Geom2d_Ellipse, Geom2d_Hyperbola and Geom2d_Parabola. A conic is positioned in the plane with a coordinate system (gp_Ax22d object), where the origin is the center of the conic (or the apex in case of a parabola). This coordinate system is the local coordinate system of the conic. It gives the conic an explicit orientation, determining the direction in which the parameter increases along the conic. The "X Axis" of the local coordinate system also defines the origin of the parameter of the conic.
+ */
 class Geom2d_Conic extends Geom2d_Curve {
 }
 
+/**
+ * The abstract class Curve describes the common behavior of curves in 2D space. The Geom2d package provides numerous concrete classes of derived curves, including lines, circles, conics, Bezier or BSpline curves, etc. The main characteristic of these curves is that they are parameterized. The Geom2d_Curve class shows: - how to work with the parametric equation of a curve in order to calculate the point of parameter u, together with the vector tangent and the derivative vectors of order 2, 3,..., N at this point; - how to obtain general information about the curve (for example, level of continuity, closed characteristics, periodicity, bounds of the parameter field); - how the parameter changes when a geometric transformation is applied to the curve or when the orientation of the curve is inverted. All curves must have a geometric continuity: a curve is at least "C0". Generally, this property is checked at the time of construction or when the curve is edited. Where this is not the case, the documentation explicitly states so. Warning The Geom2d package does not prevent the construction of curves with null length or curves which self-intersect.
+ */
 class Geom2d_Curve extends Geom2d_Geometry {
 }
 
+/**
+ * The class Direction specifies a vector that is never null. It is a unit vector.
+ */
 class Geom2d_Direction extends Geom2d_Vector {
 }
 
@@ -13266,6 +15096,9 @@ class Geom2d_Direction_1 extends Geom2d_Direction {}
 
 class Geom2d_Direction_2 extends Geom2d_Direction {}
 
+/**
+ * Describes an ellipse in the plane (2D space). An ellipse is defined by its major and minor radii and, as with any conic curve, is positioned in the plane with a coordinate system (gp_Ax22d object) where: - the origin is the center of the ellipse, - the "X Direction" defines the major axis, and - the "Y Direction" defines the minor axis. This coordinate system is the local coordinate system of the ellipse. The orientation (direct or indirect) of the local coordinate system gives an explicit orientation to the ellipse, determining the direction in which the parameter increases along the ellipse. The Geom2d_Ellipse ellipse is parameterized by an angle: P(U) = O + MajorRad*Cos(U)*XDir + MinorRad*Sin(U)*YDir where: - P is the point of parameter U, - O, XDir and YDir are respectively the origin, "X Direction" and "Y Direction" of its local coordinate system, - MajorRad and MinorRad are the major and minor radii of the ellipse. The "X Axis" of the local coordinate system therefore defines the origin of the parameter of the ellipse. An ellipse is a closed and periodic curve. The period is 2.*Pi and the parameter range is [ 0,2.*Pi [. See Also GCE2d_MakeEllipse which provides functions for more complex ellipse constructions gp_Ax22d gp_Elips2d for an equivalent, non-parameterized data structure
+ */
 class Geom2d_Ellipse extends Geom2d_Conic {
 }
 
@@ -13275,9 +15108,15 @@ class Geom2d_Ellipse_2 extends Geom2d_Ellipse {}
 
 class Geom2d_Ellipse_3 extends Geom2d_Ellipse {}
 
+/**
+ * The general abstract class Geometry in 2D space describes the common behaviour of all the geometric entities.
+ */
 class Geom2d_Geometry extends Standard_Transient {
 }
 
+/**
+ * Describes a branch of a hyperbola in the plane (2D space). A hyperbola is defined by its major and minor radii and, as with any conic curve, is positioned in the plane with a coordinate system (gp_Ax22d object) where: - the origin is the center of the hyperbola, - the "X Direction" defines the major axis, and - the "Y Direction" defines the minor axis. This coordinate system is the local coordinate system of the hyperbola. The branch of the hyperbola described is the one located on the positive side of the major axis. The orientation (direct or indirect) of the local coordinate system gives an explicit orientation to the hyperbola, determining the direction in which the parameter increases along the hyperbola. The Geom2d_Hyperbola hyperbola is parameterized as follows: P(U) = O + MajRad*Cosh(U)*XDir + MinRad*Sinh(U)*YDir where: - P is the point of parameter U, - O, XDir and YDir are respectively the origin, "X Direction" and "Y Direction" of its local coordinate system, - MajRad and MinRad are the major and minor radii of the hyperbola. The "X Axis" of the local coordinate system therefore defines the origin of the parameter of the hyperbola. The parameter range is ] -infinite,+infinite [. The following diagram illustrates the respective positions, in the plane of the hyperbola, of the three branches of hyperbolas constructed using the functions OtherBranch, ConjugateBranch1 and ConjugateBranch2: ^YAxis | FirstConjugateBranch | Other | Main --------------------- C --------------------->XAxis Branch | Branch | SecondConjugateBranch | Warning The value of the major radius (on the major axis) can be less than the value of the minor radius (on the minor axis). See Also GCE2d_MakeHyperbola which provides functions for more complex hyperbola constructions gp_Ax22d gp_Hypr2d for an equivalent, non-parameterized data structure
+ */
 class Geom2d_Hyperbola extends Geom2d_Conic {
 }
 
@@ -13287,6 +15126,9 @@ class Geom2d_Hyperbola_2 extends Geom2d_Hyperbola {}
 
 class Geom2d_Hyperbola_3 extends Geom2d_Hyperbola {}
 
+/**
+ * Describes an infinite line in the plane (2D space). A line is defined and positioned in the plane with an axis (gp_Ax2d object) which gives it an origin and a unit vector. The Geom2d_Line line is parameterized as follows: P (U) = O + U*Dir where: - P is the point of parameter U, - O is the origin and Dir the unit vector of its positioning axis. The parameter range is ] -infinite, +infinite [. The orientation of the line is given by the unit vector of its positioning axis. See Also GCE2d_MakeLine which provides functions for more complex line constructions gp_Ax2d gp_Lin2d for an equivalent, non-parameterized data structure.
+ */
 class Geom2d_Line extends Geom2d_Curve {
 }
 
@@ -13296,9 +15138,15 @@ class Geom2d_Line_2 extends Geom2d_Line {}
 
 class Geom2d_Line_3 extends Geom2d_Line {}
 
+/**
+ * This class implements the basis services for the creation, edition, modification and evaluation of planar offset curve. The offset curve is obtained by offsetting by distance along the normal to a basis curve defined in 2D space. The offset curve in this package can be a self intersecting curve even if the basis curve does not self-intersect. The self intersecting portions are not deleted at the construction time. An offset curve is a curve at constant distance (Offset) from a basis curve and the offset curve takes its parametrization from the basis curve. The Offset curve is in the direction of the normal to the basis curve N. The distance offset may be positive or negative to indicate the preferred side of the curve : . distance offset >0 => the curve is in the direction of N . distance offset >0 => the curve is in the direction of - N On the Offset curve : Value(u) = BasisCurve.Value(U) + (Offset * (T ^ Z)) / ||T ^ Z|| where T is the tangent vector to the basis curve and Z the direction of the normal vector to the plane of the curve, N = T ^ Z defines the offset direction and should not have null length.
+ */
 class Geom2d_OffsetCurve extends Geom2d_Curve {
 }
 
+/**
+ * Describes a parabola in the plane (2D space). A parabola is defined by its focal length (i.e. the distance between its focus and its apex) and is positioned in the plane with a coordinate system (gp_Ax22d object) where: - the origin is the apex of the parabola, and - the "X Axis" defines the axis of symmetry; the parabola is on the positive side of this axis. This coordinate system is the local coordinate system of the parabola. The orientation (direct or indirect) of the local coordinate system gives an explicit orientation to the parabola, determining the direction in which the parameter increases along the parabola. The Geom_Parabola parabola is parameterized as follows: P(U) = O + U*U/(4.*F)*XDir + U*YDir, where: - P is the point of parameter U, - O, XDir and YDir are respectively the origin, "X Direction" and "Y Direction" of its local coordinate system, - F is the focal length of the parabola. The parameter of the parabola is therefore its Y coordinate in the local coordinate system, with the "X Axis" of the local coordinate system defining the origin of the parameter. The parameter range is ] -infinite,+infinite [.
+ */
 class Geom2d_Parabola extends Geom2d_Conic {
 }
 
@@ -13310,9 +15158,15 @@ class Geom2d_Parabola_3 extends Geom2d_Parabola {}
 
 class Geom2d_Parabola_4 extends Geom2d_Parabola {}
 
+/**
+ * The abstract class Point describes the common behavior of geometric points in 2D space. The Geom2d package also provides the concrete class Geom2d_CartesianPoint.
+ */
 class Geom2d_Point extends Geom2d_Geometry {
 }
 
+/**
+ * The class Transformation allows to create Translation, Rotation, Symmetry, Scaling and complex transformations obtained by combination of the previous elementary transformations. The Transformation class can also be used to construct complex transformations by combining these elementary transformations. However, these transformations can never change the type of an object. For example, the projection transformation can change a circle into an ellipse, and therefore change the real type of the object. Such a transformation is forbidden in this environment and cannot be a Geom2d_Transformation. The transformation can be represented as follow :
+ */
 class Geom2d_Transformation extends Standard_Transient {
 }
 
@@ -13320,6 +15174,9 @@ class Geom2d_Transformation_1 extends Geom2d_Transformation {}
 
 class Geom2d_Transformation_2 extends Geom2d_Transformation {}
 
+/**
+ * Defines a portion of a curve limited by two values of parameters inside the parametric domain of the curve. The trimmed curve is defined by: - the basis curve, and - the two parameter values which limit it. The trimmed curve can either have the same orientation as the basis curve or the opposite orientation.
+ */
 class Geom2d_TrimmedCurve extends Geom2d_BoundedCurve {
 }
 
@@ -13337,9 +15194,15 @@ class Geom2d_UndefinedValue_1 extends Geom2d_UndefinedValue {}
 
 class Geom2d_UndefinedValue_2 extends Geom2d_UndefinedValue {}
 
+/**
+ * The abstract class Vector describes the common behavior of vectors in 2D space. The Geom2d package provides two concrete classes of vectors: Geom2d_Direction (unit vector) and Geom2d_VectorWithMagnitude.
+ */
 class Geom2d_Vector extends Geom2d_Geometry {
 }
 
+/**
+ * Defines a vector with magnitude. A vector with magnitude can have a zero length.
+ */
 class Geom2d_VectorWithMagnitude extends Geom2d_Vector {
 }
 
@@ -13349,9 +15212,15 @@ class Geom2d_VectorWithMagnitude_2 extends Geom2d_VectorWithMagnitude {}
 
 class Geom2d_VectorWithMagnitude_3 extends Geom2d_VectorWithMagnitude {}
 
+/**
+ * The GeomAPI package provides an Application Programming Interface for the Geometry.
+ */
 class GeomAPI {
 }
 
+/**
+ * Describes functions for computing all the extrema between two 3D curves. An ExtremaCurveCurve algorithm minimizes or maximizes the distance between a point on the first curve and a point on the second curve. Thus, it computes start and end points of perpendiculars common to the two curves (an intersection point is not an extremum unless the two curves are tangential at this point). Solutions consist of pairs of points, and an extremum is considered to be a segment joining the two points of a solution. An ExtremaCurveCurve object provides a framework for: - defining the construction of the extrema, - implementing the construction algorithm, and - consulting the results. Warning In some cases, the nearest points between two curves do not correspond to one of the computed extrema. Instead, they may be given by: - a limit point of one curve and one of the following: - its orthogonal projection on the other curve, - a limit point of the other curve; or - an intersection point between the two curves.
+ */
 class GeomAPI_ExtremaCurveCurve {
 }
 
@@ -13361,6 +15230,9 @@ class GeomAPI_ExtremaCurveCurve_2 extends GeomAPI_ExtremaCurveCurve {}
 
 class GeomAPI_ExtremaCurveCurve_3 extends GeomAPI_ExtremaCurveCurve {}
 
+/**
+ * Describes functions for computing all the extrema between a curve and a surface. An ExtremaCurveSurface algorithm minimizes or maximizes the distance between a point on the curve and a point on the surface. Thus, it computes start and end points of perpendiculars common to the curve and the surface (an intersection point is not an extremum except where the curve and the surface are tangential at this point). Solutions consist of pairs of points, and an extremum is considered to be a segment joining the two points of a solution. An ExtremaCurveSurface object provides a framework for: - defining the construction of the extrema, - implementing the construction algorithm, and - consulting the results. Warning In some cases, the nearest points between a curve and a surface do not correspond to one of the computed extrema. Instead, they may be given by: - a point of a bounding curve of the surface and one of the following: - its orthogonal projection on the curve, - a limit point of the curve; or - a limit point of the curve and its projection on the surface; or - an intersection point between the curve and the surface.
+ */
 class GeomAPI_ExtremaCurveSurface {
 }
 
@@ -13370,6 +15242,9 @@ class GeomAPI_ExtremaCurveSurface_2 extends GeomAPI_ExtremaCurveSurface {}
 
 class GeomAPI_ExtremaCurveSurface_3 extends GeomAPI_ExtremaCurveSurface {}
 
+/**
+ * Describes functions for computing all the extrema between two surfaces. An ExtremaSurfaceSurface algorithm minimizes or maximizes the distance between a point on the first surface and a point on the second surface. Results are start and end points of perpendiculars common to the two surfaces. Solutions consist of pairs of points, and an extremum is considered to be a segment joining the two points of a solution. An ExtremaSurfaceSurface object provides a framework for: - defining the construction of the extrema, - implementing the construction algorithm, and - consulting the results. Warning In some cases, the nearest points between the two surfaces do not correspond to one of the computed extrema. Instead, they may be given by: - a point of a bounding curve of one surface and one of the following: - its orthogonal projection on the other surface, - a point of a bounding curve of the other surface; or - any point on intersection curves between the two surfaces.
+ */
 class GeomAPI_ExtremaSurfaceSurface {
 }
 
@@ -13379,6 +15254,9 @@ class GeomAPI_ExtremaSurfaceSurface_2 extends GeomAPI_ExtremaSurfaceSurface {}
 
 class GeomAPI_ExtremaSurfaceSurface_3 extends GeomAPI_ExtremaSurfaceSurface {}
 
+/**
+ * This class implements methods for computing intersection points and segments between a
+ */
 class GeomAPI_IntCS {
 }
 
@@ -13386,6 +15264,9 @@ class GeomAPI_IntCS_1 extends GeomAPI_IntCS {}
 
 class GeomAPI_IntCS_2 extends GeomAPI_IntCS {}
 
+/**
+ * This class implements methods for computing the intersection curves between two surfaces. The result is curves from Geom. The "domain" used for a surface is the natural parametric domain unless the surface is a RectangularTrimmedSurface from Geom.
+ */
 class GeomAPI_IntSS {
 }
 
@@ -13393,6 +15274,9 @@ class GeomAPI_IntSS_1 extends GeomAPI_IntSS {}
 
 class GeomAPI_IntSS_2 extends GeomAPI_IntSS {}
 
+/**
+ * This class is used to approximate a BsplineCurve passing through an array of points, with a given Continuity. Describes functions for building a 3D BSpline curve which approximates a set of points. A PointsToBSpline object provides a framework for: - defining the data of the BSpline curve to be built, - implementing the approximation algorithm, and consulting the results.
+ */
 class GeomAPI_PointsToBSpline {
 }
 
@@ -13406,6 +15290,9 @@ class GeomAPI_PointsToBSpline_4 extends GeomAPI_PointsToBSpline {}
 
 class GeomAPI_PointsToBSpline_5 extends GeomAPI_PointsToBSpline {}
 
+/**
+ * This class is used to approximate or interpolate a BSplineSurface passing through an Array2 of points, with a given continuity. Describes functions for building a BSpline surface which approximates or interpolates a set of points. A PointsToBSplineSurface object provides a framework for: - defining the data of the BSpline surface to be built, - implementing the approximation algorithm or the interpolation algorithm, and consulting the results. In fact, class contains 3 algorithms, 2 for approximation and 1 for interpolation. First approximation algorithm is based on usual least square criterium: minimization of square distance between samplimg points and result surface. Second approximation algorithm uses least square criterium and additional minimization of some local characteristic of surface (first, second and third partial derivative), which allows managing shape of surface. Interpolation algorithm produces surface, which passes through sampling points.
+ */
 class GeomAPI_PointsToBSplineSurface {
 }
 
@@ -13419,6 +15306,9 @@ class GeomAPI_PointsToBSplineSurface_4 extends GeomAPI_PointsToBSplineSurface {}
 
 class GeomAPI_PointsToBSplineSurface_5 extends GeomAPI_PointsToBSplineSurface {}
 
+/**
+ * This class implements methods for computing all the orthogonal projections of a 3D point onto a 3D curve.
+ */
 class GeomAPI_ProjectPointOnCurve {
 }
 
@@ -13428,6 +15318,9 @@ class GeomAPI_ProjectPointOnCurve_2 extends GeomAPI_ProjectPointOnCurve {}
 
 class GeomAPI_ProjectPointOnCurve_3 extends GeomAPI_ProjectPointOnCurve {}
 
+/**
+ * This class implements methods for computing all the orthogonal projections of a point onto a surface.
+ */
 class GeomAPI_ProjectPointOnSurf {
 }
 
@@ -13441,9 +15334,15 @@ class GeomAPI_ProjectPointOnSurf_4 extends GeomAPI_ProjectPointOnSurf {}
 
 class GeomAPI_ProjectPointOnSurf_5 extends GeomAPI_ProjectPointOnSurf {}
 
+/**
+ * this package contains the geometric definition of curve and surface necessary to use algorithmes.
+ */
 class GeomAdaptor {
 }
 
+/**
+ * This class provides an interface between the services provided by any curve from the package Geom and those required of the curve by algorithms which use it. Creation of the loaded curve the curve is C1 by piece.
+ */
 class GeomAdaptor_Curve extends Adaptor3d_Curve {
 }
 
@@ -13467,6 +15366,9 @@ class GeomAdaptor_GHSurface_1 extends GeomAdaptor_GHSurface {}
 
 class GeomAdaptor_GHSurface_2 extends GeomAdaptor_GHSurface {}
 
+/**
+ * An interface between the services provided by any curve from the package Geom and those required of the curve by algorithms which use it.
+ */
 class GeomAdaptor_HCurve extends GeomAdaptor_GHCurve {
 }
 
@@ -13478,6 +15380,9 @@ class GeomAdaptor_HCurve_3 extends GeomAdaptor_HCurve {}
 
 class GeomAdaptor_HCurve_4 extends GeomAdaptor_HCurve {}
 
+/**
+ * An interface between the services provided by any surface from the package Geom and those required of the surface by algorithms which use it. Provides a surface handled by reference.
+ */
 class GeomAdaptor_HSurface extends GeomAdaptor_GHSurface {
 }
 
@@ -13503,6 +15408,9 @@ class GeomAdaptor_HSurfaceOfRevolution_1 extends GeomAdaptor_HSurfaceOfRevolutio
 
 class GeomAdaptor_HSurfaceOfRevolution_2 extends GeomAdaptor_HSurfaceOfRevolution {}
 
+/**
+ * An interface between the services provided by any surface from the package Geom and those required of the surface by algorithms which use it. Creation of the loaded surface the surface is C1 by piece
+ */
 class GeomAdaptor_Surface extends Adaptor3d_Surface {
 }
 
@@ -13512,6 +15420,9 @@ class GeomAdaptor_Surface_2 extends GeomAdaptor_Surface {}
 
 class GeomAdaptor_Surface_3 extends GeomAdaptor_Surface {}
 
+/**
+ * Generalised cylinder. This surface is obtained by sweeping a curve in a given direction. The parametrization range for the parameter U is defined with referenced the curve. The parametrization range for the parameter V is ]-infinite,+infinite[ The position of the curve gives the origin for the parameter V. The continuity of the surface is CN in the V direction.
+ */
 class GeomAdaptor_SurfaceOfLinearExtrusion extends GeomAdaptor_Surface {
 }
 
@@ -13521,6 +15432,9 @@ class GeomAdaptor_SurfaceOfLinearExtrusion_2 extends GeomAdaptor_SurfaceOfLinear
 
 class GeomAdaptor_SurfaceOfLinearExtrusion_3 extends GeomAdaptor_SurfaceOfLinearExtrusion {}
 
+/**
+ * This class defines a complete surface of revolution. The surface is obtained by rotating a curve a complete revolution about an axis. The curve and the axis must be in the same plane. If the curve and the axis are not in the same plane it is always possible to be in the previous case after a cylindrical projection of the curve in a referenced plane. For a complete surface of revolution the parametric range is 0 <= U <= 2*PI. -- The parametric range for V is defined with the revolved curve. The origin of the U parametrization is given by the position of the revolved curve (reference). The direction of the revolution axis defines the positive sense of rotation (trigonometric sense) corresponding to the increasing of the parametric value U. The derivatives are always defined for the u direction. For the v direction the definition of the derivatives depends on the degree of continuity of the referenced curve.
+ */
 class GeomAdaptor_SurfaceOfRevolution extends GeomAdaptor_Surface {
 }
 
@@ -13530,9 +15444,15 @@ class GeomAdaptor_SurfaceOfRevolution_2 extends GeomAdaptor_SurfaceOfRevolution 
 
 class GeomAdaptor_SurfaceOfRevolution_3 extends GeomAdaptor_SurfaceOfRevolution {}
 
+/**
+ * The GeomConvert package provides some global functions as follows - converting classical Geom curves into BSpline curves, - segmenting BSpline curves, particularly at knots values: this function may be used in conjunction with the GeomConvert_BSplineCurveKnotSplitting class to segment a BSpline curve into arcs which comply with required continuity levels, - converting classical Geom surfaces into BSpline surfaces, and - segmenting BSpline surfaces, particularly at knots values: this function may be used in conjunction with the GeomConvert_BSplineSurfaceKnotSplitting class to segment a BSpline surface into patches which comply with required continuity levels. All geometric entities used in this package are bounded.
+ */
 class GeomConvert {
 }
 
+/**
+ * A framework to convert a 3D curve to a 3D BSpline. This is done by approximation to a BSpline curve within a given tolerance.
+ */
 class GeomConvert_ApproxCurve {
 }
 
@@ -13540,6 +15460,9 @@ class GeomConvert_ApproxCurve_1 extends GeomConvert_ApproxCurve {}
 
 class GeomConvert_ApproxCurve_2 extends GeomConvert_ApproxCurve {}
 
+/**
+ * A framework to convert a surface to a BSpline surface. This is done by approximation to a BSpline surface within a given tolerance.
+ */
 class GeomConvert_ApproxSurface {
 }
 
@@ -13547,9 +15470,15 @@ class GeomConvert_ApproxSurface_1 extends GeomConvert_ApproxSurface {}
 
 class GeomConvert_ApproxSurface_2 extends GeomConvert_ApproxSurface {}
 
+/**
+ * An algorithm to determine points at which a BSpline curve should be split in order to obtain arcs of the same continuity. If you require curves with a minimum continuity for your computation, it is useful to know the points between which an arc has a continuity of a given order. The continuity order is given at the construction time. For a BSpline curve, the discontinuities are localized at the knot values. Between two knot values the BSpline is infinitely and continuously differentiable. At a given knot, the continuity is equal to: Degree - Mult, where Degree is the degree of the BSpline curve and Mult is the multiplicity of the knot. It is possible to compute the arcs which correspond to this splitting using the global function SplitBSplineCurve provided by the package GeomConvert. A BSplineCurveKnotSplitting object provides a framework for: - defining the curve to be analyzed and the required degree of continuity, - implementing the computation algorithm, and - consulting the results.
+ */
 class GeomConvert_BSplineCurveKnotSplitting {
 }
 
+/**
+ * An algorithm to convert a BSpline curve into a series of adjacent Bezier curves. A BSplineCurveToBezierCurve object provides a framework for: - defining the BSpline curve to be converted - implementing the construction algorithm, and - consulting the results. References : Generating the Bezier points of B-spline curves and surfaces (Wolfgang Bohm) CAD volume 13 number 6 november 1981
+ */
 class GeomConvert_BSplineCurveToBezierCurve {
 }
 
@@ -13557,9 +15486,15 @@ class GeomConvert_BSplineCurveToBezierCurve_1 extends GeomConvert_BSplineCurveTo
 
 class GeomConvert_BSplineCurveToBezierCurve_2 extends GeomConvert_BSplineCurveToBezierCurve {}
 
+/**
+ * An algorithm to determine isoparametric curves along which a BSpline surface should be split in order to obtain patches of the same continuity. The continuity order is given at the construction time. It is possible to compute the surface patches corresponding to the splitting with the method of package SplitBSplineSurface. For a B-spline surface the discontinuities are localised at the knot values. Between two knots values the B-spline is infinitely continuously differentiable. For each parametric direction at a knot of range index the continuity in this direction is equal to : Degree - Mult (Index) where Degree is the degree of the basis B-spline functions and Mult the multiplicity of the knot of range Index in the given direction. If for your computation you need to have B-spline surface with a minima of continuity it can be interesting to know between which knot values, a B-spline patch, has a continuity of given order. This algorithm computes the indexes of the knots where you should split the surface, to obtain patches with a constant continuity given at the construction time. If you just want to compute the local derivatives on the surface you don't need to create the BSpline patches, you can use the functions LocalD1, LocalD2, LocalD3, LocalDN of the class BSplineSurface from package Geom.
+ */
 class GeomConvert_BSplineSurfaceKnotSplitting {
 }
 
+/**
+ * This algorithm converts a B-spline surface into several Bezier surfaces. It uses an algorithm of knot insertion. A BSplineSurfaceToBezierSurface object provides a framework for: - defining the BSpline surface to be converted, - implementing the construction algorithm, and - consulting the results. References : Generating the Bezier points of B-spline curves and surfaces (Wolfgang Bohm) CAD volume 13 number 6 november 1981
+ */
 class GeomConvert_BSplineSurfaceToBezierSurface {
 }
 
@@ -13567,6 +15502,9 @@ class GeomConvert_BSplineSurfaceToBezierSurface_1 extends GeomConvert_BSplineSur
 
 class GeomConvert_BSplineSurfaceToBezierSurface_2 extends GeomConvert_BSplineSurfaceToBezierSurface {}
 
+/**
+ * An algorithm to convert a grid of adjacent non-rational Bezier surfaces (with continuity CM) into a BSpline surface (with continuity CM). A CompBezierSurfacesToBSplineSurface object provides a framework for: - defining the grid of adjacent Bezier surfaces which is to be converted into a BSpline surface, - implementing the computation algorithm, and - consulting the results. Warning Do not attempt to convert rational Bezier surfaces using such an algorithm. Input is array of Bezier patch 1 2 3 4 -> VIndex [1, NbVPatches] -> VDirection ----------------------- 1 | | | | | ----------------------- 2 | | | | | ----------------------- 3 | | | | | ----------------------- UIndex [1, NbUPatches] Udirection
+ */
 class GeomConvert_CompBezierSurfacesToBSplineSurface {
 }
 
@@ -13576,6 +15514,9 @@ class GeomConvert_CompBezierSurfacesToBSplineSurface_2 extends GeomConvert_CompB
 
 class GeomConvert_CompBezierSurfacesToBSplineSurface_3 extends GeomConvert_CompBezierSurfacesToBSplineSurface {}
 
+/**
+ * Algorithm converts and concat several curve in an BSplineCurve
+ */
 class GeomConvert_CompCurveToBSplineCurve {
 }
 
@@ -13583,9 +15524,15 @@ class GeomConvert_CompCurveToBSplineCurve_1 extends GeomConvert_CompCurveToBSpli
 
 class GeomConvert_CompCurveToBSplineCurve_2 extends GeomConvert_CompCurveToBSplineCurve {}
 
+/**
+ * Interface for calculation of values and derivatives for different kinds of curves in 3D. Works both with adaptors and curves.
+ */
 class GeomEvaluator_Curve extends Standard_Transient {
 }
 
+/**
+ * Allows to calculate values and derivatives for offset curves in 3D
+ */
 class GeomEvaluator_OffsetCurve extends GeomEvaluator_Curve {
 }
 
@@ -13593,6 +15540,9 @@ class GeomEvaluator_OffsetCurve_1 extends GeomEvaluator_OffsetCurve {}
 
 class GeomEvaluator_OffsetCurve_2 extends GeomEvaluator_OffsetCurve {}
 
+/**
+ * Allows to calculate values and derivatives for offset surfaces
+ */
 class GeomEvaluator_OffsetSurface extends GeomEvaluator_Surface {
 }
 
@@ -13600,9 +15550,15 @@ class GeomEvaluator_OffsetSurface_1 extends GeomEvaluator_OffsetSurface {}
 
 class GeomEvaluator_OffsetSurface_2 extends GeomEvaluator_OffsetSurface {}
 
+/**
+ * Interface for calculation of values and derivatives for different kinds of surfaces. Works both with adaptors and surfaces.
+ */
 class GeomEvaluator_Surface extends Standard_Transient {
 }
 
+/**
+ * Allows to calculate values and derivatives for surfaces of linear extrusion
+ */
 class GeomEvaluator_SurfaceOfExtrusion extends GeomEvaluator_Surface {
 }
 
@@ -13610,6 +15566,9 @@ class GeomEvaluator_SurfaceOfExtrusion_1 extends GeomEvaluator_SurfaceOfExtrusio
 
 class GeomEvaluator_SurfaceOfExtrusion_2 extends GeomEvaluator_SurfaceOfExtrusion {}
 
+/**
+ * Allows to calculate values and derivatives for surfaces of revolution
+ */
 class GeomEvaluator_SurfaceOfRevolution extends GeomEvaluator_Surface {
 }
 
@@ -13617,9 +15576,15 @@ class GeomEvaluator_SurfaceOfRevolution_1 extends GeomEvaluator_SurfaceOfRevolut
 
 class GeomEvaluator_SurfaceOfRevolution_2 extends GeomEvaluator_SurfaceOfRevolution {}
 
+/**
+ * Tools and Data to filling Surface and Sweep Surfaces
+ */
 class GeomFill {
 }
 
+/**
+ * Approximate a BSplineSurface passing by all the curves described in the SectionGenerator
+ */
 class GeomFill_AppSurf extends AppBlend_Approx {
 }
 
@@ -13627,6 +15592,9 @@ class GeomFill_AppSurf_1 extends GeomFill_AppSurf {}
 
 class GeomFill_AppSurf_2 extends GeomFill_AppSurf {}
 
+/**
+ * Approximate a sweep surface passing by all the curves described in the SweepSectionGenerator.
+ */
 class GeomFill_AppSweep extends AppBlend_Approx {
 }
 
@@ -13634,6 +15602,9 @@ class GeomFill_AppSweep_1 extends GeomFill_AppSweep {}
 
 class GeomFill_AppSweep_2 extends GeomFill_AppSweep {}
 
+/**
+ * An algorithm for constructing a BSpline surface filled from contiguous BSpline curves which form its boundaries. The algorithm accepts two, three or four BSpline curves as the boundaries of the target surface. A range of filling styles - more or less rounded, more or less flat - is available. A BSplineCurves object provides a framework for: - defining the boundaries, and the filling style of the surface - implementing the construction algorithm - consulting the result. Warning Some problems may show up with rational curves.
+ */
 class GeomFill_BSplineCurves {
 }
 
@@ -13645,6 +15616,9 @@ class GeomFill_BSplineCurves_3 extends GeomFill_BSplineCurves {}
 
 class GeomFill_BSplineCurves_4 extends GeomFill_BSplineCurves {}
 
+/**
+ * This class provides an algorithm for constructing a Bezier surface filled from contiguous Bezier curves which form its boundaries. The algorithm accepts two, three or four Bezier curves as the boundaries of the target surface. A range of filling styles - more or less rounded, more or less flat - is available. A BezierCurves object provides a framework for: - defining the boundaries, and the filling style of the surface - implementing the construction algorithm - consulting the result. Warning Some problems may show up with rational curves.
+ */
 class GeomFill_BezierCurves {
 }
 
@@ -13656,18 +15630,33 @@ class GeomFill_BezierCurves_3 extends GeomFill_BezierCurves {}
 
 class GeomFill_BezierCurves_4 extends GeomFill_BezierCurves {}
 
+/**
+ * Defines a 3d curve as a boundary for a GeomFill_ConstrainedFilling algorithm. This curve is attached to an existing surface. Defines a constrained boundary for filling the computations are done with a CurveOnSurf and a normals field defined by the normalized normal to the surface along the PCurve. Contains fields to allow a reparametrization of curve and normals field.
+ */
 class GeomFill_BoundWithSurf extends GeomFill_Boundary {
 }
 
+/**
+ * Root class to define a boundary which will form part of a contour around a gap requiring filling. Any new type of constrained boundary must inherit this class. The GeomFill package provides two classes to define constrained boundaries: - GeomFill_SimpleBound to define an unattached boundary - GeomFill_BoundWithSurf to define a boundary attached to a surface. These objects are used to define the boundaries for a GeomFill_ConstrainedFilling framework.
+ */
 class GeomFill_Boundary extends Standard_Transient {
 }
 
+/**
+ * Circular Blend Function to approximate by SweepApproximation from Approx
+ */
 class GeomFill_CircularBlendFunc extends Approx_SweepFunction {
 }
 
+/**
+ * Defined an Trihedron Law where the BiNormal, is fixed
+ */
 class GeomFill_ConstantBiNormal extends GeomFill_TrihedronLaw {
 }
 
+/**
+ * An algorithm for constructing a BSpline surface filled from a series of boundaries which serve as path constraints and optionally, as tangency constraints. The algorithm accepts three or four curves as the boundaries of the target surface. The only FillingStyle used is Coons. A ConstrainedFilling object provides a framework for: - defining the boundaries of the surface - implementing the construction algorithm - consulting the result. Warning This surface filling algorithm is specifically designed to be used in connection with fillets. Satisfactory results cannot be guaranteed for other uses.
+ */
 class GeomFill_ConstrainedFilling {
 }
 
@@ -13680,12 +15669,21 @@ class GeomFill_Coons_2 extends GeomFill_Coons {}
 
 class GeomFill_Coons_3 extends GeomFill_Coons {}
 
+/**
+ * Provides evaluation methods on an algorithmic patch (based on 4 Curves) defined by its boundaries and blending functions.
+ */
 class GeomFill_CoonsAlgPatch extends Standard_Transient {
 }
 
+/**
+ * Class (should be a structure) storing the informations about continuity, normals parallelism, coons conditions and bounds tangents angle on the corner of contour to be filled.
+ */
 class GeomFill_CornerState {
 }
 
+/**
+ * Defined an Corrected Frenet Trihedron Law It is like Frenet with an Torsion's minimization
+ */
 class GeomFill_CorrectedFrenet extends GeomFill_TrihedronLaw {
 }
 
@@ -13693,6 +15691,9 @@ class GeomFill_CorrectedFrenet_1 extends GeomFill_CorrectedFrenet {}
 
 class GeomFill_CorrectedFrenet_2 extends GeomFill_CorrectedFrenet {}
 
+/**
+ * Define location law with an TrihedronLaw and an curve Definition Location is : transformed section coordinates in (Curve(v)), (Normal(v), BiNormal(v), Tangente(v))) systeme are the same like section shape coordinates in (O,(OX, OY, OZ)) systeme.
+ */
 class GeomFill_CurveAndTrihedron extends GeomFill_LocationLaw {
 }
 
@@ -13709,42 +15710,75 @@ class GeomFill_Curved_4 extends GeomFill_Curved {}
 
 class GeomFill_Curved_5 extends GeomFill_Curved {}
 
+/**
+ * Defines Darboux case of Frenet Trihedron Law
+ */
 class GeomFill_Darboux extends GeomFill_TrihedronLaw {
 }
 
+/**
+ * Description of a degenerated boundary (a point). Class defining a degenerated boundary for a constrained filling with a point and no other constraint. Only used to simulate an ordinary bound, may not be usefull and desapear soon.
+ */
 class GeomFill_DegeneratedBound extends GeomFill_Boundary {
 }
 
+/**
+ * Defined Discrete Trihedron Law. The requirement for path curve is only G1. The result is C0-continuous surface that can be later approximated to C1.
+ */
 class GeomFill_DiscreteTrihedron extends GeomFill_TrihedronLaw {
 }
 
 class GeomFill_DraftTrihedron extends GeomFill_TrihedronLaw {
 }
 
+/**
+ * Define an Constant Section Law
+ */
 class GeomFill_EvolvedSection extends GeomFill_SectionLaw {
 }
 
+/**
+ * Root class for Filling;
+ */
 class GeomFill_Filling {
 }
 
+/**
+ * Defined an constant TrihedronLaw
+ */
 class GeomFill_Fixed extends GeomFill_TrihedronLaw {
 }
 
+/**
+ * Defined Frenet Trihedron Law
+ */
 class GeomFill_Frenet extends GeomFill_TrihedronLaw {
 }
 
 class GeomFill_FunctionDraft extends math_FunctionSetWithDerivatives {
 }
 
+/**
+ * Create a surface using generating lines. Inherits profiler. The surface will be a BSplineSurface passing by all the curves described in the generator. The VDegree of the resulting surface is 1.
+ */
 class GeomFill_Generator extends GeomFill_Profiler {
 }
 
+/**
+ * Trihedron in the case of a sweeping along a guide curve. defined by curviline absciss
+ */
 class GeomFill_GuideTrihedronAC extends GeomFill_TrihedronWithGuide {
 }
 
+/**
+ * Trihedron in the case of sweeping along a guide curve defined by the orthogonal plan on the trajectory
+ */
 class GeomFill_GuideTrihedronPlan extends GeomFill_TrihedronWithGuide {
 }
 
+/**
+ * class for instantiation of AppBlend
+ */
 class GeomFill_Line extends Standard_Transient {
 }
 
@@ -13761,9 +15795,15 @@ class GeomFill_LocationDraft extends GeomFill_LocationLaw {
 class GeomFill_LocationGuide extends GeomFill_LocationLaw {
 }
 
+/**
+ * To define location law in Sweeping location is -- defined by an Matrix M and an Vector V, and transform an point P in MP+V.
+ */
 class GeomFill_LocationLaw extends Standard_Transient {
 }
 
+/**
+ * Describes functions to construct pipes. A pipe is built by sweeping a curve (the section) along another curve (the path). The Pipe class provides the following types of construction: - pipes with a circular section of constant radius, - pipes with a constant section, - pipes with a section evolving between two given curves. All standard specific cases are detected in order to build, where required, a plane, cylinder, cone, sphere, torus, surface of linear extrusion or surface of revolution. Generally speaking, the result is a BSpline surface (NURBS). A Pipe object provides a framework for: - defining the pipe to be built, - implementing the construction algorithm, and - consulting the resulting surface. There are several methods to instantiate a Pipe: 1) give a path and a radius : the section is a circle. This location is the first point of the path, and this direction is the first derivate (calculate at the first point ) of the path.
+ */
 class GeomFill_Pipe {
 }
 
@@ -13790,27 +15830,51 @@ class GeomFill_Pipe_10 extends GeomFill_Pipe {}
 class GeomFill_PlanFunc extends math_FunctionWithDerivative {
 }
 
+/**
+ * To convert circular section in polynome
+ */
 class GeomFill_PolynomialConvertor {
 }
 
+/**
+ * Evaluation of the common BSplineProfile of a group of curves from Geom. All the curves will have the same degree, the same knot-vector, so the same number of poles.
+ */
 class GeomFill_Profiler {
 }
 
+/**
+ * To convert circular section in QuasiAngular Bezier form
+ */
 class GeomFill_QuasiAngularConvertor {
 }
 
+/**
+ * gives the functions needed for instantiation from AppSurf in AppBlend. Allow to evaluate a surface passing by all the curves if the Profiler.
+ */
 class GeomFill_SectionGenerator extends GeomFill_Profiler {
 }
 
+/**
+ * To define section law in sweeping
+ */
 class GeomFill_SectionLaw extends Standard_Transient {
 }
 
+/**
+ * To place section in sweep Function
+ */
 class GeomFill_SectionPlacement {
 }
 
+/**
+ * Defines a 3d curve as a boundary for a GeomFill_ConstrainedFilling algorithm. This curve is unattached to an existing surface.D Contains fields to allow a reparametrization of curve.
+ */
 class GeomFill_SimpleBound extends GeomFill_Boundary {
 }
 
+/**
+ * to represent function C'(t)^C''(t)
+ */
 class GeomFill_SnglrFunc extends Adaptor3d_Curve {
 }
 
@@ -13823,30 +15887,57 @@ class GeomFill_Stretch_2 extends GeomFill_Stretch {}
 
 class GeomFill_Stretch_3 extends GeomFill_Stretch {}
 
+/**
+ * Geometrical Sweep Algorithm
+ */
 class GeomFill_Sweep {
 }
 
+/**
+ * Function to approximate by SweepApproximation from Approx. To bulid general sweep Surface.
+ */
 class GeomFill_SweepFunction extends Approx_SweepFunction {
 }
 
+/**
+ * used to store the "gradient of gradient"
+ */
 class GeomFill_Tensor {
 }
 
+/**
+ * Root class defining the methods we need to make an algorithmic tangents field.
+ */
 class GeomFill_TgtField extends Standard_Transient {
 }
 
+/**
+ * Defines an algorithmic tangents field on a boundary of a CoonsAlgPatch.
+ */
 class GeomFill_TgtOnCoons extends GeomFill_TgtField {
 }
 
+/**
+ * To define Trihedron along one Curve
+ */
 class GeomFill_TrihedronLaw extends Standard_Transient {
 }
 
+/**
+ * To define Trihedron along one Curve with a guide
+ */
 class GeomFill_TrihedronWithGuide extends GeomFill_TrihedronLaw {
 }
 
+/**
+ * Define an Constant Section Law
+ */
 class GeomFill_UniformSection extends GeomFill_SectionLaw {
 }
 
+/**
+ * Provides intersections on between two surfaces of Geom. The result are curves from Geom.
+ */
 class GeomInt {
 }
 
@@ -13873,6 +15964,9 @@ class GeomInt_Gradient_BFGSOfMyGradientOfTheComputeLineBezierOfWLApprox extends 
 class GeomInt_Gradient_BFGSOfMyGradientbisOfTheComputeLineOfWLApprox extends math_BFGS {
 }
 
+/**
+ * Splits given Line.
+ */
 class GeomInt_LineConstructor {
 }
 
@@ -13990,6 +16084,9 @@ class GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox_2 extends GeomInt_The
 
 class GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox_3 extends GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox {}
 
+/**
+ * These global functions compute the degree of continuity of a 3D curve built by concatenation of two other curves (or portions of curves) at their junction point.
+ */
 class GeomLProp {
 }
 
@@ -14017,15 +16114,27 @@ class GeomLProp_SLProps_3 extends GeomLProp_SLProps {}
 class GeomLProp_SurfaceTool {
 }
 
+/**
+ * Geom Library. This package provides an implementation of functions for basic computation on geometric entity from packages Geom and Geom2d.
+ */
 class GeomLib {
 }
 
+/**
+ * Checks for the end tangents : wether or not those are reversed
+ */
 class GeomLib_Check2dBSplineCurve {
 }
 
+/**
+ * Checks for the end tangents : wether or not those are reversed regarding the third or n-3rd control
+ */
 class GeomLib_CheckBSplineCurve {
 }
 
+/**
+ * Computes the max distance between 3D-curve and 2D-curve in some surface.
+ */
 class GeomLib_CheckCurveOnSurface {
 }
 
@@ -14033,27 +16142,48 @@ class GeomLib_CheckCurveOnSurface_1 extends GeomLib_CheckCurveOnSurface {}
 
 class GeomLib_CheckCurveOnSurface_2 extends GeomLib_CheckCurveOnSurface {}
 
+/**
+ * this defines an evaluator for a function of 2 variables that will be used by CancelDenominatorDerivative in one direction.
+ */
 class GeomLib_DenominatorMultiplier {
 }
 
+/**
+ * this class is used to construct a BSpline curve by interpolation of points at given parameters The continuity of the curve is degree - 1 and the method used when boundary condition are not given is to use odd degrees and null the derivatives on both sides from degree -1 down to (degree+1) / 2 When even degree is given the returned curve is of degree - 1 so that the degree of the curve is odd
+ */
 class GeomLib_Interpolate {
 }
 
+/**
+ * Find if a surface is a planar surface.
+ */
 class GeomLib_IsPlanarSurface {
 }
 
 class GeomLib_LogSample extends math_FunctionSample {
 }
 
+/**
+ * this class is used to construct the BSpline curve from an Approximation ( ApproxAFunction from AdvApprox).
+ */
 class GeomLib_MakeCurvefromApprox {
 }
 
+/**
+ * Polynomial Function
+ */
 class GeomLib_PolyFunc extends math_FunctionWithDerivative {
 }
 
+/**
+ * Provides various methods with Geom2d and Geom curves and surfaces. The methods of this class compute the parameter(s) of a given point on a curve or a surface. To get the valid result the point must be located rather close to the curve (surface) or at least to allow getting unambiguous result (do not put point at center of circle...), but choice of "trust" distance between curve/surface and point is responcibility of user (parameter MaxDist). Return FALSE if the point is beyond the MaxDist limit or if computation fails.
+ */
 class GeomLib_Tool {
 }
 
+/**
+ * A structure containing indexes of two normals and its cross product
+ */
 class GeomPlate_Aij {
 }
 
@@ -14061,6 +16191,9 @@ class GeomPlate_Aij_1 extends GeomPlate_Aij {}
 
 class GeomPlate_Aij_2 extends GeomPlate_Aij {}
 
+/**
+ * This class computes an average inertial plane with an array of points. Computes the initial surface (average plane) in the cases when the initial surface is not given.
+ */
 class GeomPlate_BuildAveragePlane {
 }
 
@@ -14068,6 +16201,9 @@ class GeomPlate_BuildAveragePlane_1 extends GeomPlate_BuildAveragePlane {}
 
 class GeomPlate_BuildAveragePlane_2 extends GeomPlate_BuildAveragePlane {}
 
+/**
+ * This class provides an algorithm for constructing such a plate surface that it conforms to given curve and/or point constraints. The algorithm accepts or constructs an initial surface and looks for a deformation of it satisfying the constraints and minimizing energy input. A BuildPlateSurface object provides a framework for: - defining or setting constraints - implementing the construction algorithm - consulting the result.
+ */
 class GeomPlate_BuildPlateSurface {
 }
 
@@ -14077,6 +16213,9 @@ class GeomPlate_BuildPlateSurface_2 extends GeomPlate_BuildPlateSurface {}
 
 class GeomPlate_BuildPlateSurface_3 extends GeomPlate_BuildPlateSurface {}
 
+/**
+ * Defines curves as constraints to be used to deform a surface.
+ */
 class GeomPlate_CurveConstraint extends Standard_Transient {
 }
 
@@ -14084,6 +16223,9 @@ class GeomPlate_CurveConstraint_1 extends GeomPlate_CurveConstraint {}
 
 class GeomPlate_CurveConstraint_2 extends GeomPlate_CurveConstraint {}
 
+/**
+ * Allows you to convert a GeomPlate surface into a BSpline.
+ */
 class GeomPlate_MakeApprox {
 }
 
@@ -14091,12 +16233,21 @@ class GeomPlate_MakeApprox_1 extends GeomPlate_MakeApprox {}
 
 class GeomPlate_MakeApprox_2 extends GeomPlate_MakeApprox {}
 
+/**
+ * this class contains a specific G0 criterion for GeomPlate_MakeApprox
+ */
 class GeomPlate_PlateG0Criterion extends AdvApp2Var_Criterion {
 }
 
+/**
+ * this class contains a specific G1 criterion for GeomPlate_MakeApprox
+ */
 class GeomPlate_PlateG1Criterion extends AdvApp2Var_Criterion {
 }
 
+/**
+ * Defines points as constraints to be used to deform a surface.
+ */
 class GeomPlate_PointConstraint extends Standard_Transient {
 }
 
@@ -14104,12 +16255,21 @@ class GeomPlate_PointConstraint_1 extends GeomPlate_PointConstraint {}
 
 class GeomPlate_PointConstraint_2 extends GeomPlate_PointConstraint {}
 
+/**
+ * Describes the characteristics of plate surface objects returned by BuildPlateSurface::Surface. These can be used to verify the quality of the resulting surface before approximating it to a Geom_BSpline surface generated by MakeApprox. This proves necessary in cases where you want to use the resulting surface as the support for a shape. The algorithmically generated surface cannot fill this function as is, and as a result must be converted first.
+ */
 class GeomPlate_Surface extends Geom_Surface {
 }
 
+/**
+ * Projection of a curve on a surface.
+ */
 class GeomProjLib {
 }
 
+/**
+ * This class implements the transfer of the Curve Entity from Geom To IGES. These can be : Curve . BoundedCurve * BSplineCurve * BezierCurve * TrimmedCurve . Conic * Circle * Ellipse * Hyperbloa * Line * Parabola . OffsetCurve
+ */
 class GeomToIGES_GeomCurve extends GeomToIGES_GeomEntity {
 }
 
@@ -14117,6 +16277,9 @@ class GeomToIGES_GeomCurve_1 extends GeomToIGES_GeomCurve {}
 
 class GeomToIGES_GeomCurve_2 extends GeomToIGES_GeomCurve {}
 
+/**
+ * provides methods to transfer Geom entity from CASCADE to IGES.
+ */
 class GeomToIGES_GeomEntity {
 }
 
@@ -14124,6 +16287,9 @@ class GeomToIGES_GeomEntity_1 extends GeomToIGES_GeomEntity {}
 
 class GeomToIGES_GeomEntity_2 extends GeomToIGES_GeomEntity {}
 
+/**
+ * This class implements the transfer of the Point Entity from Geom to IGES . These are : . Point * CartesianPoint
+ */
 class GeomToIGES_GeomPoint extends GeomToIGES_GeomEntity {
 }
 
@@ -14131,6 +16297,9 @@ class GeomToIGES_GeomPoint_1 extends GeomToIGES_GeomPoint {}
 
 class GeomToIGES_GeomPoint_2 extends GeomToIGES_GeomPoint {}
 
+/**
+ * This class implements the transfer of the Surface Entity from Geom To IGES. These can be : . BoundedSurface * BSplineSurface * BezierSurface * RectangularTrimmedSurface . ElementarySurface * Plane * CylindricalSurface * ConicalSurface * SphericalSurface * ToroidalSurface . SweptSurface * SurfaceOfLinearExtrusion * SurfaceOfRevolution . OffsetSurface
+ */
 class GeomToIGES_GeomSurface extends GeomToIGES_GeomEntity {
 }
 
@@ -14138,6 +16307,9 @@ class GeomToIGES_GeomSurface_1 extends GeomToIGES_GeomSurface {}
 
 class GeomToIGES_GeomSurface_2 extends GeomToIGES_GeomSurface {}
 
+/**
+ * This class implements the transfer of the Vector from Geom to IGES . These can be : . Vector * Direction * VectorWithMagnitude
+ */
 class GeomToIGES_GeomVector extends GeomToIGES_GeomEntity {
 }
 
@@ -14145,6 +16317,9 @@ class GeomToIGES_GeomVector_1 extends GeomToIGES_GeomVector {}
 
 class GeomToIGES_GeomVector_2 extends GeomToIGES_GeomVector {}
 
+/**
+ * This class implements the mapping between classes Axis1Placement from Geom and Ax1 from gp, and the class Axis1Placement from StepGeom which describes an Axis1Placement from Prostep.
+ */
 class GeomToStep_MakeAxis1Placement extends GeomToStep_Root {
 }
 
@@ -14156,6 +16331,9 @@ class GeomToStep_MakeAxis1Placement_3 extends GeomToStep_MakeAxis1Placement {}
 
 class GeomToStep_MakeAxis1Placement_4 extends GeomToStep_MakeAxis1Placement {}
 
+/**
+ * This class implements the mapping between classes Axis2Placement from Geom and Ax2, Ax22d from gp, and the class Axis2Placement2d from StepGeom which describes an axis2_placement_2d from Prostep.
+ */
 class GeomToStep_MakeAxis2Placement2d extends GeomToStep_Root {
 }
 
@@ -14163,6 +16341,9 @@ class GeomToStep_MakeAxis2Placement2d_1 extends GeomToStep_MakeAxis2Placement2d 
 
 class GeomToStep_MakeAxis2Placement2d_2 extends GeomToStep_MakeAxis2Placement2d {}
 
+/**
+ * This class implements the mapping between classes Axis2Placement from Geom and Ax2, Ax3 from gp, and the class Axis2Placement3d from StepGeom which describes an axis2_placement_3d from Prostep.
+ */
 class GeomToStep_MakeAxis2Placement3d extends GeomToStep_Root {
 }
 
@@ -14176,6 +16357,9 @@ class GeomToStep_MakeAxis2Placement3d_4 extends GeomToStep_MakeAxis2Placement3d 
 
 class GeomToStep_MakeAxis2Placement3d_5 extends GeomToStep_MakeAxis2Placement3d {}
 
+/**
+ * This class implements the mapping between classes BSplineCurve from Geom, Geom2d and the class BSplineCurveWithKnots from StepGeom which describes a bspline_curve_with_knots from Prostep
+ */
 class GeomToStep_MakeBSplineCurveWithKnots extends GeomToStep_Root {
 }
 
@@ -14183,6 +16367,9 @@ class GeomToStep_MakeBSplineCurveWithKnots_1 extends GeomToStep_MakeBSplineCurve
 
 class GeomToStep_MakeBSplineCurveWithKnots_2 extends GeomToStep_MakeBSplineCurveWithKnots {}
 
+/**
+ * This class implements the mapping between classes BSplineCurve from Geom, Geom2d and the class BSplineCurveWithKnotsAndRationalBSplineCurve from StepGeom which describes a rational_bspline_curve_with_knots from Prostep
+ */
 class GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve extends GeomToStep_Root {
 }
 
@@ -14190,12 +16377,21 @@ class GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve_1 extends Geom
 
 class GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve_2 extends GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve {}
 
+/**
+ * This class implements the mapping between class BSplineSurface from Geom and the class BSplineSurfaceWithKnots from StepGeom which describes a bspline_Surface_with_knots from Prostep
+ */
 class GeomToStep_MakeBSplineSurfaceWithKnots extends GeomToStep_Root {
 }
 
+/**
+ * This class implements the mapping between class BSplineSurface from Geom and the class BSplineSurfaceWithKnotsAndRationalBSplineSurface from StepGeom which describes a rational_bspline_Surface_with_knots from Prostep
+ */
 class GeomToStep_MakeBSplineSurfaceWithKnotsAndRationalBSplineSurface extends GeomToStep_Root {
 }
 
+/**
+ * This class implements the mapping between classes BoundedCurve from Geom, Geom2d and the class BoundedCurve from StepGeom which describes a BoundedCurve from prostep. As BoundedCurve is an abstract BoundedCurve this class is an access to the sub-class required.
+ */
 class GeomToStep_MakeBoundedCurve extends GeomToStep_Root {
 }
 
@@ -14203,9 +16399,15 @@ class GeomToStep_MakeBoundedCurve_1 extends GeomToStep_MakeBoundedCurve {}
 
 class GeomToStep_MakeBoundedCurve_2 extends GeomToStep_MakeBoundedCurve {}
 
+/**
+ * This class implements the mapping between classes BoundedSurface from Geom and the class BoundedSurface from StepGeom which describes a BoundedSurface from prostep. As BoundedSurface is an abstract BoundedSurface this class is an access to the sub-class required.
+ */
 class GeomToStep_MakeBoundedSurface extends GeomToStep_Root {
 }
 
+/**
+ * This class implements the mapping between classes CartesianPoint from Geom and Pnt from gp, and the class CartesianPoint from StepGeom which describes a point from Prostep.
+ */
 class GeomToStep_MakeCartesianPoint extends GeomToStep_Root {
 }
 
@@ -14217,6 +16419,9 @@ class GeomToStep_MakeCartesianPoint_3 extends GeomToStep_MakeCartesianPoint {}
 
 class GeomToStep_MakeCartesianPoint_4 extends GeomToStep_MakeCartesianPoint {}
 
+/**
+ * This class implements the mapping between classes Circle from Geom, and Circ from gp, and the class Circle from StepGeom which describes a circle from Prostep.
+ */
 class GeomToStep_MakeCircle extends GeomToStep_Root {
 }
 
@@ -14226,6 +16431,9 @@ class GeomToStep_MakeCircle_2 extends GeomToStep_MakeCircle {}
 
 class GeomToStep_MakeCircle_3 extends GeomToStep_MakeCircle {}
 
+/**
+ * This class implements the mapping between classes Conic from Geom and the class Conic from StepGeom which describes a Conic from prostep. As Conic is an abstract Conic this class is an access to the sub-class required.
+ */
 class GeomToStep_MakeConic extends GeomToStep_Root {
 }
 
@@ -14233,9 +16441,15 @@ class GeomToStep_MakeConic_1 extends GeomToStep_MakeConic {}
 
 class GeomToStep_MakeConic_2 extends GeomToStep_MakeConic {}
 
+/**
+ * This class implements the mapping between class ConicalSurface from Geom and the class ConicalSurface from StepGeom which describes a conical_surface from Prostep
+ */
 class GeomToStep_MakeConicalSurface extends GeomToStep_Root {
 }
 
+/**
+ * This class implements the mapping between classes Curve from Geom and the class Curve from StepGeom which describes a Curve from prostep. As Curve is an abstract curve this class an access to the sub-class required.
+ */
 class GeomToStep_MakeCurve extends GeomToStep_Root {
 }
 
@@ -14243,9 +16457,15 @@ class GeomToStep_MakeCurve_1 extends GeomToStep_MakeCurve {}
 
 class GeomToStep_MakeCurve_2 extends GeomToStep_MakeCurve {}
 
+/**
+ * This class implements the mapping between class CylindricalSurface from Geom and the class CylindricalSurface from StepGeom which describes a cylindrical_surface from Prostep
+ */
 class GeomToStep_MakeCylindricalSurface extends GeomToStep_Root {
 }
 
+/**
+ * This class implements the mapping between classes Direction from Geom, Geom2d and Dir, Dir2d from gp, and the class Direction from StepGeom which describes a direction from Prostep.
+ */
 class GeomToStep_MakeDirection extends GeomToStep_Root {
 }
 
@@ -14257,9 +16477,15 @@ class GeomToStep_MakeDirection_3 extends GeomToStep_MakeDirection {}
 
 class GeomToStep_MakeDirection_4 extends GeomToStep_MakeDirection {}
 
+/**
+ * This class implements the mapping between classes ElementarySurface from Geom and the class ElementarySurface from StepGeom which describes a ElementarySurface from prostep. As ElementarySurface is an abstract Surface this class is an access to the sub-class required.
+ */
 class GeomToStep_MakeElementarySurface extends GeomToStep_Root {
 }
 
+/**
+ * This class implements the mapping between classes Ellipse from Geom, and Circ from gp, and the class Ellipse from StepGeom which describes a Ellipse from Prostep.
+ */
 class GeomToStep_MakeEllipse extends GeomToStep_Root {
 }
 
@@ -14269,6 +16495,9 @@ class GeomToStep_MakeEllipse_2 extends GeomToStep_MakeEllipse {}
 
 class GeomToStep_MakeEllipse_3 extends GeomToStep_MakeEllipse {}
 
+/**
+ * This class implements the mapping between the class Hyperbola from Geom and the class Hyperbola from StepGeom which describes a Hyperbola from ProSTEP
+ */
 class GeomToStep_MakeHyperbola extends GeomToStep_Root {
 }
 
@@ -14276,6 +16505,9 @@ class GeomToStep_MakeHyperbola_1 extends GeomToStep_MakeHyperbola {}
 
 class GeomToStep_MakeHyperbola_2 extends GeomToStep_MakeHyperbola {}
 
+/**
+ * This class implements the mapping between classes Line from Geom and Lin from gp, and the class Line from StepGeom which describes a line from Prostep.
+ */
 class GeomToStep_MakeLine extends GeomToStep_Root {
 }
 
@@ -14287,6 +16519,9 @@ class GeomToStep_MakeLine_3 extends GeomToStep_MakeLine {}
 
 class GeomToStep_MakeLine_4 extends GeomToStep_MakeLine {}
 
+/**
+ * This class implements the mapping between the class Parabola from Geom and the class Parabola from StepGeom which describes a Parabola from ProSTEP
+ */
 class GeomToStep_MakeParabola extends GeomToStep_Root {
 }
 
@@ -14294,6 +16529,9 @@ class GeomToStep_MakeParabola_1 extends GeomToStep_MakeParabola {}
 
 class GeomToStep_MakeParabola_2 extends GeomToStep_MakeParabola {}
 
+/**
+ * This class implements the mapping between classes Plane from Geom and Pln from gp, and the class Plane from StepGeom which describes a plane from Prostep.
+ */
 class GeomToStep_MakePlane extends GeomToStep_Root {
 }
 
@@ -14301,6 +16539,9 @@ class GeomToStep_MakePlane_1 extends GeomToStep_MakePlane {}
 
 class GeomToStep_MakePlane_2 extends GeomToStep_MakePlane {}
 
+/**
+ * This class implements the mapping between an Array1 of points from gp and a Polyline from StepGeom.
+ */
 class GeomToStep_MakePolyline extends GeomToStep_Root {
 }
 
@@ -14308,27 +16549,51 @@ class GeomToStep_MakePolyline_1 extends GeomToStep_MakePolyline {}
 
 class GeomToStep_MakePolyline_2 extends GeomToStep_MakePolyline {}
 
+/**
+ * This class implements the mapping between class RectangularTrimmedSurface from Geom and the class RectangularTrimmedSurface from StepGeom which describes a rectangular_trimmed_surface from ISO-IS 10303-42
+ */
 class GeomToStep_MakeRectangularTrimmedSurface extends GeomToStep_Root {
 }
 
+/**
+ * This class implements the mapping between class SphericalSurface from Geom and the class SphericalSurface from StepGeom which describes a spherical_surface from Prostep
+ */
 class GeomToStep_MakeSphericalSurface extends GeomToStep_Root {
 }
 
+/**
+ * This class implements the mapping between classes Surface from Geom and the class Surface from StepGeom which describes a Surface from prostep. As Surface is an abstract Surface this class is an access to the sub-class required.
+ */
 class GeomToStep_MakeSurface extends GeomToStep_Root {
 }
 
+/**
+ * This class implements the mapping between class SurfaceOfLinearExtrusion from Geom and the class SurfaceOfLinearExtrusion from StepGeom which describes a surface_of_linear_extrusion from Prostep
+ */
 class GeomToStep_MakeSurfaceOfLinearExtrusion extends GeomToStep_Root {
 }
 
+/**
+ * This class implements the mapping between class SurfaceOfRevolution from Geom and the class SurfaceOfRevolution from StepGeom which describes a surface_of_revolution from Prostep
+ */
 class GeomToStep_MakeSurfaceOfRevolution extends GeomToStep_Root {
 }
 
+/**
+ * This class implements the mapping between classes SweptSurface from Geom and the class SweptSurface from StepGeom which describes a SweptSurface from prostep. As SweptSurface is an abstract SweptSurface this class is an access to the sub-class required.
+ */
 class GeomToStep_MakeSweptSurface extends GeomToStep_Root {
 }
 
+/**
+ * This class implements the mapping between class ToroidalSurface from Geom and the class ToroidalSurface from StepGeom which describes a toroidal_surface from Prostep
+ */
 class GeomToStep_MakeToroidalSurface extends GeomToStep_Root {
 }
 
+/**
+ * This class implements the mapping between classes Vector from Geom, Geom2d and Vec, Vec2d from gp, and the class Vector from StepGeom which describes a Vector from Prostep.
+ */
 class GeomToStep_MakeVector extends GeomToStep_Root {
 }
 
@@ -14340,21 +16605,39 @@ class GeomToStep_MakeVector_3 extends GeomToStep_MakeVector {}
 
 class GeomToStep_MakeVector_4 extends GeomToStep_MakeVector {}
 
+/**
+ * This class implements the common services for all classes of GeomToStep which report error.
+ */
 class GeomToStep_Root {
 }
 
+/**
+ * The GeomTools package provides utilities for Geometry.
+ */
 class GeomTools {
 }
 
+/**
+ * Stores a set of Curves from Geom2d.
+ */
 class GeomTools_Curve2dSet {
 }
 
+/**
+ * Stores a set of Curves from Geom.
+ */
 class GeomTools_CurveSet {
 }
 
+/**
+ * Stores a set of Surfaces from Geom.
+ */
 class GeomTools_SurfaceSet {
 }
 
+/**
+ * Describes an axis in 3D space. An axis is defined by: - its origin, also termed the "Location point" of the axis, - its unit vector, termed the "Direction" of the axis. Note: Geom_Axis1Placement axes provide the same kind of "geometric" services as gp_Ax1 axes but have more complex data structures. The geometric objects provided by the Geom package use gp_Ax1 objects to include axes in their data structures, or to define an axis of symmetry or axis of rotation. Geom_Axis1Placement axes are used in a context where they can be shared by several objects contained inside a common data structure.
+ */
 class Geom_Axis1Placement extends Geom_AxisPlacement {
 }
 
@@ -14362,6 +16645,9 @@ class Geom_Axis1Placement_1 extends Geom_Axis1Placement {}
 
 class Geom_Axis1Placement_2 extends Geom_Axis1Placement {}
 
+/**
+ * Describes a right-handed coordinate system in 3D space. A coordinate system is defined by: - its origin, also termed the "Location point" of the coordinate system, - three orthogonal unit vectors, termed respectively the "X Direction", "Y Direction" and "Direction" (or "main Direction") of the coordinate system. As a Geom_Axis2Placement coordinate system is right-handed, its "Direction" is always equal to the cross product of its "X Direction" and "Y Direction". The "Direction" of a coordinate system is called the "main Direction" because when this unit vector is modified, the "X Direction" and "Y Direction" are recomputed, whereas when the "X Direction" or "Y Direction" is changed, the "main Direction" is retained. The "main Direction" is also the "Z Direction". Note: Geom_Axis2Placement coordinate systems provide the same kind of "geometric" services as gp_Ax2 coordinate systems but have more complex data structures. The geometric objects provided by the Geom package use gp_Ax2 objects to include coordinate systems in their data structures, or to define the geometric transformations, which are applied to them. Geom_Axis2Placement coordinate systems are used in a context where they can be shared by several objects contained inside a common data structure.
+ */
 class Geom_Axis2Placement extends Geom_AxisPlacement {
 }
 
@@ -14369,9 +16655,15 @@ class Geom_Axis2Placement_1 extends Geom_Axis2Placement {}
 
 class Geom_Axis2Placement_2 extends Geom_Axis2Placement {}
 
+/**
+ * The abstract class AxisPlacement describes the common behavior of positioning systems in 3D space, such as axis or coordinate systems. The Geom package provides two implementations of 3D positioning systems: - the axis (Geom_Axis1Placement class), which is defined by: - its origin, also termed the "Location point" of the axis, - its unit vector, termed the "Direction" or "main Direction" of the axis; - the right-handed coordinate system (Geom_Axis2Placement class), which is defined by: - its origin, also termed the "Location point" of the coordinate system, - three orthogonal unit vectors, termed respectively the "X Direction", the "Y Direction" and the "Direction" of the coordinate system. As the coordinate system is right-handed, these unit vectors have the following relation: "Direction" = "X Direction" ^ "Y Direction". The "Direction" is also called the "main Direction" because, when the unit vector is modified, the "X Direction" and "Y Direction" are recomputed, whereas when the "X Direction" or "Y Direction" is modified, the "main Direction" does not change. The axis whose origin is the origin of the positioning system and whose unit vector is its "main Direction" is also called the "Axis" or "main Axis" of the positioning system.
+ */
 class Geom_AxisPlacement extends Geom_Geometry {
 }
 
+/**
+ * Definition of the B_spline curve. A B-spline curve can be Uniform or non-uniform Rational or non-rational Periodic or non-periodic
+ */
 class Geom_BSplineCurve extends Geom_BoundedCurve {
 }
 
@@ -14379,6 +16671,9 @@ class Geom_BSplineCurve_1 extends Geom_BSplineCurve {}
 
 class Geom_BSplineCurve_2 extends Geom_BSplineCurve {}
 
+/**
+ * Describes a BSpline surface. In each parametric direction, a BSpline surface can be: - uniform or non-uniform, - rational or non-rational, - periodic or non-periodic. A BSpline surface is defined by: - its degrees, in the u and v parametric directions, - its periodic characteristic, in the u and v parametric directions, - a table of poles, also called control points (together with the associated weights if the surface is rational), and - a table of knots, together with the associated multiplicities. The degree of a Geom_BSplineSurface is limited to a value (25) which is defined and controlled by the system. This value is returned by the function MaxDegree. Poles and Weights Poles and Weights are manipulated using two associative double arrays: - the poles table, which is a double array of gp_Pnt points, and - the weights table, which is a double array of reals. The bounds of the poles and weights arrays are: - 1 and NbUPoles for the row bounds (provided that the BSpline surface is not periodic in the u parametric direction), where NbUPoles is the number of poles of the surface in the u parametric direction, and - 1 and NbVPoles for the column bounds (provided that the BSpline surface is not periodic in the v parametric direction), where NbVPoles is the number of poles of the surface in the v parametric direction. The poles of the surface are the points used to shape and reshape the surface. They comprise a rectangular network. If the surface is not periodic: - The points (1, 1), (NbUPoles, 1), (1, NbVPoles), and (NbUPoles, NbVPoles) are the four parametric "corners" of the surface. - The first column of poles and the last column of poles define two BSpline curves which delimit the surface in the v parametric direction. These are the v isoparametric curves corresponding to the two bounds of the v parameter. - The first row of poles and the last row of poles define two BSpline curves which delimit the surface in the u parametric direction. These are the u isoparametric curves corresponding to the two bounds of the u parameter. If the surface is periodic, these geometric properties are not verified. It is more difficult to define a geometrical significance for the weights. However they are useful for representing a quadric surface precisely. Moreover, if the weights of all the poles are equal, the surface has a polynomial equation, and hence is a "non-rational surface". The non-rational surface is a special, but frequently used, case, where all poles have identical weights. The weights are defined and used only in the case of a rational surface. The rational characteristic is defined in each parametric direction. A surface can be rational in the u parametric direction, and non-rational in the v parametric direction. Knots and Multiplicities For a Geom_BSplineSurface the table of knots is made up of two increasing sequences of reals, without repetition, one for each parametric direction. The multiplicities define the repetition of the knots. A BSpline surface comprises multiple contiguous patches, which are themselves polynomial or rational surfaces. The knots are the parameters of the isoparametric curves which limit these contiguous patches. The multiplicity of a knot on a BSpline surface (in a given parametric direction) is related to the degree of continuity of the surface at that knot in that parametric direction: Degree of continuity at knot(i) = Degree - Multi(i) where: - Degree is the degree of the BSpline surface in the given parametric direction, and - Multi(i) is the multiplicity of knot number i in the given parametric direction. There are some special cases, where the knots are regularly spaced in one parametric direction (i.e. the difference between two consecutive knots is a constant). - "Uniform": all the multiplicities are equal to 1. - "Quasi-uniform": all the multiplicities are equal to 1, except for the first and last knots in this parametric direction, and these are equal to Degree + 1. - "Piecewise Bezier": all the multiplicities are equal to Degree except for the first and last knots, which are equal to Degree + 1. This surface is a concatenation of Bezier patches in the given parametric direction. If the BSpline surface is not periodic in a given parametric direction, the bounds of the knots and multiplicities tables are 1 and NbKnots, where NbKnots is the number of knots of the BSpline surface in that parametric direction. If the BSpline surface is periodic in a given parametric direction, and there are k periodic knots and p periodic poles in that parametric direction: - the period is such that: period = Knot(k+1) - Knot(1), and - the poles and knots tables in that parametric direction can be considered as infinite tables, such that: Knot(i+k) = Knot(i) + period, and Pole(i+p) = Pole(i) Note: The data structure tables for a periodic BSpline surface are more complex than those of a non-periodic one. References : . A survey of curve and surface methods in CADG Wolfgang BOHM CAGD 1 (1984) . On de Boor-like algorithms and blossoming Wolfgang BOEHM cagd 5 (1988) . Blossoming and knot insertion algorithms for B-spline curves Ronald N. GOLDMAN . Modelisation des surfaces en CAO, Henri GIAUME Peugeot SA . Curves and Surfaces for Computer Aided Geometric Design, a practical guide Gerald Farin
+ */
 class Geom_BSplineSurface extends Geom_BoundedSurface {
 }
 
@@ -14386,6 +16681,9 @@ class Geom_BSplineSurface_1 extends Geom_BSplineSurface {}
 
 class Geom_BSplineSurface_2 extends Geom_BSplineSurface {}
 
+/**
+ * Describes a rational or non-rational Bezier curve - a non-rational Bezier curve is defined by a table of poles (also called control points), - a rational Bezier curve is defined by a table of poles with varying weights. These data are manipulated by two parallel arrays: - the poles table, which is an array of gp_Pnt points, and - the weights table, which is an array of reals. The bounds of these arrays are 1 and "the number of "poles" of the curve. The poles of the curve are "control points" used to deform the curve. The first pole is the start point of the curve, and the last pole is the end point of the curve. The segment that joins the first pole to the second pole is the tangent to the curve at its start point, and the segment that joins the last pole to the second-from-last pole is the tangent to the curve at its end point. It is more difficult to give a geometric signification to the weights but they are useful for providing the exact representations of arcs of a circle or ellipse. Moreover, if the weights of all poles are equal, the curve is polynomial; it is therefore a non-rational curve. The non-rational curve is a special and frequently used case. The weights are defined and used only in the case of a rational curve. The degree of a Bezier curve is equal to the number of poles, minus 1. It must be greater than or equal to 1. However, the degree of a Geom_BezierCurve curve is limited to a value (25) which is defined and controlled by the system. This value is returned by the function MaxDegree. The parameter range for a Bezier curve is [ 0, 1 ]. If the first and last control points of the Bezier curve are the same point then the curve is closed. For example, to create a closed Bezier curve with four control points, you have to give the set of control points P1, P2, P3 and P1. The continuity of a Bezier curve is infinite. It is not possible to build a Bezier curve with negative weights. We consider that a weight value is zero if it is less than or equal to gp::Resolution(). We also consider that two weight values W1 and W2 are equal if: |W2 - W1| <= gp::Resolution(). Warning - When considering the continuity of a closed Bezier curve at the junction point, remember that a curve of this type is never periodic. This means that the derivatives for the parameter u = 0 have no reason to be the same as the derivatives for the parameter u = 1 even if the curve is closed. - The length of a Bezier curve can be null.
+ */
 class Geom_BezierCurve extends Geom_BoundedCurve {
 }
 
@@ -14393,6 +16691,9 @@ class Geom_BezierCurve_1 extends Geom_BezierCurve {}
 
 class Geom_BezierCurve_2 extends Geom_BezierCurve {}
 
+/**
+ * Describes a rational or non-rational Bezier surface. - A non-rational Bezier surface is defined by a table of poles (also known as control points). - A rational Bezier surface is defined by a table of poles with varying associated weights. This data is manipulated using two associative 2D arrays: - the poles table, which is a 2D array of gp_Pnt, and - the weights table, which is a 2D array of reals. The bounds of these arrays are: - 1 and NbUPoles for the row bounds, where NbUPoles is the number of poles of the surface in the u parametric direction, and - 1 and NbVPoles for the column bounds, where NbVPoles is the number of poles of the surface in the v parametric direction. The poles of the surface, the "control points", are the points used to shape and reshape the surface. They comprise a rectangular network of points: - The points (1, 1), (NbUPoles, 1), (1, NbVPoles) and (NbUPoles, NbVPoles) are the four parametric "corners" of the surface. - The first column of poles and the last column of poles define two Bezier curves which delimit the surface in the v parametric direction. These are the v isoparametric curves corresponding to values 0 and 1 of the v parameter. - The first row of poles and the last row of poles define two Bezier curves which delimit the surface in the u parametric direction. These are the u isoparametric curves corresponding to values 0 and 1 of the u parameter. It is more difficult to define a geometrical significance for the weights. However they are useful for representing a quadric surface precisely. Moreover, if the weights of all the poles are equal, the surface has a polynomial equation, and hence is a "non-rational surface". The non-rational surface is a special, but frequently used, case, where all poles have identical weights. The weights are defined and used only in the case of a rational surface. This rational characteristic is defined in each parametric direction. Hence, a surface can be rational in the u parametric direction, and non-rational in the v parametric direction. Likewise, the degree of a surface is defined in each parametric direction. The degree of a Bezier surface in a given parametric direction is equal to the number of poles of the surface in that parametric direction, minus 1. This must be greater than or equal to 1. However, the degree for a Geom_BezierSurface is limited to a value of (25) which is defined and controlled by the system. This value is returned by the function MaxDegree. The parameter range for a Bezier surface is [ 0, 1 ] in the two parametric directions. A Bezier surface can also be closed, or open, in each parametric direction. If the first row of poles is identical to the last row of poles, the surface is closed in the u parametric direction. If the first column of poles is identical to the last column of poles, the surface is closed in the v parametric direction. The continuity of a Bezier surface is infinite in the u parametric direction and the in v parametric direction. Note: It is not possible to build a Bezier surface with negative weights. Any weight value that is less than, or equal to, gp::Resolution() is considered to be zero. Two weight values, W1 and W2, are considered equal if: |W2-W1| <= gp::Resolution()
+ */
 class Geom_BezierSurface extends Geom_BoundedSurface {
 }
 
@@ -14400,12 +16701,21 @@ class Geom_BezierSurface_1 extends Geom_BezierSurface {}
 
 class Geom_BezierSurface_2 extends Geom_BezierSurface {}
 
+/**
+ * The abstract class BoundedCurve describes the common behavior of bounded curves in 3D space. A bounded curve is limited by two finite values of the parameter, termed respectively "first parameter" and "last parameter". The "first parameter" gives the "start point" of the bounded curve, and the "last parameter" gives the "end point" of the bounded curve. The length of a bounded curve is finite. The Geom package provides three concrete classes of bounded curves: - two frequently used mathematical formulations of complex curves: - Geom_BezierCurve, - Geom_BSplineCurve, and - Geom_TrimmedCurve to trim a curve, i.e. to only take part of the curve limited by two values of the parameter of the basis curve.
+ */
 class Geom_BoundedCurve extends Geom_Curve {
 }
 
+/**
+ * The root class for bounded surfaces in 3D space. A bounded surface is defined by a rectangle in its 2D parametric space, i.e. - its u parameter, which ranges between two finite values u0 and u1, referred to as "First u parameter" and "Last u parameter" respectively, and - its v parameter, which ranges between two finite values v0 and v1, referred to as "First v parameter" and the "Last v parameter" respectively. The surface is limited by four curves which are the boundaries of the surface: - its u0 and u1 isoparametric curves in the u parametric direction, and - its v0 and v1 isoparametric curves in the v parametric direction. A bounded surface is finite. The common behavior of all bounded surfaces is described by the Geom_Surface class. The Geom package provides three concrete implementations of bounded surfaces: - Geom_BezierSurface, - Geom_BSplineSurface, and - Geom_RectangularTrimmedSurface. The first two of these implement well known mathematical definitions of complex surfaces, the third trims a surface using four isoparametric curves, i.e. it limits the variation of its parameters to a rectangle in 2D parametric space.
+ */
 class Geom_BoundedSurface extends Geom_Surface {
 }
 
+/**
+ * Describes a point in 3D space. A Geom_CartesianPoint is defined by a gp_Pnt point, with its three Cartesian coordinates X, Y and Z.
+ */
 class Geom_CartesianPoint extends Geom_Point {
 }
 
@@ -14413,6 +16723,9 @@ class Geom_CartesianPoint_1 extends Geom_CartesianPoint {}
 
 class Geom_CartesianPoint_2 extends Geom_CartesianPoint {}
 
+/**
+ * Describes a circle in 3D space. A circle is defined by its radius and, as with any conic curve, is positioned in space with a right-handed coordinate system (gp_Ax2 object) where: - the origin is the center of the circle, and - the origin, "X Direction" and "Y Direction" define the plane of the circle. This coordinate system is the local coordinate system of the circle. The "main Direction" of this coordinate system is the vector normal to the plane of the circle. The axis, of which the origin and unit vector are respectively the origin and "main Direction" of the local coordinate system, is termed the "Axis" or "main Axis" of the circle. The "main Direction" of the local coordinate system gives an explicit orientation to the circle (definition of the trigonometric sense), determining the direction in which the parameter increases along the circle. The Geom_Circle circle is parameterized by an angle: P(U) = O + R*Cos(U)*XDir + R*Sin(U)*YDir, where: - P is the point of parameter U, - O, XDir and YDir are respectively the origin, "X Direction" and "Y Direction" of its local coordinate system, - R is the radius of the circle. The "X Axis" of the local coordinate system therefore defines the origin of the parameter of the circle. The parameter is the angle with this "X Direction". A circle is a closed and periodic curve. The period is 2.*Pi and the parameter range is [ 0, 2.*Pi [.
+ */
 class Geom_Circle extends Geom_Conic {
 }
 
@@ -14420,9 +16733,15 @@ class Geom_Circle_1 extends Geom_Circle {}
 
 class Geom_Circle_2 extends Geom_Circle {}
 
+/**
+ * The abstract class Conic describes the common behavior of conic curves in 3D space and, in particular, their general characteristics. The Geom package provides four concrete classes of conics: Geom_Circle, Geom_Ellipse, Geom_Hyperbola and Geom_Parabola. A conic is positioned in space with a right-handed coordinate system (gp_Ax2 object), where: - the origin is the center of the conic (or the apex in the case of a parabola), - the origin, "X Direction" and "Y Direction" define the plane of the conic. This coordinate system is the local coordinate system of the conic. The "main Direction" of this coordinate system is the vector normal to the plane of the conic. The axis, of which the origin and unit vector are respectively the origin and "main Direction" of the local coordinate system, is termed the "Axis" or "main Axis" of the conic. The "main Direction" of the local coordinate system gives an explicit orientation to the conic, determining the direction in which the parameter increases along the conic. The "X Axis" of the local coordinate system also defines the origin of the parameter of the conic.
+ */
 class Geom_Conic extends Geom_Curve {
 }
 
+/**
+ * Describes a cone. A cone is defined by the half-angle (can be negative) at its apex, and is positioned in space by a coordinate system (a gp_Ax3 object) and a reference radius as follows: - The "main Axis" of the coordinate system is the axis of revolution of the cone. - The plane defined by the origin, the "X Direction" and the "Y Direction" of the coordinate system is the reference plane of the cone. The intersection of the cone with this reference plane is a circle of radius equal to the reference radius. - The apex of the cone is on the negative side of the "main Axis" of the coordinate system if the half-angle is positive, and on the positive side if the half-angle is negative. This coordinate system is the "local coordinate system" of the cone. The following apply: - Rotation around its "main Axis", in the trigonometric sense given by the "X Direction" and the "Y Direction", defines the u parametric direction. - Its "X Axis" gives the origin for the u parameter. - Its "main Direction" is the v parametric direction of the cone. - Its origin is the origin of the v parameter. The parametric range of the two parameters is: - [ 0, 2.*Pi ] for u, and - ] -infinity, +infinity [ for v The parametric equation of the cone is: P(u, v) = O + (R + v*sin(Ang)) * (cos(u)*XDir + sin(u)*YDir) + v*cos(Ang)*ZDir where: - O, XDir, YDir and ZDir are respectively the origin, the "X Direction", the "Y Direction" and the "Z Direction" of the cone's local coordinate system, - Ang is the half-angle at the apex of the cone, and - R is the reference radius.
+ */
 class Geom_ConicalSurface extends Geom_ElementarySurface {
 }
 
@@ -14430,9 +16749,15 @@ class Geom_ConicalSurface_1 extends Geom_ConicalSurface {}
 
 class Geom_ConicalSurface_2 extends Geom_ConicalSurface {}
 
+/**
+ * The abstract class Curve describes the common behavior of curves in 3D space. The Geom package provides numerous concrete classes of derived curves, including lines, circles, conics, Bezier or BSpline curves, etc. The main characteristic of these curves is that they are parameterized. The Geom_Curve class shows: - how to work with the parametric equation of a curve in order to calculate the point of parameter u, together with the vector tangent and the derivative vectors of order 2, 3,..., N at this point; - how to obtain general information about the curve (for example, level of continuity, closed characteristics, periodicity, bounds of the parameter field); - how the parameter changes when a geometric transformation is applied to the curve or when the orientation of the curve is inverted. All curves must have a geometric continuity: a curve is at least "C0". Generally, this property is checked at the time of construction or when the curve is edited. Where this is not the case, the documentation states so explicitly. Warning The Geom package does not prevent the construction of curves with null length or curves which self-intersect.
+ */
 class Geom_Curve extends Geom_Geometry {
 }
 
+/**
+ * This class defines the infinite cylindrical surface.
+ */
 class Geom_CylindricalSurface extends Geom_ElementarySurface {
 }
 
@@ -14440,6 +16765,9 @@ class Geom_CylindricalSurface_1 extends Geom_CylindricalSurface {}
 
 class Geom_CylindricalSurface_2 extends Geom_CylindricalSurface {}
 
+/**
+ * The class Direction specifies a vector that is never null. It is a unit vector.
+ */
 class Geom_Direction extends Geom_Vector {
 }
 
@@ -14447,9 +16775,15 @@ class Geom_Direction_1 extends Geom_Direction {}
 
 class Geom_Direction_2 extends Geom_Direction {}
 
+/**
+ * Describes the common behavior of surfaces which have a simple parametric equation in a local coordinate system. The Geom package provides several implementations of concrete elementary surfaces: - the plane, and - four simple surfaces of revolution: the cylinder, the cone, the sphere and the torus. An elementary surface inherits the common behavior of Geom_Surface surfaces. Furthermore, it is located in 3D space by a coordinate system (a gp_Ax3 object) which is also its local coordinate system. Any elementary surface is oriented, i.e. the normal vector is always defined, and gives the same orientation to the surface, at any point on the surface. In topology this property is referred to as the "outside region of the surface". This orientation is related to the two parametric directions of the surface. Rotation of a surface around the "main Axis" of its coordinate system, in the trigonometric sense given by the "X Direction" and the "Y Direction" of the coordinate system, defines the u parametric direction of that elementary surface of revolution. This is the default construction mode. It is also possible, however, to change the orientation of a surface by reversing one of the two parametric directions: use the UReverse or VReverse functions to change the orientation of the normal at any point on the surface. Warning The local coordinate system of an elementary surface is not necessarily direct: - if it is direct, the trigonometric sense defined by its "main Direction" is the same as the trigonometric sense defined by its two vectors "X Direction" and "Y Direction": "main Direction" = "X Direction" ^ "Y Direction" - if it is indirect, the two definitions of trigonometric sense are opposite: "main Direction" = - "X Direction" ^ "Y Direction"
+ */
 class Geom_ElementarySurface extends Geom_Surface {
 }
 
+/**
+ * Describes an ellipse in 3D space. An ellipse is defined by its major and minor radii and, as with any conic curve, is positioned in space with a right-handed coordinate system (gp_Ax2 object) where: - the origin is the center of the ellipse, - the "X Direction" defines the major axis, and - the "Y Direction" defines the minor axis. The origin, "X Direction" and "Y Direction" of this coordinate system define the plane of the ellipse. The coordinate system is the local coordinate system of the ellipse. The "main Direction" of this coordinate system is the vector normal to the plane of the ellipse. The axis, of which the origin and unit vector are respectively the origin and "main Direction" of the local coordinate system, is termed the "Axis" or "main Axis" of the ellipse. The "main Direction" of the local coordinate system gives an explicit orientation to the ellipse (definition of the trigonometric sense), determining the direction in which the parameter increases along the ellipse. The Geom_Ellipse ellipse is parameterized by an angle: P(U) = O + MajorRad*Cos(U)*XDir + MinorRad*Sin(U)*YDir where: - P is the point of parameter U, - O, XDir and YDir are respectively the origin, "X Direction" and "Y Direction" of its local coordinate system, - MajorRad and MinorRad are the major and minor radii of the ellipse. The "X Axis" of the local coordinate system therefore defines the origin of the parameter of the ellipse. An ellipse is a closed and periodic curve. The period is 2.*Pi and the parameter range is [ 0, 2.*Pi [.
+ */
 class Geom_Ellipse extends Geom_Conic {
 }
 
@@ -14457,9 +16791,15 @@ class Geom_Ellipse_1 extends Geom_Ellipse {}
 
 class Geom_Ellipse_2 extends Geom_Ellipse {}
 
+/**
+ * The abstract class Geometry for 3D space is the root class of all geometric objects from the Geom package. It describes the common behavior of these objects when: - applying geometric transformations to objects, and - constructing objects by geometric transformation (including copying). Warning Only transformations which do not modify the nature of the geometry can be applied to Geom objects: this is the case with translations, rotations, symmetries and scales; this is also the case with gp_Trsf composite transformations which are used to define the geometric transformations applied using the Transform or Transformed functions. Note: Geometry defines the "prototype" of the abstract method Transform which is defined for each concrete type of derived object. All other transformations are implemented using the Transform method.
+ */
 class Geom_Geometry extends Standard_Transient {
 }
 
+/**
+ * Describes a branch of a hyperbola in 3D space. A hyperbola is defined by its major and minor radii and, as with any conic curve, is positioned in space with a right-handed coordinate system (gp_Ax2 object) where: - the origin is the center of the hyperbola, - the "X Direction" defines the major axis, and - the "Y Direction" defines the minor axis. The origin, "X Direction" and "Y Direction" of this coordinate system define the plane of the hyperbola. The coordinate system is the local coordinate system of the hyperbola. The branch of the hyperbola described is the one located on the positive side of the major axis. The "main Direction" of the local coordinate system is a vector normal to the plane of the hyperbola. The axis, of which the origin and unit vector are respectively the origin and "main Direction" of the local coordinate system, is termed the "Axis" or "main Axis" of the hyperbola. The "main Direction" of the local coordinate system gives an explicit orientation to the hyperbola, determining the direction in which the parameter increases along the hyperbola. The Geom_Hyperbola hyperbola is parameterized as follows: P(U) = O + MajRad*Cosh(U)*XDir + MinRad*Sinh(U)*YDir, where: - P is the point of parameter U, - O, XDir and YDir are respectively the origin, "X Direction" and "Y Direction" of its local coordinate system, - MajRad and MinRad are the major and minor radii of the hyperbola. The "X Axis" of the local coordinate system therefore defines the origin of the parameter of the hyperbola. The parameter range is ] -infinite, +infinite [. The following diagram illustrates the respective positions, in the plane of the hyperbola, of the three branches of hyperbolas constructed using the functions OtherBranch, ConjugateBranch1 and ConjugateBranch2: Defines the main branch of an hyperbola. ^YAxis | FirstConjugateBranch | Other | Main --------------------- C ------------------------------>XAxis Branch | Branch | SecondConjugateBranch | Warning The value of the major radius (on the major axis) can be less than the value of the minor radius (on the minor axis).
+ */
 class Geom_Hyperbola extends Geom_Conic {
 }
 
@@ -14467,6 +16807,9 @@ class Geom_Hyperbola_1 extends Geom_Hyperbola {}
 
 class Geom_Hyperbola_2 extends Geom_Hyperbola {}
 
+/**
+ * Describes an infinite line. A line is defined and positioned in space with an axis (gp_Ax1 object) which gives it an origin and a unit vector. The Geom_Line line is parameterized: P (U) = O + U*Dir, where: - P is the point of parameter U, - O is the origin and Dir the unit vector of its positioning axis. The parameter range is ] -infinite, +infinite [. The orientation of the line is given by the unit vector of its positioning axis.
+ */
 class Geom_Line extends Geom_Curve {
 }
 
@@ -14476,9 +16819,15 @@ class Geom_Line_2 extends Geom_Line {}
 
 class Geom_Line_3 extends Geom_Line {}
 
+/**
+ * This class implements the basis services for an offset curve in 3D space. The Offset curve in this package can be a self intersecting curve even if the basis curve does not self-intersect. The self intersecting portions are not deleted at the construction time. An offset curve is a curve at constant distance (Offset) from a basis curve in a reference direction V. The offset curve takes its parametrization from the basis curve. The Offset curve is in the direction of the normal N defined with the cross product T^V, where the vector T is given by the first derivative on the basis curve with non zero length. The distance offset may be positive or negative to indicate the preferred side of the curve : . distance offset >0 => the curve is in the direction of N . distance offset <0 => the curve is in the direction of - N
+ */
 class Geom_OffsetCurve extends Geom_Curve {
 }
 
+/**
+ * Describes an offset surface in 3D space. An offset surface is defined by: - the basis surface to which it is parallel, and - the distance between the offset surface and its basis surface. A point on the offset surface is built by measuring the offset value along the normal vector at a point on the basis surface. This normal vector is given by the cross product D1u^D1v, where D1u and D1v are the vectors tangential to the basis surface in the u and v parametric directions at this point. The side of the basis surface on which the offset is measured depends on the sign of the offset value. A Geom_OffsetSurface surface can be self-intersecting, even if the basis surface does not self-intersect. The self-intersecting portions are not deleted at the time of construction. Warning There must be only one normal vector defined at any point on the basis surface. This must be verified by the user as no check is made at the time of construction to detect points with multiple possible normal directions (for example, the top of a conical surface).
+ */
 class Geom_OffsetSurface extends Geom_Surface {
 }
 
@@ -14489,6 +16838,9 @@ class Geom_OsculatingSurface_1 extends Geom_OsculatingSurface {}
 
 class Geom_OsculatingSurface_2 extends Geom_OsculatingSurface {}
 
+/**
+ * Describes a parabola in 3D space. A parabola is defined by its focal length (i.e. the distance between its focus and its apex) and is positioned in space with a coordinate system (gp_Ax2 object) where: - the origin is the apex of the parabola, - the "X Axis" defines the axis of symmetry; the parabola is on the positive side of this axis, - the origin, "X Direction" and "Y Direction" define the plane of the parabola. This coordinate system is the local coordinate system of the parabola. The "main Direction" of this coordinate system is a vector normal to the plane of the parabola. The axis, of which the origin and unit vector are respectively the origin and "main Direction" of the local coordinate system, is termed the "Axis" or "main Axis" of the parabola. The "main Direction" of the local coordinate system gives an explicit orientation to the parabola, determining the direction in which the parameter increases along the parabola. The Geom_Parabola parabola is parameterized as follows: P(U) = O + U*U/(4.*F)*XDir + U*YDir where: - P is the point of parameter U, - O, XDir and YDir are respectively the origin, "X Direction" and "Y Direction" of its local coordinate system, - F is the focal length of the parabola. The parameter of the parabola is therefore its Y coordinate in the local coordinate system, with the "X Axis" of the local coordinate system defining the origin of the parameter. The parameter range is ] -infinite, +infinite [.
+ */
 class Geom_Parabola extends Geom_Conic {
 }
 
@@ -14498,6 +16850,9 @@ class Geom_Parabola_2 extends Geom_Parabola {}
 
 class Geom_Parabola_3 extends Geom_Parabola {}
 
+/**
+ * Describes a plane in 3D space. A plane is positioned in space by a coordinate system (a gp_Ax3 object) such that the plane is defined by the origin, "X Direction" and "Y Direction" of this coordinate system. This coordinate system is the "local coordinate system" of the plane. The following apply: - Its "X Direction" and "Y Direction" are respectively the u and v parametric directions of the plane. - Its origin is the origin of the u and v parameters (also called the "origin" of the plane). - Its "main Direction" is a vector normal to the plane. This normal vector gives the orientation of the plane only if the local coordinate system is "direct". (The orientation of the plane is always defined by the "X Direction" and the "Y Direction" of its local coordinate system.) The parametric equation of the plane is: P(u, v) = O + u*XDir + v*YDir where O, XDir and YDir are respectively the origin, the "X Direction" and the "Y Direction" of the local coordinate system of the plane. The parametric range of the two parameters u and v is ] -infinity, +infinity [.
+ */
 class Geom_Plane extends Geom_ElementarySurface {
 }
 
@@ -14509,9 +16864,15 @@ class Geom_Plane_3 extends Geom_Plane {}
 
 class Geom_Plane_4 extends Geom_Plane {}
 
+/**
+ * The abstract class Point describes the common behavior of geometric points in 3D space. The Geom package also provides the concrete class Geom_CartesianPoint.
+ */
 class Geom_Point extends Geom_Geometry {
 }
 
+/**
+ * Describes a portion of a surface (a patch) limited by two values of the u parameter in the u parametric direction, and two values of the v parameter in the v parametric direction. The domain of the trimmed surface must be within the domain of the surface being trimmed. The trimmed surface is defined by: - the basis surface, and - the values (umin, umax) and (vmin, vmax) which limit it in the u and v parametric directions. The trimmed surface is built from a copy of the basis surface. Therefore, when the basis surface is modified the trimmed surface is not changed. Consequently, the trimmed surface does not necessarily have the same orientation as the basis surface. Warning: The case of surface being trimmed is periodic and parametrics values are outside the domain is possible. But, domain of the trimmed surface can be translated by (n X) the period.
+ */
 class Geom_RectangularTrimmedSurface extends Geom_BoundedSurface {
 }
 
@@ -14519,6 +16880,9 @@ class Geom_RectangularTrimmedSurface_1 extends Geom_RectangularTrimmedSurface {}
 
 class Geom_RectangularTrimmedSurface_2 extends Geom_RectangularTrimmedSurface {}
 
+/**
+ * Describes a sphere. A sphere is defined by its radius, and is positioned in space by a coordinate system (a gp_Ax3 object), the origin of which is the center of the sphere. This coordinate system is the "local coordinate system" of the sphere. The following apply: - Rotation around its "main Axis", in the trigonometric sense given by the "X Direction" and the "Y Direction", defines the u parametric direction. - Its "X Axis" gives the origin for the u parameter. - The "reference meridian" of the sphere is a half-circle, of radius equal to the radius of the sphere. It is located in the plane defined by the origin, "X Direction" and "main Direction", centered on the origin, and positioned on the positive side of the "X Axis". - Rotation around the "Y Axis" gives the v parameter on the reference meridian. - The "X Axis" gives the origin of the v parameter on the reference meridian. - The v parametric direction is oriented by the "main Direction", i.e. when v increases, the Z coordinate increases. (This implies that the "Y Direction" orients the reference meridian only when the local coordinate system is indirect.) - The u isoparametric curve is a half-circle obtained by rotating the reference meridian of the sphere through an angle u around the "main Axis", in the trigonometric sense defined by the "X Direction" and the "Y Direction". The parametric equation of the sphere is: P(u,v) = O + R*cos(v)*(cos(u)*XDir + sin(u)*YDir)+R*sin(v)*ZDir where: - O, XDir, YDir and ZDir are respectively the origin, the "X Direction", the "Y Direction" and the "Z Direction" of its local coordinate system, and - R is the radius of the sphere. The parametric range of the two parameters is: - [ 0, 2.*Pi ] for u, and - [ - Pi/2., + Pi/2. ] for v.
+ */
 class Geom_SphericalSurface extends Geom_ElementarySurface {
 }
 
@@ -14526,18 +16890,33 @@ class Geom_SphericalSurface_1 extends Geom_SphericalSurface {}
 
 class Geom_SphericalSurface_2 extends Geom_SphericalSurface {}
 
+/**
+ * Describes the common behavior of surfaces in 3D space. The Geom package provides many implementations of concrete derived surfaces, such as planes, cylinders, cones, spheres and tori, surfaces of linear extrusion, surfaces of revolution, Bezier and BSpline surfaces, and so on. The key characteristic of these surfaces is that they are parameterized. Geom_Surface demonstrates: - how to work with the parametric equation of a surface to compute the point of parameters (u, v), and, at this point, the 1st, 2nd ... Nth derivative, - how to find global information about a surface in each parametric direction (for example, level of continuity, whether the surface is closed, its periodicity, the bounds of the parameters and so on), and - how the parameters change when geometric transformations are applied to the surface, or the orientation is modified. Note that all surfaces must have a geometric continuity, and any surface is at least "C0". Generally, continuity is checked at construction time or when the curve is edited. Where this is not the case, the documentation makes this explicit. Warning The Geom package does not prevent the construction of surfaces with null areas, or surfaces which self-intersect.
+ */
 class Geom_Surface extends Geom_Geometry {
 }
 
+/**
+ * Describes a surface of linear extrusion ("extruded surface"), e.g. a generalized cylinder. Such a surface is obtained by sweeping a curve (called the "extruded curve" or "basis") in a given direction (referred to as the "direction of extrusion" and defined by a unit vector). The u parameter is along the extruded curve. The v parameter is along the direction of extrusion. The parameter range for the u parameter is defined by the reference curve. The parameter range for the v parameter is ] - infinity, + infinity [. The position of the curve gives the origin of the v parameter. The surface is "CN" in the v parametric direction. The form of a surface of linear extrusion is generally a ruled surface (GeomAbs_RuledForm). It can be: - a cylindrical surface, if the extruded curve is a circle, or a trimmed circle, with an axis parallel to the direction of extrusion (GeomAbs_CylindricalForm), or - a planar surface, if the extruded curve is a line (GeomAbs_PlanarForm). Note: The surface of extrusion is built from a copy of the original basis curve, so the original curve is not modified when the surface is modified. Warning Degenerate surfaces are not detected. A degenerate surface is obtained, for example, when the extruded curve is a line and the direction of extrusion is parallel to that line.
+ */
 class Geom_SurfaceOfLinearExtrusion extends Geom_SweptSurface {
 }
 
+/**
+ * Describes a surface of revolution (revolved surface). Such a surface is obtained by rotating a curve (called the "meridian") through a complete revolution about an axis (referred to as the "axis of revolution"). The curve and the axis must be in the same plane (the "reference plane" of the surface). Rotation around the axis of revolution in the trigonometric sense defines the u parametric direction. So the u parameter is an angle, and its origin is given by the position of the meridian on the surface. The parametric range for the u parameter is: [ 0, 2.*Pi ] The v parameter is that of the meridian. Note: A surface of revolution is built from a copy of the original meridian. As a result the original meridian is not modified when the surface is modified. The form of a surface of revolution is typically a general revolution surface (GeomAbs_RevolutionForm). It can be: - a conical surface, if the meridian is a line or a trimmed line (GeomAbs_ConicalForm), - a cylindrical surface, if the meridian is a line or a trimmed line parallel to the axis of revolution (GeomAbs_CylindricalForm), - a planar surface if the meridian is a line or a trimmed line perpendicular to the axis of revolution of the surface (GeomAbs_PlanarForm), - a toroidal surface, if the meridian is a circle or a trimmed circle (GeomAbs_ToroidalForm), or - a spherical surface, if the meridian is a circle, the center of which is located on the axis of the revolved surface (GeomAbs_SphericalForm). Warning Be careful not to construct a surface of revolution where the curve and the axis or revolution are not defined in the same plane. If you do not have a correct configuration, you can correct your initial curve, using a cylindrical projection in the reference plane.
+ */
 class Geom_SurfaceOfRevolution extends Geom_SweptSurface {
 }
 
+/**
+ * Describes the common behavior for surfaces constructed by sweeping a curve with another curve. The Geom package provides two concrete derived surfaces: surface of revolution (a revolved surface), and surface of linear extrusion (an extruded surface).
+ */
 class Geom_SweptSurface extends Geom_Surface {
 }
 
+/**
+ * Describes a torus. A torus is defined by its major and minor radii, and positioned in space with a coordinate system (a gp_Ax3 object) as follows: - The origin is the center of the torus. - The surface is obtained by rotating a circle around the "main Direction". This circle has a radius equal to the minor radius, and is located in the plane defined by the origin, "X Direction" and "main Direction". It is centered on the "X Axis", on its positive side, and positioned at a distance from the origin equal to the major radius. This circle is the "reference circle" of the torus. - The plane defined by the origin, the "X Direction" and the "Y Direction" is called the "reference plane" of the torus. This coordinate system is the "local coordinate system" of the torus. The following apply: - Rotation around its "main Axis", in the trigonometric sense given by "X Direction" and "Y Direction", defines the u parametric direction. - The "X Axis" gives the origin for the u parameter. - Rotation around an axis parallel to the "Y Axis" and passing through the center of the "reference circle" gives the v parameter on the "reference circle". - The "X Axis" gives the origin of the v parameter on the "reference circle". - The v parametric direction is oriented by the inverse of the "main Direction", i.e. near 0, as v increases, the Z coordinate decreases. (This implies that the "Y Direction" orients the reference circle only when the local coordinate system is direct.) - The u isoparametric curve is a circle obtained by rotating the "reference circle" of the torus through an angle u about the "main Axis". The parametric equation of the torus is : P(u, v) = O + (R + r*cos(v)) * (cos(u)*XDir + sin(u)*YDir ) + r*sin(v)*ZDir, where: - O, XDir, YDir and ZDir are respectively the origin, the "X Direction", the "Y Direction" and the "Z Direction" of the local coordinate system, - r and R are, respectively, the minor and major radius. The parametric range of the two parameters is: - [ 0, 2.*Pi ] for u - [ 0, 2.*Pi ] for v
+ */
 class Geom_ToroidalSurface extends Geom_ElementarySurface {
 }
 
@@ -14545,6 +16924,9 @@ class Geom_ToroidalSurface_1 extends Geom_ToroidalSurface {}
 
 class Geom_ToroidalSurface_2 extends Geom_ToroidalSurface {}
 
+/**
+ * Describes how to construct the following elementary transformations - translations, - rotations, - symmetries, - scales. The Transformation class can also be used to construct complex transformations by combining these elementary transformations. However, these transformations can never change the type of an object. For example, the projection transformation can change a circle into an ellipse, and therefore change the real type of the object. Such a transformation is forbidden in this environment and cannot be a Geom_Transformation. The transformation can be represented as follow :
+ */
 class Geom_Transformation extends Standard_Transient {
 }
 
@@ -14552,6 +16934,9 @@ class Geom_Transformation_1 extends Geom_Transformation {}
 
 class Geom_Transformation_2 extends Geom_Transformation {}
 
+/**
+ * Describes a portion of a curve (termed the "basis curve") limited by two parameter values inside the parametric domain of the basis curve. The trimmed curve is defined by: - the basis curve, and - the two parameter values which limit it. The trimmed curve can either have the same orientation as the basis curve or the opposite orientation.
+ */
 class Geom_TrimmedCurve extends Geom_BoundedCurve {
 }
 
@@ -14569,9 +16954,15 @@ class Geom_UndefinedValue_1 extends Geom_UndefinedValue {}
 
 class Geom_UndefinedValue_2 extends Geom_UndefinedValue {}
 
+/**
+ * The abstract class Vector describes the common behavior of vectors in 3D space. The Geom package provides two concrete classes of vectors: Geom_Direction (unit vector) and Geom_VectorWithMagnitude.
+ */
 class Geom_Vector extends Geom_Geometry {
 }
 
+/**
+ * Defines a vector with magnitude. A vector with magnitude can have a zero length.
+ */
 class Geom_VectorWithMagnitude extends Geom_Vector {
 }
 
@@ -14581,6 +16972,9 @@ class Geom_VectorWithMagnitude_2 extends Geom_VectorWithMagnitude {}
 
 class Geom_VectorWithMagnitude_3 extends Geom_VectorWithMagnitude {}
 
+/**
+ * Contains points array definition.
+ */
 class Graphic3d_ArrayOfPoints extends Graphic3d_ArrayOfPrimitives {
 }
 
@@ -14588,6 +16982,9 @@ class Graphic3d_ArrayOfPoints_1 extends Graphic3d_ArrayOfPoints {}
 
 class Graphic3d_ArrayOfPoints_2 extends Graphic3d_ArrayOfPoints {}
 
+/**
+ * Contains polygons array definition. WARNING! Polygon primitives might be unsupported by graphics library. Triangulation should be used instead of quads for better compatibility.
+ */
 class Graphic3d_ArrayOfPolygons extends Graphic3d_ArrayOfPrimitives {
 }
 
@@ -14595,6 +16992,9 @@ class Graphic3d_ArrayOfPolygons_1 extends Graphic3d_ArrayOfPolygons {}
 
 class Graphic3d_ArrayOfPolygons_2 extends Graphic3d_ArrayOfPolygons {}
 
+/**
+ * Contains polylines array definition.
+ */
 class Graphic3d_ArrayOfPolylines extends Graphic3d_ArrayOfPrimitives {
 }
 
@@ -14602,9 +17002,15 @@ class Graphic3d_ArrayOfPolylines_1 extends Graphic3d_ArrayOfPolylines {}
 
 class Graphic3d_ArrayOfPolylines_2 extends Graphic3d_ArrayOfPolylines {}
 
+/**
+ * This class furnish services to defined and fill an array of primitives which can be passed directly to graphics rendering API.
+ */
 class Graphic3d_ArrayOfPrimitives extends Standard_Transient {
 }
 
+/**
+ * Contains quadrangles strip array definition. WARNING! Quadrangle primitives might be unsupported by graphics library. Triangulation should be used instead of quads for better compatibility.
+ */
 class Graphic3d_ArrayOfQuadrangleStrips extends Graphic3d_ArrayOfPrimitives {
 }
 
@@ -14612,6 +17018,9 @@ class Graphic3d_ArrayOfQuadrangleStrips_1 extends Graphic3d_ArrayOfQuadrangleStr
 
 class Graphic3d_ArrayOfQuadrangleStrips_2 extends Graphic3d_ArrayOfQuadrangleStrips {}
 
+/**
+ * Contains quadrangles array definition. WARNING! Quadrangle primitives might be unsupported by graphics library. Triangulation should be used instead of quads for better compatibility.
+ */
 class Graphic3d_ArrayOfQuadrangles extends Graphic3d_ArrayOfPrimitives {
 }
 
@@ -14619,6 +17028,9 @@ class Graphic3d_ArrayOfQuadrangles_1 extends Graphic3d_ArrayOfQuadrangles {}
 
 class Graphic3d_ArrayOfQuadrangles_2 extends Graphic3d_ArrayOfQuadrangles {}
 
+/**
+ * Contains segments array definition.
+ */
 class Graphic3d_ArrayOfSegments extends Graphic3d_ArrayOfPrimitives {
 }
 
@@ -14626,6 +17038,9 @@ class Graphic3d_ArrayOfSegments_1 extends Graphic3d_ArrayOfSegments {}
 
 class Graphic3d_ArrayOfSegments_2 extends Graphic3d_ArrayOfSegments {}
 
+/**
+ * Contains triangles fan array definition
+ */
 class Graphic3d_ArrayOfTriangleFans extends Graphic3d_ArrayOfPrimitives {
 }
 
@@ -14633,6 +17048,9 @@ class Graphic3d_ArrayOfTriangleFans_1 extends Graphic3d_ArrayOfTriangleFans {}
 
 class Graphic3d_ArrayOfTriangleFans_2 extends Graphic3d_ArrayOfTriangleFans {}
 
+/**
+ * Contains triangles strip array definition.
+ */
 class Graphic3d_ArrayOfTriangleStrips extends Graphic3d_ArrayOfPrimitives {
 }
 
@@ -14640,6 +17058,9 @@ class Graphic3d_ArrayOfTriangleStrips_1 extends Graphic3d_ArrayOfTriangleStrips 
 
 class Graphic3d_ArrayOfTriangleStrips_2 extends Graphic3d_ArrayOfTriangleStrips {}
 
+/**
+ * Contains triangles array definition
+ */
 class Graphic3d_ArrayOfTriangles extends Graphic3d_ArrayOfPrimitives {
 }
 
@@ -14647,6 +17068,9 @@ class Graphic3d_ArrayOfTriangles_1 extends Graphic3d_ArrayOfTriangles {}
 
 class Graphic3d_ArrayOfTriangles_2 extends Graphic3d_ArrayOfTriangles {}
 
+/**
+ * This class defines graphic attributes for opaque 3d primitives (polygons, triangles, quadrilaterals).
+ */
 class Graphic3d_AspectFillArea3d extends Graphic3d_Aspects {
 }
 
@@ -14654,6 +17078,9 @@ class Graphic3d_AspectFillArea3d_1 extends Graphic3d_AspectFillArea3d {}
 
 class Graphic3d_AspectFillArea3d_2 extends Graphic3d_AspectFillArea3d {}
 
+/**
+ * Creates and updates a group of attributes for 3d line primitives. This group contains the color, the type of line, and its thickness.
+ */
 class Graphic3d_AspectLine3d extends Graphic3d_Aspects {
 }
 
@@ -14661,6 +17088,9 @@ class Graphic3d_AspectLine3d_1 extends Graphic3d_AspectLine3d {}
 
 class Graphic3d_AspectLine3d_2 extends Graphic3d_AspectLine3d {}
 
+/**
+ * Creates and updates an attribute group for marker type primitives. This group contains the type of marker, its color, and its scale factor.
+ */
 class Graphic3d_AspectMarker3d extends Graphic3d_Aspects {
 }
 
@@ -14672,6 +17102,9 @@ class Graphic3d_AspectMarker3d_3 extends Graphic3d_AspectMarker3d {}
 
 class Graphic3d_AspectMarker3d_4 extends Graphic3d_AspectMarker3d {}
 
+/**
+ * Creates and updates a group of attributes for text primitives.
+ */
 class Graphic3d_AspectText3d extends Graphic3d_Aspects {
 }
 
@@ -14679,41 +17112,74 @@ class Graphic3d_AspectText3d_1 extends Graphic3d_AspectText3d {}
 
 class Graphic3d_AspectText3d_2 extends Graphic3d_AspectText3d {}
 
+/**
+ * This class defines graphic attributes.
+ */
 class Graphic3d_Aspects extends Standard_Transient {
 }
 
+/**
+ * Buffer of vertex attributes. This class is intended for advanced usage allowing invalidation of entire buffer content or its sub-part.
+ */
 class Graphic3d_AttribBuffer extends Graphic3d_Buffer {
 }
 
+/**
+ * Class that stores style for one graduated trihedron axis such as colors, lengths and customization flags. It is used in Graphic3d_GraduatedTrihedron.
+ */
 class Graphic3d_AxisAspect {
 }
 
+/**
+ * Describes material's BSDF (Bidirectional Scattering Distribution Function) used for physically-based rendering (in path tracing engine). BSDF is represented as weighted mixture of basic BRDFs/BTDFs (Bidirectional Reflectance (Transmittance) Distribution Functions).
+ */
 class Graphic3d_BSDF {
 }
 
+/**
+ * Bounds buffer.
+ */
 class Graphic3d_BoundBuffer extends NCollection_Buffer {
 }
 
+/**
+ * Buffer of vertex attributes.
+ */
 class Graphic3d_Buffer extends NCollection_Buffer {
 }
 
+/**
+ * Set of OpenGl_Structures for building BVH tree.
+ */
 class Graphic3d_BvhCStructureSet extends BVH_PrimitiveSet3d {
 }
 
 }
 
+/**
+ * Generic light source definition. This class defines arbitrary light source - see Graphic3d_TypeOfLightSource enumeration. Some parameters are applicable only to particular light type; calling methods unrelated to current type will throw an exception.
+ */
 class Graphic3d_CLight extends Standard_Transient {
 }
 
+/**
+ * Low-level graphic structure interface
+ */
 class Graphic3d_CStructure extends Standard_Transient {
 }
 
 class Graphic3d_CTexture {
 }
 
+/**
+ * Base class of a graphical view that carries out rendering process for a concrete implementation of graphical driver. Provides virtual interfaces for redrawing its contents, management of displayed structures and render settings. The source code of the class itself implements functionality related to management of computed (HLR or "view-dependent") structures.
+ */
 class Graphic3d_CView extends Graphic3d_DataStructureManager {
 }
 
+/**
+ * Camera class provides object-oriented approach to setting up projection and orientation properties of 3D view.
+ */
 class Graphic3d_Camera extends Standard_Transient {
 }
 
@@ -14721,9 +17187,15 @@ class Graphic3d_Camera_1 extends Graphic3d_Camera {}
 
 class Graphic3d_Camera_2 extends Graphic3d_Camera {}
 
+/**
+ * Class defines the area (Tile) inside a view.
+ */
 class Graphic3d_CameraTile {
 }
 
+/**
+ * Container for properties describing either a Clipping halfspace (single Clipping Plane), or a chain of Clipping Planes defining logical AND (conjunction) operation. The plane equation is specified in "world" coordinate system.
+ */
 class Graphic3d_ClipPlane extends Standard_Transient {
 }
 
@@ -14735,6 +17207,9 @@ class Graphic3d_ClipPlane_3 extends Graphic3d_ClipPlane {}
 
 class Graphic3d_ClipPlane_4 extends Graphic3d_ClipPlane {}
 
+/**
+ * Graphic3d_CubeMapOrder maps sides of cubemap on tiles in packed cubemap image to support different tiles order in such images. Also it can be considered as permutation of numbers from 0 to 5. It stores permutation in one integer as convolution.
+ */
 class Graphic3d_CubeMapOrder {
 }
 
@@ -14744,6 +17219,9 @@ class Graphic3d_CubeMapOrder_2 extends Graphic3d_CubeMapOrder {}
 
 class Graphic3d_CubeMapOrder_3 extends Graphic3d_CubeMapOrder {}
 
+/**
+ * Class is intended to process cubemap packed into single image plane.
+ */
 class Graphic3d_CubeMapPacked extends Graphic3d_CubeMap {
 }
 
@@ -14751,6 +17229,9 @@ class Graphic3d_CubeMapPacked_1 extends Graphic3d_CubeMapPacked {}
 
 class Graphic3d_CubeMapPacked_2 extends Graphic3d_CubeMapPacked {}
 
+/**
+ * Class to manage cubemap located in six different images.
+ */
 class Graphic3d_CubeMapSeparate extends Graphic3d_CubeMap {
 }
 
@@ -14758,30 +17239,57 @@ class Graphic3d_CubeMapSeparate_1 extends Graphic3d_CubeMapSeparate {}
 
 class Graphic3d_CubeMapSeparate_2 extends Graphic3d_CubeMapSeparate {}
 
+/**
+ * Graphic3d_CullingTool class provides a possibility to store parameters of view volume, such as its vertices and equations, and contains methods detecting if given AABB overlaps view volume.
+ */
 class Graphic3d_CullingTool {
 }
 
+/**
+ * This class allows the definition of a manager to which the graphic objects are associated. It allows them to be globally manipulated. It defines the global attributes.
+ */
 class Graphic3d_DataStructureManager extends Standard_Transient {
 }
 
+/**
+ * Class storing the frame statistics.
+ */
 class Graphic3d_FrameStats extends Standard_Transient {
 }
 
+/**
+ * Data frame definition.
+ */
 class Graphic3d_FrameStatsData {
 }
 
+/**
+ * Temporary data frame definition.
+ */
 class Graphic3d_FrameStatsDataTmp extends Graphic3d_FrameStatsData {
 }
 
+/**
+ * Describes Fresnel reflectance parameters.
+ */
 class Graphic3d_Fresnel {
 }
 
+/**
+ * Defines the class of a graduated trihedron. It contains main style parameters for implementation of graduated trihedron
+ */
 class Graphic3d_GraduatedTrihedron {
 }
 
+/**
+ * This class allows the definition of a graphic driver for 3d interface (currently only OpenGl driver is used).
+ */
 class Graphic3d_GraphicDriver extends Standard_Transient {
 }
 
+/**
+ * This class allows the definition of groups of primitives inside of graphic objects (presentations). A group contains the primitives and attributes for which the range is limited to this group. The primitives of a group can be globally suppressed.
+ */
 class Graphic3d_Group extends Standard_Transient {
 }
 
@@ -14792,6 +17300,9 @@ class Graphic3d_GroupDefinitionError_1 extends Graphic3d_GroupDefinitionError {}
 
 class Graphic3d_GroupDefinitionError_2 extends Graphic3d_GroupDefinitionError {}
 
+/**
+ * A class that provides an API to use standard OCCT hatch styles defined in Aspect_HatchStyle enum or to create custom styles from a user-defined bitmap
+ */
 class Graphic3d_HatchStyle extends Standard_Transient {
 }
 
@@ -14799,15 +17310,27 @@ class Graphic3d_HatchStyle_1 extends Graphic3d_HatchStyle {}
 
 class Graphic3d_HatchStyle_2 extends Graphic3d_HatchStyle {}
 
+/**
+ * Index buffer.
+ */
 class Graphic3d_IndexBuffer extends Graphic3d_Buffer {
 }
 
+/**
+ * Presentations list sorted within priorities.
+ */
 class Graphic3d_Layer extends Standard_Transient {
 }
 
+/**
+ * Class defining the set of light sources.
+ */
 class Graphic3d_LightSet extends Standard_Transient {
 }
 
+/**
+ * This class is used to store bitmaps and images for markers rendering. It can convert bitmap texture stored in TColStd_HArray1OfByte to Image_PixMap and vice versa.
+ */
 class Graphic3d_MarkerImage extends Standard_Transient {
 }
 
@@ -14815,6 +17338,9 @@ class Graphic3d_MarkerImage_1 extends Graphic3d_MarkerImage {}
 
 class Graphic3d_MarkerImage_2 extends Graphic3d_MarkerImage {}
 
+/**
+ * This class allows the definition of the type of a surface. Aspect attributes of a 3d face. Keywords: Material, FillArea, Shininess, Ambient, Color, Diffuse, Specular, Transparency, Emissive, ReflectionMode, BackFace, FrontFace, Reflection, Absorbtion
+ */
 class Graphic3d_MaterialAspect {
 }
 
@@ -14829,12 +17355,21 @@ class Graphic3d_MaterialDefinitionError_1 extends Graphic3d_MaterialDefinitionEr
 
 class Graphic3d_MaterialDefinitionError_2 extends Graphic3d_MaterialDefinitionError {}
 
+/**
+ * Texture adapter for Media_Frame.
+ */
 class Graphic3d_MediaTexture extends Graphic3d_Texture2D {
 }
 
+/**
+ * Mutable index buffer.
+ */
 class Graphic3d_MutableIndexBuffer extends Graphic3d_IndexBuffer {
 }
 
+/**
+ * Class implementing Metallic-Roughness physically based material definition
+ */
 class Graphic3d_PBRMaterial {
 }
 
@@ -14842,6 +17377,9 @@ class Graphic3d_PBRMaterial_1 extends Graphic3d_PBRMaterial {}
 
 class Graphic3d_PBRMaterial_2 extends Graphic3d_PBRMaterial {}
 
+/**
+ * Class defines presentation properties.
+ */
 class Graphic3d_PresentationAttributes extends Standard_Transient {
 }
 
@@ -14852,24 +17390,45 @@ class Graphic3d_PriorityDefinitionError_1 extends Graphic3d_PriorityDefinitionEr
 
 class Graphic3d_PriorityDefinitionError_2 extends Graphic3d_PriorityDefinitionError {}
 
+/**
+ * Helper class to store rendering parameters.
+ */
 class Graphic3d_RenderingParams {
 }
 
+/**
+ * Class defines a Clipping Volume as a logical OR (disjunction) operation between Graphic3d_ClipPlane in sequence. Each Graphic3d_ClipPlane represents either a single Plane clipping a halfspace (direction is specified by normal), or a sub-chain of planes defining a logical AND (conjunction) operation. Therefore, this collection allows defining a Clipping Volume through the limited set of Boolean operations between clipping Planes.
+ */
 class Graphic3d_SequenceOfHClipPlane extends Standard_Transient {
 }
 
+/**
+ * Describes custom vertex shader attribute.
+ */
 class Graphic3d_ShaderAttribute extends Standard_Transient {
 }
 
+/**
+ * This class is responsible for managing shader objects.
+ */
 class Graphic3d_ShaderObject extends Standard_Transient {
 }
 
+/**
+ * This class is responsible for managing shader programs.
+ */
 class Graphic3d_ShaderProgram extends Standard_Transient {
 }
 
+/**
+ * Describes custom uniform shader variable.
+ */
 class Graphic3d_ShaderVariable extends Standard_Transient {
 }
 
+/**
+ * This class allows the definition a graphic object. This graphic structure can be displayed, erased, or highlighted. This graphic structure can be connected with another graphic structure.
+ */
 class Graphic3d_Structure extends Standard_Transient {
 }
 
@@ -14880,15 +17439,27 @@ class Graphic3d_StructureDefinitionError_1 extends Graphic3d_StructureDefinition
 
 class Graphic3d_StructureDefinitionError_2 extends Graphic3d_StructureDefinitionError {}
 
+/**
+ * This class allows the definition of a manager to which the graphic objects are associated. It allows them to be globally manipulated. It defines the global attributes. Keywords: Structure, Structure Manager, Update Mode, Destroy, Highlight, Visible
+ */
 class Graphic3d_StructureManager extends Standard_Transient {
 }
 
+/**
+ * This class allows the definition of a text object for display. The text might be defined in one of ways, using: - text value and position, - text value, orientation and the state whether the text uses position as point of attach. - text formatter. Formatter contains text, height and alignment parameter.
+ */
 class Graphic3d_Text extends Standard_Transient {
 }
 
+/**
+ * This is an abstract class for managing 1D textures.
+ */
 class Graphic3d_Texture1D extends Graphic3d_TextureMap {
 }
 
+/**
+ * This class provides the implementation of a manual 1D texture. you MUST provides texture coordinates on your facets if you want to see your texture.
+ */
 class Graphic3d_Texture1Dmanual extends Graphic3d_Texture1D {
 }
 
@@ -14898,6 +17469,9 @@ class Graphic3d_Texture1Dmanual_2 extends Graphic3d_Texture1Dmanual {}
 
 class Graphic3d_Texture1Dmanual_3 extends Graphic3d_Texture1Dmanual {}
 
+/**
+ * This class provides the implementation of a 1D texture applyable along a segment. You might use the SetSegment() method to set the way the texture is "streched" on facets.
+ */
 class Graphic3d_Texture1Dsegment extends Graphic3d_Texture1D {
 }
 
@@ -14907,9 +17481,15 @@ class Graphic3d_Texture1Dsegment_2 extends Graphic3d_Texture1Dsegment {}
 
 class Graphic3d_Texture1Dsegment_3 extends Graphic3d_Texture1Dsegment {}
 
+/**
+ * This abstract class for managing 2D textures
+ */
 class Graphic3d_Texture2D extends Graphic3d_TextureMap {
 }
 
+/**
+ * This class defined a manual texture 2D facets MUST define texture coordinate if you want to see somethings on.
+ */
 class Graphic3d_Texture2Dmanual extends Graphic3d_Texture2D {
 }
 
@@ -14919,6 +17499,9 @@ class Graphic3d_Texture2Dmanual_2 extends Graphic3d_Texture2Dmanual {}
 
 class Graphic3d_Texture2Dmanual_3 extends Graphic3d_Texture2Dmanual {}
 
+/**
+ * This class allows the management of a 2D texture defined from a plane equation Use the SetXXX() methods for positioning the texture as you want.
+ */
 class Graphic3d_Texture2Dplane extends Graphic3d_Texture2D {
 }
 
@@ -14928,6 +17511,9 @@ class Graphic3d_Texture2Dplane_2 extends Graphic3d_Texture2Dplane {}
 
 class Graphic3d_Texture2Dplane_3 extends Graphic3d_Texture2Dplane {}
 
+/**
+ * This class provides environment texture.
+ */
 class Graphic3d_TextureEnv extends Graphic3d_TextureRoot {
 }
 
@@ -14937,15 +17523,27 @@ class Graphic3d_TextureEnv_2 extends Graphic3d_TextureEnv {}
 
 class Graphic3d_TextureEnv_3 extends Graphic3d_TextureEnv {}
 
+/**
+ * This is an abstract class for managing texture applyable on polygons.
+ */
 class Graphic3d_TextureMap extends Graphic3d_TextureRoot {
 }
 
+/**
+ * This class describes texture parameters.
+ */
 class Graphic3d_TextureParams extends Standard_Transient {
 }
 
+/**
+ * This is the texture root class enable the dialog with the GraphicDriver allows the loading of texture.
+ */
 class Graphic3d_TextureRoot extends Standard_Transient {
 }
 
+/**
+ * Class holding array of textures to be mapped as a set.
+ */
 class Graphic3d_TextureSet extends Standard_Transient {
 }
 
@@ -14962,6 +17560,9 @@ class Graphic3d_TransformError_1 extends Graphic3d_TransformError {}
 
 class Graphic3d_TransformError_2 extends Graphic3d_TransformError {}
 
+/**
+ * Transformation Persistence definition.
+ */
 class Graphic3d_TransformPers extends Standard_Transient {
 }
 
@@ -14971,9 +17572,15 @@ class Graphic3d_TransformPers_2 extends Graphic3d_TransformPers {}
 
 class Graphic3d_TransformPers_3 extends Graphic3d_TransformPers {}
 
+/**
+ * Graphic3d_ValidatedCubeMapOrder contains completely valid order object. The only way to create this class except copy constructor is 'Validated' method of Graphic3d_CubeMapOrder. This class can initialize Graphic3d_CubeMapOrder. It is supposed to be used in case of necessity of completely valid order (in function argument as example). It helps to automate order's valid checks.
+ */
 class Graphic3d_ValidatedCubeMapOrder {
 }
 
+/**
+ * This class represents a graphical 3D point.
+ */
 class Graphic3d_Vertex {
 }
 
@@ -14985,9 +17592,15 @@ class Graphic3d_Vertex_3 extends Graphic3d_Vertex {}
 
 class Graphic3d_Vertex_4 extends Graphic3d_Vertex {}
 
+/**
+ * Structure display state.
+ */
 class Graphic3d_ViewAffinity extends Standard_Transient {
 }
 
+/**
+ * Helper class for keeping reference on world-view-projection state. Helpful for synchronizing state of WVP dependent data structures.
+ */
 class Graphic3d_WorldViewProjState {
 }
 
@@ -14995,6 +17608,9 @@ class Graphic3d_WorldViewProjState_1 extends Graphic3d_WorldViewProjState {}
 
 class Graphic3d_WorldViewProjState_2 extends Graphic3d_WorldViewProjState {}
 
+/**
+ * In order to have the precision required in industrial design, drawings need to offer the possibility of removing lines, which are hidden in a given projection. To do this, the Hidden Line Removal component provides two algorithms: HLRBRep_Algo and HLRBRep_PolyAlgo. These algorithms remove or indicate lines hidden by surfaces. For a given projection, they calculate a set of lines characteristic of the object being represented. They are also used in conjunction with extraction utilities, which reconstruct a new, simplified shape from a selection of calculation results. This new shape is made up of edges, which represent the lines of the visualized shape in a plane. This plane is the projection plane. HLRBRep_Algo takes into account the shape itself. HLRBRep_PolyAlgo works with a polyhedral simplification of the shape. When you use HLRBRep_Algo, you obtain an exact result, whereas, when you use HLRBRep_PolyAlgo, you reduce computation time but obtain polygonal segments.
+ */
 class HLRAlgo {
 }
 
@@ -15015,12 +17631,18 @@ class HLRAlgo_BiPoint_6 extends HLRAlgo_BiPoint {}
 
 class HLRAlgo_BiPoint_7 extends HLRAlgo_BiPoint {}
 
+/**
+ * The Coincidence class is used in an Inteference to store informations on the "hiding" edge.
+ */
 class HLRAlgo_Coincidence {
 }
 
 class HLRAlgo_EdgeIterator {
 }
 
+/**
+ * This class describes the Hidden Line status of an Edge. It contains :
+ */
 class HLRAlgo_EdgeStatus {
 }
 
@@ -15028,6 +17650,9 @@ class HLRAlgo_EdgeStatus_1 extends HLRAlgo_EdgeStatus {}
 
 class HLRAlgo_EdgeStatus_2 extends HLRAlgo_EdgeStatus {}
 
+/**
+ * An EdgesBlock is a set of Edges. It is used by the DataStructure to structure the Edges.
+ */
 class HLRAlgo_EdgesBlock extends Standard_Transient {
 }
 
@@ -15038,6 +17663,9 @@ class HLRAlgo_Interference_1 extends HLRAlgo_Interference {}
 
 class HLRAlgo_Interference_2 extends HLRAlgo_Interference {}
 
+/**
+ * Describes an intersection on an edge to hide. Contains a parameter and a state (ON = on the face, OUT = above the face, IN = under the Face)
+ */
 class HLRAlgo_Intersection {
 }
 
@@ -15045,24 +17673,45 @@ class HLRAlgo_Intersection_1 extends HLRAlgo_Intersection {}
 
 class HLRAlgo_Intersection_2 extends HLRAlgo_Intersection {}
 
+/**
+ * to remove Hidden lines on Triangulations.
+ */
 class HLRAlgo_PolyAlgo extends Standard_Transient {
 }
 
+/**
+ * Data structure of a set of Triangles.
+ */
 class HLRAlgo_PolyData extends Standard_Transient {
 }
 
+/**
+ * Data structure of a set of Hiding Triangles.
+ */
 class HLRAlgo_PolyHidingData {
 }
 
+/**
+ * to Update OutLines.
+ */
 class HLRAlgo_PolyInternalData extends Standard_Transient {
 }
 
+/**
+ * to Update OutLines.
+ */
 class HLRAlgo_PolyInternalNode extends Standard_Transient {
 }
 
+/**
+ * All the PolyData of a Shell
+ */
 class HLRAlgo_PolyShellData extends Standard_Transient {
 }
 
+/**
+ * Implements a projector object. To transform and project Points and Planes. This object is designed to be used in the removal of hidden lines and is returned by the Prs3d_Projector::Projector function. You define the projection of the selected shape by calling one of the following functions: - HLRBRep_Algo::Projector, or - HLRBRep_PolyAlgo::Projector The choice depends on the algorithm, which you are using. The parameters of the view are defined at the time of construction of a Prs3d_Projector object.
+ */
 class HLRAlgo_Projector {
 }
 
@@ -15076,18 +17725,33 @@ class HLRAlgo_Projector_4 extends HLRAlgo_Projector {}
 
 class HLRAlgo_Projector_5 extends HLRAlgo_Projector {}
 
+/**
+ * A WiresBlock is a set of Blocks. It is used by the DataStructure to structure the Edges.
+ */
 class HLRAlgo_WiresBlock extends Standard_Transient {
 }
 
+/**
+ * This class builds reflect lines on a shape according to the axes of view defined by user. Reflect lines are represented by edges in 3d.
+ */
 class HLRAppli_ReflectLines {
 }
 
+/**
+ * Provides methods to fill a HLRTopoBRep_Data.
+ */
 class HLRTopoBRep_DSFiller {
 }
 
+/**
+ * Stores the results of the OutLine and IsoLine processes.
+ */
 class HLRTopoBRep_Data {
 }
 
+/**
+ * Contains the 3 ListOfShape of a Face ( Internal OutLines, OutLines on restriction and IsoLines ).
+ */
 class HLRTopoBRep_FaceData {
 }
 
@@ -15140,9 +17804,15 @@ class HatchGen_PointOnHatching_2 extends HatchGen_PointOnHatching {}
 
 class HatchGen_PointOnHatching_3 extends HatchGen_PointOnHatching {}
 
+/**
+ * The Hatcher is an algorithm to compute cross hatchings in a 2d plane. It is mainly dedicated to display purpose.
+ */
 class Hatch_Hatcher {
 }
 
+/**
+ * Stores a Line in the Hatcher. Represented by :
+ */
 class Hatch_Line {
 }
 
@@ -15150,6 +17820,9 @@ class Hatch_Line_1 extends Hatch_Line {}
 
 class Hatch_Line_2 extends Hatch_Line {}
 
+/**
+ * Stores an intersection on a line represented by :
+ */
 class Hatch_Parameter {
 }
 
@@ -15169,12 +17842,21 @@ class HeaderSection_FileName extends Standard_Transient {
 class HeaderSection_FileSchema extends Standard_Transient {
 }
 
+/**
+ * Protocol for HeaderSection Entities It requires HeaderSection as a Resource
+ */
 class HeaderSection_Protocol extends StepData_Protocol {
 }
 
+/**
+ * This is used to reparameterize Rational BSpline Curves so that we can concatenate them later to build C1 Curves It builds and 1D-reparameterizing function starting from an Hermite interpolation and adding knots and modifying poles of the 1D BSpline obtained that way. The goal is to build a(u) so that if we consider a BSpline curve N(u) f(u) = ----- D(u)
+ */
 class Hermit {
 }
 
+/**
+ * this class gives content of the CONNECTED COMPONANT(S) which include specific Entity(ies)
+ */
 class IFGraph_AllConnected extends Interface_GraphContent {
 }
 
@@ -15182,6 +17864,9 @@ class IFGraph_AllConnected_1 extends IFGraph_AllConnected {}
 
 class IFGraph_AllConnected_2 extends IFGraph_AllConnected {}
 
+/**
+ * this class determines all Entities shared by some specific ones, at any level (those which will be lead in a Transfer for instance)
+ */
 class IFGraph_AllShared extends Interface_GraphContent {
 }
 
@@ -15189,18 +17874,33 @@ class IFGraph_AllShared_1 extends IFGraph_AllShared {}
 
 class IFGraph_AllShared_2 extends IFGraph_AllShared {}
 
+/**
+ * this class gives entities which are Articulation points in a whole Model or in a sub-part An Articulation Point divides the graph in two (or more) disconnected sub-graphs Identifying Articulation Points allows improving efficiency of spliting a set of Entities into sub-sets
+ */
 class IFGraph_Articulations extends Interface_GraphContent {
 }
 
+/**
+ * this class evaluates effect of two compared sub-parts : cumulation (union), common part (intersection-overlapping) part specific to first sub-part or to the second one Results are kept in a Graph, several question can be set Basic Iteration gives Cumulation (union)
+ */
 class IFGraph_Compare extends Interface_GraphContent {
 }
 
+/**
+ * determines Connected Componants in a Graph. They define disjoined sets of Entities
+ */
 class IFGraph_ConnectedComponants extends IFGraph_SubPartsIterator {
 }
 
+/**
+ * this class evaluates effect of cumulated sub-parts : overlapping, forgotten entities Results are kept in a Graph, several question can be set Basic Iteration gives entities which are part of Cumulation
+ */
 class IFGraph_Cumulate extends Interface_GraphContent {
 }
 
+/**
+ * determines strong componants in a graph which are Cycles
+ */
 class IFGraph_Cycles extends IFGraph_SubPartsIterator {
 }
 
@@ -15208,9 +17908,15 @@ class IFGraph_Cycles_1 extends IFGraph_Cycles {}
 
 class IFGraph_Cycles_2 extends IFGraph_Cycles {}
 
+/**
+ * this class gives entities which are Source of entities of a sub-part, but are not contained by this sub-part
+ */
 class IFGraph_ExternalSources extends Interface_GraphContent {
 }
 
+/**
+ * determines strong componants in a graph which are Roots
+ */
 class IFGraph_SCRoots extends IFGraph_StrongComponants {
 }
 
@@ -15218,9 +17924,15 @@ class IFGraph_SCRoots_1 extends IFGraph_SCRoots {}
 
 class IFGraph_SCRoots_2 extends IFGraph_SCRoots {}
 
+/**
+ * determines strong componants of a graph, that is isolated entities (single componants) or loops
+ */
 class IFGraph_StrongComponants extends IFGraph_SubPartsIterator {
 }
 
+/**
+ * defines general form for graph classes of which result is not a single iteration on Entities, but a nested one : External iteration works on sub-parts, identified by each class (according to its algorithm) Internal Iteration concerns Entities of a sub-part Sub-Parts are assumed to be disjoined; if they are not, the first one has priority
+ */
 class IFGraph_SubPartsIterator {
 }
 
@@ -15228,24 +17940,45 @@ class IFGraph_SubPartsIterator_1 extends IFGraph_SubPartsIterator {}
 
 class IFGraph_SubPartsIterator_2 extends IFGraph_SubPartsIterator {}
 
+/**
+ * Gives tools to manage Selecting a group of Entities processed by an Interface, for instance to divide up an original Model (from a File) to several smaller ones They use description of an Interface Model as a graph
+ */
 class IFSelect {
 }
 
+/**
+ * Act gives a simple way to define and add functions to be ran from a SessionPilot, as follows :
+ */
 class IFSelect_Act extends IFSelect_Activator {
 }
 
+/**
+ * Defines the general frame for working with a SessionPilot. Each Activator treats a set of Commands. Commands are given as alphanumeric strings. They can be of two main forms : - classic, to list, evaluate, enrich the session (by itself) : no specific remark, its complete execution must be described - creation of a new item : instead of creatinf it plus adding it to the session (which is a classic way), it is possible to create it and make it recorded by the SessionPilot : then, the Pilot will add it to the session; this way allows the Pilot to manage itself named items
+ */
 class IFSelect_Activator extends Standard_Transient {
 }
 
+/**
+ * This class allows to memorize and access to the modifiers which are to be applied to a file. To each modifier, is bound a list of integers (optionnal) : if this list is absent, the modifier applies to all the file. Else, it applies to the entities designated by these numbers in the produced file.
+ */
 class IFSelect_AppliedModifiers extends Standard_Transient {
 }
 
+/**
+ * BasicDumper takes into account, for SessionFile, all the classes defined in the package IFSelect : Selections, Dispatches (there is no Modifier)
+ */
 class IFSelect_BasicDumper extends IFSelect_SessionDumper {
 }
 
+/**
+ * A CheckCounter allows to see a CheckList (i.e. CheckIterator) not per entity, its messages, but per message, the entities attached (count and list). Because many messages can be repeated if they are due to systematic errors
+ */
 class IFSelect_CheckCounter extends IFSelect_SignatureList {
 }
 
+/**
+ * This class gathers various informations used by File Modifiers apart from the writer object, which is specific of the norm and of the physical format
+ */
 class IFSelect_ContextWrite {
 }
 
@@ -15253,36 +17986,69 @@ class IFSelect_ContextWrite_1 extends IFSelect_ContextWrite {}
 
 class IFSelect_ContextWrite_2 extends IFSelect_ContextWrite {}
 
+/**
+ * A DispGlobal gathers all the input Entities into only one global Packet
+ */
 class IFSelect_DispGlobal extends IFSelect_Dispatch {
 }
 
+/**
+ * A DispPerCount gathers all the input Entities into one or several Packets, each containing a defined count of Entity This count is a Parameter of the DispPerCount, given as an IntParam, thus allowing external control of its Value
+ */
 class IFSelect_DispPerCount extends IFSelect_Dispatch {
 }
 
+/**
+ * A DispPerFiles produces a determined count of Packets from the input Entities. It divides, as equally as possible, the input list into a count of files. This count is the parameter of the DispPerFiles. If the input list has less than this count, of course there will be one packet per input entity. This count is a Parameter of the DispPerFiles, given as an IntParam, thus allowing external control of its Value
+ */
 class IFSelect_DispPerFiles extends IFSelect_Dispatch {
 }
 
+/**
+ * A DispPerOne gathers all the input Entities into as many Packets as there Root Entities from the Final Selection, that is, one Packet per Entity
+ */
 class IFSelect_DispPerOne extends IFSelect_Dispatch {
 }
 
+/**
+ * A DispPerSignature sorts input Entities according to a Signature : it works with a SignCounter to do this.
+ */
 class IFSelect_DispPerSignature extends IFSelect_Dispatch {
 }
 
+/**
+ * This class allows to describe how a set of Entities has to be dispatched into resulting Packets : a Packet is a sub-set of the initial set of entities.
+ */
 class IFSelect_Dispatch extends Standard_Transient {
 }
 
+/**
+ * An Editor defines a set of values and a way to edit them, on an entity or on the model (e.g. on its header)
+ */
 class IFSelect_Editor extends Standard_Transient {
 }
 
+/**
+ * Functions gives access to all the actions which can be commanded with the resources provided by IFSelect : especially WorkSession and various types of Selections and Dispatches
+ */
 class IFSelect_Functions {
 }
 
+/**
+ * This class gives a frame for Actions which modify the effect of a Dispatch, i.e. : By Selections and Dispatches, an original Model can be splitted into one or more "target" Models : these Models contain Entities copied from the original one (that is, a part of it). Basically, these dispatched Entities are copied as identical to their original counterparts. Also the copied Models reproduce the Header of the original one.
+ */
 class IFSelect_GeneralModifier extends Standard_Transient {
 }
 
+/**
+ * A GraphCounter computes values to be sorted with the help of a Graph. I.E. not from a Signature
+ */
 class IFSelect_GraphCounter extends IFSelect_SignCounter {
 }
 
+/**
+ * A ListEditor is an auxiliary operator for Editor/EditForm I.E. it works on parameter values expressed as strings
+ */
 class IFSelect_ListEditor extends Standard_Transient {
 }
 
@@ -15290,96 +18056,189 @@ class IFSelect_ListEditor_1 extends IFSelect_ListEditor {}
 
 class IFSelect_ListEditor_2 extends IFSelect_ListEditor {}
 
+/**
+ * This class performs the Copy operations involved by the description of a ShareOut (evaluated by a ShareOutResult) plus, if there are, the Modifications on the results, with the help of Modifiers. Each Modifier can work on one or more resulting packets, accoding its criteria : it operates on a Model once copied and filled with the content of the packet.
+ */
 class IFSelect_ModelCopier extends Standard_Transient {
 }
 
+/**
+ * This modifier applies an EditForm on the entities selected
+ */
 class IFSelect_ModifEditForm extends IFSelect_Modifier {
 }
 
+/**
+ * This modifier reorders a whole model from its roots, i.e. according to <rootlast> status, it considers each of its roots, then it orders all its shared entities at any level, the result begins by the lower level entities ... ends by the roots.
+ */
 class IFSelect_ModifReorder extends IFSelect_Modifier {
 }
 
+/**
+ * This class gives a frame for Actions which can work globally on a File once completely defined (i.e. afterwards)
+ */
 class IFSelect_Modifier extends IFSelect_GeneralModifier {
 }
 
+/**
+ * This class gives a simple way to return then consult a list of packets, determined from the content of a Model, by various criteria.
+ */
 class IFSelect_PacketList extends Standard_Transient {
 }
 
+/**
+ * A ParamEditor gives access for edition to a list of TypedValue (i.e. of Static too) Its definition is made of the TypedValue to edit themselves, and can add some constants, which can then be displayed but not changed (for instance, system name, processor version ...)
+ */
 class IFSelect_ParamEditor extends IFSelect_Editor {
 }
 
+/**
+ * A SelectAnyList kind Selection selects a List of an Entity, as well as this Entity contains some. A List contains sub-entities as one per Item, or several (for instance if an Entity binds couples of sub-entities, each item is one of these couples). Remark that only Entities are taken into account (neither Reals, nor Strings, etc...)
+ */
 class IFSelect_SelectAnyList extends IFSelect_SelectDeduct {
 }
 
+/**
+ * A SelectAnyType sorts the Entities of which the Type is Kind of a given Type : this Type for Match is specific of each class of SelectAnyType
+ */
 class IFSelect_SelectAnyType extends IFSelect_SelectExtract {
 }
 
+/**
+ * SelectBase works directly from an InterfaceModel : it is the first base for other Selections.
+ */
 class IFSelect_SelectBase extends IFSelect_Selection {
 }
 
+/**
+ * A SelectCombine type Selection defines algebraic operations between results of several Selections It is a deferred class : sub-classes will have to define precise what operator is to be applied
+ */
 class IFSelect_SelectCombine extends IFSelect_Selection {
 }
 
+/**
+ * A SelectControl kind Selection works with two input Selections in a dissymmetric way : the Main Input which gives an input list of Entities, to be processed, and the Second Input which gives another list, to be used to filter the main input.
+ */
 class IFSelect_SelectControl extends IFSelect_Selection {
 }
 
+/**
+ * A SelectDeduct determines a list of Entities from an Input Selection, by a computation : Output list is not obliged to be a sub-list of Input list (for more specific, see SelectExtract for filtered sub-lists, and SelectExplore for recurcive exploration)
+ */
 class IFSelect_SelectDeduct extends IFSelect_Selection {
 }
 
+/**
+ * A SelectDiff keeps the entities from a Selection, the Main Input, which are not listed by the Second Input
+ */
 class IFSelect_SelectDiff extends IFSelect_SelectControl {
 }
 
+/**
+ * A SelectEntityNumber gets in an InterfaceModel (through a Graph), the Entity which has a specified Number (its rank of adding into the Model) : there can be zero (if none) or one. The Number is not directly defined as an Integer, but as a Parameter, which can be externally controled
+ */
 class IFSelect_SelectEntityNumber extends IFSelect_SelectBase {
 }
 
+/**
+ * A SelectErrorEntities sorts the Entities which are qualified as "Error" (their Type has not been recognized) during reading a File. This does not concern Entities which are syntactically correct, but with incorrect data (for integrity constraints).
+ */
 class IFSelect_SelectErrorEntities extends IFSelect_SelectExtract {
 }
 
+/**
+ * A SelectExplore determines from an input list of Entities, a list obtained by a way of exploration. This implies the possibility of recursive exploration : the output list is itself reused as input, etc... Examples : Shared Entities, can be considered at one level (immediate shared) or more, or max level
+ */
 class IFSelect_SelectExplore extends IFSelect_SelectDeduct {
 }
 
+/**
+ * A SelectExtract determines a list of Entities from an Input Selection, as a sub-list of the Input Result It works by applying a sort criterium on each Entity of the Input. This criterium can be applied Direct to Pick Items (default case) or Reverse to Remove Item
+ */
 class IFSelect_SelectExtract extends IFSelect_SelectDeduct {
 }
 
+/**
+ * A SelectFlag queries a flag noted in the bitmap of the Graph. The Flag is designated by its Name. Flag Names are defined by Work Session and, as necessary, other functional objects
+ */
 class IFSelect_SelectFlag extends IFSelect_SelectExtract {
 }
 
+/**
+ * A SelectInList kind Selection selects a List of an Entity, which is composed of single Entities To know the list on which to work, SelectInList has two deferred methods : NbItems (inherited from SelectAnyList) and ListedEntity (which gives an item as an Entity) which must be defined to get a List in an Entity of the required Type (and consider that list is empty if Entity has not required Type)
+ */
 class IFSelect_SelectInList extends IFSelect_SelectAnyList {
 }
 
+/**
+ * A SelectIncorrectEntities sorts the Entities which have been noted as Incorrect in the Graph of the Session (flag "Incorrect") It can find a result only if ComputeCheck has formerly been called on the WorkSession. Else, its result will be empty.
+ */
 class IFSelect_SelectIncorrectEntities extends IFSelect_SelectFlag {
 }
 
+/**
+ * A SelectIntersection filters the Entities issued from several other Selections as Intersection of results : "AND" operator
+ */
 class IFSelect_SelectIntersection extends IFSelect_SelectCombine {
 }
 
+/**
+ * A SelectModelEntities gets all the Entities of an InterfaceModel.
+ */
 class IFSelect_SelectModelEntities extends IFSelect_SelectBase {
 }
 
+/**
+ * A SelectModelRoots gets all the Root Entities of an InterfaceModel. Remember that a "Root Entity" is defined as having no Sharing Entity (if there is a Loop between Entities, none of them can be a "Root").
+ */
 class IFSelect_SelectModelRoots extends IFSelect_SelectBase {
 }
 
+/**
+ * This type of Selection is intended to describe a direct selection without an explicit criterium, for instance the result of picking viewed entities on a graphic screen
+ */
 class IFSelect_SelectPointed extends IFSelect_SelectBase {
 }
 
+/**
+ * A SelectRange keeps or rejects a sub-set of the input set, that is the Entities of which rank in the iteration list is in a given range (for instance form 2nd to 6th, etc...)
+ */
 class IFSelect_SelectRange extends IFSelect_SelectExtract {
 }
 
+/**
+ * A SelectRootComps sorts the Entities which are part of Strong Componants, local roots of a set of Entities : they can be Single Componants (containing one Entity) or Cycles This class gives a more secure result than SelectRoots (which considers only Single Componants) but is longer to work : it can be used when there can be or there are cycles in a Model For each cycle, one Entity is given arbitrarily Reject works as for SelectRoots : Strong Componants defined in the input list which are not local roots are given
+ */
 class IFSelect_SelectRootComps extends IFSelect_SelectExtract {
 }
 
+/**
+ * A SelectRoots sorts the Entities which are local roots of a set of Entities (not shared by other Entities inside this set, even if they are shared by other Entities outside it)
+ */
 class IFSelect_SelectRoots extends IFSelect_SelectExtract {
 }
 
+/**
+ * This class returns entities according sending to a file Once a model has been loaded, further sendings are recorded as status in the graph (for each value, a count of sendings)
+ */
 class IFSelect_SelectSent extends IFSelect_SelectExtract {
 }
 
+/**
+ * A SelectShared selects Entities which are directly Shared by the Entities of the Input list
+ */
 class IFSelect_SelectShared extends IFSelect_SelectDeduct {
 }
 
+/**
+ * A SelectSharing selects Entities which directly Share (Level One) the Entities of the Input list Remark : if an Entity of the Input List directly shares another one, it is of course present in the Result List
+ */
 class IFSelect_SelectSharing extends IFSelect_SelectDeduct {
 }
 
+/**
+ * A SelectSignature sorts the Entities on a Signature Matching. The signature to match is given at creation time. Also, the required match is given at creation time : exact (IsEqual) or contains (the Type's Name must contain the criterium Text)
+ */
 class IFSelect_SelectSignature extends IFSelect_SelectExtract {
 }
 
@@ -15389,15 +18248,27 @@ class IFSelect_SelectSignature_2 extends IFSelect_SelectSignature {}
 
 class IFSelect_SelectSignature_3 extends IFSelect_SelectSignature {}
 
+/**
+ * In the graph, explore the Shareds of the input entities, until it encounters some which match a given Signature (for a limited level, filters the returned list) By default, fitted for any level
+ */
 class IFSelect_SelectSignedShared extends IFSelect_SelectExplore {
 }
 
+/**
+ * In the graph, explore the sharings of the input entities, until it encounters some which match a given Signature (for a limited level, filters the returned list) By default, fitted for any level
+ */
 class IFSelect_SelectSignedSharing extends IFSelect_SelectExplore {
 }
 
+/**
+ * A SelectSuite can describe a suite of SelectDeduct as a unique one : in other words, it can be seen as a "macro selection"
+ */
 class IFSelect_SelectSuite extends IFSelect_SelectDeduct {
 }
 
+/**
+ * A SelectType keeps or rejects Entities of which the Type is Kind of a given Cdl Type
+ */
 class IFSelect_SelectType extends IFSelect_SelectAnyType {
 }
 
@@ -15405,15 +18276,27 @@ class IFSelect_SelectType_1 extends IFSelect_SelectType {}
 
 class IFSelect_SelectType_2 extends IFSelect_SelectType {}
 
+/**
+ * A SelectUnion cumulates the Entities issued from several other Selections (union of results : "OR" operator)
+ */
 class IFSelect_SelectUnion extends IFSelect_SelectCombine {
 }
 
+/**
+ * A SelectUnknownEntities sorts the Entities which are qualified as "Unknown" (their Type has not been recognized)
+ */
 class IFSelect_SelectUnknownEntities extends IFSelect_SelectExtract {
 }
 
+/**
+ * A Selection allows to define a set of Interface Entities. Entities to be put on an output file should be identified in a way as independant from such or such execution as possible. This permits to handle comprehensive criteria, and to replay them when a new variant of an input file has to be processed.
+ */
 class IFSelect_Selection extends Standard_Transient {
 }
 
+/**
+ * Defines an Iterator on a list of Selections
+ */
 class IFSelect_SelectionIterator {
 }
 
@@ -15421,9 +18304,15 @@ class IFSelect_SelectionIterator_1 extends IFSelect_SelectionIterator {}
 
 class IFSelect_SelectionIterator_2 extends IFSelect_SelectionIterator {}
 
+/**
+ * A SessionDumper is called by SessionFile. It takes into account a set of classes (such as Selections, Dispatches ...). SessionFile writes the Type (as defined by cdl) of each Item and its general Parameters. It manages the names of the Items.
+ */
 class IFSelect_SessionDumper extends Standard_Transient {
 }
 
+/**
+ * A SessionFile is intended to manage access between a WorkSession and an Ascii Form, to be considered as a Dump. It allows to write the File from the WorkSession, and later read the File to the WorkSession, by keeping required descriptions (such as dependances).
+ */
 class IFSelect_SessionFile {
 }
 
@@ -15431,12 +18320,21 @@ class IFSelect_SessionFile_1 extends IFSelect_SessionFile {}
 
 class IFSelect_SessionFile_2 extends IFSelect_SessionFile {}
 
+/**
+ * A SessionPilot is intended to make easier the use of a WorkSession. It receives commands, under alphanumeric form, then calls a library of Activators to interprete and run them.
+ */
 class IFSelect_SessionPilot extends IFSelect_Activator {
 }
 
+/**
+ * This class gathers the informations required to produce one or several file(s) from the content of an InterfaceModel (passing through the creation of intermediate Models).
+ */
 class IFSelect_ShareOut extends Standard_Transient {
 }
 
+/**
+ * This class gives results computed from a ShareOut : simulation before transfer, helps to list entities ... Transfer itself will later be performed, either by a TransferCopy to simply divide up a file, or a TransferDispatch which can be parametred with more details
+ */
 class IFSelect_ShareOutResult {
 }
 
@@ -15451,9 +18349,15 @@ class IFSelect_ShareOutResult_4 extends IFSelect_ShareOutResult {}
 class IFSelect_SignAncestor extends IFSelect_SignType {
 }
 
+/**
+ * This Signature returns the Category of an entity, as recorded in the model
+ */
 class IFSelect_SignCategory extends IFSelect_Signature {
 }
 
+/**
+ * SignCounter gives the frame to count signatures associated with entities, deducted from them. Ex.: their Dynamic Type.
+ */
 class IFSelect_SignCounter extends IFSelect_SignatureList {
 }
 
@@ -15461,42 +18365,78 @@ class IFSelect_SignCounter_1 extends IFSelect_SignCounter {}
 
 class IFSelect_SignCounter_2 extends IFSelect_SignCounter {}
 
+/**
+ * Multiple Signature : ordered list of other Signatures It concatenates on a same line the result of its sub-items separated by sets of 3 blanks It is possible to define tabulations between sub-items Moreover, match rules are specific
+ */
 class IFSelect_SignMultiple extends IFSelect_Signature {
 }
 
+/**
+ * This Signature returns the cdl Type of an entity, under two forms : - complete dynamic type (package and class) - class type, without package name
+ */
 class IFSelect_SignType extends IFSelect_Signature {
 }
 
+/**
+ * This Signature returns the Validity Status of an entity, as deducted from data in the model : it can be "OK" "Unknown" "Unloaded" "Syntactic Fail"(but loaded) "Syntactic Warning" "Semantic Fail" "Semantic Warning"
+ */
 class IFSelect_SignValidity extends IFSelect_Signature {
 }
 
+/**
+ * Signature provides the basic service used by the classes SelectSignature and Counter (i.e. Name, Value), which is : - for an entity in a model, give a characteristic string, its signature This string has not to be unique in the model, but gives a value for such or such important feature. Exemples : Dynamic Type; Category; etc
+ */
 class IFSelect_Signature extends Interface_SignType {
 }
 
+/**
+ * A SignatureList is given as result from a Counter (any kind) It gives access to a list of signatures, with counts, and optionally with list of corresponding entities
+ */
 class IFSelect_SignatureList extends Standard_Transient {
 }
 
+/**
+ * This class runs transformations made by Modifiers, as the ModelCopier does when it produces files (the same set of Modifiers can then be used, as to transform the starting Model, as at file sending time).
+ */
 class IFSelect_TransformStandard extends IFSelect_Transformer {
 }
 
+/**
+ * A Transformer defines the way an InterfaceModel is transformed (without sending it to a file). In order to work, each type of Transformer defines it method Perform, it can be parametred as needed.
+ */
 class IFSelect_Transformer extends Standard_Transient {
 }
 
+/**
+ * This class defines the (empty) frame which can be used to enrich a XSTEP set with new capabilities In particular, a specific WorkLibrary must give the way for Reading a File into a Model, and Writing a Model to a File Thus, it is possible to define several Work Libraries for each norm, but recommanded to define one general class for each one : this general class will define the Read and Write methods.
+ */
 class IFSelect_WorkLibrary extends Standard_Transient {
 }
 
+/**
+ * This class can be used to simply manage a process such as splitting a file, extracting a set of Entities ... It allows to manage different types of Variables : Integer or Text Parameters, Selections, Dispatches, in addition to a ShareOut. To each of these variables, a unique Integer Identifier is attached. A Name can be attached too as desired.
+ */
 class IFSelect_WorkSession extends Standard_Transient {
 }
 
+/**
+ * Actor to write Shape to IGES
+ */
 class IGESControl_ActorWrite extends Transfer_ActorOfFinderProcess {
 }
 
 class IGESControl_AlgoContainer extends IGESToBRep_AlgoContainer {
 }
 
+/**
+ * Controller for IGES-5.1
+ */
 class IGESControl_Controller extends XSControl_Controller {
 }
 
+/**
+ * Translates IGES boundary entity (types 141, 142 and 508) in Advanced Data Exchange. Redefines translation and treatment methods from inherited open class IGESToBRep_IGESBoundary.
+ */
 class IGESControl_IGESBoundary extends IGESToBRep_IGESBoundary {
 }
 
@@ -15504,6 +18444,9 @@ class IGESControl_IGESBoundary_1 extends IGESControl_IGESBoundary {}
 
 class IGESControl_IGESBoundary_2 extends IGESControl_IGESBoundary {}
 
+/**
+ * Reads IGES files, checks them and translates their contents into Open CASCADE models. The IGES data can be that of a whole model or that of a specific list of entities in the model. As in XSControl_Reader, you specify the list using a selection. For translation of iges files it is possible to use the following sequence: To change parameters of translation class Interface_Static should be used before the beginning of translation (see IGES Parameters and General Parameters) Creation of reader IGESControl_Reader reader; To load a file in a model use method: reader.ReadFile("filename.igs") To check a loading file use method Check: reader.Check(failsonly); where failsonly is equal to Standard_True or Standard_False; To print the results of load: reader.PrintCheckLoad(failsonly,mode) where mode is equal to the value of enumeration IFSelect_PrintCount To transfer entities from a model the following methods can be used: for the whole model reader.TransferRoots(onlyvisible); where onlyvisible is equal to Standard_True or Standard_False; To transfer a list of entities: reader.TransferList(list); To transfer one entity reader.TransferEntity(ent) or reader.Transfer(num); To obtain a result the following method can be used: reader.IsDone() reader.NbShapes() and reader.Shape(num); or reader.OneShape(); To print the results of transfer use method: reader.PrintTransferInfo(failwarn,mode); where printfail is equal to the value of enumeration IFSelect_PrintFail, mode see above. Gets correspondence between an IGES entity and a result shape obtained therefrom. reader.TransientProcess(); TopoDS_Shape shape = TransferBRep::ShapeResult(reader.TransientProcess(),ent);
+ */
 class IGESControl_Reader extends XSControl_Reader {
 }
 
@@ -15514,6 +18457,9 @@ class IGESControl_Reader_2 extends IGESControl_Reader {}
 class IGESControl_ToolContainer extends IGESToBRep_ToolContainer {
 }
 
+/**
+ * This class creates and writes IGES files from CAS.CADE models. An IGES file can be written to an existing IGES file or to a new one. The translation can be performed in one or several operations. Each translation operation outputs a distinct root entity in the IGES file. To write an IGES file it is possible to use the following sequence: To modify the IGES file header or to change translation parameters it is necessary to use class Interface_Static (see IGESParameters and GeneralParameters).
+ */
 class IGESControl_Writer {
 }
 
@@ -15523,39 +18469,75 @@ class IGESControl_Writer_2 extends IGESControl_Writer {}
 
 class IGESControl_Writer_3 extends IGESControl_Writer {}
 
+/**
+ * Interface class representing discrete 3d curve of edge. Indexation of points starts from zero.
+ */
 class IMeshData_Curve extends IMeshData_ParametersList {
 }
 
+/**
+ * Interface class representing discrete model of a shape.
+ */
 class IMeshData_Model extends IMeshData_Shape {
 }
 
+/**
+ * Interface class representing pcurve of edge associated with discrete face. Indexation of points starts from zero.
+ */
 class IMeshData_PCurve extends IMeshData_ParametersList {
 }
 
+/**
+ * Interface class representing list of parameters on curve.
+ */
 class IMeshData_ParametersList extends Standard_Transient {
 }
 
+/**
+ * Interface class representing model with associated TopoDS_Shape. Intended for inheritance by structures and algorithms keeping reference TopoDS_Shape.
+ */
 class IMeshData_Shape extends Standard_Transient {
 }
 
+/**
+ * Extension interface class providing status functionality.
+ */
 class IMeshData_StatusOwner {
 }
 
+/**
+ * Interface class representing shaped model with deflection.
+ */
 class IMeshData_TessellatedShape extends IMeshData_Shape {
 }
 
+/**
+ * Interface class representing context of BRepMesh algorithm. Intended to cache discrete model and instances of tools for its processing.
+ */
 class IMeshTools_Context extends IMeshData_Shape {
 }
 
+/**
+ * Interface class providing API for edge tessellation tools.
+ */
 class IMeshTools_CurveTessellator extends Standard_Transient {
 }
 
+/**
+ * Interface class providing API for algorithms intended to create mesh for discrete face.
+ */
 class IMeshTools_MeshAlgo extends Standard_Transient {
 }
 
+/**
+ * Base interface for factories producing instances of triangulation algorithms taking into account type of surface of target face.
+ */
 class IMeshTools_MeshAlgoFactory extends Standard_Transient {
 }
 
+/**
+ * Builds mesh for each face of shape without triangulation. In case if some faces of shape have already been triangulated checks deflection of existing polygonal model and re-uses it if deflection satisfies the specified parameter. Otherwise nullifies existing triangulation and build triangulation anew.
+ */
 class IMeshTools_MeshBuilder extends Message_Algorithm {
 }
 
@@ -15563,30 +18545,57 @@ class IMeshTools_MeshBuilder_1 extends IMeshTools_MeshBuilder {}
 
 class IMeshTools_MeshBuilder_2 extends IMeshTools_MeshBuilder {}
 
+/**
+ * Interface class providing API for algorithms intended to update or modify discrete model.
+ */
 class IMeshTools_ModelAlgo extends Standard_Transient {
 }
 
+/**
+ * Interface class represents API for tool building discrete model.
+ */
 class IMeshTools_ModelBuilder extends Message_Algorithm {
 }
 
+/**
+ * Explores TopoDS_Shape for parts to be meshed - faces and free edges.
+ */
 class IMeshTools_ShapeExplorer extends IMeshData_Shape {
 }
 
+/**
+ * Interface class for shape visitor.
+ */
 class IMeshTools_ShapeVisitor extends Standard_Transient {
 }
 
+/**
+ * Image class that support file reading/writing operations using auxiliary image library. Supported image formats: - *.bmp - bitmap image, lossless format without compression. - *.ppm - PPM (Portable Pixmap Format), lossless format without compression. - *.png - PNG (Portable Network Graphics) lossless format with compression. - *.jpg, *.jpe, *.jpeg - JPEG/JIFF (Joint Photographic Experts Group) lossy format (compressed with quality losses). YUV color space used (automatically converted from/to RGB). - *.tif, *.tiff - TIFF (Tagged Image File Format). - *.tga - TGA (Truevision Targa Graphic), lossless format. - *.gif - GIF (Graphical Interchange Format), lossy format. Color stored using palette (up to 256 distinct colors). - *.exr - OpenEXR high dynamic-range format (supports float pixel formats).
+ */
 class Image_AlienPixMap extends Image_PixMap {
 }
 
+/**
+ * This class compares two images pixel-by-pixel. It uses the following methods to ignore the difference between images: - Black/White comparison. It makes the images 2-colored before the comparison. - Equality with tolerance. Colors of two pixels are considered the same if the differnce of their color is less than a tolerance. - Border filter. The algorithm ignores alone independent pixels, which are different on both images, ignores the "border effect" - the difference caused by triangles located at angle about 0 or 90 degrees to the user.
+ */
 class Image_Diff extends Standard_Transient {
 }
 
+/**
+ * Class represents packed image plane.
+ */
 class Image_PixMap extends Standard_Transient {
 }
 
+/**
+ * Structure to manage image buffer.
+ */
 class Image_PixMapData extends NCollection_Buffer {
 }
 
+/**
+ * Texture image definition. The image can be stored as path to image file, as file path with the given offset and as a data buffer of encoded image.
+ */
 class Image_Texture extends Standard_Transient {
 }
 
@@ -15596,6 +18605,9 @@ class Image_Texture_2 extends Image_Texture {}
 
 class Image_Texture_3 extends Image_Texture {}
 
+/**
+ * Implementation of the analytical intersection between: - two Lin2d, - two Circ2d, - a Lin2d and a Circ2d, - an element of gp (Lin2d, Circ2d, Elips2d, Parab2d, Hypr2d) and another conic. No tolerance is given for all the intersections: the tolerance will be the "precision machine".
+ */
 class IntAna2d_AnaIntersection {
 }
 
@@ -15617,6 +18629,9 @@ class IntAna2d_AnaIntersection_8 extends IntAna2d_AnaIntersection {}
 
 class IntAna2d_AnaIntersection_9 extends IntAna2d_AnaIntersection {}
 
+/**
+ * Definition of a conic by its implicit quadaratic equation: A.X**2 + B.Y**2 + 2.C.X*Y + 2.D.X + 2.E.Y + F = 0.
+ */
 class IntAna2d_Conic {
 }
 
@@ -15630,6 +18645,9 @@ class IntAna2d_Conic_4 extends IntAna2d_Conic {}
 
 class IntAna2d_Conic_5 extends IntAna2d_Conic {}
 
+/**
+ * Geometrical intersection between two 2d elements.
+ */
 class IntAna2d_IntPoint {
 }
 
@@ -15639,9 +18657,15 @@ class IntAna2d_IntPoint_2 extends IntAna2d_IntPoint {}
 
 class IntAna2d_IntPoint_3 extends IntAna2d_IntPoint {}
 
+/**
+ * Definition of a parametric Curve which is the result of the intersection between two quadrics.
+ */
 class IntAna_Curve {
 }
 
+/**
+ * Intersection between 3 planes. The algorithm searches for an intersection point. If two of the planes are parallel or identical, IsEmpty returns TRUE.
+ */
 class IntAna_Int3Pln {
 }
 
@@ -15649,6 +18673,9 @@ class IntAna_Int3Pln_1 extends IntAna_Int3Pln {}
 
 class IntAna_Int3Pln_2 extends IntAna_Int3Pln {}
 
+/**
+ * This class provides the analytic intersection between a conic defined as an element of gp (Lin,Circ,Elips, Parab,Hypr) and a quadric as defined in the class Quadric from IntAna. The intersection between a conic and a plane is treated as a special case.
+ */
 class IntAna_IntConicQuad {
 }
 
@@ -15674,6 +18701,9 @@ class IntAna_IntConicQuad_10 extends IntAna_IntConicQuad {}
 
 class IntAna_IntConicQuad_11 extends IntAna_IntConicQuad {}
 
+/**
+ * Intersection between a line and a torus.
+ */
 class IntAna_IntLinTorus {
 }
 
@@ -15681,6 +18711,9 @@ class IntAna_IntLinTorus_1 extends IntAna_IntLinTorus {}
 
 class IntAna_IntLinTorus_2 extends IntAna_IntLinTorus {}
 
+/**
+ * This class provides the analytic intersection between a cylinder or a cone from gp and another quadric, as defined in the class Quadric from IntAna. This algorithm is used when the geometric intersection (class QuadQuadGeo from IntAna) returns no geometric solution. The result of the intersection may be - Curves as defined in the class Curve from IntAna - Points (Pnt from gp)
+ */
 class IntAna_IntQuadQuad {
 }
 
@@ -15690,6 +18723,9 @@ class IntAna_IntQuadQuad_2 extends IntAna_IntQuadQuad {}
 
 class IntAna_IntQuadQuad_3 extends IntAna_IntQuadQuad {}
 
+/**
+ * Geometric intersections between two natural quadrics (Sphere , Cylinder , Cone , Pln from gp). The possible intersections are : - 1 point - 1 or 2 line(s) - 1 Point and 1 Line - 1 circle - 1 ellipse - 1 parabola - 1 or 2 hyperbola(s). - Empty : there is no intersection between the two quadrics. - Same : the quadrics are identical - NoGeometricSolution : there may be an intersection, but it is necessary to use an analytic algorithm to determine it. See class IntQuadQuad from IntAna.
+ */
 class IntAna_QuadQuadGeo {
 }
 
@@ -15725,6 +18761,9 @@ class IntAna_QuadQuadGeo_15 extends IntAna_QuadQuadGeo {}
 
 class IntAna_QuadQuadGeo_16 extends IntAna_QuadQuadGeo {}
 
+/**
+ * This class provides a description of Quadrics by their Coefficients in natural coordinate system.
+ */
 class IntAna_Quadric {
 }
 
@@ -15744,6 +18783,9 @@ class IntCurveSurface_HInter extends IntCurveSurface_Intersection {
 class IntCurveSurface_Intersection {
 }
 
+/**
+ * Definition of an interserction point between a curve and a surface.
+ */
 class IntCurveSurface_IntersectionPoint {
 }
 
@@ -15751,6 +18793,9 @@ class IntCurveSurface_IntersectionPoint_1 extends IntCurveSurface_IntersectionPo
 
 class IntCurveSurface_IntersectionPoint_2 extends IntCurveSurface_IntersectionPoint {}
 
+/**
+ * A IntersectionSegment describes a segment of curve (w1,w2) where distance(C(w),Surface) is less than a given tolerances.
+ */
 class IntCurveSurface_IntersectionSegment {
 }
 
@@ -15809,6 +18854,9 @@ class IntCurveSurface_TheQuadCurvExactHInter {
 class IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter extends math_FunctionWithDerivative {
 }
 
+/**
+ * Implementation of the ImpTool from IntImpParGen for conics of gp.
+ */
 class IntCurve_IConicTool {
 }
 
@@ -15826,6 +18874,9 @@ class IntCurve_IConicTool_6 extends IntCurve_IConicTool {}
 
 class IntCurve_IConicTool_7 extends IntCurve_IConicTool {}
 
+/**
+ * Provides methods to intersect two conics. The exception ConstructionError is raised in constructors or in Perform methods when a domain (Domain from IntRes2d) is not correct, i-e when a Circle (Circ2d from gp) or an Ellipse (i-e Elips2d from gp) do not have a closed domain (use the SetEquivalentParameters method for a domain on a circle or an ellipse).
+ */
 class IntCurve_IntConicConic extends IntRes2d_Intersection {
 }
 
@@ -15871,6 +18922,9 @@ class IntCurve_IntImpConicParConic_2 extends IntCurve_IntImpConicParConic {}
 class IntCurve_MyImpParToolOfIntImpConicParConic extends math_FunctionWithDerivative {
 }
 
+/**
+ * This class represents a conic from gp as a parametric curve ( in order to be used by the class PConicTool from IntCurve).
+ */
 class IntCurve_PConic {
 }
 
@@ -15886,9 +18940,15 @@ class IntCurve_PConic_5 extends IntCurve_PConic {}
 
 class IntCurve_PConic_6 extends IntCurve_PConic {}
 
+/**
+ * Implementation of the ParTool from IntImpParGen for conics of gp, using the class PConic from IntCurve.
+ */
 class IntCurve_PConicTool {
 }
 
+/**
+ * This class provides a tool which computes the parameter of a point near a parametric conic.
+ */
 class IntCurve_ProjectOnPConicTool {
 }
 
@@ -15898,6 +18958,9 @@ class IntCurvesFace_Intersector {
 class IntCurvesFace_ShapeIntersector {
 }
 
+/**
+ * Implementation of an intersection line described by a parametrized curve.
+ */
 class IntPatch_ALine extends IntPatch_Line {
 }
 
@@ -15913,6 +18976,9 @@ class IntPatch_ALineToWLine {
 class IntPatch_ArcFunction extends math_FunctionWithDerivative {
 }
 
+/**
+ * this function is associated to the intersection between a curve on surface and a surface .
+ */
 class IntPatch_CSFunction extends math_FunctionSetWithDerivatives {
 }
 
@@ -15923,6 +18989,9 @@ class IntPatch_CurvIntSurf_1 extends IntPatch_CurvIntSurf {}
 
 class IntPatch_CurvIntSurf_2 extends IntPatch_CurvIntSurf {}
 
+/**
+ * Implementation of an intersection line represented by a conic.
+ */
 class IntPatch_GLine extends IntPatch_Line {
 }
 
@@ -15959,9 +19028,15 @@ class IntPatch_GLine_15 extends IntPatch_GLine {}
 class IntPatch_HCurve2dTool {
 }
 
+/**
+ * Tool for the intersection between 2 surfaces. Regroupe pour l instant les methodes hors Adaptor3d...
+ */
 class IntPatch_HInterTool {
 }
 
+/**
+ * Implementation of the intersection between two quadric patches : Plane, Cone, Cylinder or Sphere.
+ */
 class IntPatch_ImpImpIntersection {
 }
 
@@ -15969,6 +19044,9 @@ class IntPatch_ImpImpIntersection_1 extends IntPatch_ImpImpIntersection {}
 
 class IntPatch_ImpImpIntersection_2 extends IntPatch_ImpImpIntersection {}
 
+/**
+ * Implementation of the intersection between a natural quadric patch : Plane, Cone, Cylinder or Sphere and a bi-parametrised surface.
+ */
 class IntPatch_ImpPrmIntersection {
 }
 
@@ -15976,6 +19054,9 @@ class IntPatch_ImpPrmIntersection_1 extends IntPatch_ImpPrmIntersection {}
 
 class IntPatch_ImpPrmIntersection_2 extends IntPatch_ImpPrmIntersection {}
 
+/**
+ * Computes the interference between two polyhedra or the self interference of a polyhedron. Points of intersection, polylines of intersection and zones of tangence.
+ */
 class IntPatch_InterferencePolyhedron extends Intf_Interference {
 }
 
@@ -15985,6 +19066,9 @@ class IntPatch_InterferencePolyhedron_2 extends IntPatch_InterferencePolyhedron 
 
 class IntPatch_InterferencePolyhedron_3 extends IntPatch_InterferencePolyhedron {}
 
+/**
+ * This class provides a generic algorithm to intersect 2 surfaces.
+ */
 class IntPatch_Intersection {
 }
 
@@ -15994,15 +19078,27 @@ class IntPatch_Intersection_2 extends IntPatch_Intersection {}
 
 class IntPatch_Intersection_3 extends IntPatch_Intersection {}
 
+/**
+ * Definition of an intersection line between two surfaces. A line may be either geometric : line, circle, ellipse, parabola, hyperbola, as defined in the class GLine, or analytic, as defined in the class ALine, or defined by a set of points (coming from a walking algorithm) as defined in the class WLine.
+ */
 class IntPatch_Line extends Standard_Transient {
 }
 
+/**
+ * The intersections algorithms compute the intersection on two surfaces and return the intersections lines as IntPatch_Line.
+ */
 class IntPatch_LineConstructor {
 }
 
+/**
+ * Definition of an intersection point between two surfaces. Such a point is contains geometrical informations (see the Value method) and logical informations.
+ */
 class IntPatch_Point {
 }
 
+/**
+ * Definition of an intersection line between two surfaces. A line defined by a set of points (e.g. coming from a walking algorithm) as defined in the class WLine or RLine (Restriction line).
+ */
 class IntPatch_PointLine extends IntPatch_Line {
 }
 
@@ -16019,15 +19115,24 @@ class IntPatch_PolyLine_2 extends IntPatch_PolyLine {}
 class IntPatch_Polygo extends Intf_Polygon2d {
 }
 
+/**
+ * Describe the signature of a polyedral surface with only triangular facets and the necessary informations to compute the interferences.
+ */
 class IntPatch_PolyhedronTool {
 }
 
+/**
+ * Implementation of the Intersection between two bi-parametrised surfaces.
+ */
 class IntPatch_PrmPrmIntersection {
 }
 
 class IntPatch_PrmPrmIntersection_T3Bits {
 }
 
+/**
+ * trouver les points d intersection entre la ligne de cheminement et les arcs de restriction
+ */
 class IntPatch_RstInt {
 }
 
@@ -16071,6 +19176,9 @@ class IntPatch_TheSurfFunction_2 extends IntPatch_TheSurfFunction {}
 
 class IntPatch_TheSurfFunction_3 extends IntPatch_TheSurfFunction {}
 
+/**
+ * Definition of set of points as a result of the intersection between 2 parametrised patches.
+ */
 class IntPatch_WLine extends IntPatch_PointLine {
 }
 
@@ -16080,9 +19188,15 @@ class IntPatch_WLine_2 extends IntPatch_WLine {}
 
 class IntPatch_WLine_3 extends IntPatch_WLine {}
 
+/**
+ * IntPatch_WLineTool provides set of static methods related to walking lines.
+ */
 class IntPatch_WLineTool {
 }
 
+/**
+ * The class represents the couple of indices with additional characteristics such as analyzed flag and an angle. In IntPolyh_MaillageAffinage algorithm the class is used as a couple of interfering triangles with the intersection angle.
+ */
 class IntPolyh_Couple {
 }
 
@@ -16093,6 +19207,9 @@ class IntPolyh_Couple_2 extends IntPolyh_Couple {}
 class IntPolyh_CoupleMapHasher {
 }
 
+/**
+ * The class represents the edge built between the two IntPolyh points. It is linked to two IntPolyh triangles.
+ */
 class IntPolyh_Edge {
 }
 
@@ -16100,6 +19217,9 @@ class IntPolyh_Edge_1 extends IntPolyh_Edge {}
 
 class IntPolyh_Edge_2 extends IntPolyh_Edge {}
 
+/**
+ * API algorithm for intersection of two surfaces by intersection of their triangulations.
+ */
 class IntPolyh_Intersection {
 }
 
@@ -16109,6 +19229,9 @@ class IntPolyh_Intersection_2 extends IntPolyh_Intersection {}
 
 class IntPolyh_Intersection_3 extends IntPolyh_Intersection {}
 
+/**
+ * The class represents the point on the surface with both 3D and 2D points.
+ */
 class IntPolyh_Point {
 }
 
@@ -16130,9 +19253,15 @@ class IntPolyh_StartPoint_1 extends IntPolyh_StartPoint {}
 
 class IntPolyh_StartPoint_2 extends IntPolyh_StartPoint {}
 
+/**
+ * The class provides tools for surface sampling.
+ */
 class IntPolyh_Tools {
 }
 
+/**
+ * The class represents the triangle built from three IntPolyh points and three IntPolyh edges.
+ */
 class IntPolyh_Triangle {
 }
 
@@ -16140,6 +19269,9 @@ class IntPolyh_Triangle_1 extends IntPolyh_Triangle {}
 
 class IntPolyh_Triangle_2 extends IntPolyh_Triangle {}
 
+/**
+ * Definition of the domain of parameter on a 2d-curve. Most of the time, a domain is defined by two extremities. An extremity is made of : - a point in 2d-space (Pnt2d from gp), - a parameter on the curve, - a tolerance in the 2d-space. Sometimes, it can be made of 0 or 1 point ( for an infinite or semi-infinite line for example).
+ */
 class IntRes2d_Domain {
 }
 
@@ -16149,9 +19281,15 @@ class IntRes2d_Domain_2 extends IntRes2d_Domain {}
 
 class IntRes2d_Domain_3 extends IntRes2d_Domain {}
 
+/**
+ * Defines the root class of all the Intersections between two 2D-Curves, and provides all the methods about the results of the Intersections Algorithms.
+ */
 class IntRes2d_Intersection {
 }
 
+/**
+ * Definition of an intersection point between two 2D curves.
+ */
 class IntRes2d_IntersectionPoint {
 }
 
@@ -16159,6 +19297,9 @@ class IntRes2d_IntersectionPoint_1 extends IntRes2d_IntersectionPoint {}
 
 class IntRes2d_IntersectionPoint_2 extends IntRes2d_IntersectionPoint {}
 
+/**
+ * Definition of an intersection curve between two 2D curves.
+ */
 class IntRes2d_IntersectionSegment {
 }
 
@@ -16170,6 +19311,9 @@ class IntRes2d_IntersectionSegment_3 extends IntRes2d_IntersectionSegment {}
 
 class IntRes2d_IntersectionSegment_4 extends IntRes2d_IntersectionSegment {}
 
+/**
+ * Definition of the type of transition near an intersection point between two curves. The transition is either a "true transition", which means that one of the curves goes inside or outside the area defined by the other curve near the intersection, or a "touch transition" which means that the first curve does not cross the other one, or an "undecided" transition, which means that the curves are superposed.
+ */
 class IntRes2d_Transition {
 }
 
@@ -16181,12 +19325,21 @@ class IntRes2d_Transition_3 extends IntRes2d_Transition {}
 
 class IntRes2d_Transition_4 extends IntRes2d_Transition {}
 
+/**
+ * template class for a topological tool. This tool is linked with the surface on which the classification has to be made.
+ */
 class IntStart_SITopolTool extends Standard_Transient {
 }
 
+/**
+ * This package provides resources for all the packages concerning the intersection between surfaces.
+ */
 class IntSurf {
 }
 
+/**
+ * creation d 'un couple de 2 entiers
+ */
 class IntSurf_Couple {
 }
 
@@ -16194,6 +19347,9 @@ class IntSurf_Couple_1 extends IntSurf_Couple {}
 
 class IntSurf_Couple_2 extends IntSurf_Couple {}
 
+/**
+ * Definition of a point solution of the intersection between an implicit an a parametrised surface. These points are passing points on the intersection lines, or starting points for the closed lines on the parametrised surface.
+ */
 class IntSurf_InteriorPoint {
 }
 
@@ -16201,6 +19357,9 @@ class IntSurf_InteriorPoint_1 extends IntSurf_InteriorPoint {}
 
 class IntSurf_InteriorPoint_2 extends IntSurf_InteriorPoint {}
 
+/**
+ * This class provides a tool on the "interior point" that can be used to instantiates the Walking algorithmes (see package IntWalk).
+ */
 class IntSurf_InteriorPointTool {
 }
 
@@ -16217,6 +19376,9 @@ class IntSurf_PathPoint_2 extends IntSurf_PathPoint {}
 class IntSurf_PathPointTool {
 }
 
+/**
+ * This class defines the geometric informations for an intersection point between 2 surfaces : The coordinates ( Pnt from gp ), and two parametric coordinates.
+ */
 class IntSurf_PntOn2S {
 }
 
@@ -16235,9 +19397,15 @@ class IntSurf_Quadric_5 extends IntSurf_Quadric {}
 
 class IntSurf_Quadric_6 extends IntSurf_Quadric {}
 
+/**
+ * This class provides a tool on a quadric that can be used to instantiates the Walking algorithmes (see package IntWalk) with a Quadric from IntSurf as implicit surface.
+ */
 class IntSurf_QuadricTool {
 }
 
+/**
+ * Definition of the transition at the intersection between an intersection line and a restriction curve on a surface.
+ */
 class IntSurf_Transition {
 }
 
@@ -16247,9 +19415,15 @@ class IntSurf_Transition_2 extends IntSurf_Transition {}
 
 class IntSurf_Transition_3 extends IntSurf_Transition {}
 
+/**
+ * Contains classes for intersection and classification purposes and accompanying classes
+ */
 class IntTools {
 }
 
+/**
+ * base class for range index management
+ */
 class IntTools_BaseRangeSample {
 }
 
@@ -16257,6 +19431,9 @@ class IntTools_BaseRangeSample_1 extends IntTools_BaseRangeSample {}
 
 class IntTools_BaseRangeSample_2 extends IntTools_BaseRangeSample {}
 
+/**
+ * The class BeanFaceIntersector computes ranges of parameters on the curve of a bean(part of edge) that bound the parts of bean which are on the surface of a face according to edge and face tolerances. Warning: The real boundaries of the face are not taken into account, Most of the result parts of the bean lays only inside the region of the surface, which includes the inside of the face. And the parts which are out of this region can be excluded from the result.
+ */
 class IntTools_BeanFaceIntersector {
 }
 
@@ -16282,6 +19459,9 @@ class IntTools_CArray1OfReal_1 extends IntTools_CArray1OfReal {}
 
 class IntTools_CArray1OfReal_2 extends IntTools_CArray1OfReal {}
 
+/**
+ * The class is to describe a common part between two edges in 3-d space.
+ */
 class IntTools_CommonPrt {
 }
 
@@ -16289,6 +19469,9 @@ class IntTools_CommonPrt_1 extends IntTools_CommonPrt {}
 
 class IntTools_CommonPrt_2 extends IntTools_CommonPrt {}
 
+/**
+ * The class is a container of one 3D curve, two 2D curves and two Tolerance values. It is used in the Face/Face intersection algorithm to store the results of intersection. In this context: **the 3D curve** is the intersection curve; **the 2D curves** are the PCurves of the 3D curve on the intersecting faces; **the tolerance** is the valid tolerance for 3D curve computed as maximal deviation between 3D curve and 2D curves (or surfaces in case there are no 2D curves); **the tangential tolerance** is the maximal distance from 3D curve to the end of the tangential zone between faces in terms of their tolerance values.
+ */
 class IntTools_Curve {
 }
 
@@ -16299,6 +19482,9 @@ class IntTools_Curve_2 extends IntTools_Curve {}
 class IntTools_CurveRangeLocalizeData {
 }
 
+/**
+ * class for range index management of curve
+ */
 class IntTools_CurveRangeSample extends IntTools_BaseRangeSample {
 }
 
@@ -16306,9 +19492,15 @@ class IntTools_CurveRangeSample_1 extends IntTools_CurveRangeSample {}
 
 class IntTools_CurveRangeSample_2 extends IntTools_CurveRangeSample {}
 
+/**
+ * class for range index management of curve
+ */
 class IntTools_CurveRangeSampleMapHasher {
 }
 
+/**
+ * The class provides Edge/Edge intersection algorithm based on the intersection between edges bounding boxes.
+ */
 class IntTools_EdgeEdge {
 }
 
@@ -16318,9 +19510,15 @@ class IntTools_EdgeEdge_2 extends IntTools_EdgeEdge {}
 
 class IntTools_EdgeEdge_3 extends IntTools_EdgeEdge {}
 
+/**
+ * The class provides Edge/Face intersection algorithm to determine common parts between edge and face in 3-d space. Common parts between Edge and Face can be: - Vertices - in case of intersection or touching; - Edge - in case of full coincidence of the edge with the face.
+ */
 class IntTools_EdgeFace {
 }
 
+/**
+ * Class provides an algorithm to classify a 2d Point in 2d space of face using boundaries of the face.
+ */
 class IntTools_FClass2d {
 }
 
@@ -16328,9 +19526,15 @@ class IntTools_FClass2d_1 extends IntTools_FClass2d {}
 
 class IntTools_FClass2d_2 extends IntTools_FClass2d {}
 
+/**
+ * This class provides the intersection of face's underlying surfaces.
+ */
 class IntTools_FaceFace {
 }
 
+/**
+ * class MarkedRangeSet provides continuous set of ranges marked with flags
+ */
 class IntTools_MarkedRangeSet {
 }
 
@@ -16340,6 +19544,9 @@ class IntTools_MarkedRangeSet_2 extends IntTools_MarkedRangeSet {}
 
 class IntTools_MarkedRangeSet_3 extends IntTools_MarkedRangeSet {}
 
+/**
+ * Contains two points PntOnFace from IntTools and a flag
+ */
 class IntTools_PntOn2Faces {
 }
 
@@ -16347,6 +19554,9 @@ class IntTools_PntOn2Faces_1 extends IntTools_PntOn2Faces {}
 
 class IntTools_PntOn2Faces_2 extends IntTools_PntOn2Faces {}
 
+/**
+ * The class describes the 1-d range [myFirst, myLast].
+ */
 class IntTools_Range {
 }
 
@@ -16354,6 +19564,9 @@ class IntTools_Range_1 extends IntTools_Range {}
 
 class IntTools_Range_2 extends IntTools_Range {}
 
+/**
+ * The class is to describe the root of function of one variable for Edge/Edge and Edge/Surface algorithms.
+ */
 class IntTools_Root {
 }
 
@@ -16361,6 +19574,9 @@ class IntTools_Root_1 extends IntTools_Root {}
 
 class IntTools_Root_2 extends IntTools_Root {}
 
+/**
+ * The class provides the computation of a working (shrunk) range [t1, t2] for the 3D-curve of the edge.
+ */
 class IntTools_ShrunkRange {
 }
 
@@ -16373,6 +19589,9 @@ class IntTools_SurfaceRangeLocalizeData_2 extends IntTools_SurfaceRangeLocalizeD
 
 class IntTools_SurfaceRangeLocalizeData_3 extends IntTools_SurfaceRangeLocalizeData {}
 
+/**
+ * class for range index management of surface
+ */
 class IntTools_SurfaceRangeSample {
 }
 
@@ -16387,9 +19606,15 @@ class IntTools_SurfaceRangeSample_4 extends IntTools_SurfaceRangeSample {}
 class IntTools_SurfaceRangeSampleMapHasher {
 }
 
+/**
+ * The class contains handy static functions dealing with the geometry and topology.
+ */
 class IntTools_Tools {
 }
 
+/**
+ * Class redefine methods of TopolTool from Adaptor3d concerning sample points
+ */
 class IntTools_TopolTool extends Adaptor3d_TopolTool {
 }
 
@@ -16397,9 +19622,15 @@ class IntTools_TopolTool_1 extends IntTools_TopolTool {}
 
 class IntTools_TopolTool_2 extends IntTools_TopolTool {}
 
+/**
+ * IntTools_WLineTool provides set of static methods related to walking lines.
+ */
 class IntTools_WLineTool {
 }
 
+/**
+ * This class implements an algorithm to determine the intersection between 2 parametrized surfaces, marching from a starting point. The intersection line starts and ends on the natural surface's boundaries .
+ */
 class IntWalk_PWalking {
 }
 
@@ -16417,6 +19648,9 @@ class IntWalk_TheInt2S_1 extends IntWalk_TheInt2S {}
 
 class IntWalk_TheInt2S_2 extends IntWalk_TheInt2S {}
 
+/**
+ * A bit map simply allows to associate a boolean flag to each item of a list, such as a list of entities, etc... numbered between 1 and a positive count nbitems
+ */
 class Interface_BitMap {
 }
 
@@ -16426,6 +19660,9 @@ class Interface_BitMap_2 extends Interface_BitMap {}
 
 class Interface_BitMap_3 extends Interface_BitMap {}
 
+/**
+ * This class manages categories A category is defined by a name and a number, and can be seen as a way of rough classification, i.e. less precise than a cdl type. Hence, it is possible to dispatch every entity in about a dozen of categories, twenty is a reasonable maximum.
+ */
 class Interface_Category {
 }
 
@@ -16435,6 +19672,9 @@ class Interface_Category_2 extends Interface_Category {}
 
 class Interface_Category_3 extends Interface_Category {}
 
+/**
+ * Defines a Check, as a list of Fail or Warning Messages under a literal form, which can be empty. A Check can also bring an Entity, which is the Entity to which the messages apply (this Entity may be any Transient Object).
+ */
 class Interface_Check extends Standard_Transient {
 }
 
@@ -16449,6 +19689,9 @@ class Interface_CheckFailure_1 extends Interface_CheckFailure {}
 
 class Interface_CheckFailure_2 extends Interface_CheckFailure {}
 
+/**
+ * Result of a Check operation (especially from InterfaceModel)
+ */
 class Interface_CheckIterator {
 }
 
@@ -16456,6 +19699,9 @@ class Interface_CheckIterator_1 extends Interface_CheckIterator {}
 
 class Interface_CheckIterator_2 extends Interface_CheckIterator {}
 
+/**
+ * Performs Checks on Entities, using General Service Library and Modules to work. Works on one Entity or on a complete Model
+ */
 class Interface_CheckTool {
 }
 
@@ -16467,12 +19713,21 @@ class Interface_CheckTool_3 extends Interface_CheckTool {}
 
 class Interface_CheckTool_4 extends Interface_CheckTool {}
 
+/**
+ * This deferred class describes the services required by CopyTool to work. They are very simple and correspond basically to the management of an indexed map. But they can be provided by various classes which can control a Transfer. Each Starting Entity have at most one Result (Mapping one-one)
+ */
 class Interface_CopyControl extends Standard_Transient {
 }
 
+/**
+ * Manages a Map for the need of single Transfers, such as Copies In such transfer, Starting Entities are read from a unique Starting Model, and each transferred Entity is bound to one and only one Result, which cannot be changed later.
+ */
 class Interface_CopyMap extends Interface_CopyControl {
 }
 
+/**
+ * Performs Deep Copies of sets of Entities Allows to perform Copy of Interface Entities from a Model to another one. Works by calling general services GetFromAnother and GetImplied. Uses a CopyMap to bind a unique Result to each Copied Entity
+ */
 class Interface_CopyTool {
 }
 
@@ -16482,6 +19737,9 @@ class Interface_CopyTool_2 extends Interface_CopyTool {}
 
 class Interface_CopyTool_3 extends Interface_CopyTool {}
 
+/**
+ * Auxiliary class for EntityList. An EntityList designates an EntityCluster, which brings itself an fixed maximum count of Entities. If it is full, it gives access to another cluster ("Next"). This class is intended to give a good compromise between access time (faster than a Sequence, good for little count) and memory use (better than a Sequence in any case, overall for little count, better than an Array for a very little count. It is designed for a light management. Remark that a new Item may not be Null, because this is the criterium used for "End of List"
+ */
 class Interface_EntityCluster extends Standard_Transient {
 }
 
@@ -16493,6 +19751,9 @@ class Interface_EntityCluster_3 extends Interface_EntityCluster {}
 
 class Interface_EntityCluster_4 extends Interface_EntityCluster {}
 
+/**
+ * Defines an Iterator on Entities. Allows considering of various criteria
+ */
 class Interface_EntityIterator {
 }
 
@@ -16500,18 +19761,33 @@ class Interface_EntityIterator_1 extends Interface_EntityIterator {}
 
 class Interface_EntityIterator_2 extends Interface_EntityIterator {}
 
+/**
+ * This class defines a list of Entities (Transient Objects), it can be used as a field of other Transient classes, with these features : - oriented to define a little list, that is, slower than an Array or a Map of Entities for a big count (about 100 and over), but faster than a Sequence - allows to work as a Sequence, limited to Clear, Append, Remove, Access to an Item identified by its rank in the list - space saving, compared to a Sequence, especially for little amounts; better than an Array for a very little amount (less than 10) but less good for a greater amount
+ */
 class Interface_EntityList {
 }
 
+/**
+ * Auxiliary class to store a litteral parameter in a file intermediate directory or in an UndefinedContent : a reference type Parameter detains an Integer which is used to address a record in the directory. FileParameter is intended to be stored in a ParamSet : hence memory management is performed by ParamSet, which calls Clear to work, while the Destructor (see Destroy) does nothing. Also a FileParameter can be read for consultation only, not to be read from a Structure to be included into another one.
+ */
 class Interface_FileParameter {
 }
 
+/**
+ * Defines services which are required to load an InterfaceModel from a File. Typically, it may firstly transform a system file into a FileReaderData object, then work on it, not longer considering file contents, to load an Interface Model. It may also work on a FileReaderData already loaded.
+ */
 class Interface_FileReaderTool {
 }
 
+/**
+ * This class converts a floting number (Real) to a string It can be used if the standard C-C++ output functions (sprintf or std::cout<<) are not convenient. That is to say : - to suppress trailing '0' and 'E+00' (if desired) - to control exponant output and floating point output
+ */
 class Interface_FloatWriter {
 }
 
+/**
+ * GTool - General Tool for a Model Provides the functions performed by Protocol/GeneralModule for entities of a Model, and recorded in a GeneralLib Optimized : once an entity has been queried, the GeneralLib is not longer queried Shareable between several users : as a Handle
+ */
 class Interface_GTool extends Standard_Transient {
 }
 
@@ -16532,6 +19808,9 @@ class Interface_GlobalNodeOfGeneralLib extends Standard_Transient {
 class Interface_GlobalNodeOfReaderLib extends Standard_Transient {
 }
 
+/**
+ * Defines general form for classes of graph algorithms on Interfaces, this form is that of EntityIterator Each sub-class fills it according to its own algorithm This also allows to combine any graph result to others, all being given under one unique form
+ */
 class Interface_GraphContent extends Interface_EntityIterator {
 }
 
@@ -16543,6 +19822,9 @@ class Interface_GraphContent_3 extends Interface_GraphContent {}
 
 class Interface_GraphContent_4 extends Interface_GraphContent {}
 
+/**
+ * This class detains the data which describe a Graph. A Graph has two lists, one for shared refs, one for sharing refs (the reverses). Each list comprises, for each Entity of the Model of the Graph, a list of Entities (shared or sharing). In fact, entities are identified by their numbers in the Model or Graph : this gives better performances.
+ */
 class Interface_IntList {
 }
 
@@ -16552,6 +19834,9 @@ class Interface_IntList_2 extends Interface_IntList {}
 
 class Interface_IntList_3 extends Interface_IntList {}
 
+/**
+ * An Integer through a Handle (i.e. managed as TShared)
+ */
 class Interface_IntVal extends Standard_Transient {
 }
 
@@ -16569,12 +19854,21 @@ class Interface_InterfaceMismatch_1 extends Interface_InterfaceMismatch {}
 
 class Interface_InterfaceMismatch_2 extends Interface_InterfaceMismatch {}
 
+/**
+ * Defines an (Indexed) Set of data corresponding to a complete Transfer by a File Interface, i.e. File Header and Transient Entities (Objects) contained in a File. Contained Entities are identified in the Model by unique and consecutive Numbers.
+ */
 class Interface_InterfaceModel extends Standard_Transient {
 }
 
+/**
+ * Simple Management of a Line Buffer, to be used by Interface File Writers. While a String is suitable to do that, this class ensures an optimised Memory Management, because this is a hard point of File Writing.
+ */
 class Interface_LineBuffer {
 }
 
+/**
+ * This class gives a set of functions to manage and use a list of translated messages (messagery)
+ */
 class Interface_MSG {
 }
 
@@ -16602,9 +19896,15 @@ class Interface_NodeOfReaderLib extends Standard_Transient {
 class Interface_ParamList extends Standard_Transient {
 }
 
+/**
+ * Defines an ordered set of FileParameters, in a way to be efficient as in memory requirement or in speed
+ */
 class Interface_ParamSet extends Standard_Transient {
 }
 
+/**
+ * General description of Interface Protocols. A Protocol defines a set of Entity types. This class provides also the notion of Active Protocol, as a working context, defined once then exploited by various Tools and Libraries.
+ */
 class Interface_Protocol extends Standard_Transient {
 }
 
@@ -16615,9 +19915,15 @@ class Interface_ReaderLib_1 extends Interface_ReaderLib {}
 
 class Interface_ReaderLib_2 extends Interface_ReaderLib {}
 
+/**
+ * Defines unitary operations required to read an Entity from a File (see FileReaderData, FileReaderTool), under control of a FileReaderTool. The initial creation is performed by a GeneralModule (set in GeneralLib). Then, which remains is Loading data from the FileReaderData to the Entity
+ */
 class Interface_ReaderModule extends Standard_Transient {
 }
 
+/**
+ * A ReportEntity is produced to aknowledge and memorize the binding between a Check and an Entity. The Check can bring Fails (+ Warnings if any), or only Warnings. If it is empty, the Report Entity is for an Unknown Entity.
+ */
 class Interface_ReportEntity extends Standard_Transient {
 }
 
@@ -16625,6 +19931,9 @@ class Interface_ReportEntity_1 extends Interface_ReportEntity {}
 
 class Interface_ReportEntity_2 extends Interface_ReportEntity {}
 
+/**
+ * This class manages statistics to be queried asynchronously. Way of use : An operator describes a STAT form then fills it according to its progression. This produces a state of advancement of the process. This state can then be queried asynchronously : typically it is summarised as a percentage. There are also an identification of the current state, and informations on processed volume.
+ */
 class Interface_STAT {
 }
 
@@ -16632,6 +19941,9 @@ class Interface_STAT_1 extends Interface_STAT {}
 
 class Interface_STAT_2 extends Interface_STAT {}
 
+/**
+ * This class only says for each Entity of a Model, if it is Shared or not by one or more other(s) of this Model It uses the General Service "Shared".
+ */
 class Interface_ShareFlags {
 }
 
@@ -16645,6 +19957,9 @@ class Interface_ShareFlags_4 extends Interface_ShareFlags {}
 
 class Interface_ShareFlags_5 extends Interface_ShareFlags {}
 
+/**
+ * Builds the Graph of Dependancies, from the General Service "Shared" -> builds for each Entity of a Model, the Shared and Sharing Lists, and gives access to them. Allows to complete with Implied References (which are not regarded as Shared Entities, but are nevertheless Referenced), this can be usefull for Reference Checking
+ */
 class Interface_ShareTool {
 }
 
@@ -16660,12 +19975,21 @@ class Interface_ShareTool_5 extends Interface_ShareTool {}
 
 class Interface_ShareTool_6 extends Interface_ShareTool {}
 
+/**
+ * Signature to give the Label from the Model
+ */
 class Interface_SignLabel extends MoniTool_SignText {
 }
 
+/**
+ * Provides the basic service to get a type name, according to a norm It can be used for other classes (general signatures ...)
+ */
 class Interface_SignType extends MoniTool_SignText {
 }
 
+/**
+ * This class gives a way to manage meaningfull static variables, used as "global" parameters in various procedures.
+ */
 class Interface_Static extends Interface_TypedValue {
 }
 
@@ -16673,9 +19997,15 @@ class Interface_Static_1 extends Interface_Static {}
 
 class Interface_Static_2 extends Interface_Static {}
 
+/**
+ * Now strictly equivalent to TypedValue from MoniTool, except for ParamType which remains for compatibility reasons
+ */
 class Interface_TypedValue extends MoniTool_TypedValue {
 }
 
+/**
+ * Defines resources for an "Undefined Entity" : such an Entity is used to describe an Entity which complies with the Norm, but of an Unknown Type : hence it is kept under a literal form (avoiding to loose data). UndefinedContent offers a way to store a list of Parameters, as literals or references to other Entities
+ */
 class Interface_UndefinedContent extends Standard_Transient {
 }
 
@@ -16690,12 +20020,21 @@ class Interval_3 extends Interval {}
 
 class Interval_4 extends Interval {}
 
+/**
+ * Interference computation between polygons, lines and polyhedra with only triangular facets. These objects are polygonal representations of complex curves and triangulated representations of complex surfaces.
+ */
 class Intf {
 }
 
+/**
+ * Describes the Interference computation result between polygon2d or polygon3d or polyhedron (as three sequences of points of intersection, polylines of intersection and zones de tangence).
+ */
 class Intf_Interference {
 }
 
+/**
+ * Computes the interference between two polygons or the self intersection of a polygon in two dimensions.
+ */
 class Intf_InterferencePolygon2d extends Intf_Interference {
 }
 
@@ -16705,9 +20044,15 @@ class Intf_InterferencePolygon2d_2 extends Intf_InterferencePolygon2d {}
 
 class Intf_InterferencePolygon2d_3 extends Intf_InterferencePolygon2d {}
 
+/**
+ * Describes the necessary polygon information to compute the interferences.
+ */
 class Intf_Polygon2d {
 }
 
+/**
+ * Describe a polyline of intersection between two polyhedra as a sequence of points of intersection.
+ */
 class Intf_SectionLine {
 }
 
@@ -16715,6 +20060,9 @@ class Intf_SectionLine_1 extends Intf_SectionLine {}
 
 class Intf_SectionLine_2 extends Intf_SectionLine {}
 
+/**
+ * Describes an intersection point between polygons and polyedra.
+ */
 class Intf_SectionPoint {
 }
 
@@ -16724,6 +20072,9 @@ class Intf_SectionPoint_2 extends Intf_SectionPoint {}
 
 class Intf_SectionPoint_3 extends Intf_SectionPoint {}
 
+/**
+ * Describes a zone of tangence between polygons or polyhedra as a sequence of points of intersection.
+ */
 class Intf_TangentZone {
 }
 
@@ -16731,9 +20082,15 @@ class Intf_TangentZone_1 extends Intf_TangentZone {}
 
 class Intf_TangentZone_2 extends Intf_TangentZone {}
 
+/**
+ * Provides services to create box for infinites lines in a given contexte.
+ */
 class Intf_Tool {
 }
 
+/**
+ * **-----------**** Other ***---* IsBefore ***----------* IsJustBefore ***---------------* IsOverlappingAtStart ***------------------------* IsJustEnclosingAtEnd ***-----------------------------------* IsEnclosing ***----* IsJustOverlappingAtStart ***-------------* IsSimilar ***------------------------* IsJustEnclosingAtStart ***-* IsInside ***------* IsJustOverlappingAtEnd ***-----------------* IsOverlappingAtEnd ***--------* IsJustAfter ***---* IsAfter
+ */
 class Intrv_Interval {
 }
 
@@ -16743,6 +20100,9 @@ class Intrv_Interval_2 extends Intrv_Interval {}
 
 class Intrv_Interval_3 extends Intrv_Interval {}
 
+/**
+ * The class Intervals is a sorted sequence of non overlapping Real Intervals.
+ */
 class Intrv_Intervals {
 }
 
@@ -16840,6 +20200,9 @@ class LDOM_NodeList_1 extends LDOM_NodeList {}
 
 class LDOM_NodeList_2 extends LDOM_NodeList {}
 
+/**
+ * Subclass if std::ostream allowing to increase performance of outputting data into a string avoiding reallocation of buffer. Class LDOM_OSStream implements output into a sequence of strings and getting the result as a string. It inherits Standard_OStream (std::ostream). Beside methods of std::ostream, it also has additional useful methods: str(), Length() and Clear().
+ */
 class LDOM_OSStream extends Standard_OStream {
 }
 
@@ -16882,6 +20245,9 @@ class LProp3d_SLProps_3 extends LProp3d_SLProps {}
 class LProp3d_SurfaceTool {
 }
 
+/**
+ * Computes the locals extremas of curvature of a gp curve Remark : a gp curve has not inflection.
+ */
 class LProp_AnalyticCurInf {
 }
 
@@ -16892,6 +20258,9 @@ class LProp_BadContinuity_1 extends LProp_BadContinuity {}
 
 class LProp_BadContinuity_2 extends LProp_BadContinuity {}
 
+/**
+ * Stores the parameters of a curve 2d or 3d corresponding to the curvature's extremas and the Inflection's Points.
+ */
 class LProp_CurAndInf {
 }
 
@@ -16902,9 +20271,15 @@ class LProp_NotDefined_1 extends LProp_NotDefined {}
 
 class LProp_NotDefined_2 extends LProp_NotDefined {}
 
+/**
+ * Multiple services concerning 1d functions.
+ */
 class Law {
 }
 
+/**
+ * Law Function based on a BSpline curve 1d. Package methods and classes are implemented in package Law to construct the basis curve with several constraints.
+ */
 class Law_BSpFunc extends Law_Function {
 }
 
@@ -16912,6 +20287,9 @@ class Law_BSpFunc_1 extends Law_BSpFunc {}
 
 class Law_BSpFunc_2 extends Law_BSpFunc {}
 
+/**
+ * Definition of the 1D B_spline curve.
+ */
 class Law_BSpline extends Standard_Transient {
 }
 
@@ -16919,9 +20297,15 @@ class Law_BSpline_1 extends Law_BSpline {}
 
 class Law_BSpline_2 extends Law_BSpline {}
 
+/**
+ * For a B-spline curve the discontinuities are localised at the knot values and between two knots values the B-spline is infinitely continuously differentiable. At a knot of range index the continuity is equal to : Degree - Mult (Index) where Degree is the degree of the basis B-spline functions and Mult the multiplicity of the knot of range Index. If for your computation you need to have B-spline curves with a minima of continuity it can be interesting to know between which knot values, a B-spline curve arc, has a continuity of given order. This algorithm computes the indexes of the knots where you should split the curve, to obtain arcs with a constant continuity given at the construction time. The splitting values are in the range [FirstUKnotValue, LastUKnotValue] (See class B-spline curve from package Geom). If you just want to compute the local derivatives on the curve you don't need to create the B-spline curve arcs, you can use the functions LocalD1, LocalD2, LocalD3, LocalDN of the class BSplineCurve.
+ */
 class Law_BSplineKnotSplitting {
 }
 
+/**
+ * Loi composite constituee d une liste de lois de ranges consecutifs. Cette implementation un peu lourde permet de reunir en une seule loi des portions de loi construites de facon independantes (par exemple en interactif) et de lancer le walking d un coup a l echelle d une ElSpine. CET OBJET REPOND DONC A UN PROBLEME D IMPLEMENTATION SPECIFIQUE AUX CONGES!!!
+ */
 class Law_Composite extends Law_Function {
 }
 
@@ -16929,21 +20313,39 @@ class Law_Composite_1 extends Law_Composite {}
 
 class Law_Composite_2 extends Law_Composite {}
 
+/**
+ * Loi constante
+ */
 class Law_Constant extends Law_Function {
 }
 
+/**
+ * Root class for evolution laws.
+ */
 class Law_Function extends Standard_Transient {
 }
 
+/**
+ * Provides an evolution law that interpolates a set of parameter and value pairs (wi, radi)
+ */
 class Law_Interpol extends Law_BSpFunc {
 }
 
+/**
+ * Describes an linear evolution law.
+ */
 class Law_Linear extends Law_Function {
 }
 
+/**
+ * Describes an "S" evolution law.
+ */
 class Law_S extends Law_BSpFunc {
 }
 
+/**
+ * Provides tools to implement local topological operations on a shape.
+ */
 class LocOpe {
 }
 
@@ -16961,6 +20363,9 @@ class LocOpe_BuildWires_1 extends LocOpe_BuildWires {}
 
 class LocOpe_BuildWires_2 extends LocOpe_BuildWires {}
 
+/**
+ * This class provides the intersection between a set of axis or a circle and the faces of a shape. The intersection points are sorted in increasing parameter along each axis or circle.
+ */
 class LocOpe_CSIntersector {
 }
 
@@ -16968,6 +20373,9 @@ class LocOpe_CSIntersector_1 extends LocOpe_CSIntersector {}
 
 class LocOpe_CSIntersector_2 extends LocOpe_CSIntersector {}
 
+/**
+ * This class provides the intersection between an axis or a circle and the faces of a shape. The intersection points are sorted in increasing parameter along the axis.
+ */
 class LocOpe_CurveShapeIntersector {
 }
 
@@ -16977,6 +20385,9 @@ class LocOpe_CurveShapeIntersector_2 extends LocOpe_CurveShapeIntersector {}
 
 class LocOpe_CurveShapeIntersector_3 extends LocOpe_CurveShapeIntersector {}
 
+/**
+ * Defines a pipe (near from Pipe from BRepFill), with modifications provided for the Pipe feature.
+ */
 class LocOpe_DPrism {
 }
 
@@ -17022,6 +20433,9 @@ class LocOpe_Gluer_1 extends LocOpe_Gluer {}
 
 class LocOpe_Gluer_2 extends LocOpe_Gluer {}
 
+/**
+ * Defines a linear form (using Prism from BRepSweep) with modifications provided for the LinearForm feature.
+ */
 class LocOpe_LinearForm {
 }
 
@@ -17031,6 +20445,9 @@ class LocOpe_LinearForm_2 extends LocOpe_LinearForm {}
 
 class LocOpe_LinearForm_3 extends LocOpe_LinearForm {}
 
+/**
+ * Defines a pipe (near from Pipe from BRepFill), with modifications provided for the Pipe feature.
+ */
 class LocOpe_Pipe {
 }
 
@@ -17041,6 +20458,9 @@ class LocOpe_PntFace_1 extends LocOpe_PntFace {}
 
 class LocOpe_PntFace_2 extends LocOpe_PntFace {}
 
+/**
+ * Defines a prism (using Prism from BRepSweep) with modifications provided for the Prism feature.
+ */
 class LocOpe_Prism {
 }
 
@@ -17050,6 +20470,9 @@ class LocOpe_Prism_2 extends LocOpe_Prism {}
 
 class LocOpe_Prism_3 extends LocOpe_Prism {}
 
+/**
+ * This class provides a tool to realize the following operations on a shape : - split a face of the shape with a wire, - put draft angle on both side of the wire. For each side, the draft angle may be different.
+ */
 class LocOpe_SplitDrafts {
 }
 
@@ -17057,6 +20480,9 @@ class LocOpe_SplitDrafts_1 extends LocOpe_SplitDrafts {}
 
 class LocOpe_SplitDrafts_2 extends LocOpe_SplitDrafts {}
 
+/**
+ * Provides a tool to cut : - edges with a vertices, - faces with wires, and rebuilds the shape containing the edges and the faces.
+ */
 class LocOpe_SplitShape {
 }
 
@@ -17074,12 +20500,21 @@ class LocOpe_Spliter_2 extends LocOpe_Spliter {}
 class LocOpe_WiresOnShape extends Standard_Transient {
 }
 
+/**
+ * This package gives tools to check the local continuity between two points situated on two curves or two surfaces.
+ */
 class LocalAnalysis {
 }
 
+/**
+ * This class gives tools to check local continuity C0 C1 C2 G1 G2 between two points situated on two curves
+ */
 class LocalAnalysis_CurveContinuity {
 }
 
+/**
+ * This class gives tools to check local continuity C0 C1 C2 G1 G2 between two points situated on two surfaces
+ */
 class LocalAnalysis_SurfaceContinuity {
 }
 
@@ -17089,12 +20524,21 @@ class LocalAnalysis_SurfaceContinuity_2 extends LocalAnalysis_SurfaceContinuity 
 
 class LocalAnalysis_SurfaceContinuity_3 extends LocalAnalysis_SurfaceContinuity {}
 
+/**
+ * BiInt is a set of two integers.
+ */
 class MAT2d_BiInt {
 }
 
+/**
+ * Constructs a circuit on a set of lines. EquiCircuit gives a Circuit passing by all the lines in a set and all the connexions of the minipath associated.
+ */
 class MAT2d_Circuit extends Standard_Transient {
 }
 
+/**
+ * A Connexion links two lines of items in a set of lines. It s contains two points and their paramatric definitions on the lines. The items can be points or curves.
+ */
 class MAT2d_Connexion extends Standard_Transient {
 }
 
@@ -17105,18 +20549,33 @@ class MAT2d_Connexion_2 extends MAT2d_Connexion {}
 class MAT2d_MapBiIntHasher {
 }
 
+/**
+ * this class contains the generic algoritm of computation of the bisecting locus.
+ */
 class MAT2d_Mat2d {
 }
 
+/**
+ * MiniPath computes a path to link all the lines in a set of lines. The path is described as a set of connexions.
+ */
 class MAT2d_MiniPath {
 }
 
+/**
+ * Set of the methods useful for the MAT's computation. Tool2d contains the geometry of the bisecting locus.
+ */
 class MAT2d_Tool2d {
 }
 
+/**
+ * An Arc is associated to each Bisecting of the mat.
+ */
 class MAT_Arc extends Standard_Transient {
 }
 
+/**
+ * A BasicELt is associated to each elemtary constituant of the figure.
+ */
 class MAT_BasicElt extends Standard_Transient {
 }
 
@@ -17126,6 +20585,9 @@ class MAT_Bisector extends Standard_Transient {
 class MAT_Edge extends Standard_Transient {
 }
 
+/**
+ * The Class Graph permits the exploration of the Bisector Locus.
+ */
 class MAT_Graph extends Standard_Transient {
 }
 
@@ -17135,6 +20597,9 @@ class MAT_ListOfBisector extends Standard_Transient {
 class MAT_ListOfEdge extends Standard_Transient {
 }
 
+/**
+ * Node of Graph.
+ */
 class MAT_Node extends Standard_Transient {
 }
 
@@ -17152,6 +20617,9 @@ class MAT_TListNodeOfListOfEdge_1 extends MAT_TListNodeOfListOfEdge {}
 
 class MAT_TListNodeOfListOfEdge_2 extends MAT_TListNodeOfListOfEdge {}
 
+/**
+ * Definition of Zone of Proximity of a BasicElt : ---------------------------------------------- A Zone of proximity is the set of the points which are more near from the BasicElt than any other.
+ */
 class MAT_Zone extends Standard_Transient {
 }
 
@@ -17162,54 +20630,102 @@ class MAT_Zone_2 extends MAT_Zone {}
 class MeshVS_Buffer {
 }
 
+/**
+ * Sensitive entity covering entire mesh for global selection.
+ */
 class MeshVS_CommonSensitiveEntity extends Select3D_SensitiveSet {
 }
 
+/**
+ * The deferred class using for the following tasks: 1) Receiving geometry data about single element of node by its number; 2) Receiving type of element or node by its number; 3) Receiving topological information about links between element and nodes it consist of; 4) Receiving information about what element cover this node; 5) Receiving information about all nodes and elements the object consist of 6) Activation of advanced mesh selection. In the advanced mesh selection mode there is created: - one owner for the whole mesh and for all selection modes - one sensitive entity for the whole mesh and for each selection mode Receiving of IDs of detected entities (nodes and elements) in a viewer is achieved by implementation of a group of methods GetDetectedEntities.
+ */
 class MeshVS_DataSource extends Standard_Transient {
 }
 
 class MeshVS_DataSource3D extends MeshVS_DataSource {
 }
 
+/**
+ * The class provides default class which helps to represent node displacements by deformed mesh This class has an internal handle to canonical non-deformed mesh data source and map of displacement vectors. The displacement can be magnified to useful size. All methods is implemented with calling the corresponding methods of non-deformed data source.
+ */
 class MeshVS_DeformedDataSource extends MeshVS_DataSource {
 }
 
+/**
+ * This class provided the common interface to share between classes big set of constants affecting to object appearance. By default, this class can store integers, doubles, OCC colors, OCC materials. Each of OCC enum members can be stored as integers.
+ */
 class MeshVS_Drawer extends Standard_Transient {
 }
 
+/**
+ * This class allows to create owners to all elements or nodes, both hidden and shown, but these owners user cannot select "by hands" in viewer. They means for internal application tasks, for example, receiving all owners, both for hidden and shown entities.
+ */
 class MeshVS_DummySensitiveEntity extends Select3D_SensitiveEntity {
 }
 
+/**
+ * This class provides methods to create presentation of elements with assigned colors. The class contains two color maps: map of same colors for front and back side of face and map of different ones,
+ */
 class MeshVS_ElementalColorPrsBuilder extends MeshVS_PrsBuilder {
 }
 
+/**
+ * the main class provides interface to create mesh presentation as a whole
+ */
 class MeshVS_Mesh extends AIS_InteractiveObject {
 }
 
+/**
+ * The custom owner. This class provides methods to store owner information: 1) An address of element or node data structure 2) Type of node or element owner assigned 3) ID of node or element owner assigned
+ */
 class MeshVS_MeshEntityOwner extends SelectMgr_EntityOwner {
 }
 
+/**
+ * The custom mesh owner used for advanced mesh selection. This class provides methods to store information: 1) IDs of hilighted mesh nodes and elements 2) IDs of mesh nodes and elements selected on the mesh
+ */
 class MeshVS_MeshOwner extends SelectMgr_EntityOwner {
 }
 
+/**
+ * This class provides methods to compute base mesh presentation
+ */
 class MeshVS_MeshPrsBuilder extends MeshVS_PrsBuilder {
 }
 
+/**
+ * This class provides methods to create presentation of nodes with assigned color. There are two ways of presentation building 1. Without using texture. In this case colors of nodes are specified with DataMapOfIntegerColor and presentation is built with gradient fill between these nodes (default behaviour) 2. Using texture. In this case presentation is built with spectrum filling between nodes. For example, if one node has blue color and second one has violet color, parameters of this class may be set to fill presentation between nodes with solar spectrum. Methods: UseTexture - activates/deactivates this way SetColorMap - sets colors used for generation of texture SetColorindices - specifies correspondence between node IDs and indices of colors from color map
+ */
 class MeshVS_NodalColorPrsBuilder extends MeshVS_PrsBuilder {
 }
 
+/**
+ * This class is parent for all builders using in MeshVS_Mesh. It provides base fields and methods all buildes need.
+ */
 class MeshVS_PrsBuilder extends Standard_Transient {
 }
 
+/**
+ * This class provides custom sensitive face, which will be selected if it center is in rectangle.
+ */
 class MeshVS_SensitiveFace extends Select3D_SensitiveFace {
 }
 
+/**
+ * This class provides custom mesh sensitive entity used in advanced mesh selection.
+ */
 class MeshVS_SensitiveMesh extends Select3D_SensitiveEntity {
 }
 
+/**
+ * This class is used to detect selection of a polyhedron. The main principle of detection algorithm is to search for overlap with each polyhedron's face separately, treating them as planar convex polygons.
+ */
 class MeshVS_SensitivePolyhedron extends Select3D_SensitiveEntity {
 }
 
+/**
+ * This class contains description of planar quadrangle and defines methods for its detection by OCCT BVH selection mechanism
+ */
 class MeshVS_SensitiveQuad extends Select3D_SensitiveEntity {
 }
 
@@ -17217,27 +20733,51 @@ class MeshVS_SensitiveQuad_1 extends MeshVS_SensitiveQuad {}
 
 class MeshVS_SensitiveQuad_2 extends MeshVS_SensitiveQuad {}
 
+/**
+ * This class provides custom sensitive face, which will be selected if it center is in rectangle.
+ */
 class MeshVS_SensitiveSegment extends Select3D_SensitiveSegment {
 }
 
+/**
+ * This class provides methods to create text data presentation. It store map of texts assigned with nodes or elements.
+ */
 class MeshVS_TextPrsBuilder extends MeshVS_PrsBuilder {
 }
 
+/**
+ * This class provides auxiliary methods to create differents aspects
+ */
 class MeshVS_Tool {
 }
 
+/**
+ * This class provides methods to create vector data presentation. It store map of vectors assigned with nodes or elements. In simplified mode vectors draws with thickened ends instead of arrows
+ */
 class MeshVS_VectorPrsBuilder extends MeshVS_PrsBuilder {
 }
 
+/**
+ * Defines - tools to work with messages - basic tools intended for progress indication
+ */
 class Message {
 }
 
+/**
+ * Base class of the hierarchy of classes describing various situations occurring during execution of some algorithm or procedure.
+ */
 class Message_Alert extends Standard_Transient {
 }
 
+/**
+ * Class Message_Algorithm is intended to be the base class for classes implementing algorithms or any operations that need to provide extended information on its execution to the caller / user.
+ */
 class Message_Algorithm extends Standard_Transient {
 }
 
+/**
+ * Tiny class for extended handling of error / execution status of algorithm in universal way.
+ */
 class Message_ExecStatus {
 }
 
@@ -17245,6 +20785,9 @@ class Message_ExecStatus_1 extends Message_ExecStatus {}
 
 class Message_ExecStatus_2 extends Message_ExecStatus {}
 
+/**
+ * Messenger is API class providing general-purpose interface for libraries that may issue text messages without knowledge of how these messages will be further processed.
+ */
 class Message_Messenger extends Standard_Transient {
 }
 
@@ -17252,6 +20795,9 @@ class Message_Messenger_1 extends Message_Messenger {}
 
 class Message_Messenger_2 extends Message_Messenger {}
 
+/**
+ * This class provides a tool for constructing the parametrized message basing on resources loaded by Message_MsgFile tool.
+ */
 class Message_Msg {
 }
 
@@ -17263,12 +20809,21 @@ class Message_Msg_3 extends Message_Msg {}
 
 class Message_Msg_4 extends Message_Msg {}
 
+/**
+ * A tool providing facility to load definitions of message strings from resource file(s).
+ */
 class Message_MsgFile {
 }
 
+/**
+ * Abstract interface class defining printer as output context for text messages
+ */
 class Message_Printer extends Standard_Transient {
 }
 
+/**
+ * Implementation of a message printer associated with an std::ostream The std::ostream may be either externally defined one (e.g. std::cout), or file stream maintained internally (depending on constructor).
+ */
 class Message_PrinterOStream extends Message_Printer {
 }
 
@@ -17276,15 +20831,27 @@ class Message_PrinterOStream_1 extends Message_PrinterOStream {}
 
 class Message_PrinterOStream_2 extends Message_PrinterOStream {}
 
+/**
+ * Implementation of a message printer associated with system log. Implemented for the following systems: - Windows, through ReportEventW(). - Android, through __android_log_write(). - UNIX/Linux, through syslog().
+ */
 class Message_PrinterSystemLog extends Message_Printer {
 }
 
+/**
+ * Defines abstract interface from program to the "user". This includes progress indication and user break mechanisms.
+ */
 class Message_ProgressIndicator extends Standard_Transient {
 }
 
+/**
+ * Internal data structure for scale in ProgressIndicator
+ */
 class Message_ProgressScale {
 }
 
+/**
+ * This class is a tool allowing to manage opening/closing scopes in the ProgressIndicator in convenient and safe way.
+ */
 class Message_ProgressSentry {
 }
 
@@ -17292,9 +20859,15 @@ class Message_ProgressSentry_1 extends Message_ProgressSentry {}
 
 class Message_ProgressSentry_2 extends Message_ProgressSentry {}
 
+/**
+ * Container for alert messages, sorted according to their gravity.
+ */
 class Message_Report extends Standard_Transient {
 }
 
+/**
+ * a AttrList allows to record a list of attributes as Transients which can be edited, changed ... Each one is identified by a name
+ */
 class MoniTool_AttrList {
 }
 
@@ -17302,33 +20875,63 @@ class MoniTool_AttrList_1 extends MoniTool_AttrList {}
 
 class MoniTool_AttrList_2 extends MoniTool_AttrList {}
 
+/**
+ * This class is intended to record data attached to a case to be exploited. Cases can be : * internal, i.e. for immediate debug for instance, on an abnormal exception, fill a CaseData in a DB (see class DB) then look at its content by XSDRAW * to record abnormal situation, which cause a warning or fail message, for instance during a transfer This will allow, firstly to build a more comprehensive message (with associated data), secondly to help seeing "what happened" * to record data in order to fix a problem If a CASE is well defined and its fix is well known too, recording a CaseData which identifies the CASE will allow to furstherly call the appropriate fix routine
+ */
 class MoniTool_CaseData extends Standard_Transient {
 }
 
+/**
+ * Gives informations on an object Used as template to instantiate Elem, etc This class is for Transient
+ */
 class MoniTool_DataInfo {
 }
 
+/**
+ * ElemHasher defines HashCode for Element, which is : ask a Element its HashCode ! Because this is the Element itself which brings the HashCode for its Key
+ */
 class MoniTool_ElemHasher {
 }
 
+/**
+ * a Element allows to map any kind of object as a Key for a Map. This works by defining, for a Hash Code, that of the real Key, not of the Element which acts only as an intermediate. When a Map asks for the HashCode of a Element, this one returns the code it has determined at creation time
+ */
 class MoniTool_Element extends Standard_Transient {
 }
 
+/**
+ * An Integer through a Handle (i.e. managed as TShared)
+ */
 class MoniTool_IntVal extends Standard_Transient {
 }
 
+/**
+ * The auxiliary class provides hash code for mapping objects
+ */
 class MoniTool_MTHasher {
 }
 
+/**
+ * A Real through a Handle (i.e. managed as TShared)
+ */
 class MoniTool_RealVal extends Standard_Transient {
 }
 
+/**
+ * Signs HShape according to its real content (type of Shape) Context is not used
+ */
 class MoniTool_SignShape extends MoniTool_SignText {
 }
 
+/**
+ * Provides the basic service to get a text which identifies an object in a context It can be used for other classes (general signatures ...) It can also be used to build a message in which an object is to be identified
+ */
 class MoniTool_SignText extends Standard_Transient {
 }
 
+/**
+ * This class manages Statistics to be queried asynchronously.
+ */
 class MoniTool_Stat {
 }
 
@@ -17336,9 +20939,15 @@ class MoniTool_Stat_1 extends MoniTool_Stat {}
 
 class MoniTool_Stat_2 extends MoniTool_Stat {}
 
+/**
+ * Provides convenient service on global timers accessed by string name, mostly aimed for debugging purposes
+ */
 class MoniTool_Timer extends Standard_Transient {
 }
 
+/**
+ * A tool to facilitate using MoniTool_Timer functionality by automatically ensuring consistency of start/stop actions
+ */
 class MoniTool_TimerSentry {
 }
 
@@ -17346,9 +20955,15 @@ class MoniTool_TimerSentry_1 extends MoniTool_TimerSentry {}
 
 class MoniTool_TimerSentry_2 extends MoniTool_TimerSentry {}
 
+/**
+ * an TransientElem defines an Element for a specific input class its definition includes the value of the Key to be mapped, and the HashCoder associated to the class of the Key
+ */
 class MoniTool_TransientElem extends MoniTool_Element {
 }
 
+/**
+ * This class allows to dynamically manage .. typed values, i.e. values which have an alphanumeric expression, but with controls. Such as "must be an Integer" or "Enumerative Text" etc
+ */
 class MoniTool_TypedValue extends Standard_Transient {
 }
 
@@ -17363,39 +20978,72 @@ class MyDirectPolynomialRoots_1 extends MyDirectPolynomialRoots {}
 
 class MyDirectPolynomialRoots_2 extends MyDirectPolynomialRoots {}
 
+/**
+ * define a PinPoint geometric Constraint used to load a Non Linear Plate
+ */
 class NLPlate_HGPPConstraint extends Standard_Transient {
 }
 
+/**
+ * define a PinPoint G0 Constraint used to load a Non Linear Plate
+ */
 class NLPlate_HPG0Constraint extends NLPlate_HGPPConstraint {
 }
 
+/**
+ * define a PinPoint G0+G1 Constraint used to load a Non Linear Plate
+ */
 class NLPlate_HPG0G1Constraint extends NLPlate_HPG0Constraint {
 }
 
+/**
+ * define a PinPoint G0+G2 Constraint used to load a Non Linear Plate
+ */
 class NLPlate_HPG0G2Constraint extends NLPlate_HPG0G1Constraint {
 }
 
+/**
+ * define a PinPoint G0+G3 Constraint used to load a Non Linear Plate
+ */
 class NLPlate_HPG0G3Constraint extends NLPlate_HPG0G2Constraint {
 }
 
+/**
+ * define a PinPoint (no G0) G1 Constraint used to load a Non Linear Plate
+ */
 class NLPlate_HPG1Constraint extends NLPlate_HGPPConstraint {
 }
 
+/**
+ * define a PinPoint (no G0) G2 Constraint used to load a Non Linear Plate
+ */
 class NLPlate_HPG2Constraint extends NLPlate_HPG1Constraint {
 }
 
+/**
+ * define a PinPoint (no G0) G3 Constraint used to load a Non Linear Plate
+ */
 class NLPlate_HPG3Constraint extends NLPlate_HPG2Constraint {
 }
 
 class NLPlate_NLPlate {
 }
 
+/**
+ * Set of Operating Sytem Dependent (OSD) Tools
+ */
 class OSD {
 }
 
+/**
+ * This class measures CPU time (both user and system) consumed by current process or thread. The chronometer can be started and stopped multiple times, and measures cumulative time.
+ */
 class OSD_Chronometer {
 }
 
+/**
+ * Management of directories (a set of directory oriented tools)
+ */
 class OSD_Directory extends OSD_FileNode {
 }
 
@@ -17403,6 +21051,9 @@ class OSD_Directory_1 extends OSD_Directory {}
 
 class OSD_Directory_2 extends OSD_Directory {}
 
+/**
+ * Manages a breadth-only search for sub-directories in the specified Path. There is no specific order of results.
+ */
 class OSD_DirectoryIterator {
 }
 
@@ -17410,6 +21061,9 @@ class OSD_DirectoryIterator_1 extends OSD_DirectoryIterator {}
 
 class OSD_DirectoryIterator_2 extends OSD_DirectoryIterator {}
 
+/**
+ * Disk management (a set of disk oriented tools)
+ */
 class OSD_Disk {
 }
 
@@ -17419,6 +21073,9 @@ class OSD_Disk_2 extends OSD_Disk {}
 
 class OSD_Disk_3 extends OSD_Disk {}
 
+/**
+ * Management of system environment variables An environment variable is composed of a variable name and its value.
+ */
 class OSD_Environment {
 }
 
@@ -17428,6 +21085,9 @@ class OSD_Environment_2 extends OSD_Environment {}
 
 class OSD_Environment_3 extends OSD_Environment {}
 
+/**
+ * Accurate management of OSD specific errors.
+ */
 class OSD_Error {
 }
 
@@ -17571,6 +21231,9 @@ class OSD_Exception_STATUS_NO_MEMORY_1 extends OSD_Exception_STATUS_NO_MEMORY {}
 
 class OSD_Exception_STATUS_NO_MEMORY_2 extends OSD_Exception_STATUS_NO_MEMORY {}
 
+/**
+ * Manages a breadth-only search for files in the specified Path. There is no specific order of results.
+ */
 class OSD_FileIterator {
 }
 
@@ -17578,12 +21241,21 @@ class OSD_FileIterator_1 extends OSD_FileIterator {}
 
 class OSD_FileIterator_2 extends OSD_FileIterator {}
 
+/**
+ * Carries information about a Host System version ,host name, nodename ...
+ */
 class OSD_Host {
 }
 
+/**
+ * This class provides the possibility to set callback for memory allocation/deallocation. On MS Windows, it works only in Debug builds. It relies on the debug CRT function _CrtSetAllocHook (see MSDN for help).
+ */
 class OSD_MAllocHook {
 }
 
+/**
+ * This class provide information about memory utilized by current process. This information includes: - Private Memory - synthetic value that tries to filter out the memory usage only by the process itself (allocated for data and stack), excluding dynamic libraries. These pages may be in RAM or in SWAP. - Virtual Memory - amount of reserved and committed memory in the user-mode portion of the virtual address space. Notice that this counter includes reserved memory (not yet in used) and shared between processes memory (libraries). - Working Set - set of memory pages in the virtual address space of the process that are currently resident in physical memory (RAM). These pages are available for an application to use without triggering a page fault. - Pagefile Usage - space allocated for the pagefile, in bytes. Those pages may or may not be in memory (RAM) thus this counter couldn't be used to estimate how many active pages doesn't present in RAM.
+ */
 class OSD_MemInfo {
 }
 
@@ -17594,6 +21266,9 @@ class OSD_OSDError_1 extends OSD_OSDError {}
 
 class OSD_OSDError_2 extends OSD_OSDError {}
 
+/**
+ * This class enables measuring the CPU time between two points of code execution, regardless of the scope of these points of code. A meter is identified by its name (string). So multiple objects in various places of user code may point to the same meter. The results will be printed on stdout upon finish of the program. For details see OSD_PerfMeter.h
+ */
 class OSD_PerfMeter {
 }
 
@@ -17601,9 +21276,15 @@ class OSD_PerfMeter_1 extends OSD_PerfMeter {}
 
 class OSD_PerfMeter_2 extends OSD_PerfMeter {}
 
+/**
+ * A set of system process tools
+ */
 class OSD_Process {
 }
 
+/**
+ * This class provides data to manage file protection Example:These rights are treated in a system dependent manner : On UNIX you have User,Group and Other rights On VMS you have Owner,Group,World and System rights An automatic conversion is done between OSD and UNIX/VMS.
+ */
 class OSD_Protection {
 }
 
@@ -17667,6 +21348,9 @@ class OSD_SIGSYS_1 extends OSD_SIGSYS {}
 
 class OSD_SIGSYS_2 extends OSD_SIGSYS {}
 
+/**
+ * Interface to dynamic library loader. Provides tools to load a shared library and retrieve the address of an entry point.
+ */
 class OSD_SharedLibrary {
 }
 
@@ -17681,6 +21365,9 @@ class OSD_Signal_1 extends OSD_Signal {}
 
 class OSD_Signal_2 extends OSD_Signal {}
 
+/**
+ * A simple platform-intependent interface to execute and control threads.
+ */
 class OSD_Thread {
 }
 
@@ -17690,6 +21377,9 @@ class OSD_Thread_2 extends OSD_Thread {}
 
 class OSD_Thread_3 extends OSD_Thread {}
 
+/**
+ * Working on heterogeneous platforms we need to use the system call gettimeofday. This function is portable and it measures ELAPSED time and CPU time in seconds and microseconds. Example: OSD_Timer aTimer; aTimer.Start(); // Start the timers (t1). ..... // Do something. aTimer.Stop(); // Stop the timers (t2). aTimer.Show(); // Give the elapsed time between t1 and t2. // Give also the process CPU time between // t1 and t2.
+ */
 class OSD_Timer extends OSD_Chronometer {
 }
 
@@ -17731,15 +21421,24 @@ class PCDM_ReferenceIterator extends Standard_Transient {
 class PCDM_RetrievalDriver extends PCDM_Reader {
 }
 
+/**
+ * persistent implemention of storage.
+ */
 class PCDM_StorageDriver extends PCDM_Writer {
 }
 
 class PCDM_Writer extends Standard_Transient {
 }
 
+/**
+ * PLib means Polynomial functions library. This pk provides basic computation functions for polynomial functions. Note: weight arrays can be passed by pointer for some functions so that NULL pointer is valid. That means no weights passed.
+ */
 class PLib {
 }
 
+/**
+ * To work with different polynomial's Bases
+ */
 class PLib_Base extends Standard_Transient {
 }
 
@@ -17750,9 +21449,15 @@ class PLib_DoubleJacobiPolynomial_1 extends PLib_DoubleJacobiPolynomial {}
 
 class PLib_DoubleJacobiPolynomial_2 extends PLib_DoubleJacobiPolynomial {}
 
+/**
+ * This class provides method to work with Jacobi Polynomials relativly to an order of constraint q = myWorkDegree-2*(myNivConstr+1) Jk(t) for k=0,q compose the Jacobi Polynomial base relativly to the weigth W(t) iorder is the integer value for the constraints: iorder = 0 <=> ConstraintOrder = GeomAbs_C0 iorder = 1 <=> ConstraintOrder = GeomAbs_C1 iorder = 2 <=> ConstraintOrder = GeomAbs_C2 P(t) = H(t) + W(t) * Q(t) Where W(t) = (1-t**2)**(2*iordre+2) the coefficients JacCoeff represents P(t) JacCoeff are stored as follow:
+ */
 class PLib_HermitJacobi extends PLib_Base {
 }
 
+/**
+ * This class provides method to work with Jacobi Polynomials relativly to an order of constraint q = myWorkDegree-2*(myNivConstr+1) Jk(t) for k=0,q compose the Jacobi Polynomial base relativly to the weigth W(t) iorder is the integer value for the constraints: iorder = 0 <=> ConstraintOrder = GeomAbs_C0 iorder = 1 <=> ConstraintOrder = GeomAbs_C1 iorder = 2 <=> ConstraintOrder = GeomAbs_C2 P(t) = R(t) + W(t) * Q(t) Where W(t) = (1-t**2)**(2*iordre+2) the coefficients JacCoeff represents P(t) JacCoeff are stored as follow:
+ */
 class PLib_JacobiPolynomial extends PLib_Base {
 }
 
@@ -17765,6 +21470,9 @@ class PeriodicInterval_2 extends PeriodicInterval {}
 
 class PeriodicInterval_3 extends PeriodicInterval {}
 
+/**
+ * define an order 1 derivatives of a 3d valued function of a 2d variable
+ */
 class Plate_D1 {
 }
 
@@ -17772,6 +21480,9 @@ class Plate_D1_1 extends Plate_D1 {}
 
 class Plate_D1_2 extends Plate_D1 {}
 
+/**
+ * define an order 2 derivatives of a 3d valued function of a 2d variable
+ */
 class Plate_D2 {
 }
 
@@ -17779,6 +21490,9 @@ class Plate_D2_1 extends Plate_D2 {}
 
 class Plate_D2_2 extends Plate_D2 {}
 
+/**
+ * define an order 3 derivatives of a 3d valued function of a 2d variable
+ */
 class Plate_D3 {
 }
 
@@ -17786,6 +21500,9 @@ class Plate_D3_1 extends Plate_D3 {}
 
 class Plate_D3_2 extends Plate_D3 {}
 
+/**
+ * define a G1, G2 or G3 constraint on the Plate using weaker constraint than GtoCConstraint
+ */
 class Plate_FreeGtoCConstraint {
 }
 
@@ -17795,9 +21512,15 @@ class Plate_FreeGtoCConstraint_2 extends Plate_FreeGtoCConstraint {}
 
 class Plate_FreeGtoCConstraint_3 extends Plate_FreeGtoCConstraint {}
 
+/**
+ * force a set of UV points to translate without deformation
+ */
 class Plate_GlobalTranslationConstraint {
 }
 
+/**
+ * define a G1, G2 or G3 constraint on the Plate
+ */
 class Plate_GtoCConstraint {
 }
 
@@ -17815,9 +21538,15 @@ class Plate_GtoCConstraint_6 extends Plate_GtoCConstraint {}
 
 class Plate_GtoCConstraint_7 extends Plate_GtoCConstraint {}
 
+/**
+ * constraint a point to belong to a straight line
+ */
 class Plate_LineConstraint {
 }
 
+/**
+ * define on or several constraints as linear combination of the X,Y and Z components of a set of PinPointConstraint
+ */
 class Plate_LinearScalarConstraint {
 }
 
@@ -17831,6 +21560,9 @@ class Plate_LinearScalarConstraint_4 extends Plate_LinearScalarConstraint {}
 
 class Plate_LinearScalarConstraint_5 extends Plate_LinearScalarConstraint {}
 
+/**
+ * define on or several constraints as linear combination of PinPointConstraint unlike the LinearScalarConstraint, usage of this kind of constraint preserve the X,Y and Z uncoupling.
+ */
 class Plate_LinearXYZConstraint {
 }
 
@@ -17842,6 +21574,9 @@ class Plate_LinearXYZConstraint_3 extends Plate_LinearXYZConstraint {}
 
 class Plate_LinearXYZConstraint_4 extends Plate_LinearXYZConstraint {}
 
+/**
+ * define a constraint on the Plate
+ */
 class Plate_PinpointConstraint {
 }
 
@@ -17849,9 +21584,15 @@ class Plate_PinpointConstraint_1 extends Plate_PinpointConstraint {}
 
 class Plate_PinpointConstraint_2 extends Plate_PinpointConstraint {}
 
+/**
+ * constraint a point to belong to a Plane
+ */
 class Plate_PlaneConstraint {
 }
 
+/**
+ * This class implement a variationnal spline algorithm able to define a two variable function satisfying some constraints and minimizing an energy like criterion.
+ */
 class Plate_Plate {
 }
 
@@ -17859,6 +21600,9 @@ class Plate_Plate_1 extends Plate_Plate {}
 
 class Plate_Plate_2 extends Plate_Plate {}
 
+/**
+ * define m PinPointConstraint driven by m unknown
+ */
 class Plate_SampledCurveConstraint {
 }
 
@@ -17872,9 +21616,15 @@ class Plugin_Failure_1 extends Plugin_Failure {}
 
 class Plugin_Failure_2 extends Plugin_Failure {}
 
+/**
+ * This package provides classes and services to handle :
+ */
 class Poly {
 }
 
+/**
+ * Link between two mesh nodes that is created by existing triangle(s). Keeps reference to the opposite node of each incident triangle. The referred node with index "0" is always on the left side of the link, the one with the index "1" is always on the right side. It is possible to find both incident triangles using the method Poly_CoherentTriangulation::FindTriangle(). Any Link can store an arbitrary pointer that is called Attribute.
+ */
 class Poly_CoherentLink {
 }
 
@@ -17884,6 +21634,9 @@ class Poly_CoherentLink_2 extends Poly_CoherentLink {}
 
 class Poly_CoherentLink_3 extends Poly_CoherentLink {}
 
+/**
+ * Node of coherent triangulation. Contains: Coordinates of a 3D point defining the node location 2D point coordinates List of triangles that use this Node Integer index, normally the index of the node in the original triangulation
+ */
 class Poly_CoherentNode extends gp_XYZ {
 }
 
@@ -17891,6 +21644,9 @@ class Poly_CoherentNode_1 extends Poly_CoherentNode {}
 
 class Poly_CoherentNode_2 extends Poly_CoherentNode {}
 
+/**
+ * Data class used in Poly_CoherentTriangultion. Implements a triangle with references to its neighbours.
+ */
 class Poly_CoherentTriangle {
 }
 
@@ -17898,6 +21654,9 @@ class Poly_CoherentTriangle_1 extends Poly_CoherentTriangle {}
 
 class Poly_CoherentTriangle_2 extends Poly_CoherentTriangle {}
 
+/**
+ * Triangulation structure that allows to: Store the connectivity of each triangle with up to 3 neighbouring ones and with the corresponding 3rd nodes on them, Store the connectivity of each node with all triangles that share this node Add nodes and triangles to the structure, Find all triangles sharing a single or a couple of nodes Remove triangles from structure Optionally create Links between pairs of nodes according to the current triangulation. Convert from/to Poly_Triangulation structure.
+ */
 class Poly_CoherentTriangulation extends Standard_Transient {
 }
 
@@ -17905,6 +21664,9 @@ class Poly_CoherentTriangulation_1 extends Poly_CoherentTriangulation {}
 
 class Poly_CoherentTriangulation_2 extends Poly_CoherentTriangulation {}
 
+/**
+ * Provides an algorithm to explore, inside a triangulation, the adjacency data for a node or a triangle. Adjacency data for a node consists of triangles which contain the node. Adjacency data for a triangle consists of: - the 3 adjacent triangles which share an edge of the triangle, - and the 3 nodes which are the other nodes of these adjacent triangles. Example Inside a triangulation, a triangle T has nodes n1, n2 and n3. It has adjacent triangles AT1, AT2 and AT3 where: - AT1 shares the nodes n2 and n3, - AT2 shares the nodes n3 and n1, - AT3 shares the nodes n1 and n2. It has adjacent nodes an1, an2 and an3 where: - an1 is the third node of AT1, - an2 is the third node of AT2, - an3 is the third node of AT3. So triangle AT1 is composed of nodes n2, n3 and an1. There are two ways of using this algorithm. - From a given node you can look for one triangle that passes through the node, then look for the triangles adjacent to this triangle, then the adjacent nodes. You can thus explore the triangulation step by step (functions Triangle, Triangles and Nodes). - From a given node you can look for all the triangles that pass through the node (iteration method, using the functions Initialize, More, Next and Value). A Connect object can be seen as a tool which analyzes a triangulation and translates it into a series of triangles. By doing this, it provides an interface with other tools and applications working on basic triangles, and which do not work directly with a Poly_Triangulation.
+ */
 class Poly_Connect {
 }
 
@@ -17912,6 +21674,9 @@ class Poly_Connect_1 extends Poly_Connect {}
 
 class Poly_Connect_2 extends Poly_Connect {}
 
+/**
+ * Make loops from a set of connected links. A link is represented by a pair of integer indices of nodes.
+ */
 class Poly_MakeLoops {
 }
 
@@ -17921,6 +21686,9 @@ class Poly_MakeLoops2D extends Poly_MakeLoops {
 class Poly_MakeLoops3D extends Poly_MakeLoops {
 }
 
+/**
+ * Provides a polygon in 2D space (for example, in the parametric space of a surface). It is generally an approximate representation of a curve. A Polygon2D is defined by a table of nodes. Each node is a 2D point. If the polygon is closed, the point of closure is repeated at the end of the table of nodes.
+ */
 class Poly_Polygon2D extends Standard_Transient {
 }
 
@@ -17928,6 +21696,9 @@ class Poly_Polygon2D_1 extends Poly_Polygon2D {}
 
 class Poly_Polygon2D_2 extends Poly_Polygon2D {}
 
+/**
+ * This class Provides a polygon in 3D space. It is generally an approximate representation of a curve. A Polygon3D is defined by a table of nodes. Each node is a 3D point. If the polygon is closed, the point of closure is repeated at the end of the table of nodes. If the polygon is an approximate representation of a curve, you can associate with each of its nodes the value of the parameter of the corresponding point on the curve.
+ */
 class Poly_Polygon3D extends Standard_Transient {
 }
 
@@ -17937,6 +21708,9 @@ class Poly_Polygon3D_2 extends Poly_Polygon3D {}
 
 class Poly_Polygon3D_3 extends Poly_Polygon3D {}
 
+/**
+ * This class provides a polygon in 3D space, based on the triangulation of a surface. It may be the approximate representation of a curve on the surface, or more generally the shape. A PolygonOnTriangulation is defined by a table of nodes. Each node is an index in the table of nodes specific to a triangulation, and represents a point on the surface. If the polygon is closed, the index of the point of closure is repeated at the end of the table of nodes. If the polygon is an approximate representation of a curve on a surface, you can associate with each of its nodes the value of the parameter of the corresponding point on the curve.represents a 3d Polygon
+ */
 class Poly_PolygonOnTriangulation extends Standard_Transient {
 }
 
@@ -17946,6 +21720,9 @@ class Poly_PolygonOnTriangulation_2 extends Poly_PolygonOnTriangulation {}
 
 class Poly_PolygonOnTriangulation_3 extends Poly_PolygonOnTriangulation {}
 
+/**
+ * Describes a component triangle of a triangulation (Poly_Triangulation object). A Triangle is defined by a triplet of nodes. Each node is an index in the table of nodes specific to an existing triangulation of a shape, and represents a point on the surface.
+ */
 class Poly_Triangle {
 }
 
@@ -17953,6 +21730,9 @@ class Poly_Triangle_1 extends Poly_Triangle {}
 
 class Poly_Triangle_2 extends Poly_Triangle {}
 
+/**
+ * Provides a triangulation for a surface, a set of surfaces, or more generally a shape. A triangulation consists of an approximate representation of the actual shape, using a collection of points and triangles. The points are located on the surface. The edges of the triangles connect adjacent points with a straight line that approximates the true curve on the surface. A triangulation comprises: - A table of 3D nodes (3D points on the surface). - A table of triangles. Each triangle (Poly_Triangle object) comprises a triplet of indices in the table of 3D nodes specific to the triangulation. - A table of 2D nodes (2D points), parallel to the table of 3D nodes. This table is optional. If it exists, the coordinates of a 2D point are the (u, v) parameters of the corresponding 3D point on the surface approximated by the triangulation. - A deflection (optional), which maximizes the distance from a point on the surface to the corresponding point on its approximate triangulation. In many cases, algorithms do not need to work with the exact representation of a surface. A triangular representation induces simpler and more robust adjusting, faster performances, and the results are as good. This is a Transient class.
+ */
 class Poly_Triangulation extends Standard_Transient {
 }
 
@@ -17964,9 +21744,15 @@ class Poly_Triangulation_3 extends Poly_Triangulation {}
 
 class Poly_Triangulation_4 extends Poly_Triangulation {}
 
+/**
+ * The Precision package offers a set of functions defining precision criteria for use in conventional situations when comparing two numbers. Generalities It is not advisable to use floating number equality. Instead, the difference between numbers must be compared with a given precision, i.e. : Standard_Real x1, x2 ; x1 = ... x2 = ... If ( x1 == x2 ) ... should not be used and must be written as indicated below: Standard_Real x1, x2 ; Standard_Real Precision = ... x1 = ... x2 = ... If ( Abs ( x1 - x2 ) < Precision ) ... Likewise, when ordering floating numbers, you must take the following into account : Standard_Real x1, x2 ; Standard_Real Precision = ... x1 = ... ! a large number x2 = ... ! another large number If ( x1 < x2 - Precision ) ... is incorrect when x1 and x2 are large numbers ; it is better to write : Standard_Real x1, x2 ; Standard_Real Precision = ... x1 = ... ! a large number x2 = ... ! another large number If ( x2 - x1 > Precision ) ... Precision in Cas.Cade Generally speaking, the precision criterion is not implicit in Cas.Cade. Low-level geometric algorithms accept precision criteria as arguments. As a rule, they should not refer directly to the precision criteria provided by the Precision package. On the other hand, high-level modeling algorithms have to provide the low-level geometric algorithms that they call, with a precision criteria. One way of doing this is to use the above precision criteria. Alternatively, the high-level algorithms can have their own system for precision management. For example, the Topology Data Structure stores precision criteria for each elementary shape (as a vertex, an edge or a face). When a new topological object is constructed, the precision criteria are taken from those provided by the Precision package, and stored in the related data structure. Later, a topological algorithm which analyses these objects will work with the values stored in the data structure. Also, if this algorithm is to build a new topological object, from these precision criteria, it will compute a new precision criterion for the new topological object, and write it into the data structure of the new topological object. The different precision criteria offered by the Precision package, cover the most common requirements of geometric algorithms, such as intersections, approximations, and so on. The choice of precision depends on the algorithm and on the geometric space. The geometric space may be : - a "real" 2D or 3D space, where the lengths are measured in meters, millimeters, microns, inches, etc ..., or - a "parametric" space, 1D on a curve or 2D on a surface, where lengths have no dimension. The choice of precision criteria for real space depends on the choice of the product, as it is based on the accuracy of the machine and the unit of measurement. The choice of precision criteria for parametric space depends on both the accuracy of the machine and the dimensions of the curve or the surface, since the parametric precision criterion and the real precision criterion are linked : if the curve is defined by the equation P(t), the inequation : Abs ( t2 - t1 ) < ParametricPrecision means that the parameters t1 and t2 are considered to be equal, and the inequation : Distance ( P(t2) , P(t1) ) < RealPrecision means that the points P(t1) and P(t2) are considered to be coincident. It seems to be the same idea, and it would be wonderful if these two inequations were equivalent. Note that this is rarely the case ! What is provided in this package? The Precision package provides : - a set of real space precision criteria for the algorithms, in view of checking distances and angles, - a set of parametric space precision criteria for the algorithms, in view of checking both : - the equality of parameters in a parametric space, - or the coincidence of points in the real space, by using parameter values, - the notion of infinite value, composed of a value assumed to be infinite, and checking tests designed to verify if any value could be considered as infinite. All the provided functions are very simple. The returned values result from the adaptation of the applications developed by the Open CASCADE company to Open CASCADE algorithms. The main interest of these functions lies in that it incites engineers developing applications to ask questions on precision factors. Which one is to be used in such or such case ? Tolerance criteria are context dependent. They must first choose : - either to work in real space, - or to work in parametric space, - or to work in a combined real and parametric space. They must next decide which precision factor will give the best answer to the current problem. Within an application environment, it is crucial to master precision even though this process may take a great deal of time.
+ */
 class Precision {
 }
 
+/**
+ * The projLib package first provides projection of curves on a plane along a given Direction. The result will be a 3D curve. The ProjLib package provides projection of curves on surfaces to compute the curve in the parametric space.
+ */
 class ProjLib {
 }
 
@@ -17979,6 +21765,9 @@ class ProjLib_CompProjectedCurve_2 extends ProjLib_CompProjectedCurve {}
 
 class ProjLib_CompProjectedCurve_3 extends ProjLib_CompProjectedCurve {}
 
+/**
+ * Approximate the projection of a 3d curve on an analytic surface and stores the result in Approx. The result is a 2d curve. For approximation some parameters are used, including required tolerance of approximation. Tolerance is maximal possible value of 3d deviation of 3d projection of projected curve from "exact" 3d projection. Since algorithm searches 2d curve on surface, required 2d tolerance is computed from 3d tolerance with help of U,V resolutions of surface. 3d and 2d tolerances have sence only for curves on surface, it defines precision of projecting and approximation and have nothing to do with distance between the projected curve and the surface.
+ */
 class ProjLib_ComputeApprox {
 }
 
@@ -17986,6 +21775,9 @@ class ProjLib_ComputeApprox_1 extends ProjLib_ComputeApprox {}
 
 class ProjLib_ComputeApprox_2 extends ProjLib_ComputeApprox {}
 
+/**
+ * Approximate the projection of a 3d curve on an polar surface and stores the result in Approx. The result is a 2d curve. The evaluation of the current point of the 2d curve is done with the evaluation of the extrema P3d - Surface. For approximation some parameters are used, including required tolerance of approximation. Tolerance is maximal possible value of 3d deviation of 3d projection of projected curve from "exact" 3d projection. Since algorithm searches 2d curve on surface, required 2d tolerance is computed from 3d tolerance with help of U,V resolutions of surface. 3d and 2d tolerances have sence only for curves on surface, it defines precision of projecting and approximation and have nothing to do with distance between the projected curve and the surface.
+ */
 class ProjLib_ComputeApproxOnPolarSurface {
 }
 
@@ -17997,6 +21789,9 @@ class ProjLib_ComputeApproxOnPolarSurface_3 extends ProjLib_ComputeApproxOnPolar
 
 class ProjLib_ComputeApproxOnPolarSurface_4 extends ProjLib_ComputeApproxOnPolarSurface {}
 
+/**
+ * Projects elementary curves on a cone.
+ */
 class ProjLib_Cone extends ProjLib_Projector {
 }
 
@@ -18008,6 +21803,9 @@ class ProjLib_Cone_3 extends ProjLib_Cone {}
 
 class ProjLib_Cone_4 extends ProjLib_Cone {}
 
+/**
+ * Projects elementary curves on a cylinder.
+ */
 class ProjLib_Cylinder extends ProjLib_Projector {
 }
 
@@ -18035,6 +21833,9 @@ class ProjLib_HProjectedCurve_1 extends ProjLib_HProjectedCurve {}
 
 class ProjLib_HProjectedCurve_2 extends ProjLib_HProjectedCurve {}
 
+/**
+ * Projects elementary curves on a plane.
+ */
 class ProjLib_Plane extends ProjLib_Projector {
 }
 
@@ -18058,6 +21859,9 @@ class ProjLib_PrjFunc extends math_FunctionSetWithDerivatives {
 class ProjLib_PrjResolve {
 }
 
+/**
+ * Class used to project a 3d curve on a plane. The result will be a 3d curve.
+ */
 class ProjLib_ProjectOnPlane extends Adaptor3d_Curve {
 }
 
@@ -18067,6 +21871,9 @@ class ProjLib_ProjectOnPlane_2 extends ProjLib_ProjectOnPlane {}
 
 class ProjLib_ProjectOnPlane_3 extends ProjLib_ProjectOnPlane {}
 
+/**
+ * Compute the 2d-curve. Try to solve the particular case if possible. Otherwize, an approximation is done. For approximation some parameters are used, including required tolerance of approximation. Tolerance is maximal possible value of 3d deviation of 3d projection of projected curve from "exact" 3d projection. Since algorithm searches 2d curve on surface, required 2d tolerance is computed from 3d tolerance with help of U,V resolutions of surface. 3d and 2d tolerances have sence only for curves on surface, it defines precision of projecting and approximation and have nothing to do with distance between the projected curve and the surface.
+ */
 class ProjLib_ProjectedCurve extends Adaptor2d_Curve2d {
 }
 
@@ -18078,9 +21885,15 @@ class ProjLib_ProjectedCurve_3 extends ProjLib_ProjectedCurve {}
 
 class ProjLib_ProjectedCurve_4 extends ProjLib_ProjectedCurve {}
 
+/**
+ * Root class for projection algorithms, stores the result.
+ */
 class ProjLib_Projector {
 }
 
+/**
+ * Projects elementary curves on a sphere.
+ */
 class ProjLib_Sphere extends ProjLib_Projector {
 }
 
@@ -18090,6 +21903,9 @@ class ProjLib_Sphere_2 extends ProjLib_Sphere {}
 
 class ProjLib_Sphere_3 extends ProjLib_Sphere {}
 
+/**
+ * Projects elementary curves on a torus.
+ */
 class ProjLib_Torus extends ProjLib_Projector {
 }
 
@@ -18099,12 +21915,21 @@ class ProjLib_Torus_2 extends ProjLib_Torus {}
 
 class ProjLib_Torus_3 extends ProjLib_Torus {}
 
+/**
+ * The Prs3d package provides the following services - a presentation object (the context for all modifications to the display, its presentation will be displayed in every view of an active viewer) - an attribute manager governing how objects such as color, width, and type of line are displayed; these are generic objects, whereas those in StdPrs are specific geometries and topologies. - generic algorithms providing default settings for objects such as points, curves, surfaces and shapes - a root object which provides the abstract framework for the DsgPrs definitions at work in display of dimensions, relations and trihedra.
+ */
 class Prs3d {
 }
 
+/**
+ * Provides class methods to draw an arrow at a given location, along a given direction and using a given angle.
+ */
 class Prs3d_Arrow extends Prs3d_Root {
 }
 
+/**
+ * A framework for displaying arrows in representations of dimensions and relations.
+ */
 class Prs3d_ArrowAspect extends Prs3d_BasicAspect {
 }
 
@@ -18114,15 +21939,27 @@ class Prs3d_ArrowAspect_2 extends Prs3d_ArrowAspect {}
 
 class Prs3d_ArrowAspect_3 extends Prs3d_ArrowAspect {}
 
+/**
+ * All basic Prs3d_xxxAspect must inherits from this class The aspect classes qualifies how to represent a given kind of object.
+ */
 class Prs3d_BasicAspect extends Standard_Transient {
 }
 
+/**
+ * A framework to define the display of datums.
+ */
 class Prs3d_DatumAspect extends Prs3d_BasicAspect {
 }
 
+/**
+ * defines the attributes when drawing a Length Presentation.
+ */
 class Prs3d_DimensionAspect extends Prs3d_BasicAspect {
 }
 
+/**
+ * This class provides units for two dimension groups: - lengthes (length, radius, diameter) - angles
+ */
 class Prs3d_DimensionUnits {
 }
 
@@ -18130,6 +21967,9 @@ class Prs3d_DimensionUnits_1 extends Prs3d_DimensionUnits {}
 
 class Prs3d_DimensionUnits_2 extends Prs3d_DimensionUnits {}
 
+/**
+ * A graphic attribute manager which governs how objects such as color, width, line thickness and deflection are displayed. A drawer includes an instance of the Aspect classes with particular default values.
+ */
 class Prs3d_Drawer extends Graphic3d_PresentationAttributes {
 }
 
@@ -18140,9 +21980,15 @@ class Prs3d_InvalidAngle_1 extends Prs3d_InvalidAngle {}
 
 class Prs3d_InvalidAngle_2 extends Prs3d_InvalidAngle {}
 
+/**
+ * A framework to define the display attributes of isoparameters. This framework can be used to modify the default setting for isoparameters in Prs3d_Drawer.
+ */
 class Prs3d_IsoAspect extends Prs3d_LineAspect {
 }
 
+/**
+ * A framework for defining how a line will be displayed in a presentation. Aspects of line display include width, color and type of line. The definition set by this class is then passed to the attribute manager Prs3d_Drawer. Any object which requires a value for line aspect as an argument may then be given the attribute manager as a substitute argument in the form of a field such as myDrawer for example.
+ */
 class Prs3d_LineAspect extends Prs3d_BasicAspect {
 }
 
@@ -18150,9 +21996,15 @@ class Prs3d_LineAspect_1 extends Prs3d_LineAspect {}
 
 class Prs3d_LineAspect_2 extends Prs3d_LineAspect {}
 
+/**
+ * A framework to define the display of planes.
+ */
 class Prs3d_PlaneAspect extends Prs3d_BasicAspect {
 }
 
+/**
+ * This class defines attributes for the points The points are drawn using markers, whose size does not depend on the zoom value of the views.
+ */
 class Prs3d_PointAspect extends Prs3d_BasicAspect {
 }
 
@@ -18162,9 +22014,15 @@ class Prs3d_PointAspect_2 extends Prs3d_PointAspect {}
 
 class Prs3d_PointAspect_3 extends Prs3d_PointAspect {}
 
+/**
+ * Defines a "shadow" of existing presentation object with custom aspects.
+ */
 class Prs3d_PresentationShadow extends Graphic3d_Structure {
 }
 
+/**
+ * A projector object. This object defines the parameters of a view for a visualization algorithm. It is, for example, used by the hidden line removal algorithms.
+ */
 class Prs3d_Projector extends Standard_Transient {
 }
 
@@ -18172,9 +22030,15 @@ class Prs3d_Projector_1 extends Prs3d_Projector {}
 
 class Prs3d_Projector_2 extends Prs3d_Projector {}
 
+/**
+ * A root class for the standard presentation algorithms of the StdPrs package.
+ */
 class Prs3d_Root {
 }
 
+/**
+ * A framework to define the display of shading. The attributes which make up this definition include: - fill aspect - color, and - material
+ */
 class Prs3d_ShadingAspect extends Prs3d_BasicAspect {
 }
 
@@ -18182,12 +22046,21 @@ class Prs3d_ShadingAspect_1 extends Prs3d_ShadingAspect {}
 
 class Prs3d_ShadingAspect_2 extends Prs3d_ShadingAspect {}
 
+/**
+ * describes the behaviour requested for a wireframe shape presentation.
+ */
 class Prs3d_ShapeTool {
 }
 
+/**
+ * A framework to define the display of texts.
+ */
 class Prs3d_Text extends Prs3d_Root {
 }
 
+/**
+ * Defines the attributes when displaying a text.
+ */
 class Prs3d_TextAspect extends Prs3d_BasicAspect {
 }
 
@@ -18195,27 +22068,48 @@ class Prs3d_TextAspect_1 extends Prs3d_TextAspect {}
 
 class Prs3d_TextAspect_2 extends Prs3d_TextAspect {}
 
+/**
+ * Standard presentation algorithm that outputs graphical primitives for cylindrical surface.
+ */
 class Prs3d_ToolCylinder extends Prs3d_ToolQuadric {
 }
 
+/**
+ * Standard presentation algorithm that outputs graphical primitives for disk surface.
+ */
 class Prs3d_ToolDisk extends Prs3d_ToolQuadric {
 }
 
+/**
+ * Standard presentation algorithm that outputs graphical primitives for disk surface.
+ */
 class Prs3d_ToolSector extends Prs3d_ToolQuadric {
 }
 
+/**
+ * Standard presentation algorithm that outputs graphical primitives for spherical surface.
+ */
 class Prs3d_ToolSphere extends Prs3d_ToolQuadric {
 }
 
+/**
+ * A framework to supply the Graphic3d structure of the object to be presented. On the first display request, this structure is created by calling the appropriate algorithm and retaining this framework for further display. This abstract framework is inherited in Application Interactive Services (AIS), notably by AIS_InteractiveObject. Consequently, 3D presentation should be handled by the relevant daughter classes and their member functions in AIS. This is particularly true in the creation of new interactive objects.
+ */
 class PrsMgr_PresentableObject extends Standard_Transient {
 }
 
 class PrsMgr_Presentation extends Graphic3d_Structure {
 }
 
+/**
+ * A framework to manage 3D displays, graphic entities and their updates. Used in the AIS package (Application Interactive Services), to enable the advanced user to define the default display mode of a new interactive object which extends the list of signatures and types. Definition of new display types is handled by calling the presentation algorithms provided by the StdPrs package.
+ */
 class PrsMgr_PresentationManager extends Standard_Transient {
 }
 
+/**
+ * This class allows the definition of an RGB color as triplet of 3 normalized floating point values (red, green, blue).
+ */
 class Quantity_Color {
 }
 
@@ -18227,6 +22121,9 @@ class Quantity_Color_3 extends Quantity_Color {}
 
 class Quantity_Color_4 extends Quantity_Color {}
 
+/**
+ * The pair of Quantity_Color and Alpha component (1.0 opaque, 0.0 transparent).
+ */
 class Quantity_ColorRGBA {
 }
 
@@ -18240,6 +22137,9 @@ class Quantity_ColorRGBA_4 extends Quantity_ColorRGBA {}
 
 class Quantity_ColorRGBA_5 extends Quantity_ColorRGBA {}
 
+/**
+ * This class provides services to manage date information. A date represents the following time intervals: year, month, day, hour, minute, second, millisecond and microsecond. Current time is expressed in elapsed seconds and microseconds beginning from 00:00 GMT, January 1, 1979 (zero hour). The valid date can only be later than this one. Note: a Period object gives the interval between two dates.
+ */
 class Quantity_Date {
 }
 
@@ -18254,6 +22154,9 @@ class Quantity_DateDefinitionError_1 extends Quantity_DateDefinitionError {}
 
 class Quantity_DateDefinitionError_2 extends Quantity_DateDefinitionError {}
 
+/**
+ * Manages date intervals. For example, a Period object gives the interval between two dates. A period is expressed in seconds and microseconds.
+ */
 class Quantity_Period {
 }
 
@@ -18268,21 +22171,39 @@ class Quantity_PeriodDefinitionError_1 extends Quantity_PeriodDefinitionError {}
 
 class Quantity_PeriodDefinitionError_2 extends Quantity_PeriodDefinitionError {}
 
+/**
+ * The glTF (GL Transmission Format) mesh reader into XDE document.
+ */
 class RWGltf_CafReader extends RWMesh_CafReader {
 }
 
+/**
+ * glTF writer context from XCAF document.
+ */
 class RWGltf_CafWriter extends Standard_Transient {
 }
 
+/**
+ * Mesh data wrapper for delayed primitive array loading from glTF file. Class inherits Poly_Triangulation so that it can be put temporarily into TopoDS_Face within assembly structure, to be replaced with proper Poly_Triangulation loaded later on.
+ */
 class RWGltf_GltfLatePrimitiveArray extends Poly_Triangulation {
 }
 
+/**
+ * Material manager for exporting into glTF format.
+ */
 class RWGltf_GltfMaterialMap extends RWMesh_MaterialMap {
 }
 
+/**
+ * rapidjson::Writer wrapper for forward declaration.
+ */
 class RWGltf_GltfOStreamWriter {
 }
 
+/**
+ * An element within primitive array - vertex attribute or element indexes.
+ */
 class RWGltf_GltfPrimArrayData {
 }
 
@@ -18290,1584 +22211,3150 @@ class RWGltf_GltfPrimArrayData_1 extends RWGltf_GltfPrimArrayData {}
 
 class RWGltf_GltfPrimArrayData_2 extends RWGltf_GltfPrimArrayData {}
 
+/**
+ * Indexed map of scene nodes with custom search algorithm.
+ */
 class RWGltf_GltfSceneNodeMap {
 }
 
+/**
+ * glTF 1.0 format common (obsolete) material definition.
+ */
 class RWGltf_MaterialCommon extends Standard_Transient {
 }
 
+/**
+ * glTF 2.0 format PBR material definition.
+ */
 class RWGltf_MaterialMetallicRoughness extends Standard_Transient {
 }
 
+/**
+ * Interface for reading primitive array from glTF buffer.
+ */
 class RWGltf_PrimitiveArrayReader extends Standard_Transient {
 }
 
+/**
+ * RWGltf_PrimitiveArrayReader implementation creating Poly_Triangulation.
+ */
 class RWGltf_TriangulationReader extends RWGltf_PrimitiveArrayReader {
 }
 
 class RWHeaderSection {
 }
 
+/**
+ * Read & Write Module for FileDescription
+ */
 class RWHeaderSection_RWFileDescription {
 }
 
+/**
+ * Read & Write Module for FileName
+ */
 class RWHeaderSection_RWFileName {
 }
 
+/**
+ * Read & Write Module for FileSchema
+ */
 class RWHeaderSection_RWFileSchema {
 }
 
+/**
+ * General module to read and write HeaderSection entities
+ */
 class RWHeaderSection_ReadWriteModule extends StepData_ReadWriteModule {
 }
 
+/**
+ * The general interface for importing mesh data into XDE document.
+ */
 class RWMesh_CafReader extends Standard_Transient {
 }
 
+/**
+ * Coordinate system converter defining the following tools: - Initialization for commonly used coordinate systems Z-up and Y-up. - Perform length unit conversion (scaling). - Conversion of three basic elements: a) mesh node Positions, b) mesh node Normals, c) model nodes Transformations (locations).
+ */
 class RWMesh_CoordinateSystemConverter {
 }
 
+/**
+ * Auxiliary class to iterate through triangulated faces.
+ */
 class RWMesh_FaceIterator {
 }
 
+/**
+ * Material manager. Provides an interface for collecting all materials within the document before writing it into file, and for copying associated image files (textures) into sub-folder near by exported model.
+ */
 class RWMesh_MaterialMap {
 }
 
+/**
+ * This class provides methods to read and write triangulation from / to the OBJ files.
+ */
 class RWObj {
 }
 
+/**
+ * The OBJ mesh reader into XDE document.
+ */
 class RWObj_CafReader extends RWMesh_CafReader {
 }
 
+/**
+ * Interface to store shape attributes into document.
+ */
 class RWObj_IShapeReceiver {
 }
 
+/**
+ * Reader of mtl files.
+ */
 class RWObj_MtlReader {
 }
 
+/**
+ * An abstract class implementing procedure to read OBJ file.
+ */
 class RWObj_Reader extends Standard_Transient {
 }
 
+/**
+ * RWObj_Reader implementation dumping OBJ file into Poly_Triangulation.
+ */
 class RWObj_TriangulationReader extends RWObj_Reader {
 }
 
+/**
+ * Read & Write tool for CcDesignApproval
+ */
 class RWStepAP203_RWCcDesignApproval {
 }
 
+/**
+ * Read & Write tool for CcDesignCertification
+ */
 class RWStepAP203_RWCcDesignCertification {
 }
 
+/**
+ * Read & Write tool for CcDesignContract
+ */
 class RWStepAP203_RWCcDesignContract {
 }
 
+/**
+ * Read & Write tool for CcDesignDateAndTimeAssignment
+ */
 class RWStepAP203_RWCcDesignDateAndTimeAssignment {
 }
 
+/**
+ * Read & Write tool for CcDesignPersonAndOrganizationAssignment
+ */
 class RWStepAP203_RWCcDesignPersonAndOrganizationAssignment {
 }
 
+/**
+ * Read & Write tool for CcDesignSecurityClassification
+ */
 class RWStepAP203_RWCcDesignSecurityClassification {
 }
 
+/**
+ * Read & Write tool for CcDesignSpecificationReference
+ */
 class RWStepAP203_RWCcDesignSpecificationReference {
 }
 
+/**
+ * Read & Write tool for Change
+ */
 class RWStepAP203_RWChange {
 }
 
+/**
+ * Read & Write tool for ChangeRequest
+ */
 class RWStepAP203_RWChangeRequest {
 }
 
+/**
+ * Read & Write tool for StartRequest
+ */
 class RWStepAP203_RWStartRequest {
 }
 
+/**
+ * Read & Write tool for StartWork
+ */
 class RWStepAP203_RWStartWork {
 }
 
 class RWStepAP214 {
 }
 
+/**
+ * Read & Write Module for AppliedApprovalAssignment
+ */
 class RWStepAP214_RWAppliedApprovalAssignment {
 }
 
+/**
+ * Read & Write Module for AppliedDateAndTimeAssignment
+ */
 class RWStepAP214_RWAppliedDateAndTimeAssignment {
 }
 
+/**
+ * Read & Write Module for AppliedDateAssignment
+ */
 class RWStepAP214_RWAppliedDateAssignment {
 }
 
+/**
+ * Read & Write Module for AppliedDocumentReference
+ */
 class RWStepAP214_RWAppliedDocumentReference {
 }
 
+/**
+ * Read & Write tool for AppliedExternalIdentificationAssignment
+ */
 class RWStepAP214_RWAppliedExternalIdentificationAssignment {
 }
 
+/**
+ * Read & Write tool for AppliedGroupAssignment
+ */
 class RWStepAP214_RWAppliedGroupAssignment {
 }
 
+/**
+ * Read & Write Module for AppliedOrganizationAssignment
+ */
 class RWStepAP214_RWAppliedOrganizationAssignment {
 }
 
+/**
+ * Read & Write Module for AppliedPersonAndOrganizationAssignment
+ */
 class RWStepAP214_RWAppliedPersonAndOrganizationAssignment {
 }
 
+/**
+ * Read & Write Module for AppliedPresentedItem
+ */
 class RWStepAP214_RWAppliedPresentedItem {
 }
 
 class RWStepAP214_RWAppliedSecurityClassificationAssignment {
 }
 
+/**
+ * Read & Write Module for AutoDesignActualDateAndTimeAssignment
+ */
 class RWStepAP214_RWAutoDesignActualDateAndTimeAssignment {
 }
 
+/**
+ * Read & Write Module for AutoDesignActualDateAssignment
+ */
 class RWStepAP214_RWAutoDesignActualDateAssignment {
 }
 
+/**
+ * Read & Write Module for AutoDesignApprovalAssignment
+ */
 class RWStepAP214_RWAutoDesignApprovalAssignment {
 }
 
+/**
+ * Read & Write Module for AutoDesignDateAndPersonAssignment
+ */
 class RWStepAP214_RWAutoDesignDateAndPersonAssignment {
 }
 
+/**
+ * Read & Write Module for AutoDesignDocumentReference
+ */
 class RWStepAP214_RWAutoDesignDocumentReference {
 }
 
+/**
+ * Read & Write Module for AutoDesignGroupAssignment
+ */
 class RWStepAP214_RWAutoDesignGroupAssignment {
 }
 
+/**
+ * Read & Write Module for AutoDesignNominalDateAndTimeAssignment
+ */
 class RWStepAP214_RWAutoDesignNominalDateAndTimeAssignment {
 }
 
+/**
+ * Read & Write Module for AutoDesignNominalDateAssignment
+ */
 class RWStepAP214_RWAutoDesignNominalDateAssignment {
 }
 
+/**
+ * Read & Write Module for AutoDesignOrganizationAssignment
+ */
 class RWStepAP214_RWAutoDesignOrganizationAssignment {
 }
 
+/**
+ * Read & Write Module for AutoDesignPersonAndOrganizationAssignment
+ */
 class RWStepAP214_RWAutoDesignPersonAndOrganizationAssignment {
 }
 
+/**
+ * Read & Write Module for AutoDesignPresentedItem
+ */
 class RWStepAP214_RWAutoDesignPresentedItem {
 }
 
+/**
+ * Read & Write Module for AutoDesignSecurityClassificationAssignment
+ */
 class RWStepAP214_RWAutoDesignSecurityClassificationAssignment {
 }
 
+/**
+ * Read & Write tool for Class
+ */
 class RWStepAP214_RWClass {
 }
 
+/**
+ * Read & Write tool for ExternallyDefinedClass
+ */
 class RWStepAP214_RWExternallyDefinedClass {
 }
 
+/**
+ * Read & Write tool for ExternallyDefinedGeneralProperty
+ */
 class RWStepAP214_RWExternallyDefinedGeneralProperty {
 }
 
+/**
+ * Read & Write tool for RepItemGroup
+ */
 class RWStepAP214_RWRepItemGroup {
 }
 
+/**
+ * General module to read and write StepAP214 entities
+ */
 class RWStepAP214_ReadWriteModule extends StepData_ReadWriteModule {
 }
 
+/**
+ * Read & Write Module for DraughtingModelItemAssociation
+ */
 class RWStepAP242_RWDraughtingModelItemAssociation {
 }
 
+/**
+ * Read & Write Module for GeometricItemSpecificUsage
+ */
 class RWStepAP242_RWGeometricItemSpecificUsage {
 }
 
+/**
+ * Read & Write Module for IdAttribute
+ */
 class RWStepAP242_RWIdAttribute {
 }
 
+/**
+ * Read & Write Module for ItemIdentifiedRepresentationUsage
+ */
 class RWStepAP242_RWItemIdentifiedRepresentationUsage {
 }
 
+/**
+ * Read & Write tool for Action
+ */
 class RWStepBasic_RWAction {
 }
 
+/**
+ * Read & Write tool for ActionAssignment
+ */
 class RWStepBasic_RWActionAssignment {
 }
 
+/**
+ * Read & Write tool for ActionMethod
+ */
 class RWStepBasic_RWActionMethod {
 }
 
+/**
+ * Read & Write tool for ActionRequestAssignment
+ */
 class RWStepBasic_RWActionRequestAssignment {
 }
 
+/**
+ * Read & Write tool for ActionRequestSolution
+ */
 class RWStepBasic_RWActionRequestSolution {
 }
 
+/**
+ * Read & Write Module for Address
+ */
 class RWStepBasic_RWAddress {
 }
 
+/**
+ * Read & Write Module for ApplicationContext
+ */
 class RWStepBasic_RWApplicationContext {
 }
 
+/**
+ * Read & Write Module for ApplicationContextElement
+ */
 class RWStepBasic_RWApplicationContextElement {
 }
 
+/**
+ * Read & Write Module for ApplicationProtocolDefinition
+ */
 class RWStepBasic_RWApplicationProtocolDefinition {
 }
 
+/**
+ * Read & Write Module for Approval
+ */
 class RWStepBasic_RWApproval {
 }
 
+/**
+ * Read & Write Module for ApprovalDateTime
+ */
 class RWStepBasic_RWApprovalDateTime {
 }
 
+/**
+ * Read & Write Module for ApprovalPersonOrganization
+ */
 class RWStepBasic_RWApprovalPersonOrganization {
 }
 
+/**
+ * Read & Write Module for ApprovalRelationship
+ */
 class RWStepBasic_RWApprovalRelationship {
 }
 
+/**
+ * Read & Write Module for ApprovalRole
+ */
 class RWStepBasic_RWApprovalRole {
 }
 
+/**
+ * Read & Write Module for ApprovalStatus
+ */
 class RWStepBasic_RWApprovalStatus {
 }
 
+/**
+ * Read & Write Module for CalendarDate
+ */
 class RWStepBasic_RWCalendarDate {
 }
 
+/**
+ * Read & Write tool for Certification
+ */
 class RWStepBasic_RWCertification {
 }
 
+/**
+ * Read & Write tool for CertificationAssignment
+ */
 class RWStepBasic_RWCertificationAssignment {
 }
 
+/**
+ * Read & Write tool for CertificationType
+ */
 class RWStepBasic_RWCertificationType {
 }
 
+/**
+ * Read & Write tool for CharacterizedObject
+ */
 class RWStepBasic_RWCharacterizedObject {
 }
 
+/**
+ * Read & Write tool for Contract
+ */
 class RWStepBasic_RWContract {
 }
 
+/**
+ * Read & Write tool for ContractAssignment
+ */
 class RWStepBasic_RWContractAssignment {
 }
 
+/**
+ * Read & Write tool for ContractType
+ */
 class RWStepBasic_RWContractType {
 }
 
+/**
+ * Read & Write Module for ConversionBasedUnit
+ */
 class RWStepBasic_RWConversionBasedUnit {
 }
 
+/**
+ * Read & Write Module for RWConversionBasedUnitAndAreaUnit
+ */
 class RWStepBasic_RWConversionBasedUnitAndAreaUnit {
 }
 
+/**
+ * Read & Write Module for ConversionBasedUnitAndLengthUnit
+ */
 class RWStepBasic_RWConversionBasedUnitAndLengthUnit {
 }
 
+/**
+ * Read & Write Module for ConversionBasedUnitAndMassUnit
+ */
 class RWStepBasic_RWConversionBasedUnitAndMassUnit {
 }
 
+/**
+ * Read & Write Module for ConversionBasedUnitAndPlaneAngleUnit
+ */
 class RWStepBasic_RWConversionBasedUnitAndPlaneAngleUnit {
 }
 
+/**
+ * Read & Write Module for ConversionBasedUnitAndRatioUnit
+ */
 class RWStepBasic_RWConversionBasedUnitAndRatioUnit {
 }
 
+/**
+ * Read & Write Module for ConversionBasedUnitAndSolidAngleUnit
+ */
 class RWStepBasic_RWConversionBasedUnitAndSolidAngleUnit {
 }
 
+/**
+ * Read & Write Module for ConversionBasedUnitAndTimeUnit
+ */
 class RWStepBasic_RWConversionBasedUnitAndTimeUnit {
 }
 
+/**
+ * Read & Write Module for ConversionBasedUnitAndVolumeUnit
+ */
 class RWStepBasic_RWConversionBasedUnitAndVolumeUnit {
 }
 
+/**
+ * Read & Write Module for CoordinatedUniversalTimeOffset
+ */
 class RWStepBasic_RWCoordinatedUniversalTimeOffset {
 }
 
+/**
+ * Read & Write Module for Date
+ */
 class RWStepBasic_RWDate {
 }
 
+/**
+ * Read & Write Module for DateAndTime
+ */
 class RWStepBasic_RWDateAndTime {
 }
 
+/**
+ * Read & Write Module for DateRole
+ */
 class RWStepBasic_RWDateRole {
 }
 
+/**
+ * Read & Write Module for DateTimeRole
+ */
 class RWStepBasic_RWDateTimeRole {
 }
 
+/**
+ * Read & Write Module for DerivedUnit
+ */
 class RWStepBasic_RWDerivedUnit {
 }
 
+/**
+ * Read & Write Module for DerivedUnitElement
+ */
 class RWStepBasic_RWDerivedUnitElement {
 }
 
+/**
+ * Read & Write Module for DimensionalExponents
+ */
 class RWStepBasic_RWDimensionalExponents {
 }
 
+/**
+ * Read & Write tool for Document
+ */
 class RWStepBasic_RWDocument {
 }
 
+/**
+ * Read & Write tool for DocumentFile
+ */
 class RWStepBasic_RWDocumentFile {
 }
 
+/**
+ * Read & Write tool for DocumentProductAssociation
+ */
 class RWStepBasic_RWDocumentProductAssociation {
 }
 
+/**
+ * Read & Write tool for DocumentProductEquivalence
+ */
 class RWStepBasic_RWDocumentProductEquivalence {
 }
 
+/**
+ * Read & Write Module for DocumentRelationship
+ */
 class RWStepBasic_RWDocumentRelationship {
 }
 
+/**
+ * Read & Write tool for DocumentRepresentationType
+ */
 class RWStepBasic_RWDocumentRepresentationType {
 }
 
+/**
+ * Read & Write Module for DocumentType
+ */
 class RWStepBasic_RWDocumentType {
 }
 
+/**
+ * Read & Write Module for DocumentUsageConstraint
+ */
 class RWStepBasic_RWDocumentUsageConstraint {
 }
 
+/**
+ * Read & Write Module for Effectivity
+ */
 class RWStepBasic_RWEffectivity {
 }
 
+/**
+ * Read & Write tool for EffectivityAssignment
+ */
 class RWStepBasic_RWEffectivityAssignment {
 }
 
+/**
+ * Read & Write tool for EulerAngles
+ */
 class RWStepBasic_RWEulerAngles {
 }
 
+/**
+ * Read & Write tool for ExternalIdentificationAssignment
+ */
 class RWStepBasic_RWExternalIdentificationAssignment {
 }
 
+/**
+ * Read & Write tool for ExternalSource
+ */
 class RWStepBasic_RWExternalSource {
 }
 
+/**
+ * Read & Write tool for ExternallyDefinedItem
+ */
 class RWStepBasic_RWExternallyDefinedItem {
 }
 
+/**
+ * Read & Write tool for GeneralProperty
+ */
 class RWStepBasic_RWGeneralProperty {
 }
 
+/**
+ * Read & Write tool for Group
+ */
 class RWStepBasic_RWGroup {
 }
 
+/**
+ * Read & Write tool for GroupAssignment
+ */
 class RWStepBasic_RWGroupAssignment {
 }
 
+/**
+ * Read & Write tool for GroupRelationship
+ */
 class RWStepBasic_RWGroupRelationship {
 }
 
+/**
+ * Read & Write tool for IdentificationAssignment
+ */
 class RWStepBasic_RWIdentificationAssignment {
 }
 
+/**
+ * Read & Write tool for IdentificationRole
+ */
 class RWStepBasic_RWIdentificationRole {
 }
 
+/**
+ * Read & Write Module for LengthMeasureWithUnit
+ */
 class RWStepBasic_RWLengthMeasureWithUnit {
 }
 
+/**
+ * Read & Write Module for LengthUnit
+ */
 class RWStepBasic_RWLengthUnit {
 }
 
+/**
+ * Read & Write Module for LocalTime
+ */
 class RWStepBasic_RWLocalTime {
 }
 
+/**
+ * Read & Write Module for MassMeasureWithUnit
+ */
 class RWStepBasic_RWMassMeasureWithUnit {
 }
 
+/**
+ * Read & Write tool for MassUnit
+ */
 class RWStepBasic_RWMassUnit {
 }
 
+/**
+ * Read & Write Module for MeasureWithUnit
+ */
 class RWStepBasic_RWMeasureWithUnit {
 }
 
+/**
+ * Read & Write Module for MechanicalContext
+ */
 class RWStepBasic_RWMechanicalContext {
 }
 
+/**
+ * Read & Write tool for NameAssignment
+ */
 class RWStepBasic_RWNameAssignment {
 }
 
+/**
+ * Read & Write Module for NamedUnit
+ */
 class RWStepBasic_RWNamedUnit {
 }
 
+/**
+ * Read & Write tool for ObjectRole
+ */
 class RWStepBasic_RWObjectRole {
 }
 
+/**
+ * Read & Write Module for OrdinalDate
+ */
 class RWStepBasic_RWOrdinalDate {
 }
 
+/**
+ * Read & Write Module for Organization
+ */
 class RWStepBasic_RWOrganization {
 }
 
+/**
+ * Read & Write Module for OrganizationRole
+ */
 class RWStepBasic_RWOrganizationRole {
 }
 
+/**
+ * Read & Write Module for OrganizationalAddress
+ */
 class RWStepBasic_RWOrganizationalAddress {
 }
 
+/**
+ * Read & Write Module for Person
+ */
 class RWStepBasic_RWPerson {
 }
 
+/**
+ * Read & Write Module for PersonAndOrganization
+ */
 class RWStepBasic_RWPersonAndOrganization {
 }
 
+/**
+ * Read & Write Module for PersonAndOrganizationRole
+ */
 class RWStepBasic_RWPersonAndOrganizationRole {
 }
 
+/**
+ * Read & Write Module for PersonalAddress
+ */
 class RWStepBasic_RWPersonalAddress {
 }
 
+/**
+ * Read & Write Module for PlaneAngleMeasureWithUnit
+ */
 class RWStepBasic_RWPlaneAngleMeasureWithUnit {
 }
 
+/**
+ * Read & Write Module for PlaneAngleUnit
+ */
 class RWStepBasic_RWPlaneAngleUnit {
 }
 
+/**
+ * Read & Write Module for Product
+ */
 class RWStepBasic_RWProduct {
 }
 
+/**
+ * Read & Write Module for ProductCategory
+ */
 class RWStepBasic_RWProductCategory {
 }
 
+/**
+ * Read & Write tool for ProductCategoryRelationship
+ */
 class RWStepBasic_RWProductCategoryRelationship {
 }
 
+/**
+ * Read & Write tool for ProductConceptContext
+ */
 class RWStepBasic_RWProductConceptContext {
 }
 
+/**
+ * Read & Write Module for ProductContext
+ */
 class RWStepBasic_RWProductContext {
 }
 
+/**
+ * Read & Write Module for ProductDefinition
+ */
 class RWStepBasic_RWProductDefinition {
 }
 
+/**
+ * Read & Write Module for ProductDefinitionContext
+ */
 class RWStepBasic_RWProductDefinitionContext {
 }
 
+/**
+ * Read & Write Module for ProductDefinitionEffectivity
+ */
 class RWStepBasic_RWProductDefinitionEffectivity {
 }
 
+/**
+ * Read & Write Module for ProductDefinitionFormation
+ */
 class RWStepBasic_RWProductDefinitionFormation {
 }
 
+/**
+ * Read & Write tool for ProductDefinitionFormationRelationship
+ */
 class RWStepBasic_RWProductDefinitionFormationRelationship {
 }
 
+/**
+ * Read & Write Module for ProductDefinitionFormationWithSpecifiedSource
+ */
 class RWStepBasic_RWProductDefinitionFormationWithSpecifiedSource {
 }
 
+/**
+ * Read & Write Module for ProductDefinitionReference
+ */
 class RWStepBasic_RWProductDefinitionReference {
 }
 
+/**
+ * Read & Write Module for ProductDefinitionReferenceWithLocalRepresentation
+ */
 class RWStepBasic_RWProductDefinitionReferenceWithLocalRepresentation {
 }
 
+/**
+ * Read & Write tool for ProductDefinitionRelationship
+ */
 class RWStepBasic_RWProductDefinitionRelationship {
 }
 
+/**
+ * Read & Write Module for ProductDefinitionWithAssociatedDocuments
+ */
 class RWStepBasic_RWProductDefinitionWithAssociatedDocuments {
 }
 
+/**
+ * Read & Write Module for ProductRelatedProductCategory
+ */
 class RWStepBasic_RWProductRelatedProductCategory {
 }
 
+/**
+ * Read & Write Module for ProductType
+ */
 class RWStepBasic_RWProductType {
 }
 
+/**
+ * Read & Write Module for RatioMeasureWithUnit
+ */
 class RWStepBasic_RWRatioMeasureWithUnit {
 }
 
+/**
+ * Read & Write tool for RoleAssociation
+ */
 class RWStepBasic_RWRoleAssociation {
 }
 
+/**
+ * Read & Write Module for SecurityClassification
+ */
 class RWStepBasic_RWSecurityClassification {
 }
 
+/**
+ * Read & Write Module for SecurityClassificationLevel
+ */
 class RWStepBasic_RWSecurityClassificationLevel {
 }
 
+/**
+ * Read & Write Module for SiUnit
+ */
 class RWStepBasic_RWSiUnit {
 }
 
+/**
+ * Read & Write Module for SiUnitAndAreaUnit
+ */
 class RWStepBasic_RWSiUnitAndAreaUnit {
 }
 
+/**
+ * Read & Write Module for SiUnitAndLengthUnit
+ */
 class RWStepBasic_RWSiUnitAndLengthUnit {
 }
 
+/**
+ * Read & Write Module for SiUnitAndMassUnit
+ */
 class RWStepBasic_RWSiUnitAndMassUnit {
 }
 
+/**
+ * Read & Write Module for SiUnitAndPlaneAngleUnit
+ */
 class RWStepBasic_RWSiUnitAndPlaneAngleUnit {
 }
 
+/**
+ * Read & Write Module for SiUnitAndRatioUnit
+ */
 class RWStepBasic_RWSiUnitAndRatioUnit {
 }
 
+/**
+ * Read & Write Module for SiUnitAndSolidAngleUnit
+ */
 class RWStepBasic_RWSiUnitAndSolidAngleUnit {
 }
 
+/**
+ * Read & Write Module for SiUnitAndThermodynamicTemperatureUnit
+ */
 class RWStepBasic_RWSiUnitAndThermodynamicTemperatureUnit {
 }
 
+/**
+ * Read & Write Module for SiUnitAndTimeUnit
+ */
 class RWStepBasic_RWSiUnitAndTimeUnit {
 }
 
+/**
+ * Read & Write Module for SiUnitAndVolumeUnit
+ */
 class RWStepBasic_RWSiUnitAndVolumeUnit {
 }
 
+/**
+ * Read & Write Module for SolidAngleMeasureWithUnit
+ */
 class RWStepBasic_RWSolidAngleMeasureWithUnit {
 }
 
+/**
+ * Read & Write Module for SolidAngleUnit
+ */
 class RWStepBasic_RWSolidAngleUnit {
 }
 
+/**
+ * Read & Write tool for ThermodynamicTemperatureUnit
+ */
 class RWStepBasic_RWThermodynamicTemperatureUnit {
 }
 
+/**
+ * Read & Write Module for UncertaintyMeasureWithUnit
+ */
 class RWStepBasic_RWUncertaintyMeasureWithUnit {
 }
 
+/**
+ * Read & Write tool for VersionedActionRequest
+ */
 class RWStepBasic_RWVersionedActionRequest {
 }
 
+/**
+ * Read & Write Module for WeekOfYearAndDayDate
+ */
 class RWStepBasic_RWWeekOfYearAndDayDate {
 }
 
+/**
+ * Read & Write tool for AngularityTolerance
+ */
 class RWStepDimTol_RWAngularityTolerance {
 }
 
+/**
+ * Read & Write tool for CircularRunoutTolerance
+ */
 class RWStepDimTol_RWCircularRunoutTolerance {
 }
 
+/**
+ * Read & Write tool for CoaxialityTolerance
+ */
 class RWStepDimTol_RWCoaxialityTolerance {
 }
 
+/**
+ * Read & Write tool for CommonDatum
+ */
 class RWStepDimTol_RWCommonDatum {
 }
 
+/**
+ * Read & Write tool for ConcentricityTolerance
+ */
 class RWStepDimTol_RWConcentricityTolerance {
 }
 
+/**
+ * Read & Write tool for CylindricityTolerance
+ */
 class RWStepDimTol_RWCylindricityTolerance {
 }
 
+/**
+ * Read & Write tool for Datum
+ */
 class RWStepDimTol_RWDatum {
 }
 
+/**
+ * Read & Write tool for DatumFeature
+ */
 class RWStepDimTol_RWDatumFeature {
 }
 
+/**
+ * Read & Write tool for DatumReference
+ */
 class RWStepDimTol_RWDatumReference {
 }
 
+/**
+ * Read & Write tool for DatumReferenceElement
+ */
 class RWStepDimTol_RWDatumReferenceCompartment {
 }
 
+/**
+ * Read & Write tool for DatumReferenceElement
+ */
 class RWStepDimTol_RWDatumReferenceElement {
 }
 
+/**
+ * Read & Write tool for DatumReferenceModifierWithValue
+ */
 class RWStepDimTol_RWDatumReferenceModifierWithValue {
 }
 
+/**
+ * Read & Write tool for DatumSystem
+ */
 class RWStepDimTol_RWDatumSystem {
 }
 
+/**
+ * Read & Write tool for DatumTarget
+ */
 class RWStepDimTol_RWDatumTarget {
 }
 
+/**
+ * Read & Write tool for FlatnessTolerance
+ */
 class RWStepDimTol_RWFlatnessTolerance {
 }
 
+/**
+ * Read & Write tool for GeneralDatumReference
+ */
 class RWStepDimTol_RWGeneralDatumReference {
 }
 
+/**
+ * Read & Write Module for GeoTolAndGeoTolWthDatRef
+ */
 class RWStepDimTol_RWGeoTolAndGeoTolWthDatRef {
 }
 
+/**
+ * Read & Write Module for GeoTolAndGeoTolWthDatRefAndGeoTolWthMaxTol
+ */
 class RWStepDimTol_RWGeoTolAndGeoTolWthDatRefAndGeoTolWthMaxTol {
 }
 
+/**
+ * Read & Write Module for GeoTolAndGeoTolWthDatRefAndGeoTolWthMod
+ */
 class RWStepDimTol_RWGeoTolAndGeoTolWthDatRefAndGeoTolWthMod {
 }
 
+/**
+ * Read & Write Module for ReprItemAndLengthMeasureWithUni
+ */
 class RWStepDimTol_RWGeoTolAndGeoTolWthDatRefAndModGeoTolAndPosTol {
 }
 
+/**
+ * Read & Write Module for GeoTolAndGeoTolWthDatRefAndUneqDisGeoTol
+ */
 class RWStepDimTol_RWGeoTolAndGeoTolWthDatRefAndUneqDisGeoTol {
 }
 
+/**
+ * Read & Write Module for GeoTolAndGeoTolWthMaxTol
+ */
 class RWStepDimTol_RWGeoTolAndGeoTolWthMaxTol {
 }
 
+/**
+ * Read & Write Module for GeoTolAndGeoTolWthMod
+ */
 class RWStepDimTol_RWGeoTolAndGeoTolWthMod {
 }
 
+/**
+ * Read & Write tool for GeometricTolerance
+ */
 class RWStepDimTol_RWGeometricTolerance {
 }
 
+/**
+ * Read & Write tool for GeometricToleranceRelationship
+ */
 class RWStepDimTol_RWGeometricToleranceRelationship {
 }
 
+/**
+ * Read & Write tool for GeometricToleranceWithDatumReference
+ */
 class RWStepDimTol_RWGeometricToleranceWithDatumReference {
 }
 
+/**
+ * Read & Write tool for GeometricToleranceWithDefinedAreaUnit
+ */
 class RWStepDimTol_RWGeometricToleranceWithDefinedAreaUnit {
 }
 
+/**
+ * Read & Write tool for GeometricToleranceWithDefinedUnit
+ */
 class RWStepDimTol_RWGeometricToleranceWithDefinedUnit {
 }
 
+/**
+ * Read & Write tool for GeometricToleranceWithMaximumTolerance
+ */
 class RWStepDimTol_RWGeometricToleranceWithMaximumTolerance {
 }
 
+/**
+ * Read & Write tool for GeometricToleranceWithModifiers
+ */
 class RWStepDimTol_RWGeometricToleranceWithModifiers {
 }
 
+/**
+ * Read & Write tool for LineProfileTolerance
+ */
 class RWStepDimTol_RWLineProfileTolerance {
 }
 
+/**
+ * Read & Write tool for ModifiedGeometricTolerance
+ */
 class RWStepDimTol_RWModifiedGeometricTolerance {
 }
 
+/**
+ * Read & Write tool for NonUniformZoneDefinition
+ */
 class RWStepDimTol_RWNonUniformZoneDefinition {
 }
 
+/**
+ * Read & Write tool for ParallelismTolerance
+ */
 class RWStepDimTol_RWParallelismTolerance {
 }
 
+/**
+ * Read & Write tool for PerpendicularityTolerance
+ */
 class RWStepDimTol_RWPerpendicularityTolerance {
 }
 
+/**
+ * Read & Write tool for PlacedDatumTargetFeature
+ */
 class RWStepDimTol_RWPlacedDatumTargetFeature {
 }
 
+/**
+ * Read & Write tool for PositionTolerance
+ */
 class RWStepDimTol_RWPositionTolerance {
 }
 
+/**
+ * Read & Write tool for ProjectedZoneDefinition
+ */
 class RWStepDimTol_RWProjectedZoneDefinition {
 }
 
+/**
+ * Read & Write tool for RoundnessTolerance
+ */
 class RWStepDimTol_RWRoundnessTolerance {
 }
 
+/**
+ * Read & Write tool for RunoutZoneDefinition
+ */
 class RWStepDimTol_RWRunoutZoneDefinition {
 }
 
+/**
+ * Read & Write tool for RunoutZoneOrientation
+ */
 class RWStepDimTol_RWRunoutZoneOrientation {
 }
 
+/**
+ * Read & Write tool for StraightnessTolerance
+ */
 class RWStepDimTol_RWStraightnessTolerance {
 }
 
+/**
+ * Read & Write tool for SurfaceProfileTolerance
+ */
 class RWStepDimTol_RWSurfaceProfileTolerance {
 }
 
+/**
+ * Read & Write tool for SymmetryTolerance
+ */
 class RWStepDimTol_RWSymmetryTolerance {
 }
 
+/**
+ * Read & Write tool for ToleranceZone
+ */
 class RWStepDimTol_RWToleranceZone {
 }
 
+/**
+ * Read & Write tool for ToleranceZoneDefinition
+ */
 class RWStepDimTol_RWToleranceZoneDefinition {
 }
 
+/**
+ * Read & Write tool for ToleranceZoneForm
+ */
 class RWStepDimTol_RWToleranceZoneForm {
 }
 
+/**
+ * Read & Write tool for TotalRunoutTolerance
+ */
 class RWStepDimTol_RWTotalRunoutTolerance {
 }
 
+/**
+ * Read & Write tool for UnequallyDisposedGeometricTolerance
+ */
 class RWStepDimTol_RWUnequallyDisposedGeometricTolerance {
 }
 
+/**
+ * Read & Write tool for AnalysisItemWithinRepresentation
+ */
 class RWStepElement_RWAnalysisItemWithinRepresentation {
 }
 
+/**
+ * Read & Write tool for Curve3dElementDescriptor
+ */
 class RWStepElement_RWCurve3dElementDescriptor {
 }
 
+/**
+ * Read & Write tool for CurveElementEndReleasePacket
+ */
 class RWStepElement_RWCurveElementEndReleasePacket {
 }
 
+/**
+ * Read & Write tool for CurveElementSectionDefinition
+ */
 class RWStepElement_RWCurveElementSectionDefinition {
 }
 
+/**
+ * Read & Write tool for CurveElementSectionDerivedDefinitions
+ */
 class RWStepElement_RWCurveElementSectionDerivedDefinitions {
 }
 
+/**
+ * Read & Write tool for ElementDescriptor
+ */
 class RWStepElement_RWElementDescriptor {
 }
 
+/**
+ * Read & Write tool for ElementMaterial
+ */
 class RWStepElement_RWElementMaterial {
 }
 
+/**
+ * Read & Write tool for Surface3dElementDescriptor
+ */
 class RWStepElement_RWSurface3dElementDescriptor {
 }
 
+/**
+ * Read & Write tool for SurfaceElementProperty
+ */
 class RWStepElement_RWSurfaceElementProperty {
 }
 
+/**
+ * Read & Write tool for SurfaceSection
+ */
 class RWStepElement_RWSurfaceSection {
 }
 
+/**
+ * Read & Write tool for SurfaceSectionField
+ */
 class RWStepElement_RWSurfaceSectionField {
 }
 
+/**
+ * Read & Write tool for SurfaceSectionFieldConstant
+ */
 class RWStepElement_RWSurfaceSectionFieldConstant {
 }
 
+/**
+ * Read & Write tool for SurfaceSectionFieldVarying
+ */
 class RWStepElement_RWSurfaceSectionFieldVarying {
 }
 
+/**
+ * Read & Write tool for UniformSurfaceSection
+ */
 class RWStepElement_RWUniformSurfaceSection {
 }
 
+/**
+ * Read & Write tool for Volume3dElementDescriptor
+ */
 class RWStepElement_RWVolume3dElementDescriptor {
 }
 
+/**
+ * Read & Write tool for AlignedCurve3dElementCoordinateSystem
+ */
 class RWStepFEA_RWAlignedCurve3dElementCoordinateSystem {
 }
 
+/**
+ * Read & Write tool for AlignedSurface3dElementCoordinateSystem
+ */
 class RWStepFEA_RWAlignedSurface3dElementCoordinateSystem {
 }
 
+/**
+ * Read & Write tool for ArbitraryVolume3dElementCoordinateSystem
+ */
 class RWStepFEA_RWArbitraryVolume3dElementCoordinateSystem {
 }
 
+/**
+ * Read & Write tool for ConstantSurface3dElementCoordinateSystem
+ */
 class RWStepFEA_RWConstantSurface3dElementCoordinateSystem {
 }
 
+/**
+ * Read & Write tool for Curve3dElementProperty
+ */
 class RWStepFEA_RWCurve3dElementProperty {
 }
 
+/**
+ * Read & Write tool for Curve3dElementRepresentation
+ */
 class RWStepFEA_RWCurve3dElementRepresentation {
 }
 
+/**
+ * Read & Write tool for CurveElementEndOffset
+ */
 class RWStepFEA_RWCurveElementEndOffset {
 }
 
+/**
+ * Read & Write tool for CurveElementEndRelease
+ */
 class RWStepFEA_RWCurveElementEndRelease {
 }
 
+/**
+ * Read & Write tool for CurveElementInterval
+ */
 class RWStepFEA_RWCurveElementInterval {
 }
 
+/**
+ * Read & Write tool for CurveElementIntervalConstant
+ */
 class RWStepFEA_RWCurveElementIntervalConstant {
 }
 
+/**
+ * Read & Write tool for CurveElementIntervalLinearlyVarying
+ */
 class RWStepFEA_RWCurveElementIntervalLinearlyVarying {
 }
 
+/**
+ * Read & Write tool for CurveElementLocation
+ */
 class RWStepFEA_RWCurveElementLocation {
 }
 
+/**
+ * Read & Write tool for DummyNode
+ */
 class RWStepFEA_RWDummyNode {
 }
 
+/**
+ * Read & Write tool for ElementGeometricRelationship
+ */
 class RWStepFEA_RWElementGeometricRelationship {
 }
 
+/**
+ * Read & Write tool for ElementGroup
+ */
 class RWStepFEA_RWElementGroup {
 }
 
+/**
+ * Read & Write tool for ElementRepresentation
+ */
 class RWStepFEA_RWElementRepresentation {
 }
 
+/**
+ * Read & Write tool for FeaAreaDensity
+ */
 class RWStepFEA_RWFeaAreaDensity {
 }
 
+/**
+ * Read & Write tool for FeaAxis2Placement3d
+ */
 class RWStepFEA_RWFeaAxis2Placement3d {
 }
 
+/**
+ * Read & Write tool for FeaCurveSectionGeometricRelationship
+ */
 class RWStepFEA_RWFeaCurveSectionGeometricRelationship {
 }
 
+/**
+ * Read & Write tool for FeaGroup
+ */
 class RWStepFEA_RWFeaGroup {
 }
 
+/**
+ * Read & Write tool for FeaLinearElasticity
+ */
 class RWStepFEA_RWFeaLinearElasticity {
 }
 
+/**
+ * Read & Write tool for FeaMassDensity
+ */
 class RWStepFEA_RWFeaMassDensity {
 }
 
+/**
+ * Read & Write tool for FeaMaterialPropertyRepresentation
+ */
 class RWStepFEA_RWFeaMaterialPropertyRepresentation {
 }
 
+/**
+ * Read & Write tool for FeaMaterialPropertyRepresentationItem
+ */
 class RWStepFEA_RWFeaMaterialPropertyRepresentationItem {
 }
 
+/**
+ * Read & Write tool for FeaModel
+ */
 class RWStepFEA_RWFeaModel {
 }
 
+/**
+ * Read & Write tool for FeaModel3d
+ */
 class RWStepFEA_RWFeaModel3d {
 }
 
+/**
+ * Read & Write tool for FeaModelDefinition
+ */
 class RWStepFEA_RWFeaModelDefinition {
 }
 
+/**
+ * Read & Write tool for FeaMoistureAbsorption
+ */
 class RWStepFEA_RWFeaMoistureAbsorption {
 }
 
+/**
+ * Read & Write tool for FeaParametricPoint
+ */
 class RWStepFEA_RWFeaParametricPoint {
 }
 
+/**
+ * Read & Write tool for FeaRepresentationItem
+ */
 class RWStepFEA_RWFeaRepresentationItem {
 }
 
+/**
+ * Read & Write tool for FeaSecantCoefficientOfLinearThermalExpansion
+ */
 class RWStepFEA_RWFeaSecantCoefficientOfLinearThermalExpansion {
 }
 
+/**
+ * Read & Write tool for FeaShellBendingStiffness
+ */
 class RWStepFEA_RWFeaShellBendingStiffness {
 }
 
+/**
+ * Read & Write tool for FeaShellMembraneBendingCouplingStiffness
+ */
 class RWStepFEA_RWFeaShellMembraneBendingCouplingStiffness {
 }
 
+/**
+ * Read & Write tool for FeaShellMembraneStiffness
+ */
 class RWStepFEA_RWFeaShellMembraneStiffness {
 }
 
+/**
+ * Read & Write tool for FeaShellShearStiffness
+ */
 class RWStepFEA_RWFeaShellShearStiffness {
 }
 
+/**
+ * Read & Write tool for FeaSurfaceSectionGeometricRelationship
+ */
 class RWStepFEA_RWFeaSurfaceSectionGeometricRelationship {
 }
 
+/**
+ * Read & Write tool for FeaTangentialCoefficientOfLinearThermalExpansion
+ */
 class RWStepFEA_RWFeaTangentialCoefficientOfLinearThermalExpansion {
 }
 
+/**
+ * Read & Write tool for FreedomAndCoefficient
+ */
 class RWStepFEA_RWFreedomAndCoefficient {
 }
 
+/**
+ * Read & Write tool for FreedomsList
+ */
 class RWStepFEA_RWFreedomsList {
 }
 
+/**
+ * Read & Write tool for GeometricNode
+ */
 class RWStepFEA_RWGeometricNode {
 }
 
+/**
+ * Read & Write tool for Node
+ */
 class RWStepFEA_RWNode {
 }
 
+/**
+ * Read & Write tool for NodeDefinition
+ */
 class RWStepFEA_RWNodeDefinition {
 }
 
+/**
+ * Read & Write tool for NodeGroup
+ */
 class RWStepFEA_RWNodeGroup {
 }
 
+/**
+ * Read & Write tool for NodeRepresentation
+ */
 class RWStepFEA_RWNodeRepresentation {
 }
 
+/**
+ * Read & Write tool for NodeSet
+ */
 class RWStepFEA_RWNodeSet {
 }
 
+/**
+ * Read & Write tool for NodeWithSolutionCoordinateSystem
+ */
 class RWStepFEA_RWNodeWithSolutionCoordinateSystem {
 }
 
+/**
+ * Read & Write tool for NodeWithVector
+ */
 class RWStepFEA_RWNodeWithVector {
 }
 
+/**
+ * Read & Write tool for ParametricCurve3dElementCoordinateDirection
+ */
 class RWStepFEA_RWParametricCurve3dElementCoordinateDirection {
 }
 
+/**
+ * Read & Write tool for ParametricCurve3dElementCoordinateSystem
+ */
 class RWStepFEA_RWParametricCurve3dElementCoordinateSystem {
 }
 
+/**
+ * Read & Write tool for ParametricSurface3dElementCoordinateSystem
+ */
 class RWStepFEA_RWParametricSurface3dElementCoordinateSystem {
 }
 
+/**
+ * Read & Write tool for Surface3dElementRepresentation
+ */
 class RWStepFEA_RWSurface3dElementRepresentation {
 }
 
+/**
+ * Read & Write tool for Volume3dElementRepresentation
+ */
 class RWStepFEA_RWVolume3dElementRepresentation {
 }
 
+/**
+ * Read & Write tool for AllAroundShapeAspect
+ */
 class RWStepRepr_RWAllAroundShapeAspect {
 }
 
+/**
+ * Read & Write tool for Apex
+ */
 class RWStepRepr_RWApex {
 }
 
+/**
+ * Read & Write tool for AssemblyComponentUsage
+ */
 class RWStepRepr_RWAssemblyComponentUsage {
 }
 
+/**
+ * Read & Write Module for AssemblyComponentUsageSubstitute
+ */
 class RWStepRepr_RWAssemblyComponentUsageSubstitute {
 }
 
+/**
+ * Read & Write tool for BetweenShapeAspect
+ */
 class RWStepRepr_RWBetweenShapeAspect {
 }
 
+/**
+ * Read & Write tool for CentreOfSymmetry
+ */
 class RWStepRepr_RWCentreOfSymmetry {
 }
 
+/**
+ * Read & Write Module for CharacterizedRepresentation
+ */
 class RWStepRepr_RWCharacterizedRepresentation {
 }
 
+/**
+ * Read & Write Module for CompGroupShAspAndCompShAspAndDatumFeatAndShAsp
+ */
 class RWStepRepr_RWCompGroupShAspAndCompShAspAndDatumFeatAndShAsp {
 }
 
+/**
+ * Read & Write Module for CompShAspAndDatumFeatAndShAsp
+ */
 class RWStepRepr_RWCompShAspAndDatumFeatAndShAsp {
 }
 
+/**
+ * Read & Write tool for CompositeGroupShapeAspect
+ */
 class RWStepRepr_RWCompositeGroupShapeAspect {
 }
 
+/**
+ * Read & Write tool for CompositeShapeAspect
+ */
 class RWStepRepr_RWCompositeShapeAspect {
 }
 
+/**
+ * Read & Write Module for CompoundRepresentationItem
+ */
 class RWStepRepr_RWCompoundRepresentationItem {
 }
 
+/**
+ * Read & Write tool for ConfigurationDesign
+ */
 class RWStepRepr_RWConfigurationDesign {
 }
 
+/**
+ * Read & Write tool for ConfigurationEffectivity
+ */
 class RWStepRepr_RWConfigurationEffectivity {
 }
 
+/**
+ * Read & Write tool for ConfigurationItem
+ */
 class RWStepRepr_RWConfigurationItem {
 }
 
+/**
+ * Read & Write Module for ConstructiveGeometryRepresentation
+ */
 class RWStepRepr_RWConstructiveGeometryRepresentation {
 }
 
+/**
+ * Read & Write Module for ConstructiveGeometryRepresentationRelationship
+ */
 class RWStepRepr_RWConstructiveGeometryRepresentationRelationship {
 }
 
+/**
+ * Read & Write tool for ContinuosShapeAspect
+ */
 class RWStepRepr_RWContinuosShapeAspect {
 }
 
+/**
+ * Read & Write tool for DataEnvironment
+ */
 class RWStepRepr_RWDataEnvironment {
 }
 
+/**
+ * Read & Write Module for DefinitionalRepresentation
+ */
 class RWStepRepr_RWDefinitionalRepresentation {
 }
 
+/**
+ * Read & Write tool for DerivedShapeAspect
+ */
 class RWStepRepr_RWDerivedShapeAspect {
 }
 
+/**
+ * Read & Write Module for DescriptiveRepresentationItem
+ */
 class RWStepRepr_RWDescriptiveRepresentationItem {
 }
 
+/**
+ * Read & Write tool for Extension
+ */
 class RWStepRepr_RWExtension {
 }
 
+/**
+ * Read & Write tool for FeatureForDatumTargetRelationship
+ */
 class RWStepRepr_RWFeatureForDatumTargetRelationship {
 }
 
+/**
+ * Read & Write Module for FunctionallyDefinedTransformation
+ */
 class RWStepRepr_RWFunctionallyDefinedTransformation {
 }
 
+/**
+ * Read & Write tool for GeometricAlignment
+ */
 class RWStepRepr_RWGeometricAlignment {
 }
 
+/**
+ * Read & Write Module for GlobalUncertaintyAssignedContext
+ */
 class RWStepRepr_RWGlobalUncertaintyAssignedContext {
 }
 
+/**
+ * Read & Write Module for GlobalUnitAssignedContext
+ */
 class RWStepRepr_RWGlobalUnitAssignedContext {
 }
 
+/**
+ * Read & Write Module for IntegerRepresentationItem
+ */
 class RWStepRepr_RWIntegerRepresentationItem {
 }
 
+/**
+ * Read & Write Module for ItemDefinedTransformation
+ */
 class RWStepRepr_RWItemDefinedTransformation {
 }
 
+/**
+ * Read & Write tool for MakeFromUsageOption
+ */
 class RWStepRepr_RWMakeFromUsageOption {
 }
 
+/**
+ * Read & Write Module for MappedItem
+ */
 class RWStepRepr_RWMappedItem {
 }
 
+/**
+ * Read & Write Module for MaterialDesignation
+ */
 class RWStepRepr_RWMaterialDesignation {
 }
 
+/**
+ * Read & Write tool for MaterialProperty
+ */
 class RWStepRepr_RWMaterialProperty {
 }
 
+/**
+ * Read & Write tool for MaterialPropertyRepresentation
+ */
 class RWStepRepr_RWMaterialPropertyRepresentation {
 }
 
+/**
+ * Read & Write Module for MeasureRepresentationItem
+ */
 class RWStepRepr_RWMeasureRepresentationItem {
 }
 
+/**
+ * Read & Write tool for ParallelOffset
+ */
 class RWStepRepr_RWParallelOffset {
 }
 
+/**
+ * Read & Write Module for ParametricRepresentationContext
+ */
 class RWStepRepr_RWParametricRepresentationContext {
 }
 
+/**
+ * Read & Write tool for PerpendicularTo
+ */
 class RWStepRepr_RWPerpendicularTo {
 }
 
+/**
+ * Read & Write tool for ProductConcept
+ */
 class RWStepRepr_RWProductConcept {
 }
 
+/**
+ * Read & Write tool for ProductDefinitionShape
+ */
 class RWStepRepr_RWProductDefinitionShape {
 }
 
+/**
+ * Read & Write tool for PropertyDefinition
+ */
 class RWStepRepr_RWPropertyDefinition {
 }
 
+/**
+ * Read & Write tool for PropertyDefinitionRelationship
+ */
 class RWStepRepr_RWPropertyDefinitionRelationship {
 }
 
+/**
+ * Read & Write tool for PropertyDefinitionRepresentation
+ */
 class RWStepRepr_RWPropertyDefinitionRepresentation {
 }
 
+/**
+ * Read & Write tool for QuantifiedAssemblyComponentUsage
+ */
 class RWStepRepr_RWQuantifiedAssemblyComponentUsage {
 }
 
+/**
+ * Read & Write Module for ReprItemAndLengthMeasureWithUni
+ */
 class RWStepRepr_RWReprItemAndLengthMeasureWithUnit {
 }
 
+/**
+ * Read & Write Module for ReprItemAndLengthMeasureWithUnitAndQRI
+ */
 class RWStepRepr_RWReprItemAndLengthMeasureWithUnitAndQRI {
 }
 
+/**
+ * Read & Write Module for ReprItemAndPlaneAngleMeasureWithUni
+ */
 class RWStepRepr_RWReprItemAndPlaneAngleMeasureWithUnit {
 }
 
+/**
+ * Read & Write Module for ReprItemAndPlaneAngleMeasureWithUnitAndQRI
+ */
 class RWStepRepr_RWReprItemAndPlaneAngleMeasureWithUnitAndQRI {
 }
 
+/**
+ * Read & Write Module for Representation
+ */
 class RWStepRepr_RWRepresentation {
 }
 
+/**
+ * Read & Write Module for RepresentationContext
+ */
 class RWStepRepr_RWRepresentationContext {
 }
 
+/**
+ * Read & Write Module for RepresentationItem
+ */
 class RWStepRepr_RWRepresentationItem {
 }
 
+/**
+ * Read & Write Module for RepresentationMap
+ */
 class RWStepRepr_RWRepresentationMap {
 }
 
+/**
+ * Read & Write Module for RepresentationRelationship
+ */
 class RWStepRepr_RWRepresentationRelationship {
 }
 
+/**
+ * Read & Write Module for RepresentationRelationshipWithTransformation
+ */
 class RWStepRepr_RWRepresentationRelationshipWithTransformation {
 }
 
+/**
+ * Read & Write Module for ShapeAspect
+ */
 class RWStepRepr_RWShapeAspect {
 }
 
+/**
+ * Read & Write tool for ShapeAspectDerivingRelationship
+ */
 class RWStepRepr_RWShapeAspectDerivingRelationship {
 }
 
+/**
+ * Read & Write tool for ShapeAspectRelationship
+ */
 class RWStepRepr_RWShapeAspectRelationship {
 }
 
+/**
+ * Read & Write tool for ShapeAspectTransition
+ */
 class RWStepRepr_RWShapeAspectTransition {
 }
 
+/**
+ * Read & Write Module for ShapeRepresentationRelationshipWithTransformation
+ */
 class RWStepRepr_RWShapeRepresentationRelationshipWithTransformation {
 }
 
+/**
+ * Read & Write tool for SpecifiedHigherUsageOccurrence
+ */
 class RWStepRepr_RWSpecifiedHigherUsageOccurrence {
 }
 
+/**
+ * Read & Write tool for StructuralResponseProperty
+ */
 class RWStepRepr_RWStructuralResponseProperty {
 }
 
+/**
+ * Read & Write tool for StructuralResponsePropertyDefinitionRepresentation
+ */
 class RWStepRepr_RWStructuralResponsePropertyDefinitionRepresentation {
 }
 
+/**
+ * Read & Write tool for Tangent
+ */
 class RWStepRepr_RWTangent {
 }
 
+/**
+ * Read & Write Module for ValueRepresentationItem
+ */
 class RWStepRepr_RWValueRepresentationItem {
 }
 
+/**
+ * Read & Write Module for AdvancedBrepShapeRepresentation
+ */
 class RWStepShape_RWAdvancedBrepShapeRepresentation {
 }
 
+/**
+ * Read & Write Module for AdvancedFace
+ */
 class RWStepShape_RWAdvancedFace {
 }
 
+/**
+ * Read & Write tool for AngularLocation
+ */
 class RWStepShape_RWAngularLocation {
 }
 
+/**
+ * Read & Write tool for AngularSize
+ */
 class RWStepShape_RWAngularSize {
 }
 
+/**
+ * Read & Write Module for Block
+ */
 class RWStepShape_RWBlock {
 }
 
+/**
+ * Read & Write Module for BooleanResult
+ */
 class RWStepShape_RWBooleanResult {
 }
 
+/**
+ * Read & Write Module for BoxDomain
+ */
 class RWStepShape_RWBoxDomain {
 }
 
+/**
+ * Read & Write Module for BoxedHalfSpace
+ */
 class RWStepShape_RWBoxedHalfSpace {
 }
 
+/**
+ * Read & Write Module for ClosedShell
+ */
 class RWStepShape_RWClosedShell {
 }
 
+/**
+ * Read & Write tool for CompoundShapeRepresentation
+ */
 class RWStepShape_RWCompoundShapeRepresentation {
 }
 
+/**
+ * Read & Write tool for ConnectedEdgeSet
+ */
 class RWStepShape_RWConnectedEdgeSet {
 }
 
+/**
+ * Read & Write Module for ConnectedFaceSet
+ */
 class RWStepShape_RWConnectedFaceSet {
 }
 
+/**
+ * Read & Write tool for ConnectedFaceShapeRepresentation
+ */
 class RWStepShape_RWConnectedFaceShapeRepresentation {
 }
 
+/**
+ * Read & Write tool for ConnectedFaceSubSet
+ */
 class RWStepShape_RWConnectedFaceSubSet {
 }
 
+/**
+ * Read & Write Module for ContextDependentShapeRepresentation
+ */
 class RWStepShape_RWContextDependentShapeRepresentation {
 }
 
+/**
+ * Read & Write Module for CsgShapeRepresentation
+ */
 class RWStepShape_RWCsgShapeRepresentation {
 }
 
+/**
+ * Read & Write Module for CsgSolid
+ */
 class RWStepShape_RWCsgSolid {
 }
 
+/**
+ * Read & Write Module for ConversionBasedUnitAndLengthUnit
+ */
 class RWStepShape_RWDefinitionalRepresentationAndShapeRepresentation {
 }
 
+/**
+ * Read & Write tool for DimensionalCharacteristicRepresentation
+ */
 class RWStepShape_RWDimensionalCharacteristicRepresentation {
 }
 
+/**
+ * Read & Write tool for DimensionalLocation
+ */
 class RWStepShape_RWDimensionalLocation {
 }
 
+/**
+ * Read & Write tool for DimensionalLocationWithPath
+ */
 class RWStepShape_RWDimensionalLocationWithPath {
 }
 
+/**
+ * Read & Write tool for DimensionalSize
+ */
 class RWStepShape_RWDimensionalSize {
 }
 
+/**
+ * Read & Write tool for DimensionalSizeWithPath
+ */
 class RWStepShape_RWDimensionalSizeWithPath {
 }
 
+/**
+ * Read & Write Module for Edge
+ */
 class RWStepShape_RWEdge {
 }
 
+/**
+ * Read & Write tool for EdgeBasedWireframeModel
+ */
 class RWStepShape_RWEdgeBasedWireframeModel {
 }
 
+/**
+ * Read & Write tool for EdgeBasedWireframeShapeRepresentation
+ */
 class RWStepShape_RWEdgeBasedWireframeShapeRepresentation {
 }
 
+/**
+ * Read & Write Module for ExtrudedAreaSolid
+ */
 class RWStepShape_RWExtrudedAreaSolid {
 }
 
+/**
+ * Read & Write Module for ExtrudedFaceSolid
+ */
 class RWStepShape_RWExtrudedFaceSolid {
 }
 
+/**
+ * Read & Write Module for Face
+ */
 class RWStepShape_RWFace {
 }
 
+/**
+ * Read & Write tool for FaceBasedSurfaceModel
+ */
 class RWStepShape_RWFaceBasedSurfaceModel {
 }
 
+/**
+ * Read & Write Module for FaceOuterBound
+ */
 class RWStepShape_RWFaceOuterBound {
 }
 
+/**
+ * Read & Write Module for FaceSurface
+ */
 class RWStepShape_RWFaceSurface {
 }
 
+/**
+ * Read & Write Module for FacetedBrep
+ */
 class RWStepShape_RWFacetedBrep {
 }
 
+/**
+ * Read & Write Module for FacetedBrepAndBrepWithVoids
+ */
 class RWStepShape_RWFacetedBrepAndBrepWithVoids {
 }
 
+/**
+ * Read & Write Module for FacetedBrepShapeRepresentation
+ */
 class RWStepShape_RWFacetedBrepShapeRepresentation {
 }
 
+/**
+ * Read & Write Module for GeometricCurveSet
+ */
 class RWStepShape_RWGeometricCurveSet {
 }
 
+/**
+ * Read & Write Module for GeometricSet
+ */
 class RWStepShape_RWGeometricSet {
 }
 
+/**
+ * Read & Write Module for GeometricallyBoundedSurfaceShapeRepresentation
+ */
 class RWStepShape_RWGeometricallyBoundedSurfaceShapeRepresentation {
 }
 
+/**
+ * Read & Write Module for GeometricallyBoundedWireframeShapeRepresentation
+ */
 class RWStepShape_RWGeometricallyBoundedWireframeShapeRepresentation {
 }
 
+/**
+ * Read & Write Module for HalfSpaceSolid
+ */
 class RWStepShape_RWHalfSpaceSolid {
 }
 
+/**
+ * Read & Write Module for LimitsAndFits
+ */
 class RWStepShape_RWLimitsAndFits {
 }
 
+/**
+ * Read & Write Module for Loop
+ */
 class RWStepShape_RWLoop {
 }
 
+/**
+ * Read & Write Module for LoopAndPath
+ */
 class RWStepShape_RWLoopAndPath {
 }
 
+/**
+ * Read & Write Module for ManifoldSolidBrep
+ */
 class RWStepShape_RWManifoldSolidBrep {
 }
 
+/**
+ * Read & Write Module for ManifoldSurfaceShapeRepresentation
+ */
 class RWStepShape_RWManifoldSurfaceShapeRepresentation {
 }
 
+/**
+ * Read & Write Module for MeasureQualification
+ */
 class RWStepShape_RWMeasureQualification {
 }
 
+/**
+ * Read & Write Module for MeasureRepresentationItemAndQualifiedRepresentationItem
+ */
 class RWStepShape_RWMeasureRepresentationItemAndQualifiedRepresentationItem {
 }
 
+/**
+ * Read & Write tool for NonManifoldSurfaceShapeRepresentation
+ */
 class RWStepShape_RWNonManifoldSurfaceShapeRepresentation {
 }
 
+/**
+ * Read & Write Module for OpenShell
+ */
 class RWStepShape_RWOpenShell {
 }
 
+/**
+ * Read & Write Module for OrientedClosedShell
+ */
 class RWStepShape_RWOrientedClosedShell {
 }
 
+/**
+ * Read & Write Module for OrientedEdge
+ */
 class RWStepShape_RWOrientedEdge {
 }
 
+/**
+ * Read & Write Module for OrientedFace
+ */
 class RWStepShape_RWOrientedFace {
 }
 
+/**
+ * Read & Write Module for OrientedOpenShell
+ */
 class RWStepShape_RWOrientedOpenShell {
 }
 
+/**
+ * Read & Write Module for OrientedPath
+ */
 class RWStepShape_RWOrientedPath {
 }
 
+/**
+ * Read & Write Module for Path
+ */
 class RWStepShape_RWPath {
 }
 
+/**
+ * Read & Write Module for PlusMinusTolerance
+ */
 class RWStepShape_RWPlusMinusTolerance {
 }
 
+/**
+ * Read & Write tool for PointRepresentation
+ */
 class RWStepShape_RWPointRepresentation {
 }
 
+/**
+ * Read & Write Module for PolyLoop
+ */
 class RWStepShape_RWPolyLoop {
 }
 
+/**
+ * Read & Write Module for PrecisionQualifier
+ */
 class RWStepShape_RWPrecisionQualifier {
 }
 
+/**
+ * Read & Write Module for QualifiedRepresentationItem
+ */
 class RWStepShape_RWQualifiedRepresentationItem {
 }
 
+/**
+ * Read & Write Module for RevolvedAreaSolid
+ */
 class RWStepShape_RWRevolvedAreaSolid {
 }
 
 class RWStepShape_RWRevolvedFaceSolid {
 }
 
+/**
+ * Read & Write Module for RightAngularWedge
+ */
 class RWStepShape_RWRightAngularWedge {
 }
 
+/**
+ * Read & Write Module for RightCircularCone
+ */
 class RWStepShape_RWRightCircularCone {
 }
 
+/**
+ * Read & Write Module for RightCircularCylinder
+ */
 class RWStepShape_RWRightCircularCylinder {
 }
 
+/**
+ * Read & Write tool for SeamEdge
+ */
 class RWStepShape_RWSeamEdge {
 }
 
+/**
+ * Read & Write tool for ShapeDefinitionRepresentation
+ */
 class RWStepShape_RWShapeDefinitionRepresentation {
 }
 
+/**
+ * Read & Write tool for ShapeDimensionRepresentation
+ */
 class RWStepShape_RWShapeDimensionRepresentation {
 }
 
+/**
+ * Read & Write Module for ShapeRepresentation
+ */
 class RWStepShape_RWShapeRepresentation {
 }
 
+/**
+ * Read & Write tool for ShapeRepresentationWithParameters
+ */
 class RWStepShape_RWShapeRepresentationWithParameters {
 }
 
+/**
+ * Read & Write Module for ShellBasedSurfaceModel
+ */
 class RWStepShape_RWShellBasedSurfaceModel {
 }
 
+/**
+ * Read & Write Module for SolidModel
+ */
 class RWStepShape_RWSolidModel {
 }
 
+/**
+ * Read & Write Module for SolidReplica
+ */
 class RWStepShape_RWSolidReplica {
 }
 
+/**
+ * Read & Write Module for Sphere
+ */
 class RWStepShape_RWSphere {
 }
 
+/**
+ * Read & Write tool for Subedge
+ */
 class RWStepShape_RWSubedge {
 }
 
+/**
+ * Read & Write tool for Subface
+ */
 class RWStepShape_RWSubface {
 }
 
+/**
+ * Read & Write Module for SweptAreaSolid
+ */
 class RWStepShape_RWSweptAreaSolid {
 }
 
+/**
+ * Read & Write Module for SweptFaceSolid
+ */
 class RWStepShape_RWSweptFaceSolid {
 }
 
+/**
+ * Read & Write Module for ToleranceValue
+ */
 class RWStepShape_RWToleranceValue {
 }
 
+/**
+ * Read & Write Module for TopologicalRepresentationItem
+ */
 class RWStepShape_RWTopologicalRepresentationItem {
 }
 
+/**
+ * Read & Write Module for Torus
+ */
 class RWStepShape_RWTorus {
 }
 
+/**
+ * Read & Write Module for TransitionalShapeRepresentation
+ */
 class RWStepShape_RWTransitionalShapeRepresentation {
 }
 
+/**
+ * Read & Write Module for TypeQualifier
+ */
 class RWStepShape_RWTypeQualifier {
 }
 
+/**
+ * Read & Write tool for ValueFormatTypeQualifier
+ */
 class RWStepShape_RWValueFormatTypeQualifier {
 }
 
+/**
+ * Read & Write Module for Vertex
+ */
 class RWStepShape_RWVertex {
 }
 
+/**
+ * Read & Write Module for VertexLoop
+ */
 class RWStepShape_RWVertexLoop {
 }
 
+/**
+ * Read & Write Module for VertexPoint
+ */
 class RWStepShape_RWVertexPoint {
 }
 
+/**
+ * Read & Write Module for AnnotationCurveOccurrence
+ */
 class RWStepVisual_RWAnnotationCurveOccurrence {
 }
 
+/**
+ * Read & Write Module for AnnotationCurveOccurrenceAndAnnotationOccurrenceAndGeomReprItemAndReprItemAndStyledItem
+ */
 class RWStepVisual_RWAnnotationCurveOccurrenceAndAnnotationOccurrenceAndGeomReprItemAndReprItemAndStyledItem {
 }
 
+/**
+ * Read & Write Module for AnnotationFillArea
+ */
 class RWStepVisual_RWAnnotationFillArea {
 }
 
+/**
+ * Read & Write Module for AnnotationFillAreaOccurrence
+ */
 class RWStepVisual_RWAnnotationFillAreaOccurrence {
 }
 
+/**
+ * Read & Write Module for AnnotationOccurrence
+ */
 class RWStepVisual_RWAnnotationOccurrence {
 }
 
+/**
+ * Read & Write Module for AnnotationPlane
+ */
 class RWStepVisual_RWAnnotationPlane {
 }
 
+/**
+ * Read & Write Module for AreaInSet
+ */
 class RWStepVisual_RWAreaInSet {
 }
 
+/**
+ * Read & Write Module for BackgroundColour
+ */
 class RWStepVisual_RWBackgroundColour {
 }
 
+/**
+ * Read & Write Module for CameraImage
+ */
 class RWStepVisual_RWCameraImage {
 }
 
+/**
+ * Read & Write Module for CameraModel
+ */
 class RWStepVisual_RWCameraModel {
 }
 
+/**
+ * Read & Write Module for CameraModelD2
+ */
 class RWStepVisual_RWCameraModelD2 {
 }
 
+/**
+ * Read & Write Module for CameraModelD3
+ */
 class RWStepVisual_RWCameraModelD3 {
 }
 
+/**
+ * Read & Write Module for CameraModelD3MultiClipping
+ */
 class RWStepVisual_RWCameraModelD3MultiClipping {
 }
 
+/**
+ * Read & Write Module for CameraModelD3MultiClippingIntersection
+ */
 class RWStepVisual_RWCameraModelD3MultiClippingIntersection {
 }
 
+/**
+ * Read & Write Module for CameraModelD3MultiClippingUnion
+ */
 class RWStepVisual_RWCameraModelD3MultiClippingUnion {
 }
 
+/**
+ * Read & Write Module for CameraUsage
+ */
 class RWStepVisual_RWCameraUsage {
 }
 
+/**
+ * Read & Write Module for complex STEP entity Characterized_Object & Characterized_Representation & Draughting_Model & Representation
+ */
 class RWStepVisual_RWCharacterizedObjectAndCharacterizedRepresentationAndDraughtingModelAndRepresentation {
 }
 
+/**
+ * Read & Write Module for Colour
+ */
 class RWStepVisual_RWColour {
 }
 
+/**
+ * Read & Write Module for ColourRgb
+ */
 class RWStepVisual_RWColourRgb {
 }
 
+/**
+ * Read & Write Module for ColourSpecification
+ */
 class RWStepVisual_RWColourSpecification {
 }
 
+/**
+ * Read & Write Module for CompositeText
+ */
 class RWStepVisual_RWCompositeText {
 }
 
+/**
+ * Read & Write Module for CompositeTextWithExtent
+ */
 class RWStepVisual_RWCompositeTextWithExtent {
 }
 
+/**
+ * Read & Write Module for ContextDependentInvisibility
+ */
 class RWStepVisual_RWContextDependentInvisibility {
 }
 
+/**
+ * Read & Write Module for ContextDependentOverRidingStyledItem
+ */
 class RWStepVisual_RWContextDependentOverRidingStyledItem {
 }
 
+/**
+ * Read & Write Module for AnnotationOccurrence
+ */
 class RWStepVisual_RWCoordinatesList {
 }
 
+/**
+ * Read & Write Module for CurveStyle
+ */
 class RWStepVisual_RWCurveStyle {
 }
 
+/**
+ * Read & Write Module for CurveStyleFont
+ */
 class RWStepVisual_RWCurveStyleFont {
 }
 
+/**
+ * Read & Write Module for CurveStyleFontPattern
+ */
 class RWStepVisual_RWCurveStyleFontPattern {
 }
 
+/**
+ * Read & Write Module for DraughtingCallout
+ */
 class RWStepVisual_RWDraughtingCallout {
 }
 
+/**
+ * Read & Write tool for DraughtingModel
+ */
 class RWStepVisual_RWDraughtingModel {
 }
 
+/**
+ * Read & Write Module for DraughtingPreDefinedColour
+ */
 class RWStepVisual_RWDraughtingPreDefinedColour {
 }
 
+/**
+ * Read & Write Module for DraughtingPreDefinedCurveFont
+ */
 class RWStepVisual_RWDraughtingPreDefinedCurveFont {
 }
 
+/**
+ * Read & Write tool for ExternallyDefinedCurveFont
+ */
 class RWStepVisual_RWExternallyDefinedCurveFont {
 }
 
+/**
+ * Read & Write Module for FillAreaStyle
+ */
 class RWStepVisual_RWFillAreaStyle {
 }
 
+/**
+ * Read & Write Module for FillAreaStyleColour
+ */
 class RWStepVisual_RWFillAreaStyleColour {
 }
 
+/**
+ * Read & Write Module for Invisibility
+ */
 class RWStepVisual_RWInvisibility {
 }
 
+/**
+ * Read & Write Module for MechanicalDesignGeometricPresentationArea
+ */
 class RWStepVisual_RWMechanicalDesignGeometricPresentationArea {
 }
 
+/**
+ * Read & Write Module for MechanicalDesignGeometricPresentationRepresentation
+ */
 class RWStepVisual_RWMechanicalDesignGeometricPresentationRepresentation {
 }
 
+/**
+ * Read & Write Module for OverRidingStyledItem
+ */
 class RWStepVisual_RWOverRidingStyledItem {
 }
 
+/**
+ * Read & Write Module for PlanarBox
+ */
 class RWStepVisual_RWPlanarBox {
 }
 
+/**
+ * Read & Write Module for PlanarExtent
+ */
 class RWStepVisual_RWPlanarExtent {
 }
 
+/**
+ * Read & Write Module for PointStyle
+ */
 class RWStepVisual_RWPointStyle {
 }
 
+/**
+ * Read & Write Module for PreDefinedColour
+ */
 class RWStepVisual_RWPreDefinedColour {
 }
 
+/**
+ * Read & Write Module for PreDefinedCurveFont
+ */
 class RWStepVisual_RWPreDefinedCurveFont {
 }
 
+/**
+ * Read & Write Module for PreDefinedItem
+ */
 class RWStepVisual_RWPreDefinedItem {
 }
 
+/**
+ * Read & Write Module for PresentationArea
+ */
 class RWStepVisual_RWPresentationArea {
 }
 
+/**
+ * Read & Write Module for PresentationLayerAssignment
+ */
 class RWStepVisual_RWPresentationLayerAssignment {
 }
 
+/**
+ * Read & Write Module for PresentationLayerUsage
+ */
 class RWStepVisual_RWPresentationLayerUsage {
 }
 
+/**
+ * Read & Write Module for PresentationRepresentation
+ */
 class RWStepVisual_RWPresentationRepresentation {
 }
 
+/**
+ * Read & Write Module for PresentationSet
+ */
 class RWStepVisual_RWPresentationSet {
 }
 
+/**
+ * Read & Write Module for PresentationSize
+ */
 class RWStepVisual_RWPresentationSize {
 }
 
+/**
+ * Read & Write Module for PresentationStyleAssignment
+ */
 class RWStepVisual_RWPresentationStyleAssignment {
 }
 
+/**
+ * Read & Write Module for PresentationStyleByContext
+ */
 class RWStepVisual_RWPresentationStyleByContext {
 }
 
+/**
+ * Read & Write Module for PresentationView
+ */
 class RWStepVisual_RWPresentationView {
 }
 
+/**
+ * Read & Write Module for PresentedItemRepresentation
+ */
 class RWStepVisual_RWPresentedItemRepresentation {
 }
 
+/**
+ * Read & Write Module for StyledItem
+ */
 class RWStepVisual_RWStyledItem {
 }
 
+/**
+ * Read & Write Module for SurfaceSideStyle
+ */
 class RWStepVisual_RWSurfaceSideStyle {
 }
 
+/**
+ * Read & Write Module for SurfaceStyleBoundary
+ */
 class RWStepVisual_RWSurfaceStyleBoundary {
 }
 
+/**
+ * Read & Write Module for SurfaceStyleControlGrid
+ */
 class RWStepVisual_RWSurfaceStyleControlGrid {
 }
 
+/**
+ * Read & Write Module for SurfaceStyleFillArea
+ */
 class RWStepVisual_RWSurfaceStyleFillArea {
 }
 
+/**
+ * Read & Write Module for SurfaceStyleParameterLine
+ */
 class RWStepVisual_RWSurfaceStyleParameterLine {
 }
 
+/**
+ * Read & Write Module for SurfaceStyleSegmentationCurve
+ */
 class RWStepVisual_RWSurfaceStyleSegmentationCurve {
 }
 
+/**
+ * Read & Write Module for SurfaceStyleSilhouette
+ */
 class RWStepVisual_RWSurfaceStyleSilhouette {
 }
 
+/**
+ * Read & Write Module for SurfaceStyleUsage
+ */
 class RWStepVisual_RWSurfaceStyleUsage {
 }
 
+/**
+ * Read & Write Module for Template
+ */
 class RWStepVisual_RWTemplate {
 }
 
+/**
+ * Read & Write Module for TemplateInstance
+ */
 class RWStepVisual_RWTemplateInstance {
 }
 
+/**
+ * Read & Write Module for AnnotationOccurrence
+ */
 class RWStepVisual_RWTessellatedAnnotationOccurrence {
 }
 
+/**
+ * Read & Write Module for AnnotationOccurrence
+ */
 class RWStepVisual_RWTessellatedCurveSet {
 }
 
+/**
+ * Read & Write Module for AnnotationOccurrence
+ */
 class RWStepVisual_RWTessellatedGeometricSet {
 }
 
+/**
+ * Read & Write Module for AnnotationOccurrence
+ */
 class RWStepVisual_RWTessellatedItem {
 }
 
+/**
+ * Read & Write Module for TextLiteral
+ */
 class RWStepVisual_RWTextLiteral {
 }
 
+/**
+ * Read & Write Module for TextStyle
+ */
 class RWStepVisual_RWTextStyle {
 }
 
+/**
+ * Read & Write Module for TextStyleForDefinedFont
+ */
 class RWStepVisual_RWTextStyleForDefinedFont {
 }
 
+/**
+ * Read & Write Module for TextStyleWithBoxCharacteristics
+ */
 class RWStepVisual_RWTextStyleWithBoxCharacteristics {
 }
 
+/**
+ * Read & Write Module for ViewVolume
+ */
 class RWStepVisual_RWViewVolume {
 }
 
+/**
+ * This class provides methods to read and write triangulation from / to the STL files.
+ */
 class RWStl {
 }
 
+/**
+ * An abstract class implementing procedure to read STL file.
+ */
 class RWStl_Reader extends Standard_Transient {
 }
 
 class Resource_LexicalCompare {
 }
 
+/**
+ * Defines a resource structure and its management methods.
+ */
 class Resource_Manager extends Standard_Transient {
 }
 
@@ -19882,21 +25369,39 @@ class Resource_NoSuchResource_1 extends Resource_NoSuchResource {}
 
 class Resource_NoSuchResource_2 extends Resource_NoSuchResource {}
 
+/**
+ * This class provides functions used to convert a non-ASCII C string given in ANSI, EUC, GB or SJIS format, to a Unicode string of extended characters, and vice versa.
+ */
 class Resource_Unicode {
 }
 
+/**
+ * Extends ActorWrite from STEPControl by analysis of whether shape is assembly (based on information from DECAF)
+ */
 class STEPCAFControl_ActorWrite extends STEPControl_ActorWrite {
 }
 
+/**
+ * Extends Controller from STEPControl in order to provide ActorWrite adapted for writing assemblies from DECAF Note that ActorRead from STEPControl is used for reading (inherited automatically)
+ */
 class STEPCAFControl_Controller extends STEPControl_Controller {
 }
 
+/**
+ * Auxiliary class serving as container for data resulting from translation of external file
+ */
 class STEPCAFControl_ExternFile extends Standard_Transient {
 }
 
+/**
+ * This class provides tools for access (read) the GDT properties.
+ */
 class STEPCAFControl_GDTProperty {
 }
 
+/**
+ * Provides a tool to read STEP file and put it into DECAF document. Besides transfer of shapes (including assemblies) provided by STEPControl, supports also colors and part names
+ */
 class STEPCAFControl_Reader {
 }
 
@@ -19904,6 +25409,9 @@ class STEPCAFControl_Reader_1 extends STEPCAFControl_Reader {}
 
 class STEPCAFControl_Reader_2 extends STEPCAFControl_Reader {}
 
+/**
+ * Provides a tool to write DECAF document to the STEP file. Besides transfer of shapes (including assemblies) provided by STEPControl, supports also colors and part names
+ */
 class STEPCAFControl_Writer {
 }
 
@@ -19911,15 +25419,27 @@ class STEPCAFControl_Writer_1 extends STEPCAFControl_Writer {}
 
 class STEPCAFControl_Writer_2 extends STEPCAFControl_Writer {}
 
+/**
+ * Defines tools for creation and investigation STEP constructs used for representing various kinds of data, such as product and assembly structure, unit contexts, associated information The creation of these structures is made according to currently active schema (AP203 or AP214 CD2 or DIS) This is taken from parameter write.step.schema
+ */
 class STEPConstruct {
 }
 
+/**
+ * Maintains context specific for AP203 (required data and management information such as persons, dates, approvals etc.) It contains static entities (which can be shared), default values for person and organisation, and also provides tool for creating management entities around specific part (SDR).
+ */
 class STEPConstruct_AP203Context {
 }
 
+/**
+ * This operator creates and checks an item of an assembly, from its basic data : a ShapeRepresentation, a Location ...
+ */
 class STEPConstruct_Assembly {
 }
 
+/**
+ * Maintains global context tool for writing. Gives access to Product Definition Context (one per Model) Maintains ApplicationProtocolDefinition entity (common for all products) Also maintains context specific for AP203 and provides set of methods to work with various STEP constructs as required by Actor
+ */
 class STEPConstruct_ContextTool {
 }
 
@@ -19927,6 +25447,9 @@ class STEPConstruct_ContextTool_1 extends STEPConstruct_ContextTool {}
 
 class STEPConstruct_ContextTool_2 extends STEPConstruct_ContextTool {}
 
+/**
+ * Provides a tool for analyzing (reading) and creating (writing) references to external files in STEP
+ */
 class STEPConstruct_ExternRefs extends STEPConstruct_Tool {
 }
 
@@ -19934,12 +25457,18 @@ class STEPConstruct_ExternRefs_1 extends STEPConstruct_ExternRefs {}
 
 class STEPConstruct_ExternRefs_2 extends STEPConstruct_ExternRefs {}
 
+/**
+ * Provides tools for creating STEP structures associated with part (SDR), such as PRODUCT, PDF etc., as requied by current schema Also allows to investigate and modify this data
+ */
 class STEPConstruct_Part {
 }
 
 class STEPConstruct_PointHasher {
 }
 
+/**
+ * Provides a mechanism for reading and writing shape styles (such as color) to and from the STEP file This tool maintains a list of styles, either taking them from STEP model (reading), or filling it by calls to AddStyle or directly (writing). Some methods deal with general structures of styles and presentations in STEP, but there are methods which deal with particular implementation of colors (as described in RP)
+ */
 class STEPConstruct_Styles extends STEPConstruct_Tool {
 }
 
@@ -19947,6 +25476,9 @@ class STEPConstruct_Styles_1 extends STEPConstruct_Styles {}
 
 class STEPConstruct_Styles_2 extends STEPConstruct_Styles {}
 
+/**
+ * Provides basic functionalities for tools which are intended for encoding/decoding specific STEP constructs
+ */
 class STEPConstruct_Tool {
 }
 
@@ -19954,9 +25486,15 @@ class STEPConstruct_Tool_1 extends STEPConstruct_Tool {}
 
 class STEPConstruct_Tool_2 extends STEPConstruct_Tool {}
 
+/**
+ * Tool for creation (encoding) and decoding (for writing and reading accordingly) context defining units and tolerances (uncerntanties)
+ */
 class STEPConstruct_UnitContext {
 }
 
+/**
+ * This class provides tools for access (write and read) the validation properties on shapes in the STEP file. These are surface area, solid volume and centroid.
+ */
 class STEPConstruct_ValidationProps extends STEPConstruct_Tool {
 }
 
@@ -19964,15 +25502,27 @@ class STEPConstruct_ValidationProps_1 extends STEPConstruct_ValidationProps {}
 
 class STEPConstruct_ValidationProps_2 extends STEPConstruct_ValidationProps {}
 
+/**
+ * This class performs the transfer of an Entity from AP214 and AP203, either Geometric or Topologic.
+ */
 class STEPControl_ActorRead extends Transfer_ActorOfTransientProcess {
 }
 
+/**
+ * This class performs the transfer of a Shape from TopoDS to AP203 or AP214 (CD2 or DIS)
+ */
 class STEPControl_ActorWrite extends Transfer_ActorOfFinderProcess {
 }
 
+/**
+ * defines basic controller for STEP processor
+ */
 class STEPControl_Controller extends XSControl_Controller {
 }
 
+/**
+ * Reads STEP files, checks them and translates their contents into Open CASCADE models. The STEP data can be that of a whole model or that of a specific list of entities in the model. As in XSControl_Reader, you specify the list using a selection. For the translation of iges files it is possible to use next sequence: To change translation parameters class Interface_Static should be used before beginning of translation (see STEP Parameters and General Parameters) Creation of reader - STEPControl_Reader reader; To load s file in a model use method reader.ReadFile("filename.stp") To print load results reader.PrintCheckLoad(failsonly,mode) where mode is equal to the value of enumeration IFSelect_PrintCount For definition number of candidates : Standard_Integer nbroots = reader. NbRootsForTransfer(); To transfer entities from a model the following methods can be used: for the whole model - reader.TransferRoots(); to transfer a list of entities: reader.TransferList(list); to transfer one entity Handle(Standard_Transient) ent = reader.RootForTransfer(num); reader.TransferEntity(ent), or reader.TransferOneRoot(num), or reader.TransferOne(num), or reader.TransferRoot(num) To obtain the result the following method can be used: reader.NbShapes() and reader.Shape(num); or reader.OneShape(); To print the results of transfer use method: reader.PrintCheckTransfer(failwarn,mode); where printfail is equal to the value of enumeration IFSelect_PrintFail, mode see above; or reader.PrintStatsTransfer(); Gets correspondence between a STEP entity and a result shape obtained from it. Handle(XSControl_WorkSession) WS = reader.WS(); if ( WS->TransferReader()->HasResult(ent) ) TopoDS_Shape shape = WS->TransferReader()->ShapeResult(ent);
+ */
 class STEPControl_Reader extends XSControl_Reader {
 }
 
@@ -19980,6 +25530,9 @@ class STEPControl_Reader_1 extends STEPControl_Reader {}
 
 class STEPControl_Reader_2 extends STEPControl_Reader {}
 
+/**
+ * This class creates and writes STEP files from Open CASCADE models. A STEP file can be written to an existing STEP file or to a new one. Translation can be performed in one or several operations. Each translation operation outputs a distinct root entity in the STEP file.
+ */
 class STEPControl_Writer {
 }
 
@@ -19987,12 +25540,21 @@ class STEPControl_Writer_1 extends STEPControl_Writer {}
 
 class STEPControl_Writer_2 extends STEPControl_Writer {}
 
+/**
+ * Provides tools to exploit and edit a set of STEP data : editors, selections ..
+ */
 class STEPEdit {
 }
 
+/**
+ * EditContext is an Editor fit for Product Definition Context (one per Model) , i.e. : - ProductDefinition - ApplicationProtocolDefinition - ProductRelatedProductCategory
+ */
 class STEPEdit_EditContext extends IFSelect_Editor {
 }
 
+/**
+ * EditSDR is an Editor fit for a Shape Definition Representation which designates a Product Definition
+ */
 class STEPEdit_EditSDR extends IFSelect_Editor {
 }
 
@@ -20026,6 +25588,9 @@ class STEPSelections_SelectAssembly extends IFSelect_SelectExplore {
 class STEPSelections_SelectDerived extends StepSelect_StepType {
 }
 
+/**
+ * This selection returns "STEP faces"
+ */
 class STEPSelections_SelectFaces extends IFSelect_SelectExplore {
 }
 
@@ -20036,21 +25601,33 @@ class STEPSelections_SelectForTransfer_1 extends STEPSelections_SelectForTransfe
 
 class STEPSelections_SelectForTransfer_2 extends STEPSelections_SelectForTransfer {}
 
+/**
+ * This selection returns "curves in the geometric_set (except composite curves)"
+ */
 class STEPSelections_SelectGSCurves extends IFSelect_SelectExplore {
 }
 
 class STEPSelections_SelectInstances extends IFSelect_SelectExplore {
 }
 
+/**
+ * Index buffer for BVH tree.
+ */
 class Select3D_BVHIndexBuffer extends Graphic3d_Buffer {
 }
 
+/**
+ * This class handles the selection of arbitrary point set with internal type of sensitivity. The main principle is to split the point set given onto planar convex polygons and search for the overlap with one or more of them through traverse of BVH tree.
+ */
 class Select3D_InteriorSensitivePointSet extends Select3D_SensitiveSet {
 }
 
 class Select3D_PointData {
 }
 
+/**
+ * A framework to define selection by a sensitive box.
+ */
 class Select3D_SensitiveBox extends Select3D_SensitiveEntity {
 }
 
@@ -20058,6 +25635,9 @@ class Select3D_SensitiveBox_1 extends Select3D_SensitiveBox {}
 
 class Select3D_SensitiveBox_2 extends Select3D_SensitiveBox {}
 
+/**
+ * A framework to define sensitive 3D arcs and circles. In some cases this class can raise Standard_ConstructionError and Standard_OutOfRange exceptions. For more details see Select3D_SensitivePoly.
+ */
 class Select3D_SensitiveCircle extends Select3D_SensitivePoly {
 }
 
@@ -20069,6 +25649,9 @@ class Select3D_SensitiveCircle_3 extends Select3D_SensitiveCircle {}
 
 class Select3D_SensitiveCircle_4 extends Select3D_SensitiveCircle {}
 
+/**
+ * A framework to define a sensitive 3D curve. In some cases this class can raise Standard_ConstructionError and Standard_OutOfRange exceptions. For more details see Select3D_SensitivePoly.
+ */
 class Select3D_SensitiveCurve extends Select3D_SensitivePoly {
 }
 
@@ -20078,9 +25661,15 @@ class Select3D_SensitiveCurve_2 extends Select3D_SensitiveCurve {}
 
 class Select3D_SensitiveCurve_3 extends Select3D_SensitiveCurve {}
 
+/**
+ * Abstract framework to define 3D sensitive entities.
+ */
 class Select3D_SensitiveEntity extends Standard_Transient {
 }
 
+/**
+ * Sensitive Entity to make a face selectable. In some cases this class can raise Standard_ConstructionError and Standard_OutOfRange exceptions. For more details see Select3D_SensitivePoly.
+ */
 class Select3D_SensitiveFace extends Select3D_SensitiveEntity {
 }
 
@@ -20088,6 +25677,9 @@ class Select3D_SensitiveFace_1 extends Select3D_SensitiveFace {}
 
 class Select3D_SensitiveFace_2 extends Select3D_SensitiveFace {}
 
+/**
+ * A framework to define selection of a sensitive group by a sensitive entity which is a set of 3D sensitive entities. Remark: 2 modes are possible for rectangle selection the group is considered selected 1) when all the entities inside are selected in the rectangle 2) only one entity inside is selected by the rectangle By default the "Match All entities" mode is set.
+ */
 class Select3D_SensitiveGroup extends Select3D_SensitiveSet {
 }
 
@@ -20095,9 +25687,15 @@ class Select3D_SensitiveGroup_1 extends Select3D_SensitiveGroup {}
 
 class Select3D_SensitiveGroup_2 extends Select3D_SensitiveGroup {}
 
+/**
+ * A framework to define sensitive 3D points.
+ */
 class Select3D_SensitivePoint extends Select3D_SensitiveEntity {
 }
 
+/**
+ * Sensitive Entity to make a face selectable. In some cases this class can raise Standard_ConstructionError and Standard_OutOfRange exceptions from its member Select3D_PointData myPolyg.
+ */
 class Select3D_SensitivePoly extends Select3D_SensitiveSet {
 }
 
@@ -20107,18 +25705,33 @@ class Select3D_SensitivePoly_2 extends Select3D_SensitivePoly {}
 
 class Select3D_SensitivePoly_3 extends Select3D_SensitivePoly {}
 
+/**
+ * Sensitive for triangulation or point set defined by Primitive Array. The primitives can be optionally combined into patches within BVH tree to reduce its building time in expense of extra traverse time.
+ */
 class Select3D_SensitivePrimitiveArray extends Select3D_SensitiveSet {
 }
 
+/**
+ * A framework to define sensitive zones along a segment One gives the 3D start and end point
+ */
 class Select3D_SensitiveSegment extends Select3D_SensitiveEntity {
 }
 
+/**
+ * This class is base class for handling overlap detection of complex sensitive entities. It provides an interface for building BVH tree for some set of entities. Thereby, each iteration of overlap detection is a traverse of BVH tree in fact. To use speed-up hierarchical structure in a custom complex sensitive entity, it is necessary to make that custom entity a descendant of this class and organize sub-entities in some container which allows referencing to elements by index. Note that methods taking index as a parameter are used for BVH build and the range of given index is [0; Size() - 1]. For example of usage see Select3D_SensitiveTriangulation.
+ */
 class Select3D_SensitiveSet extends Select3D_SensitiveEntity {
 }
 
+/**
+ * A framework to define selection of triangles in a view. This comes into play in the detection of meshing and triangulation in surfaces. In some cases this class can raise Standard_ConstructionError and Standard_OutOfRange exceptions. For more details see Select3D_SensitivePoly.
+ */
 class Select3D_SensitiveTriangle extends Select3D_SensitiveEntity {
 }
 
+/**
+ * A framework to define selection of a sensitive entity made of a set of triangles.
+ */
 class Select3D_SensitiveTriangulation extends Select3D_SensitiveSet {
 }
 
@@ -20126,24 +25739,45 @@ class Select3D_SensitiveTriangulation_1 extends Select3D_SensitiveTriangulation 
 
 class Select3D_SensitiveTriangulation_2 extends Select3D_SensitiveTriangulation {}
 
+/**
+ * A framework to define selection of a wire owner by an elastic wire band.
+ */
 class Select3D_SensitiveWire extends Select3D_SensitiveSet {
 }
 
+/**
+ * interface class for dynamic selection
+ */
 class SelectBasics {
 }
 
+/**
+ * This class provides an interface for selecting volume manager, which is responsible for all overlap detection methods and calculation of minimum depth, distance to center of geometry and detected closest point on entity.
+ */
 class SelectBasics_SelectingVolumeManager {
 }
 
+/**
+ * A framework to define a selection filter for two or more types of entity.
+ */
 class SelectMgr_AndFilter extends SelectMgr_CompositionFilter {
 }
 
+/**
+ * This class is an interface for different types of selecting frustums, defining different selection types, like point, box or polyline selection. It contains signatures of functions for detection of overlap by sensitive entity and initializes some data for building the selecting frustum
+ */
 class SelectMgr_BaseFrustum extends Standard_Transient {
 }
 
+/**
+ * A framework to define a compound filter composed of two or more simple filters.
+ */
 class SelectMgr_CompositionFilter extends SelectMgr_Filter {
 }
 
+/**
+ * A framework to define classes of owners of sensitive primitives. The owner is the link between application and selection data structures. For the application to make its own objects selectable, it must define owner classes inheriting this framework.
+ */
 class SelectMgr_EntityOwner extends Standard_Transient {
 }
 
@@ -20153,52 +25787,97 @@ class SelectMgr_EntityOwner_2 extends SelectMgr_EntityOwner {}
 
 class SelectMgr_EntityOwner_3 extends SelectMgr_EntityOwner {}
 
+/**
+ * The root class to define filter objects for selection. Advance handling of objects requires the services of filters. These only allow dynamic detection and selection of objects which correspond to the criteria defined in each. Eight standard filters inheriting SelectMgr_Filter are defined in Open CASCADE. You can create your own filters by defining new filter classes inheriting this framework. You use these filters by loading them into an AIS interactive context.
+ */
 class SelectMgr_Filter extends Standard_Transient {
 }
 
+/**
+ * The purpose of this class is to provide unified interface for building selecting frustum depending on current camera projection and orientation matrices, window size and viewport parameters.
+ */
 class SelectMgr_FrustumBuilder extends Standard_Transient {
 }
 
+/**
+ * A framework to define an or selection filter. This selects one or another type of sensitive entity.
+ */
 class SelectMgr_OrFilter extends SelectMgr_CompositionFilter {
 }
 
 }
 
+/**
+ * A framework to supply the structure of the object to be selected. At the first pick, this structure is created by calling the appropriate algorithm and retaining this framework for further picking. This abstract framework is inherited in Application Interactive Services (AIS), notably in AIS_InteractiveObject. Consequently, 3D selection should be handled by the relevant daughter classes and their member functions in AIS. This is particularly true in the creation of new interactive objects.
+ */
 class SelectMgr_SelectableObject extends PrsMgr_PresentableObject {
 }
 
+/**
+ * The purpose of this class is to organize all selectable objects into data structure, allowing to build set of BVH trees for each transformation persistence subclass of selectable objects. This allow to minify number of updates for BVH trees - for example 2D persistent object subclass depends only on camera's projection and the corresponding BVH tree needs to be updated when camera's projection parameters change, while another tree for non-persistent objects can be left unchanged in this case.
+ */
 class SelectMgr_SelectableObjectSet {
 }
 
+/**
+ * This class is used to switch between active selecting volumes depending on selection type chosen by the user
+ */
 class SelectMgr_SelectingVolumeManager extends SelectBasics_SelectingVolumeManager {
 }
 
+/**
+ * Represents the state of a given selection mode for a Selectable Object. Contains all the sensitive entities available for this mode. An interactive object can have an indefinite number of modes of selection, each representing a "decomposition" into sensitive primitives; each primitive has an Owner (SelectMgr_EntityOwner) which allows us to identify the exact entity which has been detected. Each Selection mode is identified by an index. The set of sensitive primitives which correspond to a given mode is stocked in a SelectMgr_Selection object. By Convention, the default selection mode which allows us to grasp the Interactive object in its entirety will be mode 0. AIS_Trihedron : 4 selection modes - mode 0 : selection of a trihedron - mode 1 : selection of the origin of the trihedron - mode 2 : selection of the axes - mode 3 : selection of the planes XOY, YOZ, XOZ when you activate one of modes 1 2 3 4 , you pick AIS objects of type: - AIS_Point - AIS_Axis (and information on the type of axis) - AIS_Plane (and information on the type of plane). AIS_PlaneTrihedron offers 3 selection modes: - mode 0 : selection of the whole trihedron - mode 1 : selection of the origin of the trihedron - mode 2 : selection of the axes - same remarks as for the Trihedron. AIS_Shape : 7 maximum selection modes, depending on the complexity of the shape : - mode 0 : selection of the AIS_Shape - mode 1 : selection of the vertices - mode 2 : selection of the edges - mode 3 : selection of the wires - mode 4 : selection of the faces - mode 5 : selection of the shells - mode 6 : selection of the constituent solids.
+ */
 class SelectMgr_Selection extends Standard_Transient {
 }
 
+/**
+ * A framework to manage selection from the point of view of viewer selectors. These can be added and removed, and selection modes can be activated and deactivated. In addition, objects may be known to all selectors or only to some.
+ */
 class SelectMgr_SelectionManager extends Standard_Transient {
 }
 
+/**
+ * The purpose of this class is to mark sensitive entities selectable or not depending on current active selection of parent object for proper BVH traverse
+ */
 class SelectMgr_SensitiveEntity extends Standard_Transient {
 }
 
+/**
+ * This class is used to store all calculated sensitive entites of one selectable object. It provides an interface for building BVH tree which is used to speed-up the performance of searching for overlap among sensitives of one selectable object
+ */
 class SelectMgr_SensitiveEntitySet extends BVH_PrimitiveSet3d {
 }
 
+/**
+ * This class provides data and criterion for sorting candidate entities in the process of interactive selection by mouse click
+ */
 class SelectMgr_SortCriterion {
 }
 
+/**
+ * An internal class for calculation of current largest tolerance value which will be applied for creation of selecting frustum by default. Each time the selection set is deactivated, maximum tolerance value will be recalculated. If a user enables custom precision using StdSelect_ViewerSelector3d::SetPixelTolerance, it will be applied to all sensitive entities without any checks.
+ */
 class SelectMgr_ToleranceMap {
 }
 
 }
 
+/**
+ * This class is used to handle polyline selection. The main principle of polyline selection algorithm is to split the polygon defined by polyline onto triangles. Than each of them is considered as a base for triangular frustum building. In other words, each triangle vertiex will be projected from 2d screen space to 3d world space onto near and far view frustum planes. Thus, the projected triangles make up the bases of selecting frustum. When the set of such frustums is created, the function determining selection iterates through triangular frustum set and searches for overlap with any frustum.
+ */
 class SelectMgr_TriangularFrustumSet extends SelectMgr_BaseFrustum {
 }
 
+/**
+ * Class for handling depth clipping range. It is used to perform checks in case if global (for the whole view) clipping planes are defined inside of SelectMgr_RectangularFrustum class methods.
+ */
 class SelectMgr_ViewClipRange {
 }
 
+/**
+ * A framework to define finding, sorting the sensitive primitives in a view. Services are also provided to define the return of the owners of those primitives selected. The primitives are sorted by criteria such as priority of the primitive or its depth in the view relative to that of other primitives. Note that in 3D, the inheriting framework StdSelect_ViewerSelector3d is only to be used if you do not want to use the services provided by AIS. Two tools are available to find and select objects found at a given position in the view. If you want to select the owners of all the objects detected at point x,y,z you use the Init - More - Next - Picked loop. If, on the other hand, you want to select only one object detected at that point, you use the Init - More - OnePicked loop. In this iteration, More is used to see if an object was picked and OnePicked, to get the object closest to the pick position. Viewer selectors are driven by SelectMgr_SelectionManager, and manipulate the SelectMgr_Selection objects given to them by the selection manager.
+ */
 class SelectMgr_ViewerSelector extends Standard_Transient {
 }
 
@@ -20208,23 +25887,41 @@ class ShapeAlgo {
 class ShapeAlgo_AlgoContainer extends Standard_Transient {
 }
 
+/**
+ * Returns tools used by AlgoContainer
+ */
 class ShapeAlgo_ToolContainer extends Standard_Transient {
 }
 
+/**
+ * This package is intended to analyze geometrical objects and topological shapes. Analysis domain includes both exploring geometrical and topological properties of shapes and checking their conformance to Open CASCADE requirements. The directions of analysis provided by tools of this package are: computing quantities of subshapes, computing parameters of points on curve and surface, computing surface singularities, checking edge and wire consistency, checking edges order in the wire, checking face bounds orientation, checking small faces, analyzing shape tolerances, analyzing of free bounds of the shape.
+ */
 class ShapeAnalysis {
 }
 
 }
 
+/**
+ * Analysis of the face size
+ */
 class ShapeAnalysis_CheckSmallFace {
 }
 
+/**
+ * Analyzing tool for 2d or 3d curve. Computes parameters of projected point onto a curve.
+ */
 class ShapeAnalysis_Curve {
 }
 
+/**
+ * Tool for analyzing the edge. Queries geometrical representations of the edge (3d curve, pcurve on the given face or surface) and topological sub-shapes (bounding vertices). Provides methods for analyzing geometry and topology consistency (3d and pcurve(s) consistency, their adjacency to the vertices).
+ */
 class ShapeAnalysis_Edge {
 }
 
+/**
+ * This class is intended to represent free bound and to store its properties.
+ */
 class ShapeAnalysis_FreeBoundData extends Standard_Transient {
 }
 
@@ -20232,6 +25929,9 @@ class ShapeAnalysis_FreeBoundData_1 extends ShapeAnalysis_FreeBoundData {}
 
 class ShapeAnalysis_FreeBoundData_2 extends ShapeAnalysis_FreeBoundData {}
 
+/**
+ * This class is intended to output free bounds of the shape.
+ */
 class ShapeAnalysis_FreeBounds {
 }
 
@@ -20241,6 +25941,9 @@ class ShapeAnalysis_FreeBounds_2 extends ShapeAnalysis_FreeBounds {}
 
 class ShapeAnalysis_FreeBounds_3 extends ShapeAnalysis_FreeBounds {}
 
+/**
+ * This class is intended to calculate shape free bounds properties. This class provides the following functionalities: - calculates area of the contour, - calculates perimeter of the contour, - calculates ratio of average length to average width of the contour, - estimates average width of contour, - finds the notches (narrow 'V'-like sub-contour) on the contour.
+ */
 class ShapeAnalysis_FreeBoundsProperties {
 }
 
@@ -20250,6 +25953,9 @@ class ShapeAnalysis_FreeBoundsProperties_2 extends ShapeAnalysis_FreeBoundsPrope
 
 class ShapeAnalysis_FreeBoundsProperties_3 extends ShapeAnalysis_FreeBoundsProperties {}
 
+/**
+ * Analyzing tool aimed to work on primitive geometrical objects
+ */
 class ShapeAnalysis_Geom {
 }
 
@@ -20260,18 +25966,33 @@ class ShapeAnalysis_HSequenceOfFreeBounds_1 extends ShapeAnalysis_HSequenceOfFre
 
 class ShapeAnalysis_HSequenceOfFreeBounds_2 extends ShapeAnalysis_HSequenceOfFreeBounds {}
 
+/**
+ * Dumps shape contents
+ */
 class ShapeAnalysis_ShapeContents {
 }
 
+/**
+ * Tool for computing shape tolerances (minimal, maximal, average), finding shape with tolerance matching given criteria, setting or limitating tolerances.
+ */
 class ShapeAnalysis_ShapeTolerance {
 }
 
+/**
+ * This class provides operators to analyze edges orientation in the shell.
+ */
 class ShapeAnalysis_Shell {
 }
 
+/**
+ * Complements standard tool Geom_Surface by providing additional functionality for detection surface singularities, checking spatial surface closure and computing projections of 3D points onto a surface.
+ */
 class ShapeAnalysis_Surface extends Standard_Transient {
 }
 
+/**
+ * This tool is used for transferring parameters from 3d curve of the edge to pcurve and vice versa.
+ */
 class ShapeAnalysis_TransferParameters extends Standard_Transient {
 }
 
@@ -20279,6 +26000,9 @@ class ShapeAnalysis_TransferParameters_1 extends ShapeAnalysis_TransferParameter
 
 class ShapeAnalysis_TransferParameters_2 extends ShapeAnalysis_TransferParameters {}
 
+/**
+ * This tool is used for transferring parameters from 3d curve of the edge to pcurve and vice versa. This tool transfers parameters with help of projection points from curve 3d on curve 2d and vice versa
+ */
 class ShapeAnalysis_TransferParametersProj extends ShapeAnalysis_TransferParameters {
 }
 
@@ -20286,6 +26010,9 @@ class ShapeAnalysis_TransferParametersProj_1 extends ShapeAnalysis_TransferParam
 
 class ShapeAnalysis_TransferParametersProj_2 extends ShapeAnalysis_TransferParametersProj {}
 
+/**
+ * This class provides analysis of a wire to be compliant to CAS.CADE requirements.
+ */
 class ShapeAnalysis_Wire extends Standard_Transient {
 }
 
@@ -20295,6 +26022,9 @@ class ShapeAnalysis_Wire_2 extends ShapeAnalysis_Wire {}
 
 class ShapeAnalysis_Wire_3 extends ShapeAnalysis_Wire {}
 
+/**
+ * This class is intended to control and, if possible, redefine the order of a list of edges which define a wire Edges are not given directly, but as their bounds (start,end)
+ */
 class ShapeAnalysis_WireOrder {
 }
 
@@ -20302,24 +26032,45 @@ class ShapeAnalysis_WireOrder_1 extends ShapeAnalysis_WireOrder {}
 
 class ShapeAnalysis_WireOrder_2 extends ShapeAnalysis_WireOrder {}
 
+/**
+ * Analyzes and records status of vertices in a Wire
+ */
 class ShapeAnalysis_WireVertex {
 }
 
+/**
+ * This package provides basic building tools for other packages in ShapeHealing. These tools are rather internal for ShapeHealing .
+ */
 class ShapeBuild {
 }
 
+/**
+ * This class provides low-level operators for building an edge 3d curve, copying edge with replaced vertices etc.
+ */
 class ShapeBuild_Edge {
 }
 
+/**
+ * Rebuilds a Shape by making pre-defined substitutions on some of its components
+ */
 class ShapeBuild_ReShape extends BRepTools_ReShape {
 }
 
+/**
+ * Provides low-level functions used for constructing vertices
+ */
 class ShapeBuild_Vertex {
 }
 
+/**
+ * This package provides new algorithms for constructing new geometrical objects and topological shapes. It complements and extends algorithms available in Open CASCADE topological and geometrical toolkist. The functionality provided by this package are the following: projecting curves on surface, adjusting curve to have given start and end points. P
+ */
 class ShapeConstruct {
 }
 
+/**
+ * Adjusts curve to have start and end points at the given points (currently works on lines and B-Splines only)
+ */
 class ShapeConstruct_Curve {
 }
 
@@ -20330,12 +26081,21 @@ class ShapeConstruct_MakeTriangulation_1 extends ShapeConstruct_MakeTriangulatio
 
 class ShapeConstruct_MakeTriangulation_2 extends ShapeConstruct_MakeTriangulation {}
 
+/**
+ * This tool provides a method for computing pcurve by projecting 3d curve onto a surface. Projection is done by 23 or more points (this number is changed for B-Splines according to the following rule: the total number of the points is not less than number of spans * (degree + 1); it is increased recursively starting with 23 and is added with 22 until the condition is fulfilled). Isoparametric cases (if curve corresponds to U=const or V=const on the surface) are recognized with the given precision.
+ */
 class ShapeConstruct_ProjectCurveOnSurface extends Standard_Transient {
 }
 
+/**
+ * This package is intended to convert geometrical objects and topological. The modifications of one geometrical object to another (one) geometrical object are provided. The supported modifications are the following: conversion of BSpline and Bezier surfaces to analytical form, conversion of indirect elementary surfaces (with left-handed coordinate systems) into direct ones, conversion of elementary surfaces to surfaces of revolution, conversion of surface of linear extrusion, revolution, offset surface to bspline, modification of parameterization, degree, number of segments of bspline surfaces, scale the shape.
+ */
 class ShapeCustom {
 }
 
+/**
+ * this tool intended for aproximation surfaces, curves and pcurves with specified degree , max number of segments, tolerance 2d, tolerance 3d. Specified continuity can be reduced if approximation with specified continuity was not done.
+ */
 class ShapeCustom_BSplineRestriction extends ShapeCustom_Modification {
 }
 
@@ -20345,12 +26105,21 @@ class ShapeCustom_BSplineRestriction_2 extends ShapeCustom_BSplineRestriction {}
 
 class ShapeCustom_BSplineRestriction_3 extends ShapeCustom_BSplineRestriction {}
 
+/**
+ * implement a modification for BRepTools Modifier algortihm. Converts Surface of Linear Exctrusion, Revolution and Offset surfaces into BSpline Surface according to flags.
+ */
 class ShapeCustom_ConvertToBSpline extends ShapeCustom_Modification {
 }
 
+/**
+ * implements a modification for the BRepTools Modifier algortihm. Converts all elementary surfaces into surfaces of revolution.
+ */
 class ShapeCustom_ConvertToRevolution extends ShapeCustom_Modification {
 }
 
+/**
+ * Converts BSpline curve to periodic
+ */
 class ShapeCustom_Curve {
 }
 
@@ -20358,18 +26127,33 @@ class ShapeCustom_Curve_1 extends ShapeCustom_Curve {}
 
 class ShapeCustom_Curve_2 extends ShapeCustom_Curve {}
 
+/**
+ * Converts curve2d to analytical form with given precision or simpify curve2d.
+ */
 class ShapeCustom_Curve2d {
 }
 
+/**
+ * implements a modification for the BRepTools Modifier algortihm. Will redress indirect surfaces.
+ */
 class ShapeCustom_DirectModification extends ShapeCustom_Modification {
 }
 
+/**
+ * A base class of Modification's from ShapeCustom. Implements message sending mechanism.
+ */
 class ShapeCustom_Modification extends BRepTools_Modification {
 }
 
+/**
+ * This class is axuluary tool which contains parameters for BSplineRestriction class.
+ */
 class ShapeCustom_RestrictionParameters extends Standard_Transient {
 }
 
+/**
+ * Converts a surface to the analitical form with given precision. Conversion is done only the surface is bspline of bezier and this can be approximed by some analytical surface with that precision.
+ */
 class ShapeCustom_Surface {
 }
 
@@ -20377,21 +26161,39 @@ class ShapeCustom_Surface_1 extends ShapeCustom_Surface {}
 
 class ShapeCustom_Surface_2 extends ShapeCustom_Surface {}
 
+/**
+ * implements a modification for the BRepTools Modifier algortihm. Converts all elementary surfaces into surfaces of revolution.
+ */
 class ShapeCustom_SweptToElementary extends ShapeCustom_Modification {
 }
 
+/**
+ * Complements BRepTools_TrsfModification to provide reversible scaling regarding tolerances. Uses actual tolerances (attached to the shapes) not ones returned by BRep_Tool::Tolerance to work with tolerances lower than Precision::Confusion.
+ */
 class ShapeCustom_TrsfModification extends BRepTools_TrsfModification {
 }
 
+/**
+ * This package provides general tools and data structures common for other packages in SHAPEWORKS and extending CAS.CADE structures. The following items are provided by this package: - enumeration Status used for coding status flags in methods inside the SHAPEWORKS - enumeration Parametrisation used for setting global parametrisation on the composite surface - class CompositeSurface representing a composite surface made of a grid of surface patches - class WireData representing a wire in the form of ordered list of edges - class MsgRegistrator for attaching messages to the objects - tools for exploring the shapes - tools for creating new shapes.
+ */
 class ShapeExtend {
 }
 
+/**
+ * Abstract class that can be used for attaching messages to the objects (e.g. shapes). It is used by ShapeHealing algorithms to attach a message describing encountered case (e.g. removing small edge from a wire).
+ */
 class ShapeExtend_BasicMsgRegistrator extends Standard_Transient {
 }
 
+/**
+ * Defines a curve which consists of several segments. Implements basic interface to it.
+ */
 class ShapeExtend_ComplexCurve extends Geom_Curve {
 }
 
+/**
+ * Composite surface is represented by a grid of surfaces (patches) connected geometrically. Patches may have different parametrisation ranges, but they should be parametrised in the same manner so that parameter of each patch (u,v) can be converted to global parameter on the whole surface (U,V) with help of linear transformation:
+ */
 class ShapeExtend_CompositeSurface extends Geom_Surface {
 }
 
@@ -20401,12 +26203,21 @@ class ShapeExtend_CompositeSurface_2 extends ShapeExtend_CompositeSurface {}
 
 class ShapeExtend_CompositeSurface_3 extends ShapeExtend_CompositeSurface {}
 
+/**
+ * This class is intended to explore shapes and convert different representations (list, sequence, compound) of complex shapes. It provides tools for: - obtaining type of the shapes in context of TopoDS_Compound, - exploring shapes in context of TopoDS_Compound, - converting different representations of shapes (list, sequence, compound).
+ */
 class ShapeExtend_Explorer {
 }
 
+/**
+ * Attaches messages to the objects (generic Transient or shape). The objects of this class are transmitted to the Shape Healing algorithms so that they could collect messages occurred during processing.
+ */
 class ShapeExtend_MsgRegistrator extends ShapeExtend_BasicMsgRegistrator {
 }
 
+/**
+ * This class provides a data structure necessary for work with the wire as with ordered list of edges, what is required for many algorithms. The advantage of this class is that it allows to work with wires which are not correct. The object of the class ShapeExtend_WireData can be initialized by TopoDS_Wire, and converted back to TopoDS_Wire. An edge in the wire is defined by its rank number. Operations of accessing, adding and removing edge at the given rank number are provided. On the whole wire, operations of circular permutation and reversing (both orientations of all edges and order of edges) are provided as well. This class also provides a method to check if the edge in the wire is a seam (if the wire lies on a face). This class is handled by reference. Such an approach gives the following advantages: 1. Sharing the object of this class strongly optimizes the processes of analysis and fixing performed in parallel on the wire stored in the form of this class. Fixing tool (e.g. ShapeFix_Wire) fixes problems one by one using analyzing tool (e.g. ShapeAnalysis_Wire). Sharing allows not to reinitialize each time the analyzing tool with modified ShapeExtend_WireData what consumes certain time. 2. No copying of contents. The object of ShapeExtend_WireData class has quite big size, returning it as a result of the function would cause additional copying of contents if this class were one handled by value. Moreover, this class is stored as a field in other classes which are they returned as results of functions, storing only a handle to ShapeExtend_WireData saves time and memory.
+ */
 class ShapeExtend_WireData extends Standard_Transient {
 }
 
@@ -20414,15 +26225,27 @@ class ShapeExtend_WireData_1 extends ShapeExtend_WireData {}
 
 class ShapeExtend_WireData_2 extends ShapeExtend_WireData {}
 
+/**
+ * This package provides algorithms for fixing problematic (violating Open CASCADE requirements) shapes. Tools from package ShapeAnalysis are used for detecting the problems. The detecting and fixing is done taking in account various criteria implemented in BRepCheck package. Each class of package ShapeFix deals with one certain type of shapes or with some family of problems.
+ */
 class ShapeFix {
 }
 
+/**
+ * This class is intended to create a shell from the composite surface (grid of surfaces) and set of wires. It may be either division of the supporting surface of the face, or creating a shape corresponding to face on composite surface which is missing in CAS.CADE but exists in some other systems.
+ */
 class ShapeFix_ComposeShell extends ShapeFix_Root {
 }
 
+/**
+ * Rebuilds edges to connect with new vertices, was moved from ShapeBuild. Makes vertices to be shared to connect edges, updates positions and tolerances for shared vertices. Accepts edges bounded by two vertices each.
+ */
 class ShapeFix_EdgeConnect {
 }
 
+/**
+ * Project 3D point (vertex) on pcurves to find Vertex Parameter on parametric representation of an edge
+ */
 class ShapeFix_EdgeProjAux extends Standard_Transient {
 }
 
@@ -20430,6 +26253,9 @@ class ShapeFix_EdgeProjAux_1 extends ShapeFix_EdgeProjAux {}
 
 class ShapeFix_EdgeProjAux_2 extends ShapeFix_EdgeProjAux {}
 
+/**
+ * This operator allows to perform various fixes on face and its wires: fixes provided by ShapeFix_Wire, fixing orientation of wires, addition of natural bounds, fixing of missing seam edge, and detection and removal of null-area wires
+ */
 class ShapeFix_Face extends ShapeFix_Root {
 }
 
@@ -20437,15 +26263,27 @@ class ShapeFix_Face_1 extends ShapeFix_Face {}
 
 class ShapeFix_Face_2 extends ShapeFix_Face {}
 
+/**
+ * Rebuilds connectivity between faces in shell
+ */
 class ShapeFix_FaceConnect {
 }
 
+/**
+ * Fixing face with small size
+ */
 class ShapeFix_FixSmallFace extends ShapeFix_Root {
 }
 
+/**
+ * Fixing solids with small size
+ */
 class ShapeFix_FixSmallSolid extends ShapeFix_Root {
 }
 
+/**
+ * This class is intended to output free bounds of the shape (free bounds are the wires consisting of edges referenced by the only face). For building free bounds it uses ShapeAnalysis_FreeBounds class. This class complements it with the feature to reduce the number of open wires. This reduction is performed with help of connecting several adjacent open wires one to another what can lead to: 1. making an open wire with greater length out of several open wires 2. making closed wire out of several open wires
+ */
 class ShapeFix_FreeBounds {
 }
 
@@ -20455,12 +26293,21 @@ class ShapeFix_FreeBounds_2 extends ShapeFix_FreeBounds {}
 
 class ShapeFix_FreeBounds_3 extends ShapeFix_FreeBounds {}
 
+/**
+ * Tool for fixing selfintersecting wire and intersecting wires
+ */
 class ShapeFix_IntersectionTool {
 }
 
+/**
+ * Root class for fixing operations Provides context for recording changes (optional), basic precision value and limit (minimal and maximal) values for tolerances, and message registrator
+ */
 class ShapeFix_Root extends Standard_Transient {
 }
 
+/**
+ * Fixing shape in general
+ */
 class ShapeFix_Shape extends ShapeFix_Root {
 }
 
@@ -20468,9 +26315,15 @@ class ShapeFix_Shape_1 extends ShapeFix_Shape {}
 
 class ShapeFix_Shape_2 extends ShapeFix_Shape {}
 
+/**
+ * Modifies tolerances of sub-shapes (vertices, edges, faces)
+ */
 class ShapeFix_ShapeTolerance {
 }
 
+/**
+ * Fixing orientation of faces in shell
+ */
 class ShapeFix_Shell extends ShapeFix_Root {
 }
 
@@ -20478,6 +26331,9 @@ class ShapeFix_Shell_1 extends ShapeFix_Shell {}
 
 class ShapeFix_Shell_2 extends ShapeFix_Shell {}
 
+/**
+ * Provides method to build a solid from a shells and orients them in order to have a valid solid with finite volume
+ */
 class ShapeFix_Solid extends ShapeFix_Root {
 }
 
@@ -20485,12 +26341,21 @@ class ShapeFix_Solid_1 extends ShapeFix_Solid {}
 
 class ShapeFix_Solid_2 extends ShapeFix_Solid {}
 
+/**
+ * Two wires have common vertex - this case is valid in BRep model and isn't valid in STEP => before writing into STEP it is necessary to split this vertex (each wire must has one vertex)
+ */
 class ShapeFix_SplitCommonVertex extends ShapeFix_Root {
 }
 
+/**
+ * Tool for splitting and cutting edges; includes methods used in OverlappingTool and IntersectionTool
+ */
 class ShapeFix_SplitTool {
 }
 
+/**
+ * This class provides a set of tools for repairing a wire.
+ */
 class ShapeFix_Wire extends ShapeFix_Root {
 }
 
@@ -20498,9 +26363,15 @@ class ShapeFix_Wire_1 extends ShapeFix_Wire {}
 
 class ShapeFix_Wire_2 extends ShapeFix_Wire {}
 
+/**
+ * Fixing disconnected edges in the wire Fixes vertices in the wire on the basis of pre-analysis made by ShapeAnalysis_WireVertex (given as argument). The Wire has formerly been loaded in a ShapeExtend_WireData.
+ */
 class ShapeFix_WireVertex {
 }
 
+/**
+ * Provides methods for fixing wireframe of shape
+ */
 class ShapeFix_Wireframe extends ShapeFix_Root {
 }
 
@@ -20520,12 +26391,21 @@ class ShapePersistent_HArray2 {
 class ShapePersistent_HSequence {
 }
 
+/**
+ * Shape Processing module allows to define and apply general Shape Processing as a customizable sequence of Shape Healing operators. The customization is implemented via user-editable resource file which defines sequence of operators to be executed and their parameters.
+ */
 class ShapeProcess {
 }
 
+/**
+ * Applies one of the sequence read from resource file.
+ */
 class ShapeProcessAPI_ApplySequence {
 }
 
+/**
+ * Provides convenient interface to resource file Allows to load resource file and get values of attributes starting from some scope, for example if scope is defined as "ToV4" and requested parameter is "exec.op", value of "ToV4.exec.op" parameter from the resource file will be returned
+ */
 class ShapeProcess_Context extends Standard_Transient {
 }
 
@@ -20533,12 +26413,21 @@ class ShapeProcess_Context_1 extends ShapeProcess_Context {}
 
 class ShapeProcess_Context_2 extends ShapeProcess_Context {}
 
+/**
+ * Provides a set of following operators
+ */
 class ShapeProcess_OperLibrary {
 }
 
+/**
+ * Abstract Operator class providing a tool to perform an operation on Context
+ */
 class ShapeProcess_Operator extends Standard_Transient {
 }
 
+/**
+ * Extends Context to handle shapes Contains map of shape-shape, and messages attached to shapes
+ */
 class ShapeProcess_ShapeContext extends ShapeProcess_Context {
 }
 
@@ -20546,15 +26435,24 @@ class ShapeProcess_ShapeContext_1 extends ShapeProcess_ShapeContext {}
 
 class ShapeProcess_ShapeContext_2 extends ShapeProcess_ShapeContext {}
 
+/**
+ * Defines operator as container for static function OperFunc. This allows user to create new operators without creation of new classes
+ */
 class ShapeProcess_UOperator extends ShapeProcess_Operator {
 }
 
+/**
+ * This package provides tools for splitting and converting shapes by some criteria. It provides modifications of the kind when one topological object can be converted or splitted to several ones. In particular this package contains high level API classes which perform: converting geometry of shapes up to given continuity, splitting revolutions by U to segments less than given value, converting to beziers, splitting closed faces.
+ */
 class ShapeUpgrade {
 }
 
 class ShapeUpgrade_ClosedEdgeDivide extends ShapeUpgrade_EdgeDivide {
 }
 
+/**
+ * Divides a Face with one or more seam edge to avoid closed faces. Splitting is performed by U and V direction. The number of resulting faces can be defined by user.
+ */
 class ShapeUpgrade_ClosedFaceDivide extends ShapeUpgrade_FaceDivide {
 }
 
@@ -20562,18 +26460,30 @@ class ShapeUpgrade_ClosedFaceDivide_1 extends ShapeUpgrade_ClosedFaceDivide {}
 
 class ShapeUpgrade_ClosedFaceDivide_2 extends ShapeUpgrade_ClosedFaceDivide {}
 
+/**
+ * converts/splits a 2d curve to a list of beziers
+ */
 class ShapeUpgrade_ConvertCurve2dToBezier extends ShapeUpgrade_SplitCurve2d {
 }
 
+/**
+ * converts/splits a 3d curve of any type to a list of beziers
+ */
 class ShapeUpgrade_ConvertCurve3dToBezier extends ShapeUpgrade_SplitCurve3d {
 }
 
+/**
+ * Converts a plane, bspline surface, surface of revolution, surface of extrusion, offset surface to grid of bezier basis surface ( bezier surface, surface of revolution based on bezier curve, offset surface based on any previous type).
+ */
 class ShapeUpgrade_ConvertSurfaceToBezierBasis extends ShapeUpgrade_SplitSurface {
 }
 
 class ShapeUpgrade_EdgeDivide extends ShapeUpgrade_Tool {
 }
 
+/**
+ * Divides a Face (both edges in the wires, by splitting curves and pcurves, and the face itself, by splitting supporting surface) according to splitting criteria. * The domain of the face to divide is defined by the PCurves of the wires on the Face.
+ */
 class ShapeUpgrade_FaceDivide extends ShapeUpgrade_Tool {
 }
 
@@ -20581,6 +26491,9 @@ class ShapeUpgrade_FaceDivide_1 extends ShapeUpgrade_FaceDivide {}
 
 class ShapeUpgrade_FaceDivide_2 extends ShapeUpgrade_FaceDivide {}
 
+/**
+ * Divides face by max area criterium.
+ */
 class ShapeUpgrade_FaceDivideArea extends ShapeUpgrade_FaceDivide {
 }
 
@@ -20594,6 +26507,9 @@ class ShapeUpgrade_FixSmallBezierCurves extends ShapeUpgrade_FixSmallCurves {
 class ShapeUpgrade_FixSmallCurves extends ShapeUpgrade_Tool {
 }
 
+/**
+ * Removes all internal wires having area less than specified min area
+ */
 class ShapeUpgrade_RemoveInternalWires extends ShapeUpgrade_Tool {
 }
 
@@ -20601,9 +26517,15 @@ class ShapeUpgrade_RemoveInternalWires_1 extends ShapeUpgrade_RemoveInternalWire
 
 class ShapeUpgrade_RemoveInternalWires_2 extends ShapeUpgrade_RemoveInternalWires {}
 
+/**
+ * Removes all locations sub-shapes of specified shape
+ */
 class ShapeUpgrade_RemoveLocations extends Standard_Transient {
 }
 
+/**
+ * API class for performing conversion of 3D, 2D curves to bezier curves and surfaces to bezier based surfaces ( bezier surface, surface of revolution based on bezier curve, offset surface based on any previous type).
+ */
 class ShapeUpgrade_ShapeConvertToBezier extends ShapeUpgrade_ShapeDivide {
 }
 
@@ -20611,6 +26533,9 @@ class ShapeUpgrade_ShapeConvertToBezier_1 extends ShapeUpgrade_ShapeConvertToBez
 
 class ShapeUpgrade_ShapeConvertToBezier_2 extends ShapeUpgrade_ShapeConvertToBezier {}
 
+/**
+ * Divides a all faces in shell with given criteria Shell.
+ */
 class ShapeUpgrade_ShapeDivide {
 }
 
@@ -20618,6 +26543,9 @@ class ShapeUpgrade_ShapeDivide_1 extends ShapeUpgrade_ShapeDivide {}
 
 class ShapeUpgrade_ShapeDivide_2 extends ShapeUpgrade_ShapeDivide {}
 
+/**
+ * Splits all surfaces of revolution, cylindrical, toroidal, conical, spherical surfaces in the given shape so that each resulting segment covers not more than defined number of degrees (to segments less than 90).
+ */
 class ShapeUpgrade_ShapeDivideAngle extends ShapeUpgrade_ShapeDivide {
 }
 
@@ -20625,6 +26553,9 @@ class ShapeUpgrade_ShapeDivideAngle_1 extends ShapeUpgrade_ShapeDivideAngle {}
 
 class ShapeUpgrade_ShapeDivideAngle_2 extends ShapeUpgrade_ShapeDivideAngle {}
 
+/**
+ * Divides faces from sprcified shape by max area criterium.
+ */
 class ShapeUpgrade_ShapeDivideArea extends ShapeUpgrade_ShapeDivide {
 }
 
@@ -20632,12 +26563,18 @@ class ShapeUpgrade_ShapeDivideArea_1 extends ShapeUpgrade_ShapeDivideArea {}
 
 class ShapeUpgrade_ShapeDivideArea_2 extends ShapeUpgrade_ShapeDivideArea {}
 
+/**
+ * Divides all closed faces in the shape. Class ShapeUpgrade_ClosedFaceDivide is used as divide tool.
+ */
 class ShapeUpgrade_ShapeDivideClosed extends ShapeUpgrade_ShapeDivide {
 }
 
 class ShapeUpgrade_ShapeDivideClosedEdges extends ShapeUpgrade_ShapeDivide {
 }
 
+/**
+ * API Tool for converting shapes with C0 geometry into C1 ones
+ */
 class ShapeUpgrade_ShapeDivideContinuity extends ShapeUpgrade_ShapeDivide {
 }
 
@@ -20645,39 +26582,75 @@ class ShapeUpgrade_ShapeDivideContinuity_1 extends ShapeUpgrade_ShapeDivideConti
 
 class ShapeUpgrade_ShapeDivideContinuity_2 extends ShapeUpgrade_ShapeDivideContinuity {}
 
+/**
+ * This class provides a tool for applying sewing algorithm from BRepBuilderAPI: it takes a shape, calls sewing for each shell, and then replaces sewed shells with use of ShapeBuild_ReShape
+ */
 class ShapeUpgrade_ShellSewing {
 }
 
+/**
+ * Splits a curve with a criterion.
+ */
 class ShapeUpgrade_SplitCurve extends Standard_Transient {
 }
 
+/**
+ * Splits a 2d curve with a criterion.
+ */
 class ShapeUpgrade_SplitCurve2d extends ShapeUpgrade_SplitCurve {
 }
 
+/**
+ * Corrects/splits a 2d curve with a continuity criterion. Tolerance is used to correct the curve at a knot that respects geometrically the criterion, in order to reduce the multiplicity of the knot.
+ */
 class ShapeUpgrade_SplitCurve2dContinuity extends ShapeUpgrade_SplitCurve2d {
 }
 
+/**
+ * Splits a 3d curve with a criterion.
+ */
 class ShapeUpgrade_SplitCurve3d extends ShapeUpgrade_SplitCurve {
 }
 
+/**
+ * Corrects/splits a 2d curve with a continuity criterion. Tolerance is used to correct the curve at a knot that respects geometrically the criterion, in order to reduce the multiplicity of the knot.
+ */
 class ShapeUpgrade_SplitCurve3dContinuity extends ShapeUpgrade_SplitCurve3d {
 }
 
+/**
+ * Splits a Surface with a criterion.
+ */
 class ShapeUpgrade_SplitSurface extends Standard_Transient {
 }
 
+/**
+ * Splits a surfaces of revolution, cylindrical, toroidal, conical, spherical so that each resulting segment covers not more than defined number of degrees.
+ */
 class ShapeUpgrade_SplitSurfaceAngle extends ShapeUpgrade_SplitSurface {
 }
 
+/**
+ * Split surface in the parametric space in according specified number of splits on the
+ */
 class ShapeUpgrade_SplitSurfaceArea extends ShapeUpgrade_SplitSurface {
 }
 
+/**
+ * Splits a Surface with a continuity criterion. At the present moment C1 criterion is used only. This tool works with tolerance. If C0 surface can be corrected at a knot with given tolerance then the surface is corrected, otherwise it is spltted at that knot.
+ */
 class ShapeUpgrade_SplitSurfaceContinuity extends ShapeUpgrade_SplitSurface {
 }
 
+/**
+ * Tool is a root class for splitting classes Provides context for recording changes, basic precision value and limit (minimal and maximal) values for tolerances
+ */
 class ShapeUpgrade_Tool extends Standard_Transient {
 }
 
+/**
+ * This tool tries to unify faces and edges of the shape which lie on the same geometry. Faces/edges are considering as 'same-domain' if a group of neighbouring faces/edges are lying on coincident surfaces/curves. In this case these faces/edges can be unified into one face/edge. ShapeUpgrade_UnifySameDomain is initialized by a shape and the next optional parameters: UnifyFaces - tries to unify all possible faces UnifyEdges - tries to unify all possible edges ConcatBSplines - if this flag is set to true then all neighbouring edges, which lay on BSpline or Bezier curves with C1 continuity on their common vertices, will be merged into one common edge.
+ */
 class ShapeUpgrade_UnifySameDomain extends Standard_Transient {
 }
 
@@ -20685,9 +26658,15 @@ class ShapeUpgrade_UnifySameDomain_1 extends ShapeUpgrade_UnifySameDomain {}
 
 class ShapeUpgrade_UnifySameDomain_2 extends ShapeUpgrade_UnifySameDomain {}
 
+/**
+ * Divides edges in the wire lying on the face or free wires or free edges with a criterion. Splits 3D curve and pcurve(s) of the edge on the face. Other pcurves which may be associated with the edge are simply copied. If 3D curve is splitted then pcurve on the face is splitted as well, and wice-versa. Input shape is not modified. The modifications made are recorded in external context (ShapeBuild_ReShape). This tool is applied to all edges before splitting them in order to keep sharing.
+ */
 class ShapeUpgrade_WireDivide extends ShapeUpgrade_Tool {
 }
 
+/**
+ * The package Standard provides global memory allocator and other basic services used by other OCCT components.
+ */
 class Standard {
 }
 
@@ -20700,9 +26679,15 @@ class Standard_AbortiveTransaction_2 extends Standard_AbortiveTransaction {}
 
 }
 
+/**
+ * This class intended to temporary switch C locale and logically equivalent to setlocale(LC_ALL, "C"). It is intended to format text regardless of user locale settings (for import/export functionality). Thus following calls to sprintf, atoi and other functions will use "C" locale. Destructor of this class will return original locale.
+ */
 class Standard_CLocaleSentry {
 }
 
+/**
+ * This is boolean flag intended for communication between threads. One thread sets this flag to TRUE to indicate some event happened and another thread either waits this event or checks periodically its state to perform job.
+ */
 class Standard_Condition {
 }
 
@@ -20741,12 +26726,21 @@ class Standard_DomainError_1 extends Standard_DomainError {}
 
 class Standard_DomainError_2 extends Standard_DomainError {}
 
+/**
+ * This interface has some tool methods for stream (in JSON format) processing.
+ */
 class Standard_Dump {
 }
 
+/**
+ * Simple sentry class providing convenient interface to dump. Appends start and last rows in dump with class name key. An example of the using: for ClassName, the result is: "ClassName" { ... } Create instance of that class in the first row of Dump.
+ */
 class Standard_DumpSentry {
 }
 
+/**
+ * Forms the root of the entire exception hierarchy.
+ */
 class Standard_Failure extends Standard_Transient {
 }
 
@@ -20792,15 +26786,27 @@ class Standard_LicenseNotFound_1 extends Standard_LicenseNotFound {}
 
 class Standard_LicenseNotFound_2 extends Standard_LicenseNotFound {}
 
+/**
+ * Open CASCADE memory manager optimized for speed.
+ */
 class Standard_MMgrOpt extends Standard_MMgrRoot {
 }
 
+/**
+ * Implementation of raw OCC memory manager which uses standard C functions: malloc (or calloc), free and realloc without any optimization
+ */
 class Standard_MMgrRaw extends Standard_MMgrRoot {
 }
 
+/**
+ * Root class for Open CASCADE mmemory managers. Defines only abstract interface functions.
+ */
 class Standard_MMgrRoot {
 }
 
+/**
+ * Implementation of OCC memory manager which uses Intel TBB scalable allocator.
+ */
 class Standard_MMgrTBBalloc extends Standard_MMgrRoot {
 }
 
@@ -20862,6 +26868,9 @@ class Standard_NumericError_1 extends Standard_NumericError {}
 
 class Standard_NumericError_2 extends Standard_NumericError {}
 
+/**
+ * Standard_OutOfMemory exception is defined explicitly and not by macro DEFINE_STANDARD_EXCEPTION, to avoid necessity of dynamic memory allocations during throwing and stack unwinding:
+ */
 class Standard_OutOfMemory extends Standard_ProgramError {
 }
 
@@ -20879,6 +26888,9 @@ class Standard_Overflow_1 extends Standard_Overflow {}
 
 class Standard_Overflow_2 extends Standard_Overflow {}
 
+/**
+ * Root of "persistent" classes, a legacy support of object oriented databases, now outdated.
+ */
 class Standard_Persistent extends Standard_Transient {
 }
 
@@ -20896,9 +26908,15 @@ class Standard_RangeError_1 extends Standard_RangeError {}
 
 class Standard_RangeError_2 extends Standard_RangeError {}
 
+/**
+ * Auxiliary tool for buffered reading from input stream within chunks of constant size.
+ */
 class Standard_ReadBuffer {
 }
 
+/**
+ * Auxiliary tool for buffered reading of lines from input stream.
+ */
 class Standard_ReadLineBuffer {
 }
 
@@ -20909,6 +26927,9 @@ class Standard_TooManyUsers_1 extends Standard_TooManyUsers {}
 
 class Standard_TooManyUsers_2 extends Standard_TooManyUsers {}
 
+/**
+ * Abstract class which forms the root of the entire Transient class hierarchy.
+ */
 class Standard_Transient {
 }
 
@@ -20916,6 +26937,9 @@ class Standard_Transient_1 extends Standard_Transient {}
 
 class Standard_Transient_2 extends Standard_Transient {}
 
+/**
+ * This class provides legacy interface (type descriptor) to run-time type information (RTTI) for OCCT classes inheriting from Standard_Transient.
+ */
 class Standard_Type extends Standard_Transient {
 }
 
@@ -20936,6 +26960,9 @@ class Standard_Underflow_2 extends Standard_Underflow {}
 class StdDrivers {
 }
 
+/**
+ * retrieval driver of a Part document
+ */
 class StdDrivers_DocumentRetrievalDriver extends StdLDrivers_DocumentRetrievalDriver {
 }
 
@@ -20977,6 +27004,9 @@ class StdFail_UndefinedValue_2 extends StdFail_UndefinedValue {}
 class StdLDrivers {
 }
 
+/**
+ * retrieval driver of a Part document
+ */
 class StdLDrivers_DocumentRetrievalDriver extends PCDM_RetrievalDriver {
 }
 
@@ -21051,15 +27081,24 @@ class StdLPersistent_XLink {
 class StdObjMgt_MapOfInstantiators {
 }
 
+/**
+ * Root class for a temporary persistent object that reads data from a file and then creates transient object using the data.
+ */
 class StdObjMgt_Persistent extends Standard_Transient {
 }
 
+/**
+ * Auxiliary data used to read persistent objects from a file.
+ */
 class StdObjMgt_ReadData {
 }
 
 class StdObjMgt_SharedObject {
 }
 
+/**
+ * Auxiliary data used to write persistent objects to a file.
+ */
 class StdObjMgt_WriteData {
 }
 
@@ -21104,15 +27143,27 @@ class StdPersistent_PPrsStd {
 class StdPersistent_TopoDS {
 }
 
+/**
+ * Tool for computing bounding box presentation.
+ */
 class StdPrs_BndBox extends Prs3d_Root {
 }
 
+/**
+ * A framework to define display of lines, arcs of circles and conic sections. This is done with a fixed number of points, which can be modified.
+ */
 class StdPrs_Curve extends Prs3d_Root {
 }
 
+/**
+ * A framework to provide display of any curve with respect to the maximal chordal deviation defined in the Prs3d_Drawer attributes manager.
+ */
 class StdPrs_DeflectionCurve extends Prs3d_Root {
 }
 
+/**
+ * Instantiates Prs3d_PolyHLRShape to define a display of a shape where hidden and visible lines are identified with respect to a given projection. StdPrs_HLRPolyShape works with a polyhedral simplification of the shape whereas StdPrs_HLRShape takes the shape itself into account. When you use StdPrs_HLRShape, you obtain an exact result, whereas, when you use StdPrs_HLRPolyShape, you reduce computation time but obtain polygonal segments. The polygonal algorithm is used.
+ */
 class StdPrs_HLRPolyShape extends Prs3d_Root {
 }
 
@@ -21122,24 +27173,42 @@ class StdPrs_HLRShape extends Prs3d_Root {
 class StdPrs_HLRToolShape {
 }
 
+/**
+ * Tool for computing isoline representation for a face or surface. Depending on a flags set to the given Prs3d_Drawer instance, on-surface (is used by default) or on-triangulation isoline builder algorithm will be used. If the given shape is not triangulated, on-surface isoline builder will be applied regardless of Prs3d_Drawer flags.
+ */
 class StdPrs_Isolines extends Prs3d_Root {
 }
 
+/**
+ * A framework to display infinite planes.
+ */
 class StdPrs_Plane extends Prs3d_Root {
 }
 
+/**
+ * A framework to provide display of Bezier or BSpline curves (by drawing a broken line linking the poles of the curve).
+ */
 class StdPrs_PoleCurve extends Prs3d_Root {
 }
 
+/**
+ * Auxiliary procedures to prepare Shaded presentation of specified shape.
+ */
 class StdPrs_ShadedShape extends Prs3d_Root {
 }
 
+/**
+ * Computes the shading presentation of surfaces. Draws a surface by drawing the isoparametric curves with respect to a maximal chordial deviation. The number of isoparametric curves to be drawn and their color are controlled by the furnished Drawer.
+ */
 class StdPrs_ShadedSurface extends Prs3d_Root {
 }
 
 class StdPrs_ToolPoint {
 }
 
+/**
+ * Iterator over 2D curves restricting a face (skipping internal/external edges). In addition, the algorithm skips NULL curves - IsInvalidGeometry() can be checked if this should be handled within algorithm.
+ */
 class StdPrs_ToolRFace {
 }
 
@@ -21153,27 +27222,48 @@ class StdPrs_ToolTriangulatedShape {
 class StdPrs_ToolVertex {
 }
 
+/**
+ * A framework to provide display of U and V isoparameters of faces, while allowing you to impose a deflection on them. Computes the wireframe presentation of faces with restrictions by displaying a given number of U and/or V isoparametric curves. The isoparametric curves are drawn with respect to a maximal chordial deviation. The presentation includes the restriction curves.
+ */
 class StdPrs_WFDeflectionRestrictedFace extends Prs3d_Root {
 }
 
+/**
+ * Draws a surface by drawing the isoparametric curves with respect to a maximal chordial deviation. The number of isoparametric curves to be drawn and their color are controlled by the furnished Drawer.
+ */
 class StdPrs_WFDeflectionSurface extends Prs3d_Root {
 }
 
+/**
+ * Computes the presentation of surfaces by drawing a double network of lines linking the poles of the surface in the two parametric direction. The number of lines to be drawn is controlled by the NetworkNumber of the given Drawer.
+ */
 class StdPrs_WFPoleSurface extends Prs3d_Root {
 }
 
 class StdPrs_WFRestrictedFace extends Prs3d_Root {
 }
 
+/**
+ * Tool for computing wireframe presentation of a TopoDS_Shape.
+ */
 class StdPrs_WFShape extends Prs3d_Root {
 }
 
+/**
+ * Computes the wireframe presentation of surfaces by displaying a given number of U and/or V isoparametric curves. The isoparametric curves are drawn with respect to a given number of points.
+ */
 class StdPrs_WFSurface extends Prs3d_Root {
 }
 
+/**
+ * The StdSelect package provides the following services - the definition of selection modes for topological shapes - the definition of several concrete filtertandard Selection2d.ap classes - 2D and 3D viewer selectors. Note that each new Interactive Object must have all its selection modes defined. Standard Classes is useful to build 3D Selectable Objects, and to process 3D Selections:
+ */
 class StdSelect {
 }
 
+/**
+ * Defines Specific Owners for Sensitive Primitives (Sensitive Segments,Circles...). Used in Dynamic Selection Mechanism. A BRepOwner has an Owner (the shape it represents) and Users (One or More Transient entities). The highlight-unhighlight methods are empty and must be redefined by each User.
+ */
 class StdSelect_BRepOwner extends SelectMgr_EntityOwner {
 }
 
@@ -21183,27 +27273,51 @@ class StdSelect_BRepOwner_2 extends StdSelect_BRepOwner {}
 
 class StdSelect_BRepOwner_3 extends StdSelect_BRepOwner {}
 
+/**
+ * Tool to create specific selections (sets of primitives) for Shapes from Topology. These Selections may be used in dynamic selection Mechanism Given a Shape and a mode of selection (selection of vertices, edges,faces ...) , This Tool Computes corresponding sensitive primitives, puts them in an entity called Selection (see package SelectMgr) and returns it.
+ */
 class StdSelect_BRepSelectionTool {
 }
 
+/**
+ * A framework to define a filter to select a specific type of edge. The types available include: - any edge - a linear edge - a circular edge.
+ */
 class StdSelect_EdgeFilter extends SelectMgr_Filter {
 }
 
+/**
+ * A framework to define a filter to select a specific type of face. The types available include: - any face - a planar face - a cylindrical face - a spherical face - a toroidal face - a revol face.
+ */
 class StdSelect_FaceFilter extends SelectMgr_Filter {
 }
 
+/**
+ * allows entities owners to be hilighted independantly from PresentableObjects
+ */
 class StdSelect_Prs extends Prs3d_Presentation {
 }
 
+/**
+ * Presentable shape only for purpose of display for BRepOwner...
+ */
 class StdSelect_Shape extends PrsMgr_PresentableObject {
 }
 
+/**
+ * A filter framework which allows you to define a filter for a specific shape type. The types available include: - compound - compsolid - solid - shell - face - wire - edge - vertex.
+ */
 class StdSelect_ShapeTypeFilter extends SelectMgr_Filter {
 }
 
+/**
+ * Selector Usable by Viewers from V3d
+ */
 class StdSelect_ViewerSelector3d extends SelectMgr_ViewerSelector {
 }
 
+/**
+ * StdStorage package is used to write and read persistent objects. These objects are read and written by a retrieval or storage algorithm (compatible with legacy Storage_Schema) in a container (disk, memory, network ...). Drivers (FSD_File objects) assign a physical container for data to be stored or retrieved. The standard procedure for an application in reading a container is to call one of the Read functions providing either a file path or a driver opened for reading. Thes function update the instance of the StdStorage_Data class which contains the data being read. The standard procedure for an application in writing a container is the following: - open the driver in writing mode, - create an instance of the StdStorage_Data class, then add the persistent data to write with the function AddRoot, - call the function Write from the storage, setting the driver and the Storage_Data instance as parameters, - close the driver.
+ */
 class StdStorage {
 }
 
@@ -21220,6 +27334,9 @@ class StdStorage_BucketIterator {
 class StdStorage_BucketOfPersistent {
 }
 
+/**
+ * A picture memorizing the stored in a container (for example, in a file). A StdStorage_Data object represents either: - persistent data to be written into a container, or - persistent data which are read from a container. A StdStorage_Data object is used in both the storage and retrieval operations: - Storage mechanism: create an empty StdStorage_Data object, then add successively persistent objects (roots) to be stored using the StdStorage_RootData's function AddRoot. When the set of data is complete, write it to a container using the function Write in your StdStorage algorithm. - Retrieval mechanism: a StdStorage_Data object is returned by the Read function from your StdStorage algorithm. Use the StdStorage_RootData's functions NumberOfRoots and Roots to find the roots which were stored in the read container. The roots of a StdStorage_Data object may share references on objects. The shared internal references of a StdStorage_Data object are maintained by the storage/retrieval mechanism. Note: References shared by objects which are contained in two distinct StdStorage_Data objects are not maintained by the storage/retrieval mechanism: external references are not supported by Storage_Schema algorithm
+ */
 class StdStorage_Data extends Standard_Transient {
 }
 
@@ -21230,9 +27347,15 @@ class StdStorage_HSequenceOfRoots_1 extends StdStorage_HSequenceOfRoots {}
 
 class StdStorage_HSequenceOfRoots_2 extends StdStorage_HSequenceOfRoots {}
 
+/**
+ * Storage header data section that contains some auxiliary information (application name, schema version, creation date, comments and so on...)
+ */
 class StdStorage_HeaderData extends Standard_Transient {
 }
 
+/**
+ * Describes a named persistent root
+ */
 class StdStorage_Root extends Standard_Transient {
 }
 
@@ -21240,54 +27363,105 @@ class StdStorage_Root_1 extends StdStorage_Root {}
 
 class StdStorage_Root_2 extends StdStorage_Root {}
 
+/**
+ * Storage root data section contains root persistent objects
+ */
 class StdStorage_RootData extends Standard_Transient {
 }
 
+/**
+ * Storage type data section keeps association between persistent textual types and their numbers
+ */
 class StdStorage_TypeData extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP SELECT type ApprovedItem
+ */
 class StepAP203_ApprovedItem extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity CcDesignApproval
+ */
 class StepAP203_CcDesignApproval extends StepBasic_ApprovalAssignment {
 }
 
+/**
+ * Representation of STEP entity CcDesignCertification
+ */
 class StepAP203_CcDesignCertification extends StepBasic_CertificationAssignment {
 }
 
+/**
+ * Representation of STEP entity CcDesignContract
+ */
 class StepAP203_CcDesignContract extends StepBasic_ContractAssignment {
 }
 
+/**
+ * Representation of STEP entity CcDesignDateAndTimeAssignment
+ */
 class StepAP203_CcDesignDateAndTimeAssignment extends StepBasic_DateAndTimeAssignment {
 }
 
+/**
+ * Representation of STEP entity CcDesignPersonAndOrganizationAssignment
+ */
 class StepAP203_CcDesignPersonAndOrganizationAssignment extends StepBasic_PersonAndOrganizationAssignment {
 }
 
+/**
+ * Representation of STEP entity CcDesignSecurityClassification
+ */
 class StepAP203_CcDesignSecurityClassification extends StepBasic_SecurityClassificationAssignment {
 }
 
+/**
+ * Representation of STEP entity CcDesignSpecificationReference
+ */
 class StepAP203_CcDesignSpecificationReference extends StepBasic_DocumentReference {
 }
 
+/**
+ * Representation of STEP SELECT type CertifiedItem
+ */
 class StepAP203_CertifiedItem extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity Change
+ */
 class StepAP203_Change extends StepBasic_ActionAssignment {
 }
 
+/**
+ * Representation of STEP entity ChangeRequest
+ */
 class StepAP203_ChangeRequest extends StepBasic_ActionRequestAssignment {
 }
 
+/**
+ * Representation of STEP SELECT type ChangeRequestItem
+ */
 class StepAP203_ChangeRequestItem extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP SELECT type ClassifiedItem
+ */
 class StepAP203_ClassifiedItem extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP SELECT type ContractedItem
+ */
 class StepAP203_ContractedItem extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP SELECT type DateTimeItem
+ */
 class StepAP203_DateTimeItem extends StepData_SelectType {
 }
 
@@ -21401,24 +27575,45 @@ class StepAP203_HArray1OfWorkItem_3 extends StepAP203_HArray1OfWorkItem {}
 
 class StepAP203_HArray1OfWorkItem_4 extends StepAP203_HArray1OfWorkItem {}
 
+/**
+ * Representation of STEP SELECT type PersonOrganizationItem
+ */
 class StepAP203_PersonOrganizationItem extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP SELECT type SpecifiedItem
+ */
 class StepAP203_SpecifiedItem extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity StartRequest
+ */
 class StepAP203_StartRequest extends StepBasic_ActionRequestAssignment {
 }
 
+/**
+ * Representation of STEP SELECT type StartRequestItem
+ */
 class StepAP203_StartRequestItem extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity StartWork
+ */
 class StepAP203_StartWork extends StepBasic_ActionAssignment {
 }
 
+/**
+ * Representation of STEP SELECT type WorkItem
+ */
 class StepAP203_WorkItem extends StepData_SelectType {
 }
 
+/**
+ * Basic tool for working with AP209 model
+ */
 class StepAP209_Construct extends STEPConstruct_Tool {
 }
 
@@ -21426,6 +27621,9 @@ class StepAP209_Construct_1 extends StepAP209_Construct {}
 
 class StepAP209_Construct_2 extends StepAP209_Construct {}
 
+/**
+ * Complete AP214 CC1 , Revision 4 Upgrading from Revision 2 to Revision 4 : 26 Mar 1997 Splitting in sub-schemas : 5 Nov 1997
+ */
 class StepAP214 {
 }
 
@@ -21441,9 +27639,15 @@ class StepAP214_AppliedDateAssignment extends StepBasic_DateAssignment {
 class StepAP214_AppliedDocumentReference extends StepBasic_DocumentReference {
 }
 
+/**
+ * Representation of STEP entity AppliedExternalIdentificationAssignment
+ */
 class StepAP214_AppliedExternalIdentificationAssignment extends StepBasic_ExternalIdentificationAssignment {
 }
 
+/**
+ * Representation of STEP entity AppliedGroupAssignment
+ */
 class StepAP214_AppliedGroupAssignment extends StepBasic_GroupAssignment {
 }
 
@@ -21522,6 +27726,9 @@ class StepAP214_AutoDesignReferencingItem extends StepData_SelectType {
 class StepAP214_AutoDesignSecurityClassificationAssignment extends StepBasic_SecurityClassificationAssignment {
 }
 
+/**
+ * Representation of STEP entity Class
+ */
 class StepAP214_Class extends StepBasic_Group {
 }
 
@@ -21534,12 +27741,21 @@ class StepAP214_DateItem extends StepAP214_ApprovalItem {
 class StepAP214_DocumentReferenceItem extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP SELECT type ExternalIdentificationItem
+ */
 class StepAP214_ExternalIdentificationItem extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity ExternallyDefinedClass
+ */
 class StepAP214_ExternallyDefinedClass extends StepAP214_Class {
 }
 
+/**
+ * Representation of STEP entity ExternallyDefinedGeneralProperty
+ */
 class StepAP214_ExternallyDefinedGeneralProperty extends StepBasic_GeneralProperty {
 }
 
@@ -21742,18 +27958,30 @@ class StepAP214_PersonAndOrganizationItem extends StepAP214_ApprovalItem {
 class StepAP214_PresentedItemSelect extends StepData_SelectType {
 }
 
+/**
+ * Protocol for StepAP214 Entities It requires StepAP214 as a Resource
+ */
 class StepAP214_Protocol extends StepData_Protocol {
 }
 
+/**
+ * Representation of STEP entity RepItemGroup
+ */
 class StepAP214_RepItemGroup extends StepBasic_Group {
 }
 
 class StepAP214_SecurityClassificationItem extends StepAP214_ApprovalItem {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepAP242_DraughtingModelItemAssociation extends StepAP242_ItemIdentifiedRepresentationUsage {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepAP242_GeometricItemSpecificUsage extends StepAP242_ItemIdentifiedRepresentationUsage {
 }
 
@@ -21769,18 +27997,33 @@ class StepAP242_ItemIdentifiedRepresentationUsage extends Standard_Transient {
 class StepAP242_ItemIdentifiedRepresentationUsageDefinition extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity Action
+ */
 class StepBasic_Action extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ActionAssignment
+ */
 class StepBasic_ActionAssignment extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ActionMethod
+ */
 class StepBasic_ActionMethod extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ActionRequestAssignment
+ */
 class StepBasic_ActionRequestAssignment extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ActionRequestSolution
+ */
 class StepBasic_ActionRequestSolution extends Standard_Transient {
 }
 
@@ -21802,6 +28045,9 @@ class StepBasic_Approval extends Standard_Transient {
 class StepBasic_ApprovalAssignment extends Standard_Transient {
 }
 
+/**
+ * Added from StepBasic Rev2 to Rev4
+ */
 class StepBasic_ApprovalDateTime extends Standard_Transient {
 }
 
@@ -21823,24 +28069,45 @@ class StepBasic_AreaUnit extends StepBasic_NamedUnit {
 class StepBasic_CalendarDate extends StepBasic_Date {
 }
 
+/**
+ * Representation of STEP entity Certification
+ */
 class StepBasic_Certification extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity CertificationAssignment
+ */
 class StepBasic_CertificationAssignment extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity CertificationType
+ */
 class StepBasic_CertificationType extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity CharacterizedObject
+ */
 class StepBasic_CharacterizedObject extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity Contract
+ */
 class StepBasic_Contract extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ContractAssignment
+ */
 class StepBasic_ContractAssignment extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ContractType
+ */
 class StepBasic_ContractType extends Standard_Transient {
 }
 
@@ -21895,12 +28162,21 @@ class StepBasic_DateTimeRole extends Standard_Transient {
 class StepBasic_DateTimeSelect extends StepData_SelectType {
 }
 
+/**
+ * Added from StepBasic Rev2 to Rev4
+ */
 class StepBasic_DerivedUnit extends Standard_Transient {
 }
 
+/**
+ * Added from StepBasic Rev2 to Rev4
+ */
 class StepBasic_DerivedUnitElement extends Standard_Transient {
 }
 
+/**
+ * class added to Schema AP214 around April 1996
+ */
 class StepBasic_DesignContext extends StepBasic_ProductDefinitionContext {
 }
 
@@ -21910,15 +28186,27 @@ class StepBasic_DigitalDocument extends StepBasic_Document {
 class StepBasic_DimensionalExponents extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity Document
+ */
 class StepBasic_Document extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity DocumentFile
+ */
 class StepBasic_DocumentFile extends StepBasic_Document {
 }
 
+/**
+ * Representation of STEP entity DocumentProductAssociation
+ */
 class StepBasic_DocumentProductAssociation extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity DocumentProductEquivalence
+ */
 class StepBasic_DocumentProductEquivalence extends StepBasic_DocumentProductAssociation {
 }
 
@@ -21928,6 +28216,9 @@ class StepBasic_DocumentReference extends Standard_Transient {
 class StepBasic_DocumentRelationship extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity DocumentRepresentationType
+ */
 class StepBasic_DocumentRepresentationType extends Standard_Transient {
 }
 
@@ -21940,30 +28231,57 @@ class StepBasic_DocumentUsageConstraint extends Standard_Transient {
 class StepBasic_Effectivity extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity EffectivityAssignment
+ */
 class StepBasic_EffectivityAssignment extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity EulerAngles
+ */
 class StepBasic_EulerAngles extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ExternalIdentificationAssignment
+ */
 class StepBasic_ExternalIdentificationAssignment extends StepBasic_IdentificationAssignment {
 }
 
+/**
+ * Representation of STEP entity ExternalSource
+ */
 class StepBasic_ExternalSource extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ExternallyDefinedItem
+ */
 class StepBasic_ExternallyDefinedItem extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity GeneralProperty
+ */
 class StepBasic_GeneralProperty extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity Group
+ */
 class StepBasic_Group extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity GroupAssignment
+ */
 class StepBasic_GroupAssignment extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity GroupRelationship
+ */
 class StepBasic_GroupRelationship extends Standard_Transient {
 }
 
@@ -22077,9 +28395,15 @@ class StepBasic_HArray1OfUncertaintyMeasureWithUnit_3 extends StepBasic_HArray1O
 
 class StepBasic_HArray1OfUncertaintyMeasureWithUnit_4 extends StepBasic_HArray1OfUncertaintyMeasureWithUnit {}
 
+/**
+ * Representation of STEP entity IdentificationAssignment
+ */
 class StepBasic_IdentificationAssignment extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity IdentificationRole
+ */
 class StepBasic_IdentificationRole extends Standard_Transient {
 }
 
@@ -22095,9 +28419,15 @@ class StepBasic_LocalTime extends Standard_Transient {
 class StepBasic_MassMeasureWithUnit extends StepBasic_MeasureWithUnit {
 }
 
+/**
+ * Representation of STEP entity MassUnit
+ */
 class StepBasic_MassUnit extends StepBasic_NamedUnit {
 }
 
+/**
+ * for Select MeasureValue, i.e. : length_measure,time_measure,plane_angle_measure, solid_angle_measure,ratio_measure,parameter_value, context_dependent_measure,positive_length_measure, positive_plane_angle_measure,positive_ratio_measure, area_measure,volume_measure, count_measure
+ */
 class StepBasic_MeasureValueMember extends StepData_SelectReal {
 }
 
@@ -22107,12 +28437,18 @@ class StepBasic_MeasureWithUnit extends Standard_Transient {
 class StepBasic_MechanicalContext extends StepBasic_ProductContext {
 }
 
+/**
+ * Representation of STEP entity NameAssignment
+ */
 class StepBasic_NameAssignment extends Standard_Transient {
 }
 
 class StepBasic_NamedUnit extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ObjectRole
+ */
 class StepBasic_ObjectRole extends Standard_Transient {
 }
 
@@ -22164,9 +28500,15 @@ class StepBasic_Product extends Standard_Transient {
 class StepBasic_ProductCategory extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ProductCategoryRelationship
+ */
 class StepBasic_ProductCategoryRelationship extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ProductConceptContext
+ */
 class StepBasic_ProductConceptContext extends StepBasic_ApplicationContextElement {
 }
 
@@ -22185,6 +28527,9 @@ class StepBasic_ProductDefinitionEffectivity extends StepBasic_Effectivity {
 class StepBasic_ProductDefinitionFormation extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ProductDefinitionFormationRelationship
+ */
 class StepBasic_ProductDefinitionFormationRelationship extends Standard_Transient {
 }
 
@@ -22194,18 +28539,27 @@ class StepBasic_ProductDefinitionFormationWithSpecifiedSource extends StepBasic_
 class StepBasic_ProductDefinitionOrReference extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity Product_Definition_Reference
+ */
 class StepBasic_ProductDefinitionReference extends Standard_Transient {
 }
 
 class StepBasic_ProductDefinitionReferenceWithLocalRepresentation extends StepBasic_ProductDefinition {
 }
 
+/**
+ * Representation of STEP entity ProductDefinitionRelationship
+ */
 class StepBasic_ProductDefinitionRelationship extends Standard_Transient {
 }
 
 class StepBasic_ProductDefinitionWithAssociatedDocuments extends StepBasic_ProductDefinition {
 }
 
+/**
+ * Representation of STEP SELECT type ProductOrFormationOrDefinition
+ */
 class StepBasic_ProductOrFormationOrDefinition extends StepData_SelectType {
 }
 
@@ -22221,9 +28575,15 @@ class StepBasic_RatioMeasureWithUnit extends StepBasic_MeasureWithUnit {
 class StepBasic_RatioUnit extends StepBasic_NamedUnit {
 }
 
+/**
+ * Representation of STEP entity RoleAssociation
+ */
 class StepBasic_RoleAssociation extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP SELECT type RoleSelect
+ */
 class StepBasic_RoleSelect extends StepData_SelectType {
 }
 
@@ -22266,6 +28626,9 @@ class StepBasic_SiUnitAndTimeUnit extends StepBasic_SiUnit {
 class StepBasic_SiUnitAndVolumeUnit extends StepBasic_SiUnit {
 }
 
+/**
+ * For immediate members of SizeSelect, i.e. : ParameterValue (a Real)
+ */
 class StepBasic_SizeMember extends StepData_SelectReal {
 }
 
@@ -22278,9 +28641,15 @@ class StepBasic_SolidAngleMeasureWithUnit extends StepBasic_MeasureWithUnit {
 class StepBasic_SolidAngleUnit extends StepBasic_NamedUnit {
 }
 
+/**
+ * Representation of STEP SELECT type SourceItem
+ */
 class StepBasic_SourceItem extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity ThermodynamicTemperatureUnit
+ */
 class StepBasic_ThermodynamicTemperatureUnit extends StepBasic_NamedUnit {
 }
 
@@ -22293,9 +28662,15 @@ class StepBasic_TimeUnit extends StepBasic_NamedUnit {
 class StepBasic_UncertaintyMeasureWithUnit extends StepBasic_MeasureWithUnit {
 }
 
+/**
+ * Implements a select type unit (NamedUnit or DerivedUnit)
+ */
 class StepBasic_Unit extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity VersionedActionRequest
+ */
 class StepBasic_VersionedActionRequest extends Standard_Transient {
 }
 
@@ -22305,24 +28680,45 @@ class StepBasic_VolumeUnit extends StepBasic_NamedUnit {
 class StepBasic_WeekOfYearAndDayDate extends StepBasic_Date {
 }
 
+/**
+ * Gives basic data definition for Step Interface. Any class of a data model described in EXPRESS Language is candidate to be managed by a Step Interface
+ */
 class StepData {
 }
 
+/**
+ * General frame to describe entities with Description (Simple or Complex)
+ */
 class StepData_Described extends Standard_Transient {
 }
 
+/**
+ * Describes a Complex Entity (Plex) as a list of Simple ones
+ */
 class StepData_ECDescr extends StepData_EDescr {
 }
 
+/**
+ * This class is intended to describe the authorized form for an entity, either Simple or Plex
+ */
 class StepData_EDescr extends Standard_Transient {
 }
 
+/**
+ * This class is intended to describe the authorized form for a Simple (not Plex) Entity, as a list of fields
+ */
 class StepData_ESDescr extends StepData_EDescr {
 }
 
+/**
+ * This class gives a way of conversion between the value of an enumeration and its representation in STEP An enumeration corresponds to an integer with reserved values, which begin to 0 In STEP, it is represented by a name in capital letter and limited by two dots, e.g. .UNKNOWN.
+ */
 class StepData_EnumTool {
 }
 
+/**
+ * Defines a generally defined Field for STEP data : can be used either in any kind of entity to implement it or in free format entities in a "late-binding" mode A field can have : no value (or derived), a single value of any kind, a list of value : single or double list
+ */
 class StepData_Field {
 }
 
@@ -22330,18 +28726,33 @@ class StepData_Field_1 extends StepData_Field {}
 
 class StepData_Field_2 extends StepData_Field {}
 
+/**
+ * Describes a list of fields, in a general way This basic class is for a null size list Subclasses are for 1, N (fixed) or Dynamic sizes
+ */
 class StepData_FieldList {
 }
 
+/**
+ * Describes a list of ONE field
+ */
 class StepData_FieldList1 extends StepData_FieldList {
 }
 
+/**
+ * Describes a list of fields, in a general way This basic class is for a null size list Subclasses are for 1, N (fixed) or Dynamic sizes
+ */
 class StepData_FieldListD extends StepData_FieldList {
 }
 
+/**
+ * Describes a list of fields, in a general way This basic class is for a null size list Subclasses are for 1, N (fixed) or Dynamic sizes
+ */
 class StepData_FieldListN extends StepData_FieldList {
 }
 
+/**
+ * A FileProtocol is defined as the addition of several already existing Protocols. It corresponds to the definition of a SchemaName with several Names, each one being attached to a specific Protocol. Thus, a File defined with a compound Schema is processed as any other one, once built the equivalent compound Protocol, a FileProtocol
+ */
 class StepData_FileProtocol extends StepData_Protocol {
 }
 
@@ -22365,51 +28776,96 @@ class StepData_HArray1OfField_4 extends StepData_HArray1OfField {}
 class StepData_NodeOfWriterLib extends Standard_Transient {
 }
 
+/**
+ * This class is intended to describe the authorized form for a parameter, as a type or a value for a field
+ */
 class StepData_PDescr extends Standard_Transient {
 }
 
+/**
+ * A Plex (for Complex) Entity is defined as a list of Simple Members ("external mapping") The types of these members must be in alphabetic order
+ */
 class StepData_Plex extends StepData_Described {
 }
 
+/**
+ * Description of Basic Protocol for Step The class Protocol from StepData itself describes a default Protocol, which recognizes only UnknownEntities. Sub-classes will redefine CaseNumber and, if necessary, NbResources and Resources.
+ */
 class StepData_Protocol extends Interface_Protocol {
 }
 
+/**
+ * Defines basic File Access Module (Recognize, Read, Write) That is : ReaderModule (Recognize & Read) + Write for StepWriter (for a more centralized description) Warning : A sub-class of ReadWriteModule, which belongs to a particular Protocol, must use the same definition for Case Numbers (give the same Value for a StepType defined as a String from a File as the Protocol does for the corresponding Entity)
+ */
 class StepData_ReadWriteModule extends Interface_ReaderModule {
 }
 
 class StepData_SelectArrReal extends StepData_SelectNamed {
 }
 
+/**
+ * A SelectInt is a SelectMember specialised for a basic integer type in a select which also accepts entities : this one has NO NAME. For a named select, see SelectNamed
+ */
 class StepData_SelectInt extends StepData_SelectMember {
 }
 
+/**
+ * The general form for a Select Member. A Select Member can, either define a value of a basic type (such as an integer) with an additional information : a name or list of names which precise the meaning of this value or be an alternate value in a select, which also accepts an entity (in this case, the name is not mandatory)
+ */
 class StepData_SelectMember extends Standard_Transient {
 }
 
+/**
+ * This select member can be of any kind, and be named But its takes more memory than some specialised ones This class allows one name for the instance
+ */
 class StepData_SelectNamed extends StepData_SelectMember {
 }
 
+/**
+ * A SelectReal is a SelectMember specialised for a basic real type in a select which also accepts entities : this one has NO NAME For a named select, see SelectNamed
+ */
 class StepData_SelectReal extends StepData_SelectMember {
 }
 
+/**
+ * SelectType is the basis used for SELECT_TYPE definitions from the EXPRESS form. A SELECT_TYPE in EXPRESS is an enumeration of Types, it corresponds in a way to a Super-Type, but with no specific Methods, and no exclusivity (a given Type can be member of several SELECT_TYPES, plus be itself a SUB_TYPE).
+ */
 class StepData_SelectType {
 }
 
+/**
+ * A Simple Entity is defined by a type (which can heve super types) and a list of parameters
+ */
 class StepData_Simple extends StepData_Described {
 }
 
+/**
+ * Provides a way to dump entities processed through STEP, with these features : - same form as for writing a STEP File (because it is clear and compact enough, even if the names of the fields do not appear) : thus, no additionnal resource is required - possibility to look for an entity itself (only its Type or with its content), an entity and it shared items (one level) or all the entities its refers to, directly or recursively.
+ */
 class StepData_StepDumper {
 }
 
+/**
+ * Gives access to - entities in a STEP file, - the STEP file header.
+ */
 class StepData_StepModel extends Interface_InterfaceModel {
 }
 
+/**
+ * Specific FileReaderData for Step Contains litteral description of entities (for each one : type as a string, ident, parameter list) provides references evaluation, plus access to litteral data and specific access methods (Boolean, XY, XYZ)
+ */
 class StepData_StepReaderData extends Interface_FileReaderData {
 }
 
+/**
+ * Specific FileReaderTool for Step; works with FileReaderData provides references evaluation, plus access to litteral data and specific methods defined by FileReaderTool Remarks : works with a ReaderLib to load Entities
+ */
 class StepData_StepReaderTool extends Interface_FileReaderTool {
 }
 
+/**
+ * manages atomic file writing, under control of StepModel (for general organisation of file) and each class of Transient (for its own parameters) : prepares text to be written then writes it A stream cannot be used because Step limits line length at 72 In more, a specific object offers more appropriate functions
+ */
 class StepData_StepWriter {
 }
 
@@ -22420,60 +28876,108 @@ class StepData_WriterLib_1 extends StepData_WriterLib {}
 
 class StepData_WriterLib_2 extends StepData_WriterLib {}
 
+/**
+ * Representation of STEP entity AngularityTolerance
+ */
 class StepDimTol_AngularityTolerance extends StepDimTol_GeometricToleranceWithDatumReference {
 }
 
+/**
+ * Representation of STEP entity CircularRunoutTolerance
+ */
 class StepDimTol_CircularRunoutTolerance extends StepDimTol_GeometricToleranceWithDatumReference {
 }
 
+/**
+ * Representation of STEP entity CoaxialityTolerance
+ */
 class StepDimTol_CoaxialityTolerance extends StepDimTol_GeometricToleranceWithDatumReference {
 }
 
+/**
+ * Representation of STEP entity CommonDatum
+ */
 class StepDimTol_CommonDatum extends StepRepr_CompositeShapeAspect {
 }
 
+/**
+ * Representation of STEP entity ConcentricityTolerance
+ */
 class StepDimTol_ConcentricityTolerance extends StepDimTol_GeometricToleranceWithDatumReference {
 }
 
+/**
+ * Representation of STEP entity CylindricityTolerance
+ */
 class StepDimTol_CylindricityTolerance extends StepDimTol_GeometricTolerance {
 }
 
+/**
+ * Representation of STEP entity Datum
+ */
 class StepDimTol_Datum extends StepRepr_ShapeAspect {
 }
 
+/**
+ * Representation of STEP entity DatumFeature
+ */
 class StepDimTol_DatumFeature extends StepRepr_ShapeAspect {
 }
 
 class StepDimTol_DatumOrCommonDatum extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity DatumReference
+ */
 class StepDimTol_DatumReference extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity DatumReferenceCompartment
+ */
 class StepDimTol_DatumReferenceCompartment extends StepDimTol_GeneralDatumReference {
 }
 
+/**
+ * Representation of STEP entity DatumReferenceElement
+ */
 class StepDimTol_DatumReferenceElement extends StepDimTol_GeneralDatumReference {
 }
 
 class StepDimTol_DatumReferenceModifier extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity DatumReferenceModifierWithValue
+ */
 class StepDimTol_DatumReferenceModifierWithValue extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity DatumSystem
+ */
 class StepDimTol_DatumSystem extends StepRepr_ShapeAspect {
 }
 
 class StepDimTol_DatumSystemOrReference extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity DatumTarget
+ */
 class StepDimTol_DatumTarget extends StepRepr_ShapeAspect {
 }
 
+/**
+ * Representation of STEP entity FlatnessTolerance
+ */
 class StepDimTol_FlatnessTolerance extends StepDimTol_GeometricTolerance {
 }
 
+/**
+ * Representation of STEP entity GeneralDatumReference
+ */
 class StepDimTol_GeneralDatumReference extends StepRepr_ShapeAspect {
 }
 
@@ -22498,27 +29002,48 @@ class StepDimTol_GeoTolAndGeoTolWthMaxTol extends StepDimTol_GeoTolAndGeoTolWthM
 class StepDimTol_GeoTolAndGeoTolWthMod extends StepDimTol_GeometricTolerance {
 }
 
+/**
+ * Representation of STEP entity GeometricTolerance
+ */
 class StepDimTol_GeometricTolerance extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity GeometricToleranceRelationship
+ */
 class StepDimTol_GeometricToleranceRelationship extends Standard_Transient {
 }
 
 class StepDimTol_GeometricToleranceTarget extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity GeometricToleranceWithDatumReference
+ */
 class StepDimTol_GeometricToleranceWithDatumReference extends StepDimTol_GeometricTolerance {
 }
 
+/**
+ * Representation of STEP entity GeometricToleranceWithDefinedAreaUnit
+ */
 class StepDimTol_GeometricToleranceWithDefinedAreaUnit extends StepDimTol_GeometricToleranceWithDefinedUnit {
 }
 
+/**
+ * Representation of STEP entity GeometricToleranceWithDefinedUnit
+ */
 class StepDimTol_GeometricToleranceWithDefinedUnit extends StepDimTol_GeometricTolerance {
 }
 
+/**
+ * Representation of STEP entity GeometricToleranceWithMaximumTolerance
+ */
 class StepDimTol_GeometricToleranceWithMaximumTolerance extends StepDimTol_GeometricToleranceWithModifiers {
 }
 
+/**
+ * Representation of STEP entity GeometricToleranceWithModifiers
+ */
 class StepDimTol_GeometricToleranceWithModifiers extends StepDimTol_GeometricTolerance {
 }
 
@@ -22599,108 +29124,210 @@ class StepDimTol_HArray1OfToleranceZoneTarget_3 extends StepDimTol_HArray1OfTole
 
 class StepDimTol_HArray1OfToleranceZoneTarget_4 extends StepDimTol_HArray1OfToleranceZoneTarget {}
 
+/**
+ * Representation of STEP entity LineProfileTolerance
+ */
 class StepDimTol_LineProfileTolerance extends StepDimTol_GeometricTolerance {
 }
 
+/**
+ * Representation of STEP entity ModifiedGeometricTolerance
+ */
 class StepDimTol_ModifiedGeometricTolerance extends StepDimTol_GeometricTolerance {
 }
 
+/**
+ * Representation of STEP entity NonUniformZoneDefinition
+ */
 class StepDimTol_NonUniformZoneDefinition extends StepDimTol_ToleranceZoneDefinition {
 }
 
+/**
+ * Representation of STEP entity ParallelismTolerance
+ */
 class StepDimTol_ParallelismTolerance extends StepDimTol_GeometricToleranceWithDatumReference {
 }
 
+/**
+ * Representation of STEP entity PerpendicularityTolerance
+ */
 class StepDimTol_PerpendicularityTolerance extends StepDimTol_GeometricToleranceWithDatumReference {
 }
 
+/**
+ * Representation of STEP entity PlacedDatumTargetFeature
+ */
 class StepDimTol_PlacedDatumTargetFeature extends StepDimTol_DatumTarget {
 }
 
+/**
+ * Representation of STEP entity PositionTolerance
+ */
 class StepDimTol_PositionTolerance extends StepDimTol_GeometricTolerance {
 }
 
+/**
+ * Representation of STEP entity ProjectedZoneDefinition
+ */
 class StepDimTol_ProjectedZoneDefinition extends StepDimTol_ToleranceZoneDefinition {
 }
 
+/**
+ * Representation of STEP entity RoundnessTolerance
+ */
 class StepDimTol_RoundnessTolerance extends StepDimTol_GeometricTolerance {
 }
 
+/**
+ * Representation of STEP entity ToleranceZoneDefinition
+ */
 class StepDimTol_RunoutZoneDefinition extends StepDimTol_ToleranceZoneDefinition {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepDimTol_RunoutZoneOrientation extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP SELECT type ShapeToleranceSelect
+ */
 class StepDimTol_ShapeToleranceSelect extends StepData_SelectType {
 }
 
+/**
+ * Defines SimpleDatumReferenceModifier as unique member of DatumReferenceModifier Works with an EnumTool
+ */
 class StepDimTol_SimpleDatumReferenceModifierMember extends StepData_SelectInt {
 }
 
+/**
+ * Representation of STEP entity StraightnessTolerance
+ */
 class StepDimTol_StraightnessTolerance extends StepDimTol_GeometricTolerance {
 }
 
+/**
+ * Representation of STEP entity SurfaceProfileTolerance
+ */
 class StepDimTol_SurfaceProfileTolerance extends StepDimTol_GeometricTolerance {
 }
 
+/**
+ * Representation of STEP entity SymmetryTolerance
+ */
 class StepDimTol_SymmetryTolerance extends StepDimTol_GeometricToleranceWithDatumReference {
 }
 
+/**
+ * Representation of STEP entity ToleranceZone
+ */
 class StepDimTol_ToleranceZone extends StepRepr_ShapeAspect {
 }
 
+/**
+ * Representation of STEP entity ToleranceZoneDefinition
+ */
 class StepDimTol_ToleranceZoneDefinition extends Standard_Transient {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepDimTol_ToleranceZoneForm extends Standard_Transient {
 }
 
 class StepDimTol_ToleranceZoneTarget extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity TotalRunoutTolerance
+ */
 class StepDimTol_TotalRunoutTolerance extends StepDimTol_GeometricToleranceWithDatumReference {
 }
 
+/**
+ * Representation of STEP entity UnequallyDisposedGeometricTolerance
+ */
 class StepDimTol_UnequallyDisposedGeometricTolerance extends StepDimTol_GeometricTolerance {
 }
 
+/**
+ * Representation of STEP entity AnalysisItemWithinRepresentation
+ */
 class StepElement_AnalysisItemWithinRepresentation extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity Curve3dElementDescriptor
+ */
 class StepElement_Curve3dElementDescriptor extends StepElement_ElementDescriptor {
 }
 
+/**
+ * Representation of STEP entity CurveElementEndReleasePacket
+ */
 class StepElement_CurveElementEndReleasePacket extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP SELECT type CurveElementFreedom
+ */
 class StepElement_CurveElementFreedom extends StepData_SelectType {
 }
 
+/**
+ * Representation of member for STEP SELECT type CurveElementFreedom
+ */
 class StepElement_CurveElementFreedomMember extends StepData_SelectNamed {
 }
 
+/**
+ * Representation of STEP SELECT type CurveElementPurpose
+ */
 class StepElement_CurveElementPurpose extends StepData_SelectType {
 }
 
+/**
+ * Representation of member for STEP SELECT type CurveElementPurpose
+ */
 class StepElement_CurveElementPurposeMember extends StepData_SelectNamed {
 }
 
+/**
+ * Representation of STEP entity CurveElementSectionDefinition
+ */
 class StepElement_CurveElementSectionDefinition extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity CurveElementSectionDerivedDefinitions
+ */
 class StepElement_CurveElementSectionDerivedDefinitions extends StepElement_CurveElementSectionDefinition {
 }
 
+/**
+ * Representation of STEP SELECT type ElementAspect
+ */
 class StepElement_ElementAspect extends StepData_SelectType {
 }
 
+/**
+ * Representation of member for STEP SELECT type ElementAspect
+ */
 class StepElement_ElementAspectMember extends StepData_SelectNamed {
 }
 
+/**
+ * Representation of STEP entity ElementDescriptor
+ */
 class StepElement_ElementDescriptor extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ElementMaterial
+ */
 class StepElement_ElementMaterial extends Standard_Transient {
 }
 
@@ -22847,177 +29474,351 @@ class StepElement_HSequenceOfSurfaceElementPurposeMember_1 extends StepElement_H
 
 class StepElement_HSequenceOfSurfaceElementPurposeMember_2 extends StepElement_HSequenceOfSurfaceElementPurposeMember {}
 
+/**
+ * Representation of STEP SELECT type MeasureOrUnspecifiedValue
+ */
 class StepElement_MeasureOrUnspecifiedValue extends StepData_SelectType {
 }
 
+/**
+ * Representation of member for STEP SELECT type MeasureOrUnspecifiedValue
+ */
 class StepElement_MeasureOrUnspecifiedValueMember extends StepData_SelectNamed {
 }
 
+/**
+ * Representation of STEP entity Surface3dElementDescriptor
+ */
 class StepElement_Surface3dElementDescriptor extends StepElement_ElementDescriptor {
 }
 
+/**
+ * Representation of STEP entity SurfaceElementProperty
+ */
 class StepElement_SurfaceElementProperty extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP SELECT type SurfaceElementPurpose
+ */
 class StepElement_SurfaceElementPurpose extends StepData_SelectType {
 }
 
+/**
+ * Representation of member for STEP SELECT type SurfaceElementPurpose
+ */
 class StepElement_SurfaceElementPurposeMember extends StepData_SelectNamed {
 }
 
+/**
+ * Representation of STEP entity SurfaceSection
+ */
 class StepElement_SurfaceSection extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity SurfaceSectionField
+ */
 class StepElement_SurfaceSectionField extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity SurfaceSectionFieldConstant
+ */
 class StepElement_SurfaceSectionFieldConstant extends StepElement_SurfaceSectionField {
 }
 
+/**
+ * Representation of STEP entity SurfaceSectionFieldVarying
+ */
 class StepElement_SurfaceSectionFieldVarying extends StepElement_SurfaceSectionField {
 }
 
+/**
+ * Representation of STEP entity UniformSurfaceSection
+ */
 class StepElement_UniformSurfaceSection extends StepElement_SurfaceSection {
 }
 
+/**
+ * Representation of STEP entity Volume3dElementDescriptor
+ */
 class StepElement_Volume3dElementDescriptor extends StepElement_ElementDescriptor {
 }
 
+/**
+ * Representation of STEP SELECT type VolumeElementPurpose
+ */
 class StepElement_VolumeElementPurpose extends StepData_SelectType {
 }
 
+/**
+ * Representation of member for STEP SELECT type VolumeElementPurpose
+ */
 class StepElement_VolumeElementPurposeMember extends StepData_SelectNamed {
 }
 
+/**
+ * Representation of STEP entity AlignedCurve3dElementCoordinateSystem
+ */
 class StepFEA_AlignedCurve3dElementCoordinateSystem extends StepFEA_FeaRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity AlignedSurface3dElementCoordinateSystem
+ */
 class StepFEA_AlignedSurface3dElementCoordinateSystem extends StepFEA_FeaRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity ArbitraryVolume3dElementCoordinateSystem
+ */
 class StepFEA_ArbitraryVolume3dElementCoordinateSystem extends StepFEA_FeaRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity ConstantSurface3dElementCoordinateSystem
+ */
 class StepFEA_ConstantSurface3dElementCoordinateSystem extends StepFEA_FeaRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity Curve3dElementProperty
+ */
 class StepFEA_Curve3dElementProperty extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity Curve3dElementRepresentation
+ */
 class StepFEA_Curve3dElementRepresentation extends StepFEA_ElementRepresentation {
 }
 
+/**
+ * Representation of STEP SELECT type CurveElementEndCoordinateSystem
+ */
 class StepFEA_CurveElementEndCoordinateSystem extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity CurveElementEndOffset
+ */
 class StepFEA_CurveElementEndOffset extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity CurveElementEndRelease
+ */
 class StepFEA_CurveElementEndRelease extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity CurveElementInterval
+ */
 class StepFEA_CurveElementInterval extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity CurveElementIntervalConstant
+ */
 class StepFEA_CurveElementIntervalConstant extends StepFEA_CurveElementInterval {
 }
 
+/**
+ * Representation of STEP entity CurveElementIntervalLinearlyVarying
+ */
 class StepFEA_CurveElementIntervalLinearlyVarying extends StepFEA_CurveElementInterval {
 }
 
+/**
+ * Representation of STEP entity CurveElementLocation
+ */
 class StepFEA_CurveElementLocation extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP SELECT type DegreeOfFreedom
+ */
 class StepFEA_DegreeOfFreedom extends StepData_SelectType {
 }
 
+/**
+ * Representation of member for STEP SELECT type CurveElementFreedom
+ */
 class StepFEA_DegreeOfFreedomMember extends StepData_SelectNamed {
 }
 
+/**
+ * Representation of STEP entity DummyNode
+ */
 class StepFEA_DummyNode extends StepFEA_NodeRepresentation {
 }
 
+/**
+ * Representation of STEP entity ElementGeometricRelationship
+ */
 class StepFEA_ElementGeometricRelationship extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ElementGroup
+ */
 class StepFEA_ElementGroup extends StepFEA_FeaGroup {
 }
 
+/**
+ * Representation of STEP SELECT type ElementOrElementGroup
+ */
 class StepFEA_ElementOrElementGroup extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity ElementRepresentation
+ */
 class StepFEA_ElementRepresentation extends StepRepr_Representation {
 }
 
+/**
+ * Representation of STEP entity FeaAreaDensity
+ */
 class StepFEA_FeaAreaDensity extends StepFEA_FeaMaterialPropertyRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity FeaAxis2Placement3d
+ */
 class StepFEA_FeaAxis2Placement3d extends StepGeom_Axis2Placement3d {
 }
 
+/**
+ * Representation of STEP entity FeaCurveSectionGeometricRelationship
+ */
 class StepFEA_FeaCurveSectionGeometricRelationship extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity FeaGroup
+ */
 class StepFEA_FeaGroup extends StepBasic_Group {
 }
 
+/**
+ * Representation of STEP entity FeaLinearElasticity
+ */
 class StepFEA_FeaLinearElasticity extends StepFEA_FeaMaterialPropertyRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity FeaMassDensity
+ */
 class StepFEA_FeaMassDensity extends StepFEA_FeaMaterialPropertyRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity FeaMaterialPropertyRepresentation
+ */
 class StepFEA_FeaMaterialPropertyRepresentation extends StepRepr_MaterialPropertyRepresentation {
 }
 
+/**
+ * Representation of STEP entity FeaMaterialPropertyRepresentationItem
+ */
 class StepFEA_FeaMaterialPropertyRepresentationItem extends StepRepr_RepresentationItem {
 }
 
+/**
+ * Representation of STEP entity FeaModel
+ */
 class StepFEA_FeaModel extends StepRepr_Representation {
 }
 
+/**
+ * Representation of STEP entity FeaModel3d
+ */
 class StepFEA_FeaModel3d extends StepFEA_FeaModel {
 }
 
+/**
+ * Representation of STEP entity FeaModelDefinition
+ */
 class StepFEA_FeaModelDefinition extends StepRepr_ShapeAspect {
 }
 
+/**
+ * Representation of STEP entity FeaMoistureAbsorption
+ */
 class StepFEA_FeaMoistureAbsorption extends StepFEA_FeaMaterialPropertyRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity FeaParametricPoint
+ */
 class StepFEA_FeaParametricPoint extends StepGeom_Point {
 }
 
+/**
+ * Representation of STEP entity FeaRepresentationItem
+ */
 class StepFEA_FeaRepresentationItem extends StepRepr_RepresentationItem {
 }
 
+/**
+ * Representation of STEP entity FeaSecantCoefficientOfLinearThermalExpansion
+ */
 class StepFEA_FeaSecantCoefficientOfLinearThermalExpansion extends StepFEA_FeaMaterialPropertyRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity FeaShellBendingStiffness
+ */
 class StepFEA_FeaShellBendingStiffness extends StepFEA_FeaMaterialPropertyRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity FeaShellMembraneBendingCouplingStiffness
+ */
 class StepFEA_FeaShellMembraneBendingCouplingStiffness extends StepFEA_FeaMaterialPropertyRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity FeaShellMembraneStiffness
+ */
 class StepFEA_FeaShellMembraneStiffness extends StepFEA_FeaMaterialPropertyRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity FeaShellShearStiffness
+ */
 class StepFEA_FeaShellShearStiffness extends StepFEA_FeaMaterialPropertyRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity FeaSurfaceSectionGeometricRelationship
+ */
 class StepFEA_FeaSurfaceSectionGeometricRelationship extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity FeaTangentialCoefficientOfLinearThermalExpansion
+ */
 class StepFEA_FeaTangentialCoefficientOfLinearThermalExpansion extends StepFEA_FeaMaterialPropertyRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity FreedomAndCoefficient
+ */
 class StepFEA_FreedomAndCoefficient extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity FreedomsList
+ */
 class StepFEA_FreedomsList extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity GeometricNode
+ */
 class StepFEA_GeometricNode extends StepFEA_NodeRepresentation {
 }
 
@@ -23115,54 +29916,105 @@ class StepFEA_HSequenceOfNodeRepresentation_1 extends StepFEA_HSequenceOfNodeRep
 
 class StepFEA_HSequenceOfNodeRepresentation_2 extends StepFEA_HSequenceOfNodeRepresentation {}
 
+/**
+ * Representation of STEP entity Node
+ */
 class StepFEA_Node extends StepFEA_NodeRepresentation {
 }
 
+/**
+ * Representation of STEP entity NodeDefinition
+ */
 class StepFEA_NodeDefinition extends StepRepr_ShapeAspect {
 }
 
+/**
+ * Representation of STEP entity NodeGroup
+ */
 class StepFEA_NodeGroup extends StepFEA_FeaGroup {
 }
 
+/**
+ * Representation of STEP entity NodeRepresentation
+ */
 class StepFEA_NodeRepresentation extends StepRepr_Representation {
 }
 
+/**
+ * Representation of STEP entity NodeSet
+ */
 class StepFEA_NodeSet extends StepGeom_GeometricRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity NodeWithSolutionCoordinateSystem
+ */
 class StepFEA_NodeWithSolutionCoordinateSystem extends StepFEA_Node {
 }
 
+/**
+ * Representation of STEP entity NodeWithVector
+ */
 class StepFEA_NodeWithVector extends StepFEA_Node {
 }
 
+/**
+ * Representation of STEP entity ParametricCurve3dElementCoordinateDirection
+ */
 class StepFEA_ParametricCurve3dElementCoordinateDirection extends StepFEA_FeaRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity ParametricCurve3dElementCoordinateSystem
+ */
 class StepFEA_ParametricCurve3dElementCoordinateSystem extends StepFEA_FeaRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity ParametricSurface3dElementCoordinateSystem
+ */
 class StepFEA_ParametricSurface3dElementCoordinateSystem extends StepFEA_FeaRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity Surface3dElementRepresentation
+ */
 class StepFEA_Surface3dElementRepresentation extends StepFEA_ElementRepresentation {
 }
 
+/**
+ * Representation of STEP SELECT type SymmetricTensor22d
+ */
 class StepFEA_SymmetricTensor22d extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP SELECT type SymmetricTensor23d
+ */
 class StepFEA_SymmetricTensor23d extends StepData_SelectType {
 }
 
+/**
+ * Representation of member for STEP SELECT type SymmetricTensor23d
+ */
 class StepFEA_SymmetricTensor23dMember extends StepData_SelectArrReal {
 }
 
+/**
+ * Representation of STEP SELECT type SymmetricTensor42d
+ */
 class StepFEA_SymmetricTensor42d extends StepData_SelectType {
 }
 
+/**
+ * Representation of member for STEP SELECT type SymmetricTensor43d
+ */
 class StepFEA_SymmetricTensor43dMember extends StepData_SelectArrReal {
 }
 
+/**
+ * Representation of STEP entity Volume3dElementRepresentation
+ */
 class StepFEA_Volume3dElementRepresentation extends StepFEA_ElementRepresentation {
 }
 
@@ -23223,6 +30075,9 @@ class StepGeom_CartesianPoint extends StepGeom_Point {
 class StepGeom_CartesianTransformationOperator extends StepGeom_GeometricRepresentationItem {
 }
 
+/**
+ * Added from StepGeom Rev2 to Rev4
+ */
 class StepGeom_CartesianTransformationOperator2d extends StepGeom_CartesianTransformationOperator {
 }
 
@@ -23250,6 +30105,9 @@ class StepGeom_ConicalSurface extends StepGeom_ElementarySurface {
 class StepGeom_Curve extends StepGeom_GeometricRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity CurveBoundedSurface
+ */
 class StepGeom_CurveBoundedSurface extends StepGeom_BoundedSurface {
 }
 
@@ -23405,6 +30263,9 @@ class StepGeom_OffsetCurve3d extends StepGeom_Curve {
 class StepGeom_OffsetSurface extends StepGeom_Surface {
 }
 
+/**
+ * Representation of STEP entity OrientedSurface
+ */
 class StepGeom_OrientedSurface extends StepGeom_Surface {
 }
 
@@ -23477,12 +30338,18 @@ class StepGeom_SphericalSurface extends StepGeom_ElementarySurface {
 class StepGeom_Surface extends StepGeom_GeometricRepresentationItem {
 }
 
+/**
+ * Representation of STEP SELECT type SurfaceBoundary
+ */
 class StepGeom_SurfaceBoundary extends StepData_SelectType {
 }
 
 class StepGeom_SurfaceCurve extends StepGeom_Curve {
 }
 
+/**
+ * complex type: bounded_curve + surface_curve needed for curve_bounded_surfaces (S4132)
+ */
 class StepGeom_SurfaceCurveAndBoundedCurve extends StepGeom_SurfaceCurve {
 }
 
@@ -23507,6 +30374,9 @@ class StepGeom_ToroidalSurface extends StepGeom_ElementarySurface {
 class StepGeom_TrimmedCurve extends StepGeom_BoundedCurve {
 }
 
+/**
+ * For immediate members of TrimmingSelect, i.e. : ParameterValue (a Real)
+ */
 class StepGeom_TrimmingMember extends StepData_SelectReal {
 }
 
@@ -23531,54 +30401,99 @@ class StepGeom_Vector extends StepGeom_GeometricRepresentationItem {
 class StepGeom_VectorOrDirection extends StepData_SelectType {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_AllAroundShapeAspect extends StepRepr_ContinuosShapeAspect {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_Apex extends StepRepr_DerivedShapeAspect {
 }
 
+/**
+ * Representation of STEP entity AssemblyComponentUsage
+ */
 class StepRepr_AssemblyComponentUsage extends StepRepr_ProductDefinitionUsage {
 }
 
 class StepRepr_AssemblyComponentUsageSubstitute extends Standard_Transient {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_BetweenShapeAspect extends StepRepr_ContinuosShapeAspect {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_CentreOfSymmetry extends StepRepr_DerivedShapeAspect {
 }
 
+/**
+ * Representation of STEP SELECT type CharacterizedDefinition
+ */
 class StepRepr_CharacterizedDefinition extends StepData_SelectType {
 }
 
 class StepRepr_CharacterizedRepresentation extends StepRepr_Representation {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_CompGroupShAspAndCompShAspAndDatumFeatAndShAsp extends StepRepr_CompShAspAndDatumFeatAndShAsp {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_CompShAspAndDatumFeatAndShAsp extends StepRepr_ShapeAspect {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_CompositeGroupShapeAspect extends StepRepr_CompositeShapeAspect {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_CompositeShapeAspect extends StepRepr_ShapeAspect {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_CompoundRepresentationItem extends StepRepr_RepresentationItem {
 }
 
+/**
+ * Representation of STEP entity ConfigurationDesign
+ */
 class StepRepr_ConfigurationDesign extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP SELECT type ConfigurationDesignItem
+ */
 class StepRepr_ConfigurationDesignItem extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity ConfigurationEffectivity
+ */
 class StepRepr_ConfigurationEffectivity extends StepBasic_ProductDefinitionEffectivity {
 }
 
+/**
+ * Representation of STEP entity ConfigurationItem
+ */
 class StepRepr_ConfigurationItem extends Standard_Transient {
 }
 
@@ -23588,33 +30503,51 @@ class StepRepr_ConstructiveGeometryRepresentation extends StepRepr_Representatio
 class StepRepr_ConstructiveGeometryRepresentationRelationship extends StepRepr_RepresentationRelationship {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_ContinuosShapeAspect extends StepRepr_CompositeShapeAspect {
 }
 
+/**
+ * Representation of STEP entity DataEnvironment
+ */
 class StepRepr_DataEnvironment extends Standard_Transient {
 }
 
 class StepRepr_DefinitionalRepresentation extends StepRepr_Representation {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_DerivedShapeAspect extends StepRepr_ShapeAspect {
 }
 
 class StepRepr_DescriptiveRepresentationItem extends StepRepr_RepresentationItem {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_Extension extends StepRepr_DerivedShapeAspect {
 }
 
 class StepRepr_ExternallyDefinedRepresentation extends StepRepr_Representation {
 }
 
+/**
+ * Representation of STEP entity DimensionalLocation
+ */
 class StepRepr_FeatureForDatumTargetRelationship extends StepRepr_ShapeAspectRelationship {
 }
 
 class StepRepr_FunctionallyDefinedTransformation extends Standard_Transient {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_GeometricAlignment extends StepRepr_DerivedShapeAspect {
 }
 
@@ -23685,9 +30618,15 @@ class StepRepr_HSequenceOfRepresentationItem_2 extends StepRepr_HSequenceOfRepre
 class StepRepr_IntegerRepresentationItem extends StepRepr_RepresentationItem {
 }
 
+/**
+ * Added from StepRepr Rev2 to Rev4
+ */
 class StepRepr_ItemDefinedTransformation extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity MakeFromUsageOption
+ */
 class StepRepr_MakeFromUsageOption extends StepRepr_ProductDefinitionUsage {
 }
 
@@ -23697,48 +30636,87 @@ class StepRepr_MappedItem extends StepRepr_RepresentationItem {
 class StepRepr_MaterialDesignation extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity MaterialProperty
+ */
 class StepRepr_MaterialProperty extends StepRepr_PropertyDefinition {
 }
 
+/**
+ * Representation of STEP entity MaterialPropertyRepresentation
+ */
 class StepRepr_MaterialPropertyRepresentation extends StepRepr_PropertyDefinitionRepresentation {
 }
 
+/**
+ * Implements a measure_representation_item entity which is used for storing validation properties (e.g. area) for shapes
+ */
 class StepRepr_MeasureRepresentationItem extends StepRepr_RepresentationItem {
 }
 
+/**
+ * Representation of STEP entity NextAssemblyUsageOccurrence
+ */
 class StepRepr_NextAssemblyUsageOccurrence extends StepRepr_AssemblyComponentUsage {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_ParallelOffset extends StepRepr_DerivedShapeAspect {
 }
 
 class StepRepr_ParametricRepresentationContext extends StepRepr_RepresentationContext {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_PerpendicularTo extends StepRepr_DerivedShapeAspect {
 }
 
+/**
+ * Representation of STEP entity ProductConcept
+ */
 class StepRepr_ProductConcept extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ProductDefinitionShape
+ */
 class StepRepr_ProductDefinitionShape extends StepRepr_PropertyDefinition {
 }
 
+/**
+ * Representation of STEP entity ProductDefinitionUsage
+ */
 class StepRepr_ProductDefinitionUsage extends StepBasic_ProductDefinitionRelationship {
 }
 
 class StepRepr_PromissoryUsageOccurrence extends StepRepr_AssemblyComponentUsage {
 }
 
+/**
+ * Representation of STEP entity PropertyDefinition
+ */
 class StepRepr_PropertyDefinition extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity PropertyDefinitionRelationship
+ */
 class StepRepr_PropertyDefinitionRelationship extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity PropertyDefinitionRepresentation
+ */
 class StepRepr_PropertyDefinitionRepresentation extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity QuantifiedAssemblyComponentUsage
+ */
 class StepRepr_QuantifiedAssemblyComponentUsage extends StepRepr_AssemblyComponentUsage {
 }
 
@@ -23748,9 +30726,15 @@ class StepRepr_ReprItemAndLengthMeasureWithUnit extends StepRepr_ReprItemAndMeas
 class StepRepr_ReprItemAndLengthMeasureWithUnitAndQRI extends StepRepr_ReprItemAndMeasureWithUnitAndQRI {
 }
 
+/**
+ * Base class for complex types (MEASURE_REPRESENTATION_ITEM, MEASURE_WITH_UNIT, REPRESENTATION_ITEM, LENGTH_MEASURE_WITH_UNIT/PLANE_ANGLE_MEASURE_WITH_UNIT).
+ */
 class StepRepr_ReprItemAndMeasureWithUnit extends StepRepr_RepresentationItem {
 }
 
+/**
+ * Base class for complex types (MEASURE_REPRESENTATION_ITEM, MEASURE_WITH_UNIT, QUALIFIED_REPRESENTATION_ITEM REPRESENTATION_ITEM, LENGTH_MEASURE_WITH_UNIT/PLANE_ANGLE_MEASURE_WITH_UNIT).
+ */
 class StepRepr_ReprItemAndMeasureWithUnitAndQRI extends StepRepr_ReprItemAndMeasureWithUnit {
 }
 
@@ -23778,18 +30762,30 @@ class StepRepr_RepresentationRelationship extends Standard_Transient {
 class StepRepr_RepresentationRelationshipWithTransformation extends StepRepr_ShapeRepresentationRelationship {
 }
 
+/**
+ * Representation of STEP SELECT type RepresentedDefinition
+ */
 class StepRepr_RepresentedDefinition extends StepData_SelectType {
 }
 
 class StepRepr_ShapeAspect extends Standard_Transient {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_ShapeAspectDerivingRelationship extends StepRepr_ShapeAspectRelationship {
 }
 
+/**
+ * Representation of STEP entity ShapeAspectRelationship
+ */
 class StepRepr_ShapeAspectRelationship extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity ShapeAspectTransition
+ */
 class StepRepr_ShapeAspectTransition extends StepRepr_ShapeAspectRelationship {
 }
 
@@ -23802,45 +30798,72 @@ class StepRepr_ShapeRepresentationRelationship extends StepRepr_RepresentationRe
 class StepRepr_ShapeRepresentationRelationshipWithTransformation extends StepRepr_RepresentationRelationshipWithTransformation {
 }
 
+/**
+ * Representation of STEP entity SpecifiedHigherUsageOccurrence
+ */
 class StepRepr_SpecifiedHigherUsageOccurrence extends StepRepr_AssemblyComponentUsage {
 }
 
+/**
+ * Representation of STEP entity StructuralResponseProperty
+ */
 class StepRepr_StructuralResponseProperty extends StepRepr_PropertyDefinition {
 }
 
+/**
+ * Representation of STEP entity StructuralResponsePropertyDefinitionRepresentation
+ */
 class StepRepr_StructuralResponsePropertyDefinitionRepresentation extends StepRepr_PropertyDefinitionRepresentation {
 }
 
 class StepRepr_SuppliedPartRelationship extends StepBasic_ProductDefinitionRelationship {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_Tangent extends StepRepr_DerivedShapeAspect {
 }
 
 class StepRepr_Transformation extends StepData_SelectType {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepRepr_ValueRange extends StepRepr_CompoundRepresentationItem {
 }
 
 class StepRepr_ValueRepresentationItem extends StepRepr_RepresentationItem {
 }
 
+/**
+ * Performs Actions specific to StepSelect, i.e. creation of Step Selections and Counters, plus dumping specific to Step
+ */
 class StepSelect_Activator extends IFSelect_Activator {
 }
 
 class StepSelect_FileModifier extends IFSelect_GeneralModifier {
 }
 
+/**
+ * This class gives control out format for floatting values : ZeroSuppress or no, Main Format, Format in Range (for values around 1.), as StepWriter allows to manage it. Formats are given under C-printf form
+ */
 class StepSelect_FloatFormat extends StepSelect_FileModifier {
 }
 
 class StepSelect_ModelModifier extends IFSelect_Modifier {
 }
 
+/**
+ * StepType is a Signature specific to Step definitions : it considers the type as defined in STEP Schemas, the same which is used in files. For a Complex Type, if its definition is known, StepType produces the list of basic types, separated by commas, the whole between brackets : "(TYPE1,TYPE2..)". If its precise definition is not known (simply it is known as Complex, it can be recognised, but the list is produced at Write time only), StepType produces : "(..COMPLEX TYPE..)"
+ */
 class StepSelect_StepType extends IFSelect_Signature {
 }
 
+/**
+ * Performs Read and Write a STEP File with a STEP Model Following the protocols, Copy may be implemented or not
+ */
 class StepSelect_WorkLibrary extends IFSelect_WorkLibrary {
 }
 
@@ -23850,9 +30873,15 @@ class StepShape_AdvancedBrepShapeRepresentation extends StepShape_ShapeRepresent
 class StepShape_AdvancedFace extends StepShape_FaceSurface {
 }
 
+/**
+ * Representation of STEP entity AngularLocation
+ */
 class StepShape_AngularLocation extends StepShape_DimensionalLocation {
 }
 
+/**
+ * Representation of STEP entity AngularSize
+ */
 class StepShape_AngularSize extends StepShape_DimensionalSize {
 }
 
@@ -23877,18 +30906,30 @@ class StepShape_BrepWithVoids extends StepShape_ManifoldSolidBrep {
 class StepShape_ClosedShell extends StepShape_ConnectedFaceSet {
 }
 
+/**
+ * Representation of STEP entity CompoundShapeRepresentation
+ */
 class StepShape_CompoundShapeRepresentation extends StepShape_ShapeRepresentation {
 }
 
+/**
+ * Representation of STEP entity ConnectedEdgeSet
+ */
 class StepShape_ConnectedEdgeSet extends StepShape_TopologicalRepresentationItem {
 }
 
 class StepShape_ConnectedFaceSet extends StepShape_TopologicalRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity ConnectedFaceShapeRepresentation
+ */
 class StepShape_ConnectedFaceShapeRepresentation extends StepRepr_Representation {
 }
 
+/**
+ * Representation of STEP entity ConnectedFaceSubSet
+ */
 class StepShape_ConnectedFaceSubSet extends StepShape_ConnectedFaceSet {
 }
 
@@ -23907,36 +30948,66 @@ class StepShape_CsgShapeRepresentation extends StepShape_ShapeRepresentation {
 class StepShape_CsgSolid extends StepShape_SolidModel {
 }
 
+/**
+ * Implements complex type (DEFINITIONAL_REPRESENTATION,REPRESENTATION,SHAPE_REPRESENTATION)
+ */
 class StepShape_DefinitionalRepresentationAndShapeRepresentation extends StepRepr_DefinitionalRepresentation {
 }
 
+/**
+ * Representation of STEP SELECT type DimensionalCharacteristic
+ */
 class StepShape_DimensionalCharacteristic extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity DimensionalCharacteristicRepresentation
+ */
 class StepShape_DimensionalCharacteristicRepresentation extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity DimensionalLocation
+ */
 class StepShape_DimensionalLocation extends StepRepr_ShapeAspectRelationship {
 }
 
+/**
+ * Representation of STEP entity DimensionalLocationWithPath
+ */
 class StepShape_DimensionalLocationWithPath extends StepShape_DimensionalLocation {
 }
 
+/**
+ * Representation of STEP entity DimensionalSize
+ */
 class StepShape_DimensionalSize extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity DimensionalSizeWithPath
+ */
 class StepShape_DimensionalSizeWithPath extends StepShape_DimensionalSize {
 }
 
+/**
+ * Representation of STEP entity DirectedDimensionalLocation
+ */
 class StepShape_DirectedDimensionalLocation extends StepShape_DimensionalLocation {
 }
 
 class StepShape_Edge extends StepShape_TopologicalRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity EdgeBasedWireframeModel
+ */
 class StepShape_EdgeBasedWireframeModel extends StepGeom_GeometricRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity EdgeBasedWireframeShapeRepresentation
+ */
 class StepShape_EdgeBasedWireframeShapeRepresentation extends StepShape_ShapeRepresentation {
 }
 
@@ -23955,6 +31026,9 @@ class StepShape_ExtrudedFaceSolid extends StepShape_SweptFaceSolid {
 class StepShape_Face extends StepShape_TopologicalRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity FaceBasedSurfaceModel
+ */
 class StepShape_FaceBasedSurfaceModel extends StepGeom_GeometricRepresentationItem {
 }
 
@@ -24115,6 +31189,9 @@ class StepShape_HArray1OfValueQualifier_4 extends StepShape_HArray1OfValueQualif
 class StepShape_HalfSpaceSolid extends StepGeom_GeometricRepresentationItem {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepShape_LimitsAndFits extends Standard_Transient {
 }
 
@@ -24130,12 +31207,21 @@ class StepShape_ManifoldSolidBrep extends StepShape_SolidModel {
 class StepShape_ManifoldSurfaceShapeRepresentation extends StepShape_ShapeRepresentation {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepShape_MeasureQualification extends Standard_Transient {
 }
 
+/**
+ * Added for Dimensional Tolerances Complex Type between MeasureRepresentationItem and QualifiedRepresentationItem
+ */
 class StepShape_MeasureRepresentationItemAndQualifiedRepresentationItem extends StepRepr_RepresentationItem {
 }
 
+/**
+ * Representation of STEP entity NonManifoldSurfaceShapeRepresentation
+ */
 class StepShape_NonManifoldSurfaceShapeRepresentation extends StepShape_ShapeRepresentation {
 }
 
@@ -24160,18 +31246,30 @@ class StepShape_OrientedPath extends StepShape_Path {
 class StepShape_Path extends StepShape_TopologicalRepresentationItem {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepShape_PlusMinusTolerance extends Standard_Transient {
 }
 
+/**
+ * Representation of STEP entity PointRepresentation
+ */
 class StepShape_PointRepresentation extends StepShape_ShapeRepresentation {
 }
 
 class StepShape_PolyLoop extends StepShape_Loop {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepShape_PrecisionQualifier extends Standard_Transient {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepShape_QualifiedRepresentationItem extends StepRepr_RepresentationItem {
 }
 
@@ -24193,12 +31291,21 @@ class StepShape_RightCircularCone extends StepGeom_GeometricRepresentationItem {
 class StepShape_RightCircularCylinder extends StepGeom_GeometricRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity SeamEdge
+ */
 class StepShape_SeamEdge extends StepShape_OrientedEdge {
 }
 
+/**
+ * Representation of STEP entity ShapeDefinitionRepresentation
+ */
 class StepShape_ShapeDefinitionRepresentation extends StepRepr_PropertyDefinitionRepresentation {
 }
 
+/**
+ * Representation of STEP entity ShapeDimensionRepresentation
+ */
 class StepShape_ShapeDimensionRepresentation extends StepShape_ShapeRepresentation {
 }
 
@@ -24208,6 +31315,9 @@ class StepShape_ShapeDimensionRepresentationItem extends StepData_SelectType {
 class StepShape_ShapeRepresentation extends StepRepr_Representation {
 }
 
+/**
+ * Representation of STEP entity ShapeRepresentationWithParameters
+ */
 class StepShape_ShapeRepresentationWithParameters extends StepShape_ShapeRepresentation {
 }
 
@@ -24226,9 +31336,15 @@ class StepShape_SolidReplica extends StepShape_SolidModel {
 class StepShape_Sphere extends StepGeom_GeometricRepresentationItem {
 }
 
+/**
+ * Representation of STEP entity Subedge
+ */
 class StepShape_Subedge extends StepShape_Edge {
 }
 
+/**
+ * Representation of STEP entity Subface
+ */
 class StepShape_Subface extends StepShape_Face {
 }
 
@@ -24241,9 +31357,15 @@ class StepShape_SweptAreaSolid extends StepShape_SolidModel {
 class StepShape_SweptFaceSolid extends StepShape_SolidModel {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepShape_ToleranceMethodDefinition extends StepData_SelectType {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepShape_ToleranceValue extends Standard_Transient {
 }
 
@@ -24256,12 +31378,21 @@ class StepShape_Torus extends StepGeom_GeometricRepresentationItem {
 class StepShape_TransitionalShapeRepresentation extends StepShape_ShapeRepresentation {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepShape_TypeQualifier extends Standard_Transient {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepShape_ValueFormatTypeQualifier extends Standard_Transient {
 }
 
+/**
+ * Added for Dimensional Tolerances
+ */
 class StepShape_ValueQualifier extends StepData_SelectType {
 }
 
@@ -24274,21 +31405,36 @@ class StepShape_VertexLoop extends StepShape_Loop {
 class StepShape_VertexPoint extends StepShape_Vertex {
 }
 
+/**
+ * This class provides static methods to convert STEP geometric entities to OCCT. The methods returning handles will return null handle in case of error. The methods returning boolean will return True if succeeded and False if error.
+ */
 class StepToGeom {
 }
 
+/**
+ * This package implements the mapping between AP214 Shape representation and CAS.CAD Shape Representation. The source schema is Part42 (which is included in AP214)
+ */
 class StepToTopoDS {
 }
 
 class StepToTopoDS_CartesianPointHasher {
 }
 
+/**
+ * This class contains some algorithmic services specific to the mapping STEP to CAS.CADE
+ */
 class StepToTopoDS_GeometricTool {
 }
 
+/**
+ * Produces instances by Transformation of a basic item
+ */
 class StepToTopoDS_MakeTransformed extends StepToTopoDS_Root {
 }
 
+/**
+ * Provides data to process non-manifold topology when reading from STEP.
+ */
 class StepToTopoDS_NMTool {
 }
 
@@ -24296,15 +31442,24 @@ class StepToTopoDS_NMTool_1 extends StepToTopoDS_NMTool {}
 
 class StepToTopoDS_NMTool_2 extends StepToTopoDS_NMTool {}
 
+/**
+ * Stores a pair of Points from step
+ */
 class StepToTopoDS_PointPair {
 }
 
 class StepToTopoDS_PointPairHasher {
 }
 
+/**
+ * This class implements the common services for all classes of StepToTopoDS which report error and sets and returns precision.
+ */
 class StepToTopoDS_Root {
 }
 
+/**
+ * This Tool Class provides Information to build a Cas.Cad BRep from a ProSTEP Shape model.
+ */
 class StepToTopoDS_Tool {
 }
 
@@ -24312,6 +31467,9 @@ class StepToTopoDS_Tool_1 extends StepToTopoDS_Tool {}
 
 class StepToTopoDS_Tool_2 extends StepToTopoDS_Tool {}
 
+/**
+ * Translate STEP entity composite_curve to TopoDS_Wire If surface is given, the curve is assumed to lie on that surface and in case if any segment of it is a curve_on_surface, the pcurve for that segment will be taken. Note: a segment of composite_curve may be itself composite_curve. Only one-level protection against cyclic references is implemented.
+ */
 class StepToTopoDS_TranslateCompositeCurve extends StepToTopoDS_Root {
 }
 
@@ -24321,6 +31479,9 @@ class StepToTopoDS_TranslateCompositeCurve_2 extends StepToTopoDS_TranslateCompo
 
 class StepToTopoDS_TranslateCompositeCurve_3 extends StepToTopoDS_TranslateCompositeCurve {}
 
+/**
+ * Translate curve_bounded_surface into TopoDS_Face
+ */
 class StepToTopoDS_TranslateCurveBoundedSurface extends StepToTopoDS_Root {
 }
 
@@ -24380,6 +31541,9 @@ class StepToTopoDS_TranslateVertexLoop_2 extends StepToTopoDS_TranslateVertexLoo
 class StepVisual_AnnotationCurveOccurrence extends StepVisual_AnnotationOccurrence {
 }
 
+/**
+ * Added for Dimensional Tolerances Complex STEP entity AnnotationCurveOccurrence & AnnotationOccurrence & GeometricRepresentationItem & RepresentationItem & StyledItem
+ */
 class StepVisual_AnnotationCurveOccurrenceAndAnnotationOccurrenceAndGeomReprItemAndReprItemAndStyledItem extends StepVisual_AnnotationCurveOccurrence {
 }
 
@@ -24452,6 +31616,9 @@ class StepVisual_CameraModelD3MultiClippingUnionSelect extends StepData_SelectTy
 class StepVisual_CameraUsage extends StepRepr_RepresentationMap {
 }
 
+/**
+ * Added for Dimensional Tolerances Complex STEP entity Characterized_Object & Characterized_Representation & Draughting_Model & Representation
+ */
 class StepVisual_CharacterizedObjectAndCharacterizedRepresentationAndDraughtingModelAndRepresentation extends StepVisual_DraughtingModel {
 }
 
@@ -24503,6 +31670,9 @@ class StepVisual_DraughtingCallout extends StepGeom_GeometricRepresentationItem 
 class StepVisual_DraughtingCalloutElement extends StepData_SelectType {
 }
 
+/**
+ * Representation of STEP entity DraughtingModel
+ */
 class StepVisual_DraughtingModel extends StepRepr_Representation {
 }
 
@@ -24512,9 +31682,15 @@ class StepVisual_DraughtingPreDefinedColour extends StepVisual_PreDefinedColour 
 class StepVisual_DraughtingPreDefinedCurveFont extends StepVisual_PreDefinedCurveFont {
 }
 
+/**
+ * Representation of STEP entity ExternallyDefinedCurveFont
+ */
 class StepVisual_ExternallyDefinedCurveFont extends StepBasic_ExternallyDefinedItem {
 }
 
+/**
+ * Representation of STEP entity ExternallyDefinedTextFont
+ */
 class StepVisual_ExternallyDefinedTextFont extends StepBasic_ExternallyDefinedItem {
 }
 
@@ -24707,6 +31883,9 @@ class StepVisual_InvisibleItem extends StepData_SelectType {
 class StepVisual_LayeredItem extends StepData_SelectType {
 }
 
+/**
+ * Defines MarkerType as unique member of MarkerSelect Works with an EnumTool
+ */
 class StepVisual_MarkerMember extends StepData_SelectInt {
 }
 
@@ -24719,6 +31898,9 @@ class StepVisual_MechanicalDesignGeometricPresentationArea extends StepVisual_Pr
 class StepVisual_MechanicalDesignGeometricPresentationRepresentation extends StepVisual_PresentationRepresentation {
 }
 
+/**
+ * Defines NullStyle as unique member of PresentationStyleSelect Works with an EnumTool
+ */
 class StepVisual_NullStyleMember extends StepData_SelectInt {
 }
 
@@ -24752,6 +31934,9 @@ class StepVisual_PresentationArea extends StepVisual_PresentationRepresentation 
 class StepVisual_PresentationLayerAssignment extends Standard_Transient {
 }
 
+/**
+ * Added from StepVisual Rev2 to Rev4
+ */
 class StepVisual_PresentationLayerUsage extends Standard_Transient {
 }
 
@@ -24785,6 +31970,9 @@ class StepVisual_PresentationView extends StepVisual_PresentationRepresentation 
 class StepVisual_PresentedItem extends Standard_Transient {
 }
 
+/**
+ * Added from StepVisual Rev2 to Rev4
+ */
 class StepVisual_PresentedItemRepresentation extends Standard_Transient {
 }
 
@@ -24860,15 +32048,27 @@ class StepVisual_TextStyleWithBoxCharacteristics extends StepVisual_TextStyle {
 class StepVisual_ViewVolume extends Standard_Transient {
 }
 
+/**
+ * Offers the API for STL data manipulation.
+ */
 class StlAPI {
 }
 
+/**
+ * Reading from stereolithography format.
+ */
 class StlAPI_Reader {
 }
 
+/**
+ * This class creates and writes STL files from Open CASCADE shapes. An STL file can be written to an existing STL file or to a new one.
+ */
 class StlAPI_Writer {
 }
 
+/**
+ * Storage package is used to write and read persistent objects. These objects are read and written by a retrieval or storage algorithm (Storage_Schema object) in a container (disk, memory, network ...). Drivers (FSD_File objects) assign a physical container for data to be stored or retrieved. The standard procedure for an application in reading a container is the following: - open the driver in reading mode, - call the Read function from the schema, setting the driver as a parameter. This function returns an instance of the Storage_Data class which contains the data being read, - close the driver. The standard procedure for an application in writing a container is the following: - open the driver in writing mode, - create an instance of the Storage_Data class, then add the persistent data to write with the function AddRoot, - call the function Write from the schema, setting the driver and the Storage_Data instance as parameters, - close the driver.
+ */
 class Storage {
 }
 
@@ -24888,6 +32088,9 @@ class Storage_BucketOfPersistent {
 class Storage_CallBack extends Standard_Transient {
 }
 
+/**
+ * A picture memorizing the data stored in a container (for example, in a file). A Storage_Data object represents either: - persistent data to be written into a container, or - persistent data which are read from a container. A Storage_Data object is used in both the storage and retrieval operations: - Storage mechanism: create an empty Storage_Data object, then add successively persistent objects (roots) to be stored using the function AddRoot. When the set of data is complete, write it to a container using the function Write in your Storage_Schema storage/retrieval algorithm. - Retrieval mechanism: a Storage_Data object is returned by the Read function from your Storage_Schema storage/retrieval algorithm. Use the functions NumberOfRoots and Roots to find the roots which were stored in the read container. The roots of a Storage_Data object may share references on objects. The shared internal references of a Storage_Data object are maintained by the storage/retrieval mechanism. Note: References shared by objects which are contained in two distinct Storage_Data objects are not maintained by the storage/retrieval mechanism: external references are not supported by Storage_Schema algorithm
+ */
 class Storage_Data extends Standard_Transient {
 }
 
@@ -24933,6 +32136,9 @@ class Storage_HeaderData extends Standard_Transient {
 class Storage_InternalData extends Standard_Transient {
 }
 
+/**
+ * A root object extracted from a Storage_Data object. A Storage_Root encapsulates a persistent object which is a root of a Storage_Data object. It contains additional information: the name and the data type of the persistent object. When retrieving a Storage_Data object from a container (for example, a file) you access its roots with the function Roots which returns a sequence of root objects. The provided functions allow you to request information about each root of the sequence. You do not create explicit roots: when inserting data in a Storage_Data object, you just provide the persistent object and optionally its name to the function AddRoot.
+ */
 class Storage_Root extends Standard_Transient {
 }
 
@@ -24945,6 +32151,9 @@ class Storage_Root_3 extends Storage_Root {}
 class Storage_RootData extends Standard_Transient {
 }
 
+/**
+ * Root class for basic storage/retrieval algorithms. A Storage_Schema object processes: - writing of a set of persistent data into a container (store mechanism), - reading of a container to extract all the contained persistent data (retrieve mechanism). A Storage_Schema object is based on the data schema for the persistent data of the application, i.e.: - the list of all persistent objects which may be known by the application, - the organization of their data; a data schema knows how to browse each persistent object it contains. During the store or retrieve operation, only persistent objects known from the data schema can be processed; they are then stored or retrieved according to their description in the schema. A data schema is specific to the object classes to be read or written. Tools dedicated to the environment in use allow a description of the application persistent data structure. Storage_Schema algorithms are called basic because they do not support external references between containers.
+ */
 class Storage_Schema extends Standard_Transient {
 }
 
@@ -25007,6 +32216,9 @@ class Storage_TypedCallBack_1 extends Storage_TypedCallBack {}
 
 class Storage_TypedCallBack_2 extends Storage_TypedCallBack {}
 
+/**
+ * Gives a simple indexed representation of a Directing Edge topology.
+ */
 class Sweep_NumShape {
 }
 
@@ -25014,9 +32226,15 @@ class Sweep_NumShape_1 extends Sweep_NumShape {}
 
 class Sweep_NumShape_2 extends Sweep_NumShape {}
 
+/**
+ * This class provides iteration services required by the Swept Primitives for a Directing NumShape Line.
+ */
 class Sweep_NumShapeIterator {
 }
 
+/**
+ * This class provides the indexation and type analysis services required by the NumShape Directing Shapes of Swept Primitives.
+ */
 class Sweep_NumShapeTool {
 }
 
@@ -25096,6 +32314,9 @@ class TColStd_HArray2OfCharacter_2 extends TColStd_HArray2OfCharacter {}
 
 class TColStd_HArray2OfCharacter_3 extends TColStd_HArray2OfCharacter {}
 
+/**
+ * Extension of TColStd_PackedMapOfInteger class to be manipulated by handle.
+ */
 class TColStd_HPackedMapOfInteger extends Standard_Transient {
 }
 
@@ -25103,6 +32324,9 @@ class TColStd_HPackedMapOfInteger_1 extends TColStd_HPackedMapOfInteger {}
 
 class TColStd_HPackedMapOfInteger_2 extends TColStd_HPackedMapOfInteger {}
 
+/**
+ * Optimized Map of integer values. Each block of 32 integers is stored in 8 bytes in memory.
+ */
 class TColStd_PackedMapOfInteger {
 }
 
@@ -25212,9 +32436,15 @@ class TColgp_HSequenceOfVec2d_1 extends TColgp_HSequenceOfVec2d {}
 
 class TColgp_HSequenceOfVec2d_2 extends TColgp_HSequenceOfVec2d {}
 
+/**
+ * The package <TCollection> provides the services for the transient basic data structures.
+ */
 class TCollection {
 }
 
+/**
+ * Class defines a variable-length sequence of 8-bit characters. Despite class name (kept for historical reasons), it is intended to store UTF-8 string, not just ASCII characters. However, multi-byte nature of UTF-8 is not considered by the following methods: - Method ::Length() return the number of bytes, not the number of Unicode symbols. - Methods taking/returning symbol index work with 8-bit code units, not true Unicode symbols, including ::Remove(), ::SetValue(), ::Value(), ::Search(), ::Trunc() and others. If application needs to process multi-byte Unicode symbols explicitly, NCollection_Utf8Iter class can be used for iterating through Unicode string (UTF-32 code unit will be returned for each position).
+ */
 class TCollection_AsciiString {
 }
 
@@ -25246,15 +32476,27 @@ class TCollection_AsciiString_13 extends TCollection_AsciiString {}
 
 class TCollection_AsciiString_14 extends TCollection_AsciiString {}
 
+/**
+ * Definition of a base class for all instanciations of sequence.
+ */
 class TCollection_BaseSequence {
 }
 
+/**
+ * Root class of all the maps, provides utilitites for managing the buckets. Maps are dynamically extended data structures where data is quickly accessed with a key. General properties of maps - Map items may be (complex) non-unitary data; they may be difficult to manage with an array. Moreover, the map allows a data structure to be indexed by complex data. - The size of a map is dynamically extended. So a map may be first dimensioned for a little number of items. Maps avoid the use of large and quasi-empty arrays. - The access to a map item is much faster than the one to a sequence, a list, a queue or a stack item. - The access time to a map item may be compared with the one to an array item. First of all, it depends on the size of the map. It also depends on the quality of a user redefinable function (the hashing function) to find quickly where the item is. - The exploration of a map may be of better performance than the exploration of an array because the size of the map is adapted to the number of inserted items. These properties explain why maps are commonly used as internal data structures for algorithms. Definitions - A map is a data structure for which data is addressed by keys. - Once inserted in the map, a map item is referenced as an entry of the map. - Each entry of the map is addressed by a key. Two different keys address two different entries of the map. - The position of an entry in the map is called a bucket. - A map is dimensioned by its number of buckets, i.e. the maximum number of entries in the map. The performance of a map is conditioned by the number of buckets. - The hashing function transforms a key into a bucket index. The number of values that can be computed by the hashing function is equal to the number of buckets of the map. - Both the hashing function and the equality test between two keys are provided by a hasher object. - A map may be explored by a map iterator. This exploration provides only inserted entries in the map (i.e. non empty buckets). Collections' generic maps The Collections component provides numerous generic derived maps. - These maps include automatic management of the number of buckets: they are automatically resized when the number of keys exceeds the number of buckets. If you have a fair idea of the number of items in your map, you can save on automatic resizing by specifying a number of buckets at the time of construction, or by using a resizing function. This may be considered for crucial optimization issues. - Keys, items and hashers are parameters of these generic derived maps. - TCollection_MapHasher class describes the functions required by any hasher which is to be used with a map instantiated from the Collections component. - An iterator class is automatically instantiated at the time of instantiation of a map provided by the Collections component if this map is to be explored with an iterator. Note that some provided generic maps are not to be explored with an iterator but with indexes (indexed maps).
+ */
 class TCollection_BasicMap {
 }
 
+/**
+ * This class provides basic services for the iterators on Maps. The iterators are inherited from this one.
+ */
 class TCollection_BasicMapIterator {
 }
 
+/**
+ * A variable-length sequence of "extended" (UNICODE) characters (16-bit character type). It provides editing operations with built-in memory management to make ExtendedString objects easier to use than ordinary extended character arrays. ExtendedString objects follow "value semantics", that is, they are the actual strings, not handles to strings, and are copied through assignment. You may use HExtendedString objects to get handles to strings.
+ */
 class TCollection_ExtendedString {
 }
 
@@ -25282,6 +32524,9 @@ class TCollection_ExtendedString_11 extends TCollection_ExtendedString {}
 
 class TCollection_ExtendedString_12 extends TCollection_ExtendedString {}
 
+/**
+ * A variable-length sequence of ASCII characters (normal 8-bit character type). It provides editing operations with built-in memory management to make HAsciiString objects easier to use than ordinary character arrays. HAsciiString objects are handles to strings. - HAsciiString strings may be shared by several objects. - You may use an AsciiString object to get the actual string. Note: HAsciiString objects use an AsciiString string as a field.
+ */
 class TCollection_HAsciiString extends Standard_Transient {
 }
 
@@ -25303,6 +32548,9 @@ class TCollection_HAsciiString_8 extends TCollection_HAsciiString {}
 
 class TCollection_HAsciiString_9 extends TCollection_HAsciiString {}
 
+/**
+ * A variable-length sequence of "extended" (UNICODE) characters (16-bit character type). It provides editing operations with built-in memory management to make ExtendedString objects easier to use than ordinary extended character arrays. HExtendedString objects are handles to strings. - HExtendedString strings may be shared by several objects. - You may use an ExtendedString object to get the actual string. Note: HExtendedString objects use an ExtendedString string as a field.
+ */
 class TCollection_HExtendedString extends Standard_Transient {
 }
 
@@ -25322,18 +32570,30 @@ class TCollection_HExtendedString_7 extends TCollection_HExtendedString {}
 
 class TCollection_HExtendedString_8 extends TCollection_HExtendedString {}
 
+/**
+ * Basic class root of all the Maps.
+ */
 class TCollection_MapNode extends Standard_Transient {
 }
 
 class TCollection_SeqNode extends Standard_Transient {
 }
 
+/**
+ * This package provides data framework for binding features and data structures.
+ */
 class TDF {
 }
 
+/**
+ * A class each application has to implement. It is used to contain the application data. This abstract class, alongwith Label, is one of the cornerstones of Model Editor. The groundwork is to define the root of information. This information is to be attached to a Label, and could be of any of the following types: - a feature - a constraint - a comment
+ */
 class TDF_Attribute extends Standard_Transient {
 }
 
+/**
+ * This class discribes the services we need to implement Delta and Undo/Redo services.
+ */
 class TDF_AttributeDelta extends Standard_Transient {
 }
 
@@ -25346,6 +32606,9 @@ class TDF_AttributeIterator_2 extends TDF_AttributeIterator {}
 
 class TDF_AttributeIterator_3 extends TDF_AttributeIterator {}
 
+/**
+ * Iterates on the children of a label, to find attributes having ID as Attribute ID.
+ */
 class TDF_ChildIDIterator {
 }
 
@@ -25353,6 +32616,9 @@ class TDF_ChildIDIterator_1 extends TDF_ChildIDIterator {}
 
 class TDF_ChildIDIterator_2 extends TDF_ChildIDIterator {}
 
+/**
+ * Iterates on the children of a label, at the first level only. It is possible to ask the iterator to explore all the sub label levels of the given one, with the option "allLevels".
+ */
 class TDF_ChildIterator {
 }
 
@@ -25360,15 +32626,27 @@ class TDF_ChildIterator_1 extends TDF_ChildIterator {}
 
 class TDF_ChildIterator_2 extends TDF_ChildIterator {}
 
+/**
+ * This class provides options closure management.
+ */
 class TDF_ClosureMode {
 }
 
+/**
+ * This class provides services to build the closure of an information set. This class gives services around the transitive enclosure of a set of information, starting from a list of label. You can set closure options by using IDFilter (to select or exclude specific attribute IDs) and CopyOption objects and by giving to Closure method.
+ */
 class TDF_ClosureTool {
 }
 
+/**
+ * This class provides services to compare sets of information. The use of this tool can works after a copy, acted by a CopyTool.
+ */
 class TDF_ComparisonTool {
 }
 
+/**
+ * This class gives copy of source label hierarchy
+ */
 class TDF_CopyLabel {
 }
 
@@ -25376,36 +32654,69 @@ class TDF_CopyLabel_1 extends TDF_CopyLabel {}
 
 class TDF_CopyLabel_2 extends TDF_CopyLabel {}
 
+/**
+ * This class provides services to build, copy or paste a set of information.
+ */
 class TDF_CopyTool {
 }
 
+/**
+ * This class is used to manipulate a complete independant, self sufficient data structure and its services:
+ */
 class TDF_Data extends Standard_Transient {
 }
 
+/**
+ * This class is a set of TDF informations like labels and attributes.
+ */
 class TDF_DataSet extends Standard_Transient {
 }
 
+/**
+ * This class provides a default implementation of a TDF_DeltaOnModification.
+ */
 class TDF_DefaultDeltaOnModification extends TDF_DeltaOnModification {
 }
 
+/**
+ * This class provides a default implementation of a TDF_DeltaOnRemoval.
+ */
 class TDF_DefaultDeltaOnRemoval extends TDF_DeltaOnRemoval {
 }
 
+/**
+ * A set of AttributeDelta for a given transaction number and reference time number. A delta set is available at <aSourceTime>. If applied, it restores the TDF_Data in the state it was at <aTargetTime>.
+ */
 class TDF_Delta extends Standard_Transient {
 }
 
+/**
+ * This class provides default services for an AttributeDelta on an ADDITION action.
+ */
 class TDF_DeltaOnAddition extends TDF_AttributeDelta {
 }
 
+/**
+ * This class provides default services for an AttributeDelta on an Forget action.
+ */
 class TDF_DeltaOnForget extends TDF_AttributeDelta {
 }
 
+/**
+ * This class provides default services for an AttributeDelta on a MODIFICATION action.
+ */
 class TDF_DeltaOnModification extends TDF_AttributeDelta {
 }
 
+/**
+ * This class provides default services for an AttributeDelta on a REMOVAL action.
+ */
 class TDF_DeltaOnRemoval extends TDF_AttributeDelta {
 }
 
+/**
+ * This class provides default services for an AttributeDelta on an Resume action.
+ */
 class TDF_DeltaOnResume extends TDF_AttributeDelta {
 }
 
@@ -25420,27 +32731,51 @@ class TDF_HAttributeArray1_3 extends TDF_HAttributeArray1 {}
 
 class TDF_HAttributeArray1_4 extends TDF_HAttributeArray1 {}
 
+/**
+ * This class offers filtering services around an ID list.
+ */
 class TDF_IDFilter {
 }
 
+/**
+ * This class provides basic operations to define a label in a data structure. A label is a feature in the feature hierarchy. A label is always connected to a Data from TDF. To a label is attached attributes containing the software components information.
+ */
 class TDF_Label {
 }
 
+/**
+ * A label hasher for label maps.
+ */
 class TDF_LabelMapHasher {
 }
 
+/**
+ * This attribute is used to store in the framework a reference to an other label.
+ */
 class TDF_Reference extends TDF_Attribute {
 }
 
+/**
+ * This is a relocation dictionnary between source and target labels, attributes or any transient(useful for copy or paste actions). Note that one target value may be the relocation value of more than one source object.
+ */
 class TDF_RelocationTable extends Standard_Transient {
 }
 
+/**
+ * This attribute manage a tag provider to create child labels of a given one.
+ */
 class TDF_TagSource extends TDF_Attribute {
 }
 
+/**
+ * This class provides general services for a data framework.
+ */
 class TDF_Tool {
 }
 
+/**
+ * This class offers services to open, commit or abort a transaction in a more secure way than using Data from TDF. If you forget to close a transaction, it will be automaticaly aborted at the destruction of this object, at the closure of its scope.
+ */
 class TDF_Transaction {
 }
 
@@ -25448,21 +32783,39 @@ class TDF_Transaction_1 extends TDF_Transaction {}
 
 class TDF_Transaction_2 extends TDF_Transaction {}
 
+/**
+ * This package defines standard attributes for modelling. These allow you to create and modify labels and attributes for many basic data types. Standard topological and visualization attributes have also been created. To find an attribute attached to a specific label, you use the GUID of the type of attribute you are looking for. To do this, first find this information using the method GetID as follows: Standard_GUID anID = MyAttributeClass::GetID(); Then, use the method Find for the label as follows: Standard_Boolean HasAttribute = aLabel.Find(anID,anAttribute); Note For information on the relations between this component of OCAF and the others, refer to the OCAF User's Guide.
+ */
 class TDataStd {
 }
 
+/**
+ * Used to define an AsciiString attribute containing a TCollection_AsciiString
+ */
 class TDataStd_AsciiString extends TDF_Attribute {
 }
 
+/**
+ * An array of boolean values.
+ */
 class TDataStd_BooleanArray extends TDF_Attribute {
 }
 
+/**
+ * Contains a list of bolleans.
+ */
 class TDataStd_BooleanList extends TDF_Attribute {
 }
 
+/**
+ * An array of Byte (unsigned char) values.
+ */
 class TDataStd_ByteArray extends TDF_Attribute {
 }
 
+/**
+ * Iterates on the ChildStepren step of a step, at the first level only. It is possible to ask the iterator to explore all the sub step levels of the given one, with the option "allLevels".
+ */
 class TDataStd_ChildNodeIterator {
 }
 
@@ -25470,39 +32823,75 @@ class TDataStd_ChildNodeIterator_1 extends TDataStd_ChildNodeIterator {}
 
 class TDataStd_ChildNodeIterator_2 extends TDataStd_ChildNodeIterator {}
 
+/**
+ * Comment attribute. may be associated to any label to store user comment.
+ */
 class TDataStd_Comment extends TDF_Attribute {
 }
 
+/**
+ * this attribute, located at root label, manage an access to a current label.
+ */
 class TDataStd_Current extends TDF_Attribute {
 }
 
+/**
+ * This class provides default services for an AttributeDelta on a MODIFICATION action.
+ */
 class TDataStd_DeltaOnModificationOfByteArray extends TDF_DeltaOnModification {
 }
 
+/**
+ * This class provides default services for an AttributeDelta on a MODIFICATION action.
+ */
 class TDataStd_DeltaOnModificationOfExtStringArray extends TDF_DeltaOnModification {
 }
 
+/**
+ * This class provides default services for an AttributeDelta on a MODIFICATION action.
+ */
 class TDataStd_DeltaOnModificationOfIntArray extends TDF_DeltaOnModification {
 }
 
+/**
+ * This class provides default services for an AttributeDelta on a MODIFICATION action.
+ */
 class TDataStd_DeltaOnModificationOfIntPackedMap extends TDF_DeltaOnModification {
 }
 
+/**
+ * This class provides default services for an AttributeDelta on a MODIFICATION action
+ */
 class TDataStd_DeltaOnModificationOfRealArray extends TDF_DeltaOnModification {
 }
 
+/**
+ * Associates a directory in the data framework with a TDataStd_TagSource attribute. You can create a new directory label and add sub-directory or object labels to it,
+ */
 class TDataStd_Directory extends TDF_Attribute {
 }
 
+/**
+ * Expression attribute. ====================
+ */
 class TDataStd_Expression extends TDF_Attribute {
 }
 
+/**
+ * ExtStringArray Attribute. Handles an array of UNICODE strings (represented by the TCollection_ExtendedString class).
+ */
 class TDataStd_ExtStringArray extends TDF_Attribute {
 }
 
+/**
+ * Contains a list of ExtendedString.
+ */
 class TDataStd_ExtStringList extends TDF_Attribute {
 }
 
+/**
+ * Extension of TDataStd_DataMapOfStringByte class to be manipulated by handle.
+ */
 class TDataStd_HDataMapOfStringByte extends Standard_Transient {
 }
 
@@ -25510,6 +32899,9 @@ class TDataStd_HDataMapOfStringByte_1 extends TDataStd_HDataMapOfStringByte {}
 
 class TDataStd_HDataMapOfStringByte_2 extends TDataStd_HDataMapOfStringByte {}
 
+/**
+ * Extension of TDataStd_DataMapOfStringHArray1OfInteger class to be manipulated by handle.
+ */
 class TDataStd_HDataMapOfStringHArray1OfInteger extends Standard_Transient {
 }
 
@@ -25517,6 +32909,9 @@ class TDataStd_HDataMapOfStringHArray1OfInteger_1 extends TDataStd_HDataMapOfStr
 
 class TDataStd_HDataMapOfStringHArray1OfInteger_2 extends TDataStd_HDataMapOfStringHArray1OfInteger {}
 
+/**
+ * Extension of TDataStd_DataMapOfStringHArray1OfReal class to be manipulated by handle.
+ */
 class TDataStd_HDataMapOfStringHArray1OfReal extends Standard_Transient {
 }
 
@@ -25524,6 +32919,9 @@ class TDataStd_HDataMapOfStringHArray1OfReal_1 extends TDataStd_HDataMapOfString
 
 class TDataStd_HDataMapOfStringHArray1OfReal_2 extends TDataStd_HDataMapOfStringHArray1OfReal {}
 
+/**
+ * Extension of TColStd_DataMapOfStringInteger class to be manipulated by handle.
+ */
 class TDataStd_HDataMapOfStringInteger extends Standard_Transient {
 }
 
@@ -25531,6 +32929,9 @@ class TDataStd_HDataMapOfStringInteger_1 extends TDataStd_HDataMapOfStringIntege
 
 class TDataStd_HDataMapOfStringInteger_2 extends TDataStd_HDataMapOfStringInteger {}
 
+/**
+ * Extension of TDataStd_DataMapOfStringReal class to be manipulated by handle.
+ */
 class TDataStd_HDataMapOfStringReal extends Standard_Transient {
 }
 
@@ -25538,6 +32939,9 @@ class TDataStd_HDataMapOfStringReal_1 extends TDataStd_HDataMapOfStringReal {}
 
 class TDataStd_HDataMapOfStringReal_2 extends TDataStd_HDataMapOfStringReal {}
 
+/**
+ * Extension of TDataStd_DataMapOfStringString class to be manipulated by handle.
+ */
 class TDataStd_HDataMapOfStringString extends Standard_Transient {
 }
 
@@ -25556,66 +32960,126 @@ class TDataStd_HLabelArray1_3 extends TDataStd_HLabelArray1 {}
 
 class TDataStd_HLabelArray1_4 extends TDataStd_HLabelArray1 {}
 
+/**
+ * Attribute for storing TColStd_PackedMapOfInteger
+ */
 class TDataStd_IntPackedMap extends TDF_Attribute {
 }
 
+/**
+ * The basis to define an integer attribute.
+ */
 class TDataStd_Integer extends TDF_Attribute {
 }
 
+/**
+ * Contains an array of integers.
+ */
 class TDataStd_IntegerArray extends TDF_Attribute {
 }
 
+/**
+ * Contains a list of integers.
+ */
 class TDataStd_IntegerList extends TDF_Attribute {
 }
 
+/**
+ * Used to define a name attribute containing a string which specifies the name.
+ */
 class TDataStd_Name extends TDF_Attribute {
 }
 
+/**
+ * Contains a named data.
+ */
 class TDataStd_NamedData extends TDF_Attribute {
 }
 
+/**
+ * NoteBook Object attribute
+ */
 class TDataStd_NoteBook extends TDF_Attribute {
 }
 
+/**
+ * The basis to define a real number attribute.
+ */
 class TDataStd_Real extends TDF_Attribute {
 }
 
+/**
+ * A framework for an attribute composed of a real number array.
+ */
 class TDataStd_RealArray extends TDF_Attribute {
 }
 
+/**
+ * Contains a list of doubles.
+ */
 class TDataStd_RealList extends TDF_Attribute {
 }
 
+/**
+ * Contains an array of references to the labels.
+ */
 class TDataStd_ReferenceArray extends TDF_Attribute {
 }
 
+/**
+ * Contains a list of references.
+ */
 class TDataStd_ReferenceList extends TDF_Attribute {
 }
 
+/**
+ * Relation attribute. ==================
+ */
 class TDataStd_Relation extends TDF_Attribute {
 }
 
+/**
+ * Defines a boolean attribute. If it exists at a label - true, Otherwise - false.
+ */
 class TDataStd_Tick extends TDF_Attribute {
 }
 
+/**
+ * Allows you to define an explicit tree of labels which you can also edit. Without this class, the data structure cannot be fully edited. This service is required if for presentation purposes, you want to create an application with a tree which allows you to organize and link data as a function of application features.
+ */
 class TDataStd_TreeNode extends TDF_Attribute {
 }
 
 class TDataStd_UAttribute extends TDF_Attribute {
 }
 
+/**
+ * Variable attribute. ==================
+ */
 class TDataStd_Variable extends TDF_Attribute {
 }
 
+/**
+ * This package defines extension of standard attributes for modelling (mainly for work with geometry).
+ */
 class TDataXtd {
 }
 
+/**
+ * The basis to define an axis attribute.
+ */
 class TDataXtd_Axis extends TDF_Attribute {
 }
 
+/**
+ * The groundwork to define constraint attributes. The constraint attribute contains the following sorts of data: - Type whether the constraint attribute is a geometric constraint or a dimension - Value the real number value of a numeric constraint such as an angle or a radius - Geometries to identify the geometries underlying the topological attributes which define the constraint (up to 4) - Plane for 2D constraints.
+ */
 class TDataXtd_Constraint extends TDF_Attribute {
 }
 
+/**
+ * This class is used to model construction geometry. The specific geometric construction of the attribute is defined by an element of the enumeration TDataXtd_GeometryEnum. This attribute may also be used to qualify underlying geometry of the associated NamedShape. for Constructuion element by example.
+ */
 class TDataXtd_Geometry extends TDF_Attribute {
 }
 
@@ -25630,66 +33094,120 @@ class TDataXtd_HArray1OfTrsf_3 extends TDataXtd_HArray1OfTrsf {}
 
 class TDataXtd_HArray1OfTrsf_4 extends TDataXtd_HArray1OfTrsf {}
 
+/**
+ * a general pattern model
+ */
 class TDataXtd_Pattern extends TDF_Attribute {
 }
 
+/**
+ * to create a PatternStd (LinearPattern, CircularPattern, RectangularPattern, RadialCircularPattern, MirrorPattern)
+ */
 class TDataXtd_PatternStd extends TDataXtd_Pattern {
 }
 
 class TDataXtd_Placement extends TDF_Attribute {
 }
 
+/**
+ * The basis to define a plane attribute. Warning: Use TDataXtd_Geometry attribute to retrieve the gp_Pln of the Plane attribute
+ */
 class TDataXtd_Plane extends TDF_Attribute {
 }
 
+/**
+ * The basis to define a point attribute. The topological attribute must contain a vertex. You use this class to create reference points in a design.
+ */
 class TDataXtd_Point extends TDF_Attribute {
 }
 
+/**
+ * Position of a Label
+ */
 class TDataXtd_Position extends TDF_Attribute {
 }
 
+/**
+ * Attribute containing parameters of presentation of the shape, e.g. the shape attached to the same label and displayed using TPrsStd tools (see TPrsStd_AISPresentation).
+ */
 class TDataXtd_Presentation extends TDF_Attribute {
 }
 
+/**
+ * A Shape is associated in the framework with : a NamedShape attribute
+ */
 class TDataXtd_Shape extends TDF_Attribute {
 }
 
+/**
+ * An Ocaf attribute containing a mesh (Poly_Triangulation). It duplicates all methods from Poly_Triangulation. It is highly recommended to modify the mesh through the methods of this attribute, but not directly via the underlying Poly_Triangulation object. In this case Undo/Redo will work fine and robust.
+ */
 class TDataXtd_Triangulation extends TDF_Attribute {
 }
 
+/**
+ * This package define CAF main classes.
+ */
 class TDocStd {
 }
 
+/**
+ * The abstract root class for all application classes. They are in charge of: - Creating documents - Storing documents and retrieving them - Initializing document views. To create a useful OCAF-based application, you derive a class from Application and implement the methods below. You will have to redefine the deferred (virtual) methods Formats, InitDocument, and Resources, and override others. The application is a container for a document, which in its turn is the container of the data framework made up of labels and attributes. Besides furnishing a container for documents, TDocStd_Application provides the following services for them: - Creation of new documents - Activation of documents in sessions of an application - Storage and retrieval of documents - Initialization of document views. Note: If a client needs detailed information concerning the events during the Open/Store operation, a MessageDriver based on Message_PrinterOStream may be used. In case of need client can implement his own version inheriting from Message_Printer class and add it to the Messanger. Also the trace level of messages can be tuned by setting trace level (SetTraceLevel (Gravity )) for the used Printer. By default, trace level is Message_Info, so that all messages are output.
+ */
 class TDocStd_Application extends CDF_Application {
 }
 
 class TDocStd_ApplicationDelta extends Standard_Transient {
 }
 
+/**
+ * A delta set is available at <aSourceTime>. If applied, it restores the TDF_Data in the state it was at <aTargetTime>.
+ */
 class TDocStd_CompoundDelta extends TDF_Delta {
 }
 
 class TDocStd_Context {
 }
 
+/**
+ * The contents of a TDocStd_Application, a document is a container for a data framework composed of labels and attributes. As such, TDocStd_Document is the entry point into the data framework. To gain access to the data, you create a document as follows: Handle(TDocStd_Document) MyDF = new TDocStd_Document The document also allows you to manage: - modifications, providing Undo and Redo functions. - command transactions. Warning: The only data saved is the framework (TDF_Data)
+ */
 class TDocStd_Document extends CDM_Document {
 }
 
+/**
+ * Transient attribute wich register modified labels. This attribute is attached to root label.
+ */
 class TDocStd_Modified extends TDF_Attribute {
 }
 
+/**
+ * Class for synchronization of transactions within multiple documents. Each transaction of this class involvess one transaction in each modified document.
+ */
 class TDocStd_MultiTransactionManager extends Standard_Transient {
 }
 
+/**
+ * This attribute located at the root label of the framework contains a back reference to the owner TDocStd_Document, providing acces to the document from any label. private class Owner;
+ */
 class TDocStd_Owner extends TDF_Attribute {
 }
 
+/**
+ * parse an OS path
+ */
 class TDocStd_PathParser {
 }
 
+/**
+ * An attribute to store the path and the entry of external links. These refer from one data structure to a data structure in another document.
+ */
 class TDocStd_XLink extends TDF_Attribute {
 }
 
+/**
+ * Iterates on Reference attributes. This is an iterator giving all the external references of a Document.
+ */
 class TDocStd_XLinkIterator {
 }
 
@@ -25697,21 +33215,39 @@ class TDocStd_XLinkIterator_1 extends TDocStd_XLinkIterator {}
 
 class TDocStd_XLinkIterator_2 extends TDocStd_XLinkIterator {}
 
+/**
+ * This attribute is the root of all external references contained in a Data from TDF. Only one instance of this class is added to the TDF_Data root label. Starting from this attribute all the Reference are linked together, to be found easely.
+ */
 class TDocStd_XLinkRoot extends TDF_Attribute {
 }
 
+/**
+ * This tool class is used to copy the content of source label under target label. Only child labels and attributes of source are copied. attributes located out of source scope are not copied by this algorithm. Depending of the called method an external reference is set in the the target document to registred the externallink. Provide services to set, update and perform external references. Warning1: Nothing is provided in this class about the opportunity to copy, set a link or update it. Such decisions must be under application control. Warning2: If the document manages shapes, use after copy TNaming::ChangeShapes(target,M) to make copy of shapes.
+ */
 class TDocStd_XLinkTool {
 }
 
+/**
+ * This driver class provide services around function execution. One instance of this class is built for the whole session. The driver is bound to the DriverGUID in the DriverTable class. It allows you to create classes which inherit from this abstract class. These subclasses identify the various algorithms which can be applied to the data contained in the attributes of sub-labels of a model. A single instance of this class and each of its subclasses is built for the whole session.
+ */
 class TFunction_Driver extends Standard_Transient {
 }
 
+/**
+ * A container for instances of drivers. You create a new instance of TFunction_Driver and use the method AddDriver to load it into the driver table.
+ */
 class TFunction_DriverTable extends Standard_Transient {
 }
 
+/**
+ * Provides the following two services - a link to an evaluation driver - the means of providing a link between a function and an evaluation driver.
+ */
 class TFunction_Function extends TDF_Attribute {
 }
 
+/**
+ * Provides links between functions.
+ */
 class TFunction_GraphNode extends TDF_Attribute {
 }
 
@@ -25726,6 +33262,9 @@ class TFunction_HArray1OfDataMapOfGUIDDriver_3 extends TFunction_HArray1OfDataMa
 
 class TFunction_HArray1OfDataMapOfGUIDDriver_4 extends TFunction_HArray1OfDataMapOfGUIDDriver {}
 
+/**
+ * Interface class for usage of Function Mechanism
+ */
 class TFunction_IFunction {
 }
 
@@ -25733,6 +33272,9 @@ class TFunction_IFunction_1 extends TFunction_IFunction {}
 
 class TFunction_IFunction_2 extends TFunction_IFunction {}
 
+/**
+ * Iterator of the graph of functions
+ */
 class TFunction_Iterator {
 }
 
@@ -25740,21 +33282,36 @@ class TFunction_Iterator_1 extends TFunction_Iterator {}
 
 class TFunction_Iterator_2 extends TFunction_Iterator {}
 
+/**
+ * This class contains information which is written and read during the solving process. Information is divided in three groups.
+ */
 class TFunction_Logbook extends TDF_Attribute {
 }
 
+/**
+ * Keeps a scope of functions.
+ */
 class TFunction_Scope extends TDF_Attribute {
 }
 
+/**
+ * A topological attribute can be seen as a hook into the topological structure. To this hook, data can be attached and references defined. It is used for keeping and access to topological objects and their evolution. All topological objects are stored in the one user-protected TNaming_UsedShapes attribute at the root label of the data framework. This attribute contains map with all topological shapes, used in this document. To all other labels TNaming_NamedShape attribute can be added. This attribute contains references (hooks) to shapes from the TNaming_UsedShapes attribute and evolution of these shapes. TNaming_NamedShape attribute contains a set of pairs of hooks: old shape and new shape (see the figure below). It allows not only get the topological shapes by the labels, but also trace evolution of the shapes and correctly resolve dependent shapes by the changed one. If shape is just-created, then the old shape for accorded named shape is an empty shape. If a shape is deleted, then the new shape in this named shape is empty. Different algorithms may dispose sub-shapes of the result shape at the individual label depending on necessity: - If a sub-shape must have some extra attributes (material of each face or color of each edge). In this case a specific sub-shape is placed to the separate label (usually, sub-label of the result shape label) with all attributes of this sub-shape. - If topological naming is needed, a necessary and sufficient (for selected sub-shapes identification) set of sub-shapes is placed to the child labels of the result shape label. As usual, as far as basic solids and closed shells are concerned, all faces of the shape are disposed. Edges and vertices sub-shapes can be identified as intersection of contiguous faces. Modified/generated shapes may be placed to one named shape and identified as this named shape and source named shape that also can be identified with used algorithms. TNaming_NamedShape may contain a few pairs of hooks with the same evolution. In this case topology shape, which belongs to the named shape, is a compound of new shapes. The data model contains both the topology and the hooks, and functions handle both topological entities and hooks. Consider the case of a box function, which creates a solid with six faces and six hooks. Each hook is attached to a face. If you want, you can also have this function create hooks for edges and vertices as well as for faces. For the sake of simplicity though, let's limit the example. Not all functions can define explicit hooks for all topological entities they create, but all topological entities can be turned into hooks when necessary. This is where topological naming is necessary.
+ */
 class TNaming {
 }
 
+/**
+ * A tool to create and maintain topological attributes. Constructor creates an empty TNaming_NamedShape attribute at the given label. It allows adding "old shape" and "new shape" pairs with the specified evolution to this named shape. One evolution type per one builder must be used.
+ */
 class TNaming_Builder {
 }
 
 class TNaming_CopyShape {
 }
 
+/**
+ * This class provides default services for an AttributeDelta on a MODIFICATION action.
+ */
 class TNaming_DeltaOnModification extends TDF_DeltaOnModification {
 }
 
@@ -25768,6 +33325,9 @@ class TNaming_Identifier_1 extends TNaming_Identifier {}
 
 class TNaming_Identifier_2 extends TNaming_Identifier {}
 
+/**
+ * A tool to visit the contents of a named shape attribute. Pairs of shapes in the attribute are iterated, one being the pre-modification or the old shape, and the other the post-modification or the new shape. This allows you to have a full access to all contents of an attribute. If, on the other hand, you are only interested in topological entities stored in the attribute, you can use the functions GetShape and CurrentShape in TNaming_Tool.
+ */
 class TNaming_Iterator {
 }
 
@@ -25787,18 +33347,30 @@ class TNaming_IteratorOnShapesSet_2 extends TNaming_IteratorOnShapesSet {}
 class TNaming_Localizer {
 }
 
+/**
+ * store the arguments of Naming.
+ */
 class TNaming_Name {
 }
 
+/**
+ * The basis to define an attribute for the storage of topology and naming data. This attribute contains two parts: - The type of evolution, a term of the enumeration TNaming_Evolution - A list of pairs of shapes called the "old" shape and the "new" shape. The meaning depends on the type of evolution.
+ */
 class TNaming_NamedShape extends TDF_Attribute {
 }
 
+/**
+ * This attribute store the topological naming of any selected shape, when this shape is not already attached to a specific label. This class is also used to solve it when the argumentsof the toipological naming are modified.
+ */
 class TNaming_Naming extends TDF_Attribute {
 }
 
 class TNaming_NamingTool {
 }
 
+/**
+ * Iterates on all the descendants of a shape
+ */
 class TNaming_NewShapeIterator {
 }
 
@@ -25810,6 +33382,9 @@ class TNaming_NewShapeIterator_3 extends TNaming_NewShapeIterator {}
 
 class TNaming_NewShapeIterator_4 extends TNaming_NewShapeIterator {}
 
+/**
+ * Iterates on all the ascendants of a shape
+ */
 class TNaming_OldShapeIterator {
 }
 
@@ -25828,9 +33403,15 @@ class TNaming_RefShape_1 extends TNaming_RefShape {}
 
 class TNaming_RefShape_2 extends TNaming_RefShape {}
 
+/**
+ * To iterate on all the label which contained a given shape.
+ */
 class TNaming_SameShapeIterator {
 }
 
+/**
+ * this class manage a scope of labels ===================================
+ */
 class TNaming_Scope {
 }
 
@@ -25840,6 +33421,9 @@ class TNaming_Scope_2 extends TNaming_Scope {}
 
 class TNaming_Scope_3 extends TNaming_Scope {}
 
+/**
+ * This class provides a single API for selection of shapes. This involves both identification and selection of shapes in the data framework. If the selected shape is modified, this selector will solve its identifications. This class is the user interface for topological naming resources. * The <IsIdentified> method returns (if exists) the NamedShape which contains a given shape. The definition of an identified shape is : a Shape handled by a NamedShape (this shape is the only one stored) , which has the TNaming_PRImITIVE evolution
+ */
 class TNaming_Selector {
 }
 
@@ -25850,24 +33434,45 @@ class TNaming_ShapesSet_1 extends TNaming_ShapesSet {}
 
 class TNaming_ShapesSet_2 extends TNaming_ShapesSet {}
 
+/**
+ * A tool to get information on the topology of a named shape attribute. This information is typically a TopoDS_Shape object. Using this tool, relations between named shapes are also accessible.
+ */
 class TNaming_Tool {
 }
 
+/**
+ * tool to copy underlying TShape of a Shape. The TranslateTool class is provided to support the translation of topological data structures Transient to Transient.
+ */
 class TNaming_TranslateTool extends Standard_Transient {
 }
 
+/**
+ * only for Shape Copy test - to move in DNaming
+ */
 class TNaming_Translator {
 }
 
+/**
+ * Global attribute located under root label to store all the shapes handled by the framework Set of Shapes Used in a Data from TDF Only one instance by Data, it always Stored as Attribute of The Root.
+ */
 class TNaming_UsedShapes extends TDF_Attribute {
 }
 
+/**
+ * This is a base class for OCAF based TObj models with declared virtual methods
+ */
 class TObj_Application extends TDocStd_Application {
 }
 
+/**
+ * This class provides interface to the static data to be used during save or load models.
+ */
 class TObj_Assistant {
 }
 
+/**
+ * This class provides consistency check of the TObj model. It collects all inconsistencies in the status bits and prepaires messages to be sent using SendStatusMessages (SendMessages) method. It supports also the fix mode, in which some inconsistencies are corrected.
+ */
 class TObj_CheckModel extends Message_Algorithm {
 }
 
@@ -25878,51 +33483,99 @@ class TObj_HSequenceOfObject_1 extends TObj_HSequenceOfObject {}
 
 class TObj_HSequenceOfObject_2 extends TObj_HSequenceOfObject {}
 
+/**
+ * This class is partition is predefined hidden flag
+ */
 class TObj_HiddenPartition extends TObj_Partition {
 }
 
+/**
+ * This class is a basis for OCAF based iterators.
+ */
 class TObj_LabelIterator extends TObj_ObjectIterator {
 }
 
+/**
+ * Base class for OCAF based models. Defines common behaviour for all models based on TObject classes, basic services to access model objects and common operations with the model. Provides default implementation for many methods.
+ */
 class TObj_Model extends Standard_Transient {
 }
 
+/**
+ * This class provides an iterator by all objects in the model.
+ */
 class TObj_ModelIterator extends TObj_ObjectIterator {
 }
 
+/**
+ * Basis class for transient objects in OCAF-based models
+ */
 class TObj_Object extends Standard_Transient {
 }
 
+/**
+ * This class provides an iterator by objects in a partition. (implements TObj_ObjectIterator interface)
+ */
 class TObj_ObjectIterator extends Standard_Transient {
 }
 
+/**
+ * This class provides an iterator by objects in a partition. (implements TObj_ObjectIterator interface)
+ */
 class TObj_OcafObjectIterator extends TObj_LabelIterator {
 }
 
+/**
+ * This class privides tool handling one of partitions (the set of homogenious elements) in the OCAF based model`s data structure
+ */
 class TObj_Partition extends TObj_Object {
 }
 
+/**
+ * This class is intended to be a root of tools (one per class) to manage persistence of objects inherited from TObj_Object It provides a mechanism to recover correctly typed objects (subtypes of TObj_Object) out of their persistent names
+ */
 class TObj_Persistence {
 }
 
+/**
+ * This class provides an iterator by references of the object (implements TObj_ReferenceIterator interface)
+ */
 class TObj_ReferenceIterator extends TObj_LabelIterator {
 }
 
+/**
+ * This class is an iterator on sequence
+ */
 class TObj_SequenceIterator extends TObj_ObjectIterator {
 }
 
+/**
+ * OCAF Attribute to store a set of positive integer values in the OCAF tree. Each value is identified by ID (positive integer). The supporting underlying data structure is NCollection_SparseArray of integers.
+ */
 class TObj_TIntSparseArray extends TDF_Attribute {
 }
 
+/**
+ * Attribute to store OCAF-based models in OCAF tree The persistency mechanism of the TObj_TModel allowes to save and restore various types of models without recompilation of the schema
+ */
 class TObj_TModel extends TDF_Attribute {
 }
 
+/**
+ * This class provides OCAF Attribute to storing the unique names of object in model.
+ */
 class TObj_TNameContainer extends TDF_Attribute {
 }
 
+/**
+ * Purpose: OCAF Attribute to storing objects (interfaces) of OCAF-based modelers in the OCAF tree. The persistency mechanism of the TObj_TObject allowes to save and restore objects of various subtypes without recompilation of the schema
+ */
 class TObj_TObject extends TDF_Attribute {
 }
 
+/**
+ * Attribute for storing references to the objects which implement TObj_Object interface in the OCAF tree. Its persistency mechanism provides transparent method for storing cross-model references. Each reference, when created, registers itself in the referred object, to support back references
+ */
 class TObj_TReference extends TDF_Attribute {
 }
 
@@ -25945,6 +33598,9 @@ class TShort_HSequenceOfShortReal_1 extends TShort_HSequenceOfShortReal {}
 
 class TShort_HSequenceOfShortReal_2 extends TShort_HSequenceOfShortReal {}
 
+/**
+ * This package gives resources for Topology oriented applications such as : Topological Data Structure, Topological Algorithms.
+ */
 class TopAbs {
 }
 
@@ -25955,12 +33611,21 @@ class TopBas_TestInterference_1 extends TopBas_TestInterference {}
 
 class TopBas_TestInterference_2 extends TopBas_TestInterference {}
 
+/**
+ * TheEdgeFaceTransition is an algorithm to compute the cumulated transition for interferences on an edge.
+ */
 class TopCnx_EdgeFaceTransition {
 }
 
+/**
+ * This package provides basic tools to explore the topological data structures.
+ */
 class TopExp {
 }
 
+/**
+ * An Explorer is a Tool to visit a Topological Data Structure form the TopoDS package.
+ */
 class TopExp_Explorer {
 }
 
@@ -25968,6 +33633,9 @@ class TopExp_Explorer_1 extends TopExp_Explorer {}
 
 class TopExp_Explorer_2 extends TopExp_Explorer {}
 
+/**
+ * Describes a coordinate transformation, i.e. a change to an elementary 3D coordinate system, or position in 3D space. A Datum3D is always described relative to the default datum. The default datum is described relative to itself: its origin is (0,0,0), and its axes are (1,0,0) (0,1,0) (0,0,1).
+ */
 class TopLoc_Datum3D extends Standard_Transient {
 }
 
@@ -25975,9 +33643,15 @@ class TopLoc_Datum3D_1 extends TopLoc_Datum3D {}
 
 class TopLoc_Datum3D_2 extends TopLoc_Datum3D {}
 
+/**
+ * An ItemLocation is an elementary coordinate system in a Location.
+ */
 class TopLoc_ItemLocation {
 }
 
+/**
+ * A Location is a composite transition. It comprises a series of elementary reference coordinates, i.e. objects of type TopLoc_Datum3D, and the powers to which these objects are raised.
+ */
 class TopLoc_Location {
 }
 
@@ -25990,6 +33664,9 @@ class TopLoc_Location_3 extends TopLoc_Location {}
 class TopLoc_SListNodeOfItemLocation extends Standard_Transient {
 }
 
+/**
+ * An SListOfItemLocation is a LISP like list of Items. An SListOfItemLocation is : . Empty. . Or it has a Value and a Tail which is an other SListOfItemLocation.
+ */
 class TopLoc_SListOfItemLocation {
 }
 
@@ -26001,6 +33678,9 @@ class TopLoc_SListOfItemLocation_3 extends TopLoc_SListOfItemLocation {}
 
 class TopLoc_SListOfItemLocation_4 extends TopLoc_SListOfItemLocation {}
 
+/**
+ * This package provides the topological operations on the BRep data structure.
+ */
 class TopOpeBRep {
 }
 
@@ -26011,6 +33691,9 @@ class TopOpeBRepBuild_Area1dBuilder_1 extends TopOpeBRepBuild_Area1dBuilder {}
 
 class TopOpeBRepBuild_Area1dBuilder_2 extends TopOpeBRepBuild_Area1dBuilder {}
 
+/**
+ * The Area2dBuilder algorithm is used to construct Faces from a LoopSet, where the Loop is the composite topological object of the boundary, here wire or block of edges. The LoopSet gives an iteration on Loops. For each Loop it indicates if it is on the boundary (wire) or if it results from an interference (block of edges). The result of the Area2dBuilder is an iteration on areas. An area is described by a set of Loops.
+ */
 class TopOpeBRepBuild_Area2dBuilder extends TopOpeBRepBuild_AreaBuilder {
 }
 
@@ -26018,6 +33701,9 @@ class TopOpeBRepBuild_Area2dBuilder_1 extends TopOpeBRepBuild_Area2dBuilder {}
 
 class TopOpeBRepBuild_Area2dBuilder_2 extends TopOpeBRepBuild_Area2dBuilder {}
 
+/**
+ * The Area3dBuilder algorithm is used to construct Solids from a LoopSet, where the Loop is the composite topological object of the boundary, here wire or block of edges. The LoopSet gives an iteration on Loops. For each Loop it indicates if it is on the boundary (wire) or if it results from an interference (block of edges). The result of the Area3dBuilder is an iteration on areas. An area is described by a set of Loops.
+ */
 class TopOpeBRepBuild_Area3dBuilder extends TopOpeBRepBuild_AreaBuilder {
 }
 
@@ -26025,6 +33711,9 @@ class TopOpeBRepBuild_Area3dBuilder_1 extends TopOpeBRepBuild_Area3dBuilder {}
 
 class TopOpeBRepBuild_Area3dBuilder_2 extends TopOpeBRepBuild_Area3dBuilder {}
 
+/**
+ * The AreaBuilder algorithm is used to reconstruct complex topological objects as Faces or Solids. * Loop is the composite topological object of the boundary. Wire for a Face. Shell for a Solid. * LoopSet is a tool describing the object to build. It gives an iteration on Loops. For each Loop it tells if it is on the boundary or if it is an interference. * LoopClassifier is an algorithm used to test if a Loop is inside another Loop. The result of the reconstruction is an iteration on the reconstructed areas. An area is described by a set of Loops. A AreaBuilder is built with : - a LoopSet describing the object to reconstruct. - a LoopClassifier providing the classification algorithm.
+ */
 class TopOpeBRepBuild_AreaBuilder {
 }
 
@@ -26039,6 +33728,9 @@ class TopOpeBRepBuild_BlockBuilder_1 extends TopOpeBRepBuild_BlockBuilder {}
 
 class TopOpeBRepBuild_BlockBuilder_2 extends TopOpeBRepBuild_BlockBuilder {}
 
+/**
+ * Iterator on the elements of a block.
+ */
 class TopOpeBRepBuild_BlockIterator {
 }
 
@@ -26053,6 +33745,9 @@ class TopOpeBRepBuild_BuilderON_1 extends TopOpeBRepBuild_BuilderON {}
 
 class TopOpeBRepBuild_BuilderON_2 extends TopOpeBRepBuild_BuilderON {}
 
+/**
+ * classify composite Loops, i.e, loops that can be either a Shape, or a block of Elements.
+ */
 class TopOpeBRepBuild_CompositeClassifier extends TopOpeBRepBuild_LoopClassifier {
 }
 
@@ -26070,6 +33765,9 @@ class TopOpeBRepBuild_EdgeBuilder_1 extends TopOpeBRepBuild_EdgeBuilder {}
 
 class TopOpeBRepBuild_EdgeBuilder_2 extends TopOpeBRepBuild_EdgeBuilder {}
 
+/**
+ * The FaceAreaBuilder algorithm is used to construct Faces from a LoopSet, where the Loop is the composite topological object of the boundary, here wire or block of edges. The LoopSet gives an iteration on Loops. For each Loop it indicates if it is on the boundary (wire) or if it results from an interference (block of edges). The result of the FaceAreaBuilder is an iteration on areas. An area is described by a set of Loops.
+ */
 class TopOpeBRepBuild_FaceAreaBuilder extends TopOpeBRepBuild_Area2dBuilder {
 }
 
@@ -26108,9 +33806,15 @@ class TopOpeBRepBuild_GTopo_1 extends TopOpeBRepBuild_GTopo {}
 
 class TopOpeBRepBuild_GTopo_2 extends TopOpeBRepBuild_GTopo {}
 
+/**
+ * The HBuilder algorithm constructs topological objects from an existing topology and new geometries attached to the topology. It is used to construct the result of a topological operation; the existing topologies are the parts involved in the topological operation and the new geometries are the intersection lines and points.
+ */
 class TopOpeBRepBuild_HBuilder extends Standard_Transient {
 }
 
+/**
+ * a Loop is an existing shape (Shell,Wire) or a set of shapes (Faces,Edges) which are connex. a set of connex shape is represented by a BlockIterator
+ */
 class TopOpeBRepBuild_Loop extends Standard_Transient {
 }
 
@@ -26118,6 +33822,9 @@ class TopOpeBRepBuild_Loop_1 extends TopOpeBRepBuild_Loop {}
 
 class TopOpeBRepBuild_Loop_2 extends TopOpeBRepBuild_Loop {}
 
+/**
+ * classify loops in order to build Areas
+ */
 class TopOpeBRepBuild_LoopClassifier {
 }
 
@@ -26127,12 +33834,21 @@ class TopOpeBRepBuild_LoopSet {
 class TopOpeBRepBuild_Pave extends TopOpeBRepBuild_Loop {
 }
 
+/**
+ * This class compares vertices on an edge.
+ */
 class TopOpeBRepBuild_PaveClassifier extends TopOpeBRepBuild_LoopClassifier {
 }
 
+/**
+ * class providing an exploration of a set of vertices to build edges. It is similar to LoopSet from TopOpeBRepBuild where Loop is Pave.
+ */
 class TopOpeBRepBuild_PaveSet extends TopOpeBRepBuild_LoopSet {
 }
 
+/**
+ * represent shape + a list of shape
+ */
 class TopOpeBRepBuild_ShapeListOfShape {
 }
 
@@ -26142,12 +33858,21 @@ class TopOpeBRepBuild_ShapeListOfShape_2 extends TopOpeBRepBuild_ShapeListOfShap
 
 class TopOpeBRepBuild_ShapeListOfShape_3 extends TopOpeBRepBuild_ShapeListOfShape {}
 
+/**
+ * Auxiliary class providing an exploration of a set of shapes to build faces or solids. To build faces : shapes are wires, elements are edges. To build solids : shapes are shells, elements are faces. The ShapeSet stores a list of shapes, a list of elements to start reconstructions, and a map to search neighbours. The map stores the connection between elements through subshapes of type <SubShapeType> given in constructor. <SubShapeType> is : - TopAbs_VERTEX to connect edges - TopAbs_EDGE to connect faces
+ */
 class TopOpeBRepBuild_ShapeSet {
 }
 
+/**
+ * Classify faces and shells. shapes are Shells, Elements are Faces.
+ */
 class TopOpeBRepBuild_ShellFaceClassifier extends TopOpeBRepBuild_CompositeClassifier {
 }
 
+/**
+ * a bound is a shell, a boundelement is a face. The ShapeSet stores : - a list of shell (bounds), - a list of face (boundelements) to start reconstructions, - a map of edge giving the list of face incident to an edge.
+ */
 class TopOpeBRepBuild_ShellFaceSet extends TopOpeBRepBuild_ShapeSet {
 }
 
@@ -26155,9 +33880,15 @@ class TopOpeBRepBuild_ShellFaceSet_1 extends TopOpeBRepBuild_ShellFaceSet {}
 
 class TopOpeBRepBuild_ShellFaceSet_2 extends TopOpeBRepBuild_ShellFaceSet {}
 
+/**
+ * This class builds solids from a set of shells SSh and a solid F.
+ */
 class TopOpeBRepBuild_ShellToSolid {
 }
 
+/**
+ * The SolidAreaBuilder algorithm is used to construct Solids from a LoopSet, where the Loop is the composite topological object of the boundary, here wire or block of edges. The LoopSet gives an iteration on Loops. For each Loop it indicates if it is on the boundary (wire) or if it results from an interference (block of edges). The result of the SolidAreaBuilder is an iteration on areas. An area is described by a set of Loops.
+ */
 class TopOpeBRepBuild_SolidAreaBuilder extends TopOpeBRepBuild_Area3dBuilder {
 }
 
@@ -26172,6 +33903,9 @@ class TopOpeBRepBuild_SolidBuilder_1 extends TopOpeBRepBuild_SolidBuilder {}
 
 class TopOpeBRepBuild_SolidBuilder_2 extends TopOpeBRepBuild_SolidBuilder {}
 
+/**
+ * Auxiliary methods used in TopOpeBRepBuild_Builder1 class
+ */
 class TopOpeBRepBuild_Tools {
 }
 
@@ -26181,21 +33915,36 @@ class TopOpeBRepBuild_Tools2d {
 class TopOpeBRepBuild_VertexInfo {
 }
 
+/**
+ * Classify edges and wires. shapes are Wires, Element are Edge.
+ */
 class TopOpeBRepBuild_WireEdgeClassifier extends TopOpeBRepBuild_CompositeClassifier {
 }
 
+/**
+ * a bound is a wire, a boundelement is an edge. The ShapeSet stores : - a list of wire (bounds), - a list of edge (boundelements) to start reconstructions, - a map of vertex giving the list of edge incident to a vertex.
+ */
 class TopOpeBRepBuild_WireEdgeSet extends TopOpeBRepBuild_ShapeSet {
 }
 
+/**
+ * This class builds faces from a set of wires SW and a face F. The face must have and underlying surface, say S. All of the edges of all of the wires must have a 2d representation on surface S (except if S is planar)
+ */
 class TopOpeBRepBuild_WireToFace {
 }
 
+/**
+ * This package provides services used by the TopOpeBRepBuild package performing topological operations on the BRep data structure.
+ */
 class TopOpeBRepDS {
 }
 
 class TopOpeBRepDS_Association extends Standard_Transient {
 }
 
+/**
+ * Provides a Tool to build topologies. Used to instantiate the Builder algorithm.
+ */
 class TopOpeBRepDS_BuildTool {
 }
 
@@ -26205,6 +33954,9 @@ class TopOpeBRepDS_BuildTool_2 extends TopOpeBRepDS_BuildTool {}
 
 class TopOpeBRepDS_BuildTool_3 extends TopOpeBRepDS_BuildTool {}
 
+/**
+ * a tool verifing integrity and structure of DS
+ */
 class TopOpeBRepDS_Check extends Standard_Transient {
 }
 
@@ -26212,6 +33964,9 @@ class TopOpeBRepDS_Check_1 extends TopOpeBRepDS_Check {}
 
 class TopOpeBRepDS_Check_2 extends TopOpeBRepDS_Check {}
 
+/**
+ * A Geom curve and a tolerance.
+ */
 class TopOpeBRepDS_Curve {
 }
 
@@ -26236,24 +33991,42 @@ class TopOpeBRepDS_CurveExplorer_2 extends TopOpeBRepDS_CurveExplorer {}
 class TopOpeBRepDS_CurveIterator extends TopOpeBRepDS_InterferenceIterator {
 }
 
+/**
+ * An interference with a parameter.
+ */
 class TopOpeBRepDS_CurvePointInterference extends TopOpeBRepDS_Interference {
 }
 
+/**
+ * The DataStructure stores :
+ */
 class TopOpeBRepDS_DataStructure {
 }
 
 class TopOpeBRepDS_Dumper {
 }
 
+/**
+ * EdgeInterferenceReducer
+ */
 class TopOpeBRepDS_EIR {
 }
 
+/**
+ * a tool computing edge / face complex transition, Interferences of edge reference are given by I = (T on face, G = point or vertex, S = edge)
+ */
 class TopOpeBRepDS_Edge3dInterferenceTool {
 }
 
+/**
+ * a tool computing complex transition on Edge.
+ */
 class TopOpeBRepDS_EdgeInterferenceTool {
 }
 
+/**
+ * An interference with a parameter (ShapeShapeInterference).
+ */
 class TopOpeBRepDS_EdgeVertexInterference extends TopOpeBRepDS_ShapeShapeInterference {
 }
 
@@ -26268,12 +34041,21 @@ class TopOpeBRepDS_Explorer_1 extends TopOpeBRepDS_Explorer {}
 
 class TopOpeBRepDS_Explorer_2 extends TopOpeBRepDS_Explorer {}
 
+/**
+ * FaceInterferenceReducer
+ */
 class TopOpeBRepDS_FIR {
 }
 
+/**
+ * ShapeShapeInterference
+ */
 class TopOpeBRepDS_FaceEdgeInterference extends TopOpeBRepDS_ShapeShapeInterference {
 }
 
+/**
+ * a tool computing complex transition on Face.
+ */
 class TopOpeBRepDS_FaceInterferenceTool {
 }
 
@@ -26290,6 +34072,9 @@ class TopOpeBRepDS_GapTool_1 extends TopOpeBRepDS_GapTool {}
 
 class TopOpeBRepDS_GapTool_2 extends TopOpeBRepDS_GapTool {}
 
+/**
+ * mother-class of SurfaceData, CurveData, PointData
+ */
 class TopOpeBRepDS_GeometryData {
 }
 
@@ -26311,6 +34096,9 @@ class TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference_4 extends TopOpeB
 class TopOpeBRepDS_HDataStructure extends Standard_Transient {
 }
 
+/**
+ * An interference is the description of the attachment of a new geometry on a geometry. For example an intersection point on an Edge or on a Curve.
+ */
 class TopOpeBRepDS_Interference extends Standard_Transient {
 }
 
@@ -26320,6 +34108,9 @@ class TopOpeBRepDS_Interference_2 extends TopOpeBRepDS_Interference {}
 
 class TopOpeBRepDS_Interference_3 extends TopOpeBRepDS_Interference {}
 
+/**
+ * Iterate on interferences of a list, matching conditions on interferences. Nota : inheritance of ListIteratorOfListOfInterference from TopOpeBRepDS has not been done because of the impossibility of naming the classical More, Next methods which are declared as static in TCollection_ListIteratorOfList ... . ListIteratorOfList has benn placed as a field of InterferenceIterator.
+ */
 class TopOpeBRepDS_InterferenceIterator {
 }
 
@@ -26330,12 +34121,18 @@ class TopOpeBRepDS_InterferenceIterator_2 extends TopOpeBRepDS_InterferenceItera
 class TopOpeBRepDS_InterferenceTool {
 }
 
+/**
+ * represent a list of shape
+ */
 class TopOpeBRepDS_ListOfShapeOn1State {
 }
 
 class TopOpeBRepDS_Marker extends Standard_Transient {
 }
 
+/**
+ * A Geom point and a tolerance.
+ */
 class TopOpeBRepDS_Point {
 }
 
@@ -26364,21 +34161,33 @@ class TopOpeBRepDS_PointExplorer_2 extends TopOpeBRepDS_PointExplorer {}
 class TopOpeBRepDS_PointIterator extends TopOpeBRepDS_InterferenceIterator {
 }
 
+/**
+ * reduce interferences of a data structure (HDS) used in topological operations.
+ */
 class TopOpeBRepDS_Reducer {
 }
 
 class TopOpeBRepDS_ShapeData {
 }
 
+/**
+ * Interference
+ */
 class TopOpeBRepDS_ShapeShapeInterference extends TopOpeBRepDS_Interference {
 }
 
 class TopOpeBRepDS_ShapeWithState {
 }
 
+/**
+ * Interference
+ */
 class TopOpeBRepDS_SolidSurfaceInterference extends TopOpeBRepDS_Interference {
 }
 
+/**
+ * A Geom surface and a tolerance.
+ */
 class TopOpeBRepDS_Surface {
 }
 
@@ -26388,6 +34197,9 @@ class TopOpeBRepDS_Surface_2 extends TopOpeBRepDS_Surface {}
 
 class TopOpeBRepDS_Surface_3 extends TopOpeBRepDS_Surface {}
 
+/**
+ * an interference with a 2d curve
+ */
 class TopOpeBRepDS_SurfaceCurveInterference extends TopOpeBRepDS_Interference {
 }
 
@@ -26429,9 +34241,15 @@ class TopOpeBRepDS_Transition_2 extends TopOpeBRepDS_Transition {}
 
 class TopOpeBRepDS_Transition_3 extends TopOpeBRepDS_Transition {}
 
+/**
+ * This package provides services used by the TopOpeBRep package performing topological operations on the BRep data structure.
+ */
 class TopOpeBRepTool {
 }
 
+/**
+ * Describes the ancestors tool needed by the class DSFiller from TopOpeInter.
+ */
 class TopOpeBRepTool_AncestorsTool {
 }
 
@@ -26452,6 +34270,9 @@ class TopOpeBRepTool_C2DF_2 extends TopOpeBRepTool_C2DF {}
 class TopOpeBRepTool_CLASSI {
 }
 
+/**
+ * Fref is built on x-periodic surface (x=u,v). S built on Fref's geometry, should be UVClosed.
+ */
 class TopOpeBRepTool_CORRISO {
 }
 
@@ -26468,6 +34289,9 @@ class TopOpeBRepTool_CurveTool_2 extends TopOpeBRepTool_CurveTool {}
 
 class TopOpeBRepTool_CurveTool_3 extends TopOpeBRepTool_CurveTool {}
 
+/**
+ * This class can detect vertices in a face that can be considered useless and then perform the fuse of the edges and remove the useless vertices. By useles vertices, we mean : * vertices that have exactly two connex edges * the edges connex to the vertex must have exactly the same 2 connex faces . * The edges connex to the vertex must have the same geometric support.
+ */
 class TopOpeBRepTool_FuseEdges {
 }
 
@@ -26477,6 +34301,9 @@ class TopOpeBRepTool_GeomTool {
 class TopOpeBRepTool_HBoxTool extends Standard_Transient {
 }
 
+/**
+ * remove from a shape, the internal edges that are not connected to any face in the shape. We can get the list of the edges as a DataMapOfShapeListOfShape with a Face of the Shape as the key and a list of internal edges as the value. The list of internal edges means edges that are not connected to any face in the shape.
+ */
 class TopOpeBRepTool_PurgeInternalEdges {
 }
 
@@ -26493,6 +34320,9 @@ class TopOpeBRepTool_ShapeClassifier_1 extends TopOpeBRepTool_ShapeClassifier {}
 
 class TopOpeBRepTool_ShapeClassifier_2 extends TopOpeBRepTool_ShapeClassifier {}
 
+/**
+ * Extends TopExp_Explorer by counting index of current item (for tracing and debug)
+ */
 class TopOpeBRepTool_ShapeExplorer extends TopExp_Explorer {
 }
 
@@ -26532,12 +34362,21 @@ class TopOpeBRep_Bipoint_1 extends TopOpeBRep_Bipoint {}
 
 class TopOpeBRep_Bipoint_2 extends TopOpeBRep_Bipoint {}
 
+/**
+ * Provides class methods to fill a datastructure with results of intersections.
+ */
 class TopOpeBRep_DSFiller {
 }
 
+/**
+ * Fills a TopOpeBRepDS_DataStructure with Edge/Edge instersection data described by TopOpeBRep_EdgesIntersector.
+ */
 class TopOpeBRep_EdgesFiller {
 }
 
+/**
+ * Describes the intersection of two edges on the same surface
+ */
 class TopOpeBRep_EdgesIntersector {
 }
 
@@ -26550,15 +34389,27 @@ class TopOpeBRep_FFTransitionTool {
 class TopOpeBRep_FaceEdgeFiller {
 }
 
+/**
+ * Describes the intersection of a face and an edge.
+ */
 class TopOpeBRep_FaceEdgeIntersector {
 }
 
+/**
+ * Fills a DataStructure from TopOpeBRepDS with the result of Face/Face instersection described by FacesIntersector from TopOpeBRep. if the faces have same Domain, record it in the DS. else record lines and points and attach list of interferences to the faces, the lines and the edges.
+ */
 class TopOpeBRep_FacesFiller {
 }
 
+/**
+ * Describes the intersection of two faces.
+ */
 class TopOpeBRep_FacesIntersector {
 }
 
+/**
+ * Provide services needed by the DSFiller
+ */
 class TopOpeBRep_GeomTool {
 }
 
@@ -26599,15 +34450,27 @@ class TopOpeBRep_Point2d {
 class TopOpeBRep_PointClassifier {
 }
 
+/**
+ * Provide services needed by the Fillers
+ */
 class TopOpeBRep_PointGeomTool {
 }
 
+/**
+ * Intersect two shapes.
+ */
 class TopOpeBRep_ShapeIntersector {
 }
 
+/**
+ * Intersect two shapes.
+ */
 class TopOpeBRep_ShapeIntersector2d {
 }
 
+/**
+ * Find, among the subshapes SS of a reference shape RS, the ones which 3D box interfers with the box of a shape S (SS and S are of the same type).
+ */
 class TopOpeBRep_ShapeScanner {
 }
 
@@ -26634,6 +34497,9 @@ class TopOpeBRep_WPointInterIterator_1 extends TopOpeBRep_WPointInterIterator {}
 
 class TopOpeBRep_WPointInterIterator_2 extends TopOpeBRep_WPointInterIterator {}
 
+/**
+ * The TopTools package provides utilities for the topological data structure.
+ */
 class TopTools {
 }
 
@@ -26648,33 +34514,60 @@ class TopTools_HArray1OfListOfShape_3 extends TopTools_HArray1OfListOfShape {}
 
 class TopTools_HArray1OfListOfShape_4 extends TopTools_HArray1OfListOfShape {}
 
+/**
+ * The class LocationSet stores a set of location in a relocatable state.
+ */
 class TopTools_LocationSet {
 }
 
+/**
+ * Class TopTools_MutexForShapeProvider This class is used to create and store mutexes associated with shapes.
+ */
 class TopTools_MutexForShapeProvider {
 }
 
 class TopTools_OrientedShapeMapHasher {
 }
 
+/**
+ * Hash tool, used for generating maps of shapes in topology.
+ */
 class TopTools_ShapeMapHasher {
 }
 
+/**
+ * A ShapeSets contains a Shape and all its sub-shapes and locations. It can be dump, write and read.
+ */
 class TopTools_ShapeSet {
 }
 
+/**
+ * This algorithm is used to compute the transition of a Curve intersecting a curvilinear boundary.
+ */
 class TopTrans_CurveTransition {
 }
 
+/**
+ * This algorithm is used to compute the transition of a 3D surface intersecting a topological surfacic boundary on a 3D curve ( intersection curve ). The boundary is described by a set of faces each face is described by - its support surface, - an orientation defining its matter side. The geometric elements are described locally at the intersection point by a second order development. A surface is described by the normal vector, the principal directions and the principal curvatures. A curve is described by the tangent, the normal and the curvature. The algorithm keeps track of the two faces elements closest to the part of the curve "before" and "after" the intersection, these two elements are updated for each new face. The position of the curve can be computed when at least one surface element has been given, this position is "In","Out" or "On" for the part of the curve "Before" or "After" the intersection.
+ */
 class TopTrans_SurfaceTransition {
 }
 
+/**
+ * Provides methods to cast objects of class TopoDS_Shape to be onjects of more specialized sub-classes. Types are verified, thus in the example below, the first two blocks are correct but the third is rejected by the compiler.
+ */
 class TopoDS {
 }
 
+/**
+ * This package implements the mapping between CAS.CAD Shape representation and AP214 Shape Representation. The target schema is pms_c4 (a subset of AP214)
+ */
 class TopoDSToStep {
 }
 
+/**
+ * This builder Class provides services to build a ProSTEP Shape model from a Cas.Cad BRep.
+ */
 class TopoDSToStep_Builder extends TopoDSToStep_Root {
 }
 
@@ -26682,12 +34575,21 @@ class TopoDSToStep_Builder_1 extends TopoDSToStep_Builder {}
 
 class TopoDSToStep_Builder_2 extends TopoDSToStep_Builder {}
 
+/**
+ * This Tool Class provides Information about Faceted Shapes to be mapped to STEP.
+ */
 class TopoDSToStep_FacetedTool {
 }
 
+/**
+ * This class implements the mapping between classes Solid from TopoDS and BrepWithVoids from StepShape. All the topology and geometry comprised into the shell or the solid are taken into account and translated.
+ */
 class TopoDSToStep_MakeBrepWithVoids extends TopoDSToStep_Root {
 }
 
+/**
+ * This class implements the mapping between classes Shell or Solid from TopoDS and FacetedBrep from StepShape. All the topology and geometry comprised into the shell or the solid are taken into account and translated.
+ */
 class TopoDSToStep_MakeFacetedBrep extends TopoDSToStep_Root {
 }
 
@@ -26695,12 +34597,21 @@ class TopoDSToStep_MakeFacetedBrep_1 extends TopoDSToStep_MakeFacetedBrep {}
 
 class TopoDSToStep_MakeFacetedBrep_2 extends TopoDSToStep_MakeFacetedBrep {}
 
+/**
+ * This class implements the mapping between classes Solid from TopoDS and FacetedBrepAndBrepWithVoids from StepShape. All the topology and geometry comprised into the shell or the solid are taken into account and translated.
+ */
 class TopoDSToStep_MakeFacetedBrepAndBrepWithVoids extends TopoDSToStep_Root {
 }
 
+/**
+ * This class implements the mapping between a Shape from TopoDS and a GeometricCurveSet from StepShape in order to create a GeometricallyBoundedWireframeRepresentation.
+ */
 class TopoDSToStep_MakeGeometricCurveSet extends TopoDSToStep_Root {
 }
 
+/**
+ * This class implements the mapping between classes Shell or Solid from TopoDS and ManifoldSolidBrep from StepShape. All the topology and geometry comprised into the shell or the solid are taken into account and translated.
+ */
 class TopoDSToStep_MakeManifoldSolidBrep extends TopoDSToStep_Root {
 }
 
@@ -26708,6 +34619,9 @@ class TopoDSToStep_MakeManifoldSolidBrep_1 extends TopoDSToStep_MakeManifoldSoli
 
 class TopoDSToStep_MakeManifoldSolidBrep_2 extends TopoDSToStep_MakeManifoldSolidBrep {}
 
+/**
+ * This class implements the mapping between classes Face, Shell or Solid from TopoDS and ShellBasedSurfaceModel from StepShape. All the topology and geometry comprised into the shape are taken into account and translated.
+ */
 class TopoDSToStep_MakeShellBasedSurfaceModel extends TopoDSToStep_Root {
 }
 
@@ -26717,6 +34631,9 @@ class TopoDSToStep_MakeShellBasedSurfaceModel_2 extends TopoDSToStep_MakeShellBa
 
 class TopoDSToStep_MakeShellBasedSurfaceModel_3 extends TopoDSToStep_MakeShellBasedSurfaceModel {}
 
+/**
+ * This class implements the mapping between classes Edge from TopoDS and TopologicalRepresentationItem from StepShape.
+ */
 class TopoDSToStep_MakeStepEdge extends TopoDSToStep_Root {
 }
 
@@ -26724,6 +34641,9 @@ class TopoDSToStep_MakeStepEdge_1 extends TopoDSToStep_MakeStepEdge {}
 
 class TopoDSToStep_MakeStepEdge_2 extends TopoDSToStep_MakeStepEdge {}
 
+/**
+ * This class implements the mapping between classes Face from TopoDS and TopologicalRepresentationItem from StepShape.
+ */
 class TopoDSToStep_MakeStepFace extends TopoDSToStep_Root {
 }
 
@@ -26731,6 +34651,9 @@ class TopoDSToStep_MakeStepFace_1 extends TopoDSToStep_MakeStepFace {}
 
 class TopoDSToStep_MakeStepFace_2 extends TopoDSToStep_MakeStepFace {}
 
+/**
+ * This class implements the mapping between classes Vertex from TopoDS and TopologicalRepresentationItem from StepShape.
+ */
 class TopoDSToStep_MakeStepVertex extends TopoDSToStep_Root {
 }
 
@@ -26738,6 +34661,9 @@ class TopoDSToStep_MakeStepVertex_1 extends TopoDSToStep_MakeStepVertex {}
 
 class TopoDSToStep_MakeStepVertex_2 extends TopoDSToStep_MakeStepVertex {}
 
+/**
+ * This class implements the mapping between classes Wire from TopoDS and TopologicalRepresentationItem from StepShape.
+ */
 class TopoDSToStep_MakeStepWire extends TopoDSToStep_Root {
 }
 
@@ -26745,9 +34671,15 @@ class TopoDSToStep_MakeStepWire_1 extends TopoDSToStep_MakeStepWire {}
 
 class TopoDSToStep_MakeStepWire_2 extends TopoDSToStep_MakeStepWire {}
 
+/**
+ * This class implements the common services for all classes of TopoDSToStep which report error.
+ */
 class TopoDSToStep_Root {
 }
 
+/**
+ * This Tool Class provides Information to build a ProSTEP Shape model from a Cas.Cad BRep.
+ */
 class TopoDSToStep_Tool {
 }
 
@@ -26755,6 +34687,9 @@ class TopoDSToStep_Tool_1 extends TopoDSToStep_Tool {}
 
 class TopoDSToStep_Tool_2 extends TopoDSToStep_Tool {}
 
+/**
+ * This builder Class provides services to build a ProSTEP Wireframemodel from a Cas.Cad BRep.
+ */
 class TopoDSToStep_WireframeBuilder extends TopoDSToStep_Root {
 }
 
@@ -26762,24 +34697,45 @@ class TopoDSToStep_WireframeBuilder_1 extends TopoDSToStep_WireframeBuilder {}
 
 class TopoDSToStep_WireframeBuilder_2 extends TopoDSToStep_WireframeBuilder {}
 
+/**
+ * Alert object storing TopoDS shape in its field
+ */
 class TopoDS_AlertWithShape extends Message_Alert {
 }
 
+/**
+ * A Builder is used to create Topological Data Structures.It is the root of the Builder class hierarchy.
+ */
 class TopoDS_Builder {
 }
 
+/**
+ * Describes a composite solid which - references an underlying composite solid with the potential to be given a location and an orientation - has a location for the underlying composite solid, giving its placement in the local coordinate system - has an orientation for the underlying composite solid, in terms of its geometry (as opposed to orientation in relation to other shapes). Casts shape S to the more specialized return type, CompSolid.
+ */
 class TopoDS_CompSolid extends TopoDS_Shape {
 }
 
+/**
+ * Describes a compound which - references an underlying compound with the potential to be given a location and an orientation - has a location for the underlying compound, giving its placement in the local coordinate system - has an orientation for the underlying compound, in terms of its geometry (as opposed to orientation in relation to other shapes). Casts shape S to the more specialized return type, Compound.
+ */
 class TopoDS_Compound extends TopoDS_Shape {
 }
 
+/**
+ * Describes an edge which - references an underlying edge with the potential to be given a location and an orientation - has a location for the underlying edge, giving its placement in the local coordinate system - has an orientation for the underlying edge, in terms of its geometry (as opposed to orientation in relation to other shapes).
+ */
 class TopoDS_Edge extends TopoDS_Shape {
 }
 
+/**
+ * Describes a face which - references an underlying face with the potential to be given a location and an orientation - has a location for the underlying face, giving its placement in the local coordinate system - has an orientation for the underlying face, in terms of its geometry (as opposed to orientation in relation to other shapes).
+ */
 class TopoDS_Face extends TopoDS_Shape {
 }
 
+/**
+ * An attempt was made to modify a Shape already shared or protected.
+ */
 class TopoDS_FrozenShape extends Standard_DomainError {
 }
 
@@ -26787,6 +34743,9 @@ class TopoDS_FrozenShape_1 extends TopoDS_FrozenShape {}
 
 class TopoDS_FrozenShape_2 extends TopoDS_FrozenShape {}
 
+/**
+ * Class to manipulate a Shape with handle.
+ */
 class TopoDS_HShape extends Standard_Transient {
 }
 
@@ -26794,6 +34753,9 @@ class TopoDS_HShape_1 extends TopoDS_HShape {}
 
 class TopoDS_HShape_2 extends TopoDS_HShape {}
 
+/**
+ * Iterates on the underlying shape underlying a given TopoDS_Shape object, providing access to its component sub-shapes. Each component shape is returned as a TopoDS_Shape with an orientation, and a compound of the original values and the relative values.
+ */
 class TopoDS_Iterator {
 }
 
@@ -26801,6 +34763,9 @@ class TopoDS_Iterator_1 extends TopoDS_Iterator {}
 
 class TopoDS_Iterator_2 extends TopoDS_Iterator {}
 
+/**
+ * An attempt was made to modify a geometry of Shape already shared or protected.
+ */
 class TopoDS_LockedShape extends Standard_DomainError {
 }
 
@@ -26808,42 +34773,81 @@ class TopoDS_LockedShape_1 extends TopoDS_LockedShape {}
 
 class TopoDS_LockedShape_2 extends TopoDS_LockedShape {}
 
+/**
+ * Describes a shape which - references an underlying shape with the potential to be given a location and an orientation - has a location for the underlying shape, giving its placement in the local coordinate system - has an orientation for the underlying shape, in terms of its geometry (as opposed to orientation in relation to other shapes). Note: A Shape is empty if it references an underlying shape which has an empty list of shapes.
+ */
 class TopoDS_Shape {
 }
 
+/**
+ * Describes a shell which - references an underlying shell with the potential to be given a location and an orientation - has a location for the underlying shell, giving its placement in the local coordinate system - has an orientation for the underlying shell, in terms of its geometry (as opposed to orientation in relation to other shapes).
+ */
 class TopoDS_Shell extends TopoDS_Shape {
 }
 
+/**
+ * Describes a solid shape which - references an underlying solid shape with the potential to be given a location and an orientation - has a location for the underlying shape, giving its placement in the local coordinate system - has an orientation for the underlying shape, in terms of its geometry (as opposed to orientation in relation to other shapes).
+ */
 class TopoDS_Solid extends TopoDS_Shape {
 }
 
+/**
+ * A set of solids connected by their faces.
+ */
 class TopoDS_TCompSolid extends TopoDS_TShape {
 }
 
+/**
+ * A TCompound is an all-purpose set of Shapes.
+ */
 class TopoDS_TCompound extends TopoDS_TShape {
 }
 
+/**
+ * A topological part of a curve in 2D or 3D, the boundary is a set of oriented Vertices.
+ */
 class TopoDS_TEdge extends TopoDS_TShape {
 }
 
+/**
+ * A topological part of a surface or of the 2D space. The boundary is a set of wires and vertices.
+ */
 class TopoDS_TFace extends TopoDS_TShape {
 }
 
+/**
+ * A TShape is a topological structure describing a set of points in a 2D or 3D space.
+ */
 class TopoDS_TShape extends Standard_Transient {
 }
 
+/**
+ * A set of faces connected by their edges.
+ */
 class TopoDS_TShell extends TopoDS_TShape {
 }
 
+/**
+ * A Topological part of 3D space, bounded by shells, edges and vertices.
+ */
 class TopoDS_TSolid extends TopoDS_TShape {
 }
 
+/**
+ * A Vertex is a topological point in two or three dimensions.
+ */
 class TopoDS_TVertex extends TopoDS_TShape {
 }
 
+/**
+ * A set of edges connected by their vertices.
+ */
 class TopoDS_TWire extends TopoDS_TShape {
 }
 
+/**
+ * An incorrect insertion was attempted.
+ */
 class TopoDS_UnCompatibleShapes extends Standard_DomainError {
 }
 
@@ -26851,12 +34855,21 @@ class TopoDS_UnCompatibleShapes_1 extends TopoDS_UnCompatibleShapes {}
 
 class TopoDS_UnCompatibleShapes_2 extends TopoDS_UnCompatibleShapes {}
 
+/**
+ * Describes a vertex which - references an underlying vertex with the potential to be given a location and an orientation - has a location for the underlying vertex, giving its placement in the local coordinate system - has an orientation for the underlying vertex, in terms of its geometry (as opposed to orientation in relation to other shapes).
+ */
 class TopoDS_Vertex extends TopoDS_Shape {
 }
 
+/**
+ * Describes a wire which - references an underlying wire with the potential to be given a location and an orientation - has a location for the underlying wire, giving its placement in the local coordinate system - has an orientation for the underlying wire, in terms of its geometry (as opposed to orientation in relation to other shapes).
+ */
 class TopoDS_Wire extends TopoDS_Shape {
 }
 
+/**
+ * Allows direct binding between a starting Object and the Result of its transfer when it is Unique. The Result itself is defined as a formal parameter <Shape from TopoDS> Warning : While it is possible to instantiate BinderOfShape with any Type for the Result, it is not advisable to instantiate it with Transient Classes, because such Results are directly known and managed by TransferProcess & Co, through SimpleBinderOfTransient : this class looks like instantiation of BinderOfShape, but its method ResultType is adapted (reads DynamicType of the Result)
+ */
 class TransferBRep_BinderOfShape extends Transfer_Binder {
 }
 
@@ -26874,9 +34887,15 @@ class TransferBRep_HSequenceOfTransferResultInfo_2 extends TransferBRep_HSequenc
 class TransferBRep_OrientedShapeMapper extends Transfer_Finder {
 }
 
+/**
+ * This class offers a simple, easy to call, way of transferring data from interface files to Shapes from CasCade It must be specialized according to each norm/protocol, by : - defining how to read a file (specific method with protocol) - definig transfer, by providing an Actor
+ */
 class TransferBRep_Reader {
 }
 
+/**
+ * A ShapeBinder is a BinderOfShape with some additional services to cast the Result under various kinds of Shapes
+ */
 class TransferBRep_ShapeBinder extends TransferBRep_BinderOfShape {
 }
 
@@ -26884,9 +34903,15 @@ class TransferBRep_ShapeBinder_1 extends TransferBRep_ShapeBinder {}
 
 class TransferBRep_ShapeBinder_2 extends TransferBRep_ShapeBinder {}
 
+/**
+ * Gives informations on an object, see template DataInfo This class is for Shape
+ */
 class TransferBRep_ShapeInfo {
 }
 
+/**
+ * This binder binds several (a list of) shapes with a starting entity, when this entity itself corresponds to a simple list of shapes. Each part is not seen as a sub-result of an independant componant, but as an item of a built-in list
+ */
 class TransferBRep_ShapeListBinder extends Transfer_Binder {
 }
 
@@ -26897,9 +34922,15 @@ class TransferBRep_ShapeListBinder_2 extends TransferBRep_ShapeListBinder {}
 class TransferBRep_ShapeMapper extends Transfer_Finder {
 }
 
+/**
+ * Data structure for storing information on transfer result. At the moment it dispatches information for the following types: - result, - result + warning(s), - result + fail(s), - result + warning(s) + fail(s) - no result, - no result + warning(s), - no result + fail(s), - no result + warning(s) + fail(s),
+ */
 class TransferBRep_TransferResultInfo extends Standard_Transient {
 }
 
+/**
+ * This class allows to work with a TransferDispatch, i.e. to transfer entities from a data set to another one defined by the same interface norm, with the following features : - ActorDispatch itself acts as a default actor, i.e. it copies entities with the general service Copy, as CopyTool does - it allows to add other actors for specific ways of transfer, which may include data modifications, conversions ... - and other features from TransferDispatch (such as mapping other than one-one)
+ */
 class Transfer_ActorDispatch extends Transfer_ActorOfTransientProcess {
 }
 
@@ -26909,6 +34940,9 @@ class Transfer_ActorDispatch_2 extends Transfer_ActorDispatch {}
 
 class Transfer_ActorDispatch_3 extends Transfer_ActorDispatch {}
 
+/**
+ * The original class was renamed. Compatibility only
+ */
 class Transfer_ActorOfFinderProcess extends Transfer_ActorOfProcessForFinder {
 }
 
@@ -26918,27 +34952,51 @@ class Transfer_ActorOfProcessForFinder extends Standard_Transient {
 class Transfer_ActorOfProcessForTransient extends Standard_Transient {
 }
 
+/**
+ * The original class was renamed. Compatibility only
+ */
 class Transfer_ActorOfTransientProcess extends Transfer_ActorOfProcessForTransient {
 }
 
+/**
+ * A Binder is an auxiliary object to Map the Result of the Transfer of a given Object : it records the Result of the Unitary Transfer (Resulting Object), status of progress and error (if any) of the Process
+ */
 class Transfer_Binder extends Standard_Transient {
 }
 
+/**
+ * This type of Binder allows to attach as result, besides a Transient Object, an Integer Value, which can be an Index in the Object if it defines a List, for instance
+ */
 class Transfer_BinderOfTransientInteger extends Transfer_SimpleBinderOfTransient {
 }
 
+/**
+ * Gives informations on an object Used as template to instantiate Mapper and SimpleBinder This class is for Transient
+ */
 class Transfer_DataInfo {
 }
 
+/**
+ * This is an auxiliary class for TransferDispatch, which allows to record simple copies, as CopyControl from Interface, but based on a TransientProcess. Hence, it allows in addition more actions (such as recording results of adaptations)
+ */
 class Transfer_DispatchControl extends Interface_CopyControl {
 }
 
+/**
+ * FindHasher defines HashCode for Finder, which is : ask a Finder its HashCode ! Because this is the Finder itself which brings the HashCode for its Key
+ */
 class Transfer_FindHasher {
 }
 
+/**
+ * a Finder allows to map any kind of object as a Key for a Map. This works by defining, for a Hash Code, that of the real Key, not of the Finder which acts only as an intermediate. When a Map asks for the HashCode of a Finder, this one returns the code it has determined at creation time
+ */
 class Transfer_Finder extends Standard_Transient {
 }
 
+/**
+ * Adds specific features to the generic definition : PrintTrace is adapted
+ */
 class Transfer_FinderProcess extends Transfer_ProcessForFinder {
 }
 
@@ -26958,6 +35016,9 @@ class Transfer_IteratorOfProcessForTransient extends Transfer_TransferIterator {
 class Transfer_MapContainer extends Standard_Transient {
 }
 
+/**
+ * Allows direct binding between a starting Object and the Result of its transfer, when it can be made of several Transient Objects. Compared to a Transcriptor, it has no Transfer Action
+ */
 class Transfer_MultipleBinder extends Transfer_Binder {
 }
 
@@ -26968,6 +35029,9 @@ class Transfer_ProcessForFinder_1 extends Transfer_ProcessForFinder {}
 
 class Transfer_ProcessForFinder_2 extends Transfer_ProcessForFinder {}
 
+/**
+ * Manages Transfer of Transient Objects. Produces also ActorOfTransientProcess (deferred class), IteratorOfTransientProcess (for Results), TransferMapOfTransientProcess (internally used) Normally uses as TransientProcess, which adds some specifics
+ */
 class Transfer_ProcessForTransient extends Standard_Transient {
 }
 
@@ -26975,12 +35039,21 @@ class Transfer_ProcessForTransient_1 extends Transfer_ProcessForTransient {}
 
 class Transfer_ProcessForTransient_2 extends Transfer_ProcessForTransient {}
 
+/**
+ * ResultFromModel is used to store a final result stored in a TransientProcess, respectfully to its structuration in scopes by using a set of ResultFromTransient Hence, it can be regarded as a passive equivalent of the stored data in the TransientProcess, while an Iterator gives a flat view of it.
+ */
 class Transfer_ResultFromModel extends Standard_Transient {
 }
 
+/**
+ * This class, in conjunction with ResultFromModel, allows to record the result of a transfer initially stored in a TransientProcess.
+ */
 class Transfer_ResultFromTransient extends Standard_Transient {
 }
 
+/**
+ * An adapted instantiation of SimpleBinder for Transient Result, i.e. ResultType can be computed from the Result itself, instead of being static
+ */
 class Transfer_SimpleBinderOfTransient extends Transfer_Binder {
 }
 
@@ -26991,6 +35064,9 @@ class Transfer_TransferDeadLoop_1 extends Transfer_TransferDeadLoop {}
 
 class Transfer_TransferDeadLoop_2 extends Transfer_TransferDeadLoop {}
 
+/**
+ * A TransferDispatch is aimed to dispatch Entities between two Interface Models, by default by copying them, as CopyTool, but with more capabilities of adapting : Copy is redefined to firstly pass the hand to a TransferProcess. If this gives no result, standard Copy is called.
+ */
 class Transfer_TransferDispatch extends Interface_CopyTool {
 }
 
@@ -27007,12 +35083,21 @@ class Transfer_TransferFailure_1 extends Transfer_TransferFailure {}
 
 class Transfer_TransferFailure_2 extends Transfer_TransferFailure {}
 
+/**
+ * A TransferInput is a Tool which fills an InterfaceModel with the result of the Transfer of CasCade Objects, once determined The Result comes from a TransferProcess, either from Transient (the Complete Result is considered, it must contain only Transient Objects)
+ */
 class Transfer_TransferInput {
 }
 
+/**
+ * Defines an Iterator on the result of a Transfer Available for Normal Results or not (Erroneous Transfer) It gives several kinds of Informations, and allows to consider various criteria (criteria are cumulative)
+ */
 class Transfer_TransferIterator {
 }
 
+/**
+ * A TransferOutput is a Tool which manages the transfer of entities created by an Interface, stored in an InterfaceModel, into a set of Objects suitable for an Application Objects to be transferred are given, by method Transfer (which calls Transfer from TransientProcess) A default action is available to get all roots of the Model Result is given as a TransferIterator (see TransferProcess) Also, it is possible to pilot directly the TransientProcess
+ */
 class Transfer_TransferOutput {
 }
 
@@ -27020,6 +35105,9 @@ class Transfer_TransferOutput_1 extends Transfer_TransferOutput {}
 
 class Transfer_TransferOutput_2 extends Transfer_TransferOutput {}
 
+/**
+ * This binder binds several (a list of) Transients with a starting entity, when this entity itself corresponds to a simple list of Transients. Each part is not seen as a sub-result of an independant componant, but as an item of a built-in list
+ */
 class Transfer_TransientListBinder extends Transfer_Binder {
 }
 
@@ -27030,24 +35118,42 @@ class Transfer_TransientListBinder_2 extends Transfer_TransientListBinder {}
 class Transfer_TransientMapper extends Transfer_Finder {
 }
 
+/**
+ * Adds specific features to the generic definition : TransientProcess is intended to work from an InterfaceModel to a set of application objects.
+ */
 class Transfer_TransientProcess extends Transfer_ProcessForTransient {
 }
 
+/**
+ * a VoidBinder is used to bind a starting item with a status, error or warning messages, but no result It is interpreted by TransferProcess, which admits a VoidBinder to be over-written, and copies its check to the new Binder
+ */
 class Transfer_VoidBinder extends Transfer_Binder {
 }
 
+/**
+ * This package provides all the facilities to create and question a dictionary of units, and also to manipulate measurements which are real values with units.
+ */
 class Units {
 }
 
+/**
+ * The UnitsAPI global functions are used to convert a value from any unit into another unit. Principles Conversion is executed among three unit systems: - the SI System - the user's Local System - the user's Current System. The SI System is the standard international unit system. It is indicated by SI in the synopses of the UnitsAPI functions. The MDTV System corresponds to the SI international standard but the length unit and all its derivatives use millimeters instead of the meters. Both systems are proposed by Open CASCADE; the SI System is the standard option. By selecting one of these two systems, the user defines his Local System through the SetLocalSystem function. The Local System is indicated by LS in the synopses of the UnitsAPI functions. The user's Local System units can be modified in the working environment. The user defines his Current System by modifying its units through the SetCurrentUnit function. The Current System is indicated by Current in the synopses of the UnitsAPI functions.
+ */
 class UnitsAPI {
 }
 
 class UnitsMethods {
 }
 
+/**
+ * This class includes all the methods to create and manipulate the dimensions of the physical quantities.
+ */
 class Units_Dimensions extends Standard_Transient {
 }
 
+/**
+ * This class provides all the services to explore UnitsSystem or UnitsDictionary.
+ */
 class Units_Explorer {
 }
 
@@ -27061,12 +35167,21 @@ class Units_Explorer_4 extends Units_Explorer {}
 
 class Units_Explorer_5 extends Units_Explorer {}
 
+/**
+ * This class defines a lexicon useful to analyse and recognize the different key words included in a sentence. The lexicon is stored in a sequence of tokens.
+ */
 class Units_Lexicon extends Standard_Transient {
 }
 
+/**
+ * This class defines all the methods to create and compute an algebraic formula.
+ */
 class Units_MathSentence extends Units_Sentence {
 }
 
+/**
+ * This class defines a measurement which is the association of a real value and a unit.
+ */
 class Units_Measurement {
 }
 
@@ -27097,15 +35212,27 @@ class Units_QuantitiesSequence_1 extends Units_QuantitiesSequence {}
 
 class Units_QuantitiesSequence_2 extends Units_QuantitiesSequence {}
 
+/**
+ * This class stores in its field all the possible units of all the unit systems for a given physical quantity. Each unit's value is expressed in the S.I. unit system.
+ */
 class Units_Quantity extends Standard_Transient {
 }
 
+/**
+ * This class describes all the methods to create and compute an expression contained in a string.
+ */
 class Units_Sentence {
 }
 
+/**
+ * The ShiftedToken class inherits from Token and describes tokens which have a gap in addition of the multiplicative factor. This kind of token allows the description of linear functions which do not pass through the origin, of the form :
+ */
 class Units_ShiftedToken extends Units_Token {
 }
 
+/**
+ * This class is useful to describe units with a shifted origin in relation to another unit. A well known example is the Celsius degrees in relation to Kelvin degrees. The shift of the Celsius origin is 273.15 Kelvin degrees.
+ */
 class Units_ShiftedUnit extends Units_Unit {
 }
 
@@ -27115,6 +35242,9 @@ class Units_ShiftedUnit_2 extends Units_ShiftedUnit {}
 
 class Units_ShiftedUnit_3 extends Units_ShiftedUnit {}
 
+/**
+ * This class defines an elementary word contained in a Sentence object.
+ */
 class Units_Token extends Standard_Transient {
 }
 
@@ -27137,6 +35267,9 @@ class Units_TokensSequence_1 extends Units_TokensSequence {}
 
 class Units_TokensSequence_2 extends Units_TokensSequence {}
 
+/**
+ * This class defines an elementary word contained in a physical quantity.
+ */
 class Units_Unit extends Standard_Transient {
 }
 
@@ -27146,6 +35279,9 @@ class Units_Unit_2 extends Units_Unit {}
 
 class Units_Unit_3 extends Units_Unit {}
 
+/**
+ * This class describes all the facilities to manipulate and compute units contained in a string expression.
+ */
 class Units_UnitSentence extends Units_Sentence {
 }
 
@@ -27153,9 +35289,15 @@ class Units_UnitSentence_1 extends Units_UnitSentence {}
 
 class Units_UnitSentence_2 extends Units_UnitSentence {}
 
+/**
+ * This class creates a dictionary of all the units you want to know.
+ */
 class Units_UnitsDictionary extends Standard_Transient {
 }
 
+/**
+ * This class defines a lexicon useful to analyse and recognize the different key words included in a sentence. The lexicon is stored in a sequence of tokens.
+ */
 class Units_UnitsLexicon extends Units_Lexicon {
 }
 
@@ -27166,6 +35308,9 @@ class Units_UnitsSequence_1 extends Units_UnitsSequence {}
 
 class Units_UnitsSequence_2 extends Units_UnitsSequence {}
 
+/**
+ * This class allows the user to define his own system of units.
+ */
 class Units_UnitsSystem extends Standard_Transient {
 }
 
@@ -27173,9 +35318,15 @@ class Units_UnitsSystem_1 extends Units_UnitsSystem {}
 
 class Units_UnitsSystem_2 extends Units_UnitsSystem {}
 
+/**
+ * This package contains the set of commands and services of the 3D Viewer. It provides a set of high level commands to control the views and viewing modes.
+ */
 class V3d {
 }
 
+/**
+ * Creation of an ambient light source in a viewer.
+ */
 class V3d_AmbientLight extends Graphic3d_CLight {
 }
 
@@ -27189,6 +35340,9 @@ class V3d_BadValue_2 extends V3d_BadValue {}
 class V3d_CircularGrid extends Aspect_CircularGrid {
 }
 
+/**
+ * Directional light source for a viewer.
+ */
 class V3d_DirectionalLight extends V3d_PositionLight {
 }
 
@@ -27196,18 +35350,30 @@ class V3d_DirectionalLight_1 extends V3d_DirectionalLight {}
 
 class V3d_DirectionalLight_2 extends V3d_DirectionalLight {}
 
+/**
+ * Obsolete clip plane presentation class. Ported on new core of Graphic3d_ClipPlane approach. Please access Graphic3d_ClipPlane via ClipPlane() method to use it for standard clipping workflow. Example of use:
+ */
 class V3d_Plane extends Standard_Transient {
 }
 
+/**
+ * Base class for Positional, Spot and Directional Light classes.
+ */
 class V3d_PositionLight extends Graphic3d_CLight {
 }
 
+/**
+ * Creation and modification of an isolated (positional) light source. It is also defined by the color and two attenuation factors ConstAttentuation() and LinearAttentuation(). The resulting attenuation factor determining the illumination of a surface depends on the following formula: Where Distance is the distance of the isolated source from the surface.
+ */
 class V3d_PositionalLight extends V3d_PositionLight {
 }
 
 class V3d_RectangularGrid extends Aspect_RectangularGrid {
 }
 
+/**
+ * Creation and modification of a spot. The attenuation factor F determines the illumination of a surface: Where Distance is the distance from the source to the surface. The default values (1.0, 0.0) correspond to a minimum of attenuation. The concentration factor determines the dispersion of the light on the surface, the default value (1.0) corresponds to a minimum of dispersion.
+ */
 class V3d_SpotLight extends V3d_PositionLight {
 }
 
@@ -27215,6 +35381,9 @@ class V3d_SpotLight_1 extends V3d_SpotLight {}
 
 class V3d_SpotLight_2 extends V3d_SpotLight {}
 
+/**
+ * Class for presentation of zbuffer trihedron object.
+ */
 class V3d_Trihedron extends Standard_Transient {
 }
 
@@ -27225,6 +35394,9 @@ class V3d_UnMapped_1 extends V3d_UnMapped {}
 
 class V3d_UnMapped_2 extends V3d_UnMapped {}
 
+/**
+ * Defines the application object VIEW for the VIEWER application. The methods of this class allow the editing and inquiring the parameters linked to the view. Provides a set of services common to all types of view. Warning: The default parameters are defined by the class Viewer (Example : SetDefaultViewSize()). Certain methods are mouse oriented, and it is necessary to know the difference between the start and the continuation of this gesture in putting the method into operation. Example : Shifting the eye-view along the screen axes.
+ */
 class V3d_View extends Standard_Transient {
 }
 
@@ -27232,6 +35404,9 @@ class V3d_View_1 extends V3d_View {}
 
 class V3d_View_2 extends V3d_View {}
 
+/**
+ * Defines services on Viewer type objects. The methods of this class allow editing and interrogation of the parameters linked to the viewer its friend classes (View,light,plane).
+ */
 class V3d_Viewer extends Standard_Transient {
 }
 
@@ -27239,27 +35414,51 @@ class V3d_Viewer_1 extends V3d_Viewer {}
 
 class V3d_Viewer_2 extends V3d_Viewer {}
 
+/**
+ * Vrml package implements the specification of the VRML ( Virtual Reality Modeling Language ). VRML is a standard language for describing interactive 3-D objects and worlds delivered across Internet. Actual version of Vrml package have made for objects of VRML version 1.0. This package is used by VrmlConverter package. The developer should already be familiar with VRML specification before using this package.
+ */
 class Vrml {
 }
 
+/**
+ * API for writing to VRML 1.0
+ */
 class VrmlAPI {
 }
 
+/**
+ * Creates and writes VRML files from Open CASCADE shapes. A VRML file can be written to an existing VRML file or to a new one.
+ */
 class VrmlAPI_Writer {
 }
 
+/**
+ * Curve - computes the presentation of objects to be seen as curves (the computation will be made with a constant number of points), converts this one into VRML objects and writes (adds) them into anOStream. All requested properties of the representation are specify in aDrawer of Drawer class (VrmlConverter). This kind of the presentation is converted into IndexedLineSet ( VRML ).
+ */
 class VrmlConverter_Curve {
 }
 
+/**
+ * DeflectionCurve - computes the presentation of objects to be seen as curves, converts this one into VRML objects and writes (adds) into anOStream. All requested properties of the representation are specify in aDrawer. This kind of the presentation is converted into IndexedLineSet ( VRML ). The computation will be made according to a maximal chordial deviation.
+ */
 class VrmlConverter_DeflectionCurve {
 }
 
+/**
+ * qualifies the aspect properties for the VRML conversation of a specific kind of object. This includes for example color, maximal chordial deviation, etc...
+ */
 class VrmlConverter_Drawer extends Standard_Transient {
 }
 
+/**
+ * HLRShape - computes the presentation of objects with removal of their hidden lines for a specific projector, converts them into VRML objects and writes (adds) them into anOStream. All requested properties of the representation are specify in aDrawer of Drawer class. This kind of the presentation is converted into IndexedLineSet and if they are defined in Projector into : PerspectiveCamera, OrthographicCamera, DirectionLight, PointLight, SpotLight from Vrml package.
+ */
 class VrmlConverter_HLRShape {
 }
 
+/**
+ * qualifies the aspect properties for the VRML conversation of iso curves .
+ */
 class VrmlConverter_IsoAspect extends VrmlConverter_LineAspect {
 }
 
@@ -27267,6 +35466,9 @@ class VrmlConverter_IsoAspect_1 extends VrmlConverter_IsoAspect {}
 
 class VrmlConverter_IsoAspect_2 extends VrmlConverter_IsoAspect {}
 
+/**
+ * qualifies the aspect properties for the VRML conversation of a Curve and a DeflectionCurve .
+ */
 class VrmlConverter_LineAspect extends Standard_Transient {
 }
 
@@ -27274,6 +35476,9 @@ class VrmlConverter_LineAspect_1 extends VrmlConverter_LineAspect {}
 
 class VrmlConverter_LineAspect_2 extends VrmlConverter_LineAspect {}
 
+/**
+ * qualifies the aspect properties for the VRML conversation of a Point Set.
+ */
 class VrmlConverter_PointAspect extends Standard_Transient {
 }
 
@@ -27281,27 +35486,51 @@ class VrmlConverter_PointAspect_1 extends VrmlConverter_PointAspect {}
 
 class VrmlConverter_PointAspect_2 extends VrmlConverter_PointAspect {}
 
+/**
+ * defines projector and calculates properties of cameras and lights from Vrml ( OrthograpicCamera, PerspectiveCamera, DirectionalLight, PointLight, SpotLight and MatrixTransform ) to display all scene shapes with arbitrary locations for requested the Projection Vector, High Point Direction and the Focus and adds them ( method Add ) to anOSream.
+ */
 class VrmlConverter_Projector extends Standard_Transient {
 }
 
+/**
+ * ShadedShape - computes the shading presentation of shapes by triangulation algorithms, converts this one into VRML objects and writes (adds) into anOStream. All requested properties of the representation including the maximal chordial deviation are specify in aDrawer. This kind of the presentation is converted into IndexedFaceSet ( VRML ).
+ */
 class VrmlConverter_ShadedShape {
 }
 
+/**
+ * qualifies the aspect properties for the VRML conversation of ShadedShape .
+ */
 class VrmlConverter_ShadingAspect extends Standard_Transient {
 }
 
+/**
+ * WFDeflectionRestrictedFace - computes the wireframe presentation of faces with restrictions by displaying a given number of U and/or V isoparametric curves, converts his into VRML objects and writes (adds) them into anOStream. All requested properties of the representation are specify in aDrawer of Drawer class (Prs3d). This kind of the presentation is converted into IndexedFaceSet and IndexedLineSet ( VRML ).
+ */
 class VrmlConverter_WFDeflectionRestrictedFace {
 }
 
+/**
+ * WFDeflectionShape - computes the wireframe presentation of compound set of faces, edges and vertices by displaying a given number of U and/or V isoparametric curves, converts this one into VRML objects and writes (adds) them into anOStream. All requested properties of the representation are specify in aDrawer. This kind of the presentation is converted into IndexedLineSet and PointSet ( VRML ).
+ */
 class VrmlConverter_WFDeflectionShape {
 }
 
+/**
+ * WFRestrictedFace - computes the wireframe presentation of faces with restrictions by displaying a given number of U and/or V isoparametric curves, converts this one into VRML objects and writes (adds) into anOStream. All requested properties of the representation are specify in aDrawer. This kind of the presentation is converted into IndexedLineSet ( VRML ).
+ */
 class VrmlConverter_WFRestrictedFace {
 }
 
+/**
+ * WFShape - computes the wireframe presentation of compound set of faces, edges and vertices by displaying a given number of U and/or V isoparametric curves converts this one into VRML objects and writes (adds) them into anOStream. All requested properties of the representation are specify in aDrawer. This kind of the presentation is converted into IndexedLineSet and PointSet ( VRML ).
+ */
 class VrmlConverter_WFShape {
 }
 
+/**
+ * Implementation of the Appearance node type
+ */
 class VrmlData_Appearance extends VrmlData_Node {
 }
 
@@ -27309,9 +35538,15 @@ class VrmlData_Appearance_1 extends VrmlData_Appearance {}
 
 class VrmlData_Appearance_2 extends VrmlData_Appearance {}
 
+/**
+ * Implementatioon of basic node for Coordinate, Normal and Color (array of triplets).
+ */
 class VrmlData_ArrayVec3d extends VrmlData_Node {
 }
 
+/**
+ * Inplementation of the Box node. This node is defined by Size vector, assumong that the box center is located in (0., 0., 0.) and that each corner is 0.5*|Size| distance from the center.
+ */
 class VrmlData_Box extends VrmlData_Geometry {
 }
 
@@ -27319,6 +35554,9 @@ class VrmlData_Box_1 extends VrmlData_Box {}
 
 class VrmlData_Box_2 extends VrmlData_Box {}
 
+/**
+ * Implementation of the node Color
+ */
 class VrmlData_Color extends VrmlData_ArrayVec3d {
 }
 
@@ -27326,6 +35564,9 @@ class VrmlData_Color_1 extends VrmlData_Color {}
 
 class VrmlData_Color_2 extends VrmlData_Color {}
 
+/**
+ * Implementation of the Cone node. The cone is located with its middle of the height segment in (0., 0., 0.) The height is oriented along OY.
+ */
 class VrmlData_Cone extends VrmlData_Geometry {
 }
 
@@ -27333,6 +35574,9 @@ class VrmlData_Cone_1 extends VrmlData_Cone {}
 
 class VrmlData_Cone_2 extends VrmlData_Cone {}
 
+/**
+ * Implementation of the node Coordinate
+ */
 class VrmlData_Coordinate extends VrmlData_ArrayVec3d {
 }
 
@@ -27340,6 +35584,9 @@ class VrmlData_Coordinate_1 extends VrmlData_Coordinate {}
 
 class VrmlData_Coordinate_2 extends VrmlData_Coordinate {}
 
+/**
+ * Implementation of the Cylinder node
+ */
 class VrmlData_Cylinder extends VrmlData_Geometry {
 }
 
@@ -27347,12 +35594,21 @@ class VrmlData_Cylinder_1 extends VrmlData_Cylinder {}
 
 class VrmlData_Cylinder_2 extends VrmlData_Cylinder {}
 
+/**
+ * Common API of faceted Geometry nodes: IndexedFaceSet, ElevationGrid, Extrusion.
+ */
 class VrmlData_Faceted extends VrmlData_Geometry {
 }
 
+/**
+ * Implementation of the Geometry node. Contains the topological representation (TopoDS_Shell) of the VRML geometry
+ */
 class VrmlData_Geometry extends VrmlData_Node {
 }
 
+/**
+ * Implementation of node "Group"
+ */
 class VrmlData_Group extends VrmlData_Node {
 }
 
@@ -27360,6 +35616,9 @@ class VrmlData_Group_1 extends VrmlData_Group {}
 
 class VrmlData_Group_2 extends VrmlData_Group {}
 
+/**
+ * Implementation of the ImageTexture node
+ */
 class VrmlData_ImageTexture extends VrmlData_Texture {
 }
 
@@ -27367,6 +35626,9 @@ class VrmlData_ImageTexture_1 extends VrmlData_ImageTexture {}
 
 class VrmlData_ImageTexture_2 extends VrmlData_ImageTexture {}
 
+/**
+ * Implementation of the Material node
+ */
 class VrmlData_Material extends VrmlData_Node {
 }
 
@@ -27374,6 +35636,9 @@ class VrmlData_Material_1 extends VrmlData_Material {}
 
 class VrmlData_Material_2 extends VrmlData_Material {}
 
+/**
+ * Implementation of the node Normal
+ */
 class VrmlData_Normal extends VrmlData_ArrayVec3d {
 }
 
@@ -27381,9 +35646,15 @@ class VrmlData_Normal_1 extends VrmlData_Normal {}
 
 class VrmlData_Normal_2 extends VrmlData_Normal {}
 
+/**
+ * Algorithm converting one shape or a set of shapes to VrmlData_Scene.
+ */
 class VrmlData_ShapeConvert {
 }
 
+/**
+ * Implementation of the Shape node type
+ */
 class VrmlData_ShapeNode extends VrmlData_Node {
 }
 
@@ -27391,6 +35662,9 @@ class VrmlData_ShapeNode_1 extends VrmlData_ShapeNode {}
 
 class VrmlData_ShapeNode_2 extends VrmlData_ShapeNode {}
 
+/**
+ * Implementation of the Sphere node.
+ */
 class VrmlData_Sphere extends VrmlData_Geometry {
 }
 
@@ -27398,9 +35672,15 @@ class VrmlData_Sphere_1 extends VrmlData_Sphere {}
 
 class VrmlData_Sphere_2 extends VrmlData_Sphere {}
 
+/**
+ * Implementation of the Texture node
+ */
 class VrmlData_Texture extends VrmlData_Node {
 }
 
+/**
+ * Implementation of the node TextureCoordinate
+ */
 class VrmlData_TextureCoordinate extends VrmlData_Node {
 }
 
@@ -27408,9 +35688,15 @@ class VrmlData_TextureCoordinate_1 extends VrmlData_TextureCoordinate {}
 
 class VrmlData_TextureCoordinate_2 extends VrmlData_TextureCoordinate {}
 
+/**
+ * Implementation of the TextureTransform node
+ */
 class VrmlData_TextureTransform extends VrmlData_Node {
 }
 
+/**
+ * Definition of UnknownNode -- placeholder for node types that are not processed now.
+ */
 class VrmlData_UnknownNode extends VrmlData_Node {
 }
 
@@ -27418,6 +35704,9 @@ class VrmlData_UnknownNode_1 extends VrmlData_UnknownNode {}
 
 class VrmlData_UnknownNode_2 extends VrmlData_UnknownNode {}
 
+/**
+ * Data type for WorldInfo node
+ */
 class VrmlData_WorldInfo extends VrmlData_Node {
 }
 
@@ -27425,6 +35714,9 @@ class VrmlData_WorldInfo_1 extends VrmlData_WorldInfo {}
 
 class VrmlData_WorldInfo_2 extends VrmlData_WorldInfo {}
 
+/**
+ * defines a AsciiText node of VRML specifying geometry shapes. This node represents strings of text characters from ASCII coded character set. All subsequent strings advance y by -( size * spacing). The justification field determines the placement of the strings in the x dimension. LEFT (the default) places the left edge of each string at x=0. CENTER places the center of each string at x=0. RIGHT places the right edge of each string at x=0. Text is rendered from left to right, top to bottom in the font set by FontStyle. The default value for the wigth field indicates the natural width should be used for that string.
+ */
 class Vrml_AsciiText extends Standard_Transient {
 }
 
@@ -27432,9 +35724,15 @@ class Vrml_AsciiText_1 extends Vrml_AsciiText {}
 
 class Vrml_AsciiText_2 extends Vrml_AsciiText {}
 
+/**
+ * defines a Cone node of VRML specifying geometry shapes. This node represents a simple cone, whose central axis is aligned with the y-axis. By default , the cone is centred at (0,0,0) and has size of -1 to +1 in the all three directions. the cone has a radius of 1 at the bottom and height of 2, with its apex at 1 and its bottom at -1. The cone has two parts: the sides and the bottom
+ */
 class Vrml_Cone {
 }
 
+/**
+ * defines a Coordinate3 node of VRML specifying properties of geometry and its appearance. This node defines a set of 3D coordinates to be used by a subsequent IndexedFaceSet, IndexedLineSet, or PointSet node. This node does not produce a visible result during rendering; it simply replaces the current coordinates in the rendering state for subsequent nodes to use.
+ */
 class Vrml_Coordinate3 extends Standard_Transient {
 }
 
@@ -27442,12 +35740,21 @@ class Vrml_Coordinate3_1 extends Vrml_Coordinate3 {}
 
 class Vrml_Coordinate3_2 extends Vrml_Coordinate3 {}
 
+/**
+ * defines a Cube node of VRML specifying geometry shapes. This node represents a cuboid aligned with the coordinate axes. By default , the cube is centred at (0,0,0) and measures 2 units in each dimension, from -1 to +1. A cube's width is its extent along its object-space X axis, its height is its extent along the object-space Y axis, and its depth is its extent along its object-space Z axis.
+ */
 class Vrml_Cube {
 }
 
+/**
+ * defines a Cylinder node of VRML specifying geometry shapes. This node represents a simple capped cylinder centred around the y-axis. By default , the cylinder is centred at (0,0,0) and has size of -1 to +1 in the all three dimensions. The cylinder has three parts: the sides, the top (y=+1) and the bottom (y=-1)
+ */
 class Vrml_Cylinder {
 }
 
+/**
+ * defines a directional light node of VRML specifying properties of lights. This node defines a directional light source that illuminates along rays parallel to a given 3-dimentional vector Color is written as an RGB triple. Light intensity must be in the range 0.0 to 1.0, inclusive.
+ */
 class Vrml_DirectionalLight {
 }
 
@@ -27455,12 +35762,21 @@ class Vrml_DirectionalLight_1 extends Vrml_DirectionalLight {}
 
 class Vrml_DirectionalLight_2 extends Vrml_DirectionalLight {}
 
+/**
+ * defines a FontStyle node of VRML of properties of geometry and its appearance. The size field specifies the height (in object space units) of glyphs rendered and determines the vertical spacing of adjacent lines of text.
+ */
 class Vrml_FontStyle {
 }
 
+/**
+ * defines a Group node of VRML specifying group properties. This node defines the base class for all group nodes. Group is a node that contains an ordered list of child nodes. This node is simply a container for the child nodes and does not alter the traversal state in any way. During traversal, state accumulated for a child is passed on to each successive child and then to the parents of the group (Group does not push or pop traversal state as separator does).
+ */
 class Vrml_Group {
 }
 
+/**
+ * defines a IndexedFaceSet node of VRML specifying geometry shapes. This node represents a 3D shape formed by constructing faces (polygons) from vertices located at the current coordinates. IndexedFaceSet uses the indices in its coordIndex to define polygonal faces. An index of -1 separates faces (so a -1 at the end of the list is optional).
+ */
 class Vrml_IndexedFaceSet extends Standard_Transient {
 }
 
@@ -27468,6 +35784,9 @@ class Vrml_IndexedFaceSet_1 extends Vrml_IndexedFaceSet {}
 
 class Vrml_IndexedFaceSet_2 extends Vrml_IndexedFaceSet {}
 
+/**
+ * defines a IndexedLineSet node of VRML specifying geometry shapes. This node represents a 3D shape formed by constructing polylines from vertices located at the current coordinates. IndexedLineSet uses the indices in its coordIndex field to specify the polylines. An index of -1 separates one polyline from the next (thus, a final -1 is optional). the current polyline has ended and the next one begins. Treatment of the current material and normal binding is as follows: The PER_PART binding specifies a material or normal for each segment of the line. The PER_FACE binding specifies a material or normal for each polyline. PER_VERTEX specifies a material or normal for each vertex. The corresponding _INDEXED bindings are the same, but use the materialIndex or normalIndex indices. The DEFAULT material binding is equal to OVERALL. The DEFAULT normal binding is equal to PER_VERTEX_INDEXED; if insufficient normals exist in the state, the lines will be drawn unlit. The same rules for texture coordinate generation as IndexedFaceSet are used.
+ */
 class Vrml_IndexedLineSet extends Standard_Transient {
 }
 
@@ -27475,12 +35794,21 @@ class Vrml_IndexedLineSet_1 extends Vrml_IndexedLineSet {}
 
 class Vrml_IndexedLineSet_2 extends Vrml_IndexedLineSet {}
 
+/**
+ * defines a Info node of VRML specifying properties of geometry and its appearance. It is used to store information in the scene graph, Typically for application-specific purposes, copyright messages, or other strings.
+ */
 class Vrml_Info {
 }
 
+/**
+ * defines "instancing" - using the same instance of a node multiple times. It is accomplished by using the "DEF" and "USE" keywords. The DEF keyword both defines a named node, and creates a single instance of it. The USE keyword indicates that the most recently defined instance should be used again. If several nades were given the same name, then the last DEF encountered during parsing "wins". DEF/USE is limited to a single file.
+ */
 class Vrml_Instancing {
 }
 
+/**
+ * defines a LOD (level of detailization) node of VRML specifying properties of geometry and its appearance. This group node is used to allow applications to switch between various representations of objects automatically. The children of this node typically represent the same object or objects at the varying of Levels Of Detail (LOD), from highest detail to lowest.
+ */
 class Vrml_LOD extends Standard_Transient {
 }
 
@@ -27488,6 +35816,9 @@ class Vrml_LOD_1 extends Vrml_LOD {}
 
 class Vrml_LOD_2 extends Vrml_LOD {}
 
+/**
+ * defines a Material node of VRML specifying properties of geometry and its appearance. This node defines the current surface material properties for all subsequent shapes. Material sets several components of the current material during traversal. Different shapes interpret materials with multiple values differently. To bind materials to shapes, use a MaterialBinding node.
+ */
 class Vrml_Material extends Standard_Transient {
 }
 
@@ -27495,6 +35826,9 @@ class Vrml_Material_1 extends Vrml_Material {}
 
 class Vrml_Material_2 extends Vrml_Material {}
 
+/**
+ * defines a MaterialBinding node of VRML specifying properties of geometry and its appearance. Material nodes may contain more than one material. This node specifies how the current materials are bound to shapes that follow in the scene graph. Each shape node may interpret bindings differently. For example, a Sphere node is always drawn using the first material in the material node, no matter what the current MaterialBinding, while a Cube node may use six different materials to draw each of its six faces, depending on the MaterialBinding.
+ */
 class Vrml_MaterialBinding {
 }
 
@@ -27502,6 +35836,9 @@ class Vrml_MaterialBinding_1 extends Vrml_MaterialBinding {}
 
 class Vrml_MaterialBinding_2 extends Vrml_MaterialBinding {}
 
+/**
+ * defines a MatrixTransform node of VRML specifying matrix and transform properties. This node defines 3D transformation with a 4 by 4 matrix. By default : a11=1 a12=0 a13=0 a14=0 a21=0 a22=1 a23=0 a24=0 a31=0 a32=0 a33=1 a34=0 a41=0 a42=0 a43=0 a44=1 It is written to the file in row-major order as 16 Real numbers separated by whitespace. For example , matrix expressing a translation of 7.3 units along the X axis is written as: 1 0 0 0 0 1 0 0 0 0 1 0 7.3 0 0 1
+ */
 class Vrml_MatrixTransform {
 }
 
@@ -27509,6 +35846,9 @@ class Vrml_MatrixTransform_1 extends Vrml_MatrixTransform {}
 
 class Vrml_MatrixTransform_2 extends Vrml_MatrixTransform {}
 
+/**
+ * defines a Normal node of VRML specifying properties of geometry and its appearance. This node defines a set of 3D surface normal vectors to be used by vertex-based shape nodes (IndexedFaceSet, IndexedLineSet, PointSet) that follow it in the scene graph. This node does not produce a visible result during rendering; it simply replaces the current normals in the rendering state for subsequent nodes to use. This node contains one multiple-valued field that contains the normal vectors.
+ */
 class Vrml_Normal extends Standard_Transient {
 }
 
@@ -27516,6 +35856,9 @@ class Vrml_Normal_1 extends Vrml_Normal {}
 
 class Vrml_Normal_2 extends Vrml_Normal {}
 
+/**
+ * defines a NormalBinding node of VRML specifying properties of geometry and its appearance. This node specifies how the current normals are bound to shapes that follow in the scene graph. Each shape node may interpret bindings differently. The bindings for faces and vertices are meaningful only for shapes that are made from faces and vertices. Similarly, the indexed bindings are only used by the shapes that allow indexing. For bindings that require multiple normals, be sure to have at least as many normals defined as are necessary; otherwise, errors will occur.
+ */
 class Vrml_NormalBinding {
 }
 
@@ -27523,6 +35866,9 @@ class Vrml_NormalBinding_1 extends Vrml_NormalBinding {}
 
 class Vrml_NormalBinding_2 extends Vrml_NormalBinding {}
 
+/**
+ * specifies a OrthographicCamera node of VRML specifying properties of cameras. An orthographic camera defines a parallel projection from a viewpoint. This camera does not diminish objects with distance, as a PerspectiveCamera does. The viewing volume for an orthographic camera is a rectangular parallelepiped (a box).
+ */
 class Vrml_OrthographicCamera {
 }
 
@@ -27530,6 +35876,9 @@ class Vrml_OrthographicCamera_1 extends Vrml_OrthographicCamera {}
 
 class Vrml_OrthographicCamera_2 extends Vrml_OrthographicCamera {}
 
+/**
+ * specifies a PerspectiveCamera node of VRML specifying properties of cameras. A perspective camera defines a perspective projection from a viewpoint. The viewing volume for a perspective camera is a truncated right pyramid.
+ */
 class Vrml_PerspectiveCamera {
 }
 
@@ -27537,6 +35886,9 @@ class Vrml_PerspectiveCamera_1 extends Vrml_PerspectiveCamera {}
 
 class Vrml_PerspectiveCamera_2 extends Vrml_PerspectiveCamera {}
 
+/**
+ * defines a point light node of VRML specifying properties of lights. This node defines a point light source at a fixed 3D location A point source illuminates equally in all directions; that is omni-directional. Color is written as an RGB triple. Light intensity must be in the range 0.0 to 1.0, inclusive.
+ */
 class Vrml_PointLight {
 }
 
@@ -27544,9 +35896,15 @@ class Vrml_PointLight_1 extends Vrml_PointLight {}
 
 class Vrml_PointLight_2 extends Vrml_PointLight {}
 
+/**
+ * defines a PointSet node of VRML specifying geometry shapes.
+ */
 class Vrml_PointSet {
 }
 
+/**
+ * defines a Rotation node of VRML specifying matrix and transform properties. This node defines a 3D rotation about an arbitrary axis through the origin. By default : myRotation = (0 0 1 0)
+ */
 class Vrml_Rotation {
 }
 
@@ -27554,6 +35912,9 @@ class Vrml_Rotation_1 extends Vrml_Rotation {}
 
 class Vrml_Rotation_2 extends Vrml_Rotation {}
 
+/**
+ * defines SFImage type of VRML field types.
+ */
 class Vrml_SFImage extends Standard_Transient {
 }
 
@@ -27561,6 +35922,9 @@ class Vrml_SFImage_1 extends Vrml_SFImage {}
 
 class Vrml_SFImage_2 extends Vrml_SFImage {}
 
+/**
+ * defines SFRotation type of VRML field types. The 4 values represent an axis of rotation followed by amount of right-handed rotation about the that axis, in radians.
+ */
 class Vrml_SFRotation {
 }
 
@@ -27568,6 +35932,9 @@ class Vrml_SFRotation_1 extends Vrml_SFRotation {}
 
 class Vrml_SFRotation_2 extends Vrml_SFRotation {}
 
+/**
+ * defines a Scale node of VRML specifying transform properties. This node defines a 3D scaling about the origin. By default : myRotation = (1 1 1)
+ */
 class Vrml_Scale {
 }
 
@@ -27575,6 +35942,9 @@ class Vrml_Scale_1 extends Vrml_Scale {}
 
 class Vrml_Scale_2 extends Vrml_Scale {}
 
+/**
+ * defines a Separator node of VRML specifying group properties. This group node performs a push (save) of the traversal state before traversing its children and a pop (restore) after traversing them. This isolates the separator's children from the rest of the scene graph. A separator can include lights, cameras, coordinates, normals, bindings, and all other properties. Separators can also perform render culling. Render culling skips over traversal of the separator's children if they are not going to be rendered, based on the comparison of the separator's bounding box with the current view volume. Culling is controlled by the renderCulling field. These are set to AUTO by default, allowing the implementation to decide whether or not to cull.
+ */
 class Vrml_Separator {
 }
 
@@ -27582,12 +35952,21 @@ class Vrml_Separator_1 extends Vrml_Separator {}
 
 class Vrml_Separator_2 extends Vrml_Separator {}
 
+/**
+ * defines a ShapeHints node of VRML specifying properties of geometry and its appearance. The ShapeHints node indicates that IndexedFaceSets are solid, contain ordered vertices, or contain convex faces. These hints allow VRML implementations to optimize certain rendering features. Optimizations that may be performed include enabling back-face culling and disabling two-sided lighting. For example, if an object is solid and has ordered vertices, an implementation may turn on backface culling and turn off two-sided lighting. To ensure that an IndexedFaceSet can be viewed from either direction, set shapeType to be UNKNOWN_SHAPE_TYPE. If you know that your shapes are closed and will alwsys be viewed from the outside, set vertexOrdering to be either CLOCKWISE or COUNTERCLOCKWISE (depending on how you built your object), and set shapeType to be SOLID. Placing this near the top of your VRML file will allow the scene to be rendered much faster. The ShapeHints node also affects how default normals are generated. When an IndexedFaceSet has to generate default normals, it uses the creaseAngle field to determine which edges should be smoothly shaded and which ones should have a sharp crease. The crease angle is the angle between surface normals on adjacent polygons. For example, a crease angle of .5 radians (the default value) means that an edge between two adjacent polygonal faces will be smooth shaded if the normals to the two faces form an angle that is less than .5 radians (about 30 degrees). Otherwise, it will be faceted.
+ */
 class Vrml_ShapeHints {
 }
 
+/**
+ * defines a Sphere node of VRML specifying geometry shapes. This node represents a sphere. By default , the sphere is centred at (0,0,0) and has a radius of 1.
+ */
 class Vrml_Sphere {
 }
 
+/**
+ * specifies a spot light node of VRML nodes specifying properties of lights. This node defines a spotlight light source. A spotlight is placed at a fixed location in 3D-space and illuminates in a cone along a particular direction. The intensity of the illumination drops off exponentially as a ray of light diverges from this direction toward the edges of cone. The rate of drop-off and agle of the cone are controlled by the dropOfRate and cutOffAngle Color is written as an RGB triple. Light intensity must be in the range 0.0 to 1.0, inclusive.
+ */
 class Vrml_SpotLight {
 }
 
@@ -27595,9 +35974,15 @@ class Vrml_SpotLight_1 extends Vrml_SpotLight {}
 
 class Vrml_SpotLight_2 extends Vrml_SpotLight {}
 
+/**
+ * defines a Switch node of VRML specifying group properties. This group node traverses one, none, or all of its children. One can use this node to switch on and off the effects of some properties or to switch between different properties. The whichChild field specifies the index of the child to traverse, where the first child has index 0. A value of -1 (the default) means do not traverse any children. A value of -3 traverses all children, making the switch behave exactly like a regular Group.
+ */
 class Vrml_Switch {
 }
 
+/**
+ * defines a Texture2 node of VRML specifying properties of geometry and its appearance. This property node defines a texture map and parameters for that map The texture can be read from the URL specified by the filename field. To turn off texturing, set the filename field to an empty string (""). Textures can alsobe specified inline by setting the image field to contain the texture data. By default : myFilename ("") myImage (0 0 0) myWrapS (Vrml_REPEAT) myWrapT (Vrml_REPEAT)
+ */
 class Vrml_Texture2 {
 }
 
@@ -27605,6 +35990,9 @@ class Vrml_Texture2_1 extends Vrml_Texture2 {}
 
 class Vrml_Texture2_2 extends Vrml_Texture2 {}
 
+/**
+ * defines a Texture2Transform node of VRML specifying properties of geometry and its appearance. This node defines a 2D transformation applied to texture coordinates. This affect the way textures are applied to the surfaces of subsequent shapes. Transformation consisits of(in order) a non-uniform scale about an arbitrary center point, a rotation about that same point, and a translation. This allows a user to change the size and position of the textures on the shape. By default : myTranslation (0 0) myRotation (0) myScaleFactor (1 1) myCenter (0 0)
+ */
 class Vrml_Texture2Transform {
 }
 
@@ -27612,6 +36000,9 @@ class Vrml_Texture2Transform_1 extends Vrml_Texture2Transform {}
 
 class Vrml_Texture2Transform_2 extends Vrml_Texture2Transform {}
 
+/**
+ * defines a TextureCoordinate2 node of VRML specifying properties of geometry and its appearance. This node defines a set of 2D coordinates to be used to map textures to the vertices of subsequent PointSet, IndexedLineSet, or IndexedFaceSet objects. It replaces the current texture coordinates in the rendering state for the shapes to use. Texture coordinates range from 0 to 1 across the texture. The horizontal coordinate, called S, is specified first, followed by vertical coordinate, T. By default : myPoint (0 0)
+ */
 class Vrml_TextureCoordinate2 extends Standard_Transient {
 }
 
@@ -27619,6 +36010,9 @@ class Vrml_TextureCoordinate2_1 extends Vrml_TextureCoordinate2 {}
 
 class Vrml_TextureCoordinate2_2 extends Vrml_TextureCoordinate2 {}
 
+/**
+ * defines a Transform of VRML specifying transform properties. This node defines a geometric 3D transformation consisting of (in order) a (possibly) non-uniform scale about an arbitrary point, a rotation about an arbitrary point and axis and translation. By default : myTranslation (0,0,0) myRotation (0,0,1,0) myScaleFactor (1,1,1) myScaleOrientation (0,0,1,0) myCenter (0,0,0)
+ */
 class Vrml_Transform {
 }
 
@@ -27626,9 +36020,15 @@ class Vrml_Transform_1 extends Vrml_Transform {}
 
 class Vrml_Transform_2 extends Vrml_Transform {}
 
+/**
+ * defines a TransformSeparator node of VRML specifying group properties. This group node is similar to separator node in that it saves state before traversing its children and restores it afterwards. This node can be used to isolate transformations to light sources or objects.
+ */
 class Vrml_TransformSeparator {
 }
 
+/**
+ * defines a Translation of VRML specifying transform properties. This node defines a translation by 3D vector. By default : myTranslation (0,0,0)
+ */
 class Vrml_Translation {
 }
 
@@ -27636,9 +36036,15 @@ class Vrml_Translation_1 extends Vrml_Translation {}
 
 class Vrml_Translation_2 extends Vrml_Translation {}
 
+/**
+ * defines a WWWAnchor node of VRML specifying group properties. The WWWAnchor group node loads a new scene into a VRML browser when one of its children is closen. Exactly how a user "chooses" a child of the WWWAnchor is up to the VRML browser. WWWAnchor with an empty ("") name does nothing when its children are chosen. WWWAnchor behaves like a Separator, pushing the traversal state before traversing its children and popping it afterwards.
+ */
 class Vrml_WWWAnchor {
 }
 
+/**
+ * defines a WWWInline node of VRML specifying group properties. The WWWInline group node reads its children from anywhere in the World Wide Web. Exactly when its children are read is not defined; reading the children may be delayed until the WWWInline is actually displayed. WWWInline with an empty ("") name does nothing. WWWInline behaves like a Separator, pushing the traversal state before traversing its children and popping it afterwards. By defaults: myName ("") myBboxSize (0,0,0) myBboxCenter (0,0,0)
+ */
 class Vrml_WWWInline {
 }
 
@@ -27653,6 +36059,9 @@ class WNT_ClassDefinitionError_1 extends WNT_ClassDefinitionError {}
 
 class WNT_ClassDefinitionError_2 extends WNT_ClassDefinitionError {}
 
+/**
+ * Access object to store datum
+ */
 class XCAFDimTolObjects_DatumObject extends Standard_Transient {
 }
 
@@ -27660,6 +36069,9 @@ class XCAFDimTolObjects_DatumObject_1 extends XCAFDimTolObjects_DatumObject {}
 
 class XCAFDimTolObjects_DatumObject_2 extends XCAFDimTolObjects_DatumObject {}
 
+/**
+ * Access object to store dimension data
+ */
 class XCAFDimTolObjects_DimensionObject extends Standard_Transient {
 }
 
@@ -27667,6 +36079,9 @@ class XCAFDimTolObjects_DimensionObject_1 extends XCAFDimTolObjects_DimensionObj
 
 class XCAFDimTolObjects_DimensionObject_2 extends XCAFDimTolObjects_DimensionObject {}
 
+/**
+ * Access object to store dimension and tolerance
+ */
 class XCAFDimTolObjects_GeomToleranceObject extends Standard_Transient {
 }
 
@@ -27677,12 +36092,21 @@ class XCAFDimTolObjects_GeomToleranceObject_2 extends XCAFDimTolObjects_GeomTole
 class XCAFDimTolObjects_Tool {
 }
 
+/**
+ * Definition of general structure of DECAF document and tools to work with it
+ */
 class XCAFDoc {
 }
 
+/**
+ * attribute to store area
+ */
 class XCAFDoc_Area extends TDF_Attribute {
 }
 
+/**
+ * Unique item identifier in the hierarchical product structure. A full path to an assembly component in the "part-of" graph starting from the root node.
+ */
 class XCAFDoc_AssemblyItemId {
 }
 
@@ -27692,90 +36116,174 @@ class XCAFDoc_AssemblyItemId_2 extends XCAFDoc_AssemblyItemId {}
 
 class XCAFDoc_AssemblyItemId_3 extends XCAFDoc_AssemblyItemId {}
 
+/**
+ * An attribute that describes a weak reference to an assembly item or to a subshape or to an assembly label attribute.
+ */
 class XCAFDoc_AssemblyItemRef extends TDF_Attribute {
 }
 
+/**
+ * attribute to store centroid
+ */
 class XCAFDoc_Centroid extends TDF_Attribute {
 }
 
+/**
+ * Provide tool for management of ClippingPlane section of document. Provide tool to store, retrieve, remove and modify clipping planes. Each clipping plane consists of gp_Pln and its name.
+ */
 class XCAFDoc_ClippingPlaneTool extends TDF_Attribute {
 }
 
+/**
+ * attribute to store color
+ */
 class XCAFDoc_Color extends TDF_Attribute {
 }
 
+/**
+ * Provides tools to store and retrieve attributes (colors) of TopoDS_Shape in and from TDocStd_Document A Document is intended to hold different attributes of ONE shape and it's sub-shapes Provide tools for management of Colors section of document.
+ */
 class XCAFDoc_ColorTool extends TDF_Attribute {
 }
 
+/**
+ * attribute to store datum
+ */
 class XCAFDoc_Datum extends TDF_Attribute {
 }
 
+/**
+ * attribute to store dimension and tolerance
+ */
 class XCAFDoc_DimTol extends TDF_Attribute {
 }
 
+/**
+ * Attribute containing GD&T section of XCAF document. Provide tools for GD&T section management.
+ */
 class XCAFDoc_DimTolTool extends TDF_Attribute {
 }
 
+/**
+ * Attribute that identifies a dimension in the GD&T table. Its parent label is used as a container to store data provided by XCAFDimTolObjects_DimensionObject.
+ */
 class XCAFDoc_Dimension extends TDF_Attribute {
 }
 
+/**
+ * Defines sections structure of an XDE document. attribute marking CAF document as being DECAF document. Creates the sections structure of the document.
+ */
 class XCAFDoc_DocumentTool extends TDF_Attribute {
 }
 
+/**
+ * Tool for edit structure of document.
+ */
 class XCAFDoc_Editor {
 }
 
+/**
+ * This attribute allow user multirelation tree of labels. This GraphNode is experimental Graph that not control looping and redundance. Attribute containg sequence of father's and child's labels. Provide create and work with Graph in XCAFDocument.
+ */
 class XCAFDoc_GraphNode extends TDF_Attribute {
 }
 
+/**
+ * Provides tools to store and retrieve attributes (Layers) of TopoDS_Shape in and from TDocStd_Document A Document is intended to hold different attributes of ONE shape and it's sub-shapes Provide tools for management of Layers section of document.
+ */
 class XCAFDoc_LayerTool extends TDF_Attribute {
 }
 
+/**
+ * attribute to store TopLoc_Location
+ */
 class XCAFDoc_Location extends TDF_Attribute {
 }
 
+/**
+ * attribute to store material
+ */
 class XCAFDoc_Material extends TDF_Attribute {
 }
 
+/**
+ * Provides tools to store and retrieve attributes (materials) of TopoDS_Shape in and from TDocStd_Document A Document is intended to hold different attributes of ONE shape and it's sub-shapes Provide tools for management of Materialss section of document.
+ */
 class XCAFDoc_MaterialTool extends TDF_Attribute {
 }
 
+/**
+ * A base note attribute. Any note contains the name of the user created the note and the creation timestamp.
+ */
 class XCAFDoc_Note extends TDF_Attribute {
 }
 
+/**
+ * A comment note attribute. Contains a textual comment.
+ */
 class XCAFDoc_NoteBalloon extends XCAFDoc_NoteComment {
 }
 
 class XCAFDoc_NoteBinData extends XCAFDoc_Note {
 }
 
+/**
+ * A comment note attribute. Contains a textual comment.
+ */
 class XCAFDoc_NoteComment extends XCAFDoc_Note {
 }
 
+/**
+ * A tool to annotate items in the hierarchical product structure. There are two basic entities, which operates the notes tool: notes and annotated items. A note is a user defined data structure derived from the notes hive. An annotated item is represented by attribute attached to a separate label under the annotated items hive. Notes are linked with annotated items by means of attribute. Notes play parent roles and annotated items - child roles.
+ */
 class XCAFDoc_NotesTool extends TDF_Attribute {
 }
 
+/**
+ * attribute containing map of sub shapes
+ */
 class XCAFDoc_ShapeMapTool extends TDF_Attribute {
 }
 
+/**
+ * A tool to store shapes in an XDE document in the form of assembly structure, and to maintain this structure. Attribute containing Shapes section of DECAF document. Provide tools for management of Shapes section. The API provided by this class allows to work with this structure regardless of its low-level implementation. All the shapes are stored on child labels of a main label which is XCAFDoc_DocumentTool::LabelShapes(). The label for assembly also has sub-labels, each of which represents the instance of another shape in that assembly (component). Such sub-label stores reference to the label of the original shape in the form of TDataStd_TreeNode with GUID XCAFDoc::ShapeRefGUID(), and its location encapsulated into the NamedShape. For correct work with an XDE document, it is necessary to use methods for analysis and methods for working with shapes. For example: if ( STool->IsAssembly(aLabel) ) { Standard_Boolean subchilds = Standard_False; (default) Standard_Integer nbc = STool->NbComponents (aLabel[,subchilds]); } If subchilds is True, commands also consider sub-levels. By default, only level one is checked. In this example, number of children from the first level of assembly will be returned. Methods for creation and initialization: Constructor: XCAFDoc_ShapeTool::XCAFDoc_ShapeTool() Getting a guid: Standard_GUID GetID (); Creation (if does not exist) of ShapeTool on label L: Handle(XCAFDoc_ShapeTool) XCAFDoc_ShapeTool::Set(const TDF_Label& L) Analyze whether shape is a simple shape or an instance or a component of an assembly or it is an assembly ( methods of analysis). For example: STool->IsShape(aLabel) ; Analyze that the label represents a shape (simple shape, assembly or reference) or STool->IsTopLevel(aLabel); Analyze that the label is a label of a top-level shape. Work with simple shapes, assemblies and instances ( methods for work with shapes). For example: Add shape: Standard_Boolean makeAssembly; // True to interpret a Compound as an Assembly, False to take it as a whole aLabel = STool->AddShape(aShape, makeAssembly); Get shape: TDF_Label aLabel... // A label must be present if (aLabel.IsNull()) { ... no such label : abandon .. } TopoDS_Shape aShape; aShape = STool->GetShape(aLabel); if (aShape.IsNull()) { ... this label is not for a Shape ... } To get a label from shape. Standard_Boolean findInstance = Standard_False; (this is default value) aLabel = STool->FindShape(aShape [,findInstance]); if (aLabel.IsNull()) { ... no label found for this shape ... }
+ */
 class XCAFDoc_ShapeTool extends TDF_Attribute {
 }
 
+/**
+ * Attribute to store view
+ */
 class XCAFDoc_View extends TDF_Attribute {
 }
 
+/**
+ * Provides tools to store and retrieve Views in and from TDocStd_Document Each View contains parts XCAFDoc_View attribute with all information about camera and view window. Also each view contain information of displayed shapes and GDTs as sets of shape and GDT labels.
+ */
 class XCAFDoc_ViewTool extends TDF_Attribute {
 }
 
+/**
+ * Attribute storing Material definition for visualization purposes.
+ */
 class XCAFDoc_VisMaterial extends TDF_Attribute {
 }
 
+/**
+ * Provides tools to store and retrieve attributes (visualization materials) of TopoDS_Shape in and from TDocStd_Document.
+ */
 class XCAFDoc_VisMaterialTool extends TDF_Attribute {
 }
 
+/**
+ * attribute to store volume
+ */
 class XCAFDoc_Volume extends TDF_Attribute {
 }
 
+/**
+ * object to store note auxiliary data
+ */
 class XCAFNoteObjects_NoteObject extends Standard_Transient {
 }
 
@@ -27783,12 +36291,21 @@ class XCAFNoteObjects_NoteObject_1 extends XCAFNoteObjects_NoteObject {}
 
 class XCAFNoteObjects_NoteObject_2 extends XCAFNoteObjects_NoteObject {}
 
+/**
+ * Presentation (visualiation, selection etc.) tools for DECAF documents
+ */
 class XCAFPrs {
 }
 
+/**
+ * Implements AIS_InteractiveObject functionality for shape in DECAF document.
+ */
 class XCAFPrs_AISObject extends AIS_ColoredShape {
 }
 
+/**
+ * Document iterator through shape nodes.
+ */
 class XCAFPrs_DocumentExplorer {
 }
 
@@ -27798,18 +36315,33 @@ class XCAFPrs_DocumentExplorer_2 extends XCAFPrs_DocumentExplorer {}
 
 class XCAFPrs_DocumentExplorer_3 extends XCAFPrs_DocumentExplorer {}
 
+/**
+ * Auxiliary tool for iterating through Path identification string.
+ */
 class XCAFPrs_DocumentIdIterator {
 }
 
+/**
+ * Implements a driver for presentation of shapes in DECAF document. Its the only purpose is to initialize and return XCAFPrs_AISObject object on request
+ */
 class XCAFPrs_Driver extends TPrsStd_Driver {
 }
 
+/**
+ * Represents a set of styling settings applicable to a (sub)shape
+ */
 class XCAFPrs_Style {
 }
 
+/**
+ * Texture holder.
+ */
 class XCAFPrs_Texture extends Graphic3d_Texture2Dmanual {
 }
 
+/**
+ * Access object for saved view
+ */
 class XCAFView_Object extends Standard_Transient {
 }
 
@@ -27823,12 +36355,21 @@ class XSAlgo {
 class XSAlgo_AlgoContainer extends Standard_Transient {
 }
 
+/**
+ * Returns tools used by AlgoContainer
+ */
 class XSAlgo_ToolContainer extends Standard_Transient {
 }
 
+/**
+ * This package provides complements to IFSelect & Co for control of a session
+ */
 class XSControl {
 }
 
+/**
+ * From a TopoDS_Shape, or from the entity which has produced it, searches for the shapes, and the entities which have produced them in last transfer, which are adjacent to it by VERTICES
+ */
 class XSControl_ConnectedShapes extends IFSelect_SelectExplore {
 }
 
@@ -27836,15 +36377,27 @@ class XSControl_ConnectedShapes_1 extends XSControl_ConnectedShapes {}
 
 class XSControl_ConnectedShapes_2 extends XSControl_ConnectedShapes {}
 
+/**
+ * This class allows a general X-STEP engine to run generic functions on any interface norm, in the same way. It includes the transfer operations. I.e. it gathers the already available general modules, the engine has just to know it
+ */
 class XSControl_Controller extends Standard_Transient {
 }
 
+/**
+ * Defines additionnal commands for XSControl to : - control of initialisation (xinit, xnorm, newmodel) - analyse of the result of a transfer (recorded in a TransientProcess for Read, FinderProcess for Write) : statistics, various lists (roots,complete,abnormal), what about one specific entity, producing a model with the abnormal result
+ */
 class XSControl_FuncShape {
 }
 
+/**
+ * Functions from XSControl gives access to actions which can be commanded with the resources provided by XSControl: especially Controller and Transfer
+ */
 class XSControl_Functions {
 }
 
+/**
+ * A groundwork to convert a shape to data which complies with a particular norm. This data can be that of a whole model or that of a specific list of entities in the model. You specify the list using a single selection or a combination of selections. A selection is an operator which computes a list of entities from a list given in input. To specify the input, you can use: - A predefined selection such as "xst-transferrable-roots" - A filter based on a signature. A signature is an operator which returns a string from an entity according to its type. For example: - "xst-type" (CDL) - "iges-level" - "step-type". A filter can be based on a signature by giving a value to be matched by the string returned. For example, "xst-type(Curve)". If no list is specified, the selection computes its list of entities from the whole model. To use this class, you have to initialize the transfer norm first, as shown in the example below. Example: Control_Reader reader; IFSelect_ReturnStatus status = reader.ReadFile (filename.); When using IGESControl_Reader or STEPControl_Reader - as the above example shows - the reader initializes the norm directly. Note that loading the file only stores the data. It does not translate this data. Shapes are accumulated by successive transfers. The last shape is cleared by: - ClearShapes which allows you to handle a new batch - TransferRoots which restarts the list of shapes from scratch.
+ */
 class XSControl_Reader {
 }
 
@@ -27854,6 +36407,9 @@ class XSControl_Reader_2 extends XSControl_Reader {}
 
 class XSControl_Reader_3 extends XSControl_Reader {}
 
+/**
+ * This selection selects the entities which are recognised for transfer by an Actor for Read : current one or another one.
+ */
 class XSControl_SelectForTransfer extends IFSelect_SelectExtract {
 }
 
@@ -27861,6 +36417,9 @@ class XSControl_SelectForTransfer_1 extends XSControl_SelectForTransfer {}
 
 class XSControl_SelectForTransfer_2 extends XSControl_SelectForTransfer {}
 
+/**
+ * This Signatures gives the Transfer Status of an entity, as recorded in a TransferProcess. It can be : - Void : not recorded, or recorded as void with no message (attributes are not taken into account) - Warning : no result, warning message(s), no fail - Fail : no result, fail messages (with or without warning) - Result.. : result, no message (neither warning nor fail) Result.. i.e. Result:TypeName of the result - Result../Warning : result, with warning but no fail - Result../Fail : result, with fail (.e. bad result) - Fail on run : no result yet recorded, no message, but an exception occurred while recording the result (this should not appear and indicates a programming error)
+ */
 class XSControl_SignTransferStatus extends IFSelect_Signature {
 }
 
@@ -27868,21 +36427,39 @@ class XSControl_SignTransferStatus_1 extends XSControl_SignTransferStatus {}
 
 class XSControl_SignTransferStatus_2 extends XSControl_SignTransferStatus {}
 
+/**
+ * A TransferReader performs, manages, handles results of, transfers done when reading a file (i.e. from entities of an InterfaceModel, to objects for Imagine)
+ */
 class XSControl_TransferReader extends Standard_Transient {
 }
 
+/**
+ * TransferWriter gives help to control transfer to write a file after having converted data from Cascade/Imagine
+ */
 class XSControl_TransferWriter extends Standard_Transient {
 }
 
+/**
+ * This class provides various useful utility routines, to facilitate handling of most common data structures : transients (type, type name ...), strings (ascii or extended, pointed or handled or ...), shapes (reading, writing, testing ...), sequences & arrays (of strings, of transients, of shapes ...), ...
+ */
 class XSControl_Utils {
 }
 
+/**
+ * Defines a receptacle for externally defined variables, each one has a name
+ */
 class XSControl_Vars extends Standard_Transient {
 }
 
+/**
+ * This WorkSession completes the basic one, by adding : - use of Controller, with norm selection... - management of transfers (both ways) with auxiliary classes TransferReader and TransferWriter -> these transfers may work with a Context List : its items are given by the user, according to the transfer to be i.e. it is interpreted by the Actors Each item is accessed by a Name
+ */
 class XSControl_WorkSession extends IFSelect_WorkSession {
 }
 
+/**
+ * This class gives a simple way to create then write a Model compliant to a given norm, from a Shape The model can then be edited by tools by other appropriate tools
+ */
 class XSControl_Writer {
 }
 
@@ -27917,24 +36494,45 @@ class XmlLDrivers_NamespaceDef_1 extends XmlLDrivers_NamespaceDef {}
 
 class XmlLDrivers_NamespaceDef_2 extends XmlLDrivers_NamespaceDef {}
 
+/**
+ * This package provides classes and methods to translate a transient DF into a persistent one and vice versa.
+ */
 class XmlMDF {
 }
 
+/**
+ * Attribute Storage/Retrieval Driver.
+ */
 class XmlMDF_ADriver extends Standard_Transient {
 }
 
+/**
+ * A driver table is an object building links between object types and object drivers. In the translation process, a driver table is asked to give a translation driver for each current object to be translated.
+ */
 class XmlMDF_ADriverTable extends Standard_Transient {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDF_ReferenceDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDF_TagSourceDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Storage and Retrieval drivers for modelling attributes. Transient attributes are defined in package TDataStd.
+ */
 class XmlMDataStd {
 }
 
+/**
+ * TDataStd_AsciiString attribute Driver.
+ */
 class XmlMDataStd_AsciiStringDriver extends XmlMDF_ADriver {
 }
 
@@ -27947,45 +36545,78 @@ class XmlMDataStd_BooleanListDriver extends XmlMDF_ADriver {
 class XmlMDataStd_ByteArrayDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataStd_CommentDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataStd_DirectoryDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataStd_ExpressionDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataStd_ExtStringArrayDriver extends XmlMDF_ADriver {
 }
 
 class XmlMDataStd_ExtStringListDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * TDataStd_IntPackedMap attribute Driver.
+ */
 class XmlMDataStd_IntPackedMapDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataStd_IntegerArrayDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataStd_IntegerDriver extends XmlMDF_ADriver {
 }
 
 class XmlMDataStd_IntegerListDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataStd_NameDriver extends XmlMDF_ADriver {
 }
 
 class XmlMDataStd_NamedDataDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataStd_NoteBookDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataStd_RealArrayDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataStd_RealDriver extends XmlMDF_ADriver {
 }
 
@@ -27998,72 +36629,135 @@ class XmlMDataStd_ReferenceArrayDriver extends XmlMDF_ADriver {
 class XmlMDataStd_ReferenceListDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataStd_RelationDriver extends XmlMDF_ADriver {
 }
 
 class XmlMDataStd_TickDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataStd_TreeNodeDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataStd_UAttributeDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataStd_VariableDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Storage and Retrieval drivers for modelling attributes. Transient attributes are defined in package TDataXtd.
+ */
 class XmlMDataXtd {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataXtd_AxisDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataXtd_ConstraintDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataXtd_GeometryDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataXtd_PatternStdDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataXtd_PlacementDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataXtd_PlaneDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataXtd_PointDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataXtd_PositionDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataXtd_PresentationDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDataXtd_ShapeDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * TDataStd_Mesh attribute XML Driver.
+ */
 class XmlMDataXtd_TriangulationDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Driver for TDocStd_XLink
+ */
 class XmlMDocStd {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMDocStd_XLinkDriver extends XmlMDF_ADriver {
 }
 
 class XmlMFunction {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMFunction_FunctionDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * XML persistence driver for dependencies of a function.
+ */
 class XmlMFunction_GraphNodeDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * XML persistence driver for a scope of functions.
+ */
 class XmlMFunction_ScopeDriver extends XmlMDF_ADriver {
 }
 
@@ -28076,6 +36770,9 @@ class XmlMNaming_NamedShapeDriver extends XmlMDF_ADriver {
 class XmlMNaming_NamingDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * The XmlMNaming_Shape1 is the Persistent view of a TopoDS_Shape.
+ */
 class XmlMNaming_Shape1 {
 }
 
@@ -28083,87 +36780,171 @@ class XmlMNaming_Shape1_1 extends XmlMNaming_Shape1 {}
 
 class XmlMNaming_Shape1_2 extends XmlMNaming_Shape1 {}
 
+/**
+ * Storage and Retrieval drivers for modelling attributes. Transient attributes are defined in package XCAFDoc
+ */
 class XmlMXCAFDoc {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_AreaDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_AssemblyItemRefDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_CentroidDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_ClippingPlaneToolDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_ColorDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_ColorToolDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_DatumDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_DimTolDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_DimTolToolDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_DocumentToolDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_GraphNodeDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_LayerToolDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_LocationDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_MaterialDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_MaterialToolDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_NoteBalloonDriver extends XmlMXCAFDoc_NoteCommentDriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_NoteBinDataDriver extends XmlMXCAFDoc_NoteDriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_NoteCommentDriver extends XmlMXCAFDoc_NoteDriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_NoteDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_NotesToolDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_ShapeToolDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_ViewToolDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_VisMaterialDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * XML persistence driver for XCAFDoc_VisMaterialTool.
+ */
 class XmlMXCAFDoc_VisMaterialToolDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * Attribute Driver.
+ */
 class XmlMXCAFDoc_VolumeDriver extends XmlMDF_ADriver {
 }
 
+/**
+ * This package defines services to manage the storage grain of data produced by applications and those classes to manage persistent extern reference.
+ */
 class XmlObjMgt {
 }
 
+/**
+ * The class Array1 represents unidimensionnal array of fixed size known at run time. The range of the index is user defined. Warning: Programs clients of such class must be independant of the range of the first element. Then, a C++ for loop must be written like this for (i = A->Lower(); i <= A->Upper(); i++)
+ */
 class XmlObjMgt_Array1 {
 }
 
@@ -28171,9 +36952,15 @@ class XmlObjMgt_Array1_1 extends XmlObjMgt_Array1 {}
 
 class XmlObjMgt_Array1_2 extends XmlObjMgt_Array1 {}
 
+/**
+ * Translation of gp (simple geometry) objects
+ */
 class XmlObjMgt_GP {
 }
 
+/**
+ * root for XML-persistence
+ */
 class XmlObjMgt_Persistent {
 }
 
@@ -28183,12 +36970,21 @@ class XmlObjMgt_Persistent_2 extends XmlObjMgt_Persistent {}
 
 class XmlObjMgt_Persistent_3 extends XmlObjMgt_Persistent {}
 
+/**
+ * Retrieval relocation table is modeled as a child class of TColStd_DataMapOfIntegerTransient that stores a handle to the file header section. With that attribute drivers have access to the file header section.
+ */
 class XmlObjMgt_RRelocationTable extends TColStd_DataMapOfIntegerTransient {
 }
 
+/**
+ * Stored relocation table is modeled as a child class of TColStd_DataMapOfIntegerTransient that stores a handle to the file header section. With that attribute drivers have access to the file header section.
+ */
 class XmlObjMgt_SRelocationTable extends TColStd_IndexedMapOfTransient {
 }
 
+/**
+ * Class for registering storage/retrieval drivers for TObj XML persistence
+ */
 class XmlTObjDrivers {
 }
 
@@ -28216,12 +37012,21 @@ class XmlTObjDrivers_XYZDriver extends XmlMDF_ADriver {
 class XmlXCAFDrivers {
 }
 
+/**
+ * retrieval driver of a XS document
+ */
 class XmlXCAFDrivers_DocumentRetrievalDriver extends XmlDrivers_DocumentRetrievalDriver {
 }
 
+/**
+ * storage driver of a XS document
+ */
 class XmlXCAFDrivers_DocumentStorageDriver extends XmlDrivers_DocumentStorageDriver {
 }
 
+/**
+ * This class implements the following algorithms used to create Circ from gp.
+ */
 class gce_MakeCirc extends gce_Root {
 }
 
@@ -28241,6 +37046,9 @@ class gce_MakeCirc_7 extends gce_MakeCirc {}
 
 class gce_MakeCirc_8 extends gce_MakeCirc {}
 
+/**
+ * This class implements the following algorithms used to create Circ2d from gp.
+ */
 class gce_MakeCirc2d extends gce_Root {
 }
 
@@ -28258,6 +37066,9 @@ class gce_MakeCirc2d_6 extends gce_MakeCirc2d {}
 
 class gce_MakeCirc2d_7 extends gce_MakeCirc2d {}
 
+/**
+ * This class implements the following algorithms used to create a Cone from gp. * Create a Cone coaxial to another and passing through a point. * Create a Cone coaxial to another at a distance <Dist>. * Create a Cone by 4 points. * Create a Cone by its axis and 2 points. * Create a Cone by 2 points and 2 radius. * Create a Cone by an Ax2 an angle and the radius of its reference section.
+ */
 class gce_MakeCone extends gce_Root {
 }
 
@@ -28275,6 +37086,9 @@ class gce_MakeCone_6 extends gce_MakeCone {}
 
 class gce_MakeCone_7 extends gce_MakeCone {}
 
+/**
+ * This class implements the following algorithms used to create a Cylinder from gp. * Create a Cylinder coaxial to another and passing through a point. * Create a Cylinder coaxial to another at a distance <Dist>. * Create a Cylinder with 3 points. * Create a Cylinder by its axis and radius. * Create a cylinder by its circular base.
+ */
 class gce_MakeCylinder extends gce_Root {
 }
 
@@ -28290,6 +37104,9 @@ class gce_MakeCylinder_5 extends gce_MakeCylinder {}
 
 class gce_MakeCylinder_6 extends gce_MakeCylinder {}
 
+/**
+ * This class implements the following algorithms used to create a Dir from gp. * Create a Dir parallel to another and passing through a point. * Create a Dir passing through 2 points. * Create a Dir from its axis (Ax1 from gp). * Create a Dir from a point and a direction.
+ */
 class gce_MakeDir extends gce_Root {
 }
 
@@ -28301,6 +37118,9 @@ class gce_MakeDir_3 extends gce_MakeDir {}
 
 class gce_MakeDir_4 extends gce_MakeDir {}
 
+/**
+ * This class implements the following algorithms used to create a Dir2d from gp. * Create a Dir2d with 2 points. * Create a Dir2d with a Vec2d. * Create a Dir2d with a XY from gp. * Create a Dir2d with a 2 Reals (Coordinates).
+ */
 class gce_MakeDir2d extends gce_Root {
 }
 
@@ -28312,6 +37132,9 @@ class gce_MakeDir2d_3 extends gce_MakeDir2d {}
 
 class gce_MakeDir2d_4 extends gce_MakeDir2d {}
 
+/**
+ * This class implements the following algorithms used to create an ellipse from gp.
+ */
 class gce_MakeElips extends gce_Root {
 }
 
@@ -28319,6 +37142,9 @@ class gce_MakeElips_1 extends gce_MakeElips {}
 
 class gce_MakeElips_2 extends gce_MakeElips {}
 
+/**
+ * This class implements the following algorithms used to create Elips2d from gp.
+ */
 class gce_MakeElips2d extends gce_Root {
 }
 
@@ -28328,6 +37154,9 @@ class gce_MakeElips2d_2 extends gce_MakeElips2d {}
 
 class gce_MakeElips2d_3 extends gce_MakeElips2d {}
 
+/**
+ * This class implements the following algorithms used to create Hyperbola from gp. * Create an Hyperbola from its center, and two points: one on its axis of symmetry giving the major radius, the other giving the value of the small radius. The three points give the plane of the hyperbola. * Create an hyperbola from its axisplacement and its MajorRadius and its MinorRadius.
+ */
 class gce_MakeHypr extends gce_Root {
 }
 
@@ -28335,6 +37164,9 @@ class gce_MakeHypr_1 extends gce_MakeHypr {}
 
 class gce_MakeHypr_2 extends gce_MakeHypr {}
 
+/**
+ * This class implements the following algorithms used to create a 2d Hyperbola from gp. * Create a 2d Hyperbola from its center and two points: one on its axis of symmetry giving the major radius, the other giving the value of the small radius. * Create a 2d Hyperbola from its major axis and its major radius and its minor radius.
+ */
 class gce_MakeHypr2d extends gce_Root {
 }
 
@@ -28344,6 +37176,9 @@ class gce_MakeHypr2d_2 extends gce_MakeHypr2d {}
 
 class gce_MakeHypr2d_3 extends gce_MakeHypr2d {}
 
+/**
+ * This class implements the following algorithms used to create a Lin from gp. * Create a Lin parallel to another and passing through a point. * Create a Lin passing through 2 points. * Create a lin from its axis (Ax1 from gp). * Create a lin from a point and a direction.
+ */
 class gce_MakeLin extends gce_Root {
 }
 
@@ -28355,6 +37190,9 @@ class gce_MakeLin_3 extends gce_MakeLin {}
 
 class gce_MakeLin_4 extends gce_MakeLin {}
 
+/**
+ * This class implements the following algorithms used to create Lin2d from gp.
+ */
 class gce_MakeLin2d extends gce_Root {
 }
 
@@ -28370,6 +37208,9 @@ class gce_MakeLin2d_5 extends gce_MakeLin2d {}
 
 class gce_MakeLin2d_6 extends gce_MakeLin2d {}
 
+/**
+ * This class mplements elementary construction algorithms for a symmetrical transformation in 3D space about a point, axis or plane. The result is a gp_Trsf transformation. A MakeMirror object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class gce_MakeMirror {
 }
 
@@ -28385,6 +37226,9 @@ class gce_MakeMirror_5 extends gce_MakeMirror {}
 
 class gce_MakeMirror_6 extends gce_MakeMirror {}
 
+/**
+ * This class implements elementary construction algorithms for a symmetrical transformation in 2D space about a point or axis. The result is a gp_Trsf2d transformation. A MakeMirror2d object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and consulting the result.
+ */
 class gce_MakeMirror2d {
 }
 
@@ -28396,6 +37240,9 @@ class gce_MakeMirror2d_3 extends gce_MakeMirror2d {}
 
 class gce_MakeMirror2d_4 extends gce_MakeMirror2d {}
 
+/**
+ * This class implements the following algorithms used to create Parab from gp. Defines the parabola in the parameterization range : ]-infinite, +infinite[ The vertex of the parabola is the "Location" point of the local coordinate system (axis placement) of the parabola.
+ */
 class gce_MakeParab extends gce_Root {
 }
 
@@ -28403,6 +37250,9 @@ class gce_MakeParab_1 extends gce_MakeParab {}
 
 class gce_MakeParab_2 extends gce_MakeParab {}
 
+/**
+ * This class implements the following algorithms used to create Parab2d from gp. Defines an infinite parabola. An axis placement one axis defines the local cartesian coordinate system ("XAxis") of the parabola. The vertex of the parabola is the "Location" point of the local coordinate system of the parabola. The "XAxis" of the parabola is its axis of symmetry. The "XAxis" is oriented from the vertex of the parabola to the Focus of the parabola. The "YAxis" is parallel to the directrix of the parabola and its "Location" point is the vertex of the parabola. The equation of the parabola in the local coordinate system is Y**2 = (2*P) * X P is the distance between the focus and the directrix of the parabola called Parameter). The focal length F = P/2 is the distance between the vertex and the focus of the parabola.
+ */
 class gce_MakeParab2d extends gce_Root {
 }
 
@@ -28414,6 +37264,9 @@ class gce_MakeParab2d_3 extends gce_MakeParab2d {}
 
 class gce_MakeParab2d_4 extends gce_MakeParab2d {}
 
+/**
+ * This class implements the following algorithms used to create a Plane from gp. * Create a Pln parallel to another and passing through a point. * Create a Pln passing through 3 points. * Create a Pln by its normal. Defines a non-persistent plane. The plane is located in 3D space with an axis placement two axis. It is the local coordinate system of the plane.
+ */
 class gce_MakePln extends gce_Root {
 }
 
@@ -28433,6 +37286,9 @@ class gce_MakePln_7 extends gce_MakePln {}
 
 class gce_MakePln_8 extends gce_MakePln {}
 
+/**
+ * This class implements elementary construction algorithms for a rotation in 3D space. The result is a gp_Trsf transformation. A MakeRotation object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class gce_MakeRotation {
 }
 
@@ -28442,15 +37298,27 @@ class gce_MakeRotation_2 extends gce_MakeRotation {}
 
 class gce_MakeRotation_3 extends gce_MakeRotation {}
 
+/**
+ * Implements an elementary construction algorithm for a rotation in 2D space. The result is a gp_Trsf2d transformation. A MakeRotation2d object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class gce_MakeRotation2d {
 }
 
+/**
+ * Implements an elementary construction algorithm for a scaling transformation in 3D space. The result is a gp_Trsf transformation. A MakeScale object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class gce_MakeScale {
 }
 
+/**
+ * This class implements an elementary construction algorithm for a scaling transformation in 2D space. The result is a gp_Trsf2d transformation. A MakeScale2d object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class gce_MakeScale2d {
 }
 
+/**
+ * This class implements elementary construction algorithms for a translation in 3D space. The result is a gp_Trsf transformation. A MakeTranslation object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class gce_MakeTranslation {
 }
 
@@ -28458,6 +37326,9 @@ class gce_MakeTranslation_1 extends gce_MakeTranslation {}
 
 class gce_MakeTranslation_2 extends gce_MakeTranslation {}
 
+/**
+ * This class implements elementary construction algorithms for a translation in 2D space. The result is a gp_Trsf2d transformation. A MakeTranslation2d object provides a framework for: - defining the construction of the transformation, - implementing the construction algorithm, and - consulting the result.
+ */
 class gce_MakeTranslation2d {
 }
 
@@ -28465,12 +37336,21 @@ class gce_MakeTranslation2d_1 extends gce_MakeTranslation2d {}
 
 class gce_MakeTranslation2d_2 extends gce_MakeTranslation2d {}
 
+/**
+ * This class implements the common services for all classes of gce which report error.
+ */
 class gce_Root {
 }
 
+/**
+ * The geometric processor package, called gp, provides an implementation of entities used : . for algebraic calculation such as "XYZ" coordinates, "Mat" matrix . for basis analytic geometry such as Transformations, point, vector, line, plane, axis placement, conics, and elementary surfaces. These entities are defined in 2d and 3d space. All the classes of this package are non-persistent.
+ */
 class gp {
 }
 
+/**
+ * Describes an axis in 3D space. An axis is defined by: - its origin (also referred to as its "Location point"), and - its unit vector (referred to as its "Direction" or "main Direction"). An axis is used: - to describe 3D geometric entities (for example, the axis of a revolution entity). It serves the same purpose as the STEP function "axis placement one axis", or - to define geometric transformations (axis of symmetry, axis of rotation, and so on). For example, this entity can be used to locate a geometric entity or to define a symmetry axis.
+ */
 class gp_Ax1 {
 }
 
@@ -28478,6 +37358,9 @@ class gp_Ax1_1 extends gp_Ax1 {}
 
 class gp_Ax1_2 extends gp_Ax1 {}
 
+/**
+ * Describes a right-handed coordinate system in 3D space. A coordinate system is defined by: - its origin (also referred to as its "Location point"), and - three orthogonal unit vectors, termed respectively the "X Direction", the "Y Direction" and the "Direction" (also referred to as the "main Direction"). The "Direction" of the coordinate system is called its "main Direction" because whenever this unit vector is modified, the "X Direction" and the "Y Direction" are recomputed. However, when we modify either the "X Direction" or the "Y Direction", "Direction" is not modified. The "main Direction" is also the "Z Direction". Since an Ax2 coordinate system is right-handed, its "main Direction" is always equal to the cross product of its "X Direction" and "Y Direction". (To define a left-handed coordinate system, use gp_Ax3.) A coordinate system is used: - to describe geometric entities, in particular to position them. The local coordinate system of a geometric entity serves the same purpose as the STEP function "axis placement two axes", or - to define geometric transformations. Note: we refer to the "X Axis", "Y Axis" and "Z Axis", respectively, as to axes having: - the origin of the coordinate system as their origin, and - the unit vectors "X Direction", "Y Direction" and "main Direction", respectively, as their unit vectors. The "Z Axis" is also the "main Axis".
+ */
 class gp_Ax2 {
 }
 
@@ -28487,6 +37370,9 @@ class gp_Ax2_2 extends gp_Ax2 {}
 
 class gp_Ax2_3 extends gp_Ax2 {}
 
+/**
+ * Describes a coordinate system in a plane (2D space). A coordinate system is defined by: - its origin (also referred to as its "Location point"), and - two orthogonal unit vectors, respectively, called the "X Direction" and the "Y Direction". A gp_Ax22d may be right-handed ("direct sense") or left-handed ("inverse" or "indirect sense"). You use a gp_Ax22d to: - describe 2D geometric entities, in particular to position them. The local coordinate system of a geometric entity serves for the same purpose as the STEP function "axis placement two axes", or - define geometric transformations. Note: we refer to the "X Axis" and "Y Axis" as the axes having: - the origin of the coordinate system as their origin, and - the unit vectors "X Direction" and "Y Direction", respectively, as their unit vectors.
+ */
 class gp_Ax22d {
 }
 
@@ -28498,6 +37384,9 @@ class gp_Ax22d_3 extends gp_Ax22d {}
 
 class gp_Ax22d_4 extends gp_Ax22d {}
 
+/**
+ * Describes an axis in the plane (2D space). An axis is defined by: - its origin (also referred to as its "Location point"), and - its unit vector (referred to as its "Direction"). An axis implicitly defines a direct, right-handed coordinate system in 2D space by: - its origin, - its "Direction" (giving the "X Direction" of the coordinate system), and - the unit vector normal to "Direction" (positive angle measured in the trigonometric sense). An axis is used: - to describe 2D geometric entities (for example, the axis which defines angular coordinates on a circle). It serves for the same purpose as the STEP function "axis placement one axis", or - to define geometric transformations (axis of symmetry, axis of rotation, and so on). Note: to define a left-handed 2D coordinate system, use gp_Ax22d.
+ */
 class gp_Ax2d {
 }
 
@@ -28505,6 +37394,9 @@ class gp_Ax2d_1 extends gp_Ax2d {}
 
 class gp_Ax2d_2 extends gp_Ax2d {}
 
+/**
+ * Describes a coordinate system in 3D space. Unlike a gp_Ax2 coordinate system, a gp_Ax3 can be right-handed ("direct sense") or left-handed ("indirect sense"). A coordinate system is defined by: - its origin (also referred to as its "Location point"), and - three orthogonal unit vectors, termed the "X Direction", the "Y Direction" and the "Direction" (also referred to as the "main Direction"). The "Direction" of the coordinate system is called its "main Direction" because whenever this unit vector is modified, the "X Direction" and the "Y Direction" are recomputed. However, when we modify either the "X Direction" or the "Y Direction", "Direction" is not modified. "Direction" is also the "Z Direction". The "main Direction" is always parallel to the cross product of its "X Direction" and "Y Direction". If the coordinate system is right-handed, it satisfies the equation: "main Direction" = "X Direction" ^ "Y Direction" and if it is left-handed, it satisfies the equation: "main Direction" = -"X Direction" ^ "Y Direction" A coordinate system is used: - to describe geometric entities, in particular to position them. The local coordinate system of a geometric entity serves the same purpose as the STEP function "axis placement three axes", or - to define geometric transformations. Note: - We refer to the "X Axis", "Y Axis" and "Z Axis", respectively, as the axes having: - the origin of the coordinate system as their origin, and - the unit vectors "X Direction", "Y Direction" and "main Direction", respectively, as their unit vectors. - The "Z Axis" is also the "main Axis". - gp_Ax2 is used to define a coordinate system that must be always right-handed.
+ */
 class gp_Ax3 {
 }
 
@@ -28516,6 +37408,9 @@ class gp_Ax3_3 extends gp_Ax3 {}
 
 class gp_Ax3_4 extends gp_Ax3 {}
 
+/**
+ * Describes a circle in 3D space. A circle is defined by its radius and positioned in space with a coordinate system (a gp_Ax2 object) as follows: - the origin of the coordinate system is the center of the circle, and - the origin, "X Direction" and "Y Direction" of the coordinate system define the plane of the circle. This positioning coordinate system is the "local coordinate system" of the circle. Its "main Direction" gives the normal vector to the plane of the circle. The "main Axis" of the coordinate system is referred to as the "Axis" of the circle. Note: when a gp_Circ circle is converted into a Geom_Circle circle, some implicit properties of the circle are used explicitly: - the "main Direction" of the local coordinate system gives an implicit orientation to the circle (and defines its trigonometric sense), - this orientation corresponds to the direction in which parameter values increase, - the starting point for parameterization is that of the "X Axis" of the local coordinate system (i.e. the "X Axis" of the circle). See Also gce_MakeCirc which provides functions for more complex circle constructions Geom_Circle which provides additional functions for constructing circles and works, in particular, with the parametric equations of circles
+ */
 class gp_Circ {
 }
 
@@ -28523,6 +37418,9 @@ class gp_Circ_1 extends gp_Circ {}
 
 class gp_Circ_2 extends gp_Circ {}
 
+/**
+ * Describes a circle in the plane (2D space). A circle is defined by its radius and positioned in the plane with a coordinate system (a gp_Ax22d object) as follows: - the origin of the coordinate system is the center of the circle, and - the orientation (direct or indirect) of the coordinate system gives an implicit orientation to the circle (and defines its trigonometric sense). This positioning coordinate system is the "local coordinate system" of the circle. Note: when a gp_Circ2d circle is converted into a Geom2d_Circle circle, some implicit properties of the circle are used explicitly: - the implicit orientation corresponds to the direction in which parameter values increase, - the starting point for parameterization is that of the "X Axis" of the local coordinate system (i.e. the "X Axis" of the circle). See Also GccAna and Geom2dGcc packages which provide functions for constructing circles defined by geometric constraints gce_MakeCirc2d which provides functions for more complex circle constructions Geom2d_Circle which provides additional functions for constructing circles and works, with the parametric equations of circles in particular gp_Ax22d
+ */
 class gp_Circ2d {
 }
 
@@ -28532,6 +37430,9 @@ class gp_Circ2d_2 extends gp_Circ2d {}
 
 class gp_Circ2d_3 extends gp_Circ2d {}
 
+/**
+ * Defines an infinite conical surface. A cone is defined by its half-angle (can be negative) at the apex and positioned in space with a coordinate system (a gp_Ax3 object) and a "reference radius" where: - the "main Axis" of the coordinate system is the axis of revolution of the cone, - the plane defined by the origin, the "X Direction" and the "Y Direction" of the coordinate system is the reference plane of the cone; the intersection of the cone with this reference plane is a circle of radius equal to the reference radius, if the half-angle is positive, the apex of the cone is on the negative side of the "main Axis" of the coordinate system. If the half-angle is negative, the apex is on the positive side. This coordinate system is the "local coordinate system" of the cone. Note: when a gp_Cone cone is converted into a Geom_ConicalSurface cone, some implicit properties of its local coordinate system are used explicitly: - its origin, "X Direction", "Y Direction" and "main Direction" are used directly to define the parametric directions on the cone and the origin of the parameters, - its implicit orientation (right-handed or left-handed) gives the orientation (direct or indirect) of the Geom_ConicalSurface cone. See Also gce_MakeCone which provides functions for more complex cone constructions Geom_ConicalSurface which provides additional functions for constructing cones and works, in particular, with the parametric equations of cones gp_Ax3
+ */
 class gp_Cone {
 }
 
@@ -28539,6 +37440,9 @@ class gp_Cone_1 extends gp_Cone {}
 
 class gp_Cone_2 extends gp_Cone {}
 
+/**
+ * Describes an infinite cylindrical surface. A cylinder is defined by its radius and positioned in space with a coordinate system (a gp_Ax3 object), the "main Axis" of which is the axis of the cylinder. This coordinate system is the "local coordinate system" of the cylinder. Note: when a gp_Cylinder cylinder is converted into a Geom_CylindricalSurface cylinder, some implicit properties of its local coordinate system are used explicitly: - its origin, "X Direction", "Y Direction" and "main Direction" are used directly to define the parametric directions on the cylinder and the origin of the parameters, - its implicit orientation (right-handed or left-handed) gives an orientation (direct or indirect) to the Geom_CylindricalSurface cylinder. See Also gce_MakeCylinder which provides functions for more complex cylinder constructions Geom_CylindricalSurface which provides additional functions for constructing cylinders and works, in particular, with the parametric equations of cylinders gp_Ax3
+ */
 class gp_Cylinder {
 }
 
@@ -28546,6 +37450,9 @@ class gp_Cylinder_1 extends gp_Cylinder {}
 
 class gp_Cylinder_2 extends gp_Cylinder {}
 
+/**
+ * Describes a unit vector in 3D space. This unit vector is also called "Direction". See Also gce_MakeDir which provides functions for more complex unit vector constructions Geom_Direction which provides additional functions for constructing unit vectors and works, in particular, with the parametric equations of unit vectors.
+ */
 class gp_Dir {
 }
 
@@ -28557,6 +37464,9 @@ class gp_Dir_3 extends gp_Dir {}
 
 class gp_Dir_4 extends gp_Dir {}
 
+/**
+ * Describes a unit vector in the plane (2D space). This unit vector is also called "Direction". See Also gce_MakeDir2d which provides functions for more complex unit vector constructions Geom2d_Direction which provides additional functions for constructing unit vectors and works, in particular, with the parametric equations of unit vectors
+ */
 class gp_Dir2d {
 }
 
@@ -28568,6 +37478,9 @@ class gp_Dir2d_3 extends gp_Dir2d {}
 
 class gp_Dir2d_4 extends gp_Dir2d {}
 
+/**
+ * Describes an ellipse in 3D space. An ellipse is defined by its major and minor radii and positioned in space with a coordinate system (a gp_Ax2 object) as follows: - the origin of the coordinate system is the center of the ellipse, - its "X Direction" defines the major axis of the ellipse, and - its "Y Direction" defines the minor axis of the ellipse. Together, the origin, "X Direction" and "Y Direction" of this coordinate system define the plane of the ellipse. This coordinate system is the "local coordinate system" of the ellipse. In this coordinate system, the equation of the ellipse is: X*X / (MajorRadius**2) + Y*Y / (MinorRadius**2) = 1.0 The "main Direction" of the local coordinate system gives the normal vector to the plane of the ellipse. This vector gives an implicit orientation to the ellipse (definition of the trigonometric sense). We refer to the "main Axis" of the local coordinate system as the "Axis" of the ellipse. See Also gce_MakeElips which provides functions for more complex ellipse constructions Geom_Ellipse which provides additional functions for constructing ellipses and works, in particular, with the parametric equations of ellipses
+ */
 class gp_Elips {
 }
 
@@ -28575,6 +37488,9 @@ class gp_Elips_1 extends gp_Elips {}
 
 class gp_Elips_2 extends gp_Elips {}
 
+/**
+ * Describes an ellipse in the plane (2D space). An ellipse is defined by its major and minor radii and positioned in the plane with a coordinate system (a gp_Ax22d object) as follows: - the origin of the coordinate system is the center of the ellipse, - its "X Direction" defines the major axis of the ellipse, and - its "Y Direction" defines the minor axis of the ellipse. This coordinate system is the "local coordinate system" of the ellipse. Its orientation (direct or indirect) gives an implicit orientation to the ellipse. In this coordinate system, the equation of the ellipse is: X*X / (MajorRadius**2) + Y*Y / (MinorRadius**2) = 1.0 See Also gce_MakeElips2d which provides functions for more complex ellipse constructions Geom2d_Ellipse which provides additional functions for constructing ellipses and works, in particular, with the parametric equations of ellipses
+ */
 class gp_Elips2d {
 }
 
@@ -28584,6 +37500,9 @@ class gp_Elips2d_2 extends gp_Elips2d {}
 
 class gp_Elips2d_3 extends gp_Elips2d {}
 
+/**
+ * Defines a non-persistent transformation in 3D space. This transformation is a general transformation. It can be a Trsf from gp, an affinity, or you can define your own transformation giving the matrix of transformation.
+ */
 class gp_GTrsf {
 }
 
@@ -28593,6 +37512,9 @@ class gp_GTrsf_2 extends gp_GTrsf {}
 
 class gp_GTrsf_3 extends gp_GTrsf {}
 
+/**
+ * Defines a non persistent transformation in 2D space. This transformation is a general transformation. It can be a Trsf2d from package gp, an affinity, or you can define your own transformation giving the corresponding matrix of transformation.
+ */
 class gp_GTrsf2d {
 }
 
@@ -28602,6 +37524,9 @@ class gp_GTrsf2d_2 extends gp_GTrsf2d {}
 
 class gp_GTrsf2d_3 extends gp_GTrsf2d {}
 
+/**
+ * Describes a branch of a hyperbola in 3D space. A hyperbola is defined by its major and minor radii and positioned in space with a coordinate system (a gp_Ax2 object) of which: - the origin is the center of the hyperbola, - the "X Direction" defines the major axis of the hyperbola, and - the "Y Direction" defines the minor axis of the hyperbola. The origin, "X Direction" and "Y Direction" of this coordinate system together define the plane of the hyperbola. This coordinate system is the "local coordinate system" of the hyperbola. In this coordinate system, the equation of the hyperbola is: X*X/(MajorRadius**2)-Y*Y/(MinorRadius**2) = 1.0 The branch of the hyperbola described is the one located on the positive side of the major axis. The "main Direction" of the local coordinate system is a normal vector to the plane of the hyperbola. This vector gives an implicit orientation to the hyperbola. We refer to the "main Axis" of the local coordinate system as the "Axis" of the hyperbola. The following schema shows the plane of the hyperbola, and in it, the respective positions of the three branches of hyperbolas constructed with the functions OtherBranch, ConjugateBranch1, and ConjugateBranch2:
+ */
 class gp_Hypr {
 }
 
@@ -28609,6 +37534,9 @@ class gp_Hypr_1 extends gp_Hypr {}
 
 class gp_Hypr_2 extends gp_Hypr {}
 
+/**
+ * Describes a branch of a hyperbola in the plane (2D space). A hyperbola is defined by its major and minor radii, and positioned in the plane with a coordinate system (a gp_Ax22d object) of which: - the origin is the center of the hyperbola, - the "X Direction" defines the major axis of the hyperbola, and - the "Y Direction" defines the minor axis of the hyperbola. This coordinate system is the "local coordinate system" of the hyperbola. The orientation of this coordinate system (direct or indirect) gives an implicit orientation to the hyperbola. In this coordinate system, the equation of the hyperbola is: X*X/(MajorRadius**2)-Y*Y/(MinorRadius**2) = 1.0 The branch of the hyperbola described is the one located on the positive side of the major axis. The following schema shows the plane of the hyperbola, and in it, the respective positions of the three branches of hyperbolas constructed with the functions OtherBranch, ConjugateBranch1, and ConjugateBranch2: ^YAxis | FirstConjugateBranch | Other | Main --------------------- C ------------------------------>XAxis Branch | Branch | | SecondConjugateBranch |
+ */
 class gp_Hypr2d {
 }
 
@@ -28618,6 +37546,9 @@ class gp_Hypr2d_2 extends gp_Hypr2d {}
 
 class gp_Hypr2d_3 extends gp_Hypr2d {}
 
+/**
+ * Describes a line in 3D space. A line is positioned in space with an axis (a gp_Ax1 object) which gives it an origin and a unit vector. A line and an axis are similar objects, thus, we can convert one into the other. A line provides direct access to the majority of the edit and query functions available on its positioning axis. In addition, however, a line has specific functions for computing distances and positions. See Also gce_MakeLin which provides functions for more complex line constructions Geom_Line which provides additional functions for constructing lines and works, in particular, with the parametric equations of lines
+ */
 class gp_Lin {
 }
 
@@ -28627,6 +37558,9 @@ class gp_Lin_2 extends gp_Lin {}
 
 class gp_Lin_3 extends gp_Lin {}
 
+/**
+ * Describes a line in 2D space. A line is positioned in the plane with an axis (a gp_Ax2d object) which gives the line its origin and unit vector. A line and an axis are similar objects, thus, we can convert one into the other. A line provides direct access to the majority of the edit and query functions available on its positioning axis. In addition, however, a line has specific functions for computing distances and positions. See Also GccAna and Geom2dGcc packages which provide functions for constructing lines defined by geometric constraints gce_MakeLin2d which provides functions for more complex line constructions Geom2d_Line which provides additional functions for constructing lines and works, in particular, with the parametric equations of lines
+ */
 class gp_Lin2d {
 }
 
@@ -28638,6 +37572,9 @@ class gp_Lin2d_3 extends gp_Lin2d {}
 
 class gp_Lin2d_4 extends gp_Lin2d {}
 
+/**
+ * Describes a three column, three row matrix. This sort of object is used in various vectorial or matrix computations.
+ */
 class gp_Mat {
 }
 
@@ -28647,6 +37584,9 @@ class gp_Mat_2 extends gp_Mat {}
 
 class gp_Mat_3 extends gp_Mat {}
 
+/**
+ * Describes a two column, two row matrix. This sort of object is used in various vectorial or matrix computations.
+ */
 class gp_Mat2d {
 }
 
@@ -28654,6 +37594,9 @@ class gp_Mat2d_1 extends gp_Mat2d {}
 
 class gp_Mat2d_2 extends gp_Mat2d {}
 
+/**
+ * Describes a parabola in 3D space. A parabola is defined by its focal length (that is, the distance between its focus and apex) and positioned in space with a coordinate system (a gp_Ax2 object) where: - the origin of the coordinate system is on the apex of the parabola, - the "X Axis" of the coordinate system is the axis of symmetry; the parabola is on the positive side of this axis, and - the origin, "X Direction" and "Y Direction" of the coordinate system define the plane of the parabola. The equation of the parabola in this coordinate system, which is the "local coordinate system" of the parabola, is: Y**2 = (2*P) * X. where P, referred to as the parameter of the parabola, is the distance between the focus and the directrix (P is twice the focal length). The "main Direction" of the local coordinate system gives the normal vector to the plane of the parabola. See Also gce_MakeParab which provides functions for more complex parabola constructions Geom_Parabola which provides additional functions for constructing parabolas and works, in particular, with the parametric equations of parabolas
+ */
 class gp_Parab {
 }
 
@@ -28663,6 +37606,9 @@ class gp_Parab_2 extends gp_Parab {}
 
 class gp_Parab_3 extends gp_Parab {}
 
+/**
+ * Describes a parabola in the plane (2D space). A parabola is defined by its focal length (that is, the distance between its focus and apex) and positioned in the plane with a coordinate system (a gp_Ax22d object) where: - the origin of the coordinate system is on the apex of the parabola, and - the "X Axis" of the coordinate system is the axis of symmetry; the parabola is on the positive side of this axis. This coordinate system is the "local coordinate system" of the parabola. Its orientation (direct or indirect sense) gives an implicit orientation to the parabola. In this coordinate system, the equation for the parabola is: Y**2 = (2*P) * X. where P, referred to as the parameter of the parabola, is the distance between the focus and the directrix (P is twice the focal length). See Also GCE2d_MakeParab2d which provides functions for more complex parabola constructions Geom2d_Parabola which provides additional functions for constructing parabolas and works, in particular, with the parametric equations of parabolas
+ */
 class gp_Parab2d {
 }
 
@@ -28674,6 +37620,9 @@ class gp_Parab2d_3 extends gp_Parab2d {}
 
 class gp_Parab2d_4 extends gp_Parab2d {}
 
+/**
+ * Describes a plane. A plane is positioned in space with a coordinate system (a gp_Ax3 object), such that the plane is defined by the origin, "X Direction" and "Y Direction" of this coordinate system, which is the "local coordinate system" of the plane. The "main Direction" of the coordinate system is a vector normal to the plane. It gives the plane an implicit orientation such that the plane is said to be "direct", if the coordinate system is right-handed, or "indirect" in the other case. Note: when a gp_Pln plane is converted into a Geom_Plane plane, some implicit properties of its local coordinate system are used explicitly: - its origin defines the origin of the two parameters of the planar surface, - its implicit orientation is also that of the Geom_Plane. See Also gce_MakePln which provides functions for more complex plane constructions Geom_Plane which provides additional functions for constructing planes and works, in particular, with the parametric equations of planes
+ */
 class gp_Pln {
 }
 
@@ -28685,6 +37634,9 @@ class gp_Pln_3 extends gp_Pln {}
 
 class gp_Pln_4 extends gp_Pln {}
 
+/**
+ * Defines a 3D cartesian point.
+ */
 class gp_Pnt {
 }
 
@@ -28694,6 +37646,9 @@ class gp_Pnt_2 extends gp_Pnt {}
 
 class gp_Pnt_3 extends gp_Pnt {}
 
+/**
+ * Defines a non-persistent 2D cartesian point.
+ */
 class gp_Pnt2d {
 }
 
@@ -28703,6 +37658,9 @@ class gp_Pnt2d_2 extends gp_Pnt2d {}
 
 class gp_Pnt2d_3 extends gp_Pnt2d {}
 
+/**
+ * Represents operation of rotation in 3d space as queternion and implements operations with rotations basing on quaternion mathematics.
+ */
 class gp_Quaternion {
 }
 
@@ -28720,6 +37678,9 @@ class gp_Quaternion_6 extends gp_Quaternion {}
 
 class gp_Quaternion_7 extends gp_Quaternion {}
 
+/**
+ * Class perform linear interpolation (approximate rotation interpolation), result quaternion nonunit, its length lay between. sqrt(2)/2 and 1.0
+ */
 class gp_QuaternionNLerp {
 }
 
@@ -28727,6 +37688,9 @@ class gp_QuaternionNLerp_1 extends gp_QuaternionNLerp {}
 
 class gp_QuaternionNLerp_2 extends gp_QuaternionNLerp {}
 
+/**
+ * Perform Spherical Linear Interpolation of the quaternions, return unit length quaternion.
+ */
 class gp_QuaternionSLerp {
 }
 
@@ -28734,6 +37698,9 @@ class gp_QuaternionSLerp_1 extends gp_QuaternionSLerp {}
 
 class gp_QuaternionSLerp_2 extends gp_QuaternionSLerp {}
 
+/**
+ * Describes a sphere. A sphere is defined by its radius and positioned in space with a coordinate system (a gp_Ax3 object). The origin of the coordinate system is the center of the sphere. This coordinate system is the "local coordinate system" of the sphere. Note: when a gp_Sphere sphere is converted into a Geom_SphericalSurface sphere, some implicit properties of its local coordinate system are used explicitly: - its origin, "X Direction", "Y Direction" and "main Direction" are used directly to define the parametric directions on the sphere and the origin of the parameters, - its implicit orientation (right-handed or left-handed) gives the orientation (direct, indirect) to the Geom_SphericalSurface sphere. See Also gce_MakeSphere which provides functions for more complex sphere constructions Geom_SphericalSurface which provides additional functions for constructing spheres and works, in particular, with the parametric equations of spheres.
+ */
 class gp_Sphere {
 }
 
@@ -28741,6 +37708,9 @@ class gp_Sphere_1 extends gp_Sphere {}
 
 class gp_Sphere_2 extends gp_Sphere {}
 
+/**
+ * Describes a torus. A torus is defined by its major and minor radii and positioned in space with a coordinate system (a gp_Ax3 object) as follows: - The origin of the coordinate system is the center of the torus; - The surface is obtained by rotating a circle of radius equal to the minor radius of the torus about the "main Direction" of the coordinate system. This circle is located in the plane defined by the origin, the "X Direction" and the "main Direction" of the coordinate system. It is centered on the "X Axis" of this coordinate system, and located at a distance, from the origin of this coordinate system, equal to the major radius of the torus; - The "X Direction" and "Y Direction" define the reference plane of the torus. The coordinate system described above is the "local coordinate system" of the torus. Note: when a gp_Torus torus is converted into a Geom_ToroidalSurface torus, some implicit properties of its local coordinate system are used explicitly: - its origin, "X Direction", "Y Direction" and "main Direction" are used directly to define the parametric directions on the torus and the origin of the parameters, - its implicit orientation (right-handed or left-handed) gives the orientation (direct, indirect) to the Geom_ToroidalSurface torus. See Also gce_MakeTorus which provides functions for more complex torus constructions Geom_ToroidalSurface which provides additional functions for constructing tori and works, in particular, with the parametric equations of tori.
+ */
 class gp_Torus {
 }
 
@@ -28748,6 +37718,9 @@ class gp_Torus_1 extends gp_Torus {}
 
 class gp_Torus_2 extends gp_Torus {}
 
+/**
+ * Defines a non-persistent transformation in 3D space. The following transformations are implemented : . Translation, Rotation, Scale . Symmetry with respect to a point, a line, a plane. Complex transformations can be obtained by combining the previous elementary transformations using the method Multiply. The transformations can be represented as follow :
+ */
 class gp_Trsf {
 }
 
@@ -28755,6 +37728,9 @@ class gp_Trsf_1 extends gp_Trsf {}
 
 class gp_Trsf_2 extends gp_Trsf {}
 
+/**
+ * Defines a non-persistent transformation in 2D space. The following transformations are implemented : . Translation, Rotation, Scale . Symmetry with respect to a point and a line. Complex transformations can be obtained by combining the previous elementary transformations using the method Multiply. The transformations can be represented as follow :
+ */
 class gp_Trsf2d {
 }
 
@@ -28762,6 +37738,9 @@ class gp_Trsf2d_1 extends gp_Trsf2d {}
 
 class gp_Trsf2d_2 extends gp_Trsf2d {}
 
+/**
+ * Defines a non-persistent vector in 3D space.
+ */
 class gp_Vec {
 }
 
@@ -28775,6 +37754,9 @@ class gp_Vec_4 extends gp_Vec {}
 
 class gp_Vec_5 extends gp_Vec {}
 
+/**
+ * Defines a non-persistent vector in 2D space.
+ */
 class gp_Vec2d {
 }
 
@@ -28788,6 +37770,9 @@ class gp_Vec2d_4 extends gp_Vec2d {}
 
 class gp_Vec2d_5 extends gp_Vec2d {}
 
+/**
+ * This class describes a cartesian coordinate entity in 2D space {X,Y}. This class is non persistent. This entity used for algebraic calculation. An XY can be transformed with a Trsf2d or a GTrsf2d from package gp. It is used in vectorial computations or for holding this type of information in data structures.
+ */
 class gp_XY {
 }
 
@@ -28795,6 +37780,9 @@ class gp_XY_1 extends gp_XY {}
 
 class gp_XY_2 extends gp_XY {}
 
+/**
+ * This class describes a cartesian coordinate entity in 3D space {X,Y,Z}. This entity is used for algebraic calculation. This entity can be transformed with a "Trsf" or a "GTrsf" from package "gp". It is used in vectorial computations or for holding this type of information in data structures.
+ */
 class gp_XYZ {
 }
 
@@ -28805,12 +37793,21 @@ class gp_XYZ_2 extends gp_XYZ {}
 class math {
 }
 
+/**
+ * This class implements the Broyden-Fletcher-Goldfarb-Shanno variant of Davidson-Fletcher-Powell minimization algorithm of a function of multiple variables.Knowledge of the function's gradient is required.
+ */
 class math_BFGS {
 }
 
+/**
+ * This class implements a combination of Newton-Raphson and bissection methods to find the root of the function between two bounds. Knowledge of the derivative is required.
+ */
 class math_BissecNewton {
 }
 
+/**
+ * Given two distinct initial points, BracketMinimum implements the computation of three points (a, b, c) which bracket the minimum of the function and verify A less than B, B less than C and F(B) less than F(A), F(B) less than F(C).
+ */
 class math_BracketMinimum {
 }
 
@@ -28822,9 +37819,15 @@ class math_BracketMinimum_3 extends math_BracketMinimum {}
 
 class math_BracketMinimum_4 extends math_BracketMinimum {}
 
+/**
+ * This class implements the Brent method to find the root of a function located within two bounds. No knowledge of the derivative is required.
+ */
 class math_BracketedRoot {
 }
 
+/**
+ * This class implements the Brent's method to find the minimum of a function of a single variable. No knowledge of the derivative is required.
+ */
 class math_BrentMinimum {
 }
 
@@ -28832,6 +37835,9 @@ class math_BrentMinimum_1 extends math_BrentMinimum {}
 
 class math_BrentMinimum_2 extends math_BrentMinimum {}
 
+/**
+ * Fast random number generator (the algorithm proposed by Ian C. Bullard).
+ */
 class math_BullardGenerator {
 }
 
@@ -28841,9 +37847,15 @@ class math_ComputeGaussPointsAndWeights {
 class math_ComputeKronrodPointsAndWeights {
 }
 
+/**
+ * This class implements the Crout algorithm used to solve a system A*X = B where A is a symmetric matrix. It can be used to invert a symmetric matrix. This algorithm is similar to Gauss but is faster than Gauss. Only the inferior triangle of A and the diagonal can be given.
+ */
 class math_Crout {
 }
 
+/**
+ * This class implements the calculation of all the real roots of a real polynomial of degree <= 4 using a direct method. Once found, the roots are polished using the Newton method.
+ */
 class math_DirectPolynomialRoots {
 }
 
@@ -28864,18 +37876,33 @@ class math_DoubleTab_2 extends math_DoubleTab {}
 
 class math_DoubleTab_3 extends math_DoubleTab {}
 
+/**
+ * This class finds eigen values and vectors of real symmetric tridiagonal matrix
+ */
 class math_EigenValuesSearcher {
 }
 
+/**
+ * this class implements the Fletcher-Reeves-Polak_Ribiere minimization algorithm of a function of multiple variables. Knowledge of the function's gradient is required.
+ */
 class math_FRPR {
 }
 
+/**
+ * This abstract class describes the virtual functions associated with a Function of a single variable.
+ */
 class math_Function {
 }
 
+/**
+ * This algorithm uses a sample of the function to find all intervals on which the function is null, and afterwards uses the FunctionRoots algorithm to find the points where the function is null outside the "null intervals". Knowledge of the derivative is required.
+ */
 class math_FunctionAllRoots {
 }
 
+/**
+ * This class implements the computation of a root of a function of a single variable which is near an initial guess using a minimization algorithm.Knowledge of the derivative is required. The algorithm used is the same as in
+ */
 class math_FunctionRoot {
 }
 
@@ -28883,15 +37910,27 @@ class math_FunctionRoot_1 extends math_FunctionRoot {}
 
 class math_FunctionRoot_2 extends math_FunctionRoot {}
 
+/**
+ * This class implements an algorithm which finds all the real roots of a function with derivative within a given range. Knowledge of the derivative is required.
+ */
 class math_FunctionRoots {
 }
 
+/**
+ * This class gives a default sample (constant difference of parameter) for a function defined between two bound A,B.
+ */
 class math_FunctionSample {
 }
 
+/**
+ * This abstract class describes the virtual functions associated to a set on N Functions of M independant variables.
+ */
 class math_FunctionSet {
 }
 
+/**
+ * The math_FunctionSetRoot class calculates the root of a set of N functions of M variables (N<M, N=M or N>M). Knowing an initial guess of the solution and using a minimization algorithm, a search is made in the Newton direction and then in the Gradient direction if there is no success in the Newton direction. This algorithm can also be used for functions minimization. Knowledge of all the partial derivatives (the Jacobian) is required.
+ */
 class math_FunctionSetRoot {
 }
 
@@ -28899,24 +37938,45 @@ class math_FunctionSetRoot_1 extends math_FunctionSetRoot {}
 
 class math_FunctionSetRoot_2 extends math_FunctionSetRoot {}
 
+/**
+ * This abstract class describes the virtual functions associated with a set of N Functions each of M independant variables.
+ */
 class math_FunctionSetWithDerivatives extends math_FunctionSet {
 }
 
+/**
+ * This abstract class describes the virtual functions associated with a function of a single variable for which the first derivative is available.
+ */
 class math_FunctionWithDerivative extends math_Function {
 }
 
+/**
+ * This class implements the Gauss LU decomposition (Crout algorithm) with partial pivoting (rows interchange) of a square matrix and the different possible derived calculation : - solution of a set of linear equations. - inverse of a matrix. - determinant of a matrix.
+ */
 class math_Gauss {
 }
 
+/**
+ * This class implements the least square solution of a set of n linear equations of m unknowns (n >= m) using the gauss LU decomposition algorithm. This algorithm is more likely subject to numerical instability than math_SVD.
+ */
 class math_GaussLeastSquare {
 }
 
+/**
+ * This class implements the integration of a function of multiple variables between the parameter bounds Lower[a..b] and Upper[a..b]. Warning: Each element of Order must be inferior or equal to 61.
+ */
 class math_GaussMultipleIntegration {
 }
 
+/**
+ * -- This class implements the integration of a set of N functions of M variables variables between the parameter bounds Lower[a..b] and Upper[a..b]. Warning: - The case M>1 is not implemented.
+ */
 class math_GaussSetIntegration {
 }
 
+/**
+ * This class implements the integration of a function of a single variable between the parameter bounds Lower and Upper. Warning: Order must be inferior or equal to 61.
+ */
 class math_GaussSingleIntegration {
 }
 
@@ -28926,12 +37986,21 @@ class math_GaussSingleIntegration_2 extends math_GaussSingleIntegration {}
 
 class math_GaussSingleIntegration_3 extends math_GaussSingleIntegration {}
 
+/**
+ * This class represents Evtushenko's algorithm of global optimization based on non-uniform mesh. Article: Yu. Evtushenko. Numerical methods for finding global extreme (case of a non-uniform mesh). U.S.S.R. Comput. Maths. Math. Phys., Vol. 11, N 6, pp. 38-54.
+ */
 class math_GlobOptMin {
 }
 
+/**
+ * This class implements the Jacobi method to find the eigenvalues and the eigenvectors of a real symmetric square matrix. A sort of eigenvalues is done.
+ */
 class math_Jacobi {
 }
 
+/**
+ * This class implements the Gauss-Kronrod method of integral computation.
+ */
 class math_KronrodSingleIntegration {
 }
 
@@ -28941,15 +38010,24 @@ class math_KronrodSingleIntegration_2 extends math_KronrodSingleIntegration {}
 
 class math_KronrodSingleIntegration_3 extends math_KronrodSingleIntegration {}
 
+/**
+ * Describes the virtual functions associated with a multiple variable function.
+ */
 class math_MultipleVarFunction {
 }
 
+/**
+ * The abstract class MultipleVarFunctionWithGradient describes the virtual functions associated with a multiple variable function.
+ */
 class math_MultipleVarFunctionWithGradient extends math_MultipleVarFunction {
 }
 
 class math_MultipleVarFunctionWithHessian extends math_MultipleVarFunctionWithGradient {
 }
 
+/**
+ * This class implements the calculation of a root of a function of a single variable starting from an initial near guess using the Newton algorithm. Knowledge of the derivative is required.
+ */
 class math_NewtonFunctionRoot {
 }
 
@@ -28966,15 +38044,24 @@ class math_NotSquare_1 extends math_NotSquare {}
 
 class math_NotSquare_2 extends math_NotSquare {}
 
+/**
+ * In this class implemented variation of Particle Swarm Optimization (PSO) method. A. Ismael F. Vaz, L. N. Vicente "A particle swarm pattern search method for bound constrained global optimization"
+ */
 class math_PSO {
 }
 
 class math_PSOParticlesPool {
 }
 
+/**
+ * This class implements the Powell method to find the minimum of function of multiple variables (the gradient does not have to be known).
+ */
 class math_Powell {
 }
 
+/**
+ * SVD implements the solution of a set of N linear equations of M unknowns without condition on N or M. The Singular Value Decomposition algorithm is used. For singular or nearly singular matrices SVD is a better choice than Gauss or GaussLeastSquare.
+ */
 class math_SVD {
 }
 
@@ -28985,9 +38072,15 @@ class math_SingularMatrix_1 extends math_SingularMatrix {}
 
 class math_SingularMatrix_2 extends math_SingularMatrix {}
 
+/**
+ * This is function, which corresponds trigonometric equation a*Cos(x)*Cos(x) + 2*b*Cos(x)*Sin(x) + c*Cos(x) + d*Sin(x) + e = 0 See class math_TrigonometricFunctionRoots
+ */
 class math_TrigonometricEquationFunction extends math_FunctionWithDerivative {
 }
 
+/**
+ * This class implements the solutions of the equation a*Cos(x)*Cos(x) + 2*b*Cos(x)*Sin(x) + c*Cos(x) + d*Sin(x) + e The degree of this equation can be 4, 3 or 2.
+ */
 class math_TrigonometricFunctionRoots {
 }
 
@@ -28997,6 +38090,9 @@ class math_TrigonometricFunctionRoots_2 extends math_TrigonometricFunctionRoots 
 
 class math_TrigonometricFunctionRoots_3 extends math_TrigonometricFunctionRoots {}
 
+/**
+ * This class implements a system resolution C*X = B with an approach solution X0. There are no conditions on the number of equations. The algorithm used is the Uzawa algorithm. It is possible to have equal or inequal (<) equations to solve. The resolution is done with a minimization of Norm(X-X0). If there are only equal equations, the resolution is directly done and is similar to Gauss resolution with an optimisation because the matrix is a symmetric matrix. (The resolution is done with Crout algorithm)
+ */
 class math_Uzawa {
 }
 
@@ -29004,6 +38100,9 @@ class math_Uzawa_1 extends math_Uzawa {}
 
 class math_Uzawa_2 extends math_Uzawa {}
 
+/**
+ * Simple container storing two reals: value and weight
+ */
 class math_ValueAndWeight {
 }
 

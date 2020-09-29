@@ -582,7 +582,8 @@ def processEnum(enum):
 #   children (libclang list of class children): the children of the class
 # returns:
 #   string
-def getClassBinding(className, children):
+def getClassBinding(theClass, children):
+  className = theClass.spelling
   baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(baseSpec) > 1:
     raise MultipleBaseClassException("cannot handle multiple base classes (" + className + ")")
@@ -603,7 +604,15 @@ def getClassBinding(className, children):
 
   return [
     "  class_<" + className + baseClassBinding + ">(\"" + className + "\")" + os.linesep,
-    ("class " + className + baseClassTypescriptDef + "{" + os.linesep) if genTypescriptDef else "",
+    (
+      (
+        (
+          "/**" + os.linesep +
+          " * " + theClass.brief_comment + os.linesep +
+          " */" + os.linesep
+        ) if not theClass.brief_comment == None else ""
+      ) + "class " + className + baseClassTypescriptDef + "{" + os.linesep
+    ) if (genTypescriptDef) else "",
     ("  " + className + ": typeof " + className + ";" + os.linesep) if genTypescriptDef else ""
   ]
 
@@ -1134,7 +1143,7 @@ def getClassBindings(newChildren):
       successfulBinding = False
       if processClass(theClass):
         try:
-          classBinding, classTypeDef, classTypeList = getClassBinding(theClass.spelling, list(theClass.get_children()))
+          classBinding, classTypeDef, classTypeList = getClassBinding(theClass, list(theClass.get_children()))
           bindingsOutput += classBinding
           classTypeDefOutput += classTypeDef
           classTypeListOutput += classTypeList
