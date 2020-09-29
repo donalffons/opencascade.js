@@ -587,24 +587,24 @@ def getClassBinding(className, children):
   if len(baseSpec) > 1:
     raise MultipleBaseClassException("cannot handle multiple base classes (" + className + ")")
 
-  genTypes = True
+  genTypescriptDef = True
   if len(baseSpec) > 0:
     if "<" in baseSpec[0].type.spelling:
-      genTypes = False
+      genTypescriptDef = False
       print("Cannot generate types for class with template class as base class (" + className + ")")
     if ":" in baseSpec[0].type.spelling:
-      genTypes = False
+      genTypescriptDef = False
       print("Cannot generate types for class with colon operator in base class (" + className + ")")
     baseClassBinding = ", base<" + baseSpec[0].type.spelling + ">"
-    baseClassType = " extends " + baseSpec[0].type.spelling + " "
+    baseClassTypescriptDef = " extends " + baseSpec[0].type.spelling + " "
   else:
     baseClassBinding = ""
-    baseClassType = " "
+    baseClassTypescriptDef = " "
 
   return [
     "  class_<" + className + baseClassBinding + ">(\"" + className + "\")" + os.linesep,
-    ("class " + className + baseClassType + "{" + os.linesep) if genTypes else "",
-    ("  " + className + ": typeof " + className + ";" + os.linesep) if genTypes else ""
+    ("class " + className + baseClassTypescriptDef + "{" + os.linesep) if genTypescriptDef else "",
+    ("  " + className + ": typeof " + className + ";" + os.linesep) if genTypescriptDef else ""
   ]
 
 # Generates cast bindings for a method. Some methods neet to be reinterpret_cast'd or static_cast'd
@@ -756,8 +756,10 @@ def getSimpleConstructorBinding(children):
 def getOverloadedConstructorsBinding(className, children):
   constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(constructors) == 1:
-    return ""
+    return ["", "", ""]
   constructorBindings = ""
+  constructorTypescriptDef = ""
+  constructorTypescriptList = ""
   allOverloads = [m for m in children if m.kind == clang.cindex.CursorKind.CONSTRUCTOR and m.access_specifier == clang.cindex.AccessSpecifier.PUBLIC]
   if len(allOverloads) == 1:
     raise Exception("Something weird happened")
@@ -774,7 +776,9 @@ def getOverloadedConstructorsBinding(className, children):
     constructorBindings += "    class_<" + constructor.spelling + overloadPostfix + ", base<" + constructor.spelling + ">>(\"" + constructor.spelling + overloadPostfix + "\")" + os.linesep
     constructorBindings += "      .constructor<" + argTypes + ">()" + os.linesep
     constructorBindings += "    ;" + os.linesep
-  return constructorBindings
+    constructorTypescriptDef += "class " + constructor.spelling + overloadPostfix + " extends " + constructor.spelling + " {}" + os.linesep + os.linesep
+    constructorTypescriptList += "  " + constructor.spelling + overloadPostfix + ": typeof " + constructor.spelling + overloadPostfix + ";" + os.linesep
+  return [constructorBindings, constructorTypescriptDef, constructorTypescriptList]
 
 # Generates the 'epilog' for a class, i.e. some text that will be appended at the end of the bindings file. This is currently used to fix compile errors with non-public destructors: https://github.com/emscripten-core/emscripten/issues/5587
 # parameters:
@@ -896,9 +900,10 @@ def getHandleTypeBindings(children):
     oc3arg1.children = []
     oc3.arguments = [oc3arg1]
 
-    bindingsOutput += getOverloadedConstructorsBinding(handleName, [
+    [bindingsOutput, typescriptDef, typescriptList] = getOverloadedConstructorsBinding(handleName, [
       oc1, oc2, oc3
     ])
+    bindingsOutput += bindingsOutput
 
   return [bindingsOutput]
 
@@ -1014,9 +1019,10 @@ def getNCollection_Array1TypeBindings(children):
     oc4arg3.children = []
     oc4.arguments = [oc4arg1, oc4arg2, oc4arg3]
 
-    bindingsOutput += getOverloadedConstructorsBinding(theName, [
+    [bindingsOutput, typescriptDef, typescriptList] = getOverloadedConstructorsBinding(theName, [
       oc1, oc2, oc3, oc4
     ])
+    bindingsOutput += bindingsOutput
   
   return [bindingsOutput]
 
@@ -1101,9 +1107,10 @@ def getNCollection_ListTypeBindings(children):
     oc3arg1.children = []
     oc3.arguments = [oc3arg1]
 
-    bindingsOutput += getOverloadedConstructorsBinding(theName, [
+    [bindingsOutput, typescriptDef, typescriptList] = getOverloadedConstructorsBinding(theName, [
       oc1, oc2, oc3
     ])
+    bindingsOutput += bindingsOutput
   
   return [bindingsOutput]
 
@@ -1141,7 +1148,11 @@ def getClassBindings(newChildren):
           bindingsOutput += "  ;" + os.linesep
           classTypeDefOutput += "}" + os.linesep + os.linesep
           if not abstract:
-            bindingsOutput += getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children()))
+            [oConstructorBindings, oConstructorTypescriptDef, constructorTypescriptList] = getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children()))
+            bindingsOutput += oConstructorBindings
+            classTypeDefOutput += oConstructorTypescriptDef
+            classTypeListOutput += constructorTypescriptList
+
           epilogOutput += getEpilogForClass(theClass)
           numExportedClasses += 1
           successfulBinding = True

@@ -16,35 +16,73 @@ export interface opencascade {
 
   APIHeaderSection_EditHeader: typeof APIHeaderSection_EditHeader;
   APIHeaderSection_MakeHeader: typeof APIHeaderSection_MakeHeader;
+  APIHeaderSection_MakeHeader_1: typeof APIHeaderSection_MakeHeader_1;
+  APIHeaderSection_MakeHeader_2: typeof APIHeaderSection_MakeHeader_2;
   Adaptor2d_Curve2d: typeof Adaptor2d_Curve2d;
   Adaptor2d_HCurve2d: typeof Adaptor2d_HCurve2d;
   Adaptor2d_HLine2d: typeof Adaptor2d_HLine2d;
+  Adaptor2d_HLine2d_1: typeof Adaptor2d_HLine2d_1;
+  Adaptor2d_HLine2d_2: typeof Adaptor2d_HLine2d_2;
   Adaptor2d_HOffsetCurve: typeof Adaptor2d_HOffsetCurve;
+  Adaptor2d_HOffsetCurve_1: typeof Adaptor2d_HOffsetCurve_1;
+  Adaptor2d_HOffsetCurve_2: typeof Adaptor2d_HOffsetCurve_2;
   Adaptor2d_Line2d: typeof Adaptor2d_Line2d;
+  Adaptor2d_Line2d_1: typeof Adaptor2d_Line2d_1;
+  Adaptor2d_Line2d_2: typeof Adaptor2d_Line2d_2;
   Adaptor2d_OffsetCurve: typeof Adaptor2d_OffsetCurve;
+  Adaptor2d_OffsetCurve_1: typeof Adaptor2d_OffsetCurve_1;
+  Adaptor2d_OffsetCurve_2: typeof Adaptor2d_OffsetCurve_2;
+  Adaptor2d_OffsetCurve_3: typeof Adaptor2d_OffsetCurve_3;
+  Adaptor2d_OffsetCurve_4: typeof Adaptor2d_OffsetCurve_4;
   Adaptor3d_Curve: typeof Adaptor3d_Curve;
   Adaptor3d_CurveOnSurface: typeof Adaptor3d_CurveOnSurface;
+  Adaptor3d_CurveOnSurface_1: typeof Adaptor3d_CurveOnSurface_1;
+  Adaptor3d_CurveOnSurface_2: typeof Adaptor3d_CurveOnSurface_2;
+  Adaptor3d_CurveOnSurface_3: typeof Adaptor3d_CurveOnSurface_3;
   Adaptor3d_HCurve: typeof Adaptor3d_HCurve;
   Adaptor3d_HCurveOnSurface: typeof Adaptor3d_HCurveOnSurface;
+  Adaptor3d_HCurveOnSurface_1: typeof Adaptor3d_HCurveOnSurface_1;
+  Adaptor3d_HCurveOnSurface_2: typeof Adaptor3d_HCurveOnSurface_2;
   Adaptor3d_HIsoCurve: typeof Adaptor3d_HIsoCurve;
+  Adaptor3d_HIsoCurve_1: typeof Adaptor3d_HIsoCurve_1;
+  Adaptor3d_HIsoCurve_2: typeof Adaptor3d_HIsoCurve_2;
   Adaptor3d_HSurface: typeof Adaptor3d_HSurface;
   Adaptor3d_HSurfaceTool: typeof Adaptor3d_HSurfaceTool;
   Adaptor3d_HVertex: typeof Adaptor3d_HVertex;
+  Adaptor3d_HVertex_1: typeof Adaptor3d_HVertex_1;
+  Adaptor3d_HVertex_2: typeof Adaptor3d_HVertex_2;
   Adaptor3d_InterFunc: typeof Adaptor3d_InterFunc;
   Adaptor3d_IsoCurve: typeof Adaptor3d_IsoCurve;
+  Adaptor3d_IsoCurve_1: typeof Adaptor3d_IsoCurve_1;
+  Adaptor3d_IsoCurve_2: typeof Adaptor3d_IsoCurve_2;
+  Adaptor3d_IsoCurve_3: typeof Adaptor3d_IsoCurve_3;
+  Adaptor3d_IsoCurve_4: typeof Adaptor3d_IsoCurve_4;
   Adaptor3d_Surface: typeof Adaptor3d_Surface;
   Adaptor3d_TopolTool: typeof Adaptor3d_TopolTool;
+  Adaptor3d_TopolTool_1: typeof Adaptor3d_TopolTool_1;
+  Adaptor3d_TopolTool_2: typeof Adaptor3d_TopolTool_2;
   AdvApp2Var_ApproxAFunc2Var: typeof AdvApp2Var_ApproxAFunc2Var;
+  AdvApp2Var_ApproxAFunc2Var_1: typeof AdvApp2Var_ApproxAFunc2Var_1;
+  AdvApp2Var_ApproxAFunc2Var_2: typeof AdvApp2Var_ApproxAFunc2Var_2;
   AdvApp2Var_ApproxF2var: typeof AdvApp2Var_ApproxF2var;
   AdvApp2Var_Context: typeof AdvApp2Var_Context;
+  AdvApp2Var_Context_1: typeof AdvApp2Var_Context_1;
+  AdvApp2Var_Context_2: typeof AdvApp2Var_Context_2;
   AdvApp2Var_Criterion: typeof AdvApp2Var_Criterion;
   AdvApp2Var_Data: typeof AdvApp2Var_Data;
   AdvApp2Var_EvaluatorFunc2Var: typeof AdvApp2Var_EvaluatorFunc2Var;
   AdvApp2Var_MathBase: typeof AdvApp2Var_MathBase;
   AdvApp2Var_Node: typeof AdvApp2Var_Node;
+  AdvApp2Var_Node_1: typeof AdvApp2Var_Node_1;
+  AdvApp2Var_Node_2: typeof AdvApp2Var_Node_2;
+  AdvApp2Var_Node_3: typeof AdvApp2Var_Node_3;
   AdvApp2Var_Patch: typeof AdvApp2Var_Patch;
+  AdvApp2Var_Patch_1: typeof AdvApp2Var_Patch_1;
+  AdvApp2Var_Patch_2: typeof AdvApp2Var_Patch_2;
   AdvApp2Var_SysBase: typeof AdvApp2Var_SysBase;
   AdvApprox_ApproxAFunction: typeof AdvApprox_ApproxAFunction;
+  AdvApprox_ApproxAFunction_1: typeof AdvApprox_ApproxAFunction_1;
+  AdvApprox_ApproxAFunction_2: typeof AdvApprox_ApproxAFunction_2;
   AdvApprox_Cutting: typeof AdvApprox_Cutting;
   AdvApprox_DichoCutting: typeof AdvApprox_DichoCutting;
   AdvApprox_EvaluatorFunction: typeof AdvApprox_EvaluatorFunction;
@@ -56,9 +94,23 @@ export interface opencascade {
   AppCont_LeastSquare: typeof AppCont_LeastSquare;
   AppParCurves: typeof AppParCurves;
   AppParCurves_ConstraintCouple: typeof AppParCurves_ConstraintCouple;
+  AppParCurves_ConstraintCouple_1: typeof AppParCurves_ConstraintCouple_1;
+  AppParCurves_ConstraintCouple_2: typeof AppParCurves_ConstraintCouple_2;
   AppParCurves_MultiBSpCurve: typeof AppParCurves_MultiBSpCurve;
+  AppParCurves_MultiBSpCurve_1: typeof AppParCurves_MultiBSpCurve_1;
+  AppParCurves_MultiBSpCurve_2: typeof AppParCurves_MultiBSpCurve_2;
+  AppParCurves_MultiBSpCurve_3: typeof AppParCurves_MultiBSpCurve_3;
+  AppParCurves_MultiBSpCurve_4: typeof AppParCurves_MultiBSpCurve_4;
   AppParCurves_MultiCurve: typeof AppParCurves_MultiCurve;
+  AppParCurves_MultiCurve_1: typeof AppParCurves_MultiCurve_1;
+  AppParCurves_MultiCurve_2: typeof AppParCurves_MultiCurve_2;
+  AppParCurves_MultiCurve_3: typeof AppParCurves_MultiCurve_3;
   AppParCurves_MultiPoint: typeof AppParCurves_MultiPoint;
+  AppParCurves_MultiPoint_1: typeof AppParCurves_MultiPoint_1;
+  AppParCurves_MultiPoint_2: typeof AppParCurves_MultiPoint_2;
+  AppParCurves_MultiPoint_3: typeof AppParCurves_MultiPoint_3;
+  AppParCurves_MultiPoint_4: typeof AppParCurves_MultiPoint_4;
+  AppParCurves_MultiPoint_5: typeof AppParCurves_MultiPoint_5;
   AppStdL_Application: typeof AppStdL_Application;
   AppStd_Application: typeof AppStd_Application;
   ApproxInt_KnotTools: typeof ApproxInt_KnotTools;
@@ -66,33 +118,95 @@ export interface opencascade {
   Approx_Curve2d: typeof Approx_Curve2d;
   Approx_Curve3d: typeof Approx_Curve3d;
   Approx_CurveOnSurface: typeof Approx_CurveOnSurface;
+  Approx_CurveOnSurface_1: typeof Approx_CurveOnSurface_1;
+  Approx_CurveOnSurface_2: typeof Approx_CurveOnSurface_2;
   Approx_CurvilinearParameter: typeof Approx_CurvilinearParameter;
+  Approx_CurvilinearParameter_1: typeof Approx_CurvilinearParameter_1;
+  Approx_CurvilinearParameter_2: typeof Approx_CurvilinearParameter_2;
+  Approx_CurvilinearParameter_3: typeof Approx_CurvilinearParameter_3;
   Approx_CurvlinFunc: typeof Approx_CurvlinFunc;
+  Approx_CurvlinFunc_1: typeof Approx_CurvlinFunc_1;
+  Approx_CurvlinFunc_2: typeof Approx_CurvlinFunc_2;
+  Approx_CurvlinFunc_3: typeof Approx_CurvlinFunc_3;
   Approx_FitAndDivide: typeof Approx_FitAndDivide;
+  Approx_FitAndDivide_1: typeof Approx_FitAndDivide_1;
+  Approx_FitAndDivide_2: typeof Approx_FitAndDivide_2;
   Approx_FitAndDivide2d: typeof Approx_FitAndDivide2d;
+  Approx_FitAndDivide2d_1: typeof Approx_FitAndDivide2d_1;
+  Approx_FitAndDivide2d_2: typeof Approx_FitAndDivide2d_2;
   Approx_MCurvesToBSpCurve: typeof Approx_MCurvesToBSpCurve;
   Approx_SameParameter: typeof Approx_SameParameter;
+  Approx_SameParameter_1: typeof Approx_SameParameter_1;
+  Approx_SameParameter_2: typeof Approx_SameParameter_2;
+  Approx_SameParameter_3: typeof Approx_SameParameter_3;
   Approx_SweepApproximation: typeof Approx_SweepApproximation;
   Approx_SweepFunction: typeof Approx_SweepFunction;
   BRepAdaptor_CompCurve: typeof BRepAdaptor_CompCurve;
+  BRepAdaptor_CompCurve_1: typeof BRepAdaptor_CompCurve_1;
+  BRepAdaptor_CompCurve_2: typeof BRepAdaptor_CompCurve_2;
+  BRepAdaptor_CompCurve_3: typeof BRepAdaptor_CompCurve_3;
   BRepAdaptor_Curve: typeof BRepAdaptor_Curve;
+  BRepAdaptor_Curve_1: typeof BRepAdaptor_Curve_1;
+  BRepAdaptor_Curve_2: typeof BRepAdaptor_Curve_2;
+  BRepAdaptor_Curve_3: typeof BRepAdaptor_Curve_3;
   BRepAdaptor_Curve2d: typeof BRepAdaptor_Curve2d;
+  BRepAdaptor_Curve2d_1: typeof BRepAdaptor_Curve2d_1;
+  BRepAdaptor_Curve2d_2: typeof BRepAdaptor_Curve2d_2;
   BRepAdaptor_HCompCurve: typeof BRepAdaptor_HCompCurve;
+  BRepAdaptor_HCompCurve_1: typeof BRepAdaptor_HCompCurve_1;
+  BRepAdaptor_HCompCurve_2: typeof BRepAdaptor_HCompCurve_2;
   BRepAdaptor_HCurve: typeof BRepAdaptor_HCurve;
+  BRepAdaptor_HCurve_1: typeof BRepAdaptor_HCurve_1;
+  BRepAdaptor_HCurve_2: typeof BRepAdaptor_HCurve_2;
   BRepAdaptor_HCurve2d: typeof BRepAdaptor_HCurve2d;
+  BRepAdaptor_HCurve2d_1: typeof BRepAdaptor_HCurve2d_1;
+  BRepAdaptor_HCurve2d_2: typeof BRepAdaptor_HCurve2d_2;
   BRepAdaptor_HSurface: typeof BRepAdaptor_HSurface;
+  BRepAdaptor_HSurface_1: typeof BRepAdaptor_HSurface_1;
+  BRepAdaptor_HSurface_2: typeof BRepAdaptor_HSurface_2;
   BRepAdaptor_Surface: typeof BRepAdaptor_Surface;
+  BRepAdaptor_Surface_1: typeof BRepAdaptor_Surface_1;
+  BRepAdaptor_Surface_2: typeof BRepAdaptor_Surface_2;
   BRepAlgo: typeof BRepAlgo;
   BRepAlgoAPI_Algo: typeof BRepAlgoAPI_Algo;
   BRepAlgoAPI_BooleanOperation: typeof BRepAlgoAPI_BooleanOperation;
+  BRepAlgoAPI_BooleanOperation_1: typeof BRepAlgoAPI_BooleanOperation_1;
+  BRepAlgoAPI_BooleanOperation_2: typeof BRepAlgoAPI_BooleanOperation_2;
   BRepAlgoAPI_BuilderAlgo: typeof BRepAlgoAPI_BuilderAlgo;
+  BRepAlgoAPI_BuilderAlgo_1: typeof BRepAlgoAPI_BuilderAlgo_1;
+  BRepAlgoAPI_BuilderAlgo_2: typeof BRepAlgoAPI_BuilderAlgo_2;
   BRepAlgoAPI_Check: typeof BRepAlgoAPI_Check;
+  BRepAlgoAPI_Check_1: typeof BRepAlgoAPI_Check_1;
+  BRepAlgoAPI_Check_2: typeof BRepAlgoAPI_Check_2;
+  BRepAlgoAPI_Check_3: typeof BRepAlgoAPI_Check_3;
   BRepAlgoAPI_Common: typeof BRepAlgoAPI_Common;
+  BRepAlgoAPI_Common_1: typeof BRepAlgoAPI_Common_1;
+  BRepAlgoAPI_Common_2: typeof BRepAlgoAPI_Common_2;
+  BRepAlgoAPI_Common_3: typeof BRepAlgoAPI_Common_3;
+  BRepAlgoAPI_Common_4: typeof BRepAlgoAPI_Common_4;
   BRepAlgoAPI_Cut: typeof BRepAlgoAPI_Cut;
+  BRepAlgoAPI_Cut_1: typeof BRepAlgoAPI_Cut_1;
+  BRepAlgoAPI_Cut_2: typeof BRepAlgoAPI_Cut_2;
+  BRepAlgoAPI_Cut_3: typeof BRepAlgoAPI_Cut_3;
+  BRepAlgoAPI_Cut_4: typeof BRepAlgoAPI_Cut_4;
   BRepAlgoAPI_Defeaturing: typeof BRepAlgoAPI_Defeaturing;
   BRepAlgoAPI_Fuse: typeof BRepAlgoAPI_Fuse;
+  BRepAlgoAPI_Fuse_1: typeof BRepAlgoAPI_Fuse_1;
+  BRepAlgoAPI_Fuse_2: typeof BRepAlgoAPI_Fuse_2;
+  BRepAlgoAPI_Fuse_3: typeof BRepAlgoAPI_Fuse_3;
+  BRepAlgoAPI_Fuse_4: typeof BRepAlgoAPI_Fuse_4;
   BRepAlgoAPI_Section: typeof BRepAlgoAPI_Section;
+  BRepAlgoAPI_Section_1: typeof BRepAlgoAPI_Section_1;
+  BRepAlgoAPI_Section_2: typeof BRepAlgoAPI_Section_2;
+  BRepAlgoAPI_Section_3: typeof BRepAlgoAPI_Section_3;
+  BRepAlgoAPI_Section_4: typeof BRepAlgoAPI_Section_4;
+  BRepAlgoAPI_Section_5: typeof BRepAlgoAPI_Section_5;
+  BRepAlgoAPI_Section_6: typeof BRepAlgoAPI_Section_6;
+  BRepAlgoAPI_Section_7: typeof BRepAlgoAPI_Section_7;
+  BRepAlgoAPI_Section_8: typeof BRepAlgoAPI_Section_8;
   BRepAlgoAPI_Splitter: typeof BRepAlgoAPI_Splitter;
+  BRepAlgoAPI_Splitter_1: typeof BRepAlgoAPI_Splitter_1;
+  BRepAlgoAPI_Splitter_2: typeof BRepAlgoAPI_Splitter_2;
   BRepAlgo_AsDes: typeof BRepAlgo_AsDes;
   BRepAlgo_BooleanOperation: typeof BRepAlgo_BooleanOperation;
   BRepAlgo_Common: typeof BRepAlgo_Common;
@@ -102,45 +216,94 @@ export interface opencascade {
   BRepAlgo_Image: typeof BRepAlgo_Image;
   BRepAlgo_Loop: typeof BRepAlgo_Loop;
   BRepAlgo_NormalProjection: typeof BRepAlgo_NormalProjection;
+  BRepAlgo_NormalProjection_1: typeof BRepAlgo_NormalProjection_1;
+  BRepAlgo_NormalProjection_2: typeof BRepAlgo_NormalProjection_2;
   BRepAlgo_Section: typeof BRepAlgo_Section;
+  BRepAlgo_Section_1: typeof BRepAlgo_Section_1;
+  BRepAlgo_Section_2: typeof BRepAlgo_Section_2;
+  BRepAlgo_Section_3: typeof BRepAlgo_Section_3;
+  BRepAlgo_Section_4: typeof BRepAlgo_Section_4;
+  BRepAlgo_Section_5: typeof BRepAlgo_Section_5;
   BRepAlgo_Tool: typeof BRepAlgo_Tool;
   BRepApprox_ApproxLine: typeof BRepApprox_ApproxLine;
+  BRepApprox_ApproxLine_1: typeof BRepApprox_ApproxLine_1;
+  BRepApprox_ApproxLine_2: typeof BRepApprox_ApproxLine_2;
   BRepApprox_BSpGradient_BFGSOfMyBSplGradientOfTheComputeLineOfApprox: typeof BRepApprox_BSpGradient_BFGSOfMyBSplGradientOfTheComputeLineOfApprox;
   BRepApprox_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfApprox: typeof BRepApprox_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfApprox;
   BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox: typeof BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox;
+  BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox_1: typeof BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox_1;
+  BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox_2: typeof BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox_2;
+  BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox_3: typeof BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox_3;
+  BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox_4: typeof BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox_4;
   BRepApprox_Gradient_BFGSOfMyGradientOfTheComputeLineBezierOfApprox: typeof BRepApprox_Gradient_BFGSOfMyGradientOfTheComputeLineBezierOfApprox;
   BRepApprox_Gradient_BFGSOfMyGradientbisOfTheComputeLineOfApprox: typeof BRepApprox_Gradient_BFGSOfMyGradientbisOfTheComputeLineOfApprox;
   BRepApprox_MyBSplGradientOfTheComputeLineOfApprox: typeof BRepApprox_MyBSplGradientOfTheComputeLineOfApprox;
+  BRepApprox_MyBSplGradientOfTheComputeLineOfApprox_1: typeof BRepApprox_MyBSplGradientOfTheComputeLineOfApprox_1;
+  BRepApprox_MyBSplGradientOfTheComputeLineOfApprox_2: typeof BRepApprox_MyBSplGradientOfTheComputeLineOfApprox_2;
   BRepApprox_MyGradientOfTheComputeLineBezierOfApprox: typeof BRepApprox_MyGradientOfTheComputeLineBezierOfApprox;
   BRepApprox_MyGradientbisOfTheComputeLineOfApprox: typeof BRepApprox_MyGradientbisOfTheComputeLineOfApprox;
   BRepApprox_ParFunctionOfMyGradientOfTheComputeLineBezierOfApprox: typeof BRepApprox_ParFunctionOfMyGradientOfTheComputeLineBezierOfApprox;
   BRepApprox_ParFunctionOfMyGradientbisOfTheComputeLineOfApprox: typeof BRepApprox_ParFunctionOfMyGradientbisOfTheComputeLineOfApprox;
   BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox: typeof BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox;
+  BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox_1: typeof BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox_1;
+  BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox_2: typeof BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox_2;
+  BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox_3: typeof BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox_3;
+  BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox_4: typeof BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox_4;
   BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox: typeof BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox;
+  BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox_1: typeof BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox_1;
+  BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox_2: typeof BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox_2;
+  BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox_3: typeof BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox_3;
+  BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox_4: typeof BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox_4;
   BRepApprox_SurfaceTool: typeof BRepApprox_SurfaceTool;
   BRepApprox_TheComputeLineBezierOfApprox: typeof BRepApprox_TheComputeLineBezierOfApprox;
+  BRepApprox_TheComputeLineBezierOfApprox_1: typeof BRepApprox_TheComputeLineBezierOfApprox_1;
+  BRepApprox_TheComputeLineBezierOfApprox_2: typeof BRepApprox_TheComputeLineBezierOfApprox_2;
+  BRepApprox_TheComputeLineBezierOfApprox_3: typeof BRepApprox_TheComputeLineBezierOfApprox_3;
+  BRepApprox_TheComputeLineBezierOfApprox_4: typeof BRepApprox_TheComputeLineBezierOfApprox_4;
   BRepApprox_TheComputeLineOfApprox: typeof BRepApprox_TheComputeLineOfApprox;
+  BRepApprox_TheComputeLineOfApprox_1: typeof BRepApprox_TheComputeLineOfApprox_1;
+  BRepApprox_TheComputeLineOfApprox_2: typeof BRepApprox_TheComputeLineOfApprox_2;
+  BRepApprox_TheComputeLineOfApprox_3: typeof BRepApprox_TheComputeLineOfApprox_3;
+  BRepApprox_TheComputeLineOfApprox_4: typeof BRepApprox_TheComputeLineOfApprox_4;
   BRepApprox_TheFunctionOfTheInt2SOfThePrmPrmSvSurfacesOfApprox: typeof BRepApprox_TheFunctionOfTheInt2SOfThePrmPrmSvSurfacesOfApprox;
   BRepApprox_TheImpPrmSvSurfacesOfApprox: typeof BRepApprox_TheImpPrmSvSurfacesOfApprox;
+  BRepApprox_TheImpPrmSvSurfacesOfApprox_1: typeof BRepApprox_TheImpPrmSvSurfacesOfApprox_1;
+  BRepApprox_TheImpPrmSvSurfacesOfApprox_2: typeof BRepApprox_TheImpPrmSvSurfacesOfApprox_2;
   BRepApprox_TheInt2SOfThePrmPrmSvSurfacesOfApprox: typeof BRepApprox_TheInt2SOfThePrmPrmSvSurfacesOfApprox;
+  BRepApprox_TheInt2SOfThePrmPrmSvSurfacesOfApprox_1: typeof BRepApprox_TheInt2SOfThePrmPrmSvSurfacesOfApprox_1;
+  BRepApprox_TheInt2SOfThePrmPrmSvSurfacesOfApprox_2: typeof BRepApprox_TheInt2SOfThePrmPrmSvSurfacesOfApprox_2;
   BRepApprox_TheMultiLineOfApprox: typeof BRepApprox_TheMultiLineOfApprox;
+  BRepApprox_TheMultiLineOfApprox_1: typeof BRepApprox_TheMultiLineOfApprox_1;
+  BRepApprox_TheMultiLineOfApprox_2: typeof BRepApprox_TheMultiLineOfApprox_2;
+  BRepApprox_TheMultiLineOfApprox_3: typeof BRepApprox_TheMultiLineOfApprox_3;
   BRepApprox_TheMultiLineToolOfApprox: typeof BRepApprox_TheMultiLineToolOfApprox;
   BRepApprox_ThePrmPrmSvSurfacesOfApprox: typeof BRepApprox_ThePrmPrmSvSurfacesOfApprox;
   BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox: typeof BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox;
+  BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox_1: typeof BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox_1;
+  BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox_2: typeof BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox_2;
+  BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox_3: typeof BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox_3;
   BRepBlend_AppFunc: typeof BRepBlend_AppFunc;
   BRepBlend_AppFuncRoot: typeof BRepBlend_AppFuncRoot;
   BRepBlend_AppFuncRst: typeof BRepBlend_AppFuncRst;
   BRepBlend_AppFuncRstRst: typeof BRepBlend_AppFuncRstRst;
   BRepBlend_AppSurf: typeof BRepBlend_AppSurf;
+  BRepBlend_AppSurf_1: typeof BRepBlend_AppSurf_1;
+  BRepBlend_AppSurf_2: typeof BRepBlend_AppSurf_2;
   BRepBlend_AppSurface: typeof BRepBlend_AppSurface;
   BRepBlend_BlendTool: typeof BRepBlend_BlendTool;
   BRepBlend_CSWalking: typeof BRepBlend_CSWalking;
   BRepBlend_CurvPointRadInv: typeof BRepBlend_CurvPointRadInv;
   BRepBlend_Extremity: typeof BRepBlend_Extremity;
+  BRepBlend_Extremity_1: typeof BRepBlend_Extremity_1;
+  BRepBlend_Extremity_2: typeof BRepBlend_Extremity_2;
+  BRepBlend_Extremity_3: typeof BRepBlend_Extremity_3;
+  BRepBlend_Extremity_4: typeof BRepBlend_Extremity_4;
   BRepBlend_HCurve2dTool: typeof BRepBlend_HCurve2dTool;
   BRepBlend_HCurveTool: typeof BRepBlend_HCurveTool;
   BRepBlend_Line: typeof BRepBlend_Line;
   BRepBlend_PointOnRst: typeof BRepBlend_PointOnRst;
+  BRepBlend_PointOnRst_1: typeof BRepBlend_PointOnRst_1;
+  BRepBlend_PointOnRst_2: typeof BRepBlend_PointOnRst_2;
   BRepBlend_RstRstConstRad: typeof BRepBlend_RstRstConstRad;
   BRepBlend_RstRstEvolRad: typeof BRepBlend_RstRstEvolRad;
   BRepBlend_RstRstLineBuilder: typeof BRepBlend_RstRstLineBuilder;
@@ -157,22 +320,141 @@ export interface opencascade {
   BRepBuilderAPI_Collect: typeof BRepBuilderAPI_Collect;
   BRepBuilderAPI_Command: typeof BRepBuilderAPI_Command;
   BRepBuilderAPI_Copy: typeof BRepBuilderAPI_Copy;
+  BRepBuilderAPI_Copy_1: typeof BRepBuilderAPI_Copy_1;
+  BRepBuilderAPI_Copy_2: typeof BRepBuilderAPI_Copy_2;
   BRepBuilderAPI_FastSewing: typeof BRepBuilderAPI_FastSewing;
   BRepBuilderAPI_FindPlane: typeof BRepBuilderAPI_FindPlane;
+  BRepBuilderAPI_FindPlane_1: typeof BRepBuilderAPI_FindPlane_1;
+  BRepBuilderAPI_FindPlane_2: typeof BRepBuilderAPI_FindPlane_2;
   BRepBuilderAPI_GTransform: typeof BRepBuilderAPI_GTransform;
+  BRepBuilderAPI_GTransform_1: typeof BRepBuilderAPI_GTransform_1;
+  BRepBuilderAPI_GTransform_2: typeof BRepBuilderAPI_GTransform_2;
   BRepBuilderAPI_MakeEdge: typeof BRepBuilderAPI_MakeEdge;
+  BRepBuilderAPI_MakeEdge_1: typeof BRepBuilderAPI_MakeEdge_1;
+  BRepBuilderAPI_MakeEdge_2: typeof BRepBuilderAPI_MakeEdge_2;
+  BRepBuilderAPI_MakeEdge_3: typeof BRepBuilderAPI_MakeEdge_3;
+  BRepBuilderAPI_MakeEdge_4: typeof BRepBuilderAPI_MakeEdge_4;
+  BRepBuilderAPI_MakeEdge_5: typeof BRepBuilderAPI_MakeEdge_5;
+  BRepBuilderAPI_MakeEdge_6: typeof BRepBuilderAPI_MakeEdge_6;
+  BRepBuilderAPI_MakeEdge_7: typeof BRepBuilderAPI_MakeEdge_7;
+  BRepBuilderAPI_MakeEdge_8: typeof BRepBuilderAPI_MakeEdge_8;
+  BRepBuilderAPI_MakeEdge_9: typeof BRepBuilderAPI_MakeEdge_9;
+  BRepBuilderAPI_MakeEdge_10: typeof BRepBuilderAPI_MakeEdge_10;
+  BRepBuilderAPI_MakeEdge_11: typeof BRepBuilderAPI_MakeEdge_11;
+  BRepBuilderAPI_MakeEdge_12: typeof BRepBuilderAPI_MakeEdge_12;
+  BRepBuilderAPI_MakeEdge_13: typeof BRepBuilderAPI_MakeEdge_13;
+  BRepBuilderAPI_MakeEdge_14: typeof BRepBuilderAPI_MakeEdge_14;
+  BRepBuilderAPI_MakeEdge_15: typeof BRepBuilderAPI_MakeEdge_15;
+  BRepBuilderAPI_MakeEdge_16: typeof BRepBuilderAPI_MakeEdge_16;
+  BRepBuilderAPI_MakeEdge_17: typeof BRepBuilderAPI_MakeEdge_17;
+  BRepBuilderAPI_MakeEdge_18: typeof BRepBuilderAPI_MakeEdge_18;
+  BRepBuilderAPI_MakeEdge_19: typeof BRepBuilderAPI_MakeEdge_19;
+  BRepBuilderAPI_MakeEdge_20: typeof BRepBuilderAPI_MakeEdge_20;
+  BRepBuilderAPI_MakeEdge_21: typeof BRepBuilderAPI_MakeEdge_21;
+  BRepBuilderAPI_MakeEdge_22: typeof BRepBuilderAPI_MakeEdge_22;
+  BRepBuilderAPI_MakeEdge_23: typeof BRepBuilderAPI_MakeEdge_23;
+  BRepBuilderAPI_MakeEdge_24: typeof BRepBuilderAPI_MakeEdge_24;
+  BRepBuilderAPI_MakeEdge_25: typeof BRepBuilderAPI_MakeEdge_25;
+  BRepBuilderAPI_MakeEdge_26: typeof BRepBuilderAPI_MakeEdge_26;
+  BRepBuilderAPI_MakeEdge_27: typeof BRepBuilderAPI_MakeEdge_27;
+  BRepBuilderAPI_MakeEdge_28: typeof BRepBuilderAPI_MakeEdge_28;
+  BRepBuilderAPI_MakeEdge_29: typeof BRepBuilderAPI_MakeEdge_29;
+  BRepBuilderAPI_MakeEdge_30: typeof BRepBuilderAPI_MakeEdge_30;
+  BRepBuilderAPI_MakeEdge_31: typeof BRepBuilderAPI_MakeEdge_31;
+  BRepBuilderAPI_MakeEdge_32: typeof BRepBuilderAPI_MakeEdge_32;
+  BRepBuilderAPI_MakeEdge_33: typeof BRepBuilderAPI_MakeEdge_33;
+  BRepBuilderAPI_MakeEdge_34: typeof BRepBuilderAPI_MakeEdge_34;
+  BRepBuilderAPI_MakeEdge_35: typeof BRepBuilderAPI_MakeEdge_35;
   BRepBuilderAPI_MakeEdge2d: typeof BRepBuilderAPI_MakeEdge2d;
+  BRepBuilderAPI_MakeEdge2d_1: typeof BRepBuilderAPI_MakeEdge2d_1;
+  BRepBuilderAPI_MakeEdge2d_2: typeof BRepBuilderAPI_MakeEdge2d_2;
+  BRepBuilderAPI_MakeEdge2d_3: typeof BRepBuilderAPI_MakeEdge2d_3;
+  BRepBuilderAPI_MakeEdge2d_4: typeof BRepBuilderAPI_MakeEdge2d_4;
+  BRepBuilderAPI_MakeEdge2d_5: typeof BRepBuilderAPI_MakeEdge2d_5;
+  BRepBuilderAPI_MakeEdge2d_6: typeof BRepBuilderAPI_MakeEdge2d_6;
+  BRepBuilderAPI_MakeEdge2d_7: typeof BRepBuilderAPI_MakeEdge2d_7;
+  BRepBuilderAPI_MakeEdge2d_8: typeof BRepBuilderAPI_MakeEdge2d_8;
+  BRepBuilderAPI_MakeEdge2d_9: typeof BRepBuilderAPI_MakeEdge2d_9;
+  BRepBuilderAPI_MakeEdge2d_10: typeof BRepBuilderAPI_MakeEdge2d_10;
+  BRepBuilderAPI_MakeEdge2d_11: typeof BRepBuilderAPI_MakeEdge2d_11;
+  BRepBuilderAPI_MakeEdge2d_12: typeof BRepBuilderAPI_MakeEdge2d_12;
+  BRepBuilderAPI_MakeEdge2d_13: typeof BRepBuilderAPI_MakeEdge2d_13;
+  BRepBuilderAPI_MakeEdge2d_14: typeof BRepBuilderAPI_MakeEdge2d_14;
+  BRepBuilderAPI_MakeEdge2d_15: typeof BRepBuilderAPI_MakeEdge2d_15;
+  BRepBuilderAPI_MakeEdge2d_16: typeof BRepBuilderAPI_MakeEdge2d_16;
+  BRepBuilderAPI_MakeEdge2d_17: typeof BRepBuilderAPI_MakeEdge2d_17;
+  BRepBuilderAPI_MakeEdge2d_18: typeof BRepBuilderAPI_MakeEdge2d_18;
+  BRepBuilderAPI_MakeEdge2d_19: typeof BRepBuilderAPI_MakeEdge2d_19;
+  BRepBuilderAPI_MakeEdge2d_20: typeof BRepBuilderAPI_MakeEdge2d_20;
+  BRepBuilderAPI_MakeEdge2d_21: typeof BRepBuilderAPI_MakeEdge2d_21;
+  BRepBuilderAPI_MakeEdge2d_22: typeof BRepBuilderAPI_MakeEdge2d_22;
+  BRepBuilderAPI_MakeEdge2d_23: typeof BRepBuilderAPI_MakeEdge2d_23;
+  BRepBuilderAPI_MakeEdge2d_24: typeof BRepBuilderAPI_MakeEdge2d_24;
+  BRepBuilderAPI_MakeEdge2d_25: typeof BRepBuilderAPI_MakeEdge2d_25;
+  BRepBuilderAPI_MakeEdge2d_26: typeof BRepBuilderAPI_MakeEdge2d_26;
+  BRepBuilderAPI_MakeEdge2d_27: typeof BRepBuilderAPI_MakeEdge2d_27;
+  BRepBuilderAPI_MakeEdge2d_28: typeof BRepBuilderAPI_MakeEdge2d_28;
   BRepBuilderAPI_MakeFace: typeof BRepBuilderAPI_MakeFace;
+  BRepBuilderAPI_MakeFace_1: typeof BRepBuilderAPI_MakeFace_1;
+  BRepBuilderAPI_MakeFace_2: typeof BRepBuilderAPI_MakeFace_2;
+  BRepBuilderAPI_MakeFace_3: typeof BRepBuilderAPI_MakeFace_3;
+  BRepBuilderAPI_MakeFace_4: typeof BRepBuilderAPI_MakeFace_4;
+  BRepBuilderAPI_MakeFace_5: typeof BRepBuilderAPI_MakeFace_5;
+  BRepBuilderAPI_MakeFace_6: typeof BRepBuilderAPI_MakeFace_6;
+  BRepBuilderAPI_MakeFace_7: typeof BRepBuilderAPI_MakeFace_7;
+  BRepBuilderAPI_MakeFace_8: typeof BRepBuilderAPI_MakeFace_8;
+  BRepBuilderAPI_MakeFace_9: typeof BRepBuilderAPI_MakeFace_9;
+  BRepBuilderAPI_MakeFace_10: typeof BRepBuilderAPI_MakeFace_10;
+  BRepBuilderAPI_MakeFace_11: typeof BRepBuilderAPI_MakeFace_11;
+  BRepBuilderAPI_MakeFace_12: typeof BRepBuilderAPI_MakeFace_12;
+  BRepBuilderAPI_MakeFace_13: typeof BRepBuilderAPI_MakeFace_13;
+  BRepBuilderAPI_MakeFace_14: typeof BRepBuilderAPI_MakeFace_14;
+  BRepBuilderAPI_MakeFace_15: typeof BRepBuilderAPI_MakeFace_15;
+  BRepBuilderAPI_MakeFace_16: typeof BRepBuilderAPI_MakeFace_16;
+  BRepBuilderAPI_MakeFace_17: typeof BRepBuilderAPI_MakeFace_17;
+  BRepBuilderAPI_MakeFace_18: typeof BRepBuilderAPI_MakeFace_18;
+  BRepBuilderAPI_MakeFace_19: typeof BRepBuilderAPI_MakeFace_19;
+  BRepBuilderAPI_MakeFace_20: typeof BRepBuilderAPI_MakeFace_20;
+  BRepBuilderAPI_MakeFace_21: typeof BRepBuilderAPI_MakeFace_21;
+  BRepBuilderAPI_MakeFace_22: typeof BRepBuilderAPI_MakeFace_22;
   BRepBuilderAPI_MakePolygon: typeof BRepBuilderAPI_MakePolygon;
+  BRepBuilderAPI_MakePolygon_1: typeof BRepBuilderAPI_MakePolygon_1;
+  BRepBuilderAPI_MakePolygon_2: typeof BRepBuilderAPI_MakePolygon_2;
+  BRepBuilderAPI_MakePolygon_3: typeof BRepBuilderAPI_MakePolygon_3;
+  BRepBuilderAPI_MakePolygon_4: typeof BRepBuilderAPI_MakePolygon_4;
+  BRepBuilderAPI_MakePolygon_5: typeof BRepBuilderAPI_MakePolygon_5;
+  BRepBuilderAPI_MakePolygon_6: typeof BRepBuilderAPI_MakePolygon_6;
+  BRepBuilderAPI_MakePolygon_7: typeof BRepBuilderAPI_MakePolygon_7;
   BRepBuilderAPI_MakeShape: typeof BRepBuilderAPI_MakeShape;
   BRepBuilderAPI_MakeShell: typeof BRepBuilderAPI_MakeShell;
+  BRepBuilderAPI_MakeShell_1: typeof BRepBuilderAPI_MakeShell_1;
+  BRepBuilderAPI_MakeShell_2: typeof BRepBuilderAPI_MakeShell_2;
+  BRepBuilderAPI_MakeShell_3: typeof BRepBuilderAPI_MakeShell_3;
   BRepBuilderAPI_MakeSolid: typeof BRepBuilderAPI_MakeSolid;
+  BRepBuilderAPI_MakeSolid_1: typeof BRepBuilderAPI_MakeSolid_1;
+  BRepBuilderAPI_MakeSolid_2: typeof BRepBuilderAPI_MakeSolid_2;
+  BRepBuilderAPI_MakeSolid_3: typeof BRepBuilderAPI_MakeSolid_3;
+  BRepBuilderAPI_MakeSolid_4: typeof BRepBuilderAPI_MakeSolid_4;
+  BRepBuilderAPI_MakeSolid_5: typeof BRepBuilderAPI_MakeSolid_5;
+  BRepBuilderAPI_MakeSolid_6: typeof BRepBuilderAPI_MakeSolid_6;
+  BRepBuilderAPI_MakeSolid_7: typeof BRepBuilderAPI_MakeSolid_7;
   BRepBuilderAPI_MakeVertex: typeof BRepBuilderAPI_MakeVertex;
   BRepBuilderAPI_MakeWire: typeof BRepBuilderAPI_MakeWire;
+  BRepBuilderAPI_MakeWire_1: typeof BRepBuilderAPI_MakeWire_1;
+  BRepBuilderAPI_MakeWire_2: typeof BRepBuilderAPI_MakeWire_2;
+  BRepBuilderAPI_MakeWire_3: typeof BRepBuilderAPI_MakeWire_3;
+  BRepBuilderAPI_MakeWire_4: typeof BRepBuilderAPI_MakeWire_4;
+  BRepBuilderAPI_MakeWire_5: typeof BRepBuilderAPI_MakeWire_5;
+  BRepBuilderAPI_MakeWire_6: typeof BRepBuilderAPI_MakeWire_6;
+  BRepBuilderAPI_MakeWire_7: typeof BRepBuilderAPI_MakeWire_7;
   BRepBuilderAPI_ModifyShape: typeof BRepBuilderAPI_ModifyShape;
   BRepBuilderAPI_NurbsConvert: typeof BRepBuilderAPI_NurbsConvert;
+  BRepBuilderAPI_NurbsConvert_1: typeof BRepBuilderAPI_NurbsConvert_1;
+  BRepBuilderAPI_NurbsConvert_2: typeof BRepBuilderAPI_NurbsConvert_2;
   BRepBuilderAPI_Sewing: typeof BRepBuilderAPI_Sewing;
   BRepBuilderAPI_Transform: typeof BRepBuilderAPI_Transform;
+  BRepBuilderAPI_Transform_1: typeof BRepBuilderAPI_Transform_1;
+  BRepBuilderAPI_Transform_2: typeof BRepBuilderAPI_Transform_2;
   BRepBuilderAPI_VertexInspector: typeof BRepBuilderAPI_VertexInspector;
   BRepCheck: typeof BRepCheck;
   BRepCheck_Analyzer: typeof BRepCheck_Analyzer;
@@ -186,136 +468,395 @@ export interface opencascade {
   BRepClass3d: typeof BRepClass3d;
   BRepClass3d_Intersector3d: typeof BRepClass3d_Intersector3d;
   BRepClass3d_SClassifier: typeof BRepClass3d_SClassifier;
+  BRepClass3d_SClassifier_1: typeof BRepClass3d_SClassifier_1;
+  BRepClass3d_SClassifier_2: typeof BRepClass3d_SClassifier_2;
   BRepClass3d_SolidClassifier: typeof BRepClass3d_SolidClassifier;
+  BRepClass3d_SolidClassifier_1: typeof BRepClass3d_SolidClassifier_1;
+  BRepClass3d_SolidClassifier_2: typeof BRepClass3d_SolidClassifier_2;
+  BRepClass3d_SolidClassifier_3: typeof BRepClass3d_SolidClassifier_3;
   BRepClass3d_SolidExplorer: typeof BRepClass3d_SolidExplorer;
+  BRepClass3d_SolidExplorer_1: typeof BRepClass3d_SolidExplorer_1;
+  BRepClass3d_SolidExplorer_2: typeof BRepClass3d_SolidExplorer_2;
   BRepClass3d_SolidPassiveClassifier: typeof BRepClass3d_SolidPassiveClassifier;
   BRepClass_Edge: typeof BRepClass_Edge;
+  BRepClass_Edge_1: typeof BRepClass_Edge_1;
+  BRepClass_Edge_2: typeof BRepClass_Edge_2;
   BRepClass_FClass2dOfFClassifier: typeof BRepClass_FClass2dOfFClassifier;
   BRepClass_FClassifier: typeof BRepClass_FClassifier;
+  BRepClass_FClassifier_1: typeof BRepClass_FClassifier_1;
+  BRepClass_FClassifier_2: typeof BRepClass_FClassifier_2;
   BRepClass_FaceClassifier: typeof BRepClass_FaceClassifier;
+  BRepClass_FaceClassifier_1: typeof BRepClass_FaceClassifier_1;
+  BRepClass_FaceClassifier_2: typeof BRepClass_FaceClassifier_2;
+  BRepClass_FaceClassifier_3: typeof BRepClass_FaceClassifier_3;
+  BRepClass_FaceClassifier_4: typeof BRepClass_FaceClassifier_4;
   BRepClass_FaceExplorer: typeof BRepClass_FaceExplorer;
   BRepClass_FacePassiveClassifier: typeof BRepClass_FacePassiveClassifier;
   BRepClass_Intersector: typeof BRepClass_Intersector;
   BRepExtrema_DistShapeShape: typeof BRepExtrema_DistShapeShape;
+  BRepExtrema_DistShapeShape_1: typeof BRepExtrema_DistShapeShape_1;
+  BRepExtrema_DistShapeShape_2: typeof BRepExtrema_DistShapeShape_2;
+  BRepExtrema_DistShapeShape_3: typeof BRepExtrema_DistShapeShape_3;
   BRepExtrema_DistanceSS: typeof BRepExtrema_DistanceSS;
+  BRepExtrema_DistanceSS_1: typeof BRepExtrema_DistanceSS_1;
+  BRepExtrema_DistanceSS_2: typeof BRepExtrema_DistanceSS_2;
   BRepExtrema_ExtCC: typeof BRepExtrema_ExtCC;
+  BRepExtrema_ExtCC_1: typeof BRepExtrema_ExtCC_1;
+  BRepExtrema_ExtCC_2: typeof BRepExtrema_ExtCC_2;
   BRepExtrema_ExtCF: typeof BRepExtrema_ExtCF;
+  BRepExtrema_ExtCF_1: typeof BRepExtrema_ExtCF_1;
+  BRepExtrema_ExtCF_2: typeof BRepExtrema_ExtCF_2;
   BRepExtrema_ExtFF: typeof BRepExtrema_ExtFF;
+  BRepExtrema_ExtFF_1: typeof BRepExtrema_ExtFF_1;
+  BRepExtrema_ExtFF_2: typeof BRepExtrema_ExtFF_2;
   BRepExtrema_ExtPC: typeof BRepExtrema_ExtPC;
+  BRepExtrema_ExtPC_1: typeof BRepExtrema_ExtPC_1;
+  BRepExtrema_ExtPC_2: typeof BRepExtrema_ExtPC_2;
   BRepExtrema_ExtPF: typeof BRepExtrema_ExtPF;
+  BRepExtrema_ExtPF_1: typeof BRepExtrema_ExtPF_1;
+  BRepExtrema_ExtPF_2: typeof BRepExtrema_ExtPF_2;
+  BRepExtrema_OverlapTool_1: typeof BRepExtrema_OverlapTool_1;
+  BRepExtrema_OverlapTool_2: typeof BRepExtrema_OverlapTool_2;
   BRepExtrema_Poly: typeof BRepExtrema_Poly;
   BRepExtrema_SelfIntersection: typeof BRepExtrema_SelfIntersection;
+  BRepExtrema_SelfIntersection_1: typeof BRepExtrema_SelfIntersection_1;
+  BRepExtrema_SelfIntersection_2: typeof BRepExtrema_SelfIntersection_2;
   BRepExtrema_ShapeProximity: typeof BRepExtrema_ShapeProximity;
+  BRepExtrema_ShapeProximity_1: typeof BRepExtrema_ShapeProximity_1;
+  BRepExtrema_ShapeProximity_2: typeof BRepExtrema_ShapeProximity_2;
   BRepExtrema_SolutionElem: typeof BRepExtrema_SolutionElem;
+  BRepExtrema_SolutionElem_1: typeof BRepExtrema_SolutionElem_1;
+  BRepExtrema_SolutionElem_2: typeof BRepExtrema_SolutionElem_2;
+  BRepExtrema_SolutionElem_3: typeof BRepExtrema_SolutionElem_3;
+  BRepExtrema_SolutionElem_4: typeof BRepExtrema_SolutionElem_4;
   BRepExtrema_TriangleSet: typeof BRepExtrema_TriangleSet;
+  BRepExtrema_TriangleSet_1: typeof BRepExtrema_TriangleSet_1;
+  BRepExtrema_TriangleSet_2: typeof BRepExtrema_TriangleSet_2;
   BRepExtrema_UnCompatibleShape: typeof BRepExtrema_UnCompatibleShape;
+  BRepExtrema_UnCompatibleShape_1: typeof BRepExtrema_UnCompatibleShape_1;
+  BRepExtrema_UnCompatibleShape_2: typeof BRepExtrema_UnCompatibleShape_2;
   BRepFeat_Builder: typeof BRepFeat_Builder;
   BRepFeat_Form: typeof BRepFeat_Form;
   BRepFeat_Gluer: typeof BRepFeat_Gluer;
+  BRepFeat_Gluer_1: typeof BRepFeat_Gluer_1;
+  BRepFeat_Gluer_2: typeof BRepFeat_Gluer_2;
   BRepFeat_MakeCylindricalHole: typeof BRepFeat_MakeCylindricalHole;
   BRepFeat_MakeDPrism: typeof BRepFeat_MakeDPrism;
+  BRepFeat_MakeDPrism_1: typeof BRepFeat_MakeDPrism_1;
+  BRepFeat_MakeDPrism_2: typeof BRepFeat_MakeDPrism_2;
   BRepFeat_MakePipe: typeof BRepFeat_MakePipe;
+  BRepFeat_MakePipe_1: typeof BRepFeat_MakePipe_1;
+  BRepFeat_MakePipe_2: typeof BRepFeat_MakePipe_2;
   BRepFeat_MakePrism: typeof BRepFeat_MakePrism;
+  BRepFeat_MakePrism_1: typeof BRepFeat_MakePrism_1;
+  BRepFeat_MakePrism_2: typeof BRepFeat_MakePrism_2;
   BRepFeat_MakeRevol: typeof BRepFeat_MakeRevol;
+  BRepFeat_MakeRevol_1: typeof BRepFeat_MakeRevol_1;
+  BRepFeat_MakeRevol_2: typeof BRepFeat_MakeRevol_2;
   BRepFeat_MakeRevolutionForm: typeof BRepFeat_MakeRevolutionForm;
+  BRepFeat_MakeRevolutionForm_1: typeof BRepFeat_MakeRevolutionForm_1;
+  BRepFeat_MakeRevolutionForm_2: typeof BRepFeat_MakeRevolutionForm_2;
   BRepFeat_RibSlot: typeof BRepFeat_RibSlot;
   BRepFeat_SplitShape: typeof BRepFeat_SplitShape;
+  BRepFeat_SplitShape_1: typeof BRepFeat_SplitShape_1;
+  BRepFeat_SplitShape_2: typeof BRepFeat_SplitShape_2;
   BRepFill: typeof BRepFill;
   BRepFill_ACRLaw: typeof BRepFill_ACRLaw;
   BRepFill_AdvancedEvolved: typeof BRepFill_AdvancedEvolved;
   BRepFill_ApproxSeewing: typeof BRepFill_ApproxSeewing;
+  BRepFill_ApproxSeewing_1: typeof BRepFill_ApproxSeewing_1;
+  BRepFill_ApproxSeewing_2: typeof BRepFill_ApproxSeewing_2;
   BRepFill_CompatibleWires: typeof BRepFill_CompatibleWires;
+  BRepFill_CompatibleWires_1: typeof BRepFill_CompatibleWires_1;
+  BRepFill_CompatibleWires_2: typeof BRepFill_CompatibleWires_2;
   BRepFill_ComputeCLine: typeof BRepFill_ComputeCLine;
+  BRepFill_ComputeCLine_1: typeof BRepFill_ComputeCLine_1;
+  BRepFill_ComputeCLine_2: typeof BRepFill_ComputeCLine_2;
   BRepFill_CurveConstraint: typeof BRepFill_CurveConstraint;
+  BRepFill_CurveConstraint_1: typeof BRepFill_CurveConstraint_1;
+  BRepFill_CurveConstraint_2: typeof BRepFill_CurveConstraint_2;
   BRepFill_Draft: typeof BRepFill_Draft;
   BRepFill_DraftLaw: typeof BRepFill_DraftLaw;
   BRepFill_Edge3DLaw: typeof BRepFill_Edge3DLaw;
   BRepFill_EdgeFaceAndOrder: typeof BRepFill_EdgeFaceAndOrder;
+  BRepFill_EdgeFaceAndOrder_1: typeof BRepFill_EdgeFaceAndOrder_1;
+  BRepFill_EdgeFaceAndOrder_2: typeof BRepFill_EdgeFaceAndOrder_2;
   BRepFill_EdgeOnSurfLaw: typeof BRepFill_EdgeOnSurfLaw;
   BRepFill_Evolved: typeof BRepFill_Evolved;
+  BRepFill_Evolved_1: typeof BRepFill_Evolved_1;
+  BRepFill_Evolved_2: typeof BRepFill_Evolved_2;
+  BRepFill_Evolved_3: typeof BRepFill_Evolved_3;
   BRepFill_FaceAndOrder: typeof BRepFill_FaceAndOrder;
+  BRepFill_FaceAndOrder_1: typeof BRepFill_FaceAndOrder_1;
+  BRepFill_FaceAndOrder_2: typeof BRepFill_FaceAndOrder_2;
   BRepFill_Filling: typeof BRepFill_Filling;
   BRepFill_Generator: typeof BRepFill_Generator;
   BRepFill_LocationLaw: typeof BRepFill_LocationLaw;
   BRepFill_MultiLine: typeof BRepFill_MultiLine;
+  BRepFill_MultiLine_1: typeof BRepFill_MultiLine_1;
+  BRepFill_MultiLine_2: typeof BRepFill_MultiLine_2;
   BRepFill_NSections: typeof BRepFill_NSections;
+  BRepFill_NSections_1: typeof BRepFill_NSections_1;
+  BRepFill_NSections_2: typeof BRepFill_NSections_2;
   BRepFill_OffsetAncestors: typeof BRepFill_OffsetAncestors;
+  BRepFill_OffsetAncestors_1: typeof BRepFill_OffsetAncestors_1;
+  BRepFill_OffsetAncestors_2: typeof BRepFill_OffsetAncestors_2;
   BRepFill_OffsetWire: typeof BRepFill_OffsetWire;
+  BRepFill_OffsetWire_1: typeof BRepFill_OffsetWire_1;
+  BRepFill_OffsetWire_2: typeof BRepFill_OffsetWire_2;
   BRepFill_Pipe: typeof BRepFill_Pipe;
+  BRepFill_Pipe_1: typeof BRepFill_Pipe_1;
+  BRepFill_Pipe_2: typeof BRepFill_Pipe_2;
   BRepFill_PipeShell: typeof BRepFill_PipeShell;
   BRepFill_Section: typeof BRepFill_Section;
+  BRepFill_Section_1: typeof BRepFill_Section_1;
+  BRepFill_Section_2: typeof BRepFill_Section_2;
   BRepFill_SectionLaw: typeof BRepFill_SectionLaw;
   BRepFill_SectionPlacement: typeof BRepFill_SectionPlacement;
+  BRepFill_SectionPlacement_1: typeof BRepFill_SectionPlacement_1;
+  BRepFill_SectionPlacement_2: typeof BRepFill_SectionPlacement_2;
   BRepFill_ShapeLaw: typeof BRepFill_ShapeLaw;
+  BRepFill_ShapeLaw_1: typeof BRepFill_ShapeLaw_1;
+  BRepFill_ShapeLaw_2: typeof BRepFill_ShapeLaw_2;
+  BRepFill_ShapeLaw_3: typeof BRepFill_ShapeLaw_3;
   BRepFill_Sweep: typeof BRepFill_Sweep;
   BRepFill_TrimEdgeTool: typeof BRepFill_TrimEdgeTool;
+  BRepFill_TrimEdgeTool_1: typeof BRepFill_TrimEdgeTool_1;
+  BRepFill_TrimEdgeTool_2: typeof BRepFill_TrimEdgeTool_2;
   BRepFill_TrimShellCorner: typeof BRepFill_TrimShellCorner;
   BRepFill_TrimSurfaceTool: typeof BRepFill_TrimSurfaceTool;
   BRepFilletAPI_LocalOperation: typeof BRepFilletAPI_LocalOperation;
   BRepFilletAPI_MakeChamfer: typeof BRepFilletAPI_MakeChamfer;
   BRepFilletAPI_MakeFillet: typeof BRepFilletAPI_MakeFillet;
   BRepFilletAPI_MakeFillet2d: typeof BRepFilletAPI_MakeFillet2d;
+  BRepFilletAPI_MakeFillet2d_1: typeof BRepFilletAPI_MakeFillet2d_1;
+  BRepFilletAPI_MakeFillet2d_2: typeof BRepFilletAPI_MakeFillet2d_2;
   BRepGProp: typeof BRepGProp;
   BRepGProp_Cinert: typeof BRepGProp_Cinert;
+  BRepGProp_Cinert_1: typeof BRepGProp_Cinert_1;
+  BRepGProp_Cinert_2: typeof BRepGProp_Cinert_2;
   BRepGProp_Domain: typeof BRepGProp_Domain;
+  BRepGProp_Domain_1: typeof BRepGProp_Domain_1;
+  BRepGProp_Domain_2: typeof BRepGProp_Domain_2;
   BRepGProp_EdgeTool: typeof BRepGProp_EdgeTool;
   BRepGProp_Face: typeof BRepGProp_Face;
+  BRepGProp_Face_1: typeof BRepGProp_Face_1;
+  BRepGProp_Face_2: typeof BRepGProp_Face_2;
   BRepGProp_MeshCinert: typeof BRepGProp_MeshCinert;
   BRepGProp_MeshProps: typeof BRepGProp_MeshProps;
   BRepGProp_Sinert: typeof BRepGProp_Sinert;
+  BRepGProp_Sinert_1: typeof BRepGProp_Sinert_1;
+  BRepGProp_Sinert_2: typeof BRepGProp_Sinert_2;
+  BRepGProp_Sinert_3: typeof BRepGProp_Sinert_3;
+  BRepGProp_Sinert_4: typeof BRepGProp_Sinert_4;
+  BRepGProp_Sinert_5: typeof BRepGProp_Sinert_5;
   BRepGProp_TFunction: typeof BRepGProp_TFunction;
   BRepGProp_UFunction: typeof BRepGProp_UFunction;
   BRepGProp_Vinert: typeof BRepGProp_Vinert;
+  BRepGProp_Vinert_1: typeof BRepGProp_Vinert_1;
+  BRepGProp_Vinert_2: typeof BRepGProp_Vinert_2;
+  BRepGProp_Vinert_3: typeof BRepGProp_Vinert_3;
+  BRepGProp_Vinert_4: typeof BRepGProp_Vinert_4;
+  BRepGProp_Vinert_5: typeof BRepGProp_Vinert_5;
+  BRepGProp_Vinert_6: typeof BRepGProp_Vinert_6;
+  BRepGProp_Vinert_7: typeof BRepGProp_Vinert_7;
+  BRepGProp_Vinert_8: typeof BRepGProp_Vinert_8;
+  BRepGProp_Vinert_9: typeof BRepGProp_Vinert_9;
+  BRepGProp_Vinert_10: typeof BRepGProp_Vinert_10;
+  BRepGProp_Vinert_11: typeof BRepGProp_Vinert_11;
+  BRepGProp_Vinert_12: typeof BRepGProp_Vinert_12;
+  BRepGProp_Vinert_13: typeof BRepGProp_Vinert_13;
   BRepIntCurveSurface_Inter: typeof BRepIntCurveSurface_Inter;
   BRepLProp: typeof BRepLProp;
   BRepLProp_CLProps: typeof BRepLProp_CLProps;
+  BRepLProp_CLProps_1: typeof BRepLProp_CLProps_1;
+  BRepLProp_CLProps_2: typeof BRepLProp_CLProps_2;
+  BRepLProp_CLProps_3: typeof BRepLProp_CLProps_3;
   BRepLProp_CurveTool: typeof BRepLProp_CurveTool;
   BRepLProp_SLProps: typeof BRepLProp_SLProps;
+  BRepLProp_SLProps_1: typeof BRepLProp_SLProps_1;
+  BRepLProp_SLProps_2: typeof BRepLProp_SLProps_2;
+  BRepLProp_SLProps_3: typeof BRepLProp_SLProps_3;
   BRepLProp_SurfaceTool: typeof BRepLProp_SurfaceTool;
   BRepLib: typeof BRepLib;
   BRepLib_CheckCurveOnSurface: typeof BRepLib_CheckCurveOnSurface;
+  BRepLib_CheckCurveOnSurface_1: typeof BRepLib_CheckCurveOnSurface_1;
+  BRepLib_CheckCurveOnSurface_2: typeof BRepLib_CheckCurveOnSurface_2;
   BRepLib_Command: typeof BRepLib_Command;
   BRepLib_FindSurface: typeof BRepLib_FindSurface;
+  BRepLib_FindSurface_1: typeof BRepLib_FindSurface_1;
+  BRepLib_FindSurface_2: typeof BRepLib_FindSurface_2;
   BRepLib_FuseEdges: typeof BRepLib_FuseEdges;
   BRepLib_MakeEdge: typeof BRepLib_MakeEdge;
+  BRepLib_MakeEdge_1: typeof BRepLib_MakeEdge_1;
+  BRepLib_MakeEdge_2: typeof BRepLib_MakeEdge_2;
+  BRepLib_MakeEdge_3: typeof BRepLib_MakeEdge_3;
+  BRepLib_MakeEdge_4: typeof BRepLib_MakeEdge_4;
+  BRepLib_MakeEdge_5: typeof BRepLib_MakeEdge_5;
+  BRepLib_MakeEdge_6: typeof BRepLib_MakeEdge_6;
+  BRepLib_MakeEdge_7: typeof BRepLib_MakeEdge_7;
+  BRepLib_MakeEdge_8: typeof BRepLib_MakeEdge_8;
+  BRepLib_MakeEdge_9: typeof BRepLib_MakeEdge_9;
+  BRepLib_MakeEdge_10: typeof BRepLib_MakeEdge_10;
+  BRepLib_MakeEdge_11: typeof BRepLib_MakeEdge_11;
+  BRepLib_MakeEdge_12: typeof BRepLib_MakeEdge_12;
+  BRepLib_MakeEdge_13: typeof BRepLib_MakeEdge_13;
+  BRepLib_MakeEdge_14: typeof BRepLib_MakeEdge_14;
+  BRepLib_MakeEdge_15: typeof BRepLib_MakeEdge_15;
+  BRepLib_MakeEdge_16: typeof BRepLib_MakeEdge_16;
+  BRepLib_MakeEdge_17: typeof BRepLib_MakeEdge_17;
+  BRepLib_MakeEdge_18: typeof BRepLib_MakeEdge_18;
+  BRepLib_MakeEdge_19: typeof BRepLib_MakeEdge_19;
+  BRepLib_MakeEdge_20: typeof BRepLib_MakeEdge_20;
+  BRepLib_MakeEdge_21: typeof BRepLib_MakeEdge_21;
+  BRepLib_MakeEdge_22: typeof BRepLib_MakeEdge_22;
+  BRepLib_MakeEdge_23: typeof BRepLib_MakeEdge_23;
+  BRepLib_MakeEdge_24: typeof BRepLib_MakeEdge_24;
+  BRepLib_MakeEdge_25: typeof BRepLib_MakeEdge_25;
+  BRepLib_MakeEdge_26: typeof BRepLib_MakeEdge_26;
+  BRepLib_MakeEdge_27: typeof BRepLib_MakeEdge_27;
+  BRepLib_MakeEdge_28: typeof BRepLib_MakeEdge_28;
+  BRepLib_MakeEdge_29: typeof BRepLib_MakeEdge_29;
+  BRepLib_MakeEdge_30: typeof BRepLib_MakeEdge_30;
+  BRepLib_MakeEdge_31: typeof BRepLib_MakeEdge_31;
+  BRepLib_MakeEdge_32: typeof BRepLib_MakeEdge_32;
+  BRepLib_MakeEdge_33: typeof BRepLib_MakeEdge_33;
+  BRepLib_MakeEdge_34: typeof BRepLib_MakeEdge_34;
+  BRepLib_MakeEdge_35: typeof BRepLib_MakeEdge_35;
   BRepLib_MakeEdge2d: typeof BRepLib_MakeEdge2d;
+  BRepLib_MakeEdge2d_1: typeof BRepLib_MakeEdge2d_1;
+  BRepLib_MakeEdge2d_2: typeof BRepLib_MakeEdge2d_2;
+  BRepLib_MakeEdge2d_3: typeof BRepLib_MakeEdge2d_3;
+  BRepLib_MakeEdge2d_4: typeof BRepLib_MakeEdge2d_4;
+  BRepLib_MakeEdge2d_5: typeof BRepLib_MakeEdge2d_5;
+  BRepLib_MakeEdge2d_6: typeof BRepLib_MakeEdge2d_6;
+  BRepLib_MakeEdge2d_7: typeof BRepLib_MakeEdge2d_7;
+  BRepLib_MakeEdge2d_8: typeof BRepLib_MakeEdge2d_8;
+  BRepLib_MakeEdge2d_9: typeof BRepLib_MakeEdge2d_9;
+  BRepLib_MakeEdge2d_10: typeof BRepLib_MakeEdge2d_10;
+  BRepLib_MakeEdge2d_11: typeof BRepLib_MakeEdge2d_11;
+  BRepLib_MakeEdge2d_12: typeof BRepLib_MakeEdge2d_12;
+  BRepLib_MakeEdge2d_13: typeof BRepLib_MakeEdge2d_13;
+  BRepLib_MakeEdge2d_14: typeof BRepLib_MakeEdge2d_14;
+  BRepLib_MakeEdge2d_15: typeof BRepLib_MakeEdge2d_15;
+  BRepLib_MakeEdge2d_16: typeof BRepLib_MakeEdge2d_16;
+  BRepLib_MakeEdge2d_17: typeof BRepLib_MakeEdge2d_17;
+  BRepLib_MakeEdge2d_18: typeof BRepLib_MakeEdge2d_18;
+  BRepLib_MakeEdge2d_19: typeof BRepLib_MakeEdge2d_19;
+  BRepLib_MakeEdge2d_20: typeof BRepLib_MakeEdge2d_20;
+  BRepLib_MakeEdge2d_21: typeof BRepLib_MakeEdge2d_21;
+  BRepLib_MakeEdge2d_22: typeof BRepLib_MakeEdge2d_22;
+  BRepLib_MakeEdge2d_23: typeof BRepLib_MakeEdge2d_23;
+  BRepLib_MakeEdge2d_24: typeof BRepLib_MakeEdge2d_24;
+  BRepLib_MakeEdge2d_25: typeof BRepLib_MakeEdge2d_25;
+  BRepLib_MakeEdge2d_26: typeof BRepLib_MakeEdge2d_26;
+  BRepLib_MakeEdge2d_27: typeof BRepLib_MakeEdge2d_27;
+  BRepLib_MakeEdge2d_28: typeof BRepLib_MakeEdge2d_28;
   BRepLib_MakeFace: typeof BRepLib_MakeFace;
+  BRepLib_MakeFace_1: typeof BRepLib_MakeFace_1;
+  BRepLib_MakeFace_2: typeof BRepLib_MakeFace_2;
+  BRepLib_MakeFace_3: typeof BRepLib_MakeFace_3;
+  BRepLib_MakeFace_4: typeof BRepLib_MakeFace_4;
+  BRepLib_MakeFace_5: typeof BRepLib_MakeFace_5;
+  BRepLib_MakeFace_6: typeof BRepLib_MakeFace_6;
+  BRepLib_MakeFace_7: typeof BRepLib_MakeFace_7;
+  BRepLib_MakeFace_8: typeof BRepLib_MakeFace_8;
+  BRepLib_MakeFace_9: typeof BRepLib_MakeFace_9;
+  BRepLib_MakeFace_10: typeof BRepLib_MakeFace_10;
+  BRepLib_MakeFace_11: typeof BRepLib_MakeFace_11;
+  BRepLib_MakeFace_12: typeof BRepLib_MakeFace_12;
+  BRepLib_MakeFace_13: typeof BRepLib_MakeFace_13;
+  BRepLib_MakeFace_14: typeof BRepLib_MakeFace_14;
+  BRepLib_MakeFace_15: typeof BRepLib_MakeFace_15;
+  BRepLib_MakeFace_16: typeof BRepLib_MakeFace_16;
+  BRepLib_MakeFace_17: typeof BRepLib_MakeFace_17;
+  BRepLib_MakeFace_18: typeof BRepLib_MakeFace_18;
+  BRepLib_MakeFace_19: typeof BRepLib_MakeFace_19;
+  BRepLib_MakeFace_20: typeof BRepLib_MakeFace_20;
+  BRepLib_MakeFace_21: typeof BRepLib_MakeFace_21;
+  BRepLib_MakeFace_22: typeof BRepLib_MakeFace_22;
   BRepLib_MakePolygon: typeof BRepLib_MakePolygon;
+  BRepLib_MakePolygon_1: typeof BRepLib_MakePolygon_1;
+  BRepLib_MakePolygon_2: typeof BRepLib_MakePolygon_2;
+  BRepLib_MakePolygon_3: typeof BRepLib_MakePolygon_3;
+  BRepLib_MakePolygon_4: typeof BRepLib_MakePolygon_4;
+  BRepLib_MakePolygon_5: typeof BRepLib_MakePolygon_5;
+  BRepLib_MakePolygon_6: typeof BRepLib_MakePolygon_6;
+  BRepLib_MakePolygon_7: typeof BRepLib_MakePolygon_7;
   BRepLib_MakeShape: typeof BRepLib_MakeShape;
   BRepLib_MakeShell: typeof BRepLib_MakeShell;
+  BRepLib_MakeShell_1: typeof BRepLib_MakeShell_1;
+  BRepLib_MakeShell_2: typeof BRepLib_MakeShell_2;
+  BRepLib_MakeShell_3: typeof BRepLib_MakeShell_3;
   BRepLib_MakeSolid: typeof BRepLib_MakeSolid;
+  BRepLib_MakeSolid_1: typeof BRepLib_MakeSolid_1;
+  BRepLib_MakeSolid_2: typeof BRepLib_MakeSolid_2;
+  BRepLib_MakeSolid_3: typeof BRepLib_MakeSolid_3;
+  BRepLib_MakeSolid_4: typeof BRepLib_MakeSolid_4;
+  BRepLib_MakeSolid_5: typeof BRepLib_MakeSolid_5;
+  BRepLib_MakeSolid_6: typeof BRepLib_MakeSolid_6;
+  BRepLib_MakeSolid_7: typeof BRepLib_MakeSolid_7;
   BRepLib_MakeVertex: typeof BRepLib_MakeVertex;
   BRepLib_MakeWire: typeof BRepLib_MakeWire;
+  BRepLib_MakeWire_1: typeof BRepLib_MakeWire_1;
+  BRepLib_MakeWire_2: typeof BRepLib_MakeWire_2;
+  BRepLib_MakeWire_3: typeof BRepLib_MakeWire_3;
+  BRepLib_MakeWire_4: typeof BRepLib_MakeWire_4;
+  BRepLib_MakeWire_5: typeof BRepLib_MakeWire_5;
+  BRepLib_MakeWire_6: typeof BRepLib_MakeWire_6;
+  BRepLib_MakeWire_7: typeof BRepLib_MakeWire_7;
   BRepMAT2d_BisectingLocus: typeof BRepMAT2d_BisectingLocus;
   BRepMAT2d_Explorer: typeof BRepMAT2d_Explorer;
+  BRepMAT2d_Explorer_1: typeof BRepMAT2d_Explorer_1;
+  BRepMAT2d_Explorer_2: typeof BRepMAT2d_Explorer_2;
   BRepMAT2d_LinkTopoBilo: typeof BRepMAT2d_LinkTopoBilo;
+  BRepMAT2d_LinkTopoBilo_1: typeof BRepMAT2d_LinkTopoBilo_1;
+  BRepMAT2d_LinkTopoBilo_2: typeof BRepMAT2d_LinkTopoBilo_2;
   BRepMesh_BaseMeshAlgo: typeof BRepMesh_BaseMeshAlgo;
   BRepMesh_BoundaryParamsRangeSplitter: typeof BRepMesh_BoundaryParamsRangeSplitter;
   BRepMesh_Circle: typeof BRepMesh_Circle;
+  BRepMesh_Circle_1: typeof BRepMesh_Circle_1;
+  BRepMesh_Circle_2: typeof BRepMesh_Circle_2;
   BRepMesh_CircleInspector: typeof BRepMesh_CircleInspector;
   BRepMesh_CircleTool: typeof BRepMesh_CircleTool;
+  BRepMesh_CircleTool_1: typeof BRepMesh_CircleTool_1;
+  BRepMesh_CircleTool_2: typeof BRepMesh_CircleTool_2;
   BRepMesh_Classifier: typeof BRepMesh_Classifier;
   BRepMesh_ConeRangeSplitter: typeof BRepMesh_ConeRangeSplitter;
   BRepMesh_ConstrainedBaseMeshAlgo: typeof BRepMesh_ConstrainedBaseMeshAlgo;
   BRepMesh_Context: typeof BRepMesh_Context;
   BRepMesh_CurveTessellator: typeof BRepMesh_CurveTessellator;
+  BRepMesh_CurveTessellator_1: typeof BRepMesh_CurveTessellator_1;
+  BRepMesh_CurveTessellator_2: typeof BRepMesh_CurveTessellator_2;
   BRepMesh_CustomBaseMeshAlgo: typeof BRepMesh_CustomBaseMeshAlgo;
   BRepMesh_CylinderRangeSplitter: typeof BRepMesh_CylinderRangeSplitter;
   BRepMesh_DataStructureOfDelaun: typeof BRepMesh_DataStructureOfDelaun;
   BRepMesh_DefaultRangeSplitter: typeof BRepMesh_DefaultRangeSplitter;
   BRepMesh_Deflection: typeof BRepMesh_Deflection;
   BRepMesh_Delaun: typeof BRepMesh_Delaun;
+  BRepMesh_Delaun_1: typeof BRepMesh_Delaun_1;
+  BRepMesh_Delaun_2: typeof BRepMesh_Delaun_2;
+  BRepMesh_Delaun_3: typeof BRepMesh_Delaun_3;
+  BRepMesh_Delaun_4: typeof BRepMesh_Delaun_4;
+  BRepMesh_Delaun_5: typeof BRepMesh_Delaun_5;
   BRepMesh_DelaunayBaseMeshAlgo: typeof BRepMesh_DelaunayBaseMeshAlgo;
   BRepMesh_DiscretFactory: typeof BRepMesh_DiscretFactory;
   BRepMesh_DiscretRoot: typeof BRepMesh_DiscretRoot;
   BRepMesh_Edge: typeof BRepMesh_Edge;
+  BRepMesh_Edge_1: typeof BRepMesh_Edge_1;
+  BRepMesh_Edge_2: typeof BRepMesh_Edge_2;
   BRepMesh_EdgeDiscret: typeof BRepMesh_EdgeDiscret;
   BRepMesh_EdgeTessellationExtractor: typeof BRepMesh_EdgeTessellationExtractor;
   BRepMesh_FaceChecker: typeof BRepMesh_FaceChecker;
   BRepMesh_FaceDiscret: typeof BRepMesh_FaceDiscret;
   BRepMesh_FastDiscret: typeof BRepMesh_FastDiscret;
   BRepMesh_GeomTool: typeof BRepMesh_GeomTool;
+  BRepMesh_GeomTool_1: typeof BRepMesh_GeomTool_1;
+  BRepMesh_GeomTool_2: typeof BRepMesh_GeomTool_2;
   BRepMesh_IncrementalMesh: typeof BRepMesh_IncrementalMesh;
+  BRepMesh_IncrementalMesh_1: typeof BRepMesh_IncrementalMesh_1;
+  BRepMesh_IncrementalMesh_2: typeof BRepMesh_IncrementalMesh_2;
+  BRepMesh_IncrementalMesh_3: typeof BRepMesh_IncrementalMesh_3;
   BRepMesh_MeshAlgoFactory: typeof BRepMesh_MeshAlgoFactory;
   BRepMesh_MeshTool: typeof BRepMesh_MeshTool;
   BRepMesh_ModelBuilder: typeof BRepMesh_ModelBuilder;
@@ -324,67 +865,189 @@ export interface opencascade {
   BRepMesh_ModelPreProcessor: typeof BRepMesh_ModelPreProcessor;
   BRepMesh_NURBSRangeSplitter: typeof BRepMesh_NURBSRangeSplitter;
   BRepMesh_OrientedEdge: typeof BRepMesh_OrientedEdge;
+  BRepMesh_OrientedEdge_1: typeof BRepMesh_OrientedEdge_1;
+  BRepMesh_OrientedEdge_2: typeof BRepMesh_OrientedEdge_2;
   BRepMesh_PairOfIndex: typeof BRepMesh_PairOfIndex;
   BRepMesh_SelectorOfDataStructureOfDelaun: typeof BRepMesh_SelectorOfDataStructureOfDelaun;
+  BRepMesh_SelectorOfDataStructureOfDelaun_1: typeof BRepMesh_SelectorOfDataStructureOfDelaun_1;
+  BRepMesh_SelectorOfDataStructureOfDelaun_2: typeof BRepMesh_SelectorOfDataStructureOfDelaun_2;
   BRepMesh_ShapeTool: typeof BRepMesh_ShapeTool;
   BRepMesh_ShapeVisitor: typeof BRepMesh_ShapeVisitor;
   BRepMesh_SphereRangeSplitter: typeof BRepMesh_SphereRangeSplitter;
   BRepMesh_TorusRangeSplitter: typeof BRepMesh_TorusRangeSplitter;
   BRepMesh_Triangle: typeof BRepMesh_Triangle;
+  BRepMesh_Triangle_1: typeof BRepMesh_Triangle_1;
+  BRepMesh_Triangle_2: typeof BRepMesh_Triangle_2;
   BRepMesh_UVParamRangeSplitter: typeof BRepMesh_UVParamRangeSplitter;
   BRepMesh_Vertex: typeof BRepMesh_Vertex;
+  BRepMesh_Vertex_1: typeof BRepMesh_Vertex_1;
+  BRepMesh_Vertex_2: typeof BRepMesh_Vertex_2;
+  BRepMesh_Vertex_3: typeof BRepMesh_Vertex_3;
   BRepMesh_VertexInspector: typeof BRepMesh_VertexInspector;
   BRepMesh_VertexTool: typeof BRepMesh_VertexTool;
   BRepOffset: typeof BRepOffset;
   BRepOffsetAPI_DraftAngle: typeof BRepOffsetAPI_DraftAngle;
+  BRepOffsetAPI_DraftAngle_1: typeof BRepOffsetAPI_DraftAngle_1;
+  BRepOffsetAPI_DraftAngle_2: typeof BRepOffsetAPI_DraftAngle_2;
   BRepOffsetAPI_MakeDraft: typeof BRepOffsetAPI_MakeDraft;
   BRepOffsetAPI_MakeEvolved: typeof BRepOffsetAPI_MakeEvolved;
+  BRepOffsetAPI_MakeEvolved_1: typeof BRepOffsetAPI_MakeEvolved_1;
+  BRepOffsetAPI_MakeEvolved_2: typeof BRepOffsetAPI_MakeEvolved_2;
   BRepOffsetAPI_MakeFilling: typeof BRepOffsetAPI_MakeFilling;
   BRepOffsetAPI_MakeOffset: typeof BRepOffsetAPI_MakeOffset;
+  BRepOffsetAPI_MakeOffset_1: typeof BRepOffsetAPI_MakeOffset_1;
+  BRepOffsetAPI_MakeOffset_2: typeof BRepOffsetAPI_MakeOffset_2;
+  BRepOffsetAPI_MakeOffset_3: typeof BRepOffsetAPI_MakeOffset_3;
   BRepOffsetAPI_MakeOffsetShape: typeof BRepOffsetAPI_MakeOffsetShape;
+  BRepOffsetAPI_MakeOffsetShape_1: typeof BRepOffsetAPI_MakeOffsetShape_1;
+  BRepOffsetAPI_MakeOffsetShape_2: typeof BRepOffsetAPI_MakeOffsetShape_2;
   BRepOffsetAPI_MakePipe: typeof BRepOffsetAPI_MakePipe;
+  BRepOffsetAPI_MakePipe_1: typeof BRepOffsetAPI_MakePipe_1;
+  BRepOffsetAPI_MakePipe_2: typeof BRepOffsetAPI_MakePipe_2;
   BRepOffsetAPI_MakePipeShell: typeof BRepOffsetAPI_MakePipeShell;
   BRepOffsetAPI_MakeThickSolid: typeof BRepOffsetAPI_MakeThickSolid;
+  BRepOffsetAPI_MakeThickSolid_1: typeof BRepOffsetAPI_MakeThickSolid_1;
+  BRepOffsetAPI_MakeThickSolid_2: typeof BRepOffsetAPI_MakeThickSolid_2;
   BRepOffsetAPI_MiddlePath: typeof BRepOffsetAPI_MiddlePath;
   BRepOffsetAPI_NormalProjection: typeof BRepOffsetAPI_NormalProjection;
+  BRepOffsetAPI_NormalProjection_1: typeof BRepOffsetAPI_NormalProjection_1;
+  BRepOffsetAPI_NormalProjection_2: typeof BRepOffsetAPI_NormalProjection_2;
   BRepOffsetAPI_ThruSections: typeof BRepOffsetAPI_ThruSections;
   BRepOffset_Analyse: typeof BRepOffset_Analyse;
+  BRepOffset_Analyse_1: typeof BRepOffset_Analyse_1;
+  BRepOffset_Analyse_2: typeof BRepOffset_Analyse_2;
   BRepOffset_Inter2d: typeof BRepOffset_Inter2d;
   BRepOffset_Inter3d: typeof BRepOffset_Inter3d;
   BRepOffset_Interval: typeof BRepOffset_Interval;
+  BRepOffset_Interval_1: typeof BRepOffset_Interval_1;
+  BRepOffset_Interval_2: typeof BRepOffset_Interval_2;
   BRepOffset_MakeLoops: typeof BRepOffset_MakeLoops;
   BRepOffset_MakeSimpleOffset: typeof BRepOffset_MakeSimpleOffset;
+  BRepOffset_MakeSimpleOffset_1: typeof BRepOffset_MakeSimpleOffset_1;
+  BRepOffset_MakeSimpleOffset_2: typeof BRepOffset_MakeSimpleOffset_2;
   BRepOffset_Offset: typeof BRepOffset_Offset;
+  BRepOffset_Offset_1: typeof BRepOffset_Offset_1;
+  BRepOffset_Offset_2: typeof BRepOffset_Offset_2;
+  BRepOffset_Offset_3: typeof BRepOffset_Offset_3;
+  BRepOffset_Offset_4: typeof BRepOffset_Offset_4;
+  BRepOffset_Offset_5: typeof BRepOffset_Offset_5;
+  BRepOffset_Offset_6: typeof BRepOffset_Offset_6;
   BRepOffset_SimpleOffset: typeof BRepOffset_SimpleOffset;
   BRepOffset_Tool: typeof BRepOffset_Tool;
   BRepPrimAPI_MakeBox: typeof BRepPrimAPI_MakeBox;
+  BRepPrimAPI_MakeBox_1: typeof BRepPrimAPI_MakeBox_1;
+  BRepPrimAPI_MakeBox_2: typeof BRepPrimAPI_MakeBox_2;
+  BRepPrimAPI_MakeBox_3: typeof BRepPrimAPI_MakeBox_3;
+  BRepPrimAPI_MakeBox_4: typeof BRepPrimAPI_MakeBox_4;
   BRepPrimAPI_MakeCone: typeof BRepPrimAPI_MakeCone;
+  BRepPrimAPI_MakeCone_1: typeof BRepPrimAPI_MakeCone_1;
+  BRepPrimAPI_MakeCone_2: typeof BRepPrimAPI_MakeCone_2;
+  BRepPrimAPI_MakeCone_3: typeof BRepPrimAPI_MakeCone_3;
+  BRepPrimAPI_MakeCone_4: typeof BRepPrimAPI_MakeCone_4;
   BRepPrimAPI_MakeCylinder: typeof BRepPrimAPI_MakeCylinder;
+  BRepPrimAPI_MakeCylinder_1: typeof BRepPrimAPI_MakeCylinder_1;
+  BRepPrimAPI_MakeCylinder_2: typeof BRepPrimAPI_MakeCylinder_2;
+  BRepPrimAPI_MakeCylinder_3: typeof BRepPrimAPI_MakeCylinder_3;
+  BRepPrimAPI_MakeCylinder_4: typeof BRepPrimAPI_MakeCylinder_4;
   BRepPrimAPI_MakeHalfSpace: typeof BRepPrimAPI_MakeHalfSpace;
+  BRepPrimAPI_MakeHalfSpace_1: typeof BRepPrimAPI_MakeHalfSpace_1;
+  BRepPrimAPI_MakeHalfSpace_2: typeof BRepPrimAPI_MakeHalfSpace_2;
   BRepPrimAPI_MakeOneAxis: typeof BRepPrimAPI_MakeOneAxis;
   BRepPrimAPI_MakePrism: typeof BRepPrimAPI_MakePrism;
+  BRepPrimAPI_MakePrism_1: typeof BRepPrimAPI_MakePrism_1;
+  BRepPrimAPI_MakePrism_2: typeof BRepPrimAPI_MakePrism_2;
   BRepPrimAPI_MakeRevol: typeof BRepPrimAPI_MakeRevol;
+  BRepPrimAPI_MakeRevol_1: typeof BRepPrimAPI_MakeRevol_1;
+  BRepPrimAPI_MakeRevol_2: typeof BRepPrimAPI_MakeRevol_2;
   BRepPrimAPI_MakeRevolution: typeof BRepPrimAPI_MakeRevolution;
+  BRepPrimAPI_MakeRevolution_1: typeof BRepPrimAPI_MakeRevolution_1;
+  BRepPrimAPI_MakeRevolution_2: typeof BRepPrimAPI_MakeRevolution_2;
+  BRepPrimAPI_MakeRevolution_3: typeof BRepPrimAPI_MakeRevolution_3;
+  BRepPrimAPI_MakeRevolution_4: typeof BRepPrimAPI_MakeRevolution_4;
+  BRepPrimAPI_MakeRevolution_5: typeof BRepPrimAPI_MakeRevolution_5;
+  BRepPrimAPI_MakeRevolution_6: typeof BRepPrimAPI_MakeRevolution_6;
+  BRepPrimAPI_MakeRevolution_7: typeof BRepPrimAPI_MakeRevolution_7;
+  BRepPrimAPI_MakeRevolution_8: typeof BRepPrimAPI_MakeRevolution_8;
   BRepPrimAPI_MakeSphere: typeof BRepPrimAPI_MakeSphere;
+  BRepPrimAPI_MakeSphere_1: typeof BRepPrimAPI_MakeSphere_1;
+  BRepPrimAPI_MakeSphere_2: typeof BRepPrimAPI_MakeSphere_2;
+  BRepPrimAPI_MakeSphere_3: typeof BRepPrimAPI_MakeSphere_3;
+  BRepPrimAPI_MakeSphere_4: typeof BRepPrimAPI_MakeSphere_4;
+  BRepPrimAPI_MakeSphere_5: typeof BRepPrimAPI_MakeSphere_5;
+  BRepPrimAPI_MakeSphere_6: typeof BRepPrimAPI_MakeSphere_6;
+  BRepPrimAPI_MakeSphere_7: typeof BRepPrimAPI_MakeSphere_7;
+  BRepPrimAPI_MakeSphere_8: typeof BRepPrimAPI_MakeSphere_8;
+  BRepPrimAPI_MakeSphere_9: typeof BRepPrimAPI_MakeSphere_9;
+  BRepPrimAPI_MakeSphere_10: typeof BRepPrimAPI_MakeSphere_10;
+  BRepPrimAPI_MakeSphere_11: typeof BRepPrimAPI_MakeSphere_11;
+  BRepPrimAPI_MakeSphere_12: typeof BRepPrimAPI_MakeSphere_12;
   BRepPrimAPI_MakeSweep: typeof BRepPrimAPI_MakeSweep;
   BRepPrimAPI_MakeTorus: typeof BRepPrimAPI_MakeTorus;
+  BRepPrimAPI_MakeTorus_1: typeof BRepPrimAPI_MakeTorus_1;
+  BRepPrimAPI_MakeTorus_2: typeof BRepPrimAPI_MakeTorus_2;
+  BRepPrimAPI_MakeTorus_3: typeof BRepPrimAPI_MakeTorus_3;
+  BRepPrimAPI_MakeTorus_4: typeof BRepPrimAPI_MakeTorus_4;
+  BRepPrimAPI_MakeTorus_5: typeof BRepPrimAPI_MakeTorus_5;
+  BRepPrimAPI_MakeTorus_6: typeof BRepPrimAPI_MakeTorus_6;
+  BRepPrimAPI_MakeTorus_7: typeof BRepPrimAPI_MakeTorus_7;
+  BRepPrimAPI_MakeTorus_8: typeof BRepPrimAPI_MakeTorus_8;
   BRepPrimAPI_MakeWedge: typeof BRepPrimAPI_MakeWedge;
+  BRepPrimAPI_MakeWedge_1: typeof BRepPrimAPI_MakeWedge_1;
+  BRepPrimAPI_MakeWedge_2: typeof BRepPrimAPI_MakeWedge_2;
+  BRepPrimAPI_MakeWedge_3: typeof BRepPrimAPI_MakeWedge_3;
+  BRepPrimAPI_MakeWedge_4: typeof BRepPrimAPI_MakeWedge_4;
   BRepPrim_Builder: typeof BRepPrim_Builder;
+  BRepPrim_Builder_1: typeof BRepPrim_Builder_1;
+  BRepPrim_Builder_2: typeof BRepPrim_Builder_2;
   BRepPrim_Cone: typeof BRepPrim_Cone;
+  BRepPrim_Cone_1: typeof BRepPrim_Cone_1;
+  BRepPrim_Cone_2: typeof BRepPrim_Cone_2;
+  BRepPrim_Cone_3: typeof BRepPrim_Cone_3;
+  BRepPrim_Cone_4: typeof BRepPrim_Cone_4;
+  BRepPrim_Cone_5: typeof BRepPrim_Cone_5;
+  BRepPrim_Cone_6: typeof BRepPrim_Cone_6;
+  BRepPrim_Cone_7: typeof BRepPrim_Cone_7;
   BRepPrim_Cylinder: typeof BRepPrim_Cylinder;
+  BRepPrim_Cylinder_1: typeof BRepPrim_Cylinder_1;
+  BRepPrim_Cylinder_2: typeof BRepPrim_Cylinder_2;
+  BRepPrim_Cylinder_3: typeof BRepPrim_Cylinder_3;
+  BRepPrim_Cylinder_4: typeof BRepPrim_Cylinder_4;
+  BRepPrim_Cylinder_5: typeof BRepPrim_Cylinder_5;
+  BRepPrim_Cylinder_6: typeof BRepPrim_Cylinder_6;
   BRepPrim_FaceBuilder: typeof BRepPrim_FaceBuilder;
+  BRepPrim_FaceBuilder_1: typeof BRepPrim_FaceBuilder_1;
+  BRepPrim_FaceBuilder_2: typeof BRepPrim_FaceBuilder_2;
+  BRepPrim_FaceBuilder_3: typeof BRepPrim_FaceBuilder_3;
   BRepPrim_GWedge: typeof BRepPrim_GWedge;
+  BRepPrim_GWedge_1: typeof BRepPrim_GWedge_1;
+  BRepPrim_GWedge_2: typeof BRepPrim_GWedge_2;
+  BRepPrim_GWedge_3: typeof BRepPrim_GWedge_3;
   BRepPrim_OneAxis: typeof BRepPrim_OneAxis;
   BRepPrim_Revolution: typeof BRepPrim_Revolution;
   BRepPrim_Sphere: typeof BRepPrim_Sphere;
+  BRepPrim_Sphere_1: typeof BRepPrim_Sphere_1;
+  BRepPrim_Sphere_2: typeof BRepPrim_Sphere_2;
+  BRepPrim_Sphere_3: typeof BRepPrim_Sphere_3;
   BRepPrim_Torus: typeof BRepPrim_Torus;
+  BRepPrim_Torus_1: typeof BRepPrim_Torus_1;
+  BRepPrim_Torus_2: typeof BRepPrim_Torus_2;
+  BRepPrim_Torus_3: typeof BRepPrim_Torus_3;
   BRepPrim_Wedge: typeof BRepPrim_Wedge;
+  BRepPrim_Wedge_1: typeof BRepPrim_Wedge_1;
+  BRepPrim_Wedge_2: typeof BRepPrim_Wedge_2;
+  BRepPrim_Wedge_3: typeof BRepPrim_Wedge_3;
   BRepProj_Projection: typeof BRepProj_Projection;
+  BRepProj_Projection_1: typeof BRepProj_Projection_1;
+  BRepProj_Projection_2: typeof BRepProj_Projection_2;
   BRepSweep_Builder: typeof BRepSweep_Builder;
   BRepSweep_Iterator: typeof BRepSweep_Iterator;
   BRepSweep_NumLinearRegularSweep: typeof BRepSweep_NumLinearRegularSweep;
   BRepSweep_Prism: typeof BRepSweep_Prism;
+  BRepSweep_Prism_1: typeof BRepSweep_Prism_1;
+  BRepSweep_Prism_2: typeof BRepSweep_Prism_2;
   BRepSweep_Revol: typeof BRepSweep_Revol;
+  BRepSweep_Revol_1: typeof BRepSweep_Revol_1;
+  BRepSweep_Revol_2: typeof BRepSweep_Revol_2;
   BRepSweep_Rotation: typeof BRepSweep_Rotation;
   BRepSweep_Tool: typeof BRepSweep_Tool;
   BRepSweep_Translation: typeof BRepSweep_Translation;
@@ -392,24 +1055,43 @@ export interface opencascade {
   BRepToIGESBRep_Entity: typeof BRepToIGESBRep_Entity;
   BRepToIGES_BREntity: typeof BRepToIGES_BREntity;
   BRepToIGES_BRShell: typeof BRepToIGES_BRShell;
+  BRepToIGES_BRShell_1: typeof BRepToIGES_BRShell_1;
+  BRepToIGES_BRShell_2: typeof BRepToIGES_BRShell_2;
   BRepToIGES_BRSolid: typeof BRepToIGES_BRSolid;
+  BRepToIGES_BRSolid_1: typeof BRepToIGES_BRSolid_1;
+  BRepToIGES_BRSolid_2: typeof BRepToIGES_BRSolid_2;
   BRepToIGES_BRWire: typeof BRepToIGES_BRWire;
+  BRepToIGES_BRWire_1: typeof BRepToIGES_BRWire_1;
+  BRepToIGES_BRWire_2: typeof BRepToIGES_BRWire_2;
   BRepTools: typeof BRepTools;
   BRepTools_GTrsfModification: typeof BRepTools_GTrsfModification;
   BRepTools_History: typeof BRepTools_History;
   BRepTools_Modification: typeof BRepTools_Modification;
   BRepTools_Modifier: typeof BRepTools_Modifier;
+  BRepTools_Modifier_1: typeof BRepTools_Modifier_1;
+  BRepTools_Modifier_2: typeof BRepTools_Modifier_2;
+  BRepTools_Modifier_3: typeof BRepTools_Modifier_3;
   BRepTools_NurbsConvertModification: typeof BRepTools_NurbsConvertModification;
   BRepTools_Quilt: typeof BRepTools_Quilt;
   BRepTools_ReShape: typeof BRepTools_ReShape;
   BRepTools_ShapeSet: typeof BRepTools_ShapeSet;
+  BRepTools_ShapeSet_1: typeof BRepTools_ShapeSet_1;
+  BRepTools_ShapeSet_2: typeof BRepTools_ShapeSet_2;
   BRepTools_Substitution: typeof BRepTools_Substitution;
   BRepTools_TrsfModification: typeof BRepTools_TrsfModification;
   BRepTools_WireExplorer: typeof BRepTools_WireExplorer;
+  BRepTools_WireExplorer_1: typeof BRepTools_WireExplorer_1;
+  BRepTools_WireExplorer_2: typeof BRepTools_WireExplorer_2;
+  BRepTools_WireExplorer_3: typeof BRepTools_WireExplorer_3;
   BRepTopAdaptor_FClass2d: typeof BRepTopAdaptor_FClass2d;
   BRepTopAdaptor_HVertex: typeof BRepTopAdaptor_HVertex;
   BRepTopAdaptor_Tool: typeof BRepTopAdaptor_Tool;
+  BRepTopAdaptor_Tool_1: typeof BRepTopAdaptor_Tool_1;
+  BRepTopAdaptor_Tool_2: typeof BRepTopAdaptor_Tool_2;
+  BRepTopAdaptor_Tool_3: typeof BRepTopAdaptor_Tool_3;
   BRepTopAdaptor_TopolTool: typeof BRepTopAdaptor_TopolTool;
+  BRepTopAdaptor_TopolTool_1: typeof BRepTopAdaptor_TopolTool_1;
+  BRepTopAdaptor_TopolTool_2: typeof BRepTopAdaptor_TopolTool_2;
   BRep_Builder: typeof BRep_Builder;
   BRep_Curve3D: typeof BRep_Curve3D;
   BRep_CurveOn2Surfaces: typeof BRep_CurveOn2Surfaces;
@@ -432,6 +1114,8 @@ export interface opencascade {
   BRep_TVertex: typeof BRep_TVertex;
   BRep_Tool: typeof BRep_Tool;
   BSplCLib_Cache: typeof BSplCLib_Cache;
+  BSplCLib_Cache_1: typeof BSplCLib_Cache_1;
+  BSplCLib_Cache_2: typeof BSplCLib_Cache_2;
   BSplCLib_EvaluatorFunction: typeof BSplCLib_EvaluatorFunction;
   BSplSLib: typeof BSplSLib;
   BSplSLib_Cache: typeof BSplSLib_Cache;
@@ -443,20 +1127,41 @@ export interface opencascade {
   BVH_Properties: typeof BVH_Properties;
   BVH_TreeBaseTransient: typeof BVH_TreeBaseTransient;
   BiTgte_Blend: typeof BiTgte_Blend;
+  BiTgte_Blend_1: typeof BiTgte_Blend_1;
+  BiTgte_Blend_2: typeof BiTgte_Blend_2;
   BiTgte_CurveOnEdge: typeof BiTgte_CurveOnEdge;
+  BiTgte_CurveOnEdge_1: typeof BiTgte_CurveOnEdge_1;
+  BiTgte_CurveOnEdge_2: typeof BiTgte_CurveOnEdge_2;
   BiTgte_CurveOnVertex: typeof BiTgte_CurveOnVertex;
+  BiTgte_CurveOnVertex_1: typeof BiTgte_CurveOnVertex_1;
+  BiTgte_CurveOnVertex_2: typeof BiTgte_CurveOnVertex_2;
   BiTgte_HCurveOnEdge: typeof BiTgte_HCurveOnEdge;
+  BiTgte_HCurveOnEdge_1: typeof BiTgte_HCurveOnEdge_1;
+  BiTgte_HCurveOnEdge_2: typeof BiTgte_HCurveOnEdge_2;
   BiTgte_HCurveOnVertex: typeof BiTgte_HCurveOnVertex;
+  BiTgte_HCurveOnVertex_1: typeof BiTgte_HCurveOnVertex_1;
+  BiTgte_HCurveOnVertex_2: typeof BiTgte_HCurveOnVertex_2;
   Bisector: typeof Bisector;
   Bisector_Bisec: typeof Bisector_Bisec;
   Bisector_BisecAna: typeof Bisector_BisecAna;
   Bisector_BisecCC: typeof Bisector_BisecCC;
+  Bisector_BisecCC_1: typeof Bisector_BisecCC_1;
+  Bisector_BisecCC_2: typeof Bisector_BisecCC_2;
   Bisector_BisecPC: typeof Bisector_BisecPC;
+  Bisector_BisecPC_1: typeof Bisector_BisecPC_1;
+  Bisector_BisecPC_2: typeof Bisector_BisecPC_2;
+  Bisector_BisecPC_3: typeof Bisector_BisecPC_3;
   Bisector_Curve: typeof Bisector_Curve;
   Bisector_FunctionH: typeof Bisector_FunctionH;
   Bisector_FunctionInter: typeof Bisector_FunctionInter;
+  Bisector_FunctionInter_1: typeof Bisector_FunctionInter_1;
+  Bisector_FunctionInter_2: typeof Bisector_FunctionInter_2;
   Bisector_Inter: typeof Bisector_Inter;
+  Bisector_Inter_1: typeof Bisector_Inter_1;
+  Bisector_Inter_2: typeof Bisector_Inter_2;
   Bisector_PointOnBis: typeof Bisector_PointOnBis;
+  Bisector_PointOnBis_1: typeof Bisector_PointOnBis_1;
+  Bisector_PointOnBis_2: typeof Bisector_PointOnBis_2;
   Bisector_PolyBis: typeof Bisector_PolyBis;
   BlendFunc_CSCircular: typeof BlendFunc_CSCircular;
   BlendFunc_CSConstRad: typeof BlendFunc_CSConstRad;
@@ -484,6 +1189,15 @@ export interface opencascade {
   Blend_FuncInv: typeof Blend_FuncInv;
   Blend_Function: typeof Blend_Function;
   Blend_Point: typeof Blend_Point;
+  Blend_Point_1: typeof Blend_Point_1;
+  Blend_Point_2: typeof Blend_Point_2;
+  Blend_Point_3: typeof Blend_Point_3;
+  Blend_Point_4: typeof Blend_Point_4;
+  Blend_Point_5: typeof Blend_Point_5;
+  Blend_Point_6: typeof Blend_Point_6;
+  Blend_Point_7: typeof Blend_Point_7;
+  Blend_Point_8: typeof Blend_Point_8;
+  Blend_Point_9: typeof Blend_Point_9;
   Blend_RstRstFunction: typeof Blend_RstRstFunction;
   Blend_SurfCurvFuncInv: typeof Blend_SurfCurvFuncInv;
   Blend_SurfPointFuncInv: typeof Blend_SurfPointFuncInv;
@@ -493,24 +1207,45 @@ export interface opencascade {
   BndLib_Add3dCurve: typeof BndLib_Add3dCurve;
   BndLib_AddSurface: typeof BndLib_AddSurface;
   Bnd_B2d: typeof Bnd_B2d;
+  Bnd_B2d_1: typeof Bnd_B2d_1;
+  Bnd_B2d_2: typeof Bnd_B2d_2;
   Bnd_B2f: typeof Bnd_B2f;
+  Bnd_B2f_1: typeof Bnd_B2f_1;
+  Bnd_B2f_2: typeof Bnd_B2f_2;
   Bnd_B3d: typeof Bnd_B3d;
+  Bnd_B3d_1: typeof Bnd_B3d_1;
+  Bnd_B3d_2: typeof Bnd_B3d_2;
   Bnd_B3f: typeof Bnd_B3f;
+  Bnd_B3f_1: typeof Bnd_B3f_1;
+  Bnd_B3f_2: typeof Bnd_B3f_2;
   Bnd_BoundSortBox: typeof Bnd_BoundSortBox;
   Bnd_BoundSortBox2d: typeof Bnd_BoundSortBox2d;
   Bnd_Box: typeof Bnd_Box;
+  Bnd_Box_1: typeof Bnd_Box_1;
+  Bnd_Box_2: typeof Bnd_Box_2;
   Bnd_Box2d: typeof Bnd_Box2d;
   Bnd_OBB: typeof Bnd_OBB;
+  Bnd_OBB_1: typeof Bnd_OBB_1;
+  Bnd_OBB_2: typeof Bnd_OBB_2;
+  Bnd_OBB_3: typeof Bnd_OBB_3;
   Bnd_Range: typeof Bnd_Range;
+  Bnd_Range_1: typeof Bnd_Range_1;
+  Bnd_Range_2: typeof Bnd_Range_2;
   Bnd_Sphere: typeof Bnd_Sphere;
+  Bnd_Sphere_1: typeof Bnd_Sphere_1;
+  Bnd_Sphere_2: typeof Bnd_Sphere_2;
   Bnd_Tools: typeof Bnd_Tools;
   CDF: typeof CDF;
   CDF_Application: typeof CDF_Application;
   CDF_Directory: typeof CDF_Directory;
   CDF_DirectoryIterator: typeof CDF_DirectoryIterator;
+  CDF_DirectoryIterator_1: typeof CDF_DirectoryIterator_1;
+  CDF_DirectoryIterator_2: typeof CDF_DirectoryIterator_2;
   CDF_FWOSDriver: typeof CDF_FWOSDriver;
   CDF_MetaDataDriver: typeof CDF_MetaDataDriver;
   CDF_MetaDataDriverError: typeof CDF_MetaDataDriverError;
+  CDF_MetaDataDriverError_1: typeof CDF_MetaDataDriverError_1;
+  CDF_MetaDataDriverError_2: typeof CDF_MetaDataDriverError_2;
   CDF_MetaDataDriverFactory: typeof CDF_MetaDataDriverFactory;
   CDF_Session: typeof CDF_Session;
   CDF_Store: typeof CDF_Store;
@@ -521,33 +1256,67 @@ export interface opencascade {
   CDM_Reference: typeof CDM_Reference;
   CDM_ReferenceIterator: typeof CDM_ReferenceIterator;
   CPnts_AbscissaPoint: typeof CPnts_AbscissaPoint;
+  CPnts_AbscissaPoint_1: typeof CPnts_AbscissaPoint_1;
+  CPnts_AbscissaPoint_2: typeof CPnts_AbscissaPoint_2;
+  CPnts_AbscissaPoint_3: typeof CPnts_AbscissaPoint_3;
+  CPnts_AbscissaPoint_4: typeof CPnts_AbscissaPoint_4;
+  CPnts_AbscissaPoint_5: typeof CPnts_AbscissaPoint_5;
   CPnts_MyGaussFunction: typeof CPnts_MyGaussFunction;
   CPnts_MyRootFunction: typeof CPnts_MyRootFunction;
   CPnts_UniformDeflection: typeof CPnts_UniformDeflection;
+  CPnts_UniformDeflection_1: typeof CPnts_UniformDeflection_1;
+  CPnts_UniformDeflection_2: typeof CPnts_UniformDeflection_2;
+  CPnts_UniformDeflection_3: typeof CPnts_UniformDeflection_3;
+  CPnts_UniformDeflection_4: typeof CPnts_UniformDeflection_4;
+  CPnts_UniformDeflection_5: typeof CPnts_UniformDeflection_5;
   CSLib: typeof CSLib;
   CSLib_Class2d: typeof CSLib_Class2d;
+  CSLib_Class2d_1: typeof CSLib_Class2d_1;
+  CSLib_Class2d_2: typeof CSLib_Class2d_2;
   CSLib_NormalPolyDef: typeof CSLib_NormalPolyDef;
   ChFi2d: typeof ChFi2d;
   ChFi2d_AnaFilletAlgo: typeof ChFi2d_AnaFilletAlgo;
+  ChFi2d_AnaFilletAlgo_1: typeof ChFi2d_AnaFilletAlgo_1;
+  ChFi2d_AnaFilletAlgo_2: typeof ChFi2d_AnaFilletAlgo_2;
+  ChFi2d_AnaFilletAlgo_3: typeof ChFi2d_AnaFilletAlgo_3;
   ChFi2d_Builder: typeof ChFi2d_Builder;
+  ChFi2d_Builder_1: typeof ChFi2d_Builder_1;
+  ChFi2d_Builder_2: typeof ChFi2d_Builder_2;
   ChFi2d_ChamferAPI: typeof ChFi2d_ChamferAPI;
+  ChFi2d_ChamferAPI_1: typeof ChFi2d_ChamferAPI_1;
+  ChFi2d_ChamferAPI_2: typeof ChFi2d_ChamferAPI_2;
+  ChFi2d_ChamferAPI_3: typeof ChFi2d_ChamferAPI_3;
   ChFi2d_FilletAPI: typeof ChFi2d_FilletAPI;
+  ChFi2d_FilletAPI_1: typeof ChFi2d_FilletAPI_1;
+  ChFi2d_FilletAPI_2: typeof ChFi2d_FilletAPI_2;
+  ChFi2d_FilletAPI_3: typeof ChFi2d_FilletAPI_3;
   ChFi2d_FilletAlgo: typeof ChFi2d_FilletAlgo;
+  ChFi2d_FilletAlgo_1: typeof ChFi2d_FilletAlgo_1;
+  ChFi2d_FilletAlgo_2: typeof ChFi2d_FilletAlgo_2;
+  ChFi2d_FilletAlgo_3: typeof ChFi2d_FilletAlgo_3;
   ChFi3d: typeof ChFi3d;
   ChFi3d_Builder: typeof ChFi3d_Builder;
   ChFi3d_ChBuilder: typeof ChFi3d_ChBuilder;
   ChFi3d_FilBuilder: typeof ChFi3d_FilBuilder;
   ChFi3d_SearchSing: typeof ChFi3d_SearchSing;
   ChFiDS_ChamfSpine: typeof ChFiDS_ChamfSpine;
+  ChFiDS_ChamfSpine_1: typeof ChFiDS_ChamfSpine_1;
+  ChFiDS_ChamfSpine_2: typeof ChFiDS_ChamfSpine_2;
   ChFiDS_CircSection: typeof ChFiDS_CircSection;
   ChFiDS_CommonPoint: typeof ChFiDS_CommonPoint;
   ChFiDS_ElSpine: typeof ChFiDS_ElSpine;
   ChFiDS_FaceInterference: typeof ChFiDS_FaceInterference;
   ChFiDS_FilSpine: typeof ChFiDS_FilSpine;
+  ChFiDS_FilSpine_1: typeof ChFiDS_FilSpine_1;
+  ChFiDS_FilSpine_2: typeof ChFiDS_FilSpine_2;
   ChFiDS_HElSpine: typeof ChFiDS_HElSpine;
+  ChFiDS_HElSpine_1: typeof ChFiDS_HElSpine_1;
+  ChFiDS_HElSpine_2: typeof ChFiDS_HElSpine_2;
   ChFiDS_Map: typeof ChFiDS_Map;
   ChFiDS_Regul: typeof ChFiDS_Regul;
   ChFiDS_Spine: typeof ChFiDS_Spine;
+  ChFiDS_Spine_1: typeof ChFiDS_Spine_1;
+  ChFiDS_Spine_2: typeof ChFiDS_Spine_2;
   ChFiDS_Stripe: typeof ChFiDS_Stripe;
   ChFiDS_StripeMap: typeof ChFiDS_StripeMap;
   ChFiDS_SurfData: typeof ChFiDS_SurfData;
@@ -555,35 +1324,72 @@ export interface opencascade {
   Contap_ArcFunction: typeof Contap_ArcFunction;
   Contap_ContAna: typeof Contap_ContAna;
   Contap_Contour: typeof Contap_Contour;
+  Contap_Contour_1: typeof Contap_Contour_1;
+  Contap_Contour_2: typeof Contap_Contour_2;
+  Contap_Contour_3: typeof Contap_Contour_3;
+  Contap_Contour_4: typeof Contap_Contour_4;
+  Contap_Contour_5: typeof Contap_Contour_5;
+  Contap_Contour_6: typeof Contap_Contour_6;
+  Contap_Contour_7: typeof Contap_Contour_7;
   Contap_HContTool: typeof Contap_HContTool;
   Contap_HCurve2dTool: typeof Contap_HCurve2dTool;
   Contap_Line: typeof Contap_Line;
   Contap_Point: typeof Contap_Point;
+  Contap_Point_1: typeof Contap_Point_1;
+  Contap_Point_2: typeof Contap_Point_2;
   Contap_SurfFunction: typeof Contap_SurfFunction;
   Contap_SurfProps: typeof Contap_SurfProps;
   Contap_TheIWLineOfTheIWalking: typeof Contap_TheIWLineOfTheIWalking;
   Contap_TheIWalking: typeof Contap_TheIWalking;
   Contap_ThePathPointOfTheSearch: typeof Contap_ThePathPointOfTheSearch;
+  Contap_ThePathPointOfTheSearch_1: typeof Contap_ThePathPointOfTheSearch_1;
+  Contap_ThePathPointOfTheSearch_2: typeof Contap_ThePathPointOfTheSearch_2;
+  Contap_ThePathPointOfTheSearch_3: typeof Contap_ThePathPointOfTheSearch_3;
   Contap_TheSearch: typeof Contap_TheSearch;
   Contap_TheSearchInside: typeof Contap_TheSearchInside;
+  Contap_TheSearchInside_1: typeof Contap_TheSearchInside_1;
+  Contap_TheSearchInside_2: typeof Contap_TheSearchInside_2;
   Contap_TheSegmentOfTheSearch: typeof Contap_TheSegmentOfTheSearch;
   Convert_CircleToBSplineCurve: typeof Convert_CircleToBSplineCurve;
+  Convert_CircleToBSplineCurve_1: typeof Convert_CircleToBSplineCurve_1;
+  Convert_CircleToBSplineCurve_2: typeof Convert_CircleToBSplineCurve_2;
   Convert_CompBezierCurves2dToBSplineCurve2d: typeof Convert_CompBezierCurves2dToBSplineCurve2d;
   Convert_CompBezierCurvesToBSplineCurve: typeof Convert_CompBezierCurvesToBSplineCurve;
   Convert_CompPolynomialToPoles: typeof Convert_CompPolynomialToPoles;
+  Convert_CompPolynomialToPoles_1: typeof Convert_CompPolynomialToPoles_1;
+  Convert_CompPolynomialToPoles_2: typeof Convert_CompPolynomialToPoles_2;
+  Convert_CompPolynomialToPoles_3: typeof Convert_CompPolynomialToPoles_3;
   Convert_ConeToBSplineSurface: typeof Convert_ConeToBSplineSurface;
+  Convert_ConeToBSplineSurface_1: typeof Convert_ConeToBSplineSurface_1;
+  Convert_ConeToBSplineSurface_2: typeof Convert_ConeToBSplineSurface_2;
   Convert_ConicToBSplineCurve: typeof Convert_ConicToBSplineCurve;
   Convert_CylinderToBSplineSurface: typeof Convert_CylinderToBSplineSurface;
+  Convert_CylinderToBSplineSurface_1: typeof Convert_CylinderToBSplineSurface_1;
+  Convert_CylinderToBSplineSurface_2: typeof Convert_CylinderToBSplineSurface_2;
   Convert_ElementarySurfaceToBSplineSurface: typeof Convert_ElementarySurfaceToBSplineSurface;
   Convert_EllipseToBSplineCurve: typeof Convert_EllipseToBSplineCurve;
+  Convert_EllipseToBSplineCurve_1: typeof Convert_EllipseToBSplineCurve_1;
+  Convert_EllipseToBSplineCurve_2: typeof Convert_EllipseToBSplineCurve_2;
   Convert_GridPolynomialToPoles: typeof Convert_GridPolynomialToPoles;
+  Convert_GridPolynomialToPoles_1: typeof Convert_GridPolynomialToPoles_1;
+  Convert_GridPolynomialToPoles_2: typeof Convert_GridPolynomialToPoles_2;
   Convert_HyperbolaToBSplineCurve: typeof Convert_HyperbolaToBSplineCurve;
   Convert_ParabolaToBSplineCurve: typeof Convert_ParabolaToBSplineCurve;
   Convert_SphereToBSplineSurface: typeof Convert_SphereToBSplineSurface;
+  Convert_SphereToBSplineSurface_1: typeof Convert_SphereToBSplineSurface_1;
+  Convert_SphereToBSplineSurface_2: typeof Convert_SphereToBSplineSurface_2;
+  Convert_SphereToBSplineSurface_3: typeof Convert_SphereToBSplineSurface_3;
   Convert_TorusToBSplineSurface: typeof Convert_TorusToBSplineSurface;
+  Convert_TorusToBSplineSurface_1: typeof Convert_TorusToBSplineSurface_1;
+  Convert_TorusToBSplineSurface_2: typeof Convert_TorusToBSplineSurface_2;
+  Convert_TorusToBSplineSurface_3: typeof Convert_TorusToBSplineSurface_3;
   Draft: typeof Draft;
   Draft_EdgeInfo: typeof Draft_EdgeInfo;
+  Draft_EdgeInfo_1: typeof Draft_EdgeInfo_1;
+  Draft_EdgeInfo_2: typeof Draft_EdgeInfo_2;
   Draft_FaceInfo: typeof Draft_FaceInfo;
+  Draft_FaceInfo_1: typeof Draft_FaceInfo_1;
+  Draft_FaceInfo_2: typeof Draft_FaceInfo_2;
   Draft_Modification: typeof Draft_Modification;
   Draft_VertexInfo: typeof Draft_VertexInfo;
   DsgPrs: typeof DsgPrs;
@@ -620,6 +1426,8 @@ export interface opencascade {
   ExprIntrp_GenRel: typeof ExprIntrp_GenRel;
   ExprIntrp_Generator: typeof ExprIntrp_Generator;
   ExprIntrp_SyntaxError: typeof ExprIntrp_SyntaxError;
+  ExprIntrp_SyntaxError_1: typeof ExprIntrp_SyntaxError_1;
+  ExprIntrp_SyntaxError_2: typeof ExprIntrp_SyntaxError_2;
   Expr_Absolute: typeof Expr_Absolute;
   Expr_ArcCosine: typeof Expr_ArcCosine;
   Expr_ArcSine: typeof Expr_ArcSine;
@@ -638,6 +1446,8 @@ export interface opencascade {
   Expr_Exponential: typeof Expr_Exponential;
   Expr_Exponentiate: typeof Expr_Exponentiate;
   Expr_ExprFailure: typeof Expr_ExprFailure;
+  Expr_ExprFailure_1: typeof Expr_ExprFailure_1;
+  Expr_ExprFailure_2: typeof Expr_ExprFailure_2;
   Expr_FunctionDerivative: typeof Expr_FunctionDerivative;
   Expr_GeneralExpression: typeof Expr_GeneralExpression;
   Expr_GeneralFunction: typeof Expr_GeneralFunction;
@@ -645,8 +1455,14 @@ export interface opencascade {
   Expr_GreaterThan: typeof Expr_GreaterThan;
   Expr_GreaterThanOrEqual: typeof Expr_GreaterThanOrEqual;
   Expr_InvalidAssignment: typeof Expr_InvalidAssignment;
+  Expr_InvalidAssignment_1: typeof Expr_InvalidAssignment_1;
+  Expr_InvalidAssignment_2: typeof Expr_InvalidAssignment_2;
   Expr_InvalidFunction: typeof Expr_InvalidFunction;
+  Expr_InvalidFunction_1: typeof Expr_InvalidFunction_1;
+  Expr_InvalidFunction_2: typeof Expr_InvalidFunction_2;
   Expr_InvalidOperand: typeof Expr_InvalidOperand;
+  Expr_InvalidOperand_1: typeof Expr_InvalidOperand_1;
+  Expr_InvalidOperand_2: typeof Expr_InvalidOperand_2;
   Expr_LessThan: typeof Expr_LessThan;
   Expr_LessThanOrEqual: typeof Expr_LessThanOrEqual;
   Expr_LogOf10: typeof Expr_LogOf10;
@@ -656,11 +1472,17 @@ export interface opencascade {
   Expr_NamedFunction: typeof Expr_NamedFunction;
   Expr_NamedUnknown: typeof Expr_NamedUnknown;
   Expr_NotAssigned: typeof Expr_NotAssigned;
+  Expr_NotAssigned_1: typeof Expr_NotAssigned_1;
+  Expr_NotAssigned_2: typeof Expr_NotAssigned_2;
   Expr_NotEvaluable: typeof Expr_NotEvaluable;
+  Expr_NotEvaluable_1: typeof Expr_NotEvaluable_1;
+  Expr_NotEvaluable_2: typeof Expr_NotEvaluable_2;
   Expr_NumericValue: typeof Expr_NumericValue;
   Expr_PolyExpression: typeof Expr_PolyExpression;
   Expr_PolyFunction: typeof Expr_PolyFunction;
   Expr_Product: typeof Expr_Product;
+  Expr_Product_1: typeof Expr_Product_1;
+  Expr_Product_2: typeof Expr_Product_2;
   Expr_RUIterator: typeof Expr_RUIterator;
   Expr_RelationIterator: typeof Expr_RelationIterator;
   Expr_Sign: typeof Expr_Sign;
@@ -670,6 +1492,8 @@ export interface opencascade {
   Expr_Square: typeof Expr_Square;
   Expr_SquareRoot: typeof Expr_SquareRoot;
   Expr_Sum: typeof Expr_Sum;
+  Expr_Sum_1: typeof Expr_Sum_1;
+  Expr_Sum_2: typeof Expr_Sum_2;
   Expr_SystemRelation: typeof Expr_SystemRelation;
   Expr_Tangent: typeof Expr_Tangent;
   Expr_Tanh: typeof Expr_Tanh;
@@ -678,134 +1502,538 @@ export interface opencascade {
   Expr_UnaryMinus: typeof Expr_UnaryMinus;
   Expr_UnknownIterator: typeof Expr_UnknownIterator;
   Extrema_CCLocFOfLocECC: typeof Extrema_CCLocFOfLocECC;
+  Extrema_CCLocFOfLocECC_1: typeof Extrema_CCLocFOfLocECC_1;
+  Extrema_CCLocFOfLocECC_2: typeof Extrema_CCLocFOfLocECC_2;
   Extrema_CCLocFOfLocECC2d: typeof Extrema_CCLocFOfLocECC2d;
+  Extrema_CCLocFOfLocECC2d_1: typeof Extrema_CCLocFOfLocECC2d_1;
+  Extrema_CCLocFOfLocECC2d_2: typeof Extrema_CCLocFOfLocECC2d_2;
   Extrema_Curve2dTool: typeof Extrema_Curve2dTool;
   Extrema_CurveTool: typeof Extrema_CurveTool;
   Extrema_ECC: typeof Extrema_ECC;
+  Extrema_ECC_1: typeof Extrema_ECC_1;
+  Extrema_ECC_2: typeof Extrema_ECC_2;
+  Extrema_ECC_3: typeof Extrema_ECC_3;
   Extrema_ECC2d: typeof Extrema_ECC2d;
+  Extrema_ECC2d_1: typeof Extrema_ECC2d_1;
+  Extrema_ECC2d_2: typeof Extrema_ECC2d_2;
+  Extrema_ECC2d_3: typeof Extrema_ECC2d_3;
   Extrema_ELPCOfLocateExtPC: typeof Extrema_ELPCOfLocateExtPC;
+  Extrema_ELPCOfLocateExtPC_1: typeof Extrema_ELPCOfLocateExtPC_1;
+  Extrema_ELPCOfLocateExtPC_2: typeof Extrema_ELPCOfLocateExtPC_2;
+  Extrema_ELPCOfLocateExtPC_3: typeof Extrema_ELPCOfLocateExtPC_3;
   Extrema_ELPCOfLocateExtPC2d: typeof Extrema_ELPCOfLocateExtPC2d;
+  Extrema_ELPCOfLocateExtPC2d_1: typeof Extrema_ELPCOfLocateExtPC2d_1;
+  Extrema_ELPCOfLocateExtPC2d_2: typeof Extrema_ELPCOfLocateExtPC2d_2;
+  Extrema_ELPCOfLocateExtPC2d_3: typeof Extrema_ELPCOfLocateExtPC2d_3;
   Extrema_EPCOfELPCOfLocateExtPC: typeof Extrema_EPCOfELPCOfLocateExtPC;
+  Extrema_EPCOfELPCOfLocateExtPC_1: typeof Extrema_EPCOfELPCOfLocateExtPC_1;
+  Extrema_EPCOfELPCOfLocateExtPC_2: typeof Extrema_EPCOfELPCOfLocateExtPC_2;
+  Extrema_EPCOfELPCOfLocateExtPC_3: typeof Extrema_EPCOfELPCOfLocateExtPC_3;
   Extrema_EPCOfELPCOfLocateExtPC2d: typeof Extrema_EPCOfELPCOfLocateExtPC2d;
+  Extrema_EPCOfELPCOfLocateExtPC2d_1: typeof Extrema_EPCOfELPCOfLocateExtPC2d_1;
+  Extrema_EPCOfELPCOfLocateExtPC2d_2: typeof Extrema_EPCOfELPCOfLocateExtPC2d_2;
+  Extrema_EPCOfELPCOfLocateExtPC2d_3: typeof Extrema_EPCOfELPCOfLocateExtPC2d_3;
   Extrema_EPCOfExtPC: typeof Extrema_EPCOfExtPC;
+  Extrema_EPCOfExtPC_1: typeof Extrema_EPCOfExtPC_1;
+  Extrema_EPCOfExtPC_2: typeof Extrema_EPCOfExtPC_2;
+  Extrema_EPCOfExtPC_3: typeof Extrema_EPCOfExtPC_3;
   Extrema_EPCOfExtPC2d: typeof Extrema_EPCOfExtPC2d;
+  Extrema_EPCOfExtPC2d_1: typeof Extrema_EPCOfExtPC2d_1;
+  Extrema_EPCOfExtPC2d_2: typeof Extrema_EPCOfExtPC2d_2;
+  Extrema_EPCOfExtPC2d_3: typeof Extrema_EPCOfExtPC2d_3;
   Extrema_ExtCC: typeof Extrema_ExtCC;
+  Extrema_ExtCC_1: typeof Extrema_ExtCC_1;
+  Extrema_ExtCC_2: typeof Extrema_ExtCC_2;
+  Extrema_ExtCC_3: typeof Extrema_ExtCC_3;
   Extrema_ExtCC2d: typeof Extrema_ExtCC2d;
+  Extrema_ExtCC2d_1: typeof Extrema_ExtCC2d_1;
+  Extrema_ExtCC2d_2: typeof Extrema_ExtCC2d_2;
+  Extrema_ExtCC2d_3: typeof Extrema_ExtCC2d_3;
   Extrema_ExtCS: typeof Extrema_ExtCS;
+  Extrema_ExtCS_1: typeof Extrema_ExtCS_1;
+  Extrema_ExtCS_2: typeof Extrema_ExtCS_2;
+  Extrema_ExtCS_3: typeof Extrema_ExtCS_3;
   Extrema_ExtElC: typeof Extrema_ExtElC;
+  Extrema_ExtElC_1: typeof Extrema_ExtElC_1;
+  Extrema_ExtElC_2: typeof Extrema_ExtElC_2;
+  Extrema_ExtElC_3: typeof Extrema_ExtElC_3;
+  Extrema_ExtElC_4: typeof Extrema_ExtElC_4;
+  Extrema_ExtElC_5: typeof Extrema_ExtElC_5;
+  Extrema_ExtElC_6: typeof Extrema_ExtElC_6;
+  Extrema_ExtElC_7: typeof Extrema_ExtElC_7;
   Extrema_ExtElC2d: typeof Extrema_ExtElC2d;
+  Extrema_ExtElC2d_1: typeof Extrema_ExtElC2d_1;
+  Extrema_ExtElC2d_2: typeof Extrema_ExtElC2d_2;
+  Extrema_ExtElC2d_3: typeof Extrema_ExtElC2d_3;
+  Extrema_ExtElC2d_4: typeof Extrema_ExtElC2d_4;
+  Extrema_ExtElC2d_5: typeof Extrema_ExtElC2d_5;
+  Extrema_ExtElC2d_6: typeof Extrema_ExtElC2d_6;
+  Extrema_ExtElC2d_7: typeof Extrema_ExtElC2d_7;
+  Extrema_ExtElC2d_8: typeof Extrema_ExtElC2d_8;
+  Extrema_ExtElC2d_9: typeof Extrema_ExtElC2d_9;
+  Extrema_ExtElC2d_10: typeof Extrema_ExtElC2d_10;
   Extrema_ExtElCS: typeof Extrema_ExtElCS;
+  Extrema_ExtElCS_1: typeof Extrema_ExtElCS_1;
+  Extrema_ExtElCS_2: typeof Extrema_ExtElCS_2;
+  Extrema_ExtElCS_3: typeof Extrema_ExtElCS_3;
+  Extrema_ExtElCS_4: typeof Extrema_ExtElCS_4;
+  Extrema_ExtElCS_5: typeof Extrema_ExtElCS_5;
+  Extrema_ExtElCS_6: typeof Extrema_ExtElCS_6;
+  Extrema_ExtElCS_7: typeof Extrema_ExtElCS_7;
+  Extrema_ExtElCS_8: typeof Extrema_ExtElCS_8;
+  Extrema_ExtElCS_9: typeof Extrema_ExtElCS_9;
+  Extrema_ExtElCS_10: typeof Extrema_ExtElCS_10;
+  Extrema_ExtElCS_11: typeof Extrema_ExtElCS_11;
+  Extrema_ExtElCS_12: typeof Extrema_ExtElCS_12;
   Extrema_ExtElSS: typeof Extrema_ExtElSS;
+  Extrema_ExtElSS_1: typeof Extrema_ExtElSS_1;
+  Extrema_ExtElSS_2: typeof Extrema_ExtElSS_2;
+  Extrema_ExtElSS_3: typeof Extrema_ExtElSS_3;
+  Extrema_ExtElSS_4: typeof Extrema_ExtElSS_4;
+  Extrema_ExtElSS_5: typeof Extrema_ExtElSS_5;
+  Extrema_ExtElSS_6: typeof Extrema_ExtElSS_6;
+  Extrema_ExtElSS_7: typeof Extrema_ExtElSS_7;
   Extrema_ExtPC: typeof Extrema_ExtPC;
+  Extrema_ExtPC_1: typeof Extrema_ExtPC_1;
+  Extrema_ExtPC_2: typeof Extrema_ExtPC_2;
+  Extrema_ExtPC_3: typeof Extrema_ExtPC_3;
   Extrema_ExtPC2d: typeof Extrema_ExtPC2d;
+  Extrema_ExtPC2d_1: typeof Extrema_ExtPC2d_1;
+  Extrema_ExtPC2d_2: typeof Extrema_ExtPC2d_2;
+  Extrema_ExtPC2d_3: typeof Extrema_ExtPC2d_3;
   Extrema_ExtPElC: typeof Extrema_ExtPElC;
+  Extrema_ExtPElC_1: typeof Extrema_ExtPElC_1;
+  Extrema_ExtPElC_2: typeof Extrema_ExtPElC_2;
+  Extrema_ExtPElC_3: typeof Extrema_ExtPElC_3;
+  Extrema_ExtPElC_4: typeof Extrema_ExtPElC_4;
+  Extrema_ExtPElC_5: typeof Extrema_ExtPElC_5;
+  Extrema_ExtPElC_6: typeof Extrema_ExtPElC_6;
   Extrema_ExtPElC2d: typeof Extrema_ExtPElC2d;
+  Extrema_ExtPElC2d_1: typeof Extrema_ExtPElC2d_1;
+  Extrema_ExtPElC2d_2: typeof Extrema_ExtPElC2d_2;
+  Extrema_ExtPElC2d_3: typeof Extrema_ExtPElC2d_3;
+  Extrema_ExtPElC2d_4: typeof Extrema_ExtPElC2d_4;
+  Extrema_ExtPElC2d_5: typeof Extrema_ExtPElC2d_5;
+  Extrema_ExtPElC2d_6: typeof Extrema_ExtPElC2d_6;
   Extrema_ExtPElS: typeof Extrema_ExtPElS;
+  Extrema_ExtPElS_1: typeof Extrema_ExtPElS_1;
+  Extrema_ExtPElS_2: typeof Extrema_ExtPElS_2;
+  Extrema_ExtPElS_3: typeof Extrema_ExtPElS_3;
+  Extrema_ExtPElS_4: typeof Extrema_ExtPElS_4;
+  Extrema_ExtPElS_5: typeof Extrema_ExtPElS_5;
+  Extrema_ExtPElS_6: typeof Extrema_ExtPElS_6;
   Extrema_ExtPExtS: typeof Extrema_ExtPExtS;
+  Extrema_ExtPExtS_1: typeof Extrema_ExtPExtS_1;
+  Extrema_ExtPExtS_2: typeof Extrema_ExtPExtS_2;
+  Extrema_ExtPExtS_3: typeof Extrema_ExtPExtS_3;
   Extrema_ExtPRevS: typeof Extrema_ExtPRevS;
+  Extrema_ExtPRevS_1: typeof Extrema_ExtPRevS_1;
+  Extrema_ExtPRevS_2: typeof Extrema_ExtPRevS_2;
+  Extrema_ExtPRevS_3: typeof Extrema_ExtPRevS_3;
   Extrema_ExtPS: typeof Extrema_ExtPS;
+  Extrema_ExtPS_1: typeof Extrema_ExtPS_1;
+  Extrema_ExtPS_2: typeof Extrema_ExtPS_2;
+  Extrema_ExtPS_3: typeof Extrema_ExtPS_3;
   Extrema_ExtSS: typeof Extrema_ExtSS;
+  Extrema_ExtSS_1: typeof Extrema_ExtSS_1;
+  Extrema_ExtSS_2: typeof Extrema_ExtSS_2;
+  Extrema_ExtSS_3: typeof Extrema_ExtSS_3;
   Extrema_FuncExtCS: typeof Extrema_FuncExtCS;
+  Extrema_FuncExtCS_1: typeof Extrema_FuncExtCS_1;
+  Extrema_FuncExtCS_2: typeof Extrema_FuncExtCS_2;
   Extrema_FuncExtSS: typeof Extrema_FuncExtSS;
+  Extrema_FuncExtSS_1: typeof Extrema_FuncExtSS_1;
+  Extrema_FuncExtSS_2: typeof Extrema_FuncExtSS_2;
   Extrema_FuncPSDist: typeof Extrema_FuncPSDist;
   Extrema_FuncPSNorm: typeof Extrema_FuncPSNorm;
+  Extrema_FuncPSNorm_1: typeof Extrema_FuncPSNorm_1;
+  Extrema_FuncPSNorm_2: typeof Extrema_FuncPSNorm_2;
   Extrema_GenExtCS: typeof Extrema_GenExtCS;
+  Extrema_GenExtCS_1: typeof Extrema_GenExtCS_1;
+  Extrema_GenExtCS_2: typeof Extrema_GenExtCS_2;
+  Extrema_GenExtCS_3: typeof Extrema_GenExtCS_3;
   Extrema_GenExtPS: typeof Extrema_GenExtPS;
+  Extrema_GenExtPS_1: typeof Extrema_GenExtPS_1;
+  Extrema_GenExtPS_2: typeof Extrema_GenExtPS_2;
+  Extrema_GenExtPS_3: typeof Extrema_GenExtPS_3;
   Extrema_GenExtSS: typeof Extrema_GenExtSS;
+  Extrema_GenExtSS_1: typeof Extrema_GenExtSS_1;
+  Extrema_GenExtSS_2: typeof Extrema_GenExtSS_2;
+  Extrema_GenExtSS_3: typeof Extrema_GenExtSS_3;
   Extrema_GenLocateExtCS: typeof Extrema_GenLocateExtCS;
+  Extrema_GenLocateExtCS_1: typeof Extrema_GenLocateExtCS_1;
+  Extrema_GenLocateExtCS_2: typeof Extrema_GenLocateExtCS_2;
   Extrema_GenLocateExtPS: typeof Extrema_GenLocateExtPS;
   Extrema_GenLocateExtSS: typeof Extrema_GenLocateExtSS;
+  Extrema_GenLocateExtSS_1: typeof Extrema_GenLocateExtSS_1;
+  Extrema_GenLocateExtSS_2: typeof Extrema_GenLocateExtSS_2;
   Extrema_GlobOptFuncCCC0: typeof Extrema_GlobOptFuncCCC0;
+  Extrema_GlobOptFuncCCC0_1: typeof Extrema_GlobOptFuncCCC0_1;
+  Extrema_GlobOptFuncCCC0_2: typeof Extrema_GlobOptFuncCCC0_2;
   Extrema_GlobOptFuncCCC1: typeof Extrema_GlobOptFuncCCC1;
+  Extrema_GlobOptFuncCCC1_1: typeof Extrema_GlobOptFuncCCC1_1;
+  Extrema_GlobOptFuncCCC1_2: typeof Extrema_GlobOptFuncCCC1_2;
   Extrema_GlobOptFuncCCC2: typeof Extrema_GlobOptFuncCCC2;
+  Extrema_GlobOptFuncCCC2_1: typeof Extrema_GlobOptFuncCCC2_1;
+  Extrema_GlobOptFuncCCC2_2: typeof Extrema_GlobOptFuncCCC2_2;
   Extrema_GlobOptFuncCS: typeof Extrema_GlobOptFuncCS;
   Extrema_LocECC: typeof Extrema_LocECC;
   Extrema_LocECC2d: typeof Extrema_LocECC2d;
   Extrema_LocEPCOfLocateExtPC: typeof Extrema_LocEPCOfLocateExtPC;
+  Extrema_LocEPCOfLocateExtPC_1: typeof Extrema_LocEPCOfLocateExtPC_1;
+  Extrema_LocEPCOfLocateExtPC_2: typeof Extrema_LocEPCOfLocateExtPC_2;
+  Extrema_LocEPCOfLocateExtPC_3: typeof Extrema_LocEPCOfLocateExtPC_3;
   Extrema_LocEPCOfLocateExtPC2d: typeof Extrema_LocEPCOfLocateExtPC2d;
+  Extrema_LocEPCOfLocateExtPC2d_1: typeof Extrema_LocEPCOfLocateExtPC2d_1;
+  Extrema_LocEPCOfLocateExtPC2d_2: typeof Extrema_LocEPCOfLocateExtPC2d_2;
+  Extrema_LocEPCOfLocateExtPC2d_3: typeof Extrema_LocEPCOfLocateExtPC2d_3;
   Extrema_LocateExtCC: typeof Extrema_LocateExtCC;
   Extrema_LocateExtCC2d: typeof Extrema_LocateExtCC2d;
   Extrema_LocateExtPC: typeof Extrema_LocateExtPC;
+  Extrema_LocateExtPC_1: typeof Extrema_LocateExtPC_1;
+  Extrema_LocateExtPC_2: typeof Extrema_LocateExtPC_2;
+  Extrema_LocateExtPC_3: typeof Extrema_LocateExtPC_3;
   Extrema_LocateExtPC2d: typeof Extrema_LocateExtPC2d;
+  Extrema_LocateExtPC2d_1: typeof Extrema_LocateExtPC2d_1;
+  Extrema_LocateExtPC2d_2: typeof Extrema_LocateExtPC2d_2;
+  Extrema_LocateExtPC2d_3: typeof Extrema_LocateExtPC2d_3;
   Extrema_PCFOfEPCOfELPCOfLocateExtPC: typeof Extrema_PCFOfEPCOfELPCOfLocateExtPC;
+  Extrema_PCFOfEPCOfELPCOfLocateExtPC_1: typeof Extrema_PCFOfEPCOfELPCOfLocateExtPC_1;
+  Extrema_PCFOfEPCOfELPCOfLocateExtPC_2: typeof Extrema_PCFOfEPCOfELPCOfLocateExtPC_2;
   Extrema_PCFOfEPCOfELPCOfLocateExtPC2d: typeof Extrema_PCFOfEPCOfELPCOfLocateExtPC2d;
+  Extrema_PCFOfEPCOfELPCOfLocateExtPC2d_1: typeof Extrema_PCFOfEPCOfELPCOfLocateExtPC2d_1;
+  Extrema_PCFOfEPCOfELPCOfLocateExtPC2d_2: typeof Extrema_PCFOfEPCOfELPCOfLocateExtPC2d_2;
   Extrema_PCFOfEPCOfExtPC: typeof Extrema_PCFOfEPCOfExtPC;
+  Extrema_PCFOfEPCOfExtPC_1: typeof Extrema_PCFOfEPCOfExtPC_1;
+  Extrema_PCFOfEPCOfExtPC_2: typeof Extrema_PCFOfEPCOfExtPC_2;
   Extrema_PCFOfEPCOfExtPC2d: typeof Extrema_PCFOfEPCOfExtPC2d;
+  Extrema_PCFOfEPCOfExtPC2d_1: typeof Extrema_PCFOfEPCOfExtPC2d_1;
+  Extrema_PCFOfEPCOfExtPC2d_2: typeof Extrema_PCFOfEPCOfExtPC2d_2;
   Extrema_PCLocFOfLocEPCOfLocateExtPC: typeof Extrema_PCLocFOfLocEPCOfLocateExtPC;
+  Extrema_PCLocFOfLocEPCOfLocateExtPC_1: typeof Extrema_PCLocFOfLocEPCOfLocateExtPC_1;
+  Extrema_PCLocFOfLocEPCOfLocateExtPC_2: typeof Extrema_PCLocFOfLocEPCOfLocateExtPC_2;
   Extrema_PCLocFOfLocEPCOfLocateExtPC2d: typeof Extrema_PCLocFOfLocEPCOfLocateExtPC2d;
+  Extrema_PCLocFOfLocEPCOfLocateExtPC2d_1: typeof Extrema_PCLocFOfLocEPCOfLocateExtPC2d_1;
+  Extrema_PCLocFOfLocEPCOfLocateExtPC2d_2: typeof Extrema_PCLocFOfLocEPCOfLocateExtPC2d_2;
   Extrema_POnCurv: typeof Extrema_POnCurv;
+  Extrema_POnCurv_1: typeof Extrema_POnCurv_1;
+  Extrema_POnCurv_2: typeof Extrema_POnCurv_2;
   Extrema_POnCurv2d: typeof Extrema_POnCurv2d;
+  Extrema_POnCurv2d_1: typeof Extrema_POnCurv2d_1;
+  Extrema_POnCurv2d_2: typeof Extrema_POnCurv2d_2;
   Extrema_POnSurf: typeof Extrema_POnSurf;
+  Extrema_POnSurf_1: typeof Extrema_POnSurf_1;
+  Extrema_POnSurf_2: typeof Extrema_POnSurf_2;
   Extrema_POnSurfParams: typeof Extrema_POnSurfParams;
+  Extrema_POnSurfParams_1: typeof Extrema_POnSurfParams_1;
+  Extrema_POnSurfParams_2: typeof Extrema_POnSurfParams_2;
   GCE2d_MakeArcOfCircle: typeof GCE2d_MakeArcOfCircle;
+  GCE2d_MakeArcOfCircle_1: typeof GCE2d_MakeArcOfCircle_1;
+  GCE2d_MakeArcOfCircle_2: typeof GCE2d_MakeArcOfCircle_2;
+  GCE2d_MakeArcOfCircle_3: typeof GCE2d_MakeArcOfCircle_3;
+  GCE2d_MakeArcOfCircle_4: typeof GCE2d_MakeArcOfCircle_4;
+  GCE2d_MakeArcOfCircle_5: typeof GCE2d_MakeArcOfCircle_5;
   GCE2d_MakeArcOfEllipse: typeof GCE2d_MakeArcOfEllipse;
+  GCE2d_MakeArcOfEllipse_1: typeof GCE2d_MakeArcOfEllipse_1;
+  GCE2d_MakeArcOfEllipse_2: typeof GCE2d_MakeArcOfEllipse_2;
+  GCE2d_MakeArcOfEllipse_3: typeof GCE2d_MakeArcOfEllipse_3;
   GCE2d_MakeArcOfHyperbola: typeof GCE2d_MakeArcOfHyperbola;
+  GCE2d_MakeArcOfHyperbola_1: typeof GCE2d_MakeArcOfHyperbola_1;
+  GCE2d_MakeArcOfHyperbola_2: typeof GCE2d_MakeArcOfHyperbola_2;
+  GCE2d_MakeArcOfHyperbola_3: typeof GCE2d_MakeArcOfHyperbola_3;
   GCE2d_MakeArcOfParabola: typeof GCE2d_MakeArcOfParabola;
+  GCE2d_MakeArcOfParabola_1: typeof GCE2d_MakeArcOfParabola_1;
+  GCE2d_MakeArcOfParabola_2: typeof GCE2d_MakeArcOfParabola_2;
+  GCE2d_MakeArcOfParabola_3: typeof GCE2d_MakeArcOfParabola_3;
   GCE2d_MakeCircle: typeof GCE2d_MakeCircle;
+  GCE2d_MakeCircle_1: typeof GCE2d_MakeCircle_1;
+  GCE2d_MakeCircle_2: typeof GCE2d_MakeCircle_2;
+  GCE2d_MakeCircle_3: typeof GCE2d_MakeCircle_3;
+  GCE2d_MakeCircle_4: typeof GCE2d_MakeCircle_4;
+  GCE2d_MakeCircle_5: typeof GCE2d_MakeCircle_5;
+  GCE2d_MakeCircle_6: typeof GCE2d_MakeCircle_6;
+  GCE2d_MakeCircle_7: typeof GCE2d_MakeCircle_7;
+  GCE2d_MakeCircle_8: typeof GCE2d_MakeCircle_8;
   GCE2d_MakeEllipse: typeof GCE2d_MakeEllipse;
+  GCE2d_MakeEllipse_1: typeof GCE2d_MakeEllipse_1;
+  GCE2d_MakeEllipse_2: typeof GCE2d_MakeEllipse_2;
+  GCE2d_MakeEllipse_3: typeof GCE2d_MakeEllipse_3;
+  GCE2d_MakeEllipse_4: typeof GCE2d_MakeEllipse_4;
   GCE2d_MakeHyperbola: typeof GCE2d_MakeHyperbola;
+  GCE2d_MakeHyperbola_1: typeof GCE2d_MakeHyperbola_1;
+  GCE2d_MakeHyperbola_2: typeof GCE2d_MakeHyperbola_2;
+  GCE2d_MakeHyperbola_3: typeof GCE2d_MakeHyperbola_3;
+  GCE2d_MakeHyperbola_4: typeof GCE2d_MakeHyperbola_4;
   GCE2d_MakeLine: typeof GCE2d_MakeLine;
+  GCE2d_MakeLine_1: typeof GCE2d_MakeLine_1;
+  GCE2d_MakeLine_2: typeof GCE2d_MakeLine_2;
+  GCE2d_MakeLine_3: typeof GCE2d_MakeLine_3;
+  GCE2d_MakeLine_4: typeof GCE2d_MakeLine_4;
+  GCE2d_MakeLine_5: typeof GCE2d_MakeLine_5;
+  GCE2d_MakeLine_6: typeof GCE2d_MakeLine_6;
   GCE2d_MakeMirror: typeof GCE2d_MakeMirror;
+  GCE2d_MakeMirror_1: typeof GCE2d_MakeMirror_1;
+  GCE2d_MakeMirror_2: typeof GCE2d_MakeMirror_2;
+  GCE2d_MakeMirror_3: typeof GCE2d_MakeMirror_3;
+  GCE2d_MakeMirror_4: typeof GCE2d_MakeMirror_4;
   GCE2d_MakeParabola: typeof GCE2d_MakeParabola;
+  GCE2d_MakeParabola_1: typeof GCE2d_MakeParabola_1;
+  GCE2d_MakeParabola_2: typeof GCE2d_MakeParabola_2;
+  GCE2d_MakeParabola_3: typeof GCE2d_MakeParabola_3;
+  GCE2d_MakeParabola_4: typeof GCE2d_MakeParabola_4;
+  GCE2d_MakeParabola_5: typeof GCE2d_MakeParabola_5;
   GCE2d_MakeRotation: typeof GCE2d_MakeRotation;
   GCE2d_MakeScale: typeof GCE2d_MakeScale;
   GCE2d_MakeSegment: typeof GCE2d_MakeSegment;
+  GCE2d_MakeSegment_1: typeof GCE2d_MakeSegment_1;
+  GCE2d_MakeSegment_2: typeof GCE2d_MakeSegment_2;
+  GCE2d_MakeSegment_3: typeof GCE2d_MakeSegment_3;
+  GCE2d_MakeSegment_4: typeof GCE2d_MakeSegment_4;
+  GCE2d_MakeSegment_5: typeof GCE2d_MakeSegment_5;
   GCE2d_MakeTranslation: typeof GCE2d_MakeTranslation;
+  GCE2d_MakeTranslation_1: typeof GCE2d_MakeTranslation_1;
+  GCE2d_MakeTranslation_2: typeof GCE2d_MakeTranslation_2;
   GCE2d_Root: typeof GCE2d_Root;
   GCPnts_AbscissaPoint: typeof GCPnts_AbscissaPoint;
+  GCPnts_AbscissaPoint_1: typeof GCPnts_AbscissaPoint_1;
+  GCPnts_AbscissaPoint_2: typeof GCPnts_AbscissaPoint_2;
+  GCPnts_AbscissaPoint_3: typeof GCPnts_AbscissaPoint_3;
+  GCPnts_AbscissaPoint_4: typeof GCPnts_AbscissaPoint_4;
+  GCPnts_AbscissaPoint_5: typeof GCPnts_AbscissaPoint_5;
+  GCPnts_AbscissaPoint_6: typeof GCPnts_AbscissaPoint_6;
+  GCPnts_AbscissaPoint_7: typeof GCPnts_AbscissaPoint_7;
+  GCPnts_AbscissaPoint_8: typeof GCPnts_AbscissaPoint_8;
+  GCPnts_AbscissaPoint_9: typeof GCPnts_AbscissaPoint_9;
   GCPnts_DistFunction2dMV: typeof GCPnts_DistFunction2dMV;
   GCPnts_DistFunctionMV: typeof GCPnts_DistFunctionMV;
   GCPnts_QuasiUniformAbscissa: typeof GCPnts_QuasiUniformAbscissa;
+  GCPnts_QuasiUniformAbscissa_1: typeof GCPnts_QuasiUniformAbscissa_1;
+  GCPnts_QuasiUniformAbscissa_2: typeof GCPnts_QuasiUniformAbscissa_2;
+  GCPnts_QuasiUniformAbscissa_3: typeof GCPnts_QuasiUniformAbscissa_3;
+  GCPnts_QuasiUniformAbscissa_4: typeof GCPnts_QuasiUniformAbscissa_4;
+  GCPnts_QuasiUniformAbscissa_5: typeof GCPnts_QuasiUniformAbscissa_5;
   GCPnts_QuasiUniformDeflection: typeof GCPnts_QuasiUniformDeflection;
+  GCPnts_QuasiUniformDeflection_1: typeof GCPnts_QuasiUniformDeflection_1;
+  GCPnts_QuasiUniformDeflection_2: typeof GCPnts_QuasiUniformDeflection_2;
+  GCPnts_QuasiUniformDeflection_3: typeof GCPnts_QuasiUniformDeflection_3;
+  GCPnts_QuasiUniformDeflection_4: typeof GCPnts_QuasiUniformDeflection_4;
+  GCPnts_QuasiUniformDeflection_5: typeof GCPnts_QuasiUniformDeflection_5;
   GCPnts_TangentialDeflection: typeof GCPnts_TangentialDeflection;
+  GCPnts_TangentialDeflection_1: typeof GCPnts_TangentialDeflection_1;
+  GCPnts_TangentialDeflection_2: typeof GCPnts_TangentialDeflection_2;
+  GCPnts_TangentialDeflection_3: typeof GCPnts_TangentialDeflection_3;
+  GCPnts_TangentialDeflection_4: typeof GCPnts_TangentialDeflection_4;
+  GCPnts_TangentialDeflection_5: typeof GCPnts_TangentialDeflection_5;
   GCPnts_UniformAbscissa: typeof GCPnts_UniformAbscissa;
+  GCPnts_UniformAbscissa_1: typeof GCPnts_UniformAbscissa_1;
+  GCPnts_UniformAbscissa_2: typeof GCPnts_UniformAbscissa_2;
+  GCPnts_UniformAbscissa_3: typeof GCPnts_UniformAbscissa_3;
+  GCPnts_UniformAbscissa_4: typeof GCPnts_UniformAbscissa_4;
+  GCPnts_UniformAbscissa_5: typeof GCPnts_UniformAbscissa_5;
+  GCPnts_UniformAbscissa_6: typeof GCPnts_UniformAbscissa_6;
+  GCPnts_UniformAbscissa_7: typeof GCPnts_UniformAbscissa_7;
+  GCPnts_UniformAbscissa_8: typeof GCPnts_UniformAbscissa_8;
+  GCPnts_UniformAbscissa_9: typeof GCPnts_UniformAbscissa_9;
   GCPnts_UniformDeflection: typeof GCPnts_UniformDeflection;
+  GCPnts_UniformDeflection_1: typeof GCPnts_UniformDeflection_1;
+  GCPnts_UniformDeflection_2: typeof GCPnts_UniformDeflection_2;
+  GCPnts_UniformDeflection_3: typeof GCPnts_UniformDeflection_3;
+  GCPnts_UniformDeflection_4: typeof GCPnts_UniformDeflection_4;
+  GCPnts_UniformDeflection_5: typeof GCPnts_UniformDeflection_5;
   GC_MakeArcOfCircle: typeof GC_MakeArcOfCircle;
+  GC_MakeArcOfCircle_1: typeof GC_MakeArcOfCircle_1;
+  GC_MakeArcOfCircle_2: typeof GC_MakeArcOfCircle_2;
+  GC_MakeArcOfCircle_3: typeof GC_MakeArcOfCircle_3;
+  GC_MakeArcOfCircle_4: typeof GC_MakeArcOfCircle_4;
+  GC_MakeArcOfCircle_5: typeof GC_MakeArcOfCircle_5;
   GC_MakeArcOfEllipse: typeof GC_MakeArcOfEllipse;
+  GC_MakeArcOfEllipse_1: typeof GC_MakeArcOfEllipse_1;
+  GC_MakeArcOfEllipse_2: typeof GC_MakeArcOfEllipse_2;
+  GC_MakeArcOfEllipse_3: typeof GC_MakeArcOfEllipse_3;
   GC_MakeArcOfHyperbola: typeof GC_MakeArcOfHyperbola;
+  GC_MakeArcOfHyperbola_1: typeof GC_MakeArcOfHyperbola_1;
+  GC_MakeArcOfHyperbola_2: typeof GC_MakeArcOfHyperbola_2;
+  GC_MakeArcOfHyperbola_3: typeof GC_MakeArcOfHyperbola_3;
   GC_MakeArcOfParabola: typeof GC_MakeArcOfParabola;
+  GC_MakeArcOfParabola_1: typeof GC_MakeArcOfParabola_1;
+  GC_MakeArcOfParabola_2: typeof GC_MakeArcOfParabola_2;
+  GC_MakeArcOfParabola_3: typeof GC_MakeArcOfParabola_3;
   GC_MakeCircle: typeof GC_MakeCircle;
+  GC_MakeCircle_1: typeof GC_MakeCircle_1;
+  GC_MakeCircle_2: typeof GC_MakeCircle_2;
+  GC_MakeCircle_3: typeof GC_MakeCircle_3;
+  GC_MakeCircle_4: typeof GC_MakeCircle_4;
+  GC_MakeCircle_5: typeof GC_MakeCircle_5;
+  GC_MakeCircle_6: typeof GC_MakeCircle_6;
+  GC_MakeCircle_7: typeof GC_MakeCircle_7;
+  GC_MakeCircle_8: typeof GC_MakeCircle_8;
   GC_MakeConicalSurface: typeof GC_MakeConicalSurface;
+  GC_MakeConicalSurface_1: typeof GC_MakeConicalSurface_1;
+  GC_MakeConicalSurface_2: typeof GC_MakeConicalSurface_2;
+  GC_MakeConicalSurface_3: typeof GC_MakeConicalSurface_3;
+  GC_MakeConicalSurface_4: typeof GC_MakeConicalSurface_4;
   GC_MakeCylindricalSurface: typeof GC_MakeCylindricalSurface;
+  GC_MakeCylindricalSurface_1: typeof GC_MakeCylindricalSurface_1;
+  GC_MakeCylindricalSurface_2: typeof GC_MakeCylindricalSurface_2;
+  GC_MakeCylindricalSurface_3: typeof GC_MakeCylindricalSurface_3;
+  GC_MakeCylindricalSurface_4: typeof GC_MakeCylindricalSurface_4;
+  GC_MakeCylindricalSurface_5: typeof GC_MakeCylindricalSurface_5;
+  GC_MakeCylindricalSurface_6: typeof GC_MakeCylindricalSurface_6;
+  GC_MakeCylindricalSurface_7: typeof GC_MakeCylindricalSurface_7;
   GC_MakeEllipse: typeof GC_MakeEllipse;
+  GC_MakeEllipse_1: typeof GC_MakeEllipse_1;
+  GC_MakeEllipse_2: typeof GC_MakeEllipse_2;
+  GC_MakeEllipse_3: typeof GC_MakeEllipse_3;
   GC_MakeHyperbola: typeof GC_MakeHyperbola;
+  GC_MakeHyperbola_1: typeof GC_MakeHyperbola_1;
+  GC_MakeHyperbola_2: typeof GC_MakeHyperbola_2;
+  GC_MakeHyperbola_3: typeof GC_MakeHyperbola_3;
   GC_MakeLine: typeof GC_MakeLine;
+  GC_MakeLine_1: typeof GC_MakeLine_1;
+  GC_MakeLine_2: typeof GC_MakeLine_2;
+  GC_MakeLine_3: typeof GC_MakeLine_3;
+  GC_MakeLine_4: typeof GC_MakeLine_4;
+  GC_MakeLine_5: typeof GC_MakeLine_5;
   GC_MakeMirror: typeof GC_MakeMirror;
+  GC_MakeMirror_1: typeof GC_MakeMirror_1;
+  GC_MakeMirror_2: typeof GC_MakeMirror_2;
+  GC_MakeMirror_3: typeof GC_MakeMirror_3;
+  GC_MakeMirror_4: typeof GC_MakeMirror_4;
+  GC_MakeMirror_5: typeof GC_MakeMirror_5;
+  GC_MakeMirror_6: typeof GC_MakeMirror_6;
   GC_MakePlane: typeof GC_MakePlane;
+  GC_MakePlane_1: typeof GC_MakePlane_1;
+  GC_MakePlane_2: typeof GC_MakePlane_2;
+  GC_MakePlane_3: typeof GC_MakePlane_3;
+  GC_MakePlane_4: typeof GC_MakePlane_4;
+  GC_MakePlane_5: typeof GC_MakePlane_5;
+  GC_MakePlane_6: typeof GC_MakePlane_6;
+  GC_MakePlane_7: typeof GC_MakePlane_7;
   GC_MakeRotation: typeof GC_MakeRotation;
+  GC_MakeRotation_1: typeof GC_MakeRotation_1;
+  GC_MakeRotation_2: typeof GC_MakeRotation_2;
+  GC_MakeRotation_3: typeof GC_MakeRotation_3;
   GC_MakeScale: typeof GC_MakeScale;
   GC_MakeSegment: typeof GC_MakeSegment;
+  GC_MakeSegment_1: typeof GC_MakeSegment_1;
+  GC_MakeSegment_2: typeof GC_MakeSegment_2;
+  GC_MakeSegment_3: typeof GC_MakeSegment_3;
+  GC_MakeSegment_4: typeof GC_MakeSegment_4;
   GC_MakeTranslation: typeof GC_MakeTranslation;
+  GC_MakeTranslation_1: typeof GC_MakeTranslation_1;
+  GC_MakeTranslation_2: typeof GC_MakeTranslation_2;
   GC_MakeTrimmedCone: typeof GC_MakeTrimmedCone;
+  GC_MakeTrimmedCone_1: typeof GC_MakeTrimmedCone_1;
+  GC_MakeTrimmedCone_2: typeof GC_MakeTrimmedCone_2;
   GC_MakeTrimmedCylinder: typeof GC_MakeTrimmedCylinder;
+  GC_MakeTrimmedCylinder_1: typeof GC_MakeTrimmedCylinder_1;
+  GC_MakeTrimmedCylinder_2: typeof GC_MakeTrimmedCylinder_2;
+  GC_MakeTrimmedCylinder_3: typeof GC_MakeTrimmedCylinder_3;
   GC_Root: typeof GC_Root;
   GProp: typeof GProp;
   GProp_CelGProps: typeof GProp_CelGProps;
+  GProp_CelGProps_1: typeof GProp_CelGProps_1;
+  GProp_CelGProps_2: typeof GProp_CelGProps_2;
+  GProp_CelGProps_3: typeof GProp_CelGProps_3;
+  GProp_CelGProps_4: typeof GProp_CelGProps_4;
   GProp_GProps: typeof GProp_GProps;
+  GProp_GProps_1: typeof GProp_GProps_1;
+  GProp_GProps_2: typeof GProp_GProps_2;
   GProp_PEquation: typeof GProp_PEquation;
   GProp_PGProps: typeof GProp_PGProps;
+  GProp_PGProps_1: typeof GProp_PGProps_1;
+  GProp_PGProps_2: typeof GProp_PGProps_2;
+  GProp_PGProps_3: typeof GProp_PGProps_3;
+  GProp_PGProps_4: typeof GProp_PGProps_4;
+  GProp_PGProps_5: typeof GProp_PGProps_5;
   GProp_PrincipalProps: typeof GProp_PrincipalProps;
   GProp_SelGProps: typeof GProp_SelGProps;
+  GProp_SelGProps_1: typeof GProp_SelGProps_1;
+  GProp_SelGProps_2: typeof GProp_SelGProps_2;
+  GProp_SelGProps_3: typeof GProp_SelGProps_3;
+  GProp_SelGProps_4: typeof GProp_SelGProps_4;
+  GProp_SelGProps_5: typeof GProp_SelGProps_5;
   GProp_UndefinedAxis: typeof GProp_UndefinedAxis;
+  GProp_UndefinedAxis_1: typeof GProp_UndefinedAxis_1;
+  GProp_UndefinedAxis_2: typeof GProp_UndefinedAxis_2;
   GProp_VelGProps: typeof GProp_VelGProps;
+  GProp_VelGProps_1: typeof GProp_VelGProps_1;
+  GProp_VelGProps_2: typeof GProp_VelGProps_2;
+  GProp_VelGProps_3: typeof GProp_VelGProps_3;
+  GProp_VelGProps_4: typeof GProp_VelGProps_4;
+  GProp_VelGProps_5: typeof GProp_VelGProps_5;
   GccAna_Circ2d2TanOn: typeof GccAna_Circ2d2TanOn;
+  GccAna_Circ2d2TanOn_1: typeof GccAna_Circ2d2TanOn_1;
+  GccAna_Circ2d2TanOn_2: typeof GccAna_Circ2d2TanOn_2;
+  GccAna_Circ2d2TanOn_3: typeof GccAna_Circ2d2TanOn_3;
+  GccAna_Circ2d2TanOn_4: typeof GccAna_Circ2d2TanOn_4;
+  GccAna_Circ2d2TanOn_5: typeof GccAna_Circ2d2TanOn_5;
+  GccAna_Circ2d2TanOn_6: typeof GccAna_Circ2d2TanOn_6;
+  GccAna_Circ2d2TanOn_7: typeof GccAna_Circ2d2TanOn_7;
+  GccAna_Circ2d2TanOn_8: typeof GccAna_Circ2d2TanOn_8;
+  GccAna_Circ2d2TanOn_9: typeof GccAna_Circ2d2TanOn_9;
+  GccAna_Circ2d2TanOn_10: typeof GccAna_Circ2d2TanOn_10;
+  GccAna_Circ2d2TanOn_11: typeof GccAna_Circ2d2TanOn_11;
+  GccAna_Circ2d2TanOn_12: typeof GccAna_Circ2d2TanOn_12;
   GccAna_Circ2d2TanRad: typeof GccAna_Circ2d2TanRad;
+  GccAna_Circ2d2TanRad_1: typeof GccAna_Circ2d2TanRad_1;
+  GccAna_Circ2d2TanRad_2: typeof GccAna_Circ2d2TanRad_2;
+  GccAna_Circ2d2TanRad_3: typeof GccAna_Circ2d2TanRad_3;
+  GccAna_Circ2d2TanRad_4: typeof GccAna_Circ2d2TanRad_4;
+  GccAna_Circ2d2TanRad_5: typeof GccAna_Circ2d2TanRad_5;
+  GccAna_Circ2d2TanRad_6: typeof GccAna_Circ2d2TanRad_6;
   GccAna_Circ2d3Tan: typeof GccAna_Circ2d3Tan;
+  GccAna_Circ2d3Tan_1: typeof GccAna_Circ2d3Tan_1;
+  GccAna_Circ2d3Tan_2: typeof GccAna_Circ2d3Tan_2;
+  GccAna_Circ2d3Tan_3: typeof GccAna_Circ2d3Tan_3;
+  GccAna_Circ2d3Tan_4: typeof GccAna_Circ2d3Tan_4;
+  GccAna_Circ2d3Tan_5: typeof GccAna_Circ2d3Tan_5;
+  GccAna_Circ2d3Tan_6: typeof GccAna_Circ2d3Tan_6;
+  GccAna_Circ2d3Tan_7: typeof GccAna_Circ2d3Tan_7;
+  GccAna_Circ2d3Tan_8: typeof GccAna_Circ2d3Tan_8;
+  GccAna_Circ2d3Tan_9: typeof GccAna_Circ2d3Tan_9;
+  GccAna_Circ2d3Tan_10: typeof GccAna_Circ2d3Tan_10;
   GccAna_Circ2dBisec: typeof GccAna_Circ2dBisec;
   GccAna_Circ2dTanCen: typeof GccAna_Circ2dTanCen;
+  GccAna_Circ2dTanCen_1: typeof GccAna_Circ2dTanCen_1;
+  GccAna_Circ2dTanCen_2: typeof GccAna_Circ2dTanCen_2;
+  GccAna_Circ2dTanCen_3: typeof GccAna_Circ2dTanCen_3;
   GccAna_Circ2dTanOnRad: typeof GccAna_Circ2dTanOnRad;
+  GccAna_Circ2dTanOnRad_1: typeof GccAna_Circ2dTanOnRad_1;
+  GccAna_Circ2dTanOnRad_2: typeof GccAna_Circ2dTanOnRad_2;
+  GccAna_Circ2dTanOnRad_3: typeof GccAna_Circ2dTanOnRad_3;
+  GccAna_Circ2dTanOnRad_4: typeof GccAna_Circ2dTanOnRad_4;
+  GccAna_Circ2dTanOnRad_5: typeof GccAna_Circ2dTanOnRad_5;
+  GccAna_Circ2dTanOnRad_6: typeof GccAna_Circ2dTanOnRad_6;
   GccAna_CircLin2dBisec: typeof GccAna_CircLin2dBisec;
   GccAna_CircPnt2dBisec: typeof GccAna_CircPnt2dBisec;
+  GccAna_CircPnt2dBisec_1: typeof GccAna_CircPnt2dBisec_1;
+  GccAna_CircPnt2dBisec_2: typeof GccAna_CircPnt2dBisec_2;
   GccAna_Lin2d2Tan: typeof GccAna_Lin2d2Tan;
+  GccAna_Lin2d2Tan_1: typeof GccAna_Lin2d2Tan_1;
+  GccAna_Lin2d2Tan_2: typeof GccAna_Lin2d2Tan_2;
+  GccAna_Lin2d2Tan_3: typeof GccAna_Lin2d2Tan_3;
   GccAna_Lin2dBisec: typeof GccAna_Lin2dBisec;
   GccAna_Lin2dTanObl: typeof GccAna_Lin2dTanObl;
+  GccAna_Lin2dTanObl_1: typeof GccAna_Lin2dTanObl_1;
+  GccAna_Lin2dTanObl_2: typeof GccAna_Lin2dTanObl_2;
   GccAna_Lin2dTanPar: typeof GccAna_Lin2dTanPar;
+  GccAna_Lin2dTanPar_1: typeof GccAna_Lin2dTanPar_1;
+  GccAna_Lin2dTanPar_2: typeof GccAna_Lin2dTanPar_2;
   GccAna_Lin2dTanPer: typeof GccAna_Lin2dTanPer;
+  GccAna_Lin2dTanPer_1: typeof GccAna_Lin2dTanPer_1;
+  GccAna_Lin2dTanPer_2: typeof GccAna_Lin2dTanPer_2;
+  GccAna_Lin2dTanPer_3: typeof GccAna_Lin2dTanPer_3;
+  GccAna_Lin2dTanPer_4: typeof GccAna_Lin2dTanPer_4;
   GccAna_LinPnt2dBisec: typeof GccAna_LinPnt2dBisec;
   GccAna_NoSolution: typeof GccAna_NoSolution;
+  GccAna_NoSolution_1: typeof GccAna_NoSolution_1;
+  GccAna_NoSolution_2: typeof GccAna_NoSolution_2;
   GccAna_Pnt2dBisec: typeof GccAna_Pnt2dBisec;
   GccEnt: typeof GccEnt;
   GccEnt_BadQualifier: typeof GccEnt_BadQualifier;
+  GccEnt_BadQualifier_1: typeof GccEnt_BadQualifier_1;
+  GccEnt_BadQualifier_2: typeof GccEnt_BadQualifier_2;
   GccEnt_QualifiedCirc: typeof GccEnt_QualifiedCirc;
   GccEnt_QualifiedLin: typeof GccEnt_QualifiedLin;
   GccInt_BCirc: typeof GccInt_BCirc;
@@ -817,99 +2045,264 @@ export interface opencascade {
   GccInt_Bisec: typeof GccInt_Bisec;
   Geom2dAdaptor: typeof Geom2dAdaptor;
   Geom2dAdaptor_Curve: typeof Geom2dAdaptor_Curve;
+  Geom2dAdaptor_Curve_1: typeof Geom2dAdaptor_Curve_1;
+  Geom2dAdaptor_Curve_2: typeof Geom2dAdaptor_Curve_2;
+  Geom2dAdaptor_Curve_3: typeof Geom2dAdaptor_Curve_3;
   Geom2dAdaptor_GHCurve: typeof Geom2dAdaptor_GHCurve;
+  Geom2dAdaptor_GHCurve_1: typeof Geom2dAdaptor_GHCurve_1;
+  Geom2dAdaptor_GHCurve_2: typeof Geom2dAdaptor_GHCurve_2;
   Geom2dAdaptor_HCurve: typeof Geom2dAdaptor_HCurve;
+  Geom2dAdaptor_HCurve_1: typeof Geom2dAdaptor_HCurve_1;
+  Geom2dAdaptor_HCurve_2: typeof Geom2dAdaptor_HCurve_2;
+  Geom2dAdaptor_HCurve_3: typeof Geom2dAdaptor_HCurve_3;
+  Geom2dAdaptor_HCurve_4: typeof Geom2dAdaptor_HCurve_4;
   Geom2dConvert: typeof Geom2dConvert;
   Geom2dConvert_ApproxCurve: typeof Geom2dConvert_ApproxCurve;
+  Geom2dConvert_ApproxCurve_1: typeof Geom2dConvert_ApproxCurve_1;
+  Geom2dConvert_ApproxCurve_2: typeof Geom2dConvert_ApproxCurve_2;
   Geom2dConvert_BSplineCurveKnotSplitting: typeof Geom2dConvert_BSplineCurveKnotSplitting;
   Geom2dConvert_BSplineCurveToBezierCurve: typeof Geom2dConvert_BSplineCurveToBezierCurve;
+  Geom2dConvert_BSplineCurveToBezierCurve_1: typeof Geom2dConvert_BSplineCurveToBezierCurve_1;
+  Geom2dConvert_BSplineCurveToBezierCurve_2: typeof Geom2dConvert_BSplineCurveToBezierCurve_2;
   Geom2dConvert_CompCurveToBSplineCurve: typeof Geom2dConvert_CompCurveToBSplineCurve;
+  Geom2dConvert_CompCurveToBSplineCurve_1: typeof Geom2dConvert_CompCurveToBSplineCurve_1;
+  Geom2dConvert_CompCurveToBSplineCurve_2: typeof Geom2dConvert_CompCurveToBSplineCurve_2;
   Geom2dEvaluator_Curve: typeof Geom2dEvaluator_Curve;
   Geom2dEvaluator_OffsetCurve: typeof Geom2dEvaluator_OffsetCurve;
+  Geom2dEvaluator_OffsetCurve_1: typeof Geom2dEvaluator_OffsetCurve_1;
+  Geom2dEvaluator_OffsetCurve_2: typeof Geom2dEvaluator_OffsetCurve_2;
   Geom2dLProp_CLProps2d: typeof Geom2dLProp_CLProps2d;
+  Geom2dLProp_CLProps2d_1: typeof Geom2dLProp_CLProps2d_1;
+  Geom2dLProp_CLProps2d_2: typeof Geom2dLProp_CLProps2d_2;
+  Geom2dLProp_CLProps2d_3: typeof Geom2dLProp_CLProps2d_3;
   Geom2dLProp_CurAndInf2d: typeof Geom2dLProp_CurAndInf2d;
   Geom2dLProp_Curve2dTool: typeof Geom2dLProp_Curve2dTool;
   Geom2dLProp_FuncCurExt: typeof Geom2dLProp_FuncCurExt;
   Geom2dLProp_FuncCurNul: typeof Geom2dLProp_FuncCurNul;
   Geom2dLProp_NumericCurInf2d: typeof Geom2dLProp_NumericCurInf2d;
   Geom2dToIGES_Geom2dCurve: typeof Geom2dToIGES_Geom2dCurve;
+  Geom2dToIGES_Geom2dCurve_1: typeof Geom2dToIGES_Geom2dCurve_1;
+  Geom2dToIGES_Geom2dCurve_2: typeof Geom2dToIGES_Geom2dCurve_2;
   Geom2dToIGES_Geom2dEntity: typeof Geom2dToIGES_Geom2dEntity;
+  Geom2dToIGES_Geom2dEntity_1: typeof Geom2dToIGES_Geom2dEntity_1;
+  Geom2dToIGES_Geom2dEntity_2: typeof Geom2dToIGES_Geom2dEntity_2;
   Geom2dToIGES_Geom2dPoint: typeof Geom2dToIGES_Geom2dPoint;
+  Geom2dToIGES_Geom2dPoint_1: typeof Geom2dToIGES_Geom2dPoint_1;
+  Geom2dToIGES_Geom2dPoint_2: typeof Geom2dToIGES_Geom2dPoint_2;
   Geom2dToIGES_Geom2dVector: typeof Geom2dToIGES_Geom2dVector;
+  Geom2dToIGES_Geom2dVector_1: typeof Geom2dToIGES_Geom2dVector_1;
+  Geom2dToIGES_Geom2dVector_2: typeof Geom2dToIGES_Geom2dVector_2;
   Geom2d_AxisPlacement: typeof Geom2d_AxisPlacement;
+  Geom2d_AxisPlacement_1: typeof Geom2d_AxisPlacement_1;
+  Geom2d_AxisPlacement_2: typeof Geom2d_AxisPlacement_2;
   Geom2d_BSplineCurve: typeof Geom2d_BSplineCurve;
+  Geom2d_BSplineCurve_1: typeof Geom2d_BSplineCurve_1;
+  Geom2d_BSplineCurve_2: typeof Geom2d_BSplineCurve_2;
   Geom2d_BezierCurve: typeof Geom2d_BezierCurve;
+  Geom2d_BezierCurve_1: typeof Geom2d_BezierCurve_1;
+  Geom2d_BezierCurve_2: typeof Geom2d_BezierCurve_2;
   Geom2d_BoundedCurve: typeof Geom2d_BoundedCurve;
   Geom2d_CartesianPoint: typeof Geom2d_CartesianPoint;
+  Geom2d_CartesianPoint_1: typeof Geom2d_CartesianPoint_1;
+  Geom2d_CartesianPoint_2: typeof Geom2d_CartesianPoint_2;
   Geom2d_Circle: typeof Geom2d_Circle;
+  Geom2d_Circle_1: typeof Geom2d_Circle_1;
+  Geom2d_Circle_2: typeof Geom2d_Circle_2;
+  Geom2d_Circle_3: typeof Geom2d_Circle_3;
   Geom2d_Conic: typeof Geom2d_Conic;
   Geom2d_Curve: typeof Geom2d_Curve;
   Geom2d_Direction: typeof Geom2d_Direction;
+  Geom2d_Direction_1: typeof Geom2d_Direction_1;
+  Geom2d_Direction_2: typeof Geom2d_Direction_2;
   Geom2d_Ellipse: typeof Geom2d_Ellipse;
+  Geom2d_Ellipse_1: typeof Geom2d_Ellipse_1;
+  Geom2d_Ellipse_2: typeof Geom2d_Ellipse_2;
+  Geom2d_Ellipse_3: typeof Geom2d_Ellipse_3;
   Geom2d_Geometry: typeof Geom2d_Geometry;
   Geom2d_Hyperbola: typeof Geom2d_Hyperbola;
+  Geom2d_Hyperbola_1: typeof Geom2d_Hyperbola_1;
+  Geom2d_Hyperbola_2: typeof Geom2d_Hyperbola_2;
+  Geom2d_Hyperbola_3: typeof Geom2d_Hyperbola_3;
   Geom2d_Line: typeof Geom2d_Line;
+  Geom2d_Line_1: typeof Geom2d_Line_1;
+  Geom2d_Line_2: typeof Geom2d_Line_2;
+  Geom2d_Line_3: typeof Geom2d_Line_3;
   Geom2d_OffsetCurve: typeof Geom2d_OffsetCurve;
   Geom2d_Parabola: typeof Geom2d_Parabola;
+  Geom2d_Parabola_1: typeof Geom2d_Parabola_1;
+  Geom2d_Parabola_2: typeof Geom2d_Parabola_2;
+  Geom2d_Parabola_3: typeof Geom2d_Parabola_3;
+  Geom2d_Parabola_4: typeof Geom2d_Parabola_4;
   Geom2d_Point: typeof Geom2d_Point;
   Geom2d_Transformation: typeof Geom2d_Transformation;
+  Geom2d_Transformation_1: typeof Geom2d_Transformation_1;
+  Geom2d_Transformation_2: typeof Geom2d_Transformation_2;
   Geom2d_TrimmedCurve: typeof Geom2d_TrimmedCurve;
   Geom2d_UndefinedDerivative: typeof Geom2d_UndefinedDerivative;
+  Geom2d_UndefinedDerivative_1: typeof Geom2d_UndefinedDerivative_1;
+  Geom2d_UndefinedDerivative_2: typeof Geom2d_UndefinedDerivative_2;
   Geom2d_UndefinedValue: typeof Geom2d_UndefinedValue;
+  Geom2d_UndefinedValue_1: typeof Geom2d_UndefinedValue_1;
+  Geom2d_UndefinedValue_2: typeof Geom2d_UndefinedValue_2;
   Geom2d_Vector: typeof Geom2d_Vector;
   Geom2d_VectorWithMagnitude: typeof Geom2d_VectorWithMagnitude;
+  Geom2d_VectorWithMagnitude_1: typeof Geom2d_VectorWithMagnitude_1;
+  Geom2d_VectorWithMagnitude_2: typeof Geom2d_VectorWithMagnitude_2;
+  Geom2d_VectorWithMagnitude_3: typeof Geom2d_VectorWithMagnitude_3;
   GeomAPI: typeof GeomAPI;
   GeomAPI_ExtremaCurveCurve: typeof GeomAPI_ExtremaCurveCurve;
+  GeomAPI_ExtremaCurveCurve_1: typeof GeomAPI_ExtremaCurveCurve_1;
+  GeomAPI_ExtremaCurveCurve_2: typeof GeomAPI_ExtremaCurveCurve_2;
+  GeomAPI_ExtremaCurveCurve_3: typeof GeomAPI_ExtremaCurveCurve_3;
   GeomAPI_ExtremaCurveSurface: typeof GeomAPI_ExtremaCurveSurface;
+  GeomAPI_ExtremaCurveSurface_1: typeof GeomAPI_ExtremaCurveSurface_1;
+  GeomAPI_ExtremaCurveSurface_2: typeof GeomAPI_ExtremaCurveSurface_2;
+  GeomAPI_ExtremaCurveSurface_3: typeof GeomAPI_ExtremaCurveSurface_3;
   GeomAPI_ExtremaSurfaceSurface: typeof GeomAPI_ExtremaSurfaceSurface;
+  GeomAPI_ExtremaSurfaceSurface_1: typeof GeomAPI_ExtremaSurfaceSurface_1;
+  GeomAPI_ExtremaSurfaceSurface_2: typeof GeomAPI_ExtremaSurfaceSurface_2;
+  GeomAPI_ExtremaSurfaceSurface_3: typeof GeomAPI_ExtremaSurfaceSurface_3;
   GeomAPI_IntCS: typeof GeomAPI_IntCS;
+  GeomAPI_IntCS_1: typeof GeomAPI_IntCS_1;
+  GeomAPI_IntCS_2: typeof GeomAPI_IntCS_2;
   GeomAPI_IntSS: typeof GeomAPI_IntSS;
+  GeomAPI_IntSS_1: typeof GeomAPI_IntSS_1;
+  GeomAPI_IntSS_2: typeof GeomAPI_IntSS_2;
   GeomAPI_PointsToBSpline: typeof GeomAPI_PointsToBSpline;
+  GeomAPI_PointsToBSpline_1: typeof GeomAPI_PointsToBSpline_1;
+  GeomAPI_PointsToBSpline_2: typeof GeomAPI_PointsToBSpline_2;
+  GeomAPI_PointsToBSpline_3: typeof GeomAPI_PointsToBSpline_3;
+  GeomAPI_PointsToBSpline_4: typeof GeomAPI_PointsToBSpline_4;
+  GeomAPI_PointsToBSpline_5: typeof GeomAPI_PointsToBSpline_5;
   GeomAPI_PointsToBSplineSurface: typeof GeomAPI_PointsToBSplineSurface;
+  GeomAPI_PointsToBSplineSurface_1: typeof GeomAPI_PointsToBSplineSurface_1;
+  GeomAPI_PointsToBSplineSurface_2: typeof GeomAPI_PointsToBSplineSurface_2;
+  GeomAPI_PointsToBSplineSurface_3: typeof GeomAPI_PointsToBSplineSurface_3;
+  GeomAPI_PointsToBSplineSurface_4: typeof GeomAPI_PointsToBSplineSurface_4;
+  GeomAPI_PointsToBSplineSurface_5: typeof GeomAPI_PointsToBSplineSurface_5;
   GeomAPI_ProjectPointOnCurve: typeof GeomAPI_ProjectPointOnCurve;
+  GeomAPI_ProjectPointOnCurve_1: typeof GeomAPI_ProjectPointOnCurve_1;
+  GeomAPI_ProjectPointOnCurve_2: typeof GeomAPI_ProjectPointOnCurve_2;
+  GeomAPI_ProjectPointOnCurve_3: typeof GeomAPI_ProjectPointOnCurve_3;
   GeomAPI_ProjectPointOnSurf: typeof GeomAPI_ProjectPointOnSurf;
+  GeomAPI_ProjectPointOnSurf_1: typeof GeomAPI_ProjectPointOnSurf_1;
+  GeomAPI_ProjectPointOnSurf_2: typeof GeomAPI_ProjectPointOnSurf_2;
+  GeomAPI_ProjectPointOnSurf_3: typeof GeomAPI_ProjectPointOnSurf_3;
+  GeomAPI_ProjectPointOnSurf_4: typeof GeomAPI_ProjectPointOnSurf_4;
+  GeomAPI_ProjectPointOnSurf_5: typeof GeomAPI_ProjectPointOnSurf_5;
   GeomAdaptor: typeof GeomAdaptor;
   GeomAdaptor_Curve: typeof GeomAdaptor_Curve;
+  GeomAdaptor_Curve_1: typeof GeomAdaptor_Curve_1;
+  GeomAdaptor_Curve_2: typeof GeomAdaptor_Curve_2;
+  GeomAdaptor_Curve_3: typeof GeomAdaptor_Curve_3;
   GeomAdaptor_GHCurve: typeof GeomAdaptor_GHCurve;
+  GeomAdaptor_GHCurve_1: typeof GeomAdaptor_GHCurve_1;
+  GeomAdaptor_GHCurve_2: typeof GeomAdaptor_GHCurve_2;
   GeomAdaptor_GHSurface: typeof GeomAdaptor_GHSurface;
+  GeomAdaptor_GHSurface_1: typeof GeomAdaptor_GHSurface_1;
+  GeomAdaptor_GHSurface_2: typeof GeomAdaptor_GHSurface_2;
   GeomAdaptor_HCurve: typeof GeomAdaptor_HCurve;
+  GeomAdaptor_HCurve_1: typeof GeomAdaptor_HCurve_1;
+  GeomAdaptor_HCurve_2: typeof GeomAdaptor_HCurve_2;
+  GeomAdaptor_HCurve_3: typeof GeomAdaptor_HCurve_3;
+  GeomAdaptor_HCurve_4: typeof GeomAdaptor_HCurve_4;
   GeomAdaptor_HSurface: typeof GeomAdaptor_HSurface;
+  GeomAdaptor_HSurface_1: typeof GeomAdaptor_HSurface_1;
+  GeomAdaptor_HSurface_2: typeof GeomAdaptor_HSurface_2;
+  GeomAdaptor_HSurface_3: typeof GeomAdaptor_HSurface_3;
+  GeomAdaptor_HSurface_4: typeof GeomAdaptor_HSurface_4;
   GeomAdaptor_HSurfaceOfLinearExtrusion: typeof GeomAdaptor_HSurfaceOfLinearExtrusion;
+  GeomAdaptor_HSurfaceOfLinearExtrusion_1: typeof GeomAdaptor_HSurfaceOfLinearExtrusion_1;
+  GeomAdaptor_HSurfaceOfLinearExtrusion_2: typeof GeomAdaptor_HSurfaceOfLinearExtrusion_2;
   GeomAdaptor_HSurfaceOfRevolution: typeof GeomAdaptor_HSurfaceOfRevolution;
+  GeomAdaptor_HSurfaceOfRevolution_1: typeof GeomAdaptor_HSurfaceOfRevolution_1;
+  GeomAdaptor_HSurfaceOfRevolution_2: typeof GeomAdaptor_HSurfaceOfRevolution_2;
   GeomAdaptor_Surface: typeof GeomAdaptor_Surface;
+  GeomAdaptor_Surface_1: typeof GeomAdaptor_Surface_1;
+  GeomAdaptor_Surface_2: typeof GeomAdaptor_Surface_2;
+  GeomAdaptor_Surface_3: typeof GeomAdaptor_Surface_3;
   GeomAdaptor_SurfaceOfLinearExtrusion: typeof GeomAdaptor_SurfaceOfLinearExtrusion;
+  GeomAdaptor_SurfaceOfLinearExtrusion_1: typeof GeomAdaptor_SurfaceOfLinearExtrusion_1;
+  GeomAdaptor_SurfaceOfLinearExtrusion_2: typeof GeomAdaptor_SurfaceOfLinearExtrusion_2;
+  GeomAdaptor_SurfaceOfLinearExtrusion_3: typeof GeomAdaptor_SurfaceOfLinearExtrusion_3;
   GeomAdaptor_SurfaceOfRevolution: typeof GeomAdaptor_SurfaceOfRevolution;
+  GeomAdaptor_SurfaceOfRevolution_1: typeof GeomAdaptor_SurfaceOfRevolution_1;
+  GeomAdaptor_SurfaceOfRevolution_2: typeof GeomAdaptor_SurfaceOfRevolution_2;
+  GeomAdaptor_SurfaceOfRevolution_3: typeof GeomAdaptor_SurfaceOfRevolution_3;
   GeomConvert: typeof GeomConvert;
   GeomConvert_ApproxCurve: typeof GeomConvert_ApproxCurve;
+  GeomConvert_ApproxCurve_1: typeof GeomConvert_ApproxCurve_1;
+  GeomConvert_ApproxCurve_2: typeof GeomConvert_ApproxCurve_2;
   GeomConvert_ApproxSurface: typeof GeomConvert_ApproxSurface;
+  GeomConvert_ApproxSurface_1: typeof GeomConvert_ApproxSurface_1;
+  GeomConvert_ApproxSurface_2: typeof GeomConvert_ApproxSurface_2;
   GeomConvert_BSplineCurveKnotSplitting: typeof GeomConvert_BSplineCurveKnotSplitting;
   GeomConvert_BSplineCurveToBezierCurve: typeof GeomConvert_BSplineCurveToBezierCurve;
+  GeomConvert_BSplineCurveToBezierCurve_1: typeof GeomConvert_BSplineCurveToBezierCurve_1;
+  GeomConvert_BSplineCurveToBezierCurve_2: typeof GeomConvert_BSplineCurveToBezierCurve_2;
   GeomConvert_BSplineSurfaceKnotSplitting: typeof GeomConvert_BSplineSurfaceKnotSplitting;
   GeomConvert_BSplineSurfaceToBezierSurface: typeof GeomConvert_BSplineSurfaceToBezierSurface;
+  GeomConvert_BSplineSurfaceToBezierSurface_1: typeof GeomConvert_BSplineSurfaceToBezierSurface_1;
+  GeomConvert_BSplineSurfaceToBezierSurface_2: typeof GeomConvert_BSplineSurfaceToBezierSurface_2;
   GeomConvert_CompBezierSurfacesToBSplineSurface: typeof GeomConvert_CompBezierSurfacesToBSplineSurface;
+  GeomConvert_CompBezierSurfacesToBSplineSurface_1: typeof GeomConvert_CompBezierSurfacesToBSplineSurface_1;
+  GeomConvert_CompBezierSurfacesToBSplineSurface_2: typeof GeomConvert_CompBezierSurfacesToBSplineSurface_2;
+  GeomConvert_CompBezierSurfacesToBSplineSurface_3: typeof GeomConvert_CompBezierSurfacesToBSplineSurface_3;
   GeomConvert_CompCurveToBSplineCurve: typeof GeomConvert_CompCurveToBSplineCurve;
+  GeomConvert_CompCurveToBSplineCurve_1: typeof GeomConvert_CompCurveToBSplineCurve_1;
+  GeomConvert_CompCurveToBSplineCurve_2: typeof GeomConvert_CompCurveToBSplineCurve_2;
   GeomEvaluator_Curve: typeof GeomEvaluator_Curve;
   GeomEvaluator_OffsetCurve: typeof GeomEvaluator_OffsetCurve;
+  GeomEvaluator_OffsetCurve_1: typeof GeomEvaluator_OffsetCurve_1;
+  GeomEvaluator_OffsetCurve_2: typeof GeomEvaluator_OffsetCurve_2;
   GeomEvaluator_OffsetSurface: typeof GeomEvaluator_OffsetSurface;
+  GeomEvaluator_OffsetSurface_1: typeof GeomEvaluator_OffsetSurface_1;
+  GeomEvaluator_OffsetSurface_2: typeof GeomEvaluator_OffsetSurface_2;
   GeomEvaluator_Surface: typeof GeomEvaluator_Surface;
   GeomEvaluator_SurfaceOfExtrusion: typeof GeomEvaluator_SurfaceOfExtrusion;
+  GeomEvaluator_SurfaceOfExtrusion_1: typeof GeomEvaluator_SurfaceOfExtrusion_1;
+  GeomEvaluator_SurfaceOfExtrusion_2: typeof GeomEvaluator_SurfaceOfExtrusion_2;
   GeomEvaluator_SurfaceOfRevolution: typeof GeomEvaluator_SurfaceOfRevolution;
+  GeomEvaluator_SurfaceOfRevolution_1: typeof GeomEvaluator_SurfaceOfRevolution_1;
+  GeomEvaluator_SurfaceOfRevolution_2: typeof GeomEvaluator_SurfaceOfRevolution_2;
   GeomFill: typeof GeomFill;
   GeomFill_AppSurf: typeof GeomFill_AppSurf;
+  GeomFill_AppSurf_1: typeof GeomFill_AppSurf_1;
+  GeomFill_AppSurf_2: typeof GeomFill_AppSurf_2;
   GeomFill_AppSweep: typeof GeomFill_AppSweep;
+  GeomFill_AppSweep_1: typeof GeomFill_AppSweep_1;
+  GeomFill_AppSweep_2: typeof GeomFill_AppSweep_2;
   GeomFill_BSplineCurves: typeof GeomFill_BSplineCurves;
+  GeomFill_BSplineCurves_1: typeof GeomFill_BSplineCurves_1;
+  GeomFill_BSplineCurves_2: typeof GeomFill_BSplineCurves_2;
+  GeomFill_BSplineCurves_3: typeof GeomFill_BSplineCurves_3;
+  GeomFill_BSplineCurves_4: typeof GeomFill_BSplineCurves_4;
   GeomFill_BezierCurves: typeof GeomFill_BezierCurves;
+  GeomFill_BezierCurves_1: typeof GeomFill_BezierCurves_1;
+  GeomFill_BezierCurves_2: typeof GeomFill_BezierCurves_2;
+  GeomFill_BezierCurves_3: typeof GeomFill_BezierCurves_3;
+  GeomFill_BezierCurves_4: typeof GeomFill_BezierCurves_4;
   GeomFill_BoundWithSurf: typeof GeomFill_BoundWithSurf;
   GeomFill_Boundary: typeof GeomFill_Boundary;
   GeomFill_CircularBlendFunc: typeof GeomFill_CircularBlendFunc;
   GeomFill_ConstantBiNormal: typeof GeomFill_ConstantBiNormal;
   GeomFill_ConstrainedFilling: typeof GeomFill_ConstrainedFilling;
   GeomFill_Coons: typeof GeomFill_Coons;
+  GeomFill_Coons_1: typeof GeomFill_Coons_1;
+  GeomFill_Coons_2: typeof GeomFill_Coons_2;
+  GeomFill_Coons_3: typeof GeomFill_Coons_3;
   GeomFill_CoonsAlgPatch: typeof GeomFill_CoonsAlgPatch;
   GeomFill_CornerState: typeof GeomFill_CornerState;
   GeomFill_CorrectedFrenet: typeof GeomFill_CorrectedFrenet;
+  GeomFill_CorrectedFrenet_1: typeof GeomFill_CorrectedFrenet_1;
+  GeomFill_CorrectedFrenet_2: typeof GeomFill_CorrectedFrenet_2;
   GeomFill_CurveAndTrihedron: typeof GeomFill_CurveAndTrihedron;
   GeomFill_Curved: typeof GeomFill_Curved;
+  GeomFill_Curved_1: typeof GeomFill_Curved_1;
+  GeomFill_Curved_2: typeof GeomFill_Curved_2;
+  GeomFill_Curved_3: typeof GeomFill_Curved_3;
+  GeomFill_Curved_4: typeof GeomFill_Curved_4;
+  GeomFill_Curved_5: typeof GeomFill_Curved_5;
   GeomFill_Darboux: typeof GeomFill_Darboux;
   GeomFill_DegeneratedBound: typeof GeomFill_DegeneratedBound;
   GeomFill_DiscreteTrihedron: typeof GeomFill_DiscreteTrihedron;
@@ -923,11 +2316,23 @@ export interface opencascade {
   GeomFill_GuideTrihedronAC: typeof GeomFill_GuideTrihedronAC;
   GeomFill_GuideTrihedronPlan: typeof GeomFill_GuideTrihedronPlan;
   GeomFill_Line: typeof GeomFill_Line;
+  GeomFill_Line_1: typeof GeomFill_Line_1;
+  GeomFill_Line_2: typeof GeomFill_Line_2;
   GeomFill_LocFunction: typeof GeomFill_LocFunction;
   GeomFill_LocationDraft: typeof GeomFill_LocationDraft;
   GeomFill_LocationGuide: typeof GeomFill_LocationGuide;
   GeomFill_LocationLaw: typeof GeomFill_LocationLaw;
   GeomFill_Pipe: typeof GeomFill_Pipe;
+  GeomFill_Pipe_1: typeof GeomFill_Pipe_1;
+  GeomFill_Pipe_2: typeof GeomFill_Pipe_2;
+  GeomFill_Pipe_3: typeof GeomFill_Pipe_3;
+  GeomFill_Pipe_4: typeof GeomFill_Pipe_4;
+  GeomFill_Pipe_5: typeof GeomFill_Pipe_5;
+  GeomFill_Pipe_6: typeof GeomFill_Pipe_6;
+  GeomFill_Pipe_7: typeof GeomFill_Pipe_7;
+  GeomFill_Pipe_8: typeof GeomFill_Pipe_8;
+  GeomFill_Pipe_9: typeof GeomFill_Pipe_9;
+  GeomFill_Pipe_10: typeof GeomFill_Pipe_10;
   GeomFill_PlanFunc: typeof GeomFill_PlanFunc;
   GeomFill_PolynomialConvertor: typeof GeomFill_PolynomialConvertor;
   GeomFill_Profiler: typeof GeomFill_Profiler;
@@ -938,6 +2343,9 @@ export interface opencascade {
   GeomFill_SimpleBound: typeof GeomFill_SimpleBound;
   GeomFill_SnglrFunc: typeof GeomFill_SnglrFunc;
   GeomFill_Stretch: typeof GeomFill_Stretch;
+  GeomFill_Stretch_1: typeof GeomFill_Stretch_1;
+  GeomFill_Stretch_2: typeof GeomFill_Stretch_2;
+  GeomFill_Stretch_3: typeof GeomFill_Stretch_3;
   GeomFill_Sweep: typeof GeomFill_Sweep;
   GeomFill_SweepFunction: typeof GeomFill_SweepFunction;
   GeomFill_Tensor: typeof GeomFill_Tensor;
@@ -950,36 +2358,78 @@ export interface opencascade {
   GeomInt_BSpGradient_BFGSOfMyBSplGradientOfTheComputeLineOfWLApprox: typeof GeomInt_BSpGradient_BFGSOfMyBSplGradientOfTheComputeLineOfWLApprox;
   GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox: typeof GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox;
   GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox: typeof GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox;
+  GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox_1: typeof GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox_1;
+  GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox_2: typeof GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox_2;
+  GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox_3: typeof GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox_3;
+  GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox_4: typeof GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox_4;
   GeomInt_Gradient_BFGSOfMyGradientOfTheComputeLineBezierOfWLApprox: typeof GeomInt_Gradient_BFGSOfMyGradientOfTheComputeLineBezierOfWLApprox;
   GeomInt_Gradient_BFGSOfMyGradientbisOfTheComputeLineOfWLApprox: typeof GeomInt_Gradient_BFGSOfMyGradientbisOfTheComputeLineOfWLApprox;
   GeomInt_LineConstructor: typeof GeomInt_LineConstructor;
   GeomInt_LineTool: typeof GeomInt_LineTool;
   GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox: typeof GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox;
+  GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox_1: typeof GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox_1;
+  GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox_2: typeof GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox_2;
   GeomInt_MyGradientOfTheComputeLineBezierOfWLApprox: typeof GeomInt_MyGradientOfTheComputeLineBezierOfWLApprox;
   GeomInt_MyGradientbisOfTheComputeLineOfWLApprox: typeof GeomInt_MyGradientbisOfTheComputeLineOfWLApprox;
   GeomInt_ParFunctionOfMyGradientOfTheComputeLineBezierOfWLApprox: typeof GeomInt_ParFunctionOfMyGradientOfTheComputeLineBezierOfWLApprox;
   GeomInt_ParFunctionOfMyGradientbisOfTheComputeLineOfWLApprox: typeof GeomInt_ParFunctionOfMyGradientbisOfTheComputeLineOfWLApprox;
   GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox: typeof GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox;
+  GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox_1: typeof GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox_1;
+  GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox_2: typeof GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox_2;
+  GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox_3: typeof GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox_3;
+  GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox_4: typeof GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox_4;
   GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox: typeof GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox;
+  GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox_1: typeof GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox_1;
+  GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox_2: typeof GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox_2;
+  GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox_3: typeof GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox_3;
+  GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox_4: typeof GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox_4;
   GeomInt_ParameterAndOrientation: typeof GeomInt_ParameterAndOrientation;
+  GeomInt_ParameterAndOrientation_1: typeof GeomInt_ParameterAndOrientation_1;
+  GeomInt_ParameterAndOrientation_2: typeof GeomInt_ParameterAndOrientation_2;
   GeomInt_TheComputeLineBezierOfWLApprox: typeof GeomInt_TheComputeLineBezierOfWLApprox;
+  GeomInt_TheComputeLineBezierOfWLApprox_1: typeof GeomInt_TheComputeLineBezierOfWLApprox_1;
+  GeomInt_TheComputeLineBezierOfWLApprox_2: typeof GeomInt_TheComputeLineBezierOfWLApprox_2;
+  GeomInt_TheComputeLineBezierOfWLApprox_3: typeof GeomInt_TheComputeLineBezierOfWLApprox_3;
+  GeomInt_TheComputeLineBezierOfWLApprox_4: typeof GeomInt_TheComputeLineBezierOfWLApprox_4;
   GeomInt_TheComputeLineOfWLApprox: typeof GeomInt_TheComputeLineOfWLApprox;
+  GeomInt_TheComputeLineOfWLApprox_1: typeof GeomInt_TheComputeLineOfWLApprox_1;
+  GeomInt_TheComputeLineOfWLApprox_2: typeof GeomInt_TheComputeLineOfWLApprox_2;
+  GeomInt_TheComputeLineOfWLApprox_3: typeof GeomInt_TheComputeLineOfWLApprox_3;
+  GeomInt_TheComputeLineOfWLApprox_4: typeof GeomInt_TheComputeLineOfWLApprox_4;
   GeomInt_TheFunctionOfTheInt2SOfThePrmPrmSvSurfacesOfWLApprox: typeof GeomInt_TheFunctionOfTheInt2SOfThePrmPrmSvSurfacesOfWLApprox;
   GeomInt_TheImpPrmSvSurfacesOfWLApprox: typeof GeomInt_TheImpPrmSvSurfacesOfWLApprox;
+  GeomInt_TheImpPrmSvSurfacesOfWLApprox_1: typeof GeomInt_TheImpPrmSvSurfacesOfWLApprox_1;
+  GeomInt_TheImpPrmSvSurfacesOfWLApprox_2: typeof GeomInt_TheImpPrmSvSurfacesOfWLApprox_2;
   GeomInt_TheInt2SOfThePrmPrmSvSurfacesOfWLApprox: typeof GeomInt_TheInt2SOfThePrmPrmSvSurfacesOfWLApprox;
+  GeomInt_TheInt2SOfThePrmPrmSvSurfacesOfWLApprox_1: typeof GeomInt_TheInt2SOfThePrmPrmSvSurfacesOfWLApprox_1;
+  GeomInt_TheInt2SOfThePrmPrmSvSurfacesOfWLApprox_2: typeof GeomInt_TheInt2SOfThePrmPrmSvSurfacesOfWLApprox_2;
   GeomInt_TheMultiLineOfWLApprox: typeof GeomInt_TheMultiLineOfWLApprox;
+  GeomInt_TheMultiLineOfWLApprox_1: typeof GeomInt_TheMultiLineOfWLApprox_1;
+  GeomInt_TheMultiLineOfWLApprox_2: typeof GeomInt_TheMultiLineOfWLApprox_2;
+  GeomInt_TheMultiLineOfWLApprox_3: typeof GeomInt_TheMultiLineOfWLApprox_3;
   GeomInt_TheMultiLineToolOfWLApprox: typeof GeomInt_TheMultiLineToolOfWLApprox;
   GeomInt_ThePrmPrmSvSurfacesOfWLApprox: typeof GeomInt_ThePrmPrmSvSurfacesOfWLApprox;
   GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox: typeof GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox;
+  GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox_1: typeof GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox_1;
+  GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox_2: typeof GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox_2;
+  GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox_3: typeof GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox_3;
   GeomLProp: typeof GeomLProp;
   GeomLProp_CLProps: typeof GeomLProp_CLProps;
+  GeomLProp_CLProps_1: typeof GeomLProp_CLProps_1;
+  GeomLProp_CLProps_2: typeof GeomLProp_CLProps_2;
+  GeomLProp_CLProps_3: typeof GeomLProp_CLProps_3;
   GeomLProp_CurveTool: typeof GeomLProp_CurveTool;
   GeomLProp_SLProps: typeof GeomLProp_SLProps;
+  GeomLProp_SLProps_1: typeof GeomLProp_SLProps_1;
+  GeomLProp_SLProps_2: typeof GeomLProp_SLProps_2;
+  GeomLProp_SLProps_3: typeof GeomLProp_SLProps_3;
   GeomLProp_SurfaceTool: typeof GeomLProp_SurfaceTool;
   GeomLib: typeof GeomLib;
   GeomLib_Check2dBSplineCurve: typeof GeomLib_Check2dBSplineCurve;
   GeomLib_CheckBSplineCurve: typeof GeomLib_CheckBSplineCurve;
   GeomLib_CheckCurveOnSurface: typeof GeomLib_CheckCurveOnSurface;
+  GeomLib_CheckCurveOnSurface_1: typeof GeomLib_CheckCurveOnSurface_1;
+  GeomLib_CheckCurveOnSurface_2: typeof GeomLib_CheckCurveOnSurface_2;
   GeomLib_DenominatorMultiplier: typeof GeomLib_DenominatorMultiplier;
   GeomLib_Interpolate: typeof GeomLib_Interpolate;
   GeomLib_IsPlanarSurface: typeof GeomLib_IsPlanarSurface;
@@ -988,43 +2438,113 @@ export interface opencascade {
   GeomLib_PolyFunc: typeof GeomLib_PolyFunc;
   GeomLib_Tool: typeof GeomLib_Tool;
   GeomPlate_Aij: typeof GeomPlate_Aij;
+  GeomPlate_Aij_1: typeof GeomPlate_Aij_1;
+  GeomPlate_Aij_2: typeof GeomPlate_Aij_2;
   GeomPlate_BuildAveragePlane: typeof GeomPlate_BuildAveragePlane;
+  GeomPlate_BuildAveragePlane_1: typeof GeomPlate_BuildAveragePlane_1;
+  GeomPlate_BuildAveragePlane_2: typeof GeomPlate_BuildAveragePlane_2;
   GeomPlate_BuildPlateSurface: typeof GeomPlate_BuildPlateSurface;
+  GeomPlate_BuildPlateSurface_1: typeof GeomPlate_BuildPlateSurface_1;
+  GeomPlate_BuildPlateSurface_2: typeof GeomPlate_BuildPlateSurface_2;
+  GeomPlate_BuildPlateSurface_3: typeof GeomPlate_BuildPlateSurface_3;
   GeomPlate_CurveConstraint: typeof GeomPlate_CurveConstraint;
+  GeomPlate_CurveConstraint_1: typeof GeomPlate_CurveConstraint_1;
+  GeomPlate_CurveConstraint_2: typeof GeomPlate_CurveConstraint_2;
   GeomPlate_MakeApprox: typeof GeomPlate_MakeApprox;
+  GeomPlate_MakeApprox_1: typeof GeomPlate_MakeApprox_1;
+  GeomPlate_MakeApprox_2: typeof GeomPlate_MakeApprox_2;
   GeomPlate_PlateG0Criterion: typeof GeomPlate_PlateG0Criterion;
   GeomPlate_PlateG1Criterion: typeof GeomPlate_PlateG1Criterion;
   GeomPlate_PointConstraint: typeof GeomPlate_PointConstraint;
+  GeomPlate_PointConstraint_1: typeof GeomPlate_PointConstraint_1;
+  GeomPlate_PointConstraint_2: typeof GeomPlate_PointConstraint_2;
   GeomPlate_Surface: typeof GeomPlate_Surface;
   GeomProjLib: typeof GeomProjLib;
   GeomToIGES_GeomCurve: typeof GeomToIGES_GeomCurve;
+  GeomToIGES_GeomCurve_1: typeof GeomToIGES_GeomCurve_1;
+  GeomToIGES_GeomCurve_2: typeof GeomToIGES_GeomCurve_2;
   GeomToIGES_GeomEntity: typeof GeomToIGES_GeomEntity;
+  GeomToIGES_GeomEntity_1: typeof GeomToIGES_GeomEntity_1;
+  GeomToIGES_GeomEntity_2: typeof GeomToIGES_GeomEntity_2;
   GeomToIGES_GeomPoint: typeof GeomToIGES_GeomPoint;
+  GeomToIGES_GeomPoint_1: typeof GeomToIGES_GeomPoint_1;
+  GeomToIGES_GeomPoint_2: typeof GeomToIGES_GeomPoint_2;
   GeomToIGES_GeomSurface: typeof GeomToIGES_GeomSurface;
+  GeomToIGES_GeomSurface_1: typeof GeomToIGES_GeomSurface_1;
+  GeomToIGES_GeomSurface_2: typeof GeomToIGES_GeomSurface_2;
   GeomToIGES_GeomVector: typeof GeomToIGES_GeomVector;
+  GeomToIGES_GeomVector_1: typeof GeomToIGES_GeomVector_1;
+  GeomToIGES_GeomVector_2: typeof GeomToIGES_GeomVector_2;
   GeomToStep_MakeAxis1Placement: typeof GeomToStep_MakeAxis1Placement;
+  GeomToStep_MakeAxis1Placement_1: typeof GeomToStep_MakeAxis1Placement_1;
+  GeomToStep_MakeAxis1Placement_2: typeof GeomToStep_MakeAxis1Placement_2;
+  GeomToStep_MakeAxis1Placement_3: typeof GeomToStep_MakeAxis1Placement_3;
+  GeomToStep_MakeAxis1Placement_4: typeof GeomToStep_MakeAxis1Placement_4;
   GeomToStep_MakeAxis2Placement2d: typeof GeomToStep_MakeAxis2Placement2d;
+  GeomToStep_MakeAxis2Placement2d_1: typeof GeomToStep_MakeAxis2Placement2d_1;
+  GeomToStep_MakeAxis2Placement2d_2: typeof GeomToStep_MakeAxis2Placement2d_2;
   GeomToStep_MakeAxis2Placement3d: typeof GeomToStep_MakeAxis2Placement3d;
+  GeomToStep_MakeAxis2Placement3d_1: typeof GeomToStep_MakeAxis2Placement3d_1;
+  GeomToStep_MakeAxis2Placement3d_2: typeof GeomToStep_MakeAxis2Placement3d_2;
+  GeomToStep_MakeAxis2Placement3d_3: typeof GeomToStep_MakeAxis2Placement3d_3;
+  GeomToStep_MakeAxis2Placement3d_4: typeof GeomToStep_MakeAxis2Placement3d_4;
+  GeomToStep_MakeAxis2Placement3d_5: typeof GeomToStep_MakeAxis2Placement3d_5;
   GeomToStep_MakeBSplineCurveWithKnots: typeof GeomToStep_MakeBSplineCurveWithKnots;
+  GeomToStep_MakeBSplineCurveWithKnots_1: typeof GeomToStep_MakeBSplineCurveWithKnots_1;
+  GeomToStep_MakeBSplineCurveWithKnots_2: typeof GeomToStep_MakeBSplineCurveWithKnots_2;
   GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve: typeof GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve;
+  GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve_1: typeof GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve_1;
+  GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve_2: typeof GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve_2;
   GeomToStep_MakeBSplineSurfaceWithKnots: typeof GeomToStep_MakeBSplineSurfaceWithKnots;
   GeomToStep_MakeBSplineSurfaceWithKnotsAndRationalBSplineSurface: typeof GeomToStep_MakeBSplineSurfaceWithKnotsAndRationalBSplineSurface;
   GeomToStep_MakeBoundedCurve: typeof GeomToStep_MakeBoundedCurve;
+  GeomToStep_MakeBoundedCurve_1: typeof GeomToStep_MakeBoundedCurve_1;
+  GeomToStep_MakeBoundedCurve_2: typeof GeomToStep_MakeBoundedCurve_2;
   GeomToStep_MakeBoundedSurface: typeof GeomToStep_MakeBoundedSurface;
   GeomToStep_MakeCartesianPoint: typeof GeomToStep_MakeCartesianPoint;
+  GeomToStep_MakeCartesianPoint_1: typeof GeomToStep_MakeCartesianPoint_1;
+  GeomToStep_MakeCartesianPoint_2: typeof GeomToStep_MakeCartesianPoint_2;
+  GeomToStep_MakeCartesianPoint_3: typeof GeomToStep_MakeCartesianPoint_3;
+  GeomToStep_MakeCartesianPoint_4: typeof GeomToStep_MakeCartesianPoint_4;
   GeomToStep_MakeCircle: typeof GeomToStep_MakeCircle;
+  GeomToStep_MakeCircle_1: typeof GeomToStep_MakeCircle_1;
+  GeomToStep_MakeCircle_2: typeof GeomToStep_MakeCircle_2;
+  GeomToStep_MakeCircle_3: typeof GeomToStep_MakeCircle_3;
   GeomToStep_MakeConic: typeof GeomToStep_MakeConic;
+  GeomToStep_MakeConic_1: typeof GeomToStep_MakeConic_1;
+  GeomToStep_MakeConic_2: typeof GeomToStep_MakeConic_2;
   GeomToStep_MakeConicalSurface: typeof GeomToStep_MakeConicalSurface;
   GeomToStep_MakeCurve: typeof GeomToStep_MakeCurve;
+  GeomToStep_MakeCurve_1: typeof GeomToStep_MakeCurve_1;
+  GeomToStep_MakeCurve_2: typeof GeomToStep_MakeCurve_2;
   GeomToStep_MakeCylindricalSurface: typeof GeomToStep_MakeCylindricalSurface;
   GeomToStep_MakeDirection: typeof GeomToStep_MakeDirection;
+  GeomToStep_MakeDirection_1: typeof GeomToStep_MakeDirection_1;
+  GeomToStep_MakeDirection_2: typeof GeomToStep_MakeDirection_2;
+  GeomToStep_MakeDirection_3: typeof GeomToStep_MakeDirection_3;
+  GeomToStep_MakeDirection_4: typeof GeomToStep_MakeDirection_4;
   GeomToStep_MakeElementarySurface: typeof GeomToStep_MakeElementarySurface;
   GeomToStep_MakeEllipse: typeof GeomToStep_MakeEllipse;
+  GeomToStep_MakeEllipse_1: typeof GeomToStep_MakeEllipse_1;
+  GeomToStep_MakeEllipse_2: typeof GeomToStep_MakeEllipse_2;
+  GeomToStep_MakeEllipse_3: typeof GeomToStep_MakeEllipse_3;
   GeomToStep_MakeHyperbola: typeof GeomToStep_MakeHyperbola;
+  GeomToStep_MakeHyperbola_1: typeof GeomToStep_MakeHyperbola_1;
+  GeomToStep_MakeHyperbola_2: typeof GeomToStep_MakeHyperbola_2;
   GeomToStep_MakeLine: typeof GeomToStep_MakeLine;
+  GeomToStep_MakeLine_1: typeof GeomToStep_MakeLine_1;
+  GeomToStep_MakeLine_2: typeof GeomToStep_MakeLine_2;
+  GeomToStep_MakeLine_3: typeof GeomToStep_MakeLine_3;
+  GeomToStep_MakeLine_4: typeof GeomToStep_MakeLine_4;
   GeomToStep_MakeParabola: typeof GeomToStep_MakeParabola;
+  GeomToStep_MakeParabola_1: typeof GeomToStep_MakeParabola_1;
+  GeomToStep_MakeParabola_2: typeof GeomToStep_MakeParabola_2;
   GeomToStep_MakePlane: typeof GeomToStep_MakePlane;
+  GeomToStep_MakePlane_1: typeof GeomToStep_MakePlane_1;
+  GeomToStep_MakePlane_2: typeof GeomToStep_MakePlane_2;
   GeomToStep_MakePolyline: typeof GeomToStep_MakePolyline;
+  GeomToStep_MakePolyline_1: typeof GeomToStep_MakePolyline_1;
+  GeomToStep_MakePolyline_2: typeof GeomToStep_MakePolyline_2;
   GeomToStep_MakeRectangularTrimmedSurface: typeof GeomToStep_MakeRectangularTrimmedSurface;
   GeomToStep_MakeSphericalSurface: typeof GeomToStep_MakeSphericalSurface;
   GeomToStep_MakeSurface: typeof GeomToStep_MakeSurface;
@@ -1033,65 +2553,150 @@ export interface opencascade {
   GeomToStep_MakeSweptSurface: typeof GeomToStep_MakeSweptSurface;
   GeomToStep_MakeToroidalSurface: typeof GeomToStep_MakeToroidalSurface;
   GeomToStep_MakeVector: typeof GeomToStep_MakeVector;
+  GeomToStep_MakeVector_1: typeof GeomToStep_MakeVector_1;
+  GeomToStep_MakeVector_2: typeof GeomToStep_MakeVector_2;
+  GeomToStep_MakeVector_3: typeof GeomToStep_MakeVector_3;
+  GeomToStep_MakeVector_4: typeof GeomToStep_MakeVector_4;
   GeomToStep_Root: typeof GeomToStep_Root;
   GeomTools: typeof GeomTools;
   GeomTools_Curve2dSet: typeof GeomTools_Curve2dSet;
   GeomTools_CurveSet: typeof GeomTools_CurveSet;
   GeomTools_SurfaceSet: typeof GeomTools_SurfaceSet;
   Geom_Axis1Placement: typeof Geom_Axis1Placement;
+  Geom_Axis1Placement_1: typeof Geom_Axis1Placement_1;
+  Geom_Axis1Placement_2: typeof Geom_Axis1Placement_2;
   Geom_Axis2Placement: typeof Geom_Axis2Placement;
+  Geom_Axis2Placement_1: typeof Geom_Axis2Placement_1;
+  Geom_Axis2Placement_2: typeof Geom_Axis2Placement_2;
   Geom_AxisPlacement: typeof Geom_AxisPlacement;
   Geom_BSplineCurve: typeof Geom_BSplineCurve;
+  Geom_BSplineCurve_1: typeof Geom_BSplineCurve_1;
+  Geom_BSplineCurve_2: typeof Geom_BSplineCurve_2;
   Geom_BSplineSurface: typeof Geom_BSplineSurface;
+  Geom_BSplineSurface_1: typeof Geom_BSplineSurface_1;
+  Geom_BSplineSurface_2: typeof Geom_BSplineSurface_2;
   Geom_BezierCurve: typeof Geom_BezierCurve;
+  Geom_BezierCurve_1: typeof Geom_BezierCurve_1;
+  Geom_BezierCurve_2: typeof Geom_BezierCurve_2;
   Geom_BezierSurface: typeof Geom_BezierSurface;
+  Geom_BezierSurface_1: typeof Geom_BezierSurface_1;
+  Geom_BezierSurface_2: typeof Geom_BezierSurface_2;
   Geom_BoundedCurve: typeof Geom_BoundedCurve;
   Geom_BoundedSurface: typeof Geom_BoundedSurface;
   Geom_CartesianPoint: typeof Geom_CartesianPoint;
+  Geom_CartesianPoint_1: typeof Geom_CartesianPoint_1;
+  Geom_CartesianPoint_2: typeof Geom_CartesianPoint_2;
   Geom_Circle: typeof Geom_Circle;
+  Geom_Circle_1: typeof Geom_Circle_1;
+  Geom_Circle_2: typeof Geom_Circle_2;
   Geom_Conic: typeof Geom_Conic;
   Geom_ConicalSurface: typeof Geom_ConicalSurface;
+  Geom_ConicalSurface_1: typeof Geom_ConicalSurface_1;
+  Geom_ConicalSurface_2: typeof Geom_ConicalSurface_2;
   Geom_Curve: typeof Geom_Curve;
   Geom_CylindricalSurface: typeof Geom_CylindricalSurface;
+  Geom_CylindricalSurface_1: typeof Geom_CylindricalSurface_1;
+  Geom_CylindricalSurface_2: typeof Geom_CylindricalSurface_2;
   Geom_Direction: typeof Geom_Direction;
+  Geom_Direction_1: typeof Geom_Direction_1;
+  Geom_Direction_2: typeof Geom_Direction_2;
   Geom_ElementarySurface: typeof Geom_ElementarySurface;
   Geom_Ellipse: typeof Geom_Ellipse;
+  Geom_Ellipse_1: typeof Geom_Ellipse_1;
+  Geom_Ellipse_2: typeof Geom_Ellipse_2;
   Geom_Geometry: typeof Geom_Geometry;
   Geom_Hyperbola: typeof Geom_Hyperbola;
+  Geom_Hyperbola_1: typeof Geom_Hyperbola_1;
+  Geom_Hyperbola_2: typeof Geom_Hyperbola_2;
   Geom_Line: typeof Geom_Line;
+  Geom_Line_1: typeof Geom_Line_1;
+  Geom_Line_2: typeof Geom_Line_2;
+  Geom_Line_3: typeof Geom_Line_3;
   Geom_OffsetCurve: typeof Geom_OffsetCurve;
   Geom_OffsetSurface: typeof Geom_OffsetSurface;
   Geom_OsculatingSurface: typeof Geom_OsculatingSurface;
+  Geom_OsculatingSurface_1: typeof Geom_OsculatingSurface_1;
+  Geom_OsculatingSurface_2: typeof Geom_OsculatingSurface_2;
   Geom_Parabola: typeof Geom_Parabola;
+  Geom_Parabola_1: typeof Geom_Parabola_1;
+  Geom_Parabola_2: typeof Geom_Parabola_2;
+  Geom_Parabola_3: typeof Geom_Parabola_3;
   Geom_Plane: typeof Geom_Plane;
+  Geom_Plane_1: typeof Geom_Plane_1;
+  Geom_Plane_2: typeof Geom_Plane_2;
+  Geom_Plane_3: typeof Geom_Plane_3;
+  Geom_Plane_4: typeof Geom_Plane_4;
   Geom_Point: typeof Geom_Point;
   Geom_RectangularTrimmedSurface: typeof Geom_RectangularTrimmedSurface;
+  Geom_RectangularTrimmedSurface_1: typeof Geom_RectangularTrimmedSurface_1;
+  Geom_RectangularTrimmedSurface_2: typeof Geom_RectangularTrimmedSurface_2;
   Geom_SphericalSurface: typeof Geom_SphericalSurface;
+  Geom_SphericalSurface_1: typeof Geom_SphericalSurface_1;
+  Geom_SphericalSurface_2: typeof Geom_SphericalSurface_2;
   Geom_Surface: typeof Geom_Surface;
   Geom_SurfaceOfLinearExtrusion: typeof Geom_SurfaceOfLinearExtrusion;
   Geom_SurfaceOfRevolution: typeof Geom_SurfaceOfRevolution;
   Geom_SweptSurface: typeof Geom_SweptSurface;
   Geom_ToroidalSurface: typeof Geom_ToroidalSurface;
+  Geom_ToroidalSurface_1: typeof Geom_ToroidalSurface_1;
+  Geom_ToroidalSurface_2: typeof Geom_ToroidalSurface_2;
   Geom_Transformation: typeof Geom_Transformation;
+  Geom_Transformation_1: typeof Geom_Transformation_1;
+  Geom_Transformation_2: typeof Geom_Transformation_2;
   Geom_TrimmedCurve: typeof Geom_TrimmedCurve;
   Geom_UndefinedDerivative: typeof Geom_UndefinedDerivative;
+  Geom_UndefinedDerivative_1: typeof Geom_UndefinedDerivative_1;
+  Geom_UndefinedDerivative_2: typeof Geom_UndefinedDerivative_2;
   Geom_UndefinedValue: typeof Geom_UndefinedValue;
+  Geom_UndefinedValue_1: typeof Geom_UndefinedValue_1;
+  Geom_UndefinedValue_2: typeof Geom_UndefinedValue_2;
   Geom_Vector: typeof Geom_Vector;
   Geom_VectorWithMagnitude: typeof Geom_VectorWithMagnitude;
+  Geom_VectorWithMagnitude_1: typeof Geom_VectorWithMagnitude_1;
+  Geom_VectorWithMagnitude_2: typeof Geom_VectorWithMagnitude_2;
+  Geom_VectorWithMagnitude_3: typeof Geom_VectorWithMagnitude_3;
   Graphic3d_ArrayOfPoints: typeof Graphic3d_ArrayOfPoints;
+  Graphic3d_ArrayOfPoints_1: typeof Graphic3d_ArrayOfPoints_1;
+  Graphic3d_ArrayOfPoints_2: typeof Graphic3d_ArrayOfPoints_2;
   Graphic3d_ArrayOfPolygons: typeof Graphic3d_ArrayOfPolygons;
+  Graphic3d_ArrayOfPolygons_1: typeof Graphic3d_ArrayOfPolygons_1;
+  Graphic3d_ArrayOfPolygons_2: typeof Graphic3d_ArrayOfPolygons_2;
   Graphic3d_ArrayOfPolylines: typeof Graphic3d_ArrayOfPolylines;
+  Graphic3d_ArrayOfPolylines_1: typeof Graphic3d_ArrayOfPolylines_1;
+  Graphic3d_ArrayOfPolylines_2: typeof Graphic3d_ArrayOfPolylines_2;
   Graphic3d_ArrayOfPrimitives: typeof Graphic3d_ArrayOfPrimitives;
   Graphic3d_ArrayOfQuadrangleStrips: typeof Graphic3d_ArrayOfQuadrangleStrips;
+  Graphic3d_ArrayOfQuadrangleStrips_1: typeof Graphic3d_ArrayOfQuadrangleStrips_1;
+  Graphic3d_ArrayOfQuadrangleStrips_2: typeof Graphic3d_ArrayOfQuadrangleStrips_2;
   Graphic3d_ArrayOfQuadrangles: typeof Graphic3d_ArrayOfQuadrangles;
+  Graphic3d_ArrayOfQuadrangles_1: typeof Graphic3d_ArrayOfQuadrangles_1;
+  Graphic3d_ArrayOfQuadrangles_2: typeof Graphic3d_ArrayOfQuadrangles_2;
   Graphic3d_ArrayOfSegments: typeof Graphic3d_ArrayOfSegments;
+  Graphic3d_ArrayOfSegments_1: typeof Graphic3d_ArrayOfSegments_1;
+  Graphic3d_ArrayOfSegments_2: typeof Graphic3d_ArrayOfSegments_2;
   Graphic3d_ArrayOfTriangleFans: typeof Graphic3d_ArrayOfTriangleFans;
+  Graphic3d_ArrayOfTriangleFans_1: typeof Graphic3d_ArrayOfTriangleFans_1;
+  Graphic3d_ArrayOfTriangleFans_2: typeof Graphic3d_ArrayOfTriangleFans_2;
   Graphic3d_ArrayOfTriangleStrips: typeof Graphic3d_ArrayOfTriangleStrips;
+  Graphic3d_ArrayOfTriangleStrips_1: typeof Graphic3d_ArrayOfTriangleStrips_1;
+  Graphic3d_ArrayOfTriangleStrips_2: typeof Graphic3d_ArrayOfTriangleStrips_2;
   Graphic3d_ArrayOfTriangles: typeof Graphic3d_ArrayOfTriangles;
+  Graphic3d_ArrayOfTriangles_1: typeof Graphic3d_ArrayOfTriangles_1;
+  Graphic3d_ArrayOfTriangles_2: typeof Graphic3d_ArrayOfTriangles_2;
   Graphic3d_AspectFillArea3d: typeof Graphic3d_AspectFillArea3d;
+  Graphic3d_AspectFillArea3d_1: typeof Graphic3d_AspectFillArea3d_1;
+  Graphic3d_AspectFillArea3d_2: typeof Graphic3d_AspectFillArea3d_2;
   Graphic3d_AspectLine3d: typeof Graphic3d_AspectLine3d;
+  Graphic3d_AspectLine3d_1: typeof Graphic3d_AspectLine3d_1;
+  Graphic3d_AspectLine3d_2: typeof Graphic3d_AspectLine3d_2;
   Graphic3d_AspectMarker3d: typeof Graphic3d_AspectMarker3d;
+  Graphic3d_AspectMarker3d_1: typeof Graphic3d_AspectMarker3d_1;
+  Graphic3d_AspectMarker3d_2: typeof Graphic3d_AspectMarker3d_2;
+  Graphic3d_AspectMarker3d_3: typeof Graphic3d_AspectMarker3d_3;
+  Graphic3d_AspectMarker3d_4: typeof Graphic3d_AspectMarker3d_4;
   Graphic3d_AspectText3d: typeof Graphic3d_AspectText3d;
+  Graphic3d_AspectText3d_1: typeof Graphic3d_AspectText3d_1;
+  Graphic3d_AspectText3d_2: typeof Graphic3d_AspectText3d_2;
   Graphic3d_Aspects: typeof Graphic3d_Aspects;
   Graphic3d_AttribBuffer: typeof Graphic3d_AttribBuffer;
   Graphic3d_AxisAspect: typeof Graphic3d_AxisAspect;
@@ -1104,11 +2709,24 @@ export interface opencascade {
   Graphic3d_CTexture: typeof Graphic3d_CTexture;
   Graphic3d_CView: typeof Graphic3d_CView;
   Graphic3d_Camera: typeof Graphic3d_Camera;
+  Graphic3d_Camera_1: typeof Graphic3d_Camera_1;
+  Graphic3d_Camera_2: typeof Graphic3d_Camera_2;
   Graphic3d_CameraTile: typeof Graphic3d_CameraTile;
   Graphic3d_ClipPlane: typeof Graphic3d_ClipPlane;
+  Graphic3d_ClipPlane_1: typeof Graphic3d_ClipPlane_1;
+  Graphic3d_ClipPlane_2: typeof Graphic3d_ClipPlane_2;
+  Graphic3d_ClipPlane_3: typeof Graphic3d_ClipPlane_3;
+  Graphic3d_ClipPlane_4: typeof Graphic3d_ClipPlane_4;
   Graphic3d_CubeMapOrder: typeof Graphic3d_CubeMapOrder;
+  Graphic3d_CubeMapOrder_1: typeof Graphic3d_CubeMapOrder_1;
+  Graphic3d_CubeMapOrder_2: typeof Graphic3d_CubeMapOrder_2;
+  Graphic3d_CubeMapOrder_3: typeof Graphic3d_CubeMapOrder_3;
   Graphic3d_CubeMapPacked: typeof Graphic3d_CubeMapPacked;
+  Graphic3d_CubeMapPacked_1: typeof Graphic3d_CubeMapPacked_1;
+  Graphic3d_CubeMapPacked_2: typeof Graphic3d_CubeMapPacked_2;
   Graphic3d_CubeMapSeparate: typeof Graphic3d_CubeMapSeparate;
+  Graphic3d_CubeMapSeparate_1: typeof Graphic3d_CubeMapSeparate_1;
+  Graphic3d_CubeMapSeparate_2: typeof Graphic3d_CubeMapSeparate_2;
   Graphic3d_CullingTool: typeof Graphic3d_CullingTool;
   Graphic3d_DataStructureManager: typeof Graphic3d_DataStructureManager;
   Graphic3d_FrameStats: typeof Graphic3d_FrameStats;
@@ -1119,17 +2737,32 @@ export interface opencascade {
   Graphic3d_GraphicDriver: typeof Graphic3d_GraphicDriver;
   Graphic3d_Group: typeof Graphic3d_Group;
   Graphic3d_GroupDefinitionError: typeof Graphic3d_GroupDefinitionError;
+  Graphic3d_GroupDefinitionError_1: typeof Graphic3d_GroupDefinitionError_1;
+  Graphic3d_GroupDefinitionError_2: typeof Graphic3d_GroupDefinitionError_2;
   Graphic3d_HatchStyle: typeof Graphic3d_HatchStyle;
+  Graphic3d_HatchStyle_1: typeof Graphic3d_HatchStyle_1;
+  Graphic3d_HatchStyle_2: typeof Graphic3d_HatchStyle_2;
   Graphic3d_IndexBuffer: typeof Graphic3d_IndexBuffer;
   Graphic3d_Layer: typeof Graphic3d_Layer;
   Graphic3d_LightSet: typeof Graphic3d_LightSet;
   Graphic3d_MarkerImage: typeof Graphic3d_MarkerImage;
+  Graphic3d_MarkerImage_1: typeof Graphic3d_MarkerImage_1;
+  Graphic3d_MarkerImage_2: typeof Graphic3d_MarkerImage_2;
   Graphic3d_MaterialAspect: typeof Graphic3d_MaterialAspect;
+  Graphic3d_MaterialAspect_1: typeof Graphic3d_MaterialAspect_1;
+  Graphic3d_MaterialAspect_2: typeof Graphic3d_MaterialAspect_2;
   Graphic3d_MaterialDefinitionError: typeof Graphic3d_MaterialDefinitionError;
+  Graphic3d_MaterialDefinitionError_1: typeof Graphic3d_MaterialDefinitionError_1;
+  Graphic3d_MaterialDefinitionError_2: typeof Graphic3d_MaterialDefinitionError_2;
   Graphic3d_MediaTexture: typeof Graphic3d_MediaTexture;
   Graphic3d_MutableIndexBuffer: typeof Graphic3d_MutableIndexBuffer;
+  Graphic3d_PBRMaterial: typeof Graphic3d_PBRMaterial;
+  Graphic3d_PBRMaterial_1: typeof Graphic3d_PBRMaterial_1;
+  Graphic3d_PBRMaterial_2: typeof Graphic3d_PBRMaterial_2;
   Graphic3d_PresentationAttributes: typeof Graphic3d_PresentationAttributes;
   Graphic3d_PriorityDefinitionError: typeof Graphic3d_PriorityDefinitionError;
+  Graphic3d_PriorityDefinitionError_1: typeof Graphic3d_PriorityDefinitionError_1;
+  Graphic3d_PriorityDefinitionError_2: typeof Graphic3d_PriorityDefinitionError_2;
   Graphic3d_RenderingParams: typeof Graphic3d_RenderingParams;
   Graphic3d_SequenceOfHClipPlane: typeof Graphic3d_SequenceOfHClipPlane;
   Graphic3d_ShaderAttribute: typeof Graphic3d_ShaderAttribute;
@@ -1138,33 +2771,77 @@ export interface opencascade {
   Graphic3d_ShaderVariable: typeof Graphic3d_ShaderVariable;
   Graphic3d_Structure: typeof Graphic3d_Structure;
   Graphic3d_StructureDefinitionError: typeof Graphic3d_StructureDefinitionError;
+  Graphic3d_StructureDefinitionError_1: typeof Graphic3d_StructureDefinitionError_1;
+  Graphic3d_StructureDefinitionError_2: typeof Graphic3d_StructureDefinitionError_2;
   Graphic3d_StructureManager: typeof Graphic3d_StructureManager;
   Graphic3d_Text: typeof Graphic3d_Text;
   Graphic3d_Texture1D: typeof Graphic3d_Texture1D;
   Graphic3d_Texture1Dmanual: typeof Graphic3d_Texture1Dmanual;
+  Graphic3d_Texture1Dmanual_1: typeof Graphic3d_Texture1Dmanual_1;
+  Graphic3d_Texture1Dmanual_2: typeof Graphic3d_Texture1Dmanual_2;
+  Graphic3d_Texture1Dmanual_3: typeof Graphic3d_Texture1Dmanual_3;
   Graphic3d_Texture1Dsegment: typeof Graphic3d_Texture1Dsegment;
+  Graphic3d_Texture1Dsegment_1: typeof Graphic3d_Texture1Dsegment_1;
+  Graphic3d_Texture1Dsegment_2: typeof Graphic3d_Texture1Dsegment_2;
+  Graphic3d_Texture1Dsegment_3: typeof Graphic3d_Texture1Dsegment_3;
   Graphic3d_Texture2D: typeof Graphic3d_Texture2D;
   Graphic3d_Texture2Dmanual: typeof Graphic3d_Texture2Dmanual;
+  Graphic3d_Texture2Dmanual_1: typeof Graphic3d_Texture2Dmanual_1;
+  Graphic3d_Texture2Dmanual_2: typeof Graphic3d_Texture2Dmanual_2;
+  Graphic3d_Texture2Dmanual_3: typeof Graphic3d_Texture2Dmanual_3;
   Graphic3d_Texture2Dplane: typeof Graphic3d_Texture2Dplane;
+  Graphic3d_Texture2Dplane_1: typeof Graphic3d_Texture2Dplane_1;
+  Graphic3d_Texture2Dplane_2: typeof Graphic3d_Texture2Dplane_2;
+  Graphic3d_Texture2Dplane_3: typeof Graphic3d_Texture2Dplane_3;
   Graphic3d_TextureEnv: typeof Graphic3d_TextureEnv;
+  Graphic3d_TextureEnv_1: typeof Graphic3d_TextureEnv_1;
+  Graphic3d_TextureEnv_2: typeof Graphic3d_TextureEnv_2;
+  Graphic3d_TextureEnv_3: typeof Graphic3d_TextureEnv_3;
   Graphic3d_TextureMap: typeof Graphic3d_TextureMap;
   Graphic3d_TextureParams: typeof Graphic3d_TextureParams;
   Graphic3d_TextureRoot: typeof Graphic3d_TextureRoot;
   Graphic3d_TextureSet: typeof Graphic3d_TextureSet;
+  Graphic3d_TextureSet_1: typeof Graphic3d_TextureSet_1;
+  Graphic3d_TextureSet_2: typeof Graphic3d_TextureSet_2;
+  Graphic3d_TextureSet_3: typeof Graphic3d_TextureSet_3;
   Graphic3d_TransformError: typeof Graphic3d_TransformError;
+  Graphic3d_TransformError_1: typeof Graphic3d_TransformError_1;
+  Graphic3d_TransformError_2: typeof Graphic3d_TransformError_2;
   Graphic3d_TransformPers: typeof Graphic3d_TransformPers;
+  Graphic3d_TransformPers_1: typeof Graphic3d_TransformPers_1;
+  Graphic3d_TransformPers_2: typeof Graphic3d_TransformPers_2;
+  Graphic3d_TransformPers_3: typeof Graphic3d_TransformPers_3;
   Graphic3d_ValidatedCubeMapOrder: typeof Graphic3d_ValidatedCubeMapOrder;
   Graphic3d_Vertex: typeof Graphic3d_Vertex;
+  Graphic3d_Vertex_1: typeof Graphic3d_Vertex_1;
+  Graphic3d_Vertex_2: typeof Graphic3d_Vertex_2;
+  Graphic3d_Vertex_3: typeof Graphic3d_Vertex_3;
+  Graphic3d_Vertex_4: typeof Graphic3d_Vertex_4;
   Graphic3d_ViewAffinity: typeof Graphic3d_ViewAffinity;
   Graphic3d_WorldViewProjState: typeof Graphic3d_WorldViewProjState;
+  Graphic3d_WorldViewProjState_1: typeof Graphic3d_WorldViewProjState_1;
+  Graphic3d_WorldViewProjState_2: typeof Graphic3d_WorldViewProjState_2;
   HLRAlgo: typeof HLRAlgo;
   HLRAlgo_BiPoint: typeof HLRAlgo_BiPoint;
+  HLRAlgo_BiPoint_1: typeof HLRAlgo_BiPoint_1;
+  HLRAlgo_BiPoint_2: typeof HLRAlgo_BiPoint_2;
+  HLRAlgo_BiPoint_3: typeof HLRAlgo_BiPoint_3;
+  HLRAlgo_BiPoint_4: typeof HLRAlgo_BiPoint_4;
+  HLRAlgo_BiPoint_5: typeof HLRAlgo_BiPoint_5;
+  HLRAlgo_BiPoint_6: typeof HLRAlgo_BiPoint_6;
+  HLRAlgo_BiPoint_7: typeof HLRAlgo_BiPoint_7;
   HLRAlgo_Coincidence: typeof HLRAlgo_Coincidence;
   HLRAlgo_EdgeIterator: typeof HLRAlgo_EdgeIterator;
   HLRAlgo_EdgeStatus: typeof HLRAlgo_EdgeStatus;
+  HLRAlgo_EdgeStatus_1: typeof HLRAlgo_EdgeStatus_1;
+  HLRAlgo_EdgeStatus_2: typeof HLRAlgo_EdgeStatus_2;
   HLRAlgo_EdgesBlock: typeof HLRAlgo_EdgesBlock;
   HLRAlgo_Interference: typeof HLRAlgo_Interference;
+  HLRAlgo_Interference_1: typeof HLRAlgo_Interference_1;
+  HLRAlgo_Interference_2: typeof HLRAlgo_Interference_2;
   HLRAlgo_Intersection: typeof HLRAlgo_Intersection;
+  HLRAlgo_Intersection_1: typeof HLRAlgo_Intersection_1;
+  HLRAlgo_Intersection_2: typeof HLRAlgo_Intersection_2;
   HLRAlgo_PolyAlgo: typeof HLRAlgo_PolyAlgo;
   HLRAlgo_PolyData: typeof HLRAlgo_PolyData;
   HLRAlgo_PolyHidingData: typeof HLRAlgo_PolyHidingData;
@@ -1172,6 +2849,11 @@ export interface opencascade {
   HLRAlgo_PolyInternalNode: typeof HLRAlgo_PolyInternalNode;
   HLRAlgo_PolyShellData: typeof HLRAlgo_PolyShellData;
   HLRAlgo_Projector: typeof HLRAlgo_Projector;
+  HLRAlgo_Projector_1: typeof HLRAlgo_Projector_1;
+  HLRAlgo_Projector_2: typeof HLRAlgo_Projector_2;
+  HLRAlgo_Projector_3: typeof HLRAlgo_Projector_3;
+  HLRAlgo_Projector_4: typeof HLRAlgo_Projector_4;
+  HLRAlgo_Projector_5: typeof HLRAlgo_Projector_5;
   HLRAlgo_WiresBlock: typeof HLRAlgo_WiresBlock;
   HLRAppli_ReflectLines: typeof HLRAppli_ReflectLines;
   HLRTopoBRep_DSFiller: typeof HLRTopoBRep_DSFiller;
@@ -1179,14 +2861,32 @@ export interface opencascade {
   HLRTopoBRep_FaceData: typeof HLRTopoBRep_FaceData;
   HLRTopoBRep_FaceIsoLiner: typeof HLRTopoBRep_FaceIsoLiner;
   HLRTopoBRep_OutLiner: typeof HLRTopoBRep_OutLiner;
+  HLRTopoBRep_OutLiner_1: typeof HLRTopoBRep_OutLiner_1;
+  HLRTopoBRep_OutLiner_2: typeof HLRTopoBRep_OutLiner_2;
+  HLRTopoBRep_OutLiner_3: typeof HLRTopoBRep_OutLiner_3;
   HLRTopoBRep_VData: typeof HLRTopoBRep_VData;
+  HLRTopoBRep_VData_1: typeof HLRTopoBRep_VData_1;
+  HLRTopoBRep_VData_2: typeof HLRTopoBRep_VData_2;
   HatchGen_Domain: typeof HatchGen_Domain;
+  HatchGen_Domain_1: typeof HatchGen_Domain_1;
+  HatchGen_Domain_2: typeof HatchGen_Domain_2;
+  HatchGen_Domain_3: typeof HatchGen_Domain_3;
   HatchGen_IntersectionPoint: typeof HatchGen_IntersectionPoint;
   HatchGen_PointOnElement: typeof HatchGen_PointOnElement;
+  HatchGen_PointOnElement_1: typeof HatchGen_PointOnElement_1;
+  HatchGen_PointOnElement_2: typeof HatchGen_PointOnElement_2;
+  HatchGen_PointOnElement_3: typeof HatchGen_PointOnElement_3;
   HatchGen_PointOnHatching: typeof HatchGen_PointOnHatching;
+  HatchGen_PointOnHatching_1: typeof HatchGen_PointOnHatching_1;
+  HatchGen_PointOnHatching_2: typeof HatchGen_PointOnHatching_2;
+  HatchGen_PointOnHatching_3: typeof HatchGen_PointOnHatching_3;
   Hatch_Hatcher: typeof Hatch_Hatcher;
   Hatch_Line: typeof Hatch_Line;
+  Hatch_Line_1: typeof Hatch_Line_1;
+  Hatch_Line_2: typeof Hatch_Line_2;
   Hatch_Parameter: typeof Hatch_Parameter;
+  Hatch_Parameter_1: typeof Hatch_Parameter_1;
+  Hatch_Parameter_2: typeof Hatch_Parameter_2;
   HeaderSection: typeof HeaderSection;
   HeaderSection_FileDescription: typeof HeaderSection_FileDescription;
   HeaderSection_FileName: typeof HeaderSection_FileName;
@@ -1194,16 +2894,26 @@ export interface opencascade {
   HeaderSection_Protocol: typeof HeaderSection_Protocol;
   Hermit: typeof Hermit;
   IFGraph_AllConnected: typeof IFGraph_AllConnected;
+  IFGraph_AllConnected_1: typeof IFGraph_AllConnected_1;
+  IFGraph_AllConnected_2: typeof IFGraph_AllConnected_2;
   IFGraph_AllShared: typeof IFGraph_AllShared;
+  IFGraph_AllShared_1: typeof IFGraph_AllShared_1;
+  IFGraph_AllShared_2: typeof IFGraph_AllShared_2;
   IFGraph_Articulations: typeof IFGraph_Articulations;
   IFGraph_Compare: typeof IFGraph_Compare;
   IFGraph_ConnectedComponants: typeof IFGraph_ConnectedComponants;
   IFGraph_Cumulate: typeof IFGraph_Cumulate;
   IFGraph_Cycles: typeof IFGraph_Cycles;
+  IFGraph_Cycles_1: typeof IFGraph_Cycles_1;
+  IFGraph_Cycles_2: typeof IFGraph_Cycles_2;
   IFGraph_ExternalSources: typeof IFGraph_ExternalSources;
   IFGraph_SCRoots: typeof IFGraph_SCRoots;
+  IFGraph_SCRoots_1: typeof IFGraph_SCRoots_1;
+  IFGraph_SCRoots_2: typeof IFGraph_SCRoots_2;
   IFGraph_StrongComponants: typeof IFGraph_StrongComponants;
   IFGraph_SubPartsIterator: typeof IFGraph_SubPartsIterator;
+  IFGraph_SubPartsIterator_1: typeof IFGraph_SubPartsIterator_1;
+  IFGraph_SubPartsIterator_2: typeof IFGraph_SubPartsIterator_2;
   IFSelect: typeof IFSelect;
   IFSelect_Act: typeof IFSelect_Act;
   IFSelect_Activator: typeof IFSelect_Activator;
@@ -1211,6 +2921,8 @@ export interface opencascade {
   IFSelect_BasicDumper: typeof IFSelect_BasicDumper;
   IFSelect_CheckCounter: typeof IFSelect_CheckCounter;
   IFSelect_ContextWrite: typeof IFSelect_ContextWrite;
+  IFSelect_ContextWrite_1: typeof IFSelect_ContextWrite_1;
+  IFSelect_ContextWrite_2: typeof IFSelect_ContextWrite_2;
   IFSelect_DispGlobal: typeof IFSelect_DispGlobal;
   IFSelect_DispPerCount: typeof IFSelect_DispPerCount;
   IFSelect_DispPerFiles: typeof IFSelect_DispPerFiles;
@@ -1222,6 +2934,8 @@ export interface opencascade {
   IFSelect_GeneralModifier: typeof IFSelect_GeneralModifier;
   IFSelect_GraphCounter: typeof IFSelect_GraphCounter;
   IFSelect_ListEditor: typeof IFSelect_ListEditor;
+  IFSelect_ListEditor_1: typeof IFSelect_ListEditor_1;
+  IFSelect_ListEditor_2: typeof IFSelect_ListEditor_2;
   IFSelect_ModelCopier: typeof IFSelect_ModelCopier;
   IFSelect_ModifEditForm: typeof IFSelect_ModifEditForm;
   IFSelect_ModifReorder: typeof IFSelect_ModifReorder;
@@ -1253,22 +2967,37 @@ export interface opencascade {
   IFSelect_SelectShared: typeof IFSelect_SelectShared;
   IFSelect_SelectSharing: typeof IFSelect_SelectSharing;
   IFSelect_SelectSignature: typeof IFSelect_SelectSignature;
+  IFSelect_SelectSignature_1: typeof IFSelect_SelectSignature_1;
+  IFSelect_SelectSignature_2: typeof IFSelect_SelectSignature_2;
+  IFSelect_SelectSignature_3: typeof IFSelect_SelectSignature_3;
   IFSelect_SelectSignedShared: typeof IFSelect_SelectSignedShared;
   IFSelect_SelectSignedSharing: typeof IFSelect_SelectSignedSharing;
   IFSelect_SelectSuite: typeof IFSelect_SelectSuite;
   IFSelect_SelectType: typeof IFSelect_SelectType;
+  IFSelect_SelectType_1: typeof IFSelect_SelectType_1;
+  IFSelect_SelectType_2: typeof IFSelect_SelectType_2;
   IFSelect_SelectUnion: typeof IFSelect_SelectUnion;
   IFSelect_SelectUnknownEntities: typeof IFSelect_SelectUnknownEntities;
   IFSelect_Selection: typeof IFSelect_Selection;
   IFSelect_SelectionIterator: typeof IFSelect_SelectionIterator;
+  IFSelect_SelectionIterator_1: typeof IFSelect_SelectionIterator_1;
+  IFSelect_SelectionIterator_2: typeof IFSelect_SelectionIterator_2;
   IFSelect_SessionDumper: typeof IFSelect_SessionDumper;
   IFSelect_SessionFile: typeof IFSelect_SessionFile;
+  IFSelect_SessionFile_1: typeof IFSelect_SessionFile_1;
+  IFSelect_SessionFile_2: typeof IFSelect_SessionFile_2;
   IFSelect_SessionPilot: typeof IFSelect_SessionPilot;
   IFSelect_ShareOut: typeof IFSelect_ShareOut;
   IFSelect_ShareOutResult: typeof IFSelect_ShareOutResult;
+  IFSelect_ShareOutResult_1: typeof IFSelect_ShareOutResult_1;
+  IFSelect_ShareOutResult_2: typeof IFSelect_ShareOutResult_2;
+  IFSelect_ShareOutResult_3: typeof IFSelect_ShareOutResult_3;
+  IFSelect_ShareOutResult_4: typeof IFSelect_ShareOutResult_4;
   IFSelect_SignAncestor: typeof IFSelect_SignAncestor;
   IFSelect_SignCategory: typeof IFSelect_SignCategory;
   IFSelect_SignCounter: typeof IFSelect_SignCounter;
+  IFSelect_SignCounter_1: typeof IFSelect_SignCounter_1;
+  IFSelect_SignCounter_2: typeof IFSelect_SignCounter_2;
   IFSelect_SignMultiple: typeof IFSelect_SignMultiple;
   IFSelect_SignType: typeof IFSelect_SignType;
   IFSelect_SignValidity: typeof IFSelect_SignValidity;
@@ -1282,9 +3011,16 @@ export interface opencascade {
   IGESControl_AlgoContainer: typeof IGESControl_AlgoContainer;
   IGESControl_Controller: typeof IGESControl_Controller;
   IGESControl_IGESBoundary: typeof IGESControl_IGESBoundary;
+  IGESControl_IGESBoundary_1: typeof IGESControl_IGESBoundary_1;
+  IGESControl_IGESBoundary_2: typeof IGESControl_IGESBoundary_2;
   IGESControl_Reader: typeof IGESControl_Reader;
+  IGESControl_Reader_1: typeof IGESControl_Reader_1;
+  IGESControl_Reader_2: typeof IGESControl_Reader_2;
   IGESControl_ToolContainer: typeof IGESControl_ToolContainer;
   IGESControl_Writer: typeof IGESControl_Writer;
+  IGESControl_Writer_1: typeof IGESControl_Writer_1;
+  IGESControl_Writer_2: typeof IGESControl_Writer_2;
+  IGESControl_Writer_3: typeof IGESControl_Writer_3;
   IMeshData_Curve: typeof IMeshData_Curve;
   IMeshData_Model: typeof IMeshData_Model;
   IMeshData_PCurve: typeof IMeshData_PCurve;
@@ -1297,6 +3033,8 @@ export interface opencascade {
   IMeshTools_MeshAlgo: typeof IMeshTools_MeshAlgo;
   IMeshTools_MeshAlgoFactory: typeof IMeshTools_MeshAlgoFactory;
   IMeshTools_MeshBuilder: typeof IMeshTools_MeshBuilder;
+  IMeshTools_MeshBuilder_1: typeof IMeshTools_MeshBuilder_1;
+  IMeshTools_MeshBuilder_2: typeof IMeshTools_MeshBuilder_2;
   IMeshTools_ModelAlgo: typeof IMeshTools_ModelAlgo;
   IMeshTools_ModelBuilder: typeof IMeshTools_ModelBuilder;
   IMeshTools_ShapeExplorer: typeof IMeshTools_ShapeExplorer;
@@ -1306,56 +3044,194 @@ export interface opencascade {
   Image_PixMap: typeof Image_PixMap;
   Image_PixMapData: typeof Image_PixMapData;
   Image_Texture: typeof Image_Texture;
+  Image_Texture_1: typeof Image_Texture_1;
+  Image_Texture_2: typeof Image_Texture_2;
+  Image_Texture_3: typeof Image_Texture_3;
   IntAna2d_AnaIntersection: typeof IntAna2d_AnaIntersection;
+  IntAna2d_AnaIntersection_1: typeof IntAna2d_AnaIntersection_1;
+  IntAna2d_AnaIntersection_2: typeof IntAna2d_AnaIntersection_2;
+  IntAna2d_AnaIntersection_3: typeof IntAna2d_AnaIntersection_3;
+  IntAna2d_AnaIntersection_4: typeof IntAna2d_AnaIntersection_4;
+  IntAna2d_AnaIntersection_5: typeof IntAna2d_AnaIntersection_5;
+  IntAna2d_AnaIntersection_6: typeof IntAna2d_AnaIntersection_6;
+  IntAna2d_AnaIntersection_7: typeof IntAna2d_AnaIntersection_7;
+  IntAna2d_AnaIntersection_8: typeof IntAna2d_AnaIntersection_8;
+  IntAna2d_AnaIntersection_9: typeof IntAna2d_AnaIntersection_9;
   IntAna2d_Conic: typeof IntAna2d_Conic;
+  IntAna2d_Conic_1: typeof IntAna2d_Conic_1;
+  IntAna2d_Conic_2: typeof IntAna2d_Conic_2;
+  IntAna2d_Conic_3: typeof IntAna2d_Conic_3;
+  IntAna2d_Conic_4: typeof IntAna2d_Conic_4;
+  IntAna2d_Conic_5: typeof IntAna2d_Conic_5;
   IntAna2d_IntPoint: typeof IntAna2d_IntPoint;
+  IntAna2d_IntPoint_1: typeof IntAna2d_IntPoint_1;
+  IntAna2d_IntPoint_2: typeof IntAna2d_IntPoint_2;
+  IntAna2d_IntPoint_3: typeof IntAna2d_IntPoint_3;
   IntAna_Curve: typeof IntAna_Curve;
   IntAna_Int3Pln: typeof IntAna_Int3Pln;
+  IntAna_Int3Pln_1: typeof IntAna_Int3Pln_1;
+  IntAna_Int3Pln_2: typeof IntAna_Int3Pln_2;
   IntAna_IntConicQuad: typeof IntAna_IntConicQuad;
+  IntAna_IntConicQuad_1: typeof IntAna_IntConicQuad_1;
+  IntAna_IntConicQuad_2: typeof IntAna_IntConicQuad_2;
+  IntAna_IntConicQuad_3: typeof IntAna_IntConicQuad_3;
+  IntAna_IntConicQuad_4: typeof IntAna_IntConicQuad_4;
+  IntAna_IntConicQuad_5: typeof IntAna_IntConicQuad_5;
+  IntAna_IntConicQuad_6: typeof IntAna_IntConicQuad_6;
+  IntAna_IntConicQuad_7: typeof IntAna_IntConicQuad_7;
+  IntAna_IntConicQuad_8: typeof IntAna_IntConicQuad_8;
+  IntAna_IntConicQuad_9: typeof IntAna_IntConicQuad_9;
+  IntAna_IntConicQuad_10: typeof IntAna_IntConicQuad_10;
+  IntAna_IntConicQuad_11: typeof IntAna_IntConicQuad_11;
   IntAna_IntLinTorus: typeof IntAna_IntLinTorus;
+  IntAna_IntLinTorus_1: typeof IntAna_IntLinTorus_1;
+  IntAna_IntLinTorus_2: typeof IntAna_IntLinTorus_2;
   IntAna_IntQuadQuad: typeof IntAna_IntQuadQuad;
+  IntAna_IntQuadQuad_1: typeof IntAna_IntQuadQuad_1;
+  IntAna_IntQuadQuad_2: typeof IntAna_IntQuadQuad_2;
+  IntAna_IntQuadQuad_3: typeof IntAna_IntQuadQuad_3;
   IntAna_QuadQuadGeo: typeof IntAna_QuadQuadGeo;
+  IntAna_QuadQuadGeo_1: typeof IntAna_QuadQuadGeo_1;
+  IntAna_QuadQuadGeo_2: typeof IntAna_QuadQuadGeo_2;
+  IntAna_QuadQuadGeo_3: typeof IntAna_QuadQuadGeo_3;
+  IntAna_QuadQuadGeo_4: typeof IntAna_QuadQuadGeo_4;
+  IntAna_QuadQuadGeo_5: typeof IntAna_QuadQuadGeo_5;
+  IntAna_QuadQuadGeo_6: typeof IntAna_QuadQuadGeo_6;
+  IntAna_QuadQuadGeo_7: typeof IntAna_QuadQuadGeo_7;
+  IntAna_QuadQuadGeo_8: typeof IntAna_QuadQuadGeo_8;
+  IntAna_QuadQuadGeo_9: typeof IntAna_QuadQuadGeo_9;
+  IntAna_QuadQuadGeo_10: typeof IntAna_QuadQuadGeo_10;
+  IntAna_QuadQuadGeo_11: typeof IntAna_QuadQuadGeo_11;
+  IntAna_QuadQuadGeo_12: typeof IntAna_QuadQuadGeo_12;
+  IntAna_QuadQuadGeo_13: typeof IntAna_QuadQuadGeo_13;
+  IntAna_QuadQuadGeo_14: typeof IntAna_QuadQuadGeo_14;
+  IntAna_QuadQuadGeo_15: typeof IntAna_QuadQuadGeo_15;
+  IntAna_QuadQuadGeo_16: typeof IntAna_QuadQuadGeo_16;
   IntAna_Quadric: typeof IntAna_Quadric;
+  IntAna_Quadric_1: typeof IntAna_Quadric_1;
+  IntAna_Quadric_2: typeof IntAna_Quadric_2;
+  IntAna_Quadric_3: typeof IntAna_Quadric_3;
+  IntAna_Quadric_4: typeof IntAna_Quadric_4;
+  IntAna_Quadric_5: typeof IntAna_Quadric_5;
   IntCurveSurface_HInter: typeof IntCurveSurface_HInter;
   IntCurveSurface_Intersection: typeof IntCurveSurface_Intersection;
   IntCurveSurface_IntersectionPoint: typeof IntCurveSurface_IntersectionPoint;
+  IntCurveSurface_IntersectionPoint_1: typeof IntCurveSurface_IntersectionPoint_1;
+  IntCurveSurface_IntersectionPoint_2: typeof IntCurveSurface_IntersectionPoint_2;
   IntCurveSurface_IntersectionSegment: typeof IntCurveSurface_IntersectionSegment;
+  IntCurveSurface_IntersectionSegment_1: typeof IntCurveSurface_IntersectionSegment_1;
+  IntCurveSurface_IntersectionSegment_2: typeof IntCurveSurface_IntersectionSegment_2;
   IntCurveSurface_TheCSFunctionOfHInter: typeof IntCurveSurface_TheCSFunctionOfHInter;
   IntCurveSurface_TheExactHInter: typeof IntCurveSurface_TheExactHInter;
+  IntCurveSurface_TheExactHInter_1: typeof IntCurveSurface_TheExactHInter_1;
+  IntCurveSurface_TheExactHInter_2: typeof IntCurveSurface_TheExactHInter_2;
   IntCurveSurface_TheHCurveTool: typeof IntCurveSurface_TheHCurveTool;
   IntCurveSurface_TheInterferenceOfHInter: typeof IntCurveSurface_TheInterferenceOfHInter;
+  IntCurveSurface_TheInterferenceOfHInter_1: typeof IntCurveSurface_TheInterferenceOfHInter_1;
+  IntCurveSurface_TheInterferenceOfHInter_2: typeof IntCurveSurface_TheInterferenceOfHInter_2;
+  IntCurveSurface_TheInterferenceOfHInter_3: typeof IntCurveSurface_TheInterferenceOfHInter_3;
+  IntCurveSurface_TheInterferenceOfHInter_4: typeof IntCurveSurface_TheInterferenceOfHInter_4;
+  IntCurveSurface_TheInterferenceOfHInter_5: typeof IntCurveSurface_TheInterferenceOfHInter_5;
+  IntCurveSurface_TheInterferenceOfHInter_6: typeof IntCurveSurface_TheInterferenceOfHInter_6;
+  IntCurveSurface_TheInterferenceOfHInter_7: typeof IntCurveSurface_TheInterferenceOfHInter_7;
   IntCurveSurface_ThePolygonOfHInter: typeof IntCurveSurface_ThePolygonOfHInter;
+  IntCurveSurface_ThePolygonOfHInter_1: typeof IntCurveSurface_ThePolygonOfHInter_1;
+  IntCurveSurface_ThePolygonOfHInter_2: typeof IntCurveSurface_ThePolygonOfHInter_2;
+  IntCurveSurface_ThePolygonOfHInter_3: typeof IntCurveSurface_ThePolygonOfHInter_3;
   IntCurveSurface_ThePolygonToolOfHInter: typeof IntCurveSurface_ThePolygonToolOfHInter;
   IntCurveSurface_ThePolyhedronToolOfHInter: typeof IntCurveSurface_ThePolyhedronToolOfHInter;
   IntCurveSurface_TheQuadCurvExactHInter: typeof IntCurveSurface_TheQuadCurvExactHInter;
   IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter: typeof IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter;
   IntCurve_IConicTool: typeof IntCurve_IConicTool;
+  IntCurve_IConicTool_1: typeof IntCurve_IConicTool_1;
+  IntCurve_IConicTool_2: typeof IntCurve_IConicTool_2;
+  IntCurve_IConicTool_3: typeof IntCurve_IConicTool_3;
+  IntCurve_IConicTool_4: typeof IntCurve_IConicTool_4;
+  IntCurve_IConicTool_5: typeof IntCurve_IConicTool_5;
+  IntCurve_IConicTool_6: typeof IntCurve_IConicTool_6;
+  IntCurve_IConicTool_7: typeof IntCurve_IConicTool_7;
   IntCurve_IntConicConic: typeof IntCurve_IntConicConic;
+  IntCurve_IntConicConic_1: typeof IntCurve_IntConicConic_1;
+  IntCurve_IntConicConic_2: typeof IntCurve_IntConicConic_2;
+  IntCurve_IntConicConic_3: typeof IntCurve_IntConicConic_3;
+  IntCurve_IntConicConic_4: typeof IntCurve_IntConicConic_4;
+  IntCurve_IntConicConic_5: typeof IntCurve_IntConicConic_5;
+  IntCurve_IntConicConic_6: typeof IntCurve_IntConicConic_6;
+  IntCurve_IntConicConic_7: typeof IntCurve_IntConicConic_7;
+  IntCurve_IntConicConic_8: typeof IntCurve_IntConicConic_8;
+  IntCurve_IntConicConic_9: typeof IntCurve_IntConicConic_9;
+  IntCurve_IntConicConic_10: typeof IntCurve_IntConicConic_10;
+  IntCurve_IntConicConic_11: typeof IntCurve_IntConicConic_11;
+  IntCurve_IntConicConic_12: typeof IntCurve_IntConicConic_12;
+  IntCurve_IntConicConic_13: typeof IntCurve_IntConicConic_13;
+  IntCurve_IntConicConic_14: typeof IntCurve_IntConicConic_14;
+  IntCurve_IntConicConic_15: typeof IntCurve_IntConicConic_15;
+  IntCurve_IntConicConic_16: typeof IntCurve_IntConicConic_16;
   IntCurve_IntImpConicParConic: typeof IntCurve_IntImpConicParConic;
+  IntCurve_IntImpConicParConic_1: typeof IntCurve_IntImpConicParConic_1;
+  IntCurve_IntImpConicParConic_2: typeof IntCurve_IntImpConicParConic_2;
   IntCurve_MyImpParToolOfIntImpConicParConic: typeof IntCurve_MyImpParToolOfIntImpConicParConic;
   IntCurve_PConic: typeof IntCurve_PConic;
+  IntCurve_PConic_1: typeof IntCurve_PConic_1;
+  IntCurve_PConic_2: typeof IntCurve_PConic_2;
+  IntCurve_PConic_3: typeof IntCurve_PConic_3;
+  IntCurve_PConic_4: typeof IntCurve_PConic_4;
+  IntCurve_PConic_5: typeof IntCurve_PConic_5;
+  IntCurve_PConic_6: typeof IntCurve_PConic_6;
   IntCurve_PConicTool: typeof IntCurve_PConicTool;
   IntCurve_ProjectOnPConicTool: typeof IntCurve_ProjectOnPConicTool;
   IntCurvesFace_Intersector: typeof IntCurvesFace_Intersector;
   IntCurvesFace_ShapeIntersector: typeof IntCurvesFace_ShapeIntersector;
   IntPatch_ALine: typeof IntPatch_ALine;
+  IntPatch_ALine_1: typeof IntPatch_ALine_1;
+  IntPatch_ALine_2: typeof IntPatch_ALine_2;
+  IntPatch_ALine_3: typeof IntPatch_ALine_3;
   IntPatch_ALineToWLine: typeof IntPatch_ALineToWLine;
   IntPatch_ArcFunction: typeof IntPatch_ArcFunction;
   IntPatch_CSFunction: typeof IntPatch_CSFunction;
   IntPatch_CurvIntSurf: typeof IntPatch_CurvIntSurf;
+  IntPatch_CurvIntSurf_1: typeof IntPatch_CurvIntSurf_1;
+  IntPatch_CurvIntSurf_2: typeof IntPatch_CurvIntSurf_2;
   IntPatch_GLine: typeof IntPatch_GLine;
+  IntPatch_GLine_1: typeof IntPatch_GLine_1;
+  IntPatch_GLine_2: typeof IntPatch_GLine_2;
+  IntPatch_GLine_3: typeof IntPatch_GLine_3;
+  IntPatch_GLine_4: typeof IntPatch_GLine_4;
+  IntPatch_GLine_5: typeof IntPatch_GLine_5;
+  IntPatch_GLine_6: typeof IntPatch_GLine_6;
+  IntPatch_GLine_7: typeof IntPatch_GLine_7;
+  IntPatch_GLine_8: typeof IntPatch_GLine_8;
+  IntPatch_GLine_9: typeof IntPatch_GLine_9;
+  IntPatch_GLine_10: typeof IntPatch_GLine_10;
+  IntPatch_GLine_11: typeof IntPatch_GLine_11;
+  IntPatch_GLine_12: typeof IntPatch_GLine_12;
+  IntPatch_GLine_13: typeof IntPatch_GLine_13;
+  IntPatch_GLine_14: typeof IntPatch_GLine_14;
+  IntPatch_GLine_15: typeof IntPatch_GLine_15;
   IntPatch_HCurve2dTool: typeof IntPatch_HCurve2dTool;
   IntPatch_HInterTool: typeof IntPatch_HInterTool;
   IntPatch_ImpImpIntersection: typeof IntPatch_ImpImpIntersection;
+  IntPatch_ImpImpIntersection_1: typeof IntPatch_ImpImpIntersection_1;
+  IntPatch_ImpImpIntersection_2: typeof IntPatch_ImpImpIntersection_2;
   IntPatch_ImpPrmIntersection: typeof IntPatch_ImpPrmIntersection;
+  IntPatch_ImpPrmIntersection_1: typeof IntPatch_ImpPrmIntersection_1;
+  IntPatch_ImpPrmIntersection_2: typeof IntPatch_ImpPrmIntersection_2;
   IntPatch_InterferencePolyhedron: typeof IntPatch_InterferencePolyhedron;
+  IntPatch_InterferencePolyhedron_1: typeof IntPatch_InterferencePolyhedron_1;
+  IntPatch_InterferencePolyhedron_2: typeof IntPatch_InterferencePolyhedron_2;
+  IntPatch_InterferencePolyhedron_3: typeof IntPatch_InterferencePolyhedron_3;
   IntPatch_Intersection: typeof IntPatch_Intersection;
+  IntPatch_Intersection_1: typeof IntPatch_Intersection_1;
+  IntPatch_Intersection_2: typeof IntPatch_Intersection_2;
+  IntPatch_Intersection_3: typeof IntPatch_Intersection_3;
   IntPatch_Line: typeof IntPatch_Line;
   IntPatch_LineConstructor: typeof IntPatch_LineConstructor;
   IntPatch_Point: typeof IntPatch_Point;
   IntPatch_PointLine: typeof IntPatch_PointLine;
   IntPatch_PolyArc: typeof IntPatch_PolyArc;
   IntPatch_PolyLine: typeof IntPatch_PolyLine;
+  IntPatch_PolyLine_1: typeof IntPatch_PolyLine_1;
+  IntPatch_PolyLine_2: typeof IntPatch_PolyLine_2;
   IntPatch_Polygo: typeof IntPatch_Polygo;
   IntPatch_PolyhedronTool: typeof IntPatch_PolyhedronTool;
   IntPatch_PrmPrmIntersection: typeof IntPatch_PrmPrmIntersection;
@@ -1365,93 +3241,236 @@ export interface opencascade {
   IntPatch_TheIWLineOfTheIWalking: typeof IntPatch_TheIWLineOfTheIWalking;
   IntPatch_TheIWalking: typeof IntPatch_TheIWalking;
   IntPatch_ThePathPointOfTheSOnBounds: typeof IntPatch_ThePathPointOfTheSOnBounds;
+  IntPatch_ThePathPointOfTheSOnBounds_1: typeof IntPatch_ThePathPointOfTheSOnBounds_1;
+  IntPatch_ThePathPointOfTheSOnBounds_2: typeof IntPatch_ThePathPointOfTheSOnBounds_2;
+  IntPatch_ThePathPointOfTheSOnBounds_3: typeof IntPatch_ThePathPointOfTheSOnBounds_3;
   IntPatch_TheSOnBounds: typeof IntPatch_TheSOnBounds;
   IntPatch_TheSearchInside: typeof IntPatch_TheSearchInside;
+  IntPatch_TheSearchInside_1: typeof IntPatch_TheSearchInside_1;
+  IntPatch_TheSearchInside_2: typeof IntPatch_TheSearchInside_2;
   IntPatch_TheSegmentOfTheSOnBounds: typeof IntPatch_TheSegmentOfTheSOnBounds;
   IntPatch_TheSurfFunction: typeof IntPatch_TheSurfFunction;
+  IntPatch_TheSurfFunction_1: typeof IntPatch_TheSurfFunction_1;
+  IntPatch_TheSurfFunction_2: typeof IntPatch_TheSurfFunction_2;
+  IntPatch_TheSurfFunction_3: typeof IntPatch_TheSurfFunction_3;
   IntPatch_WLine: typeof IntPatch_WLine;
+  IntPatch_WLine_1: typeof IntPatch_WLine_1;
+  IntPatch_WLine_2: typeof IntPatch_WLine_2;
+  IntPatch_WLine_3: typeof IntPatch_WLine_3;
   IntPatch_WLineTool: typeof IntPatch_WLineTool;
   IntPolyh_Couple: typeof IntPolyh_Couple;
+  IntPolyh_Couple_1: typeof IntPolyh_Couple_1;
+  IntPolyh_Couple_2: typeof IntPolyh_Couple_2;
   IntPolyh_CoupleMapHasher: typeof IntPolyh_CoupleMapHasher;
   IntPolyh_Edge: typeof IntPolyh_Edge;
+  IntPolyh_Edge_1: typeof IntPolyh_Edge_1;
+  IntPolyh_Edge_2: typeof IntPolyh_Edge_2;
   IntPolyh_Intersection: typeof IntPolyh_Intersection;
+  IntPolyh_Intersection_1: typeof IntPolyh_Intersection_1;
+  IntPolyh_Intersection_2: typeof IntPolyh_Intersection_2;
+  IntPolyh_Intersection_3: typeof IntPolyh_Intersection_3;
   IntPolyh_Point: typeof IntPolyh_Point;
+  IntPolyh_Point_1: typeof IntPolyh_Point_1;
+  IntPolyh_Point_2: typeof IntPolyh_Point_2;
   IntPolyh_SectionLine: typeof IntPolyh_SectionLine;
+  IntPolyh_SectionLine_1: typeof IntPolyh_SectionLine_1;
+  IntPolyh_SectionLine_2: typeof IntPolyh_SectionLine_2;
   IntPolyh_StartPoint: typeof IntPolyh_StartPoint;
+  IntPolyh_StartPoint_1: typeof IntPolyh_StartPoint_1;
+  IntPolyh_StartPoint_2: typeof IntPolyh_StartPoint_2;
   IntPolyh_Tools: typeof IntPolyh_Tools;
   IntPolyh_Triangle: typeof IntPolyh_Triangle;
+  IntPolyh_Triangle_1: typeof IntPolyh_Triangle_1;
+  IntPolyh_Triangle_2: typeof IntPolyh_Triangle_2;
   IntRes2d_Domain: typeof IntRes2d_Domain;
+  IntRes2d_Domain_1: typeof IntRes2d_Domain_1;
+  IntRes2d_Domain_2: typeof IntRes2d_Domain_2;
+  IntRes2d_Domain_3: typeof IntRes2d_Domain_3;
   IntRes2d_Intersection: typeof IntRes2d_Intersection;
   IntRes2d_IntersectionPoint: typeof IntRes2d_IntersectionPoint;
+  IntRes2d_IntersectionPoint_1: typeof IntRes2d_IntersectionPoint_1;
+  IntRes2d_IntersectionPoint_2: typeof IntRes2d_IntersectionPoint_2;
   IntRes2d_IntersectionSegment: typeof IntRes2d_IntersectionSegment;
+  IntRes2d_IntersectionSegment_1: typeof IntRes2d_IntersectionSegment_1;
+  IntRes2d_IntersectionSegment_2: typeof IntRes2d_IntersectionSegment_2;
+  IntRes2d_IntersectionSegment_3: typeof IntRes2d_IntersectionSegment_3;
+  IntRes2d_IntersectionSegment_4: typeof IntRes2d_IntersectionSegment_4;
   IntRes2d_Transition: typeof IntRes2d_Transition;
+  IntRes2d_Transition_1: typeof IntRes2d_Transition_1;
+  IntRes2d_Transition_2: typeof IntRes2d_Transition_2;
+  IntRes2d_Transition_3: typeof IntRes2d_Transition_3;
+  IntRes2d_Transition_4: typeof IntRes2d_Transition_4;
   IntStart_SITopolTool: typeof IntStart_SITopolTool;
   IntSurf: typeof IntSurf;
   IntSurf_Couple: typeof IntSurf_Couple;
+  IntSurf_Couple_1: typeof IntSurf_Couple_1;
+  IntSurf_Couple_2: typeof IntSurf_Couple_2;
   IntSurf_InteriorPoint: typeof IntSurf_InteriorPoint;
+  IntSurf_InteriorPoint_1: typeof IntSurf_InteriorPoint_1;
+  IntSurf_InteriorPoint_2: typeof IntSurf_InteriorPoint_2;
   IntSurf_InteriorPointTool: typeof IntSurf_InteriorPointTool;
   IntSurf_LineOn2S: typeof IntSurf_LineOn2S;
   IntSurf_PathPoint: typeof IntSurf_PathPoint;
+  IntSurf_PathPoint_1: typeof IntSurf_PathPoint_1;
+  IntSurf_PathPoint_2: typeof IntSurf_PathPoint_2;
   IntSurf_PathPointTool: typeof IntSurf_PathPointTool;
   IntSurf_PntOn2S: typeof IntSurf_PntOn2S;
   IntSurf_Quadric: typeof IntSurf_Quadric;
+  IntSurf_Quadric_1: typeof IntSurf_Quadric_1;
+  IntSurf_Quadric_2: typeof IntSurf_Quadric_2;
+  IntSurf_Quadric_3: typeof IntSurf_Quadric_3;
+  IntSurf_Quadric_4: typeof IntSurf_Quadric_4;
+  IntSurf_Quadric_5: typeof IntSurf_Quadric_5;
+  IntSurf_Quadric_6: typeof IntSurf_Quadric_6;
   IntSurf_QuadricTool: typeof IntSurf_QuadricTool;
   IntSurf_Transition: typeof IntSurf_Transition;
+  IntSurf_Transition_1: typeof IntSurf_Transition_1;
+  IntSurf_Transition_2: typeof IntSurf_Transition_2;
+  IntSurf_Transition_3: typeof IntSurf_Transition_3;
   IntTools: typeof IntTools;
   IntTools_BaseRangeSample: typeof IntTools_BaseRangeSample;
+  IntTools_BaseRangeSample_1: typeof IntTools_BaseRangeSample_1;
+  IntTools_BaseRangeSample_2: typeof IntTools_BaseRangeSample_2;
   IntTools_BeanFaceIntersector: typeof IntTools_BeanFaceIntersector;
+  IntTools_BeanFaceIntersector_1: typeof IntTools_BeanFaceIntersector_1;
+  IntTools_BeanFaceIntersector_2: typeof IntTools_BeanFaceIntersector_2;
+  IntTools_BeanFaceIntersector_3: typeof IntTools_BeanFaceIntersector_3;
+  IntTools_BeanFaceIntersector_4: typeof IntTools_BeanFaceIntersector_4;
   IntTools_CArray1OfInteger: typeof IntTools_CArray1OfInteger;
+  IntTools_CArray1OfInteger_1: typeof IntTools_CArray1OfInteger_1;
+  IntTools_CArray1OfInteger_2: typeof IntTools_CArray1OfInteger_2;
   IntTools_CArray1OfReal: typeof IntTools_CArray1OfReal;
+  IntTools_CArray1OfReal_1: typeof IntTools_CArray1OfReal_1;
+  IntTools_CArray1OfReal_2: typeof IntTools_CArray1OfReal_2;
   IntTools_CommonPrt: typeof IntTools_CommonPrt;
+  IntTools_CommonPrt_1: typeof IntTools_CommonPrt_1;
+  IntTools_CommonPrt_2: typeof IntTools_CommonPrt_2;
   IntTools_Curve: typeof IntTools_Curve;
+  IntTools_Curve_1: typeof IntTools_Curve_1;
+  IntTools_Curve_2: typeof IntTools_Curve_2;
   IntTools_CurveRangeLocalizeData: typeof IntTools_CurveRangeLocalizeData;
   IntTools_CurveRangeSample: typeof IntTools_CurveRangeSample;
+  IntTools_CurveRangeSample_1: typeof IntTools_CurveRangeSample_1;
+  IntTools_CurveRangeSample_2: typeof IntTools_CurveRangeSample_2;
   IntTools_CurveRangeSampleMapHasher: typeof IntTools_CurveRangeSampleMapHasher;
   IntTools_EdgeEdge: typeof IntTools_EdgeEdge;
+  IntTools_EdgeEdge_1: typeof IntTools_EdgeEdge_1;
+  IntTools_EdgeEdge_2: typeof IntTools_EdgeEdge_2;
+  IntTools_EdgeEdge_3: typeof IntTools_EdgeEdge_3;
   IntTools_EdgeFace: typeof IntTools_EdgeFace;
   IntTools_FClass2d: typeof IntTools_FClass2d;
+  IntTools_FClass2d_1: typeof IntTools_FClass2d_1;
+  IntTools_FClass2d_2: typeof IntTools_FClass2d_2;
   IntTools_FaceFace: typeof IntTools_FaceFace;
   IntTools_MarkedRangeSet: typeof IntTools_MarkedRangeSet;
+  IntTools_MarkedRangeSet_1: typeof IntTools_MarkedRangeSet_1;
+  IntTools_MarkedRangeSet_2: typeof IntTools_MarkedRangeSet_2;
+  IntTools_MarkedRangeSet_3: typeof IntTools_MarkedRangeSet_3;
   IntTools_PntOn2Faces: typeof IntTools_PntOn2Faces;
+  IntTools_PntOn2Faces_1: typeof IntTools_PntOn2Faces_1;
+  IntTools_PntOn2Faces_2: typeof IntTools_PntOn2Faces_2;
   IntTools_Range: typeof IntTools_Range;
+  IntTools_Range_1: typeof IntTools_Range_1;
+  IntTools_Range_2: typeof IntTools_Range_2;
   IntTools_Root: typeof IntTools_Root;
+  IntTools_Root_1: typeof IntTools_Root_1;
+  IntTools_Root_2: typeof IntTools_Root_2;
   IntTools_ShrunkRange: typeof IntTools_ShrunkRange;
   IntTools_SurfaceRangeLocalizeData: typeof IntTools_SurfaceRangeLocalizeData;
+  IntTools_SurfaceRangeLocalizeData_1: typeof IntTools_SurfaceRangeLocalizeData_1;
+  IntTools_SurfaceRangeLocalizeData_2: typeof IntTools_SurfaceRangeLocalizeData_2;
+  IntTools_SurfaceRangeLocalizeData_3: typeof IntTools_SurfaceRangeLocalizeData_3;
   IntTools_SurfaceRangeSample: typeof IntTools_SurfaceRangeSample;
+  IntTools_SurfaceRangeSample_1: typeof IntTools_SurfaceRangeSample_1;
+  IntTools_SurfaceRangeSample_2: typeof IntTools_SurfaceRangeSample_2;
+  IntTools_SurfaceRangeSample_3: typeof IntTools_SurfaceRangeSample_3;
+  IntTools_SurfaceRangeSample_4: typeof IntTools_SurfaceRangeSample_4;
   IntTools_SurfaceRangeSampleMapHasher: typeof IntTools_SurfaceRangeSampleMapHasher;
   IntTools_Tools: typeof IntTools_Tools;
   IntTools_TopolTool: typeof IntTools_TopolTool;
+  IntTools_TopolTool_1: typeof IntTools_TopolTool_1;
+  IntTools_TopolTool_2: typeof IntTools_TopolTool_2;
   IntTools_WLineTool: typeof IntTools_WLineTool;
   IntWalk_PWalking: typeof IntWalk_PWalking;
+  IntWalk_PWalking_1: typeof IntWalk_PWalking_1;
+  IntWalk_PWalking_2: typeof IntWalk_PWalking_2;
   IntWalk_TheFunctionOfTheInt2S: typeof IntWalk_TheFunctionOfTheInt2S;
   IntWalk_TheInt2S: typeof IntWalk_TheInt2S;
+  IntWalk_TheInt2S_1: typeof IntWalk_TheInt2S_1;
+  IntWalk_TheInt2S_2: typeof IntWalk_TheInt2S_2;
   Interface_BitMap: typeof Interface_BitMap;
+  Interface_BitMap_1: typeof Interface_BitMap_1;
+  Interface_BitMap_2: typeof Interface_BitMap_2;
+  Interface_BitMap_3: typeof Interface_BitMap_3;
   Interface_Category: typeof Interface_Category;
+  Interface_Category_1: typeof Interface_Category_1;
+  Interface_Category_2: typeof Interface_Category_2;
+  Interface_Category_3: typeof Interface_Category_3;
   Interface_Check: typeof Interface_Check;
+  Interface_Check_1: typeof Interface_Check_1;
+  Interface_Check_2: typeof Interface_Check_2;
   Interface_CheckFailure: typeof Interface_CheckFailure;
+  Interface_CheckFailure_1: typeof Interface_CheckFailure_1;
+  Interface_CheckFailure_2: typeof Interface_CheckFailure_2;
   Interface_CheckIterator: typeof Interface_CheckIterator;
+  Interface_CheckIterator_1: typeof Interface_CheckIterator_1;
+  Interface_CheckIterator_2: typeof Interface_CheckIterator_2;
   Interface_CheckTool: typeof Interface_CheckTool;
+  Interface_CheckTool_1: typeof Interface_CheckTool_1;
+  Interface_CheckTool_2: typeof Interface_CheckTool_2;
+  Interface_CheckTool_3: typeof Interface_CheckTool_3;
+  Interface_CheckTool_4: typeof Interface_CheckTool_4;
   Interface_CopyControl: typeof Interface_CopyControl;
   Interface_CopyMap: typeof Interface_CopyMap;
   Interface_CopyTool: typeof Interface_CopyTool;
+  Interface_CopyTool_1: typeof Interface_CopyTool_1;
+  Interface_CopyTool_2: typeof Interface_CopyTool_2;
+  Interface_CopyTool_3: typeof Interface_CopyTool_3;
   Interface_EntityCluster: typeof Interface_EntityCluster;
+  Interface_EntityCluster_1: typeof Interface_EntityCluster_1;
+  Interface_EntityCluster_2: typeof Interface_EntityCluster_2;
+  Interface_EntityCluster_3: typeof Interface_EntityCluster_3;
+  Interface_EntityCluster_4: typeof Interface_EntityCluster_4;
   Interface_EntityIterator: typeof Interface_EntityIterator;
+  Interface_EntityIterator_1: typeof Interface_EntityIterator_1;
+  Interface_EntityIterator_2: typeof Interface_EntityIterator_2;
   Interface_EntityList: typeof Interface_EntityList;
   Interface_FileParameter: typeof Interface_FileParameter;
   Interface_FileReaderTool: typeof Interface_FileReaderTool;
   Interface_FloatWriter: typeof Interface_FloatWriter;
   Interface_GTool: typeof Interface_GTool;
+  Interface_GTool_1: typeof Interface_GTool_1;
+  Interface_GTool_2: typeof Interface_GTool_2;
   Interface_GeneralLib: typeof Interface_GeneralLib;
+  Interface_GeneralLib_1: typeof Interface_GeneralLib_1;
+  Interface_GeneralLib_2: typeof Interface_GeneralLib_2;
   Interface_GlobalNodeOfGeneralLib: typeof Interface_GlobalNodeOfGeneralLib;
   Interface_GlobalNodeOfReaderLib: typeof Interface_GlobalNodeOfReaderLib;
   Interface_GraphContent: typeof Interface_GraphContent;
+  Interface_GraphContent_1: typeof Interface_GraphContent_1;
+  Interface_GraphContent_2: typeof Interface_GraphContent_2;
+  Interface_GraphContent_3: typeof Interface_GraphContent_3;
+  Interface_GraphContent_4: typeof Interface_GraphContent_4;
   Interface_IntList: typeof Interface_IntList;
+  Interface_IntList_1: typeof Interface_IntList_1;
+  Interface_IntList_2: typeof Interface_IntList_2;
+  Interface_IntList_3: typeof Interface_IntList_3;
   Interface_IntVal: typeof Interface_IntVal;
   Interface_InterfaceError: typeof Interface_InterfaceError;
+  Interface_InterfaceError_1: typeof Interface_InterfaceError_1;
+  Interface_InterfaceError_2: typeof Interface_InterfaceError_2;
   Interface_InterfaceMismatch: typeof Interface_InterfaceMismatch;
+  Interface_InterfaceMismatch_1: typeof Interface_InterfaceMismatch_1;
+  Interface_InterfaceMismatch_2: typeof Interface_InterfaceMismatch_2;
   Interface_InterfaceModel: typeof Interface_InterfaceModel;
   Interface_LineBuffer: typeof Interface_LineBuffer;
   Interface_MSG: typeof Interface_MSG;
+  Interface_MSG_1: typeof Interface_MSG_1;
+  Interface_MSG_2: typeof Interface_MSG_2;
+  Interface_MSG_3: typeof Interface_MSG_3;
+  Interface_MSG_4: typeof Interface_MSG_4;
+  Interface_MSG_5: typeof Interface_MSG_5;
+  Interface_MSG_6: typeof Interface_MSG_6;
   Interface_MapAsciiStringHasher: typeof Interface_MapAsciiStringHasher;
   Interface_NodeOfGeneralLib: typeof Interface_NodeOfGeneralLib;
   Interface_NodeOfReaderLib: typeof Interface_NodeOfReaderLib;
@@ -1459,60 +3478,137 @@ export interface opencascade {
   Interface_ParamSet: typeof Interface_ParamSet;
   Interface_Protocol: typeof Interface_Protocol;
   Interface_ReaderLib: typeof Interface_ReaderLib;
+  Interface_ReaderLib_1: typeof Interface_ReaderLib_1;
+  Interface_ReaderLib_2: typeof Interface_ReaderLib_2;
   Interface_ReaderModule: typeof Interface_ReaderModule;
   Interface_ReportEntity: typeof Interface_ReportEntity;
+  Interface_ReportEntity_1: typeof Interface_ReportEntity_1;
+  Interface_ReportEntity_2: typeof Interface_ReportEntity_2;
   Interface_STAT: typeof Interface_STAT;
+  Interface_STAT_1: typeof Interface_STAT_1;
+  Interface_STAT_2: typeof Interface_STAT_2;
   Interface_ShareFlags: typeof Interface_ShareFlags;
+  Interface_ShareFlags_1: typeof Interface_ShareFlags_1;
+  Interface_ShareFlags_2: typeof Interface_ShareFlags_2;
+  Interface_ShareFlags_3: typeof Interface_ShareFlags_3;
+  Interface_ShareFlags_4: typeof Interface_ShareFlags_4;
+  Interface_ShareFlags_5: typeof Interface_ShareFlags_5;
   Interface_ShareTool: typeof Interface_ShareTool;
+  Interface_ShareTool_1: typeof Interface_ShareTool_1;
+  Interface_ShareTool_2: typeof Interface_ShareTool_2;
+  Interface_ShareTool_3: typeof Interface_ShareTool_3;
+  Interface_ShareTool_4: typeof Interface_ShareTool_4;
+  Interface_ShareTool_5: typeof Interface_ShareTool_5;
+  Interface_ShareTool_6: typeof Interface_ShareTool_6;
   Interface_SignLabel: typeof Interface_SignLabel;
   Interface_SignType: typeof Interface_SignType;
   Interface_Static: typeof Interface_Static;
+  Interface_Static_1: typeof Interface_Static_1;
+  Interface_Static_2: typeof Interface_Static_2;
   Interface_TypedValue: typeof Interface_TypedValue;
   Interface_UndefinedContent: typeof Interface_UndefinedContent;
   Interval: typeof Interval;
+  Interval_1: typeof Interval_1;
+  Interval_2: typeof Interval_2;
+  Interval_3: typeof Interval_3;
+  Interval_4: typeof Interval_4;
   Intf: typeof Intf;
   Intf_Interference: typeof Intf_Interference;
   Intf_InterferencePolygon2d: typeof Intf_InterferencePolygon2d;
+  Intf_InterferencePolygon2d_1: typeof Intf_InterferencePolygon2d_1;
+  Intf_InterferencePolygon2d_2: typeof Intf_InterferencePolygon2d_2;
+  Intf_InterferencePolygon2d_3: typeof Intf_InterferencePolygon2d_3;
   Intf_Polygon2d: typeof Intf_Polygon2d;
   Intf_SectionLine: typeof Intf_SectionLine;
+  Intf_SectionLine_1: typeof Intf_SectionLine_1;
+  Intf_SectionLine_2: typeof Intf_SectionLine_2;
   Intf_SectionPoint: typeof Intf_SectionPoint;
+  Intf_SectionPoint_1: typeof Intf_SectionPoint_1;
+  Intf_SectionPoint_2: typeof Intf_SectionPoint_2;
+  Intf_SectionPoint_3: typeof Intf_SectionPoint_3;
   Intf_TangentZone: typeof Intf_TangentZone;
+  Intf_TangentZone_1: typeof Intf_TangentZone_1;
+  Intf_TangentZone_2: typeof Intf_TangentZone_2;
   Intf_Tool: typeof Intf_Tool;
   Intrv_Interval: typeof Intrv_Interval;
+  Intrv_Interval_1: typeof Intrv_Interval_1;
+  Intrv_Interval_2: typeof Intrv_Interval_2;
+  Intrv_Interval_3: typeof Intrv_Interval_3;
   Intrv_Intervals: typeof Intrv_Intervals;
+  Intrv_Intervals_1: typeof Intrv_Intervals_1;
+  Intrv_Intervals_2: typeof Intrv_Intervals_2;
+  Intrv_Intervals_3: typeof Intrv_Intervals_3;
   LDOMBasicString: typeof LDOMBasicString;
+  LDOMBasicString_1: typeof LDOMBasicString_1;
+  LDOMBasicString_2: typeof LDOMBasicString_2;
+  LDOMBasicString_3: typeof LDOMBasicString_3;
+  LDOMBasicString_4: typeof LDOMBasicString_4;
+  LDOMBasicString_5: typeof LDOMBasicString_5;
+  LDOMBasicString_6: typeof LDOMBasicString_6;
   LDOMParser: typeof LDOMParser;
   LDOM_Attr: typeof LDOM_Attr;
+  LDOM_Attr_1: typeof LDOM_Attr_1;
+  LDOM_Attr_2: typeof LDOM_Attr_2;
   LDOM_BasicAttribute: typeof LDOM_BasicAttribute;
   LDOM_BasicElement: typeof LDOM_BasicElement;
   LDOM_BasicNode: typeof LDOM_BasicNode;
   LDOM_BasicText: typeof LDOM_BasicText;
   LDOM_CDATASection: typeof LDOM_CDATASection;
+  LDOM_CDATASection_1: typeof LDOM_CDATASection_1;
+  LDOM_CDATASection_2: typeof LDOM_CDATASection_2;
   LDOM_CharReference: typeof LDOM_CharReference;
   LDOM_CharacterData: typeof LDOM_CharacterData;
+  LDOM_CharacterData_1: typeof LDOM_CharacterData_1;
+  LDOM_CharacterData_2: typeof LDOM_CharacterData_2;
   LDOM_Comment: typeof LDOM_Comment;
+  LDOM_Comment_1: typeof LDOM_Comment_1;
+  LDOM_Comment_2: typeof LDOM_Comment_2;
   LDOM_Document: typeof LDOM_Document;
+  LDOM_Document_1: typeof LDOM_Document_1;
+  LDOM_Document_2: typeof LDOM_Document_2;
   LDOM_DocumentType: typeof LDOM_DocumentType;
   LDOM_Element: typeof LDOM_Element;
+  LDOM_Element_1: typeof LDOM_Element_1;
+  LDOM_Element_2: typeof LDOM_Element_2;
   LDOM_LDOMImplementation: typeof LDOM_LDOMImplementation;
   LDOM_NodeList: typeof LDOM_NodeList;
+  LDOM_NodeList_1: typeof LDOM_NodeList_1;
+  LDOM_NodeList_2: typeof LDOM_NodeList_2;
   LDOM_OSStream: typeof LDOM_OSStream;
   LDOM_Text: typeof LDOM_Text;
+  LDOM_Text_1: typeof LDOM_Text_1;
+  LDOM_Text_2: typeof LDOM_Text_2;
   LDOM_XmlReader: typeof LDOM_XmlReader;
   LDOM_XmlWriter: typeof LDOM_XmlWriter;
   LProp3d_CLProps: typeof LProp3d_CLProps;
+  LProp3d_CLProps_1: typeof LProp3d_CLProps_1;
+  LProp3d_CLProps_2: typeof LProp3d_CLProps_2;
+  LProp3d_CLProps_3: typeof LProp3d_CLProps_3;
   LProp3d_CurveTool: typeof LProp3d_CurveTool;
   LProp3d_SLProps: typeof LProp3d_SLProps;
+  LProp3d_SLProps_1: typeof LProp3d_SLProps_1;
+  LProp3d_SLProps_2: typeof LProp3d_SLProps_2;
+  LProp3d_SLProps_3: typeof LProp3d_SLProps_3;
   LProp3d_SurfaceTool: typeof LProp3d_SurfaceTool;
   LProp_AnalyticCurInf: typeof LProp_AnalyticCurInf;
   LProp_BadContinuity: typeof LProp_BadContinuity;
+  LProp_BadContinuity_1: typeof LProp_BadContinuity_1;
+  LProp_BadContinuity_2: typeof LProp_BadContinuity_2;
   LProp_CurAndInf: typeof LProp_CurAndInf;
   LProp_NotDefined: typeof LProp_NotDefined;
+  LProp_NotDefined_1: typeof LProp_NotDefined_1;
+  LProp_NotDefined_2: typeof LProp_NotDefined_2;
   Law: typeof Law;
   Law_BSpFunc: typeof Law_BSpFunc;
+  Law_BSpFunc_1: typeof Law_BSpFunc_1;
+  Law_BSpFunc_2: typeof Law_BSpFunc_2;
   Law_BSpline: typeof Law_BSpline;
+  Law_BSpline_1: typeof Law_BSpline_1;
+  Law_BSpline_2: typeof Law_BSpline_2;
   Law_BSplineKnotSplitting: typeof Law_BSplineKnotSplitting;
   Law_Composite: typeof Law_Composite;
+  Law_Composite_1: typeof Law_Composite_1;
+  Law_Composite_2: typeof Law_Composite_2;
   Law_Constant: typeof Law_Constant;
   Law_Function: typeof Law_Function;
   Law_Interpol: typeof Law_Interpol;
@@ -1520,30 +3616,70 @@ export interface opencascade {
   Law_S: typeof Law_S;
   LocOpe: typeof LocOpe;
   LocOpe_BuildShape: typeof LocOpe_BuildShape;
+  LocOpe_BuildShape_1: typeof LocOpe_BuildShape_1;
+  LocOpe_BuildShape_2: typeof LocOpe_BuildShape_2;
   LocOpe_BuildWires: typeof LocOpe_BuildWires;
+  LocOpe_BuildWires_1: typeof LocOpe_BuildWires_1;
+  LocOpe_BuildWires_2: typeof LocOpe_BuildWires_2;
   LocOpe_CSIntersector: typeof LocOpe_CSIntersector;
+  LocOpe_CSIntersector_1: typeof LocOpe_CSIntersector_1;
+  LocOpe_CSIntersector_2: typeof LocOpe_CSIntersector_2;
   LocOpe_CurveShapeIntersector: typeof LocOpe_CurveShapeIntersector;
+  LocOpe_CurveShapeIntersector_1: typeof LocOpe_CurveShapeIntersector_1;
+  LocOpe_CurveShapeIntersector_2: typeof LocOpe_CurveShapeIntersector_2;
+  LocOpe_CurveShapeIntersector_3: typeof LocOpe_CurveShapeIntersector_3;
   LocOpe_DPrism: typeof LocOpe_DPrism;
+  LocOpe_DPrism_1: typeof LocOpe_DPrism_1;
+  LocOpe_DPrism_2: typeof LocOpe_DPrism_2;
   LocOpe_FindEdges: typeof LocOpe_FindEdges;
+  LocOpe_FindEdges_1: typeof LocOpe_FindEdges_1;
+  LocOpe_FindEdges_2: typeof LocOpe_FindEdges_2;
   LocOpe_FindEdgesInFace: typeof LocOpe_FindEdgesInFace;
+  LocOpe_FindEdgesInFace_1: typeof LocOpe_FindEdgesInFace_1;
+  LocOpe_FindEdgesInFace_2: typeof LocOpe_FindEdgesInFace_2;
   LocOpe_GeneratedShape: typeof LocOpe_GeneratedShape;
   LocOpe_Generator: typeof LocOpe_Generator;
+  LocOpe_Generator_1: typeof LocOpe_Generator_1;
+  LocOpe_Generator_2: typeof LocOpe_Generator_2;
   LocOpe_GluedShape: typeof LocOpe_GluedShape;
+  LocOpe_GluedShape_1: typeof LocOpe_GluedShape_1;
+  LocOpe_GluedShape_2: typeof LocOpe_GluedShape_2;
   LocOpe_Gluer: typeof LocOpe_Gluer;
+  LocOpe_Gluer_1: typeof LocOpe_Gluer_1;
+  LocOpe_Gluer_2: typeof LocOpe_Gluer_2;
   LocOpe_LinearForm: typeof LocOpe_LinearForm;
+  LocOpe_LinearForm_1: typeof LocOpe_LinearForm_1;
+  LocOpe_LinearForm_2: typeof LocOpe_LinearForm_2;
+  LocOpe_LinearForm_3: typeof LocOpe_LinearForm_3;
   LocOpe_Pipe: typeof LocOpe_Pipe;
   LocOpe_PntFace: typeof LocOpe_PntFace;
+  LocOpe_PntFace_1: typeof LocOpe_PntFace_1;
+  LocOpe_PntFace_2: typeof LocOpe_PntFace_2;
   LocOpe_Prism: typeof LocOpe_Prism;
+  LocOpe_Prism_1: typeof LocOpe_Prism_1;
+  LocOpe_Prism_2: typeof LocOpe_Prism_2;
+  LocOpe_Prism_3: typeof LocOpe_Prism_3;
   LocOpe_SplitDrafts: typeof LocOpe_SplitDrafts;
+  LocOpe_SplitDrafts_1: typeof LocOpe_SplitDrafts_1;
+  LocOpe_SplitDrafts_2: typeof LocOpe_SplitDrafts_2;
   LocOpe_SplitShape: typeof LocOpe_SplitShape;
+  LocOpe_SplitShape_1: typeof LocOpe_SplitShape_1;
+  LocOpe_SplitShape_2: typeof LocOpe_SplitShape_2;
   LocOpe_Spliter: typeof LocOpe_Spliter;
+  LocOpe_Spliter_1: typeof LocOpe_Spliter_1;
+  LocOpe_Spliter_2: typeof LocOpe_Spliter_2;
   LocOpe_WiresOnShape: typeof LocOpe_WiresOnShape;
   LocalAnalysis: typeof LocalAnalysis;
   LocalAnalysis_CurveContinuity: typeof LocalAnalysis_CurveContinuity;
   LocalAnalysis_SurfaceContinuity: typeof LocalAnalysis_SurfaceContinuity;
+  LocalAnalysis_SurfaceContinuity_1: typeof LocalAnalysis_SurfaceContinuity_1;
+  LocalAnalysis_SurfaceContinuity_2: typeof LocalAnalysis_SurfaceContinuity_2;
+  LocalAnalysis_SurfaceContinuity_3: typeof LocalAnalysis_SurfaceContinuity_3;
   MAT2d_BiInt: typeof MAT2d_BiInt;
   MAT2d_Circuit: typeof MAT2d_Circuit;
   MAT2d_Connexion: typeof MAT2d_Connexion;
+  MAT2d_Connexion_1: typeof MAT2d_Connexion_1;
+  MAT2d_Connexion_2: typeof MAT2d_Connexion_2;
   MAT2d_MapBiIntHasher: typeof MAT2d_MapBiIntHasher;
   MAT2d_Mat2d: typeof MAT2d_Mat2d;
   MAT2d_MiniPath: typeof MAT2d_MiniPath;
@@ -1557,8 +3693,14 @@ export interface opencascade {
   MAT_ListOfEdge: typeof MAT_ListOfEdge;
   MAT_Node: typeof MAT_Node;
   MAT_TListNodeOfListOfBisector: typeof MAT_TListNodeOfListOfBisector;
+  MAT_TListNodeOfListOfBisector_1: typeof MAT_TListNodeOfListOfBisector_1;
+  MAT_TListNodeOfListOfBisector_2: typeof MAT_TListNodeOfListOfBisector_2;
   MAT_TListNodeOfListOfEdge: typeof MAT_TListNodeOfListOfEdge;
+  MAT_TListNodeOfListOfEdge_1: typeof MAT_TListNodeOfListOfEdge_1;
+  MAT_TListNodeOfListOfEdge_2: typeof MAT_TListNodeOfListOfEdge_2;
   MAT_Zone: typeof MAT_Zone;
+  MAT_Zone_1: typeof MAT_Zone_1;
+  MAT_Zone_2: typeof MAT_Zone_2;
   MeshVS_Buffer: typeof MeshVS_Buffer;
   MeshVS_CommonSensitiveEntity: typeof MeshVS_CommonSensitiveEntity;
   MeshVS_DataSource: typeof MeshVS_DataSource;
@@ -1577,6 +3719,8 @@ export interface opencascade {
   MeshVS_SensitiveMesh: typeof MeshVS_SensitiveMesh;
   MeshVS_SensitivePolyhedron: typeof MeshVS_SensitivePolyhedron;
   MeshVS_SensitiveQuad: typeof MeshVS_SensitiveQuad;
+  MeshVS_SensitiveQuad_1: typeof MeshVS_SensitiveQuad_1;
+  MeshVS_SensitiveQuad_2: typeof MeshVS_SensitiveQuad_2;
   MeshVS_SensitiveSegment: typeof MeshVS_SensitiveSegment;
   MeshVS_TextPrsBuilder: typeof MeshVS_TextPrsBuilder;
   MeshVS_Tool: typeof MeshVS_Tool;
@@ -1585,16 +3729,31 @@ export interface opencascade {
   Message_Alert: typeof Message_Alert;
   Message_Algorithm: typeof Message_Algorithm;
   Message_ExecStatus: typeof Message_ExecStatus;
+  Message_ExecStatus_1: typeof Message_ExecStatus_1;
+  Message_ExecStatus_2: typeof Message_ExecStatus_2;
   Message_Messenger: typeof Message_Messenger;
+  Message_Messenger_1: typeof Message_Messenger_1;
+  Message_Messenger_2: typeof Message_Messenger_2;
   Message_Msg: typeof Message_Msg;
+  Message_Msg_1: typeof Message_Msg_1;
+  Message_Msg_2: typeof Message_Msg_2;
+  Message_Msg_3: typeof Message_Msg_3;
+  Message_Msg_4: typeof Message_Msg_4;
   Message_MsgFile: typeof Message_MsgFile;
   Message_Printer: typeof Message_Printer;
   Message_PrinterOStream: typeof Message_PrinterOStream;
+  Message_PrinterOStream_1: typeof Message_PrinterOStream_1;
+  Message_PrinterOStream_2: typeof Message_PrinterOStream_2;
+  Message_PrinterSystemLog: typeof Message_PrinterSystemLog;
   Message_ProgressIndicator: typeof Message_ProgressIndicator;
   Message_ProgressScale: typeof Message_ProgressScale;
   Message_ProgressSentry: typeof Message_ProgressSentry;
+  Message_ProgressSentry_1: typeof Message_ProgressSentry_1;
+  Message_ProgressSentry_2: typeof Message_ProgressSentry_2;
   Message_Report: typeof Message_Report;
   MoniTool_AttrList: typeof MoniTool_AttrList;
+  MoniTool_AttrList_1: typeof MoniTool_AttrList_1;
+  MoniTool_AttrList_2: typeof MoniTool_AttrList_2;
   MoniTool_CaseData: typeof MoniTool_CaseData;
   MoniTool_DataInfo: typeof MoniTool_DataInfo;
   MoniTool_ElemHasher: typeof MoniTool_ElemHasher;
@@ -1605,11 +3764,19 @@ export interface opencascade {
   MoniTool_SignShape: typeof MoniTool_SignShape;
   MoniTool_SignText: typeof MoniTool_SignText;
   MoniTool_Stat: typeof MoniTool_Stat;
+  MoniTool_Stat_1: typeof MoniTool_Stat_1;
+  MoniTool_Stat_2: typeof MoniTool_Stat_2;
   MoniTool_Timer: typeof MoniTool_Timer;
   MoniTool_TimerSentry: typeof MoniTool_TimerSentry;
+  MoniTool_TimerSentry_1: typeof MoniTool_TimerSentry_1;
+  MoniTool_TimerSentry_2: typeof MoniTool_TimerSentry_2;
   MoniTool_TransientElem: typeof MoniTool_TransientElem;
   MoniTool_TypedValue: typeof MoniTool_TypedValue;
+  MoniTool_TypedValue_1: typeof MoniTool_TypedValue_1;
+  MoniTool_TypedValue_2: typeof MoniTool_TypedValue_2;
   MyDirectPolynomialRoots: typeof MyDirectPolynomialRoots;
+  MyDirectPolynomialRoots_1: typeof MyDirectPolynomialRoots_1;
+  MyDirectPolynomialRoots_2: typeof MyDirectPolynomialRoots_2;
   NLPlate_HGPPConstraint: typeof NLPlate_HGPPConstraint;
   NLPlate_HPG0Constraint: typeof NLPlate_HPG0Constraint;
   NLPlate_HPG0G1Constraint: typeof NLPlate_HPG0G1Constraint;
@@ -1622,58 +3789,143 @@ export interface opencascade {
   OSD: typeof OSD;
   OSD_Chronometer: typeof OSD_Chronometer;
   OSD_Directory: typeof OSD_Directory;
+  OSD_Directory_1: typeof OSD_Directory_1;
+  OSD_Directory_2: typeof OSD_Directory_2;
   OSD_DirectoryIterator: typeof OSD_DirectoryIterator;
+  OSD_DirectoryIterator_1: typeof OSD_DirectoryIterator_1;
+  OSD_DirectoryIterator_2: typeof OSD_DirectoryIterator_2;
   OSD_Disk: typeof OSD_Disk;
+  OSD_Disk_1: typeof OSD_Disk_1;
+  OSD_Disk_2: typeof OSD_Disk_2;
+  OSD_Disk_3: typeof OSD_Disk_3;
   OSD_Environment: typeof OSD_Environment;
+  OSD_Environment_1: typeof OSD_Environment_1;
+  OSD_Environment_2: typeof OSD_Environment_2;
+  OSD_Environment_3: typeof OSD_Environment_3;
   OSD_Error: typeof OSD_Error;
   OSD_Exception: typeof OSD_Exception;
+  OSD_Exception_1: typeof OSD_Exception_1;
+  OSD_Exception_2: typeof OSD_Exception_2;
   OSD_Exception_ACCESS_VIOLATION: typeof OSD_Exception_ACCESS_VIOLATION;
+  OSD_Exception_ACCESS_VIOLATION_1: typeof OSD_Exception_ACCESS_VIOLATION_1;
+  OSD_Exception_ACCESS_VIOLATION_2: typeof OSD_Exception_ACCESS_VIOLATION_2;
   OSD_Exception_ARRAY_BOUNDS_EXCEEDED: typeof OSD_Exception_ARRAY_BOUNDS_EXCEEDED;
+  OSD_Exception_ARRAY_BOUNDS_EXCEEDED_1: typeof OSD_Exception_ARRAY_BOUNDS_EXCEEDED_1;
+  OSD_Exception_ARRAY_BOUNDS_EXCEEDED_2: typeof OSD_Exception_ARRAY_BOUNDS_EXCEEDED_2;
   OSD_Exception_CTRL_BREAK: typeof OSD_Exception_CTRL_BREAK;
+  OSD_Exception_CTRL_BREAK_1: typeof OSD_Exception_CTRL_BREAK_1;
+  OSD_Exception_CTRL_BREAK_2: typeof OSD_Exception_CTRL_BREAK_2;
   OSD_Exception_FLT_DENORMAL_OPERAND: typeof OSD_Exception_FLT_DENORMAL_OPERAND;
+  OSD_Exception_FLT_DENORMAL_OPERAND_1: typeof OSD_Exception_FLT_DENORMAL_OPERAND_1;
+  OSD_Exception_FLT_DENORMAL_OPERAND_2: typeof OSD_Exception_FLT_DENORMAL_OPERAND_2;
   OSD_Exception_FLT_DIVIDE_BY_ZERO: typeof OSD_Exception_FLT_DIVIDE_BY_ZERO;
+  OSD_Exception_FLT_DIVIDE_BY_ZERO_1: typeof OSD_Exception_FLT_DIVIDE_BY_ZERO_1;
+  OSD_Exception_FLT_DIVIDE_BY_ZERO_2: typeof OSD_Exception_FLT_DIVIDE_BY_ZERO_2;
   OSD_Exception_FLT_INEXACT_RESULT: typeof OSD_Exception_FLT_INEXACT_RESULT;
+  OSD_Exception_FLT_INEXACT_RESULT_1: typeof OSD_Exception_FLT_INEXACT_RESULT_1;
+  OSD_Exception_FLT_INEXACT_RESULT_2: typeof OSD_Exception_FLT_INEXACT_RESULT_2;
   OSD_Exception_FLT_INVALID_OPERATION: typeof OSD_Exception_FLT_INVALID_OPERATION;
+  OSD_Exception_FLT_INVALID_OPERATION_1: typeof OSD_Exception_FLT_INVALID_OPERATION_1;
+  OSD_Exception_FLT_INVALID_OPERATION_2: typeof OSD_Exception_FLT_INVALID_OPERATION_2;
   OSD_Exception_FLT_OVERFLOW: typeof OSD_Exception_FLT_OVERFLOW;
+  OSD_Exception_FLT_OVERFLOW_1: typeof OSD_Exception_FLT_OVERFLOW_1;
+  OSD_Exception_FLT_OVERFLOW_2: typeof OSD_Exception_FLT_OVERFLOW_2;
   OSD_Exception_FLT_STACK_CHECK: typeof OSD_Exception_FLT_STACK_CHECK;
+  OSD_Exception_FLT_STACK_CHECK_1: typeof OSD_Exception_FLT_STACK_CHECK_1;
+  OSD_Exception_FLT_STACK_CHECK_2: typeof OSD_Exception_FLT_STACK_CHECK_2;
   OSD_Exception_FLT_UNDERFLOW: typeof OSD_Exception_FLT_UNDERFLOW;
+  OSD_Exception_FLT_UNDERFLOW_1: typeof OSD_Exception_FLT_UNDERFLOW_1;
+  OSD_Exception_FLT_UNDERFLOW_2: typeof OSD_Exception_FLT_UNDERFLOW_2;
   OSD_Exception_ILLEGAL_INSTRUCTION: typeof OSD_Exception_ILLEGAL_INSTRUCTION;
+  OSD_Exception_ILLEGAL_INSTRUCTION_1: typeof OSD_Exception_ILLEGAL_INSTRUCTION_1;
+  OSD_Exception_ILLEGAL_INSTRUCTION_2: typeof OSD_Exception_ILLEGAL_INSTRUCTION_2;
   OSD_Exception_INT_DIVIDE_BY_ZERO: typeof OSD_Exception_INT_DIVIDE_BY_ZERO;
+  OSD_Exception_INT_DIVIDE_BY_ZERO_1: typeof OSD_Exception_INT_DIVIDE_BY_ZERO_1;
+  OSD_Exception_INT_DIVIDE_BY_ZERO_2: typeof OSD_Exception_INT_DIVIDE_BY_ZERO_2;
   OSD_Exception_INT_OVERFLOW: typeof OSD_Exception_INT_OVERFLOW;
+  OSD_Exception_INT_OVERFLOW_1: typeof OSD_Exception_INT_OVERFLOW_1;
+  OSD_Exception_INT_OVERFLOW_2: typeof OSD_Exception_INT_OVERFLOW_2;
   OSD_Exception_INVALID_DISPOSITION: typeof OSD_Exception_INVALID_DISPOSITION;
+  OSD_Exception_INVALID_DISPOSITION_1: typeof OSD_Exception_INVALID_DISPOSITION_1;
+  OSD_Exception_INVALID_DISPOSITION_2: typeof OSD_Exception_INVALID_DISPOSITION_2;
   OSD_Exception_IN_PAGE_ERROR: typeof OSD_Exception_IN_PAGE_ERROR;
+  OSD_Exception_IN_PAGE_ERROR_1: typeof OSD_Exception_IN_PAGE_ERROR_1;
+  OSD_Exception_IN_PAGE_ERROR_2: typeof OSD_Exception_IN_PAGE_ERROR_2;
   OSD_Exception_NONCONTINUABLE_EXCEPTION: typeof OSD_Exception_NONCONTINUABLE_EXCEPTION;
+  OSD_Exception_NONCONTINUABLE_EXCEPTION_1: typeof OSD_Exception_NONCONTINUABLE_EXCEPTION_1;
+  OSD_Exception_NONCONTINUABLE_EXCEPTION_2: typeof OSD_Exception_NONCONTINUABLE_EXCEPTION_2;
   OSD_Exception_PRIV_INSTRUCTION: typeof OSD_Exception_PRIV_INSTRUCTION;
+  OSD_Exception_PRIV_INSTRUCTION_1: typeof OSD_Exception_PRIV_INSTRUCTION_1;
+  OSD_Exception_PRIV_INSTRUCTION_2: typeof OSD_Exception_PRIV_INSTRUCTION_2;
   OSD_Exception_STACK_OVERFLOW: typeof OSD_Exception_STACK_OVERFLOW;
+  OSD_Exception_STACK_OVERFLOW_1: typeof OSD_Exception_STACK_OVERFLOW_1;
+  OSD_Exception_STACK_OVERFLOW_2: typeof OSD_Exception_STACK_OVERFLOW_2;
   OSD_Exception_STATUS_NO_MEMORY: typeof OSD_Exception_STATUS_NO_MEMORY;
+  OSD_Exception_STATUS_NO_MEMORY_1: typeof OSD_Exception_STATUS_NO_MEMORY_1;
+  OSD_Exception_STATUS_NO_MEMORY_2: typeof OSD_Exception_STATUS_NO_MEMORY_2;
   OSD_FileIterator: typeof OSD_FileIterator;
+  OSD_FileIterator_1: typeof OSD_FileIterator_1;
+  OSD_FileIterator_2: typeof OSD_FileIterator_2;
   OSD_Host: typeof OSD_Host;
   OSD_MAllocHook: typeof OSD_MAllocHook;
   OSD_MemInfo: typeof OSD_MemInfo;
   OSD_OSDError: typeof OSD_OSDError;
+  OSD_OSDError_1: typeof OSD_OSDError_1;
+  OSD_OSDError_2: typeof OSD_OSDError_2;
   OSD_PerfMeter: typeof OSD_PerfMeter;
+  OSD_PerfMeter_1: typeof OSD_PerfMeter_1;
+  OSD_PerfMeter_2: typeof OSD_PerfMeter_2;
   OSD_Process: typeof OSD_Process;
   OSD_Protection: typeof OSD_Protection;
+  OSD_Protection_1: typeof OSD_Protection_1;
+  OSD_Protection_2: typeof OSD_Protection_2;
   OSD_SIGBUS: typeof OSD_SIGBUS;
+  OSD_SIGBUS_1: typeof OSD_SIGBUS_1;
+  OSD_SIGBUS_2: typeof OSD_SIGBUS_2;
   OSD_SIGHUP: typeof OSD_SIGHUP;
+  OSD_SIGHUP_1: typeof OSD_SIGHUP_1;
+  OSD_SIGHUP_2: typeof OSD_SIGHUP_2;
   OSD_SIGILL: typeof OSD_SIGILL;
+  OSD_SIGILL_1: typeof OSD_SIGILL_1;
+  OSD_SIGILL_2: typeof OSD_SIGILL_2;
   OSD_SIGINT: typeof OSD_SIGINT;
+  OSD_SIGINT_1: typeof OSD_SIGINT_1;
+  OSD_SIGINT_2: typeof OSD_SIGINT_2;
   OSD_SIGKILL: typeof OSD_SIGKILL;
+  OSD_SIGKILL_1: typeof OSD_SIGKILL_1;
+  OSD_SIGKILL_2: typeof OSD_SIGKILL_2;
   OSD_SIGQUIT: typeof OSD_SIGQUIT;
+  OSD_SIGQUIT_1: typeof OSD_SIGQUIT_1;
+  OSD_SIGQUIT_2: typeof OSD_SIGQUIT_2;
   OSD_SIGSEGV: typeof OSD_SIGSEGV;
+  OSD_SIGSEGV_1: typeof OSD_SIGSEGV_1;
+  OSD_SIGSEGV_2: typeof OSD_SIGSEGV_2;
   OSD_SIGSYS: typeof OSD_SIGSYS;
+  OSD_SIGSYS_1: typeof OSD_SIGSYS_1;
+  OSD_SIGSYS_2: typeof OSD_SIGSYS_2;
   OSD_SharedLibrary: typeof OSD_SharedLibrary;
+  OSD_SharedLibrary_1: typeof OSD_SharedLibrary_1;
+  OSD_SharedLibrary_2: typeof OSD_SharedLibrary_2;
   OSD_Signal: typeof OSD_Signal;
+  OSD_Signal_1: typeof OSD_Signal_1;
+  OSD_Signal_2: typeof OSD_Signal_2;
   OSD_Thread: typeof OSD_Thread;
+  OSD_Thread_1: typeof OSD_Thread_1;
+  OSD_Thread_2: typeof OSD_Thread_2;
+  OSD_Thread_3: typeof OSD_Thread_3;
   OSD_Timer: typeof OSD_Timer;
   PCDM: typeof PCDM;
   PCDM_DOMHeaderParser: typeof PCDM_DOMHeaderParser;
   PCDM_Document: typeof PCDM_Document;
   PCDM_DriverError: typeof PCDM_DriverError;
+  PCDM_DriverError_1: typeof PCDM_DriverError_1;
+  PCDM_DriverError_2: typeof PCDM_DriverError_2;
   PCDM_ReadWriter: typeof PCDM_ReadWriter;
   PCDM_ReadWriter_1: typeof PCDM_ReadWriter_1;
   PCDM_Reader: typeof PCDM_Reader;
   PCDM_Reference: typeof PCDM_Reference;
+  PCDM_Reference_1: typeof PCDM_Reference_1;
+  PCDM_Reference_2: typeof PCDM_Reference_2;
   PCDM_ReferenceIterator: typeof PCDM_ReferenceIterator;
   PCDM_RetrievalDriver: typeof PCDM_RetrievalDriver;
   PCDM_StorageDriver: typeof PCDM_StorageDriver;
@@ -1681,75 +3933,196 @@ export interface opencascade {
   PLib: typeof PLib;
   PLib_Base: typeof PLib_Base;
   PLib_DoubleJacobiPolynomial: typeof PLib_DoubleJacobiPolynomial;
+  PLib_DoubleJacobiPolynomial_1: typeof PLib_DoubleJacobiPolynomial_1;
+  PLib_DoubleJacobiPolynomial_2: typeof PLib_DoubleJacobiPolynomial_2;
   PLib_HermitJacobi: typeof PLib_HermitJacobi;
   PLib_JacobiPolynomial: typeof PLib_JacobiPolynomial;
   PeriodicInterval: typeof PeriodicInterval;
+  PeriodicInterval_1: typeof PeriodicInterval_1;
+  PeriodicInterval_2: typeof PeriodicInterval_2;
+  PeriodicInterval_3: typeof PeriodicInterval_3;
   Plate_D1: typeof Plate_D1;
+  Plate_D1_1: typeof Plate_D1_1;
+  Plate_D1_2: typeof Plate_D1_2;
   Plate_D2: typeof Plate_D2;
+  Plate_D2_1: typeof Plate_D2_1;
+  Plate_D2_2: typeof Plate_D2_2;
   Plate_D3: typeof Plate_D3;
+  Plate_D3_1: typeof Plate_D3_1;
+  Plate_D3_2: typeof Plate_D3_2;
   Plate_FreeGtoCConstraint: typeof Plate_FreeGtoCConstraint;
+  Plate_FreeGtoCConstraint_1: typeof Plate_FreeGtoCConstraint_1;
+  Plate_FreeGtoCConstraint_2: typeof Plate_FreeGtoCConstraint_2;
+  Plate_FreeGtoCConstraint_3: typeof Plate_FreeGtoCConstraint_3;
   Plate_GlobalTranslationConstraint: typeof Plate_GlobalTranslationConstraint;
   Plate_GtoCConstraint: typeof Plate_GtoCConstraint;
+  Plate_GtoCConstraint_1: typeof Plate_GtoCConstraint_1;
+  Plate_GtoCConstraint_2: typeof Plate_GtoCConstraint_2;
+  Plate_GtoCConstraint_3: typeof Plate_GtoCConstraint_3;
+  Plate_GtoCConstraint_4: typeof Plate_GtoCConstraint_4;
+  Plate_GtoCConstraint_5: typeof Plate_GtoCConstraint_5;
+  Plate_GtoCConstraint_6: typeof Plate_GtoCConstraint_6;
+  Plate_GtoCConstraint_7: typeof Plate_GtoCConstraint_7;
   Plate_LineConstraint: typeof Plate_LineConstraint;
   Plate_LinearScalarConstraint: typeof Plate_LinearScalarConstraint;
+  Plate_LinearScalarConstraint_1: typeof Plate_LinearScalarConstraint_1;
+  Plate_LinearScalarConstraint_2: typeof Plate_LinearScalarConstraint_2;
+  Plate_LinearScalarConstraint_3: typeof Plate_LinearScalarConstraint_3;
+  Plate_LinearScalarConstraint_4: typeof Plate_LinearScalarConstraint_4;
+  Plate_LinearScalarConstraint_5: typeof Plate_LinearScalarConstraint_5;
   Plate_LinearXYZConstraint: typeof Plate_LinearXYZConstraint;
+  Plate_LinearXYZConstraint_1: typeof Plate_LinearXYZConstraint_1;
+  Plate_LinearXYZConstraint_2: typeof Plate_LinearXYZConstraint_2;
+  Plate_LinearXYZConstraint_3: typeof Plate_LinearXYZConstraint_3;
+  Plate_LinearXYZConstraint_4: typeof Plate_LinearXYZConstraint_4;
   Plate_PinpointConstraint: typeof Plate_PinpointConstraint;
+  Plate_PinpointConstraint_1: typeof Plate_PinpointConstraint_1;
+  Plate_PinpointConstraint_2: typeof Plate_PinpointConstraint_2;
   Plate_PlaneConstraint: typeof Plate_PlaneConstraint;
   Plate_Plate: typeof Plate_Plate;
+  Plate_Plate_1: typeof Plate_Plate_1;
+  Plate_Plate_2: typeof Plate_Plate_2;
   Plate_SampledCurveConstraint: typeof Plate_SampledCurveConstraint;
   Plugin: typeof Plugin;
   Plugin_Failure: typeof Plugin_Failure;
+  Plugin_Failure_1: typeof Plugin_Failure_1;
+  Plugin_Failure_2: typeof Plugin_Failure_2;
   Poly: typeof Poly;
   Poly_CoherentLink: typeof Poly_CoherentLink;
+  Poly_CoherentLink_1: typeof Poly_CoherentLink_1;
+  Poly_CoherentLink_2: typeof Poly_CoherentLink_2;
+  Poly_CoherentLink_3: typeof Poly_CoherentLink_3;
   Poly_CoherentNode: typeof Poly_CoherentNode;
+  Poly_CoherentNode_1: typeof Poly_CoherentNode_1;
+  Poly_CoherentNode_2: typeof Poly_CoherentNode_2;
   Poly_CoherentTriangle: typeof Poly_CoherentTriangle;
+  Poly_CoherentTriangle_1: typeof Poly_CoherentTriangle_1;
+  Poly_CoherentTriangle_2: typeof Poly_CoherentTriangle_2;
   Poly_CoherentTriangulation: typeof Poly_CoherentTriangulation;
+  Poly_CoherentTriangulation_1: typeof Poly_CoherentTriangulation_1;
+  Poly_CoherentTriangulation_2: typeof Poly_CoherentTriangulation_2;
   Poly_Connect: typeof Poly_Connect;
+  Poly_Connect_1: typeof Poly_Connect_1;
+  Poly_Connect_2: typeof Poly_Connect_2;
   Poly_MakeLoops: typeof Poly_MakeLoops;
   Poly_MakeLoops2D: typeof Poly_MakeLoops2D;
   Poly_MakeLoops3D: typeof Poly_MakeLoops3D;
   Poly_Polygon2D: typeof Poly_Polygon2D;
+  Poly_Polygon2D_1: typeof Poly_Polygon2D_1;
+  Poly_Polygon2D_2: typeof Poly_Polygon2D_2;
   Poly_Polygon3D: typeof Poly_Polygon3D;
+  Poly_Polygon3D_1: typeof Poly_Polygon3D_1;
+  Poly_Polygon3D_2: typeof Poly_Polygon3D_2;
+  Poly_Polygon3D_3: typeof Poly_Polygon3D_3;
   Poly_PolygonOnTriangulation: typeof Poly_PolygonOnTriangulation;
+  Poly_PolygonOnTriangulation_1: typeof Poly_PolygonOnTriangulation_1;
+  Poly_PolygonOnTriangulation_2: typeof Poly_PolygonOnTriangulation_2;
+  Poly_PolygonOnTriangulation_3: typeof Poly_PolygonOnTriangulation_3;
   Poly_Triangle: typeof Poly_Triangle;
+  Poly_Triangle_1: typeof Poly_Triangle_1;
+  Poly_Triangle_2: typeof Poly_Triangle_2;
   Poly_Triangulation: typeof Poly_Triangulation;
+  Poly_Triangulation_1: typeof Poly_Triangulation_1;
+  Poly_Triangulation_2: typeof Poly_Triangulation_2;
+  Poly_Triangulation_3: typeof Poly_Triangulation_3;
+  Poly_Triangulation_4: typeof Poly_Triangulation_4;
   Precision: typeof Precision;
   ProjLib: typeof ProjLib;
   ProjLib_CompProjectedCurve: typeof ProjLib_CompProjectedCurve;
+  ProjLib_CompProjectedCurve_1: typeof ProjLib_CompProjectedCurve_1;
+  ProjLib_CompProjectedCurve_2: typeof ProjLib_CompProjectedCurve_2;
+  ProjLib_CompProjectedCurve_3: typeof ProjLib_CompProjectedCurve_3;
   ProjLib_ComputeApprox: typeof ProjLib_ComputeApprox;
+  ProjLib_ComputeApprox_1: typeof ProjLib_ComputeApprox_1;
+  ProjLib_ComputeApprox_2: typeof ProjLib_ComputeApprox_2;
   ProjLib_ComputeApproxOnPolarSurface: typeof ProjLib_ComputeApproxOnPolarSurface;
+  ProjLib_ComputeApproxOnPolarSurface_1: typeof ProjLib_ComputeApproxOnPolarSurface_1;
+  ProjLib_ComputeApproxOnPolarSurface_2: typeof ProjLib_ComputeApproxOnPolarSurface_2;
+  ProjLib_ComputeApproxOnPolarSurface_3: typeof ProjLib_ComputeApproxOnPolarSurface_3;
+  ProjLib_ComputeApproxOnPolarSurface_4: typeof ProjLib_ComputeApproxOnPolarSurface_4;
   ProjLib_Cone: typeof ProjLib_Cone;
+  ProjLib_Cone_1: typeof ProjLib_Cone_1;
+  ProjLib_Cone_2: typeof ProjLib_Cone_2;
+  ProjLib_Cone_3: typeof ProjLib_Cone_3;
+  ProjLib_Cone_4: typeof ProjLib_Cone_4;
   ProjLib_Cylinder: typeof ProjLib_Cylinder;
+  ProjLib_Cylinder_1: typeof ProjLib_Cylinder_1;
+  ProjLib_Cylinder_2: typeof ProjLib_Cylinder_2;
+  ProjLib_Cylinder_3: typeof ProjLib_Cylinder_3;
+  ProjLib_Cylinder_4: typeof ProjLib_Cylinder_4;
+  ProjLib_Cylinder_5: typeof ProjLib_Cylinder_5;
   ProjLib_HCompProjectedCurve: typeof ProjLib_HCompProjectedCurve;
+  ProjLib_HCompProjectedCurve_1: typeof ProjLib_HCompProjectedCurve_1;
+  ProjLib_HCompProjectedCurve_2: typeof ProjLib_HCompProjectedCurve_2;
   ProjLib_HProjectedCurve: typeof ProjLib_HProjectedCurve;
+  ProjLib_HProjectedCurve_1: typeof ProjLib_HProjectedCurve_1;
+  ProjLib_HProjectedCurve_2: typeof ProjLib_HProjectedCurve_2;
   ProjLib_Plane: typeof ProjLib_Plane;
+  ProjLib_Plane_1: typeof ProjLib_Plane_1;
+  ProjLib_Plane_2: typeof ProjLib_Plane_2;
+  ProjLib_Plane_3: typeof ProjLib_Plane_3;
+  ProjLib_Plane_4: typeof ProjLib_Plane_4;
+  ProjLib_Plane_5: typeof ProjLib_Plane_5;
+  ProjLib_Plane_6: typeof ProjLib_Plane_6;
+  ProjLib_Plane_7: typeof ProjLib_Plane_7;
   ProjLib_PrjFunc: typeof ProjLib_PrjFunc;
   ProjLib_PrjResolve: typeof ProjLib_PrjResolve;
   ProjLib_ProjectOnPlane: typeof ProjLib_ProjectOnPlane;
+  ProjLib_ProjectOnPlane_1: typeof ProjLib_ProjectOnPlane_1;
+  ProjLib_ProjectOnPlane_2: typeof ProjLib_ProjectOnPlane_2;
+  ProjLib_ProjectOnPlane_3: typeof ProjLib_ProjectOnPlane_3;
   ProjLib_ProjectedCurve: typeof ProjLib_ProjectedCurve;
+  ProjLib_ProjectedCurve_1: typeof ProjLib_ProjectedCurve_1;
+  ProjLib_ProjectedCurve_2: typeof ProjLib_ProjectedCurve_2;
+  ProjLib_ProjectedCurve_3: typeof ProjLib_ProjectedCurve_3;
+  ProjLib_ProjectedCurve_4: typeof ProjLib_ProjectedCurve_4;
   ProjLib_Projector: typeof ProjLib_Projector;
   ProjLib_Sphere: typeof ProjLib_Sphere;
+  ProjLib_Sphere_1: typeof ProjLib_Sphere_1;
+  ProjLib_Sphere_2: typeof ProjLib_Sphere_2;
+  ProjLib_Sphere_3: typeof ProjLib_Sphere_3;
   ProjLib_Torus: typeof ProjLib_Torus;
+  ProjLib_Torus_1: typeof ProjLib_Torus_1;
+  ProjLib_Torus_2: typeof ProjLib_Torus_2;
+  ProjLib_Torus_3: typeof ProjLib_Torus_3;
   Prs3d: typeof Prs3d;
   Prs3d_Arrow: typeof Prs3d_Arrow;
   Prs3d_ArrowAspect: typeof Prs3d_ArrowAspect;
+  Prs3d_ArrowAspect_1: typeof Prs3d_ArrowAspect_1;
+  Prs3d_ArrowAspect_2: typeof Prs3d_ArrowAspect_2;
+  Prs3d_ArrowAspect_3: typeof Prs3d_ArrowAspect_3;
   Prs3d_BasicAspect: typeof Prs3d_BasicAspect;
   Prs3d_DatumAspect: typeof Prs3d_DatumAspect;
   Prs3d_DimensionAspect: typeof Prs3d_DimensionAspect;
   Prs3d_DimensionUnits: typeof Prs3d_DimensionUnits;
+  Prs3d_DimensionUnits_1: typeof Prs3d_DimensionUnits_1;
+  Prs3d_DimensionUnits_2: typeof Prs3d_DimensionUnits_2;
   Prs3d_Drawer: typeof Prs3d_Drawer;
   Prs3d_InvalidAngle: typeof Prs3d_InvalidAngle;
+  Prs3d_InvalidAngle_1: typeof Prs3d_InvalidAngle_1;
+  Prs3d_InvalidAngle_2: typeof Prs3d_InvalidAngle_2;
   Prs3d_IsoAspect: typeof Prs3d_IsoAspect;
   Prs3d_LineAspect: typeof Prs3d_LineAspect;
+  Prs3d_LineAspect_1: typeof Prs3d_LineAspect_1;
+  Prs3d_LineAspect_2: typeof Prs3d_LineAspect_2;
   Prs3d_PlaneAspect: typeof Prs3d_PlaneAspect;
   Prs3d_PointAspect: typeof Prs3d_PointAspect;
+  Prs3d_PointAspect_1: typeof Prs3d_PointAspect_1;
+  Prs3d_PointAspect_2: typeof Prs3d_PointAspect_2;
+  Prs3d_PointAspect_3: typeof Prs3d_PointAspect_3;
   Prs3d_PresentationShadow: typeof Prs3d_PresentationShadow;
   Prs3d_Projector: typeof Prs3d_Projector;
+  Prs3d_Projector_1: typeof Prs3d_Projector_1;
+  Prs3d_Projector_2: typeof Prs3d_Projector_2;
   Prs3d_Root: typeof Prs3d_Root;
   Prs3d_ShadingAspect: typeof Prs3d_ShadingAspect;
+  Prs3d_ShadingAspect_1: typeof Prs3d_ShadingAspect_1;
+  Prs3d_ShadingAspect_2: typeof Prs3d_ShadingAspect_2;
   Prs3d_ShapeTool: typeof Prs3d_ShapeTool;
   Prs3d_Text: typeof Prs3d_Text;
   Prs3d_TextAspect: typeof Prs3d_TextAspect;
+  Prs3d_TextAspect_1: typeof Prs3d_TextAspect_1;
+  Prs3d_TextAspect_2: typeof Prs3d_TextAspect_2;
   Prs3d_ToolCylinder: typeof Prs3d_ToolCylinder;
   Prs3d_ToolDisk: typeof Prs3d_ToolDisk;
   Prs3d_ToolSector: typeof Prs3d_ToolSector;
@@ -1758,15 +4131,37 @@ export interface opencascade {
   PrsMgr_Presentation: typeof PrsMgr_Presentation;
   PrsMgr_PresentationManager: typeof PrsMgr_PresentationManager;
   Quantity_Color: typeof Quantity_Color;
-  Quantity_ColorDefinitionError: typeof Quantity_ColorDefinitionError;
+  Quantity_Color_1: typeof Quantity_Color_1;
+  Quantity_Color_2: typeof Quantity_Color_2;
+  Quantity_Color_3: typeof Quantity_Color_3;
+  Quantity_Color_4: typeof Quantity_Color_4;
   Quantity_ColorRGBA: typeof Quantity_ColorRGBA;
+  Quantity_ColorRGBA_1: typeof Quantity_ColorRGBA_1;
+  Quantity_ColorRGBA_2: typeof Quantity_ColorRGBA_2;
+  Quantity_ColorRGBA_3: typeof Quantity_ColorRGBA_3;
+  Quantity_ColorRGBA_4: typeof Quantity_ColorRGBA_4;
+  Quantity_ColorRGBA_5: typeof Quantity_ColorRGBA_5;
   Quantity_Date: typeof Quantity_Date;
+  Quantity_Date_1: typeof Quantity_Date_1;
+  Quantity_Date_2: typeof Quantity_Date_2;
   Quantity_DateDefinitionError: typeof Quantity_DateDefinitionError;
+  Quantity_DateDefinitionError_1: typeof Quantity_DateDefinitionError_1;
+  Quantity_DateDefinitionError_2: typeof Quantity_DateDefinitionError_2;
   Quantity_Period: typeof Quantity_Period;
+  Quantity_Period_1: typeof Quantity_Period_1;
+  Quantity_Period_2: typeof Quantity_Period_2;
   Quantity_PeriodDefinitionError: typeof Quantity_PeriodDefinitionError;
+  Quantity_PeriodDefinitionError_1: typeof Quantity_PeriodDefinitionError_1;
+  Quantity_PeriodDefinitionError_2: typeof Quantity_PeriodDefinitionError_2;
   RWGltf_CafReader: typeof RWGltf_CafReader;
+  RWGltf_CafWriter: typeof RWGltf_CafWriter;
   RWGltf_GltfLatePrimitiveArray: typeof RWGltf_GltfLatePrimitiveArray;
+  RWGltf_GltfMaterialMap: typeof RWGltf_GltfMaterialMap;
+  RWGltf_GltfOStreamWriter: typeof RWGltf_GltfOStreamWriter;
   RWGltf_GltfPrimArrayData: typeof RWGltf_GltfPrimArrayData;
+  RWGltf_GltfPrimArrayData_1: typeof RWGltf_GltfPrimArrayData_1;
+  RWGltf_GltfPrimArrayData_2: typeof RWGltf_GltfPrimArrayData_2;
+  RWGltf_GltfSceneNodeMap: typeof RWGltf_GltfSceneNodeMap;
   RWGltf_MaterialCommon: typeof RWGltf_MaterialCommon;
   RWGltf_MaterialMetallicRoughness: typeof RWGltf_MaterialMetallicRoughness;
   RWGltf_PrimitiveArrayReader: typeof RWGltf_PrimitiveArrayReader;
@@ -1778,6 +4173,8 @@ export interface opencascade {
   RWHeaderSection_ReadWriteModule: typeof RWHeaderSection_ReadWriteModule;
   RWMesh_CafReader: typeof RWMesh_CafReader;
   RWMesh_CoordinateSystemConverter: typeof RWMesh_CoordinateSystemConverter;
+  RWMesh_FaceIterator: typeof RWMesh_FaceIterator;
+  RWMesh_MaterialMap: typeof RWMesh_MaterialMap;
   RWObj: typeof RWObj;
   RWObj_CafReader: typeof RWObj_CafReader;
   RWObj_IShapeReceiver: typeof RWObj_IShapeReceiver;
@@ -2291,58 +4688,107 @@ export interface opencascade {
   RWStl_Reader: typeof RWStl_Reader;
   Resource_LexicalCompare: typeof Resource_LexicalCompare;
   Resource_Manager: typeof Resource_Manager;
+  Resource_Manager_1: typeof Resource_Manager_1;
+  Resource_Manager_2: typeof Resource_Manager_2;
   Resource_NoSuchResource: typeof Resource_NoSuchResource;
+  Resource_NoSuchResource_1: typeof Resource_NoSuchResource_1;
+  Resource_NoSuchResource_2: typeof Resource_NoSuchResource_2;
   Resource_Unicode: typeof Resource_Unicode;
   STEPCAFControl_ActorWrite: typeof STEPCAFControl_ActorWrite;
   STEPCAFControl_Controller: typeof STEPCAFControl_Controller;
   STEPCAFControl_ExternFile: typeof STEPCAFControl_ExternFile;
   STEPCAFControl_GDTProperty: typeof STEPCAFControl_GDTProperty;
   STEPCAFControl_Reader: typeof STEPCAFControl_Reader;
+  STEPCAFControl_Reader_1: typeof STEPCAFControl_Reader_1;
+  STEPCAFControl_Reader_2: typeof STEPCAFControl_Reader_2;
   STEPCAFControl_Writer: typeof STEPCAFControl_Writer;
+  STEPCAFControl_Writer_1: typeof STEPCAFControl_Writer_1;
+  STEPCAFControl_Writer_2: typeof STEPCAFControl_Writer_2;
   STEPConstruct: typeof STEPConstruct;
   STEPConstruct_AP203Context: typeof STEPConstruct_AP203Context;
   STEPConstruct_Assembly: typeof STEPConstruct_Assembly;
   STEPConstruct_ContextTool: typeof STEPConstruct_ContextTool;
+  STEPConstruct_ContextTool_1: typeof STEPConstruct_ContextTool_1;
+  STEPConstruct_ContextTool_2: typeof STEPConstruct_ContextTool_2;
   STEPConstruct_ExternRefs: typeof STEPConstruct_ExternRefs;
+  STEPConstruct_ExternRefs_1: typeof STEPConstruct_ExternRefs_1;
+  STEPConstruct_ExternRefs_2: typeof STEPConstruct_ExternRefs_2;
   STEPConstruct_Part: typeof STEPConstruct_Part;
   STEPConstruct_PointHasher: typeof STEPConstruct_PointHasher;
   STEPConstruct_Styles: typeof STEPConstruct_Styles;
+  STEPConstruct_Styles_1: typeof STEPConstruct_Styles_1;
+  STEPConstruct_Styles_2: typeof STEPConstruct_Styles_2;
   STEPConstruct_Tool: typeof STEPConstruct_Tool;
+  STEPConstruct_Tool_1: typeof STEPConstruct_Tool_1;
+  STEPConstruct_Tool_2: typeof STEPConstruct_Tool_2;
   STEPConstruct_UnitContext: typeof STEPConstruct_UnitContext;
   STEPConstruct_ValidationProps: typeof STEPConstruct_ValidationProps;
+  STEPConstruct_ValidationProps_1: typeof STEPConstruct_ValidationProps_1;
+  STEPConstruct_ValidationProps_2: typeof STEPConstruct_ValidationProps_2;
   STEPControl_ActorRead: typeof STEPControl_ActorRead;
   STEPControl_ActorWrite: typeof STEPControl_ActorWrite;
   STEPControl_Controller: typeof STEPControl_Controller;
   STEPControl_Reader: typeof STEPControl_Reader;
+  STEPControl_Reader_1: typeof STEPControl_Reader_1;
+  STEPControl_Reader_2: typeof STEPControl_Reader_2;
   STEPControl_Writer: typeof STEPControl_Writer;
+  STEPControl_Writer_1: typeof STEPControl_Writer_1;
+  STEPControl_Writer_2: typeof STEPControl_Writer_2;
   STEPEdit: typeof STEPEdit;
   STEPEdit_EditContext: typeof STEPEdit_EditContext;
   STEPEdit_EditSDR: typeof STEPEdit_EditSDR;
   STEPSelections_AssemblyComponent: typeof STEPSelections_AssemblyComponent;
+  STEPSelections_AssemblyComponent_1: typeof STEPSelections_AssemblyComponent_1;
+  STEPSelections_AssemblyComponent_2: typeof STEPSelections_AssemblyComponent_2;
   STEPSelections_AssemblyExplorer: typeof STEPSelections_AssemblyExplorer;
   STEPSelections_AssemblyLink: typeof STEPSelections_AssemblyLink;
+  STEPSelections_AssemblyLink_1: typeof STEPSelections_AssemblyLink_1;
+  STEPSelections_AssemblyLink_2: typeof STEPSelections_AssemblyLink_2;
+  STEPSelections_HSequenceOfAssemblyLink: typeof STEPSelections_HSequenceOfAssemblyLink;
+  STEPSelections_HSequenceOfAssemblyLink_1: typeof STEPSelections_HSequenceOfAssemblyLink_1;
+  STEPSelections_HSequenceOfAssemblyLink_2: typeof STEPSelections_HSequenceOfAssemblyLink_2;
   STEPSelections_SelectAssembly: typeof STEPSelections_SelectAssembly;
   STEPSelections_SelectDerived: typeof STEPSelections_SelectDerived;
   STEPSelections_SelectFaces: typeof STEPSelections_SelectFaces;
   STEPSelections_SelectForTransfer: typeof STEPSelections_SelectForTransfer;
+  STEPSelections_SelectForTransfer_1: typeof STEPSelections_SelectForTransfer_1;
+  STEPSelections_SelectForTransfer_2: typeof STEPSelections_SelectForTransfer_2;
   STEPSelections_SelectGSCurves: typeof STEPSelections_SelectGSCurves;
   STEPSelections_SelectInstances: typeof STEPSelections_SelectInstances;
   Select3D_BVHIndexBuffer: typeof Select3D_BVHIndexBuffer;
   Select3D_InteriorSensitivePointSet: typeof Select3D_InteriorSensitivePointSet;
   Select3D_PointData: typeof Select3D_PointData;
   Select3D_SensitiveBox: typeof Select3D_SensitiveBox;
+  Select3D_SensitiveBox_1: typeof Select3D_SensitiveBox_1;
+  Select3D_SensitiveBox_2: typeof Select3D_SensitiveBox_2;
   Select3D_SensitiveCircle: typeof Select3D_SensitiveCircle;
+  Select3D_SensitiveCircle_1: typeof Select3D_SensitiveCircle_1;
+  Select3D_SensitiveCircle_2: typeof Select3D_SensitiveCircle_2;
+  Select3D_SensitiveCircle_3: typeof Select3D_SensitiveCircle_3;
+  Select3D_SensitiveCircle_4: typeof Select3D_SensitiveCircle_4;
   Select3D_SensitiveCurve: typeof Select3D_SensitiveCurve;
+  Select3D_SensitiveCurve_1: typeof Select3D_SensitiveCurve_1;
+  Select3D_SensitiveCurve_2: typeof Select3D_SensitiveCurve_2;
+  Select3D_SensitiveCurve_3: typeof Select3D_SensitiveCurve_3;
   Select3D_SensitiveEntity: typeof Select3D_SensitiveEntity;
   Select3D_SensitiveFace: typeof Select3D_SensitiveFace;
+  Select3D_SensitiveFace_1: typeof Select3D_SensitiveFace_1;
+  Select3D_SensitiveFace_2: typeof Select3D_SensitiveFace_2;
   Select3D_SensitiveGroup: typeof Select3D_SensitiveGroup;
+  Select3D_SensitiveGroup_1: typeof Select3D_SensitiveGroup_1;
+  Select3D_SensitiveGroup_2: typeof Select3D_SensitiveGroup_2;
   Select3D_SensitivePoint: typeof Select3D_SensitivePoint;
   Select3D_SensitivePoly: typeof Select3D_SensitivePoly;
+  Select3D_SensitivePoly_1: typeof Select3D_SensitivePoly_1;
+  Select3D_SensitivePoly_2: typeof Select3D_SensitivePoly_2;
+  Select3D_SensitivePoly_3: typeof Select3D_SensitivePoly_3;
   Select3D_SensitivePrimitiveArray: typeof Select3D_SensitivePrimitiveArray;
   Select3D_SensitiveSegment: typeof Select3D_SensitiveSegment;
   Select3D_SensitiveSet: typeof Select3D_SensitiveSet;
   Select3D_SensitiveTriangle: typeof Select3D_SensitiveTriangle;
   Select3D_SensitiveTriangulation: typeof Select3D_SensitiveTriangulation;
+  Select3D_SensitiveTriangulation_1: typeof Select3D_SensitiveTriangulation_1;
+  Select3D_SensitiveTriangulation_2: typeof Select3D_SensitiveTriangulation_2;
   Select3D_SensitiveWire: typeof Select3D_SensitiveWire;
   SelectBasics: typeof SelectBasics;
   SelectBasics_SelectingVolumeManager: typeof SelectBasics_SelectingVolumeManager;
@@ -2350,6 +4796,9 @@ export interface opencascade {
   SelectMgr_BaseFrustum: typeof SelectMgr_BaseFrustum;
   SelectMgr_CompositionFilter: typeof SelectMgr_CompositionFilter;
   SelectMgr_EntityOwner: typeof SelectMgr_EntityOwner;
+  SelectMgr_EntityOwner_1: typeof SelectMgr_EntityOwner_1;
+  SelectMgr_EntityOwner_2: typeof SelectMgr_EntityOwner_2;
+  SelectMgr_EntityOwner_3: typeof SelectMgr_EntityOwner_3;
   SelectMgr_Filter: typeof SelectMgr_Filter;
   SelectMgr_FrustumBuilder: typeof SelectMgr_FrustumBuilder;
   SelectMgr_OrFilter: typeof SelectMgr_OrFilter;
@@ -2373,17 +4822,37 @@ export interface opencascade {
   ShapeAnalysis_Curve: typeof ShapeAnalysis_Curve;
   ShapeAnalysis_Edge: typeof ShapeAnalysis_Edge;
   ShapeAnalysis_FreeBoundData: typeof ShapeAnalysis_FreeBoundData;
+  ShapeAnalysis_FreeBoundData_1: typeof ShapeAnalysis_FreeBoundData_1;
+  ShapeAnalysis_FreeBoundData_2: typeof ShapeAnalysis_FreeBoundData_2;
   ShapeAnalysis_FreeBounds: typeof ShapeAnalysis_FreeBounds;
+  ShapeAnalysis_FreeBounds_1: typeof ShapeAnalysis_FreeBounds_1;
+  ShapeAnalysis_FreeBounds_2: typeof ShapeAnalysis_FreeBounds_2;
+  ShapeAnalysis_FreeBounds_3: typeof ShapeAnalysis_FreeBounds_3;
   ShapeAnalysis_FreeBoundsProperties: typeof ShapeAnalysis_FreeBoundsProperties;
+  ShapeAnalysis_FreeBoundsProperties_1: typeof ShapeAnalysis_FreeBoundsProperties_1;
+  ShapeAnalysis_FreeBoundsProperties_2: typeof ShapeAnalysis_FreeBoundsProperties_2;
+  ShapeAnalysis_FreeBoundsProperties_3: typeof ShapeAnalysis_FreeBoundsProperties_3;
   ShapeAnalysis_Geom: typeof ShapeAnalysis_Geom;
+  ShapeAnalysis_HSequenceOfFreeBounds: typeof ShapeAnalysis_HSequenceOfFreeBounds;
+  ShapeAnalysis_HSequenceOfFreeBounds_1: typeof ShapeAnalysis_HSequenceOfFreeBounds_1;
+  ShapeAnalysis_HSequenceOfFreeBounds_2: typeof ShapeAnalysis_HSequenceOfFreeBounds_2;
   ShapeAnalysis_ShapeContents: typeof ShapeAnalysis_ShapeContents;
   ShapeAnalysis_ShapeTolerance: typeof ShapeAnalysis_ShapeTolerance;
   ShapeAnalysis_Shell: typeof ShapeAnalysis_Shell;
   ShapeAnalysis_Surface: typeof ShapeAnalysis_Surface;
   ShapeAnalysis_TransferParameters: typeof ShapeAnalysis_TransferParameters;
+  ShapeAnalysis_TransferParameters_1: typeof ShapeAnalysis_TransferParameters_1;
+  ShapeAnalysis_TransferParameters_2: typeof ShapeAnalysis_TransferParameters_2;
   ShapeAnalysis_TransferParametersProj: typeof ShapeAnalysis_TransferParametersProj;
+  ShapeAnalysis_TransferParametersProj_1: typeof ShapeAnalysis_TransferParametersProj_1;
+  ShapeAnalysis_TransferParametersProj_2: typeof ShapeAnalysis_TransferParametersProj_2;
   ShapeAnalysis_Wire: typeof ShapeAnalysis_Wire;
+  ShapeAnalysis_Wire_1: typeof ShapeAnalysis_Wire_1;
+  ShapeAnalysis_Wire_2: typeof ShapeAnalysis_Wire_2;
+  ShapeAnalysis_Wire_3: typeof ShapeAnalysis_Wire_3;
   ShapeAnalysis_WireOrder: typeof ShapeAnalysis_WireOrder;
+  ShapeAnalysis_WireOrder_1: typeof ShapeAnalysis_WireOrder_1;
+  ShapeAnalysis_WireOrder_2: typeof ShapeAnalysis_WireOrder_2;
   ShapeAnalysis_WireVertex: typeof ShapeAnalysis_WireVertex;
   ShapeBuild: typeof ShapeBuild;
   ShapeBuild_Edge: typeof ShapeBuild_Edge;
@@ -2392,46 +4861,77 @@ export interface opencascade {
   ShapeConstruct: typeof ShapeConstruct;
   ShapeConstruct_Curve: typeof ShapeConstruct_Curve;
   ShapeConstruct_MakeTriangulation: typeof ShapeConstruct_MakeTriangulation;
+  ShapeConstruct_MakeTriangulation_1: typeof ShapeConstruct_MakeTriangulation_1;
+  ShapeConstruct_MakeTriangulation_2: typeof ShapeConstruct_MakeTriangulation_2;
   ShapeConstruct_ProjectCurveOnSurface: typeof ShapeConstruct_ProjectCurveOnSurface;
   ShapeCustom: typeof ShapeCustom;
   ShapeCustom_BSplineRestriction: typeof ShapeCustom_BSplineRestriction;
+  ShapeCustom_BSplineRestriction_1: typeof ShapeCustom_BSplineRestriction_1;
+  ShapeCustom_BSplineRestriction_2: typeof ShapeCustom_BSplineRestriction_2;
+  ShapeCustom_BSplineRestriction_3: typeof ShapeCustom_BSplineRestriction_3;
   ShapeCustom_ConvertToBSpline: typeof ShapeCustom_ConvertToBSpline;
   ShapeCustom_ConvertToRevolution: typeof ShapeCustom_ConvertToRevolution;
   ShapeCustom_Curve: typeof ShapeCustom_Curve;
+  ShapeCustom_Curve_1: typeof ShapeCustom_Curve_1;
+  ShapeCustom_Curve_2: typeof ShapeCustom_Curve_2;
   ShapeCustom_Curve2d: typeof ShapeCustom_Curve2d;
   ShapeCustom_DirectModification: typeof ShapeCustom_DirectModification;
   ShapeCustom_Modification: typeof ShapeCustom_Modification;
   ShapeCustom_RestrictionParameters: typeof ShapeCustom_RestrictionParameters;
   ShapeCustom_Surface: typeof ShapeCustom_Surface;
+  ShapeCustom_Surface_1: typeof ShapeCustom_Surface_1;
+  ShapeCustom_Surface_2: typeof ShapeCustom_Surface_2;
   ShapeCustom_SweptToElementary: typeof ShapeCustom_SweptToElementary;
   ShapeCustom_TrsfModification: typeof ShapeCustom_TrsfModification;
   ShapeExtend: typeof ShapeExtend;
   ShapeExtend_BasicMsgRegistrator: typeof ShapeExtend_BasicMsgRegistrator;
   ShapeExtend_ComplexCurve: typeof ShapeExtend_ComplexCurve;
   ShapeExtend_CompositeSurface: typeof ShapeExtend_CompositeSurface;
+  ShapeExtend_CompositeSurface_1: typeof ShapeExtend_CompositeSurface_1;
+  ShapeExtend_CompositeSurface_2: typeof ShapeExtend_CompositeSurface_2;
+  ShapeExtend_CompositeSurface_3: typeof ShapeExtend_CompositeSurface_3;
   ShapeExtend_Explorer: typeof ShapeExtend_Explorer;
   ShapeExtend_MsgRegistrator: typeof ShapeExtend_MsgRegistrator;
   ShapeExtend_WireData: typeof ShapeExtend_WireData;
+  ShapeExtend_WireData_1: typeof ShapeExtend_WireData_1;
+  ShapeExtend_WireData_2: typeof ShapeExtend_WireData_2;
   ShapeFix: typeof ShapeFix;
   ShapeFix_ComposeShell: typeof ShapeFix_ComposeShell;
   ShapeFix_EdgeConnect: typeof ShapeFix_EdgeConnect;
   ShapeFix_EdgeProjAux: typeof ShapeFix_EdgeProjAux;
+  ShapeFix_EdgeProjAux_1: typeof ShapeFix_EdgeProjAux_1;
+  ShapeFix_EdgeProjAux_2: typeof ShapeFix_EdgeProjAux_2;
   ShapeFix_Face: typeof ShapeFix_Face;
+  ShapeFix_Face_1: typeof ShapeFix_Face_1;
+  ShapeFix_Face_2: typeof ShapeFix_Face_2;
   ShapeFix_FaceConnect: typeof ShapeFix_FaceConnect;
   ShapeFix_FixSmallFace: typeof ShapeFix_FixSmallFace;
   ShapeFix_FixSmallSolid: typeof ShapeFix_FixSmallSolid;
   ShapeFix_FreeBounds: typeof ShapeFix_FreeBounds;
+  ShapeFix_FreeBounds_1: typeof ShapeFix_FreeBounds_1;
+  ShapeFix_FreeBounds_2: typeof ShapeFix_FreeBounds_2;
+  ShapeFix_FreeBounds_3: typeof ShapeFix_FreeBounds_3;
   ShapeFix_IntersectionTool: typeof ShapeFix_IntersectionTool;
   ShapeFix_Root: typeof ShapeFix_Root;
   ShapeFix_Shape: typeof ShapeFix_Shape;
+  ShapeFix_Shape_1: typeof ShapeFix_Shape_1;
+  ShapeFix_Shape_2: typeof ShapeFix_Shape_2;
   ShapeFix_ShapeTolerance: typeof ShapeFix_ShapeTolerance;
   ShapeFix_Shell: typeof ShapeFix_Shell;
+  ShapeFix_Shell_1: typeof ShapeFix_Shell_1;
+  ShapeFix_Shell_2: typeof ShapeFix_Shell_2;
   ShapeFix_Solid: typeof ShapeFix_Solid;
+  ShapeFix_Solid_1: typeof ShapeFix_Solid_1;
+  ShapeFix_Solid_2: typeof ShapeFix_Solid_2;
   ShapeFix_SplitCommonVertex: typeof ShapeFix_SplitCommonVertex;
   ShapeFix_SplitTool: typeof ShapeFix_SplitTool;
   ShapeFix_Wire: typeof ShapeFix_Wire;
+  ShapeFix_Wire_1: typeof ShapeFix_Wire_1;
+  ShapeFix_Wire_2: typeof ShapeFix_Wire_2;
   ShapeFix_WireVertex: typeof ShapeFix_WireVertex;
   ShapeFix_Wireframe: typeof ShapeFix_Wireframe;
+  ShapeFix_Wireframe_1: typeof ShapeFix_Wireframe_1;
+  ShapeFix_Wireframe_2: typeof ShapeFix_Wireframe_2;
   ShapePersistent: typeof ShapePersistent;
   ShapePersistent_HArray1: typeof ShapePersistent_HArray1;
   ShapePersistent_HArray2: typeof ShapePersistent_HArray2;
@@ -2439,30 +4939,52 @@ export interface opencascade {
   ShapeProcess: typeof ShapeProcess;
   ShapeProcessAPI_ApplySequence: typeof ShapeProcessAPI_ApplySequence;
   ShapeProcess_Context: typeof ShapeProcess_Context;
+  ShapeProcess_Context_1: typeof ShapeProcess_Context_1;
+  ShapeProcess_Context_2: typeof ShapeProcess_Context_2;
   ShapeProcess_OperLibrary: typeof ShapeProcess_OperLibrary;
   ShapeProcess_Operator: typeof ShapeProcess_Operator;
   ShapeProcess_ShapeContext: typeof ShapeProcess_ShapeContext;
+  ShapeProcess_ShapeContext_1: typeof ShapeProcess_ShapeContext_1;
+  ShapeProcess_ShapeContext_2: typeof ShapeProcess_ShapeContext_2;
   ShapeProcess_UOperator: typeof ShapeProcess_UOperator;
   ShapeUpgrade: typeof ShapeUpgrade;
   ShapeUpgrade_ClosedEdgeDivide: typeof ShapeUpgrade_ClosedEdgeDivide;
   ShapeUpgrade_ClosedFaceDivide: typeof ShapeUpgrade_ClosedFaceDivide;
+  ShapeUpgrade_ClosedFaceDivide_1: typeof ShapeUpgrade_ClosedFaceDivide_1;
+  ShapeUpgrade_ClosedFaceDivide_2: typeof ShapeUpgrade_ClosedFaceDivide_2;
   ShapeUpgrade_ConvertCurve2dToBezier: typeof ShapeUpgrade_ConvertCurve2dToBezier;
   ShapeUpgrade_ConvertCurve3dToBezier: typeof ShapeUpgrade_ConvertCurve3dToBezier;
   ShapeUpgrade_ConvertSurfaceToBezierBasis: typeof ShapeUpgrade_ConvertSurfaceToBezierBasis;
   ShapeUpgrade_EdgeDivide: typeof ShapeUpgrade_EdgeDivide;
   ShapeUpgrade_FaceDivide: typeof ShapeUpgrade_FaceDivide;
+  ShapeUpgrade_FaceDivide_1: typeof ShapeUpgrade_FaceDivide_1;
+  ShapeUpgrade_FaceDivide_2: typeof ShapeUpgrade_FaceDivide_2;
   ShapeUpgrade_FaceDivideArea: typeof ShapeUpgrade_FaceDivideArea;
+  ShapeUpgrade_FaceDivideArea_1: typeof ShapeUpgrade_FaceDivideArea_1;
+  ShapeUpgrade_FaceDivideArea_2: typeof ShapeUpgrade_FaceDivideArea_2;
   ShapeUpgrade_FixSmallBezierCurves: typeof ShapeUpgrade_FixSmallBezierCurves;
   ShapeUpgrade_FixSmallCurves: typeof ShapeUpgrade_FixSmallCurves;
   ShapeUpgrade_RemoveInternalWires: typeof ShapeUpgrade_RemoveInternalWires;
+  ShapeUpgrade_RemoveInternalWires_1: typeof ShapeUpgrade_RemoveInternalWires_1;
+  ShapeUpgrade_RemoveInternalWires_2: typeof ShapeUpgrade_RemoveInternalWires_2;
   ShapeUpgrade_RemoveLocations: typeof ShapeUpgrade_RemoveLocations;
   ShapeUpgrade_ShapeConvertToBezier: typeof ShapeUpgrade_ShapeConvertToBezier;
+  ShapeUpgrade_ShapeConvertToBezier_1: typeof ShapeUpgrade_ShapeConvertToBezier_1;
+  ShapeUpgrade_ShapeConvertToBezier_2: typeof ShapeUpgrade_ShapeConvertToBezier_2;
   ShapeUpgrade_ShapeDivide: typeof ShapeUpgrade_ShapeDivide;
+  ShapeUpgrade_ShapeDivide_1: typeof ShapeUpgrade_ShapeDivide_1;
+  ShapeUpgrade_ShapeDivide_2: typeof ShapeUpgrade_ShapeDivide_2;
   ShapeUpgrade_ShapeDivideAngle: typeof ShapeUpgrade_ShapeDivideAngle;
+  ShapeUpgrade_ShapeDivideAngle_1: typeof ShapeUpgrade_ShapeDivideAngle_1;
+  ShapeUpgrade_ShapeDivideAngle_2: typeof ShapeUpgrade_ShapeDivideAngle_2;
   ShapeUpgrade_ShapeDivideArea: typeof ShapeUpgrade_ShapeDivideArea;
+  ShapeUpgrade_ShapeDivideArea_1: typeof ShapeUpgrade_ShapeDivideArea_1;
+  ShapeUpgrade_ShapeDivideArea_2: typeof ShapeUpgrade_ShapeDivideArea_2;
   ShapeUpgrade_ShapeDivideClosed: typeof ShapeUpgrade_ShapeDivideClosed;
   ShapeUpgrade_ShapeDivideClosedEdges: typeof ShapeUpgrade_ShapeDivideClosedEdges;
   ShapeUpgrade_ShapeDivideContinuity: typeof ShapeUpgrade_ShapeDivideContinuity;
+  ShapeUpgrade_ShapeDivideContinuity_1: typeof ShapeUpgrade_ShapeDivideContinuity_1;
+  ShapeUpgrade_ShapeDivideContinuity_2: typeof ShapeUpgrade_ShapeDivideContinuity_2;
   ShapeUpgrade_ShellSewing: typeof ShapeUpgrade_ShellSewing;
   ShapeUpgrade_SplitCurve: typeof ShapeUpgrade_SplitCurve;
   ShapeUpgrade_SplitCurve2d: typeof ShapeUpgrade_SplitCurve2d;
@@ -2475,55 +4997,126 @@ export interface opencascade {
   ShapeUpgrade_SplitSurfaceContinuity: typeof ShapeUpgrade_SplitSurfaceContinuity;
   ShapeUpgrade_Tool: typeof ShapeUpgrade_Tool;
   ShapeUpgrade_UnifySameDomain: typeof ShapeUpgrade_UnifySameDomain;
+  ShapeUpgrade_UnifySameDomain_1: typeof ShapeUpgrade_UnifySameDomain_1;
+  ShapeUpgrade_UnifySameDomain_2: typeof ShapeUpgrade_UnifySameDomain_2;
   ShapeUpgrade_WireDivide: typeof ShapeUpgrade_WireDivide;
   Standard: typeof Standard;
   Standard_AbortiveTransaction: typeof Standard_AbortiveTransaction;
+  Standard_AbortiveTransaction_1: typeof Standard_AbortiveTransaction_1;
+  Standard_AbortiveTransaction_2: typeof Standard_AbortiveTransaction_2;
   Standard_CLocaleSentry: typeof Standard_CLocaleSentry;
   Standard_Condition: typeof Standard_Condition;
   Standard_ConstructionError: typeof Standard_ConstructionError;
+  Standard_ConstructionError_1: typeof Standard_ConstructionError_1;
+  Standard_ConstructionError_2: typeof Standard_ConstructionError_2;
   Standard_DimensionError: typeof Standard_DimensionError;
+  Standard_DimensionError_1: typeof Standard_DimensionError_1;
+  Standard_DimensionError_2: typeof Standard_DimensionError_2;
   Standard_DimensionMismatch: typeof Standard_DimensionMismatch;
+  Standard_DimensionMismatch_1: typeof Standard_DimensionMismatch_1;
+  Standard_DimensionMismatch_2: typeof Standard_DimensionMismatch_2;
   Standard_DivideByZero: typeof Standard_DivideByZero;
+  Standard_DivideByZero_1: typeof Standard_DivideByZero_1;
+  Standard_DivideByZero_2: typeof Standard_DivideByZero_2;
   Standard_DomainError: typeof Standard_DomainError;
+  Standard_DomainError_1: typeof Standard_DomainError_1;
+  Standard_DomainError_2: typeof Standard_DomainError_2;
   Standard_Dump: typeof Standard_Dump;
   Standard_DumpSentry: typeof Standard_DumpSentry;
   Standard_Failure: typeof Standard_Failure;
+  Standard_Failure_1: typeof Standard_Failure_1;
+  Standard_Failure_2: typeof Standard_Failure_2;
+  Standard_Failure_3: typeof Standard_Failure_3;
   Standard_GUID: typeof Standard_GUID;
+  Standard_GUID_1: typeof Standard_GUID_1;
+  Standard_GUID_2: typeof Standard_GUID_2;
+  Standard_GUID_3: typeof Standard_GUID_3;
+  Standard_GUID_4: typeof Standard_GUID_4;
+  Standard_GUID_5: typeof Standard_GUID_5;
+  Standard_GUID_6: typeof Standard_GUID_6;
   Standard_ImmutableObject: typeof Standard_ImmutableObject;
+  Standard_ImmutableObject_1: typeof Standard_ImmutableObject_1;
+  Standard_ImmutableObject_2: typeof Standard_ImmutableObject_2;
   Standard_LicenseError: typeof Standard_LicenseError;
+  Standard_LicenseError_1: typeof Standard_LicenseError_1;
+  Standard_LicenseError_2: typeof Standard_LicenseError_2;
   Standard_LicenseNotFound: typeof Standard_LicenseNotFound;
+  Standard_LicenseNotFound_1: typeof Standard_LicenseNotFound_1;
+  Standard_LicenseNotFound_2: typeof Standard_LicenseNotFound_2;
   Standard_MMgrOpt: typeof Standard_MMgrOpt;
   Standard_MMgrRaw: typeof Standard_MMgrRaw;
   Standard_MMgrRoot: typeof Standard_MMgrRoot;
   Standard_MMgrTBBalloc: typeof Standard_MMgrTBBalloc;
   Standard_MultiplyDefined: typeof Standard_MultiplyDefined;
+  Standard_MultiplyDefined_1: typeof Standard_MultiplyDefined_1;
+  Standard_MultiplyDefined_2: typeof Standard_MultiplyDefined_2;
   Standard_NegativeValue: typeof Standard_NegativeValue;
+  Standard_NegativeValue_1: typeof Standard_NegativeValue_1;
+  Standard_NegativeValue_2: typeof Standard_NegativeValue_2;
   Standard_NoMoreObject: typeof Standard_NoMoreObject;
+  Standard_NoMoreObject_1: typeof Standard_NoMoreObject_1;
+  Standard_NoMoreObject_2: typeof Standard_NoMoreObject_2;
   Standard_NoSuchObject: typeof Standard_NoSuchObject;
+  Standard_NoSuchObject_1: typeof Standard_NoSuchObject_1;
+  Standard_NoSuchObject_2: typeof Standard_NoSuchObject_2;
   Standard_NotImplemented: typeof Standard_NotImplemented;
+  Standard_NotImplemented_1: typeof Standard_NotImplemented_1;
+  Standard_NotImplemented_2: typeof Standard_NotImplemented_2;
   Standard_NullObject: typeof Standard_NullObject;
+  Standard_NullObject_1: typeof Standard_NullObject_1;
+  Standard_NullObject_2: typeof Standard_NullObject_2;
   Standard_NullValue: typeof Standard_NullValue;
+  Standard_NullValue_1: typeof Standard_NullValue_1;
+  Standard_NullValue_2: typeof Standard_NullValue_2;
   Standard_NumericError: typeof Standard_NumericError;
+  Standard_NumericError_1: typeof Standard_NumericError_1;
+  Standard_NumericError_2: typeof Standard_NumericError_2;
   Standard_OutOfMemory: typeof Standard_OutOfMemory;
   Standard_OutOfRange: typeof Standard_OutOfRange;
+  Standard_OutOfRange_1: typeof Standard_OutOfRange_1;
+  Standard_OutOfRange_2: typeof Standard_OutOfRange_2;
   Standard_Overflow: typeof Standard_Overflow;
+  Standard_Overflow_1: typeof Standard_Overflow_1;
+  Standard_Overflow_2: typeof Standard_Overflow_2;
   Standard_Persistent: typeof Standard_Persistent;
   Standard_ProgramError: typeof Standard_ProgramError;
+  Standard_ProgramError_1: typeof Standard_ProgramError_1;
+  Standard_ProgramError_2: typeof Standard_ProgramError_2;
   Standard_RangeError: typeof Standard_RangeError;
+  Standard_RangeError_1: typeof Standard_RangeError_1;
+  Standard_RangeError_2: typeof Standard_RangeError_2;
   Standard_ReadBuffer: typeof Standard_ReadBuffer;
   Standard_ReadLineBuffer: typeof Standard_ReadLineBuffer;
   Standard_TooManyUsers: typeof Standard_TooManyUsers;
+  Standard_TooManyUsers_1: typeof Standard_TooManyUsers_1;
+  Standard_TooManyUsers_2: typeof Standard_TooManyUsers_2;
   Standard_Transient: typeof Standard_Transient;
+  Standard_Transient_1: typeof Standard_Transient_1;
+  Standard_Transient_2: typeof Standard_Transient_2;
   Standard_Type: typeof Standard_Type;
   Standard_TypeMismatch: typeof Standard_TypeMismatch;
+  Standard_TypeMismatch_1: typeof Standard_TypeMismatch_1;
+  Standard_TypeMismatch_2: typeof Standard_TypeMismatch_2;
   Standard_Underflow: typeof Standard_Underflow;
+  Standard_Underflow_1: typeof Standard_Underflow_1;
+  Standard_Underflow_2: typeof Standard_Underflow_2;
   StdDrivers: typeof StdDrivers;
   StdDrivers_DocumentRetrievalDriver: typeof StdDrivers_DocumentRetrievalDriver;
   StdFail_InfiniteSolutions: typeof StdFail_InfiniteSolutions;
+  StdFail_InfiniteSolutions_1: typeof StdFail_InfiniteSolutions_1;
+  StdFail_InfiniteSolutions_2: typeof StdFail_InfiniteSolutions_2;
   StdFail_NotDone: typeof StdFail_NotDone;
+  StdFail_NotDone_1: typeof StdFail_NotDone_1;
+  StdFail_NotDone_2: typeof StdFail_NotDone_2;
   StdFail_Undefined: typeof StdFail_Undefined;
+  StdFail_Undefined_1: typeof StdFail_Undefined_1;
+  StdFail_Undefined_2: typeof StdFail_Undefined_2;
   StdFail_UndefinedDerivative: typeof StdFail_UndefinedDerivative;
+  StdFail_UndefinedDerivative_1: typeof StdFail_UndefinedDerivative_1;
+  StdFail_UndefinedDerivative_2: typeof StdFail_UndefinedDerivative_2;
   StdFail_UndefinedValue: typeof StdFail_UndefinedValue;
+  StdFail_UndefinedValue_1: typeof StdFail_UndefinedValue_1;
+  StdFail_UndefinedValue_2: typeof StdFail_UndefinedValue_2;
   StdLDrivers: typeof StdLDrivers;
   StdLDrivers_DocumentRetrievalDriver: typeof StdLDrivers_DocumentRetrievalDriver;
   StdLPersistent: typeof StdLPersistent;
@@ -2531,11 +5124,27 @@ export interface opencascade {
   StdLPersistent_Data: typeof StdLPersistent_Data;
   StdLPersistent_Dependency: typeof StdLPersistent_Dependency;
   StdLPersistent_Document: typeof StdLPersistent_Document;
+  StdLPersistent_Function: typeof StdLPersistent_Function;
   StdLPersistent_HArray1: typeof StdLPersistent_HArray1;
+  StdLPersistent_HArray1OfPersistent: typeof StdLPersistent_HArray1OfPersistent;
+  StdLPersistent_HArray1OfPersistent_1: typeof StdLPersistent_HArray1OfPersistent_1;
+  StdLPersistent_HArray1OfPersistent_2: typeof StdLPersistent_HArray1OfPersistent_2;
+  StdLPersistent_HArray1OfPersistent_3: typeof StdLPersistent_HArray1OfPersistent_3;
+  StdLPersistent_HArray1OfPersistent_4: typeof StdLPersistent_HArray1OfPersistent_4;
   StdLPersistent_HArray2: typeof StdLPersistent_HArray2;
+  StdLPersistent_HArray2OfPersistent: typeof StdLPersistent_HArray2OfPersistent;
+  StdLPersistent_HArray2OfPersistent_1: typeof StdLPersistent_HArray2OfPersistent_1;
+  StdLPersistent_HArray2OfPersistent_2: typeof StdLPersistent_HArray2OfPersistent_2;
+  StdLPersistent_HArray2OfPersistent_3: typeof StdLPersistent_HArray2OfPersistent_3;
   StdLPersistent_HString: typeof StdLPersistent_HString;
+  StdLPersistent_NamedData: typeof StdLPersistent_NamedData;
+  StdLPersistent_Real: typeof StdLPersistent_Real;
+  StdLPersistent_TreeNode: typeof StdLPersistent_TreeNode;
   StdLPersistent_Value: typeof StdLPersistent_Value;
+  StdLPersistent_Variable: typeof StdLPersistent_Variable;
   StdLPersistent_Void: typeof StdLPersistent_Void;
+  StdLPersistent_XLink: typeof StdLPersistent_XLink;
+  StdObjMgt_MapOfInstantiators: typeof StdObjMgt_MapOfInstantiators;
   StdObjMgt_Persistent: typeof StdObjMgt_Persistent;
   StdObjMgt_ReadData: typeof StdObjMgt_ReadData;
   StdObjMgt_SharedObject: typeof StdObjMgt_SharedObject;
@@ -2544,7 +5153,14 @@ export interface opencascade {
   StdObject_Shape: typeof StdObject_Shape;
   StdPersistent: typeof StdPersistent;
   StdPersistent_DataXtd: typeof StdPersistent_DataXtd;
+  StdPersistent_DataXtd_Constraint: typeof StdPersistent_DataXtd_Constraint;
+  StdPersistent_DataXtd_PatternStd: typeof StdPersistent_DataXtd_PatternStd;
   StdPersistent_HArray1: typeof StdPersistent_HArray1;
+  StdPersistent_HArray1OfShape1: typeof StdPersistent_HArray1OfShape1;
+  StdPersistent_HArray1OfShape1_1: typeof StdPersistent_HArray1OfShape1_1;
+  StdPersistent_HArray1OfShape1_2: typeof StdPersistent_HArray1OfShape1_2;
+  StdPersistent_HArray1OfShape1_3: typeof StdPersistent_HArray1OfShape1_3;
+  StdPersistent_HArray1OfShape1_4: typeof StdPersistent_HArray1OfShape1_4;
   StdPersistent_Naming: typeof StdPersistent_Naming;
   StdPersistent_PPrsStd: typeof StdPersistent_PPrsStd;
   StdPersistent_TopoDS: typeof StdPersistent_TopoDS;
@@ -2561,6 +5177,8 @@ export interface opencascade {
   StdPrs_ShadedSurface: typeof StdPrs_ShadedSurface;
   StdPrs_ToolPoint: typeof StdPrs_ToolPoint;
   StdPrs_ToolRFace: typeof StdPrs_ToolRFace;
+  StdPrs_ToolRFace_1: typeof StdPrs_ToolRFace_1;
+  StdPrs_ToolRFace_2: typeof StdPrs_ToolRFace_2;
   StdPrs_ToolTriangulatedShape: typeof StdPrs_ToolTriangulatedShape;
   StdPrs_ToolVertex: typeof StdPrs_ToolVertex;
   StdPrs_WFDeflectionRestrictedFace: typeof StdPrs_WFDeflectionRestrictedFace;
@@ -2571,6 +5189,9 @@ export interface opencascade {
   StdPrs_WFSurface: typeof StdPrs_WFSurface;
   StdSelect: typeof StdSelect;
   StdSelect_BRepOwner: typeof StdSelect_BRepOwner;
+  StdSelect_BRepOwner_1: typeof StdSelect_BRepOwner_1;
+  StdSelect_BRepOwner_2: typeof StdSelect_BRepOwner_2;
+  StdSelect_BRepOwner_3: typeof StdSelect_BRepOwner_3;
   StdSelect_BRepSelectionTool: typeof StdSelect_BRepSelectionTool;
   StdSelect_EdgeFilter: typeof StdSelect_EdgeFilter;
   StdSelect_FaceFilter: typeof StdSelect_FaceFilter;
@@ -2580,11 +5201,18 @@ export interface opencascade {
   StdSelect_ViewerSelector3d: typeof StdSelect_ViewerSelector3d;
   StdStorage: typeof StdStorage;
   StdStorage_Bucket: typeof StdStorage_Bucket;
+  StdStorage_Bucket_1: typeof StdStorage_Bucket_1;
+  StdStorage_Bucket_2: typeof StdStorage_Bucket_2;
   StdStorage_BucketIterator: typeof StdStorage_BucketIterator;
   StdStorage_BucketOfPersistent: typeof StdStorage_BucketOfPersistent;
   StdStorage_Data: typeof StdStorage_Data;
+  StdStorage_HSequenceOfRoots: typeof StdStorage_HSequenceOfRoots;
+  StdStorage_HSequenceOfRoots_1: typeof StdStorage_HSequenceOfRoots_1;
+  StdStorage_HSequenceOfRoots_2: typeof StdStorage_HSequenceOfRoots_2;
   StdStorage_HeaderData: typeof StdStorage_HeaderData;
   StdStorage_Root: typeof StdStorage_Root;
+  StdStorage_Root_1: typeof StdStorage_Root_1;
+  StdStorage_Root_2: typeof StdStorage_Root_2;
   StdStorage_RootData: typeof StdStorage_RootData;
   StdStorage_TypeData: typeof StdStorage_TypeData;
   StepAP203_ApprovedItem: typeof StepAP203_ApprovedItem;
@@ -2602,6 +5230,56 @@ export interface opencascade {
   StepAP203_ClassifiedItem: typeof StepAP203_ClassifiedItem;
   StepAP203_ContractedItem: typeof StepAP203_ContractedItem;
   StepAP203_DateTimeItem: typeof StepAP203_DateTimeItem;
+  StepAP203_HArray1OfApprovedItem: typeof StepAP203_HArray1OfApprovedItem;
+  StepAP203_HArray1OfApprovedItem_1: typeof StepAP203_HArray1OfApprovedItem_1;
+  StepAP203_HArray1OfApprovedItem_2: typeof StepAP203_HArray1OfApprovedItem_2;
+  StepAP203_HArray1OfApprovedItem_3: typeof StepAP203_HArray1OfApprovedItem_3;
+  StepAP203_HArray1OfApprovedItem_4: typeof StepAP203_HArray1OfApprovedItem_4;
+  StepAP203_HArray1OfCertifiedItem: typeof StepAP203_HArray1OfCertifiedItem;
+  StepAP203_HArray1OfCertifiedItem_1: typeof StepAP203_HArray1OfCertifiedItem_1;
+  StepAP203_HArray1OfCertifiedItem_2: typeof StepAP203_HArray1OfCertifiedItem_2;
+  StepAP203_HArray1OfCertifiedItem_3: typeof StepAP203_HArray1OfCertifiedItem_3;
+  StepAP203_HArray1OfCertifiedItem_4: typeof StepAP203_HArray1OfCertifiedItem_4;
+  StepAP203_HArray1OfChangeRequestItem: typeof StepAP203_HArray1OfChangeRequestItem;
+  StepAP203_HArray1OfChangeRequestItem_1: typeof StepAP203_HArray1OfChangeRequestItem_1;
+  StepAP203_HArray1OfChangeRequestItem_2: typeof StepAP203_HArray1OfChangeRequestItem_2;
+  StepAP203_HArray1OfChangeRequestItem_3: typeof StepAP203_HArray1OfChangeRequestItem_3;
+  StepAP203_HArray1OfChangeRequestItem_4: typeof StepAP203_HArray1OfChangeRequestItem_4;
+  StepAP203_HArray1OfClassifiedItem: typeof StepAP203_HArray1OfClassifiedItem;
+  StepAP203_HArray1OfClassifiedItem_1: typeof StepAP203_HArray1OfClassifiedItem_1;
+  StepAP203_HArray1OfClassifiedItem_2: typeof StepAP203_HArray1OfClassifiedItem_2;
+  StepAP203_HArray1OfClassifiedItem_3: typeof StepAP203_HArray1OfClassifiedItem_3;
+  StepAP203_HArray1OfClassifiedItem_4: typeof StepAP203_HArray1OfClassifiedItem_4;
+  StepAP203_HArray1OfContractedItem: typeof StepAP203_HArray1OfContractedItem;
+  StepAP203_HArray1OfContractedItem_1: typeof StepAP203_HArray1OfContractedItem_1;
+  StepAP203_HArray1OfContractedItem_2: typeof StepAP203_HArray1OfContractedItem_2;
+  StepAP203_HArray1OfContractedItem_3: typeof StepAP203_HArray1OfContractedItem_3;
+  StepAP203_HArray1OfContractedItem_4: typeof StepAP203_HArray1OfContractedItem_4;
+  StepAP203_HArray1OfDateTimeItem: typeof StepAP203_HArray1OfDateTimeItem;
+  StepAP203_HArray1OfDateTimeItem_1: typeof StepAP203_HArray1OfDateTimeItem_1;
+  StepAP203_HArray1OfDateTimeItem_2: typeof StepAP203_HArray1OfDateTimeItem_2;
+  StepAP203_HArray1OfDateTimeItem_3: typeof StepAP203_HArray1OfDateTimeItem_3;
+  StepAP203_HArray1OfDateTimeItem_4: typeof StepAP203_HArray1OfDateTimeItem_4;
+  StepAP203_HArray1OfPersonOrganizationItem: typeof StepAP203_HArray1OfPersonOrganizationItem;
+  StepAP203_HArray1OfPersonOrganizationItem_1: typeof StepAP203_HArray1OfPersonOrganizationItem_1;
+  StepAP203_HArray1OfPersonOrganizationItem_2: typeof StepAP203_HArray1OfPersonOrganizationItem_2;
+  StepAP203_HArray1OfPersonOrganizationItem_3: typeof StepAP203_HArray1OfPersonOrganizationItem_3;
+  StepAP203_HArray1OfPersonOrganizationItem_4: typeof StepAP203_HArray1OfPersonOrganizationItem_4;
+  StepAP203_HArray1OfSpecifiedItem: typeof StepAP203_HArray1OfSpecifiedItem;
+  StepAP203_HArray1OfSpecifiedItem_1: typeof StepAP203_HArray1OfSpecifiedItem_1;
+  StepAP203_HArray1OfSpecifiedItem_2: typeof StepAP203_HArray1OfSpecifiedItem_2;
+  StepAP203_HArray1OfSpecifiedItem_3: typeof StepAP203_HArray1OfSpecifiedItem_3;
+  StepAP203_HArray1OfSpecifiedItem_4: typeof StepAP203_HArray1OfSpecifiedItem_4;
+  StepAP203_HArray1OfStartRequestItem: typeof StepAP203_HArray1OfStartRequestItem;
+  StepAP203_HArray1OfStartRequestItem_1: typeof StepAP203_HArray1OfStartRequestItem_1;
+  StepAP203_HArray1OfStartRequestItem_2: typeof StepAP203_HArray1OfStartRequestItem_2;
+  StepAP203_HArray1OfStartRequestItem_3: typeof StepAP203_HArray1OfStartRequestItem_3;
+  StepAP203_HArray1OfStartRequestItem_4: typeof StepAP203_HArray1OfStartRequestItem_4;
+  StepAP203_HArray1OfWorkItem: typeof StepAP203_HArray1OfWorkItem;
+  StepAP203_HArray1OfWorkItem_1: typeof StepAP203_HArray1OfWorkItem_1;
+  StepAP203_HArray1OfWorkItem_2: typeof StepAP203_HArray1OfWorkItem_2;
+  StepAP203_HArray1OfWorkItem_3: typeof StepAP203_HArray1OfWorkItem_3;
+  StepAP203_HArray1OfWorkItem_4: typeof StepAP203_HArray1OfWorkItem_4;
   StepAP203_PersonOrganizationItem: typeof StepAP203_PersonOrganizationItem;
   StepAP203_SpecifiedItem: typeof StepAP203_SpecifiedItem;
   StepAP203_StartRequest: typeof StepAP203_StartRequest;
@@ -2609,6 +5287,8 @@ export interface opencascade {
   StepAP203_StartWork: typeof StepAP203_StartWork;
   StepAP203_WorkItem: typeof StepAP203_WorkItem;
   StepAP209_Construct: typeof StepAP209_Construct;
+  StepAP209_Construct_1: typeof StepAP209_Construct_1;
+  StepAP209_Construct_2: typeof StepAP209_Construct_2;
   StepAP214: typeof StepAP214;
   StepAP214_AppliedApprovalAssignment: typeof StepAP214_AppliedApprovalAssignment;
   StepAP214_AppliedDateAndTimeAssignment: typeof StepAP214_AppliedDateAndTimeAssignment;
@@ -2649,6 +5329,91 @@ export interface opencascade {
   StepAP214_ExternallyDefinedClass: typeof StepAP214_ExternallyDefinedClass;
   StepAP214_ExternallyDefinedGeneralProperty: typeof StepAP214_ExternallyDefinedGeneralProperty;
   StepAP214_GroupItem: typeof StepAP214_GroupItem;
+  StepAP214_HArray1OfApprovalItem: typeof StepAP214_HArray1OfApprovalItem;
+  StepAP214_HArray1OfApprovalItem_1: typeof StepAP214_HArray1OfApprovalItem_1;
+  StepAP214_HArray1OfApprovalItem_2: typeof StepAP214_HArray1OfApprovalItem_2;
+  StepAP214_HArray1OfApprovalItem_3: typeof StepAP214_HArray1OfApprovalItem_3;
+  StepAP214_HArray1OfApprovalItem_4: typeof StepAP214_HArray1OfApprovalItem_4;
+  StepAP214_HArray1OfAutoDesignDateAndPersonItem: typeof StepAP214_HArray1OfAutoDesignDateAndPersonItem;
+  StepAP214_HArray1OfAutoDesignDateAndPersonItem_1: typeof StepAP214_HArray1OfAutoDesignDateAndPersonItem_1;
+  StepAP214_HArray1OfAutoDesignDateAndPersonItem_2: typeof StepAP214_HArray1OfAutoDesignDateAndPersonItem_2;
+  StepAP214_HArray1OfAutoDesignDateAndPersonItem_3: typeof StepAP214_HArray1OfAutoDesignDateAndPersonItem_3;
+  StepAP214_HArray1OfAutoDesignDateAndPersonItem_4: typeof StepAP214_HArray1OfAutoDesignDateAndPersonItem_4;
+  StepAP214_HArray1OfAutoDesignDateAndTimeItem: typeof StepAP214_HArray1OfAutoDesignDateAndTimeItem;
+  StepAP214_HArray1OfAutoDesignDateAndTimeItem_1: typeof StepAP214_HArray1OfAutoDesignDateAndTimeItem_1;
+  StepAP214_HArray1OfAutoDesignDateAndTimeItem_2: typeof StepAP214_HArray1OfAutoDesignDateAndTimeItem_2;
+  StepAP214_HArray1OfAutoDesignDateAndTimeItem_3: typeof StepAP214_HArray1OfAutoDesignDateAndTimeItem_3;
+  StepAP214_HArray1OfAutoDesignDateAndTimeItem_4: typeof StepAP214_HArray1OfAutoDesignDateAndTimeItem_4;
+  StepAP214_HArray1OfAutoDesignDatedItem: typeof StepAP214_HArray1OfAutoDesignDatedItem;
+  StepAP214_HArray1OfAutoDesignDatedItem_1: typeof StepAP214_HArray1OfAutoDesignDatedItem_1;
+  StepAP214_HArray1OfAutoDesignDatedItem_2: typeof StepAP214_HArray1OfAutoDesignDatedItem_2;
+  StepAP214_HArray1OfAutoDesignDatedItem_3: typeof StepAP214_HArray1OfAutoDesignDatedItem_3;
+  StepAP214_HArray1OfAutoDesignDatedItem_4: typeof StepAP214_HArray1OfAutoDesignDatedItem_4;
+  StepAP214_HArray1OfAutoDesignGeneralOrgItem: typeof StepAP214_HArray1OfAutoDesignGeneralOrgItem;
+  StepAP214_HArray1OfAutoDesignGeneralOrgItem_1: typeof StepAP214_HArray1OfAutoDesignGeneralOrgItem_1;
+  StepAP214_HArray1OfAutoDesignGeneralOrgItem_2: typeof StepAP214_HArray1OfAutoDesignGeneralOrgItem_2;
+  StepAP214_HArray1OfAutoDesignGeneralOrgItem_3: typeof StepAP214_HArray1OfAutoDesignGeneralOrgItem_3;
+  StepAP214_HArray1OfAutoDesignGeneralOrgItem_4: typeof StepAP214_HArray1OfAutoDesignGeneralOrgItem_4;
+  StepAP214_HArray1OfAutoDesignGroupedItem: typeof StepAP214_HArray1OfAutoDesignGroupedItem;
+  StepAP214_HArray1OfAutoDesignGroupedItem_1: typeof StepAP214_HArray1OfAutoDesignGroupedItem_1;
+  StepAP214_HArray1OfAutoDesignGroupedItem_2: typeof StepAP214_HArray1OfAutoDesignGroupedItem_2;
+  StepAP214_HArray1OfAutoDesignGroupedItem_3: typeof StepAP214_HArray1OfAutoDesignGroupedItem_3;
+  StepAP214_HArray1OfAutoDesignGroupedItem_4: typeof StepAP214_HArray1OfAutoDesignGroupedItem_4;
+  StepAP214_HArray1OfAutoDesignPresentedItemSelect: typeof StepAP214_HArray1OfAutoDesignPresentedItemSelect;
+  StepAP214_HArray1OfAutoDesignPresentedItemSelect_1: typeof StepAP214_HArray1OfAutoDesignPresentedItemSelect_1;
+  StepAP214_HArray1OfAutoDesignPresentedItemSelect_2: typeof StepAP214_HArray1OfAutoDesignPresentedItemSelect_2;
+  StepAP214_HArray1OfAutoDesignPresentedItemSelect_3: typeof StepAP214_HArray1OfAutoDesignPresentedItemSelect_3;
+  StepAP214_HArray1OfAutoDesignPresentedItemSelect_4: typeof StepAP214_HArray1OfAutoDesignPresentedItemSelect_4;
+  StepAP214_HArray1OfAutoDesignReferencingItem: typeof StepAP214_HArray1OfAutoDesignReferencingItem;
+  StepAP214_HArray1OfAutoDesignReferencingItem_1: typeof StepAP214_HArray1OfAutoDesignReferencingItem_1;
+  StepAP214_HArray1OfAutoDesignReferencingItem_2: typeof StepAP214_HArray1OfAutoDesignReferencingItem_2;
+  StepAP214_HArray1OfAutoDesignReferencingItem_3: typeof StepAP214_HArray1OfAutoDesignReferencingItem_3;
+  StepAP214_HArray1OfAutoDesignReferencingItem_4: typeof StepAP214_HArray1OfAutoDesignReferencingItem_4;
+  StepAP214_HArray1OfDateAndTimeItem: typeof StepAP214_HArray1OfDateAndTimeItem;
+  StepAP214_HArray1OfDateAndTimeItem_1: typeof StepAP214_HArray1OfDateAndTimeItem_1;
+  StepAP214_HArray1OfDateAndTimeItem_2: typeof StepAP214_HArray1OfDateAndTimeItem_2;
+  StepAP214_HArray1OfDateAndTimeItem_3: typeof StepAP214_HArray1OfDateAndTimeItem_3;
+  StepAP214_HArray1OfDateAndTimeItem_4: typeof StepAP214_HArray1OfDateAndTimeItem_4;
+  StepAP214_HArray1OfDateItem: typeof StepAP214_HArray1OfDateItem;
+  StepAP214_HArray1OfDateItem_1: typeof StepAP214_HArray1OfDateItem_1;
+  StepAP214_HArray1OfDateItem_2: typeof StepAP214_HArray1OfDateItem_2;
+  StepAP214_HArray1OfDateItem_3: typeof StepAP214_HArray1OfDateItem_3;
+  StepAP214_HArray1OfDateItem_4: typeof StepAP214_HArray1OfDateItem_4;
+  StepAP214_HArray1OfDocumentReferenceItem: typeof StepAP214_HArray1OfDocumentReferenceItem;
+  StepAP214_HArray1OfDocumentReferenceItem_1: typeof StepAP214_HArray1OfDocumentReferenceItem_1;
+  StepAP214_HArray1OfDocumentReferenceItem_2: typeof StepAP214_HArray1OfDocumentReferenceItem_2;
+  StepAP214_HArray1OfDocumentReferenceItem_3: typeof StepAP214_HArray1OfDocumentReferenceItem_3;
+  StepAP214_HArray1OfDocumentReferenceItem_4: typeof StepAP214_HArray1OfDocumentReferenceItem_4;
+  StepAP214_HArray1OfExternalIdentificationItem: typeof StepAP214_HArray1OfExternalIdentificationItem;
+  StepAP214_HArray1OfExternalIdentificationItem_1: typeof StepAP214_HArray1OfExternalIdentificationItem_1;
+  StepAP214_HArray1OfExternalIdentificationItem_2: typeof StepAP214_HArray1OfExternalIdentificationItem_2;
+  StepAP214_HArray1OfExternalIdentificationItem_3: typeof StepAP214_HArray1OfExternalIdentificationItem_3;
+  StepAP214_HArray1OfExternalIdentificationItem_4: typeof StepAP214_HArray1OfExternalIdentificationItem_4;
+  StepAP214_HArray1OfGroupItem: typeof StepAP214_HArray1OfGroupItem;
+  StepAP214_HArray1OfGroupItem_1: typeof StepAP214_HArray1OfGroupItem_1;
+  StepAP214_HArray1OfGroupItem_2: typeof StepAP214_HArray1OfGroupItem_2;
+  StepAP214_HArray1OfGroupItem_3: typeof StepAP214_HArray1OfGroupItem_3;
+  StepAP214_HArray1OfGroupItem_4: typeof StepAP214_HArray1OfGroupItem_4;
+  StepAP214_HArray1OfOrganizationItem: typeof StepAP214_HArray1OfOrganizationItem;
+  StepAP214_HArray1OfOrganizationItem_1: typeof StepAP214_HArray1OfOrganizationItem_1;
+  StepAP214_HArray1OfOrganizationItem_2: typeof StepAP214_HArray1OfOrganizationItem_2;
+  StepAP214_HArray1OfOrganizationItem_3: typeof StepAP214_HArray1OfOrganizationItem_3;
+  StepAP214_HArray1OfOrganizationItem_4: typeof StepAP214_HArray1OfOrganizationItem_4;
+  StepAP214_HArray1OfPersonAndOrganizationItem: typeof StepAP214_HArray1OfPersonAndOrganizationItem;
+  StepAP214_HArray1OfPersonAndOrganizationItem_1: typeof StepAP214_HArray1OfPersonAndOrganizationItem_1;
+  StepAP214_HArray1OfPersonAndOrganizationItem_2: typeof StepAP214_HArray1OfPersonAndOrganizationItem_2;
+  StepAP214_HArray1OfPersonAndOrganizationItem_3: typeof StepAP214_HArray1OfPersonAndOrganizationItem_3;
+  StepAP214_HArray1OfPersonAndOrganizationItem_4: typeof StepAP214_HArray1OfPersonAndOrganizationItem_4;
+  StepAP214_HArray1OfPresentedItemSelect: typeof StepAP214_HArray1OfPresentedItemSelect;
+  StepAP214_HArray1OfPresentedItemSelect_1: typeof StepAP214_HArray1OfPresentedItemSelect_1;
+  StepAP214_HArray1OfPresentedItemSelect_2: typeof StepAP214_HArray1OfPresentedItemSelect_2;
+  StepAP214_HArray1OfPresentedItemSelect_3: typeof StepAP214_HArray1OfPresentedItemSelect_3;
+  StepAP214_HArray1OfPresentedItemSelect_4: typeof StepAP214_HArray1OfPresentedItemSelect_4;
+  StepAP214_HArray1OfSecurityClassificationItem: typeof StepAP214_HArray1OfSecurityClassificationItem;
+  StepAP214_HArray1OfSecurityClassificationItem_1: typeof StepAP214_HArray1OfSecurityClassificationItem_1;
+  StepAP214_HArray1OfSecurityClassificationItem_2: typeof StepAP214_HArray1OfSecurityClassificationItem_2;
+  StepAP214_HArray1OfSecurityClassificationItem_3: typeof StepAP214_HArray1OfSecurityClassificationItem_3;
+  StepAP214_HArray1OfSecurityClassificationItem_4: typeof StepAP214_HArray1OfSecurityClassificationItem_4;
   StepAP214_OrganizationItem: typeof StepAP214_OrganizationItem;
   StepAP214_PersonAndOrganizationItem: typeof StepAP214_PersonAndOrganizationItem;
   StepAP214_PresentedItemSelect: typeof StepAP214_PresentedItemSelect;
@@ -2727,6 +5492,56 @@ export interface opencascade {
   StepBasic_Group: typeof StepBasic_Group;
   StepBasic_GroupAssignment: typeof StepBasic_GroupAssignment;
   StepBasic_GroupRelationship: typeof StepBasic_GroupRelationship;
+  StepBasic_HArray1OfApproval: typeof StepBasic_HArray1OfApproval;
+  StepBasic_HArray1OfApproval_1: typeof StepBasic_HArray1OfApproval_1;
+  StepBasic_HArray1OfApproval_2: typeof StepBasic_HArray1OfApproval_2;
+  StepBasic_HArray1OfApproval_3: typeof StepBasic_HArray1OfApproval_3;
+  StepBasic_HArray1OfApproval_4: typeof StepBasic_HArray1OfApproval_4;
+  StepBasic_HArray1OfDerivedUnitElement: typeof StepBasic_HArray1OfDerivedUnitElement;
+  StepBasic_HArray1OfDerivedUnitElement_1: typeof StepBasic_HArray1OfDerivedUnitElement_1;
+  StepBasic_HArray1OfDerivedUnitElement_2: typeof StepBasic_HArray1OfDerivedUnitElement_2;
+  StepBasic_HArray1OfDerivedUnitElement_3: typeof StepBasic_HArray1OfDerivedUnitElement_3;
+  StepBasic_HArray1OfDerivedUnitElement_4: typeof StepBasic_HArray1OfDerivedUnitElement_4;
+  StepBasic_HArray1OfDocument: typeof StepBasic_HArray1OfDocument;
+  StepBasic_HArray1OfDocument_1: typeof StepBasic_HArray1OfDocument_1;
+  StepBasic_HArray1OfDocument_2: typeof StepBasic_HArray1OfDocument_2;
+  StepBasic_HArray1OfDocument_3: typeof StepBasic_HArray1OfDocument_3;
+  StepBasic_HArray1OfDocument_4: typeof StepBasic_HArray1OfDocument_4;
+  StepBasic_HArray1OfNamedUnit: typeof StepBasic_HArray1OfNamedUnit;
+  StepBasic_HArray1OfNamedUnit_1: typeof StepBasic_HArray1OfNamedUnit_1;
+  StepBasic_HArray1OfNamedUnit_2: typeof StepBasic_HArray1OfNamedUnit_2;
+  StepBasic_HArray1OfNamedUnit_3: typeof StepBasic_HArray1OfNamedUnit_3;
+  StepBasic_HArray1OfNamedUnit_4: typeof StepBasic_HArray1OfNamedUnit_4;
+  StepBasic_HArray1OfOrganization: typeof StepBasic_HArray1OfOrganization;
+  StepBasic_HArray1OfOrganization_1: typeof StepBasic_HArray1OfOrganization_1;
+  StepBasic_HArray1OfOrganization_2: typeof StepBasic_HArray1OfOrganization_2;
+  StepBasic_HArray1OfOrganization_3: typeof StepBasic_HArray1OfOrganization_3;
+  StepBasic_HArray1OfOrganization_4: typeof StepBasic_HArray1OfOrganization_4;
+  StepBasic_HArray1OfPerson: typeof StepBasic_HArray1OfPerson;
+  StepBasic_HArray1OfPerson_1: typeof StepBasic_HArray1OfPerson_1;
+  StepBasic_HArray1OfPerson_2: typeof StepBasic_HArray1OfPerson_2;
+  StepBasic_HArray1OfPerson_3: typeof StepBasic_HArray1OfPerson_3;
+  StepBasic_HArray1OfPerson_4: typeof StepBasic_HArray1OfPerson_4;
+  StepBasic_HArray1OfProduct: typeof StepBasic_HArray1OfProduct;
+  StepBasic_HArray1OfProduct_1: typeof StepBasic_HArray1OfProduct_1;
+  StepBasic_HArray1OfProduct_2: typeof StepBasic_HArray1OfProduct_2;
+  StepBasic_HArray1OfProduct_3: typeof StepBasic_HArray1OfProduct_3;
+  StepBasic_HArray1OfProduct_4: typeof StepBasic_HArray1OfProduct_4;
+  StepBasic_HArray1OfProductContext: typeof StepBasic_HArray1OfProductContext;
+  StepBasic_HArray1OfProductContext_1: typeof StepBasic_HArray1OfProductContext_1;
+  StepBasic_HArray1OfProductContext_2: typeof StepBasic_HArray1OfProductContext_2;
+  StepBasic_HArray1OfProductContext_3: typeof StepBasic_HArray1OfProductContext_3;
+  StepBasic_HArray1OfProductContext_4: typeof StepBasic_HArray1OfProductContext_4;
+  StepBasic_HArray1OfProductDefinition: typeof StepBasic_HArray1OfProductDefinition;
+  StepBasic_HArray1OfProductDefinition_1: typeof StepBasic_HArray1OfProductDefinition_1;
+  StepBasic_HArray1OfProductDefinition_2: typeof StepBasic_HArray1OfProductDefinition_2;
+  StepBasic_HArray1OfProductDefinition_3: typeof StepBasic_HArray1OfProductDefinition_3;
+  StepBasic_HArray1OfProductDefinition_4: typeof StepBasic_HArray1OfProductDefinition_4;
+  StepBasic_HArray1OfUncertaintyMeasureWithUnit: typeof StepBasic_HArray1OfUncertaintyMeasureWithUnit;
+  StepBasic_HArray1OfUncertaintyMeasureWithUnit_1: typeof StepBasic_HArray1OfUncertaintyMeasureWithUnit_1;
+  StepBasic_HArray1OfUncertaintyMeasureWithUnit_2: typeof StepBasic_HArray1OfUncertaintyMeasureWithUnit_2;
+  StepBasic_HArray1OfUncertaintyMeasureWithUnit_3: typeof StepBasic_HArray1OfUncertaintyMeasureWithUnit_3;
+  StepBasic_HArray1OfUncertaintyMeasureWithUnit_4: typeof StepBasic_HArray1OfUncertaintyMeasureWithUnit_4;
   StepBasic_IdentificationAssignment: typeof StepBasic_IdentificationAssignment;
   StepBasic_IdentificationRole: typeof StepBasic_IdentificationRole;
   StepBasic_LengthMeasureWithUnit: typeof StepBasic_LengthMeasureWithUnit;
@@ -2810,6 +5625,8 @@ export interface opencascade {
   StepData_ESDescr: typeof StepData_ESDescr;
   StepData_EnumTool: typeof StepData_EnumTool;
   StepData_Field: typeof StepData_Field;
+  StepData_Field_1: typeof StepData_Field_1;
+  StepData_Field_2: typeof StepData_Field_2;
   StepData_FieldList: typeof StepData_FieldList;
   StepData_FieldList1: typeof StepData_FieldList1;
   StepData_FieldListD: typeof StepData_FieldListD;
@@ -2817,6 +5634,11 @@ export interface opencascade {
   StepData_FileProtocol: typeof StepData_FileProtocol;
   StepData_FileRecognizer: typeof StepData_FileRecognizer;
   StepData_GlobalNodeOfWriterLib: typeof StepData_GlobalNodeOfWriterLib;
+  StepData_HArray1OfField: typeof StepData_HArray1OfField;
+  StepData_HArray1OfField_1: typeof StepData_HArray1OfField_1;
+  StepData_HArray1OfField_2: typeof StepData_HArray1OfField_2;
+  StepData_HArray1OfField_3: typeof StepData_HArray1OfField_3;
+  StepData_HArray1OfField_4: typeof StepData_HArray1OfField_4;
   StepData_NodeOfWriterLib: typeof StepData_NodeOfWriterLib;
   StepData_PDescr: typeof StepData_PDescr;
   StepData_Plex: typeof StepData_Plex;
@@ -2835,6 +5657,8 @@ export interface opencascade {
   StepData_StepReaderTool: typeof StepData_StepReaderTool;
   StepData_StepWriter: typeof StepData_StepWriter;
   StepData_WriterLib: typeof StepData_WriterLib;
+  StepData_WriterLib_1: typeof StepData_WriterLib_1;
+  StepData_WriterLib_2: typeof StepData_WriterLib_2;
   StepDimTol_AngularityTolerance: typeof StepDimTol_AngularityTolerance;
   StepDimTol_CircularRunoutTolerance: typeof StepDimTol_CircularRunoutTolerance;
   StepDimTol_CoaxialityTolerance: typeof StepDimTol_CoaxialityTolerance;
@@ -2869,6 +5693,41 @@ export interface opencascade {
   StepDimTol_GeometricToleranceWithDefinedUnit: typeof StepDimTol_GeometricToleranceWithDefinedUnit;
   StepDimTol_GeometricToleranceWithMaximumTolerance: typeof StepDimTol_GeometricToleranceWithMaximumTolerance;
   StepDimTol_GeometricToleranceWithModifiers: typeof StepDimTol_GeometricToleranceWithModifiers;
+  StepDimTol_HArray1OfDatumReference: typeof StepDimTol_HArray1OfDatumReference;
+  StepDimTol_HArray1OfDatumReference_1: typeof StepDimTol_HArray1OfDatumReference_1;
+  StepDimTol_HArray1OfDatumReference_2: typeof StepDimTol_HArray1OfDatumReference_2;
+  StepDimTol_HArray1OfDatumReference_3: typeof StepDimTol_HArray1OfDatumReference_3;
+  StepDimTol_HArray1OfDatumReference_4: typeof StepDimTol_HArray1OfDatumReference_4;
+  StepDimTol_HArray1OfDatumReferenceCompartment: typeof StepDimTol_HArray1OfDatumReferenceCompartment;
+  StepDimTol_HArray1OfDatumReferenceCompartment_1: typeof StepDimTol_HArray1OfDatumReferenceCompartment_1;
+  StepDimTol_HArray1OfDatumReferenceCompartment_2: typeof StepDimTol_HArray1OfDatumReferenceCompartment_2;
+  StepDimTol_HArray1OfDatumReferenceCompartment_3: typeof StepDimTol_HArray1OfDatumReferenceCompartment_3;
+  StepDimTol_HArray1OfDatumReferenceCompartment_4: typeof StepDimTol_HArray1OfDatumReferenceCompartment_4;
+  StepDimTol_HArray1OfDatumReferenceElement: typeof StepDimTol_HArray1OfDatumReferenceElement;
+  StepDimTol_HArray1OfDatumReferenceElement_1: typeof StepDimTol_HArray1OfDatumReferenceElement_1;
+  StepDimTol_HArray1OfDatumReferenceElement_2: typeof StepDimTol_HArray1OfDatumReferenceElement_2;
+  StepDimTol_HArray1OfDatumReferenceElement_3: typeof StepDimTol_HArray1OfDatumReferenceElement_3;
+  StepDimTol_HArray1OfDatumReferenceElement_4: typeof StepDimTol_HArray1OfDatumReferenceElement_4;
+  StepDimTol_HArray1OfDatumReferenceModifier: typeof StepDimTol_HArray1OfDatumReferenceModifier;
+  StepDimTol_HArray1OfDatumReferenceModifier_1: typeof StepDimTol_HArray1OfDatumReferenceModifier_1;
+  StepDimTol_HArray1OfDatumReferenceModifier_2: typeof StepDimTol_HArray1OfDatumReferenceModifier_2;
+  StepDimTol_HArray1OfDatumReferenceModifier_3: typeof StepDimTol_HArray1OfDatumReferenceModifier_3;
+  StepDimTol_HArray1OfDatumReferenceModifier_4: typeof StepDimTol_HArray1OfDatumReferenceModifier_4;
+  StepDimTol_HArray1OfDatumSystemOrReference: typeof StepDimTol_HArray1OfDatumSystemOrReference;
+  StepDimTol_HArray1OfDatumSystemOrReference_1: typeof StepDimTol_HArray1OfDatumSystemOrReference_1;
+  StepDimTol_HArray1OfDatumSystemOrReference_2: typeof StepDimTol_HArray1OfDatumSystemOrReference_2;
+  StepDimTol_HArray1OfDatumSystemOrReference_3: typeof StepDimTol_HArray1OfDatumSystemOrReference_3;
+  StepDimTol_HArray1OfDatumSystemOrReference_4: typeof StepDimTol_HArray1OfDatumSystemOrReference_4;
+  StepDimTol_HArray1OfGeometricToleranceModifier: typeof StepDimTol_HArray1OfGeometricToleranceModifier;
+  StepDimTol_HArray1OfGeometricToleranceModifier_1: typeof StepDimTol_HArray1OfGeometricToleranceModifier_1;
+  StepDimTol_HArray1OfGeometricToleranceModifier_2: typeof StepDimTol_HArray1OfGeometricToleranceModifier_2;
+  StepDimTol_HArray1OfGeometricToleranceModifier_3: typeof StepDimTol_HArray1OfGeometricToleranceModifier_3;
+  StepDimTol_HArray1OfGeometricToleranceModifier_4: typeof StepDimTol_HArray1OfGeometricToleranceModifier_4;
+  StepDimTol_HArray1OfToleranceZoneTarget: typeof StepDimTol_HArray1OfToleranceZoneTarget;
+  StepDimTol_HArray1OfToleranceZoneTarget_1: typeof StepDimTol_HArray1OfToleranceZoneTarget_1;
+  StepDimTol_HArray1OfToleranceZoneTarget_2: typeof StepDimTol_HArray1OfToleranceZoneTarget_2;
+  StepDimTol_HArray1OfToleranceZoneTarget_3: typeof StepDimTol_HArray1OfToleranceZoneTarget_3;
+  StepDimTol_HArray1OfToleranceZoneTarget_4: typeof StepDimTol_HArray1OfToleranceZoneTarget_4;
   StepDimTol_LineProfileTolerance: typeof StepDimTol_LineProfileTolerance;
   StepDimTol_ModifiedGeometricTolerance: typeof StepDimTol_ModifiedGeometricTolerance;
   StepDimTol_NonUniformZoneDefinition: typeof StepDimTol_NonUniformZoneDefinition;
@@ -2904,6 +5763,70 @@ export interface opencascade {
   StepElement_ElementAspectMember: typeof StepElement_ElementAspectMember;
   StepElement_ElementDescriptor: typeof StepElement_ElementDescriptor;
   StepElement_ElementMaterial: typeof StepElement_ElementMaterial;
+  StepElement_HArray1OfCurveElementEndReleasePacket: typeof StepElement_HArray1OfCurveElementEndReleasePacket;
+  StepElement_HArray1OfCurveElementEndReleasePacket_1: typeof StepElement_HArray1OfCurveElementEndReleasePacket_1;
+  StepElement_HArray1OfCurveElementEndReleasePacket_2: typeof StepElement_HArray1OfCurveElementEndReleasePacket_2;
+  StepElement_HArray1OfCurveElementEndReleasePacket_3: typeof StepElement_HArray1OfCurveElementEndReleasePacket_3;
+  StepElement_HArray1OfCurveElementEndReleasePacket_4: typeof StepElement_HArray1OfCurveElementEndReleasePacket_4;
+  StepElement_HArray1OfCurveElementSectionDefinition: typeof StepElement_HArray1OfCurveElementSectionDefinition;
+  StepElement_HArray1OfCurveElementSectionDefinition_1: typeof StepElement_HArray1OfCurveElementSectionDefinition_1;
+  StepElement_HArray1OfCurveElementSectionDefinition_2: typeof StepElement_HArray1OfCurveElementSectionDefinition_2;
+  StepElement_HArray1OfCurveElementSectionDefinition_3: typeof StepElement_HArray1OfCurveElementSectionDefinition_3;
+  StepElement_HArray1OfCurveElementSectionDefinition_4: typeof StepElement_HArray1OfCurveElementSectionDefinition_4;
+  StepElement_HArray1OfHSequenceOfCurveElementPurposeMember: typeof StepElement_HArray1OfHSequenceOfCurveElementPurposeMember;
+  StepElement_HArray1OfHSequenceOfCurveElementPurposeMember_1: typeof StepElement_HArray1OfHSequenceOfCurveElementPurposeMember_1;
+  StepElement_HArray1OfHSequenceOfCurveElementPurposeMember_2: typeof StepElement_HArray1OfHSequenceOfCurveElementPurposeMember_2;
+  StepElement_HArray1OfHSequenceOfCurveElementPurposeMember_3: typeof StepElement_HArray1OfHSequenceOfCurveElementPurposeMember_3;
+  StepElement_HArray1OfHSequenceOfCurveElementPurposeMember_4: typeof StepElement_HArray1OfHSequenceOfCurveElementPurposeMember_4;
+  StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember: typeof StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember;
+  StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember_1: typeof StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember_1;
+  StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember_2: typeof StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember_2;
+  StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember_3: typeof StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember_3;
+  StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember_4: typeof StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember_4;
+  StepElement_HArray1OfMeasureOrUnspecifiedValue: typeof StepElement_HArray1OfMeasureOrUnspecifiedValue;
+  StepElement_HArray1OfMeasureOrUnspecifiedValue_1: typeof StepElement_HArray1OfMeasureOrUnspecifiedValue_1;
+  StepElement_HArray1OfMeasureOrUnspecifiedValue_2: typeof StepElement_HArray1OfMeasureOrUnspecifiedValue_2;
+  StepElement_HArray1OfMeasureOrUnspecifiedValue_3: typeof StepElement_HArray1OfMeasureOrUnspecifiedValue_3;
+  StepElement_HArray1OfMeasureOrUnspecifiedValue_4: typeof StepElement_HArray1OfMeasureOrUnspecifiedValue_4;
+  StepElement_HArray1OfSurfaceSection: typeof StepElement_HArray1OfSurfaceSection;
+  StepElement_HArray1OfSurfaceSection_1: typeof StepElement_HArray1OfSurfaceSection_1;
+  StepElement_HArray1OfSurfaceSection_2: typeof StepElement_HArray1OfSurfaceSection_2;
+  StepElement_HArray1OfSurfaceSection_3: typeof StepElement_HArray1OfSurfaceSection_3;
+  StepElement_HArray1OfSurfaceSection_4: typeof StepElement_HArray1OfSurfaceSection_4;
+  StepElement_HArray1OfVolumeElementPurpose: typeof StepElement_HArray1OfVolumeElementPurpose;
+  StepElement_HArray1OfVolumeElementPurpose_1: typeof StepElement_HArray1OfVolumeElementPurpose_1;
+  StepElement_HArray1OfVolumeElementPurpose_2: typeof StepElement_HArray1OfVolumeElementPurpose_2;
+  StepElement_HArray1OfVolumeElementPurpose_3: typeof StepElement_HArray1OfVolumeElementPurpose_3;
+  StepElement_HArray1OfVolumeElementPurpose_4: typeof StepElement_HArray1OfVolumeElementPurpose_4;
+  StepElement_HArray1OfVolumeElementPurposeMember: typeof StepElement_HArray1OfVolumeElementPurposeMember;
+  StepElement_HArray1OfVolumeElementPurposeMember_1: typeof StepElement_HArray1OfVolumeElementPurposeMember_1;
+  StepElement_HArray1OfVolumeElementPurposeMember_2: typeof StepElement_HArray1OfVolumeElementPurposeMember_2;
+  StepElement_HArray1OfVolumeElementPurposeMember_3: typeof StepElement_HArray1OfVolumeElementPurposeMember_3;
+  StepElement_HArray1OfVolumeElementPurposeMember_4: typeof StepElement_HArray1OfVolumeElementPurposeMember_4;
+  StepElement_HArray2OfCurveElementPurposeMember: typeof StepElement_HArray2OfCurveElementPurposeMember;
+  StepElement_HArray2OfCurveElementPurposeMember_1: typeof StepElement_HArray2OfCurveElementPurposeMember_1;
+  StepElement_HArray2OfCurveElementPurposeMember_2: typeof StepElement_HArray2OfCurveElementPurposeMember_2;
+  StepElement_HArray2OfCurveElementPurposeMember_3: typeof StepElement_HArray2OfCurveElementPurposeMember_3;
+  StepElement_HArray2OfSurfaceElementPurpose: typeof StepElement_HArray2OfSurfaceElementPurpose;
+  StepElement_HArray2OfSurfaceElementPurpose_1: typeof StepElement_HArray2OfSurfaceElementPurpose_1;
+  StepElement_HArray2OfSurfaceElementPurpose_2: typeof StepElement_HArray2OfSurfaceElementPurpose_2;
+  StepElement_HArray2OfSurfaceElementPurpose_3: typeof StepElement_HArray2OfSurfaceElementPurpose_3;
+  StepElement_HArray2OfSurfaceElementPurposeMember: typeof StepElement_HArray2OfSurfaceElementPurposeMember;
+  StepElement_HArray2OfSurfaceElementPurposeMember_1: typeof StepElement_HArray2OfSurfaceElementPurposeMember_1;
+  StepElement_HArray2OfSurfaceElementPurposeMember_2: typeof StepElement_HArray2OfSurfaceElementPurposeMember_2;
+  StepElement_HArray2OfSurfaceElementPurposeMember_3: typeof StepElement_HArray2OfSurfaceElementPurposeMember_3;
+  StepElement_HSequenceOfCurveElementPurposeMember: typeof StepElement_HSequenceOfCurveElementPurposeMember;
+  StepElement_HSequenceOfCurveElementPurposeMember_1: typeof StepElement_HSequenceOfCurveElementPurposeMember_1;
+  StepElement_HSequenceOfCurveElementPurposeMember_2: typeof StepElement_HSequenceOfCurveElementPurposeMember_2;
+  StepElement_HSequenceOfCurveElementSectionDefinition: typeof StepElement_HSequenceOfCurveElementSectionDefinition;
+  StepElement_HSequenceOfCurveElementSectionDefinition_1: typeof StepElement_HSequenceOfCurveElementSectionDefinition_1;
+  StepElement_HSequenceOfCurveElementSectionDefinition_2: typeof StepElement_HSequenceOfCurveElementSectionDefinition_2;
+  StepElement_HSequenceOfElementMaterial: typeof StepElement_HSequenceOfElementMaterial;
+  StepElement_HSequenceOfElementMaterial_1: typeof StepElement_HSequenceOfElementMaterial_1;
+  StepElement_HSequenceOfElementMaterial_2: typeof StepElement_HSequenceOfElementMaterial_2;
+  StepElement_HSequenceOfSurfaceElementPurposeMember: typeof StepElement_HSequenceOfSurfaceElementPurposeMember;
+  StepElement_HSequenceOfSurfaceElementPurposeMember_1: typeof StepElement_HSequenceOfSurfaceElementPurposeMember_1;
+  StepElement_HSequenceOfSurfaceElementPurposeMember_2: typeof StepElement_HSequenceOfSurfaceElementPurposeMember_2;
   StepElement_MeasureOrUnspecifiedValue: typeof StepElement_MeasureOrUnspecifiedValue;
   StepElement_MeasureOrUnspecifiedValueMember: typeof StepElement_MeasureOrUnspecifiedValueMember;
   StepElement_Surface3dElementDescriptor: typeof StepElement_Surface3dElementDescriptor;
@@ -2962,6 +5885,48 @@ export interface opencascade {
   StepFEA_FreedomAndCoefficient: typeof StepFEA_FreedomAndCoefficient;
   StepFEA_FreedomsList: typeof StepFEA_FreedomsList;
   StepFEA_GeometricNode: typeof StepFEA_GeometricNode;
+  StepFEA_HArray1OfCurveElementEndOffset: typeof StepFEA_HArray1OfCurveElementEndOffset;
+  StepFEA_HArray1OfCurveElementEndOffset_1: typeof StepFEA_HArray1OfCurveElementEndOffset_1;
+  StepFEA_HArray1OfCurveElementEndOffset_2: typeof StepFEA_HArray1OfCurveElementEndOffset_2;
+  StepFEA_HArray1OfCurveElementEndOffset_3: typeof StepFEA_HArray1OfCurveElementEndOffset_3;
+  StepFEA_HArray1OfCurveElementEndOffset_4: typeof StepFEA_HArray1OfCurveElementEndOffset_4;
+  StepFEA_HArray1OfCurveElementEndRelease: typeof StepFEA_HArray1OfCurveElementEndRelease;
+  StepFEA_HArray1OfCurveElementEndRelease_1: typeof StepFEA_HArray1OfCurveElementEndRelease_1;
+  StepFEA_HArray1OfCurveElementEndRelease_2: typeof StepFEA_HArray1OfCurveElementEndRelease_2;
+  StepFEA_HArray1OfCurveElementEndRelease_3: typeof StepFEA_HArray1OfCurveElementEndRelease_3;
+  StepFEA_HArray1OfCurveElementEndRelease_4: typeof StepFEA_HArray1OfCurveElementEndRelease_4;
+  StepFEA_HArray1OfCurveElementInterval: typeof StepFEA_HArray1OfCurveElementInterval;
+  StepFEA_HArray1OfCurveElementInterval_1: typeof StepFEA_HArray1OfCurveElementInterval_1;
+  StepFEA_HArray1OfCurveElementInterval_2: typeof StepFEA_HArray1OfCurveElementInterval_2;
+  StepFEA_HArray1OfCurveElementInterval_3: typeof StepFEA_HArray1OfCurveElementInterval_3;
+  StepFEA_HArray1OfCurveElementInterval_4: typeof StepFEA_HArray1OfCurveElementInterval_4;
+  StepFEA_HArray1OfDegreeOfFreedom: typeof StepFEA_HArray1OfDegreeOfFreedom;
+  StepFEA_HArray1OfDegreeOfFreedom_1: typeof StepFEA_HArray1OfDegreeOfFreedom_1;
+  StepFEA_HArray1OfDegreeOfFreedom_2: typeof StepFEA_HArray1OfDegreeOfFreedom_2;
+  StepFEA_HArray1OfDegreeOfFreedom_3: typeof StepFEA_HArray1OfDegreeOfFreedom_3;
+  StepFEA_HArray1OfDegreeOfFreedom_4: typeof StepFEA_HArray1OfDegreeOfFreedom_4;
+  StepFEA_HArray1OfElementRepresentation: typeof StepFEA_HArray1OfElementRepresentation;
+  StepFEA_HArray1OfElementRepresentation_1: typeof StepFEA_HArray1OfElementRepresentation_1;
+  StepFEA_HArray1OfElementRepresentation_2: typeof StepFEA_HArray1OfElementRepresentation_2;
+  StepFEA_HArray1OfElementRepresentation_3: typeof StepFEA_HArray1OfElementRepresentation_3;
+  StepFEA_HArray1OfElementRepresentation_4: typeof StepFEA_HArray1OfElementRepresentation_4;
+  StepFEA_HArray1OfNodeRepresentation: typeof StepFEA_HArray1OfNodeRepresentation;
+  StepFEA_HArray1OfNodeRepresentation_1: typeof StepFEA_HArray1OfNodeRepresentation_1;
+  StepFEA_HArray1OfNodeRepresentation_2: typeof StepFEA_HArray1OfNodeRepresentation_2;
+  StepFEA_HArray1OfNodeRepresentation_3: typeof StepFEA_HArray1OfNodeRepresentation_3;
+  StepFEA_HArray1OfNodeRepresentation_4: typeof StepFEA_HArray1OfNodeRepresentation_4;
+  StepFEA_HSequenceOfCurve3dElementProperty: typeof StepFEA_HSequenceOfCurve3dElementProperty;
+  StepFEA_HSequenceOfCurve3dElementProperty_1: typeof StepFEA_HSequenceOfCurve3dElementProperty_1;
+  StepFEA_HSequenceOfCurve3dElementProperty_2: typeof StepFEA_HSequenceOfCurve3dElementProperty_2;
+  StepFEA_HSequenceOfElementGeometricRelationship: typeof StepFEA_HSequenceOfElementGeometricRelationship;
+  StepFEA_HSequenceOfElementGeometricRelationship_1: typeof StepFEA_HSequenceOfElementGeometricRelationship_1;
+  StepFEA_HSequenceOfElementGeometricRelationship_2: typeof StepFEA_HSequenceOfElementGeometricRelationship_2;
+  StepFEA_HSequenceOfElementRepresentation: typeof StepFEA_HSequenceOfElementRepresentation;
+  StepFEA_HSequenceOfElementRepresentation_1: typeof StepFEA_HSequenceOfElementRepresentation_1;
+  StepFEA_HSequenceOfElementRepresentation_2: typeof StepFEA_HSequenceOfElementRepresentation_2;
+  StepFEA_HSequenceOfNodeRepresentation: typeof StepFEA_HSequenceOfNodeRepresentation;
+  StepFEA_HSequenceOfNodeRepresentation_1: typeof StepFEA_HSequenceOfNodeRepresentation_1;
+  StepFEA_HSequenceOfNodeRepresentation_2: typeof StepFEA_HSequenceOfNodeRepresentation_2;
   StepFEA_Node: typeof StepFEA_Node;
   StepFEA_NodeDefinition: typeof StepFEA_NodeDefinition;
   StepFEA_NodeGroup: typeof StepFEA_NodeGroup;
@@ -3022,6 +5987,49 @@ export interface opencascade {
   StepGeom_GeometricRepresentationContextAndGlobalUnitAssignedContext: typeof StepGeom_GeometricRepresentationContextAndGlobalUnitAssignedContext;
   StepGeom_GeometricRepresentationContextAndParametricRepresentationContext: typeof StepGeom_GeometricRepresentationContextAndParametricRepresentationContext;
   StepGeom_GeometricRepresentationItem: typeof StepGeom_GeometricRepresentationItem;
+  StepGeom_HArray1OfBoundaryCurve: typeof StepGeom_HArray1OfBoundaryCurve;
+  StepGeom_HArray1OfBoundaryCurve_1: typeof StepGeom_HArray1OfBoundaryCurve_1;
+  StepGeom_HArray1OfBoundaryCurve_2: typeof StepGeom_HArray1OfBoundaryCurve_2;
+  StepGeom_HArray1OfBoundaryCurve_3: typeof StepGeom_HArray1OfBoundaryCurve_3;
+  StepGeom_HArray1OfBoundaryCurve_4: typeof StepGeom_HArray1OfBoundaryCurve_4;
+  StepGeom_HArray1OfCartesianPoint: typeof StepGeom_HArray1OfCartesianPoint;
+  StepGeom_HArray1OfCartesianPoint_1: typeof StepGeom_HArray1OfCartesianPoint_1;
+  StepGeom_HArray1OfCartesianPoint_2: typeof StepGeom_HArray1OfCartesianPoint_2;
+  StepGeom_HArray1OfCartesianPoint_3: typeof StepGeom_HArray1OfCartesianPoint_3;
+  StepGeom_HArray1OfCartesianPoint_4: typeof StepGeom_HArray1OfCartesianPoint_4;
+  StepGeom_HArray1OfCompositeCurveSegment: typeof StepGeom_HArray1OfCompositeCurveSegment;
+  StepGeom_HArray1OfCompositeCurveSegment_1: typeof StepGeom_HArray1OfCompositeCurveSegment_1;
+  StepGeom_HArray1OfCompositeCurveSegment_2: typeof StepGeom_HArray1OfCompositeCurveSegment_2;
+  StepGeom_HArray1OfCompositeCurveSegment_3: typeof StepGeom_HArray1OfCompositeCurveSegment_3;
+  StepGeom_HArray1OfCompositeCurveSegment_4: typeof StepGeom_HArray1OfCompositeCurveSegment_4;
+  StepGeom_HArray1OfCurve: typeof StepGeom_HArray1OfCurve;
+  StepGeom_HArray1OfCurve_1: typeof StepGeom_HArray1OfCurve_1;
+  StepGeom_HArray1OfCurve_2: typeof StepGeom_HArray1OfCurve_2;
+  StepGeom_HArray1OfCurve_3: typeof StepGeom_HArray1OfCurve_3;
+  StepGeom_HArray1OfCurve_4: typeof StepGeom_HArray1OfCurve_4;
+  StepGeom_HArray1OfPcurveOrSurface: typeof StepGeom_HArray1OfPcurveOrSurface;
+  StepGeom_HArray1OfPcurveOrSurface_1: typeof StepGeom_HArray1OfPcurveOrSurface_1;
+  StepGeom_HArray1OfPcurveOrSurface_2: typeof StepGeom_HArray1OfPcurveOrSurface_2;
+  StepGeom_HArray1OfPcurveOrSurface_3: typeof StepGeom_HArray1OfPcurveOrSurface_3;
+  StepGeom_HArray1OfPcurveOrSurface_4: typeof StepGeom_HArray1OfPcurveOrSurface_4;
+  StepGeom_HArray1OfSurfaceBoundary: typeof StepGeom_HArray1OfSurfaceBoundary;
+  StepGeom_HArray1OfSurfaceBoundary_1: typeof StepGeom_HArray1OfSurfaceBoundary_1;
+  StepGeom_HArray1OfSurfaceBoundary_2: typeof StepGeom_HArray1OfSurfaceBoundary_2;
+  StepGeom_HArray1OfSurfaceBoundary_3: typeof StepGeom_HArray1OfSurfaceBoundary_3;
+  StepGeom_HArray1OfSurfaceBoundary_4: typeof StepGeom_HArray1OfSurfaceBoundary_4;
+  StepGeom_HArray1OfTrimmingSelect: typeof StepGeom_HArray1OfTrimmingSelect;
+  StepGeom_HArray1OfTrimmingSelect_1: typeof StepGeom_HArray1OfTrimmingSelect_1;
+  StepGeom_HArray1OfTrimmingSelect_2: typeof StepGeom_HArray1OfTrimmingSelect_2;
+  StepGeom_HArray1OfTrimmingSelect_3: typeof StepGeom_HArray1OfTrimmingSelect_3;
+  StepGeom_HArray1OfTrimmingSelect_4: typeof StepGeom_HArray1OfTrimmingSelect_4;
+  StepGeom_HArray2OfCartesianPoint: typeof StepGeom_HArray2OfCartesianPoint;
+  StepGeom_HArray2OfCartesianPoint_1: typeof StepGeom_HArray2OfCartesianPoint_1;
+  StepGeom_HArray2OfCartesianPoint_2: typeof StepGeom_HArray2OfCartesianPoint_2;
+  StepGeom_HArray2OfCartesianPoint_3: typeof StepGeom_HArray2OfCartesianPoint_3;
+  StepGeom_HArray2OfSurfacePatch: typeof StepGeom_HArray2OfSurfacePatch;
+  StepGeom_HArray2OfSurfacePatch_1: typeof StepGeom_HArray2OfSurfacePatch_1;
+  StepGeom_HArray2OfSurfacePatch_2: typeof StepGeom_HArray2OfSurfacePatch_2;
+  StepGeom_HArray2OfSurfacePatch_3: typeof StepGeom_HArray2OfSurfacePatch_3;
   StepGeom_Hyperbola: typeof StepGeom_Hyperbola;
   StepGeom_IntersectionCurve: typeof StepGeom_IntersectionCurve;
   StepGeom_Line: typeof StepGeom_Line;
@@ -3100,6 +6108,32 @@ export interface opencascade {
   StepRepr_GeometricAlignment: typeof StepRepr_GeometricAlignment;
   StepRepr_GlobalUncertaintyAssignedContext: typeof StepRepr_GlobalUncertaintyAssignedContext;
   StepRepr_GlobalUnitAssignedContext: typeof StepRepr_GlobalUnitAssignedContext;
+  StepRepr_HArray1OfMaterialPropertyRepresentation: typeof StepRepr_HArray1OfMaterialPropertyRepresentation;
+  StepRepr_HArray1OfMaterialPropertyRepresentation_1: typeof StepRepr_HArray1OfMaterialPropertyRepresentation_1;
+  StepRepr_HArray1OfMaterialPropertyRepresentation_2: typeof StepRepr_HArray1OfMaterialPropertyRepresentation_2;
+  StepRepr_HArray1OfMaterialPropertyRepresentation_3: typeof StepRepr_HArray1OfMaterialPropertyRepresentation_3;
+  StepRepr_HArray1OfMaterialPropertyRepresentation_4: typeof StepRepr_HArray1OfMaterialPropertyRepresentation_4;
+  StepRepr_HArray1OfPropertyDefinitionRepresentation: typeof StepRepr_HArray1OfPropertyDefinitionRepresentation;
+  StepRepr_HArray1OfPropertyDefinitionRepresentation_1: typeof StepRepr_HArray1OfPropertyDefinitionRepresentation_1;
+  StepRepr_HArray1OfPropertyDefinitionRepresentation_2: typeof StepRepr_HArray1OfPropertyDefinitionRepresentation_2;
+  StepRepr_HArray1OfPropertyDefinitionRepresentation_3: typeof StepRepr_HArray1OfPropertyDefinitionRepresentation_3;
+  StepRepr_HArray1OfPropertyDefinitionRepresentation_4: typeof StepRepr_HArray1OfPropertyDefinitionRepresentation_4;
+  StepRepr_HArray1OfRepresentationItem: typeof StepRepr_HArray1OfRepresentationItem;
+  StepRepr_HArray1OfRepresentationItem_1: typeof StepRepr_HArray1OfRepresentationItem_1;
+  StepRepr_HArray1OfRepresentationItem_2: typeof StepRepr_HArray1OfRepresentationItem_2;
+  StepRepr_HArray1OfRepresentationItem_3: typeof StepRepr_HArray1OfRepresentationItem_3;
+  StepRepr_HArray1OfRepresentationItem_4: typeof StepRepr_HArray1OfRepresentationItem_4;
+  StepRepr_HArray1OfShapeAspect: typeof StepRepr_HArray1OfShapeAspect;
+  StepRepr_HArray1OfShapeAspect_1: typeof StepRepr_HArray1OfShapeAspect_1;
+  StepRepr_HArray1OfShapeAspect_2: typeof StepRepr_HArray1OfShapeAspect_2;
+  StepRepr_HArray1OfShapeAspect_3: typeof StepRepr_HArray1OfShapeAspect_3;
+  StepRepr_HArray1OfShapeAspect_4: typeof StepRepr_HArray1OfShapeAspect_4;
+  StepRepr_HSequenceOfMaterialPropertyRepresentation: typeof StepRepr_HSequenceOfMaterialPropertyRepresentation;
+  StepRepr_HSequenceOfMaterialPropertyRepresentation_1: typeof StepRepr_HSequenceOfMaterialPropertyRepresentation_1;
+  StepRepr_HSequenceOfMaterialPropertyRepresentation_2: typeof StepRepr_HSequenceOfMaterialPropertyRepresentation_2;
+  StepRepr_HSequenceOfRepresentationItem: typeof StepRepr_HSequenceOfRepresentationItem;
+  StepRepr_HSequenceOfRepresentationItem_1: typeof StepRepr_HSequenceOfRepresentationItem_1;
+  StepRepr_HSequenceOfRepresentationItem_2: typeof StepRepr_HSequenceOfRepresentationItem_2;
   StepRepr_IntegerRepresentationItem: typeof StepRepr_IntegerRepresentationItem;
   StepRepr_ItemDefinedTransformation: typeof StepRepr_ItemDefinedTransformation;
   StepRepr_MakeFromUsageOption: typeof StepRepr_MakeFromUsageOption;
@@ -3203,6 +6237,61 @@ export interface opencascade {
   StepShape_GeometricSetSelect: typeof StepShape_GeometricSetSelect;
   StepShape_GeometricallyBoundedSurfaceShapeRepresentation: typeof StepShape_GeometricallyBoundedSurfaceShapeRepresentation;
   StepShape_GeometricallyBoundedWireframeShapeRepresentation: typeof StepShape_GeometricallyBoundedWireframeShapeRepresentation;
+  StepShape_HArray1OfConnectedEdgeSet: typeof StepShape_HArray1OfConnectedEdgeSet;
+  StepShape_HArray1OfConnectedEdgeSet_1: typeof StepShape_HArray1OfConnectedEdgeSet_1;
+  StepShape_HArray1OfConnectedEdgeSet_2: typeof StepShape_HArray1OfConnectedEdgeSet_2;
+  StepShape_HArray1OfConnectedEdgeSet_3: typeof StepShape_HArray1OfConnectedEdgeSet_3;
+  StepShape_HArray1OfConnectedEdgeSet_4: typeof StepShape_HArray1OfConnectedEdgeSet_4;
+  StepShape_HArray1OfConnectedFaceSet: typeof StepShape_HArray1OfConnectedFaceSet;
+  StepShape_HArray1OfConnectedFaceSet_1: typeof StepShape_HArray1OfConnectedFaceSet_1;
+  StepShape_HArray1OfConnectedFaceSet_2: typeof StepShape_HArray1OfConnectedFaceSet_2;
+  StepShape_HArray1OfConnectedFaceSet_3: typeof StepShape_HArray1OfConnectedFaceSet_3;
+  StepShape_HArray1OfConnectedFaceSet_4: typeof StepShape_HArray1OfConnectedFaceSet_4;
+  StepShape_HArray1OfEdge: typeof StepShape_HArray1OfEdge;
+  StepShape_HArray1OfEdge_1: typeof StepShape_HArray1OfEdge_1;
+  StepShape_HArray1OfEdge_2: typeof StepShape_HArray1OfEdge_2;
+  StepShape_HArray1OfEdge_3: typeof StepShape_HArray1OfEdge_3;
+  StepShape_HArray1OfEdge_4: typeof StepShape_HArray1OfEdge_4;
+  StepShape_HArray1OfFace: typeof StepShape_HArray1OfFace;
+  StepShape_HArray1OfFace_1: typeof StepShape_HArray1OfFace_1;
+  StepShape_HArray1OfFace_2: typeof StepShape_HArray1OfFace_2;
+  StepShape_HArray1OfFace_3: typeof StepShape_HArray1OfFace_3;
+  StepShape_HArray1OfFace_4: typeof StepShape_HArray1OfFace_4;
+  StepShape_HArray1OfFaceBound: typeof StepShape_HArray1OfFaceBound;
+  StepShape_HArray1OfFaceBound_1: typeof StepShape_HArray1OfFaceBound_1;
+  StepShape_HArray1OfFaceBound_2: typeof StepShape_HArray1OfFaceBound_2;
+  StepShape_HArray1OfFaceBound_3: typeof StepShape_HArray1OfFaceBound_3;
+  StepShape_HArray1OfFaceBound_4: typeof StepShape_HArray1OfFaceBound_4;
+  StepShape_HArray1OfGeometricSetSelect: typeof StepShape_HArray1OfGeometricSetSelect;
+  StepShape_HArray1OfGeometricSetSelect_1: typeof StepShape_HArray1OfGeometricSetSelect_1;
+  StepShape_HArray1OfGeometricSetSelect_2: typeof StepShape_HArray1OfGeometricSetSelect_2;
+  StepShape_HArray1OfGeometricSetSelect_3: typeof StepShape_HArray1OfGeometricSetSelect_3;
+  StepShape_HArray1OfGeometricSetSelect_4: typeof StepShape_HArray1OfGeometricSetSelect_4;
+  StepShape_HArray1OfOrientedClosedShell: typeof StepShape_HArray1OfOrientedClosedShell;
+  StepShape_HArray1OfOrientedClosedShell_1: typeof StepShape_HArray1OfOrientedClosedShell_1;
+  StepShape_HArray1OfOrientedClosedShell_2: typeof StepShape_HArray1OfOrientedClosedShell_2;
+  StepShape_HArray1OfOrientedClosedShell_3: typeof StepShape_HArray1OfOrientedClosedShell_3;
+  StepShape_HArray1OfOrientedClosedShell_4: typeof StepShape_HArray1OfOrientedClosedShell_4;
+  StepShape_HArray1OfOrientedEdge: typeof StepShape_HArray1OfOrientedEdge;
+  StepShape_HArray1OfOrientedEdge_1: typeof StepShape_HArray1OfOrientedEdge_1;
+  StepShape_HArray1OfOrientedEdge_2: typeof StepShape_HArray1OfOrientedEdge_2;
+  StepShape_HArray1OfOrientedEdge_3: typeof StepShape_HArray1OfOrientedEdge_3;
+  StepShape_HArray1OfOrientedEdge_4: typeof StepShape_HArray1OfOrientedEdge_4;
+  StepShape_HArray1OfShapeDimensionRepresentationItem: typeof StepShape_HArray1OfShapeDimensionRepresentationItem;
+  StepShape_HArray1OfShapeDimensionRepresentationItem_1: typeof StepShape_HArray1OfShapeDimensionRepresentationItem_1;
+  StepShape_HArray1OfShapeDimensionRepresentationItem_2: typeof StepShape_HArray1OfShapeDimensionRepresentationItem_2;
+  StepShape_HArray1OfShapeDimensionRepresentationItem_3: typeof StepShape_HArray1OfShapeDimensionRepresentationItem_3;
+  StepShape_HArray1OfShapeDimensionRepresentationItem_4: typeof StepShape_HArray1OfShapeDimensionRepresentationItem_4;
+  StepShape_HArray1OfShell: typeof StepShape_HArray1OfShell;
+  StepShape_HArray1OfShell_1: typeof StepShape_HArray1OfShell_1;
+  StepShape_HArray1OfShell_2: typeof StepShape_HArray1OfShell_2;
+  StepShape_HArray1OfShell_3: typeof StepShape_HArray1OfShell_3;
+  StepShape_HArray1OfShell_4: typeof StepShape_HArray1OfShell_4;
+  StepShape_HArray1OfValueQualifier: typeof StepShape_HArray1OfValueQualifier;
+  StepShape_HArray1OfValueQualifier_1: typeof StepShape_HArray1OfValueQualifier_1;
+  StepShape_HArray1OfValueQualifier_2: typeof StepShape_HArray1OfValueQualifier_2;
+  StepShape_HArray1OfValueQualifier_3: typeof StepShape_HArray1OfValueQualifier_3;
+  StepShape_HArray1OfValueQualifier_4: typeof StepShape_HArray1OfValueQualifier_4;
   StepShape_HalfSpaceSolid: typeof StepShape_HalfSpaceSolid;
   StepShape_LimitsAndFits: typeof StepShape_LimitsAndFits;
   StepShape_Loop: typeof StepShape_Loop;
@@ -3263,19 +6352,42 @@ export interface opencascade {
   StepToTopoDS_GeometricTool: typeof StepToTopoDS_GeometricTool;
   StepToTopoDS_MakeTransformed: typeof StepToTopoDS_MakeTransformed;
   StepToTopoDS_NMTool: typeof StepToTopoDS_NMTool;
+  StepToTopoDS_NMTool_1: typeof StepToTopoDS_NMTool_1;
+  StepToTopoDS_NMTool_2: typeof StepToTopoDS_NMTool_2;
   StepToTopoDS_PointPair: typeof StepToTopoDS_PointPair;
   StepToTopoDS_PointPairHasher: typeof StepToTopoDS_PointPairHasher;
   StepToTopoDS_Root: typeof StepToTopoDS_Root;
   StepToTopoDS_Tool: typeof StepToTopoDS_Tool;
+  StepToTopoDS_Tool_1: typeof StepToTopoDS_Tool_1;
+  StepToTopoDS_Tool_2: typeof StepToTopoDS_Tool_2;
   StepToTopoDS_TranslateCompositeCurve: typeof StepToTopoDS_TranslateCompositeCurve;
+  StepToTopoDS_TranslateCompositeCurve_1: typeof StepToTopoDS_TranslateCompositeCurve_1;
+  StepToTopoDS_TranslateCompositeCurve_2: typeof StepToTopoDS_TranslateCompositeCurve_2;
+  StepToTopoDS_TranslateCompositeCurve_3: typeof StepToTopoDS_TranslateCompositeCurve_3;
   StepToTopoDS_TranslateCurveBoundedSurface: typeof StepToTopoDS_TranslateCurveBoundedSurface;
+  StepToTopoDS_TranslateCurveBoundedSurface_1: typeof StepToTopoDS_TranslateCurveBoundedSurface_1;
+  StepToTopoDS_TranslateCurveBoundedSurface_2: typeof StepToTopoDS_TranslateCurveBoundedSurface_2;
   StepToTopoDS_TranslateEdge: typeof StepToTopoDS_TranslateEdge;
+  StepToTopoDS_TranslateEdge_1: typeof StepToTopoDS_TranslateEdge_1;
+  StepToTopoDS_TranslateEdge_2: typeof StepToTopoDS_TranslateEdge_2;
   StepToTopoDS_TranslateEdgeLoop: typeof StepToTopoDS_TranslateEdgeLoop;
+  StepToTopoDS_TranslateEdgeLoop_1: typeof StepToTopoDS_TranslateEdgeLoop_1;
+  StepToTopoDS_TranslateEdgeLoop_2: typeof StepToTopoDS_TranslateEdgeLoop_2;
   StepToTopoDS_TranslateFace: typeof StepToTopoDS_TranslateFace;
+  StepToTopoDS_TranslateFace_1: typeof StepToTopoDS_TranslateFace_1;
+  StepToTopoDS_TranslateFace_2: typeof StepToTopoDS_TranslateFace_2;
   StepToTopoDS_TranslatePolyLoop: typeof StepToTopoDS_TranslatePolyLoop;
+  StepToTopoDS_TranslatePolyLoop_1: typeof StepToTopoDS_TranslatePolyLoop_1;
+  StepToTopoDS_TranslatePolyLoop_2: typeof StepToTopoDS_TranslatePolyLoop_2;
   StepToTopoDS_TranslateShell: typeof StepToTopoDS_TranslateShell;
+  StepToTopoDS_TranslateShell_1: typeof StepToTopoDS_TranslateShell_1;
+  StepToTopoDS_TranslateShell_2: typeof StepToTopoDS_TranslateShell_2;
   StepToTopoDS_TranslateVertex: typeof StepToTopoDS_TranslateVertex;
+  StepToTopoDS_TranslateVertex_1: typeof StepToTopoDS_TranslateVertex_1;
+  StepToTopoDS_TranslateVertex_2: typeof StepToTopoDS_TranslateVertex_2;
   StepToTopoDS_TranslateVertexLoop: typeof StepToTopoDS_TranslateVertexLoop;
+  StepToTopoDS_TranslateVertexLoop_1: typeof StepToTopoDS_TranslateVertexLoop_1;
+  StepToTopoDS_TranslateVertexLoop_2: typeof StepToTopoDS_TranslateVertexLoop_2;
   StepVisual_AnnotationCurveOccurrence: typeof StepVisual_AnnotationCurveOccurrence;
   StepVisual_AnnotationCurveOccurrenceAndAnnotationOccurrenceAndGeomReprItemAndReprItemAndStyledItem: typeof StepVisual_AnnotationCurveOccurrenceAndAnnotationOccurrenceAndGeomReprItemAndReprItemAndStyledItem;
   StepVisual_AnnotationFillArea: typeof StepVisual_AnnotationFillArea;
@@ -3327,6 +6439,81 @@ export interface opencascade {
   StepVisual_FillAreaStyleColour: typeof StepVisual_FillAreaStyleColour;
   StepVisual_FillStyleSelect: typeof StepVisual_FillStyleSelect;
   StepVisual_FontSelect: typeof StepVisual_FontSelect;
+  StepVisual_HArray1OfAnnotationPlaneElement: typeof StepVisual_HArray1OfAnnotationPlaneElement;
+  StepVisual_HArray1OfAnnotationPlaneElement_1: typeof StepVisual_HArray1OfAnnotationPlaneElement_1;
+  StepVisual_HArray1OfAnnotationPlaneElement_2: typeof StepVisual_HArray1OfAnnotationPlaneElement_2;
+  StepVisual_HArray1OfAnnotationPlaneElement_3: typeof StepVisual_HArray1OfAnnotationPlaneElement_3;
+  StepVisual_HArray1OfAnnotationPlaneElement_4: typeof StepVisual_HArray1OfAnnotationPlaneElement_4;
+  StepVisual_HArray1OfBoxCharacteristicSelect: typeof StepVisual_HArray1OfBoxCharacteristicSelect;
+  StepVisual_HArray1OfBoxCharacteristicSelect_1: typeof StepVisual_HArray1OfBoxCharacteristicSelect_1;
+  StepVisual_HArray1OfBoxCharacteristicSelect_2: typeof StepVisual_HArray1OfBoxCharacteristicSelect_2;
+  StepVisual_HArray1OfBoxCharacteristicSelect_3: typeof StepVisual_HArray1OfBoxCharacteristicSelect_3;
+  StepVisual_HArray1OfBoxCharacteristicSelect_4: typeof StepVisual_HArray1OfBoxCharacteristicSelect_4;
+  StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect: typeof StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect;
+  StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect_1: typeof StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect_1;
+  StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect_2: typeof StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect_2;
+  StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect_3: typeof StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect_3;
+  StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect_4: typeof StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect_4;
+  StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect: typeof StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect;
+  StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect_1: typeof StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect_1;
+  StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect_2: typeof StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect_2;
+  StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect_3: typeof StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect_3;
+  StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect_4: typeof StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect_4;
+  StepVisual_HArray1OfCurveStyleFontPattern: typeof StepVisual_HArray1OfCurveStyleFontPattern;
+  StepVisual_HArray1OfCurveStyleFontPattern_1: typeof StepVisual_HArray1OfCurveStyleFontPattern_1;
+  StepVisual_HArray1OfCurveStyleFontPattern_2: typeof StepVisual_HArray1OfCurveStyleFontPattern_2;
+  StepVisual_HArray1OfCurveStyleFontPattern_3: typeof StepVisual_HArray1OfCurveStyleFontPattern_3;
+  StepVisual_HArray1OfCurveStyleFontPattern_4: typeof StepVisual_HArray1OfCurveStyleFontPattern_4;
+  StepVisual_HArray1OfDirectionCountSelect: typeof StepVisual_HArray1OfDirectionCountSelect;
+  StepVisual_HArray1OfDirectionCountSelect_1: typeof StepVisual_HArray1OfDirectionCountSelect_1;
+  StepVisual_HArray1OfDirectionCountSelect_2: typeof StepVisual_HArray1OfDirectionCountSelect_2;
+  StepVisual_HArray1OfDirectionCountSelect_3: typeof StepVisual_HArray1OfDirectionCountSelect_3;
+  StepVisual_HArray1OfDirectionCountSelect_4: typeof StepVisual_HArray1OfDirectionCountSelect_4;
+  StepVisual_HArray1OfDraughtingCalloutElement: typeof StepVisual_HArray1OfDraughtingCalloutElement;
+  StepVisual_HArray1OfDraughtingCalloutElement_1: typeof StepVisual_HArray1OfDraughtingCalloutElement_1;
+  StepVisual_HArray1OfDraughtingCalloutElement_2: typeof StepVisual_HArray1OfDraughtingCalloutElement_2;
+  StepVisual_HArray1OfDraughtingCalloutElement_3: typeof StepVisual_HArray1OfDraughtingCalloutElement_3;
+  StepVisual_HArray1OfDraughtingCalloutElement_4: typeof StepVisual_HArray1OfDraughtingCalloutElement_4;
+  StepVisual_HArray1OfFillStyleSelect: typeof StepVisual_HArray1OfFillStyleSelect;
+  StepVisual_HArray1OfFillStyleSelect_1: typeof StepVisual_HArray1OfFillStyleSelect_1;
+  StepVisual_HArray1OfFillStyleSelect_2: typeof StepVisual_HArray1OfFillStyleSelect_2;
+  StepVisual_HArray1OfFillStyleSelect_3: typeof StepVisual_HArray1OfFillStyleSelect_3;
+  StepVisual_HArray1OfFillStyleSelect_4: typeof StepVisual_HArray1OfFillStyleSelect_4;
+  StepVisual_HArray1OfInvisibleItem: typeof StepVisual_HArray1OfInvisibleItem;
+  StepVisual_HArray1OfInvisibleItem_1: typeof StepVisual_HArray1OfInvisibleItem_1;
+  StepVisual_HArray1OfInvisibleItem_2: typeof StepVisual_HArray1OfInvisibleItem_2;
+  StepVisual_HArray1OfInvisibleItem_3: typeof StepVisual_HArray1OfInvisibleItem_3;
+  StepVisual_HArray1OfInvisibleItem_4: typeof StepVisual_HArray1OfInvisibleItem_4;
+  StepVisual_HArray1OfLayeredItem: typeof StepVisual_HArray1OfLayeredItem;
+  StepVisual_HArray1OfLayeredItem_1: typeof StepVisual_HArray1OfLayeredItem_1;
+  StepVisual_HArray1OfLayeredItem_2: typeof StepVisual_HArray1OfLayeredItem_2;
+  StepVisual_HArray1OfLayeredItem_3: typeof StepVisual_HArray1OfLayeredItem_3;
+  StepVisual_HArray1OfLayeredItem_4: typeof StepVisual_HArray1OfLayeredItem_4;
+  StepVisual_HArray1OfPresentationStyleAssignment: typeof StepVisual_HArray1OfPresentationStyleAssignment;
+  StepVisual_HArray1OfPresentationStyleAssignment_1: typeof StepVisual_HArray1OfPresentationStyleAssignment_1;
+  StepVisual_HArray1OfPresentationStyleAssignment_2: typeof StepVisual_HArray1OfPresentationStyleAssignment_2;
+  StepVisual_HArray1OfPresentationStyleAssignment_3: typeof StepVisual_HArray1OfPresentationStyleAssignment_3;
+  StepVisual_HArray1OfPresentationStyleAssignment_4: typeof StepVisual_HArray1OfPresentationStyleAssignment_4;
+  StepVisual_HArray1OfPresentationStyleSelect: typeof StepVisual_HArray1OfPresentationStyleSelect;
+  StepVisual_HArray1OfPresentationStyleSelect_1: typeof StepVisual_HArray1OfPresentationStyleSelect_1;
+  StepVisual_HArray1OfPresentationStyleSelect_2: typeof StepVisual_HArray1OfPresentationStyleSelect_2;
+  StepVisual_HArray1OfPresentationStyleSelect_3: typeof StepVisual_HArray1OfPresentationStyleSelect_3;
+  StepVisual_HArray1OfPresentationStyleSelect_4: typeof StepVisual_HArray1OfPresentationStyleSelect_4;
+  StepVisual_HArray1OfStyleContextSelect: typeof StepVisual_HArray1OfStyleContextSelect;
+  StepVisual_HArray1OfStyleContextSelect_1: typeof StepVisual_HArray1OfStyleContextSelect_1;
+  StepVisual_HArray1OfStyleContextSelect_2: typeof StepVisual_HArray1OfStyleContextSelect_2;
+  StepVisual_HArray1OfStyleContextSelect_3: typeof StepVisual_HArray1OfStyleContextSelect_3;
+  StepVisual_HArray1OfStyleContextSelect_4: typeof StepVisual_HArray1OfStyleContextSelect_4;
+  StepVisual_HArray1OfSurfaceStyleElementSelect: typeof StepVisual_HArray1OfSurfaceStyleElementSelect;
+  StepVisual_HArray1OfSurfaceStyleElementSelect_1: typeof StepVisual_HArray1OfSurfaceStyleElementSelect_1;
+  StepVisual_HArray1OfSurfaceStyleElementSelect_2: typeof StepVisual_HArray1OfSurfaceStyleElementSelect_2;
+  StepVisual_HArray1OfSurfaceStyleElementSelect_3: typeof StepVisual_HArray1OfSurfaceStyleElementSelect_3;
+  StepVisual_HArray1OfSurfaceStyleElementSelect_4: typeof StepVisual_HArray1OfSurfaceStyleElementSelect_4;
+  StepVisual_HArray1OfTextOrCharacter: typeof StepVisual_HArray1OfTextOrCharacter;
+  StepVisual_HArray1OfTextOrCharacter_1: typeof StepVisual_HArray1OfTextOrCharacter_1;
+  StepVisual_HArray1OfTextOrCharacter_2: typeof StepVisual_HArray1OfTextOrCharacter_2;
+  StepVisual_HArray1OfTextOrCharacter_3: typeof StepVisual_HArray1OfTextOrCharacter_3;
+  StepVisual_HArray1OfTextOrCharacter_4: typeof StepVisual_HArray1OfTextOrCharacter_4;
   StepVisual_Invisibility: typeof StepVisual_Invisibility;
   StepVisual_InvisibilityContext: typeof StepVisual_InvisibilityContext;
   StepVisual_InvisibleItem: typeof StepVisual_InvisibleItem;
@@ -3387,50 +6574,223 @@ export interface opencascade {
   StlAPI_Writer: typeof StlAPI_Writer;
   Storage: typeof Storage;
   Storage_Bucket: typeof Storage_Bucket;
+  Storage_Bucket_1: typeof Storage_Bucket_1;
+  Storage_Bucket_2: typeof Storage_Bucket_2;
   Storage_BucketIterator: typeof Storage_BucketIterator;
   Storage_BucketOfPersistent: typeof Storage_BucketOfPersistent;
   Storage_CallBack: typeof Storage_CallBack;
   Storage_Data: typeof Storage_Data;
   Storage_DefaultCallBack: typeof Storage_DefaultCallBack;
+  Storage_HArrayOfCallBack: typeof Storage_HArrayOfCallBack;
+  Storage_HArrayOfCallBack_1: typeof Storage_HArrayOfCallBack_1;
+  Storage_HArrayOfCallBack_2: typeof Storage_HArrayOfCallBack_2;
+  Storage_HArrayOfCallBack_3: typeof Storage_HArrayOfCallBack_3;
+  Storage_HArrayOfCallBack_4: typeof Storage_HArrayOfCallBack_4;
+  Storage_HArrayOfSchema: typeof Storage_HArrayOfSchema;
+  Storage_HArrayOfSchema_1: typeof Storage_HArrayOfSchema_1;
+  Storage_HArrayOfSchema_2: typeof Storage_HArrayOfSchema_2;
+  Storage_HArrayOfSchema_3: typeof Storage_HArrayOfSchema_3;
+  Storage_HArrayOfSchema_4: typeof Storage_HArrayOfSchema_4;
+  Storage_HPArray: typeof Storage_HPArray;
+  Storage_HPArray_1: typeof Storage_HPArray_1;
+  Storage_HPArray_2: typeof Storage_HPArray_2;
+  Storage_HPArray_3: typeof Storage_HPArray_3;
+  Storage_HPArray_4: typeof Storage_HPArray_4;
   Storage_HeaderData: typeof Storage_HeaderData;
   Storage_InternalData: typeof Storage_InternalData;
   Storage_Root: typeof Storage_Root;
+  Storage_Root_1: typeof Storage_Root_1;
+  Storage_Root_2: typeof Storage_Root_2;
+  Storage_Root_3: typeof Storage_Root_3;
   Storage_RootData: typeof Storage_RootData;
   Storage_Schema: typeof Storage_Schema;
   Storage_StreamExtCharParityError: typeof Storage_StreamExtCharParityError;
+  Storage_StreamExtCharParityError_1: typeof Storage_StreamExtCharParityError_1;
+  Storage_StreamExtCharParityError_2: typeof Storage_StreamExtCharParityError_2;
   Storage_StreamFormatError: typeof Storage_StreamFormatError;
+  Storage_StreamFormatError_1: typeof Storage_StreamFormatError_1;
+  Storage_StreamFormatError_2: typeof Storage_StreamFormatError_2;
   Storage_StreamModeError: typeof Storage_StreamModeError;
+  Storage_StreamModeError_1: typeof Storage_StreamModeError_1;
+  Storage_StreamModeError_2: typeof Storage_StreamModeError_2;
   Storage_StreamReadError: typeof Storage_StreamReadError;
+  Storage_StreamReadError_1: typeof Storage_StreamReadError_1;
+  Storage_StreamReadError_2: typeof Storage_StreamReadError_2;
   Storage_StreamTypeMismatchError: typeof Storage_StreamTypeMismatchError;
+  Storage_StreamTypeMismatchError_1: typeof Storage_StreamTypeMismatchError_1;
+  Storage_StreamTypeMismatchError_2: typeof Storage_StreamTypeMismatchError_2;
   Storage_StreamUnknownTypeError: typeof Storage_StreamUnknownTypeError;
+  Storage_StreamUnknownTypeError_1: typeof Storage_StreamUnknownTypeError_1;
+  Storage_StreamUnknownTypeError_2: typeof Storage_StreamUnknownTypeError_2;
   Storage_StreamWriteError: typeof Storage_StreamWriteError;
+  Storage_StreamWriteError_1: typeof Storage_StreamWriteError_1;
+  Storage_StreamWriteError_2: typeof Storage_StreamWriteError_2;
   Storage_TypeData: typeof Storage_TypeData;
   Storage_TypedCallBack: typeof Storage_TypedCallBack;
+  Storage_TypedCallBack_1: typeof Storage_TypedCallBack_1;
+  Storage_TypedCallBack_2: typeof Storage_TypedCallBack_2;
   Sweep_NumShape: typeof Sweep_NumShape;
+  Sweep_NumShape_1: typeof Sweep_NumShape_1;
+  Sweep_NumShape_2: typeof Sweep_NumShape_2;
   Sweep_NumShapeIterator: typeof Sweep_NumShapeIterator;
   Sweep_NumShapeTool: typeof Sweep_NumShapeTool;
+  TColGeom2d_HArray1OfBezierCurve: typeof TColGeom2d_HArray1OfBezierCurve;
+  TColGeom2d_HArray1OfBezierCurve_1: typeof TColGeom2d_HArray1OfBezierCurve_1;
+  TColGeom2d_HArray1OfBezierCurve_2: typeof TColGeom2d_HArray1OfBezierCurve_2;
+  TColGeom2d_HArray1OfBezierCurve_3: typeof TColGeom2d_HArray1OfBezierCurve_3;
+  TColGeom2d_HArray1OfBezierCurve_4: typeof TColGeom2d_HArray1OfBezierCurve_4;
+  TColGeom2d_HSequenceOfBoundedCurve: typeof TColGeom2d_HSequenceOfBoundedCurve;
+  TColGeom2d_HSequenceOfBoundedCurve_1: typeof TColGeom2d_HSequenceOfBoundedCurve_1;
+  TColGeom2d_HSequenceOfBoundedCurve_2: typeof TColGeom2d_HSequenceOfBoundedCurve_2;
+  TColGeom_HArray1OfBezierCurve: typeof TColGeom_HArray1OfBezierCurve;
+  TColGeom_HArray1OfBezierCurve_1: typeof TColGeom_HArray1OfBezierCurve_1;
+  TColGeom_HArray1OfBezierCurve_2: typeof TColGeom_HArray1OfBezierCurve_2;
+  TColGeom_HArray1OfBezierCurve_3: typeof TColGeom_HArray1OfBezierCurve_3;
+  TColGeom_HArray1OfBezierCurve_4: typeof TColGeom_HArray1OfBezierCurve_4;
+  TColGeom_HArray1OfCurve: typeof TColGeom_HArray1OfCurve;
+  TColGeom_HArray1OfCurve_1: typeof TColGeom_HArray1OfCurve_1;
+  TColGeom_HArray1OfCurve_2: typeof TColGeom_HArray1OfCurve_2;
+  TColGeom_HArray1OfCurve_3: typeof TColGeom_HArray1OfCurve_3;
+  TColGeom_HArray1OfCurve_4: typeof TColGeom_HArray1OfCurve_4;
+  TColGeom_HArray2OfSurface: typeof TColGeom_HArray2OfSurface;
+  TColGeom_HArray2OfSurface_1: typeof TColGeom_HArray2OfSurface_1;
+  TColGeom_HArray2OfSurface_2: typeof TColGeom_HArray2OfSurface_2;
+  TColGeom_HArray2OfSurface_3: typeof TColGeom_HArray2OfSurface_3;
+  TColGeom_HSequenceOfBoundedCurve: typeof TColGeom_HSequenceOfBoundedCurve;
+  TColGeom_HSequenceOfBoundedCurve_1: typeof TColGeom_HSequenceOfBoundedCurve_1;
+  TColGeom_HSequenceOfBoundedCurve_2: typeof TColGeom_HSequenceOfBoundedCurve_2;
+  TColStd_HArray1OfExtendedString: typeof TColStd_HArray1OfExtendedString;
+  TColStd_HArray1OfExtendedString_1: typeof TColStd_HArray1OfExtendedString_1;
+  TColStd_HArray1OfExtendedString_2: typeof TColStd_HArray1OfExtendedString_2;
+  TColStd_HArray1OfExtendedString_3: typeof TColStd_HArray1OfExtendedString_3;
+  TColStd_HArray1OfExtendedString_4: typeof TColStd_HArray1OfExtendedString_4;
+  TColStd_HArray2OfCharacter: typeof TColStd_HArray2OfCharacter;
+  TColStd_HArray2OfCharacter_1: typeof TColStd_HArray2OfCharacter_1;
+  TColStd_HArray2OfCharacter_2: typeof TColStd_HArray2OfCharacter_2;
+  TColStd_HArray2OfCharacter_3: typeof TColStd_HArray2OfCharacter_3;
   TColStd_HPackedMapOfInteger: typeof TColStd_HPackedMapOfInteger;
+  TColStd_HPackedMapOfInteger_1: typeof TColStd_HPackedMapOfInteger_1;
+  TColStd_HPackedMapOfInteger_2: typeof TColStd_HPackedMapOfInteger_2;
   TColStd_PackedMapOfInteger: typeof TColStd_PackedMapOfInteger;
+  TColStd_PackedMapOfInteger_1: typeof TColStd_PackedMapOfInteger_1;
+  TColStd_PackedMapOfInteger_2: typeof TColStd_PackedMapOfInteger_2;
+  TColgp_HArray1OfDir2d: typeof TColgp_HArray1OfDir2d;
+  TColgp_HArray1OfDir2d_1: typeof TColgp_HArray1OfDir2d_1;
+  TColgp_HArray1OfDir2d_2: typeof TColgp_HArray1OfDir2d_2;
+  TColgp_HArray1OfDir2d_3: typeof TColgp_HArray1OfDir2d_3;
+  TColgp_HArray1OfDir2d_4: typeof TColgp_HArray1OfDir2d_4;
+  TColgp_HArray2OfCirc2d: typeof TColgp_HArray2OfCirc2d;
+  TColgp_HArray2OfCirc2d_1: typeof TColgp_HArray2OfCirc2d_1;
+  TColgp_HArray2OfCirc2d_2: typeof TColgp_HArray2OfCirc2d_2;
+  TColgp_HArray2OfCirc2d_3: typeof TColgp_HArray2OfCirc2d_3;
+  TColgp_HArray2OfDir: typeof TColgp_HArray2OfDir;
+  TColgp_HArray2OfDir_1: typeof TColgp_HArray2OfDir_1;
+  TColgp_HArray2OfDir_2: typeof TColgp_HArray2OfDir_2;
+  TColgp_HArray2OfDir_3: typeof TColgp_HArray2OfDir_3;
+  TColgp_HArray2OfDir2d: typeof TColgp_HArray2OfDir2d;
+  TColgp_HArray2OfDir2d_1: typeof TColgp_HArray2OfDir2d_1;
+  TColgp_HArray2OfDir2d_2: typeof TColgp_HArray2OfDir2d_2;
+  TColgp_HArray2OfDir2d_3: typeof TColgp_HArray2OfDir2d_3;
+  TColgp_HArray2OfLin2d: typeof TColgp_HArray2OfLin2d;
+  TColgp_HArray2OfLin2d_1: typeof TColgp_HArray2OfLin2d_1;
+  TColgp_HArray2OfLin2d_2: typeof TColgp_HArray2OfLin2d_2;
+  TColgp_HArray2OfLin2d_3: typeof TColgp_HArray2OfLin2d_3;
+  TColgp_HArray2OfVec: typeof TColgp_HArray2OfVec;
+  TColgp_HArray2OfVec_1: typeof TColgp_HArray2OfVec_1;
+  TColgp_HArray2OfVec_2: typeof TColgp_HArray2OfVec_2;
+  TColgp_HArray2OfVec_3: typeof TColgp_HArray2OfVec_3;
+  TColgp_HArray2OfVec2d: typeof TColgp_HArray2OfVec2d;
+  TColgp_HArray2OfVec2d_1: typeof TColgp_HArray2OfVec2d_1;
+  TColgp_HArray2OfVec2d_2: typeof TColgp_HArray2OfVec2d_2;
+  TColgp_HArray2OfVec2d_3: typeof TColgp_HArray2OfVec2d_3;
+  TColgp_HArray2OfXY: typeof TColgp_HArray2OfXY;
+  TColgp_HArray2OfXY_1: typeof TColgp_HArray2OfXY_1;
+  TColgp_HArray2OfXY_2: typeof TColgp_HArray2OfXY_2;
+  TColgp_HArray2OfXY_3: typeof TColgp_HArray2OfXY_3;
+  TColgp_HSequenceOfDir: typeof TColgp_HSequenceOfDir;
+  TColgp_HSequenceOfDir_1: typeof TColgp_HSequenceOfDir_1;
+  TColgp_HSequenceOfDir_2: typeof TColgp_HSequenceOfDir_2;
+  TColgp_HSequenceOfDir2d: typeof TColgp_HSequenceOfDir2d;
+  TColgp_HSequenceOfDir2d_1: typeof TColgp_HSequenceOfDir2d_1;
+  TColgp_HSequenceOfDir2d_2: typeof TColgp_HSequenceOfDir2d_2;
+  TColgp_HSequenceOfVec: typeof TColgp_HSequenceOfVec;
+  TColgp_HSequenceOfVec_1: typeof TColgp_HSequenceOfVec_1;
+  TColgp_HSequenceOfVec_2: typeof TColgp_HSequenceOfVec_2;
+  TColgp_HSequenceOfVec2d: typeof TColgp_HSequenceOfVec2d;
+  TColgp_HSequenceOfVec2d_1: typeof TColgp_HSequenceOfVec2d_1;
+  TColgp_HSequenceOfVec2d_2: typeof TColgp_HSequenceOfVec2d_2;
   TCollection: typeof TCollection;
   TCollection_AsciiString: typeof TCollection_AsciiString;
+  TCollection_AsciiString_1: typeof TCollection_AsciiString_1;
+  TCollection_AsciiString_2: typeof TCollection_AsciiString_2;
+  TCollection_AsciiString_3: typeof TCollection_AsciiString_3;
+  TCollection_AsciiString_4: typeof TCollection_AsciiString_4;
+  TCollection_AsciiString_5: typeof TCollection_AsciiString_5;
+  TCollection_AsciiString_6: typeof TCollection_AsciiString_6;
+  TCollection_AsciiString_7: typeof TCollection_AsciiString_7;
+  TCollection_AsciiString_8: typeof TCollection_AsciiString_8;
+  TCollection_AsciiString_9: typeof TCollection_AsciiString_9;
+  TCollection_AsciiString_10: typeof TCollection_AsciiString_10;
+  TCollection_AsciiString_11: typeof TCollection_AsciiString_11;
+  TCollection_AsciiString_12: typeof TCollection_AsciiString_12;
+  TCollection_AsciiString_13: typeof TCollection_AsciiString_13;
+  TCollection_AsciiString_14: typeof TCollection_AsciiString_14;
   TCollection_BaseSequence: typeof TCollection_BaseSequence;
   TCollection_BasicMap: typeof TCollection_BasicMap;
   TCollection_BasicMapIterator: typeof TCollection_BasicMapIterator;
   TCollection_ExtendedString: typeof TCollection_ExtendedString;
+  TCollection_ExtendedString_1: typeof TCollection_ExtendedString_1;
+  TCollection_ExtendedString_2: typeof TCollection_ExtendedString_2;
+  TCollection_ExtendedString_3: typeof TCollection_ExtendedString_3;
+  TCollection_ExtendedString_4: typeof TCollection_ExtendedString_4;
+  TCollection_ExtendedString_5: typeof TCollection_ExtendedString_5;
+  TCollection_ExtendedString_6: typeof TCollection_ExtendedString_6;
+  TCollection_ExtendedString_7: typeof TCollection_ExtendedString_7;
+  TCollection_ExtendedString_8: typeof TCollection_ExtendedString_8;
+  TCollection_ExtendedString_9: typeof TCollection_ExtendedString_9;
+  TCollection_ExtendedString_10: typeof TCollection_ExtendedString_10;
+  TCollection_ExtendedString_11: typeof TCollection_ExtendedString_11;
+  TCollection_ExtendedString_12: typeof TCollection_ExtendedString_12;
   TCollection_HAsciiString: typeof TCollection_HAsciiString;
+  TCollection_HAsciiString_1: typeof TCollection_HAsciiString_1;
+  TCollection_HAsciiString_2: typeof TCollection_HAsciiString_2;
+  TCollection_HAsciiString_3: typeof TCollection_HAsciiString_3;
+  TCollection_HAsciiString_4: typeof TCollection_HAsciiString_4;
+  TCollection_HAsciiString_5: typeof TCollection_HAsciiString_5;
+  TCollection_HAsciiString_6: typeof TCollection_HAsciiString_6;
+  TCollection_HAsciiString_7: typeof TCollection_HAsciiString_7;
+  TCollection_HAsciiString_8: typeof TCollection_HAsciiString_8;
+  TCollection_HAsciiString_9: typeof TCollection_HAsciiString_9;
   TCollection_HExtendedString: typeof TCollection_HExtendedString;
+  TCollection_HExtendedString_1: typeof TCollection_HExtendedString_1;
+  TCollection_HExtendedString_2: typeof TCollection_HExtendedString_2;
+  TCollection_HExtendedString_3: typeof TCollection_HExtendedString_3;
+  TCollection_HExtendedString_4: typeof TCollection_HExtendedString_4;
+  TCollection_HExtendedString_5: typeof TCollection_HExtendedString_5;
+  TCollection_HExtendedString_6: typeof TCollection_HExtendedString_6;
+  TCollection_HExtendedString_7: typeof TCollection_HExtendedString_7;
+  TCollection_HExtendedString_8: typeof TCollection_HExtendedString_8;
   TCollection_MapNode: typeof TCollection_MapNode;
   TCollection_SeqNode: typeof TCollection_SeqNode;
   TDF: typeof TDF;
   TDF_Attribute: typeof TDF_Attribute;
   TDF_AttributeDelta: typeof TDF_AttributeDelta;
   TDF_AttributeIterator: typeof TDF_AttributeIterator;
+  TDF_AttributeIterator_1: typeof TDF_AttributeIterator_1;
+  TDF_AttributeIterator_2: typeof TDF_AttributeIterator_2;
+  TDF_AttributeIterator_3: typeof TDF_AttributeIterator_3;
   TDF_ChildIDIterator: typeof TDF_ChildIDIterator;
+  TDF_ChildIDIterator_1: typeof TDF_ChildIDIterator_1;
+  TDF_ChildIDIterator_2: typeof TDF_ChildIDIterator_2;
   TDF_ChildIterator: typeof TDF_ChildIterator;
+  TDF_ChildIterator_1: typeof TDF_ChildIterator_1;
+  TDF_ChildIterator_2: typeof TDF_ChildIterator_2;
   TDF_ClosureMode: typeof TDF_ClosureMode;
   TDF_ClosureTool: typeof TDF_ClosureTool;
   TDF_ComparisonTool: typeof TDF_ComparisonTool;
   TDF_CopyLabel: typeof TDF_CopyLabel;
+  TDF_CopyLabel_1: typeof TDF_CopyLabel_1;
+  TDF_CopyLabel_2: typeof TDF_CopyLabel_2;
   TDF_CopyTool: typeof TDF_CopyTool;
   TDF_Data: typeof TDF_Data;
   TDF_DataSet: typeof TDF_DataSet;
@@ -3442,6 +6802,11 @@ export interface opencascade {
   TDF_DeltaOnModification: typeof TDF_DeltaOnModification;
   TDF_DeltaOnRemoval: typeof TDF_DeltaOnRemoval;
   TDF_DeltaOnResume: typeof TDF_DeltaOnResume;
+  TDF_HAttributeArray1: typeof TDF_HAttributeArray1;
+  TDF_HAttributeArray1_1: typeof TDF_HAttributeArray1_1;
+  TDF_HAttributeArray1_2: typeof TDF_HAttributeArray1_2;
+  TDF_HAttributeArray1_3: typeof TDF_HAttributeArray1_3;
+  TDF_HAttributeArray1_4: typeof TDF_HAttributeArray1_4;
   TDF_IDFilter: typeof TDF_IDFilter;
   TDF_Label: typeof TDF_Label;
   TDF_LabelMapHasher: typeof TDF_LabelMapHasher;
@@ -3450,12 +6815,16 @@ export interface opencascade {
   TDF_TagSource: typeof TDF_TagSource;
   TDF_Tool: typeof TDF_Tool;
   TDF_Transaction: typeof TDF_Transaction;
+  TDF_Transaction_1: typeof TDF_Transaction_1;
+  TDF_Transaction_2: typeof TDF_Transaction_2;
   TDataStd: typeof TDataStd;
   TDataStd_AsciiString: typeof TDataStd_AsciiString;
   TDataStd_BooleanArray: typeof TDataStd_BooleanArray;
   TDataStd_BooleanList: typeof TDataStd_BooleanList;
   TDataStd_ByteArray: typeof TDataStd_ByteArray;
   TDataStd_ChildNodeIterator: typeof TDataStd_ChildNodeIterator;
+  TDataStd_ChildNodeIterator_1: typeof TDataStd_ChildNodeIterator_1;
+  TDataStd_ChildNodeIterator_2: typeof TDataStd_ChildNodeIterator_2;
   TDataStd_Comment: typeof TDataStd_Comment;
   TDataStd_Current: typeof TDataStd_Current;
   TDataStd_DeltaOnModificationOfByteArray: typeof TDataStd_DeltaOnModificationOfByteArray;
@@ -3468,11 +6837,28 @@ export interface opencascade {
   TDataStd_ExtStringArray: typeof TDataStd_ExtStringArray;
   TDataStd_ExtStringList: typeof TDataStd_ExtStringList;
   TDataStd_HDataMapOfStringByte: typeof TDataStd_HDataMapOfStringByte;
+  TDataStd_HDataMapOfStringByte_1: typeof TDataStd_HDataMapOfStringByte_1;
+  TDataStd_HDataMapOfStringByte_2: typeof TDataStd_HDataMapOfStringByte_2;
   TDataStd_HDataMapOfStringHArray1OfInteger: typeof TDataStd_HDataMapOfStringHArray1OfInteger;
+  TDataStd_HDataMapOfStringHArray1OfInteger_1: typeof TDataStd_HDataMapOfStringHArray1OfInteger_1;
+  TDataStd_HDataMapOfStringHArray1OfInteger_2: typeof TDataStd_HDataMapOfStringHArray1OfInteger_2;
   TDataStd_HDataMapOfStringHArray1OfReal: typeof TDataStd_HDataMapOfStringHArray1OfReal;
+  TDataStd_HDataMapOfStringHArray1OfReal_1: typeof TDataStd_HDataMapOfStringHArray1OfReal_1;
+  TDataStd_HDataMapOfStringHArray1OfReal_2: typeof TDataStd_HDataMapOfStringHArray1OfReal_2;
   TDataStd_HDataMapOfStringInteger: typeof TDataStd_HDataMapOfStringInteger;
+  TDataStd_HDataMapOfStringInteger_1: typeof TDataStd_HDataMapOfStringInteger_1;
+  TDataStd_HDataMapOfStringInteger_2: typeof TDataStd_HDataMapOfStringInteger_2;
   TDataStd_HDataMapOfStringReal: typeof TDataStd_HDataMapOfStringReal;
+  TDataStd_HDataMapOfStringReal_1: typeof TDataStd_HDataMapOfStringReal_1;
+  TDataStd_HDataMapOfStringReal_2: typeof TDataStd_HDataMapOfStringReal_2;
   TDataStd_HDataMapOfStringString: typeof TDataStd_HDataMapOfStringString;
+  TDataStd_HDataMapOfStringString_1: typeof TDataStd_HDataMapOfStringString_1;
+  TDataStd_HDataMapOfStringString_2: typeof TDataStd_HDataMapOfStringString_2;
+  TDataStd_HLabelArray1: typeof TDataStd_HLabelArray1;
+  TDataStd_HLabelArray1_1: typeof TDataStd_HLabelArray1_1;
+  TDataStd_HLabelArray1_2: typeof TDataStd_HLabelArray1_2;
+  TDataStd_HLabelArray1_3: typeof TDataStd_HLabelArray1_3;
+  TDataStd_HLabelArray1_4: typeof TDataStd_HLabelArray1_4;
   TDataStd_IntPackedMap: typeof TDataStd_IntPackedMap;
   TDataStd_Integer: typeof TDataStd_Integer;
   TDataStd_IntegerArray: typeof TDataStd_IntegerArray;
@@ -3494,6 +6880,11 @@ export interface opencascade {
   TDataXtd_Axis: typeof TDataXtd_Axis;
   TDataXtd_Constraint: typeof TDataXtd_Constraint;
   TDataXtd_Geometry: typeof TDataXtd_Geometry;
+  TDataXtd_HArray1OfTrsf: typeof TDataXtd_HArray1OfTrsf;
+  TDataXtd_HArray1OfTrsf_1: typeof TDataXtd_HArray1OfTrsf_1;
+  TDataXtd_HArray1OfTrsf_2: typeof TDataXtd_HArray1OfTrsf_2;
+  TDataXtd_HArray1OfTrsf_3: typeof TDataXtd_HArray1OfTrsf_3;
+  TDataXtd_HArray1OfTrsf_4: typeof TDataXtd_HArray1OfTrsf_4;
   TDataXtd_Pattern: typeof TDataXtd_Pattern;
   TDataXtd_PatternStd: typeof TDataXtd_PatternStd;
   TDataXtd_Placement: typeof TDataXtd_Placement;
@@ -3515,14 +6906,25 @@ export interface opencascade {
   TDocStd_PathParser: typeof TDocStd_PathParser;
   TDocStd_XLink: typeof TDocStd_XLink;
   TDocStd_XLinkIterator: typeof TDocStd_XLinkIterator;
+  TDocStd_XLinkIterator_1: typeof TDocStd_XLinkIterator_1;
+  TDocStd_XLinkIterator_2: typeof TDocStd_XLinkIterator_2;
   TDocStd_XLinkRoot: typeof TDocStd_XLinkRoot;
   TDocStd_XLinkTool: typeof TDocStd_XLinkTool;
   TFunction_Driver: typeof TFunction_Driver;
   TFunction_DriverTable: typeof TFunction_DriverTable;
   TFunction_Function: typeof TFunction_Function;
   TFunction_GraphNode: typeof TFunction_GraphNode;
+  TFunction_HArray1OfDataMapOfGUIDDriver: typeof TFunction_HArray1OfDataMapOfGUIDDriver;
+  TFunction_HArray1OfDataMapOfGUIDDriver_1: typeof TFunction_HArray1OfDataMapOfGUIDDriver_1;
+  TFunction_HArray1OfDataMapOfGUIDDriver_2: typeof TFunction_HArray1OfDataMapOfGUIDDriver_2;
+  TFunction_HArray1OfDataMapOfGUIDDriver_3: typeof TFunction_HArray1OfDataMapOfGUIDDriver_3;
+  TFunction_HArray1OfDataMapOfGUIDDriver_4: typeof TFunction_HArray1OfDataMapOfGUIDDriver_4;
   TFunction_IFunction: typeof TFunction_IFunction;
+  TFunction_IFunction_1: typeof TFunction_IFunction_1;
+  TFunction_IFunction_2: typeof TFunction_IFunction_2;
   TFunction_Iterator: typeof TFunction_Iterator;
+  TFunction_Iterator_1: typeof TFunction_Iterator_1;
+  TFunction_Iterator_2: typeof TFunction_Iterator_2;
   TFunction_Logbook: typeof TFunction_Logbook;
   TFunction_Scope: typeof TFunction_Scope;
   TNaming: typeof TNaming;
@@ -3531,20 +6933,42 @@ export interface opencascade {
   TNaming_DeltaOnModification: typeof TNaming_DeltaOnModification;
   TNaming_DeltaOnRemoval: typeof TNaming_DeltaOnRemoval;
   TNaming_Identifier: typeof TNaming_Identifier;
+  TNaming_Identifier_1: typeof TNaming_Identifier_1;
+  TNaming_Identifier_2: typeof TNaming_Identifier_2;
   TNaming_Iterator: typeof TNaming_Iterator;
+  TNaming_Iterator_1: typeof TNaming_Iterator_1;
+  TNaming_Iterator_2: typeof TNaming_Iterator_2;
+  TNaming_Iterator_3: typeof TNaming_Iterator_3;
   TNaming_IteratorOnShapesSet: typeof TNaming_IteratorOnShapesSet;
+  TNaming_IteratorOnShapesSet_1: typeof TNaming_IteratorOnShapesSet_1;
+  TNaming_IteratorOnShapesSet_2: typeof TNaming_IteratorOnShapesSet_2;
   TNaming_Localizer: typeof TNaming_Localizer;
   TNaming_Name: typeof TNaming_Name;
   TNaming_NamedShape: typeof TNaming_NamedShape;
   TNaming_Naming: typeof TNaming_Naming;
   TNaming_NamingTool: typeof TNaming_NamingTool;
   TNaming_NewShapeIterator: typeof TNaming_NewShapeIterator;
+  TNaming_NewShapeIterator_1: typeof TNaming_NewShapeIterator_1;
+  TNaming_NewShapeIterator_2: typeof TNaming_NewShapeIterator_2;
+  TNaming_NewShapeIterator_3: typeof TNaming_NewShapeIterator_3;
+  TNaming_NewShapeIterator_4: typeof TNaming_NewShapeIterator_4;
   TNaming_OldShapeIterator: typeof TNaming_OldShapeIterator;
+  TNaming_OldShapeIterator_1: typeof TNaming_OldShapeIterator_1;
+  TNaming_OldShapeIterator_2: typeof TNaming_OldShapeIterator_2;
+  TNaming_OldShapeIterator_3: typeof TNaming_OldShapeIterator_3;
+  TNaming_OldShapeIterator_4: typeof TNaming_OldShapeIterator_4;
   TNaming_RefShape: typeof TNaming_RefShape;
+  TNaming_RefShape_1: typeof TNaming_RefShape_1;
+  TNaming_RefShape_2: typeof TNaming_RefShape_2;
   TNaming_SameShapeIterator: typeof TNaming_SameShapeIterator;
   TNaming_Scope: typeof TNaming_Scope;
+  TNaming_Scope_1: typeof TNaming_Scope_1;
+  TNaming_Scope_2: typeof TNaming_Scope_2;
+  TNaming_Scope_3: typeof TNaming_Scope_3;
   TNaming_Selector: typeof TNaming_Selector;
   TNaming_ShapesSet: typeof TNaming_ShapesSet;
+  TNaming_ShapesSet_1: typeof TNaming_ShapesSet_1;
+  TNaming_ShapesSet_2: typeof TNaming_ShapesSet_2;
   TNaming_Tool: typeof TNaming_Tool;
   TNaming_TranslateTool: typeof TNaming_TranslateTool;
   TNaming_Translator: typeof TNaming_Translator;
@@ -3552,6 +6976,9 @@ export interface opencascade {
   TObj_Application: typeof TObj_Application;
   TObj_Assistant: typeof TObj_Assistant;
   TObj_CheckModel: typeof TObj_CheckModel;
+  TObj_HSequenceOfObject: typeof TObj_HSequenceOfObject;
+  TObj_HSequenceOfObject_1: typeof TObj_HSequenceOfObject_1;
+  TObj_HSequenceOfObject_2: typeof TObj_HSequenceOfObject_2;
   TObj_HiddenPartition: typeof TObj_HiddenPartition;
   TObj_LabelIterator: typeof TObj_LabelIterator;
   TObj_Model: typeof TObj_Model;
@@ -3569,47 +6996,106 @@ export interface opencascade {
   TObj_TObject: typeof TObj_TObject;
   TObj_TReference: typeof TObj_TReference;
   TObj_TXYZ: typeof TObj_TXYZ;
+  TShort_HArray2OfShortReal: typeof TShort_HArray2OfShortReal;
+  TShort_HArray2OfShortReal_1: typeof TShort_HArray2OfShortReal_1;
+  TShort_HArray2OfShortReal_2: typeof TShort_HArray2OfShortReal_2;
+  TShort_HArray2OfShortReal_3: typeof TShort_HArray2OfShortReal_3;
+  TShort_HSequenceOfShortReal: typeof TShort_HSequenceOfShortReal;
+  TShort_HSequenceOfShortReal_1: typeof TShort_HSequenceOfShortReal_1;
+  TShort_HSequenceOfShortReal_2: typeof TShort_HSequenceOfShortReal_2;
   TopAbs: typeof TopAbs;
   TopBas_TestInterference: typeof TopBas_TestInterference;
+  TopBas_TestInterference_1: typeof TopBas_TestInterference_1;
+  TopBas_TestInterference_2: typeof TopBas_TestInterference_2;
   TopCnx_EdgeFaceTransition: typeof TopCnx_EdgeFaceTransition;
   TopExp: typeof TopExp;
   TopExp_Explorer: typeof TopExp_Explorer;
+  TopExp_Explorer_1: typeof TopExp_Explorer_1;
+  TopExp_Explorer_2: typeof TopExp_Explorer_2;
   TopLoc_Datum3D: typeof TopLoc_Datum3D;
+  TopLoc_Datum3D_1: typeof TopLoc_Datum3D_1;
+  TopLoc_Datum3D_2: typeof TopLoc_Datum3D_2;
   TopLoc_ItemLocation: typeof TopLoc_ItemLocation;
   TopLoc_Location: typeof TopLoc_Location;
+  TopLoc_Location_1: typeof TopLoc_Location_1;
+  TopLoc_Location_2: typeof TopLoc_Location_2;
+  TopLoc_Location_3: typeof TopLoc_Location_3;
   TopLoc_SListNodeOfItemLocation: typeof TopLoc_SListNodeOfItemLocation;
   TopLoc_SListOfItemLocation: typeof TopLoc_SListOfItemLocation;
+  TopLoc_SListOfItemLocation_1: typeof TopLoc_SListOfItemLocation_1;
+  TopLoc_SListOfItemLocation_2: typeof TopLoc_SListOfItemLocation_2;
+  TopLoc_SListOfItemLocation_3: typeof TopLoc_SListOfItemLocation_3;
+  TopLoc_SListOfItemLocation_4: typeof TopLoc_SListOfItemLocation_4;
   TopOpeBRep: typeof TopOpeBRep;
   TopOpeBRepBuild_Area1dBuilder: typeof TopOpeBRepBuild_Area1dBuilder;
+  TopOpeBRepBuild_Area1dBuilder_1: typeof TopOpeBRepBuild_Area1dBuilder_1;
+  TopOpeBRepBuild_Area1dBuilder_2: typeof TopOpeBRepBuild_Area1dBuilder_2;
   TopOpeBRepBuild_Area2dBuilder: typeof TopOpeBRepBuild_Area2dBuilder;
+  TopOpeBRepBuild_Area2dBuilder_1: typeof TopOpeBRepBuild_Area2dBuilder_1;
+  TopOpeBRepBuild_Area2dBuilder_2: typeof TopOpeBRepBuild_Area2dBuilder_2;
   TopOpeBRepBuild_Area3dBuilder: typeof TopOpeBRepBuild_Area3dBuilder;
+  TopOpeBRepBuild_Area3dBuilder_1: typeof TopOpeBRepBuild_Area3dBuilder_1;
+  TopOpeBRepBuild_Area3dBuilder_2: typeof TopOpeBRepBuild_Area3dBuilder_2;
   TopOpeBRepBuild_AreaBuilder: typeof TopOpeBRepBuild_AreaBuilder;
+  TopOpeBRepBuild_AreaBuilder_1: typeof TopOpeBRepBuild_AreaBuilder_1;
+  TopOpeBRepBuild_AreaBuilder_2: typeof TopOpeBRepBuild_AreaBuilder_2;
   TopOpeBRepBuild_BlockBuilder: typeof TopOpeBRepBuild_BlockBuilder;
+  TopOpeBRepBuild_BlockBuilder_1: typeof TopOpeBRepBuild_BlockBuilder_1;
+  TopOpeBRepBuild_BlockBuilder_2: typeof TopOpeBRepBuild_BlockBuilder_2;
   TopOpeBRepBuild_BlockIterator: typeof TopOpeBRepBuild_BlockIterator;
+  TopOpeBRepBuild_BlockIterator_1: typeof TopOpeBRepBuild_BlockIterator_1;
+  TopOpeBRepBuild_BlockIterator_2: typeof TopOpeBRepBuild_BlockIterator_2;
   TopOpeBRepBuild_BuilderON: typeof TopOpeBRepBuild_BuilderON;
+  TopOpeBRepBuild_BuilderON_1: typeof TopOpeBRepBuild_BuilderON_1;
+  TopOpeBRepBuild_BuilderON_2: typeof TopOpeBRepBuild_BuilderON_2;
   TopOpeBRepBuild_CompositeClassifier: typeof TopOpeBRepBuild_CompositeClassifier;
   TopOpeBRepBuild_CorrectFace2d: typeof TopOpeBRepBuild_CorrectFace2d;
+  TopOpeBRepBuild_CorrectFace2d_1: typeof TopOpeBRepBuild_CorrectFace2d_1;
+  TopOpeBRepBuild_CorrectFace2d_2: typeof TopOpeBRepBuild_CorrectFace2d_2;
   TopOpeBRepBuild_EdgeBuilder: typeof TopOpeBRepBuild_EdgeBuilder;
+  TopOpeBRepBuild_EdgeBuilder_1: typeof TopOpeBRepBuild_EdgeBuilder_1;
+  TopOpeBRepBuild_EdgeBuilder_2: typeof TopOpeBRepBuild_EdgeBuilder_2;
   TopOpeBRepBuild_FaceAreaBuilder: typeof TopOpeBRepBuild_FaceAreaBuilder;
+  TopOpeBRepBuild_FaceAreaBuilder_1: typeof TopOpeBRepBuild_FaceAreaBuilder_1;
+  TopOpeBRepBuild_FaceAreaBuilder_2: typeof TopOpeBRepBuild_FaceAreaBuilder_2;
   TopOpeBRepBuild_FaceBuilder: typeof TopOpeBRepBuild_FaceBuilder;
+  TopOpeBRepBuild_FaceBuilder_1: typeof TopOpeBRepBuild_FaceBuilder_1;
+  TopOpeBRepBuild_FaceBuilder_2: typeof TopOpeBRepBuild_FaceBuilder_2;
   TopOpeBRepBuild_FuseFace: typeof TopOpeBRepBuild_FuseFace;
+  TopOpeBRepBuild_FuseFace_1: typeof TopOpeBRepBuild_FuseFace_1;
+  TopOpeBRepBuild_FuseFace_2: typeof TopOpeBRepBuild_FuseFace_2;
   TopOpeBRepBuild_GIter: typeof TopOpeBRepBuild_GIter;
+  TopOpeBRepBuild_GIter_1: typeof TopOpeBRepBuild_GIter_1;
+  TopOpeBRepBuild_GIter_2: typeof TopOpeBRepBuild_GIter_2;
   TopOpeBRepBuild_GTool: typeof TopOpeBRepBuild_GTool;
   TopOpeBRepBuild_GTopo: typeof TopOpeBRepBuild_GTopo;
+  TopOpeBRepBuild_GTopo_1: typeof TopOpeBRepBuild_GTopo_1;
+  TopOpeBRepBuild_GTopo_2: typeof TopOpeBRepBuild_GTopo_2;
   TopOpeBRepBuild_HBuilder: typeof TopOpeBRepBuild_HBuilder;
   TopOpeBRepBuild_Loop: typeof TopOpeBRepBuild_Loop;
+  TopOpeBRepBuild_Loop_1: typeof TopOpeBRepBuild_Loop_1;
+  TopOpeBRepBuild_Loop_2: typeof TopOpeBRepBuild_Loop_2;
   TopOpeBRepBuild_LoopClassifier: typeof TopOpeBRepBuild_LoopClassifier;
   TopOpeBRepBuild_LoopSet: typeof TopOpeBRepBuild_LoopSet;
   TopOpeBRepBuild_Pave: typeof TopOpeBRepBuild_Pave;
   TopOpeBRepBuild_PaveClassifier: typeof TopOpeBRepBuild_PaveClassifier;
   TopOpeBRepBuild_PaveSet: typeof TopOpeBRepBuild_PaveSet;
   TopOpeBRepBuild_ShapeListOfShape: typeof TopOpeBRepBuild_ShapeListOfShape;
+  TopOpeBRepBuild_ShapeListOfShape_1: typeof TopOpeBRepBuild_ShapeListOfShape_1;
+  TopOpeBRepBuild_ShapeListOfShape_2: typeof TopOpeBRepBuild_ShapeListOfShape_2;
+  TopOpeBRepBuild_ShapeListOfShape_3: typeof TopOpeBRepBuild_ShapeListOfShape_3;
   TopOpeBRepBuild_ShapeSet: typeof TopOpeBRepBuild_ShapeSet;
   TopOpeBRepBuild_ShellFaceClassifier: typeof TopOpeBRepBuild_ShellFaceClassifier;
   TopOpeBRepBuild_ShellFaceSet: typeof TopOpeBRepBuild_ShellFaceSet;
+  TopOpeBRepBuild_ShellFaceSet_1: typeof TopOpeBRepBuild_ShellFaceSet_1;
+  TopOpeBRepBuild_ShellFaceSet_2: typeof TopOpeBRepBuild_ShellFaceSet_2;
   TopOpeBRepBuild_ShellToSolid: typeof TopOpeBRepBuild_ShellToSolid;
   TopOpeBRepBuild_SolidAreaBuilder: typeof TopOpeBRepBuild_SolidAreaBuilder;
+  TopOpeBRepBuild_SolidAreaBuilder_1: typeof TopOpeBRepBuild_SolidAreaBuilder_1;
+  TopOpeBRepBuild_SolidAreaBuilder_2: typeof TopOpeBRepBuild_SolidAreaBuilder_2;
   TopOpeBRepBuild_SolidBuilder: typeof TopOpeBRepBuild_SolidBuilder;
+  TopOpeBRepBuild_SolidBuilder_1: typeof TopOpeBRepBuild_SolidBuilder_1;
+  TopOpeBRepBuild_SolidBuilder_2: typeof TopOpeBRepBuild_SolidBuilder_2;
   TopOpeBRepBuild_Tools: typeof TopOpeBRepBuild_Tools;
   TopOpeBRepBuild_Tools2d: typeof TopOpeBRepBuild_Tools2d;
   TopOpeBRepBuild_VertexInfo: typeof TopOpeBRepBuild_VertexInfo;
@@ -3619,10 +7105,21 @@ export interface opencascade {
   TopOpeBRepDS: typeof TopOpeBRepDS;
   TopOpeBRepDS_Association: typeof TopOpeBRepDS_Association;
   TopOpeBRepDS_BuildTool: typeof TopOpeBRepDS_BuildTool;
+  TopOpeBRepDS_BuildTool_1: typeof TopOpeBRepDS_BuildTool_1;
+  TopOpeBRepDS_BuildTool_2: typeof TopOpeBRepDS_BuildTool_2;
+  TopOpeBRepDS_BuildTool_3: typeof TopOpeBRepDS_BuildTool_3;
   TopOpeBRepDS_Check: typeof TopOpeBRepDS_Check;
+  TopOpeBRepDS_Check_1: typeof TopOpeBRepDS_Check_1;
+  TopOpeBRepDS_Check_2: typeof TopOpeBRepDS_Check_2;
   TopOpeBRepDS_Curve: typeof TopOpeBRepDS_Curve;
+  TopOpeBRepDS_Curve_1: typeof TopOpeBRepDS_Curve_1;
+  TopOpeBRepDS_Curve_2: typeof TopOpeBRepDS_Curve_2;
   TopOpeBRepDS_CurveData: typeof TopOpeBRepDS_CurveData;
+  TopOpeBRepDS_CurveData_1: typeof TopOpeBRepDS_CurveData_1;
+  TopOpeBRepDS_CurveData_2: typeof TopOpeBRepDS_CurveData_2;
   TopOpeBRepDS_CurveExplorer: typeof TopOpeBRepDS_CurveExplorer;
+  TopOpeBRepDS_CurveExplorer_1: typeof TopOpeBRepDS_CurveExplorer_1;
+  TopOpeBRepDS_CurveExplorer_2: typeof TopOpeBRepDS_CurveExplorer_2;
   TopOpeBRepDS_CurveIterator: typeof TopOpeBRepDS_CurveIterator;
   TopOpeBRepDS_CurvePointInterference: typeof TopOpeBRepDS_CurvePointInterference;
   TopOpeBRepDS_DataStructure: typeof TopOpeBRepDS_DataStructure;
@@ -3631,23 +7128,49 @@ export interface opencascade {
   TopOpeBRepDS_Edge3dInterferenceTool: typeof TopOpeBRepDS_Edge3dInterferenceTool;
   TopOpeBRepDS_EdgeInterferenceTool: typeof TopOpeBRepDS_EdgeInterferenceTool;
   TopOpeBRepDS_EdgeVertexInterference: typeof TopOpeBRepDS_EdgeVertexInterference;
+  TopOpeBRepDS_EdgeVertexInterference_1: typeof TopOpeBRepDS_EdgeVertexInterference_1;
+  TopOpeBRepDS_EdgeVertexInterference_2: typeof TopOpeBRepDS_EdgeVertexInterference_2;
   TopOpeBRepDS_Explorer: typeof TopOpeBRepDS_Explorer;
+  TopOpeBRepDS_Explorer_1: typeof TopOpeBRepDS_Explorer_1;
+  TopOpeBRepDS_Explorer_2: typeof TopOpeBRepDS_Explorer_2;
   TopOpeBRepDS_FIR: typeof TopOpeBRepDS_FIR;
   TopOpeBRepDS_FaceEdgeInterference: typeof TopOpeBRepDS_FaceEdgeInterference;
   TopOpeBRepDS_FaceInterferenceTool: typeof TopOpeBRepDS_FaceInterferenceTool;
   TopOpeBRepDS_Filter: typeof TopOpeBRepDS_Filter;
   TopOpeBRepDS_GapFiller: typeof TopOpeBRepDS_GapFiller;
   TopOpeBRepDS_GapTool: typeof TopOpeBRepDS_GapTool;
+  TopOpeBRepDS_GapTool_1: typeof TopOpeBRepDS_GapTool_1;
+  TopOpeBRepDS_GapTool_2: typeof TopOpeBRepDS_GapTool_2;
   TopOpeBRepDS_GeometryData: typeof TopOpeBRepDS_GeometryData;
+  TopOpeBRepDS_GeometryData_1: typeof TopOpeBRepDS_GeometryData_1;
+  TopOpeBRepDS_GeometryData_2: typeof TopOpeBRepDS_GeometryData_2;
+  TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference: typeof TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference;
+  TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference_1: typeof TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference_1;
+  TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference_2: typeof TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference_2;
+  TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference_3: typeof TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference_3;
+  TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference_4: typeof TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference_4;
   TopOpeBRepDS_HDataStructure: typeof TopOpeBRepDS_HDataStructure;
   TopOpeBRepDS_Interference: typeof TopOpeBRepDS_Interference;
+  TopOpeBRepDS_Interference_1: typeof TopOpeBRepDS_Interference_1;
+  TopOpeBRepDS_Interference_2: typeof TopOpeBRepDS_Interference_2;
+  TopOpeBRepDS_Interference_3: typeof TopOpeBRepDS_Interference_3;
   TopOpeBRepDS_InterferenceIterator: typeof TopOpeBRepDS_InterferenceIterator;
+  TopOpeBRepDS_InterferenceIterator_1: typeof TopOpeBRepDS_InterferenceIterator_1;
+  TopOpeBRepDS_InterferenceIterator_2: typeof TopOpeBRepDS_InterferenceIterator_2;
   TopOpeBRepDS_InterferenceTool: typeof TopOpeBRepDS_InterferenceTool;
   TopOpeBRepDS_ListOfShapeOn1State: typeof TopOpeBRepDS_ListOfShapeOn1State;
   TopOpeBRepDS_Marker: typeof TopOpeBRepDS_Marker;
   TopOpeBRepDS_Point: typeof TopOpeBRepDS_Point;
+  TopOpeBRepDS_Point_1: typeof TopOpeBRepDS_Point_1;
+  TopOpeBRepDS_Point_2: typeof TopOpeBRepDS_Point_2;
+  TopOpeBRepDS_Point_3: typeof TopOpeBRepDS_Point_3;
   TopOpeBRepDS_PointData: typeof TopOpeBRepDS_PointData;
+  TopOpeBRepDS_PointData_1: typeof TopOpeBRepDS_PointData_1;
+  TopOpeBRepDS_PointData_2: typeof TopOpeBRepDS_PointData_2;
+  TopOpeBRepDS_PointData_3: typeof TopOpeBRepDS_PointData_3;
   TopOpeBRepDS_PointExplorer: typeof TopOpeBRepDS_PointExplorer;
+  TopOpeBRepDS_PointExplorer_1: typeof TopOpeBRepDS_PointExplorer_1;
+  TopOpeBRepDS_PointExplorer_2: typeof TopOpeBRepDS_PointExplorer_2;
   TopOpeBRepDS_PointIterator: typeof TopOpeBRepDS_PointIterator;
   TopOpeBRepDS_Reducer: typeof TopOpeBRepDS_Reducer;
   TopOpeBRepDS_ShapeData: typeof TopOpeBRepDS_ShapeData;
@@ -3655,20 +7178,42 @@ export interface opencascade {
   TopOpeBRepDS_ShapeWithState: typeof TopOpeBRepDS_ShapeWithState;
   TopOpeBRepDS_SolidSurfaceInterference: typeof TopOpeBRepDS_SolidSurfaceInterference;
   TopOpeBRepDS_Surface: typeof TopOpeBRepDS_Surface;
+  TopOpeBRepDS_Surface_1: typeof TopOpeBRepDS_Surface_1;
+  TopOpeBRepDS_Surface_2: typeof TopOpeBRepDS_Surface_2;
+  TopOpeBRepDS_Surface_3: typeof TopOpeBRepDS_Surface_3;
   TopOpeBRepDS_SurfaceCurveInterference: typeof TopOpeBRepDS_SurfaceCurveInterference;
+  TopOpeBRepDS_SurfaceCurveInterference_1: typeof TopOpeBRepDS_SurfaceCurveInterference_1;
+  TopOpeBRepDS_SurfaceCurveInterference_2: typeof TopOpeBRepDS_SurfaceCurveInterference_2;
+  TopOpeBRepDS_SurfaceCurveInterference_3: typeof TopOpeBRepDS_SurfaceCurveInterference_3;
   TopOpeBRepDS_SurfaceData: typeof TopOpeBRepDS_SurfaceData;
+  TopOpeBRepDS_SurfaceData_1: typeof TopOpeBRepDS_SurfaceData_1;
+  TopOpeBRepDS_SurfaceData_2: typeof TopOpeBRepDS_SurfaceData_2;
   TopOpeBRepDS_SurfaceExplorer: typeof TopOpeBRepDS_SurfaceExplorer;
+  TopOpeBRepDS_SurfaceExplorer_1: typeof TopOpeBRepDS_SurfaceExplorer_1;
+  TopOpeBRepDS_SurfaceExplorer_2: typeof TopOpeBRepDS_SurfaceExplorer_2;
   TopOpeBRepDS_SurfaceIterator: typeof TopOpeBRepDS_SurfaceIterator;
   TopOpeBRepDS_TKI: typeof TopOpeBRepDS_TKI;
   TopOpeBRepDS_TOOL: typeof TopOpeBRepDS_TOOL;
   TopOpeBRepDS_Transition: typeof TopOpeBRepDS_Transition;
+  TopOpeBRepDS_Transition_1: typeof TopOpeBRepDS_Transition_1;
+  TopOpeBRepDS_Transition_2: typeof TopOpeBRepDS_Transition_2;
+  TopOpeBRepDS_Transition_3: typeof TopOpeBRepDS_Transition_3;
   TopOpeBRepTool: typeof TopOpeBRepTool;
   TopOpeBRepTool_AncestorsTool: typeof TopOpeBRepTool_AncestorsTool;
   TopOpeBRepTool_BoxSort: typeof TopOpeBRepTool_BoxSort;
+  TopOpeBRepTool_BoxSort_1: typeof TopOpeBRepTool_BoxSort_1;
+  TopOpeBRepTool_BoxSort_2: typeof TopOpeBRepTool_BoxSort_2;
   TopOpeBRepTool_C2DF: typeof TopOpeBRepTool_C2DF;
+  TopOpeBRepTool_C2DF_1: typeof TopOpeBRepTool_C2DF_1;
+  TopOpeBRepTool_C2DF_2: typeof TopOpeBRepTool_C2DF_2;
   TopOpeBRepTool_CLASSI: typeof TopOpeBRepTool_CLASSI;
   TopOpeBRepTool_CORRISO: typeof TopOpeBRepTool_CORRISO;
+  TopOpeBRepTool_CORRISO_1: typeof TopOpeBRepTool_CORRISO_1;
+  TopOpeBRepTool_CORRISO_2: typeof TopOpeBRepTool_CORRISO_2;
   TopOpeBRepTool_CurveTool: typeof TopOpeBRepTool_CurveTool;
+  TopOpeBRepTool_CurveTool_1: typeof TopOpeBRepTool_CurveTool_1;
+  TopOpeBRepTool_CurveTool_2: typeof TopOpeBRepTool_CurveTool_2;
+  TopOpeBRepTool_CurveTool_3: typeof TopOpeBRepTool_CurveTool_3;
   TopOpeBRepTool_FuseEdges: typeof TopOpeBRepTool_FuseEdges;
   TopOpeBRepTool_GeomTool: typeof TopOpeBRepTool_GeomTool;
   TopOpeBRepTool_HBoxTool: typeof TopOpeBRepTool_HBoxTool;
@@ -3676,15 +7221,23 @@ export interface opencascade {
   TopOpeBRepTool_REGUS: typeof TopOpeBRepTool_REGUS;
   TopOpeBRepTool_REGUW: typeof TopOpeBRepTool_REGUW;
   TopOpeBRepTool_ShapeClassifier: typeof TopOpeBRepTool_ShapeClassifier;
+  TopOpeBRepTool_ShapeClassifier_1: typeof TopOpeBRepTool_ShapeClassifier_1;
+  TopOpeBRepTool_ShapeClassifier_2: typeof TopOpeBRepTool_ShapeClassifier_2;
   TopOpeBRepTool_ShapeExplorer: typeof TopOpeBRepTool_ShapeExplorer;
+  TopOpeBRepTool_ShapeExplorer_1: typeof TopOpeBRepTool_ShapeExplorer_1;
+  TopOpeBRepTool_ShapeExplorer_2: typeof TopOpeBRepTool_ShapeExplorer_2;
   TopOpeBRepTool_ShapeTool: typeof TopOpeBRepTool_ShapeTool;
   TopOpeBRepTool_SolidClassifier: typeof TopOpeBRepTool_SolidClassifier;
   TopOpeBRepTool_TOOL: typeof TopOpeBRepTool_TOOL;
   TopOpeBRepTool_connexity: typeof TopOpeBRepTool_connexity;
+  TopOpeBRepTool_connexity_1: typeof TopOpeBRepTool_connexity_1;
+  TopOpeBRepTool_connexity_2: typeof TopOpeBRepTool_connexity_2;
   TopOpeBRepTool_face: typeof TopOpeBRepTool_face;
   TopOpeBRepTool_makeTransition: typeof TopOpeBRepTool_makeTransition;
   TopOpeBRepTool_mkTondgE: typeof TopOpeBRepTool_mkTondgE;
   TopOpeBRep_Bipoint: typeof TopOpeBRep_Bipoint;
+  TopOpeBRep_Bipoint_1: typeof TopOpeBRep_Bipoint_1;
+  TopOpeBRep_Bipoint_2: typeof TopOpeBRep_Bipoint_2;
   TopOpeBRep_DSFiller: typeof TopOpeBRep_DSFiller;
   TopOpeBRep_EdgesFiller: typeof TopOpeBRep_EdgesFiller;
   TopOpeBRep_EdgesIntersector: typeof TopOpeBRep_EdgesIntersector;
@@ -3695,6 +7248,16 @@ export interface opencascade {
   TopOpeBRep_FacesFiller: typeof TopOpeBRep_FacesFiller;
   TopOpeBRep_FacesIntersector: typeof TopOpeBRep_FacesIntersector;
   TopOpeBRep_GeomTool: typeof TopOpeBRep_GeomTool;
+  TopOpeBRep_HArray1OfLineInter: typeof TopOpeBRep_HArray1OfLineInter;
+  TopOpeBRep_HArray1OfLineInter_1: typeof TopOpeBRep_HArray1OfLineInter_1;
+  TopOpeBRep_HArray1OfLineInter_2: typeof TopOpeBRep_HArray1OfLineInter_2;
+  TopOpeBRep_HArray1OfLineInter_3: typeof TopOpeBRep_HArray1OfLineInter_3;
+  TopOpeBRep_HArray1OfLineInter_4: typeof TopOpeBRep_HArray1OfLineInter_4;
+  TopOpeBRep_HArray1OfVPointInter: typeof TopOpeBRep_HArray1OfVPointInter;
+  TopOpeBRep_HArray1OfVPointInter_1: typeof TopOpeBRep_HArray1OfVPointInter_1;
+  TopOpeBRep_HArray1OfVPointInter_2: typeof TopOpeBRep_HArray1OfVPointInter_2;
+  TopOpeBRep_HArray1OfVPointInter_3: typeof TopOpeBRep_HArray1OfVPointInter_3;
+  TopOpeBRep_HArray1OfVPointInter_4: typeof TopOpeBRep_HArray1OfVPointInter_4;
   TopOpeBRep_Hctxee2d: typeof TopOpeBRep_Hctxee2d;
   TopOpeBRep_Hctxff2d: typeof TopOpeBRep_Hctxff2d;
   TopOpeBRep_LineInter: typeof TopOpeBRep_LineInter;
@@ -3707,9 +7270,18 @@ export interface opencascade {
   TopOpeBRep_VPointInter: typeof TopOpeBRep_VPointInter;
   TopOpeBRep_VPointInterClassifier: typeof TopOpeBRep_VPointInterClassifier;
   TopOpeBRep_VPointInterIterator: typeof TopOpeBRep_VPointInterIterator;
+  TopOpeBRep_VPointInterIterator_1: typeof TopOpeBRep_VPointInterIterator_1;
+  TopOpeBRep_VPointInterIterator_2: typeof TopOpeBRep_VPointInterIterator_2;
   TopOpeBRep_WPointInter: typeof TopOpeBRep_WPointInter;
   TopOpeBRep_WPointInterIterator: typeof TopOpeBRep_WPointInterIterator;
+  TopOpeBRep_WPointInterIterator_1: typeof TopOpeBRep_WPointInterIterator_1;
+  TopOpeBRep_WPointInterIterator_2: typeof TopOpeBRep_WPointInterIterator_2;
   TopTools: typeof TopTools;
+  TopTools_HArray1OfListOfShape: typeof TopTools_HArray1OfListOfShape;
+  TopTools_HArray1OfListOfShape_1: typeof TopTools_HArray1OfListOfShape_1;
+  TopTools_HArray1OfListOfShape_2: typeof TopTools_HArray1OfListOfShape_2;
+  TopTools_HArray1OfListOfShape_3: typeof TopTools_HArray1OfListOfShape_3;
+  TopTools_HArray1OfListOfShape_4: typeof TopTools_HArray1OfListOfShape_4;
   TopTools_LocationSet: typeof TopTools_LocationSet;
   TopTools_MutexForShapeProvider: typeof TopTools_MutexForShapeProvider;
   TopTools_OrientedShapeMapHasher: typeof TopTools_OrientedShapeMapHasher;
@@ -3720,20 +7292,41 @@ export interface opencascade {
   TopoDS: typeof TopoDS;
   TopoDSToStep: typeof TopoDSToStep;
   TopoDSToStep_Builder: typeof TopoDSToStep_Builder;
+  TopoDSToStep_Builder_1: typeof TopoDSToStep_Builder_1;
+  TopoDSToStep_Builder_2: typeof TopoDSToStep_Builder_2;
   TopoDSToStep_FacetedTool: typeof TopoDSToStep_FacetedTool;
   TopoDSToStep_MakeBrepWithVoids: typeof TopoDSToStep_MakeBrepWithVoids;
   TopoDSToStep_MakeFacetedBrep: typeof TopoDSToStep_MakeFacetedBrep;
+  TopoDSToStep_MakeFacetedBrep_1: typeof TopoDSToStep_MakeFacetedBrep_1;
+  TopoDSToStep_MakeFacetedBrep_2: typeof TopoDSToStep_MakeFacetedBrep_2;
   TopoDSToStep_MakeFacetedBrepAndBrepWithVoids: typeof TopoDSToStep_MakeFacetedBrepAndBrepWithVoids;
   TopoDSToStep_MakeGeometricCurveSet: typeof TopoDSToStep_MakeGeometricCurveSet;
   TopoDSToStep_MakeManifoldSolidBrep: typeof TopoDSToStep_MakeManifoldSolidBrep;
+  TopoDSToStep_MakeManifoldSolidBrep_1: typeof TopoDSToStep_MakeManifoldSolidBrep_1;
+  TopoDSToStep_MakeManifoldSolidBrep_2: typeof TopoDSToStep_MakeManifoldSolidBrep_2;
   TopoDSToStep_MakeShellBasedSurfaceModel: typeof TopoDSToStep_MakeShellBasedSurfaceModel;
+  TopoDSToStep_MakeShellBasedSurfaceModel_1: typeof TopoDSToStep_MakeShellBasedSurfaceModel_1;
+  TopoDSToStep_MakeShellBasedSurfaceModel_2: typeof TopoDSToStep_MakeShellBasedSurfaceModel_2;
+  TopoDSToStep_MakeShellBasedSurfaceModel_3: typeof TopoDSToStep_MakeShellBasedSurfaceModel_3;
   TopoDSToStep_MakeStepEdge: typeof TopoDSToStep_MakeStepEdge;
+  TopoDSToStep_MakeStepEdge_1: typeof TopoDSToStep_MakeStepEdge_1;
+  TopoDSToStep_MakeStepEdge_2: typeof TopoDSToStep_MakeStepEdge_2;
   TopoDSToStep_MakeStepFace: typeof TopoDSToStep_MakeStepFace;
+  TopoDSToStep_MakeStepFace_1: typeof TopoDSToStep_MakeStepFace_1;
+  TopoDSToStep_MakeStepFace_2: typeof TopoDSToStep_MakeStepFace_2;
   TopoDSToStep_MakeStepVertex: typeof TopoDSToStep_MakeStepVertex;
+  TopoDSToStep_MakeStepVertex_1: typeof TopoDSToStep_MakeStepVertex_1;
+  TopoDSToStep_MakeStepVertex_2: typeof TopoDSToStep_MakeStepVertex_2;
   TopoDSToStep_MakeStepWire: typeof TopoDSToStep_MakeStepWire;
+  TopoDSToStep_MakeStepWire_1: typeof TopoDSToStep_MakeStepWire_1;
+  TopoDSToStep_MakeStepWire_2: typeof TopoDSToStep_MakeStepWire_2;
   TopoDSToStep_Root: typeof TopoDSToStep_Root;
   TopoDSToStep_Tool: typeof TopoDSToStep_Tool;
+  TopoDSToStep_Tool_1: typeof TopoDSToStep_Tool_1;
+  TopoDSToStep_Tool_2: typeof TopoDSToStep_Tool_2;
   TopoDSToStep_WireframeBuilder: typeof TopoDSToStep_WireframeBuilder;
+  TopoDSToStep_WireframeBuilder_1: typeof TopoDSToStep_WireframeBuilder_1;
+  TopoDSToStep_WireframeBuilder_2: typeof TopoDSToStep_WireframeBuilder_2;
   TopoDS_AlertWithShape: typeof TopoDS_AlertWithShape;
   TopoDS_Builder: typeof TopoDS_Builder;
   TopoDS_CompSolid: typeof TopoDS_CompSolid;
@@ -3741,9 +7334,17 @@ export interface opencascade {
   TopoDS_Edge: typeof TopoDS_Edge;
   TopoDS_Face: typeof TopoDS_Face;
   TopoDS_FrozenShape: typeof TopoDS_FrozenShape;
+  TopoDS_FrozenShape_1: typeof TopoDS_FrozenShape_1;
+  TopoDS_FrozenShape_2: typeof TopoDS_FrozenShape_2;
   TopoDS_HShape: typeof TopoDS_HShape;
+  TopoDS_HShape_1: typeof TopoDS_HShape_1;
+  TopoDS_HShape_2: typeof TopoDS_HShape_2;
   TopoDS_Iterator: typeof TopoDS_Iterator;
+  TopoDS_Iterator_1: typeof TopoDS_Iterator_1;
+  TopoDS_Iterator_2: typeof TopoDS_Iterator_2;
   TopoDS_LockedShape: typeof TopoDS_LockedShape;
+  TopoDS_LockedShape_1: typeof TopoDS_LockedShape_1;
+  TopoDS_LockedShape_2: typeof TopoDS_LockedShape_2;
   TopoDS_Shape: typeof TopoDS_Shape;
   TopoDS_Shell: typeof TopoDS_Shell;
   TopoDS_Solid: typeof TopoDS_Solid;
@@ -3757,17 +7358,31 @@ export interface opencascade {
   TopoDS_TVertex: typeof TopoDS_TVertex;
   TopoDS_TWire: typeof TopoDS_TWire;
   TopoDS_UnCompatibleShapes: typeof TopoDS_UnCompatibleShapes;
+  TopoDS_UnCompatibleShapes_1: typeof TopoDS_UnCompatibleShapes_1;
+  TopoDS_UnCompatibleShapes_2: typeof TopoDS_UnCompatibleShapes_2;
   TopoDS_Vertex: typeof TopoDS_Vertex;
   TopoDS_Wire: typeof TopoDS_Wire;
   TransferBRep_BinderOfShape: typeof TransferBRep_BinderOfShape;
+  TransferBRep_BinderOfShape_1: typeof TransferBRep_BinderOfShape_1;
+  TransferBRep_BinderOfShape_2: typeof TransferBRep_BinderOfShape_2;
+  TransferBRep_HSequenceOfTransferResultInfo: typeof TransferBRep_HSequenceOfTransferResultInfo;
+  TransferBRep_HSequenceOfTransferResultInfo_1: typeof TransferBRep_HSequenceOfTransferResultInfo_1;
+  TransferBRep_HSequenceOfTransferResultInfo_2: typeof TransferBRep_HSequenceOfTransferResultInfo_2;
   TransferBRep_OrientedShapeMapper: typeof TransferBRep_OrientedShapeMapper;
   TransferBRep_Reader: typeof TransferBRep_Reader;
   TransferBRep_ShapeBinder: typeof TransferBRep_ShapeBinder;
+  TransferBRep_ShapeBinder_1: typeof TransferBRep_ShapeBinder_1;
+  TransferBRep_ShapeBinder_2: typeof TransferBRep_ShapeBinder_2;
   TransferBRep_ShapeInfo: typeof TransferBRep_ShapeInfo;
   TransferBRep_ShapeListBinder: typeof TransferBRep_ShapeListBinder;
+  TransferBRep_ShapeListBinder_1: typeof TransferBRep_ShapeListBinder_1;
+  TransferBRep_ShapeListBinder_2: typeof TransferBRep_ShapeListBinder_2;
   TransferBRep_ShapeMapper: typeof TransferBRep_ShapeMapper;
   TransferBRep_TransferResultInfo: typeof TransferBRep_TransferResultInfo;
   Transfer_ActorDispatch: typeof Transfer_ActorDispatch;
+  Transfer_ActorDispatch_1: typeof Transfer_ActorDispatch_1;
+  Transfer_ActorDispatch_2: typeof Transfer_ActorDispatch_2;
+  Transfer_ActorDispatch_3: typeof Transfer_ActorDispatch_3;
   Transfer_ActorOfFinderProcess: typeof Transfer_ActorOfFinderProcess;
   Transfer_ActorOfProcessForFinder: typeof Transfer_ActorOfProcessForFinder;
   Transfer_ActorOfProcessForTransient: typeof Transfer_ActorOfProcessForTransient;
@@ -3779,22 +7394,40 @@ export interface opencascade {
   Transfer_FindHasher: typeof Transfer_FindHasher;
   Transfer_Finder: typeof Transfer_Finder;
   Transfer_FinderProcess: typeof Transfer_FinderProcess;
+  Transfer_HSequenceOfBinder: typeof Transfer_HSequenceOfBinder;
+  Transfer_HSequenceOfBinder_1: typeof Transfer_HSequenceOfBinder_1;
+  Transfer_HSequenceOfBinder_2: typeof Transfer_HSequenceOfBinder_2;
   Transfer_IteratorOfProcessForFinder: typeof Transfer_IteratorOfProcessForFinder;
   Transfer_IteratorOfProcessForTransient: typeof Transfer_IteratorOfProcessForTransient;
   Transfer_MapContainer: typeof Transfer_MapContainer;
   Transfer_MultipleBinder: typeof Transfer_MultipleBinder;
   Transfer_ProcessForFinder: typeof Transfer_ProcessForFinder;
+  Transfer_ProcessForFinder_1: typeof Transfer_ProcessForFinder_1;
+  Transfer_ProcessForFinder_2: typeof Transfer_ProcessForFinder_2;
   Transfer_ProcessForTransient: typeof Transfer_ProcessForTransient;
+  Transfer_ProcessForTransient_1: typeof Transfer_ProcessForTransient_1;
+  Transfer_ProcessForTransient_2: typeof Transfer_ProcessForTransient_2;
   Transfer_ResultFromModel: typeof Transfer_ResultFromModel;
   Transfer_ResultFromTransient: typeof Transfer_ResultFromTransient;
   Transfer_SimpleBinderOfTransient: typeof Transfer_SimpleBinderOfTransient;
   Transfer_TransferDeadLoop: typeof Transfer_TransferDeadLoop;
+  Transfer_TransferDeadLoop_1: typeof Transfer_TransferDeadLoop_1;
+  Transfer_TransferDeadLoop_2: typeof Transfer_TransferDeadLoop_2;
   Transfer_TransferDispatch: typeof Transfer_TransferDispatch;
+  Transfer_TransferDispatch_1: typeof Transfer_TransferDispatch_1;
+  Transfer_TransferDispatch_2: typeof Transfer_TransferDispatch_2;
+  Transfer_TransferDispatch_3: typeof Transfer_TransferDispatch_3;
   Transfer_TransferFailure: typeof Transfer_TransferFailure;
+  Transfer_TransferFailure_1: typeof Transfer_TransferFailure_1;
+  Transfer_TransferFailure_2: typeof Transfer_TransferFailure_2;
   Transfer_TransferInput: typeof Transfer_TransferInput;
   Transfer_TransferIterator: typeof Transfer_TransferIterator;
   Transfer_TransferOutput: typeof Transfer_TransferOutput;
+  Transfer_TransferOutput_1: typeof Transfer_TransferOutput_1;
+  Transfer_TransferOutput_2: typeof Transfer_TransferOutput_2;
   Transfer_TransientListBinder: typeof Transfer_TransientListBinder;
+  Transfer_TransientListBinder_1: typeof Transfer_TransientListBinder_1;
+  Transfer_TransientListBinder_2: typeof Transfer_TransientListBinder_2;
   Transfer_TransientMapper: typeof Transfer_TransientMapper;
   Transfer_TransientProcess: typeof Transfer_TransientProcess;
   Transfer_VoidBinder: typeof Transfer_VoidBinder;
@@ -3803,35 +7436,84 @@ export interface opencascade {
   UnitsMethods: typeof UnitsMethods;
   Units_Dimensions: typeof Units_Dimensions;
   Units_Explorer: typeof Units_Explorer;
+  Units_Explorer_1: typeof Units_Explorer_1;
+  Units_Explorer_2: typeof Units_Explorer_2;
+  Units_Explorer_3: typeof Units_Explorer_3;
+  Units_Explorer_4: typeof Units_Explorer_4;
+  Units_Explorer_5: typeof Units_Explorer_5;
   Units_Lexicon: typeof Units_Lexicon;
   Units_MathSentence: typeof Units_MathSentence;
   Units_Measurement: typeof Units_Measurement;
+  Units_Measurement_1: typeof Units_Measurement_1;
+  Units_Measurement_2: typeof Units_Measurement_2;
+  Units_Measurement_3: typeof Units_Measurement_3;
   Units_NoSuchType: typeof Units_NoSuchType;
+  Units_NoSuchType_1: typeof Units_NoSuchType_1;
+  Units_NoSuchType_2: typeof Units_NoSuchType_2;
   Units_NoSuchUnit: typeof Units_NoSuchUnit;
+  Units_NoSuchUnit_1: typeof Units_NoSuchUnit_1;
+  Units_NoSuchUnit_2: typeof Units_NoSuchUnit_2;
+  Units_QuantitiesSequence: typeof Units_QuantitiesSequence;
+  Units_QuantitiesSequence_1: typeof Units_QuantitiesSequence_1;
+  Units_QuantitiesSequence_2: typeof Units_QuantitiesSequence_2;
   Units_Quantity: typeof Units_Quantity;
   Units_Sentence: typeof Units_Sentence;
   Units_ShiftedToken: typeof Units_ShiftedToken;
   Units_ShiftedUnit: typeof Units_ShiftedUnit;
+  Units_ShiftedUnit_1: typeof Units_ShiftedUnit_1;
+  Units_ShiftedUnit_2: typeof Units_ShiftedUnit_2;
+  Units_ShiftedUnit_3: typeof Units_ShiftedUnit_3;
   Units_Token: typeof Units_Token;
+  Units_Token_1: typeof Units_Token_1;
+  Units_Token_2: typeof Units_Token_2;
+  Units_Token_3: typeof Units_Token_3;
+  Units_Token_4: typeof Units_Token_4;
+  Units_Token_5: typeof Units_Token_5;
+  Units_Token_6: typeof Units_Token_6;
+  Units_TokensSequence: typeof Units_TokensSequence;
+  Units_TokensSequence_1: typeof Units_TokensSequence_1;
+  Units_TokensSequence_2: typeof Units_TokensSequence_2;
   Units_Unit: typeof Units_Unit;
+  Units_Unit_1: typeof Units_Unit_1;
+  Units_Unit_2: typeof Units_Unit_2;
+  Units_Unit_3: typeof Units_Unit_3;
   Units_UnitSentence: typeof Units_UnitSentence;
+  Units_UnitSentence_1: typeof Units_UnitSentence_1;
+  Units_UnitSentence_2: typeof Units_UnitSentence_2;
   Units_UnitsDictionary: typeof Units_UnitsDictionary;
   Units_UnitsLexicon: typeof Units_UnitsLexicon;
+  Units_UnitsSequence: typeof Units_UnitsSequence;
+  Units_UnitsSequence_1: typeof Units_UnitsSequence_1;
+  Units_UnitsSequence_2: typeof Units_UnitsSequence_2;
   Units_UnitsSystem: typeof Units_UnitsSystem;
+  Units_UnitsSystem_1: typeof Units_UnitsSystem_1;
+  Units_UnitsSystem_2: typeof Units_UnitsSystem_2;
   V3d: typeof V3d;
   V3d_AmbientLight: typeof V3d_AmbientLight;
   V3d_BadValue: typeof V3d_BadValue;
+  V3d_BadValue_1: typeof V3d_BadValue_1;
+  V3d_BadValue_2: typeof V3d_BadValue_2;
   V3d_CircularGrid: typeof V3d_CircularGrid;
   V3d_DirectionalLight: typeof V3d_DirectionalLight;
+  V3d_DirectionalLight_1: typeof V3d_DirectionalLight_1;
+  V3d_DirectionalLight_2: typeof V3d_DirectionalLight_2;
   V3d_Plane: typeof V3d_Plane;
   V3d_PositionLight: typeof V3d_PositionLight;
   V3d_PositionalLight: typeof V3d_PositionalLight;
   V3d_RectangularGrid: typeof V3d_RectangularGrid;
   V3d_SpotLight: typeof V3d_SpotLight;
+  V3d_SpotLight_1: typeof V3d_SpotLight_1;
+  V3d_SpotLight_2: typeof V3d_SpotLight_2;
   V3d_Trihedron: typeof V3d_Trihedron;
   V3d_UnMapped: typeof V3d_UnMapped;
+  V3d_UnMapped_1: typeof V3d_UnMapped_1;
+  V3d_UnMapped_2: typeof V3d_UnMapped_2;
   V3d_View: typeof V3d_View;
+  V3d_View_1: typeof V3d_View_1;
+  V3d_View_2: typeof V3d_View_2;
   V3d_Viewer: typeof V3d_Viewer;
+  V3d_Viewer_1: typeof V3d_Viewer_1;
+  V3d_Viewer_2: typeof V3d_Viewer_2;
   Vrml: typeof Vrml;
   VrmlAPI: typeof VrmlAPI;
   VrmlAPI_Writer: typeof VrmlAPI_Writer;
@@ -3840,8 +7522,14 @@ export interface opencascade {
   VrmlConverter_Drawer: typeof VrmlConverter_Drawer;
   VrmlConverter_HLRShape: typeof VrmlConverter_HLRShape;
   VrmlConverter_IsoAspect: typeof VrmlConverter_IsoAspect;
+  VrmlConverter_IsoAspect_1: typeof VrmlConverter_IsoAspect_1;
+  VrmlConverter_IsoAspect_2: typeof VrmlConverter_IsoAspect_2;
   VrmlConverter_LineAspect: typeof VrmlConverter_LineAspect;
+  VrmlConverter_LineAspect_1: typeof VrmlConverter_LineAspect_1;
+  VrmlConverter_LineAspect_2: typeof VrmlConverter_LineAspect_2;
   VrmlConverter_PointAspect: typeof VrmlConverter_PointAspect;
+  VrmlConverter_PointAspect_1: typeof VrmlConverter_PointAspect_1;
+  VrmlConverter_PointAspect_2: typeof VrmlConverter_PointAspect_2;
   VrmlConverter_Projector: typeof VrmlConverter_Projector;
   VrmlConverter_ShadedShape: typeof VrmlConverter_ShadedShape;
   VrmlConverter_ShadingAspect: typeof VrmlConverter_ShadingAspect;
@@ -3850,73 +7538,166 @@ export interface opencascade {
   VrmlConverter_WFRestrictedFace: typeof VrmlConverter_WFRestrictedFace;
   VrmlConverter_WFShape: typeof VrmlConverter_WFShape;
   VrmlData_Appearance: typeof VrmlData_Appearance;
+  VrmlData_Appearance_1: typeof VrmlData_Appearance_1;
+  VrmlData_Appearance_2: typeof VrmlData_Appearance_2;
   VrmlData_ArrayVec3d: typeof VrmlData_ArrayVec3d;
   VrmlData_Box: typeof VrmlData_Box;
+  VrmlData_Box_1: typeof VrmlData_Box_1;
+  VrmlData_Box_2: typeof VrmlData_Box_2;
   VrmlData_Color: typeof VrmlData_Color;
+  VrmlData_Color_1: typeof VrmlData_Color_1;
+  VrmlData_Color_2: typeof VrmlData_Color_2;
   VrmlData_Cone: typeof VrmlData_Cone;
+  VrmlData_Cone_1: typeof VrmlData_Cone_1;
+  VrmlData_Cone_2: typeof VrmlData_Cone_2;
   VrmlData_Coordinate: typeof VrmlData_Coordinate;
+  VrmlData_Coordinate_1: typeof VrmlData_Coordinate_1;
+  VrmlData_Coordinate_2: typeof VrmlData_Coordinate_2;
   VrmlData_Cylinder: typeof VrmlData_Cylinder;
+  VrmlData_Cylinder_1: typeof VrmlData_Cylinder_1;
+  VrmlData_Cylinder_2: typeof VrmlData_Cylinder_2;
   VrmlData_Faceted: typeof VrmlData_Faceted;
   VrmlData_Geometry: typeof VrmlData_Geometry;
   VrmlData_Group: typeof VrmlData_Group;
+  VrmlData_Group_1: typeof VrmlData_Group_1;
+  VrmlData_Group_2: typeof VrmlData_Group_2;
   VrmlData_ImageTexture: typeof VrmlData_ImageTexture;
+  VrmlData_ImageTexture_1: typeof VrmlData_ImageTexture_1;
+  VrmlData_ImageTexture_2: typeof VrmlData_ImageTexture_2;
   VrmlData_Material: typeof VrmlData_Material;
+  VrmlData_Material_1: typeof VrmlData_Material_1;
+  VrmlData_Material_2: typeof VrmlData_Material_2;
   VrmlData_Normal: typeof VrmlData_Normal;
+  VrmlData_Normal_1: typeof VrmlData_Normal_1;
+  VrmlData_Normal_2: typeof VrmlData_Normal_2;
   VrmlData_ShapeConvert: typeof VrmlData_ShapeConvert;
   VrmlData_ShapeNode: typeof VrmlData_ShapeNode;
+  VrmlData_ShapeNode_1: typeof VrmlData_ShapeNode_1;
+  VrmlData_ShapeNode_2: typeof VrmlData_ShapeNode_2;
   VrmlData_Sphere: typeof VrmlData_Sphere;
+  VrmlData_Sphere_1: typeof VrmlData_Sphere_1;
+  VrmlData_Sphere_2: typeof VrmlData_Sphere_2;
   VrmlData_Texture: typeof VrmlData_Texture;
   VrmlData_TextureCoordinate: typeof VrmlData_TextureCoordinate;
+  VrmlData_TextureCoordinate_1: typeof VrmlData_TextureCoordinate_1;
+  VrmlData_TextureCoordinate_2: typeof VrmlData_TextureCoordinate_2;
   VrmlData_TextureTransform: typeof VrmlData_TextureTransform;
   VrmlData_UnknownNode: typeof VrmlData_UnknownNode;
+  VrmlData_UnknownNode_1: typeof VrmlData_UnknownNode_1;
+  VrmlData_UnknownNode_2: typeof VrmlData_UnknownNode_2;
   VrmlData_WorldInfo: typeof VrmlData_WorldInfo;
+  VrmlData_WorldInfo_1: typeof VrmlData_WorldInfo_1;
+  VrmlData_WorldInfo_2: typeof VrmlData_WorldInfo_2;
   Vrml_AsciiText: typeof Vrml_AsciiText;
+  Vrml_AsciiText_1: typeof Vrml_AsciiText_1;
+  Vrml_AsciiText_2: typeof Vrml_AsciiText_2;
   Vrml_Cone: typeof Vrml_Cone;
   Vrml_Coordinate3: typeof Vrml_Coordinate3;
+  Vrml_Coordinate3_1: typeof Vrml_Coordinate3_1;
+  Vrml_Coordinate3_2: typeof Vrml_Coordinate3_2;
   Vrml_Cube: typeof Vrml_Cube;
   Vrml_Cylinder: typeof Vrml_Cylinder;
   Vrml_DirectionalLight: typeof Vrml_DirectionalLight;
+  Vrml_DirectionalLight_1: typeof Vrml_DirectionalLight_1;
+  Vrml_DirectionalLight_2: typeof Vrml_DirectionalLight_2;
   Vrml_FontStyle: typeof Vrml_FontStyle;
   Vrml_Group: typeof Vrml_Group;
   Vrml_IndexedFaceSet: typeof Vrml_IndexedFaceSet;
+  Vrml_IndexedFaceSet_1: typeof Vrml_IndexedFaceSet_1;
+  Vrml_IndexedFaceSet_2: typeof Vrml_IndexedFaceSet_2;
   Vrml_IndexedLineSet: typeof Vrml_IndexedLineSet;
+  Vrml_IndexedLineSet_1: typeof Vrml_IndexedLineSet_1;
+  Vrml_IndexedLineSet_2: typeof Vrml_IndexedLineSet_2;
   Vrml_Info: typeof Vrml_Info;
   Vrml_Instancing: typeof Vrml_Instancing;
   Vrml_LOD: typeof Vrml_LOD;
+  Vrml_LOD_1: typeof Vrml_LOD_1;
+  Vrml_LOD_2: typeof Vrml_LOD_2;
   Vrml_Material: typeof Vrml_Material;
+  Vrml_Material_1: typeof Vrml_Material_1;
+  Vrml_Material_2: typeof Vrml_Material_2;
   Vrml_MaterialBinding: typeof Vrml_MaterialBinding;
+  Vrml_MaterialBinding_1: typeof Vrml_MaterialBinding_1;
+  Vrml_MaterialBinding_2: typeof Vrml_MaterialBinding_2;
   Vrml_MatrixTransform: typeof Vrml_MatrixTransform;
+  Vrml_MatrixTransform_1: typeof Vrml_MatrixTransform_1;
+  Vrml_MatrixTransform_2: typeof Vrml_MatrixTransform_2;
   Vrml_Normal: typeof Vrml_Normal;
+  Vrml_Normal_1: typeof Vrml_Normal_1;
+  Vrml_Normal_2: typeof Vrml_Normal_2;
   Vrml_NormalBinding: typeof Vrml_NormalBinding;
+  Vrml_NormalBinding_1: typeof Vrml_NormalBinding_1;
+  Vrml_NormalBinding_2: typeof Vrml_NormalBinding_2;
   Vrml_OrthographicCamera: typeof Vrml_OrthographicCamera;
+  Vrml_OrthographicCamera_1: typeof Vrml_OrthographicCamera_1;
+  Vrml_OrthographicCamera_2: typeof Vrml_OrthographicCamera_2;
   Vrml_PerspectiveCamera: typeof Vrml_PerspectiveCamera;
+  Vrml_PerspectiveCamera_1: typeof Vrml_PerspectiveCamera_1;
+  Vrml_PerspectiveCamera_2: typeof Vrml_PerspectiveCamera_2;
   Vrml_PointLight: typeof Vrml_PointLight;
+  Vrml_PointLight_1: typeof Vrml_PointLight_1;
+  Vrml_PointLight_2: typeof Vrml_PointLight_2;
   Vrml_PointSet: typeof Vrml_PointSet;
   Vrml_Rotation: typeof Vrml_Rotation;
+  Vrml_Rotation_1: typeof Vrml_Rotation_1;
+  Vrml_Rotation_2: typeof Vrml_Rotation_2;
   Vrml_SFImage: typeof Vrml_SFImage;
+  Vrml_SFImage_1: typeof Vrml_SFImage_1;
+  Vrml_SFImage_2: typeof Vrml_SFImage_2;
   Vrml_SFRotation: typeof Vrml_SFRotation;
+  Vrml_SFRotation_1: typeof Vrml_SFRotation_1;
+  Vrml_SFRotation_2: typeof Vrml_SFRotation_2;
   Vrml_Scale: typeof Vrml_Scale;
+  Vrml_Scale_1: typeof Vrml_Scale_1;
+  Vrml_Scale_2: typeof Vrml_Scale_2;
   Vrml_Separator: typeof Vrml_Separator;
+  Vrml_Separator_1: typeof Vrml_Separator_1;
+  Vrml_Separator_2: typeof Vrml_Separator_2;
   Vrml_ShapeHints: typeof Vrml_ShapeHints;
   Vrml_Sphere: typeof Vrml_Sphere;
   Vrml_SpotLight: typeof Vrml_SpotLight;
+  Vrml_SpotLight_1: typeof Vrml_SpotLight_1;
+  Vrml_SpotLight_2: typeof Vrml_SpotLight_2;
   Vrml_Switch: typeof Vrml_Switch;
   Vrml_Texture2: typeof Vrml_Texture2;
+  Vrml_Texture2_1: typeof Vrml_Texture2_1;
+  Vrml_Texture2_2: typeof Vrml_Texture2_2;
   Vrml_Texture2Transform: typeof Vrml_Texture2Transform;
+  Vrml_Texture2Transform_1: typeof Vrml_Texture2Transform_1;
+  Vrml_Texture2Transform_2: typeof Vrml_Texture2Transform_2;
   Vrml_TextureCoordinate2: typeof Vrml_TextureCoordinate2;
+  Vrml_TextureCoordinate2_1: typeof Vrml_TextureCoordinate2_1;
+  Vrml_TextureCoordinate2_2: typeof Vrml_TextureCoordinate2_2;
   Vrml_Transform: typeof Vrml_Transform;
+  Vrml_Transform_1: typeof Vrml_Transform_1;
+  Vrml_Transform_2: typeof Vrml_Transform_2;
   Vrml_TransformSeparator: typeof Vrml_TransformSeparator;
   Vrml_Translation: typeof Vrml_Translation;
+  Vrml_Translation_1: typeof Vrml_Translation_1;
+  Vrml_Translation_2: typeof Vrml_Translation_2;
   Vrml_WWWAnchor: typeof Vrml_WWWAnchor;
   Vrml_WWWInline: typeof Vrml_WWWInline;
+  Vrml_WWWInline_1: typeof Vrml_WWWInline_1;
+  Vrml_WWWInline_2: typeof Vrml_WWWInline_2;
   WNT_ClassDefinitionError: typeof WNT_ClassDefinitionError;
+  WNT_ClassDefinitionError_1: typeof WNT_ClassDefinitionError_1;
+  WNT_ClassDefinitionError_2: typeof WNT_ClassDefinitionError_2;
   XCAFDimTolObjects_DatumObject: typeof XCAFDimTolObjects_DatumObject;
+  XCAFDimTolObjects_DatumObject_1: typeof XCAFDimTolObjects_DatumObject_1;
+  XCAFDimTolObjects_DatumObject_2: typeof XCAFDimTolObjects_DatumObject_2;
   XCAFDimTolObjects_DimensionObject: typeof XCAFDimTolObjects_DimensionObject;
+  XCAFDimTolObjects_DimensionObject_1: typeof XCAFDimTolObjects_DimensionObject_1;
+  XCAFDimTolObjects_DimensionObject_2: typeof XCAFDimTolObjects_DimensionObject_2;
   XCAFDimTolObjects_GeomToleranceObject: typeof XCAFDimTolObjects_GeomToleranceObject;
+  XCAFDimTolObjects_GeomToleranceObject_1: typeof XCAFDimTolObjects_GeomToleranceObject_1;
+  XCAFDimTolObjects_GeomToleranceObject_2: typeof XCAFDimTolObjects_GeomToleranceObject_2;
   XCAFDimTolObjects_Tool: typeof XCAFDimTolObjects_Tool;
   XCAFDoc: typeof XCAFDoc;
   XCAFDoc_Area: typeof XCAFDoc_Area;
   XCAFDoc_AssemblyItemId: typeof XCAFDoc_AssemblyItemId;
+  XCAFDoc_AssemblyItemId_1: typeof XCAFDoc_AssemblyItemId_1;
+  XCAFDoc_AssemblyItemId_2: typeof XCAFDoc_AssemblyItemId_2;
+  XCAFDoc_AssemblyItemId_3: typeof XCAFDoc_AssemblyItemId_3;
   XCAFDoc_AssemblyItemRef: typeof XCAFDoc_AssemblyItemRef;
   XCAFDoc_Centroid: typeof XCAFDoc_Centroid;
   XCAFDoc_ClippingPlaneTool: typeof XCAFDoc_ClippingPlaneTool;
@@ -3942,32 +7723,54 @@ export interface opencascade {
   XCAFDoc_ShapeTool: typeof XCAFDoc_ShapeTool;
   XCAFDoc_View: typeof XCAFDoc_View;
   XCAFDoc_ViewTool: typeof XCAFDoc_ViewTool;
+  XCAFDoc_VisMaterial: typeof XCAFDoc_VisMaterial;
+  XCAFDoc_VisMaterialTool: typeof XCAFDoc_VisMaterialTool;
   XCAFDoc_Volume: typeof XCAFDoc_Volume;
   XCAFNoteObjects_NoteObject: typeof XCAFNoteObjects_NoteObject;
+  XCAFNoteObjects_NoteObject_1: typeof XCAFNoteObjects_NoteObject_1;
+  XCAFNoteObjects_NoteObject_2: typeof XCAFNoteObjects_NoteObject_2;
   XCAFPrs: typeof XCAFPrs;
   XCAFPrs_AISObject: typeof XCAFPrs_AISObject;
   XCAFPrs_DocumentExplorer: typeof XCAFPrs_DocumentExplorer;
+  XCAFPrs_DocumentExplorer_1: typeof XCAFPrs_DocumentExplorer_1;
+  XCAFPrs_DocumentExplorer_2: typeof XCAFPrs_DocumentExplorer_2;
+  XCAFPrs_DocumentExplorer_3: typeof XCAFPrs_DocumentExplorer_3;
   XCAFPrs_DocumentIdIterator: typeof XCAFPrs_DocumentIdIterator;
   XCAFPrs_Driver: typeof XCAFPrs_Driver;
   XCAFPrs_Style: typeof XCAFPrs_Style;
+  XCAFPrs_Texture: typeof XCAFPrs_Texture;
   XCAFView_Object: typeof XCAFView_Object;
+  XCAFView_Object_1: typeof XCAFView_Object_1;
+  XCAFView_Object_2: typeof XCAFView_Object_2;
   XSAlgo: typeof XSAlgo;
   XSAlgo_AlgoContainer: typeof XSAlgo_AlgoContainer;
   XSAlgo_ToolContainer: typeof XSAlgo_ToolContainer;
   XSControl: typeof XSControl;
   XSControl_ConnectedShapes: typeof XSControl_ConnectedShapes;
+  XSControl_ConnectedShapes_1: typeof XSControl_ConnectedShapes_1;
+  XSControl_ConnectedShapes_2: typeof XSControl_ConnectedShapes_2;
   XSControl_Controller: typeof XSControl_Controller;
   XSControl_FuncShape: typeof XSControl_FuncShape;
   XSControl_Functions: typeof XSControl_Functions;
   XSControl_Reader: typeof XSControl_Reader;
+  XSControl_Reader_1: typeof XSControl_Reader_1;
+  XSControl_Reader_2: typeof XSControl_Reader_2;
+  XSControl_Reader_3: typeof XSControl_Reader_3;
   XSControl_SelectForTransfer: typeof XSControl_SelectForTransfer;
+  XSControl_SelectForTransfer_1: typeof XSControl_SelectForTransfer_1;
+  XSControl_SelectForTransfer_2: typeof XSControl_SelectForTransfer_2;
   XSControl_SignTransferStatus: typeof XSControl_SignTransferStatus;
+  XSControl_SignTransferStatus_1: typeof XSControl_SignTransferStatus_1;
+  XSControl_SignTransferStatus_2: typeof XSControl_SignTransferStatus_2;
   XSControl_TransferReader: typeof XSControl_TransferReader;
   XSControl_TransferWriter: typeof XSControl_TransferWriter;
   XSControl_Utils: typeof XSControl_Utils;
   XSControl_Vars: typeof XSControl_Vars;
   XSControl_WorkSession: typeof XSControl_WorkSession;
   XSControl_Writer: typeof XSControl_Writer;
+  XSControl_Writer_1: typeof XSControl_Writer_1;
+  XSControl_Writer_2: typeof XSControl_Writer_2;
+  XSControl_Writer_3: typeof XSControl_Writer_3;
   XmlDrivers: typeof XmlDrivers;
   XmlDrivers_DocumentRetrievalDriver: typeof XmlDrivers_DocumentRetrievalDriver;
   XmlDrivers_DocumentStorageDriver: typeof XmlDrivers_DocumentStorageDriver;
@@ -3975,6 +7778,8 @@ export interface opencascade {
   XmlLDrivers_DocumentRetrievalDriver: typeof XmlLDrivers_DocumentRetrievalDriver;
   XmlLDrivers_DocumentStorageDriver: typeof XmlLDrivers_DocumentStorageDriver;
   XmlLDrivers_NamespaceDef: typeof XmlLDrivers_NamespaceDef;
+  XmlLDrivers_NamespaceDef_1: typeof XmlLDrivers_NamespaceDef_1;
+  XmlLDrivers_NamespaceDef_2: typeof XmlLDrivers_NamespaceDef_2;
   XmlMDF: typeof XmlMDF;
   XmlMDF_ADriver: typeof XmlMDF_ADriver;
   XmlMDF_ADriverTable: typeof XmlMDF_ADriverTable;
@@ -4029,6 +7834,8 @@ export interface opencascade {
   XmlMNaming_NamedShapeDriver: typeof XmlMNaming_NamedShapeDriver;
   XmlMNaming_NamingDriver: typeof XmlMNaming_NamingDriver;
   XmlMNaming_Shape1: typeof XmlMNaming_Shape1;
+  XmlMNaming_Shape1_1: typeof XmlMNaming_Shape1_1;
+  XmlMNaming_Shape1_2: typeof XmlMNaming_Shape1_2;
   XmlMXCAFDoc: typeof XmlMXCAFDoc;
   XmlMXCAFDoc_AreaDriver: typeof XmlMXCAFDoc_AreaDriver;
   XmlMXCAFDoc_AssemblyItemRefDriver: typeof XmlMXCAFDoc_AssemblyItemRefDriver;
@@ -4052,11 +7859,18 @@ export interface opencascade {
   XmlMXCAFDoc_NotesToolDriver: typeof XmlMXCAFDoc_NotesToolDriver;
   XmlMXCAFDoc_ShapeToolDriver: typeof XmlMXCAFDoc_ShapeToolDriver;
   XmlMXCAFDoc_ViewToolDriver: typeof XmlMXCAFDoc_ViewToolDriver;
+  XmlMXCAFDoc_VisMaterialDriver: typeof XmlMXCAFDoc_VisMaterialDriver;
+  XmlMXCAFDoc_VisMaterialToolDriver: typeof XmlMXCAFDoc_VisMaterialToolDriver;
   XmlMXCAFDoc_VolumeDriver: typeof XmlMXCAFDoc_VolumeDriver;
   XmlObjMgt: typeof XmlObjMgt;
   XmlObjMgt_Array1: typeof XmlObjMgt_Array1;
+  XmlObjMgt_Array1_1: typeof XmlObjMgt_Array1_1;
+  XmlObjMgt_Array1_2: typeof XmlObjMgt_Array1_2;
   XmlObjMgt_GP: typeof XmlObjMgt_GP;
   XmlObjMgt_Persistent: typeof XmlObjMgt_Persistent;
+  XmlObjMgt_Persistent_1: typeof XmlObjMgt_Persistent_1;
+  XmlObjMgt_Persistent_2: typeof XmlObjMgt_Persistent_2;
+  XmlObjMgt_Persistent_3: typeof XmlObjMgt_Persistent_3;
   XmlObjMgt_RRelocationTable: typeof XmlObjMgt_RRelocationTable;
   XmlObjMgt_SRelocationTable: typeof XmlObjMgt_SRelocationTable;
   XmlTObjDrivers: typeof XmlTObjDrivers;
@@ -4071,88 +7885,302 @@ export interface opencascade {
   XmlXCAFDrivers_DocumentRetrievalDriver: typeof XmlXCAFDrivers_DocumentRetrievalDriver;
   XmlXCAFDrivers_DocumentStorageDriver: typeof XmlXCAFDrivers_DocumentStorageDriver;
   gce_MakeCirc: typeof gce_MakeCirc;
+  gce_MakeCirc_1: typeof gce_MakeCirc_1;
+  gce_MakeCirc_2: typeof gce_MakeCirc_2;
+  gce_MakeCirc_3: typeof gce_MakeCirc_3;
+  gce_MakeCirc_4: typeof gce_MakeCirc_4;
+  gce_MakeCirc_5: typeof gce_MakeCirc_5;
+  gce_MakeCirc_6: typeof gce_MakeCirc_6;
+  gce_MakeCirc_7: typeof gce_MakeCirc_7;
+  gce_MakeCirc_8: typeof gce_MakeCirc_8;
   gce_MakeCirc2d: typeof gce_MakeCirc2d;
+  gce_MakeCirc2d_1: typeof gce_MakeCirc2d_1;
+  gce_MakeCirc2d_2: typeof gce_MakeCirc2d_2;
+  gce_MakeCirc2d_3: typeof gce_MakeCirc2d_3;
+  gce_MakeCirc2d_4: typeof gce_MakeCirc2d_4;
+  gce_MakeCirc2d_5: typeof gce_MakeCirc2d_5;
+  gce_MakeCirc2d_6: typeof gce_MakeCirc2d_6;
+  gce_MakeCirc2d_7: typeof gce_MakeCirc2d_7;
   gce_MakeCone: typeof gce_MakeCone;
+  gce_MakeCone_1: typeof gce_MakeCone_1;
+  gce_MakeCone_2: typeof gce_MakeCone_2;
+  gce_MakeCone_3: typeof gce_MakeCone_3;
+  gce_MakeCone_4: typeof gce_MakeCone_4;
+  gce_MakeCone_5: typeof gce_MakeCone_5;
+  gce_MakeCone_6: typeof gce_MakeCone_6;
+  gce_MakeCone_7: typeof gce_MakeCone_7;
   gce_MakeCylinder: typeof gce_MakeCylinder;
+  gce_MakeCylinder_1: typeof gce_MakeCylinder_1;
+  gce_MakeCylinder_2: typeof gce_MakeCylinder_2;
+  gce_MakeCylinder_3: typeof gce_MakeCylinder_3;
+  gce_MakeCylinder_4: typeof gce_MakeCylinder_4;
+  gce_MakeCylinder_5: typeof gce_MakeCylinder_5;
+  gce_MakeCylinder_6: typeof gce_MakeCylinder_6;
   gce_MakeDir: typeof gce_MakeDir;
+  gce_MakeDir_1: typeof gce_MakeDir_1;
+  gce_MakeDir_2: typeof gce_MakeDir_2;
+  gce_MakeDir_3: typeof gce_MakeDir_3;
+  gce_MakeDir_4: typeof gce_MakeDir_4;
   gce_MakeDir2d: typeof gce_MakeDir2d;
+  gce_MakeDir2d_1: typeof gce_MakeDir2d_1;
+  gce_MakeDir2d_2: typeof gce_MakeDir2d_2;
+  gce_MakeDir2d_3: typeof gce_MakeDir2d_3;
+  gce_MakeDir2d_4: typeof gce_MakeDir2d_4;
   gce_MakeElips: typeof gce_MakeElips;
+  gce_MakeElips_1: typeof gce_MakeElips_1;
+  gce_MakeElips_2: typeof gce_MakeElips_2;
   gce_MakeElips2d: typeof gce_MakeElips2d;
+  gce_MakeElips2d_1: typeof gce_MakeElips2d_1;
+  gce_MakeElips2d_2: typeof gce_MakeElips2d_2;
+  gce_MakeElips2d_3: typeof gce_MakeElips2d_3;
   gce_MakeHypr: typeof gce_MakeHypr;
+  gce_MakeHypr_1: typeof gce_MakeHypr_1;
+  gce_MakeHypr_2: typeof gce_MakeHypr_2;
   gce_MakeHypr2d: typeof gce_MakeHypr2d;
+  gce_MakeHypr2d_1: typeof gce_MakeHypr2d_1;
+  gce_MakeHypr2d_2: typeof gce_MakeHypr2d_2;
+  gce_MakeHypr2d_3: typeof gce_MakeHypr2d_3;
   gce_MakeLin: typeof gce_MakeLin;
+  gce_MakeLin_1: typeof gce_MakeLin_1;
+  gce_MakeLin_2: typeof gce_MakeLin_2;
+  gce_MakeLin_3: typeof gce_MakeLin_3;
+  gce_MakeLin_4: typeof gce_MakeLin_4;
   gce_MakeLin2d: typeof gce_MakeLin2d;
+  gce_MakeLin2d_1: typeof gce_MakeLin2d_1;
+  gce_MakeLin2d_2: typeof gce_MakeLin2d_2;
+  gce_MakeLin2d_3: typeof gce_MakeLin2d_3;
+  gce_MakeLin2d_4: typeof gce_MakeLin2d_4;
+  gce_MakeLin2d_5: typeof gce_MakeLin2d_5;
+  gce_MakeLin2d_6: typeof gce_MakeLin2d_6;
   gce_MakeMirror: typeof gce_MakeMirror;
+  gce_MakeMirror_1: typeof gce_MakeMirror_1;
+  gce_MakeMirror_2: typeof gce_MakeMirror_2;
+  gce_MakeMirror_3: typeof gce_MakeMirror_3;
+  gce_MakeMirror_4: typeof gce_MakeMirror_4;
+  gce_MakeMirror_5: typeof gce_MakeMirror_5;
+  gce_MakeMirror_6: typeof gce_MakeMirror_6;
   gce_MakeMirror2d: typeof gce_MakeMirror2d;
+  gce_MakeMirror2d_1: typeof gce_MakeMirror2d_1;
+  gce_MakeMirror2d_2: typeof gce_MakeMirror2d_2;
+  gce_MakeMirror2d_3: typeof gce_MakeMirror2d_3;
+  gce_MakeMirror2d_4: typeof gce_MakeMirror2d_4;
   gce_MakeParab: typeof gce_MakeParab;
+  gce_MakeParab_1: typeof gce_MakeParab_1;
+  gce_MakeParab_2: typeof gce_MakeParab_2;
   gce_MakeParab2d: typeof gce_MakeParab2d;
+  gce_MakeParab2d_1: typeof gce_MakeParab2d_1;
+  gce_MakeParab2d_2: typeof gce_MakeParab2d_2;
+  gce_MakeParab2d_3: typeof gce_MakeParab2d_3;
+  gce_MakeParab2d_4: typeof gce_MakeParab2d_4;
   gce_MakePln: typeof gce_MakePln;
+  gce_MakePln_1: typeof gce_MakePln_1;
+  gce_MakePln_2: typeof gce_MakePln_2;
+  gce_MakePln_3: typeof gce_MakePln_3;
+  gce_MakePln_4: typeof gce_MakePln_4;
+  gce_MakePln_5: typeof gce_MakePln_5;
+  gce_MakePln_6: typeof gce_MakePln_6;
+  gce_MakePln_7: typeof gce_MakePln_7;
+  gce_MakePln_8: typeof gce_MakePln_8;
   gce_MakeRotation: typeof gce_MakeRotation;
+  gce_MakeRotation_1: typeof gce_MakeRotation_1;
+  gce_MakeRotation_2: typeof gce_MakeRotation_2;
+  gce_MakeRotation_3: typeof gce_MakeRotation_3;
   gce_MakeRotation2d: typeof gce_MakeRotation2d;
   gce_MakeScale: typeof gce_MakeScale;
   gce_MakeScale2d: typeof gce_MakeScale2d;
   gce_MakeTranslation: typeof gce_MakeTranslation;
+  gce_MakeTranslation_1: typeof gce_MakeTranslation_1;
+  gce_MakeTranslation_2: typeof gce_MakeTranslation_2;
   gce_MakeTranslation2d: typeof gce_MakeTranslation2d;
+  gce_MakeTranslation2d_1: typeof gce_MakeTranslation2d_1;
+  gce_MakeTranslation2d_2: typeof gce_MakeTranslation2d_2;
   gce_Root: typeof gce_Root;
   gp: typeof gp;
   gp_Ax1: typeof gp_Ax1;
+  gp_Ax1_1: typeof gp_Ax1_1;
+  gp_Ax1_2: typeof gp_Ax1_2;
   gp_Ax2: typeof gp_Ax2;
+  gp_Ax2_1: typeof gp_Ax2_1;
+  gp_Ax2_2: typeof gp_Ax2_2;
+  gp_Ax2_3: typeof gp_Ax2_3;
   gp_Ax22d: typeof gp_Ax22d;
+  gp_Ax22d_1: typeof gp_Ax22d_1;
+  gp_Ax22d_2: typeof gp_Ax22d_2;
+  gp_Ax22d_3: typeof gp_Ax22d_3;
+  gp_Ax22d_4: typeof gp_Ax22d_4;
   gp_Ax2d: typeof gp_Ax2d;
+  gp_Ax2d_1: typeof gp_Ax2d_1;
+  gp_Ax2d_2: typeof gp_Ax2d_2;
   gp_Ax3: typeof gp_Ax3;
+  gp_Ax3_1: typeof gp_Ax3_1;
+  gp_Ax3_2: typeof gp_Ax3_2;
+  gp_Ax3_3: typeof gp_Ax3_3;
+  gp_Ax3_4: typeof gp_Ax3_4;
   gp_Circ: typeof gp_Circ;
+  gp_Circ_1: typeof gp_Circ_1;
+  gp_Circ_2: typeof gp_Circ_2;
   gp_Circ2d: typeof gp_Circ2d;
+  gp_Circ2d_1: typeof gp_Circ2d_1;
+  gp_Circ2d_2: typeof gp_Circ2d_2;
+  gp_Circ2d_3: typeof gp_Circ2d_3;
   gp_Cone: typeof gp_Cone;
+  gp_Cone_1: typeof gp_Cone_1;
+  gp_Cone_2: typeof gp_Cone_2;
   gp_Cylinder: typeof gp_Cylinder;
+  gp_Cylinder_1: typeof gp_Cylinder_1;
+  gp_Cylinder_2: typeof gp_Cylinder_2;
   gp_Dir: typeof gp_Dir;
+  gp_Dir_1: typeof gp_Dir_1;
+  gp_Dir_2: typeof gp_Dir_2;
+  gp_Dir_3: typeof gp_Dir_3;
+  gp_Dir_4: typeof gp_Dir_4;
   gp_Dir2d: typeof gp_Dir2d;
+  gp_Dir2d_1: typeof gp_Dir2d_1;
+  gp_Dir2d_2: typeof gp_Dir2d_2;
+  gp_Dir2d_3: typeof gp_Dir2d_3;
+  gp_Dir2d_4: typeof gp_Dir2d_4;
   gp_Elips: typeof gp_Elips;
+  gp_Elips_1: typeof gp_Elips_1;
+  gp_Elips_2: typeof gp_Elips_2;
   gp_Elips2d: typeof gp_Elips2d;
+  gp_Elips2d_1: typeof gp_Elips2d_1;
+  gp_Elips2d_2: typeof gp_Elips2d_2;
+  gp_Elips2d_3: typeof gp_Elips2d_3;
   gp_GTrsf: typeof gp_GTrsf;
+  gp_GTrsf_1: typeof gp_GTrsf_1;
+  gp_GTrsf_2: typeof gp_GTrsf_2;
+  gp_GTrsf_3: typeof gp_GTrsf_3;
   gp_GTrsf2d: typeof gp_GTrsf2d;
+  gp_GTrsf2d_1: typeof gp_GTrsf2d_1;
+  gp_GTrsf2d_2: typeof gp_GTrsf2d_2;
+  gp_GTrsf2d_3: typeof gp_GTrsf2d_3;
   gp_Hypr: typeof gp_Hypr;
+  gp_Hypr_1: typeof gp_Hypr_1;
+  gp_Hypr_2: typeof gp_Hypr_2;
   gp_Hypr2d: typeof gp_Hypr2d;
+  gp_Hypr2d_1: typeof gp_Hypr2d_1;
+  gp_Hypr2d_2: typeof gp_Hypr2d_2;
+  gp_Hypr2d_3: typeof gp_Hypr2d_3;
   gp_Lin: typeof gp_Lin;
+  gp_Lin_1: typeof gp_Lin_1;
+  gp_Lin_2: typeof gp_Lin_2;
+  gp_Lin_3: typeof gp_Lin_3;
   gp_Lin2d: typeof gp_Lin2d;
+  gp_Lin2d_1: typeof gp_Lin2d_1;
+  gp_Lin2d_2: typeof gp_Lin2d_2;
+  gp_Lin2d_3: typeof gp_Lin2d_3;
+  gp_Lin2d_4: typeof gp_Lin2d_4;
   gp_Mat: typeof gp_Mat;
+  gp_Mat_1: typeof gp_Mat_1;
+  gp_Mat_2: typeof gp_Mat_2;
+  gp_Mat_3: typeof gp_Mat_3;
   gp_Mat2d: typeof gp_Mat2d;
+  gp_Mat2d_1: typeof gp_Mat2d_1;
+  gp_Mat2d_2: typeof gp_Mat2d_2;
   gp_Parab: typeof gp_Parab;
+  gp_Parab_1: typeof gp_Parab_1;
+  gp_Parab_2: typeof gp_Parab_2;
+  gp_Parab_3: typeof gp_Parab_3;
   gp_Parab2d: typeof gp_Parab2d;
+  gp_Parab2d_1: typeof gp_Parab2d_1;
+  gp_Parab2d_2: typeof gp_Parab2d_2;
+  gp_Parab2d_3: typeof gp_Parab2d_3;
+  gp_Parab2d_4: typeof gp_Parab2d_4;
   gp_Pln: typeof gp_Pln;
+  gp_Pln_1: typeof gp_Pln_1;
+  gp_Pln_2: typeof gp_Pln_2;
+  gp_Pln_3: typeof gp_Pln_3;
+  gp_Pln_4: typeof gp_Pln_4;
   gp_Pnt: typeof gp_Pnt;
+  gp_Pnt_1: typeof gp_Pnt_1;
+  gp_Pnt_2: typeof gp_Pnt_2;
+  gp_Pnt_3: typeof gp_Pnt_3;
   gp_Pnt2d: typeof gp_Pnt2d;
+  gp_Pnt2d_1: typeof gp_Pnt2d_1;
+  gp_Pnt2d_2: typeof gp_Pnt2d_2;
+  gp_Pnt2d_3: typeof gp_Pnt2d_3;
   gp_Quaternion: typeof gp_Quaternion;
+  gp_Quaternion_1: typeof gp_Quaternion_1;
+  gp_Quaternion_2: typeof gp_Quaternion_2;
+  gp_Quaternion_3: typeof gp_Quaternion_3;
+  gp_Quaternion_4: typeof gp_Quaternion_4;
+  gp_Quaternion_5: typeof gp_Quaternion_5;
+  gp_Quaternion_6: typeof gp_Quaternion_6;
+  gp_Quaternion_7: typeof gp_Quaternion_7;
   gp_QuaternionNLerp: typeof gp_QuaternionNLerp;
+  gp_QuaternionNLerp_1: typeof gp_QuaternionNLerp_1;
+  gp_QuaternionNLerp_2: typeof gp_QuaternionNLerp_2;
   gp_QuaternionSLerp: typeof gp_QuaternionSLerp;
+  gp_QuaternionSLerp_1: typeof gp_QuaternionSLerp_1;
+  gp_QuaternionSLerp_2: typeof gp_QuaternionSLerp_2;
   gp_Sphere: typeof gp_Sphere;
+  gp_Sphere_1: typeof gp_Sphere_1;
+  gp_Sphere_2: typeof gp_Sphere_2;
   gp_Torus: typeof gp_Torus;
+  gp_Torus_1: typeof gp_Torus_1;
+  gp_Torus_2: typeof gp_Torus_2;
   gp_Trsf: typeof gp_Trsf;
+  gp_Trsf_1: typeof gp_Trsf_1;
+  gp_Trsf_2: typeof gp_Trsf_2;
   gp_Trsf2d: typeof gp_Trsf2d;
+  gp_Trsf2d_1: typeof gp_Trsf2d_1;
+  gp_Trsf2d_2: typeof gp_Trsf2d_2;
   gp_Vec: typeof gp_Vec;
+  gp_Vec_1: typeof gp_Vec_1;
+  gp_Vec_2: typeof gp_Vec_2;
+  gp_Vec_3: typeof gp_Vec_3;
+  gp_Vec_4: typeof gp_Vec_4;
+  gp_Vec_5: typeof gp_Vec_5;
   gp_Vec2d: typeof gp_Vec2d;
+  gp_Vec2d_1: typeof gp_Vec2d_1;
+  gp_Vec2d_2: typeof gp_Vec2d_2;
+  gp_Vec2d_3: typeof gp_Vec2d_3;
+  gp_Vec2d_4: typeof gp_Vec2d_4;
+  gp_Vec2d_5: typeof gp_Vec2d_5;
   gp_XY: typeof gp_XY;
+  gp_XY_1: typeof gp_XY_1;
+  gp_XY_2: typeof gp_XY_2;
   gp_XYZ: typeof gp_XYZ;
+  gp_XYZ_1: typeof gp_XYZ_1;
+  gp_XYZ_2: typeof gp_XYZ_2;
   math: typeof math;
   math_BFGS: typeof math_BFGS;
   math_BissecNewton: typeof math_BissecNewton;
   math_BracketMinimum: typeof math_BracketMinimum;
+  math_BracketMinimum_1: typeof math_BracketMinimum_1;
+  math_BracketMinimum_2: typeof math_BracketMinimum_2;
+  math_BracketMinimum_3: typeof math_BracketMinimum_3;
+  math_BracketMinimum_4: typeof math_BracketMinimum_4;
   math_BracketedRoot: typeof math_BracketedRoot;
   math_BrentMinimum: typeof math_BrentMinimum;
+  math_BrentMinimum_1: typeof math_BrentMinimum_1;
+  math_BrentMinimum_2: typeof math_BrentMinimum_2;
   math_BullardGenerator: typeof math_BullardGenerator;
   math_ComputeGaussPointsAndWeights: typeof math_ComputeGaussPointsAndWeights;
   math_ComputeKronrodPointsAndWeights: typeof math_ComputeKronrodPointsAndWeights;
   math_Crout: typeof math_Crout;
   math_DirectPolynomialRoots: typeof math_DirectPolynomialRoots;
+  math_DirectPolynomialRoots_1: typeof math_DirectPolynomialRoots_1;
+  math_DirectPolynomialRoots_2: typeof math_DirectPolynomialRoots_2;
+  math_DirectPolynomialRoots_3: typeof math_DirectPolynomialRoots_3;
+  math_DirectPolynomialRoots_4: typeof math_DirectPolynomialRoots_4;
   math_DoubleTab: typeof math_DoubleTab;
+  math_DoubleTab_1: typeof math_DoubleTab_1;
+  math_DoubleTab_2: typeof math_DoubleTab_2;
+  math_DoubleTab_3: typeof math_DoubleTab_3;
   math_EigenValuesSearcher: typeof math_EigenValuesSearcher;
   math_FRPR: typeof math_FRPR;
   math_Function: typeof math_Function;
   math_FunctionAllRoots: typeof math_FunctionAllRoots;
   math_FunctionRoot: typeof math_FunctionRoot;
+  math_FunctionRoot_1: typeof math_FunctionRoot_1;
+  math_FunctionRoot_2: typeof math_FunctionRoot_2;
   math_FunctionRoots: typeof math_FunctionRoots;
   math_FunctionSample: typeof math_FunctionSample;
   math_FunctionSet: typeof math_FunctionSet;
   math_FunctionSetRoot: typeof math_FunctionSetRoot;
+  math_FunctionSetRoot_1: typeof math_FunctionSetRoot_1;
+  math_FunctionSetRoot_2: typeof math_FunctionSetRoot_2;
   math_FunctionSetWithDerivatives: typeof math_FunctionSetWithDerivatives;
   math_FunctionWithDerivative: typeof math_FunctionWithDerivative;
   math_Gauss: typeof math_Gauss;
@@ -4160,23 +8188,43 @@ export interface opencascade {
   math_GaussMultipleIntegration: typeof math_GaussMultipleIntegration;
   math_GaussSetIntegration: typeof math_GaussSetIntegration;
   math_GaussSingleIntegration: typeof math_GaussSingleIntegration;
+  math_GaussSingleIntegration_1: typeof math_GaussSingleIntegration_1;
+  math_GaussSingleIntegration_2: typeof math_GaussSingleIntegration_2;
+  math_GaussSingleIntegration_3: typeof math_GaussSingleIntegration_3;
   math_GlobOptMin: typeof math_GlobOptMin;
   math_Jacobi: typeof math_Jacobi;
   math_KronrodSingleIntegration: typeof math_KronrodSingleIntegration;
+  math_KronrodSingleIntegration_1: typeof math_KronrodSingleIntegration_1;
+  math_KronrodSingleIntegration_2: typeof math_KronrodSingleIntegration_2;
+  math_KronrodSingleIntegration_3: typeof math_KronrodSingleIntegration_3;
   math_MultipleVarFunction: typeof math_MultipleVarFunction;
   math_MultipleVarFunctionWithGradient: typeof math_MultipleVarFunctionWithGradient;
   math_MultipleVarFunctionWithHessian: typeof math_MultipleVarFunctionWithHessian;
   math_NewtonFunctionRoot: typeof math_NewtonFunctionRoot;
+  math_NewtonFunctionRoot_1: typeof math_NewtonFunctionRoot_1;
+  math_NewtonFunctionRoot_2: typeof math_NewtonFunctionRoot_2;
+  math_NewtonFunctionRoot_3: typeof math_NewtonFunctionRoot_3;
   math_NotSquare: typeof math_NotSquare;
+  math_NotSquare_1: typeof math_NotSquare_1;
+  math_NotSquare_2: typeof math_NotSquare_2;
   math_PSO: typeof math_PSO;
   math_PSOParticlesPool: typeof math_PSOParticlesPool;
   math_Powell: typeof math_Powell;
   math_SVD: typeof math_SVD;
   math_SingularMatrix: typeof math_SingularMatrix;
+  math_SingularMatrix_1: typeof math_SingularMatrix_1;
+  math_SingularMatrix_2: typeof math_SingularMatrix_2;
   math_TrigonometricEquationFunction: typeof math_TrigonometricEquationFunction;
   math_TrigonometricFunctionRoots: typeof math_TrigonometricFunctionRoots;
+  math_TrigonometricFunctionRoots_1: typeof math_TrigonometricFunctionRoots_1;
+  math_TrigonometricFunctionRoots_2: typeof math_TrigonometricFunctionRoots_2;
+  math_TrigonometricFunctionRoots_3: typeof math_TrigonometricFunctionRoots_3;
   math_Uzawa: typeof math_Uzawa;
+  math_Uzawa_1: typeof math_Uzawa_1;
+  math_Uzawa_2: typeof math_Uzawa_2;
   math_ValueAndWeight: typeof math_ValueAndWeight;
+  math_ValueAndWeight_1: typeof math_ValueAndWeight_1;
+  math_ValueAndWeight_2: typeof math_ValueAndWeight_2;
 }
 
 class APIHeaderSection_EditHeader extends IFSelect_Editor {
@@ -4184,6 +8232,10 @@ class APIHeaderSection_EditHeader extends IFSelect_Editor {
 
 class APIHeaderSection_MakeHeader {
 }
+
+class APIHeaderSection_MakeHeader_1 extends APIHeaderSection_MakeHeader {}
+
+class APIHeaderSection_MakeHeader_2 extends APIHeaderSection_MakeHeader {}
 
 class Adaptor2d_Curve2d {
 }
@@ -4194,14 +8246,34 @@ class Adaptor2d_HCurve2d extends Standard_Transient {
 class Adaptor2d_HLine2d extends Adaptor2d_HCurve2d {
 }
 
+class Adaptor2d_HLine2d_1 extends Adaptor2d_HLine2d {}
+
+class Adaptor2d_HLine2d_2 extends Adaptor2d_HLine2d {}
+
 class Adaptor2d_HOffsetCurve extends Adaptor2d_HCurve2d {
 }
+
+class Adaptor2d_HOffsetCurve_1 extends Adaptor2d_HOffsetCurve {}
+
+class Adaptor2d_HOffsetCurve_2 extends Adaptor2d_HOffsetCurve {}
 
 class Adaptor2d_Line2d extends Adaptor2d_Curve2d {
 }
 
+class Adaptor2d_Line2d_1 extends Adaptor2d_Line2d {}
+
+class Adaptor2d_Line2d_2 extends Adaptor2d_Line2d {}
+
 class Adaptor2d_OffsetCurve extends Adaptor2d_Curve2d {
 }
+
+class Adaptor2d_OffsetCurve_1 extends Adaptor2d_OffsetCurve {}
+
+class Adaptor2d_OffsetCurve_2 extends Adaptor2d_OffsetCurve {}
+
+class Adaptor2d_OffsetCurve_3 extends Adaptor2d_OffsetCurve {}
+
+class Adaptor2d_OffsetCurve_4 extends Adaptor2d_OffsetCurve {}
 
 class Adaptor3d_Curve {
 }
@@ -4209,14 +8281,28 @@ class Adaptor3d_Curve {
 class Adaptor3d_CurveOnSurface extends Adaptor3d_Curve {
 }
 
+class Adaptor3d_CurveOnSurface_1 extends Adaptor3d_CurveOnSurface {}
+
+class Adaptor3d_CurveOnSurface_2 extends Adaptor3d_CurveOnSurface {}
+
+class Adaptor3d_CurveOnSurface_3 extends Adaptor3d_CurveOnSurface {}
+
 class Adaptor3d_HCurve extends Standard_Transient {
 }
 
 class Adaptor3d_HCurveOnSurface extends Adaptor3d_HCurve {
 }
 
+class Adaptor3d_HCurveOnSurface_1 extends Adaptor3d_HCurveOnSurface {}
+
+class Adaptor3d_HCurveOnSurface_2 extends Adaptor3d_HCurveOnSurface {}
+
 class Adaptor3d_HIsoCurve extends Adaptor3d_HCurve {
 }
+
+class Adaptor3d_HIsoCurve_1 extends Adaptor3d_HIsoCurve {}
+
+class Adaptor3d_HIsoCurve_2 extends Adaptor3d_HIsoCurve {}
 
 class Adaptor3d_HSurface extends Standard_Transient {
 }
@@ -4227,11 +8313,23 @@ class Adaptor3d_HSurfaceTool {
 class Adaptor3d_HVertex extends Standard_Transient {
 }
 
+class Adaptor3d_HVertex_1 extends Adaptor3d_HVertex {}
+
+class Adaptor3d_HVertex_2 extends Adaptor3d_HVertex {}
+
 class Adaptor3d_InterFunc extends math_FunctionWithDerivative {
 }
 
 class Adaptor3d_IsoCurve extends Adaptor3d_Curve {
 }
+
+class Adaptor3d_IsoCurve_1 extends Adaptor3d_IsoCurve {}
+
+class Adaptor3d_IsoCurve_2 extends Adaptor3d_IsoCurve {}
+
+class Adaptor3d_IsoCurve_3 extends Adaptor3d_IsoCurve {}
+
+class Adaptor3d_IsoCurve_4 extends Adaptor3d_IsoCurve {}
 
 class Adaptor3d_Surface {
 }
@@ -4239,14 +8337,26 @@ class Adaptor3d_Surface {
 class Adaptor3d_TopolTool extends Standard_Transient {
 }
 
+class Adaptor3d_TopolTool_1 extends Adaptor3d_TopolTool {}
+
+class Adaptor3d_TopolTool_2 extends Adaptor3d_TopolTool {}
+
 class AdvApp2Var_ApproxAFunc2Var {
 }
+
+class AdvApp2Var_ApproxAFunc2Var_1 extends AdvApp2Var_ApproxAFunc2Var {}
+
+class AdvApp2Var_ApproxAFunc2Var_2 extends AdvApp2Var_ApproxAFunc2Var {}
 
 class AdvApp2Var_ApproxF2var {
 }
 
 class AdvApp2Var_Context {
 }
+
+class AdvApp2Var_Context_1 extends AdvApp2Var_Context {}
+
+class AdvApp2Var_Context_2 extends AdvApp2Var_Context {}
 
 class AdvApp2Var_Criterion {
 }
@@ -4263,14 +8373,28 @@ class AdvApp2Var_MathBase {
 class AdvApp2Var_Node {
 }
 
+class AdvApp2Var_Node_1 extends AdvApp2Var_Node {}
+
+class AdvApp2Var_Node_2 extends AdvApp2Var_Node {}
+
+class AdvApp2Var_Node_3 extends AdvApp2Var_Node {}
+
 class AdvApp2Var_Patch {
 }
+
+class AdvApp2Var_Patch_1 extends AdvApp2Var_Patch {}
+
+class AdvApp2Var_Patch_2 extends AdvApp2Var_Patch {}
 
 class AdvApp2Var_SysBase {
 }
 
 class AdvApprox_ApproxAFunction {
 }
+
+class AdvApprox_ApproxAFunction_1 extends AdvApprox_ApproxAFunction {}
+
+class AdvApprox_ApproxAFunction_2 extends AdvApprox_ApproxAFunction {}
 
 class AdvApprox_Cutting {
 }
@@ -4305,14 +8429,42 @@ class AppParCurves {
 class AppParCurves_ConstraintCouple {
 }
 
+class AppParCurves_ConstraintCouple_1 extends AppParCurves_ConstraintCouple {}
+
+class AppParCurves_ConstraintCouple_2 extends AppParCurves_ConstraintCouple {}
+
 class AppParCurves_MultiBSpCurve extends AppParCurves_MultiCurve {
 }
+
+class AppParCurves_MultiBSpCurve_1 extends AppParCurves_MultiBSpCurve {}
+
+class AppParCurves_MultiBSpCurve_2 extends AppParCurves_MultiBSpCurve {}
+
+class AppParCurves_MultiBSpCurve_3 extends AppParCurves_MultiBSpCurve {}
+
+class AppParCurves_MultiBSpCurve_4 extends AppParCurves_MultiBSpCurve {}
 
 class AppParCurves_MultiCurve {
 }
 
+class AppParCurves_MultiCurve_1 extends AppParCurves_MultiCurve {}
+
+class AppParCurves_MultiCurve_2 extends AppParCurves_MultiCurve {}
+
+class AppParCurves_MultiCurve_3 extends AppParCurves_MultiCurve {}
+
 class AppParCurves_MultiPoint {
 }
+
+class AppParCurves_MultiPoint_1 extends AppParCurves_MultiPoint {}
+
+class AppParCurves_MultiPoint_2 extends AppParCurves_MultiPoint {}
+
+class AppParCurves_MultiPoint_3 extends AppParCurves_MultiPoint {}
+
+class AppParCurves_MultiPoint_4 extends AppParCurves_MultiPoint {}
+
+class AppParCurves_MultiPoint_5 extends AppParCurves_MultiPoint {}
 
 class AppStdL_Application extends TDocStd_Application {
 }
@@ -4335,23 +8487,53 @@ class Approx_Curve3d {
 class Approx_CurveOnSurface {
 }
 
+class Approx_CurveOnSurface_1 extends Approx_CurveOnSurface {}
+
+class Approx_CurveOnSurface_2 extends Approx_CurveOnSurface {}
+
 class Approx_CurvilinearParameter {
 }
+
+class Approx_CurvilinearParameter_1 extends Approx_CurvilinearParameter {}
+
+class Approx_CurvilinearParameter_2 extends Approx_CurvilinearParameter {}
+
+class Approx_CurvilinearParameter_3 extends Approx_CurvilinearParameter {}
 
 class Approx_CurvlinFunc extends Standard_Transient {
 }
 
+class Approx_CurvlinFunc_1 extends Approx_CurvlinFunc {}
+
+class Approx_CurvlinFunc_2 extends Approx_CurvlinFunc {}
+
+class Approx_CurvlinFunc_3 extends Approx_CurvlinFunc {}
+
 class Approx_FitAndDivide {
 }
 
+class Approx_FitAndDivide_1 extends Approx_FitAndDivide {}
+
+class Approx_FitAndDivide_2 extends Approx_FitAndDivide {}
+
 class Approx_FitAndDivide2d {
 }
+
+class Approx_FitAndDivide2d_1 extends Approx_FitAndDivide2d {}
+
+class Approx_FitAndDivide2d_2 extends Approx_FitAndDivide2d {}
 
 class Approx_MCurvesToBSpCurve {
 }
 
 class Approx_SameParameter {
 }
+
+class Approx_SameParameter_1 extends Approx_SameParameter {}
+
+class Approx_SameParameter_2 extends Approx_SameParameter {}
+
+class Approx_SameParameter_3 extends Approx_SameParameter {}
 
 class Approx_SweepApproximation {
 }
@@ -4362,26 +8544,62 @@ class Approx_SweepFunction extends Standard_Transient {
 class BRepAdaptor_CompCurve extends Adaptor3d_Curve {
 }
 
+class BRepAdaptor_CompCurve_1 extends BRepAdaptor_CompCurve {}
+
+class BRepAdaptor_CompCurve_2 extends BRepAdaptor_CompCurve {}
+
+class BRepAdaptor_CompCurve_3 extends BRepAdaptor_CompCurve {}
+
 class BRepAdaptor_Curve extends Adaptor3d_Curve {
 }
+
+class BRepAdaptor_Curve_1 extends BRepAdaptor_Curve {}
+
+class BRepAdaptor_Curve_2 extends BRepAdaptor_Curve {}
+
+class BRepAdaptor_Curve_3 extends BRepAdaptor_Curve {}
 
 class BRepAdaptor_Curve2d extends Geom2dAdaptor_Curve {
 }
 
+class BRepAdaptor_Curve2d_1 extends BRepAdaptor_Curve2d {}
+
+class BRepAdaptor_Curve2d_2 extends BRepAdaptor_Curve2d {}
+
 class BRepAdaptor_HCompCurve extends Adaptor3d_HCurve {
 }
+
+class BRepAdaptor_HCompCurve_1 extends BRepAdaptor_HCompCurve {}
+
+class BRepAdaptor_HCompCurve_2 extends BRepAdaptor_HCompCurve {}
 
 class BRepAdaptor_HCurve extends Adaptor3d_HCurve {
 }
 
+class BRepAdaptor_HCurve_1 extends BRepAdaptor_HCurve {}
+
+class BRepAdaptor_HCurve_2 extends BRepAdaptor_HCurve {}
+
 class BRepAdaptor_HCurve2d extends Adaptor2d_HCurve2d {
 }
+
+class BRepAdaptor_HCurve2d_1 extends BRepAdaptor_HCurve2d {}
+
+class BRepAdaptor_HCurve2d_2 extends BRepAdaptor_HCurve2d {}
 
 class BRepAdaptor_HSurface extends Adaptor3d_HSurface {
 }
 
+class BRepAdaptor_HSurface_1 extends BRepAdaptor_HSurface {}
+
+class BRepAdaptor_HSurface_2 extends BRepAdaptor_HSurface {}
+
 class BRepAdaptor_Surface extends Adaptor3d_Surface {
 }
+
+class BRepAdaptor_Surface_1 extends BRepAdaptor_Surface {}
+
+class BRepAdaptor_Surface_2 extends BRepAdaptor_Surface {}
 
 class BRepAlgo {
 }
@@ -4392,17 +8610,47 @@ class BRepAlgoAPI_Algo extends BRepBuilderAPI_MakeShape {
 class BRepAlgoAPI_BooleanOperation extends BRepAlgoAPI_BuilderAlgo {
 }
 
+class BRepAlgoAPI_BooleanOperation_1 extends BRepAlgoAPI_BooleanOperation {}
+
+class BRepAlgoAPI_BooleanOperation_2 extends BRepAlgoAPI_BooleanOperation {}
+
 class BRepAlgoAPI_BuilderAlgo extends BRepAlgoAPI_Algo {
 }
+
+class BRepAlgoAPI_BuilderAlgo_1 extends BRepAlgoAPI_BuilderAlgo {}
+
+class BRepAlgoAPI_BuilderAlgo_2 extends BRepAlgoAPI_BuilderAlgo {}
 
 class BRepAlgoAPI_Check extends BOPAlgo_Options {
 }
 
+class BRepAlgoAPI_Check_1 extends BRepAlgoAPI_Check {}
+
+class BRepAlgoAPI_Check_2 extends BRepAlgoAPI_Check {}
+
+class BRepAlgoAPI_Check_3 extends BRepAlgoAPI_Check {}
+
 class BRepAlgoAPI_Common extends BRepAlgoAPI_BooleanOperation {
 }
 
+class BRepAlgoAPI_Common_1 extends BRepAlgoAPI_Common {}
+
+class BRepAlgoAPI_Common_2 extends BRepAlgoAPI_Common {}
+
+class BRepAlgoAPI_Common_3 extends BRepAlgoAPI_Common {}
+
+class BRepAlgoAPI_Common_4 extends BRepAlgoAPI_Common {}
+
 class BRepAlgoAPI_Cut extends BRepAlgoAPI_BooleanOperation {
 }
+
+class BRepAlgoAPI_Cut_1 extends BRepAlgoAPI_Cut {}
+
+class BRepAlgoAPI_Cut_2 extends BRepAlgoAPI_Cut {}
+
+class BRepAlgoAPI_Cut_3 extends BRepAlgoAPI_Cut {}
+
+class BRepAlgoAPI_Cut_4 extends BRepAlgoAPI_Cut {}
 
 class BRepAlgoAPI_Defeaturing extends BRepAlgoAPI_Algo {
 }
@@ -4410,11 +8658,39 @@ class BRepAlgoAPI_Defeaturing extends BRepAlgoAPI_Algo {
 class BRepAlgoAPI_Fuse extends BRepAlgoAPI_BooleanOperation {
 }
 
+class BRepAlgoAPI_Fuse_1 extends BRepAlgoAPI_Fuse {}
+
+class BRepAlgoAPI_Fuse_2 extends BRepAlgoAPI_Fuse {}
+
+class BRepAlgoAPI_Fuse_3 extends BRepAlgoAPI_Fuse {}
+
+class BRepAlgoAPI_Fuse_4 extends BRepAlgoAPI_Fuse {}
+
 class BRepAlgoAPI_Section extends BRepAlgoAPI_BooleanOperation {
 }
 
+class BRepAlgoAPI_Section_1 extends BRepAlgoAPI_Section {}
+
+class BRepAlgoAPI_Section_2 extends BRepAlgoAPI_Section {}
+
+class BRepAlgoAPI_Section_3 extends BRepAlgoAPI_Section {}
+
+class BRepAlgoAPI_Section_4 extends BRepAlgoAPI_Section {}
+
+class BRepAlgoAPI_Section_5 extends BRepAlgoAPI_Section {}
+
+class BRepAlgoAPI_Section_6 extends BRepAlgoAPI_Section {}
+
+class BRepAlgoAPI_Section_7 extends BRepAlgoAPI_Section {}
+
+class BRepAlgoAPI_Section_8 extends BRepAlgoAPI_Section {}
+
 class BRepAlgoAPI_Splitter extends BRepAlgoAPI_BuilderAlgo {
 }
+
+class BRepAlgoAPI_Splitter_1 extends BRepAlgoAPI_Splitter {}
+
+class BRepAlgoAPI_Splitter_2 extends BRepAlgoAPI_Splitter {}
 
 class BRepAlgo_AsDes extends Standard_Transient {
 }
@@ -4443,14 +8719,32 @@ class BRepAlgo_Loop {
 class BRepAlgo_NormalProjection {
 }
 
+class BRepAlgo_NormalProjection_1 extends BRepAlgo_NormalProjection {}
+
+class BRepAlgo_NormalProjection_2 extends BRepAlgo_NormalProjection {}
+
 class BRepAlgo_Section extends BRepAlgo_BooleanOperation {
 }
+
+class BRepAlgo_Section_1 extends BRepAlgo_Section {}
+
+class BRepAlgo_Section_2 extends BRepAlgo_Section {}
+
+class BRepAlgo_Section_3 extends BRepAlgo_Section {}
+
+class BRepAlgo_Section_4 extends BRepAlgo_Section {}
+
+class BRepAlgo_Section_5 extends BRepAlgo_Section {}
 
 class BRepAlgo_Tool {
 }
 
 class BRepApprox_ApproxLine extends Standard_Transient {
 }
+
+class BRepApprox_ApproxLine_1 extends BRepApprox_ApproxLine {}
+
+class BRepApprox_ApproxLine_2 extends BRepApprox_ApproxLine {}
 
 class BRepApprox_BSpGradient_BFGSOfMyBSplGradientOfTheComputeLineOfApprox extends math_BFGS {
 }
@@ -4461,6 +8755,14 @@ class BRepApprox_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfApprox extends 
 class BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox {
 }
 
+class BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox_1 extends BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox {}
+
+class BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox_2 extends BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox {}
+
+class BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox_3 extends BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox {}
+
+class BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox_4 extends BRepApprox_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfApprox {}
+
 class BRepApprox_Gradient_BFGSOfMyGradientOfTheComputeLineBezierOfApprox extends math_BFGS {
 }
 
@@ -4469,6 +8771,10 @@ class BRepApprox_Gradient_BFGSOfMyGradientbisOfTheComputeLineOfApprox extends ma
 
 class BRepApprox_MyBSplGradientOfTheComputeLineOfApprox {
 }
+
+class BRepApprox_MyBSplGradientOfTheComputeLineOfApprox_1 extends BRepApprox_MyBSplGradientOfTheComputeLineOfApprox {}
+
+class BRepApprox_MyBSplGradientOfTheComputeLineOfApprox_2 extends BRepApprox_MyBSplGradientOfTheComputeLineOfApprox {}
 
 class BRepApprox_MyGradientOfTheComputeLineBezierOfApprox {
 }
@@ -4485,8 +8791,24 @@ class BRepApprox_ParFunctionOfMyGradientbisOfTheComputeLineOfApprox extends math
 class BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox {
 }
 
+class BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox_1 extends BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox {}
+
+class BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox_2 extends BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox {}
+
+class BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox_3 extends BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox {}
+
+class BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox_4 extends BRepApprox_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfApprox {}
+
 class BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox {
 }
+
+class BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox_1 extends BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox {}
+
+class BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox_2 extends BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox {}
+
+class BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox_3 extends BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox {}
+
+class BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox_4 extends BRepApprox_ParLeastSquareOfMyGradientbisOfTheComputeLineOfApprox {}
 
 class BRepApprox_SurfaceTool {
 }
@@ -4494,8 +8816,24 @@ class BRepApprox_SurfaceTool {
 class BRepApprox_TheComputeLineBezierOfApprox {
 }
 
+class BRepApprox_TheComputeLineBezierOfApprox_1 extends BRepApprox_TheComputeLineBezierOfApprox {}
+
+class BRepApprox_TheComputeLineBezierOfApprox_2 extends BRepApprox_TheComputeLineBezierOfApprox {}
+
+class BRepApprox_TheComputeLineBezierOfApprox_3 extends BRepApprox_TheComputeLineBezierOfApprox {}
+
+class BRepApprox_TheComputeLineBezierOfApprox_4 extends BRepApprox_TheComputeLineBezierOfApprox {}
+
 class BRepApprox_TheComputeLineOfApprox {
 }
+
+class BRepApprox_TheComputeLineOfApprox_1 extends BRepApprox_TheComputeLineOfApprox {}
+
+class BRepApprox_TheComputeLineOfApprox_2 extends BRepApprox_TheComputeLineOfApprox {}
+
+class BRepApprox_TheComputeLineOfApprox_3 extends BRepApprox_TheComputeLineOfApprox {}
+
+class BRepApprox_TheComputeLineOfApprox_4 extends BRepApprox_TheComputeLineOfApprox {}
 
 class BRepApprox_TheFunctionOfTheInt2SOfThePrmPrmSvSurfacesOfApprox extends math_FunctionSetWithDerivatives {
 }
@@ -4503,11 +8841,25 @@ class BRepApprox_TheFunctionOfTheInt2SOfThePrmPrmSvSurfacesOfApprox extends math
 class BRepApprox_TheImpPrmSvSurfacesOfApprox extends ApproxInt_SvSurfaces {
 }
 
+class BRepApprox_TheImpPrmSvSurfacesOfApprox_1 extends BRepApprox_TheImpPrmSvSurfacesOfApprox {}
+
+class BRepApprox_TheImpPrmSvSurfacesOfApprox_2 extends BRepApprox_TheImpPrmSvSurfacesOfApprox {}
+
 class BRepApprox_TheInt2SOfThePrmPrmSvSurfacesOfApprox {
 }
 
+class BRepApprox_TheInt2SOfThePrmPrmSvSurfacesOfApprox_1 extends BRepApprox_TheInt2SOfThePrmPrmSvSurfacesOfApprox {}
+
+class BRepApprox_TheInt2SOfThePrmPrmSvSurfacesOfApprox_2 extends BRepApprox_TheInt2SOfThePrmPrmSvSurfacesOfApprox {}
+
 class BRepApprox_TheMultiLineOfApprox {
 }
+
+class BRepApprox_TheMultiLineOfApprox_1 extends BRepApprox_TheMultiLineOfApprox {}
+
+class BRepApprox_TheMultiLineOfApprox_2 extends BRepApprox_TheMultiLineOfApprox {}
+
+class BRepApprox_TheMultiLineOfApprox_3 extends BRepApprox_TheMultiLineOfApprox {}
 
 class BRepApprox_TheMultiLineToolOfApprox {
 }
@@ -4517,6 +8869,12 @@ class BRepApprox_ThePrmPrmSvSurfacesOfApprox extends ApproxInt_SvSurfaces {
 
 class BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox extends math_FunctionSetWithDerivatives {
 }
+
+class BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox_1 extends BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox {}
+
+class BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox_2 extends BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox {}
+
+class BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox_3 extends BRepApprox_TheZerImpFuncOfTheImpPrmSvSurfacesOfApprox {}
 
 class BRepBlend_AppFunc extends BRepBlend_AppFuncRoot {
 }
@@ -4533,6 +8891,10 @@ class BRepBlend_AppFuncRstRst extends BRepBlend_AppFuncRoot {
 class BRepBlend_AppSurf extends AppBlend_Approx {
 }
 
+class BRepBlend_AppSurf_1 extends BRepBlend_AppSurf {}
+
+class BRepBlend_AppSurf_2 extends BRepBlend_AppSurf {}
+
 class BRepBlend_AppSurface extends AppBlend_Approx {
 }
 
@@ -4548,6 +8910,14 @@ class BRepBlend_CurvPointRadInv extends Blend_CurvPointFuncInv {
 class BRepBlend_Extremity {
 }
 
+class BRepBlend_Extremity_1 extends BRepBlend_Extremity {}
+
+class BRepBlend_Extremity_2 extends BRepBlend_Extremity {}
+
+class BRepBlend_Extremity_3 extends BRepBlend_Extremity {}
+
+class BRepBlend_Extremity_4 extends BRepBlend_Extremity {}
+
 class BRepBlend_HCurve2dTool {
 }
 
@@ -4559,6 +8929,10 @@ class BRepBlend_Line extends Standard_Transient {
 
 class BRepBlend_PointOnRst {
 }
+
+class BRepBlend_PointOnRst_1 extends BRepBlend_PointOnRst {}
+
+class BRepBlend_PointOnRst_2 extends BRepBlend_PointOnRst {}
 
 class BRepBlend_RstRstConstRad extends Blend_RstRstFunction {
 }
@@ -4610,26 +8984,222 @@ class BRepBuilderAPI_Command {
 class BRepBuilderAPI_Copy extends BRepBuilderAPI_ModifyShape {
 }
 
+class BRepBuilderAPI_Copy_1 extends BRepBuilderAPI_Copy {}
+
+class BRepBuilderAPI_Copy_2 extends BRepBuilderAPI_Copy {}
+
 class BRepBuilderAPI_FastSewing extends Standard_Transient {
 }
 
 class BRepBuilderAPI_FindPlane {
 }
 
+class BRepBuilderAPI_FindPlane_1 extends BRepBuilderAPI_FindPlane {}
+
+class BRepBuilderAPI_FindPlane_2 extends BRepBuilderAPI_FindPlane {}
+
 class BRepBuilderAPI_GTransform extends BRepBuilderAPI_ModifyShape {
 }
+
+class BRepBuilderAPI_GTransform_1 extends BRepBuilderAPI_GTransform {}
+
+class BRepBuilderAPI_GTransform_2 extends BRepBuilderAPI_GTransform {}
 
 class BRepBuilderAPI_MakeEdge extends BRepBuilderAPI_MakeShape {
 }
 
+class BRepBuilderAPI_MakeEdge_1 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_2 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_3 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_4 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_5 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_6 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_7 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_8 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_9 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_10 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_11 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_12 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_13 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_14 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_15 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_16 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_17 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_18 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_19 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_20 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_21 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_22 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_23 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_24 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_25 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_26 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_27 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_28 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_29 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_30 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_31 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_32 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_33 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_34 extends BRepBuilderAPI_MakeEdge {}
+
+class BRepBuilderAPI_MakeEdge_35 extends BRepBuilderAPI_MakeEdge {}
+
 class BRepBuilderAPI_MakeEdge2d extends BRepBuilderAPI_MakeShape {
 }
+
+class BRepBuilderAPI_MakeEdge2d_1 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_2 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_3 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_4 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_5 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_6 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_7 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_8 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_9 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_10 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_11 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_12 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_13 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_14 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_15 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_16 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_17 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_18 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_19 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_20 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_21 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_22 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_23 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_24 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_25 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_26 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_27 extends BRepBuilderAPI_MakeEdge2d {}
+
+class BRepBuilderAPI_MakeEdge2d_28 extends BRepBuilderAPI_MakeEdge2d {}
 
 class BRepBuilderAPI_MakeFace extends BRepBuilderAPI_MakeShape {
 }
 
+class BRepBuilderAPI_MakeFace_1 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_2 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_3 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_4 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_5 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_6 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_7 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_8 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_9 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_10 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_11 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_12 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_13 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_14 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_15 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_16 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_17 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_18 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_19 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_20 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_21 extends BRepBuilderAPI_MakeFace {}
+
+class BRepBuilderAPI_MakeFace_22 extends BRepBuilderAPI_MakeFace {}
+
 class BRepBuilderAPI_MakePolygon extends BRepBuilderAPI_MakeShape {
 }
+
+class BRepBuilderAPI_MakePolygon_1 extends BRepBuilderAPI_MakePolygon {}
+
+class BRepBuilderAPI_MakePolygon_2 extends BRepBuilderAPI_MakePolygon {}
+
+class BRepBuilderAPI_MakePolygon_3 extends BRepBuilderAPI_MakePolygon {}
+
+class BRepBuilderAPI_MakePolygon_4 extends BRepBuilderAPI_MakePolygon {}
+
+class BRepBuilderAPI_MakePolygon_5 extends BRepBuilderAPI_MakePolygon {}
+
+class BRepBuilderAPI_MakePolygon_6 extends BRepBuilderAPI_MakePolygon {}
+
+class BRepBuilderAPI_MakePolygon_7 extends BRepBuilderAPI_MakePolygon {}
 
 class BRepBuilderAPI_MakeShape extends BRepBuilderAPI_Command {
 }
@@ -4637,8 +9207,28 @@ class BRepBuilderAPI_MakeShape extends BRepBuilderAPI_Command {
 class BRepBuilderAPI_MakeShell extends BRepBuilderAPI_MakeShape {
 }
 
+class BRepBuilderAPI_MakeShell_1 extends BRepBuilderAPI_MakeShell {}
+
+class BRepBuilderAPI_MakeShell_2 extends BRepBuilderAPI_MakeShell {}
+
+class BRepBuilderAPI_MakeShell_3 extends BRepBuilderAPI_MakeShell {}
+
 class BRepBuilderAPI_MakeSolid extends BRepBuilderAPI_MakeShape {
 }
+
+class BRepBuilderAPI_MakeSolid_1 extends BRepBuilderAPI_MakeSolid {}
+
+class BRepBuilderAPI_MakeSolid_2 extends BRepBuilderAPI_MakeSolid {}
+
+class BRepBuilderAPI_MakeSolid_3 extends BRepBuilderAPI_MakeSolid {}
+
+class BRepBuilderAPI_MakeSolid_4 extends BRepBuilderAPI_MakeSolid {}
+
+class BRepBuilderAPI_MakeSolid_5 extends BRepBuilderAPI_MakeSolid {}
+
+class BRepBuilderAPI_MakeSolid_6 extends BRepBuilderAPI_MakeSolid {}
+
+class BRepBuilderAPI_MakeSolid_7 extends BRepBuilderAPI_MakeSolid {}
 
 class BRepBuilderAPI_MakeVertex extends BRepBuilderAPI_MakeShape {
 }
@@ -4646,17 +9236,39 @@ class BRepBuilderAPI_MakeVertex extends BRepBuilderAPI_MakeShape {
 class BRepBuilderAPI_MakeWire extends BRepBuilderAPI_MakeShape {
 }
 
+class BRepBuilderAPI_MakeWire_1 extends BRepBuilderAPI_MakeWire {}
+
+class BRepBuilderAPI_MakeWire_2 extends BRepBuilderAPI_MakeWire {}
+
+class BRepBuilderAPI_MakeWire_3 extends BRepBuilderAPI_MakeWire {}
+
+class BRepBuilderAPI_MakeWire_4 extends BRepBuilderAPI_MakeWire {}
+
+class BRepBuilderAPI_MakeWire_5 extends BRepBuilderAPI_MakeWire {}
+
+class BRepBuilderAPI_MakeWire_6 extends BRepBuilderAPI_MakeWire {}
+
+class BRepBuilderAPI_MakeWire_7 extends BRepBuilderAPI_MakeWire {}
+
 class BRepBuilderAPI_ModifyShape extends BRepBuilderAPI_MakeShape {
 }
 
 class BRepBuilderAPI_NurbsConvert extends BRepBuilderAPI_ModifyShape {
 }
 
+class BRepBuilderAPI_NurbsConvert_1 extends BRepBuilderAPI_NurbsConvert {}
+
+class BRepBuilderAPI_NurbsConvert_2 extends BRepBuilderAPI_NurbsConvert {}
+
 class BRepBuilderAPI_Sewing extends Standard_Transient {
 }
 
 class BRepBuilderAPI_Transform extends BRepBuilderAPI_ModifyShape {
 }
+
+class BRepBuilderAPI_Transform_1 extends BRepBuilderAPI_Transform {}
+
+class BRepBuilderAPI_Transform_2 extends BRepBuilderAPI_Transform {}
 
 class BRepBuilderAPI_VertexInspector extends NCollection_CellFilter_InspectorXYZ {
 }
@@ -4701,11 +9313,25 @@ class BRepClass3d_Intersector3d {
 class BRepClass3d_SClassifier {
 }
 
+class BRepClass3d_SClassifier_1 extends BRepClass3d_SClassifier {}
+
+class BRepClass3d_SClassifier_2 extends BRepClass3d_SClassifier {}
+
 class BRepClass3d_SolidClassifier extends BRepClass3d_SClassifier {
 }
 
+class BRepClass3d_SolidClassifier_1 extends BRepClass3d_SolidClassifier {}
+
+class BRepClass3d_SolidClassifier_2 extends BRepClass3d_SolidClassifier {}
+
+class BRepClass3d_SolidClassifier_3 extends BRepClass3d_SolidClassifier {}
+
 class BRepClass3d_SolidExplorer {
 }
+
+class BRepClass3d_SolidExplorer_1 extends BRepClass3d_SolidExplorer {}
+
+class BRepClass3d_SolidExplorer_2 extends BRepClass3d_SolidExplorer {}
 
 class BRepClass3d_SolidPassiveClassifier {
 }
@@ -4713,14 +9339,30 @@ class BRepClass3d_SolidPassiveClassifier {
 class BRepClass_Edge {
 }
 
+class BRepClass_Edge_1 extends BRepClass_Edge {}
+
+class BRepClass_Edge_2 extends BRepClass_Edge {}
+
 class BRepClass_FClass2dOfFClassifier {
 }
 
 class BRepClass_FClassifier {
 }
 
+class BRepClass_FClassifier_1 extends BRepClass_FClassifier {}
+
+class BRepClass_FClassifier_2 extends BRepClass_FClassifier {}
+
 class BRepClass_FaceClassifier extends BRepClass_FClassifier {
 }
+
+class BRepClass_FaceClassifier_1 extends BRepClass_FaceClassifier {}
+
+class BRepClass_FaceClassifier_2 extends BRepClass_FaceClassifier {}
+
+class BRepClass_FaceClassifier_3 extends BRepClass_FaceClassifier {}
+
+class BRepClass_FaceClassifier_4 extends BRepClass_FaceClassifier {}
 
 class BRepClass_FaceExplorer {
 }
@@ -4734,25 +9376,59 @@ class BRepClass_Intersector extends Geom2dInt_IntConicCurveOfGInter {
 class BRepExtrema_DistShapeShape {
 }
 
+class BRepExtrema_DistShapeShape_1 extends BRepExtrema_DistShapeShape {}
+
+class BRepExtrema_DistShapeShape_2 extends BRepExtrema_DistShapeShape {}
+
+class BRepExtrema_DistShapeShape_3 extends BRepExtrema_DistShapeShape {}
+
 class BRepExtrema_DistanceSS {
 }
+
+class BRepExtrema_DistanceSS_1 extends BRepExtrema_DistanceSS {}
+
+class BRepExtrema_DistanceSS_2 extends BRepExtrema_DistanceSS {}
 
 class BRepExtrema_ExtCC {
 }
 
+class BRepExtrema_ExtCC_1 extends BRepExtrema_ExtCC {}
+
+class BRepExtrema_ExtCC_2 extends BRepExtrema_ExtCC {}
+
 class BRepExtrema_ExtCF {
 }
+
+class BRepExtrema_ExtCF_1 extends BRepExtrema_ExtCF {}
+
+class BRepExtrema_ExtCF_2 extends BRepExtrema_ExtCF {}
 
 class BRepExtrema_ExtFF {
 }
 
+class BRepExtrema_ExtFF_1 extends BRepExtrema_ExtFF {}
+
+class BRepExtrema_ExtFF_2 extends BRepExtrema_ExtFF {}
+
 class BRepExtrema_ExtPC {
 }
+
+class BRepExtrema_ExtPC_1 extends BRepExtrema_ExtPC {}
+
+class BRepExtrema_ExtPC_2 extends BRepExtrema_ExtPC {}
 
 class BRepExtrema_ExtPF {
 }
 
+class BRepExtrema_ExtPF_1 extends BRepExtrema_ExtPF {}
+
+class BRepExtrema_ExtPF_2 extends BRepExtrema_ExtPF {}
+
 }
+
+class BRepExtrema_OverlapTool_1 extends BRepExtrema_OverlapTool {}
+
+class BRepExtrema_OverlapTool_2 extends BRepExtrema_OverlapTool {}
 
 class BRepExtrema_Poly {
 }
@@ -4760,17 +9436,41 @@ class BRepExtrema_Poly {
 class BRepExtrema_SelfIntersection extends BRepExtrema_ElementFilter {
 }
 
+class BRepExtrema_SelfIntersection_1 extends BRepExtrema_SelfIntersection {}
+
+class BRepExtrema_SelfIntersection_2 extends BRepExtrema_SelfIntersection {}
+
 class BRepExtrema_ShapeProximity {
 }
+
+class BRepExtrema_ShapeProximity_1 extends BRepExtrema_ShapeProximity {}
+
+class BRepExtrema_ShapeProximity_2 extends BRepExtrema_ShapeProximity {}
 
 class BRepExtrema_SolutionElem {
 }
 
+class BRepExtrema_SolutionElem_1 extends BRepExtrema_SolutionElem {}
+
+class BRepExtrema_SolutionElem_2 extends BRepExtrema_SolutionElem {}
+
+class BRepExtrema_SolutionElem_3 extends BRepExtrema_SolutionElem {}
+
+class BRepExtrema_SolutionElem_4 extends BRepExtrema_SolutionElem {}
+
 class BRepExtrema_TriangleSet extends BVH_PrimitiveSet3d {
 }
 
+class BRepExtrema_TriangleSet_1 extends BRepExtrema_TriangleSet {}
+
+class BRepExtrema_TriangleSet_2 extends BRepExtrema_TriangleSet {}
+
 class BRepExtrema_UnCompatibleShape extends Standard_DomainError {
 }
+
+class BRepExtrema_UnCompatibleShape_1 extends BRepExtrema_UnCompatibleShape {}
+
+class BRepExtrema_UnCompatibleShape_2 extends BRepExtrema_UnCompatibleShape {}
 
 class BRepFeat_Builder extends BOPAlgo_BOP {
 }
@@ -4781,29 +9481,57 @@ class BRepFeat_Form extends BRepBuilderAPI_MakeShape {
 class BRepFeat_Gluer extends BRepBuilderAPI_MakeShape {
 }
 
+class BRepFeat_Gluer_1 extends BRepFeat_Gluer {}
+
+class BRepFeat_Gluer_2 extends BRepFeat_Gluer {}
+
 class BRepFeat_MakeCylindricalHole extends BRepFeat_Builder {
 }
 
 class BRepFeat_MakeDPrism extends BRepFeat_Form {
 }
 
+class BRepFeat_MakeDPrism_1 extends BRepFeat_MakeDPrism {}
+
+class BRepFeat_MakeDPrism_2 extends BRepFeat_MakeDPrism {}
+
 class BRepFeat_MakePipe extends BRepFeat_Form {
 }
+
+class BRepFeat_MakePipe_1 extends BRepFeat_MakePipe {}
+
+class BRepFeat_MakePipe_2 extends BRepFeat_MakePipe {}
 
 class BRepFeat_MakePrism extends BRepFeat_Form {
 }
 
+class BRepFeat_MakePrism_1 extends BRepFeat_MakePrism {}
+
+class BRepFeat_MakePrism_2 extends BRepFeat_MakePrism {}
+
 class BRepFeat_MakeRevol extends BRepFeat_Form {
 }
 
+class BRepFeat_MakeRevol_1 extends BRepFeat_MakeRevol {}
+
+class BRepFeat_MakeRevol_2 extends BRepFeat_MakeRevol {}
+
 class BRepFeat_MakeRevolutionForm extends BRepFeat_RibSlot {
 }
+
+class BRepFeat_MakeRevolutionForm_1 extends BRepFeat_MakeRevolutionForm {}
+
+class BRepFeat_MakeRevolutionForm_2 extends BRepFeat_MakeRevolutionForm {}
 
 class BRepFeat_RibSlot extends BRepBuilderAPI_MakeShape {
 }
 
 class BRepFeat_SplitShape extends BRepBuilderAPI_MakeShape {
 }
+
+class BRepFeat_SplitShape_1 extends BRepFeat_SplitShape {}
+
+class BRepFeat_SplitShape_2 extends BRepFeat_SplitShape {}
 
 class BRepFill {
 }
@@ -4817,14 +9545,30 @@ class BRepFill_AdvancedEvolved {
 class BRepFill_ApproxSeewing {
 }
 
+class BRepFill_ApproxSeewing_1 extends BRepFill_ApproxSeewing {}
+
+class BRepFill_ApproxSeewing_2 extends BRepFill_ApproxSeewing {}
+
 class BRepFill_CompatibleWires {
 }
+
+class BRepFill_CompatibleWires_1 extends BRepFill_CompatibleWires {}
+
+class BRepFill_CompatibleWires_2 extends BRepFill_CompatibleWires {}
 
 class BRepFill_ComputeCLine {
 }
 
+class BRepFill_ComputeCLine_1 extends BRepFill_ComputeCLine {}
+
+class BRepFill_ComputeCLine_2 extends BRepFill_ComputeCLine {}
+
 class BRepFill_CurveConstraint extends GeomPlate_CurveConstraint {
 }
+
+class BRepFill_CurveConstraint_1 extends BRepFill_CurveConstraint {}
+
+class BRepFill_CurveConstraint_2 extends BRepFill_CurveConstraint {}
 
 class BRepFill_Draft {
 }
@@ -4838,14 +9582,28 @@ class BRepFill_Edge3DLaw extends BRepFill_LocationLaw {
 class BRepFill_EdgeFaceAndOrder {
 }
 
+class BRepFill_EdgeFaceAndOrder_1 extends BRepFill_EdgeFaceAndOrder {}
+
+class BRepFill_EdgeFaceAndOrder_2 extends BRepFill_EdgeFaceAndOrder {}
+
 class BRepFill_EdgeOnSurfLaw extends BRepFill_LocationLaw {
 }
 
 class BRepFill_Evolved {
 }
 
+class BRepFill_Evolved_1 extends BRepFill_Evolved {}
+
+class BRepFill_Evolved_2 extends BRepFill_Evolved {}
+
+class BRepFill_Evolved_3 extends BRepFill_Evolved {}
+
 class BRepFill_FaceAndOrder {
 }
+
+class BRepFill_FaceAndOrder_1 extends BRepFill_FaceAndOrder {}
+
+class BRepFill_FaceAndOrder_2 extends BRepFill_FaceAndOrder {}
 
 class BRepFill_Filling {
 }
@@ -4859,17 +9617,37 @@ class BRepFill_LocationLaw extends Standard_Transient {
 class BRepFill_MultiLine extends AppCont_Function {
 }
 
+class BRepFill_MultiLine_1 extends BRepFill_MultiLine {}
+
+class BRepFill_MultiLine_2 extends BRepFill_MultiLine {}
+
 class BRepFill_NSections extends BRepFill_SectionLaw {
 }
+
+class BRepFill_NSections_1 extends BRepFill_NSections {}
+
+class BRepFill_NSections_2 extends BRepFill_NSections {}
 
 class BRepFill_OffsetAncestors {
 }
 
+class BRepFill_OffsetAncestors_1 extends BRepFill_OffsetAncestors {}
+
+class BRepFill_OffsetAncestors_2 extends BRepFill_OffsetAncestors {}
+
 class BRepFill_OffsetWire {
 }
 
+class BRepFill_OffsetWire_1 extends BRepFill_OffsetWire {}
+
+class BRepFill_OffsetWire_2 extends BRepFill_OffsetWire {}
+
 class BRepFill_Pipe {
 }
+
+class BRepFill_Pipe_1 extends BRepFill_Pipe {}
+
+class BRepFill_Pipe_2 extends BRepFill_Pipe {}
 
 class BRepFill_PipeShell extends Standard_Transient {
 }
@@ -4877,20 +9655,38 @@ class BRepFill_PipeShell extends Standard_Transient {
 class BRepFill_Section {
 }
 
+class BRepFill_Section_1 extends BRepFill_Section {}
+
+class BRepFill_Section_2 extends BRepFill_Section {}
+
 class BRepFill_SectionLaw extends Standard_Transient {
 }
 
 class BRepFill_SectionPlacement {
 }
 
+class BRepFill_SectionPlacement_1 extends BRepFill_SectionPlacement {}
+
+class BRepFill_SectionPlacement_2 extends BRepFill_SectionPlacement {}
+
 class BRepFill_ShapeLaw extends BRepFill_SectionLaw {
 }
+
+class BRepFill_ShapeLaw_1 extends BRepFill_ShapeLaw {}
+
+class BRepFill_ShapeLaw_2 extends BRepFill_ShapeLaw {}
+
+class BRepFill_ShapeLaw_3 extends BRepFill_ShapeLaw {}
 
 class BRepFill_Sweep {
 }
 
 class BRepFill_TrimEdgeTool {
 }
+
+class BRepFill_TrimEdgeTool_1 extends BRepFill_TrimEdgeTool {}
+
+class BRepFill_TrimEdgeTool_2 extends BRepFill_TrimEdgeTool {}
 
 class BRepFill_TrimShellCorner {
 }
@@ -4910,20 +9706,36 @@ class BRepFilletAPI_MakeFillet extends BRepFilletAPI_LocalOperation {
 class BRepFilletAPI_MakeFillet2d extends BRepBuilderAPI_MakeShape {
 }
 
+class BRepFilletAPI_MakeFillet2d_1 extends BRepFilletAPI_MakeFillet2d {}
+
+class BRepFilletAPI_MakeFillet2d_2 extends BRepFilletAPI_MakeFillet2d {}
+
 class BRepGProp {
 }
 
 class BRepGProp_Cinert extends GProp_GProps {
 }
 
+class BRepGProp_Cinert_1 extends BRepGProp_Cinert {}
+
+class BRepGProp_Cinert_2 extends BRepGProp_Cinert {}
+
 class BRepGProp_Domain {
 }
+
+class BRepGProp_Domain_1 extends BRepGProp_Domain {}
+
+class BRepGProp_Domain_2 extends BRepGProp_Domain {}
 
 class BRepGProp_EdgeTool {
 }
 
 class BRepGProp_Face {
 }
+
+class BRepGProp_Face_1 extends BRepGProp_Face {}
+
+class BRepGProp_Face_2 extends BRepGProp_Face {}
 
 class BRepGProp_MeshCinert extends GProp_GProps {
 }
@@ -4934,6 +9746,16 @@ class BRepGProp_MeshProps extends GProp_GProps {
 class BRepGProp_Sinert extends GProp_GProps {
 }
 
+class BRepGProp_Sinert_1 extends BRepGProp_Sinert {}
+
+class BRepGProp_Sinert_2 extends BRepGProp_Sinert {}
+
+class BRepGProp_Sinert_3 extends BRepGProp_Sinert {}
+
+class BRepGProp_Sinert_4 extends BRepGProp_Sinert {}
+
+class BRepGProp_Sinert_5 extends BRepGProp_Sinert {}
+
 class BRepGProp_TFunction extends math_Function {
 }
 
@@ -4942,6 +9764,32 @@ class BRepGProp_UFunction extends math_Function {
 
 class BRepGProp_Vinert extends GProp_GProps {
 }
+
+class BRepGProp_Vinert_1 extends BRepGProp_Vinert {}
+
+class BRepGProp_Vinert_2 extends BRepGProp_Vinert {}
+
+class BRepGProp_Vinert_3 extends BRepGProp_Vinert {}
+
+class BRepGProp_Vinert_4 extends BRepGProp_Vinert {}
+
+class BRepGProp_Vinert_5 extends BRepGProp_Vinert {}
+
+class BRepGProp_Vinert_6 extends BRepGProp_Vinert {}
+
+class BRepGProp_Vinert_7 extends BRepGProp_Vinert {}
+
+class BRepGProp_Vinert_8 extends BRepGProp_Vinert {}
+
+class BRepGProp_Vinert_9 extends BRepGProp_Vinert {}
+
+class BRepGProp_Vinert_10 extends BRepGProp_Vinert {}
+
+class BRepGProp_Vinert_11 extends BRepGProp_Vinert {}
+
+class BRepGProp_Vinert_12 extends BRepGProp_Vinert {}
+
+class BRepGProp_Vinert_13 extends BRepGProp_Vinert {}
 
 class BRepIntCurveSurface_Inter {
 }
@@ -4952,11 +9800,23 @@ class BRepLProp {
 class BRepLProp_CLProps {
 }
 
+class BRepLProp_CLProps_1 extends BRepLProp_CLProps {}
+
+class BRepLProp_CLProps_2 extends BRepLProp_CLProps {}
+
+class BRepLProp_CLProps_3 extends BRepLProp_CLProps {}
+
 class BRepLProp_CurveTool {
 }
 
 class BRepLProp_SLProps {
 }
+
+class BRepLProp_SLProps_1 extends BRepLProp_SLProps {}
+
+class BRepLProp_SLProps_2 extends BRepLProp_SLProps {}
+
+class BRepLProp_SLProps_3 extends BRepLProp_SLProps {}
 
 class BRepLProp_SurfaceTool {
 }
@@ -4967,11 +9827,19 @@ class BRepLib {
 class BRepLib_CheckCurveOnSurface {
 }
 
+class BRepLib_CheckCurveOnSurface_1 extends BRepLib_CheckCurveOnSurface {}
+
+class BRepLib_CheckCurveOnSurface_2 extends BRepLib_CheckCurveOnSurface {}
+
 class BRepLib_Command {
 }
 
 class BRepLib_FindSurface {
 }
+
+class BRepLib_FindSurface_1 extends BRepLib_FindSurface {}
+
+class BRepLib_FindSurface_2 extends BRepLib_FindSurface {}
 
 class BRepLib_FuseEdges {
 }
@@ -4979,14 +9847,198 @@ class BRepLib_FuseEdges {
 class BRepLib_MakeEdge extends BRepLib_MakeShape {
 }
 
+class BRepLib_MakeEdge_1 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_2 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_3 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_4 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_5 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_6 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_7 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_8 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_9 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_10 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_11 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_12 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_13 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_14 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_15 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_16 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_17 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_18 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_19 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_20 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_21 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_22 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_23 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_24 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_25 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_26 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_27 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_28 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_29 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_30 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_31 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_32 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_33 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_34 extends BRepLib_MakeEdge {}
+
+class BRepLib_MakeEdge_35 extends BRepLib_MakeEdge {}
+
 class BRepLib_MakeEdge2d extends BRepLib_MakeShape {
 }
+
+class BRepLib_MakeEdge2d_1 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_2 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_3 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_4 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_5 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_6 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_7 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_8 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_9 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_10 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_11 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_12 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_13 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_14 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_15 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_16 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_17 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_18 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_19 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_20 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_21 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_22 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_23 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_24 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_25 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_26 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_27 extends BRepLib_MakeEdge2d {}
+
+class BRepLib_MakeEdge2d_28 extends BRepLib_MakeEdge2d {}
 
 class BRepLib_MakeFace extends BRepLib_MakeShape {
 }
 
+class BRepLib_MakeFace_1 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_2 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_3 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_4 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_5 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_6 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_7 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_8 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_9 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_10 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_11 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_12 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_13 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_14 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_15 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_16 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_17 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_18 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_19 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_20 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_21 extends BRepLib_MakeFace {}
+
+class BRepLib_MakeFace_22 extends BRepLib_MakeFace {}
+
 class BRepLib_MakePolygon extends BRepLib_MakeShape {
 }
+
+class BRepLib_MakePolygon_1 extends BRepLib_MakePolygon {}
+
+class BRepLib_MakePolygon_2 extends BRepLib_MakePolygon {}
+
+class BRepLib_MakePolygon_3 extends BRepLib_MakePolygon {}
+
+class BRepLib_MakePolygon_4 extends BRepLib_MakePolygon {}
+
+class BRepLib_MakePolygon_5 extends BRepLib_MakePolygon {}
+
+class BRepLib_MakePolygon_6 extends BRepLib_MakePolygon {}
+
+class BRepLib_MakePolygon_7 extends BRepLib_MakePolygon {}
 
 class BRepLib_MakeShape extends BRepLib_Command {
 }
@@ -4994,8 +10046,28 @@ class BRepLib_MakeShape extends BRepLib_Command {
 class BRepLib_MakeShell extends BRepLib_MakeShape {
 }
 
+class BRepLib_MakeShell_1 extends BRepLib_MakeShell {}
+
+class BRepLib_MakeShell_2 extends BRepLib_MakeShell {}
+
+class BRepLib_MakeShell_3 extends BRepLib_MakeShell {}
+
 class BRepLib_MakeSolid extends BRepLib_MakeShape {
 }
+
+class BRepLib_MakeSolid_1 extends BRepLib_MakeSolid {}
+
+class BRepLib_MakeSolid_2 extends BRepLib_MakeSolid {}
+
+class BRepLib_MakeSolid_3 extends BRepLib_MakeSolid {}
+
+class BRepLib_MakeSolid_4 extends BRepLib_MakeSolid {}
+
+class BRepLib_MakeSolid_5 extends BRepLib_MakeSolid {}
+
+class BRepLib_MakeSolid_6 extends BRepLib_MakeSolid {}
+
+class BRepLib_MakeSolid_7 extends BRepLib_MakeSolid {}
 
 class BRepLib_MakeVertex extends BRepLib_MakeShape {
 }
@@ -5003,14 +10075,36 @@ class BRepLib_MakeVertex extends BRepLib_MakeShape {
 class BRepLib_MakeWire extends BRepLib_MakeShape {
 }
 
+class BRepLib_MakeWire_1 extends BRepLib_MakeWire {}
+
+class BRepLib_MakeWire_2 extends BRepLib_MakeWire {}
+
+class BRepLib_MakeWire_3 extends BRepLib_MakeWire {}
+
+class BRepLib_MakeWire_4 extends BRepLib_MakeWire {}
+
+class BRepLib_MakeWire_5 extends BRepLib_MakeWire {}
+
+class BRepLib_MakeWire_6 extends BRepLib_MakeWire {}
+
+class BRepLib_MakeWire_7 extends BRepLib_MakeWire {}
+
 class BRepMAT2d_BisectingLocus {
 }
 
 class BRepMAT2d_Explorer {
 }
 
+class BRepMAT2d_Explorer_1 extends BRepMAT2d_Explorer {}
+
+class BRepMAT2d_Explorer_2 extends BRepMAT2d_Explorer {}
+
 class BRepMAT2d_LinkTopoBilo {
 }
+
+class BRepMAT2d_LinkTopoBilo_1 extends BRepMAT2d_LinkTopoBilo {}
+
+class BRepMAT2d_LinkTopoBilo_2 extends BRepMAT2d_LinkTopoBilo {}
 
 class BRepMesh_BaseMeshAlgo extends IMeshTools_MeshAlgo {
 }
@@ -5021,11 +10115,19 @@ class BRepMesh_BoundaryParamsRangeSplitter extends BRepMesh_NURBSRangeSplitter {
 class BRepMesh_Circle {
 }
 
+class BRepMesh_Circle_1 extends BRepMesh_Circle {}
+
+class BRepMesh_Circle_2 extends BRepMesh_Circle {}
+
 class BRepMesh_CircleInspector extends NCollection_CellFilter_InspectorXY {
 }
 
 class BRepMesh_CircleTool {
 }
+
+class BRepMesh_CircleTool_1 extends BRepMesh_CircleTool {}
+
+class BRepMesh_CircleTool_2 extends BRepMesh_CircleTool {}
 
 class BRepMesh_Classifier extends Standard_Transient {
 }
@@ -5041,6 +10143,10 @@ class BRepMesh_Context extends IMeshTools_Context {
 
 class BRepMesh_CurveTessellator extends IMeshTools_CurveTessellator {
 }
+
+class BRepMesh_CurveTessellator_1 extends BRepMesh_CurveTessellator {}
+
+class BRepMesh_CurveTessellator_2 extends BRepMesh_CurveTessellator {}
 
 class BRepMesh_CustomBaseMeshAlgo extends BRepMesh_ConstrainedBaseMeshAlgo {
 }
@@ -5060,6 +10166,16 @@ class BRepMesh_Deflection extends Standard_Transient {
 class BRepMesh_Delaun {
 }
 
+class BRepMesh_Delaun_1 extends BRepMesh_Delaun {}
+
+class BRepMesh_Delaun_2 extends BRepMesh_Delaun {}
+
+class BRepMesh_Delaun_3 extends BRepMesh_Delaun {}
+
+class BRepMesh_Delaun_4 extends BRepMesh_Delaun {}
+
+class BRepMesh_Delaun_5 extends BRepMesh_Delaun {}
+
 class BRepMesh_DelaunayBaseMeshAlgo extends BRepMesh_ConstrainedBaseMeshAlgo {
 }
 
@@ -5071,6 +10187,10 @@ class BRepMesh_DiscretRoot extends Standard_Transient {
 
 class BRepMesh_Edge extends BRepMesh_OrientedEdge {
 }
+
+class BRepMesh_Edge_1 extends BRepMesh_Edge {}
+
+class BRepMesh_Edge_2 extends BRepMesh_Edge {}
 
 class BRepMesh_EdgeDiscret extends IMeshTools_ModelAlgo {
 }
@@ -5090,8 +10210,18 @@ class BRepMesh_FastDiscret {
 class BRepMesh_GeomTool {
 }
 
+class BRepMesh_GeomTool_1 extends BRepMesh_GeomTool {}
+
+class BRepMesh_GeomTool_2 extends BRepMesh_GeomTool {}
+
 class BRepMesh_IncrementalMesh extends BRepMesh_DiscretRoot {
 }
+
+class BRepMesh_IncrementalMesh_1 extends BRepMesh_IncrementalMesh {}
+
+class BRepMesh_IncrementalMesh_2 extends BRepMesh_IncrementalMesh {}
+
+class BRepMesh_IncrementalMesh_3 extends BRepMesh_IncrementalMesh {}
 
 class BRepMesh_MeshAlgoFactory extends IMeshTools_MeshAlgoFactory {
 }
@@ -5117,11 +10247,19 @@ class BRepMesh_NURBSRangeSplitter extends BRepMesh_UVParamRangeSplitter {
 class BRepMesh_OrientedEdge {
 }
 
+class BRepMesh_OrientedEdge_1 extends BRepMesh_OrientedEdge {}
+
+class BRepMesh_OrientedEdge_2 extends BRepMesh_OrientedEdge {}
+
 class BRepMesh_PairOfIndex {
 }
 
 class BRepMesh_SelectorOfDataStructureOfDelaun extends Standard_Transient {
 }
+
+class BRepMesh_SelectorOfDataStructureOfDelaun_1 extends BRepMesh_SelectorOfDataStructureOfDelaun {}
+
+class BRepMesh_SelectorOfDataStructureOfDelaun_2 extends BRepMesh_SelectorOfDataStructureOfDelaun {}
 
 class BRepMesh_ShapeTool extends Standard_Transient {
 }
@@ -5138,11 +10276,21 @@ class BRepMesh_TorusRangeSplitter extends BRepMesh_UVParamRangeSplitter {
 class BRepMesh_Triangle {
 }
 
+class BRepMesh_Triangle_1 extends BRepMesh_Triangle {}
+
+class BRepMesh_Triangle_2 extends BRepMesh_Triangle {}
+
 class BRepMesh_UVParamRangeSplitter extends BRepMesh_DefaultRangeSplitter {
 }
 
 class BRepMesh_Vertex {
 }
+
+class BRepMesh_Vertex_1 extends BRepMesh_Vertex {}
+
+class BRepMesh_Vertex_2 extends BRepMesh_Vertex {}
+
+class BRepMesh_Vertex_3 extends BRepMesh_Vertex {}
 
 class BRepMesh_VertexInspector extends NCollection_CellFilter_InspectorXY {
 }
@@ -5156,11 +10304,19 @@ class BRepOffset {
 class BRepOffsetAPI_DraftAngle extends BRepBuilderAPI_ModifyShape {
 }
 
+class BRepOffsetAPI_DraftAngle_1 extends BRepOffsetAPI_DraftAngle {}
+
+class BRepOffsetAPI_DraftAngle_2 extends BRepOffsetAPI_DraftAngle {}
+
 class BRepOffsetAPI_MakeDraft extends BRepBuilderAPI_MakeShape {
 }
 
 class BRepOffsetAPI_MakeEvolved extends BRepBuilderAPI_MakeShape {
 }
+
+class BRepOffsetAPI_MakeEvolved_1 extends BRepOffsetAPI_MakeEvolved {}
+
+class BRepOffsetAPI_MakeEvolved_2 extends BRepOffsetAPI_MakeEvolved {}
 
 class BRepOffsetAPI_MakeFilling extends BRepBuilderAPI_MakeShape {
 }
@@ -5168,11 +10324,25 @@ class BRepOffsetAPI_MakeFilling extends BRepBuilderAPI_MakeShape {
 class BRepOffsetAPI_MakeOffset extends BRepBuilderAPI_MakeShape {
 }
 
+class BRepOffsetAPI_MakeOffset_1 extends BRepOffsetAPI_MakeOffset {}
+
+class BRepOffsetAPI_MakeOffset_2 extends BRepOffsetAPI_MakeOffset {}
+
+class BRepOffsetAPI_MakeOffset_3 extends BRepOffsetAPI_MakeOffset {}
+
 class BRepOffsetAPI_MakeOffsetShape extends BRepBuilderAPI_MakeShape {
 }
 
+class BRepOffsetAPI_MakeOffsetShape_1 extends BRepOffsetAPI_MakeOffsetShape {}
+
+class BRepOffsetAPI_MakeOffsetShape_2 extends BRepOffsetAPI_MakeOffsetShape {}
+
 class BRepOffsetAPI_MakePipe extends BRepPrimAPI_MakeSweep {
 }
+
+class BRepOffsetAPI_MakePipe_1 extends BRepOffsetAPI_MakePipe {}
+
+class BRepOffsetAPI_MakePipe_2 extends BRepOffsetAPI_MakePipe {}
 
 class BRepOffsetAPI_MakePipeShell extends BRepPrimAPI_MakeSweep {
 }
@@ -5180,17 +10350,29 @@ class BRepOffsetAPI_MakePipeShell extends BRepPrimAPI_MakeSweep {
 class BRepOffsetAPI_MakeThickSolid extends BRepOffsetAPI_MakeOffsetShape {
 }
 
+class BRepOffsetAPI_MakeThickSolid_1 extends BRepOffsetAPI_MakeThickSolid {}
+
+class BRepOffsetAPI_MakeThickSolid_2 extends BRepOffsetAPI_MakeThickSolid {}
+
 class BRepOffsetAPI_MiddlePath extends BRepBuilderAPI_MakeShape {
 }
 
 class BRepOffsetAPI_NormalProjection extends BRepBuilderAPI_MakeShape {
 }
 
+class BRepOffsetAPI_NormalProjection_1 extends BRepOffsetAPI_NormalProjection {}
+
+class BRepOffsetAPI_NormalProjection_2 extends BRepOffsetAPI_NormalProjection {}
+
 class BRepOffsetAPI_ThruSections extends BRepBuilderAPI_MakeShape {
 }
 
 class BRepOffset_Analyse {
 }
+
+class BRepOffset_Analyse_1 extends BRepOffset_Analyse {}
+
+class BRepOffset_Analyse_2 extends BRepOffset_Analyse {}
 
 class BRepOffset_Inter2d {
 }
@@ -5201,14 +10383,34 @@ class BRepOffset_Inter3d {
 class BRepOffset_Interval {
 }
 
+class BRepOffset_Interval_1 extends BRepOffset_Interval {}
+
+class BRepOffset_Interval_2 extends BRepOffset_Interval {}
+
 class BRepOffset_MakeLoops {
 }
 
 class BRepOffset_MakeSimpleOffset {
 }
 
+class BRepOffset_MakeSimpleOffset_1 extends BRepOffset_MakeSimpleOffset {}
+
+class BRepOffset_MakeSimpleOffset_2 extends BRepOffset_MakeSimpleOffset {}
+
 class BRepOffset_Offset {
 }
+
+class BRepOffset_Offset_1 extends BRepOffset_Offset {}
+
+class BRepOffset_Offset_2 extends BRepOffset_Offset {}
+
+class BRepOffset_Offset_3 extends BRepOffset_Offset {}
+
+class BRepOffset_Offset_4 extends BRepOffset_Offset {}
+
+class BRepOffset_Offset_5 extends BRepOffset_Offset {}
+
+class BRepOffset_Offset_6 extends BRepOffset_Offset {}
 
 class BRepOffset_SimpleOffset extends BRepTools_Modification {
 }
@@ -5219,14 +10421,42 @@ class BRepOffset_Tool {
 class BRepPrimAPI_MakeBox extends BRepBuilderAPI_MakeShape {
 }
 
+class BRepPrimAPI_MakeBox_1 extends BRepPrimAPI_MakeBox {}
+
+class BRepPrimAPI_MakeBox_2 extends BRepPrimAPI_MakeBox {}
+
+class BRepPrimAPI_MakeBox_3 extends BRepPrimAPI_MakeBox {}
+
+class BRepPrimAPI_MakeBox_4 extends BRepPrimAPI_MakeBox {}
+
 class BRepPrimAPI_MakeCone extends BRepPrimAPI_MakeOneAxis {
 }
+
+class BRepPrimAPI_MakeCone_1 extends BRepPrimAPI_MakeCone {}
+
+class BRepPrimAPI_MakeCone_2 extends BRepPrimAPI_MakeCone {}
+
+class BRepPrimAPI_MakeCone_3 extends BRepPrimAPI_MakeCone {}
+
+class BRepPrimAPI_MakeCone_4 extends BRepPrimAPI_MakeCone {}
 
 class BRepPrimAPI_MakeCylinder extends BRepPrimAPI_MakeOneAxis {
 }
 
+class BRepPrimAPI_MakeCylinder_1 extends BRepPrimAPI_MakeCylinder {}
+
+class BRepPrimAPI_MakeCylinder_2 extends BRepPrimAPI_MakeCylinder {}
+
+class BRepPrimAPI_MakeCylinder_3 extends BRepPrimAPI_MakeCylinder {}
+
+class BRepPrimAPI_MakeCylinder_4 extends BRepPrimAPI_MakeCylinder {}
+
 class BRepPrimAPI_MakeHalfSpace extends BRepBuilderAPI_MakeShape {
 }
+
+class BRepPrimAPI_MakeHalfSpace_1 extends BRepPrimAPI_MakeHalfSpace {}
+
+class BRepPrimAPI_MakeHalfSpace_2 extends BRepPrimAPI_MakeHalfSpace {}
 
 class BRepPrimAPI_MakeOneAxis extends BRepBuilderAPI_MakeShape {
 }
@@ -5234,14 +10464,62 @@ class BRepPrimAPI_MakeOneAxis extends BRepBuilderAPI_MakeShape {
 class BRepPrimAPI_MakePrism extends BRepPrimAPI_MakeSweep {
 }
 
+class BRepPrimAPI_MakePrism_1 extends BRepPrimAPI_MakePrism {}
+
+class BRepPrimAPI_MakePrism_2 extends BRepPrimAPI_MakePrism {}
+
 class BRepPrimAPI_MakeRevol extends BRepPrimAPI_MakeSweep {
 }
+
+class BRepPrimAPI_MakeRevol_1 extends BRepPrimAPI_MakeRevol {}
+
+class BRepPrimAPI_MakeRevol_2 extends BRepPrimAPI_MakeRevol {}
 
 class BRepPrimAPI_MakeRevolution extends BRepPrimAPI_MakeOneAxis {
 }
 
+class BRepPrimAPI_MakeRevolution_1 extends BRepPrimAPI_MakeRevolution {}
+
+class BRepPrimAPI_MakeRevolution_2 extends BRepPrimAPI_MakeRevolution {}
+
+class BRepPrimAPI_MakeRevolution_3 extends BRepPrimAPI_MakeRevolution {}
+
+class BRepPrimAPI_MakeRevolution_4 extends BRepPrimAPI_MakeRevolution {}
+
+class BRepPrimAPI_MakeRevolution_5 extends BRepPrimAPI_MakeRevolution {}
+
+class BRepPrimAPI_MakeRevolution_6 extends BRepPrimAPI_MakeRevolution {}
+
+class BRepPrimAPI_MakeRevolution_7 extends BRepPrimAPI_MakeRevolution {}
+
+class BRepPrimAPI_MakeRevolution_8 extends BRepPrimAPI_MakeRevolution {}
+
 class BRepPrimAPI_MakeSphere extends BRepPrimAPI_MakeOneAxis {
 }
+
+class BRepPrimAPI_MakeSphere_1 extends BRepPrimAPI_MakeSphere {}
+
+class BRepPrimAPI_MakeSphere_2 extends BRepPrimAPI_MakeSphere {}
+
+class BRepPrimAPI_MakeSphere_3 extends BRepPrimAPI_MakeSphere {}
+
+class BRepPrimAPI_MakeSphere_4 extends BRepPrimAPI_MakeSphere {}
+
+class BRepPrimAPI_MakeSphere_5 extends BRepPrimAPI_MakeSphere {}
+
+class BRepPrimAPI_MakeSphere_6 extends BRepPrimAPI_MakeSphere {}
+
+class BRepPrimAPI_MakeSphere_7 extends BRepPrimAPI_MakeSphere {}
+
+class BRepPrimAPI_MakeSphere_8 extends BRepPrimAPI_MakeSphere {}
+
+class BRepPrimAPI_MakeSphere_9 extends BRepPrimAPI_MakeSphere {}
+
+class BRepPrimAPI_MakeSphere_10 extends BRepPrimAPI_MakeSphere {}
+
+class BRepPrimAPI_MakeSphere_11 extends BRepPrimAPI_MakeSphere {}
+
+class BRepPrimAPI_MakeSphere_12 extends BRepPrimAPI_MakeSphere {}
 
 class BRepPrimAPI_MakeSweep extends BRepBuilderAPI_MakeShape {
 }
@@ -5249,23 +10527,89 @@ class BRepPrimAPI_MakeSweep extends BRepBuilderAPI_MakeShape {
 class BRepPrimAPI_MakeTorus extends BRepPrimAPI_MakeOneAxis {
 }
 
+class BRepPrimAPI_MakeTorus_1 extends BRepPrimAPI_MakeTorus {}
+
+class BRepPrimAPI_MakeTorus_2 extends BRepPrimAPI_MakeTorus {}
+
+class BRepPrimAPI_MakeTorus_3 extends BRepPrimAPI_MakeTorus {}
+
+class BRepPrimAPI_MakeTorus_4 extends BRepPrimAPI_MakeTorus {}
+
+class BRepPrimAPI_MakeTorus_5 extends BRepPrimAPI_MakeTorus {}
+
+class BRepPrimAPI_MakeTorus_6 extends BRepPrimAPI_MakeTorus {}
+
+class BRepPrimAPI_MakeTorus_7 extends BRepPrimAPI_MakeTorus {}
+
+class BRepPrimAPI_MakeTorus_8 extends BRepPrimAPI_MakeTorus {}
+
 class BRepPrimAPI_MakeWedge extends BRepBuilderAPI_MakeShape {
 }
+
+class BRepPrimAPI_MakeWedge_1 extends BRepPrimAPI_MakeWedge {}
+
+class BRepPrimAPI_MakeWedge_2 extends BRepPrimAPI_MakeWedge {}
+
+class BRepPrimAPI_MakeWedge_3 extends BRepPrimAPI_MakeWedge {}
+
+class BRepPrimAPI_MakeWedge_4 extends BRepPrimAPI_MakeWedge {}
 
 class BRepPrim_Builder {
 }
 
+class BRepPrim_Builder_1 extends BRepPrim_Builder {}
+
+class BRepPrim_Builder_2 extends BRepPrim_Builder {}
+
 class BRepPrim_Cone extends BRepPrim_Revolution {
 }
+
+class BRepPrim_Cone_1 extends BRepPrim_Cone {}
+
+class BRepPrim_Cone_2 extends BRepPrim_Cone {}
+
+class BRepPrim_Cone_3 extends BRepPrim_Cone {}
+
+class BRepPrim_Cone_4 extends BRepPrim_Cone {}
+
+class BRepPrim_Cone_5 extends BRepPrim_Cone {}
+
+class BRepPrim_Cone_6 extends BRepPrim_Cone {}
+
+class BRepPrim_Cone_7 extends BRepPrim_Cone {}
 
 class BRepPrim_Cylinder extends BRepPrim_Revolution {
 }
 
+class BRepPrim_Cylinder_1 extends BRepPrim_Cylinder {}
+
+class BRepPrim_Cylinder_2 extends BRepPrim_Cylinder {}
+
+class BRepPrim_Cylinder_3 extends BRepPrim_Cylinder {}
+
+class BRepPrim_Cylinder_4 extends BRepPrim_Cylinder {}
+
+class BRepPrim_Cylinder_5 extends BRepPrim_Cylinder {}
+
+class BRepPrim_Cylinder_6 extends BRepPrim_Cylinder {}
+
 class BRepPrim_FaceBuilder {
 }
 
+class BRepPrim_FaceBuilder_1 extends BRepPrim_FaceBuilder {}
+
+class BRepPrim_FaceBuilder_2 extends BRepPrim_FaceBuilder {}
+
+class BRepPrim_FaceBuilder_3 extends BRepPrim_FaceBuilder {}
+
 class BRepPrim_GWedge {
 }
+
+class BRepPrim_GWedge_1 extends BRepPrim_GWedge {}
+
+class BRepPrim_GWedge_2 extends BRepPrim_GWedge {}
+
+class BRepPrim_GWedge_3 extends BRepPrim_GWedge {}
 
 class BRepPrim_OneAxis {
 }
@@ -5276,14 +10620,36 @@ class BRepPrim_Revolution extends BRepPrim_OneAxis {
 class BRepPrim_Sphere extends BRepPrim_Revolution {
 }
 
+class BRepPrim_Sphere_1 extends BRepPrim_Sphere {}
+
+class BRepPrim_Sphere_2 extends BRepPrim_Sphere {}
+
+class BRepPrim_Sphere_3 extends BRepPrim_Sphere {}
+
 class BRepPrim_Torus extends BRepPrim_Revolution {
 }
+
+class BRepPrim_Torus_1 extends BRepPrim_Torus {}
+
+class BRepPrim_Torus_2 extends BRepPrim_Torus {}
+
+class BRepPrim_Torus_3 extends BRepPrim_Torus {}
 
 class BRepPrim_Wedge extends BRepPrim_GWedge {
 }
 
+class BRepPrim_Wedge_1 extends BRepPrim_Wedge {}
+
+class BRepPrim_Wedge_2 extends BRepPrim_Wedge {}
+
+class BRepPrim_Wedge_3 extends BRepPrim_Wedge {}
+
 class BRepProj_Projection {
 }
+
+class BRepProj_Projection_1 extends BRepProj_Projection {}
+
+class BRepProj_Projection_2 extends BRepProj_Projection {}
 
 class BRepSweep_Builder {
 }
@@ -5297,8 +10663,16 @@ class BRepSweep_NumLinearRegularSweep {
 class BRepSweep_Prism {
 }
 
+class BRepSweep_Prism_1 extends BRepSweep_Prism {}
+
+class BRepSweep_Prism_2 extends BRepSweep_Prism {}
+
 class BRepSweep_Revol {
 }
+
+class BRepSweep_Revol_1 extends BRepSweep_Revol {}
+
+class BRepSweep_Revol_2 extends BRepSweep_Revol {}
 
 class BRepSweep_Rotation extends BRepSweep_Trsf {
 }
@@ -5321,11 +10695,23 @@ class BRepToIGES_BREntity {
 class BRepToIGES_BRShell extends BRepToIGES_BREntity {
 }
 
+class BRepToIGES_BRShell_1 extends BRepToIGES_BRShell {}
+
+class BRepToIGES_BRShell_2 extends BRepToIGES_BRShell {}
+
 class BRepToIGES_BRSolid extends BRepToIGES_BREntity {
 }
 
+class BRepToIGES_BRSolid_1 extends BRepToIGES_BRSolid {}
+
+class BRepToIGES_BRSolid_2 extends BRepToIGES_BRSolid {}
+
 class BRepToIGES_BRWire extends BRepToIGES_BREntity {
 }
+
+class BRepToIGES_BRWire_1 extends BRepToIGES_BRWire {}
+
+class BRepToIGES_BRWire_2 extends BRepToIGES_BRWire {}
 
 class BRepTools {
 }
@@ -5342,6 +10728,12 @@ class BRepTools_Modification extends Standard_Transient {
 class BRepTools_Modifier {
 }
 
+class BRepTools_Modifier_1 extends BRepTools_Modifier {}
+
+class BRepTools_Modifier_2 extends BRepTools_Modifier {}
+
+class BRepTools_Modifier_3 extends BRepTools_Modifier {}
+
 class BRepTools_NurbsConvertModification extends BRepTools_Modification {
 }
 
@@ -5354,6 +10746,10 @@ class BRepTools_ReShape extends Standard_Transient {
 class BRepTools_ShapeSet extends TopTools_ShapeSet {
 }
 
+class BRepTools_ShapeSet_1 extends BRepTools_ShapeSet {}
+
+class BRepTools_ShapeSet_2 extends BRepTools_ShapeSet {}
+
 class BRepTools_Substitution {
 }
 
@@ -5362,6 +10758,12 @@ class BRepTools_TrsfModification extends BRepTools_Modification {
 
 class BRepTools_WireExplorer {
 }
+
+class BRepTools_WireExplorer_1 extends BRepTools_WireExplorer {}
+
+class BRepTools_WireExplorer_2 extends BRepTools_WireExplorer {}
+
+class BRepTools_WireExplorer_3 extends BRepTools_WireExplorer {}
 
 class BRepTopAdaptor_FClass2d {
 }
@@ -5372,8 +10774,18 @@ class BRepTopAdaptor_HVertex extends Adaptor3d_HVertex {
 class BRepTopAdaptor_Tool {
 }
 
+class BRepTopAdaptor_Tool_1 extends BRepTopAdaptor_Tool {}
+
+class BRepTopAdaptor_Tool_2 extends BRepTopAdaptor_Tool {}
+
+class BRepTopAdaptor_Tool_3 extends BRepTopAdaptor_Tool {}
+
 class BRepTopAdaptor_TopolTool extends Adaptor3d_TopolTool {
 }
+
+class BRepTopAdaptor_TopolTool_1 extends BRepTopAdaptor_TopolTool {}
+
+class BRepTopAdaptor_TopolTool_2 extends BRepTopAdaptor_TopolTool {}
 
 class BRep_Builder extends TopoDS_Builder {
 }
@@ -5441,6 +10853,10 @@ class BRep_Tool {
 class BSplCLib_Cache extends Standard_Transient {
 }
 
+class BSplCLib_Cache_1 extends BSplCLib_Cache {}
+
+class BSplCLib_Cache_2 extends BSplCLib_Cache {}
+
 class BSplCLib_EvaluatorFunction {
 }
 
@@ -5474,17 +10890,37 @@ class BVH_TreeBaseTransient extends Standard_Transient {
 class BiTgte_Blend {
 }
 
+class BiTgte_Blend_1 extends BiTgte_Blend {}
+
+class BiTgte_Blend_2 extends BiTgte_Blend {}
+
 class BiTgte_CurveOnEdge extends Adaptor3d_Curve {
 }
+
+class BiTgte_CurveOnEdge_1 extends BiTgte_CurveOnEdge {}
+
+class BiTgte_CurveOnEdge_2 extends BiTgte_CurveOnEdge {}
 
 class BiTgte_CurveOnVertex extends Adaptor3d_Curve {
 }
 
+class BiTgte_CurveOnVertex_1 extends BiTgte_CurveOnVertex {}
+
+class BiTgte_CurveOnVertex_2 extends BiTgte_CurveOnVertex {}
+
 class BiTgte_HCurveOnEdge extends Adaptor3d_HCurve {
 }
 
+class BiTgte_HCurveOnEdge_1 extends BiTgte_HCurveOnEdge {}
+
+class BiTgte_HCurveOnEdge_2 extends BiTgte_HCurveOnEdge {}
+
 class BiTgte_HCurveOnVertex extends Adaptor3d_HCurve {
 }
+
+class BiTgte_HCurveOnVertex_1 extends BiTgte_HCurveOnVertex {}
+
+class BiTgte_HCurveOnVertex_2 extends BiTgte_HCurveOnVertex {}
 
 class Bisector {
 }
@@ -5498,8 +10934,18 @@ class Bisector_BisecAna extends Bisector_Curve {
 class Bisector_BisecCC extends Bisector_Curve {
 }
 
+class Bisector_BisecCC_1 extends Bisector_BisecCC {}
+
+class Bisector_BisecCC_2 extends Bisector_BisecCC {}
+
 class Bisector_BisecPC extends Bisector_Curve {
 }
+
+class Bisector_BisecPC_1 extends Bisector_BisecPC {}
+
+class Bisector_BisecPC_2 extends Bisector_BisecPC {}
+
+class Bisector_BisecPC_3 extends Bisector_BisecPC {}
 
 class Bisector_Curve extends Geom2d_Curve {
 }
@@ -5510,11 +10956,23 @@ class Bisector_FunctionH extends math_FunctionWithDerivative {
 class Bisector_FunctionInter extends math_FunctionWithDerivative {
 }
 
+class Bisector_FunctionInter_1 extends Bisector_FunctionInter {}
+
+class Bisector_FunctionInter_2 extends Bisector_FunctionInter {}
+
 class Bisector_Inter extends IntRes2d_Intersection {
 }
 
+class Bisector_Inter_1 extends Bisector_Inter {}
+
+class Bisector_Inter_2 extends Bisector_Inter {}
+
 class Bisector_PointOnBis {
 }
+
+class Bisector_PointOnBis_1 extends Bisector_PointOnBis {}
+
+class Bisector_PointOnBis_2 extends Bisector_PointOnBis {}
 
 class Bisector_PolyBis {
 }
@@ -5597,6 +11055,24 @@ class Blend_Function extends Blend_AppFunction {
 class Blend_Point {
 }
 
+class Blend_Point_1 extends Blend_Point {}
+
+class Blend_Point_2 extends Blend_Point {}
+
+class Blend_Point_3 extends Blend_Point {}
+
+class Blend_Point_4 extends Blend_Point {}
+
+class Blend_Point_5 extends Blend_Point {}
+
+class Blend_Point_6 extends Blend_Point {}
+
+class Blend_Point_7 extends Blend_Point {}
+
+class Blend_Point_8 extends Blend_Point {}
+
+class Blend_Point_9 extends Blend_Point {}
+
 class Blend_RstRstFunction extends Blend_AppFunction {
 }
 
@@ -5624,14 +11100,30 @@ class BndLib_AddSurface {
 class Bnd_B2d {
 }
 
+class Bnd_B2d_1 extends Bnd_B2d {}
+
+class Bnd_B2d_2 extends Bnd_B2d {}
+
 class Bnd_B2f {
 }
+
+class Bnd_B2f_1 extends Bnd_B2f {}
+
+class Bnd_B2f_2 extends Bnd_B2f {}
 
 class Bnd_B3d {
 }
 
+class Bnd_B3d_1 extends Bnd_B3d {}
+
+class Bnd_B3d_2 extends Bnd_B3d {}
+
 class Bnd_B3f {
 }
+
+class Bnd_B3f_1 extends Bnd_B3f {}
+
+class Bnd_B3f_2 extends Bnd_B3f {}
 
 class Bnd_BoundSortBox {
 }
@@ -5642,17 +11134,35 @@ class Bnd_BoundSortBox2d {
 class Bnd_Box {
 }
 
+class Bnd_Box_1 extends Bnd_Box {}
+
+class Bnd_Box_2 extends Bnd_Box {}
+
 class Bnd_Box2d {
 }
 
 class Bnd_OBB {
 }
 
+class Bnd_OBB_1 extends Bnd_OBB {}
+
+class Bnd_OBB_2 extends Bnd_OBB {}
+
+class Bnd_OBB_3 extends Bnd_OBB {}
+
 class Bnd_Range {
 }
 
+class Bnd_Range_1 extends Bnd_Range {}
+
+class Bnd_Range_2 extends Bnd_Range {}
+
 class Bnd_Sphere {
 }
+
+class Bnd_Sphere_1 extends Bnd_Sphere {}
+
+class Bnd_Sphere_2 extends Bnd_Sphere {}
 
 class Bnd_Tools {
 }
@@ -5669,6 +11179,10 @@ class CDF_Directory extends Standard_Transient {
 class CDF_DirectoryIterator {
 }
 
+class CDF_DirectoryIterator_1 extends CDF_DirectoryIterator {}
+
+class CDF_DirectoryIterator_2 extends CDF_DirectoryIterator {}
+
 class CDF_FWOSDriver extends CDF_MetaDataDriver {
 }
 
@@ -5677,6 +11191,10 @@ class CDF_MetaDataDriver extends Standard_Transient {
 
 class CDF_MetaDataDriverError extends Standard_Failure {
 }
+
+class CDF_MetaDataDriverError_1 extends CDF_MetaDataDriverError {}
+
+class CDF_MetaDataDriverError_2 extends CDF_MetaDataDriverError {}
 
 class CDF_MetaDataDriverFactory extends Standard_Transient {
 }
@@ -5708,6 +11226,16 @@ class CDM_ReferenceIterator {
 class CPnts_AbscissaPoint {
 }
 
+class CPnts_AbscissaPoint_1 extends CPnts_AbscissaPoint {}
+
+class CPnts_AbscissaPoint_2 extends CPnts_AbscissaPoint {}
+
+class CPnts_AbscissaPoint_3 extends CPnts_AbscissaPoint {}
+
+class CPnts_AbscissaPoint_4 extends CPnts_AbscissaPoint {}
+
+class CPnts_AbscissaPoint_5 extends CPnts_AbscissaPoint {}
+
 class CPnts_MyGaussFunction extends math_Function {
 }
 
@@ -5717,11 +11245,25 @@ class CPnts_MyRootFunction extends math_FunctionWithDerivative {
 class CPnts_UniformDeflection {
 }
 
+class CPnts_UniformDeflection_1 extends CPnts_UniformDeflection {}
+
+class CPnts_UniformDeflection_2 extends CPnts_UniformDeflection {}
+
+class CPnts_UniformDeflection_3 extends CPnts_UniformDeflection {}
+
+class CPnts_UniformDeflection_4 extends CPnts_UniformDeflection {}
+
+class CPnts_UniformDeflection_5 extends CPnts_UniformDeflection {}
+
 class CSLib {
 }
 
 class CSLib_Class2d {
 }
+
+class CSLib_Class2d_1 extends CSLib_Class2d {}
+
+class CSLib_Class2d_2 extends CSLib_Class2d {}
 
 class CSLib_NormalPolyDef extends math_FunctionWithDerivative {
 }
@@ -5732,17 +11274,45 @@ class ChFi2d {
 class ChFi2d_AnaFilletAlgo {
 }
 
+class ChFi2d_AnaFilletAlgo_1 extends ChFi2d_AnaFilletAlgo {}
+
+class ChFi2d_AnaFilletAlgo_2 extends ChFi2d_AnaFilletAlgo {}
+
+class ChFi2d_AnaFilletAlgo_3 extends ChFi2d_AnaFilletAlgo {}
+
 class ChFi2d_Builder {
 }
+
+class ChFi2d_Builder_1 extends ChFi2d_Builder {}
+
+class ChFi2d_Builder_2 extends ChFi2d_Builder {}
 
 class ChFi2d_ChamferAPI {
 }
 
+class ChFi2d_ChamferAPI_1 extends ChFi2d_ChamferAPI {}
+
+class ChFi2d_ChamferAPI_2 extends ChFi2d_ChamferAPI {}
+
+class ChFi2d_ChamferAPI_3 extends ChFi2d_ChamferAPI {}
+
 class ChFi2d_FilletAPI {
 }
 
+class ChFi2d_FilletAPI_1 extends ChFi2d_FilletAPI {}
+
+class ChFi2d_FilletAPI_2 extends ChFi2d_FilletAPI {}
+
+class ChFi2d_FilletAPI_3 extends ChFi2d_FilletAPI {}
+
 class ChFi2d_FilletAlgo {
 }
+
+class ChFi2d_FilletAlgo_1 extends ChFi2d_FilletAlgo {}
+
+class ChFi2d_FilletAlgo_2 extends ChFi2d_FilletAlgo {}
+
+class ChFi2d_FilletAlgo_3 extends ChFi2d_FilletAlgo {}
 
 class ChFi3d {
 }
@@ -5762,6 +11332,10 @@ class ChFi3d_SearchSing extends math_FunctionWithDerivative {
 class ChFiDS_ChamfSpine extends ChFiDS_Spine {
 }
 
+class ChFiDS_ChamfSpine_1 extends ChFiDS_ChamfSpine {}
+
+class ChFiDS_ChamfSpine_2 extends ChFiDS_ChamfSpine {}
+
 class ChFiDS_CircSection {
 }
 
@@ -5777,8 +11351,16 @@ class ChFiDS_FaceInterference {
 class ChFiDS_FilSpine extends ChFiDS_Spine {
 }
 
+class ChFiDS_FilSpine_1 extends ChFiDS_FilSpine {}
+
+class ChFiDS_FilSpine_2 extends ChFiDS_FilSpine {}
+
 class ChFiDS_HElSpine extends Adaptor3d_HCurve {
 }
+
+class ChFiDS_HElSpine_1 extends ChFiDS_HElSpine {}
+
+class ChFiDS_HElSpine_2 extends ChFiDS_HElSpine {}
 
 class ChFiDS_Map {
 }
@@ -5788,6 +11370,10 @@ class ChFiDS_Regul {
 
 class ChFiDS_Spine extends Standard_Transient {
 }
+
+class ChFiDS_Spine_1 extends ChFiDS_Spine {}
+
+class ChFiDS_Spine_2 extends ChFiDS_Spine {}
 
 class ChFiDS_Stripe extends Standard_Transient {
 }
@@ -5810,6 +11396,20 @@ class Contap_ContAna {
 class Contap_Contour {
 }
 
+class Contap_Contour_1 extends Contap_Contour {}
+
+class Contap_Contour_2 extends Contap_Contour {}
+
+class Contap_Contour_3 extends Contap_Contour {}
+
+class Contap_Contour_4 extends Contap_Contour {}
+
+class Contap_Contour_5 extends Contap_Contour {}
+
+class Contap_Contour_6 extends Contap_Contour {}
+
+class Contap_Contour_7 extends Contap_Contour {}
+
 class Contap_HContTool {
 }
 
@@ -5821,6 +11421,10 @@ class Contap_Line {
 
 class Contap_Point {
 }
+
+class Contap_Point_1 extends Contap_Point {}
+
+class Contap_Point_2 extends Contap_Point {}
 
 class Contap_SurfFunction extends math_FunctionSetWithDerivatives {
 }
@@ -5837,17 +11441,31 @@ class Contap_TheIWalking {
 class Contap_ThePathPointOfTheSearch {
 }
 
+class Contap_ThePathPointOfTheSearch_1 extends Contap_ThePathPointOfTheSearch {}
+
+class Contap_ThePathPointOfTheSearch_2 extends Contap_ThePathPointOfTheSearch {}
+
+class Contap_ThePathPointOfTheSearch_3 extends Contap_ThePathPointOfTheSearch {}
+
 class Contap_TheSearch {
 }
 
 class Contap_TheSearchInside {
 }
 
+class Contap_TheSearchInside_1 extends Contap_TheSearchInside {}
+
+class Contap_TheSearchInside_2 extends Contap_TheSearchInside {}
+
 class Contap_TheSegmentOfTheSearch {
 }
 
 class Convert_CircleToBSplineCurve extends Convert_ConicToBSplineCurve {
 }
+
+class Convert_CircleToBSplineCurve_1 extends Convert_CircleToBSplineCurve {}
+
+class Convert_CircleToBSplineCurve_2 extends Convert_CircleToBSplineCurve {}
 
 class Convert_CompBezierCurves2dToBSplineCurve2d {
 }
@@ -5858,8 +11476,18 @@ class Convert_CompBezierCurvesToBSplineCurve {
 class Convert_CompPolynomialToPoles {
 }
 
+class Convert_CompPolynomialToPoles_1 extends Convert_CompPolynomialToPoles {}
+
+class Convert_CompPolynomialToPoles_2 extends Convert_CompPolynomialToPoles {}
+
+class Convert_CompPolynomialToPoles_3 extends Convert_CompPolynomialToPoles {}
+
 class Convert_ConeToBSplineSurface extends Convert_ElementarySurfaceToBSplineSurface {
 }
+
+class Convert_ConeToBSplineSurface_1 extends Convert_ConeToBSplineSurface {}
+
+class Convert_ConeToBSplineSurface_2 extends Convert_ConeToBSplineSurface {}
 
 class Convert_ConicToBSplineCurve {
 }
@@ -5867,14 +11495,26 @@ class Convert_ConicToBSplineCurve {
 class Convert_CylinderToBSplineSurface extends Convert_ElementarySurfaceToBSplineSurface {
 }
 
+class Convert_CylinderToBSplineSurface_1 extends Convert_CylinderToBSplineSurface {}
+
+class Convert_CylinderToBSplineSurface_2 extends Convert_CylinderToBSplineSurface {}
+
 class Convert_ElementarySurfaceToBSplineSurface {
 }
 
 class Convert_EllipseToBSplineCurve extends Convert_ConicToBSplineCurve {
 }
 
+class Convert_EllipseToBSplineCurve_1 extends Convert_EllipseToBSplineCurve {}
+
+class Convert_EllipseToBSplineCurve_2 extends Convert_EllipseToBSplineCurve {}
+
 class Convert_GridPolynomialToPoles {
 }
+
+class Convert_GridPolynomialToPoles_1 extends Convert_GridPolynomialToPoles {}
+
+class Convert_GridPolynomialToPoles_2 extends Convert_GridPolynomialToPoles {}
 
 class Convert_HyperbolaToBSplineCurve extends Convert_ConicToBSplineCurve {
 }
@@ -5885,8 +11525,20 @@ class Convert_ParabolaToBSplineCurve extends Convert_ConicToBSplineCurve {
 class Convert_SphereToBSplineSurface extends Convert_ElementarySurfaceToBSplineSurface {
 }
 
+class Convert_SphereToBSplineSurface_1 extends Convert_SphereToBSplineSurface {}
+
+class Convert_SphereToBSplineSurface_2 extends Convert_SphereToBSplineSurface {}
+
+class Convert_SphereToBSplineSurface_3 extends Convert_SphereToBSplineSurface {}
+
 class Convert_TorusToBSplineSurface extends Convert_ElementarySurfaceToBSplineSurface {
 }
+
+class Convert_TorusToBSplineSurface_1 extends Convert_TorusToBSplineSurface {}
+
+class Convert_TorusToBSplineSurface_2 extends Convert_TorusToBSplineSurface {}
+
+class Convert_TorusToBSplineSurface_3 extends Convert_TorusToBSplineSurface {}
 
 class Draft {
 }
@@ -5894,8 +11546,16 @@ class Draft {
 class Draft_EdgeInfo {
 }
 
+class Draft_EdgeInfo_1 extends Draft_EdgeInfo {}
+
+class Draft_EdgeInfo_2 extends Draft_EdgeInfo {}
+
 class Draft_FaceInfo {
 }
+
+class Draft_FaceInfo_1 extends Draft_FaceInfo {}
+
+class Draft_FaceInfo_2 extends Draft_FaceInfo {}
 
 class Draft_Modification extends BRepTools_Modification {
 }
@@ -6005,6 +11665,10 @@ class ExprIntrp_Generator extends Standard_Transient {
 class ExprIntrp_SyntaxError extends Standard_Failure {
 }
 
+class ExprIntrp_SyntaxError_1 extends ExprIntrp_SyntaxError {}
+
+class ExprIntrp_SyntaxError_2 extends ExprIntrp_SyntaxError {}
+
 class Expr_Absolute extends Expr_UnaryExpression {
 }
 
@@ -6059,6 +11723,10 @@ class Expr_Exponentiate extends Expr_BinaryExpression {
 class Expr_ExprFailure extends Standard_Failure {
 }
 
+class Expr_ExprFailure_1 extends Expr_ExprFailure {}
+
+class Expr_ExprFailure_2 extends Expr_ExprFailure {}
+
 class Expr_FunctionDerivative extends Expr_GeneralFunction {
 }
 
@@ -6080,11 +11748,23 @@ class Expr_GreaterThanOrEqual extends Expr_SingleRelation {
 class Expr_InvalidAssignment extends Expr_ExprFailure {
 }
 
+class Expr_InvalidAssignment_1 extends Expr_InvalidAssignment {}
+
+class Expr_InvalidAssignment_2 extends Expr_InvalidAssignment {}
+
 class Expr_InvalidFunction extends Expr_ExprFailure {
 }
 
+class Expr_InvalidFunction_1 extends Expr_InvalidFunction {}
+
+class Expr_InvalidFunction_2 extends Expr_InvalidFunction {}
+
 class Expr_InvalidOperand extends Expr_ExprFailure {
 }
+
+class Expr_InvalidOperand_1 extends Expr_InvalidOperand {}
+
+class Expr_InvalidOperand_2 extends Expr_InvalidOperand {}
 
 class Expr_LessThan extends Expr_SingleRelation {
 }
@@ -6113,8 +11793,16 @@ class Expr_NamedUnknown extends Expr_NamedExpression {
 class Expr_NotAssigned extends Expr_ExprFailure {
 }
 
+class Expr_NotAssigned_1 extends Expr_NotAssigned {}
+
+class Expr_NotAssigned_2 extends Expr_NotAssigned {}
+
 class Expr_NotEvaluable extends Expr_ExprFailure {
 }
+
+class Expr_NotEvaluable_1 extends Expr_NotEvaluable {}
+
+class Expr_NotEvaluable_2 extends Expr_NotEvaluable {}
 
 class Expr_NumericValue extends Expr_GeneralExpression {
 }
@@ -6127,6 +11815,10 @@ class Expr_PolyFunction extends Expr_PolyExpression {
 
 class Expr_Product extends Expr_PolyExpression {
 }
+
+class Expr_Product_1 extends Expr_Product {}
+
+class Expr_Product_2 extends Expr_Product {}
 
 class Expr_RUIterator {
 }
@@ -6155,6 +11847,10 @@ class Expr_SquareRoot extends Expr_UnaryExpression {
 class Expr_Sum extends Expr_PolyExpression {
 }
 
+class Expr_Sum_1 extends Expr_Sum {}
+
+class Expr_Sum_2 extends Expr_Sum {}
+
 class Expr_SystemRelation extends Expr_GeneralRelation {
 }
 
@@ -6179,8 +11875,16 @@ class Expr_UnknownIterator {
 class Extrema_CCLocFOfLocECC extends math_FunctionSetWithDerivatives {
 }
 
+class Extrema_CCLocFOfLocECC_1 extends Extrema_CCLocFOfLocECC {}
+
+class Extrema_CCLocFOfLocECC_2 extends Extrema_CCLocFOfLocECC {}
+
 class Extrema_CCLocFOfLocECC2d extends math_FunctionSetWithDerivatives {
 }
+
+class Extrema_CCLocFOfLocECC2d_1 extends Extrema_CCLocFOfLocECC2d {}
+
+class Extrema_CCLocFOfLocECC2d_2 extends Extrema_CCLocFOfLocECC2d {}
 
 class Extrema_Curve2dTool {
 }
@@ -6191,80 +11895,298 @@ class Extrema_CurveTool {
 class Extrema_ECC {
 }
 
+class Extrema_ECC_1 extends Extrema_ECC {}
+
+class Extrema_ECC_2 extends Extrema_ECC {}
+
+class Extrema_ECC_3 extends Extrema_ECC {}
+
 class Extrema_ECC2d {
 }
+
+class Extrema_ECC2d_1 extends Extrema_ECC2d {}
+
+class Extrema_ECC2d_2 extends Extrema_ECC2d {}
+
+class Extrema_ECC2d_3 extends Extrema_ECC2d {}
 
 class Extrema_ELPCOfLocateExtPC {
 }
 
+class Extrema_ELPCOfLocateExtPC_1 extends Extrema_ELPCOfLocateExtPC {}
+
+class Extrema_ELPCOfLocateExtPC_2 extends Extrema_ELPCOfLocateExtPC {}
+
+class Extrema_ELPCOfLocateExtPC_3 extends Extrema_ELPCOfLocateExtPC {}
+
 class Extrema_ELPCOfLocateExtPC2d {
 }
+
+class Extrema_ELPCOfLocateExtPC2d_1 extends Extrema_ELPCOfLocateExtPC2d {}
+
+class Extrema_ELPCOfLocateExtPC2d_2 extends Extrema_ELPCOfLocateExtPC2d {}
+
+class Extrema_ELPCOfLocateExtPC2d_3 extends Extrema_ELPCOfLocateExtPC2d {}
 
 class Extrema_EPCOfELPCOfLocateExtPC {
 }
 
+class Extrema_EPCOfELPCOfLocateExtPC_1 extends Extrema_EPCOfELPCOfLocateExtPC {}
+
+class Extrema_EPCOfELPCOfLocateExtPC_2 extends Extrema_EPCOfELPCOfLocateExtPC {}
+
+class Extrema_EPCOfELPCOfLocateExtPC_3 extends Extrema_EPCOfELPCOfLocateExtPC {}
+
 class Extrema_EPCOfELPCOfLocateExtPC2d {
 }
+
+class Extrema_EPCOfELPCOfLocateExtPC2d_1 extends Extrema_EPCOfELPCOfLocateExtPC2d {}
+
+class Extrema_EPCOfELPCOfLocateExtPC2d_2 extends Extrema_EPCOfELPCOfLocateExtPC2d {}
+
+class Extrema_EPCOfELPCOfLocateExtPC2d_3 extends Extrema_EPCOfELPCOfLocateExtPC2d {}
 
 class Extrema_EPCOfExtPC {
 }
 
+class Extrema_EPCOfExtPC_1 extends Extrema_EPCOfExtPC {}
+
+class Extrema_EPCOfExtPC_2 extends Extrema_EPCOfExtPC {}
+
+class Extrema_EPCOfExtPC_3 extends Extrema_EPCOfExtPC {}
+
 class Extrema_EPCOfExtPC2d {
 }
+
+class Extrema_EPCOfExtPC2d_1 extends Extrema_EPCOfExtPC2d {}
+
+class Extrema_EPCOfExtPC2d_2 extends Extrema_EPCOfExtPC2d {}
+
+class Extrema_EPCOfExtPC2d_3 extends Extrema_EPCOfExtPC2d {}
 
 class Extrema_ExtCC {
 }
 
+class Extrema_ExtCC_1 extends Extrema_ExtCC {}
+
+class Extrema_ExtCC_2 extends Extrema_ExtCC {}
+
+class Extrema_ExtCC_3 extends Extrema_ExtCC {}
+
 class Extrema_ExtCC2d {
 }
+
+class Extrema_ExtCC2d_1 extends Extrema_ExtCC2d {}
+
+class Extrema_ExtCC2d_2 extends Extrema_ExtCC2d {}
+
+class Extrema_ExtCC2d_3 extends Extrema_ExtCC2d {}
 
 class Extrema_ExtCS {
 }
 
+class Extrema_ExtCS_1 extends Extrema_ExtCS {}
+
+class Extrema_ExtCS_2 extends Extrema_ExtCS {}
+
+class Extrema_ExtCS_3 extends Extrema_ExtCS {}
+
 class Extrema_ExtElC {
 }
+
+class Extrema_ExtElC_1 extends Extrema_ExtElC {}
+
+class Extrema_ExtElC_2 extends Extrema_ExtElC {}
+
+class Extrema_ExtElC_3 extends Extrema_ExtElC {}
+
+class Extrema_ExtElC_4 extends Extrema_ExtElC {}
+
+class Extrema_ExtElC_5 extends Extrema_ExtElC {}
+
+class Extrema_ExtElC_6 extends Extrema_ExtElC {}
+
+class Extrema_ExtElC_7 extends Extrema_ExtElC {}
 
 class Extrema_ExtElC2d {
 }
 
+class Extrema_ExtElC2d_1 extends Extrema_ExtElC2d {}
+
+class Extrema_ExtElC2d_2 extends Extrema_ExtElC2d {}
+
+class Extrema_ExtElC2d_3 extends Extrema_ExtElC2d {}
+
+class Extrema_ExtElC2d_4 extends Extrema_ExtElC2d {}
+
+class Extrema_ExtElC2d_5 extends Extrema_ExtElC2d {}
+
+class Extrema_ExtElC2d_6 extends Extrema_ExtElC2d {}
+
+class Extrema_ExtElC2d_7 extends Extrema_ExtElC2d {}
+
+class Extrema_ExtElC2d_8 extends Extrema_ExtElC2d {}
+
+class Extrema_ExtElC2d_9 extends Extrema_ExtElC2d {}
+
+class Extrema_ExtElC2d_10 extends Extrema_ExtElC2d {}
+
 class Extrema_ExtElCS {
 }
+
+class Extrema_ExtElCS_1 extends Extrema_ExtElCS {}
+
+class Extrema_ExtElCS_2 extends Extrema_ExtElCS {}
+
+class Extrema_ExtElCS_3 extends Extrema_ExtElCS {}
+
+class Extrema_ExtElCS_4 extends Extrema_ExtElCS {}
+
+class Extrema_ExtElCS_5 extends Extrema_ExtElCS {}
+
+class Extrema_ExtElCS_6 extends Extrema_ExtElCS {}
+
+class Extrema_ExtElCS_7 extends Extrema_ExtElCS {}
+
+class Extrema_ExtElCS_8 extends Extrema_ExtElCS {}
+
+class Extrema_ExtElCS_9 extends Extrema_ExtElCS {}
+
+class Extrema_ExtElCS_10 extends Extrema_ExtElCS {}
+
+class Extrema_ExtElCS_11 extends Extrema_ExtElCS {}
+
+class Extrema_ExtElCS_12 extends Extrema_ExtElCS {}
 
 class Extrema_ExtElSS {
 }
 
+class Extrema_ExtElSS_1 extends Extrema_ExtElSS {}
+
+class Extrema_ExtElSS_2 extends Extrema_ExtElSS {}
+
+class Extrema_ExtElSS_3 extends Extrema_ExtElSS {}
+
+class Extrema_ExtElSS_4 extends Extrema_ExtElSS {}
+
+class Extrema_ExtElSS_5 extends Extrema_ExtElSS {}
+
+class Extrema_ExtElSS_6 extends Extrema_ExtElSS {}
+
+class Extrema_ExtElSS_7 extends Extrema_ExtElSS {}
+
 class Extrema_ExtPC {
 }
+
+class Extrema_ExtPC_1 extends Extrema_ExtPC {}
+
+class Extrema_ExtPC_2 extends Extrema_ExtPC {}
+
+class Extrema_ExtPC_3 extends Extrema_ExtPC {}
 
 class Extrema_ExtPC2d {
 }
 
+class Extrema_ExtPC2d_1 extends Extrema_ExtPC2d {}
+
+class Extrema_ExtPC2d_2 extends Extrema_ExtPC2d {}
+
+class Extrema_ExtPC2d_3 extends Extrema_ExtPC2d {}
+
 class Extrema_ExtPElC {
 }
+
+class Extrema_ExtPElC_1 extends Extrema_ExtPElC {}
+
+class Extrema_ExtPElC_2 extends Extrema_ExtPElC {}
+
+class Extrema_ExtPElC_3 extends Extrema_ExtPElC {}
+
+class Extrema_ExtPElC_4 extends Extrema_ExtPElC {}
+
+class Extrema_ExtPElC_5 extends Extrema_ExtPElC {}
+
+class Extrema_ExtPElC_6 extends Extrema_ExtPElC {}
 
 class Extrema_ExtPElC2d {
 }
 
+class Extrema_ExtPElC2d_1 extends Extrema_ExtPElC2d {}
+
+class Extrema_ExtPElC2d_2 extends Extrema_ExtPElC2d {}
+
+class Extrema_ExtPElC2d_3 extends Extrema_ExtPElC2d {}
+
+class Extrema_ExtPElC2d_4 extends Extrema_ExtPElC2d {}
+
+class Extrema_ExtPElC2d_5 extends Extrema_ExtPElC2d {}
+
+class Extrema_ExtPElC2d_6 extends Extrema_ExtPElC2d {}
+
 class Extrema_ExtPElS {
 }
+
+class Extrema_ExtPElS_1 extends Extrema_ExtPElS {}
+
+class Extrema_ExtPElS_2 extends Extrema_ExtPElS {}
+
+class Extrema_ExtPElS_3 extends Extrema_ExtPElS {}
+
+class Extrema_ExtPElS_4 extends Extrema_ExtPElS {}
+
+class Extrema_ExtPElS_5 extends Extrema_ExtPElS {}
+
+class Extrema_ExtPElS_6 extends Extrema_ExtPElS {}
 
 class Extrema_ExtPExtS extends Standard_Transient {
 }
 
+class Extrema_ExtPExtS_1 extends Extrema_ExtPExtS {}
+
+class Extrema_ExtPExtS_2 extends Extrema_ExtPExtS {}
+
+class Extrema_ExtPExtS_3 extends Extrema_ExtPExtS {}
+
 class Extrema_ExtPRevS extends Standard_Transient {
 }
+
+class Extrema_ExtPRevS_1 extends Extrema_ExtPRevS {}
+
+class Extrema_ExtPRevS_2 extends Extrema_ExtPRevS {}
+
+class Extrema_ExtPRevS_3 extends Extrema_ExtPRevS {}
 
 class Extrema_ExtPS {
 }
 
+class Extrema_ExtPS_1 extends Extrema_ExtPS {}
+
+class Extrema_ExtPS_2 extends Extrema_ExtPS {}
+
+class Extrema_ExtPS_3 extends Extrema_ExtPS {}
+
 class Extrema_ExtSS {
 }
+
+class Extrema_ExtSS_1 extends Extrema_ExtSS {}
+
+class Extrema_ExtSS_2 extends Extrema_ExtSS {}
+
+class Extrema_ExtSS_3 extends Extrema_ExtSS {}
 
 class Extrema_FuncExtCS extends math_FunctionSetWithDerivatives {
 }
 
+class Extrema_FuncExtCS_1 extends Extrema_FuncExtCS {}
+
+class Extrema_FuncExtCS_2 extends Extrema_FuncExtCS {}
+
 class Extrema_FuncExtSS extends math_FunctionSetWithDerivatives {
 }
+
+class Extrema_FuncExtSS_1 extends Extrema_FuncExtSS {}
+
+class Extrema_FuncExtSS_2 extends Extrema_FuncExtSS {}
 
 class Extrema_FuncPSDist extends math_MultipleVarFunctionWithGradient {
 }
@@ -6272,17 +12194,43 @@ class Extrema_FuncPSDist extends math_MultipleVarFunctionWithGradient {
 class Extrema_FuncPSNorm extends math_FunctionSetWithDerivatives {
 }
 
+class Extrema_FuncPSNorm_1 extends Extrema_FuncPSNorm {}
+
+class Extrema_FuncPSNorm_2 extends Extrema_FuncPSNorm {}
+
 class Extrema_GenExtCS {
 }
+
+class Extrema_GenExtCS_1 extends Extrema_GenExtCS {}
+
+class Extrema_GenExtCS_2 extends Extrema_GenExtCS {}
+
+class Extrema_GenExtCS_3 extends Extrema_GenExtCS {}
 
 class Extrema_GenExtPS {
 }
 
+class Extrema_GenExtPS_1 extends Extrema_GenExtPS {}
+
+class Extrema_GenExtPS_2 extends Extrema_GenExtPS {}
+
+class Extrema_GenExtPS_3 extends Extrema_GenExtPS {}
+
 class Extrema_GenExtSS {
 }
 
+class Extrema_GenExtSS_1 extends Extrema_GenExtSS {}
+
+class Extrema_GenExtSS_2 extends Extrema_GenExtSS {}
+
+class Extrema_GenExtSS_3 extends Extrema_GenExtSS {}
+
 class Extrema_GenLocateExtCS {
 }
+
+class Extrema_GenLocateExtCS_1 extends Extrema_GenLocateExtCS {}
+
+class Extrema_GenLocateExtCS_2 extends Extrema_GenLocateExtCS {}
 
 class Extrema_GenLocateExtPS {
 }
@@ -6290,14 +12238,30 @@ class Extrema_GenLocateExtPS {
 class Extrema_GenLocateExtSS {
 }
 
+class Extrema_GenLocateExtSS_1 extends Extrema_GenLocateExtSS {}
+
+class Extrema_GenLocateExtSS_2 extends Extrema_GenLocateExtSS {}
+
 class Extrema_GlobOptFuncCCC0 extends math_MultipleVarFunction {
 }
+
+class Extrema_GlobOptFuncCCC0_1 extends Extrema_GlobOptFuncCCC0 {}
+
+class Extrema_GlobOptFuncCCC0_2 extends Extrema_GlobOptFuncCCC0 {}
 
 class Extrema_GlobOptFuncCCC1 extends math_MultipleVarFunctionWithGradient {
 }
 
+class Extrema_GlobOptFuncCCC1_1 extends Extrema_GlobOptFuncCCC1 {}
+
+class Extrema_GlobOptFuncCCC1_2 extends Extrema_GlobOptFuncCCC1 {}
+
 class Extrema_GlobOptFuncCCC2 extends math_MultipleVarFunctionWithHessian {
 }
+
+class Extrema_GlobOptFuncCCC2_1 extends Extrema_GlobOptFuncCCC2 {}
+
+class Extrema_GlobOptFuncCCC2_2 extends Extrema_GlobOptFuncCCC2 {}
 
 class Extrema_GlobOptFuncCS extends math_MultipleVarFunctionWithHessian {
 }
@@ -6311,8 +12275,20 @@ class Extrema_LocECC2d {
 class Extrema_LocEPCOfLocateExtPC {
 }
 
+class Extrema_LocEPCOfLocateExtPC_1 extends Extrema_LocEPCOfLocateExtPC {}
+
+class Extrema_LocEPCOfLocateExtPC_2 extends Extrema_LocEPCOfLocateExtPC {}
+
+class Extrema_LocEPCOfLocateExtPC_3 extends Extrema_LocEPCOfLocateExtPC {}
+
 class Extrema_LocEPCOfLocateExtPC2d {
 }
+
+class Extrema_LocEPCOfLocateExtPC2d_1 extends Extrema_LocEPCOfLocateExtPC2d {}
+
+class Extrema_LocEPCOfLocateExtPC2d_2 extends Extrema_LocEPCOfLocateExtPC2d {}
+
+class Extrema_LocEPCOfLocateExtPC2d_3 extends Extrema_LocEPCOfLocateExtPC2d {}
 
 class Extrema_LocateExtCC {
 }
@@ -6323,68 +12299,210 @@ class Extrema_LocateExtCC2d {
 class Extrema_LocateExtPC {
 }
 
+class Extrema_LocateExtPC_1 extends Extrema_LocateExtPC {}
+
+class Extrema_LocateExtPC_2 extends Extrema_LocateExtPC {}
+
+class Extrema_LocateExtPC_3 extends Extrema_LocateExtPC {}
+
 class Extrema_LocateExtPC2d {
 }
+
+class Extrema_LocateExtPC2d_1 extends Extrema_LocateExtPC2d {}
+
+class Extrema_LocateExtPC2d_2 extends Extrema_LocateExtPC2d {}
+
+class Extrema_LocateExtPC2d_3 extends Extrema_LocateExtPC2d {}
 
 class Extrema_PCFOfEPCOfELPCOfLocateExtPC extends math_FunctionWithDerivative {
 }
 
+class Extrema_PCFOfEPCOfELPCOfLocateExtPC_1 extends Extrema_PCFOfEPCOfELPCOfLocateExtPC {}
+
+class Extrema_PCFOfEPCOfELPCOfLocateExtPC_2 extends Extrema_PCFOfEPCOfELPCOfLocateExtPC {}
+
 class Extrema_PCFOfEPCOfELPCOfLocateExtPC2d extends math_FunctionWithDerivative {
 }
+
+class Extrema_PCFOfEPCOfELPCOfLocateExtPC2d_1 extends Extrema_PCFOfEPCOfELPCOfLocateExtPC2d {}
+
+class Extrema_PCFOfEPCOfELPCOfLocateExtPC2d_2 extends Extrema_PCFOfEPCOfELPCOfLocateExtPC2d {}
 
 class Extrema_PCFOfEPCOfExtPC extends math_FunctionWithDerivative {
 }
 
+class Extrema_PCFOfEPCOfExtPC_1 extends Extrema_PCFOfEPCOfExtPC {}
+
+class Extrema_PCFOfEPCOfExtPC_2 extends Extrema_PCFOfEPCOfExtPC {}
+
 class Extrema_PCFOfEPCOfExtPC2d extends math_FunctionWithDerivative {
 }
+
+class Extrema_PCFOfEPCOfExtPC2d_1 extends Extrema_PCFOfEPCOfExtPC2d {}
+
+class Extrema_PCFOfEPCOfExtPC2d_2 extends Extrema_PCFOfEPCOfExtPC2d {}
 
 class Extrema_PCLocFOfLocEPCOfLocateExtPC extends math_FunctionWithDerivative {
 }
 
+class Extrema_PCLocFOfLocEPCOfLocateExtPC_1 extends Extrema_PCLocFOfLocEPCOfLocateExtPC {}
+
+class Extrema_PCLocFOfLocEPCOfLocateExtPC_2 extends Extrema_PCLocFOfLocEPCOfLocateExtPC {}
+
 class Extrema_PCLocFOfLocEPCOfLocateExtPC2d extends math_FunctionWithDerivative {
 }
+
+class Extrema_PCLocFOfLocEPCOfLocateExtPC2d_1 extends Extrema_PCLocFOfLocEPCOfLocateExtPC2d {}
+
+class Extrema_PCLocFOfLocEPCOfLocateExtPC2d_2 extends Extrema_PCLocFOfLocEPCOfLocateExtPC2d {}
 
 class Extrema_POnCurv {
 }
 
+class Extrema_POnCurv_1 extends Extrema_POnCurv {}
+
+class Extrema_POnCurv_2 extends Extrema_POnCurv {}
+
 class Extrema_POnCurv2d {
 }
+
+class Extrema_POnCurv2d_1 extends Extrema_POnCurv2d {}
+
+class Extrema_POnCurv2d_2 extends Extrema_POnCurv2d {}
 
 class Extrema_POnSurf {
 }
 
+class Extrema_POnSurf_1 extends Extrema_POnSurf {}
+
+class Extrema_POnSurf_2 extends Extrema_POnSurf {}
+
 class Extrema_POnSurfParams extends Extrema_POnSurf {
 }
+
+class Extrema_POnSurfParams_1 extends Extrema_POnSurfParams {}
+
+class Extrema_POnSurfParams_2 extends Extrema_POnSurfParams {}
 
 class GCE2d_MakeArcOfCircle extends GCE2d_Root {
 }
 
+class GCE2d_MakeArcOfCircle_1 extends GCE2d_MakeArcOfCircle {}
+
+class GCE2d_MakeArcOfCircle_2 extends GCE2d_MakeArcOfCircle {}
+
+class GCE2d_MakeArcOfCircle_3 extends GCE2d_MakeArcOfCircle {}
+
+class GCE2d_MakeArcOfCircle_4 extends GCE2d_MakeArcOfCircle {}
+
+class GCE2d_MakeArcOfCircle_5 extends GCE2d_MakeArcOfCircle {}
+
 class GCE2d_MakeArcOfEllipse extends GCE2d_Root {
 }
+
+class GCE2d_MakeArcOfEllipse_1 extends GCE2d_MakeArcOfEllipse {}
+
+class GCE2d_MakeArcOfEllipse_2 extends GCE2d_MakeArcOfEllipse {}
+
+class GCE2d_MakeArcOfEllipse_3 extends GCE2d_MakeArcOfEllipse {}
 
 class GCE2d_MakeArcOfHyperbola extends GCE2d_Root {
 }
 
+class GCE2d_MakeArcOfHyperbola_1 extends GCE2d_MakeArcOfHyperbola {}
+
+class GCE2d_MakeArcOfHyperbola_2 extends GCE2d_MakeArcOfHyperbola {}
+
+class GCE2d_MakeArcOfHyperbola_3 extends GCE2d_MakeArcOfHyperbola {}
+
 class GCE2d_MakeArcOfParabola extends GCE2d_Root {
 }
+
+class GCE2d_MakeArcOfParabola_1 extends GCE2d_MakeArcOfParabola {}
+
+class GCE2d_MakeArcOfParabola_2 extends GCE2d_MakeArcOfParabola {}
+
+class GCE2d_MakeArcOfParabola_3 extends GCE2d_MakeArcOfParabola {}
 
 class GCE2d_MakeCircle extends GCE2d_Root {
 }
 
+class GCE2d_MakeCircle_1 extends GCE2d_MakeCircle {}
+
+class GCE2d_MakeCircle_2 extends GCE2d_MakeCircle {}
+
+class GCE2d_MakeCircle_3 extends GCE2d_MakeCircle {}
+
+class GCE2d_MakeCircle_4 extends GCE2d_MakeCircle {}
+
+class GCE2d_MakeCircle_5 extends GCE2d_MakeCircle {}
+
+class GCE2d_MakeCircle_6 extends GCE2d_MakeCircle {}
+
+class GCE2d_MakeCircle_7 extends GCE2d_MakeCircle {}
+
+class GCE2d_MakeCircle_8 extends GCE2d_MakeCircle {}
+
 class GCE2d_MakeEllipse extends GCE2d_Root {
 }
+
+class GCE2d_MakeEllipse_1 extends GCE2d_MakeEllipse {}
+
+class GCE2d_MakeEllipse_2 extends GCE2d_MakeEllipse {}
+
+class GCE2d_MakeEllipse_3 extends GCE2d_MakeEllipse {}
+
+class GCE2d_MakeEllipse_4 extends GCE2d_MakeEllipse {}
 
 class GCE2d_MakeHyperbola extends GCE2d_Root {
 }
 
+class GCE2d_MakeHyperbola_1 extends GCE2d_MakeHyperbola {}
+
+class GCE2d_MakeHyperbola_2 extends GCE2d_MakeHyperbola {}
+
+class GCE2d_MakeHyperbola_3 extends GCE2d_MakeHyperbola {}
+
+class GCE2d_MakeHyperbola_4 extends GCE2d_MakeHyperbola {}
+
 class GCE2d_MakeLine extends GCE2d_Root {
 }
+
+class GCE2d_MakeLine_1 extends GCE2d_MakeLine {}
+
+class GCE2d_MakeLine_2 extends GCE2d_MakeLine {}
+
+class GCE2d_MakeLine_3 extends GCE2d_MakeLine {}
+
+class GCE2d_MakeLine_4 extends GCE2d_MakeLine {}
+
+class GCE2d_MakeLine_5 extends GCE2d_MakeLine {}
+
+class GCE2d_MakeLine_6 extends GCE2d_MakeLine {}
 
 class GCE2d_MakeMirror {
 }
 
+class GCE2d_MakeMirror_1 extends GCE2d_MakeMirror {}
+
+class GCE2d_MakeMirror_2 extends GCE2d_MakeMirror {}
+
+class GCE2d_MakeMirror_3 extends GCE2d_MakeMirror {}
+
+class GCE2d_MakeMirror_4 extends GCE2d_MakeMirror {}
+
 class GCE2d_MakeParabola extends GCE2d_Root {
 }
+
+class GCE2d_MakeParabola_1 extends GCE2d_MakeParabola {}
+
+class GCE2d_MakeParabola_2 extends GCE2d_MakeParabola {}
+
+class GCE2d_MakeParabola_3 extends GCE2d_MakeParabola {}
+
+class GCE2d_MakeParabola_4 extends GCE2d_MakeParabola {}
+
+class GCE2d_MakeParabola_5 extends GCE2d_MakeParabola {}
 
 class GCE2d_MakeRotation {
 }
@@ -6395,14 +12513,46 @@ class GCE2d_MakeScale {
 class GCE2d_MakeSegment extends GCE2d_Root {
 }
 
+class GCE2d_MakeSegment_1 extends GCE2d_MakeSegment {}
+
+class GCE2d_MakeSegment_2 extends GCE2d_MakeSegment {}
+
+class GCE2d_MakeSegment_3 extends GCE2d_MakeSegment {}
+
+class GCE2d_MakeSegment_4 extends GCE2d_MakeSegment {}
+
+class GCE2d_MakeSegment_5 extends GCE2d_MakeSegment {}
+
 class GCE2d_MakeTranslation {
 }
+
+class GCE2d_MakeTranslation_1 extends GCE2d_MakeTranslation {}
+
+class GCE2d_MakeTranslation_2 extends GCE2d_MakeTranslation {}
 
 class GCE2d_Root {
 }
 
 class GCPnts_AbscissaPoint {
 }
+
+class GCPnts_AbscissaPoint_1 extends GCPnts_AbscissaPoint {}
+
+class GCPnts_AbscissaPoint_2 extends GCPnts_AbscissaPoint {}
+
+class GCPnts_AbscissaPoint_3 extends GCPnts_AbscissaPoint {}
+
+class GCPnts_AbscissaPoint_4 extends GCPnts_AbscissaPoint {}
+
+class GCPnts_AbscissaPoint_5 extends GCPnts_AbscissaPoint {}
+
+class GCPnts_AbscissaPoint_6 extends GCPnts_AbscissaPoint {}
+
+class GCPnts_AbscissaPoint_7 extends GCPnts_AbscissaPoint {}
+
+class GCPnts_AbscissaPoint_8 extends GCPnts_AbscissaPoint {}
+
+class GCPnts_AbscissaPoint_9 extends GCPnts_AbscissaPoint {}
 
 class GCPnts_DistFunction2dMV extends math_MultipleVarFunction {
 }
@@ -6413,56 +12563,234 @@ class GCPnts_DistFunctionMV extends math_MultipleVarFunction {
 class GCPnts_QuasiUniformAbscissa {
 }
 
+class GCPnts_QuasiUniformAbscissa_1 extends GCPnts_QuasiUniformAbscissa {}
+
+class GCPnts_QuasiUniformAbscissa_2 extends GCPnts_QuasiUniformAbscissa {}
+
+class GCPnts_QuasiUniformAbscissa_3 extends GCPnts_QuasiUniformAbscissa {}
+
+class GCPnts_QuasiUniformAbscissa_4 extends GCPnts_QuasiUniformAbscissa {}
+
+class GCPnts_QuasiUniformAbscissa_5 extends GCPnts_QuasiUniformAbscissa {}
+
 class GCPnts_QuasiUniformDeflection {
 }
+
+class GCPnts_QuasiUniformDeflection_1 extends GCPnts_QuasiUniformDeflection {}
+
+class GCPnts_QuasiUniformDeflection_2 extends GCPnts_QuasiUniformDeflection {}
+
+class GCPnts_QuasiUniformDeflection_3 extends GCPnts_QuasiUniformDeflection {}
+
+class GCPnts_QuasiUniformDeflection_4 extends GCPnts_QuasiUniformDeflection {}
+
+class GCPnts_QuasiUniformDeflection_5 extends GCPnts_QuasiUniformDeflection {}
 
 class GCPnts_TangentialDeflection {
 }
 
+class GCPnts_TangentialDeflection_1 extends GCPnts_TangentialDeflection {}
+
+class GCPnts_TangentialDeflection_2 extends GCPnts_TangentialDeflection {}
+
+class GCPnts_TangentialDeflection_3 extends GCPnts_TangentialDeflection {}
+
+class GCPnts_TangentialDeflection_4 extends GCPnts_TangentialDeflection {}
+
+class GCPnts_TangentialDeflection_5 extends GCPnts_TangentialDeflection {}
+
 class GCPnts_UniformAbscissa {
 }
+
+class GCPnts_UniformAbscissa_1 extends GCPnts_UniformAbscissa {}
+
+class GCPnts_UniformAbscissa_2 extends GCPnts_UniformAbscissa {}
+
+class GCPnts_UniformAbscissa_3 extends GCPnts_UniformAbscissa {}
+
+class GCPnts_UniformAbscissa_4 extends GCPnts_UniformAbscissa {}
+
+class GCPnts_UniformAbscissa_5 extends GCPnts_UniformAbscissa {}
+
+class GCPnts_UniformAbscissa_6 extends GCPnts_UniformAbscissa {}
+
+class GCPnts_UniformAbscissa_7 extends GCPnts_UniformAbscissa {}
+
+class GCPnts_UniformAbscissa_8 extends GCPnts_UniformAbscissa {}
+
+class GCPnts_UniformAbscissa_9 extends GCPnts_UniformAbscissa {}
 
 class GCPnts_UniformDeflection {
 }
 
+class GCPnts_UniformDeflection_1 extends GCPnts_UniformDeflection {}
+
+class GCPnts_UniformDeflection_2 extends GCPnts_UniformDeflection {}
+
+class GCPnts_UniformDeflection_3 extends GCPnts_UniformDeflection {}
+
+class GCPnts_UniformDeflection_4 extends GCPnts_UniformDeflection {}
+
+class GCPnts_UniformDeflection_5 extends GCPnts_UniformDeflection {}
+
 class GC_MakeArcOfCircle extends GC_Root {
 }
+
+class GC_MakeArcOfCircle_1 extends GC_MakeArcOfCircle {}
+
+class GC_MakeArcOfCircle_2 extends GC_MakeArcOfCircle {}
+
+class GC_MakeArcOfCircle_3 extends GC_MakeArcOfCircle {}
+
+class GC_MakeArcOfCircle_4 extends GC_MakeArcOfCircle {}
+
+class GC_MakeArcOfCircle_5 extends GC_MakeArcOfCircle {}
 
 class GC_MakeArcOfEllipse extends GC_Root {
 }
 
+class GC_MakeArcOfEllipse_1 extends GC_MakeArcOfEllipse {}
+
+class GC_MakeArcOfEllipse_2 extends GC_MakeArcOfEllipse {}
+
+class GC_MakeArcOfEllipse_3 extends GC_MakeArcOfEllipse {}
+
 class GC_MakeArcOfHyperbola extends GC_Root {
 }
+
+class GC_MakeArcOfHyperbola_1 extends GC_MakeArcOfHyperbola {}
+
+class GC_MakeArcOfHyperbola_2 extends GC_MakeArcOfHyperbola {}
+
+class GC_MakeArcOfHyperbola_3 extends GC_MakeArcOfHyperbola {}
 
 class GC_MakeArcOfParabola extends GC_Root {
 }
 
+class GC_MakeArcOfParabola_1 extends GC_MakeArcOfParabola {}
+
+class GC_MakeArcOfParabola_2 extends GC_MakeArcOfParabola {}
+
+class GC_MakeArcOfParabola_3 extends GC_MakeArcOfParabola {}
+
 class GC_MakeCircle extends GC_Root {
 }
+
+class GC_MakeCircle_1 extends GC_MakeCircle {}
+
+class GC_MakeCircle_2 extends GC_MakeCircle {}
+
+class GC_MakeCircle_3 extends GC_MakeCircle {}
+
+class GC_MakeCircle_4 extends GC_MakeCircle {}
+
+class GC_MakeCircle_5 extends GC_MakeCircle {}
+
+class GC_MakeCircle_6 extends GC_MakeCircle {}
+
+class GC_MakeCircle_7 extends GC_MakeCircle {}
+
+class GC_MakeCircle_8 extends GC_MakeCircle {}
 
 class GC_MakeConicalSurface extends GC_Root {
 }
 
+class GC_MakeConicalSurface_1 extends GC_MakeConicalSurface {}
+
+class GC_MakeConicalSurface_2 extends GC_MakeConicalSurface {}
+
+class GC_MakeConicalSurface_3 extends GC_MakeConicalSurface {}
+
+class GC_MakeConicalSurface_4 extends GC_MakeConicalSurface {}
+
 class GC_MakeCylindricalSurface extends GC_Root {
 }
+
+class GC_MakeCylindricalSurface_1 extends GC_MakeCylindricalSurface {}
+
+class GC_MakeCylindricalSurface_2 extends GC_MakeCylindricalSurface {}
+
+class GC_MakeCylindricalSurface_3 extends GC_MakeCylindricalSurface {}
+
+class GC_MakeCylindricalSurface_4 extends GC_MakeCylindricalSurface {}
+
+class GC_MakeCylindricalSurface_5 extends GC_MakeCylindricalSurface {}
+
+class GC_MakeCylindricalSurface_6 extends GC_MakeCylindricalSurface {}
+
+class GC_MakeCylindricalSurface_7 extends GC_MakeCylindricalSurface {}
 
 class GC_MakeEllipse extends GC_Root {
 }
 
+class GC_MakeEllipse_1 extends GC_MakeEllipse {}
+
+class GC_MakeEllipse_2 extends GC_MakeEllipse {}
+
+class GC_MakeEllipse_3 extends GC_MakeEllipse {}
+
 class GC_MakeHyperbola extends GC_Root {
 }
+
+class GC_MakeHyperbola_1 extends GC_MakeHyperbola {}
+
+class GC_MakeHyperbola_2 extends GC_MakeHyperbola {}
+
+class GC_MakeHyperbola_3 extends GC_MakeHyperbola {}
 
 class GC_MakeLine extends GC_Root {
 }
 
+class GC_MakeLine_1 extends GC_MakeLine {}
+
+class GC_MakeLine_2 extends GC_MakeLine {}
+
+class GC_MakeLine_3 extends GC_MakeLine {}
+
+class GC_MakeLine_4 extends GC_MakeLine {}
+
+class GC_MakeLine_5 extends GC_MakeLine {}
+
 class GC_MakeMirror {
 }
+
+class GC_MakeMirror_1 extends GC_MakeMirror {}
+
+class GC_MakeMirror_2 extends GC_MakeMirror {}
+
+class GC_MakeMirror_3 extends GC_MakeMirror {}
+
+class GC_MakeMirror_4 extends GC_MakeMirror {}
+
+class GC_MakeMirror_5 extends GC_MakeMirror {}
+
+class GC_MakeMirror_6 extends GC_MakeMirror {}
 
 class GC_MakePlane extends GC_Root {
 }
 
+class GC_MakePlane_1 extends GC_MakePlane {}
+
+class GC_MakePlane_2 extends GC_MakePlane {}
+
+class GC_MakePlane_3 extends GC_MakePlane {}
+
+class GC_MakePlane_4 extends GC_MakePlane {}
+
+class GC_MakePlane_5 extends GC_MakePlane {}
+
+class GC_MakePlane_6 extends GC_MakePlane {}
+
+class GC_MakePlane_7 extends GC_MakePlane {}
+
 class GC_MakeRotation {
 }
+
+class GC_MakeRotation_1 extends GC_MakeRotation {}
+
+class GC_MakeRotation_2 extends GC_MakeRotation {}
+
+class GC_MakeRotation_3 extends GC_MakeRotation {}
 
 class GC_MakeScale {
 }
@@ -6470,14 +12798,36 @@ class GC_MakeScale {
 class GC_MakeSegment extends GC_Root {
 }
 
+class GC_MakeSegment_1 extends GC_MakeSegment {}
+
+class GC_MakeSegment_2 extends GC_MakeSegment {}
+
+class GC_MakeSegment_3 extends GC_MakeSegment {}
+
+class GC_MakeSegment_4 extends GC_MakeSegment {}
+
 class GC_MakeTranslation {
 }
+
+class GC_MakeTranslation_1 extends GC_MakeTranslation {}
+
+class GC_MakeTranslation_2 extends GC_MakeTranslation {}
 
 class GC_MakeTrimmedCone extends GC_Root {
 }
 
+class GC_MakeTrimmedCone_1 extends GC_MakeTrimmedCone {}
+
+class GC_MakeTrimmedCone_2 extends GC_MakeTrimmedCone {}
+
 class GC_MakeTrimmedCylinder extends GC_Root {
 }
+
+class GC_MakeTrimmedCylinder_1 extends GC_MakeTrimmedCylinder {}
+
+class GC_MakeTrimmedCylinder_2 extends GC_MakeTrimmedCylinder {}
+
+class GC_MakeTrimmedCylinder_3 extends GC_MakeTrimmedCylinder {}
 
 class GC_Root {
 }
@@ -6488,8 +12838,20 @@ class GProp {
 class GProp_CelGProps extends GProp_GProps {
 }
 
+class GProp_CelGProps_1 extends GProp_CelGProps {}
+
+class GProp_CelGProps_2 extends GProp_CelGProps {}
+
+class GProp_CelGProps_3 extends GProp_CelGProps {}
+
+class GProp_CelGProps_4 extends GProp_CelGProps {}
+
 class GProp_GProps {
 }
+
+class GProp_GProps_1 extends GProp_GProps {}
+
+class GProp_GProps_2 extends GProp_GProps {}
 
 class GProp_PEquation {
 }
@@ -6497,26 +12859,116 @@ class GProp_PEquation {
 class GProp_PGProps extends GProp_GProps {
 }
 
+class GProp_PGProps_1 extends GProp_PGProps {}
+
+class GProp_PGProps_2 extends GProp_PGProps {}
+
+class GProp_PGProps_3 extends GProp_PGProps {}
+
+class GProp_PGProps_4 extends GProp_PGProps {}
+
+class GProp_PGProps_5 extends GProp_PGProps {}
+
 class GProp_PrincipalProps {
 }
 
 class GProp_SelGProps extends GProp_GProps {
 }
 
+class GProp_SelGProps_1 extends GProp_SelGProps {}
+
+class GProp_SelGProps_2 extends GProp_SelGProps {}
+
+class GProp_SelGProps_3 extends GProp_SelGProps {}
+
+class GProp_SelGProps_4 extends GProp_SelGProps {}
+
+class GProp_SelGProps_5 extends GProp_SelGProps {}
+
 class GProp_UndefinedAxis extends Standard_DomainError {
 }
+
+class GProp_UndefinedAxis_1 extends GProp_UndefinedAxis {}
+
+class GProp_UndefinedAxis_2 extends GProp_UndefinedAxis {}
 
 class GProp_VelGProps extends GProp_GProps {
 }
 
+class GProp_VelGProps_1 extends GProp_VelGProps {}
+
+class GProp_VelGProps_2 extends GProp_VelGProps {}
+
+class GProp_VelGProps_3 extends GProp_VelGProps {}
+
+class GProp_VelGProps_4 extends GProp_VelGProps {}
+
+class GProp_VelGProps_5 extends GProp_VelGProps {}
+
 class GccAna_Circ2d2TanOn {
 }
+
+class GccAna_Circ2d2TanOn_1 extends GccAna_Circ2d2TanOn {}
+
+class GccAna_Circ2d2TanOn_2 extends GccAna_Circ2d2TanOn {}
+
+class GccAna_Circ2d2TanOn_3 extends GccAna_Circ2d2TanOn {}
+
+class GccAna_Circ2d2TanOn_4 extends GccAna_Circ2d2TanOn {}
+
+class GccAna_Circ2d2TanOn_5 extends GccAna_Circ2d2TanOn {}
+
+class GccAna_Circ2d2TanOn_6 extends GccAna_Circ2d2TanOn {}
+
+class GccAna_Circ2d2TanOn_7 extends GccAna_Circ2d2TanOn {}
+
+class GccAna_Circ2d2TanOn_8 extends GccAna_Circ2d2TanOn {}
+
+class GccAna_Circ2d2TanOn_9 extends GccAna_Circ2d2TanOn {}
+
+class GccAna_Circ2d2TanOn_10 extends GccAna_Circ2d2TanOn {}
+
+class GccAna_Circ2d2TanOn_11 extends GccAna_Circ2d2TanOn {}
+
+class GccAna_Circ2d2TanOn_12 extends GccAna_Circ2d2TanOn {}
 
 class GccAna_Circ2d2TanRad {
 }
 
+class GccAna_Circ2d2TanRad_1 extends GccAna_Circ2d2TanRad {}
+
+class GccAna_Circ2d2TanRad_2 extends GccAna_Circ2d2TanRad {}
+
+class GccAna_Circ2d2TanRad_3 extends GccAna_Circ2d2TanRad {}
+
+class GccAna_Circ2d2TanRad_4 extends GccAna_Circ2d2TanRad {}
+
+class GccAna_Circ2d2TanRad_5 extends GccAna_Circ2d2TanRad {}
+
+class GccAna_Circ2d2TanRad_6 extends GccAna_Circ2d2TanRad {}
+
 class GccAna_Circ2d3Tan {
 }
+
+class GccAna_Circ2d3Tan_1 extends GccAna_Circ2d3Tan {}
+
+class GccAna_Circ2d3Tan_2 extends GccAna_Circ2d3Tan {}
+
+class GccAna_Circ2d3Tan_3 extends GccAna_Circ2d3Tan {}
+
+class GccAna_Circ2d3Tan_4 extends GccAna_Circ2d3Tan {}
+
+class GccAna_Circ2d3Tan_5 extends GccAna_Circ2d3Tan {}
+
+class GccAna_Circ2d3Tan_6 extends GccAna_Circ2d3Tan {}
+
+class GccAna_Circ2d3Tan_7 extends GccAna_Circ2d3Tan {}
+
+class GccAna_Circ2d3Tan_8 extends GccAna_Circ2d3Tan {}
+
+class GccAna_Circ2d3Tan_9 extends GccAna_Circ2d3Tan {}
+
+class GccAna_Circ2d3Tan_10 extends GccAna_Circ2d3Tan {}
 
 class GccAna_Circ2dBisec {
 }
@@ -6524,8 +12976,26 @@ class GccAna_Circ2dBisec {
 class GccAna_Circ2dTanCen {
 }
 
+class GccAna_Circ2dTanCen_1 extends GccAna_Circ2dTanCen {}
+
+class GccAna_Circ2dTanCen_2 extends GccAna_Circ2dTanCen {}
+
+class GccAna_Circ2dTanCen_3 extends GccAna_Circ2dTanCen {}
+
 class GccAna_Circ2dTanOnRad {
 }
+
+class GccAna_Circ2dTanOnRad_1 extends GccAna_Circ2dTanOnRad {}
+
+class GccAna_Circ2dTanOnRad_2 extends GccAna_Circ2dTanOnRad {}
+
+class GccAna_Circ2dTanOnRad_3 extends GccAna_Circ2dTanOnRad {}
+
+class GccAna_Circ2dTanOnRad_4 extends GccAna_Circ2dTanOnRad {}
+
+class GccAna_Circ2dTanOnRad_5 extends GccAna_Circ2dTanOnRad {}
+
+class GccAna_Circ2dTanOnRad_6 extends GccAna_Circ2dTanOnRad {}
 
 class GccAna_CircLin2dBisec {
 }
@@ -6533,8 +13003,18 @@ class GccAna_CircLin2dBisec {
 class GccAna_CircPnt2dBisec {
 }
 
+class GccAna_CircPnt2dBisec_1 extends GccAna_CircPnt2dBisec {}
+
+class GccAna_CircPnt2dBisec_2 extends GccAna_CircPnt2dBisec {}
+
 class GccAna_Lin2d2Tan {
 }
+
+class GccAna_Lin2d2Tan_1 extends GccAna_Lin2d2Tan {}
+
+class GccAna_Lin2d2Tan_2 extends GccAna_Lin2d2Tan {}
+
+class GccAna_Lin2d2Tan_3 extends GccAna_Lin2d2Tan {}
 
 class GccAna_Lin2dBisec {
 }
@@ -6542,17 +13022,37 @@ class GccAna_Lin2dBisec {
 class GccAna_Lin2dTanObl {
 }
 
+class GccAna_Lin2dTanObl_1 extends GccAna_Lin2dTanObl {}
+
+class GccAna_Lin2dTanObl_2 extends GccAna_Lin2dTanObl {}
+
 class GccAna_Lin2dTanPar {
 }
 
+class GccAna_Lin2dTanPar_1 extends GccAna_Lin2dTanPar {}
+
+class GccAna_Lin2dTanPar_2 extends GccAna_Lin2dTanPar {}
+
 class GccAna_Lin2dTanPer {
 }
+
+class GccAna_Lin2dTanPer_1 extends GccAna_Lin2dTanPer {}
+
+class GccAna_Lin2dTanPer_2 extends GccAna_Lin2dTanPer {}
+
+class GccAna_Lin2dTanPer_3 extends GccAna_Lin2dTanPer {}
+
+class GccAna_Lin2dTanPer_4 extends GccAna_Lin2dTanPer {}
 
 class GccAna_LinPnt2dBisec {
 }
 
 class GccAna_NoSolution extends Standard_Failure {
 }
+
+class GccAna_NoSolution_1 extends GccAna_NoSolution {}
+
+class GccAna_NoSolution_2 extends GccAna_NoSolution {}
 
 class GccAna_Pnt2dBisec {
 }
@@ -6562,6 +13062,10 @@ class GccEnt {
 
 class GccEnt_BadQualifier extends Standard_DomainError {
 }
+
+class GccEnt_BadQualifier_1 extends GccEnt_BadQualifier {}
+
+class GccEnt_BadQualifier_2 extends GccEnt_BadQualifier {}
 
 class GccEnt_QualifiedCirc {
 }
@@ -6596,11 +13100,29 @@ class Geom2dAdaptor {
 class Geom2dAdaptor_Curve extends Adaptor2d_Curve2d {
 }
 
+class Geom2dAdaptor_Curve_1 extends Geom2dAdaptor_Curve {}
+
+class Geom2dAdaptor_Curve_2 extends Geom2dAdaptor_Curve {}
+
+class Geom2dAdaptor_Curve_3 extends Geom2dAdaptor_Curve {}
+
 class Geom2dAdaptor_GHCurve extends Adaptor2d_HCurve2d {
 }
 
+class Geom2dAdaptor_GHCurve_1 extends Geom2dAdaptor_GHCurve {}
+
+class Geom2dAdaptor_GHCurve_2 extends Geom2dAdaptor_GHCurve {}
+
 class Geom2dAdaptor_HCurve extends Geom2dAdaptor_GHCurve {
 }
+
+class Geom2dAdaptor_HCurve_1 extends Geom2dAdaptor_HCurve {}
+
+class Geom2dAdaptor_HCurve_2 extends Geom2dAdaptor_HCurve {}
+
+class Geom2dAdaptor_HCurve_3 extends Geom2dAdaptor_HCurve {}
+
+class Geom2dAdaptor_HCurve_4 extends Geom2dAdaptor_HCurve {}
 
 class Geom2dConvert {
 }
@@ -6608,14 +13130,26 @@ class Geom2dConvert {
 class Geom2dConvert_ApproxCurve {
 }
 
+class Geom2dConvert_ApproxCurve_1 extends Geom2dConvert_ApproxCurve {}
+
+class Geom2dConvert_ApproxCurve_2 extends Geom2dConvert_ApproxCurve {}
+
 class Geom2dConvert_BSplineCurveKnotSplitting {
 }
 
 class Geom2dConvert_BSplineCurveToBezierCurve {
 }
 
+class Geom2dConvert_BSplineCurveToBezierCurve_1 extends Geom2dConvert_BSplineCurveToBezierCurve {}
+
+class Geom2dConvert_BSplineCurveToBezierCurve_2 extends Geom2dConvert_BSplineCurveToBezierCurve {}
+
 class Geom2dConvert_CompCurveToBSplineCurve {
 }
+
+class Geom2dConvert_CompCurveToBSplineCurve_1 extends Geom2dConvert_CompCurveToBSplineCurve {}
+
+class Geom2dConvert_CompCurveToBSplineCurve_2 extends Geom2dConvert_CompCurveToBSplineCurve {}
 
 class Geom2dEvaluator_Curve extends Standard_Transient {
 }
@@ -6623,8 +13157,18 @@ class Geom2dEvaluator_Curve extends Standard_Transient {
 class Geom2dEvaluator_OffsetCurve extends Geom2dEvaluator_Curve {
 }
 
+class Geom2dEvaluator_OffsetCurve_1 extends Geom2dEvaluator_OffsetCurve {}
+
+class Geom2dEvaluator_OffsetCurve_2 extends Geom2dEvaluator_OffsetCurve {}
+
 class Geom2dLProp_CLProps2d {
 }
+
+class Geom2dLProp_CLProps2d_1 extends Geom2dLProp_CLProps2d {}
+
+class Geom2dLProp_CLProps2d_2 extends Geom2dLProp_CLProps2d {}
+
+class Geom2dLProp_CLProps2d_3 extends Geom2dLProp_CLProps2d {}
 
 class Geom2dLProp_CurAndInf2d extends LProp_CurAndInf {
 }
@@ -6644,23 +13188,51 @@ class Geom2dLProp_NumericCurInf2d {
 class Geom2dToIGES_Geom2dCurve extends Geom2dToIGES_Geom2dEntity {
 }
 
+class Geom2dToIGES_Geom2dCurve_1 extends Geom2dToIGES_Geom2dCurve {}
+
+class Geom2dToIGES_Geom2dCurve_2 extends Geom2dToIGES_Geom2dCurve {}
+
 class Geom2dToIGES_Geom2dEntity {
 }
+
+class Geom2dToIGES_Geom2dEntity_1 extends Geom2dToIGES_Geom2dEntity {}
+
+class Geom2dToIGES_Geom2dEntity_2 extends Geom2dToIGES_Geom2dEntity {}
 
 class Geom2dToIGES_Geom2dPoint extends Geom2dToIGES_Geom2dEntity {
 }
 
+class Geom2dToIGES_Geom2dPoint_1 extends Geom2dToIGES_Geom2dPoint {}
+
+class Geom2dToIGES_Geom2dPoint_2 extends Geom2dToIGES_Geom2dPoint {}
+
 class Geom2dToIGES_Geom2dVector extends Geom2dToIGES_Geom2dEntity {
 }
+
+class Geom2dToIGES_Geom2dVector_1 extends Geom2dToIGES_Geom2dVector {}
+
+class Geom2dToIGES_Geom2dVector_2 extends Geom2dToIGES_Geom2dVector {}
 
 class Geom2d_AxisPlacement extends Geom2d_Geometry {
 }
 
+class Geom2d_AxisPlacement_1 extends Geom2d_AxisPlacement {}
+
+class Geom2d_AxisPlacement_2 extends Geom2d_AxisPlacement {}
+
 class Geom2d_BSplineCurve extends Geom2d_BoundedCurve {
 }
 
+class Geom2d_BSplineCurve_1 extends Geom2d_BSplineCurve {}
+
+class Geom2d_BSplineCurve_2 extends Geom2d_BSplineCurve {}
+
 class Geom2d_BezierCurve extends Geom2d_BoundedCurve {
 }
+
+class Geom2d_BezierCurve_1 extends Geom2d_BezierCurve {}
+
+class Geom2d_BezierCurve_2 extends Geom2d_BezierCurve {}
 
 class Geom2d_BoundedCurve extends Geom2d_Curve {
 }
@@ -6668,8 +13240,18 @@ class Geom2d_BoundedCurve extends Geom2d_Curve {
 class Geom2d_CartesianPoint extends Geom2d_Point {
 }
 
+class Geom2d_CartesianPoint_1 extends Geom2d_CartesianPoint {}
+
+class Geom2d_CartesianPoint_2 extends Geom2d_CartesianPoint {}
+
 class Geom2d_Circle extends Geom2d_Conic {
 }
+
+class Geom2d_Circle_1 extends Geom2d_Circle {}
+
+class Geom2d_Circle_2 extends Geom2d_Circle {}
+
+class Geom2d_Circle_3 extends Geom2d_Circle {}
 
 class Geom2d_Conic extends Geom2d_Curve {
 }
@@ -6680,8 +13262,18 @@ class Geom2d_Curve extends Geom2d_Geometry {
 class Geom2d_Direction extends Geom2d_Vector {
 }
 
+class Geom2d_Direction_1 extends Geom2d_Direction {}
+
+class Geom2d_Direction_2 extends Geom2d_Direction {}
+
 class Geom2d_Ellipse extends Geom2d_Conic {
 }
+
+class Geom2d_Ellipse_1 extends Geom2d_Ellipse {}
+
+class Geom2d_Ellipse_2 extends Geom2d_Ellipse {}
+
+class Geom2d_Ellipse_3 extends Geom2d_Ellipse {}
 
 class Geom2d_Geometry extends Standard_Transient {
 }
@@ -6689,8 +13281,20 @@ class Geom2d_Geometry extends Standard_Transient {
 class Geom2d_Hyperbola extends Geom2d_Conic {
 }
 
+class Geom2d_Hyperbola_1 extends Geom2d_Hyperbola {}
+
+class Geom2d_Hyperbola_2 extends Geom2d_Hyperbola {}
+
+class Geom2d_Hyperbola_3 extends Geom2d_Hyperbola {}
+
 class Geom2d_Line extends Geom2d_Curve {
 }
+
+class Geom2d_Line_1 extends Geom2d_Line {}
+
+class Geom2d_Line_2 extends Geom2d_Line {}
+
+class Geom2d_Line_3 extends Geom2d_Line {}
 
 class Geom2d_OffsetCurve extends Geom2d_Curve {
 }
@@ -6698,11 +13302,23 @@ class Geom2d_OffsetCurve extends Geom2d_Curve {
 class Geom2d_Parabola extends Geom2d_Conic {
 }
 
+class Geom2d_Parabola_1 extends Geom2d_Parabola {}
+
+class Geom2d_Parabola_2 extends Geom2d_Parabola {}
+
+class Geom2d_Parabola_3 extends Geom2d_Parabola {}
+
+class Geom2d_Parabola_4 extends Geom2d_Parabola {}
+
 class Geom2d_Point extends Geom2d_Geometry {
 }
 
 class Geom2d_Transformation extends Standard_Transient {
 }
+
+class Geom2d_Transformation_1 extends Geom2d_Transformation {}
+
+class Geom2d_Transformation_2 extends Geom2d_Transformation {}
 
 class Geom2d_TrimmedCurve extends Geom2d_BoundedCurve {
 }
@@ -6710,8 +13326,16 @@ class Geom2d_TrimmedCurve extends Geom2d_BoundedCurve {
 class Geom2d_UndefinedDerivative extends Standard_DomainError {
 }
 
+class Geom2d_UndefinedDerivative_1 extends Geom2d_UndefinedDerivative {}
+
+class Geom2d_UndefinedDerivative_2 extends Geom2d_UndefinedDerivative {}
+
 class Geom2d_UndefinedValue extends Standard_DomainError {
 }
+
+class Geom2d_UndefinedValue_1 extends Geom2d_UndefinedValue {}
+
+class Geom2d_UndefinedValue_2 extends Geom2d_UndefinedValue {}
 
 class Geom2d_Vector extends Geom2d_Geometry {
 }
@@ -6719,35 +13343,103 @@ class Geom2d_Vector extends Geom2d_Geometry {
 class Geom2d_VectorWithMagnitude extends Geom2d_Vector {
 }
 
+class Geom2d_VectorWithMagnitude_1 extends Geom2d_VectorWithMagnitude {}
+
+class Geom2d_VectorWithMagnitude_2 extends Geom2d_VectorWithMagnitude {}
+
+class Geom2d_VectorWithMagnitude_3 extends Geom2d_VectorWithMagnitude {}
+
 class GeomAPI {
 }
 
 class GeomAPI_ExtremaCurveCurve {
 }
 
+class GeomAPI_ExtremaCurveCurve_1 extends GeomAPI_ExtremaCurveCurve {}
+
+class GeomAPI_ExtremaCurveCurve_2 extends GeomAPI_ExtremaCurveCurve {}
+
+class GeomAPI_ExtremaCurveCurve_3 extends GeomAPI_ExtremaCurveCurve {}
+
 class GeomAPI_ExtremaCurveSurface {
 }
+
+class GeomAPI_ExtremaCurveSurface_1 extends GeomAPI_ExtremaCurveSurface {}
+
+class GeomAPI_ExtremaCurveSurface_2 extends GeomAPI_ExtremaCurveSurface {}
+
+class GeomAPI_ExtremaCurveSurface_3 extends GeomAPI_ExtremaCurveSurface {}
 
 class GeomAPI_ExtremaSurfaceSurface {
 }
 
+class GeomAPI_ExtremaSurfaceSurface_1 extends GeomAPI_ExtremaSurfaceSurface {}
+
+class GeomAPI_ExtremaSurfaceSurface_2 extends GeomAPI_ExtremaSurfaceSurface {}
+
+class GeomAPI_ExtremaSurfaceSurface_3 extends GeomAPI_ExtremaSurfaceSurface {}
+
 class GeomAPI_IntCS {
 }
+
+class GeomAPI_IntCS_1 extends GeomAPI_IntCS {}
+
+class GeomAPI_IntCS_2 extends GeomAPI_IntCS {}
 
 class GeomAPI_IntSS {
 }
 
+class GeomAPI_IntSS_1 extends GeomAPI_IntSS {}
+
+class GeomAPI_IntSS_2 extends GeomAPI_IntSS {}
+
 class GeomAPI_PointsToBSpline {
 }
+
+class GeomAPI_PointsToBSpline_1 extends GeomAPI_PointsToBSpline {}
+
+class GeomAPI_PointsToBSpline_2 extends GeomAPI_PointsToBSpline {}
+
+class GeomAPI_PointsToBSpline_3 extends GeomAPI_PointsToBSpline {}
+
+class GeomAPI_PointsToBSpline_4 extends GeomAPI_PointsToBSpline {}
+
+class GeomAPI_PointsToBSpline_5 extends GeomAPI_PointsToBSpline {}
 
 class GeomAPI_PointsToBSplineSurface {
 }
 
+class GeomAPI_PointsToBSplineSurface_1 extends GeomAPI_PointsToBSplineSurface {}
+
+class GeomAPI_PointsToBSplineSurface_2 extends GeomAPI_PointsToBSplineSurface {}
+
+class GeomAPI_PointsToBSplineSurface_3 extends GeomAPI_PointsToBSplineSurface {}
+
+class GeomAPI_PointsToBSplineSurface_4 extends GeomAPI_PointsToBSplineSurface {}
+
+class GeomAPI_PointsToBSplineSurface_5 extends GeomAPI_PointsToBSplineSurface {}
+
 class GeomAPI_ProjectPointOnCurve {
 }
 
+class GeomAPI_ProjectPointOnCurve_1 extends GeomAPI_ProjectPointOnCurve {}
+
+class GeomAPI_ProjectPointOnCurve_2 extends GeomAPI_ProjectPointOnCurve {}
+
+class GeomAPI_ProjectPointOnCurve_3 extends GeomAPI_ProjectPointOnCurve {}
+
 class GeomAPI_ProjectPointOnSurf {
 }
+
+class GeomAPI_ProjectPointOnSurf_1 extends GeomAPI_ProjectPointOnSurf {}
+
+class GeomAPI_ProjectPointOnSurf_2 extends GeomAPI_ProjectPointOnSurf {}
+
+class GeomAPI_ProjectPointOnSurf_3 extends GeomAPI_ProjectPointOnSurf {}
+
+class GeomAPI_ProjectPointOnSurf_4 extends GeomAPI_ProjectPointOnSurf {}
+
+class GeomAPI_ProjectPointOnSurf_5 extends GeomAPI_ProjectPointOnSurf {}
 
 class GeomAdaptor {
 }
@@ -6755,32 +13447,88 @@ class GeomAdaptor {
 class GeomAdaptor_Curve extends Adaptor3d_Curve {
 }
 
+class GeomAdaptor_Curve_1 extends GeomAdaptor_Curve {}
+
+class GeomAdaptor_Curve_2 extends GeomAdaptor_Curve {}
+
+class GeomAdaptor_Curve_3 extends GeomAdaptor_Curve {}
+
 class GeomAdaptor_GHCurve extends Adaptor3d_HCurve {
 }
+
+class GeomAdaptor_GHCurve_1 extends GeomAdaptor_GHCurve {}
+
+class GeomAdaptor_GHCurve_2 extends GeomAdaptor_GHCurve {}
 
 class GeomAdaptor_GHSurface extends Adaptor3d_HSurface {
 }
 
+class GeomAdaptor_GHSurface_1 extends GeomAdaptor_GHSurface {}
+
+class GeomAdaptor_GHSurface_2 extends GeomAdaptor_GHSurface {}
+
 class GeomAdaptor_HCurve extends GeomAdaptor_GHCurve {
 }
+
+class GeomAdaptor_HCurve_1 extends GeomAdaptor_HCurve {}
+
+class GeomAdaptor_HCurve_2 extends GeomAdaptor_HCurve {}
+
+class GeomAdaptor_HCurve_3 extends GeomAdaptor_HCurve {}
+
+class GeomAdaptor_HCurve_4 extends GeomAdaptor_HCurve {}
 
 class GeomAdaptor_HSurface extends GeomAdaptor_GHSurface {
 }
 
+class GeomAdaptor_HSurface_1 extends GeomAdaptor_HSurface {}
+
+class GeomAdaptor_HSurface_2 extends GeomAdaptor_HSurface {}
+
+class GeomAdaptor_HSurface_3 extends GeomAdaptor_HSurface {}
+
+class GeomAdaptor_HSurface_4 extends GeomAdaptor_HSurface {}
+
 class GeomAdaptor_HSurfaceOfLinearExtrusion extends Adaptor3d_HSurface {
 }
+
+class GeomAdaptor_HSurfaceOfLinearExtrusion_1 extends GeomAdaptor_HSurfaceOfLinearExtrusion {}
+
+class GeomAdaptor_HSurfaceOfLinearExtrusion_2 extends GeomAdaptor_HSurfaceOfLinearExtrusion {}
 
 class GeomAdaptor_HSurfaceOfRevolution extends Adaptor3d_HSurface {
 }
 
+class GeomAdaptor_HSurfaceOfRevolution_1 extends GeomAdaptor_HSurfaceOfRevolution {}
+
+class GeomAdaptor_HSurfaceOfRevolution_2 extends GeomAdaptor_HSurfaceOfRevolution {}
+
 class GeomAdaptor_Surface extends Adaptor3d_Surface {
 }
+
+class GeomAdaptor_Surface_1 extends GeomAdaptor_Surface {}
+
+class GeomAdaptor_Surface_2 extends GeomAdaptor_Surface {}
+
+class GeomAdaptor_Surface_3 extends GeomAdaptor_Surface {}
 
 class GeomAdaptor_SurfaceOfLinearExtrusion extends GeomAdaptor_Surface {
 }
 
+class GeomAdaptor_SurfaceOfLinearExtrusion_1 extends GeomAdaptor_SurfaceOfLinearExtrusion {}
+
+class GeomAdaptor_SurfaceOfLinearExtrusion_2 extends GeomAdaptor_SurfaceOfLinearExtrusion {}
+
+class GeomAdaptor_SurfaceOfLinearExtrusion_3 extends GeomAdaptor_SurfaceOfLinearExtrusion {}
+
 class GeomAdaptor_SurfaceOfRevolution extends GeomAdaptor_Surface {
 }
+
+class GeomAdaptor_SurfaceOfRevolution_1 extends GeomAdaptor_SurfaceOfRevolution {}
+
+class GeomAdaptor_SurfaceOfRevolution_2 extends GeomAdaptor_SurfaceOfRevolution {}
+
+class GeomAdaptor_SurfaceOfRevolution_3 extends GeomAdaptor_SurfaceOfRevolution {}
 
 class GeomConvert {
 }
@@ -6788,8 +13536,16 @@ class GeomConvert {
 class GeomConvert_ApproxCurve {
 }
 
+class GeomConvert_ApproxCurve_1 extends GeomConvert_ApproxCurve {}
+
+class GeomConvert_ApproxCurve_2 extends GeomConvert_ApproxCurve {}
+
 class GeomConvert_ApproxSurface {
 }
+
+class GeomConvert_ApproxSurface_1 extends GeomConvert_ApproxSurface {}
+
+class GeomConvert_ApproxSurface_2 extends GeomConvert_ApproxSurface {}
 
 class GeomConvert_BSplineCurveKnotSplitting {
 }
@@ -6797,17 +13553,35 @@ class GeomConvert_BSplineCurveKnotSplitting {
 class GeomConvert_BSplineCurveToBezierCurve {
 }
 
+class GeomConvert_BSplineCurveToBezierCurve_1 extends GeomConvert_BSplineCurveToBezierCurve {}
+
+class GeomConvert_BSplineCurveToBezierCurve_2 extends GeomConvert_BSplineCurveToBezierCurve {}
+
 class GeomConvert_BSplineSurfaceKnotSplitting {
 }
 
 class GeomConvert_BSplineSurfaceToBezierSurface {
 }
 
+class GeomConvert_BSplineSurfaceToBezierSurface_1 extends GeomConvert_BSplineSurfaceToBezierSurface {}
+
+class GeomConvert_BSplineSurfaceToBezierSurface_2 extends GeomConvert_BSplineSurfaceToBezierSurface {}
+
 class GeomConvert_CompBezierSurfacesToBSplineSurface {
 }
 
+class GeomConvert_CompBezierSurfacesToBSplineSurface_1 extends GeomConvert_CompBezierSurfacesToBSplineSurface {}
+
+class GeomConvert_CompBezierSurfacesToBSplineSurface_2 extends GeomConvert_CompBezierSurfacesToBSplineSurface {}
+
+class GeomConvert_CompBezierSurfacesToBSplineSurface_3 extends GeomConvert_CompBezierSurfacesToBSplineSurface {}
+
 class GeomConvert_CompCurveToBSplineCurve {
 }
+
+class GeomConvert_CompCurveToBSplineCurve_1 extends GeomConvert_CompCurveToBSplineCurve {}
+
+class GeomConvert_CompCurveToBSplineCurve_2 extends GeomConvert_CompCurveToBSplineCurve {}
 
 class GeomEvaluator_Curve extends Standard_Transient {
 }
@@ -6815,8 +13589,16 @@ class GeomEvaluator_Curve extends Standard_Transient {
 class GeomEvaluator_OffsetCurve extends GeomEvaluator_Curve {
 }
 
+class GeomEvaluator_OffsetCurve_1 extends GeomEvaluator_OffsetCurve {}
+
+class GeomEvaluator_OffsetCurve_2 extends GeomEvaluator_OffsetCurve {}
+
 class GeomEvaluator_OffsetSurface extends GeomEvaluator_Surface {
 }
+
+class GeomEvaluator_OffsetSurface_1 extends GeomEvaluator_OffsetSurface {}
+
+class GeomEvaluator_OffsetSurface_2 extends GeomEvaluator_OffsetSurface {}
 
 class GeomEvaluator_Surface extends Standard_Transient {
 }
@@ -6824,8 +13606,16 @@ class GeomEvaluator_Surface extends Standard_Transient {
 class GeomEvaluator_SurfaceOfExtrusion extends GeomEvaluator_Surface {
 }
 
+class GeomEvaluator_SurfaceOfExtrusion_1 extends GeomEvaluator_SurfaceOfExtrusion {}
+
+class GeomEvaluator_SurfaceOfExtrusion_2 extends GeomEvaluator_SurfaceOfExtrusion {}
+
 class GeomEvaluator_SurfaceOfRevolution extends GeomEvaluator_Surface {
 }
+
+class GeomEvaluator_SurfaceOfRevolution_1 extends GeomEvaluator_SurfaceOfRevolution {}
+
+class GeomEvaluator_SurfaceOfRevolution_2 extends GeomEvaluator_SurfaceOfRevolution {}
 
 class GeomFill {
 }
@@ -6833,14 +13623,38 @@ class GeomFill {
 class GeomFill_AppSurf extends AppBlend_Approx {
 }
 
+class GeomFill_AppSurf_1 extends GeomFill_AppSurf {}
+
+class GeomFill_AppSurf_2 extends GeomFill_AppSurf {}
+
 class GeomFill_AppSweep extends AppBlend_Approx {
 }
+
+class GeomFill_AppSweep_1 extends GeomFill_AppSweep {}
+
+class GeomFill_AppSweep_2 extends GeomFill_AppSweep {}
 
 class GeomFill_BSplineCurves {
 }
 
+class GeomFill_BSplineCurves_1 extends GeomFill_BSplineCurves {}
+
+class GeomFill_BSplineCurves_2 extends GeomFill_BSplineCurves {}
+
+class GeomFill_BSplineCurves_3 extends GeomFill_BSplineCurves {}
+
+class GeomFill_BSplineCurves_4 extends GeomFill_BSplineCurves {}
+
 class GeomFill_BezierCurves {
 }
+
+class GeomFill_BezierCurves_1 extends GeomFill_BezierCurves {}
+
+class GeomFill_BezierCurves_2 extends GeomFill_BezierCurves {}
+
+class GeomFill_BezierCurves_3 extends GeomFill_BezierCurves {}
+
+class GeomFill_BezierCurves_4 extends GeomFill_BezierCurves {}
 
 class GeomFill_BoundWithSurf extends GeomFill_Boundary {
 }
@@ -6860,6 +13674,12 @@ class GeomFill_ConstrainedFilling {
 class GeomFill_Coons extends GeomFill_Filling {
 }
 
+class GeomFill_Coons_1 extends GeomFill_Coons {}
+
+class GeomFill_Coons_2 extends GeomFill_Coons {}
+
+class GeomFill_Coons_3 extends GeomFill_Coons {}
+
 class GeomFill_CoonsAlgPatch extends Standard_Transient {
 }
 
@@ -6869,11 +13689,25 @@ class GeomFill_CornerState {
 class GeomFill_CorrectedFrenet extends GeomFill_TrihedronLaw {
 }
 
+class GeomFill_CorrectedFrenet_1 extends GeomFill_CorrectedFrenet {}
+
+class GeomFill_CorrectedFrenet_2 extends GeomFill_CorrectedFrenet {}
+
 class GeomFill_CurveAndTrihedron extends GeomFill_LocationLaw {
 }
 
 class GeomFill_Curved extends GeomFill_Filling {
 }
+
+class GeomFill_Curved_1 extends GeomFill_Curved {}
+
+class GeomFill_Curved_2 extends GeomFill_Curved {}
+
+class GeomFill_Curved_3 extends GeomFill_Curved {}
+
+class GeomFill_Curved_4 extends GeomFill_Curved {}
+
+class GeomFill_Curved_5 extends GeomFill_Curved {}
 
 class GeomFill_Darboux extends GeomFill_TrihedronLaw {
 }
@@ -6914,6 +13748,10 @@ class GeomFill_GuideTrihedronPlan extends GeomFill_TrihedronWithGuide {
 class GeomFill_Line extends Standard_Transient {
 }
 
+class GeomFill_Line_1 extends GeomFill_Line {}
+
+class GeomFill_Line_2 extends GeomFill_Line {}
+
 class GeomFill_LocFunction {
 }
 
@@ -6928,6 +13766,26 @@ class GeomFill_LocationLaw extends Standard_Transient {
 
 class GeomFill_Pipe {
 }
+
+class GeomFill_Pipe_1 extends GeomFill_Pipe {}
+
+class GeomFill_Pipe_2 extends GeomFill_Pipe {}
+
+class GeomFill_Pipe_3 extends GeomFill_Pipe {}
+
+class GeomFill_Pipe_4 extends GeomFill_Pipe {}
+
+class GeomFill_Pipe_5 extends GeomFill_Pipe {}
+
+class GeomFill_Pipe_6 extends GeomFill_Pipe {}
+
+class GeomFill_Pipe_7 extends GeomFill_Pipe {}
+
+class GeomFill_Pipe_8 extends GeomFill_Pipe {}
+
+class GeomFill_Pipe_9 extends GeomFill_Pipe {}
+
+class GeomFill_Pipe_10 extends GeomFill_Pipe {}
 
 class GeomFill_PlanFunc extends math_FunctionWithDerivative {
 }
@@ -6958,6 +13816,12 @@ class GeomFill_SnglrFunc extends Adaptor3d_Curve {
 
 class GeomFill_Stretch extends GeomFill_Filling {
 }
+
+class GeomFill_Stretch_1 extends GeomFill_Stretch {}
+
+class GeomFill_Stretch_2 extends GeomFill_Stretch {}
+
+class GeomFill_Stretch_3 extends GeomFill_Stretch {}
 
 class GeomFill_Sweep {
 }
@@ -6995,6 +13859,14 @@ class GeomInt_BSpParFunctionOfMyBSplGradientOfTheComputeLineOfWLApprox extends m
 class GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox {
 }
 
+class GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox_1 extends GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox {}
+
+class GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox_2 extends GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox {}
+
+class GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox_3 extends GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox {}
+
+class GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox_4 extends GeomInt_BSpParLeastSquareOfMyBSplGradientOfTheComputeLineOfWLApprox {}
+
 class GeomInt_Gradient_BFGSOfMyGradientOfTheComputeLineBezierOfWLApprox extends math_BFGS {
 }
 
@@ -7009,6 +13881,10 @@ class GeomInt_LineTool {
 
 class GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox {
 }
+
+class GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox_1 extends GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox {}
+
+class GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox_2 extends GeomInt_MyBSplGradientOfTheComputeLineOfWLApprox {}
 
 class GeomInt_MyGradientOfTheComputeLineBezierOfWLApprox {
 }
@@ -7025,17 +13901,53 @@ class GeomInt_ParFunctionOfMyGradientbisOfTheComputeLineOfWLApprox extends math_
 class GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox {
 }
 
+class GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox_1 extends GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox {}
+
+class GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox_2 extends GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox {}
+
+class GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox_3 extends GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox {}
+
+class GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox_4 extends GeomInt_ParLeastSquareOfMyGradientOfTheComputeLineBezierOfWLApprox {}
+
 class GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox {
 }
+
+class GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox_1 extends GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox {}
+
+class GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox_2 extends GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox {}
+
+class GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox_3 extends GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox {}
+
+class GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox_4 extends GeomInt_ParLeastSquareOfMyGradientbisOfTheComputeLineOfWLApprox {}
 
 class GeomInt_ParameterAndOrientation {
 }
 
+class GeomInt_ParameterAndOrientation_1 extends GeomInt_ParameterAndOrientation {}
+
+class GeomInt_ParameterAndOrientation_2 extends GeomInt_ParameterAndOrientation {}
+
 class GeomInt_TheComputeLineBezierOfWLApprox {
 }
 
+class GeomInt_TheComputeLineBezierOfWLApprox_1 extends GeomInt_TheComputeLineBezierOfWLApprox {}
+
+class GeomInt_TheComputeLineBezierOfWLApprox_2 extends GeomInt_TheComputeLineBezierOfWLApprox {}
+
+class GeomInt_TheComputeLineBezierOfWLApprox_3 extends GeomInt_TheComputeLineBezierOfWLApprox {}
+
+class GeomInt_TheComputeLineBezierOfWLApprox_4 extends GeomInt_TheComputeLineBezierOfWLApprox {}
+
 class GeomInt_TheComputeLineOfWLApprox {
 }
+
+class GeomInt_TheComputeLineOfWLApprox_1 extends GeomInt_TheComputeLineOfWLApprox {}
+
+class GeomInt_TheComputeLineOfWLApprox_2 extends GeomInt_TheComputeLineOfWLApprox {}
+
+class GeomInt_TheComputeLineOfWLApprox_3 extends GeomInt_TheComputeLineOfWLApprox {}
+
+class GeomInt_TheComputeLineOfWLApprox_4 extends GeomInt_TheComputeLineOfWLApprox {}
 
 class GeomInt_TheFunctionOfTheInt2SOfThePrmPrmSvSurfacesOfWLApprox extends math_FunctionSetWithDerivatives {
 }
@@ -7043,11 +13955,25 @@ class GeomInt_TheFunctionOfTheInt2SOfThePrmPrmSvSurfacesOfWLApprox extends math_
 class GeomInt_TheImpPrmSvSurfacesOfWLApprox extends ApproxInt_SvSurfaces {
 }
 
+class GeomInt_TheImpPrmSvSurfacesOfWLApprox_1 extends GeomInt_TheImpPrmSvSurfacesOfWLApprox {}
+
+class GeomInt_TheImpPrmSvSurfacesOfWLApprox_2 extends GeomInt_TheImpPrmSvSurfacesOfWLApprox {}
+
 class GeomInt_TheInt2SOfThePrmPrmSvSurfacesOfWLApprox {
 }
 
+class GeomInt_TheInt2SOfThePrmPrmSvSurfacesOfWLApprox_1 extends GeomInt_TheInt2SOfThePrmPrmSvSurfacesOfWLApprox {}
+
+class GeomInt_TheInt2SOfThePrmPrmSvSurfacesOfWLApprox_2 extends GeomInt_TheInt2SOfThePrmPrmSvSurfacesOfWLApprox {}
+
 class GeomInt_TheMultiLineOfWLApprox {
 }
+
+class GeomInt_TheMultiLineOfWLApprox_1 extends GeomInt_TheMultiLineOfWLApprox {}
+
+class GeomInt_TheMultiLineOfWLApprox_2 extends GeomInt_TheMultiLineOfWLApprox {}
+
+class GeomInt_TheMultiLineOfWLApprox_3 extends GeomInt_TheMultiLineOfWLApprox {}
 
 class GeomInt_TheMultiLineToolOfWLApprox {
 }
@@ -7058,17 +13984,35 @@ class GeomInt_ThePrmPrmSvSurfacesOfWLApprox extends ApproxInt_SvSurfaces {
 class GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox extends math_FunctionSetWithDerivatives {
 }
 
+class GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox_1 extends GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox {}
+
+class GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox_2 extends GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox {}
+
+class GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox_3 extends GeomInt_TheZerImpFuncOfTheImpPrmSvSurfacesOfWLApprox {}
+
 class GeomLProp {
 }
 
 class GeomLProp_CLProps {
 }
 
+class GeomLProp_CLProps_1 extends GeomLProp_CLProps {}
+
+class GeomLProp_CLProps_2 extends GeomLProp_CLProps {}
+
+class GeomLProp_CLProps_3 extends GeomLProp_CLProps {}
+
 class GeomLProp_CurveTool {
 }
 
 class GeomLProp_SLProps {
 }
+
+class GeomLProp_SLProps_1 extends GeomLProp_SLProps {}
+
+class GeomLProp_SLProps_2 extends GeomLProp_SLProps {}
+
+class GeomLProp_SLProps_3 extends GeomLProp_SLProps {}
 
 class GeomLProp_SurfaceTool {
 }
@@ -7084,6 +14028,10 @@ class GeomLib_CheckBSplineCurve {
 
 class GeomLib_CheckCurveOnSurface {
 }
+
+class GeomLib_CheckCurveOnSurface_1 extends GeomLib_CheckCurveOnSurface {}
+
+class GeomLib_CheckCurveOnSurface_2 extends GeomLib_CheckCurveOnSurface {}
 
 class GeomLib_DenominatorMultiplier {
 }
@@ -7109,17 +14057,39 @@ class GeomLib_Tool {
 class GeomPlate_Aij {
 }
 
+class GeomPlate_Aij_1 extends GeomPlate_Aij {}
+
+class GeomPlate_Aij_2 extends GeomPlate_Aij {}
+
 class GeomPlate_BuildAveragePlane {
 }
+
+class GeomPlate_BuildAveragePlane_1 extends GeomPlate_BuildAveragePlane {}
+
+class GeomPlate_BuildAveragePlane_2 extends GeomPlate_BuildAveragePlane {}
 
 class GeomPlate_BuildPlateSurface {
 }
 
+class GeomPlate_BuildPlateSurface_1 extends GeomPlate_BuildPlateSurface {}
+
+class GeomPlate_BuildPlateSurface_2 extends GeomPlate_BuildPlateSurface {}
+
+class GeomPlate_BuildPlateSurface_3 extends GeomPlate_BuildPlateSurface {}
+
 class GeomPlate_CurveConstraint extends Standard_Transient {
 }
 
+class GeomPlate_CurveConstraint_1 extends GeomPlate_CurveConstraint {}
+
+class GeomPlate_CurveConstraint_2 extends GeomPlate_CurveConstraint {}
+
 class GeomPlate_MakeApprox {
 }
+
+class GeomPlate_MakeApprox_1 extends GeomPlate_MakeApprox {}
+
+class GeomPlate_MakeApprox_2 extends GeomPlate_MakeApprox {}
 
 class GeomPlate_PlateG0Criterion extends AdvApp2Var_Criterion {
 }
@@ -7130,6 +14100,10 @@ class GeomPlate_PlateG1Criterion extends AdvApp2Var_Criterion {
 class GeomPlate_PointConstraint extends Standard_Transient {
 }
 
+class GeomPlate_PointConstraint_1 extends GeomPlate_PointConstraint {}
+
+class GeomPlate_PointConstraint_2 extends GeomPlate_PointConstraint {}
+
 class GeomPlate_Surface extends Geom_Surface {
 }
 
@@ -7139,32 +14113,82 @@ class GeomProjLib {
 class GeomToIGES_GeomCurve extends GeomToIGES_GeomEntity {
 }
 
+class GeomToIGES_GeomCurve_1 extends GeomToIGES_GeomCurve {}
+
+class GeomToIGES_GeomCurve_2 extends GeomToIGES_GeomCurve {}
+
 class GeomToIGES_GeomEntity {
 }
+
+class GeomToIGES_GeomEntity_1 extends GeomToIGES_GeomEntity {}
+
+class GeomToIGES_GeomEntity_2 extends GeomToIGES_GeomEntity {}
 
 class GeomToIGES_GeomPoint extends GeomToIGES_GeomEntity {
 }
 
+class GeomToIGES_GeomPoint_1 extends GeomToIGES_GeomPoint {}
+
+class GeomToIGES_GeomPoint_2 extends GeomToIGES_GeomPoint {}
+
 class GeomToIGES_GeomSurface extends GeomToIGES_GeomEntity {
 }
+
+class GeomToIGES_GeomSurface_1 extends GeomToIGES_GeomSurface {}
+
+class GeomToIGES_GeomSurface_2 extends GeomToIGES_GeomSurface {}
 
 class GeomToIGES_GeomVector extends GeomToIGES_GeomEntity {
 }
 
+class GeomToIGES_GeomVector_1 extends GeomToIGES_GeomVector {}
+
+class GeomToIGES_GeomVector_2 extends GeomToIGES_GeomVector {}
+
 class GeomToStep_MakeAxis1Placement extends GeomToStep_Root {
 }
+
+class GeomToStep_MakeAxis1Placement_1 extends GeomToStep_MakeAxis1Placement {}
+
+class GeomToStep_MakeAxis1Placement_2 extends GeomToStep_MakeAxis1Placement {}
+
+class GeomToStep_MakeAxis1Placement_3 extends GeomToStep_MakeAxis1Placement {}
+
+class GeomToStep_MakeAxis1Placement_4 extends GeomToStep_MakeAxis1Placement {}
 
 class GeomToStep_MakeAxis2Placement2d extends GeomToStep_Root {
 }
 
+class GeomToStep_MakeAxis2Placement2d_1 extends GeomToStep_MakeAxis2Placement2d {}
+
+class GeomToStep_MakeAxis2Placement2d_2 extends GeomToStep_MakeAxis2Placement2d {}
+
 class GeomToStep_MakeAxis2Placement3d extends GeomToStep_Root {
 }
+
+class GeomToStep_MakeAxis2Placement3d_1 extends GeomToStep_MakeAxis2Placement3d {}
+
+class GeomToStep_MakeAxis2Placement3d_2 extends GeomToStep_MakeAxis2Placement3d {}
+
+class GeomToStep_MakeAxis2Placement3d_3 extends GeomToStep_MakeAxis2Placement3d {}
+
+class GeomToStep_MakeAxis2Placement3d_4 extends GeomToStep_MakeAxis2Placement3d {}
+
+class GeomToStep_MakeAxis2Placement3d_5 extends GeomToStep_MakeAxis2Placement3d {}
 
 class GeomToStep_MakeBSplineCurveWithKnots extends GeomToStep_Root {
 }
 
+class GeomToStep_MakeBSplineCurveWithKnots_1 extends GeomToStep_MakeBSplineCurveWithKnots {}
+
+class GeomToStep_MakeBSplineCurveWithKnots_2 extends GeomToStep_MakeBSplineCurveWithKnots {}
+
 class GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve extends GeomToStep_Root {
 }
+
+class GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve_1 extends GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve {}
+
+class GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve_2 extends GeomToStep_MakeBSplineCurveWithKnotsAndRationalBSplineCurve {}
 
 class GeomToStep_MakeBSplineSurfaceWithKnots extends GeomToStep_Root {
 }
@@ -7175,17 +14199,39 @@ class GeomToStep_MakeBSplineSurfaceWithKnotsAndRationalBSplineSurface extends Ge
 class GeomToStep_MakeBoundedCurve extends GeomToStep_Root {
 }
 
+class GeomToStep_MakeBoundedCurve_1 extends GeomToStep_MakeBoundedCurve {}
+
+class GeomToStep_MakeBoundedCurve_2 extends GeomToStep_MakeBoundedCurve {}
+
 class GeomToStep_MakeBoundedSurface extends GeomToStep_Root {
 }
 
 class GeomToStep_MakeCartesianPoint extends GeomToStep_Root {
 }
 
+class GeomToStep_MakeCartesianPoint_1 extends GeomToStep_MakeCartesianPoint {}
+
+class GeomToStep_MakeCartesianPoint_2 extends GeomToStep_MakeCartesianPoint {}
+
+class GeomToStep_MakeCartesianPoint_3 extends GeomToStep_MakeCartesianPoint {}
+
+class GeomToStep_MakeCartesianPoint_4 extends GeomToStep_MakeCartesianPoint {}
+
 class GeomToStep_MakeCircle extends GeomToStep_Root {
 }
 
+class GeomToStep_MakeCircle_1 extends GeomToStep_MakeCircle {}
+
+class GeomToStep_MakeCircle_2 extends GeomToStep_MakeCircle {}
+
+class GeomToStep_MakeCircle_3 extends GeomToStep_MakeCircle {}
+
 class GeomToStep_MakeConic extends GeomToStep_Root {
 }
+
+class GeomToStep_MakeConic_1 extends GeomToStep_MakeConic {}
+
+class GeomToStep_MakeConic_2 extends GeomToStep_MakeConic {}
 
 class GeomToStep_MakeConicalSurface extends GeomToStep_Root {
 }
@@ -7193,11 +14239,23 @@ class GeomToStep_MakeConicalSurface extends GeomToStep_Root {
 class GeomToStep_MakeCurve extends GeomToStep_Root {
 }
 
+class GeomToStep_MakeCurve_1 extends GeomToStep_MakeCurve {}
+
+class GeomToStep_MakeCurve_2 extends GeomToStep_MakeCurve {}
+
 class GeomToStep_MakeCylindricalSurface extends GeomToStep_Root {
 }
 
 class GeomToStep_MakeDirection extends GeomToStep_Root {
 }
+
+class GeomToStep_MakeDirection_1 extends GeomToStep_MakeDirection {}
+
+class GeomToStep_MakeDirection_2 extends GeomToStep_MakeDirection {}
+
+class GeomToStep_MakeDirection_3 extends GeomToStep_MakeDirection {}
+
+class GeomToStep_MakeDirection_4 extends GeomToStep_MakeDirection {}
 
 class GeomToStep_MakeElementarySurface extends GeomToStep_Root {
 }
@@ -7205,20 +14263,50 @@ class GeomToStep_MakeElementarySurface extends GeomToStep_Root {
 class GeomToStep_MakeEllipse extends GeomToStep_Root {
 }
 
+class GeomToStep_MakeEllipse_1 extends GeomToStep_MakeEllipse {}
+
+class GeomToStep_MakeEllipse_2 extends GeomToStep_MakeEllipse {}
+
+class GeomToStep_MakeEllipse_3 extends GeomToStep_MakeEllipse {}
+
 class GeomToStep_MakeHyperbola extends GeomToStep_Root {
 }
+
+class GeomToStep_MakeHyperbola_1 extends GeomToStep_MakeHyperbola {}
+
+class GeomToStep_MakeHyperbola_2 extends GeomToStep_MakeHyperbola {}
 
 class GeomToStep_MakeLine extends GeomToStep_Root {
 }
 
+class GeomToStep_MakeLine_1 extends GeomToStep_MakeLine {}
+
+class GeomToStep_MakeLine_2 extends GeomToStep_MakeLine {}
+
+class GeomToStep_MakeLine_3 extends GeomToStep_MakeLine {}
+
+class GeomToStep_MakeLine_4 extends GeomToStep_MakeLine {}
+
 class GeomToStep_MakeParabola extends GeomToStep_Root {
 }
+
+class GeomToStep_MakeParabola_1 extends GeomToStep_MakeParabola {}
+
+class GeomToStep_MakeParabola_2 extends GeomToStep_MakeParabola {}
 
 class GeomToStep_MakePlane extends GeomToStep_Root {
 }
 
+class GeomToStep_MakePlane_1 extends GeomToStep_MakePlane {}
+
+class GeomToStep_MakePlane_2 extends GeomToStep_MakePlane {}
+
 class GeomToStep_MakePolyline extends GeomToStep_Root {
 }
+
+class GeomToStep_MakePolyline_1 extends GeomToStep_MakePolyline {}
+
+class GeomToStep_MakePolyline_2 extends GeomToStep_MakePolyline {}
 
 class GeomToStep_MakeRectangularTrimmedSurface extends GeomToStep_Root {
 }
@@ -7244,6 +14332,14 @@ class GeomToStep_MakeToroidalSurface extends GeomToStep_Root {
 class GeomToStep_MakeVector extends GeomToStep_Root {
 }
 
+class GeomToStep_MakeVector_1 extends GeomToStep_MakeVector {}
+
+class GeomToStep_MakeVector_2 extends GeomToStep_MakeVector {}
+
+class GeomToStep_MakeVector_3 extends GeomToStep_MakeVector {}
+
+class GeomToStep_MakeVector_4 extends GeomToStep_MakeVector {}
+
 class GeomToStep_Root {
 }
 
@@ -7262,8 +14358,16 @@ class GeomTools_SurfaceSet {
 class Geom_Axis1Placement extends Geom_AxisPlacement {
 }
 
+class Geom_Axis1Placement_1 extends Geom_Axis1Placement {}
+
+class Geom_Axis1Placement_2 extends Geom_Axis1Placement {}
+
 class Geom_Axis2Placement extends Geom_AxisPlacement {
 }
+
+class Geom_Axis2Placement_1 extends Geom_Axis2Placement {}
+
+class Geom_Axis2Placement_2 extends Geom_Axis2Placement {}
 
 class Geom_AxisPlacement extends Geom_Geometry {
 }
@@ -7271,14 +14375,30 @@ class Geom_AxisPlacement extends Geom_Geometry {
 class Geom_BSplineCurve extends Geom_BoundedCurve {
 }
 
+class Geom_BSplineCurve_1 extends Geom_BSplineCurve {}
+
+class Geom_BSplineCurve_2 extends Geom_BSplineCurve {}
+
 class Geom_BSplineSurface extends Geom_BoundedSurface {
 }
+
+class Geom_BSplineSurface_1 extends Geom_BSplineSurface {}
+
+class Geom_BSplineSurface_2 extends Geom_BSplineSurface {}
 
 class Geom_BezierCurve extends Geom_BoundedCurve {
 }
 
+class Geom_BezierCurve_1 extends Geom_BezierCurve {}
+
+class Geom_BezierCurve_2 extends Geom_BezierCurve {}
+
 class Geom_BezierSurface extends Geom_BoundedSurface {
 }
+
+class Geom_BezierSurface_1 extends Geom_BezierSurface {}
+
+class Geom_BezierSurface_2 extends Geom_BezierSurface {}
 
 class Geom_BoundedCurve extends Geom_Curve {
 }
@@ -7289,8 +14409,16 @@ class Geom_BoundedSurface extends Geom_Surface {
 class Geom_CartesianPoint extends Geom_Point {
 }
 
+class Geom_CartesianPoint_1 extends Geom_CartesianPoint {}
+
+class Geom_CartesianPoint_2 extends Geom_CartesianPoint {}
+
 class Geom_Circle extends Geom_Conic {
 }
+
+class Geom_Circle_1 extends Geom_Circle {}
+
+class Geom_Circle_2 extends Geom_Circle {}
 
 class Geom_Conic extends Geom_Curve {
 }
@@ -7298,14 +14426,26 @@ class Geom_Conic extends Geom_Curve {
 class Geom_ConicalSurface extends Geom_ElementarySurface {
 }
 
+class Geom_ConicalSurface_1 extends Geom_ConicalSurface {}
+
+class Geom_ConicalSurface_2 extends Geom_ConicalSurface {}
+
 class Geom_Curve extends Geom_Geometry {
 }
 
 class Geom_CylindricalSurface extends Geom_ElementarySurface {
 }
 
+class Geom_CylindricalSurface_1 extends Geom_CylindricalSurface {}
+
+class Geom_CylindricalSurface_2 extends Geom_CylindricalSurface {}
+
 class Geom_Direction extends Geom_Vector {
 }
+
+class Geom_Direction_1 extends Geom_Direction {}
+
+class Geom_Direction_2 extends Geom_Direction {}
 
 class Geom_ElementarySurface extends Geom_Surface {
 }
@@ -7313,14 +14453,28 @@ class Geom_ElementarySurface extends Geom_Surface {
 class Geom_Ellipse extends Geom_Conic {
 }
 
+class Geom_Ellipse_1 extends Geom_Ellipse {}
+
+class Geom_Ellipse_2 extends Geom_Ellipse {}
+
 class Geom_Geometry extends Standard_Transient {
 }
 
 class Geom_Hyperbola extends Geom_Conic {
 }
 
+class Geom_Hyperbola_1 extends Geom_Hyperbola {}
+
+class Geom_Hyperbola_2 extends Geom_Hyperbola {}
+
 class Geom_Line extends Geom_Curve {
 }
+
+class Geom_Line_1 extends Geom_Line {}
+
+class Geom_Line_2 extends Geom_Line {}
+
+class Geom_Line_3 extends Geom_Line {}
 
 class Geom_OffsetCurve extends Geom_Curve {
 }
@@ -7331,11 +14485,29 @@ class Geom_OffsetSurface extends Geom_Surface {
 class Geom_OsculatingSurface extends Standard_Transient {
 }
 
+class Geom_OsculatingSurface_1 extends Geom_OsculatingSurface {}
+
+class Geom_OsculatingSurface_2 extends Geom_OsculatingSurface {}
+
 class Geom_Parabola extends Geom_Conic {
 }
 
+class Geom_Parabola_1 extends Geom_Parabola {}
+
+class Geom_Parabola_2 extends Geom_Parabola {}
+
+class Geom_Parabola_3 extends Geom_Parabola {}
+
 class Geom_Plane extends Geom_ElementarySurface {
 }
+
+class Geom_Plane_1 extends Geom_Plane {}
+
+class Geom_Plane_2 extends Geom_Plane {}
+
+class Geom_Plane_3 extends Geom_Plane {}
+
+class Geom_Plane_4 extends Geom_Plane {}
 
 class Geom_Point extends Geom_Geometry {
 }
@@ -7343,8 +14515,16 @@ class Geom_Point extends Geom_Geometry {
 class Geom_RectangularTrimmedSurface extends Geom_BoundedSurface {
 }
 
+class Geom_RectangularTrimmedSurface_1 extends Geom_RectangularTrimmedSurface {}
+
+class Geom_RectangularTrimmedSurface_2 extends Geom_RectangularTrimmedSurface {}
+
 class Geom_SphericalSurface extends Geom_ElementarySurface {
 }
+
+class Geom_SphericalSurface_1 extends Geom_SphericalSurface {}
+
+class Geom_SphericalSurface_2 extends Geom_SphericalSurface {}
 
 class Geom_Surface extends Geom_Geometry {
 }
@@ -7361,8 +14541,16 @@ class Geom_SweptSurface extends Geom_Surface {
 class Geom_ToroidalSurface extends Geom_ElementarySurface {
 }
 
+class Geom_ToroidalSurface_1 extends Geom_ToroidalSurface {}
+
+class Geom_ToroidalSurface_2 extends Geom_ToroidalSurface {}
+
 class Geom_Transformation extends Standard_Transient {
 }
+
+class Geom_Transformation_1 extends Geom_Transformation {}
+
+class Geom_Transformation_2 extends Geom_Transformation {}
 
 class Geom_TrimmedCurve extends Geom_BoundedCurve {
 }
@@ -7370,8 +14558,16 @@ class Geom_TrimmedCurve extends Geom_BoundedCurve {
 class Geom_UndefinedDerivative extends Standard_DomainError {
 }
 
+class Geom_UndefinedDerivative_1 extends Geom_UndefinedDerivative {}
+
+class Geom_UndefinedDerivative_2 extends Geom_UndefinedDerivative {}
+
 class Geom_UndefinedValue extends Standard_DomainError {
 }
+
+class Geom_UndefinedValue_1 extends Geom_UndefinedValue {}
+
+class Geom_UndefinedValue_2 extends Geom_UndefinedValue {}
 
 class Geom_Vector extends Geom_Geometry {
 }
@@ -7379,14 +14575,32 @@ class Geom_Vector extends Geom_Geometry {
 class Geom_VectorWithMagnitude extends Geom_Vector {
 }
 
+class Geom_VectorWithMagnitude_1 extends Geom_VectorWithMagnitude {}
+
+class Geom_VectorWithMagnitude_2 extends Geom_VectorWithMagnitude {}
+
+class Geom_VectorWithMagnitude_3 extends Geom_VectorWithMagnitude {}
+
 class Graphic3d_ArrayOfPoints extends Graphic3d_ArrayOfPrimitives {
 }
+
+class Graphic3d_ArrayOfPoints_1 extends Graphic3d_ArrayOfPoints {}
+
+class Graphic3d_ArrayOfPoints_2 extends Graphic3d_ArrayOfPoints {}
 
 class Graphic3d_ArrayOfPolygons extends Graphic3d_ArrayOfPrimitives {
 }
 
+class Graphic3d_ArrayOfPolygons_1 extends Graphic3d_ArrayOfPolygons {}
+
+class Graphic3d_ArrayOfPolygons_2 extends Graphic3d_ArrayOfPolygons {}
+
 class Graphic3d_ArrayOfPolylines extends Graphic3d_ArrayOfPrimitives {
 }
+
+class Graphic3d_ArrayOfPolylines_1 extends Graphic3d_ArrayOfPolylines {}
+
+class Graphic3d_ArrayOfPolylines_2 extends Graphic3d_ArrayOfPolylines {}
 
 class Graphic3d_ArrayOfPrimitives extends Standard_Transient {
 }
@@ -7394,32 +14608,76 @@ class Graphic3d_ArrayOfPrimitives extends Standard_Transient {
 class Graphic3d_ArrayOfQuadrangleStrips extends Graphic3d_ArrayOfPrimitives {
 }
 
+class Graphic3d_ArrayOfQuadrangleStrips_1 extends Graphic3d_ArrayOfQuadrangleStrips {}
+
+class Graphic3d_ArrayOfQuadrangleStrips_2 extends Graphic3d_ArrayOfQuadrangleStrips {}
+
 class Graphic3d_ArrayOfQuadrangles extends Graphic3d_ArrayOfPrimitives {
 }
+
+class Graphic3d_ArrayOfQuadrangles_1 extends Graphic3d_ArrayOfQuadrangles {}
+
+class Graphic3d_ArrayOfQuadrangles_2 extends Graphic3d_ArrayOfQuadrangles {}
 
 class Graphic3d_ArrayOfSegments extends Graphic3d_ArrayOfPrimitives {
 }
 
+class Graphic3d_ArrayOfSegments_1 extends Graphic3d_ArrayOfSegments {}
+
+class Graphic3d_ArrayOfSegments_2 extends Graphic3d_ArrayOfSegments {}
+
 class Graphic3d_ArrayOfTriangleFans extends Graphic3d_ArrayOfPrimitives {
 }
+
+class Graphic3d_ArrayOfTriangleFans_1 extends Graphic3d_ArrayOfTriangleFans {}
+
+class Graphic3d_ArrayOfTriangleFans_2 extends Graphic3d_ArrayOfTriangleFans {}
 
 class Graphic3d_ArrayOfTriangleStrips extends Graphic3d_ArrayOfPrimitives {
 }
 
+class Graphic3d_ArrayOfTriangleStrips_1 extends Graphic3d_ArrayOfTriangleStrips {}
+
+class Graphic3d_ArrayOfTriangleStrips_2 extends Graphic3d_ArrayOfTriangleStrips {}
+
 class Graphic3d_ArrayOfTriangles extends Graphic3d_ArrayOfPrimitives {
 }
+
+class Graphic3d_ArrayOfTriangles_1 extends Graphic3d_ArrayOfTriangles {}
+
+class Graphic3d_ArrayOfTriangles_2 extends Graphic3d_ArrayOfTriangles {}
 
 class Graphic3d_AspectFillArea3d extends Graphic3d_Aspects {
 }
 
+class Graphic3d_AspectFillArea3d_1 extends Graphic3d_AspectFillArea3d {}
+
+class Graphic3d_AspectFillArea3d_2 extends Graphic3d_AspectFillArea3d {}
+
 class Graphic3d_AspectLine3d extends Graphic3d_Aspects {
 }
+
+class Graphic3d_AspectLine3d_1 extends Graphic3d_AspectLine3d {}
+
+class Graphic3d_AspectLine3d_2 extends Graphic3d_AspectLine3d {}
 
 class Graphic3d_AspectMarker3d extends Graphic3d_Aspects {
 }
 
+class Graphic3d_AspectMarker3d_1 extends Graphic3d_AspectMarker3d {}
+
+class Graphic3d_AspectMarker3d_2 extends Graphic3d_AspectMarker3d {}
+
+class Graphic3d_AspectMarker3d_3 extends Graphic3d_AspectMarker3d {}
+
+class Graphic3d_AspectMarker3d_4 extends Graphic3d_AspectMarker3d {}
+
 class Graphic3d_AspectText3d extends Graphic3d_Aspects {
 }
+
+class Graphic3d_AspectText3d_1 extends Graphic3d_AspectText3d {}
+
+class Graphic3d_AspectText3d_2 extends Graphic3d_AspectText3d {}
 
 class Graphic3d_Aspects extends Standard_Transient {
 }
@@ -7459,20 +14717,46 @@ class Graphic3d_CView extends Graphic3d_DataStructureManager {
 class Graphic3d_Camera extends Standard_Transient {
 }
 
+class Graphic3d_Camera_1 extends Graphic3d_Camera {}
+
+class Graphic3d_Camera_2 extends Graphic3d_Camera {}
+
 class Graphic3d_CameraTile {
 }
 
 class Graphic3d_ClipPlane extends Standard_Transient {
 }
 
+class Graphic3d_ClipPlane_1 extends Graphic3d_ClipPlane {}
+
+class Graphic3d_ClipPlane_2 extends Graphic3d_ClipPlane {}
+
+class Graphic3d_ClipPlane_3 extends Graphic3d_ClipPlane {}
+
+class Graphic3d_ClipPlane_4 extends Graphic3d_ClipPlane {}
+
 class Graphic3d_CubeMapOrder {
 }
+
+class Graphic3d_CubeMapOrder_1 extends Graphic3d_CubeMapOrder {}
+
+class Graphic3d_CubeMapOrder_2 extends Graphic3d_CubeMapOrder {}
+
+class Graphic3d_CubeMapOrder_3 extends Graphic3d_CubeMapOrder {}
 
 class Graphic3d_CubeMapPacked extends Graphic3d_CubeMap {
 }
 
+class Graphic3d_CubeMapPacked_1 extends Graphic3d_CubeMapPacked {}
+
+class Graphic3d_CubeMapPacked_2 extends Graphic3d_CubeMapPacked {}
+
 class Graphic3d_CubeMapSeparate extends Graphic3d_CubeMap {
 }
+
+class Graphic3d_CubeMapSeparate_1 extends Graphic3d_CubeMapSeparate {}
+
+class Graphic3d_CubeMapSeparate_2 extends Graphic3d_CubeMapSeparate {}
 
 class Graphic3d_CullingTool {
 }
@@ -7504,8 +14788,16 @@ class Graphic3d_Group extends Standard_Transient {
 class Graphic3d_GroupDefinitionError extends Standard_OutOfRange {
 }
 
+class Graphic3d_GroupDefinitionError_1 extends Graphic3d_GroupDefinitionError {}
+
+class Graphic3d_GroupDefinitionError_2 extends Graphic3d_GroupDefinitionError {}
+
 class Graphic3d_HatchStyle extends Standard_Transient {
 }
+
+class Graphic3d_HatchStyle_1 extends Graphic3d_HatchStyle {}
+
+class Graphic3d_HatchStyle_2 extends Graphic3d_HatchStyle {}
 
 class Graphic3d_IndexBuffer extends Graphic3d_Buffer {
 }
@@ -7519,11 +14811,23 @@ class Graphic3d_LightSet extends Standard_Transient {
 class Graphic3d_MarkerImage extends Standard_Transient {
 }
 
+class Graphic3d_MarkerImage_1 extends Graphic3d_MarkerImage {}
+
+class Graphic3d_MarkerImage_2 extends Graphic3d_MarkerImage {}
+
 class Graphic3d_MaterialAspect {
 }
 
+class Graphic3d_MaterialAspect_1 extends Graphic3d_MaterialAspect {}
+
+class Graphic3d_MaterialAspect_2 extends Graphic3d_MaterialAspect {}
+
 class Graphic3d_MaterialDefinitionError extends Standard_OutOfRange {
 }
+
+class Graphic3d_MaterialDefinitionError_1 extends Graphic3d_MaterialDefinitionError {}
+
+class Graphic3d_MaterialDefinitionError_2 extends Graphic3d_MaterialDefinitionError {}
 
 class Graphic3d_MediaTexture extends Graphic3d_Texture2D {
 }
@@ -7531,11 +14835,22 @@ class Graphic3d_MediaTexture extends Graphic3d_Texture2D {
 class Graphic3d_MutableIndexBuffer extends Graphic3d_IndexBuffer {
 }
 
+class Graphic3d_PBRMaterial {
+}
+
+class Graphic3d_PBRMaterial_1 extends Graphic3d_PBRMaterial {}
+
+class Graphic3d_PBRMaterial_2 extends Graphic3d_PBRMaterial {}
+
 class Graphic3d_PresentationAttributes extends Standard_Transient {
 }
 
 class Graphic3d_PriorityDefinitionError extends Standard_OutOfRange {
 }
+
+class Graphic3d_PriorityDefinitionError_1 extends Graphic3d_PriorityDefinitionError {}
+
+class Graphic3d_PriorityDefinitionError_2 extends Graphic3d_PriorityDefinitionError {}
 
 class Graphic3d_RenderingParams {
 }
@@ -7561,6 +14876,10 @@ class Graphic3d_Structure extends Standard_Transient {
 class Graphic3d_StructureDefinitionError extends Standard_OutOfRange {
 }
 
+class Graphic3d_StructureDefinitionError_1 extends Graphic3d_StructureDefinitionError {}
+
+class Graphic3d_StructureDefinitionError_2 extends Graphic3d_StructureDefinitionError {}
+
 class Graphic3d_StructureManager extends Standard_Transient {
 }
 
@@ -7573,8 +14892,20 @@ class Graphic3d_Texture1D extends Graphic3d_TextureMap {
 class Graphic3d_Texture1Dmanual extends Graphic3d_Texture1D {
 }
 
+class Graphic3d_Texture1Dmanual_1 extends Graphic3d_Texture1Dmanual {}
+
+class Graphic3d_Texture1Dmanual_2 extends Graphic3d_Texture1Dmanual {}
+
+class Graphic3d_Texture1Dmanual_3 extends Graphic3d_Texture1Dmanual {}
+
 class Graphic3d_Texture1Dsegment extends Graphic3d_Texture1D {
 }
+
+class Graphic3d_Texture1Dsegment_1 extends Graphic3d_Texture1Dsegment {}
+
+class Graphic3d_Texture1Dsegment_2 extends Graphic3d_Texture1Dsegment {}
+
+class Graphic3d_Texture1Dsegment_3 extends Graphic3d_Texture1Dsegment {}
 
 class Graphic3d_Texture2D extends Graphic3d_TextureMap {
 }
@@ -7582,11 +14913,29 @@ class Graphic3d_Texture2D extends Graphic3d_TextureMap {
 class Graphic3d_Texture2Dmanual extends Graphic3d_Texture2D {
 }
 
+class Graphic3d_Texture2Dmanual_1 extends Graphic3d_Texture2Dmanual {}
+
+class Graphic3d_Texture2Dmanual_2 extends Graphic3d_Texture2Dmanual {}
+
+class Graphic3d_Texture2Dmanual_3 extends Graphic3d_Texture2Dmanual {}
+
 class Graphic3d_Texture2Dplane extends Graphic3d_Texture2D {
 }
 
+class Graphic3d_Texture2Dplane_1 extends Graphic3d_Texture2Dplane {}
+
+class Graphic3d_Texture2Dplane_2 extends Graphic3d_Texture2Dplane {}
+
+class Graphic3d_Texture2Dplane_3 extends Graphic3d_Texture2Dplane {}
+
 class Graphic3d_TextureEnv extends Graphic3d_TextureRoot {
 }
+
+class Graphic3d_TextureEnv_1 extends Graphic3d_TextureEnv {}
+
+class Graphic3d_TextureEnv_2 extends Graphic3d_TextureEnv {}
+
+class Graphic3d_TextureEnv_3 extends Graphic3d_TextureEnv {}
 
 class Graphic3d_TextureMap extends Graphic3d_TextureRoot {
 }
@@ -7600,11 +14949,27 @@ class Graphic3d_TextureRoot extends Standard_Transient {
 class Graphic3d_TextureSet extends Standard_Transient {
 }
 
+class Graphic3d_TextureSet_1 extends Graphic3d_TextureSet {}
+
+class Graphic3d_TextureSet_2 extends Graphic3d_TextureSet {}
+
+class Graphic3d_TextureSet_3 extends Graphic3d_TextureSet {}
+
 class Graphic3d_TransformError extends Standard_OutOfRange {
 }
 
+class Graphic3d_TransformError_1 extends Graphic3d_TransformError {}
+
+class Graphic3d_TransformError_2 extends Graphic3d_TransformError {}
+
 class Graphic3d_TransformPers extends Standard_Transient {
 }
+
+class Graphic3d_TransformPers_1 extends Graphic3d_TransformPers {}
+
+class Graphic3d_TransformPers_2 extends Graphic3d_TransformPers {}
+
+class Graphic3d_TransformPers_3 extends Graphic3d_TransformPers {}
 
 class Graphic3d_ValidatedCubeMapOrder {
 }
@@ -7612,17 +14977,43 @@ class Graphic3d_ValidatedCubeMapOrder {
 class Graphic3d_Vertex {
 }
 
+class Graphic3d_Vertex_1 extends Graphic3d_Vertex {}
+
+class Graphic3d_Vertex_2 extends Graphic3d_Vertex {}
+
+class Graphic3d_Vertex_3 extends Graphic3d_Vertex {}
+
+class Graphic3d_Vertex_4 extends Graphic3d_Vertex {}
+
 class Graphic3d_ViewAffinity extends Standard_Transient {
 }
 
 class Graphic3d_WorldViewProjState {
 }
 
+class Graphic3d_WorldViewProjState_1 extends Graphic3d_WorldViewProjState {}
+
+class Graphic3d_WorldViewProjState_2 extends Graphic3d_WorldViewProjState {}
+
 class HLRAlgo {
 }
 
 class HLRAlgo_BiPoint {
 }
+
+class HLRAlgo_BiPoint_1 extends HLRAlgo_BiPoint {}
+
+class HLRAlgo_BiPoint_2 extends HLRAlgo_BiPoint {}
+
+class HLRAlgo_BiPoint_3 extends HLRAlgo_BiPoint {}
+
+class HLRAlgo_BiPoint_4 extends HLRAlgo_BiPoint {}
+
+class HLRAlgo_BiPoint_5 extends HLRAlgo_BiPoint {}
+
+class HLRAlgo_BiPoint_6 extends HLRAlgo_BiPoint {}
+
+class HLRAlgo_BiPoint_7 extends HLRAlgo_BiPoint {}
 
 class HLRAlgo_Coincidence {
 }
@@ -7633,14 +15024,26 @@ class HLRAlgo_EdgeIterator {
 class HLRAlgo_EdgeStatus {
 }
 
+class HLRAlgo_EdgeStatus_1 extends HLRAlgo_EdgeStatus {}
+
+class HLRAlgo_EdgeStatus_2 extends HLRAlgo_EdgeStatus {}
+
 class HLRAlgo_EdgesBlock extends Standard_Transient {
 }
 
 class HLRAlgo_Interference {
 }
 
+class HLRAlgo_Interference_1 extends HLRAlgo_Interference {}
+
+class HLRAlgo_Interference_2 extends HLRAlgo_Interference {}
+
 class HLRAlgo_Intersection {
 }
+
+class HLRAlgo_Intersection_1 extends HLRAlgo_Intersection {}
+
+class HLRAlgo_Intersection_2 extends HLRAlgo_Intersection {}
 
 class HLRAlgo_PolyAlgo extends Standard_Transient {
 }
@@ -7663,6 +15066,16 @@ class HLRAlgo_PolyShellData extends Standard_Transient {
 class HLRAlgo_Projector {
 }
 
+class HLRAlgo_Projector_1 extends HLRAlgo_Projector {}
+
+class HLRAlgo_Projector_2 extends HLRAlgo_Projector {}
+
+class HLRAlgo_Projector_3 extends HLRAlgo_Projector {}
+
+class HLRAlgo_Projector_4 extends HLRAlgo_Projector {}
+
+class HLRAlgo_Projector_5 extends HLRAlgo_Projector {}
+
 class HLRAlgo_WiresBlock extends Standard_Transient {
 }
 
@@ -7684,11 +15097,27 @@ class HLRTopoBRep_FaceIsoLiner {
 class HLRTopoBRep_OutLiner extends Standard_Transient {
 }
 
+class HLRTopoBRep_OutLiner_1 extends HLRTopoBRep_OutLiner {}
+
+class HLRTopoBRep_OutLiner_2 extends HLRTopoBRep_OutLiner {}
+
+class HLRTopoBRep_OutLiner_3 extends HLRTopoBRep_OutLiner {}
+
 class HLRTopoBRep_VData {
 }
 
+class HLRTopoBRep_VData_1 extends HLRTopoBRep_VData {}
+
+class HLRTopoBRep_VData_2 extends HLRTopoBRep_VData {}
+
 class HatchGen_Domain {
 }
+
+class HatchGen_Domain_1 extends HatchGen_Domain {}
+
+class HatchGen_Domain_2 extends HatchGen_Domain {}
+
+class HatchGen_Domain_3 extends HatchGen_Domain {}
 
 class HatchGen_IntersectionPoint {
 }
@@ -7696,8 +15125,20 @@ class HatchGen_IntersectionPoint {
 class HatchGen_PointOnElement extends HatchGen_IntersectionPoint {
 }
 
+class HatchGen_PointOnElement_1 extends HatchGen_PointOnElement {}
+
+class HatchGen_PointOnElement_2 extends HatchGen_PointOnElement {}
+
+class HatchGen_PointOnElement_3 extends HatchGen_PointOnElement {}
+
 class HatchGen_PointOnHatching extends HatchGen_IntersectionPoint {
 }
+
+class HatchGen_PointOnHatching_1 extends HatchGen_PointOnHatching {}
+
+class HatchGen_PointOnHatching_2 extends HatchGen_PointOnHatching {}
+
+class HatchGen_PointOnHatching_3 extends HatchGen_PointOnHatching {}
 
 class Hatch_Hatcher {
 }
@@ -7705,8 +15146,16 @@ class Hatch_Hatcher {
 class Hatch_Line {
 }
 
+class Hatch_Line_1 extends Hatch_Line {}
+
+class Hatch_Line_2 extends Hatch_Line {}
+
 class Hatch_Parameter {
 }
+
+class Hatch_Parameter_1 extends Hatch_Parameter {}
+
+class Hatch_Parameter_2 extends Hatch_Parameter {}
 
 class HeaderSection {
 }
@@ -7729,8 +15178,16 @@ class Hermit {
 class IFGraph_AllConnected extends Interface_GraphContent {
 }
 
+class IFGraph_AllConnected_1 extends IFGraph_AllConnected {}
+
+class IFGraph_AllConnected_2 extends IFGraph_AllConnected {}
+
 class IFGraph_AllShared extends Interface_GraphContent {
 }
+
+class IFGraph_AllShared_1 extends IFGraph_AllShared {}
+
+class IFGraph_AllShared_2 extends IFGraph_AllShared {}
 
 class IFGraph_Articulations extends Interface_GraphContent {
 }
@@ -7747,17 +15204,29 @@ class IFGraph_Cumulate extends Interface_GraphContent {
 class IFGraph_Cycles extends IFGraph_SubPartsIterator {
 }
 
+class IFGraph_Cycles_1 extends IFGraph_Cycles {}
+
+class IFGraph_Cycles_2 extends IFGraph_Cycles {}
+
 class IFGraph_ExternalSources extends Interface_GraphContent {
 }
 
 class IFGraph_SCRoots extends IFGraph_StrongComponants {
 }
 
+class IFGraph_SCRoots_1 extends IFGraph_SCRoots {}
+
+class IFGraph_SCRoots_2 extends IFGraph_SCRoots {}
+
 class IFGraph_StrongComponants extends IFGraph_SubPartsIterator {
 }
 
 class IFGraph_SubPartsIterator {
 }
+
+class IFGraph_SubPartsIterator_1 extends IFGraph_SubPartsIterator {}
+
+class IFGraph_SubPartsIterator_2 extends IFGraph_SubPartsIterator {}
 
 class IFSelect {
 }
@@ -7779,6 +15248,10 @@ class IFSelect_CheckCounter extends IFSelect_SignatureList {
 
 class IFSelect_ContextWrite {
 }
+
+class IFSelect_ContextWrite_1 extends IFSelect_ContextWrite {}
+
+class IFSelect_ContextWrite_2 extends IFSelect_ContextWrite {}
 
 class IFSelect_DispGlobal extends IFSelect_Dispatch {
 }
@@ -7812,6 +15285,10 @@ class IFSelect_GraphCounter extends IFSelect_SignCounter {
 
 class IFSelect_ListEditor extends Standard_Transient {
 }
+
+class IFSelect_ListEditor_1 extends IFSelect_ListEditor {}
+
+class IFSelect_ListEditor_2 extends IFSelect_ListEditor {}
 
 class IFSelect_ModelCopier extends Standard_Transient {
 }
@@ -7906,6 +15383,12 @@ class IFSelect_SelectSharing extends IFSelect_SelectDeduct {
 class IFSelect_SelectSignature extends IFSelect_SelectExtract {
 }
 
+class IFSelect_SelectSignature_1 extends IFSelect_SelectSignature {}
+
+class IFSelect_SelectSignature_2 extends IFSelect_SelectSignature {}
+
+class IFSelect_SelectSignature_3 extends IFSelect_SelectSignature {}
+
 class IFSelect_SelectSignedShared extends IFSelect_SelectExplore {
 }
 
@@ -7917,6 +15400,10 @@ class IFSelect_SelectSuite extends IFSelect_SelectDeduct {
 
 class IFSelect_SelectType extends IFSelect_SelectAnyType {
 }
+
+class IFSelect_SelectType_1 extends IFSelect_SelectType {}
+
+class IFSelect_SelectType_2 extends IFSelect_SelectType {}
 
 class IFSelect_SelectUnion extends IFSelect_SelectCombine {
 }
@@ -7930,11 +15417,19 @@ class IFSelect_Selection extends Standard_Transient {
 class IFSelect_SelectionIterator {
 }
 
+class IFSelect_SelectionIterator_1 extends IFSelect_SelectionIterator {}
+
+class IFSelect_SelectionIterator_2 extends IFSelect_SelectionIterator {}
+
 class IFSelect_SessionDumper extends Standard_Transient {
 }
 
 class IFSelect_SessionFile {
 }
+
+class IFSelect_SessionFile_1 extends IFSelect_SessionFile {}
+
+class IFSelect_SessionFile_2 extends IFSelect_SessionFile {}
 
 class IFSelect_SessionPilot extends IFSelect_Activator {
 }
@@ -7945,6 +15440,14 @@ class IFSelect_ShareOut extends Standard_Transient {
 class IFSelect_ShareOutResult {
 }
 
+class IFSelect_ShareOutResult_1 extends IFSelect_ShareOutResult {}
+
+class IFSelect_ShareOutResult_2 extends IFSelect_ShareOutResult {}
+
+class IFSelect_ShareOutResult_3 extends IFSelect_ShareOutResult {}
+
+class IFSelect_ShareOutResult_4 extends IFSelect_ShareOutResult {}
+
 class IFSelect_SignAncestor extends IFSelect_SignType {
 }
 
@@ -7953,6 +15456,10 @@ class IFSelect_SignCategory extends IFSelect_Signature {
 
 class IFSelect_SignCounter extends IFSelect_SignatureList {
 }
+
+class IFSelect_SignCounter_1 extends IFSelect_SignCounter {}
+
+class IFSelect_SignCounter_2 extends IFSelect_SignCounter {}
 
 class IFSelect_SignMultiple extends IFSelect_Signature {
 }
@@ -7993,14 +15500,28 @@ class IGESControl_Controller extends XSControl_Controller {
 class IGESControl_IGESBoundary extends IGESToBRep_IGESBoundary {
 }
 
+class IGESControl_IGESBoundary_1 extends IGESControl_IGESBoundary {}
+
+class IGESControl_IGESBoundary_2 extends IGESControl_IGESBoundary {}
+
 class IGESControl_Reader extends XSControl_Reader {
 }
+
+class IGESControl_Reader_1 extends IGESControl_Reader {}
+
+class IGESControl_Reader_2 extends IGESControl_Reader {}
 
 class IGESControl_ToolContainer extends IGESToBRep_ToolContainer {
 }
 
 class IGESControl_Writer {
 }
+
+class IGESControl_Writer_1 extends IGESControl_Writer {}
+
+class IGESControl_Writer_2 extends IGESControl_Writer {}
+
+class IGESControl_Writer_3 extends IGESControl_Writer {}
 
 class IMeshData_Curve extends IMeshData_ParametersList {
 }
@@ -8038,6 +15559,10 @@ class IMeshTools_MeshAlgoFactory extends Standard_Transient {
 class IMeshTools_MeshBuilder extends Message_Algorithm {
 }
 
+class IMeshTools_MeshBuilder_1 extends IMeshTools_MeshBuilder {}
+
+class IMeshTools_MeshBuilder_2 extends IMeshTools_MeshBuilder {}
+
 class IMeshTools_ModelAlgo extends Standard_Transient {
 }
 
@@ -8065,14 +15590,54 @@ class Image_PixMapData extends NCollection_Buffer {
 class Image_Texture extends Standard_Transient {
 }
 
+class Image_Texture_1 extends Image_Texture {}
+
+class Image_Texture_2 extends Image_Texture {}
+
+class Image_Texture_3 extends Image_Texture {}
+
 class IntAna2d_AnaIntersection {
 }
+
+class IntAna2d_AnaIntersection_1 extends IntAna2d_AnaIntersection {}
+
+class IntAna2d_AnaIntersection_2 extends IntAna2d_AnaIntersection {}
+
+class IntAna2d_AnaIntersection_3 extends IntAna2d_AnaIntersection {}
+
+class IntAna2d_AnaIntersection_4 extends IntAna2d_AnaIntersection {}
+
+class IntAna2d_AnaIntersection_5 extends IntAna2d_AnaIntersection {}
+
+class IntAna2d_AnaIntersection_6 extends IntAna2d_AnaIntersection {}
+
+class IntAna2d_AnaIntersection_7 extends IntAna2d_AnaIntersection {}
+
+class IntAna2d_AnaIntersection_8 extends IntAna2d_AnaIntersection {}
+
+class IntAna2d_AnaIntersection_9 extends IntAna2d_AnaIntersection {}
 
 class IntAna2d_Conic {
 }
 
+class IntAna2d_Conic_1 extends IntAna2d_Conic {}
+
+class IntAna2d_Conic_2 extends IntAna2d_Conic {}
+
+class IntAna2d_Conic_3 extends IntAna2d_Conic {}
+
+class IntAna2d_Conic_4 extends IntAna2d_Conic {}
+
+class IntAna2d_Conic_5 extends IntAna2d_Conic {}
+
 class IntAna2d_IntPoint {
 }
+
+class IntAna2d_IntPoint_1 extends IntAna2d_IntPoint {}
+
+class IntAna2d_IntPoint_2 extends IntAna2d_IntPoint {}
+
+class IntAna2d_IntPoint_3 extends IntAna2d_IntPoint {}
 
 class IntAna_Curve {
 }
@@ -8080,20 +15645,98 @@ class IntAna_Curve {
 class IntAna_Int3Pln {
 }
 
+class IntAna_Int3Pln_1 extends IntAna_Int3Pln {}
+
+class IntAna_Int3Pln_2 extends IntAna_Int3Pln {}
+
 class IntAna_IntConicQuad {
 }
+
+class IntAna_IntConicQuad_1 extends IntAna_IntConicQuad {}
+
+class IntAna_IntConicQuad_2 extends IntAna_IntConicQuad {}
+
+class IntAna_IntConicQuad_3 extends IntAna_IntConicQuad {}
+
+class IntAna_IntConicQuad_4 extends IntAna_IntConicQuad {}
+
+class IntAna_IntConicQuad_5 extends IntAna_IntConicQuad {}
+
+class IntAna_IntConicQuad_6 extends IntAna_IntConicQuad {}
+
+class IntAna_IntConicQuad_7 extends IntAna_IntConicQuad {}
+
+class IntAna_IntConicQuad_8 extends IntAna_IntConicQuad {}
+
+class IntAna_IntConicQuad_9 extends IntAna_IntConicQuad {}
+
+class IntAna_IntConicQuad_10 extends IntAna_IntConicQuad {}
+
+class IntAna_IntConicQuad_11 extends IntAna_IntConicQuad {}
 
 class IntAna_IntLinTorus {
 }
 
+class IntAna_IntLinTorus_1 extends IntAna_IntLinTorus {}
+
+class IntAna_IntLinTorus_2 extends IntAna_IntLinTorus {}
+
 class IntAna_IntQuadQuad {
 }
+
+class IntAna_IntQuadQuad_1 extends IntAna_IntQuadQuad {}
+
+class IntAna_IntQuadQuad_2 extends IntAna_IntQuadQuad {}
+
+class IntAna_IntQuadQuad_3 extends IntAna_IntQuadQuad {}
 
 class IntAna_QuadQuadGeo {
 }
 
+class IntAna_QuadQuadGeo_1 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_2 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_3 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_4 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_5 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_6 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_7 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_8 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_9 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_10 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_11 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_12 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_13 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_14 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_15 extends IntAna_QuadQuadGeo {}
+
+class IntAna_QuadQuadGeo_16 extends IntAna_QuadQuadGeo {}
+
 class IntAna_Quadric {
 }
+
+class IntAna_Quadric_1 extends IntAna_Quadric {}
+
+class IntAna_Quadric_2 extends IntAna_Quadric {}
+
+class IntAna_Quadric_3 extends IntAna_Quadric {}
+
+class IntAna_Quadric_4 extends IntAna_Quadric {}
+
+class IntAna_Quadric_5 extends IntAna_Quadric {}
 
 class IntCurveSurface_HInter extends IntCurveSurface_Intersection {
 }
@@ -8104,8 +15747,16 @@ class IntCurveSurface_Intersection {
 class IntCurveSurface_IntersectionPoint {
 }
 
+class IntCurveSurface_IntersectionPoint_1 extends IntCurveSurface_IntersectionPoint {}
+
+class IntCurveSurface_IntersectionPoint_2 extends IntCurveSurface_IntersectionPoint {}
+
 class IntCurveSurface_IntersectionSegment {
 }
+
+class IntCurveSurface_IntersectionSegment_1 extends IntCurveSurface_IntersectionSegment {}
+
+class IntCurveSurface_IntersectionSegment_2 extends IntCurveSurface_IntersectionSegment {}
 
 class IntCurveSurface_TheCSFunctionOfHInter extends math_FunctionSetWithDerivatives {
 }
@@ -8113,14 +15764,38 @@ class IntCurveSurface_TheCSFunctionOfHInter extends math_FunctionSetWithDerivati
 class IntCurveSurface_TheExactHInter {
 }
 
+class IntCurveSurface_TheExactHInter_1 extends IntCurveSurface_TheExactHInter {}
+
+class IntCurveSurface_TheExactHInter_2 extends IntCurveSurface_TheExactHInter {}
+
 class IntCurveSurface_TheHCurveTool {
 }
 
 class IntCurveSurface_TheInterferenceOfHInter extends Intf_Interference {
 }
 
+class IntCurveSurface_TheInterferenceOfHInter_1 extends IntCurveSurface_TheInterferenceOfHInter {}
+
+class IntCurveSurface_TheInterferenceOfHInter_2 extends IntCurveSurface_TheInterferenceOfHInter {}
+
+class IntCurveSurface_TheInterferenceOfHInter_3 extends IntCurveSurface_TheInterferenceOfHInter {}
+
+class IntCurveSurface_TheInterferenceOfHInter_4 extends IntCurveSurface_TheInterferenceOfHInter {}
+
+class IntCurveSurface_TheInterferenceOfHInter_5 extends IntCurveSurface_TheInterferenceOfHInter {}
+
+class IntCurveSurface_TheInterferenceOfHInter_6 extends IntCurveSurface_TheInterferenceOfHInter {}
+
+class IntCurveSurface_TheInterferenceOfHInter_7 extends IntCurveSurface_TheInterferenceOfHInter {}
+
 class IntCurveSurface_ThePolygonOfHInter {
 }
+
+class IntCurveSurface_ThePolygonOfHInter_1 extends IntCurveSurface_ThePolygonOfHInter {}
+
+class IntCurveSurface_ThePolygonOfHInter_2 extends IntCurveSurface_ThePolygonOfHInter {}
+
+class IntCurveSurface_ThePolygonOfHInter_3 extends IntCurveSurface_ThePolygonOfHInter {}
 
 class IntCurveSurface_ThePolygonToolOfHInter {
 }
@@ -8137,17 +15812,79 @@ class IntCurveSurface_TheQuadCurvFuncOfTheQuadCurvExactHInter extends math_Funct
 class IntCurve_IConicTool {
 }
 
+class IntCurve_IConicTool_1 extends IntCurve_IConicTool {}
+
+class IntCurve_IConicTool_2 extends IntCurve_IConicTool {}
+
+class IntCurve_IConicTool_3 extends IntCurve_IConicTool {}
+
+class IntCurve_IConicTool_4 extends IntCurve_IConicTool {}
+
+class IntCurve_IConicTool_5 extends IntCurve_IConicTool {}
+
+class IntCurve_IConicTool_6 extends IntCurve_IConicTool {}
+
+class IntCurve_IConicTool_7 extends IntCurve_IConicTool {}
+
 class IntCurve_IntConicConic extends IntRes2d_Intersection {
 }
 
+class IntCurve_IntConicConic_1 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_2 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_3 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_4 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_5 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_6 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_7 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_8 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_9 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_10 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_11 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_12 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_13 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_14 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_15 extends IntCurve_IntConicConic {}
+
+class IntCurve_IntConicConic_16 extends IntCurve_IntConicConic {}
+
 class IntCurve_IntImpConicParConic extends IntRes2d_Intersection {
 }
+
+class IntCurve_IntImpConicParConic_1 extends IntCurve_IntImpConicParConic {}
+
+class IntCurve_IntImpConicParConic_2 extends IntCurve_IntImpConicParConic {}
 
 class IntCurve_MyImpParToolOfIntImpConicParConic extends math_FunctionWithDerivative {
 }
 
 class IntCurve_PConic {
 }
+
+class IntCurve_PConic_1 extends IntCurve_PConic {}
+
+class IntCurve_PConic_2 extends IntCurve_PConic {}
+
+class IntCurve_PConic_3 extends IntCurve_PConic {}
+
+class IntCurve_PConic_4 extends IntCurve_PConic {}
+
+class IntCurve_PConic_5 extends IntCurve_PConic {}
+
+class IntCurve_PConic_6 extends IntCurve_PConic {}
 
 class IntCurve_PConicTool {
 }
@@ -8164,6 +15901,12 @@ class IntCurvesFace_ShapeIntersector {
 class IntPatch_ALine extends IntPatch_Line {
 }
 
+class IntPatch_ALine_1 extends IntPatch_ALine {}
+
+class IntPatch_ALine_2 extends IntPatch_ALine {}
+
+class IntPatch_ALine_3 extends IntPatch_ALine {}
+
 class IntPatch_ALineToWLine {
 }
 
@@ -8176,8 +15919,42 @@ class IntPatch_CSFunction extends math_FunctionSetWithDerivatives {
 class IntPatch_CurvIntSurf {
 }
 
+class IntPatch_CurvIntSurf_1 extends IntPatch_CurvIntSurf {}
+
+class IntPatch_CurvIntSurf_2 extends IntPatch_CurvIntSurf {}
+
 class IntPatch_GLine extends IntPatch_Line {
 }
+
+class IntPatch_GLine_1 extends IntPatch_GLine {}
+
+class IntPatch_GLine_2 extends IntPatch_GLine {}
+
+class IntPatch_GLine_3 extends IntPatch_GLine {}
+
+class IntPatch_GLine_4 extends IntPatch_GLine {}
+
+class IntPatch_GLine_5 extends IntPatch_GLine {}
+
+class IntPatch_GLine_6 extends IntPatch_GLine {}
+
+class IntPatch_GLine_7 extends IntPatch_GLine {}
+
+class IntPatch_GLine_8 extends IntPatch_GLine {}
+
+class IntPatch_GLine_9 extends IntPatch_GLine {}
+
+class IntPatch_GLine_10 extends IntPatch_GLine {}
+
+class IntPatch_GLine_11 extends IntPatch_GLine {}
+
+class IntPatch_GLine_12 extends IntPatch_GLine {}
+
+class IntPatch_GLine_13 extends IntPatch_GLine {}
+
+class IntPatch_GLine_14 extends IntPatch_GLine {}
+
+class IntPatch_GLine_15 extends IntPatch_GLine {}
 
 class IntPatch_HCurve2dTool {
 }
@@ -8188,14 +15965,34 @@ class IntPatch_HInterTool {
 class IntPatch_ImpImpIntersection {
 }
 
+class IntPatch_ImpImpIntersection_1 extends IntPatch_ImpImpIntersection {}
+
+class IntPatch_ImpImpIntersection_2 extends IntPatch_ImpImpIntersection {}
+
 class IntPatch_ImpPrmIntersection {
 }
+
+class IntPatch_ImpPrmIntersection_1 extends IntPatch_ImpPrmIntersection {}
+
+class IntPatch_ImpPrmIntersection_2 extends IntPatch_ImpPrmIntersection {}
 
 class IntPatch_InterferencePolyhedron extends Intf_Interference {
 }
 
+class IntPatch_InterferencePolyhedron_1 extends IntPatch_InterferencePolyhedron {}
+
+class IntPatch_InterferencePolyhedron_2 extends IntPatch_InterferencePolyhedron {}
+
+class IntPatch_InterferencePolyhedron_3 extends IntPatch_InterferencePolyhedron {}
+
 class IntPatch_Intersection {
 }
+
+class IntPatch_Intersection_1 extends IntPatch_Intersection {}
+
+class IntPatch_Intersection_2 extends IntPatch_Intersection {}
+
+class IntPatch_Intersection_3 extends IntPatch_Intersection {}
 
 class IntPatch_Line extends Standard_Transient {
 }
@@ -8214,6 +16011,10 @@ class IntPatch_PolyArc extends IntPatch_Polygo {
 
 class IntPatch_PolyLine extends IntPatch_Polygo {
 }
+
+class IntPatch_PolyLine_1 extends IntPatch_PolyLine {}
+
+class IntPatch_PolyLine_2 extends IntPatch_PolyLine {}
 
 class IntPatch_Polygo extends Intf_Polygon2d {
 }
@@ -8242,11 +16043,21 @@ class IntPatch_TheIWalking {
 class IntPatch_ThePathPointOfTheSOnBounds {
 }
 
+class IntPatch_ThePathPointOfTheSOnBounds_1 extends IntPatch_ThePathPointOfTheSOnBounds {}
+
+class IntPatch_ThePathPointOfTheSOnBounds_2 extends IntPatch_ThePathPointOfTheSOnBounds {}
+
+class IntPatch_ThePathPointOfTheSOnBounds_3 extends IntPatch_ThePathPointOfTheSOnBounds {}
+
 class IntPatch_TheSOnBounds {
 }
 
 class IntPatch_TheSearchInside {
 }
+
+class IntPatch_TheSearchInside_1 extends IntPatch_TheSearchInside {}
+
+class IntPatch_TheSearchInside_2 extends IntPatch_TheSearchInside {}
 
 class IntPatch_TheSegmentOfTheSOnBounds {
 }
@@ -8254,8 +16065,20 @@ class IntPatch_TheSegmentOfTheSOnBounds {
 class IntPatch_TheSurfFunction extends math_FunctionSetWithDerivatives {
 }
 
+class IntPatch_TheSurfFunction_1 extends IntPatch_TheSurfFunction {}
+
+class IntPatch_TheSurfFunction_2 extends IntPatch_TheSurfFunction {}
+
+class IntPatch_TheSurfFunction_3 extends IntPatch_TheSurfFunction {}
+
 class IntPatch_WLine extends IntPatch_PointLine {
 }
+
+class IntPatch_WLine_1 extends IntPatch_WLine {}
+
+class IntPatch_WLine_2 extends IntPatch_WLine {}
+
+class IntPatch_WLine_3 extends IntPatch_WLine {}
 
 class IntPatch_WLineTool {
 }
@@ -8263,23 +16086,49 @@ class IntPatch_WLineTool {
 class IntPolyh_Couple {
 }
 
+class IntPolyh_Couple_1 extends IntPolyh_Couple {}
+
+class IntPolyh_Couple_2 extends IntPolyh_Couple {}
+
 class IntPolyh_CoupleMapHasher {
 }
 
 class IntPolyh_Edge {
 }
 
+class IntPolyh_Edge_1 extends IntPolyh_Edge {}
+
+class IntPolyh_Edge_2 extends IntPolyh_Edge {}
+
 class IntPolyh_Intersection {
 }
+
+class IntPolyh_Intersection_1 extends IntPolyh_Intersection {}
+
+class IntPolyh_Intersection_2 extends IntPolyh_Intersection {}
+
+class IntPolyh_Intersection_3 extends IntPolyh_Intersection {}
 
 class IntPolyh_Point {
 }
 
+class IntPolyh_Point_1 extends IntPolyh_Point {}
+
+class IntPolyh_Point_2 extends IntPolyh_Point {}
+
 class IntPolyh_SectionLine {
 }
 
+class IntPolyh_SectionLine_1 extends IntPolyh_SectionLine {}
+
+class IntPolyh_SectionLine_2 extends IntPolyh_SectionLine {}
+
 class IntPolyh_StartPoint {
 }
+
+class IntPolyh_StartPoint_1 extends IntPolyh_StartPoint {}
+
+class IntPolyh_StartPoint_2 extends IntPolyh_StartPoint {}
 
 class IntPolyh_Tools {
 }
@@ -8287,8 +16136,18 @@ class IntPolyh_Tools {
 class IntPolyh_Triangle {
 }
 
+class IntPolyh_Triangle_1 extends IntPolyh_Triangle {}
+
+class IntPolyh_Triangle_2 extends IntPolyh_Triangle {}
+
 class IntRes2d_Domain {
 }
+
+class IntRes2d_Domain_1 extends IntRes2d_Domain {}
+
+class IntRes2d_Domain_2 extends IntRes2d_Domain {}
+
+class IntRes2d_Domain_3 extends IntRes2d_Domain {}
 
 class IntRes2d_Intersection {
 }
@@ -8296,11 +16155,31 @@ class IntRes2d_Intersection {
 class IntRes2d_IntersectionPoint {
 }
 
+class IntRes2d_IntersectionPoint_1 extends IntRes2d_IntersectionPoint {}
+
+class IntRes2d_IntersectionPoint_2 extends IntRes2d_IntersectionPoint {}
+
 class IntRes2d_IntersectionSegment {
 }
 
+class IntRes2d_IntersectionSegment_1 extends IntRes2d_IntersectionSegment {}
+
+class IntRes2d_IntersectionSegment_2 extends IntRes2d_IntersectionSegment {}
+
+class IntRes2d_IntersectionSegment_3 extends IntRes2d_IntersectionSegment {}
+
+class IntRes2d_IntersectionSegment_4 extends IntRes2d_IntersectionSegment {}
+
 class IntRes2d_Transition {
 }
+
+class IntRes2d_Transition_1 extends IntRes2d_Transition {}
+
+class IntRes2d_Transition_2 extends IntRes2d_Transition {}
+
+class IntRes2d_Transition_3 extends IntRes2d_Transition {}
+
+class IntRes2d_Transition_4 extends IntRes2d_Transition {}
 
 class IntStart_SITopolTool extends Standard_Transient {
 }
@@ -8311,8 +16190,16 @@ class IntSurf {
 class IntSurf_Couple {
 }
 
+class IntSurf_Couple_1 extends IntSurf_Couple {}
+
+class IntSurf_Couple_2 extends IntSurf_Couple {}
+
 class IntSurf_InteriorPoint {
 }
+
+class IntSurf_InteriorPoint_1 extends IntSurf_InteriorPoint {}
+
+class IntSurf_InteriorPoint_2 extends IntSurf_InteriorPoint {}
 
 class IntSurf_InteriorPointTool {
 }
@@ -8323,6 +16210,10 @@ class IntSurf_LineOn2S extends Standard_Transient {
 class IntSurf_PathPoint {
 }
 
+class IntSurf_PathPoint_1 extends IntSurf_PathPoint {}
+
+class IntSurf_PathPoint_2 extends IntSurf_PathPoint {}
+
 class IntSurf_PathPointTool {
 }
 
@@ -8332,11 +16223,29 @@ class IntSurf_PntOn2S {
 class IntSurf_Quadric {
 }
 
+class IntSurf_Quadric_1 extends IntSurf_Quadric {}
+
+class IntSurf_Quadric_2 extends IntSurf_Quadric {}
+
+class IntSurf_Quadric_3 extends IntSurf_Quadric {}
+
+class IntSurf_Quadric_4 extends IntSurf_Quadric {}
+
+class IntSurf_Quadric_5 extends IntSurf_Quadric {}
+
+class IntSurf_Quadric_6 extends IntSurf_Quadric {}
+
 class IntSurf_QuadricTool {
 }
 
 class IntSurf_Transition {
 }
+
+class IntSurf_Transition_1 extends IntSurf_Transition {}
+
+class IntSurf_Transition_2 extends IntSurf_Transition {}
+
+class IntSurf_Transition_3 extends IntSurf_Transition {}
 
 class IntTools {
 }
@@ -8344,20 +16253,48 @@ class IntTools {
 class IntTools_BaseRangeSample {
 }
 
+class IntTools_BaseRangeSample_1 extends IntTools_BaseRangeSample {}
+
+class IntTools_BaseRangeSample_2 extends IntTools_BaseRangeSample {}
+
 class IntTools_BeanFaceIntersector {
 }
+
+class IntTools_BeanFaceIntersector_1 extends IntTools_BeanFaceIntersector {}
+
+class IntTools_BeanFaceIntersector_2 extends IntTools_BeanFaceIntersector {}
+
+class IntTools_BeanFaceIntersector_3 extends IntTools_BeanFaceIntersector {}
+
+class IntTools_BeanFaceIntersector_4 extends IntTools_BeanFaceIntersector {}
 
 class IntTools_CArray1OfInteger {
 }
 
+class IntTools_CArray1OfInteger_1 extends IntTools_CArray1OfInteger {}
+
+class IntTools_CArray1OfInteger_2 extends IntTools_CArray1OfInteger {}
+
 class IntTools_CArray1OfReal {
 }
+
+class IntTools_CArray1OfReal_1 extends IntTools_CArray1OfReal {}
+
+class IntTools_CArray1OfReal_2 extends IntTools_CArray1OfReal {}
 
 class IntTools_CommonPrt {
 }
 
+class IntTools_CommonPrt_1 extends IntTools_CommonPrt {}
+
+class IntTools_CommonPrt_2 extends IntTools_CommonPrt {}
+
 class IntTools_Curve {
 }
+
+class IntTools_Curve_1 extends IntTools_Curve {}
+
+class IntTools_Curve_2 extends IntTools_Curve {}
 
 class IntTools_CurveRangeLocalizeData {
 }
@@ -8365,11 +16302,21 @@ class IntTools_CurveRangeLocalizeData {
 class IntTools_CurveRangeSample extends IntTools_BaseRangeSample {
 }
 
+class IntTools_CurveRangeSample_1 extends IntTools_CurveRangeSample {}
+
+class IntTools_CurveRangeSample_2 extends IntTools_CurveRangeSample {}
+
 class IntTools_CurveRangeSampleMapHasher {
 }
 
 class IntTools_EdgeEdge {
 }
+
+class IntTools_EdgeEdge_1 extends IntTools_EdgeEdge {}
+
+class IntTools_EdgeEdge_2 extends IntTools_EdgeEdge {}
+
+class IntTools_EdgeEdge_3 extends IntTools_EdgeEdge {}
 
 class IntTools_EdgeFace {
 }
@@ -8377,20 +16324,42 @@ class IntTools_EdgeFace {
 class IntTools_FClass2d {
 }
 
+class IntTools_FClass2d_1 extends IntTools_FClass2d {}
+
+class IntTools_FClass2d_2 extends IntTools_FClass2d {}
+
 class IntTools_FaceFace {
 }
 
 class IntTools_MarkedRangeSet {
 }
 
+class IntTools_MarkedRangeSet_1 extends IntTools_MarkedRangeSet {}
+
+class IntTools_MarkedRangeSet_2 extends IntTools_MarkedRangeSet {}
+
+class IntTools_MarkedRangeSet_3 extends IntTools_MarkedRangeSet {}
+
 class IntTools_PntOn2Faces {
 }
+
+class IntTools_PntOn2Faces_1 extends IntTools_PntOn2Faces {}
+
+class IntTools_PntOn2Faces_2 extends IntTools_PntOn2Faces {}
 
 class IntTools_Range {
 }
 
+class IntTools_Range_1 extends IntTools_Range {}
+
+class IntTools_Range_2 extends IntTools_Range {}
+
 class IntTools_Root {
 }
+
+class IntTools_Root_1 extends IntTools_Root {}
+
+class IntTools_Root_2 extends IntTools_Root {}
 
 class IntTools_ShrunkRange {
 }
@@ -8398,8 +16367,22 @@ class IntTools_ShrunkRange {
 class IntTools_SurfaceRangeLocalizeData {
 }
 
+class IntTools_SurfaceRangeLocalizeData_1 extends IntTools_SurfaceRangeLocalizeData {}
+
+class IntTools_SurfaceRangeLocalizeData_2 extends IntTools_SurfaceRangeLocalizeData {}
+
+class IntTools_SurfaceRangeLocalizeData_3 extends IntTools_SurfaceRangeLocalizeData {}
+
 class IntTools_SurfaceRangeSample {
 }
+
+class IntTools_SurfaceRangeSample_1 extends IntTools_SurfaceRangeSample {}
+
+class IntTools_SurfaceRangeSample_2 extends IntTools_SurfaceRangeSample {}
+
+class IntTools_SurfaceRangeSample_3 extends IntTools_SurfaceRangeSample {}
+
+class IntTools_SurfaceRangeSample_4 extends IntTools_SurfaceRangeSample {}
 
 class IntTools_SurfaceRangeSampleMapHasher {
 }
@@ -8410,11 +16393,19 @@ class IntTools_Tools {
 class IntTools_TopolTool extends Adaptor3d_TopolTool {
 }
 
+class IntTools_TopolTool_1 extends IntTools_TopolTool {}
+
+class IntTools_TopolTool_2 extends IntTools_TopolTool {}
+
 class IntTools_WLineTool {
 }
 
 class IntWalk_PWalking {
 }
+
+class IntWalk_PWalking_1 extends IntWalk_PWalking {}
+
+class IntWalk_PWalking_2 extends IntWalk_PWalking {}
 
 class IntWalk_TheFunctionOfTheInt2S extends math_FunctionSetWithDerivatives {
 }
@@ -8422,23 +16413,59 @@ class IntWalk_TheFunctionOfTheInt2S extends math_FunctionSetWithDerivatives {
 class IntWalk_TheInt2S {
 }
 
+class IntWalk_TheInt2S_1 extends IntWalk_TheInt2S {}
+
+class IntWalk_TheInt2S_2 extends IntWalk_TheInt2S {}
+
 class Interface_BitMap {
 }
+
+class Interface_BitMap_1 extends Interface_BitMap {}
+
+class Interface_BitMap_2 extends Interface_BitMap {}
+
+class Interface_BitMap_3 extends Interface_BitMap {}
 
 class Interface_Category {
 }
 
+class Interface_Category_1 extends Interface_Category {}
+
+class Interface_Category_2 extends Interface_Category {}
+
+class Interface_Category_3 extends Interface_Category {}
+
 class Interface_Check extends Standard_Transient {
 }
+
+class Interface_Check_1 extends Interface_Check {}
+
+class Interface_Check_2 extends Interface_Check {}
 
 class Interface_CheckFailure extends Interface_InterfaceError {
 }
 
+class Interface_CheckFailure_1 extends Interface_CheckFailure {}
+
+class Interface_CheckFailure_2 extends Interface_CheckFailure {}
+
 class Interface_CheckIterator {
 }
 
+class Interface_CheckIterator_1 extends Interface_CheckIterator {}
+
+class Interface_CheckIterator_2 extends Interface_CheckIterator {}
+
 class Interface_CheckTool {
 }
+
+class Interface_CheckTool_1 extends Interface_CheckTool {}
+
+class Interface_CheckTool_2 extends Interface_CheckTool {}
+
+class Interface_CheckTool_3 extends Interface_CheckTool {}
+
+class Interface_CheckTool_4 extends Interface_CheckTool {}
 
 class Interface_CopyControl extends Standard_Transient {
 }
@@ -8449,11 +16476,29 @@ class Interface_CopyMap extends Interface_CopyControl {
 class Interface_CopyTool {
 }
 
+class Interface_CopyTool_1 extends Interface_CopyTool {}
+
+class Interface_CopyTool_2 extends Interface_CopyTool {}
+
+class Interface_CopyTool_3 extends Interface_CopyTool {}
+
 class Interface_EntityCluster extends Standard_Transient {
 }
 
+class Interface_EntityCluster_1 extends Interface_EntityCluster {}
+
+class Interface_EntityCluster_2 extends Interface_EntityCluster {}
+
+class Interface_EntityCluster_3 extends Interface_EntityCluster {}
+
+class Interface_EntityCluster_4 extends Interface_EntityCluster {}
+
 class Interface_EntityIterator {
 }
+
+class Interface_EntityIterator_1 extends Interface_EntityIterator {}
+
+class Interface_EntityIterator_2 extends Interface_EntityIterator {}
 
 class Interface_EntityList {
 }
@@ -8470,8 +16515,16 @@ class Interface_FloatWriter {
 class Interface_GTool extends Standard_Transient {
 }
 
+class Interface_GTool_1 extends Interface_GTool {}
+
+class Interface_GTool_2 extends Interface_GTool {}
+
 class Interface_GeneralLib {
 }
+
+class Interface_GeneralLib_1 extends Interface_GeneralLib {}
+
+class Interface_GeneralLib_2 extends Interface_GeneralLib {}
 
 class Interface_GlobalNodeOfGeneralLib extends Standard_Transient {
 }
@@ -8482,8 +16535,22 @@ class Interface_GlobalNodeOfReaderLib extends Standard_Transient {
 class Interface_GraphContent extends Interface_EntityIterator {
 }
 
+class Interface_GraphContent_1 extends Interface_GraphContent {}
+
+class Interface_GraphContent_2 extends Interface_GraphContent {}
+
+class Interface_GraphContent_3 extends Interface_GraphContent {}
+
+class Interface_GraphContent_4 extends Interface_GraphContent {}
+
 class Interface_IntList {
 }
+
+class Interface_IntList_1 extends Interface_IntList {}
+
+class Interface_IntList_2 extends Interface_IntList {}
+
+class Interface_IntList_3 extends Interface_IntList {}
 
 class Interface_IntVal extends Standard_Transient {
 }
@@ -8491,8 +16558,16 @@ class Interface_IntVal extends Standard_Transient {
 class Interface_InterfaceError extends Standard_Failure {
 }
 
+class Interface_InterfaceError_1 extends Interface_InterfaceError {}
+
+class Interface_InterfaceError_2 extends Interface_InterfaceError {}
+
 class Interface_InterfaceMismatch extends Interface_InterfaceError {
 }
+
+class Interface_InterfaceMismatch_1 extends Interface_InterfaceMismatch {}
+
+class Interface_InterfaceMismatch_2 extends Interface_InterfaceMismatch {}
 
 class Interface_InterfaceModel extends Standard_Transient {
 }
@@ -8502,6 +16577,18 @@ class Interface_LineBuffer {
 
 class Interface_MSG {
 }
+
+class Interface_MSG_1 extends Interface_MSG {}
+
+class Interface_MSG_2 extends Interface_MSG {}
+
+class Interface_MSG_3 extends Interface_MSG {}
+
+class Interface_MSG_4 extends Interface_MSG {}
+
+class Interface_MSG_5 extends Interface_MSG {}
+
+class Interface_MSG_6 extends Interface_MSG {}
 
 class Interface_MapAsciiStringHasher {
 }
@@ -8524,20 +16611,54 @@ class Interface_Protocol extends Standard_Transient {
 class Interface_ReaderLib {
 }
 
+class Interface_ReaderLib_1 extends Interface_ReaderLib {}
+
+class Interface_ReaderLib_2 extends Interface_ReaderLib {}
+
 class Interface_ReaderModule extends Standard_Transient {
 }
 
 class Interface_ReportEntity extends Standard_Transient {
 }
 
+class Interface_ReportEntity_1 extends Interface_ReportEntity {}
+
+class Interface_ReportEntity_2 extends Interface_ReportEntity {}
+
 class Interface_STAT {
 }
+
+class Interface_STAT_1 extends Interface_STAT {}
+
+class Interface_STAT_2 extends Interface_STAT {}
 
 class Interface_ShareFlags {
 }
 
+class Interface_ShareFlags_1 extends Interface_ShareFlags {}
+
+class Interface_ShareFlags_2 extends Interface_ShareFlags {}
+
+class Interface_ShareFlags_3 extends Interface_ShareFlags {}
+
+class Interface_ShareFlags_4 extends Interface_ShareFlags {}
+
+class Interface_ShareFlags_5 extends Interface_ShareFlags {}
+
 class Interface_ShareTool {
 }
+
+class Interface_ShareTool_1 extends Interface_ShareTool {}
+
+class Interface_ShareTool_2 extends Interface_ShareTool {}
+
+class Interface_ShareTool_3 extends Interface_ShareTool {}
+
+class Interface_ShareTool_4 extends Interface_ShareTool {}
+
+class Interface_ShareTool_5 extends Interface_ShareTool {}
+
+class Interface_ShareTool_6 extends Interface_ShareTool {}
 
 class Interface_SignLabel extends MoniTool_SignText {
 }
@@ -8548,6 +16669,10 @@ class Interface_SignType extends MoniTool_SignText {
 class Interface_Static extends Interface_TypedValue {
 }
 
+class Interface_Static_1 extends Interface_Static {}
+
+class Interface_Static_2 extends Interface_Static {}
+
 class Interface_TypedValue extends MoniTool_TypedValue {
 }
 
@@ -8556,6 +16681,14 @@ class Interface_UndefinedContent extends Standard_Transient {
 
 class Interval {
 }
+
+class Interval_1 extends Interval {}
+
+class Interval_2 extends Interval {}
+
+class Interval_3 extends Interval {}
+
+class Interval_4 extends Interval {}
 
 class Intf {
 }
@@ -8566,17 +16699,37 @@ class Intf_Interference {
 class Intf_InterferencePolygon2d extends Intf_Interference {
 }
 
+class Intf_InterferencePolygon2d_1 extends Intf_InterferencePolygon2d {}
+
+class Intf_InterferencePolygon2d_2 extends Intf_InterferencePolygon2d {}
+
+class Intf_InterferencePolygon2d_3 extends Intf_InterferencePolygon2d {}
+
 class Intf_Polygon2d {
 }
 
 class Intf_SectionLine {
 }
 
+class Intf_SectionLine_1 extends Intf_SectionLine {}
+
+class Intf_SectionLine_2 extends Intf_SectionLine {}
+
 class Intf_SectionPoint {
 }
 
+class Intf_SectionPoint_1 extends Intf_SectionPoint {}
+
+class Intf_SectionPoint_2 extends Intf_SectionPoint {}
+
+class Intf_SectionPoint_3 extends Intf_SectionPoint {}
+
 class Intf_TangentZone {
 }
+
+class Intf_TangentZone_1 extends Intf_TangentZone {}
+
+class Intf_TangentZone_2 extends Intf_TangentZone {}
 
 class Intf_Tool {
 }
@@ -8584,17 +16737,45 @@ class Intf_Tool {
 class Intrv_Interval {
 }
 
+class Intrv_Interval_1 extends Intrv_Interval {}
+
+class Intrv_Interval_2 extends Intrv_Interval {}
+
+class Intrv_Interval_3 extends Intrv_Interval {}
+
 class Intrv_Intervals {
 }
 
+class Intrv_Intervals_1 extends Intrv_Intervals {}
+
+class Intrv_Intervals_2 extends Intrv_Intervals {}
+
+class Intrv_Intervals_3 extends Intrv_Intervals {}
+
 class LDOMBasicString {
 }
+
+class LDOMBasicString_1 extends LDOMBasicString {}
+
+class LDOMBasicString_2 extends LDOMBasicString {}
+
+class LDOMBasicString_3 extends LDOMBasicString {}
+
+class LDOMBasicString_4 extends LDOMBasicString {}
+
+class LDOMBasicString_5 extends LDOMBasicString {}
+
+class LDOMBasicString_6 extends LDOMBasicString {}
 
 class LDOMParser {
 }
 
 class LDOM_Attr extends LDOM_Node {
 }
+
+class LDOM_Attr_1 extends LDOM_Attr {}
+
+class LDOM_Attr_2 extends LDOM_Attr {}
 
 class LDOM_BasicAttribute extends LDOM_BasicNode {
 }
@@ -8611,17 +16792,33 @@ class LDOM_BasicText extends LDOM_BasicNode {
 class LDOM_CDATASection extends LDOM_Text {
 }
 
+class LDOM_CDATASection_1 extends LDOM_CDATASection {}
+
+class LDOM_CDATASection_2 extends LDOM_CDATASection {}
+
 class LDOM_CharReference {
 }
 
 class LDOM_CharacterData extends LDOM_Node {
 }
 
+class LDOM_CharacterData_1 extends LDOM_CharacterData {}
+
+class LDOM_CharacterData_2 extends LDOM_CharacterData {}
+
 class LDOM_Comment extends LDOM_CharacterData {
 }
 
+class LDOM_Comment_1 extends LDOM_Comment {}
+
+class LDOM_Comment_2 extends LDOM_Comment {}
+
 class LDOM_Document {
 }
+
+class LDOM_Document_1 extends LDOM_Document {}
+
+class LDOM_Document_2 extends LDOM_Document {}
 
 class LDOM_DocumentType {
 }
@@ -8629,11 +16826,19 @@ class LDOM_DocumentType {
 class LDOM_Element extends LDOM_Node {
 }
 
+class LDOM_Element_1 extends LDOM_Element {}
+
+class LDOM_Element_2 extends LDOM_Element {}
+
 class LDOM_LDOMImplementation {
 }
 
 class LDOM_NodeList {
 }
+
+class LDOM_NodeList_1 extends LDOM_NodeList {}
+
+class LDOM_NodeList_2 extends LDOM_NodeList {}
 
 class LDOM_OSStream extends Standard_OStream {
 }
@@ -8642,6 +16847,10 @@ class LDOM_OSStream extends Standard_OStream {
 
 class LDOM_Text extends LDOM_CharacterData {
 }
+
+class LDOM_Text_1 extends LDOM_Text {}
+
+class LDOM_Text_2 extends LDOM_Text {}
 
 class LDOM_XmlReader {
 }
@@ -8652,11 +16861,23 @@ class LDOM_XmlWriter {
 class LProp3d_CLProps {
 }
 
+class LProp3d_CLProps_1 extends LProp3d_CLProps {}
+
+class LProp3d_CLProps_2 extends LProp3d_CLProps {}
+
+class LProp3d_CLProps_3 extends LProp3d_CLProps {}
+
 class LProp3d_CurveTool {
 }
 
 class LProp3d_SLProps {
 }
+
+class LProp3d_SLProps_1 extends LProp3d_SLProps {}
+
+class LProp3d_SLProps_2 extends LProp3d_SLProps {}
+
+class LProp3d_SLProps_3 extends LProp3d_SLProps {}
 
 class LProp3d_SurfaceTool {
 }
@@ -8667,11 +16888,19 @@ class LProp_AnalyticCurInf {
 class LProp_BadContinuity extends Standard_Failure {
 }
 
+class LProp_BadContinuity_1 extends LProp_BadContinuity {}
+
+class LProp_BadContinuity_2 extends LProp_BadContinuity {}
+
 class LProp_CurAndInf {
 }
 
 class LProp_NotDefined extends Standard_Failure {
 }
+
+class LProp_NotDefined_1 extends LProp_NotDefined {}
+
+class LProp_NotDefined_2 extends LProp_NotDefined {}
 
 class Law {
 }
@@ -8679,14 +16908,26 @@ class Law {
 class Law_BSpFunc extends Law_Function {
 }
 
+class Law_BSpFunc_1 extends Law_BSpFunc {}
+
+class Law_BSpFunc_2 extends Law_BSpFunc {}
+
 class Law_BSpline extends Standard_Transient {
 }
+
+class Law_BSpline_1 extends Law_BSpline {}
+
+class Law_BSpline_2 extends Law_BSpline {}
 
 class Law_BSplineKnotSplitting {
 }
 
 class Law_Composite extends Law_Function {
 }
+
+class Law_Composite_1 extends Law_Composite {}
+
+class Law_Composite_2 extends Law_Composite {}
 
 class Law_Constant extends Law_Function {
 }
@@ -8709,23 +16950,53 @@ class LocOpe {
 class LocOpe_BuildShape {
 }
 
+class LocOpe_BuildShape_1 extends LocOpe_BuildShape {}
+
+class LocOpe_BuildShape_2 extends LocOpe_BuildShape {}
+
 class LocOpe_BuildWires {
 }
+
+class LocOpe_BuildWires_1 extends LocOpe_BuildWires {}
+
+class LocOpe_BuildWires_2 extends LocOpe_BuildWires {}
 
 class LocOpe_CSIntersector {
 }
 
+class LocOpe_CSIntersector_1 extends LocOpe_CSIntersector {}
+
+class LocOpe_CSIntersector_2 extends LocOpe_CSIntersector {}
+
 class LocOpe_CurveShapeIntersector {
 }
+
+class LocOpe_CurveShapeIntersector_1 extends LocOpe_CurveShapeIntersector {}
+
+class LocOpe_CurveShapeIntersector_2 extends LocOpe_CurveShapeIntersector {}
+
+class LocOpe_CurveShapeIntersector_3 extends LocOpe_CurveShapeIntersector {}
 
 class LocOpe_DPrism {
 }
 
+class LocOpe_DPrism_1 extends LocOpe_DPrism {}
+
+class LocOpe_DPrism_2 extends LocOpe_DPrism {}
+
 class LocOpe_FindEdges {
 }
 
+class LocOpe_FindEdges_1 extends LocOpe_FindEdges {}
+
+class LocOpe_FindEdges_2 extends LocOpe_FindEdges {}
+
 class LocOpe_FindEdgesInFace {
 }
+
+class LocOpe_FindEdgesInFace_1 extends LocOpe_FindEdgesInFace {}
+
+class LocOpe_FindEdgesInFace_2 extends LocOpe_FindEdgesInFace {}
 
 class LocOpe_GeneratedShape extends Standard_Transient {
 }
@@ -8733,14 +17004,32 @@ class LocOpe_GeneratedShape extends Standard_Transient {
 class LocOpe_Generator {
 }
 
+class LocOpe_Generator_1 extends LocOpe_Generator {}
+
+class LocOpe_Generator_2 extends LocOpe_Generator {}
+
 class LocOpe_GluedShape extends LocOpe_GeneratedShape {
 }
+
+class LocOpe_GluedShape_1 extends LocOpe_GluedShape {}
+
+class LocOpe_GluedShape_2 extends LocOpe_GluedShape {}
 
 class LocOpe_Gluer {
 }
 
+class LocOpe_Gluer_1 extends LocOpe_Gluer {}
+
+class LocOpe_Gluer_2 extends LocOpe_Gluer {}
+
 class LocOpe_LinearForm {
 }
+
+class LocOpe_LinearForm_1 extends LocOpe_LinearForm {}
+
+class LocOpe_LinearForm_2 extends LocOpe_LinearForm {}
+
+class LocOpe_LinearForm_3 extends LocOpe_LinearForm {}
 
 class LocOpe_Pipe {
 }
@@ -8748,17 +17037,39 @@ class LocOpe_Pipe {
 class LocOpe_PntFace {
 }
 
+class LocOpe_PntFace_1 extends LocOpe_PntFace {}
+
+class LocOpe_PntFace_2 extends LocOpe_PntFace {}
+
 class LocOpe_Prism {
 }
+
+class LocOpe_Prism_1 extends LocOpe_Prism {}
+
+class LocOpe_Prism_2 extends LocOpe_Prism {}
+
+class LocOpe_Prism_3 extends LocOpe_Prism {}
 
 class LocOpe_SplitDrafts {
 }
 
+class LocOpe_SplitDrafts_1 extends LocOpe_SplitDrafts {}
+
+class LocOpe_SplitDrafts_2 extends LocOpe_SplitDrafts {}
+
 class LocOpe_SplitShape {
 }
 
+class LocOpe_SplitShape_1 extends LocOpe_SplitShape {}
+
+class LocOpe_SplitShape_2 extends LocOpe_SplitShape {}
+
 class LocOpe_Spliter {
 }
+
+class LocOpe_Spliter_1 extends LocOpe_Spliter {}
+
+class LocOpe_Spliter_2 extends LocOpe_Spliter {}
 
 class LocOpe_WiresOnShape extends Standard_Transient {
 }
@@ -8772,6 +17083,12 @@ class LocalAnalysis_CurveContinuity {
 class LocalAnalysis_SurfaceContinuity {
 }
 
+class LocalAnalysis_SurfaceContinuity_1 extends LocalAnalysis_SurfaceContinuity {}
+
+class LocalAnalysis_SurfaceContinuity_2 extends LocalAnalysis_SurfaceContinuity {}
+
+class LocalAnalysis_SurfaceContinuity_3 extends LocalAnalysis_SurfaceContinuity {}
+
 class MAT2d_BiInt {
 }
 
@@ -8780,6 +17097,10 @@ class MAT2d_Circuit extends Standard_Transient {
 
 class MAT2d_Connexion extends Standard_Transient {
 }
+
+class MAT2d_Connexion_1 extends MAT2d_Connexion {}
+
+class MAT2d_Connexion_2 extends MAT2d_Connexion {}
 
 class MAT2d_MapBiIntHasher {
 }
@@ -8820,11 +17141,23 @@ class MAT_Node extends Standard_Transient {
 class MAT_TListNodeOfListOfBisector extends Standard_Transient {
 }
 
+class MAT_TListNodeOfListOfBisector_1 extends MAT_TListNodeOfListOfBisector {}
+
+class MAT_TListNodeOfListOfBisector_2 extends MAT_TListNodeOfListOfBisector {}
+
 class MAT_TListNodeOfListOfEdge extends Standard_Transient {
 }
 
+class MAT_TListNodeOfListOfEdge_1 extends MAT_TListNodeOfListOfEdge {}
+
+class MAT_TListNodeOfListOfEdge_2 extends MAT_TListNodeOfListOfEdge {}
+
 class MAT_Zone extends Standard_Transient {
 }
+
+class MAT_Zone_1 extends MAT_Zone {}
+
+class MAT_Zone_2 extends MAT_Zone {}
 
 class MeshVS_Buffer {
 }
@@ -8880,6 +17213,10 @@ class MeshVS_SensitivePolyhedron extends Select3D_SensitiveEntity {
 class MeshVS_SensitiveQuad extends Select3D_SensitiveEntity {
 }
 
+class MeshVS_SensitiveQuad_1 extends MeshVS_SensitiveQuad {}
+
+class MeshVS_SensitiveQuad_2 extends MeshVS_SensitiveQuad {}
+
 class MeshVS_SensitiveSegment extends Select3D_SensitiveSegment {
 }
 
@@ -8904,11 +17241,27 @@ class Message_Algorithm extends Standard_Transient {
 class Message_ExecStatus {
 }
 
+class Message_ExecStatus_1 extends Message_ExecStatus {}
+
+class Message_ExecStatus_2 extends Message_ExecStatus {}
+
 class Message_Messenger extends Standard_Transient {
 }
 
+class Message_Messenger_1 extends Message_Messenger {}
+
+class Message_Messenger_2 extends Message_Messenger {}
+
 class Message_Msg {
 }
+
+class Message_Msg_1 extends Message_Msg {}
+
+class Message_Msg_2 extends Message_Msg {}
+
+class Message_Msg_3 extends Message_Msg {}
+
+class Message_Msg_4 extends Message_Msg {}
 
 class Message_MsgFile {
 }
@@ -8917,6 +17270,13 @@ class Message_Printer extends Standard_Transient {
 }
 
 class Message_PrinterOStream extends Message_Printer {
+}
+
+class Message_PrinterOStream_1 extends Message_PrinterOStream {}
+
+class Message_PrinterOStream_2 extends Message_PrinterOStream {}
+
+class Message_PrinterSystemLog extends Message_Printer {
 }
 
 class Message_ProgressIndicator extends Standard_Transient {
@@ -8928,11 +17288,19 @@ class Message_ProgressScale {
 class Message_ProgressSentry {
 }
 
+class Message_ProgressSentry_1 extends Message_ProgressSentry {}
+
+class Message_ProgressSentry_2 extends Message_ProgressSentry {}
+
 class Message_Report extends Standard_Transient {
 }
 
 class MoniTool_AttrList {
 }
+
+class MoniTool_AttrList_1 extends MoniTool_AttrList {}
+
+class MoniTool_AttrList_2 extends MoniTool_AttrList {}
 
 class MoniTool_CaseData extends Standard_Transient {
 }
@@ -8964,11 +17332,19 @@ class MoniTool_SignText extends Standard_Transient {
 class MoniTool_Stat {
 }
 
+class MoniTool_Stat_1 extends MoniTool_Stat {}
+
+class MoniTool_Stat_2 extends MoniTool_Stat {}
+
 class MoniTool_Timer extends Standard_Transient {
 }
 
 class MoniTool_TimerSentry {
 }
+
+class MoniTool_TimerSentry_1 extends MoniTool_TimerSentry {}
+
+class MoniTool_TimerSentry_2 extends MoniTool_TimerSentry {}
 
 class MoniTool_TransientElem extends MoniTool_Element {
 }
@@ -8976,8 +17352,16 @@ class MoniTool_TransientElem extends MoniTool_Element {
 class MoniTool_TypedValue extends Standard_Transient {
 }
 
+class MoniTool_TypedValue_1 extends MoniTool_TypedValue {}
+
+class MoniTool_TypedValue_2 extends MoniTool_TypedValue {}
+
 class MyDirectPolynomialRoots {
 }
+
+class MyDirectPolynomialRoots_1 extends MyDirectPolynomialRoots {}
+
+class MyDirectPolynomialRoots_2 extends MyDirectPolynomialRoots {}
 
 class NLPlate_HGPPConstraint extends Standard_Transient {
 }
@@ -9015,14 +17399,34 @@ class OSD_Chronometer {
 class OSD_Directory extends OSD_FileNode {
 }
 
+class OSD_Directory_1 extends OSD_Directory {}
+
+class OSD_Directory_2 extends OSD_Directory {}
+
 class OSD_DirectoryIterator {
 }
+
+class OSD_DirectoryIterator_1 extends OSD_DirectoryIterator {}
+
+class OSD_DirectoryIterator_2 extends OSD_DirectoryIterator {}
 
 class OSD_Disk {
 }
 
+class OSD_Disk_1 extends OSD_Disk {}
+
+class OSD_Disk_2 extends OSD_Disk {}
+
+class OSD_Disk_3 extends OSD_Disk {}
+
 class OSD_Environment {
 }
+
+class OSD_Environment_1 extends OSD_Environment {}
+
+class OSD_Environment_2 extends OSD_Environment {}
+
+class OSD_Environment_3 extends OSD_Environment {}
 
 class OSD_Error {
 }
@@ -9030,65 +17434,149 @@ class OSD_Error {
 class OSD_Exception extends Standard_Failure {
 }
 
+class OSD_Exception_1 extends OSD_Exception {}
+
+class OSD_Exception_2 extends OSD_Exception {}
+
 class OSD_Exception_ACCESS_VIOLATION extends OSD_Exception {
 }
+
+class OSD_Exception_ACCESS_VIOLATION_1 extends OSD_Exception_ACCESS_VIOLATION {}
+
+class OSD_Exception_ACCESS_VIOLATION_2 extends OSD_Exception_ACCESS_VIOLATION {}
 
 class OSD_Exception_ARRAY_BOUNDS_EXCEEDED extends OSD_Exception {
 }
 
+class OSD_Exception_ARRAY_BOUNDS_EXCEEDED_1 extends OSD_Exception_ARRAY_BOUNDS_EXCEEDED {}
+
+class OSD_Exception_ARRAY_BOUNDS_EXCEEDED_2 extends OSD_Exception_ARRAY_BOUNDS_EXCEEDED {}
+
 class OSD_Exception_CTRL_BREAK extends OSD_Exception {
 }
+
+class OSD_Exception_CTRL_BREAK_1 extends OSD_Exception_CTRL_BREAK {}
+
+class OSD_Exception_CTRL_BREAK_2 extends OSD_Exception_CTRL_BREAK {}
 
 class OSD_Exception_FLT_DENORMAL_OPERAND extends OSD_Exception {
 }
 
+class OSD_Exception_FLT_DENORMAL_OPERAND_1 extends OSD_Exception_FLT_DENORMAL_OPERAND {}
+
+class OSD_Exception_FLT_DENORMAL_OPERAND_2 extends OSD_Exception_FLT_DENORMAL_OPERAND {}
+
 class OSD_Exception_FLT_DIVIDE_BY_ZERO extends OSD_Exception {
 }
+
+class OSD_Exception_FLT_DIVIDE_BY_ZERO_1 extends OSD_Exception_FLT_DIVIDE_BY_ZERO {}
+
+class OSD_Exception_FLT_DIVIDE_BY_ZERO_2 extends OSD_Exception_FLT_DIVIDE_BY_ZERO {}
 
 class OSD_Exception_FLT_INEXACT_RESULT extends OSD_Exception {
 }
 
+class OSD_Exception_FLT_INEXACT_RESULT_1 extends OSD_Exception_FLT_INEXACT_RESULT {}
+
+class OSD_Exception_FLT_INEXACT_RESULT_2 extends OSD_Exception_FLT_INEXACT_RESULT {}
+
 class OSD_Exception_FLT_INVALID_OPERATION extends OSD_Exception {
 }
+
+class OSD_Exception_FLT_INVALID_OPERATION_1 extends OSD_Exception_FLT_INVALID_OPERATION {}
+
+class OSD_Exception_FLT_INVALID_OPERATION_2 extends OSD_Exception_FLT_INVALID_OPERATION {}
 
 class OSD_Exception_FLT_OVERFLOW extends OSD_Exception {
 }
 
+class OSD_Exception_FLT_OVERFLOW_1 extends OSD_Exception_FLT_OVERFLOW {}
+
+class OSD_Exception_FLT_OVERFLOW_2 extends OSD_Exception_FLT_OVERFLOW {}
+
 class OSD_Exception_FLT_STACK_CHECK extends OSD_Exception {
 }
+
+class OSD_Exception_FLT_STACK_CHECK_1 extends OSD_Exception_FLT_STACK_CHECK {}
+
+class OSD_Exception_FLT_STACK_CHECK_2 extends OSD_Exception_FLT_STACK_CHECK {}
 
 class OSD_Exception_FLT_UNDERFLOW extends OSD_Exception {
 }
 
+class OSD_Exception_FLT_UNDERFLOW_1 extends OSD_Exception_FLT_UNDERFLOW {}
+
+class OSD_Exception_FLT_UNDERFLOW_2 extends OSD_Exception_FLT_UNDERFLOW {}
+
 class OSD_Exception_ILLEGAL_INSTRUCTION extends OSD_Exception {
 }
+
+class OSD_Exception_ILLEGAL_INSTRUCTION_1 extends OSD_Exception_ILLEGAL_INSTRUCTION {}
+
+class OSD_Exception_ILLEGAL_INSTRUCTION_2 extends OSD_Exception_ILLEGAL_INSTRUCTION {}
 
 class OSD_Exception_INT_DIVIDE_BY_ZERO extends OSD_Exception {
 }
 
+class OSD_Exception_INT_DIVIDE_BY_ZERO_1 extends OSD_Exception_INT_DIVIDE_BY_ZERO {}
+
+class OSD_Exception_INT_DIVIDE_BY_ZERO_2 extends OSD_Exception_INT_DIVIDE_BY_ZERO {}
+
 class OSD_Exception_INT_OVERFLOW extends OSD_Exception {
 }
+
+class OSD_Exception_INT_OVERFLOW_1 extends OSD_Exception_INT_OVERFLOW {}
+
+class OSD_Exception_INT_OVERFLOW_2 extends OSD_Exception_INT_OVERFLOW {}
 
 class OSD_Exception_INVALID_DISPOSITION extends OSD_Exception {
 }
 
+class OSD_Exception_INVALID_DISPOSITION_1 extends OSD_Exception_INVALID_DISPOSITION {}
+
+class OSD_Exception_INVALID_DISPOSITION_2 extends OSD_Exception_INVALID_DISPOSITION {}
+
 class OSD_Exception_IN_PAGE_ERROR extends OSD_Exception {
 }
+
+class OSD_Exception_IN_PAGE_ERROR_1 extends OSD_Exception_IN_PAGE_ERROR {}
+
+class OSD_Exception_IN_PAGE_ERROR_2 extends OSD_Exception_IN_PAGE_ERROR {}
 
 class OSD_Exception_NONCONTINUABLE_EXCEPTION extends OSD_Exception {
 }
 
+class OSD_Exception_NONCONTINUABLE_EXCEPTION_1 extends OSD_Exception_NONCONTINUABLE_EXCEPTION {}
+
+class OSD_Exception_NONCONTINUABLE_EXCEPTION_2 extends OSD_Exception_NONCONTINUABLE_EXCEPTION {}
+
 class OSD_Exception_PRIV_INSTRUCTION extends OSD_Exception {
 }
+
+class OSD_Exception_PRIV_INSTRUCTION_1 extends OSD_Exception_PRIV_INSTRUCTION {}
+
+class OSD_Exception_PRIV_INSTRUCTION_2 extends OSD_Exception_PRIV_INSTRUCTION {}
 
 class OSD_Exception_STACK_OVERFLOW extends OSD_Exception {
 }
 
+class OSD_Exception_STACK_OVERFLOW_1 extends OSD_Exception_STACK_OVERFLOW {}
+
+class OSD_Exception_STACK_OVERFLOW_2 extends OSD_Exception_STACK_OVERFLOW {}
+
 class OSD_Exception_STATUS_NO_MEMORY extends OSD_Exception {
 }
 
+class OSD_Exception_STATUS_NO_MEMORY_1 extends OSD_Exception_STATUS_NO_MEMORY {}
+
+class OSD_Exception_STATUS_NO_MEMORY_2 extends OSD_Exception_STATUS_NO_MEMORY {}
+
 class OSD_FileIterator {
 }
+
+class OSD_FileIterator_1 extends OSD_FileIterator {}
+
+class OSD_FileIterator_2 extends OSD_FileIterator {}
 
 class OSD_Host {
 }
@@ -9102,8 +17590,16 @@ class OSD_MemInfo {
 class OSD_OSDError extends Standard_Failure {
 }
 
+class OSD_OSDError_1 extends OSD_OSDError {}
+
+class OSD_OSDError_2 extends OSD_OSDError {}
+
 class OSD_PerfMeter {
 }
+
+class OSD_PerfMeter_1 extends OSD_PerfMeter {}
+
+class OSD_PerfMeter_2 extends OSD_PerfMeter {}
 
 class OSD_Process {
 }
@@ -9111,38 +17607,88 @@ class OSD_Process {
 class OSD_Protection {
 }
 
+class OSD_Protection_1 extends OSD_Protection {}
+
+class OSD_Protection_2 extends OSD_Protection {}
+
 class OSD_SIGBUS extends OSD_Signal {
 }
+
+class OSD_SIGBUS_1 extends OSD_SIGBUS {}
+
+class OSD_SIGBUS_2 extends OSD_SIGBUS {}
 
 class OSD_SIGHUP extends OSD_Signal {
 }
 
+class OSD_SIGHUP_1 extends OSD_SIGHUP {}
+
+class OSD_SIGHUP_2 extends OSD_SIGHUP {}
+
 class OSD_SIGILL extends OSD_Signal {
 }
+
+class OSD_SIGILL_1 extends OSD_SIGILL {}
+
+class OSD_SIGILL_2 extends OSD_SIGILL {}
 
 class OSD_SIGINT extends OSD_Signal {
 }
 
+class OSD_SIGINT_1 extends OSD_SIGINT {}
+
+class OSD_SIGINT_2 extends OSD_SIGINT {}
+
 class OSD_SIGKILL extends OSD_Signal {
 }
+
+class OSD_SIGKILL_1 extends OSD_SIGKILL {}
+
+class OSD_SIGKILL_2 extends OSD_SIGKILL {}
 
 class OSD_SIGQUIT extends OSD_Signal {
 }
 
+class OSD_SIGQUIT_1 extends OSD_SIGQUIT {}
+
+class OSD_SIGQUIT_2 extends OSD_SIGQUIT {}
+
 class OSD_SIGSEGV extends OSD_Signal {
 }
+
+class OSD_SIGSEGV_1 extends OSD_SIGSEGV {}
+
+class OSD_SIGSEGV_2 extends OSD_SIGSEGV {}
 
 class OSD_SIGSYS extends OSD_Signal {
 }
 
+class OSD_SIGSYS_1 extends OSD_SIGSYS {}
+
+class OSD_SIGSYS_2 extends OSD_SIGSYS {}
+
 class OSD_SharedLibrary {
 }
+
+class OSD_SharedLibrary_1 extends OSD_SharedLibrary {}
+
+class OSD_SharedLibrary_2 extends OSD_SharedLibrary {}
 
 class OSD_Signal extends Standard_Failure {
 }
 
+class OSD_Signal_1 extends OSD_Signal {}
+
+class OSD_Signal_2 extends OSD_Signal {}
+
 class OSD_Thread {
 }
+
+class OSD_Thread_1 extends OSD_Thread {}
+
+class OSD_Thread_2 extends OSD_Thread {}
+
+class OSD_Thread_3 extends OSD_Thread {}
 
 class OSD_Timer extends OSD_Chronometer {
 }
@@ -9159,6 +17705,10 @@ class PCDM_Document extends Standard_Persistent {
 class PCDM_DriverError extends Standard_Failure {
 }
 
+class PCDM_DriverError_1 extends PCDM_DriverError {}
+
+class PCDM_DriverError_2 extends PCDM_DriverError {}
+
 class PCDM_ReadWriter extends Standard_Transient {
 }
 
@@ -9170,6 +17720,10 @@ class PCDM_Reader extends Standard_Transient {
 
 class PCDM_Reference {
 }
+
+class PCDM_Reference_1 extends PCDM_Reference {}
+
+class PCDM_Reference_2 extends PCDM_Reference {}
 
 class PCDM_ReferenceIterator extends Standard_Transient {
 }
@@ -9192,6 +17746,10 @@ class PLib_Base extends Standard_Transient {
 class PLib_DoubleJacobiPolynomial {
 }
 
+class PLib_DoubleJacobiPolynomial_1 extends PLib_DoubleJacobiPolynomial {}
+
+class PLib_DoubleJacobiPolynomial_2 extends PLib_DoubleJacobiPolynomial {}
+
 class PLib_HermitJacobi extends PLib_Base {
 }
 
@@ -9201,17 +17759,41 @@ class PLib_JacobiPolynomial extends PLib_Base {
 class PeriodicInterval {
 }
 
+class PeriodicInterval_1 extends PeriodicInterval {}
+
+class PeriodicInterval_2 extends PeriodicInterval {}
+
+class PeriodicInterval_3 extends PeriodicInterval {}
+
 class Plate_D1 {
 }
+
+class Plate_D1_1 extends Plate_D1 {}
+
+class Plate_D1_2 extends Plate_D1 {}
 
 class Plate_D2 {
 }
 
+class Plate_D2_1 extends Plate_D2 {}
+
+class Plate_D2_2 extends Plate_D2 {}
+
 class Plate_D3 {
 }
 
+class Plate_D3_1 extends Plate_D3 {}
+
+class Plate_D3_2 extends Plate_D3 {}
+
 class Plate_FreeGtoCConstraint {
 }
+
+class Plate_FreeGtoCConstraint_1 extends Plate_FreeGtoCConstraint {}
+
+class Plate_FreeGtoCConstraint_2 extends Plate_FreeGtoCConstraint {}
+
+class Plate_FreeGtoCConstraint_3 extends Plate_FreeGtoCConstraint {}
 
 class Plate_GlobalTranslationConstraint {
 }
@@ -9219,23 +17801,63 @@ class Plate_GlobalTranslationConstraint {
 class Plate_GtoCConstraint {
 }
 
+class Plate_GtoCConstraint_1 extends Plate_GtoCConstraint {}
+
+class Plate_GtoCConstraint_2 extends Plate_GtoCConstraint {}
+
+class Plate_GtoCConstraint_3 extends Plate_GtoCConstraint {}
+
+class Plate_GtoCConstraint_4 extends Plate_GtoCConstraint {}
+
+class Plate_GtoCConstraint_5 extends Plate_GtoCConstraint {}
+
+class Plate_GtoCConstraint_6 extends Plate_GtoCConstraint {}
+
+class Plate_GtoCConstraint_7 extends Plate_GtoCConstraint {}
+
 class Plate_LineConstraint {
 }
 
 class Plate_LinearScalarConstraint {
 }
 
+class Plate_LinearScalarConstraint_1 extends Plate_LinearScalarConstraint {}
+
+class Plate_LinearScalarConstraint_2 extends Plate_LinearScalarConstraint {}
+
+class Plate_LinearScalarConstraint_3 extends Plate_LinearScalarConstraint {}
+
+class Plate_LinearScalarConstraint_4 extends Plate_LinearScalarConstraint {}
+
+class Plate_LinearScalarConstraint_5 extends Plate_LinearScalarConstraint {}
+
 class Plate_LinearXYZConstraint {
 }
 
+class Plate_LinearXYZConstraint_1 extends Plate_LinearXYZConstraint {}
+
+class Plate_LinearXYZConstraint_2 extends Plate_LinearXYZConstraint {}
+
+class Plate_LinearXYZConstraint_3 extends Plate_LinearXYZConstraint {}
+
+class Plate_LinearXYZConstraint_4 extends Plate_LinearXYZConstraint {}
+
 class Plate_PinpointConstraint {
 }
+
+class Plate_PinpointConstraint_1 extends Plate_PinpointConstraint {}
+
+class Plate_PinpointConstraint_2 extends Plate_PinpointConstraint {}
 
 class Plate_PlaneConstraint {
 }
 
 class Plate_Plate {
 }
+
+class Plate_Plate_1 extends Plate_Plate {}
+
+class Plate_Plate_2 extends Plate_Plate {}
 
 class Plate_SampledCurveConstraint {
 }
@@ -9246,23 +17868,49 @@ class Plugin {
 class Plugin_Failure extends Standard_Failure {
 }
 
+class Plugin_Failure_1 extends Plugin_Failure {}
+
+class Plugin_Failure_2 extends Plugin_Failure {}
+
 class Poly {
 }
 
 class Poly_CoherentLink {
 }
 
+class Poly_CoherentLink_1 extends Poly_CoherentLink {}
+
+class Poly_CoherentLink_2 extends Poly_CoherentLink {}
+
+class Poly_CoherentLink_3 extends Poly_CoherentLink {}
+
 class Poly_CoherentNode extends gp_XYZ {
 }
+
+class Poly_CoherentNode_1 extends Poly_CoherentNode {}
+
+class Poly_CoherentNode_2 extends Poly_CoherentNode {}
 
 class Poly_CoherentTriangle {
 }
 
+class Poly_CoherentTriangle_1 extends Poly_CoherentTriangle {}
+
+class Poly_CoherentTriangle_2 extends Poly_CoherentTriangle {}
+
 class Poly_CoherentTriangulation extends Standard_Transient {
 }
 
+class Poly_CoherentTriangulation_1 extends Poly_CoherentTriangulation {}
+
+class Poly_CoherentTriangulation_2 extends Poly_CoherentTriangulation {}
+
 class Poly_Connect {
 }
+
+class Poly_Connect_1 extends Poly_Connect {}
+
+class Poly_Connect_2 extends Poly_Connect {}
 
 class Poly_MakeLoops {
 }
@@ -9276,17 +17924,45 @@ class Poly_MakeLoops3D extends Poly_MakeLoops {
 class Poly_Polygon2D extends Standard_Transient {
 }
 
+class Poly_Polygon2D_1 extends Poly_Polygon2D {}
+
+class Poly_Polygon2D_2 extends Poly_Polygon2D {}
+
 class Poly_Polygon3D extends Standard_Transient {
 }
+
+class Poly_Polygon3D_1 extends Poly_Polygon3D {}
+
+class Poly_Polygon3D_2 extends Poly_Polygon3D {}
+
+class Poly_Polygon3D_3 extends Poly_Polygon3D {}
 
 class Poly_PolygonOnTriangulation extends Standard_Transient {
 }
 
+class Poly_PolygonOnTriangulation_1 extends Poly_PolygonOnTriangulation {}
+
+class Poly_PolygonOnTriangulation_2 extends Poly_PolygonOnTriangulation {}
+
+class Poly_PolygonOnTriangulation_3 extends Poly_PolygonOnTriangulation {}
+
 class Poly_Triangle {
 }
 
+class Poly_Triangle_1 extends Poly_Triangle {}
+
+class Poly_Triangle_2 extends Poly_Triangle {}
+
 class Poly_Triangulation extends Standard_Transient {
 }
+
+class Poly_Triangulation_1 extends Poly_Triangulation {}
+
+class Poly_Triangulation_2 extends Poly_Triangulation {}
+
+class Poly_Triangulation_3 extends Poly_Triangulation {}
+
+class Poly_Triangulation_4 extends Poly_Triangulation {}
 
 class Precision {
 }
@@ -9297,26 +17973,84 @@ class ProjLib {
 class ProjLib_CompProjectedCurve extends Adaptor2d_Curve2d {
 }
 
+class ProjLib_CompProjectedCurve_1 extends ProjLib_CompProjectedCurve {}
+
+class ProjLib_CompProjectedCurve_2 extends ProjLib_CompProjectedCurve {}
+
+class ProjLib_CompProjectedCurve_3 extends ProjLib_CompProjectedCurve {}
+
 class ProjLib_ComputeApprox {
 }
+
+class ProjLib_ComputeApprox_1 extends ProjLib_ComputeApprox {}
+
+class ProjLib_ComputeApprox_2 extends ProjLib_ComputeApprox {}
 
 class ProjLib_ComputeApproxOnPolarSurface {
 }
 
+class ProjLib_ComputeApproxOnPolarSurface_1 extends ProjLib_ComputeApproxOnPolarSurface {}
+
+class ProjLib_ComputeApproxOnPolarSurface_2 extends ProjLib_ComputeApproxOnPolarSurface {}
+
+class ProjLib_ComputeApproxOnPolarSurface_3 extends ProjLib_ComputeApproxOnPolarSurface {}
+
+class ProjLib_ComputeApproxOnPolarSurface_4 extends ProjLib_ComputeApproxOnPolarSurface {}
+
 class ProjLib_Cone extends ProjLib_Projector {
 }
+
+class ProjLib_Cone_1 extends ProjLib_Cone {}
+
+class ProjLib_Cone_2 extends ProjLib_Cone {}
+
+class ProjLib_Cone_3 extends ProjLib_Cone {}
+
+class ProjLib_Cone_4 extends ProjLib_Cone {}
 
 class ProjLib_Cylinder extends ProjLib_Projector {
 }
 
+class ProjLib_Cylinder_1 extends ProjLib_Cylinder {}
+
+class ProjLib_Cylinder_2 extends ProjLib_Cylinder {}
+
+class ProjLib_Cylinder_3 extends ProjLib_Cylinder {}
+
+class ProjLib_Cylinder_4 extends ProjLib_Cylinder {}
+
+class ProjLib_Cylinder_5 extends ProjLib_Cylinder {}
+
 class ProjLib_HCompProjectedCurve extends Adaptor2d_HCurve2d {
 }
+
+class ProjLib_HCompProjectedCurve_1 extends ProjLib_HCompProjectedCurve {}
+
+class ProjLib_HCompProjectedCurve_2 extends ProjLib_HCompProjectedCurve {}
 
 class ProjLib_HProjectedCurve extends Adaptor2d_HCurve2d {
 }
 
+class ProjLib_HProjectedCurve_1 extends ProjLib_HProjectedCurve {}
+
+class ProjLib_HProjectedCurve_2 extends ProjLib_HProjectedCurve {}
+
 class ProjLib_Plane extends ProjLib_Projector {
 }
+
+class ProjLib_Plane_1 extends ProjLib_Plane {}
+
+class ProjLib_Plane_2 extends ProjLib_Plane {}
+
+class ProjLib_Plane_3 extends ProjLib_Plane {}
+
+class ProjLib_Plane_4 extends ProjLib_Plane {}
+
+class ProjLib_Plane_5 extends ProjLib_Plane {}
+
+class ProjLib_Plane_6 extends ProjLib_Plane {}
+
+class ProjLib_Plane_7 extends ProjLib_Plane {}
 
 class ProjLib_PrjFunc extends math_FunctionSetWithDerivatives {
 }
@@ -9327,8 +18061,22 @@ class ProjLib_PrjResolve {
 class ProjLib_ProjectOnPlane extends Adaptor3d_Curve {
 }
 
+class ProjLib_ProjectOnPlane_1 extends ProjLib_ProjectOnPlane {}
+
+class ProjLib_ProjectOnPlane_2 extends ProjLib_ProjectOnPlane {}
+
+class ProjLib_ProjectOnPlane_3 extends ProjLib_ProjectOnPlane {}
+
 class ProjLib_ProjectedCurve extends Adaptor2d_Curve2d {
 }
+
+class ProjLib_ProjectedCurve_1 extends ProjLib_ProjectedCurve {}
+
+class ProjLib_ProjectedCurve_2 extends ProjLib_ProjectedCurve {}
+
+class ProjLib_ProjectedCurve_3 extends ProjLib_ProjectedCurve {}
+
+class ProjLib_ProjectedCurve_4 extends ProjLib_ProjectedCurve {}
 
 class ProjLib_Projector {
 }
@@ -9336,8 +18084,20 @@ class ProjLib_Projector {
 class ProjLib_Sphere extends ProjLib_Projector {
 }
 
+class ProjLib_Sphere_1 extends ProjLib_Sphere {}
+
+class ProjLib_Sphere_2 extends ProjLib_Sphere {}
+
+class ProjLib_Sphere_3 extends ProjLib_Sphere {}
+
 class ProjLib_Torus extends ProjLib_Projector {
 }
+
+class ProjLib_Torus_1 extends ProjLib_Torus {}
+
+class ProjLib_Torus_2 extends ProjLib_Torus {}
+
+class ProjLib_Torus_3 extends ProjLib_Torus {}
 
 class Prs3d {
 }
@@ -9347,6 +18107,12 @@ class Prs3d_Arrow extends Prs3d_Root {
 
 class Prs3d_ArrowAspect extends Prs3d_BasicAspect {
 }
+
+class Prs3d_ArrowAspect_1 extends Prs3d_ArrowAspect {}
+
+class Prs3d_ArrowAspect_2 extends Prs3d_ArrowAspect {}
+
+class Prs3d_ArrowAspect_3 extends Prs3d_ArrowAspect {}
 
 class Prs3d_BasicAspect extends Standard_Transient {
 }
@@ -9360,11 +18126,19 @@ class Prs3d_DimensionAspect extends Prs3d_BasicAspect {
 class Prs3d_DimensionUnits {
 }
 
+class Prs3d_DimensionUnits_1 extends Prs3d_DimensionUnits {}
+
+class Prs3d_DimensionUnits_2 extends Prs3d_DimensionUnits {}
+
 class Prs3d_Drawer extends Graphic3d_PresentationAttributes {
 }
 
 class Prs3d_InvalidAngle extends Standard_RangeError {
 }
+
+class Prs3d_InvalidAngle_1 extends Prs3d_InvalidAngle {}
+
+class Prs3d_InvalidAngle_2 extends Prs3d_InvalidAngle {}
 
 class Prs3d_IsoAspect extends Prs3d_LineAspect {
 }
@@ -9372,11 +18146,21 @@ class Prs3d_IsoAspect extends Prs3d_LineAspect {
 class Prs3d_LineAspect extends Prs3d_BasicAspect {
 }
 
+class Prs3d_LineAspect_1 extends Prs3d_LineAspect {}
+
+class Prs3d_LineAspect_2 extends Prs3d_LineAspect {}
+
 class Prs3d_PlaneAspect extends Prs3d_BasicAspect {
 }
 
 class Prs3d_PointAspect extends Prs3d_BasicAspect {
 }
+
+class Prs3d_PointAspect_1 extends Prs3d_PointAspect {}
+
+class Prs3d_PointAspect_2 extends Prs3d_PointAspect {}
+
+class Prs3d_PointAspect_3 extends Prs3d_PointAspect {}
 
 class Prs3d_PresentationShadow extends Graphic3d_Structure {
 }
@@ -9384,11 +18168,19 @@ class Prs3d_PresentationShadow extends Graphic3d_Structure {
 class Prs3d_Projector extends Standard_Transient {
 }
 
+class Prs3d_Projector_1 extends Prs3d_Projector {}
+
+class Prs3d_Projector_2 extends Prs3d_Projector {}
+
 class Prs3d_Root {
 }
 
 class Prs3d_ShadingAspect extends Prs3d_BasicAspect {
 }
+
+class Prs3d_ShadingAspect_1 extends Prs3d_ShadingAspect {}
+
+class Prs3d_ShadingAspect_2 extends Prs3d_ShadingAspect {}
 
 class Prs3d_ShapeTool {
 }
@@ -9398,6 +18190,10 @@ class Prs3d_Text extends Prs3d_Root {
 
 class Prs3d_TextAspect extends Prs3d_BasicAspect {
 }
+
+class Prs3d_TextAspect_1 extends Prs3d_TextAspect {}
+
+class Prs3d_TextAspect_2 extends Prs3d_TextAspect {}
 
 class Prs3d_ToolCylinder extends Prs3d_ToolQuadric {
 }
@@ -9423,31 +18219,78 @@ class PrsMgr_PresentationManager extends Standard_Transient {
 class Quantity_Color {
 }
 
-class Quantity_ColorDefinitionError extends Standard_DomainError {
-}
+class Quantity_Color_1 extends Quantity_Color {}
+
+class Quantity_Color_2 extends Quantity_Color {}
+
+class Quantity_Color_3 extends Quantity_Color {}
+
+class Quantity_Color_4 extends Quantity_Color {}
 
 class Quantity_ColorRGBA {
 }
 
+class Quantity_ColorRGBA_1 extends Quantity_ColorRGBA {}
+
+class Quantity_ColorRGBA_2 extends Quantity_ColorRGBA {}
+
+class Quantity_ColorRGBA_3 extends Quantity_ColorRGBA {}
+
+class Quantity_ColorRGBA_4 extends Quantity_ColorRGBA {}
+
+class Quantity_ColorRGBA_5 extends Quantity_ColorRGBA {}
+
 class Quantity_Date {
 }
+
+class Quantity_Date_1 extends Quantity_Date {}
+
+class Quantity_Date_2 extends Quantity_Date {}
 
 class Quantity_DateDefinitionError extends Standard_DomainError {
 }
 
+class Quantity_DateDefinitionError_1 extends Quantity_DateDefinitionError {}
+
+class Quantity_DateDefinitionError_2 extends Quantity_DateDefinitionError {}
+
 class Quantity_Period {
 }
+
+class Quantity_Period_1 extends Quantity_Period {}
+
+class Quantity_Period_2 extends Quantity_Period {}
 
 class Quantity_PeriodDefinitionError extends Standard_DomainError {
 }
 
+class Quantity_PeriodDefinitionError_1 extends Quantity_PeriodDefinitionError {}
+
+class Quantity_PeriodDefinitionError_2 extends Quantity_PeriodDefinitionError {}
+
 class RWGltf_CafReader extends RWMesh_CafReader {
+}
+
+class RWGltf_CafWriter extends Standard_Transient {
 }
 
 class RWGltf_GltfLatePrimitiveArray extends Poly_Triangulation {
 }
 
+class RWGltf_GltfMaterialMap extends RWMesh_MaterialMap {
+}
+
+class RWGltf_GltfOStreamWriter {
+}
+
 class RWGltf_GltfPrimArrayData {
+}
+
+class RWGltf_GltfPrimArrayData_1 extends RWGltf_GltfPrimArrayData {}
+
+class RWGltf_GltfPrimArrayData_2 extends RWGltf_GltfPrimArrayData {}
+
+class RWGltf_GltfSceneNodeMap {
 }
 
 class RWGltf_MaterialCommon extends Standard_Transient {
@@ -9481,6 +18324,12 @@ class RWMesh_CafReader extends Standard_Transient {
 }
 
 class RWMesh_CoordinateSystemConverter {
+}
+
+class RWMesh_FaceIterator {
+}
+
+class RWMesh_MaterialMap {
 }
 
 class RWObj {
@@ -11022,8 +19871,16 @@ class Resource_LexicalCompare {
 class Resource_Manager extends Standard_Transient {
 }
 
+class Resource_Manager_1 extends Resource_Manager {}
+
+class Resource_Manager_2 extends Resource_Manager {}
+
 class Resource_NoSuchResource extends Standard_NoSuchObject {
 }
+
+class Resource_NoSuchResource_1 extends Resource_NoSuchResource {}
+
+class Resource_NoSuchResource_2 extends Resource_NoSuchResource {}
 
 class Resource_Unicode {
 }
@@ -11043,8 +19900,16 @@ class STEPCAFControl_GDTProperty {
 class STEPCAFControl_Reader {
 }
 
+class STEPCAFControl_Reader_1 extends STEPCAFControl_Reader {}
+
+class STEPCAFControl_Reader_2 extends STEPCAFControl_Reader {}
+
 class STEPCAFControl_Writer {
 }
+
+class STEPCAFControl_Writer_1 extends STEPCAFControl_Writer {}
+
+class STEPCAFControl_Writer_2 extends STEPCAFControl_Writer {}
 
 class STEPConstruct {
 }
@@ -11058,8 +19923,16 @@ class STEPConstruct_Assembly {
 class STEPConstruct_ContextTool {
 }
 
+class STEPConstruct_ContextTool_1 extends STEPConstruct_ContextTool {}
+
+class STEPConstruct_ContextTool_2 extends STEPConstruct_ContextTool {}
+
 class STEPConstruct_ExternRefs extends STEPConstruct_Tool {
 }
+
+class STEPConstruct_ExternRefs_1 extends STEPConstruct_ExternRefs {}
+
+class STEPConstruct_ExternRefs_2 extends STEPConstruct_ExternRefs {}
 
 class STEPConstruct_Part {
 }
@@ -11070,14 +19943,26 @@ class STEPConstruct_PointHasher {
 class STEPConstruct_Styles extends STEPConstruct_Tool {
 }
 
+class STEPConstruct_Styles_1 extends STEPConstruct_Styles {}
+
+class STEPConstruct_Styles_2 extends STEPConstruct_Styles {}
+
 class STEPConstruct_Tool {
 }
+
+class STEPConstruct_Tool_1 extends STEPConstruct_Tool {}
+
+class STEPConstruct_Tool_2 extends STEPConstruct_Tool {}
 
 class STEPConstruct_UnitContext {
 }
 
 class STEPConstruct_ValidationProps extends STEPConstruct_Tool {
 }
+
+class STEPConstruct_ValidationProps_1 extends STEPConstruct_ValidationProps {}
+
+class STEPConstruct_ValidationProps_2 extends STEPConstruct_ValidationProps {}
 
 class STEPControl_ActorRead extends Transfer_ActorOfTransientProcess {
 }
@@ -11091,8 +19976,16 @@ class STEPControl_Controller extends XSControl_Controller {
 class STEPControl_Reader extends XSControl_Reader {
 }
 
+class STEPControl_Reader_1 extends STEPControl_Reader {}
+
+class STEPControl_Reader_2 extends STEPControl_Reader {}
+
 class STEPControl_Writer {
 }
+
+class STEPControl_Writer_1 extends STEPControl_Writer {}
+
+class STEPControl_Writer_2 extends STEPControl_Writer {}
 
 class STEPEdit {
 }
@@ -11106,11 +19999,26 @@ class STEPEdit_EditSDR extends IFSelect_Editor {
 class STEPSelections_AssemblyComponent extends Standard_Transient {
 }
 
+class STEPSelections_AssemblyComponent_1 extends STEPSelections_AssemblyComponent {}
+
+class STEPSelections_AssemblyComponent_2 extends STEPSelections_AssemblyComponent {}
+
 class STEPSelections_AssemblyExplorer {
 }
 
 class STEPSelections_AssemblyLink extends Standard_Transient {
 }
+
+class STEPSelections_AssemblyLink_1 extends STEPSelections_AssemblyLink {}
+
+class STEPSelections_AssemblyLink_2 extends STEPSelections_AssemblyLink {}
+
+class STEPSelections_HSequenceOfAssemblyLink extends Standard_Transient {
+}
+
+class STEPSelections_HSequenceOfAssemblyLink_1 extends STEPSelections_HSequenceOfAssemblyLink {}
+
+class STEPSelections_HSequenceOfAssemblyLink_2 extends STEPSelections_HSequenceOfAssemblyLink {}
 
 class STEPSelections_SelectAssembly extends IFSelect_SelectExplore {
 }
@@ -11123,6 +20031,10 @@ class STEPSelections_SelectFaces extends IFSelect_SelectExplore {
 
 class STEPSelections_SelectForTransfer extends XSControl_SelectForTransfer {
 }
+
+class STEPSelections_SelectForTransfer_1 extends STEPSelections_SelectForTransfer {}
+
+class STEPSelections_SelectForTransfer_2 extends STEPSelections_SelectForTransfer {}
 
 class STEPSelections_SelectGSCurves extends IFSelect_SelectExplore {
 }
@@ -11142,11 +20054,29 @@ class Select3D_PointData {
 class Select3D_SensitiveBox extends Select3D_SensitiveEntity {
 }
 
+class Select3D_SensitiveBox_1 extends Select3D_SensitiveBox {}
+
+class Select3D_SensitiveBox_2 extends Select3D_SensitiveBox {}
+
 class Select3D_SensitiveCircle extends Select3D_SensitivePoly {
 }
 
+class Select3D_SensitiveCircle_1 extends Select3D_SensitiveCircle {}
+
+class Select3D_SensitiveCircle_2 extends Select3D_SensitiveCircle {}
+
+class Select3D_SensitiveCircle_3 extends Select3D_SensitiveCircle {}
+
+class Select3D_SensitiveCircle_4 extends Select3D_SensitiveCircle {}
+
 class Select3D_SensitiveCurve extends Select3D_SensitivePoly {
 }
+
+class Select3D_SensitiveCurve_1 extends Select3D_SensitiveCurve {}
+
+class Select3D_SensitiveCurve_2 extends Select3D_SensitiveCurve {}
+
+class Select3D_SensitiveCurve_3 extends Select3D_SensitiveCurve {}
 
 class Select3D_SensitiveEntity extends Standard_Transient {
 }
@@ -11154,14 +20084,28 @@ class Select3D_SensitiveEntity extends Standard_Transient {
 class Select3D_SensitiveFace extends Select3D_SensitiveEntity {
 }
 
+class Select3D_SensitiveFace_1 extends Select3D_SensitiveFace {}
+
+class Select3D_SensitiveFace_2 extends Select3D_SensitiveFace {}
+
 class Select3D_SensitiveGroup extends Select3D_SensitiveSet {
 }
+
+class Select3D_SensitiveGroup_1 extends Select3D_SensitiveGroup {}
+
+class Select3D_SensitiveGroup_2 extends Select3D_SensitiveGroup {}
 
 class Select3D_SensitivePoint extends Select3D_SensitiveEntity {
 }
 
 class Select3D_SensitivePoly extends Select3D_SensitiveSet {
 }
+
+class Select3D_SensitivePoly_1 extends Select3D_SensitivePoly {}
+
+class Select3D_SensitivePoly_2 extends Select3D_SensitivePoly {}
+
+class Select3D_SensitivePoly_3 extends Select3D_SensitivePoly {}
 
 class Select3D_SensitivePrimitiveArray extends Select3D_SensitiveSet {
 }
@@ -11177,6 +20121,10 @@ class Select3D_SensitiveTriangle extends Select3D_SensitiveEntity {
 
 class Select3D_SensitiveTriangulation extends Select3D_SensitiveSet {
 }
+
+class Select3D_SensitiveTriangulation_1 extends Select3D_SensitiveTriangulation {}
+
+class Select3D_SensitiveTriangulation_2 extends Select3D_SensitiveTriangulation {}
 
 class Select3D_SensitiveWire extends Select3D_SensitiveSet {
 }
@@ -11198,6 +20146,12 @@ class SelectMgr_CompositionFilter extends SelectMgr_Filter {
 
 class SelectMgr_EntityOwner extends Standard_Transient {
 }
+
+class SelectMgr_EntityOwner_1 extends SelectMgr_EntityOwner {}
+
+class SelectMgr_EntityOwner_2 extends SelectMgr_EntityOwner {}
+
+class SelectMgr_EntityOwner_3 extends SelectMgr_EntityOwner {}
 
 class SelectMgr_Filter extends Standard_Transient {
 }
@@ -11274,14 +20228,37 @@ class ShapeAnalysis_Edge {
 class ShapeAnalysis_FreeBoundData extends Standard_Transient {
 }
 
+class ShapeAnalysis_FreeBoundData_1 extends ShapeAnalysis_FreeBoundData {}
+
+class ShapeAnalysis_FreeBoundData_2 extends ShapeAnalysis_FreeBoundData {}
+
 class ShapeAnalysis_FreeBounds {
 }
+
+class ShapeAnalysis_FreeBounds_1 extends ShapeAnalysis_FreeBounds {}
+
+class ShapeAnalysis_FreeBounds_2 extends ShapeAnalysis_FreeBounds {}
+
+class ShapeAnalysis_FreeBounds_3 extends ShapeAnalysis_FreeBounds {}
 
 class ShapeAnalysis_FreeBoundsProperties {
 }
 
+class ShapeAnalysis_FreeBoundsProperties_1 extends ShapeAnalysis_FreeBoundsProperties {}
+
+class ShapeAnalysis_FreeBoundsProperties_2 extends ShapeAnalysis_FreeBoundsProperties {}
+
+class ShapeAnalysis_FreeBoundsProperties_3 extends ShapeAnalysis_FreeBoundsProperties {}
+
 class ShapeAnalysis_Geom {
 }
+
+class ShapeAnalysis_HSequenceOfFreeBounds extends Standard_Transient {
+}
+
+class ShapeAnalysis_HSequenceOfFreeBounds_1 extends ShapeAnalysis_HSequenceOfFreeBounds {}
+
+class ShapeAnalysis_HSequenceOfFreeBounds_2 extends ShapeAnalysis_HSequenceOfFreeBounds {}
 
 class ShapeAnalysis_ShapeContents {
 }
@@ -11298,14 +20275,32 @@ class ShapeAnalysis_Surface extends Standard_Transient {
 class ShapeAnalysis_TransferParameters extends Standard_Transient {
 }
 
+class ShapeAnalysis_TransferParameters_1 extends ShapeAnalysis_TransferParameters {}
+
+class ShapeAnalysis_TransferParameters_2 extends ShapeAnalysis_TransferParameters {}
+
 class ShapeAnalysis_TransferParametersProj extends ShapeAnalysis_TransferParameters {
 }
+
+class ShapeAnalysis_TransferParametersProj_1 extends ShapeAnalysis_TransferParametersProj {}
+
+class ShapeAnalysis_TransferParametersProj_2 extends ShapeAnalysis_TransferParametersProj {}
 
 class ShapeAnalysis_Wire extends Standard_Transient {
 }
 
+class ShapeAnalysis_Wire_1 extends ShapeAnalysis_Wire {}
+
+class ShapeAnalysis_Wire_2 extends ShapeAnalysis_Wire {}
+
+class ShapeAnalysis_Wire_3 extends ShapeAnalysis_Wire {}
+
 class ShapeAnalysis_WireOrder {
 }
+
+class ShapeAnalysis_WireOrder_1 extends ShapeAnalysis_WireOrder {}
+
+class ShapeAnalysis_WireOrder_2 extends ShapeAnalysis_WireOrder {}
 
 class ShapeAnalysis_WireVertex {
 }
@@ -11331,6 +20326,10 @@ class ShapeConstruct_Curve {
 class ShapeConstruct_MakeTriangulation extends BRepBuilderAPI_MakeShape {
 }
 
+class ShapeConstruct_MakeTriangulation_1 extends ShapeConstruct_MakeTriangulation {}
+
+class ShapeConstruct_MakeTriangulation_2 extends ShapeConstruct_MakeTriangulation {}
+
 class ShapeConstruct_ProjectCurveOnSurface extends Standard_Transient {
 }
 
@@ -11340,6 +20339,12 @@ class ShapeCustom {
 class ShapeCustom_BSplineRestriction extends ShapeCustom_Modification {
 }
 
+class ShapeCustom_BSplineRestriction_1 extends ShapeCustom_BSplineRestriction {}
+
+class ShapeCustom_BSplineRestriction_2 extends ShapeCustom_BSplineRestriction {}
+
+class ShapeCustom_BSplineRestriction_3 extends ShapeCustom_BSplineRestriction {}
+
 class ShapeCustom_ConvertToBSpline extends ShapeCustom_Modification {
 }
 
@@ -11348,6 +20353,10 @@ class ShapeCustom_ConvertToRevolution extends ShapeCustom_Modification {
 
 class ShapeCustom_Curve {
 }
+
+class ShapeCustom_Curve_1 extends ShapeCustom_Curve {}
+
+class ShapeCustom_Curve_2 extends ShapeCustom_Curve {}
 
 class ShapeCustom_Curve2d {
 }
@@ -11363,6 +20372,10 @@ class ShapeCustom_RestrictionParameters extends Standard_Transient {
 
 class ShapeCustom_Surface {
 }
+
+class ShapeCustom_Surface_1 extends ShapeCustom_Surface {}
+
+class ShapeCustom_Surface_2 extends ShapeCustom_Surface {}
 
 class ShapeCustom_SweptToElementary extends ShapeCustom_Modification {
 }
@@ -11382,6 +20395,12 @@ class ShapeExtend_ComplexCurve extends Geom_Curve {
 class ShapeExtend_CompositeSurface extends Geom_Surface {
 }
 
+class ShapeExtend_CompositeSurface_1 extends ShapeExtend_CompositeSurface {}
+
+class ShapeExtend_CompositeSurface_2 extends ShapeExtend_CompositeSurface {}
+
+class ShapeExtend_CompositeSurface_3 extends ShapeExtend_CompositeSurface {}
+
 class ShapeExtend_Explorer {
 }
 
@@ -11390,6 +20409,10 @@ class ShapeExtend_MsgRegistrator extends ShapeExtend_BasicMsgRegistrator {
 
 class ShapeExtend_WireData extends Standard_Transient {
 }
+
+class ShapeExtend_WireData_1 extends ShapeExtend_WireData {}
+
+class ShapeExtend_WireData_2 extends ShapeExtend_WireData {}
 
 class ShapeFix {
 }
@@ -11403,8 +20426,16 @@ class ShapeFix_EdgeConnect {
 class ShapeFix_EdgeProjAux extends Standard_Transient {
 }
 
+class ShapeFix_EdgeProjAux_1 extends ShapeFix_EdgeProjAux {}
+
+class ShapeFix_EdgeProjAux_2 extends ShapeFix_EdgeProjAux {}
+
 class ShapeFix_Face extends ShapeFix_Root {
 }
+
+class ShapeFix_Face_1 extends ShapeFix_Face {}
+
+class ShapeFix_Face_2 extends ShapeFix_Face {}
 
 class ShapeFix_FaceConnect {
 }
@@ -11418,6 +20449,12 @@ class ShapeFix_FixSmallSolid extends ShapeFix_Root {
 class ShapeFix_FreeBounds {
 }
 
+class ShapeFix_FreeBounds_1 extends ShapeFix_FreeBounds {}
+
+class ShapeFix_FreeBounds_2 extends ShapeFix_FreeBounds {}
+
+class ShapeFix_FreeBounds_3 extends ShapeFix_FreeBounds {}
+
 class ShapeFix_IntersectionTool {
 }
 
@@ -11427,14 +20464,26 @@ class ShapeFix_Root extends Standard_Transient {
 class ShapeFix_Shape extends ShapeFix_Root {
 }
 
+class ShapeFix_Shape_1 extends ShapeFix_Shape {}
+
+class ShapeFix_Shape_2 extends ShapeFix_Shape {}
+
 class ShapeFix_ShapeTolerance {
 }
 
 class ShapeFix_Shell extends ShapeFix_Root {
 }
 
+class ShapeFix_Shell_1 extends ShapeFix_Shell {}
+
+class ShapeFix_Shell_2 extends ShapeFix_Shell {}
+
 class ShapeFix_Solid extends ShapeFix_Root {
 }
+
+class ShapeFix_Solid_1 extends ShapeFix_Solid {}
+
+class ShapeFix_Solid_2 extends ShapeFix_Solid {}
 
 class ShapeFix_SplitCommonVertex extends ShapeFix_Root {
 }
@@ -11445,11 +20494,19 @@ class ShapeFix_SplitTool {
 class ShapeFix_Wire extends ShapeFix_Root {
 }
 
+class ShapeFix_Wire_1 extends ShapeFix_Wire {}
+
+class ShapeFix_Wire_2 extends ShapeFix_Wire {}
+
 class ShapeFix_WireVertex {
 }
 
 class ShapeFix_Wireframe extends ShapeFix_Root {
 }
+
+class ShapeFix_Wireframe_1 extends ShapeFix_Wireframe {}
+
+class ShapeFix_Wireframe_2 extends ShapeFix_Wireframe {}
 
 class ShapePersistent {
 }
@@ -11472,6 +20529,10 @@ class ShapeProcessAPI_ApplySequence {
 class ShapeProcess_Context extends Standard_Transient {
 }
 
+class ShapeProcess_Context_1 extends ShapeProcess_Context {}
+
+class ShapeProcess_Context_2 extends ShapeProcess_Context {}
+
 class ShapeProcess_OperLibrary {
 }
 
@@ -11480,6 +20541,10 @@ class ShapeProcess_Operator extends Standard_Transient {
 
 class ShapeProcess_ShapeContext extends ShapeProcess_Context {
 }
+
+class ShapeProcess_ShapeContext_1 extends ShapeProcess_ShapeContext {}
+
+class ShapeProcess_ShapeContext_2 extends ShapeProcess_ShapeContext {}
 
 class ShapeProcess_UOperator extends ShapeProcess_Operator {
 }
@@ -11492,6 +20557,10 @@ class ShapeUpgrade_ClosedEdgeDivide extends ShapeUpgrade_EdgeDivide {
 
 class ShapeUpgrade_ClosedFaceDivide extends ShapeUpgrade_FaceDivide {
 }
+
+class ShapeUpgrade_ClosedFaceDivide_1 extends ShapeUpgrade_ClosedFaceDivide {}
+
+class ShapeUpgrade_ClosedFaceDivide_2 extends ShapeUpgrade_ClosedFaceDivide {}
 
 class ShapeUpgrade_ConvertCurve2dToBezier extends ShapeUpgrade_SplitCurve2d {
 }
@@ -11508,8 +20577,16 @@ class ShapeUpgrade_EdgeDivide extends ShapeUpgrade_Tool {
 class ShapeUpgrade_FaceDivide extends ShapeUpgrade_Tool {
 }
 
+class ShapeUpgrade_FaceDivide_1 extends ShapeUpgrade_FaceDivide {}
+
+class ShapeUpgrade_FaceDivide_2 extends ShapeUpgrade_FaceDivide {}
+
 class ShapeUpgrade_FaceDivideArea extends ShapeUpgrade_FaceDivide {
 }
+
+class ShapeUpgrade_FaceDivideArea_1 extends ShapeUpgrade_FaceDivideArea {}
+
+class ShapeUpgrade_FaceDivideArea_2 extends ShapeUpgrade_FaceDivideArea {}
 
 class ShapeUpgrade_FixSmallBezierCurves extends ShapeUpgrade_FixSmallCurves {
 }
@@ -11520,20 +20597,40 @@ class ShapeUpgrade_FixSmallCurves extends ShapeUpgrade_Tool {
 class ShapeUpgrade_RemoveInternalWires extends ShapeUpgrade_Tool {
 }
 
+class ShapeUpgrade_RemoveInternalWires_1 extends ShapeUpgrade_RemoveInternalWires {}
+
+class ShapeUpgrade_RemoveInternalWires_2 extends ShapeUpgrade_RemoveInternalWires {}
+
 class ShapeUpgrade_RemoveLocations extends Standard_Transient {
 }
 
 class ShapeUpgrade_ShapeConvertToBezier extends ShapeUpgrade_ShapeDivide {
 }
 
+class ShapeUpgrade_ShapeConvertToBezier_1 extends ShapeUpgrade_ShapeConvertToBezier {}
+
+class ShapeUpgrade_ShapeConvertToBezier_2 extends ShapeUpgrade_ShapeConvertToBezier {}
+
 class ShapeUpgrade_ShapeDivide {
 }
+
+class ShapeUpgrade_ShapeDivide_1 extends ShapeUpgrade_ShapeDivide {}
+
+class ShapeUpgrade_ShapeDivide_2 extends ShapeUpgrade_ShapeDivide {}
 
 class ShapeUpgrade_ShapeDivideAngle extends ShapeUpgrade_ShapeDivide {
 }
 
+class ShapeUpgrade_ShapeDivideAngle_1 extends ShapeUpgrade_ShapeDivideAngle {}
+
+class ShapeUpgrade_ShapeDivideAngle_2 extends ShapeUpgrade_ShapeDivideAngle {}
+
 class ShapeUpgrade_ShapeDivideArea extends ShapeUpgrade_ShapeDivide {
 }
+
+class ShapeUpgrade_ShapeDivideArea_1 extends ShapeUpgrade_ShapeDivideArea {}
+
+class ShapeUpgrade_ShapeDivideArea_2 extends ShapeUpgrade_ShapeDivideArea {}
 
 class ShapeUpgrade_ShapeDivideClosed extends ShapeUpgrade_ShapeDivide {
 }
@@ -11543,6 +20640,10 @@ class ShapeUpgrade_ShapeDivideClosedEdges extends ShapeUpgrade_ShapeDivide {
 
 class ShapeUpgrade_ShapeDivideContinuity extends ShapeUpgrade_ShapeDivide {
 }
+
+class ShapeUpgrade_ShapeDivideContinuity_1 extends ShapeUpgrade_ShapeDivideContinuity {}
+
+class ShapeUpgrade_ShapeDivideContinuity_2 extends ShapeUpgrade_ShapeDivideContinuity {}
 
 class ShapeUpgrade_ShellSewing {
 }
@@ -11580,6 +20681,10 @@ class ShapeUpgrade_Tool extends Standard_Transient {
 class ShapeUpgrade_UnifySameDomain extends Standard_Transient {
 }
 
+class ShapeUpgrade_UnifySameDomain_1 extends ShapeUpgrade_UnifySameDomain {}
+
+class ShapeUpgrade_UnifySameDomain_2 extends ShapeUpgrade_UnifySameDomain {}
+
 class ShapeUpgrade_WireDivide extends ShapeUpgrade_Tool {
 }
 
@@ -11588,6 +20693,10 @@ class Standard {
 
 class Standard_AbortiveTransaction extends Standard_Failure {
 }
+
+class Standard_AbortiveTransaction_1 extends Standard_AbortiveTransaction {}
+
+class Standard_AbortiveTransaction_2 extends Standard_AbortiveTransaction {}
 
 }
 
@@ -11600,17 +20709,37 @@ class Standard_Condition {
 class Standard_ConstructionError extends Standard_DomainError {
 }
 
+class Standard_ConstructionError_1 extends Standard_ConstructionError {}
+
+class Standard_ConstructionError_2 extends Standard_ConstructionError {}
+
 class Standard_DimensionError extends Standard_DomainError {
 }
+
+class Standard_DimensionError_1 extends Standard_DimensionError {}
+
+class Standard_DimensionError_2 extends Standard_DimensionError {}
 
 class Standard_DimensionMismatch extends Standard_DimensionError {
 }
 
+class Standard_DimensionMismatch_1 extends Standard_DimensionMismatch {}
+
+class Standard_DimensionMismatch_2 extends Standard_DimensionMismatch {}
+
 class Standard_DivideByZero extends Standard_NumericError {
 }
 
+class Standard_DivideByZero_1 extends Standard_DivideByZero {}
+
+class Standard_DivideByZero_2 extends Standard_DivideByZero {}
+
 class Standard_DomainError extends Standard_Failure {
 }
+
+class Standard_DomainError_1 extends Standard_DomainError {}
+
+class Standard_DomainError_2 extends Standard_DomainError {}
 
 class Standard_Dump {
 }
@@ -11621,17 +20750,47 @@ class Standard_DumpSentry {
 class Standard_Failure extends Standard_Transient {
 }
 
+class Standard_Failure_1 extends Standard_Failure {}
+
+class Standard_Failure_2 extends Standard_Failure {}
+
+class Standard_Failure_3 extends Standard_Failure {}
+
 class Standard_GUID {
 }
+
+class Standard_GUID_1 extends Standard_GUID {}
+
+class Standard_GUID_2 extends Standard_GUID {}
+
+class Standard_GUID_3 extends Standard_GUID {}
+
+class Standard_GUID_4 extends Standard_GUID {}
+
+class Standard_GUID_5 extends Standard_GUID {}
+
+class Standard_GUID_6 extends Standard_GUID {}
 
 class Standard_ImmutableObject extends Standard_DomainError {
 }
 
+class Standard_ImmutableObject_1 extends Standard_ImmutableObject {}
+
+class Standard_ImmutableObject_2 extends Standard_ImmutableObject {}
+
 class Standard_LicenseError extends Standard_Failure {
 }
 
+class Standard_LicenseError_1 extends Standard_LicenseError {}
+
+class Standard_LicenseError_2 extends Standard_LicenseError {}
+
 class Standard_LicenseNotFound extends Standard_LicenseError {
 }
+
+class Standard_LicenseNotFound_1 extends Standard_LicenseNotFound {}
+
+class Standard_LicenseNotFound_2 extends Standard_LicenseNotFound {}
 
 class Standard_MMgrOpt extends Standard_MMgrRoot {
 }
@@ -11648,28 +20807,60 @@ class Standard_MMgrTBBalloc extends Standard_MMgrRoot {
 class Standard_MultiplyDefined extends Standard_DomainError {
 }
 
+class Standard_MultiplyDefined_1 extends Standard_MultiplyDefined {}
+
+class Standard_MultiplyDefined_2 extends Standard_MultiplyDefined {}
+
 }
 
 class Standard_NegativeValue extends Standard_RangeError {
 }
 
+class Standard_NegativeValue_1 extends Standard_NegativeValue {}
+
+class Standard_NegativeValue_2 extends Standard_NegativeValue {}
+
 class Standard_NoMoreObject extends Standard_DomainError {
 }
+
+class Standard_NoMoreObject_1 extends Standard_NoMoreObject {}
+
+class Standard_NoMoreObject_2 extends Standard_NoMoreObject {}
 
 class Standard_NoSuchObject extends Standard_DomainError {
 }
 
+class Standard_NoSuchObject_1 extends Standard_NoSuchObject {}
+
+class Standard_NoSuchObject_2 extends Standard_NoSuchObject {}
+
 class Standard_NotImplemented extends Standard_ProgramError {
 }
+
+class Standard_NotImplemented_1 extends Standard_NotImplemented {}
+
+class Standard_NotImplemented_2 extends Standard_NotImplemented {}
 
 class Standard_NullObject extends Standard_DomainError {
 }
 
+class Standard_NullObject_1 extends Standard_NullObject {}
+
+class Standard_NullObject_2 extends Standard_NullObject {}
+
 class Standard_NullValue extends Standard_RangeError {
 }
 
+class Standard_NullValue_1 extends Standard_NullValue {}
+
+class Standard_NullValue_2 extends Standard_NullValue {}
+
 class Standard_NumericError extends Standard_Failure {
 }
+
+class Standard_NumericError_1 extends Standard_NumericError {}
+
+class Standard_NumericError_2 extends Standard_NumericError {}
 
 class Standard_OutOfMemory extends Standard_ProgramError {
 }
@@ -11677,8 +20868,16 @@ class Standard_OutOfMemory extends Standard_ProgramError {
 class Standard_OutOfRange extends Standard_RangeError {
 }
 
+class Standard_OutOfRange_1 extends Standard_OutOfRange {}
+
+class Standard_OutOfRange_2 extends Standard_OutOfRange {}
+
 class Standard_Overflow extends Standard_NumericError {
 }
+
+class Standard_Overflow_1 extends Standard_Overflow {}
+
+class Standard_Overflow_2 extends Standard_Overflow {}
 
 class Standard_Persistent extends Standard_Transient {
 }
@@ -11686,8 +20885,16 @@ class Standard_Persistent extends Standard_Transient {
 class Standard_ProgramError extends Standard_Failure {
 }
 
+class Standard_ProgramError_1 extends Standard_ProgramError {}
+
+class Standard_ProgramError_2 extends Standard_ProgramError {}
+
 class Standard_RangeError extends Standard_DomainError {
 }
+
+class Standard_RangeError_1 extends Standard_RangeError {}
+
+class Standard_RangeError_2 extends Standard_RangeError {}
 
 class Standard_ReadBuffer {
 }
@@ -11698,8 +20905,16 @@ class Standard_ReadLineBuffer {
 class Standard_TooManyUsers extends Standard_LicenseError {
 }
 
+class Standard_TooManyUsers_1 extends Standard_TooManyUsers {}
+
+class Standard_TooManyUsers_2 extends Standard_TooManyUsers {}
+
 class Standard_Transient {
 }
+
+class Standard_Transient_1 extends Standard_Transient {}
+
+class Standard_Transient_2 extends Standard_Transient {}
 
 class Standard_Type extends Standard_Transient {
 }
@@ -11707,8 +20922,16 @@ class Standard_Type extends Standard_Transient {
 class Standard_TypeMismatch extends Standard_DomainError {
 }
 
+class Standard_TypeMismatch_1 extends Standard_TypeMismatch {}
+
+class Standard_TypeMismatch_2 extends Standard_TypeMismatch {}
+
 class Standard_Underflow extends Standard_NumericError {
 }
+
+class Standard_Underflow_1 extends Standard_Underflow {}
+
+class Standard_Underflow_2 extends Standard_Underflow {}
 
 class StdDrivers {
 }
@@ -11719,17 +20942,37 @@ class StdDrivers_DocumentRetrievalDriver extends StdLDrivers_DocumentRetrievalDr
 class StdFail_InfiniteSolutions extends Standard_Failure {
 }
 
+class StdFail_InfiniteSolutions_1 extends StdFail_InfiniteSolutions {}
+
+class StdFail_InfiniteSolutions_2 extends StdFail_InfiniteSolutions {}
+
 class StdFail_NotDone extends Standard_Failure {
 }
+
+class StdFail_NotDone_1 extends StdFail_NotDone {}
+
+class StdFail_NotDone_2 extends StdFail_NotDone {}
 
 class StdFail_Undefined extends Standard_Failure {
 }
 
+class StdFail_Undefined_1 extends StdFail_Undefined {}
+
+class StdFail_Undefined_2 extends StdFail_Undefined {}
+
 class StdFail_UndefinedDerivative extends Standard_DomainError {
 }
 
+class StdFail_UndefinedDerivative_1 extends StdFail_UndefinedDerivative {}
+
+class StdFail_UndefinedDerivative_2 extends StdFail_UndefinedDerivative {}
+
 class StdFail_UndefinedValue extends Standard_DomainError {
 }
+
+class StdFail_UndefinedValue_1 extends StdFail_UndefinedValue {}
+
+class StdFail_UndefinedValue_2 extends StdFail_UndefinedValue {}
 
 class StdLDrivers {
 }
@@ -11752,33 +20995,60 @@ class StdLPersistent_Dependency {
 class StdLPersistent_Document extends StdObjMgt_Persistent {
 }
 
+class StdLPersistent_Function {
 }
 
 class StdLPersistent_HArray1 {
 }
 
+class StdLPersistent_HArray1OfPersistent extends Standard_Transient {
+}
+
+class StdLPersistent_HArray1OfPersistent_1 extends StdLPersistent_HArray1OfPersistent {}
+
+class StdLPersistent_HArray1OfPersistent_2 extends StdLPersistent_HArray1OfPersistent {}
+
+class StdLPersistent_HArray1OfPersistent_3 extends StdLPersistent_HArray1OfPersistent {}
+
+class StdLPersistent_HArray1OfPersistent_4 extends StdLPersistent_HArray1OfPersistent {}
+
 class StdLPersistent_HArray2 {
 }
+
+class StdLPersistent_HArray2OfPersistent extends Standard_Transient {
+}
+
+class StdLPersistent_HArray2OfPersistent_1 extends StdLPersistent_HArray2OfPersistent {}
+
+class StdLPersistent_HArray2OfPersistent_2 extends StdLPersistent_HArray2OfPersistent {}
+
+class StdLPersistent_HArray2OfPersistent_3 extends StdLPersistent_HArray2OfPersistent {}
 
 class StdLPersistent_HString {
 }
 
+class StdLPersistent_NamedData {
 }
 
+class StdLPersistent_Real {
 }
 
+class StdLPersistent_TreeNode {
 }
 
 class StdLPersistent_Value {
 }
 
+class StdLPersistent_Variable {
 }
 
 class StdLPersistent_Void {
 }
 
+class StdLPersistent_XLink {
 }
 
+class StdObjMgt_MapOfInstantiators {
 }
 
 class StdObjMgt_Persistent extends Standard_Transient {
@@ -11805,12 +21075,25 @@ class StdPersistent {
 class StdPersistent_DataXtd {
 }
 
+class StdPersistent_DataXtd_Constraint {
 }
 
+class StdPersistent_DataXtd_PatternStd {
 }
 
 class StdPersistent_HArray1 {
 }
+
+class StdPersistent_HArray1OfShape1 extends Standard_Transient {
+}
+
+class StdPersistent_HArray1OfShape1_1 extends StdPersistent_HArray1OfShape1 {}
+
+class StdPersistent_HArray1OfShape1_2 extends StdPersistent_HArray1OfShape1 {}
+
+class StdPersistent_HArray1OfShape1_3 extends StdPersistent_HArray1OfShape1 {}
+
+class StdPersistent_HArray1OfShape1_4 extends StdPersistent_HArray1OfShape1 {}
 
 class StdPersistent_Naming {
 }
@@ -11860,6 +21143,10 @@ class StdPrs_ToolPoint {
 class StdPrs_ToolRFace {
 }
 
+class StdPrs_ToolRFace_1 extends StdPrs_ToolRFace {}
+
+class StdPrs_ToolRFace_2 extends StdPrs_ToolRFace {}
+
 class StdPrs_ToolTriangulatedShape {
 }
 
@@ -11890,6 +21177,12 @@ class StdSelect {
 class StdSelect_BRepOwner extends SelectMgr_EntityOwner {
 }
 
+class StdSelect_BRepOwner_1 extends StdSelect_BRepOwner {}
+
+class StdSelect_BRepOwner_2 extends StdSelect_BRepOwner {}
+
+class StdSelect_BRepOwner_3 extends StdSelect_BRepOwner {}
+
 class StdSelect_BRepSelectionTool {
 }
 
@@ -11917,6 +21210,10 @@ class StdStorage {
 class StdStorage_Bucket {
 }
 
+class StdStorage_Bucket_1 extends StdStorage_Bucket {}
+
+class StdStorage_Bucket_2 extends StdStorage_Bucket {}
+
 class StdStorage_BucketIterator {
 }
 
@@ -11926,11 +21223,22 @@ class StdStorage_BucketOfPersistent {
 class StdStorage_Data extends Standard_Transient {
 }
 
+class StdStorage_HSequenceOfRoots extends Standard_Transient {
+}
+
+class StdStorage_HSequenceOfRoots_1 extends StdStorage_HSequenceOfRoots {}
+
+class StdStorage_HSequenceOfRoots_2 extends StdStorage_HSequenceOfRoots {}
+
 class StdStorage_HeaderData extends Standard_Transient {
 }
 
 class StdStorage_Root extends Standard_Transient {
 }
+
+class StdStorage_Root_1 extends StdStorage_Root {}
+
+class StdStorage_Root_2 extends StdStorage_Root {}
 
 class StdStorage_RootData extends Standard_Transient {
 }
@@ -11983,6 +21291,116 @@ class StepAP203_ContractedItem extends StepData_SelectType {
 class StepAP203_DateTimeItem extends StepData_SelectType {
 }
 
+class StepAP203_HArray1OfApprovedItem extends Standard_Transient {
+}
+
+class StepAP203_HArray1OfApprovedItem_1 extends StepAP203_HArray1OfApprovedItem {}
+
+class StepAP203_HArray1OfApprovedItem_2 extends StepAP203_HArray1OfApprovedItem {}
+
+class StepAP203_HArray1OfApprovedItem_3 extends StepAP203_HArray1OfApprovedItem {}
+
+class StepAP203_HArray1OfApprovedItem_4 extends StepAP203_HArray1OfApprovedItem {}
+
+class StepAP203_HArray1OfCertifiedItem extends Standard_Transient {
+}
+
+class StepAP203_HArray1OfCertifiedItem_1 extends StepAP203_HArray1OfCertifiedItem {}
+
+class StepAP203_HArray1OfCertifiedItem_2 extends StepAP203_HArray1OfCertifiedItem {}
+
+class StepAP203_HArray1OfCertifiedItem_3 extends StepAP203_HArray1OfCertifiedItem {}
+
+class StepAP203_HArray1OfCertifiedItem_4 extends StepAP203_HArray1OfCertifiedItem {}
+
+class StepAP203_HArray1OfChangeRequestItem extends Standard_Transient {
+}
+
+class StepAP203_HArray1OfChangeRequestItem_1 extends StepAP203_HArray1OfChangeRequestItem {}
+
+class StepAP203_HArray1OfChangeRequestItem_2 extends StepAP203_HArray1OfChangeRequestItem {}
+
+class StepAP203_HArray1OfChangeRequestItem_3 extends StepAP203_HArray1OfChangeRequestItem {}
+
+class StepAP203_HArray1OfChangeRequestItem_4 extends StepAP203_HArray1OfChangeRequestItem {}
+
+class StepAP203_HArray1OfClassifiedItem extends Standard_Transient {
+}
+
+class StepAP203_HArray1OfClassifiedItem_1 extends StepAP203_HArray1OfClassifiedItem {}
+
+class StepAP203_HArray1OfClassifiedItem_2 extends StepAP203_HArray1OfClassifiedItem {}
+
+class StepAP203_HArray1OfClassifiedItem_3 extends StepAP203_HArray1OfClassifiedItem {}
+
+class StepAP203_HArray1OfClassifiedItem_4 extends StepAP203_HArray1OfClassifiedItem {}
+
+class StepAP203_HArray1OfContractedItem extends Standard_Transient {
+}
+
+class StepAP203_HArray1OfContractedItem_1 extends StepAP203_HArray1OfContractedItem {}
+
+class StepAP203_HArray1OfContractedItem_2 extends StepAP203_HArray1OfContractedItem {}
+
+class StepAP203_HArray1OfContractedItem_3 extends StepAP203_HArray1OfContractedItem {}
+
+class StepAP203_HArray1OfContractedItem_4 extends StepAP203_HArray1OfContractedItem {}
+
+class StepAP203_HArray1OfDateTimeItem extends Standard_Transient {
+}
+
+class StepAP203_HArray1OfDateTimeItem_1 extends StepAP203_HArray1OfDateTimeItem {}
+
+class StepAP203_HArray1OfDateTimeItem_2 extends StepAP203_HArray1OfDateTimeItem {}
+
+class StepAP203_HArray1OfDateTimeItem_3 extends StepAP203_HArray1OfDateTimeItem {}
+
+class StepAP203_HArray1OfDateTimeItem_4 extends StepAP203_HArray1OfDateTimeItem {}
+
+class StepAP203_HArray1OfPersonOrganizationItem extends Standard_Transient {
+}
+
+class StepAP203_HArray1OfPersonOrganizationItem_1 extends StepAP203_HArray1OfPersonOrganizationItem {}
+
+class StepAP203_HArray1OfPersonOrganizationItem_2 extends StepAP203_HArray1OfPersonOrganizationItem {}
+
+class StepAP203_HArray1OfPersonOrganizationItem_3 extends StepAP203_HArray1OfPersonOrganizationItem {}
+
+class StepAP203_HArray1OfPersonOrganizationItem_4 extends StepAP203_HArray1OfPersonOrganizationItem {}
+
+class StepAP203_HArray1OfSpecifiedItem extends Standard_Transient {
+}
+
+class StepAP203_HArray1OfSpecifiedItem_1 extends StepAP203_HArray1OfSpecifiedItem {}
+
+class StepAP203_HArray1OfSpecifiedItem_2 extends StepAP203_HArray1OfSpecifiedItem {}
+
+class StepAP203_HArray1OfSpecifiedItem_3 extends StepAP203_HArray1OfSpecifiedItem {}
+
+class StepAP203_HArray1OfSpecifiedItem_4 extends StepAP203_HArray1OfSpecifiedItem {}
+
+class StepAP203_HArray1OfStartRequestItem extends Standard_Transient {
+}
+
+class StepAP203_HArray1OfStartRequestItem_1 extends StepAP203_HArray1OfStartRequestItem {}
+
+class StepAP203_HArray1OfStartRequestItem_2 extends StepAP203_HArray1OfStartRequestItem {}
+
+class StepAP203_HArray1OfStartRequestItem_3 extends StepAP203_HArray1OfStartRequestItem {}
+
+class StepAP203_HArray1OfStartRequestItem_4 extends StepAP203_HArray1OfStartRequestItem {}
+
+class StepAP203_HArray1OfWorkItem extends Standard_Transient {
+}
+
+class StepAP203_HArray1OfWorkItem_1 extends StepAP203_HArray1OfWorkItem {}
+
+class StepAP203_HArray1OfWorkItem_2 extends StepAP203_HArray1OfWorkItem {}
+
+class StepAP203_HArray1OfWorkItem_3 extends StepAP203_HArray1OfWorkItem {}
+
+class StepAP203_HArray1OfWorkItem_4 extends StepAP203_HArray1OfWorkItem {}
+
 class StepAP203_PersonOrganizationItem extends StepData_SelectType {
 }
 
@@ -12003,6 +21421,10 @@ class StepAP203_WorkItem extends StepData_SelectType {
 
 class StepAP209_Construct extends STEPConstruct_Tool {
 }
+
+class StepAP209_Construct_1 extends StepAP209_Construct {}
+
+class StepAP209_Construct_2 extends StepAP209_Construct {}
 
 class StepAP214 {
 }
@@ -12123,6 +21545,193 @@ class StepAP214_ExternallyDefinedGeneralProperty extends StepBasic_GeneralProper
 
 class StepAP214_GroupItem extends StepData_SelectType {
 }
+
+class StepAP214_HArray1OfApprovalItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfApprovalItem_1 extends StepAP214_HArray1OfApprovalItem {}
+
+class StepAP214_HArray1OfApprovalItem_2 extends StepAP214_HArray1OfApprovalItem {}
+
+class StepAP214_HArray1OfApprovalItem_3 extends StepAP214_HArray1OfApprovalItem {}
+
+class StepAP214_HArray1OfApprovalItem_4 extends StepAP214_HArray1OfApprovalItem {}
+
+class StepAP214_HArray1OfAutoDesignDateAndPersonItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfAutoDesignDateAndPersonItem_1 extends StepAP214_HArray1OfAutoDesignDateAndPersonItem {}
+
+class StepAP214_HArray1OfAutoDesignDateAndPersonItem_2 extends StepAP214_HArray1OfAutoDesignDateAndPersonItem {}
+
+class StepAP214_HArray1OfAutoDesignDateAndPersonItem_3 extends StepAP214_HArray1OfAutoDesignDateAndPersonItem {}
+
+class StepAP214_HArray1OfAutoDesignDateAndPersonItem_4 extends StepAP214_HArray1OfAutoDesignDateAndPersonItem {}
+
+class StepAP214_HArray1OfAutoDesignDateAndTimeItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfAutoDesignDateAndTimeItem_1 extends StepAP214_HArray1OfAutoDesignDateAndTimeItem {}
+
+class StepAP214_HArray1OfAutoDesignDateAndTimeItem_2 extends StepAP214_HArray1OfAutoDesignDateAndTimeItem {}
+
+class StepAP214_HArray1OfAutoDesignDateAndTimeItem_3 extends StepAP214_HArray1OfAutoDesignDateAndTimeItem {}
+
+class StepAP214_HArray1OfAutoDesignDateAndTimeItem_4 extends StepAP214_HArray1OfAutoDesignDateAndTimeItem {}
+
+class StepAP214_HArray1OfAutoDesignDatedItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfAutoDesignDatedItem_1 extends StepAP214_HArray1OfAutoDesignDatedItem {}
+
+class StepAP214_HArray1OfAutoDesignDatedItem_2 extends StepAP214_HArray1OfAutoDesignDatedItem {}
+
+class StepAP214_HArray1OfAutoDesignDatedItem_3 extends StepAP214_HArray1OfAutoDesignDatedItem {}
+
+class StepAP214_HArray1OfAutoDesignDatedItem_4 extends StepAP214_HArray1OfAutoDesignDatedItem {}
+
+class StepAP214_HArray1OfAutoDesignGeneralOrgItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfAutoDesignGeneralOrgItem_1 extends StepAP214_HArray1OfAutoDesignGeneralOrgItem {}
+
+class StepAP214_HArray1OfAutoDesignGeneralOrgItem_2 extends StepAP214_HArray1OfAutoDesignGeneralOrgItem {}
+
+class StepAP214_HArray1OfAutoDesignGeneralOrgItem_3 extends StepAP214_HArray1OfAutoDesignGeneralOrgItem {}
+
+class StepAP214_HArray1OfAutoDesignGeneralOrgItem_4 extends StepAP214_HArray1OfAutoDesignGeneralOrgItem {}
+
+class StepAP214_HArray1OfAutoDesignGroupedItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfAutoDesignGroupedItem_1 extends StepAP214_HArray1OfAutoDesignGroupedItem {}
+
+class StepAP214_HArray1OfAutoDesignGroupedItem_2 extends StepAP214_HArray1OfAutoDesignGroupedItem {}
+
+class StepAP214_HArray1OfAutoDesignGroupedItem_3 extends StepAP214_HArray1OfAutoDesignGroupedItem {}
+
+class StepAP214_HArray1OfAutoDesignGroupedItem_4 extends StepAP214_HArray1OfAutoDesignGroupedItem {}
+
+class StepAP214_HArray1OfAutoDesignPresentedItemSelect extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfAutoDesignPresentedItemSelect_1 extends StepAP214_HArray1OfAutoDesignPresentedItemSelect {}
+
+class StepAP214_HArray1OfAutoDesignPresentedItemSelect_2 extends StepAP214_HArray1OfAutoDesignPresentedItemSelect {}
+
+class StepAP214_HArray1OfAutoDesignPresentedItemSelect_3 extends StepAP214_HArray1OfAutoDesignPresentedItemSelect {}
+
+class StepAP214_HArray1OfAutoDesignPresentedItemSelect_4 extends StepAP214_HArray1OfAutoDesignPresentedItemSelect {}
+
+class StepAP214_HArray1OfAutoDesignReferencingItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfAutoDesignReferencingItem_1 extends StepAP214_HArray1OfAutoDesignReferencingItem {}
+
+class StepAP214_HArray1OfAutoDesignReferencingItem_2 extends StepAP214_HArray1OfAutoDesignReferencingItem {}
+
+class StepAP214_HArray1OfAutoDesignReferencingItem_3 extends StepAP214_HArray1OfAutoDesignReferencingItem {}
+
+class StepAP214_HArray1OfAutoDesignReferencingItem_4 extends StepAP214_HArray1OfAutoDesignReferencingItem {}
+
+class StepAP214_HArray1OfDateAndTimeItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfDateAndTimeItem_1 extends StepAP214_HArray1OfDateAndTimeItem {}
+
+class StepAP214_HArray1OfDateAndTimeItem_2 extends StepAP214_HArray1OfDateAndTimeItem {}
+
+class StepAP214_HArray1OfDateAndTimeItem_3 extends StepAP214_HArray1OfDateAndTimeItem {}
+
+class StepAP214_HArray1OfDateAndTimeItem_4 extends StepAP214_HArray1OfDateAndTimeItem {}
+
+class StepAP214_HArray1OfDateItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfDateItem_1 extends StepAP214_HArray1OfDateItem {}
+
+class StepAP214_HArray1OfDateItem_2 extends StepAP214_HArray1OfDateItem {}
+
+class StepAP214_HArray1OfDateItem_3 extends StepAP214_HArray1OfDateItem {}
+
+class StepAP214_HArray1OfDateItem_4 extends StepAP214_HArray1OfDateItem {}
+
+class StepAP214_HArray1OfDocumentReferenceItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfDocumentReferenceItem_1 extends StepAP214_HArray1OfDocumentReferenceItem {}
+
+class StepAP214_HArray1OfDocumentReferenceItem_2 extends StepAP214_HArray1OfDocumentReferenceItem {}
+
+class StepAP214_HArray1OfDocumentReferenceItem_3 extends StepAP214_HArray1OfDocumentReferenceItem {}
+
+class StepAP214_HArray1OfDocumentReferenceItem_4 extends StepAP214_HArray1OfDocumentReferenceItem {}
+
+class StepAP214_HArray1OfExternalIdentificationItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfExternalIdentificationItem_1 extends StepAP214_HArray1OfExternalIdentificationItem {}
+
+class StepAP214_HArray1OfExternalIdentificationItem_2 extends StepAP214_HArray1OfExternalIdentificationItem {}
+
+class StepAP214_HArray1OfExternalIdentificationItem_3 extends StepAP214_HArray1OfExternalIdentificationItem {}
+
+class StepAP214_HArray1OfExternalIdentificationItem_4 extends StepAP214_HArray1OfExternalIdentificationItem {}
+
+class StepAP214_HArray1OfGroupItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfGroupItem_1 extends StepAP214_HArray1OfGroupItem {}
+
+class StepAP214_HArray1OfGroupItem_2 extends StepAP214_HArray1OfGroupItem {}
+
+class StepAP214_HArray1OfGroupItem_3 extends StepAP214_HArray1OfGroupItem {}
+
+class StepAP214_HArray1OfGroupItem_4 extends StepAP214_HArray1OfGroupItem {}
+
+class StepAP214_HArray1OfOrganizationItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfOrganizationItem_1 extends StepAP214_HArray1OfOrganizationItem {}
+
+class StepAP214_HArray1OfOrganizationItem_2 extends StepAP214_HArray1OfOrganizationItem {}
+
+class StepAP214_HArray1OfOrganizationItem_3 extends StepAP214_HArray1OfOrganizationItem {}
+
+class StepAP214_HArray1OfOrganizationItem_4 extends StepAP214_HArray1OfOrganizationItem {}
+
+class StepAP214_HArray1OfPersonAndOrganizationItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfPersonAndOrganizationItem_1 extends StepAP214_HArray1OfPersonAndOrganizationItem {}
+
+class StepAP214_HArray1OfPersonAndOrganizationItem_2 extends StepAP214_HArray1OfPersonAndOrganizationItem {}
+
+class StepAP214_HArray1OfPersonAndOrganizationItem_3 extends StepAP214_HArray1OfPersonAndOrganizationItem {}
+
+class StepAP214_HArray1OfPersonAndOrganizationItem_4 extends StepAP214_HArray1OfPersonAndOrganizationItem {}
+
+class StepAP214_HArray1OfPresentedItemSelect extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfPresentedItemSelect_1 extends StepAP214_HArray1OfPresentedItemSelect {}
+
+class StepAP214_HArray1OfPresentedItemSelect_2 extends StepAP214_HArray1OfPresentedItemSelect {}
+
+class StepAP214_HArray1OfPresentedItemSelect_3 extends StepAP214_HArray1OfPresentedItemSelect {}
+
+class StepAP214_HArray1OfPresentedItemSelect_4 extends StepAP214_HArray1OfPresentedItemSelect {}
+
+class StepAP214_HArray1OfSecurityClassificationItem extends Standard_Transient {
+}
+
+class StepAP214_HArray1OfSecurityClassificationItem_1 extends StepAP214_HArray1OfSecurityClassificationItem {}
+
+class StepAP214_HArray1OfSecurityClassificationItem_2 extends StepAP214_HArray1OfSecurityClassificationItem {}
+
+class StepAP214_HArray1OfSecurityClassificationItem_3 extends StepAP214_HArray1OfSecurityClassificationItem {}
+
+class StepAP214_HArray1OfSecurityClassificationItem_4 extends StepAP214_HArray1OfSecurityClassificationItem {}
 
 class StepAP214_OrganizationItem extends StepAP214_ApprovalItem {
 }
@@ -12357,6 +21966,116 @@ class StepBasic_GroupAssignment extends Standard_Transient {
 
 class StepBasic_GroupRelationship extends Standard_Transient {
 }
+
+class StepBasic_HArray1OfApproval extends Standard_Transient {
+}
+
+class StepBasic_HArray1OfApproval_1 extends StepBasic_HArray1OfApproval {}
+
+class StepBasic_HArray1OfApproval_2 extends StepBasic_HArray1OfApproval {}
+
+class StepBasic_HArray1OfApproval_3 extends StepBasic_HArray1OfApproval {}
+
+class StepBasic_HArray1OfApproval_4 extends StepBasic_HArray1OfApproval {}
+
+class StepBasic_HArray1OfDerivedUnitElement extends Standard_Transient {
+}
+
+class StepBasic_HArray1OfDerivedUnitElement_1 extends StepBasic_HArray1OfDerivedUnitElement {}
+
+class StepBasic_HArray1OfDerivedUnitElement_2 extends StepBasic_HArray1OfDerivedUnitElement {}
+
+class StepBasic_HArray1OfDerivedUnitElement_3 extends StepBasic_HArray1OfDerivedUnitElement {}
+
+class StepBasic_HArray1OfDerivedUnitElement_4 extends StepBasic_HArray1OfDerivedUnitElement {}
+
+class StepBasic_HArray1OfDocument extends Standard_Transient {
+}
+
+class StepBasic_HArray1OfDocument_1 extends StepBasic_HArray1OfDocument {}
+
+class StepBasic_HArray1OfDocument_2 extends StepBasic_HArray1OfDocument {}
+
+class StepBasic_HArray1OfDocument_3 extends StepBasic_HArray1OfDocument {}
+
+class StepBasic_HArray1OfDocument_4 extends StepBasic_HArray1OfDocument {}
+
+class StepBasic_HArray1OfNamedUnit extends Standard_Transient {
+}
+
+class StepBasic_HArray1OfNamedUnit_1 extends StepBasic_HArray1OfNamedUnit {}
+
+class StepBasic_HArray1OfNamedUnit_2 extends StepBasic_HArray1OfNamedUnit {}
+
+class StepBasic_HArray1OfNamedUnit_3 extends StepBasic_HArray1OfNamedUnit {}
+
+class StepBasic_HArray1OfNamedUnit_4 extends StepBasic_HArray1OfNamedUnit {}
+
+class StepBasic_HArray1OfOrganization extends Standard_Transient {
+}
+
+class StepBasic_HArray1OfOrganization_1 extends StepBasic_HArray1OfOrganization {}
+
+class StepBasic_HArray1OfOrganization_2 extends StepBasic_HArray1OfOrganization {}
+
+class StepBasic_HArray1OfOrganization_3 extends StepBasic_HArray1OfOrganization {}
+
+class StepBasic_HArray1OfOrganization_4 extends StepBasic_HArray1OfOrganization {}
+
+class StepBasic_HArray1OfPerson extends Standard_Transient {
+}
+
+class StepBasic_HArray1OfPerson_1 extends StepBasic_HArray1OfPerson {}
+
+class StepBasic_HArray1OfPerson_2 extends StepBasic_HArray1OfPerson {}
+
+class StepBasic_HArray1OfPerson_3 extends StepBasic_HArray1OfPerson {}
+
+class StepBasic_HArray1OfPerson_4 extends StepBasic_HArray1OfPerson {}
+
+class StepBasic_HArray1OfProduct extends Standard_Transient {
+}
+
+class StepBasic_HArray1OfProduct_1 extends StepBasic_HArray1OfProduct {}
+
+class StepBasic_HArray1OfProduct_2 extends StepBasic_HArray1OfProduct {}
+
+class StepBasic_HArray1OfProduct_3 extends StepBasic_HArray1OfProduct {}
+
+class StepBasic_HArray1OfProduct_4 extends StepBasic_HArray1OfProduct {}
+
+class StepBasic_HArray1OfProductContext extends Standard_Transient {
+}
+
+class StepBasic_HArray1OfProductContext_1 extends StepBasic_HArray1OfProductContext {}
+
+class StepBasic_HArray1OfProductContext_2 extends StepBasic_HArray1OfProductContext {}
+
+class StepBasic_HArray1OfProductContext_3 extends StepBasic_HArray1OfProductContext {}
+
+class StepBasic_HArray1OfProductContext_4 extends StepBasic_HArray1OfProductContext {}
+
+class StepBasic_HArray1OfProductDefinition extends Standard_Transient {
+}
+
+class StepBasic_HArray1OfProductDefinition_1 extends StepBasic_HArray1OfProductDefinition {}
+
+class StepBasic_HArray1OfProductDefinition_2 extends StepBasic_HArray1OfProductDefinition {}
+
+class StepBasic_HArray1OfProductDefinition_3 extends StepBasic_HArray1OfProductDefinition {}
+
+class StepBasic_HArray1OfProductDefinition_4 extends StepBasic_HArray1OfProductDefinition {}
+
+class StepBasic_HArray1OfUncertaintyMeasureWithUnit extends Standard_Transient {
+}
+
+class StepBasic_HArray1OfUncertaintyMeasureWithUnit_1 extends StepBasic_HArray1OfUncertaintyMeasureWithUnit {}
+
+class StepBasic_HArray1OfUncertaintyMeasureWithUnit_2 extends StepBasic_HArray1OfUncertaintyMeasureWithUnit {}
+
+class StepBasic_HArray1OfUncertaintyMeasureWithUnit_3 extends StepBasic_HArray1OfUncertaintyMeasureWithUnit {}
+
+class StepBasic_HArray1OfUncertaintyMeasureWithUnit_4 extends StepBasic_HArray1OfUncertaintyMeasureWithUnit {}
 
 class StepBasic_IdentificationAssignment extends Standard_Transient {
 }
@@ -12607,6 +22326,10 @@ class StepData_EnumTool {
 class StepData_Field {
 }
 
+class StepData_Field_1 extends StepData_Field {}
+
+class StepData_Field_2 extends StepData_Field {}
+
 class StepData_FieldList {
 }
 
@@ -12627,6 +22350,17 @@ class StepData_FileRecognizer extends Standard_Transient {
 
 class StepData_GlobalNodeOfWriterLib extends Standard_Transient {
 }
+
+class StepData_HArray1OfField extends Standard_Transient {
+}
+
+class StepData_HArray1OfField_1 extends StepData_HArray1OfField {}
+
+class StepData_HArray1OfField_2 extends StepData_HArray1OfField {}
+
+class StepData_HArray1OfField_3 extends StepData_HArray1OfField {}
+
+class StepData_HArray1OfField_4 extends StepData_HArray1OfField {}
 
 class StepData_NodeOfWriterLib extends Standard_Transient {
 }
@@ -12681,6 +22415,10 @@ class StepData_StepWriter {
 
 class StepData_WriterLib {
 }
+
+class StepData_WriterLib_1 extends StepData_WriterLib {}
+
+class StepData_WriterLib_2 extends StepData_WriterLib {}
 
 class StepDimTol_AngularityTolerance extends StepDimTol_GeometricToleranceWithDatumReference {
 }
@@ -12783,6 +22521,83 @@ class StepDimTol_GeometricToleranceWithMaximumTolerance extends StepDimTol_Geome
 
 class StepDimTol_GeometricToleranceWithModifiers extends StepDimTol_GeometricTolerance {
 }
+
+class StepDimTol_HArray1OfDatumReference extends Standard_Transient {
+}
+
+class StepDimTol_HArray1OfDatumReference_1 extends StepDimTol_HArray1OfDatumReference {}
+
+class StepDimTol_HArray1OfDatumReference_2 extends StepDimTol_HArray1OfDatumReference {}
+
+class StepDimTol_HArray1OfDatumReference_3 extends StepDimTol_HArray1OfDatumReference {}
+
+class StepDimTol_HArray1OfDatumReference_4 extends StepDimTol_HArray1OfDatumReference {}
+
+class StepDimTol_HArray1OfDatumReferenceCompartment extends Standard_Transient {
+}
+
+class StepDimTol_HArray1OfDatumReferenceCompartment_1 extends StepDimTol_HArray1OfDatumReferenceCompartment {}
+
+class StepDimTol_HArray1OfDatumReferenceCompartment_2 extends StepDimTol_HArray1OfDatumReferenceCompartment {}
+
+class StepDimTol_HArray1OfDatumReferenceCompartment_3 extends StepDimTol_HArray1OfDatumReferenceCompartment {}
+
+class StepDimTol_HArray1OfDatumReferenceCompartment_4 extends StepDimTol_HArray1OfDatumReferenceCompartment {}
+
+class StepDimTol_HArray1OfDatumReferenceElement extends Standard_Transient {
+}
+
+class StepDimTol_HArray1OfDatumReferenceElement_1 extends StepDimTol_HArray1OfDatumReferenceElement {}
+
+class StepDimTol_HArray1OfDatumReferenceElement_2 extends StepDimTol_HArray1OfDatumReferenceElement {}
+
+class StepDimTol_HArray1OfDatumReferenceElement_3 extends StepDimTol_HArray1OfDatumReferenceElement {}
+
+class StepDimTol_HArray1OfDatumReferenceElement_4 extends StepDimTol_HArray1OfDatumReferenceElement {}
+
+class StepDimTol_HArray1OfDatumReferenceModifier extends Standard_Transient {
+}
+
+class StepDimTol_HArray1OfDatumReferenceModifier_1 extends StepDimTol_HArray1OfDatumReferenceModifier {}
+
+class StepDimTol_HArray1OfDatumReferenceModifier_2 extends StepDimTol_HArray1OfDatumReferenceModifier {}
+
+class StepDimTol_HArray1OfDatumReferenceModifier_3 extends StepDimTol_HArray1OfDatumReferenceModifier {}
+
+class StepDimTol_HArray1OfDatumReferenceModifier_4 extends StepDimTol_HArray1OfDatumReferenceModifier {}
+
+class StepDimTol_HArray1OfDatumSystemOrReference extends Standard_Transient {
+}
+
+class StepDimTol_HArray1OfDatumSystemOrReference_1 extends StepDimTol_HArray1OfDatumSystemOrReference {}
+
+class StepDimTol_HArray1OfDatumSystemOrReference_2 extends StepDimTol_HArray1OfDatumSystemOrReference {}
+
+class StepDimTol_HArray1OfDatumSystemOrReference_3 extends StepDimTol_HArray1OfDatumSystemOrReference {}
+
+class StepDimTol_HArray1OfDatumSystemOrReference_4 extends StepDimTol_HArray1OfDatumSystemOrReference {}
+
+class StepDimTol_HArray1OfGeometricToleranceModifier extends Standard_Transient {
+}
+
+class StepDimTol_HArray1OfGeometricToleranceModifier_1 extends StepDimTol_HArray1OfGeometricToleranceModifier {}
+
+class StepDimTol_HArray1OfGeometricToleranceModifier_2 extends StepDimTol_HArray1OfGeometricToleranceModifier {}
+
+class StepDimTol_HArray1OfGeometricToleranceModifier_3 extends StepDimTol_HArray1OfGeometricToleranceModifier {}
+
+class StepDimTol_HArray1OfGeometricToleranceModifier_4 extends StepDimTol_HArray1OfGeometricToleranceModifier {}
+
+class StepDimTol_HArray1OfToleranceZoneTarget extends Standard_Transient {
+}
+
+class StepDimTol_HArray1OfToleranceZoneTarget_1 extends StepDimTol_HArray1OfToleranceZoneTarget {}
+
+class StepDimTol_HArray1OfToleranceZoneTarget_2 extends StepDimTol_HArray1OfToleranceZoneTarget {}
+
+class StepDimTol_HArray1OfToleranceZoneTarget_3 extends StepDimTol_HArray1OfToleranceZoneTarget {}
+
+class StepDimTol_HArray1OfToleranceZoneTarget_4 extends StepDimTol_HArray1OfToleranceZoneTarget {}
 
 class StepDimTol_LineProfileTolerance extends StepDimTol_GeometricTolerance {
 }
@@ -12888,6 +22703,149 @@ class StepElement_ElementDescriptor extends Standard_Transient {
 
 class StepElement_ElementMaterial extends Standard_Transient {
 }
+
+class StepElement_HArray1OfCurveElementEndReleasePacket extends Standard_Transient {
+}
+
+class StepElement_HArray1OfCurveElementEndReleasePacket_1 extends StepElement_HArray1OfCurveElementEndReleasePacket {}
+
+class StepElement_HArray1OfCurveElementEndReleasePacket_2 extends StepElement_HArray1OfCurveElementEndReleasePacket {}
+
+class StepElement_HArray1OfCurveElementEndReleasePacket_3 extends StepElement_HArray1OfCurveElementEndReleasePacket {}
+
+class StepElement_HArray1OfCurveElementEndReleasePacket_4 extends StepElement_HArray1OfCurveElementEndReleasePacket {}
+
+class StepElement_HArray1OfCurveElementSectionDefinition extends Standard_Transient {
+}
+
+class StepElement_HArray1OfCurveElementSectionDefinition_1 extends StepElement_HArray1OfCurveElementSectionDefinition {}
+
+class StepElement_HArray1OfCurveElementSectionDefinition_2 extends StepElement_HArray1OfCurveElementSectionDefinition {}
+
+class StepElement_HArray1OfCurveElementSectionDefinition_3 extends StepElement_HArray1OfCurveElementSectionDefinition {}
+
+class StepElement_HArray1OfCurveElementSectionDefinition_4 extends StepElement_HArray1OfCurveElementSectionDefinition {}
+
+class StepElement_HArray1OfHSequenceOfCurveElementPurposeMember extends Standard_Transient {
+}
+
+class StepElement_HArray1OfHSequenceOfCurveElementPurposeMember_1 extends StepElement_HArray1OfHSequenceOfCurveElementPurposeMember {}
+
+class StepElement_HArray1OfHSequenceOfCurveElementPurposeMember_2 extends StepElement_HArray1OfHSequenceOfCurveElementPurposeMember {}
+
+class StepElement_HArray1OfHSequenceOfCurveElementPurposeMember_3 extends StepElement_HArray1OfHSequenceOfCurveElementPurposeMember {}
+
+class StepElement_HArray1OfHSequenceOfCurveElementPurposeMember_4 extends StepElement_HArray1OfHSequenceOfCurveElementPurposeMember {}
+
+class StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember extends Standard_Transient {
+}
+
+class StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember_1 extends StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember {}
+
+class StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember_2 extends StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember {}
+
+class StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember_3 extends StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember {}
+
+class StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember_4 extends StepElement_HArray1OfHSequenceOfSurfaceElementPurposeMember {}
+
+class StepElement_HArray1OfMeasureOrUnspecifiedValue extends Standard_Transient {
+}
+
+class StepElement_HArray1OfMeasureOrUnspecifiedValue_1 extends StepElement_HArray1OfMeasureOrUnspecifiedValue {}
+
+class StepElement_HArray1OfMeasureOrUnspecifiedValue_2 extends StepElement_HArray1OfMeasureOrUnspecifiedValue {}
+
+class StepElement_HArray1OfMeasureOrUnspecifiedValue_3 extends StepElement_HArray1OfMeasureOrUnspecifiedValue {}
+
+class StepElement_HArray1OfMeasureOrUnspecifiedValue_4 extends StepElement_HArray1OfMeasureOrUnspecifiedValue {}
+
+class StepElement_HArray1OfSurfaceSection extends Standard_Transient {
+}
+
+class StepElement_HArray1OfSurfaceSection_1 extends StepElement_HArray1OfSurfaceSection {}
+
+class StepElement_HArray1OfSurfaceSection_2 extends StepElement_HArray1OfSurfaceSection {}
+
+class StepElement_HArray1OfSurfaceSection_3 extends StepElement_HArray1OfSurfaceSection {}
+
+class StepElement_HArray1OfSurfaceSection_4 extends StepElement_HArray1OfSurfaceSection {}
+
+class StepElement_HArray1OfVolumeElementPurpose extends Standard_Transient {
+}
+
+class StepElement_HArray1OfVolumeElementPurpose_1 extends StepElement_HArray1OfVolumeElementPurpose {}
+
+class StepElement_HArray1OfVolumeElementPurpose_2 extends StepElement_HArray1OfVolumeElementPurpose {}
+
+class StepElement_HArray1OfVolumeElementPurpose_3 extends StepElement_HArray1OfVolumeElementPurpose {}
+
+class StepElement_HArray1OfVolumeElementPurpose_4 extends StepElement_HArray1OfVolumeElementPurpose {}
+
+class StepElement_HArray1OfVolumeElementPurposeMember extends Standard_Transient {
+}
+
+class StepElement_HArray1OfVolumeElementPurposeMember_1 extends StepElement_HArray1OfVolumeElementPurposeMember {}
+
+class StepElement_HArray1OfVolumeElementPurposeMember_2 extends StepElement_HArray1OfVolumeElementPurposeMember {}
+
+class StepElement_HArray1OfVolumeElementPurposeMember_3 extends StepElement_HArray1OfVolumeElementPurposeMember {}
+
+class StepElement_HArray1OfVolumeElementPurposeMember_4 extends StepElement_HArray1OfVolumeElementPurposeMember {}
+
+class StepElement_HArray2OfCurveElementPurposeMember extends Standard_Transient {
+}
+
+class StepElement_HArray2OfCurveElementPurposeMember_1 extends StepElement_HArray2OfCurveElementPurposeMember {}
+
+class StepElement_HArray2OfCurveElementPurposeMember_2 extends StepElement_HArray2OfCurveElementPurposeMember {}
+
+class StepElement_HArray2OfCurveElementPurposeMember_3 extends StepElement_HArray2OfCurveElementPurposeMember {}
+
+class StepElement_HArray2OfSurfaceElementPurpose extends Standard_Transient {
+}
+
+class StepElement_HArray2OfSurfaceElementPurpose_1 extends StepElement_HArray2OfSurfaceElementPurpose {}
+
+class StepElement_HArray2OfSurfaceElementPurpose_2 extends StepElement_HArray2OfSurfaceElementPurpose {}
+
+class StepElement_HArray2OfSurfaceElementPurpose_3 extends StepElement_HArray2OfSurfaceElementPurpose {}
+
+class StepElement_HArray2OfSurfaceElementPurposeMember extends Standard_Transient {
+}
+
+class StepElement_HArray2OfSurfaceElementPurposeMember_1 extends StepElement_HArray2OfSurfaceElementPurposeMember {}
+
+class StepElement_HArray2OfSurfaceElementPurposeMember_2 extends StepElement_HArray2OfSurfaceElementPurposeMember {}
+
+class StepElement_HArray2OfSurfaceElementPurposeMember_3 extends StepElement_HArray2OfSurfaceElementPurposeMember {}
+
+class StepElement_HSequenceOfCurveElementPurposeMember extends Standard_Transient {
+}
+
+class StepElement_HSequenceOfCurveElementPurposeMember_1 extends StepElement_HSequenceOfCurveElementPurposeMember {}
+
+class StepElement_HSequenceOfCurveElementPurposeMember_2 extends StepElement_HSequenceOfCurveElementPurposeMember {}
+
+class StepElement_HSequenceOfCurveElementSectionDefinition extends Standard_Transient {
+}
+
+class StepElement_HSequenceOfCurveElementSectionDefinition_1 extends StepElement_HSequenceOfCurveElementSectionDefinition {}
+
+class StepElement_HSequenceOfCurveElementSectionDefinition_2 extends StepElement_HSequenceOfCurveElementSectionDefinition {}
+
+class StepElement_HSequenceOfElementMaterial extends Standard_Transient {
+}
+
+class StepElement_HSequenceOfElementMaterial_1 extends StepElement_HSequenceOfElementMaterial {}
+
+class StepElement_HSequenceOfElementMaterial_2 extends StepElement_HSequenceOfElementMaterial {}
+
+class StepElement_HSequenceOfSurfaceElementPurposeMember extends Standard_Transient {
+}
+
+class StepElement_HSequenceOfSurfaceElementPurposeMember_1 extends StepElement_HSequenceOfSurfaceElementPurposeMember {}
+
+class StepElement_HSequenceOfSurfaceElementPurposeMember_2 extends StepElement_HSequenceOfSurfaceElementPurposeMember {}
 
 class StepElement_MeasureOrUnspecifiedValue extends StepData_SelectType {
 }
@@ -13062,6 +23020,100 @@ class StepFEA_FreedomsList extends Standard_Transient {
 
 class StepFEA_GeometricNode extends StepFEA_NodeRepresentation {
 }
+
+class StepFEA_HArray1OfCurveElementEndOffset extends Standard_Transient {
+}
+
+class StepFEA_HArray1OfCurveElementEndOffset_1 extends StepFEA_HArray1OfCurveElementEndOffset {}
+
+class StepFEA_HArray1OfCurveElementEndOffset_2 extends StepFEA_HArray1OfCurveElementEndOffset {}
+
+class StepFEA_HArray1OfCurveElementEndOffset_3 extends StepFEA_HArray1OfCurveElementEndOffset {}
+
+class StepFEA_HArray1OfCurveElementEndOffset_4 extends StepFEA_HArray1OfCurveElementEndOffset {}
+
+class StepFEA_HArray1OfCurveElementEndRelease extends Standard_Transient {
+}
+
+class StepFEA_HArray1OfCurveElementEndRelease_1 extends StepFEA_HArray1OfCurveElementEndRelease {}
+
+class StepFEA_HArray1OfCurveElementEndRelease_2 extends StepFEA_HArray1OfCurveElementEndRelease {}
+
+class StepFEA_HArray1OfCurveElementEndRelease_3 extends StepFEA_HArray1OfCurveElementEndRelease {}
+
+class StepFEA_HArray1OfCurveElementEndRelease_4 extends StepFEA_HArray1OfCurveElementEndRelease {}
+
+class StepFEA_HArray1OfCurveElementInterval extends Standard_Transient {
+}
+
+class StepFEA_HArray1OfCurveElementInterval_1 extends StepFEA_HArray1OfCurveElementInterval {}
+
+class StepFEA_HArray1OfCurveElementInterval_2 extends StepFEA_HArray1OfCurveElementInterval {}
+
+class StepFEA_HArray1OfCurveElementInterval_3 extends StepFEA_HArray1OfCurveElementInterval {}
+
+class StepFEA_HArray1OfCurveElementInterval_4 extends StepFEA_HArray1OfCurveElementInterval {}
+
+class StepFEA_HArray1OfDegreeOfFreedom extends Standard_Transient {
+}
+
+class StepFEA_HArray1OfDegreeOfFreedom_1 extends StepFEA_HArray1OfDegreeOfFreedom {}
+
+class StepFEA_HArray1OfDegreeOfFreedom_2 extends StepFEA_HArray1OfDegreeOfFreedom {}
+
+class StepFEA_HArray1OfDegreeOfFreedom_3 extends StepFEA_HArray1OfDegreeOfFreedom {}
+
+class StepFEA_HArray1OfDegreeOfFreedom_4 extends StepFEA_HArray1OfDegreeOfFreedom {}
+
+class StepFEA_HArray1OfElementRepresentation extends Standard_Transient {
+}
+
+class StepFEA_HArray1OfElementRepresentation_1 extends StepFEA_HArray1OfElementRepresentation {}
+
+class StepFEA_HArray1OfElementRepresentation_2 extends StepFEA_HArray1OfElementRepresentation {}
+
+class StepFEA_HArray1OfElementRepresentation_3 extends StepFEA_HArray1OfElementRepresentation {}
+
+class StepFEA_HArray1OfElementRepresentation_4 extends StepFEA_HArray1OfElementRepresentation {}
+
+class StepFEA_HArray1OfNodeRepresentation extends Standard_Transient {
+}
+
+class StepFEA_HArray1OfNodeRepresentation_1 extends StepFEA_HArray1OfNodeRepresentation {}
+
+class StepFEA_HArray1OfNodeRepresentation_2 extends StepFEA_HArray1OfNodeRepresentation {}
+
+class StepFEA_HArray1OfNodeRepresentation_3 extends StepFEA_HArray1OfNodeRepresentation {}
+
+class StepFEA_HArray1OfNodeRepresentation_4 extends StepFEA_HArray1OfNodeRepresentation {}
+
+class StepFEA_HSequenceOfCurve3dElementProperty extends Standard_Transient {
+}
+
+class StepFEA_HSequenceOfCurve3dElementProperty_1 extends StepFEA_HSequenceOfCurve3dElementProperty {}
+
+class StepFEA_HSequenceOfCurve3dElementProperty_2 extends StepFEA_HSequenceOfCurve3dElementProperty {}
+
+class StepFEA_HSequenceOfElementGeometricRelationship extends Standard_Transient {
+}
+
+class StepFEA_HSequenceOfElementGeometricRelationship_1 extends StepFEA_HSequenceOfElementGeometricRelationship {}
+
+class StepFEA_HSequenceOfElementGeometricRelationship_2 extends StepFEA_HSequenceOfElementGeometricRelationship {}
+
+class StepFEA_HSequenceOfElementRepresentation extends Standard_Transient {
+}
+
+class StepFEA_HSequenceOfElementRepresentation_1 extends StepFEA_HSequenceOfElementRepresentation {}
+
+class StepFEA_HSequenceOfElementRepresentation_2 extends StepFEA_HSequenceOfElementRepresentation {}
+
+class StepFEA_HSequenceOfNodeRepresentation extends Standard_Transient {
+}
+
+class StepFEA_HSequenceOfNodeRepresentation_1 extends StepFEA_HSequenceOfNodeRepresentation {}
+
+class StepFEA_HSequenceOfNodeRepresentation_2 extends StepFEA_HSequenceOfNodeRepresentation {}
 
 class StepFEA_Node extends StepFEA_NodeRepresentation {
 }
@@ -13242,6 +23294,101 @@ class StepGeom_GeometricRepresentationContextAndParametricRepresentationContext 
 
 class StepGeom_GeometricRepresentationItem extends StepRepr_RepresentationItem {
 }
+
+class StepGeom_HArray1OfBoundaryCurve extends Standard_Transient {
+}
+
+class StepGeom_HArray1OfBoundaryCurve_1 extends StepGeom_HArray1OfBoundaryCurve {}
+
+class StepGeom_HArray1OfBoundaryCurve_2 extends StepGeom_HArray1OfBoundaryCurve {}
+
+class StepGeom_HArray1OfBoundaryCurve_3 extends StepGeom_HArray1OfBoundaryCurve {}
+
+class StepGeom_HArray1OfBoundaryCurve_4 extends StepGeom_HArray1OfBoundaryCurve {}
+
+class StepGeom_HArray1OfCartesianPoint extends Standard_Transient {
+}
+
+class StepGeom_HArray1OfCartesianPoint_1 extends StepGeom_HArray1OfCartesianPoint {}
+
+class StepGeom_HArray1OfCartesianPoint_2 extends StepGeom_HArray1OfCartesianPoint {}
+
+class StepGeom_HArray1OfCartesianPoint_3 extends StepGeom_HArray1OfCartesianPoint {}
+
+class StepGeom_HArray1OfCartesianPoint_4 extends StepGeom_HArray1OfCartesianPoint {}
+
+class StepGeom_HArray1OfCompositeCurveSegment extends Standard_Transient {
+}
+
+class StepGeom_HArray1OfCompositeCurveSegment_1 extends StepGeom_HArray1OfCompositeCurveSegment {}
+
+class StepGeom_HArray1OfCompositeCurveSegment_2 extends StepGeom_HArray1OfCompositeCurveSegment {}
+
+class StepGeom_HArray1OfCompositeCurveSegment_3 extends StepGeom_HArray1OfCompositeCurveSegment {}
+
+class StepGeom_HArray1OfCompositeCurveSegment_4 extends StepGeom_HArray1OfCompositeCurveSegment {}
+
+class StepGeom_HArray1OfCurve extends Standard_Transient {
+}
+
+class StepGeom_HArray1OfCurve_1 extends StepGeom_HArray1OfCurve {}
+
+class StepGeom_HArray1OfCurve_2 extends StepGeom_HArray1OfCurve {}
+
+class StepGeom_HArray1OfCurve_3 extends StepGeom_HArray1OfCurve {}
+
+class StepGeom_HArray1OfCurve_4 extends StepGeom_HArray1OfCurve {}
+
+class StepGeom_HArray1OfPcurveOrSurface extends Standard_Transient {
+}
+
+class StepGeom_HArray1OfPcurveOrSurface_1 extends StepGeom_HArray1OfPcurveOrSurface {}
+
+class StepGeom_HArray1OfPcurveOrSurface_2 extends StepGeom_HArray1OfPcurveOrSurface {}
+
+class StepGeom_HArray1OfPcurveOrSurface_3 extends StepGeom_HArray1OfPcurveOrSurface {}
+
+class StepGeom_HArray1OfPcurveOrSurface_4 extends StepGeom_HArray1OfPcurveOrSurface {}
+
+class StepGeom_HArray1OfSurfaceBoundary extends Standard_Transient {
+}
+
+class StepGeom_HArray1OfSurfaceBoundary_1 extends StepGeom_HArray1OfSurfaceBoundary {}
+
+class StepGeom_HArray1OfSurfaceBoundary_2 extends StepGeom_HArray1OfSurfaceBoundary {}
+
+class StepGeom_HArray1OfSurfaceBoundary_3 extends StepGeom_HArray1OfSurfaceBoundary {}
+
+class StepGeom_HArray1OfSurfaceBoundary_4 extends StepGeom_HArray1OfSurfaceBoundary {}
+
+class StepGeom_HArray1OfTrimmingSelect extends Standard_Transient {
+}
+
+class StepGeom_HArray1OfTrimmingSelect_1 extends StepGeom_HArray1OfTrimmingSelect {}
+
+class StepGeom_HArray1OfTrimmingSelect_2 extends StepGeom_HArray1OfTrimmingSelect {}
+
+class StepGeom_HArray1OfTrimmingSelect_3 extends StepGeom_HArray1OfTrimmingSelect {}
+
+class StepGeom_HArray1OfTrimmingSelect_4 extends StepGeom_HArray1OfTrimmingSelect {}
+
+class StepGeom_HArray2OfCartesianPoint extends Standard_Transient {
+}
+
+class StepGeom_HArray2OfCartesianPoint_1 extends StepGeom_HArray2OfCartesianPoint {}
+
+class StepGeom_HArray2OfCartesianPoint_2 extends StepGeom_HArray2OfCartesianPoint {}
+
+class StepGeom_HArray2OfCartesianPoint_3 extends StepGeom_HArray2OfCartesianPoint {}
+
+class StepGeom_HArray2OfSurfacePatch extends Standard_Transient {
+}
+
+class StepGeom_HArray2OfSurfacePatch_1 extends StepGeom_HArray2OfSurfacePatch {}
+
+class StepGeom_HArray2OfSurfacePatch_2 extends StepGeom_HArray2OfSurfacePatch {}
+
+class StepGeom_HArray2OfSurfacePatch_3 extends StepGeom_HArray2OfSurfacePatch {}
 
 class StepGeom_Hyperbola extends StepGeom_Conic {
 }
@@ -13476,6 +23623,64 @@ class StepRepr_GlobalUncertaintyAssignedContext extends StepRepr_RepresentationC
 
 class StepRepr_GlobalUnitAssignedContext extends StepRepr_RepresentationContext {
 }
+
+class StepRepr_HArray1OfMaterialPropertyRepresentation extends Standard_Transient {
+}
+
+class StepRepr_HArray1OfMaterialPropertyRepresentation_1 extends StepRepr_HArray1OfMaterialPropertyRepresentation {}
+
+class StepRepr_HArray1OfMaterialPropertyRepresentation_2 extends StepRepr_HArray1OfMaterialPropertyRepresentation {}
+
+class StepRepr_HArray1OfMaterialPropertyRepresentation_3 extends StepRepr_HArray1OfMaterialPropertyRepresentation {}
+
+class StepRepr_HArray1OfMaterialPropertyRepresentation_4 extends StepRepr_HArray1OfMaterialPropertyRepresentation {}
+
+class StepRepr_HArray1OfPropertyDefinitionRepresentation extends Standard_Transient {
+}
+
+class StepRepr_HArray1OfPropertyDefinitionRepresentation_1 extends StepRepr_HArray1OfPropertyDefinitionRepresentation {}
+
+class StepRepr_HArray1OfPropertyDefinitionRepresentation_2 extends StepRepr_HArray1OfPropertyDefinitionRepresentation {}
+
+class StepRepr_HArray1OfPropertyDefinitionRepresentation_3 extends StepRepr_HArray1OfPropertyDefinitionRepresentation {}
+
+class StepRepr_HArray1OfPropertyDefinitionRepresentation_4 extends StepRepr_HArray1OfPropertyDefinitionRepresentation {}
+
+class StepRepr_HArray1OfRepresentationItem extends Standard_Transient {
+}
+
+class StepRepr_HArray1OfRepresentationItem_1 extends StepRepr_HArray1OfRepresentationItem {}
+
+class StepRepr_HArray1OfRepresentationItem_2 extends StepRepr_HArray1OfRepresentationItem {}
+
+class StepRepr_HArray1OfRepresentationItem_3 extends StepRepr_HArray1OfRepresentationItem {}
+
+class StepRepr_HArray1OfRepresentationItem_4 extends StepRepr_HArray1OfRepresentationItem {}
+
+class StepRepr_HArray1OfShapeAspect extends Standard_Transient {
+}
+
+class StepRepr_HArray1OfShapeAspect_1 extends StepRepr_HArray1OfShapeAspect {}
+
+class StepRepr_HArray1OfShapeAspect_2 extends StepRepr_HArray1OfShapeAspect {}
+
+class StepRepr_HArray1OfShapeAspect_3 extends StepRepr_HArray1OfShapeAspect {}
+
+class StepRepr_HArray1OfShapeAspect_4 extends StepRepr_HArray1OfShapeAspect {}
+
+class StepRepr_HSequenceOfMaterialPropertyRepresentation extends Standard_Transient {
+}
+
+class StepRepr_HSequenceOfMaterialPropertyRepresentation_1 extends StepRepr_HSequenceOfMaterialPropertyRepresentation {}
+
+class StepRepr_HSequenceOfMaterialPropertyRepresentation_2 extends StepRepr_HSequenceOfMaterialPropertyRepresentation {}
+
+class StepRepr_HSequenceOfRepresentationItem extends Standard_Transient {
+}
+
+class StepRepr_HSequenceOfRepresentationItem_1 extends StepRepr_HSequenceOfRepresentationItem {}
+
+class StepRepr_HSequenceOfRepresentationItem_2 extends StepRepr_HSequenceOfRepresentationItem {}
 
 class StepRepr_IntegerRepresentationItem extends StepRepr_RepresentationItem {
 }
@@ -13786,6 +23991,127 @@ class StepShape_GeometricallyBoundedSurfaceShapeRepresentation extends StepShape
 class StepShape_GeometricallyBoundedWireframeShapeRepresentation extends StepShape_ShapeRepresentation {
 }
 
+class StepShape_HArray1OfConnectedEdgeSet extends Standard_Transient {
+}
+
+class StepShape_HArray1OfConnectedEdgeSet_1 extends StepShape_HArray1OfConnectedEdgeSet {}
+
+class StepShape_HArray1OfConnectedEdgeSet_2 extends StepShape_HArray1OfConnectedEdgeSet {}
+
+class StepShape_HArray1OfConnectedEdgeSet_3 extends StepShape_HArray1OfConnectedEdgeSet {}
+
+class StepShape_HArray1OfConnectedEdgeSet_4 extends StepShape_HArray1OfConnectedEdgeSet {}
+
+class StepShape_HArray1OfConnectedFaceSet extends Standard_Transient {
+}
+
+class StepShape_HArray1OfConnectedFaceSet_1 extends StepShape_HArray1OfConnectedFaceSet {}
+
+class StepShape_HArray1OfConnectedFaceSet_2 extends StepShape_HArray1OfConnectedFaceSet {}
+
+class StepShape_HArray1OfConnectedFaceSet_3 extends StepShape_HArray1OfConnectedFaceSet {}
+
+class StepShape_HArray1OfConnectedFaceSet_4 extends StepShape_HArray1OfConnectedFaceSet {}
+
+class StepShape_HArray1OfEdge extends Standard_Transient {
+}
+
+class StepShape_HArray1OfEdge_1 extends StepShape_HArray1OfEdge {}
+
+class StepShape_HArray1OfEdge_2 extends StepShape_HArray1OfEdge {}
+
+class StepShape_HArray1OfEdge_3 extends StepShape_HArray1OfEdge {}
+
+class StepShape_HArray1OfEdge_4 extends StepShape_HArray1OfEdge {}
+
+class StepShape_HArray1OfFace extends Standard_Transient {
+}
+
+class StepShape_HArray1OfFace_1 extends StepShape_HArray1OfFace {}
+
+class StepShape_HArray1OfFace_2 extends StepShape_HArray1OfFace {}
+
+class StepShape_HArray1OfFace_3 extends StepShape_HArray1OfFace {}
+
+class StepShape_HArray1OfFace_4 extends StepShape_HArray1OfFace {}
+
+class StepShape_HArray1OfFaceBound extends Standard_Transient {
+}
+
+class StepShape_HArray1OfFaceBound_1 extends StepShape_HArray1OfFaceBound {}
+
+class StepShape_HArray1OfFaceBound_2 extends StepShape_HArray1OfFaceBound {}
+
+class StepShape_HArray1OfFaceBound_3 extends StepShape_HArray1OfFaceBound {}
+
+class StepShape_HArray1OfFaceBound_4 extends StepShape_HArray1OfFaceBound {}
+
+class StepShape_HArray1OfGeometricSetSelect extends Standard_Transient {
+}
+
+class StepShape_HArray1OfGeometricSetSelect_1 extends StepShape_HArray1OfGeometricSetSelect {}
+
+class StepShape_HArray1OfGeometricSetSelect_2 extends StepShape_HArray1OfGeometricSetSelect {}
+
+class StepShape_HArray1OfGeometricSetSelect_3 extends StepShape_HArray1OfGeometricSetSelect {}
+
+class StepShape_HArray1OfGeometricSetSelect_4 extends StepShape_HArray1OfGeometricSetSelect {}
+
+class StepShape_HArray1OfOrientedClosedShell extends Standard_Transient {
+}
+
+class StepShape_HArray1OfOrientedClosedShell_1 extends StepShape_HArray1OfOrientedClosedShell {}
+
+class StepShape_HArray1OfOrientedClosedShell_2 extends StepShape_HArray1OfOrientedClosedShell {}
+
+class StepShape_HArray1OfOrientedClosedShell_3 extends StepShape_HArray1OfOrientedClosedShell {}
+
+class StepShape_HArray1OfOrientedClosedShell_4 extends StepShape_HArray1OfOrientedClosedShell {}
+
+class StepShape_HArray1OfOrientedEdge extends Standard_Transient {
+}
+
+class StepShape_HArray1OfOrientedEdge_1 extends StepShape_HArray1OfOrientedEdge {}
+
+class StepShape_HArray1OfOrientedEdge_2 extends StepShape_HArray1OfOrientedEdge {}
+
+class StepShape_HArray1OfOrientedEdge_3 extends StepShape_HArray1OfOrientedEdge {}
+
+class StepShape_HArray1OfOrientedEdge_4 extends StepShape_HArray1OfOrientedEdge {}
+
+class StepShape_HArray1OfShapeDimensionRepresentationItem extends Standard_Transient {
+}
+
+class StepShape_HArray1OfShapeDimensionRepresentationItem_1 extends StepShape_HArray1OfShapeDimensionRepresentationItem {}
+
+class StepShape_HArray1OfShapeDimensionRepresentationItem_2 extends StepShape_HArray1OfShapeDimensionRepresentationItem {}
+
+class StepShape_HArray1OfShapeDimensionRepresentationItem_3 extends StepShape_HArray1OfShapeDimensionRepresentationItem {}
+
+class StepShape_HArray1OfShapeDimensionRepresentationItem_4 extends StepShape_HArray1OfShapeDimensionRepresentationItem {}
+
+class StepShape_HArray1OfShell extends Standard_Transient {
+}
+
+class StepShape_HArray1OfShell_1 extends StepShape_HArray1OfShell {}
+
+class StepShape_HArray1OfShell_2 extends StepShape_HArray1OfShell {}
+
+class StepShape_HArray1OfShell_3 extends StepShape_HArray1OfShell {}
+
+class StepShape_HArray1OfShell_4 extends StepShape_HArray1OfShell {}
+
+class StepShape_HArray1OfValueQualifier extends Standard_Transient {
+}
+
+class StepShape_HArray1OfValueQualifier_1 extends StepShape_HArray1OfValueQualifier {}
+
+class StepShape_HArray1OfValueQualifier_2 extends StepShape_HArray1OfValueQualifier {}
+
+class StepShape_HArray1OfValueQualifier_3 extends StepShape_HArray1OfValueQualifier {}
+
+class StepShape_HArray1OfValueQualifier_4 extends StepShape_HArray1OfValueQualifier {}
+
 class StepShape_HalfSpaceSolid extends StepGeom_GeometricRepresentationItem {
 }
 
@@ -13966,6 +24292,10 @@ class StepToTopoDS_MakeTransformed extends StepToTopoDS_Root {
 class StepToTopoDS_NMTool {
 }
 
+class StepToTopoDS_NMTool_1 extends StepToTopoDS_NMTool {}
+
+class StepToTopoDS_NMTool_2 extends StepToTopoDS_NMTool {}
+
 class StepToTopoDS_PointPair {
 }
 
@@ -13978,32 +24308,74 @@ class StepToTopoDS_Root {
 class StepToTopoDS_Tool {
 }
 
+class StepToTopoDS_Tool_1 extends StepToTopoDS_Tool {}
+
+class StepToTopoDS_Tool_2 extends StepToTopoDS_Tool {}
+
 class StepToTopoDS_TranslateCompositeCurve extends StepToTopoDS_Root {
 }
+
+class StepToTopoDS_TranslateCompositeCurve_1 extends StepToTopoDS_TranslateCompositeCurve {}
+
+class StepToTopoDS_TranslateCompositeCurve_2 extends StepToTopoDS_TranslateCompositeCurve {}
+
+class StepToTopoDS_TranslateCompositeCurve_3 extends StepToTopoDS_TranslateCompositeCurve {}
 
 class StepToTopoDS_TranslateCurveBoundedSurface extends StepToTopoDS_Root {
 }
 
+class StepToTopoDS_TranslateCurveBoundedSurface_1 extends StepToTopoDS_TranslateCurveBoundedSurface {}
+
+class StepToTopoDS_TranslateCurveBoundedSurface_2 extends StepToTopoDS_TranslateCurveBoundedSurface {}
+
 class StepToTopoDS_TranslateEdge extends StepToTopoDS_Root {
 }
+
+class StepToTopoDS_TranslateEdge_1 extends StepToTopoDS_TranslateEdge {}
+
+class StepToTopoDS_TranslateEdge_2 extends StepToTopoDS_TranslateEdge {}
 
 class StepToTopoDS_TranslateEdgeLoop extends StepToTopoDS_Root {
 }
 
+class StepToTopoDS_TranslateEdgeLoop_1 extends StepToTopoDS_TranslateEdgeLoop {}
+
+class StepToTopoDS_TranslateEdgeLoop_2 extends StepToTopoDS_TranslateEdgeLoop {}
+
 class StepToTopoDS_TranslateFace extends StepToTopoDS_Root {
 }
+
+class StepToTopoDS_TranslateFace_1 extends StepToTopoDS_TranslateFace {}
+
+class StepToTopoDS_TranslateFace_2 extends StepToTopoDS_TranslateFace {}
 
 class StepToTopoDS_TranslatePolyLoop extends StepToTopoDS_Root {
 }
 
+class StepToTopoDS_TranslatePolyLoop_1 extends StepToTopoDS_TranslatePolyLoop {}
+
+class StepToTopoDS_TranslatePolyLoop_2 extends StepToTopoDS_TranslatePolyLoop {}
+
 class StepToTopoDS_TranslateShell extends StepToTopoDS_Root {
 }
+
+class StepToTopoDS_TranslateShell_1 extends StepToTopoDS_TranslateShell {}
+
+class StepToTopoDS_TranslateShell_2 extends StepToTopoDS_TranslateShell {}
 
 class StepToTopoDS_TranslateVertex extends StepToTopoDS_Root {
 }
 
+class StepToTopoDS_TranslateVertex_1 extends StepToTopoDS_TranslateVertex {}
+
+class StepToTopoDS_TranslateVertex_2 extends StepToTopoDS_TranslateVertex {}
+
 class StepToTopoDS_TranslateVertexLoop extends StepToTopoDS_Root {
 }
+
+class StepToTopoDS_TranslateVertexLoop_1 extends StepToTopoDS_TranslateVertexLoop {}
+
+class StepToTopoDS_TranslateVertexLoop_2 extends StepToTopoDS_TranslateVertexLoop {}
 
 class StepVisual_AnnotationCurveOccurrence extends StepVisual_AnnotationOccurrence {
 }
@@ -14157,6 +24529,171 @@ class StepVisual_FillStyleSelect extends StepData_SelectType {
 
 class StepVisual_FontSelect extends StepData_SelectType {
 }
+
+class StepVisual_HArray1OfAnnotationPlaneElement extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfAnnotationPlaneElement_1 extends StepVisual_HArray1OfAnnotationPlaneElement {}
+
+class StepVisual_HArray1OfAnnotationPlaneElement_2 extends StepVisual_HArray1OfAnnotationPlaneElement {}
+
+class StepVisual_HArray1OfAnnotationPlaneElement_3 extends StepVisual_HArray1OfAnnotationPlaneElement {}
+
+class StepVisual_HArray1OfAnnotationPlaneElement_4 extends StepVisual_HArray1OfAnnotationPlaneElement {}
+
+class StepVisual_HArray1OfBoxCharacteristicSelect extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfBoxCharacteristicSelect_1 extends StepVisual_HArray1OfBoxCharacteristicSelect {}
+
+class StepVisual_HArray1OfBoxCharacteristicSelect_2 extends StepVisual_HArray1OfBoxCharacteristicSelect {}
+
+class StepVisual_HArray1OfBoxCharacteristicSelect_3 extends StepVisual_HArray1OfBoxCharacteristicSelect {}
+
+class StepVisual_HArray1OfBoxCharacteristicSelect_4 extends StepVisual_HArray1OfBoxCharacteristicSelect {}
+
+class StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect_1 extends StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect {}
+
+class StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect_2 extends StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect {}
+
+class StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect_3 extends StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect {}
+
+class StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect_4 extends StepVisual_HArray1OfCameraModelD3MultiClippingInterectionSelect {}
+
+class StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect_1 extends StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect {}
+
+class StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect_2 extends StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect {}
+
+class StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect_3 extends StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect {}
+
+class StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect_4 extends StepVisual_HArray1OfCameraModelD3MultiClippingUnionSelect {}
+
+class StepVisual_HArray1OfCurveStyleFontPattern extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfCurveStyleFontPattern_1 extends StepVisual_HArray1OfCurveStyleFontPattern {}
+
+class StepVisual_HArray1OfCurveStyleFontPattern_2 extends StepVisual_HArray1OfCurveStyleFontPattern {}
+
+class StepVisual_HArray1OfCurveStyleFontPattern_3 extends StepVisual_HArray1OfCurveStyleFontPattern {}
+
+class StepVisual_HArray1OfCurveStyleFontPattern_4 extends StepVisual_HArray1OfCurveStyleFontPattern {}
+
+class StepVisual_HArray1OfDirectionCountSelect extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfDirectionCountSelect_1 extends StepVisual_HArray1OfDirectionCountSelect {}
+
+class StepVisual_HArray1OfDirectionCountSelect_2 extends StepVisual_HArray1OfDirectionCountSelect {}
+
+class StepVisual_HArray1OfDirectionCountSelect_3 extends StepVisual_HArray1OfDirectionCountSelect {}
+
+class StepVisual_HArray1OfDirectionCountSelect_4 extends StepVisual_HArray1OfDirectionCountSelect {}
+
+class StepVisual_HArray1OfDraughtingCalloutElement extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfDraughtingCalloutElement_1 extends StepVisual_HArray1OfDraughtingCalloutElement {}
+
+class StepVisual_HArray1OfDraughtingCalloutElement_2 extends StepVisual_HArray1OfDraughtingCalloutElement {}
+
+class StepVisual_HArray1OfDraughtingCalloutElement_3 extends StepVisual_HArray1OfDraughtingCalloutElement {}
+
+class StepVisual_HArray1OfDraughtingCalloutElement_4 extends StepVisual_HArray1OfDraughtingCalloutElement {}
+
+class StepVisual_HArray1OfFillStyleSelect extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfFillStyleSelect_1 extends StepVisual_HArray1OfFillStyleSelect {}
+
+class StepVisual_HArray1OfFillStyleSelect_2 extends StepVisual_HArray1OfFillStyleSelect {}
+
+class StepVisual_HArray1OfFillStyleSelect_3 extends StepVisual_HArray1OfFillStyleSelect {}
+
+class StepVisual_HArray1OfFillStyleSelect_4 extends StepVisual_HArray1OfFillStyleSelect {}
+
+class StepVisual_HArray1OfInvisibleItem extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfInvisibleItem_1 extends StepVisual_HArray1OfInvisibleItem {}
+
+class StepVisual_HArray1OfInvisibleItem_2 extends StepVisual_HArray1OfInvisibleItem {}
+
+class StepVisual_HArray1OfInvisibleItem_3 extends StepVisual_HArray1OfInvisibleItem {}
+
+class StepVisual_HArray1OfInvisibleItem_4 extends StepVisual_HArray1OfInvisibleItem {}
+
+class StepVisual_HArray1OfLayeredItem extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfLayeredItem_1 extends StepVisual_HArray1OfLayeredItem {}
+
+class StepVisual_HArray1OfLayeredItem_2 extends StepVisual_HArray1OfLayeredItem {}
+
+class StepVisual_HArray1OfLayeredItem_3 extends StepVisual_HArray1OfLayeredItem {}
+
+class StepVisual_HArray1OfLayeredItem_4 extends StepVisual_HArray1OfLayeredItem {}
+
+class StepVisual_HArray1OfPresentationStyleAssignment extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfPresentationStyleAssignment_1 extends StepVisual_HArray1OfPresentationStyleAssignment {}
+
+class StepVisual_HArray1OfPresentationStyleAssignment_2 extends StepVisual_HArray1OfPresentationStyleAssignment {}
+
+class StepVisual_HArray1OfPresentationStyleAssignment_3 extends StepVisual_HArray1OfPresentationStyleAssignment {}
+
+class StepVisual_HArray1OfPresentationStyleAssignment_4 extends StepVisual_HArray1OfPresentationStyleAssignment {}
+
+class StepVisual_HArray1OfPresentationStyleSelect extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfPresentationStyleSelect_1 extends StepVisual_HArray1OfPresentationStyleSelect {}
+
+class StepVisual_HArray1OfPresentationStyleSelect_2 extends StepVisual_HArray1OfPresentationStyleSelect {}
+
+class StepVisual_HArray1OfPresentationStyleSelect_3 extends StepVisual_HArray1OfPresentationStyleSelect {}
+
+class StepVisual_HArray1OfPresentationStyleSelect_4 extends StepVisual_HArray1OfPresentationStyleSelect {}
+
+class StepVisual_HArray1OfStyleContextSelect extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfStyleContextSelect_1 extends StepVisual_HArray1OfStyleContextSelect {}
+
+class StepVisual_HArray1OfStyleContextSelect_2 extends StepVisual_HArray1OfStyleContextSelect {}
+
+class StepVisual_HArray1OfStyleContextSelect_3 extends StepVisual_HArray1OfStyleContextSelect {}
+
+class StepVisual_HArray1OfStyleContextSelect_4 extends StepVisual_HArray1OfStyleContextSelect {}
+
+class StepVisual_HArray1OfSurfaceStyleElementSelect extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfSurfaceStyleElementSelect_1 extends StepVisual_HArray1OfSurfaceStyleElementSelect {}
+
+class StepVisual_HArray1OfSurfaceStyleElementSelect_2 extends StepVisual_HArray1OfSurfaceStyleElementSelect {}
+
+class StepVisual_HArray1OfSurfaceStyleElementSelect_3 extends StepVisual_HArray1OfSurfaceStyleElementSelect {}
+
+class StepVisual_HArray1OfSurfaceStyleElementSelect_4 extends StepVisual_HArray1OfSurfaceStyleElementSelect {}
+
+class StepVisual_HArray1OfTextOrCharacter extends Standard_Transient {
+}
+
+class StepVisual_HArray1OfTextOrCharacter_1 extends StepVisual_HArray1OfTextOrCharacter {}
+
+class StepVisual_HArray1OfTextOrCharacter_2 extends StepVisual_HArray1OfTextOrCharacter {}
+
+class StepVisual_HArray1OfTextOrCharacter_3 extends StepVisual_HArray1OfTextOrCharacter {}
+
+class StepVisual_HArray1OfTextOrCharacter_4 extends StepVisual_HArray1OfTextOrCharacter {}
 
 class StepVisual_Invisibility extends Standard_Transient {
 }
@@ -14338,6 +24875,10 @@ class Storage {
 class Storage_Bucket {
 }
 
+class Storage_Bucket_1 extends Storage_Bucket {}
+
+class Storage_Bucket_2 extends Storage_Bucket {}
+
 class Storage_BucketIterator {
 }
 
@@ -14353,6 +24894,39 @@ class Storage_Data extends Standard_Transient {
 class Storage_DefaultCallBack extends Storage_CallBack {
 }
 
+class Storage_HArrayOfCallBack extends Standard_Transient {
+}
+
+class Storage_HArrayOfCallBack_1 extends Storage_HArrayOfCallBack {}
+
+class Storage_HArrayOfCallBack_2 extends Storage_HArrayOfCallBack {}
+
+class Storage_HArrayOfCallBack_3 extends Storage_HArrayOfCallBack {}
+
+class Storage_HArrayOfCallBack_4 extends Storage_HArrayOfCallBack {}
+
+class Storage_HArrayOfSchema extends Standard_Transient {
+}
+
+class Storage_HArrayOfSchema_1 extends Storage_HArrayOfSchema {}
+
+class Storage_HArrayOfSchema_2 extends Storage_HArrayOfSchema {}
+
+class Storage_HArrayOfSchema_3 extends Storage_HArrayOfSchema {}
+
+class Storage_HArrayOfSchema_4 extends Storage_HArrayOfSchema {}
+
+class Storage_HPArray extends Standard_Transient {
+}
+
+class Storage_HPArray_1 extends Storage_HPArray {}
+
+class Storage_HPArray_2 extends Storage_HPArray {}
+
+class Storage_HPArray_3 extends Storage_HPArray {}
+
+class Storage_HPArray_4 extends Storage_HPArray {}
+
 class Storage_HeaderData extends Standard_Transient {
 }
 
@@ -14361,6 +24935,12 @@ class Storage_InternalData extends Standard_Transient {
 
 class Storage_Root extends Standard_Transient {
 }
+
+class Storage_Root_1 extends Storage_Root {}
+
+class Storage_Root_2 extends Storage_Root {}
+
+class Storage_Root_3 extends Storage_Root {}
 
 class Storage_RootData extends Standard_Transient {
 }
@@ -14371,23 +24951,51 @@ class Storage_Schema extends Standard_Transient {
 class Storage_StreamExtCharParityError extends Storage_StreamReadError {
 }
 
+class Storage_StreamExtCharParityError_1 extends Storage_StreamExtCharParityError {}
+
+class Storage_StreamExtCharParityError_2 extends Storage_StreamExtCharParityError {}
+
 class Storage_StreamFormatError extends Standard_Failure {
 }
+
+class Storage_StreamFormatError_1 extends Storage_StreamFormatError {}
+
+class Storage_StreamFormatError_2 extends Storage_StreamFormatError {}
 
 class Storage_StreamModeError extends Standard_Failure {
 }
 
+class Storage_StreamModeError_1 extends Storage_StreamModeError {}
+
+class Storage_StreamModeError_2 extends Storage_StreamModeError {}
+
 class Storage_StreamReadError extends Standard_Failure {
 }
+
+class Storage_StreamReadError_1 extends Storage_StreamReadError {}
+
+class Storage_StreamReadError_2 extends Storage_StreamReadError {}
 
 class Storage_StreamTypeMismatchError extends Storage_StreamReadError {
 }
 
+class Storage_StreamTypeMismatchError_1 extends Storage_StreamTypeMismatchError {}
+
+class Storage_StreamTypeMismatchError_2 extends Storage_StreamTypeMismatchError {}
+
 class Storage_StreamUnknownTypeError extends Storage_StreamReadError {
 }
 
+class Storage_StreamUnknownTypeError_1 extends Storage_StreamUnknownTypeError {}
+
+class Storage_StreamUnknownTypeError_2 extends Storage_StreamUnknownTypeError {}
+
 class Storage_StreamWriteError extends Standard_Failure {
 }
+
+class Storage_StreamWriteError_1 extends Storage_StreamWriteError {}
+
+class Storage_StreamWriteError_2 extends Storage_StreamWriteError {}
 
 class Storage_TypeData extends Standard_Transient {
 }
@@ -14395,8 +25003,16 @@ class Storage_TypeData extends Standard_Transient {
 class Storage_TypedCallBack extends Standard_Transient {
 }
 
+class Storage_TypedCallBack_1 extends Storage_TypedCallBack {}
+
+class Storage_TypedCallBack_2 extends Storage_TypedCallBack {}
+
 class Sweep_NumShape {
 }
+
+class Sweep_NumShape_1 extends Sweep_NumShape {}
+
+class Sweep_NumShape_2 extends Sweep_NumShape {}
 
 class Sweep_NumShapeIterator {
 }
@@ -14404,17 +25020,231 @@ class Sweep_NumShapeIterator {
 class Sweep_NumShapeTool {
 }
 
+class TColGeom2d_HArray1OfBezierCurve extends Standard_Transient {
+}
+
+class TColGeom2d_HArray1OfBezierCurve_1 extends TColGeom2d_HArray1OfBezierCurve {}
+
+class TColGeom2d_HArray1OfBezierCurve_2 extends TColGeom2d_HArray1OfBezierCurve {}
+
+class TColGeom2d_HArray1OfBezierCurve_3 extends TColGeom2d_HArray1OfBezierCurve {}
+
+class TColGeom2d_HArray1OfBezierCurve_4 extends TColGeom2d_HArray1OfBezierCurve {}
+
+class TColGeom2d_HSequenceOfBoundedCurve extends Standard_Transient {
+}
+
+class TColGeom2d_HSequenceOfBoundedCurve_1 extends TColGeom2d_HSequenceOfBoundedCurve {}
+
+class TColGeom2d_HSequenceOfBoundedCurve_2 extends TColGeom2d_HSequenceOfBoundedCurve {}
+
+class TColGeom_HArray1OfBezierCurve extends Standard_Transient {
+}
+
+class TColGeom_HArray1OfBezierCurve_1 extends TColGeom_HArray1OfBezierCurve {}
+
+class TColGeom_HArray1OfBezierCurve_2 extends TColGeom_HArray1OfBezierCurve {}
+
+class TColGeom_HArray1OfBezierCurve_3 extends TColGeom_HArray1OfBezierCurve {}
+
+class TColGeom_HArray1OfBezierCurve_4 extends TColGeom_HArray1OfBezierCurve {}
+
+class TColGeom_HArray1OfCurve extends Standard_Transient {
+}
+
+class TColGeom_HArray1OfCurve_1 extends TColGeom_HArray1OfCurve {}
+
+class TColGeom_HArray1OfCurve_2 extends TColGeom_HArray1OfCurve {}
+
+class TColGeom_HArray1OfCurve_3 extends TColGeom_HArray1OfCurve {}
+
+class TColGeom_HArray1OfCurve_4 extends TColGeom_HArray1OfCurve {}
+
+class TColGeom_HArray2OfSurface extends Standard_Transient {
+}
+
+class TColGeom_HArray2OfSurface_1 extends TColGeom_HArray2OfSurface {}
+
+class TColGeom_HArray2OfSurface_2 extends TColGeom_HArray2OfSurface {}
+
+class TColGeom_HArray2OfSurface_3 extends TColGeom_HArray2OfSurface {}
+
+class TColGeom_HSequenceOfBoundedCurve extends Standard_Transient {
+}
+
+class TColGeom_HSequenceOfBoundedCurve_1 extends TColGeom_HSequenceOfBoundedCurve {}
+
+class TColGeom_HSequenceOfBoundedCurve_2 extends TColGeom_HSequenceOfBoundedCurve {}
+
+class TColStd_HArray1OfExtendedString extends Standard_Transient {
+}
+
+class TColStd_HArray1OfExtendedString_1 extends TColStd_HArray1OfExtendedString {}
+
+class TColStd_HArray1OfExtendedString_2 extends TColStd_HArray1OfExtendedString {}
+
+class TColStd_HArray1OfExtendedString_3 extends TColStd_HArray1OfExtendedString {}
+
+class TColStd_HArray1OfExtendedString_4 extends TColStd_HArray1OfExtendedString {}
+
+class TColStd_HArray2OfCharacter extends Standard_Transient {
+}
+
+class TColStd_HArray2OfCharacter_1 extends TColStd_HArray2OfCharacter {}
+
+class TColStd_HArray2OfCharacter_2 extends TColStd_HArray2OfCharacter {}
+
+class TColStd_HArray2OfCharacter_3 extends TColStd_HArray2OfCharacter {}
+
 class TColStd_HPackedMapOfInteger extends Standard_Transient {
 }
 
+class TColStd_HPackedMapOfInteger_1 extends TColStd_HPackedMapOfInteger {}
+
+class TColStd_HPackedMapOfInteger_2 extends TColStd_HPackedMapOfInteger {}
+
 class TColStd_PackedMapOfInteger {
 }
+
+class TColStd_PackedMapOfInteger_1 extends TColStd_PackedMapOfInteger {}
+
+class TColStd_PackedMapOfInteger_2 extends TColStd_PackedMapOfInteger {}
+
+class TColgp_HArray1OfDir2d extends Standard_Transient {
+}
+
+class TColgp_HArray1OfDir2d_1 extends TColgp_HArray1OfDir2d {}
+
+class TColgp_HArray1OfDir2d_2 extends TColgp_HArray1OfDir2d {}
+
+class TColgp_HArray1OfDir2d_3 extends TColgp_HArray1OfDir2d {}
+
+class TColgp_HArray1OfDir2d_4 extends TColgp_HArray1OfDir2d {}
+
+class TColgp_HArray2OfCirc2d extends Standard_Transient {
+}
+
+class TColgp_HArray2OfCirc2d_1 extends TColgp_HArray2OfCirc2d {}
+
+class TColgp_HArray2OfCirc2d_2 extends TColgp_HArray2OfCirc2d {}
+
+class TColgp_HArray2OfCirc2d_3 extends TColgp_HArray2OfCirc2d {}
+
+class TColgp_HArray2OfDir extends Standard_Transient {
+}
+
+class TColgp_HArray2OfDir_1 extends TColgp_HArray2OfDir {}
+
+class TColgp_HArray2OfDir_2 extends TColgp_HArray2OfDir {}
+
+class TColgp_HArray2OfDir_3 extends TColgp_HArray2OfDir {}
+
+class TColgp_HArray2OfDir2d extends Standard_Transient {
+}
+
+class TColgp_HArray2OfDir2d_1 extends TColgp_HArray2OfDir2d {}
+
+class TColgp_HArray2OfDir2d_2 extends TColgp_HArray2OfDir2d {}
+
+class TColgp_HArray2OfDir2d_3 extends TColgp_HArray2OfDir2d {}
+
+class TColgp_HArray2OfLin2d extends Standard_Transient {
+}
+
+class TColgp_HArray2OfLin2d_1 extends TColgp_HArray2OfLin2d {}
+
+class TColgp_HArray2OfLin2d_2 extends TColgp_HArray2OfLin2d {}
+
+class TColgp_HArray2OfLin2d_3 extends TColgp_HArray2OfLin2d {}
+
+class TColgp_HArray2OfVec extends Standard_Transient {
+}
+
+class TColgp_HArray2OfVec_1 extends TColgp_HArray2OfVec {}
+
+class TColgp_HArray2OfVec_2 extends TColgp_HArray2OfVec {}
+
+class TColgp_HArray2OfVec_3 extends TColgp_HArray2OfVec {}
+
+class TColgp_HArray2OfVec2d extends Standard_Transient {
+}
+
+class TColgp_HArray2OfVec2d_1 extends TColgp_HArray2OfVec2d {}
+
+class TColgp_HArray2OfVec2d_2 extends TColgp_HArray2OfVec2d {}
+
+class TColgp_HArray2OfVec2d_3 extends TColgp_HArray2OfVec2d {}
+
+class TColgp_HArray2OfXY extends Standard_Transient {
+}
+
+class TColgp_HArray2OfXY_1 extends TColgp_HArray2OfXY {}
+
+class TColgp_HArray2OfXY_2 extends TColgp_HArray2OfXY {}
+
+class TColgp_HArray2OfXY_3 extends TColgp_HArray2OfXY {}
+
+class TColgp_HSequenceOfDir extends Standard_Transient {
+}
+
+class TColgp_HSequenceOfDir_1 extends TColgp_HSequenceOfDir {}
+
+class TColgp_HSequenceOfDir_2 extends TColgp_HSequenceOfDir {}
+
+class TColgp_HSequenceOfDir2d extends Standard_Transient {
+}
+
+class TColgp_HSequenceOfDir2d_1 extends TColgp_HSequenceOfDir2d {}
+
+class TColgp_HSequenceOfDir2d_2 extends TColgp_HSequenceOfDir2d {}
+
+class TColgp_HSequenceOfVec extends Standard_Transient {
+}
+
+class TColgp_HSequenceOfVec_1 extends TColgp_HSequenceOfVec {}
+
+class TColgp_HSequenceOfVec_2 extends TColgp_HSequenceOfVec {}
+
+class TColgp_HSequenceOfVec2d extends Standard_Transient {
+}
+
+class TColgp_HSequenceOfVec2d_1 extends TColgp_HSequenceOfVec2d {}
+
+class TColgp_HSequenceOfVec2d_2 extends TColgp_HSequenceOfVec2d {}
 
 class TCollection {
 }
 
 class TCollection_AsciiString {
 }
+
+class TCollection_AsciiString_1 extends TCollection_AsciiString {}
+
+class TCollection_AsciiString_2 extends TCollection_AsciiString {}
+
+class TCollection_AsciiString_3 extends TCollection_AsciiString {}
+
+class TCollection_AsciiString_4 extends TCollection_AsciiString {}
+
+class TCollection_AsciiString_5 extends TCollection_AsciiString {}
+
+class TCollection_AsciiString_6 extends TCollection_AsciiString {}
+
+class TCollection_AsciiString_7 extends TCollection_AsciiString {}
+
+class TCollection_AsciiString_8 extends TCollection_AsciiString {}
+
+class TCollection_AsciiString_9 extends TCollection_AsciiString {}
+
+class TCollection_AsciiString_10 extends TCollection_AsciiString {}
+
+class TCollection_AsciiString_11 extends TCollection_AsciiString {}
+
+class TCollection_AsciiString_12 extends TCollection_AsciiString {}
+
+class TCollection_AsciiString_13 extends TCollection_AsciiString {}
+
+class TCollection_AsciiString_14 extends TCollection_AsciiString {}
 
 class TCollection_BaseSequence {
 }
@@ -14428,11 +25258,69 @@ class TCollection_BasicMapIterator {
 class TCollection_ExtendedString {
 }
 
+class TCollection_ExtendedString_1 extends TCollection_ExtendedString {}
+
+class TCollection_ExtendedString_2 extends TCollection_ExtendedString {}
+
+class TCollection_ExtendedString_3 extends TCollection_ExtendedString {}
+
+class TCollection_ExtendedString_4 extends TCollection_ExtendedString {}
+
+class TCollection_ExtendedString_5 extends TCollection_ExtendedString {}
+
+class TCollection_ExtendedString_6 extends TCollection_ExtendedString {}
+
+class TCollection_ExtendedString_7 extends TCollection_ExtendedString {}
+
+class TCollection_ExtendedString_8 extends TCollection_ExtendedString {}
+
+class TCollection_ExtendedString_9 extends TCollection_ExtendedString {}
+
+class TCollection_ExtendedString_10 extends TCollection_ExtendedString {}
+
+class TCollection_ExtendedString_11 extends TCollection_ExtendedString {}
+
+class TCollection_ExtendedString_12 extends TCollection_ExtendedString {}
+
 class TCollection_HAsciiString extends Standard_Transient {
 }
 
+class TCollection_HAsciiString_1 extends TCollection_HAsciiString {}
+
+class TCollection_HAsciiString_2 extends TCollection_HAsciiString {}
+
+class TCollection_HAsciiString_3 extends TCollection_HAsciiString {}
+
+class TCollection_HAsciiString_4 extends TCollection_HAsciiString {}
+
+class TCollection_HAsciiString_5 extends TCollection_HAsciiString {}
+
+class TCollection_HAsciiString_6 extends TCollection_HAsciiString {}
+
+class TCollection_HAsciiString_7 extends TCollection_HAsciiString {}
+
+class TCollection_HAsciiString_8 extends TCollection_HAsciiString {}
+
+class TCollection_HAsciiString_9 extends TCollection_HAsciiString {}
+
 class TCollection_HExtendedString extends Standard_Transient {
 }
+
+class TCollection_HExtendedString_1 extends TCollection_HExtendedString {}
+
+class TCollection_HExtendedString_2 extends TCollection_HExtendedString {}
+
+class TCollection_HExtendedString_3 extends TCollection_HExtendedString {}
+
+class TCollection_HExtendedString_4 extends TCollection_HExtendedString {}
+
+class TCollection_HExtendedString_5 extends TCollection_HExtendedString {}
+
+class TCollection_HExtendedString_6 extends TCollection_HExtendedString {}
+
+class TCollection_HExtendedString_7 extends TCollection_HExtendedString {}
+
+class TCollection_HExtendedString_8 extends TCollection_HExtendedString {}
 
 class TCollection_MapNode extends Standard_Transient {
 }
@@ -14452,11 +25340,25 @@ class TDF_AttributeDelta extends Standard_Transient {
 class TDF_AttributeIterator {
 }
 
+class TDF_AttributeIterator_1 extends TDF_AttributeIterator {}
+
+class TDF_AttributeIterator_2 extends TDF_AttributeIterator {}
+
+class TDF_AttributeIterator_3 extends TDF_AttributeIterator {}
+
 class TDF_ChildIDIterator {
 }
 
+class TDF_ChildIDIterator_1 extends TDF_ChildIDIterator {}
+
+class TDF_ChildIDIterator_2 extends TDF_ChildIDIterator {}
+
 class TDF_ChildIterator {
 }
+
+class TDF_ChildIterator_1 extends TDF_ChildIterator {}
+
+class TDF_ChildIterator_2 extends TDF_ChildIterator {}
 
 class TDF_ClosureMode {
 }
@@ -14469,6 +25371,10 @@ class TDF_ComparisonTool {
 
 class TDF_CopyLabel {
 }
+
+class TDF_CopyLabel_1 extends TDF_CopyLabel {}
+
+class TDF_CopyLabel_2 extends TDF_CopyLabel {}
 
 class TDF_CopyTool {
 }
@@ -14503,6 +25409,17 @@ class TDF_DeltaOnRemoval extends TDF_AttributeDelta {
 class TDF_DeltaOnResume extends TDF_AttributeDelta {
 }
 
+class TDF_HAttributeArray1 extends Standard_Transient {
+}
+
+class TDF_HAttributeArray1_1 extends TDF_HAttributeArray1 {}
+
+class TDF_HAttributeArray1_2 extends TDF_HAttributeArray1 {}
+
+class TDF_HAttributeArray1_3 extends TDF_HAttributeArray1 {}
+
+class TDF_HAttributeArray1_4 extends TDF_HAttributeArray1 {}
+
 class TDF_IDFilter {
 }
 
@@ -14527,6 +25444,10 @@ class TDF_Tool {
 class TDF_Transaction {
 }
 
+class TDF_Transaction_1 extends TDF_Transaction {}
+
+class TDF_Transaction_2 extends TDF_Transaction {}
+
 class TDataStd {
 }
 
@@ -14544,6 +25465,10 @@ class TDataStd_ByteArray extends TDF_Attribute {
 
 class TDataStd_ChildNodeIterator {
 }
+
+class TDataStd_ChildNodeIterator_1 extends TDataStd_ChildNodeIterator {}
+
+class TDataStd_ChildNodeIterator_2 extends TDataStd_ChildNodeIterator {}
 
 class TDataStd_Comment extends TDF_Attribute {
 }
@@ -14581,20 +25506,55 @@ class TDataStd_ExtStringList extends TDF_Attribute {
 class TDataStd_HDataMapOfStringByte extends Standard_Transient {
 }
 
+class TDataStd_HDataMapOfStringByte_1 extends TDataStd_HDataMapOfStringByte {}
+
+class TDataStd_HDataMapOfStringByte_2 extends TDataStd_HDataMapOfStringByte {}
+
 class TDataStd_HDataMapOfStringHArray1OfInteger extends Standard_Transient {
 }
+
+class TDataStd_HDataMapOfStringHArray1OfInteger_1 extends TDataStd_HDataMapOfStringHArray1OfInteger {}
+
+class TDataStd_HDataMapOfStringHArray1OfInteger_2 extends TDataStd_HDataMapOfStringHArray1OfInteger {}
 
 class TDataStd_HDataMapOfStringHArray1OfReal extends Standard_Transient {
 }
 
+class TDataStd_HDataMapOfStringHArray1OfReal_1 extends TDataStd_HDataMapOfStringHArray1OfReal {}
+
+class TDataStd_HDataMapOfStringHArray1OfReal_2 extends TDataStd_HDataMapOfStringHArray1OfReal {}
+
 class TDataStd_HDataMapOfStringInteger extends Standard_Transient {
 }
+
+class TDataStd_HDataMapOfStringInteger_1 extends TDataStd_HDataMapOfStringInteger {}
+
+class TDataStd_HDataMapOfStringInteger_2 extends TDataStd_HDataMapOfStringInteger {}
 
 class TDataStd_HDataMapOfStringReal extends Standard_Transient {
 }
 
+class TDataStd_HDataMapOfStringReal_1 extends TDataStd_HDataMapOfStringReal {}
+
+class TDataStd_HDataMapOfStringReal_2 extends TDataStd_HDataMapOfStringReal {}
+
 class TDataStd_HDataMapOfStringString extends Standard_Transient {
 }
+
+class TDataStd_HDataMapOfStringString_1 extends TDataStd_HDataMapOfStringString {}
+
+class TDataStd_HDataMapOfStringString_2 extends TDataStd_HDataMapOfStringString {}
+
+class TDataStd_HLabelArray1 extends Standard_Transient {
+}
+
+class TDataStd_HLabelArray1_1 extends TDataStd_HLabelArray1 {}
+
+class TDataStd_HLabelArray1_2 extends TDataStd_HLabelArray1 {}
+
+class TDataStd_HLabelArray1_3 extends TDataStd_HLabelArray1 {}
+
+class TDataStd_HLabelArray1_4 extends TDataStd_HLabelArray1 {}
 
 class TDataStd_IntPackedMap extends TDF_Attribute {
 }
@@ -14659,6 +25619,17 @@ class TDataXtd_Constraint extends TDF_Attribute {
 class TDataXtd_Geometry extends TDF_Attribute {
 }
 
+class TDataXtd_HArray1OfTrsf extends Standard_Transient {
+}
+
+class TDataXtd_HArray1OfTrsf_1 extends TDataXtd_HArray1OfTrsf {}
+
+class TDataXtd_HArray1OfTrsf_2 extends TDataXtd_HArray1OfTrsf {}
+
+class TDataXtd_HArray1OfTrsf_3 extends TDataXtd_HArray1OfTrsf {}
+
+class TDataXtd_HArray1OfTrsf_4 extends TDataXtd_HArray1OfTrsf {}
+
 class TDataXtd_Pattern extends TDF_Attribute {
 }
 
@@ -14722,6 +25693,10 @@ class TDocStd_XLink extends TDF_Attribute {
 class TDocStd_XLinkIterator {
 }
 
+class TDocStd_XLinkIterator_1 extends TDocStd_XLinkIterator {}
+
+class TDocStd_XLinkIterator_2 extends TDocStd_XLinkIterator {}
+
 class TDocStd_XLinkRoot extends TDF_Attribute {
 }
 
@@ -14740,11 +25715,30 @@ class TFunction_Function extends TDF_Attribute {
 class TFunction_GraphNode extends TDF_Attribute {
 }
 
+class TFunction_HArray1OfDataMapOfGUIDDriver extends Standard_Transient {
+}
+
+class TFunction_HArray1OfDataMapOfGUIDDriver_1 extends TFunction_HArray1OfDataMapOfGUIDDriver {}
+
+class TFunction_HArray1OfDataMapOfGUIDDriver_2 extends TFunction_HArray1OfDataMapOfGUIDDriver {}
+
+class TFunction_HArray1OfDataMapOfGUIDDriver_3 extends TFunction_HArray1OfDataMapOfGUIDDriver {}
+
+class TFunction_HArray1OfDataMapOfGUIDDriver_4 extends TFunction_HArray1OfDataMapOfGUIDDriver {}
+
 class TFunction_IFunction {
 }
 
+class TFunction_IFunction_1 extends TFunction_IFunction {}
+
+class TFunction_IFunction_2 extends TFunction_IFunction {}
+
 class TFunction_Iterator {
 }
+
+class TFunction_Iterator_1 extends TFunction_Iterator {}
+
+class TFunction_Iterator_2 extends TFunction_Iterator {}
 
 class TFunction_Logbook extends TDF_Attribute {
 }
@@ -14770,11 +25764,25 @@ class TNaming_DeltaOnRemoval extends TDF_DeltaOnRemoval {
 class TNaming_Identifier {
 }
 
+class TNaming_Identifier_1 extends TNaming_Identifier {}
+
+class TNaming_Identifier_2 extends TNaming_Identifier {}
+
 class TNaming_Iterator {
 }
 
+class TNaming_Iterator_1 extends TNaming_Iterator {}
+
+class TNaming_Iterator_2 extends TNaming_Iterator {}
+
+class TNaming_Iterator_3 extends TNaming_Iterator {}
+
 class TNaming_IteratorOnShapesSet {
 }
+
+class TNaming_IteratorOnShapesSet_1 extends TNaming_IteratorOnShapesSet {}
+
+class TNaming_IteratorOnShapesSet_2 extends TNaming_IteratorOnShapesSet {}
 
 class TNaming_Localizer {
 }
@@ -14794,11 +25802,31 @@ class TNaming_NamingTool {
 class TNaming_NewShapeIterator {
 }
 
+class TNaming_NewShapeIterator_1 extends TNaming_NewShapeIterator {}
+
+class TNaming_NewShapeIterator_2 extends TNaming_NewShapeIterator {}
+
+class TNaming_NewShapeIterator_3 extends TNaming_NewShapeIterator {}
+
+class TNaming_NewShapeIterator_4 extends TNaming_NewShapeIterator {}
+
 class TNaming_OldShapeIterator {
 }
 
+class TNaming_OldShapeIterator_1 extends TNaming_OldShapeIterator {}
+
+class TNaming_OldShapeIterator_2 extends TNaming_OldShapeIterator {}
+
+class TNaming_OldShapeIterator_3 extends TNaming_OldShapeIterator {}
+
+class TNaming_OldShapeIterator_4 extends TNaming_OldShapeIterator {}
+
 class TNaming_RefShape {
 }
+
+class TNaming_RefShape_1 extends TNaming_RefShape {}
+
+class TNaming_RefShape_2 extends TNaming_RefShape {}
 
 class TNaming_SameShapeIterator {
 }
@@ -14806,11 +25834,21 @@ class TNaming_SameShapeIterator {
 class TNaming_Scope {
 }
 
+class TNaming_Scope_1 extends TNaming_Scope {}
+
+class TNaming_Scope_2 extends TNaming_Scope {}
+
+class TNaming_Scope_3 extends TNaming_Scope {}
+
 class TNaming_Selector {
 }
 
 class TNaming_ShapesSet {
 }
+
+class TNaming_ShapesSet_1 extends TNaming_ShapesSet {}
+
+class TNaming_ShapesSet_2 extends TNaming_ShapesSet {}
 
 class TNaming_Tool {
 }
@@ -14832,6 +25870,13 @@ class TObj_Assistant {
 
 class TObj_CheckModel extends Message_Algorithm {
 }
+
+class TObj_HSequenceOfObject extends Standard_Transient {
+}
+
+class TObj_HSequenceOfObject_1 extends TObj_HSequenceOfObject {}
+
+class TObj_HSequenceOfObject_2 extends TObj_HSequenceOfObject {}
 
 class TObj_HiddenPartition extends TObj_Partition {
 }
@@ -14884,11 +25929,31 @@ class TObj_TReference extends TDF_Attribute {
 class TObj_TXYZ extends TDF_Attribute {
 }
 
+class TShort_HArray2OfShortReal extends Standard_Transient {
+}
+
+class TShort_HArray2OfShortReal_1 extends TShort_HArray2OfShortReal {}
+
+class TShort_HArray2OfShortReal_2 extends TShort_HArray2OfShortReal {}
+
+class TShort_HArray2OfShortReal_3 extends TShort_HArray2OfShortReal {}
+
+class TShort_HSequenceOfShortReal extends Standard_Transient {
+}
+
+class TShort_HSequenceOfShortReal_1 extends TShort_HSequenceOfShortReal {}
+
+class TShort_HSequenceOfShortReal_2 extends TShort_HSequenceOfShortReal {}
+
 class TopAbs {
 }
 
 class TopBas_TestInterference {
 }
+
+class TopBas_TestInterference_1 extends TopBas_TestInterference {}
+
+class TopBas_TestInterference_2 extends TopBas_TestInterference {}
 
 class TopCnx_EdgeFaceTransition {
 }
@@ -14899,8 +25964,16 @@ class TopExp {
 class TopExp_Explorer {
 }
 
+class TopExp_Explorer_1 extends TopExp_Explorer {}
+
+class TopExp_Explorer_2 extends TopExp_Explorer {}
+
 class TopLoc_Datum3D extends Standard_Transient {
 }
+
+class TopLoc_Datum3D_1 extends TopLoc_Datum3D {}
+
+class TopLoc_Datum3D_2 extends TopLoc_Datum3D {}
 
 class TopLoc_ItemLocation {
 }
@@ -14908,11 +25981,25 @@ class TopLoc_ItemLocation {
 class TopLoc_Location {
 }
 
+class TopLoc_Location_1 extends TopLoc_Location {}
+
+class TopLoc_Location_2 extends TopLoc_Location {}
+
+class TopLoc_Location_3 extends TopLoc_Location {}
+
 class TopLoc_SListNodeOfItemLocation extends Standard_Transient {
 }
 
 class TopLoc_SListOfItemLocation {
 }
+
+class TopLoc_SListOfItemLocation_1 extends TopLoc_SListOfItemLocation {}
+
+class TopLoc_SListOfItemLocation_2 extends TopLoc_SListOfItemLocation {}
+
+class TopLoc_SListOfItemLocation_3 extends TopLoc_SListOfItemLocation {}
+
+class TopLoc_SListOfItemLocation_4 extends TopLoc_SListOfItemLocation {}
 
 class TopOpeBRep {
 }
@@ -14920,23 +26007,51 @@ class TopOpeBRep {
 class TopOpeBRepBuild_Area1dBuilder extends TopOpeBRepBuild_AreaBuilder {
 }
 
+class TopOpeBRepBuild_Area1dBuilder_1 extends TopOpeBRepBuild_Area1dBuilder {}
+
+class TopOpeBRepBuild_Area1dBuilder_2 extends TopOpeBRepBuild_Area1dBuilder {}
+
 class TopOpeBRepBuild_Area2dBuilder extends TopOpeBRepBuild_AreaBuilder {
 }
+
+class TopOpeBRepBuild_Area2dBuilder_1 extends TopOpeBRepBuild_Area2dBuilder {}
+
+class TopOpeBRepBuild_Area2dBuilder_2 extends TopOpeBRepBuild_Area2dBuilder {}
 
 class TopOpeBRepBuild_Area3dBuilder extends TopOpeBRepBuild_AreaBuilder {
 }
 
+class TopOpeBRepBuild_Area3dBuilder_1 extends TopOpeBRepBuild_Area3dBuilder {}
+
+class TopOpeBRepBuild_Area3dBuilder_2 extends TopOpeBRepBuild_Area3dBuilder {}
+
 class TopOpeBRepBuild_AreaBuilder {
 }
+
+class TopOpeBRepBuild_AreaBuilder_1 extends TopOpeBRepBuild_AreaBuilder {}
+
+class TopOpeBRepBuild_AreaBuilder_2 extends TopOpeBRepBuild_AreaBuilder {}
 
 class TopOpeBRepBuild_BlockBuilder {
 }
 
+class TopOpeBRepBuild_BlockBuilder_1 extends TopOpeBRepBuild_BlockBuilder {}
+
+class TopOpeBRepBuild_BlockBuilder_2 extends TopOpeBRepBuild_BlockBuilder {}
+
 class TopOpeBRepBuild_BlockIterator {
 }
 
+class TopOpeBRepBuild_BlockIterator_1 extends TopOpeBRepBuild_BlockIterator {}
+
+class TopOpeBRepBuild_BlockIterator_2 extends TopOpeBRepBuild_BlockIterator {}
+
 class TopOpeBRepBuild_BuilderON {
 }
+
+class TopOpeBRepBuild_BuilderON_1 extends TopOpeBRepBuild_BuilderON {}
+
+class TopOpeBRepBuild_BuilderON_2 extends TopOpeBRepBuild_BuilderON {}
 
 class TopOpeBRepBuild_CompositeClassifier extends TopOpeBRepBuild_LoopClassifier {
 }
@@ -14944,20 +26059,44 @@ class TopOpeBRepBuild_CompositeClassifier extends TopOpeBRepBuild_LoopClassifier
 class TopOpeBRepBuild_CorrectFace2d {
 }
 
+class TopOpeBRepBuild_CorrectFace2d_1 extends TopOpeBRepBuild_CorrectFace2d {}
+
+class TopOpeBRepBuild_CorrectFace2d_2 extends TopOpeBRepBuild_CorrectFace2d {}
+
 class TopOpeBRepBuild_EdgeBuilder extends TopOpeBRepBuild_Area1dBuilder {
 }
+
+class TopOpeBRepBuild_EdgeBuilder_1 extends TopOpeBRepBuild_EdgeBuilder {}
+
+class TopOpeBRepBuild_EdgeBuilder_2 extends TopOpeBRepBuild_EdgeBuilder {}
 
 class TopOpeBRepBuild_FaceAreaBuilder extends TopOpeBRepBuild_Area2dBuilder {
 }
 
+class TopOpeBRepBuild_FaceAreaBuilder_1 extends TopOpeBRepBuild_FaceAreaBuilder {}
+
+class TopOpeBRepBuild_FaceAreaBuilder_2 extends TopOpeBRepBuild_FaceAreaBuilder {}
+
 class TopOpeBRepBuild_FaceBuilder {
 }
+
+class TopOpeBRepBuild_FaceBuilder_1 extends TopOpeBRepBuild_FaceBuilder {}
+
+class TopOpeBRepBuild_FaceBuilder_2 extends TopOpeBRepBuild_FaceBuilder {}
 
 class TopOpeBRepBuild_FuseFace {
 }
 
+class TopOpeBRepBuild_FuseFace_1 extends TopOpeBRepBuild_FuseFace {}
+
+class TopOpeBRepBuild_FuseFace_2 extends TopOpeBRepBuild_FuseFace {}
+
 class TopOpeBRepBuild_GIter {
 }
+
+class TopOpeBRepBuild_GIter_1 extends TopOpeBRepBuild_GIter {}
+
+class TopOpeBRepBuild_GIter_2 extends TopOpeBRepBuild_GIter {}
 
 class TopOpeBRepBuild_GTool {
 }
@@ -14965,11 +26104,19 @@ class TopOpeBRepBuild_GTool {
 class TopOpeBRepBuild_GTopo {
 }
 
+class TopOpeBRepBuild_GTopo_1 extends TopOpeBRepBuild_GTopo {}
+
+class TopOpeBRepBuild_GTopo_2 extends TopOpeBRepBuild_GTopo {}
+
 class TopOpeBRepBuild_HBuilder extends Standard_Transient {
 }
 
 class TopOpeBRepBuild_Loop extends Standard_Transient {
 }
+
+class TopOpeBRepBuild_Loop_1 extends TopOpeBRepBuild_Loop {}
+
+class TopOpeBRepBuild_Loop_2 extends TopOpeBRepBuild_Loop {}
 
 class TopOpeBRepBuild_LoopClassifier {
 }
@@ -14989,6 +26136,12 @@ class TopOpeBRepBuild_PaveSet extends TopOpeBRepBuild_LoopSet {
 class TopOpeBRepBuild_ShapeListOfShape {
 }
 
+class TopOpeBRepBuild_ShapeListOfShape_1 extends TopOpeBRepBuild_ShapeListOfShape {}
+
+class TopOpeBRepBuild_ShapeListOfShape_2 extends TopOpeBRepBuild_ShapeListOfShape {}
+
+class TopOpeBRepBuild_ShapeListOfShape_3 extends TopOpeBRepBuild_ShapeListOfShape {}
+
 class TopOpeBRepBuild_ShapeSet {
 }
 
@@ -14998,14 +26151,26 @@ class TopOpeBRepBuild_ShellFaceClassifier extends TopOpeBRepBuild_CompositeClass
 class TopOpeBRepBuild_ShellFaceSet extends TopOpeBRepBuild_ShapeSet {
 }
 
+class TopOpeBRepBuild_ShellFaceSet_1 extends TopOpeBRepBuild_ShellFaceSet {}
+
+class TopOpeBRepBuild_ShellFaceSet_2 extends TopOpeBRepBuild_ShellFaceSet {}
+
 class TopOpeBRepBuild_ShellToSolid {
 }
 
 class TopOpeBRepBuild_SolidAreaBuilder extends TopOpeBRepBuild_Area3dBuilder {
 }
 
+class TopOpeBRepBuild_SolidAreaBuilder_1 extends TopOpeBRepBuild_SolidAreaBuilder {}
+
+class TopOpeBRepBuild_SolidAreaBuilder_2 extends TopOpeBRepBuild_SolidAreaBuilder {}
+
 class TopOpeBRepBuild_SolidBuilder {
 }
+
+class TopOpeBRepBuild_SolidBuilder_1 extends TopOpeBRepBuild_SolidBuilder {}
+
+class TopOpeBRepBuild_SolidBuilder_2 extends TopOpeBRepBuild_SolidBuilder {}
 
 class TopOpeBRepBuild_Tools {
 }
@@ -15034,17 +26199,39 @@ class TopOpeBRepDS_Association extends Standard_Transient {
 class TopOpeBRepDS_BuildTool {
 }
 
+class TopOpeBRepDS_BuildTool_1 extends TopOpeBRepDS_BuildTool {}
+
+class TopOpeBRepDS_BuildTool_2 extends TopOpeBRepDS_BuildTool {}
+
+class TopOpeBRepDS_BuildTool_3 extends TopOpeBRepDS_BuildTool {}
+
 class TopOpeBRepDS_Check extends Standard_Transient {
 }
+
+class TopOpeBRepDS_Check_1 extends TopOpeBRepDS_Check {}
+
+class TopOpeBRepDS_Check_2 extends TopOpeBRepDS_Check {}
 
 class TopOpeBRepDS_Curve {
 }
 
+class TopOpeBRepDS_Curve_1 extends TopOpeBRepDS_Curve {}
+
+class TopOpeBRepDS_Curve_2 extends TopOpeBRepDS_Curve {}
+
 class TopOpeBRepDS_CurveData extends TopOpeBRepDS_GeometryData {
 }
 
+class TopOpeBRepDS_CurveData_1 extends TopOpeBRepDS_CurveData {}
+
+class TopOpeBRepDS_CurveData_2 extends TopOpeBRepDS_CurveData {}
+
 class TopOpeBRepDS_CurveExplorer {
 }
+
+class TopOpeBRepDS_CurveExplorer_1 extends TopOpeBRepDS_CurveExplorer {}
+
+class TopOpeBRepDS_CurveExplorer_2 extends TopOpeBRepDS_CurveExplorer {}
 
 class TopOpeBRepDS_CurveIterator extends TopOpeBRepDS_InterferenceIterator {
 }
@@ -15070,8 +26257,16 @@ class TopOpeBRepDS_EdgeInterferenceTool {
 class TopOpeBRepDS_EdgeVertexInterference extends TopOpeBRepDS_ShapeShapeInterference {
 }
 
+class TopOpeBRepDS_EdgeVertexInterference_1 extends TopOpeBRepDS_EdgeVertexInterference {}
+
+class TopOpeBRepDS_EdgeVertexInterference_2 extends TopOpeBRepDS_EdgeVertexInterference {}
+
 class TopOpeBRepDS_Explorer {
 }
+
+class TopOpeBRepDS_Explorer_1 extends TopOpeBRepDS_Explorer {}
+
+class TopOpeBRepDS_Explorer_2 extends TopOpeBRepDS_Explorer {}
 
 class TopOpeBRepDS_FIR {
 }
@@ -15091,8 +26286,27 @@ class TopOpeBRepDS_GapFiller {
 class TopOpeBRepDS_GapTool extends Standard_Transient {
 }
 
+class TopOpeBRepDS_GapTool_1 extends TopOpeBRepDS_GapTool {}
+
+class TopOpeBRepDS_GapTool_2 extends TopOpeBRepDS_GapTool {}
+
 class TopOpeBRepDS_GeometryData {
 }
+
+class TopOpeBRepDS_GeometryData_1 extends TopOpeBRepDS_GeometryData {}
+
+class TopOpeBRepDS_GeometryData_2 extends TopOpeBRepDS_GeometryData {}
+
+class TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference extends Standard_Transient {
+}
+
+class TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference_1 extends TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference {}
+
+class TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference_2 extends TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference {}
+
+class TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference_3 extends TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference {}
+
+class TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference_4 extends TopOpeBRepDS_HArray1OfDataMapOfIntegerListOfInterference {}
 
 class TopOpeBRepDS_HDataStructure extends Standard_Transient {
 }
@@ -15100,8 +26314,18 @@ class TopOpeBRepDS_HDataStructure extends Standard_Transient {
 class TopOpeBRepDS_Interference extends Standard_Transient {
 }
 
+class TopOpeBRepDS_Interference_1 extends TopOpeBRepDS_Interference {}
+
+class TopOpeBRepDS_Interference_2 extends TopOpeBRepDS_Interference {}
+
+class TopOpeBRepDS_Interference_3 extends TopOpeBRepDS_Interference {}
+
 class TopOpeBRepDS_InterferenceIterator {
 }
+
+class TopOpeBRepDS_InterferenceIterator_1 extends TopOpeBRepDS_InterferenceIterator {}
+
+class TopOpeBRepDS_InterferenceIterator_2 extends TopOpeBRepDS_InterferenceIterator {}
 
 class TopOpeBRepDS_InterferenceTool {
 }
@@ -15115,11 +26339,27 @@ class TopOpeBRepDS_Marker extends Standard_Transient {
 class TopOpeBRepDS_Point {
 }
 
+class TopOpeBRepDS_Point_1 extends TopOpeBRepDS_Point {}
+
+class TopOpeBRepDS_Point_2 extends TopOpeBRepDS_Point {}
+
+class TopOpeBRepDS_Point_3 extends TopOpeBRepDS_Point {}
+
 class TopOpeBRepDS_PointData extends TopOpeBRepDS_GeometryData {
 }
 
+class TopOpeBRepDS_PointData_1 extends TopOpeBRepDS_PointData {}
+
+class TopOpeBRepDS_PointData_2 extends TopOpeBRepDS_PointData {}
+
+class TopOpeBRepDS_PointData_3 extends TopOpeBRepDS_PointData {}
+
 class TopOpeBRepDS_PointExplorer {
 }
+
+class TopOpeBRepDS_PointExplorer_1 extends TopOpeBRepDS_PointExplorer {}
+
+class TopOpeBRepDS_PointExplorer_2 extends TopOpeBRepDS_PointExplorer {}
 
 class TopOpeBRepDS_PointIterator extends TopOpeBRepDS_InterferenceIterator {
 }
@@ -15142,14 +26382,34 @@ class TopOpeBRepDS_SolidSurfaceInterference extends TopOpeBRepDS_Interference {
 class TopOpeBRepDS_Surface {
 }
 
+class TopOpeBRepDS_Surface_1 extends TopOpeBRepDS_Surface {}
+
+class TopOpeBRepDS_Surface_2 extends TopOpeBRepDS_Surface {}
+
+class TopOpeBRepDS_Surface_3 extends TopOpeBRepDS_Surface {}
+
 class TopOpeBRepDS_SurfaceCurveInterference extends TopOpeBRepDS_Interference {
 }
+
+class TopOpeBRepDS_SurfaceCurveInterference_1 extends TopOpeBRepDS_SurfaceCurveInterference {}
+
+class TopOpeBRepDS_SurfaceCurveInterference_2 extends TopOpeBRepDS_SurfaceCurveInterference {}
+
+class TopOpeBRepDS_SurfaceCurveInterference_3 extends TopOpeBRepDS_SurfaceCurveInterference {}
 
 class TopOpeBRepDS_SurfaceData extends TopOpeBRepDS_GeometryData {
 }
 
+class TopOpeBRepDS_SurfaceData_1 extends TopOpeBRepDS_SurfaceData {}
+
+class TopOpeBRepDS_SurfaceData_2 extends TopOpeBRepDS_SurfaceData {}
+
 class TopOpeBRepDS_SurfaceExplorer {
 }
+
+class TopOpeBRepDS_SurfaceExplorer_1 extends TopOpeBRepDS_SurfaceExplorer {}
+
+class TopOpeBRepDS_SurfaceExplorer_2 extends TopOpeBRepDS_SurfaceExplorer {}
 
 class TopOpeBRepDS_SurfaceIterator extends TopOpeBRepDS_InterferenceIterator {
 }
@@ -15163,6 +26423,12 @@ class TopOpeBRepDS_TOOL {
 class TopOpeBRepDS_Transition {
 }
 
+class TopOpeBRepDS_Transition_1 extends TopOpeBRepDS_Transition {}
+
+class TopOpeBRepDS_Transition_2 extends TopOpeBRepDS_Transition {}
+
+class TopOpeBRepDS_Transition_3 extends TopOpeBRepDS_Transition {}
+
 class TopOpeBRepTool {
 }
 
@@ -15172,8 +26438,16 @@ class TopOpeBRepTool_AncestorsTool {
 class TopOpeBRepTool_BoxSort {
 }
 
+class TopOpeBRepTool_BoxSort_1 extends TopOpeBRepTool_BoxSort {}
+
+class TopOpeBRepTool_BoxSort_2 extends TopOpeBRepTool_BoxSort {}
+
 class TopOpeBRepTool_C2DF {
 }
+
+class TopOpeBRepTool_C2DF_1 extends TopOpeBRepTool_C2DF {}
+
+class TopOpeBRepTool_C2DF_2 extends TopOpeBRepTool_C2DF {}
 
 class TopOpeBRepTool_CLASSI {
 }
@@ -15181,8 +26455,18 @@ class TopOpeBRepTool_CLASSI {
 class TopOpeBRepTool_CORRISO {
 }
 
+class TopOpeBRepTool_CORRISO_1 extends TopOpeBRepTool_CORRISO {}
+
+class TopOpeBRepTool_CORRISO_2 extends TopOpeBRepTool_CORRISO {}
+
 class TopOpeBRepTool_CurveTool {
 }
+
+class TopOpeBRepTool_CurveTool_1 extends TopOpeBRepTool_CurveTool {}
+
+class TopOpeBRepTool_CurveTool_2 extends TopOpeBRepTool_CurveTool {}
+
+class TopOpeBRepTool_CurveTool_3 extends TopOpeBRepTool_CurveTool {}
 
 class TopOpeBRepTool_FuseEdges {
 }
@@ -15205,8 +26489,16 @@ class TopOpeBRepTool_REGUW {
 class TopOpeBRepTool_ShapeClassifier {
 }
 
+class TopOpeBRepTool_ShapeClassifier_1 extends TopOpeBRepTool_ShapeClassifier {}
+
+class TopOpeBRepTool_ShapeClassifier_2 extends TopOpeBRepTool_ShapeClassifier {}
+
 class TopOpeBRepTool_ShapeExplorer extends TopExp_Explorer {
 }
+
+class TopOpeBRepTool_ShapeExplorer_1 extends TopOpeBRepTool_ShapeExplorer {}
+
+class TopOpeBRepTool_ShapeExplorer_2 extends TopOpeBRepTool_ShapeExplorer {}
 
 class TopOpeBRepTool_ShapeTool {
 }
@@ -15220,6 +26512,10 @@ class TopOpeBRepTool_TOOL {
 class TopOpeBRepTool_connexity {
 }
 
+class TopOpeBRepTool_connexity_1 extends TopOpeBRepTool_connexity {}
+
+class TopOpeBRepTool_connexity_2 extends TopOpeBRepTool_connexity {}
+
 class TopOpeBRepTool_face {
 }
 
@@ -15231,6 +26527,10 @@ class TopOpeBRepTool_mkTondgE {
 
 class TopOpeBRep_Bipoint {
 }
+
+class TopOpeBRep_Bipoint_1 extends TopOpeBRep_Bipoint {}
+
+class TopOpeBRep_Bipoint_2 extends TopOpeBRep_Bipoint {}
 
 class TopOpeBRep_DSFiller {
 }
@@ -15261,6 +26561,28 @@ class TopOpeBRep_FacesIntersector {
 
 class TopOpeBRep_GeomTool {
 }
+
+class TopOpeBRep_HArray1OfLineInter extends Standard_Transient {
+}
+
+class TopOpeBRep_HArray1OfLineInter_1 extends TopOpeBRep_HArray1OfLineInter {}
+
+class TopOpeBRep_HArray1OfLineInter_2 extends TopOpeBRep_HArray1OfLineInter {}
+
+class TopOpeBRep_HArray1OfLineInter_3 extends TopOpeBRep_HArray1OfLineInter {}
+
+class TopOpeBRep_HArray1OfLineInter_4 extends TopOpeBRep_HArray1OfLineInter {}
+
+class TopOpeBRep_HArray1OfVPointInter extends Standard_Transient {
+}
+
+class TopOpeBRep_HArray1OfVPointInter_1 extends TopOpeBRep_HArray1OfVPointInter {}
+
+class TopOpeBRep_HArray1OfVPointInter_2 extends TopOpeBRep_HArray1OfVPointInter {}
+
+class TopOpeBRep_HArray1OfVPointInter_3 extends TopOpeBRep_HArray1OfVPointInter {}
+
+class TopOpeBRep_HArray1OfVPointInter_4 extends TopOpeBRep_HArray1OfVPointInter {}
 
 class TopOpeBRep_Hctxee2d extends Standard_Transient {
 }
@@ -15298,14 +26620,33 @@ class TopOpeBRep_VPointInterClassifier {
 class TopOpeBRep_VPointInterIterator {
 }
 
+class TopOpeBRep_VPointInterIterator_1 extends TopOpeBRep_VPointInterIterator {}
+
+class TopOpeBRep_VPointInterIterator_2 extends TopOpeBRep_VPointInterIterator {}
+
 class TopOpeBRep_WPointInter {
 }
 
 class TopOpeBRep_WPointInterIterator {
 }
 
+class TopOpeBRep_WPointInterIterator_1 extends TopOpeBRep_WPointInterIterator {}
+
+class TopOpeBRep_WPointInterIterator_2 extends TopOpeBRep_WPointInterIterator {}
+
 class TopTools {
 }
+
+class TopTools_HArray1OfListOfShape extends Standard_Transient {
+}
+
+class TopTools_HArray1OfListOfShape_1 extends TopTools_HArray1OfListOfShape {}
+
+class TopTools_HArray1OfListOfShape_2 extends TopTools_HArray1OfListOfShape {}
+
+class TopTools_HArray1OfListOfShape_3 extends TopTools_HArray1OfListOfShape {}
+
+class TopTools_HArray1OfListOfShape_4 extends TopTools_HArray1OfListOfShape {}
 
 class TopTools_LocationSet {
 }
@@ -15337,6 +26678,10 @@ class TopoDSToStep {
 class TopoDSToStep_Builder extends TopoDSToStep_Root {
 }
 
+class TopoDSToStep_Builder_1 extends TopoDSToStep_Builder {}
+
+class TopoDSToStep_Builder_2 extends TopoDSToStep_Builder {}
+
 class TopoDSToStep_FacetedTool {
 }
 
@@ -15345,6 +26690,10 @@ class TopoDSToStep_MakeBrepWithVoids extends TopoDSToStep_Root {
 
 class TopoDSToStep_MakeFacetedBrep extends TopoDSToStep_Root {
 }
+
+class TopoDSToStep_MakeFacetedBrep_1 extends TopoDSToStep_MakeFacetedBrep {}
+
+class TopoDSToStep_MakeFacetedBrep_2 extends TopoDSToStep_MakeFacetedBrep {}
 
 class TopoDSToStep_MakeFacetedBrepAndBrepWithVoids extends TopoDSToStep_Root {
 }
@@ -15355,20 +26704,46 @@ class TopoDSToStep_MakeGeometricCurveSet extends TopoDSToStep_Root {
 class TopoDSToStep_MakeManifoldSolidBrep extends TopoDSToStep_Root {
 }
 
+class TopoDSToStep_MakeManifoldSolidBrep_1 extends TopoDSToStep_MakeManifoldSolidBrep {}
+
+class TopoDSToStep_MakeManifoldSolidBrep_2 extends TopoDSToStep_MakeManifoldSolidBrep {}
+
 class TopoDSToStep_MakeShellBasedSurfaceModel extends TopoDSToStep_Root {
 }
+
+class TopoDSToStep_MakeShellBasedSurfaceModel_1 extends TopoDSToStep_MakeShellBasedSurfaceModel {}
+
+class TopoDSToStep_MakeShellBasedSurfaceModel_2 extends TopoDSToStep_MakeShellBasedSurfaceModel {}
+
+class TopoDSToStep_MakeShellBasedSurfaceModel_3 extends TopoDSToStep_MakeShellBasedSurfaceModel {}
 
 class TopoDSToStep_MakeStepEdge extends TopoDSToStep_Root {
 }
 
+class TopoDSToStep_MakeStepEdge_1 extends TopoDSToStep_MakeStepEdge {}
+
+class TopoDSToStep_MakeStepEdge_2 extends TopoDSToStep_MakeStepEdge {}
+
 class TopoDSToStep_MakeStepFace extends TopoDSToStep_Root {
 }
+
+class TopoDSToStep_MakeStepFace_1 extends TopoDSToStep_MakeStepFace {}
+
+class TopoDSToStep_MakeStepFace_2 extends TopoDSToStep_MakeStepFace {}
 
 class TopoDSToStep_MakeStepVertex extends TopoDSToStep_Root {
 }
 
+class TopoDSToStep_MakeStepVertex_1 extends TopoDSToStep_MakeStepVertex {}
+
+class TopoDSToStep_MakeStepVertex_2 extends TopoDSToStep_MakeStepVertex {}
+
 class TopoDSToStep_MakeStepWire extends TopoDSToStep_Root {
 }
+
+class TopoDSToStep_MakeStepWire_1 extends TopoDSToStep_MakeStepWire {}
+
+class TopoDSToStep_MakeStepWire_2 extends TopoDSToStep_MakeStepWire {}
 
 class TopoDSToStep_Root {
 }
@@ -15376,8 +26751,16 @@ class TopoDSToStep_Root {
 class TopoDSToStep_Tool {
 }
 
+class TopoDSToStep_Tool_1 extends TopoDSToStep_Tool {}
+
+class TopoDSToStep_Tool_2 extends TopoDSToStep_Tool {}
+
 class TopoDSToStep_WireframeBuilder extends TopoDSToStep_Root {
 }
+
+class TopoDSToStep_WireframeBuilder_1 extends TopoDSToStep_WireframeBuilder {}
+
+class TopoDSToStep_WireframeBuilder_2 extends TopoDSToStep_WireframeBuilder {}
 
 class TopoDS_AlertWithShape extends Message_Alert {
 }
@@ -15400,14 +26783,30 @@ class TopoDS_Face extends TopoDS_Shape {
 class TopoDS_FrozenShape extends Standard_DomainError {
 }
 
+class TopoDS_FrozenShape_1 extends TopoDS_FrozenShape {}
+
+class TopoDS_FrozenShape_2 extends TopoDS_FrozenShape {}
+
 class TopoDS_HShape extends Standard_Transient {
 }
+
+class TopoDS_HShape_1 extends TopoDS_HShape {}
+
+class TopoDS_HShape_2 extends TopoDS_HShape {}
 
 class TopoDS_Iterator {
 }
 
+class TopoDS_Iterator_1 extends TopoDS_Iterator {}
+
+class TopoDS_Iterator_2 extends TopoDS_Iterator {}
+
 class TopoDS_LockedShape extends Standard_DomainError {
 }
+
+class TopoDS_LockedShape_1 extends TopoDS_LockedShape {}
+
+class TopoDS_LockedShape_2 extends TopoDS_LockedShape {}
 
 class TopoDS_Shape {
 }
@@ -15448,6 +26847,10 @@ class TopoDS_TWire extends TopoDS_TShape {
 class TopoDS_UnCompatibleShapes extends Standard_DomainError {
 }
 
+class TopoDS_UnCompatibleShapes_1 extends TopoDS_UnCompatibleShapes {}
+
+class TopoDS_UnCompatibleShapes_2 extends TopoDS_UnCompatibleShapes {}
+
 class TopoDS_Vertex extends TopoDS_Shape {
 }
 
@@ -15456,6 +26859,17 @@ class TopoDS_Wire extends TopoDS_Shape {
 
 class TransferBRep_BinderOfShape extends Transfer_Binder {
 }
+
+class TransferBRep_BinderOfShape_1 extends TransferBRep_BinderOfShape {}
+
+class TransferBRep_BinderOfShape_2 extends TransferBRep_BinderOfShape {}
+
+class TransferBRep_HSequenceOfTransferResultInfo extends Standard_Transient {
+}
+
+class TransferBRep_HSequenceOfTransferResultInfo_1 extends TransferBRep_HSequenceOfTransferResultInfo {}
+
+class TransferBRep_HSequenceOfTransferResultInfo_2 extends TransferBRep_HSequenceOfTransferResultInfo {}
 
 class TransferBRep_OrientedShapeMapper extends Transfer_Finder {
 }
@@ -15466,11 +26880,19 @@ class TransferBRep_Reader {
 class TransferBRep_ShapeBinder extends TransferBRep_BinderOfShape {
 }
 
+class TransferBRep_ShapeBinder_1 extends TransferBRep_ShapeBinder {}
+
+class TransferBRep_ShapeBinder_2 extends TransferBRep_ShapeBinder {}
+
 class TransferBRep_ShapeInfo {
 }
 
 class TransferBRep_ShapeListBinder extends Transfer_Binder {
 }
+
+class TransferBRep_ShapeListBinder_1 extends TransferBRep_ShapeListBinder {}
+
+class TransferBRep_ShapeListBinder_2 extends TransferBRep_ShapeListBinder {}
 
 class TransferBRep_ShapeMapper extends Transfer_Finder {
 }
@@ -15480,6 +26902,12 @@ class TransferBRep_TransferResultInfo extends Standard_Transient {
 
 class Transfer_ActorDispatch extends Transfer_ActorOfTransientProcess {
 }
+
+class Transfer_ActorDispatch_1 extends Transfer_ActorDispatch {}
+
+class Transfer_ActorDispatch_2 extends Transfer_ActorDispatch {}
+
+class Transfer_ActorDispatch_3 extends Transfer_ActorDispatch {}
 
 class Transfer_ActorOfFinderProcess extends Transfer_ActorOfProcessForFinder {
 }
@@ -15514,6 +26942,13 @@ class Transfer_Finder extends Standard_Transient {
 class Transfer_FinderProcess extends Transfer_ProcessForFinder {
 }
 
+class Transfer_HSequenceOfBinder extends Standard_Transient {
+}
+
+class Transfer_HSequenceOfBinder_1 extends Transfer_HSequenceOfBinder {}
+
+class Transfer_HSequenceOfBinder_2 extends Transfer_HSequenceOfBinder {}
+
 class Transfer_IteratorOfProcessForFinder extends Transfer_TransferIterator {
 }
 
@@ -15529,8 +26964,16 @@ class Transfer_MultipleBinder extends Transfer_Binder {
 class Transfer_ProcessForFinder extends Standard_Transient {
 }
 
+class Transfer_ProcessForFinder_1 extends Transfer_ProcessForFinder {}
+
+class Transfer_ProcessForFinder_2 extends Transfer_ProcessForFinder {}
+
 class Transfer_ProcessForTransient extends Standard_Transient {
 }
+
+class Transfer_ProcessForTransient_1 extends Transfer_ProcessForTransient {}
+
+class Transfer_ProcessForTransient_2 extends Transfer_ProcessForTransient {}
 
 class Transfer_ResultFromModel extends Standard_Transient {
 }
@@ -15544,11 +26987,25 @@ class Transfer_SimpleBinderOfTransient extends Transfer_Binder {
 class Transfer_TransferDeadLoop extends Transfer_TransferFailure {
 }
 
+class Transfer_TransferDeadLoop_1 extends Transfer_TransferDeadLoop {}
+
+class Transfer_TransferDeadLoop_2 extends Transfer_TransferDeadLoop {}
+
 class Transfer_TransferDispatch extends Interface_CopyTool {
 }
 
+class Transfer_TransferDispatch_1 extends Transfer_TransferDispatch {}
+
+class Transfer_TransferDispatch_2 extends Transfer_TransferDispatch {}
+
+class Transfer_TransferDispatch_3 extends Transfer_TransferDispatch {}
+
 class Transfer_TransferFailure extends Interface_InterfaceError {
 }
+
+class Transfer_TransferFailure_1 extends Transfer_TransferFailure {}
+
+class Transfer_TransferFailure_2 extends Transfer_TransferFailure {}
 
 class Transfer_TransferInput {
 }
@@ -15559,8 +27016,16 @@ class Transfer_TransferIterator {
 class Transfer_TransferOutput {
 }
 
+class Transfer_TransferOutput_1 extends Transfer_TransferOutput {}
+
+class Transfer_TransferOutput_2 extends Transfer_TransferOutput {}
+
 class Transfer_TransientListBinder extends Transfer_Binder {
 }
+
+class Transfer_TransientListBinder_1 extends Transfer_TransientListBinder {}
+
+class Transfer_TransientListBinder_2 extends Transfer_TransientListBinder {}
 
 class Transfer_TransientMapper extends Transfer_Finder {
 }
@@ -15586,6 +27051,16 @@ class Units_Dimensions extends Standard_Transient {
 class Units_Explorer {
 }
 
+class Units_Explorer_1 extends Units_Explorer {}
+
+class Units_Explorer_2 extends Units_Explorer {}
+
+class Units_Explorer_3 extends Units_Explorer {}
+
+class Units_Explorer_4 extends Units_Explorer {}
+
+class Units_Explorer_5 extends Units_Explorer {}
+
 class Units_Lexicon extends Standard_Transient {
 }
 
@@ -15595,11 +27070,32 @@ class Units_MathSentence extends Units_Sentence {
 class Units_Measurement {
 }
 
+class Units_Measurement_1 extends Units_Measurement {}
+
+class Units_Measurement_2 extends Units_Measurement {}
+
+class Units_Measurement_3 extends Units_Measurement {}
+
 class Units_NoSuchType extends Standard_NoSuchObject {
 }
 
+class Units_NoSuchType_1 extends Units_NoSuchType {}
+
+class Units_NoSuchType_2 extends Units_NoSuchType {}
+
 class Units_NoSuchUnit extends Standard_NoSuchObject {
 }
+
+class Units_NoSuchUnit_1 extends Units_NoSuchUnit {}
+
+class Units_NoSuchUnit_2 extends Units_NoSuchUnit {}
+
+class Units_QuantitiesSequence extends Standard_Transient {
+}
+
+class Units_QuantitiesSequence_1 extends Units_QuantitiesSequence {}
+
+class Units_QuantitiesSequence_2 extends Units_QuantitiesSequence {}
 
 class Units_Quantity extends Standard_Transient {
 }
@@ -15613,14 +27109,49 @@ class Units_ShiftedToken extends Units_Token {
 class Units_ShiftedUnit extends Units_Unit {
 }
 
+class Units_ShiftedUnit_1 extends Units_ShiftedUnit {}
+
+class Units_ShiftedUnit_2 extends Units_ShiftedUnit {}
+
+class Units_ShiftedUnit_3 extends Units_ShiftedUnit {}
+
 class Units_Token extends Standard_Transient {
 }
+
+class Units_Token_1 extends Units_Token {}
+
+class Units_Token_2 extends Units_Token {}
+
+class Units_Token_3 extends Units_Token {}
+
+class Units_Token_4 extends Units_Token {}
+
+class Units_Token_5 extends Units_Token {}
+
+class Units_Token_6 extends Units_Token {}
+
+class Units_TokensSequence extends Standard_Transient {
+}
+
+class Units_TokensSequence_1 extends Units_TokensSequence {}
+
+class Units_TokensSequence_2 extends Units_TokensSequence {}
 
 class Units_Unit extends Standard_Transient {
 }
 
+class Units_Unit_1 extends Units_Unit {}
+
+class Units_Unit_2 extends Units_Unit {}
+
+class Units_Unit_3 extends Units_Unit {}
+
 class Units_UnitSentence extends Units_Sentence {
 }
+
+class Units_UnitSentence_1 extends Units_UnitSentence {}
+
+class Units_UnitSentence_2 extends Units_UnitSentence {}
 
 class Units_UnitsDictionary extends Standard_Transient {
 }
@@ -15628,8 +27159,19 @@ class Units_UnitsDictionary extends Standard_Transient {
 class Units_UnitsLexicon extends Units_Lexicon {
 }
 
+class Units_UnitsSequence extends Standard_Transient {
+}
+
+class Units_UnitsSequence_1 extends Units_UnitsSequence {}
+
+class Units_UnitsSequence_2 extends Units_UnitsSequence {}
+
 class Units_UnitsSystem extends Standard_Transient {
 }
+
+class Units_UnitsSystem_1 extends Units_UnitsSystem {}
+
+class Units_UnitsSystem_2 extends Units_UnitsSystem {}
 
 class V3d {
 }
@@ -15640,11 +27182,19 @@ class V3d_AmbientLight extends Graphic3d_CLight {
 class V3d_BadValue extends Standard_OutOfRange {
 }
 
+class V3d_BadValue_1 extends V3d_BadValue {}
+
+class V3d_BadValue_2 extends V3d_BadValue {}
+
 class V3d_CircularGrid extends Aspect_CircularGrid {
 }
 
 class V3d_DirectionalLight extends V3d_PositionLight {
 }
+
+class V3d_DirectionalLight_1 extends V3d_DirectionalLight {}
+
+class V3d_DirectionalLight_2 extends V3d_DirectionalLight {}
 
 class V3d_Plane extends Standard_Transient {
 }
@@ -15661,17 +27211,33 @@ class V3d_RectangularGrid extends Aspect_RectangularGrid {
 class V3d_SpotLight extends V3d_PositionLight {
 }
 
+class V3d_SpotLight_1 extends V3d_SpotLight {}
+
+class V3d_SpotLight_2 extends V3d_SpotLight {}
+
 class V3d_Trihedron extends Standard_Transient {
 }
 
 class V3d_UnMapped extends Standard_DomainError {
 }
 
+class V3d_UnMapped_1 extends V3d_UnMapped {}
+
+class V3d_UnMapped_2 extends V3d_UnMapped {}
+
 class V3d_View extends Standard_Transient {
 }
 
+class V3d_View_1 extends V3d_View {}
+
+class V3d_View_2 extends V3d_View {}
+
 class V3d_Viewer extends Standard_Transient {
 }
+
+class V3d_Viewer_1 extends V3d_Viewer {}
+
+class V3d_Viewer_2 extends V3d_Viewer {}
 
 class Vrml {
 }
@@ -15697,11 +27263,23 @@ class VrmlConverter_HLRShape {
 class VrmlConverter_IsoAspect extends VrmlConverter_LineAspect {
 }
 
+class VrmlConverter_IsoAspect_1 extends VrmlConverter_IsoAspect {}
+
+class VrmlConverter_IsoAspect_2 extends VrmlConverter_IsoAspect {}
+
 class VrmlConverter_LineAspect extends Standard_Transient {
 }
 
+class VrmlConverter_LineAspect_1 extends VrmlConverter_LineAspect {}
+
+class VrmlConverter_LineAspect_2 extends VrmlConverter_LineAspect {}
+
 class VrmlConverter_PointAspect extends Standard_Transient {
 }
+
+class VrmlConverter_PointAspect_1 extends VrmlConverter_PointAspect {}
+
+class VrmlConverter_PointAspect_2 extends VrmlConverter_PointAspect {}
 
 class VrmlConverter_Projector extends Standard_Transient {
 }
@@ -15727,23 +27305,47 @@ class VrmlConverter_WFShape {
 class VrmlData_Appearance extends VrmlData_Node {
 }
 
+class VrmlData_Appearance_1 extends VrmlData_Appearance {}
+
+class VrmlData_Appearance_2 extends VrmlData_Appearance {}
+
 class VrmlData_ArrayVec3d extends VrmlData_Node {
 }
 
 class VrmlData_Box extends VrmlData_Geometry {
 }
 
+class VrmlData_Box_1 extends VrmlData_Box {}
+
+class VrmlData_Box_2 extends VrmlData_Box {}
+
 class VrmlData_Color extends VrmlData_ArrayVec3d {
 }
+
+class VrmlData_Color_1 extends VrmlData_Color {}
+
+class VrmlData_Color_2 extends VrmlData_Color {}
 
 class VrmlData_Cone extends VrmlData_Geometry {
 }
 
+class VrmlData_Cone_1 extends VrmlData_Cone {}
+
+class VrmlData_Cone_2 extends VrmlData_Cone {}
+
 class VrmlData_Coordinate extends VrmlData_ArrayVec3d {
 }
 
+class VrmlData_Coordinate_1 extends VrmlData_Coordinate {}
+
+class VrmlData_Coordinate_2 extends VrmlData_Coordinate {}
+
 class VrmlData_Cylinder extends VrmlData_Geometry {
 }
+
+class VrmlData_Cylinder_1 extends VrmlData_Cylinder {}
+
+class VrmlData_Cylinder_2 extends VrmlData_Cylinder {}
 
 class VrmlData_Faceted extends VrmlData_Geometry {
 }
@@ -15754,14 +27356,30 @@ class VrmlData_Geometry extends VrmlData_Node {
 class VrmlData_Group extends VrmlData_Node {
 }
 
+class VrmlData_Group_1 extends VrmlData_Group {}
+
+class VrmlData_Group_2 extends VrmlData_Group {}
+
 class VrmlData_ImageTexture extends VrmlData_Texture {
 }
+
+class VrmlData_ImageTexture_1 extends VrmlData_ImageTexture {}
+
+class VrmlData_ImageTexture_2 extends VrmlData_ImageTexture {}
 
 class VrmlData_Material extends VrmlData_Node {
 }
 
+class VrmlData_Material_1 extends VrmlData_Material {}
+
+class VrmlData_Material_2 extends VrmlData_Material {}
+
 class VrmlData_Normal extends VrmlData_ArrayVec3d {
 }
+
+class VrmlData_Normal_1 extends VrmlData_Normal {}
+
+class VrmlData_Normal_2 extends VrmlData_Normal {}
 
 class VrmlData_ShapeConvert {
 }
@@ -15769,8 +27387,16 @@ class VrmlData_ShapeConvert {
 class VrmlData_ShapeNode extends VrmlData_Node {
 }
 
+class VrmlData_ShapeNode_1 extends VrmlData_ShapeNode {}
+
+class VrmlData_ShapeNode_2 extends VrmlData_ShapeNode {}
+
 class VrmlData_Sphere extends VrmlData_Geometry {
 }
+
+class VrmlData_Sphere_1 extends VrmlData_Sphere {}
+
+class VrmlData_Sphere_2 extends VrmlData_Sphere {}
 
 class VrmlData_Texture extends VrmlData_Node {
 }
@@ -15778,23 +27404,43 @@ class VrmlData_Texture extends VrmlData_Node {
 class VrmlData_TextureCoordinate extends VrmlData_Node {
 }
 
+class VrmlData_TextureCoordinate_1 extends VrmlData_TextureCoordinate {}
+
+class VrmlData_TextureCoordinate_2 extends VrmlData_TextureCoordinate {}
+
 class VrmlData_TextureTransform extends VrmlData_Node {
 }
 
 class VrmlData_UnknownNode extends VrmlData_Node {
 }
 
+class VrmlData_UnknownNode_1 extends VrmlData_UnknownNode {}
+
+class VrmlData_UnknownNode_2 extends VrmlData_UnknownNode {}
+
 class VrmlData_WorldInfo extends VrmlData_Node {
 }
 
+class VrmlData_WorldInfo_1 extends VrmlData_WorldInfo {}
+
+class VrmlData_WorldInfo_2 extends VrmlData_WorldInfo {}
+
 class Vrml_AsciiText extends Standard_Transient {
 }
+
+class Vrml_AsciiText_1 extends Vrml_AsciiText {}
+
+class Vrml_AsciiText_2 extends Vrml_AsciiText {}
 
 class Vrml_Cone {
 }
 
 class Vrml_Coordinate3 extends Standard_Transient {
 }
+
+class Vrml_Coordinate3_1 extends Vrml_Coordinate3 {}
+
+class Vrml_Coordinate3_2 extends Vrml_Coordinate3 {}
 
 class Vrml_Cube {
 }
@@ -15805,6 +27451,10 @@ class Vrml_Cylinder {
 class Vrml_DirectionalLight {
 }
 
+class Vrml_DirectionalLight_1 extends Vrml_DirectionalLight {}
+
+class Vrml_DirectionalLight_2 extends Vrml_DirectionalLight {}
+
 class Vrml_FontStyle {
 }
 
@@ -15814,8 +27464,16 @@ class Vrml_Group {
 class Vrml_IndexedFaceSet extends Standard_Transient {
 }
 
+class Vrml_IndexedFaceSet_1 extends Vrml_IndexedFaceSet {}
+
+class Vrml_IndexedFaceSet_2 extends Vrml_IndexedFaceSet {}
+
 class Vrml_IndexedLineSet extends Standard_Transient {
 }
+
+class Vrml_IndexedLineSet_1 extends Vrml_IndexedLineSet {}
+
+class Vrml_IndexedLineSet_2 extends Vrml_IndexedLineSet {}
 
 class Vrml_Info {
 }
@@ -15826,29 +27484,65 @@ class Vrml_Instancing {
 class Vrml_LOD extends Standard_Transient {
 }
 
+class Vrml_LOD_1 extends Vrml_LOD {}
+
+class Vrml_LOD_2 extends Vrml_LOD {}
+
 class Vrml_Material extends Standard_Transient {
 }
+
+class Vrml_Material_1 extends Vrml_Material {}
+
+class Vrml_Material_2 extends Vrml_Material {}
 
 class Vrml_MaterialBinding {
 }
 
+class Vrml_MaterialBinding_1 extends Vrml_MaterialBinding {}
+
+class Vrml_MaterialBinding_2 extends Vrml_MaterialBinding {}
+
 class Vrml_MatrixTransform {
 }
+
+class Vrml_MatrixTransform_1 extends Vrml_MatrixTransform {}
+
+class Vrml_MatrixTransform_2 extends Vrml_MatrixTransform {}
 
 class Vrml_Normal extends Standard_Transient {
 }
 
+class Vrml_Normal_1 extends Vrml_Normal {}
+
+class Vrml_Normal_2 extends Vrml_Normal {}
+
 class Vrml_NormalBinding {
 }
+
+class Vrml_NormalBinding_1 extends Vrml_NormalBinding {}
+
+class Vrml_NormalBinding_2 extends Vrml_NormalBinding {}
 
 class Vrml_OrthographicCamera {
 }
 
+class Vrml_OrthographicCamera_1 extends Vrml_OrthographicCamera {}
+
+class Vrml_OrthographicCamera_2 extends Vrml_OrthographicCamera {}
+
 class Vrml_PerspectiveCamera {
 }
 
+class Vrml_PerspectiveCamera_1 extends Vrml_PerspectiveCamera {}
+
+class Vrml_PerspectiveCamera_2 extends Vrml_PerspectiveCamera {}
+
 class Vrml_PointLight {
 }
+
+class Vrml_PointLight_1 extends Vrml_PointLight {}
+
+class Vrml_PointLight_2 extends Vrml_PointLight {}
 
 class Vrml_PointSet {
 }
@@ -15856,17 +27550,37 @@ class Vrml_PointSet {
 class Vrml_Rotation {
 }
 
+class Vrml_Rotation_1 extends Vrml_Rotation {}
+
+class Vrml_Rotation_2 extends Vrml_Rotation {}
+
 class Vrml_SFImage extends Standard_Transient {
 }
+
+class Vrml_SFImage_1 extends Vrml_SFImage {}
+
+class Vrml_SFImage_2 extends Vrml_SFImage {}
 
 class Vrml_SFRotation {
 }
 
+class Vrml_SFRotation_1 extends Vrml_SFRotation {}
+
+class Vrml_SFRotation_2 extends Vrml_SFRotation {}
+
 class Vrml_Scale {
 }
 
+class Vrml_Scale_1 extends Vrml_Scale {}
+
+class Vrml_Scale_2 extends Vrml_Scale {}
+
 class Vrml_Separator {
 }
+
+class Vrml_Separator_1 extends Vrml_Separator {}
+
+class Vrml_Separator_2 extends Vrml_Separator {}
 
 class Vrml_ShapeHints {
 }
@@ -15877,20 +27591,40 @@ class Vrml_Sphere {
 class Vrml_SpotLight {
 }
 
+class Vrml_SpotLight_1 extends Vrml_SpotLight {}
+
+class Vrml_SpotLight_2 extends Vrml_SpotLight {}
+
 class Vrml_Switch {
 }
 
 class Vrml_Texture2 {
 }
 
+class Vrml_Texture2_1 extends Vrml_Texture2 {}
+
+class Vrml_Texture2_2 extends Vrml_Texture2 {}
+
 class Vrml_Texture2Transform {
 }
+
+class Vrml_Texture2Transform_1 extends Vrml_Texture2Transform {}
+
+class Vrml_Texture2Transform_2 extends Vrml_Texture2Transform {}
 
 class Vrml_TextureCoordinate2 extends Standard_Transient {
 }
 
+class Vrml_TextureCoordinate2_1 extends Vrml_TextureCoordinate2 {}
+
+class Vrml_TextureCoordinate2_2 extends Vrml_TextureCoordinate2 {}
+
 class Vrml_Transform {
 }
+
+class Vrml_Transform_1 extends Vrml_Transform {}
+
+class Vrml_Transform_2 extends Vrml_Transform {}
 
 class Vrml_TransformSeparator {
 }
@@ -15898,23 +27632,47 @@ class Vrml_TransformSeparator {
 class Vrml_Translation {
 }
 
+class Vrml_Translation_1 extends Vrml_Translation {}
+
+class Vrml_Translation_2 extends Vrml_Translation {}
+
 class Vrml_WWWAnchor {
 }
 
 class Vrml_WWWInline {
 }
 
+class Vrml_WWWInline_1 extends Vrml_WWWInline {}
+
+class Vrml_WWWInline_2 extends Vrml_WWWInline {}
+
 class WNT_ClassDefinitionError extends Standard_ConstructionError {
 }
+
+class WNT_ClassDefinitionError_1 extends WNT_ClassDefinitionError {}
+
+class WNT_ClassDefinitionError_2 extends WNT_ClassDefinitionError {}
 
 class XCAFDimTolObjects_DatumObject extends Standard_Transient {
 }
 
+class XCAFDimTolObjects_DatumObject_1 extends XCAFDimTolObjects_DatumObject {}
+
+class XCAFDimTolObjects_DatumObject_2 extends XCAFDimTolObjects_DatumObject {}
+
 class XCAFDimTolObjects_DimensionObject extends Standard_Transient {
 }
 
+class XCAFDimTolObjects_DimensionObject_1 extends XCAFDimTolObjects_DimensionObject {}
+
+class XCAFDimTolObjects_DimensionObject_2 extends XCAFDimTolObjects_DimensionObject {}
+
 class XCAFDimTolObjects_GeomToleranceObject extends Standard_Transient {
 }
+
+class XCAFDimTolObjects_GeomToleranceObject_1 extends XCAFDimTolObjects_GeomToleranceObject {}
+
+class XCAFDimTolObjects_GeomToleranceObject_2 extends XCAFDimTolObjects_GeomToleranceObject {}
 
 class XCAFDimTolObjects_Tool {
 }
@@ -15927,6 +27685,12 @@ class XCAFDoc_Area extends TDF_Attribute {
 
 class XCAFDoc_AssemblyItemId {
 }
+
+class XCAFDoc_AssemblyItemId_1 extends XCAFDoc_AssemblyItemId {}
+
+class XCAFDoc_AssemblyItemId_2 extends XCAFDoc_AssemblyItemId {}
+
+class XCAFDoc_AssemblyItemId_3 extends XCAFDoc_AssemblyItemId {}
 
 class XCAFDoc_AssemblyItemRef extends TDF_Attribute {
 }
@@ -16003,11 +27767,21 @@ class XCAFDoc_View extends TDF_Attribute {
 class XCAFDoc_ViewTool extends TDF_Attribute {
 }
 
+class XCAFDoc_VisMaterial extends TDF_Attribute {
+}
+
+class XCAFDoc_VisMaterialTool extends TDF_Attribute {
+}
+
 class XCAFDoc_Volume extends TDF_Attribute {
 }
 
 class XCAFNoteObjects_NoteObject extends Standard_Transient {
 }
+
+class XCAFNoteObjects_NoteObject_1 extends XCAFNoteObjects_NoteObject {}
+
+class XCAFNoteObjects_NoteObject_2 extends XCAFNoteObjects_NoteObject {}
 
 class XCAFPrs {
 }
@@ -16018,6 +27792,12 @@ class XCAFPrs_AISObject extends AIS_ColoredShape {
 class XCAFPrs_DocumentExplorer {
 }
 
+class XCAFPrs_DocumentExplorer_1 extends XCAFPrs_DocumentExplorer {}
+
+class XCAFPrs_DocumentExplorer_2 extends XCAFPrs_DocumentExplorer {}
+
+class XCAFPrs_DocumentExplorer_3 extends XCAFPrs_DocumentExplorer {}
+
 class XCAFPrs_DocumentIdIterator {
 }
 
@@ -16027,8 +27807,15 @@ class XCAFPrs_Driver extends TPrsStd_Driver {
 class XCAFPrs_Style {
 }
 
+class XCAFPrs_Texture extends Graphic3d_Texture2Dmanual {
+}
+
 class XCAFView_Object extends Standard_Transient {
 }
+
+class XCAFView_Object_1 extends XCAFView_Object {}
+
+class XCAFView_Object_2 extends XCAFView_Object {}
 
 class XSAlgo {
 }
@@ -16045,6 +27832,10 @@ class XSControl {
 class XSControl_ConnectedShapes extends IFSelect_SelectExplore {
 }
 
+class XSControl_ConnectedShapes_1 extends XSControl_ConnectedShapes {}
+
+class XSControl_ConnectedShapes_2 extends XSControl_ConnectedShapes {}
+
 class XSControl_Controller extends Standard_Transient {
 }
 
@@ -16057,11 +27848,25 @@ class XSControl_Functions {
 class XSControl_Reader {
 }
 
+class XSControl_Reader_1 extends XSControl_Reader {}
+
+class XSControl_Reader_2 extends XSControl_Reader {}
+
+class XSControl_Reader_3 extends XSControl_Reader {}
+
 class XSControl_SelectForTransfer extends IFSelect_SelectExtract {
 }
 
+class XSControl_SelectForTransfer_1 extends XSControl_SelectForTransfer {}
+
+class XSControl_SelectForTransfer_2 extends XSControl_SelectForTransfer {}
+
 class XSControl_SignTransferStatus extends IFSelect_Signature {
 }
+
+class XSControl_SignTransferStatus_1 extends XSControl_SignTransferStatus {}
+
+class XSControl_SignTransferStatus_2 extends XSControl_SignTransferStatus {}
 
 class XSControl_TransferReader extends Standard_Transient {
 }
@@ -16080,6 +27885,12 @@ class XSControl_WorkSession extends IFSelect_WorkSession {
 
 class XSControl_Writer {
 }
+
+class XSControl_Writer_1 extends XSControl_Writer {}
+
+class XSControl_Writer_2 extends XSControl_Writer {}
+
+class XSControl_Writer_3 extends XSControl_Writer {}
 
 class XmlDrivers {
 }
@@ -16101,6 +27912,10 @@ class XmlLDrivers_DocumentStorageDriver extends PCDM_StorageDriver {
 
 class XmlLDrivers_NamespaceDef {
 }
+
+class XmlLDrivers_NamespaceDef_1 extends XmlLDrivers_NamespaceDef {}
+
+class XmlLDrivers_NamespaceDef_2 extends XmlLDrivers_NamespaceDef {}
 
 class XmlMDF {
 }
@@ -16264,6 +28079,10 @@ class XmlMNaming_NamingDriver extends XmlMDF_ADriver {
 class XmlMNaming_Shape1 {
 }
 
+class XmlMNaming_Shape1_1 extends XmlMNaming_Shape1 {}
+
+class XmlMNaming_Shape1_2 extends XmlMNaming_Shape1 {}
+
 class XmlMXCAFDoc {
 }
 
@@ -16333,6 +28152,12 @@ class XmlMXCAFDoc_ShapeToolDriver extends XmlMDF_ADriver {
 class XmlMXCAFDoc_ViewToolDriver extends XmlMDF_ADriver {
 }
 
+class XmlMXCAFDoc_VisMaterialDriver extends XmlMDF_ADriver {
+}
+
+class XmlMXCAFDoc_VisMaterialToolDriver extends XmlMDF_ADriver {
+}
+
 class XmlMXCAFDoc_VolumeDriver extends XmlMDF_ADriver {
 }
 
@@ -16342,11 +28167,21 @@ class XmlObjMgt {
 class XmlObjMgt_Array1 {
 }
 
+class XmlObjMgt_Array1_1 extends XmlObjMgt_Array1 {}
+
+class XmlObjMgt_Array1_2 extends XmlObjMgt_Array1 {}
+
 class XmlObjMgt_GP {
 }
 
 class XmlObjMgt_Persistent {
 }
+
+class XmlObjMgt_Persistent_1 extends XmlObjMgt_Persistent {}
+
+class XmlObjMgt_Persistent_2 extends XmlObjMgt_Persistent {}
+
+class XmlObjMgt_Persistent_3 extends XmlObjMgt_Persistent {}
 
 class XmlObjMgt_RRelocationTable extends TColStd_DataMapOfIntegerTransient {
 }
@@ -16390,56 +28225,222 @@ class XmlXCAFDrivers_DocumentStorageDriver extends XmlDrivers_DocumentStorageDri
 class gce_MakeCirc extends gce_Root {
 }
 
+class gce_MakeCirc_1 extends gce_MakeCirc {}
+
+class gce_MakeCirc_2 extends gce_MakeCirc {}
+
+class gce_MakeCirc_3 extends gce_MakeCirc {}
+
+class gce_MakeCirc_4 extends gce_MakeCirc {}
+
+class gce_MakeCirc_5 extends gce_MakeCirc {}
+
+class gce_MakeCirc_6 extends gce_MakeCirc {}
+
+class gce_MakeCirc_7 extends gce_MakeCirc {}
+
+class gce_MakeCirc_8 extends gce_MakeCirc {}
+
 class gce_MakeCirc2d extends gce_Root {
 }
+
+class gce_MakeCirc2d_1 extends gce_MakeCirc2d {}
+
+class gce_MakeCirc2d_2 extends gce_MakeCirc2d {}
+
+class gce_MakeCirc2d_3 extends gce_MakeCirc2d {}
+
+class gce_MakeCirc2d_4 extends gce_MakeCirc2d {}
+
+class gce_MakeCirc2d_5 extends gce_MakeCirc2d {}
+
+class gce_MakeCirc2d_6 extends gce_MakeCirc2d {}
+
+class gce_MakeCirc2d_7 extends gce_MakeCirc2d {}
 
 class gce_MakeCone extends gce_Root {
 }
 
+class gce_MakeCone_1 extends gce_MakeCone {}
+
+class gce_MakeCone_2 extends gce_MakeCone {}
+
+class gce_MakeCone_3 extends gce_MakeCone {}
+
+class gce_MakeCone_4 extends gce_MakeCone {}
+
+class gce_MakeCone_5 extends gce_MakeCone {}
+
+class gce_MakeCone_6 extends gce_MakeCone {}
+
+class gce_MakeCone_7 extends gce_MakeCone {}
+
 class gce_MakeCylinder extends gce_Root {
 }
+
+class gce_MakeCylinder_1 extends gce_MakeCylinder {}
+
+class gce_MakeCylinder_2 extends gce_MakeCylinder {}
+
+class gce_MakeCylinder_3 extends gce_MakeCylinder {}
+
+class gce_MakeCylinder_4 extends gce_MakeCylinder {}
+
+class gce_MakeCylinder_5 extends gce_MakeCylinder {}
+
+class gce_MakeCylinder_6 extends gce_MakeCylinder {}
 
 class gce_MakeDir extends gce_Root {
 }
 
+class gce_MakeDir_1 extends gce_MakeDir {}
+
+class gce_MakeDir_2 extends gce_MakeDir {}
+
+class gce_MakeDir_3 extends gce_MakeDir {}
+
+class gce_MakeDir_4 extends gce_MakeDir {}
+
 class gce_MakeDir2d extends gce_Root {
 }
+
+class gce_MakeDir2d_1 extends gce_MakeDir2d {}
+
+class gce_MakeDir2d_2 extends gce_MakeDir2d {}
+
+class gce_MakeDir2d_3 extends gce_MakeDir2d {}
+
+class gce_MakeDir2d_4 extends gce_MakeDir2d {}
 
 class gce_MakeElips extends gce_Root {
 }
 
+class gce_MakeElips_1 extends gce_MakeElips {}
+
+class gce_MakeElips_2 extends gce_MakeElips {}
+
 class gce_MakeElips2d extends gce_Root {
 }
+
+class gce_MakeElips2d_1 extends gce_MakeElips2d {}
+
+class gce_MakeElips2d_2 extends gce_MakeElips2d {}
+
+class gce_MakeElips2d_3 extends gce_MakeElips2d {}
 
 class gce_MakeHypr extends gce_Root {
 }
 
+class gce_MakeHypr_1 extends gce_MakeHypr {}
+
+class gce_MakeHypr_2 extends gce_MakeHypr {}
+
 class gce_MakeHypr2d extends gce_Root {
 }
+
+class gce_MakeHypr2d_1 extends gce_MakeHypr2d {}
+
+class gce_MakeHypr2d_2 extends gce_MakeHypr2d {}
+
+class gce_MakeHypr2d_3 extends gce_MakeHypr2d {}
 
 class gce_MakeLin extends gce_Root {
 }
 
+class gce_MakeLin_1 extends gce_MakeLin {}
+
+class gce_MakeLin_2 extends gce_MakeLin {}
+
+class gce_MakeLin_3 extends gce_MakeLin {}
+
+class gce_MakeLin_4 extends gce_MakeLin {}
+
 class gce_MakeLin2d extends gce_Root {
 }
+
+class gce_MakeLin2d_1 extends gce_MakeLin2d {}
+
+class gce_MakeLin2d_2 extends gce_MakeLin2d {}
+
+class gce_MakeLin2d_3 extends gce_MakeLin2d {}
+
+class gce_MakeLin2d_4 extends gce_MakeLin2d {}
+
+class gce_MakeLin2d_5 extends gce_MakeLin2d {}
+
+class gce_MakeLin2d_6 extends gce_MakeLin2d {}
 
 class gce_MakeMirror {
 }
 
+class gce_MakeMirror_1 extends gce_MakeMirror {}
+
+class gce_MakeMirror_2 extends gce_MakeMirror {}
+
+class gce_MakeMirror_3 extends gce_MakeMirror {}
+
+class gce_MakeMirror_4 extends gce_MakeMirror {}
+
+class gce_MakeMirror_5 extends gce_MakeMirror {}
+
+class gce_MakeMirror_6 extends gce_MakeMirror {}
+
 class gce_MakeMirror2d {
 }
+
+class gce_MakeMirror2d_1 extends gce_MakeMirror2d {}
+
+class gce_MakeMirror2d_2 extends gce_MakeMirror2d {}
+
+class gce_MakeMirror2d_3 extends gce_MakeMirror2d {}
+
+class gce_MakeMirror2d_4 extends gce_MakeMirror2d {}
 
 class gce_MakeParab extends gce_Root {
 }
 
+class gce_MakeParab_1 extends gce_MakeParab {}
+
+class gce_MakeParab_2 extends gce_MakeParab {}
+
 class gce_MakeParab2d extends gce_Root {
 }
+
+class gce_MakeParab2d_1 extends gce_MakeParab2d {}
+
+class gce_MakeParab2d_2 extends gce_MakeParab2d {}
+
+class gce_MakeParab2d_3 extends gce_MakeParab2d {}
+
+class gce_MakeParab2d_4 extends gce_MakeParab2d {}
 
 class gce_MakePln extends gce_Root {
 }
 
+class gce_MakePln_1 extends gce_MakePln {}
+
+class gce_MakePln_2 extends gce_MakePln {}
+
+class gce_MakePln_3 extends gce_MakePln {}
+
+class gce_MakePln_4 extends gce_MakePln {}
+
+class gce_MakePln_5 extends gce_MakePln {}
+
+class gce_MakePln_6 extends gce_MakePln {}
+
+class gce_MakePln_7 extends gce_MakePln {}
+
+class gce_MakePln_8 extends gce_MakePln {}
+
 class gce_MakeRotation {
 }
+
+class gce_MakeRotation_1 extends gce_MakeRotation {}
+
+class gce_MakeRotation_2 extends gce_MakeRotation {}
+
+class gce_MakeRotation_3 extends gce_MakeRotation {}
 
 class gce_MakeRotation2d {
 }
@@ -16453,8 +28454,16 @@ class gce_MakeScale2d {
 class gce_MakeTranslation {
 }
 
+class gce_MakeTranslation_1 extends gce_MakeTranslation {}
+
+class gce_MakeTranslation_2 extends gce_MakeTranslation {}
+
 class gce_MakeTranslation2d {
 }
+
+class gce_MakeTranslation2d_1 extends gce_MakeTranslation2d {}
+
+class gce_MakeTranslation2d_2 extends gce_MakeTranslation2d {}
 
 class gce_Root {
 }
@@ -16465,113 +28474,333 @@ class gp {
 class gp_Ax1 {
 }
 
+class gp_Ax1_1 extends gp_Ax1 {}
+
+class gp_Ax1_2 extends gp_Ax1 {}
+
 class gp_Ax2 {
 }
+
+class gp_Ax2_1 extends gp_Ax2 {}
+
+class gp_Ax2_2 extends gp_Ax2 {}
+
+class gp_Ax2_3 extends gp_Ax2 {}
 
 class gp_Ax22d {
 }
 
+class gp_Ax22d_1 extends gp_Ax22d {}
+
+class gp_Ax22d_2 extends gp_Ax22d {}
+
+class gp_Ax22d_3 extends gp_Ax22d {}
+
+class gp_Ax22d_4 extends gp_Ax22d {}
+
 class gp_Ax2d {
 }
+
+class gp_Ax2d_1 extends gp_Ax2d {}
+
+class gp_Ax2d_2 extends gp_Ax2d {}
 
 class gp_Ax3 {
 }
 
+class gp_Ax3_1 extends gp_Ax3 {}
+
+class gp_Ax3_2 extends gp_Ax3 {}
+
+class gp_Ax3_3 extends gp_Ax3 {}
+
+class gp_Ax3_4 extends gp_Ax3 {}
+
 class gp_Circ {
 }
+
+class gp_Circ_1 extends gp_Circ {}
+
+class gp_Circ_2 extends gp_Circ {}
 
 class gp_Circ2d {
 }
 
+class gp_Circ2d_1 extends gp_Circ2d {}
+
+class gp_Circ2d_2 extends gp_Circ2d {}
+
+class gp_Circ2d_3 extends gp_Circ2d {}
+
 class gp_Cone {
 }
+
+class gp_Cone_1 extends gp_Cone {}
+
+class gp_Cone_2 extends gp_Cone {}
 
 class gp_Cylinder {
 }
 
+class gp_Cylinder_1 extends gp_Cylinder {}
+
+class gp_Cylinder_2 extends gp_Cylinder {}
+
 class gp_Dir {
 }
+
+class gp_Dir_1 extends gp_Dir {}
+
+class gp_Dir_2 extends gp_Dir {}
+
+class gp_Dir_3 extends gp_Dir {}
+
+class gp_Dir_4 extends gp_Dir {}
 
 class gp_Dir2d {
 }
 
+class gp_Dir2d_1 extends gp_Dir2d {}
+
+class gp_Dir2d_2 extends gp_Dir2d {}
+
+class gp_Dir2d_3 extends gp_Dir2d {}
+
+class gp_Dir2d_4 extends gp_Dir2d {}
+
 class gp_Elips {
 }
+
+class gp_Elips_1 extends gp_Elips {}
+
+class gp_Elips_2 extends gp_Elips {}
 
 class gp_Elips2d {
 }
 
+class gp_Elips2d_1 extends gp_Elips2d {}
+
+class gp_Elips2d_2 extends gp_Elips2d {}
+
+class gp_Elips2d_3 extends gp_Elips2d {}
+
 class gp_GTrsf {
 }
+
+class gp_GTrsf_1 extends gp_GTrsf {}
+
+class gp_GTrsf_2 extends gp_GTrsf {}
+
+class gp_GTrsf_3 extends gp_GTrsf {}
 
 class gp_GTrsf2d {
 }
 
+class gp_GTrsf2d_1 extends gp_GTrsf2d {}
+
+class gp_GTrsf2d_2 extends gp_GTrsf2d {}
+
+class gp_GTrsf2d_3 extends gp_GTrsf2d {}
+
 class gp_Hypr {
 }
+
+class gp_Hypr_1 extends gp_Hypr {}
+
+class gp_Hypr_2 extends gp_Hypr {}
 
 class gp_Hypr2d {
 }
 
+class gp_Hypr2d_1 extends gp_Hypr2d {}
+
+class gp_Hypr2d_2 extends gp_Hypr2d {}
+
+class gp_Hypr2d_3 extends gp_Hypr2d {}
+
 class gp_Lin {
 }
+
+class gp_Lin_1 extends gp_Lin {}
+
+class gp_Lin_2 extends gp_Lin {}
+
+class gp_Lin_3 extends gp_Lin {}
 
 class gp_Lin2d {
 }
 
+class gp_Lin2d_1 extends gp_Lin2d {}
+
+class gp_Lin2d_2 extends gp_Lin2d {}
+
+class gp_Lin2d_3 extends gp_Lin2d {}
+
+class gp_Lin2d_4 extends gp_Lin2d {}
+
 class gp_Mat {
 }
+
+class gp_Mat_1 extends gp_Mat {}
+
+class gp_Mat_2 extends gp_Mat {}
+
+class gp_Mat_3 extends gp_Mat {}
 
 class gp_Mat2d {
 }
 
+class gp_Mat2d_1 extends gp_Mat2d {}
+
+class gp_Mat2d_2 extends gp_Mat2d {}
+
 class gp_Parab {
 }
+
+class gp_Parab_1 extends gp_Parab {}
+
+class gp_Parab_2 extends gp_Parab {}
+
+class gp_Parab_3 extends gp_Parab {}
 
 class gp_Parab2d {
 }
 
+class gp_Parab2d_1 extends gp_Parab2d {}
+
+class gp_Parab2d_2 extends gp_Parab2d {}
+
+class gp_Parab2d_3 extends gp_Parab2d {}
+
+class gp_Parab2d_4 extends gp_Parab2d {}
+
 class gp_Pln {
 }
+
+class gp_Pln_1 extends gp_Pln {}
+
+class gp_Pln_2 extends gp_Pln {}
+
+class gp_Pln_3 extends gp_Pln {}
+
+class gp_Pln_4 extends gp_Pln {}
 
 class gp_Pnt {
 }
 
+class gp_Pnt_1 extends gp_Pnt {}
+
+class gp_Pnt_2 extends gp_Pnt {}
+
+class gp_Pnt_3 extends gp_Pnt {}
+
 class gp_Pnt2d {
 }
+
+class gp_Pnt2d_1 extends gp_Pnt2d {}
+
+class gp_Pnt2d_2 extends gp_Pnt2d {}
+
+class gp_Pnt2d_3 extends gp_Pnt2d {}
 
 class gp_Quaternion {
 }
 
+class gp_Quaternion_1 extends gp_Quaternion {}
+
+class gp_Quaternion_2 extends gp_Quaternion {}
+
+class gp_Quaternion_3 extends gp_Quaternion {}
+
+class gp_Quaternion_4 extends gp_Quaternion {}
+
+class gp_Quaternion_5 extends gp_Quaternion {}
+
+class gp_Quaternion_6 extends gp_Quaternion {}
+
+class gp_Quaternion_7 extends gp_Quaternion {}
+
 class gp_QuaternionNLerp {
 }
+
+class gp_QuaternionNLerp_1 extends gp_QuaternionNLerp {}
+
+class gp_QuaternionNLerp_2 extends gp_QuaternionNLerp {}
 
 class gp_QuaternionSLerp {
 }
 
+class gp_QuaternionSLerp_1 extends gp_QuaternionSLerp {}
+
+class gp_QuaternionSLerp_2 extends gp_QuaternionSLerp {}
+
 class gp_Sphere {
 }
+
+class gp_Sphere_1 extends gp_Sphere {}
+
+class gp_Sphere_2 extends gp_Sphere {}
 
 class gp_Torus {
 }
 
+class gp_Torus_1 extends gp_Torus {}
+
+class gp_Torus_2 extends gp_Torus {}
+
 class gp_Trsf {
 }
+
+class gp_Trsf_1 extends gp_Trsf {}
+
+class gp_Trsf_2 extends gp_Trsf {}
 
 class gp_Trsf2d {
 }
 
+class gp_Trsf2d_1 extends gp_Trsf2d {}
+
+class gp_Trsf2d_2 extends gp_Trsf2d {}
+
 class gp_Vec {
 }
+
+class gp_Vec_1 extends gp_Vec {}
+
+class gp_Vec_2 extends gp_Vec {}
+
+class gp_Vec_3 extends gp_Vec {}
+
+class gp_Vec_4 extends gp_Vec {}
+
+class gp_Vec_5 extends gp_Vec {}
 
 class gp_Vec2d {
 }
 
+class gp_Vec2d_1 extends gp_Vec2d {}
+
+class gp_Vec2d_2 extends gp_Vec2d {}
+
+class gp_Vec2d_3 extends gp_Vec2d {}
+
+class gp_Vec2d_4 extends gp_Vec2d {}
+
+class gp_Vec2d_5 extends gp_Vec2d {}
+
 class gp_XY {
 }
 
+class gp_XY_1 extends gp_XY {}
+
+class gp_XY_2 extends gp_XY {}
+
 class gp_XYZ {
 }
+
+class gp_XYZ_1 extends gp_XYZ {}
+
+class gp_XYZ_2 extends gp_XYZ {}
 
 class math {
 }
@@ -16585,11 +28814,23 @@ class math_BissecNewton {
 class math_BracketMinimum {
 }
 
+class math_BracketMinimum_1 extends math_BracketMinimum {}
+
+class math_BracketMinimum_2 extends math_BracketMinimum {}
+
+class math_BracketMinimum_3 extends math_BracketMinimum {}
+
+class math_BracketMinimum_4 extends math_BracketMinimum {}
+
 class math_BracketedRoot {
 }
 
 class math_BrentMinimum {
 }
+
+class math_BrentMinimum_1 extends math_BrentMinimum {}
+
+class math_BrentMinimum_2 extends math_BrentMinimum {}
 
 class math_BullardGenerator {
 }
@@ -16606,8 +28847,22 @@ class math_Crout {
 class math_DirectPolynomialRoots {
 }
 
+class math_DirectPolynomialRoots_1 extends math_DirectPolynomialRoots {}
+
+class math_DirectPolynomialRoots_2 extends math_DirectPolynomialRoots {}
+
+class math_DirectPolynomialRoots_3 extends math_DirectPolynomialRoots {}
+
+class math_DirectPolynomialRoots_4 extends math_DirectPolynomialRoots {}
+
 class math_DoubleTab {
 }
+
+class math_DoubleTab_1 extends math_DoubleTab {}
+
+class math_DoubleTab_2 extends math_DoubleTab {}
+
+class math_DoubleTab_3 extends math_DoubleTab {}
 
 class math_EigenValuesSearcher {
 }
@@ -16624,6 +28879,10 @@ class math_FunctionAllRoots {
 class math_FunctionRoot {
 }
 
+class math_FunctionRoot_1 extends math_FunctionRoot {}
+
+class math_FunctionRoot_2 extends math_FunctionRoot {}
+
 class math_FunctionRoots {
 }
 
@@ -16635,6 +28894,10 @@ class math_FunctionSet {
 
 class math_FunctionSetRoot {
 }
+
+class math_FunctionSetRoot_1 extends math_FunctionSetRoot {}
+
+class math_FunctionSetRoot_2 extends math_FunctionSetRoot {}
 
 class math_FunctionSetWithDerivatives extends math_FunctionSet {
 }
@@ -16657,6 +28920,12 @@ class math_GaussSetIntegration {
 class math_GaussSingleIntegration {
 }
 
+class math_GaussSingleIntegration_1 extends math_GaussSingleIntegration {}
+
+class math_GaussSingleIntegration_2 extends math_GaussSingleIntegration {}
+
+class math_GaussSingleIntegration_3 extends math_GaussSingleIntegration {}
+
 class math_GlobOptMin {
 }
 
@@ -16665,6 +28934,12 @@ class math_Jacobi {
 
 class math_KronrodSingleIntegration {
 }
+
+class math_KronrodSingleIntegration_1 extends math_KronrodSingleIntegration {}
+
+class math_KronrodSingleIntegration_2 extends math_KronrodSingleIntegration {}
+
+class math_KronrodSingleIntegration_3 extends math_KronrodSingleIntegration {}
 
 class math_MultipleVarFunction {
 }
@@ -16678,8 +28953,18 @@ class math_MultipleVarFunctionWithHessian extends math_MultipleVarFunctionWithGr
 class math_NewtonFunctionRoot {
 }
 
+class math_NewtonFunctionRoot_1 extends math_NewtonFunctionRoot {}
+
+class math_NewtonFunctionRoot_2 extends math_NewtonFunctionRoot {}
+
+class math_NewtonFunctionRoot_3 extends math_NewtonFunctionRoot {}
+
 class math_NotSquare extends Standard_DimensionError {
 }
+
+class math_NotSquare_1 extends math_NotSquare {}
+
+class math_NotSquare_2 extends math_NotSquare {}
 
 class math_PSO {
 }
@@ -16696,15 +28981,33 @@ class math_SVD {
 class math_SingularMatrix extends Standard_Failure {
 }
 
+class math_SingularMatrix_1 extends math_SingularMatrix {}
+
+class math_SingularMatrix_2 extends math_SingularMatrix {}
+
 class math_TrigonometricEquationFunction extends math_FunctionWithDerivative {
 }
 
 class math_TrigonometricFunctionRoots {
 }
 
+class math_TrigonometricFunctionRoots_1 extends math_TrigonometricFunctionRoots {}
+
+class math_TrigonometricFunctionRoots_2 extends math_TrigonometricFunctionRoots {}
+
+class math_TrigonometricFunctionRoots_3 extends math_TrigonometricFunctionRoots {}
+
 class math_Uzawa {
 }
 
+class math_Uzawa_1 extends math_Uzawa {}
+
+class math_Uzawa_2 extends math_Uzawa {}
+
 class math_ValueAndWeight {
 }
+
+class math_ValueAndWeight_1 extends math_ValueAndWeight {}
+
+class math_ValueAndWeight_2 extends math_ValueAndWeight {}
 
