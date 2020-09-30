@@ -28,6 +28,7 @@
 * Auto-generate for typedefs of template classes
 * Look through `NCollection` module and generate auto-bindings for all entities inside.
 * Make sure, the build system is not accidentally binding non-OpenCascade classes (e.g. from the `GL` folder)
+* Support for making methods public using `using...` syntax.
 
 ## 4. Build System and Versioning (non-breaking changes)
 
