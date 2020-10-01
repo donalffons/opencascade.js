@@ -7,7 +7,7 @@ numExportedClasses = 0
 numIgnoredClasses = 0
 
 # This exception indicates that a certain class has multiple base classes. This is not (easily) possible to represent in JavaScript
-class MultipleBaseClassException(Exception):
+class SkipException(Exception):
   pass
 
 # processIncludeFile
@@ -593,7 +593,7 @@ def processEnum(enum):
 def getClassBinding(className, children):
   baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(baseSpec) > 1:
-    raise MultipleBaseClassException("cannot handle multiple base classes (" + className + ")")
+    raise SkipException("cannot handle multiple base classes (" + className + ")")
 
   if len(baseSpec) > 0:
     baseClass = ", base<" + baseSpec[0].type.spelling + ">"
@@ -608,19 +608,22 @@ def getClassBinding(className, children):
 #   method (libclang method decl): the method
 # returns:
 #   string
-def getCastMethodBindings(className, method):
+def getCastMethodBindings(className, method, forceReinterpretCast):
   args = list(method.get_arguments())
   hasConstCharArg = any(any(x.spelling == "Standard_CString" for x in a.get_tokens()) for a in args)
   hasRefArg = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE for x in args)
   needReinterpretCast = hasConstCharArg or hasRefArg
   returnType = method.result_type.spelling
   const = "const" if method.is_const_method() else ""
-  classQualifier = ( className + "::" if not method.is_static_method() else "" ) + "*"
-  if needReinterpretCast:
+  if not forceReinterpretCast == None:
+    classQualifier = ( forceReinterpretCast[0] + "::" if not method.is_static_method() else "" ) + "*"
+  else:
+    classQualifier = ( className + "::" if not method.is_static_method() else "" ) + "*"
+  if needReinterpretCast or not forceReinterpretCast == None:
     castedArgResults = list(map(getSingleArgumentBinding(False), args))
     somethingChanged = any(map(lambda x: x[1], castedArgResults))
     castedArgTypes = list(map(lambda x: x[0], castedArgResults))
-    if somethingChanged:
+    if somethingChanged or not forceReinterpretCast == None:
       return ["reinterpret_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
     else:
       return ["static_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
@@ -633,8 +636,10 @@ def getCastMethodBindings(className, method):
 #   allOverloads (list of libclang method decl): all overloads of the method (i.e. methods with the same name but different signatures)
 # returns:
 #   string
-def getSingleMethodBinding(className, method, allOverloads):
+def getSingleMethodBinding(theClass, method, forceReinterpretCast = None):
+  className = theClass.spelling
   if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD:
+    allOverloads = [m for m in theClass.get_children() if m.spelling == method.spelling]
     if method.spelling.startswith("operator"):
       return ""
     overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(method) + 1)
@@ -654,8 +659,17 @@ def getSingleMethodBinding(className, method, allOverloads):
     else:
       functionCommand = "function"
 
-    cast = getCastMethodBindings(className, method)
+    cast = getCastMethodBindings(className, method, forceReinterpretCast)
     return "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())" + os.linesep
+  if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.USING_DECLARATION:
+    if not len(list(method.get_children())) == 2:
+      raise SkipException("Using declaration with more than 2 children (" + className + ", " + method.spelling + ")")
+    usingClass = list(method.get_children())[0].referenced
+    if not usingClass.kind == clang.cindex.CursorKind.CLASS_DECL:
+      raise SkipException("using statement with something other than a class declaration, could be a template specialization (" + className + ", " + method.spelling + ")")
+    usingMethod = next(x for x in usingClass.get_children() if x.spelling == list(method.get_children())[1].spelling)
+
+    return getSingleMethodBinding(usingClass, usingMethod, [className, className])
   return ""
 
 # Generates bindings for a single argument of a function
@@ -705,13 +719,15 @@ def getSingleArgumentBinding(argNames = True, isConstructor = False):
 #   children (libclang list of children): the children of the class
 # returns:
 #   string
-def getMethodsBinding(className, children):
+def getMethodsBinding(theClass, children):
   methodsBinding = ""
   for child in children:
-    if not processMethod(className, child):
+    if not processMethod(theClass.spelling, child):
       continue
-    allOverloads = [m for m in children if m.spelling == child.spelling]
-    methodsBinding += getSingleMethodBinding(className, child, allOverloads)
+    try:
+      methodsBinding += getSingleMethodBinding(theClass, child)
+    except SkipException as e:
+      print(str(e))
   return methodsBinding
 
 # Generates bindings for a "simple" constructor, i.e. using Embind's ".constructor<...>()" tag. Simple constructors can be used, when no overloads of the constructor exsist.
@@ -1115,14 +1131,14 @@ def getClassBindings(newChildren):
           abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
           if not abstract:
             bindingsOutput += getSimpleConstructorBinding(list(theClass.get_children()))
-          bindingsOutput += getMethodsBinding(theClass.spelling, list(theClass.get_children()))
+          bindingsOutput += getMethodsBinding(theClass, list(theClass.get_children()))
           bindingsOutput += "  ;" + os.linesep
           if not abstract:
             bindingsOutput += getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children()))
           epilogOutput += getEpilogForClass(theClass)
           numExportedClasses += 1
           successfulBinding = True
-        except MultipleBaseClassException as e:
+        except SkipException as e:
           print(str(e))
 
       if not successfulBinding:
