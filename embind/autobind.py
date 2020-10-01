@@ -122,6 +122,10 @@ def processIncludeFile(filename):
   if filename == "math_Householder.hxx":
     return False
 
+  # fatal error: 'rapidjson/prettywriter.h' file not found
+  if filename == "RWGltf_GltfOStreamWriter.hxx":
+    return False
+
   return True
 
 # indicates if bindings for a class should be generated (returns True) or not (returns False)
