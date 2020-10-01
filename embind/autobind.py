@@ -570,6 +570,10 @@ def processTypedef(typedef):
   if typedef.spelling == "TopoDS_ListOfShape":
     return False
 
+  # error: unknown type name 'Handle_Xw_Window'; did you mean 'Handle_Cocoa_Window'?
+  if typedef.spelling == "Handle_Xw_Window":
+    return False
+
   return True
 
 # indicates if bindings for an enum should be generated (returns True) or not (returns False)
