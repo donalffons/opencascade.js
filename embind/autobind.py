@@ -146,7 +146,6 @@ def processClass(theClass):
     theClass.spelling.startswith("DDF") or
     theClass.spelling.startswith("Cocoa") or
     theClass.spelling.startswith("Bin") or
-    theClass.spelling.startswith("BOP") or
     theClass.spelling.startswith("DNaming") or
     theClass.spelling.startswith("DPrs") or
     theClass.spelling == "DDataStd" or
