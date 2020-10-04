@@ -607,22 +607,19 @@ def getClassBinding(className, children):
 #   method (libclang method decl): the method
 # returns:
 #   string
-def getCastMethodBindings(className, method, forceReinterpretCast):
+def getCastMethodBindings(className, method):
   args = list(method.get_arguments())
   hasConstCharArg = any(any(x.spelling == "Standard_CString" for x in a.get_tokens()) for a in args)
   hasRefArg = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE for x in args)
   needReinterpretCast = hasConstCharArg or hasRefArg
   returnType = method.result_type.spelling
   const = "const" if method.is_const_method() else ""
-  if not forceReinterpretCast == None:
-    classQualifier = ( forceReinterpretCast[0] + "::" if not method.is_static_method() else "" ) + "*"
-  else:
-    classQualifier = ( className + "::" if not method.is_static_method() else "" ) + "*"
-  if needReinterpretCast or not forceReinterpretCast == None:
+  classQualifier = (className + "::" if not method.is_static_method() else "" ) + "*"
+  if needReinterpretCast:
     castedArgResults = list(map(getSingleArgumentBinding(False), args))
     somethingChanged = any(map(lambda x: x[1], castedArgResults))
     castedArgTypes = list(map(lambda x: x[0], castedArgResults))
-    if somethingChanged or not forceReinterpretCast == None:
+    if somethingChanged:
       return ["reinterpret_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
     else:
       return ["static_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
@@ -635,7 +632,7 @@ def getCastMethodBindings(className, method, forceReinterpretCast):
 #   allOverloads (list of libclang method decl): all overloads of the method (i.e. methods with the same name but different signatures)
 # returns:
 #   string
-def getSingleMethodBinding(theClass, method, forceReinterpretCast = None):
+def getSingleMethodBinding(theClass, method, forceClassName = None):
   className = theClass.spelling
   if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD:
     allOverloads = [m for m in theClass.get_children() if m.spelling == method.spelling]
@@ -646,29 +643,22 @@ def getSingleMethodBinding(theClass, method, forceReinterpretCast = None):
     if method.result_type.spelling.startswith("Standard_OStream"):
       return ""
     if len(allOverloads) == 1:
-      functor = "&" + className + "::" + method.spelling
+      functor = "&" + (forceClassName if not forceClassName == None else className) + "::" + method.spelling
     else:
       returnType = method.result_type.spelling
       const = "const" if method.is_const_method() else ""
       args = ", ".join(list(map(lambda x: x.type.spelling + " " + x.spelling, list(method.get_arguments()))))
-      functor = "(" + returnType + " (" + ((className + "::") if not method.is_static_method() else "") + "*)(" + args + ") " + const + ") &" + className + "::" + method.spelling
+      functor = "(" + returnType + " (" + (((forceClassName if not forceClassName == None else className) + "::") if not method.is_static_method() else "") + "*)(" + args + ") " + const + ") &" + className + "::" + method.spelling
 
     if method.is_static_method():
       functionCommand = "class_function"
     else:
       functionCommand = "function"
 
-    cast = getCastMethodBindings(className, method, forceReinterpretCast)
+    cast = getCastMethodBindings(className, method)
     return "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())" + os.linesep
   if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.USING_DECLARATION:
-    if not len(list(method.get_children())) == 2:
-      raise SkipException("Using declaration with more than 2 children (" + className + ", " + method.spelling + ")")
-    usingClass = list(method.get_children())[0].referenced
-    if not usingClass.kind == clang.cindex.CursorKind.CLASS_DECL:
-      raise SkipException("using statement with something other than a class declaration, could be a template specialization (" + className + ", " + method.spelling + ")")
-    usingMethod = next(x for x in usingClass.get_children() if x.spelling == list(method.get_children())[1].spelling)
-
-    return getSingleMethodBinding(usingClass, usingMethod, [className, className])
+    raise SkipException("Using declarations can cause nasty problems, be careful! (" + className + ", " + method.spelling + ")")
   return ""
 
 # Generates bindings for a single argument of a function
