@@ -28,6 +28,19 @@
 * Auto-generate for typedefs of template classes
 * Look through `NCollection` module and generate auto-bindings for all entities inside.
 * Make sure, the build system is not accidentally binding non-OpenCascade classes (e.g. from the `GL` folder)
+* Patch `using` syntax in the following classes:
+  * BRepExtrema_TriangleSet::Box
+  * BlendFunc_ChamfInv::Set)
+  * BlendFunc_ConstThroatInv::Set
+  * Graphic3d_Buffer::Data
+  * Graphic3d_Buffer::ChangeData
+  * SelectMgr_SensitiveEntitySet::Box
+  * V3d_DirectionalLight::SetDirection
+  * V3d_PositionalLight::Position
+  * V3d_PositionalLight::SetPosition
+  * V3d_SpotLight::SetDirection
+  * V3d_SpotLight::Position
+  * V3d_SpotLight::SetPosition
 
 ## 4. Build System and Versioning (non-breaking changes)
 

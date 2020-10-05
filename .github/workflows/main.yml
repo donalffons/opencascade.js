@@ -90,6 +90,7 @@ jobs:
   test:
     name: Test OpenCascade.js
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2

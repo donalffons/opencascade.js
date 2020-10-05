@@ -159,11 +159,10 @@ def build():
     files = os.listdir(source)
     for f in files:
       shutil.move(source+f, dest)
-    patch.fromfile("../patches/CMakeLists.txt.patch").apply()
-    pset = patch.fromfile("../patches/OSD_Path.cxx.patch").apply()
-    pset = patch.fromfile("../patches/OSD_Process.cxx.patch").apply()
-    pset = patch.fromfile("../patches/Bnd_Box.hxx.patch").apply()
-    pset = patch.fromfile("../patches/BRepGProp.hxx.patch").apply()
+
+    patchDir = "../patches/"
+    for filename in os.listdir(patchDir):
+      patch.fromfile(os.path.join(patchDir, filename)).apply()
 
   if not os.path.exists('regal'):
     stage("downloading and extracting regal...")

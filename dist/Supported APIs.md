@@ -385,187 +385,187 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/3hIVfqr) `Aspect_WindowError`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertAcquiredSelfIntersection`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertAcquiredSelfIntersection`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertBOPNotAllowed`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertBOPNotAllowed`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertBOPNotSet`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertBOPNotSet`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertBadPositioning`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertBadPositioning`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertBuilderFailed`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertBuilderFailed`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertBuildingPCurveFailed`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertBuildingPCurveFailed`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertEmptyShape`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertEmptyShape`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertFaceBuilderUnusedEdges`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertFaceBuilderUnusedEdges`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertIntersectionFailed`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertIntersectionFailed`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertIntersectionOfPairOfShapesFailed`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertIntersectionOfPairOfShapesFailed`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertMultiDimensionalArguments`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertMultiDimensionalArguments`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertMultipleArguments`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertMultipleArguments`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertNoFacesToRemove`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertNoFacesToRemove`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertNoFiller`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertNoFiller`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertNoPeriodicityRequired`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertNoPeriodicityRequired`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertNotSplittableEdge`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertNotSplittableEdge`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertNullInputShapes`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertNullInputShapes`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertPostTreatFF`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertPostTreatFF`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertRemovalOfIBForEdgesFailed`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertRemovalOfIBForEdgesFailed`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertRemovalOfIBForFacesFailed`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertRemovalOfIBForFacesFailed`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertRemovalOfIBForMDimShapes`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertRemovalOfIBForMDimShapes`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertRemovalOfIBForSolidsFailed`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertRemovalOfIBForSolidsFailed`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertRemoveFeaturesFailed`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertRemoveFeaturesFailed`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertSelfInterferingShape`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertSelfInterferingShape`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertShapeIsNotPeriodic`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertShapeIsNotPeriodic`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertShellSplitterFailed`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertShellSplitterFailed`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertSolidBuilderFailed`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertSolidBuilderFailed`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertSolidBuilderUnusedFaces`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertSolidBuilderUnusedFaces`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertTooFewArguments`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertTooFewArguments`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertTooSmallEdge`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertTooSmallEdge`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertUnableToGlue`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertUnableToGlue`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertUnableToMakeIdentical`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertUnableToMakeIdentical`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertUnableToMakePeriodic`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertUnableToMakePeriodic`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertUnableToOrientTheShape`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertUnableToOrientTheShape`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertUnableToRemoveTheFeature`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertUnableToRemoveTheFeature`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertUnableToRepeat`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertUnableToRepeat`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertUnableToTrim`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertUnableToTrim`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertUnknownShape`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertUnknownShape`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_AlertUnsupportedType`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_AlertUnsupportedType`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_Algo`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_Algo`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_ArgumentAnalyzer`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_ArgumentAnalyzer`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_BOP`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_BOP`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_Builder`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_Builder`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_BuilderArea`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_BuilderArea`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_BuilderFace`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_BuilderFace`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_BuilderShape`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_BuilderShape`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_BuilderSolid`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_BuilderSolid`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_CellsBuilder`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_CellsBuilder`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_CheckResult`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_CheckResult`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_CheckerSI`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_CheckerSI`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_EdgeInfo`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_EdgeInfo`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_MakeConnected`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_MakeConnected`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_MakePeriodic`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_MakePeriodic`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_MakerVolume`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_MakerVolume`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_Options`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_Options`
 
 ### ![](https://bit.ly/3hIVfqr) `BOPAlgo_PaveFiller`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_RemoveFeatures`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_RemoveFeatures`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_Section`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_Section`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_SectionAttribute`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_SectionAttribute`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_ShellSplitter`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_ShellSplitter`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_Splitter`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_Splitter`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_Tools`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_Tools`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_ToolsProvider`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_ToolsProvider`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_WireEdgeSet`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_WireEdgeSet`
 
-### ![](https://bit.ly/3hIVfqr) `BOPAlgo_WireSplitter`
+### ![](https://bit.ly/2El7GLC) `BOPAlgo_WireSplitter`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_CommonBlock`
+### ![](https://bit.ly/2El7GLC) `BOPDS_CommonBlock`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_CoupleOfPaveBlocks`
+### ![](https://bit.ly/2El7GLC) `BOPDS_CoupleOfPaveBlocks`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_Curve`
+### ![](https://bit.ly/2El7GLC) `BOPDS_Curve`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_DS`
+### ![](https://bit.ly/2El7GLC) `BOPDS_DS`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_FaceInfo`
+### ![](https://bit.ly/2El7GLC) `BOPDS_FaceInfo`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_IndexRange`
+### ![](https://bit.ly/2El7GLC) `BOPDS_IndexRange`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_Interf`
+### ![](https://bit.ly/2El7GLC) `BOPDS_Interf`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfEE`
+### ![](https://bit.ly/2El7GLC) `BOPDS_InterfEE`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfEF`
+### ![](https://bit.ly/2El7GLC) `BOPDS_InterfEF`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfEZ`
+### ![](https://bit.ly/2El7GLC) `BOPDS_InterfEZ`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfFF`
+### ![](https://bit.ly/2El7GLC) `BOPDS_InterfFF`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfFZ`
+### ![](https://bit.ly/2El7GLC) `BOPDS_InterfFZ`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfVE`
+### ![](https://bit.ly/2El7GLC) `BOPDS_InterfVE`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfVF`
+### ![](https://bit.ly/2El7GLC) `BOPDS_InterfVF`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfVV`
+### ![](https://bit.ly/2El7GLC) `BOPDS_InterfVV`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfVZ`
+### ![](https://bit.ly/2El7GLC) `BOPDS_InterfVZ`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_InterfZZ`
+### ![](https://bit.ly/2El7GLC) `BOPDS_InterfZZ`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_Pair`
+### ![](https://bit.ly/2El7GLC) `BOPDS_Pair`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_PairMapHasher`
+### ![](https://bit.ly/2El7GLC) `BOPDS_PairMapHasher`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_Pave`
+### ![](https://bit.ly/2El7GLC) `BOPDS_Pave`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_PaveBlock`
+### ![](https://bit.ly/2El7GLC) `BOPDS_PaveBlock`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_PaveMapHasher`
+### ![](https://bit.ly/2El7GLC) `BOPDS_PaveMapHasher`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_Point`
+### ![](https://bit.ly/2El7GLC) `BOPDS_Point`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_ShapeInfo`
+### ![](https://bit.ly/2El7GLC) `BOPDS_ShapeInfo`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_SubIterator`
+### ![](https://bit.ly/2El7GLC) `BOPDS_SubIterator`
 
-### ![](https://bit.ly/3hIVfqr) `BOPDS_Tools`
+### ![](https://bit.ly/2El7GLC) `BOPDS_Tools`
 
 ### ![](https://bit.ly/3hIVfqr) `BOPTest`
 
@@ -573,19 +573,19 @@ This list only lists class definitions. It does not contain information about:
 
 ### ![](https://bit.ly/3hIVfqr) `BOPTest_Objects`
 
-### ![](https://bit.ly/3hIVfqr) `BOPTools_AlgoTools`
+### ![](https://bit.ly/2El7GLC) `BOPTools_AlgoTools`
 
-### ![](https://bit.ly/3hIVfqr) `BOPTools_AlgoTools2D`
+### ![](https://bit.ly/2El7GLC) `BOPTools_AlgoTools2D`
 
-### ![](https://bit.ly/3hIVfqr) `BOPTools_AlgoTools3D`
+### ![](https://bit.ly/2El7GLC) `BOPTools_AlgoTools3D`
 
-### ![](https://bit.ly/3hIVfqr) `BOPTools_ConnexityBlock`
+### ![](https://bit.ly/2El7GLC) `BOPTools_ConnexityBlock`
 
-### ![](https://bit.ly/3hIVfqr) `BOPTools_CoupleOfShape`
+### ![](https://bit.ly/2El7GLC) `BOPTools_CoupleOfShape`
 
-### ![](https://bit.ly/3hIVfqr) `BOPTools_Set`
+### ![](https://bit.ly/2El7GLC) `BOPTools_Set`
 
-### ![](https://bit.ly/3hIVfqr) `BOPTools_SetMapHasher`
+### ![](https://bit.ly/2El7GLC) `BOPTools_SetMapHasher`
 
 ### ![](https://bit.ly/2El7GLC) `BRepAdaptor_CompCurve`
 

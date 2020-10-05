@@ -7,7 +7,7 @@ numExportedClasses = 0
 numIgnoredClasses = 0
 
 # This exception indicates that a certain class has multiple base classes. This is not (easily) possible to represent in JavaScript
-class MultipleBaseClassException(Exception):
+class SkipException(Exception):
   pass
 
 # processIncludeFile
@@ -122,6 +122,10 @@ def processIncludeFile(filename):
   if filename == "math_Householder.hxx":
     return False
 
+  # fatal error: 'rapidjson/prettywriter.h' file not found
+  if filename == "RWGltf_GltfOStreamWriter.hxx":
+    return False
+
   return True
 
 # indicates if bindings for a class should be generated (returns True) or not (returns False)
@@ -142,7 +146,6 @@ def processClass(theClass):
     theClass.spelling.startswith("DDF") or
     theClass.spelling.startswith("Cocoa") or
     theClass.spelling.startswith("Bin") or
-    theClass.spelling.startswith("BOP") or
     theClass.spelling.startswith("DNaming") or
     theClass.spelling.startswith("DPrs") or
     theClass.spelling == "DDataStd" or
@@ -528,6 +531,15 @@ def processClass(theClass):
   ):
     return False
 
+  if (
+    theClass.spelling == "BOPTest_Objects" or
+    theClass.spelling == "BOPTest_DrawableShape" or
+    theClass.spelling == "BOPTest" or
+    theClass.spelling == "Draw_Drawable3D" or
+    theClass.spelling == "DBRep_DrawableShape"
+  ):
+    return False
+
   return True
 
 # indicates if bindings for a method should be generated (returns True) or not (returns False)
@@ -566,6 +578,10 @@ def processTypedef(typedef):
   if typedef.spelling == "TopoDS_ListOfShape":
     return False
 
+  # error: unknown type name 'Handle_Xw_Window'; did you mean 'Handle_Cocoa_Window'?
+  if typedef.spelling == "Handle_Xw_Window":
+    return False
+
   return True
 
 # indicates if bindings for an enum should be generated (returns True) or not (returns False)
@@ -586,7 +602,7 @@ def getClassBinding(theClass, children):
   className = theClass.spelling
   baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(baseSpec) > 1:
-    raise MultipleBaseClassException("cannot handle multiple base classes (" + className + ")")
+    raise SkipException("cannot handle multiple base classes (" + className + ")")
 
   genTypescriptDef = True
   if len(baseSpec) > 0:
@@ -629,7 +645,7 @@ def getCastMethodBindings(className, method):
   needReinterpretCast = hasConstCharArg or hasRefArg
   returnType = method.result_type.spelling
   const = "const" if method.is_const_method() else ""
-  classQualifier = ( className + "::" if not method.is_static_method() else "" ) + "*"
+  classQualifier = (className + "::" if not method.is_static_method() else "" ) + "*"
   if needReinterpretCast:
     castedArgResults = list(map(getSingleArgumentBinding(False), args))
     somethingChanged = any(map(lambda x: x[1], castedArgResults))
@@ -647,8 +663,10 @@ def getCastMethodBindings(className, method):
 #   allOverloads (list of libclang method decl): all overloads of the method (i.e. methods with the same name but different signatures)
 # returns:
 #   string
-def getSingleMethodBinding(className, method, allOverloads):
+def getSingleMethodBinding(theClass, method, forceClassName = None):
+  className = theClass.spelling
   if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD:
+    allOverloads = [m for m in theClass.get_children() if m.spelling == method.spelling]
     if method.spelling.startswith("operator"):
       return ""
     overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(method) + 1)
@@ -656,12 +674,12 @@ def getSingleMethodBinding(className, method, allOverloads):
     if method.result_type.spelling.startswith("Standard_OStream"):
       return ""
     if len(allOverloads) == 1:
-      functor = "&" + className + "::" + method.spelling
+      functor = "&" + (forceClassName if not forceClassName == None else className) + "::" + method.spelling
     else:
       returnType = method.result_type.spelling
       const = "const" if method.is_const_method() else ""
       args = ", ".join(list(map(lambda x: x.type.spelling + " " + x.spelling, list(method.get_arguments()))))
-      functor = "(" + returnType + " (" + ((className + "::") if not method.is_static_method() else "") + "*)(" + args + ") " + const + ") &" + className + "::" + method.spelling
+      functor = "(" + returnType + " (" + (((forceClassName if not forceClassName == None else className) + "::") if not method.is_static_method() else "") + "*)(" + args + ") " + const + ") &" + className + "::" + method.spelling
 
     if method.is_static_method():
       functionCommand = "class_function"
@@ -670,6 +688,8 @@ def getSingleMethodBinding(className, method, allOverloads):
 
     cast = getCastMethodBindings(className, method)
     return "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())" + os.linesep
+  if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.USING_DECLARATION:
+    raise SkipException("Using declarations can cause nasty problems, be careful! (" + className + ", " + method.spelling + ")")
   return ""
 
 # Generates bindings for a single argument of a function
@@ -719,13 +739,15 @@ def getSingleArgumentBinding(argNames = True, isConstructor = False):
 #   children (libclang list of children): the children of the class
 # returns:
 #   string
-def getMethodsBinding(className, children):
+def getMethodsBinding(theClass, children):
   methodsBinding = ""
   for child in children:
-    if not processMethod(className, child):
+    if not processMethod(theClass.spelling, child):
       continue
-    allOverloads = [m for m in children if m.spelling == child.spelling]
-    methodsBinding += getSingleMethodBinding(className, child, allOverloads)
+    try:
+      methodsBinding += getSingleMethodBinding(theClass, child)
+    except SkipException as e:
+      print(str(e))
   return methodsBinding
 
 # Generates bindings for a "simple" constructor, i.e. using Embind's ".constructor<...>()" tag. Simple constructors can be used, when no overloads of the constructor exsist.
@@ -1165,7 +1187,7 @@ def getClassBindings(newChildren):
           epilogOutput += getEpilogForClass(theClass)
           numExportedClasses += 1
           successfulBinding = True
-        except MultipleBaseClassException as e:
+        except SkipException as e:
           print(str(e))
 
       if not successfulBinding:
