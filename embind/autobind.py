@@ -531,6 +531,15 @@ def processClass(theClass):
   ):
     return False
 
+  if (
+    theClass.spelling == "BOPTest_Objects" or
+    theClass.spelling == "BOPTest_DrawableShape" or
+    theClass.spelling == "BOPTest" or
+    theClass.spelling == "Draw_Drawable3D" or
+    theClass.spelling == "DBRep_DrawableShape"
+  ):
+    return False
+
   return True
 
 # indicates if bindings for a method should be generated (returns True) or not (returns False)
