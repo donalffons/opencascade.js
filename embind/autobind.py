@@ -621,13 +621,7 @@ def getClassBinding(theClass, children):
   return [
     "  class_<" + className + baseClassBinding + ">(\"" + className + "\")" + os.linesep,
     (
-      (
-        (
-          "/**" + os.linesep +
-          " * " + theClass.brief_comment + os.linesep +
-          " */" + os.linesep
-        ) if not theClass.brief_comment == None else ""
-      ) + "class " + className + baseClassTypescriptDef + "{" + os.linesep
+      "class " + className + baseClassTypescriptDef + "{" + os.linesep
     ) if (genTypescriptDef) else "",
     ("  " + className + ": typeof " + className + ";" + os.linesep) if genTypescriptDef else ""
   ]
@@ -755,7 +749,8 @@ def getMethodsBinding(theClass, children):
 #   children (libclang list of children): the children of the class
 # returns:
 #   string
-def getSimpleConstructorBinding(children):
+def getSimpleConstructorBinding(theClass):
+  children = list(theClass.get_children())
   constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR, children))
   if len(constructors) == 0:
     return [
@@ -771,11 +766,26 @@ def getSimpleConstructorBinding(children):
   argTypesBindings = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
   # TYPESCRIPT WIP
   # argsTypes = ", ".join(list(map(lambda x: x.spelling + ": " + x.type.spelling.replace("&", "").replace("*", "").replace("const", "").strip(), list(standardConstructor.get_arguments()))))
+
   return [
     "    .constructor<" + argTypesBindings + ">()" + os.linesep,
+    (
+      "  /**" + os.linesep +
+      (
+        (
+          "   * " + theClass.brief_comment + os.linesep
+        ) if not theClass.brief_comment == None else ""
+      ) +
+      "   *" + os.linesep +
+      (
+        (
+          "   * " + standardConstructor.brief_comment + os.linesep
+        ) if not standardConstructor.brief_comment == None else ""
+      ) +
+      "   */" + os.linesep
+    ) + "  constructor();" + os.linesep
     # TYPESCRIPT WIP
     # "    constructor(" + argsTypes + ");" + os.linesep,
-    "    constructor();" + os.linesep
   ]
 
 # Generates bindings for all overloaded constructors. Overloaded constructors are represented by deriving sub-classes from the parentClass (named parentClass_1, for example) and implementing only the given overloaded constructor as the default / simple constructor.
@@ -1172,9 +1182,9 @@ def getClassBindings(newChildren):
           docsOutput += "### ![](https://bit.ly/2El7GLC) `" + theClass.spelling + "`" + os.linesep + os.linesep
           abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
           if not abstract:
-            constructorBinding, constructorType = getSimpleConstructorBinding(list(theClass.get_children()))
+            constructorBinding, constructorType = getSimpleConstructorBinding(theClass)
             bindingsOutput += constructorBinding
-            # classTypeOutput += constructorType
+            classTypeDefOutput += constructorType
           bindingsOutput += getMethodsBinding(theClass, list(theClass.get_children()))
           bindingsOutput += "  ;" + os.linesep
           classTypeDefOutput += "}" + os.linesep + os.linesep
