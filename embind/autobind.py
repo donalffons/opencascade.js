@@ -1175,7 +1175,7 @@ def getClassBindings(newChildren):
             constructorBinding, constructorType = getSimpleConstructorBinding(list(theClass.get_children()))
             bindingsOutput += constructorBinding
             # classTypeOutput += constructorType
-          bindingsOutput += getMethodsBinding(theClass.spelling, list(theClass.get_children()))
+          bindingsOutput += getMethodsBinding(theClass, list(theClass.get_children()))
           bindingsOutput += "  ;" + os.linesep
           classTypeDefOutput += "}" + os.linesep + os.linesep
           if not abstract:
