@@ -744,18 +744,41 @@ def getMethodsBinding(theClass, children):
       print(str(e))
   return methodsBinding
 
-# Generates bindings for a "simple" constructor, i.e. using Embind's ".constructor<...>()" tag. Simple constructors can be used, when no overloads of the constructor exsist.
+# Returns typescript definition for one function argument
 # parameters:
-#   children (libclang list of children): the children of the class
+#  arg: the argument
+#  typedefs: all typedefs
 # returns:
 #   string
-def getSimpleConstructorBinding(theClass):
+def getTypescriptDefFromArg(arg, typedefs):
+  typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == arg.type.spelling.replace("&", "").replace("const", "").strip()), None)
+  argTypeName = (arg.type.spelling if typedefType is None else typedefType.spelling)
+  argTypeName = argTypeName.replace("&", "").replace("*", "").replace("const", "").strip()
+  return arg.spelling + ": " + argTypeName
+
+# Generates bindings for a "simple" constructor, i.e. using Embind's ".constructor<...>()" tag. Simple constructors can be used, when no overloads of the constructor exsist.
+# parameters:
+#  theClass: the class
+#  typedefs: all typedefs
+# returns:
+#   string
+def getSimpleConstructorBinding(theClass, typedefs):
   children = list(theClass.get_children())
   constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR, children))
+
   if len(constructors) == 0:
+    typescriptComment = \
+      "  /**" + os.linesep + \
+      (
+        (
+          "   * " + theClass.brief_comment + os.linesep
+        ) if not theClass.brief_comment == None else ""
+      ) + \
+      "   */" + os.linesep
     return [
       "    .constructor<>()" + os.linesep,
-      "    constructor();" + os.linesep
+      typescriptComment +
+      "  constructor();" + os.linesep
     ]
   publicConstructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(publicConstructors) == 0 or len(publicConstructors) > 1:
@@ -764,28 +787,27 @@ def getSimpleConstructorBinding(theClass):
   if not standardConstructor:
     return ["", ""]
   argTypesBindings = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
-  # TYPESCRIPT WIP
-  # argsTypes = ", ".join(list(map(lambda x: x.spelling + ": " + x.type.spelling.replace("&", "").replace("*", "").replace("const", "").strip(), list(standardConstructor.get_arguments()))))
+  
+  argsTypescriptDef = ", ".join(list(map(lambda x: getTypescriptDefFromArg(x, typedefs), list(standardConstructor.get_arguments()))))
 
+  typescriptComment = \
+    "  /**" + os.linesep + \
+    (
+      (
+        "   * " + theClass.brief_comment + os.linesep
+      ) if not theClass.brief_comment == None else ""
+    ) + \
+    "   *" + os.linesep + \
+    (
+      (
+        "   * " + standardConstructor.brief_comment + os.linesep
+      ) if not standardConstructor.brief_comment == None else ""
+    ) + \
+    "   */" + os.linesep
   return [
     "    .constructor<" + argTypesBindings + ">()" + os.linesep,
-    (
-      "  /**" + os.linesep +
-      (
-        (
-          "   * " + theClass.brief_comment + os.linesep
-        ) if not theClass.brief_comment == None else ""
-      ) +
-      "   *" + os.linesep +
-      (
-        (
-          "   * " + standardConstructor.brief_comment + os.linesep
-        ) if not standardConstructor.brief_comment == None else ""
-      ) +
-      "   */" + os.linesep
-    ) + "  constructor();" + os.linesep
-    # TYPESCRIPT WIP
-    # "    constructor(" + argsTypes + ");" + os.linesep,
+    typescriptComment +
+    "  constructor(" + argsTypescriptDef + ");" + os.linesep
   ]
 
 # Generates bindings for all overloaded constructors. Overloaded constructors are represented by deriving sub-classes from the parentClass (named parentClass_1, for example) and implementing only the given overloaded constructor as the default / simple constructor.
@@ -879,15 +901,9 @@ class overloadedConstrutorObject(object):
 #   children (list of libclang objects): all libclang objects
 # returns:
 #   None
-def getHandleTypeBindings(children):
+def getHandleTypeBindings(handleTypedefs):
   bindingsOutput = ""
   print("generating bindings for handle types...")
-
-  handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle") and x.spelling.startswith("Handle_"), children))
-  filteredHandleTypedefs = []
-  for child in handleTypedefs:
-    if not any(x.underlying_typedef_type.spelling == child.underlying_typedef_type.spelling for x in filteredHandleTypedefs):
-      filteredHandleTypedefs.append(child)
 
   for handleTypedef in handleTypedefs:
     if not processTypedef(handleTypedef):
@@ -1160,7 +1176,7 @@ def getNCollection_ListTypeBindings(children):
 #   newChildren (list of libclang objects): all libclang objects
 # returns:
 #   None
-def getClassBindings(newChildren):
+def getClassBindings(newChildren, typedefs):
   global numExportedClasses, numIgnoredClasses
   bindingsOutput = ""
   epilogOutput = ""
@@ -1182,7 +1198,7 @@ def getClassBindings(newChildren):
           docsOutput += "### ![](https://bit.ly/2El7GLC) `" + theClass.spelling + "`" + os.linesep + os.linesep
           abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
           if not abstract:
-            constructorBinding, constructorType = getSimpleConstructorBinding(theClass)
+            constructorBinding, constructorType = getSimpleConstructorBinding(theClass, typedefs)
             bindingsOutput += constructorBinding
             classTypeDefOutput += constructorType
           bindingsOutput += getMethodsBinding(theClass, list(theClass.get_children()))
@@ -1326,11 +1342,17 @@ export interface opencascade {
       newChildren.append(child)
   newChildren = sorted(newChildren, key=lambda x: x.spelling)
 
-  classBindingsOutput, classEpilogOutput, classDocsOutput, classTypeDefOutput, classTypeListOutput = getClassBindings(newChildren)
+  typedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL, children))
+  filteredTypedefs = []
+  for child in typedefs:
+    if not any(x.underlying_typedef_type.spelling == child.underlying_typedef_type.spelling for x in filteredTypedefs):
+      filteredTypedefs.append(child)
+
+  classBindingsOutput, classEpilogOutput, classDocsOutput, classTypeDefOutput, classTypeListOutput = getClassBindings(newChildren, filteredTypedefs)
   bindingsFile.write(classBindingsOutput)
   typescriptFile.write(classTypeListOutput)
   outputDocFile.write(classDocsOutput)
-  handleBindingsOutput = getHandleTypeBindings(children)[0]
+  handleBindingsOutput = getHandleTypeBindings(filteredTypedefs)[0]
   bindingsFile.write(handleBindingsOutput)
   enumBindingsOutput = getEnumBindings(newChildren)[0]
   bindingsFile.write(enumBindingsOutput)
