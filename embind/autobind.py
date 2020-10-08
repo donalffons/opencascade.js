@@ -657,34 +657,45 @@ def getCastMethodBindings(className, method):
 #   allOverloads (list of libclang method decl): all overloads of the method (i.e. methods with the same name but different signatures)
 # returns:
 #   string
-def getSingleMethodBinding(theClass, method, forceClassName = None):
+def getSingleMethodBinding(theClass, method, typedefs):
   className = theClass.spelling
   if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD:
     allOverloads = [m for m in theClass.get_children() if m.spelling == method.spelling]
     if method.spelling.startswith("operator"):
-      return ""
+      return ["", ""]
     overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(method) + 1)
 
     if method.result_type.spelling.startswith("Standard_OStream"):
-      return ""
+      return ["", ""]
     if len(allOverloads) == 1:
-      functor = "&" + (forceClassName if not forceClassName == None else className) + "::" + method.spelling
+      functor = "&" + className + "::" + method.spelling
     else:
       returnType = method.result_type.spelling
       const = "const" if method.is_const_method() else ""
       args = ", ".join(list(map(lambda x: x.type.spelling + " " + x.spelling, list(method.get_arguments()))))
-      functor = "(" + returnType + " (" + (((forceClassName if not forceClassName == None else className) + "::") if not method.is_static_method() else "") + "*)(" + args + ") " + const + ") &" + className + "::" + method.spelling
+      functor = "(" + returnType + " (" + ((className + "::") if not method.is_static_method() else "") + "*)(" + args + ") " + const + ") &" + className + "::" + method.spelling
 
     if method.is_static_method():
       functionCommand = "class_function"
     else:
       functionCommand = "function"
 
+    argsTypescriptDef = ", ".join(list(map(lambda x: getTypescriptDefFromArg(x, typedefs), method.get_arguments())))
     cast = getCastMethodBindings(className, method)
-    return "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())" + os.linesep
+    return [
+      "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())" + os.linesep,
+      "  /**" + os.linesep + \
+      (
+        (
+          "   * " + method.brief_comment + os.linesep
+        ) if not method.brief_comment == None else ""
+      ) + \
+      "   */" + os.linesep +
+      "  " + method.spelling + overloadPostfix + ": (" + argsTypescriptDef + ") => " + getTypescriptDefFromResultType(method.result_type, typedefs) + ";" + os.linesep
+    ]
   if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.USING_DECLARATION:
     raise SkipException("Using declarations can cause nasty problems, be careful! (" + className + ", " + method.spelling + ")")
-  return ""
+  return ["", ""]
 
 # Generates bindings for a single argument of a function
 # parameters:
@@ -733,16 +744,19 @@ def getSingleArgumentBinding(argNames = True, isConstructor = False):
 #   children (libclang list of children): the children of the class
 # returns:
 #   string
-def getMethodsBinding(theClass, children):
+def getMethodsBinding(theClass, children, typedefs):
   methodsBinding = ""
+  methodsTypescriptDef = ""
   for child in children:
     if not processMethod(theClass.spelling, child):
       continue
     try:
-      methodsBinding += getSingleMethodBinding(theClass, child)
+      binding, typescriptDef = getSingleMethodBinding(theClass, child, typedefs)
+      methodsBinding += binding
+      methodsTypescriptDef += typescriptDef
     except SkipException as e:
       print(str(e))
-  return methodsBinding
+  return [methodsBinding, methodsTypescriptDef]
 
 # Returns typescript definition for one function argument
 # parameters:
@@ -751,10 +765,27 @@ def getMethodsBinding(theClass, children):
 # returns:
 #   string
 def getTypescriptDefFromArg(arg, typedefs):
-  typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == arg.type.spelling.replace("&", "").replace("const", "").strip()), None)
+  argTypedefType = arg.type.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
+  typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == argTypedefType), None)
   argTypeName = (arg.type.spelling if typedefType is None else typedefType.spelling)
-  argTypeName = argTypeName.replace("&", "").replace("*", "").replace("const", "").strip()
+  argTypeName = argTypeName.replace("&", "").replace("const", "").replace("*", "").strip()
   return arg.spelling + ": " + argTypeName
+
+# Returns typescript definition for function return type
+# parameters:
+#  arg: the argument
+#  typedefs: all typedefs
+# returns:
+#   string
+def getTypescriptDefFromResultType(res, typedefs):
+  resTypedefType = res.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
+  if not resTypedefType == "void":
+    typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == resTypedefType), None)
+    resTypeName = (res.spelling if typedefType is None else typedefType.spelling)
+    resTypeName = resTypeName.replace("&", "").replace("const", "").replace("*", "").strip()
+  else:
+    resTypeName = resTypedefType
+  return resTypeName
 
 # Generates bindings for a "simple" constructor, i.e. using Embind's ".constructor<...>()" tag. Simple constructors can be used, when no overloads of the constructor exsist.
 # parameters:
@@ -1198,17 +1229,20 @@ def getClassBindings(newChildren, typedefs):
           docsOutput += "### ![](https://bit.ly/2El7GLC) `" + theClass.spelling + "`" + os.linesep + os.linesep
           abstract = isAbstractClass(theClass, filter(lambda x: x.kind == clang.cindex.CursorKind.CLASS_DECL, newChildren))
           if not abstract:
-            constructorBinding, constructorType = getSimpleConstructorBinding(theClass, typedefs)
+            constructorBinding, constructorTypescriptDef = getSimpleConstructorBinding(theClass, typedefs)
             bindingsOutput += constructorBinding
-            classTypeDefOutput += constructorType
-          bindingsOutput += getMethodsBinding(theClass, list(theClass.get_children()))
+            classTypeDefOutput += constructorTypescriptDef
+
+          bindings, typescriptDef = getMethodsBinding(theClass, list(theClass.get_children()), typedefs)
+          bindingsOutput += bindings
           bindingsOutput += "  ;" + os.linesep
+          classTypeDefOutput += typescriptDef
           classTypeDefOutput += "}" + os.linesep + os.linesep
           if not abstract:
-            [oConstructorBindings, oConstructorTypescriptDef, constructorTypescriptList] = getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children()))
+            [oConstructorBindings, oConstructorTypescriptDef, oconstructorTypescriptList] = getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children()))
             bindingsOutput += oConstructorBindings
             classTypeDefOutput += oConstructorTypescriptDef
-            classTypeListOutput += constructorTypescriptList
+            classTypeListOutput += oconstructorTypescriptList
 
           epilogOutput += getEpilogForClass(theClass)
           numExportedClasses += 1
