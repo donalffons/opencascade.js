@@ -1074,6 +1074,33 @@ def getNCollection_Array1TypeBindings(children):
     bindingsOutput += "    .function(\"Resize\", &" + theName + "::Resize)" + os.linesep
     bindingsOutput += "  ;" + os.linesep
 
+    typescriptDefOutput += "class " + theName + " {" + os.linesep
+    typescriptDefOutput += "  begin: () => any;" + os.linesep
+    typescriptDefOutput += "  end: () => any;" + os.linesep
+    typescriptDefOutput += "  cbegin: () => any;" + os.linesep
+    typescriptDefOutput += "  cend: () => any;" + os.linesep
+    typescriptDefOutput += "  Init: (theValue: " + theType + ") => void;" + os.linesep
+    typescriptDefOutput += "  Size: () => Standard_Integer;" + os.linesep
+    typescriptDefOutput += "  Length: () => Standard_Integer;" + os.linesep
+    typescriptDefOutput += "  IsEmpty: () => Standard_Boolean;" + os.linesep
+    typescriptDefOutput += "  Lower: () => Standard_Integer;" + os.linesep
+    typescriptDefOutput += "  Upper: () => Standard_Integer;" + os.linesep
+    typescriptDefOutput += "  IsDeletable: () => Standard_Boolean;" + os.linesep
+    typescriptDefOutput += "  IsAllocated: () => Standard_Boolean;" + os.linesep
+    typescriptDefOutput += "  Assign: (theOther: " + theName + ") => " + theName+ ";" + os.linesep
+    typescriptDefOutput += "  Move: (theOther: " + theName + ") => " + theName+ ";" + os.linesep
+    typescriptDefOutput += "  First: () => " + theType + ";" + os.linesep
+    typescriptDefOutput += "  ChangeFirst: () => " + theType + ";" + os.linesep
+    typescriptDefOutput += "  Last: () => " + theType + ";" + os.linesep
+    typescriptDefOutput += "  ChangeLast: () => " + theType + ";" + os.linesep
+    typescriptDefOutput += "  Value: (theIndex: Standard_Integer) => " + theType + ";" + os.linesep
+    typescriptDefOutput += "  ChangeValue: (theIndex: Standard_Integer) => " + theType + ";" + os.linesep
+    typescriptDefOutput += "  SetValue: (theIndex: Standard_Integer, theItem: " + theType + ") => void;" + os.linesep
+    typescriptDefOutput += "  Resize: (theLower: Standard_Integer, theUpper: Standard_Integer, theToCopyData: Standard_Boolean) => void;" + os.linesep
+    typescriptDefOutput += "}" + os.linesep + os.linesep
+
+    typescriptListOutput += "  " + theName + ": typeof " + theName + ";" + os.linesep
+
     oc1 = overloadedConstrutorObject()
     oc1.spelling = theName
     oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
