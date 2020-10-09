@@ -932,10 +932,13 @@ class overloadedConstrutorObject(object):
 #   children (list of libclang objects): all libclang objects
 # returns:
 #   None
-def getHandleTypeBindings(handleTypedefs):
+def getHandleTypeBindings(children):
   bindingsOutput = ""
+  typescriptDefOutput = ""
+  typescriptListOutput = ""
   print("generating bindings for handle types...")
 
+  handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle"), children))
   for handleTypedef in handleTypedefs:
     if not processTypedef(handleTypedef):
       continue
@@ -953,6 +956,20 @@ def getHandleTypeBindings(handleTypedefs):
     bindingsOutput += "    .function(\"operator_dereference\", &" + handleName + "::operator->, allow_raw_pointers())" + os.linesep
     bindingsOutput += "    .function(\"operator_bool\", &" + handleName + "::operator bool)" + os.linesep
     bindingsOutput += "  ;" + os.linesep
+
+    typescriptDefOutput += "  class " + handleName + " {" + os.linesep
+    typescriptDefOutput += "    Nullify: () => void;" + os.linesep
+    typescriptDefOutput += "    IsNull: () => Standard_Boolean;" + os.linesep
+    typescriptDefOutput += "    reset: (thePtr: " + targetType + ") => void;" + os.linesep
+    typescriptDefOutput += "    operator_assign_1: (theHandle: " + handleName + ") => " + handleName + ";" + os.linesep
+    typescriptDefOutput += "    operator_assign_2: (thePtr: " + targetType + ") => " + handleName + ";" + os.linesep
+    typescriptDefOutput += "    operator_assign_3: (theHandle: " + handleName + ") => " + handleName + ";" + os.linesep
+    typescriptDefOutput += "    get: () => " + targetType + ";" + os.linesep
+    typescriptDefOutput += "    operator_dereference: () => " + targetType + ";" + os.linesep
+    typescriptDefOutput += "    operator_bool: () => Standard_Boolean" + ";" + os.linesep
+    typescriptDefOutput += "  }" + os.linesep
+
+    typescriptListOutput += "  " + handleName + ": typeof " + handleName + ";" + os.linesep
 
     oc1 = overloadedConstrutorObject()
     oc1.spelling = handleName
@@ -993,7 +1010,7 @@ def getHandleTypeBindings(handleTypedefs):
     ])
     bindingsOutput += bindingsOutput
 
-  return [bindingsOutput]
+  return [bindingsOutput, typescriptDefOutput, typescriptListOutput]
 
 def getNCollection_Array1TypeBindings(children):
   bindingsOutput = ""
@@ -1350,6 +1367,11 @@ EMSCRIPTEN_BINDINGS(opencascadejs) {
   typescriptFile.write(
 '''export declare function initOpenCascade(): Promise<opencascade>;
 
+type Standard_Boolean = boolean;
+type Standard_Real = number;
+type Standard_Integer = number;
+type Standard_CString = string;
+
 export interface opencascade {
   ready: Promise<opencascade>;
   
@@ -1382,12 +1404,13 @@ export interface opencascade {
     if not any(x.underlying_typedef_type.spelling == child.underlying_typedef_type.spelling for x in filteredTypedefs):
       filteredTypedefs.append(child)
 
-  classBindingsOutput, classEpilogOutput, classDocsOutput, classTypeDefOutput, classTypeListOutput = getClassBindings(newChildren, filteredTypedefs)
-  bindingsFile.write(classBindingsOutput)
-  typescriptFile.write(classTypeListOutput)
-  outputDocFile.write(classDocsOutput)
-  handleBindingsOutput = getHandleTypeBindings(filteredTypedefs)[0]
-  bindingsFile.write(handleBindingsOutput)
+  classBindings, classEpilog, classDocs, classTypescriptDef, classTypescriptDefList = getClassBindings(newChildren, filteredTypedefs)
+  bindingsFile.write(classBindings)
+  typescriptFile.write(classTypescriptDefList)
+  outputDocFile.write(classDocs)
+  handleBindings, handleTypescriptDef, handleTypescriptDefList = getHandleTypeBindings(filteredTypedefs)
+  bindingsFile.write(handleBindings)
+  typescriptFile.write(handleTypescriptDefList)
   enumBindingsOutput = getEnumBindings(newChildren)[0]
   bindingsFile.write(enumBindingsOutput)
   nCollection_Array1BindingsOutput = getNCollection_Array1TypeBindings(children)[0]
@@ -1395,9 +1418,12 @@ export interface opencascade {
   nCollection_ListBindingsOutput = getNCollection_ListTypeBindings(children)[0]
   bindingsFile.write(nCollection_ListBindingsOutput)
 
-  typescriptFile.write("}" + os.linesep + os.linesep + classTypeDefOutput)
   bindingsFile.write("}" + os.linesep + os.linesep)
-  bindingsFile.write(classEpilogOutput)
+  bindingsFile.write(classEpilog)
+
+  typescriptFile.write("}" + os.linesep + os.linesep)
+  typescriptFile.write(classTypescriptDef)
+  typescriptFile.write(handleTypescriptDef)
 
 main()
 den = (numExportedClasses+numIgnoredClasses)
