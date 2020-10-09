@@ -975,15 +975,16 @@ def getHandleTypeBindings(children):
     bindingsOutput += "    .function(\"operator_bool\", &" + handleName + "::operator bool)" + os.linesep
     bindingsOutput += "  ;" + os.linesep
 
+    typescriptType = getTypescriptDefFromResultType(handleTypedef.underlying_typedef_type.get_template_argument_type(0), children)
     typescriptDefOutput += "class " + handleName + " {" + os.linesep
     typescriptDefOutput += "  Nullify: () => void;" + os.linesep
     typescriptDefOutput += "  IsNull: () => Standard_Boolean;" + os.linesep
-    typescriptDefOutput += "  reset: (thePtr: " + targetType + ") => void;" + os.linesep
+    typescriptDefOutput += "  reset: (thePtr: " + typescriptType + ") => void;" + os.linesep
     typescriptDefOutput += "  operator_assign_1: (theHandle: " + handleName + ") => " + handleName + ";" + os.linesep
-    typescriptDefOutput += "  operator_assign_2: (thePtr: " + targetType + ") => " + handleName + ";" + os.linesep
+    typescriptDefOutput += "  operator_assign_2: (thePtr: " + typescriptType + ") => " + handleName + ";" + os.linesep
     typescriptDefOutput += "  operator_assign_3: (theHandle: " + handleName + ") => " + handleName + ";" + os.linesep
-    typescriptDefOutput += "  get: () => " + targetType + ";" + os.linesep
-    typescriptDefOutput += "  operator_dereference: () => " + targetType + ";" + os.linesep
+    typescriptDefOutput += "  get: () => " + typescriptType + ";" + os.linesep
+    typescriptDefOutput += "  operator_dereference: () => " + typescriptType + ";" + os.linesep
     typescriptDefOutput += "  operator_bool: () => Standard_Boolean" + ";" + os.linesep
     typescriptDefOutput += "}" + os.linesep + os.linesep
 
@@ -1074,12 +1075,13 @@ def getNCollection_Array1TypeBindings(children):
     bindingsOutput += "    .function(\"Resize\", &" + theName + "::Resize)" + os.linesep
     bindingsOutput += "  ;" + os.linesep
 
+    typescriptType = getTypescriptDefFromResultType(nCollection_Array1Typedef.underlying_typedef_type.get_template_argument_type(0), children)
     typescriptDefOutput += "class " + theName + " {" + os.linesep
     typescriptDefOutput += "  begin: () => any;" + os.linesep
     typescriptDefOutput += "  end: () => any;" + os.linesep
     typescriptDefOutput += "  cbegin: () => any;" + os.linesep
     typescriptDefOutput += "  cend: () => any;" + os.linesep
-    typescriptDefOutput += "  Init: (theValue: " + theType + ") => void;" + os.linesep
+    typescriptDefOutput += "  Init: (theValue: " + typescriptType + ") => void;" + os.linesep
     typescriptDefOutput += "  Size: () => Standard_Integer;" + os.linesep
     typescriptDefOutput += "  Length: () => Standard_Integer;" + os.linesep
     typescriptDefOutput += "  IsEmpty: () => Standard_Boolean;" + os.linesep
@@ -1089,13 +1091,13 @@ def getNCollection_Array1TypeBindings(children):
     typescriptDefOutput += "  IsAllocated: () => Standard_Boolean;" + os.linesep
     typescriptDefOutput += "  Assign: (theOther: " + theName + ") => " + theName+ ";" + os.linesep
     typescriptDefOutput += "  Move: (theOther: " + theName + ") => " + theName+ ";" + os.linesep
-    typescriptDefOutput += "  First: () => " + theType + ";" + os.linesep
-    typescriptDefOutput += "  ChangeFirst: () => " + theType + ";" + os.linesep
-    typescriptDefOutput += "  Last: () => " + theType + ";" + os.linesep
-    typescriptDefOutput += "  ChangeLast: () => " + theType + ";" + os.linesep
-    typescriptDefOutput += "  Value: (theIndex: Standard_Integer) => " + theType + ";" + os.linesep
-    typescriptDefOutput += "  ChangeValue: (theIndex: Standard_Integer) => " + theType + ";" + os.linesep
-    typescriptDefOutput += "  SetValue: (theIndex: Standard_Integer, theItem: " + theType + ") => void;" + os.linesep
+    typescriptDefOutput += "  First: () => " + typescriptType + ";" + os.linesep
+    typescriptDefOutput += "  ChangeFirst: () => " + typescriptType + ";" + os.linesep
+    typescriptDefOutput += "  Last: () => " + typescriptType + ";" + os.linesep
+    typescriptDefOutput += "  ChangeLast: () => " + typescriptType + ";" + os.linesep
+    typescriptDefOutput += "  Value: (theIndex: Standard_Integer) => " + typescriptType + ";" + os.linesep
+    typescriptDefOutput += "  ChangeValue: (theIndex: Standard_Integer) => " + typescriptType + ";" + os.linesep
+    typescriptDefOutput += "  SetValue: (theIndex: Standard_Integer, theItem: " + typescriptType + ") => void;" + os.linesep
     typescriptDefOutput += "  Resize: (theLower: Standard_Integer, theUpper: Standard_Integer, theToCopyData: Standard_Boolean) => void;" + os.linesep
     typescriptDefOutput += "}" + os.linesep + os.linesep
 
@@ -1230,6 +1232,29 @@ def getNCollection_ListTypeBindings(children):
     bindingsOutput += "    .function(\"Reverse\", &" + theName + "::Reverse)" + os.linesep
     bindingsOutput += "    // .function(\"Contains\", ...)" + os.linesep
     bindingsOutput += "  ;" + os.linesep
+
+    typescriptType = getTypescriptDefFromResultType(nCollection_ListTypedef.underlying_typedef_type.get_template_argument_type(0), children)
+    typescriptDefOutput += "class " + theName + " {" + os.linesep
+    typescriptDefOutput += "  begin: () => any;" + os.linesep
+    typescriptDefOutput += "  end: () => any;" + os.linesep
+    typescriptDefOutput += "  cbegin: () => any;" + os.linesep
+    typescriptDefOutput += "  cend: () => any;" + os.linesep
+    typescriptDefOutput += "  Size: () => Standard_Integer;" + os.linesep
+    typescriptDefOutput += "  Assign: (theOther: " + theName + ") => " + theName + ";" + os.linesep
+    typescriptDefOutput += "  Clear: (theAllocator: any) => void;" + os.linesep
+    typescriptDefOutput += "  First_1: () => " + typescriptType + ";" + os.linesep
+    typescriptDefOutput += "  First_2: () => " + typescriptType + ";" + os.linesep
+    typescriptDefOutput += "  Last_1: () => " + typescriptType + ";" + os.linesep
+    typescriptDefOutput += "  Last_2: () => " + typescriptType + ";" + os.linesep
+    typescriptDefOutput += "  Append_1: (theItem: " + typescriptType + ") => " + typescriptType + ";" + os.linesep
+    typescriptDefOutput += "  Append_3: (theOther: " + theName + ") => void;" + os.linesep
+    typescriptDefOutput += "  Prepend_1: (theItem: " + typescriptType + ") => " + typescriptType + ";" + os.linesep
+    typescriptDefOutput += "  Prepend_2: (theOther: " + theName + ") => void;" + os.linesep
+    typescriptDefOutput += "  RemoveFirst: () => void;" + os.linesep
+    typescriptDefOutput += "  Reverse: () => void;" + os.linesep
+    typescriptDefOutput += "}" + os.linesep + os.linesep
+
+    typescriptListOutput += "  " + theName + ": typeof " + theName + ";" + os.linesep
 
     oc1 = overloadedConstrutorObject()
     oc1.spelling = theName
