@@ -847,7 +847,7 @@ def getSimpleConstructorBinding(theClass, typedefs):
 #   children (libclang list of children): the children of the class
 # returns:
 #   string
-def getOverloadedConstructorsBinding(className, children):
+def getOverloadedConstructorsBinding(theClass, children, typedefs):
   constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(constructors) == 1:
     return ["", "", ""]
@@ -863,6 +863,7 @@ def getOverloadedConstructorsBinding(className, children):
     args = ", ".join(list(map(lambda x: getSingleArgumentBinding(True, True)(x)[0], list(constructor.get_arguments()))))
     argNames = ", ".join(list(map(lambda x: x.spelling if not any(y.spelling == "Standard_CString" for y in x.get_tokens()) else x.spelling + ".c_str()", list(constructor.get_arguments()))))
     argTypes = ", ".join(list(map(lambda x: getSingleArgumentBinding(False, True)(x)[0], list(constructor.get_arguments()))))
+    argsTypescriptDef = ", ".join(list(map(lambda x: getTypescriptDefFromArg(x, typedefs), list(constructor.get_arguments()))))
 
     constructorBindings += "    struct " + constructor.spelling + overloadPostfix + " : public " + constructor.spelling + " {" + os.linesep
     constructorBindings += "      " + constructor.spelling + overloadPostfix + "(" + args + ") : " + constructor.spelling + "(" + argNames + ") {}" + os.linesep
@@ -870,7 +871,22 @@ def getOverloadedConstructorsBinding(className, children):
     constructorBindings += "    class_<" + constructor.spelling + overloadPostfix + ", base<" + constructor.spelling + ">>(\"" + constructor.spelling + overloadPostfix + "\")" + os.linesep
     constructorBindings += "      .constructor<" + argTypes + ">()" + os.linesep
     constructorBindings += "    ;" + os.linesep
-    constructorTypescriptDef += "class " + constructor.spelling + overloadPostfix + " extends " + constructor.spelling + " {}" + os.linesep + os.linesep
+    constructorTypescriptDef += "class " + constructor.spelling + overloadPostfix + " extends " + constructor.spelling + " {" + os.linesep
+    constructorTypescriptDef += "  /**" + os.linesep + \
+    (
+      (
+        "   * " + theClass.brief_comment + os.linesep
+      ) if not theClass.brief_comment == None else ""
+    ) + \
+    "   *" + os.linesep + \
+    (
+      (
+        "   * " + constructor.brief_comment + os.linesep
+      ) if not constructor.brief_comment == None else ""
+    ) + \
+    "   */" + os.linesep
+    constructorTypescriptDef += "  constructor(" + argsTypescriptDef + ");" + os.linesep
+    constructorTypescriptDef += "}" + os.linesep + os.linesep
     constructorTypescriptList += "  " + constructor.spelling + overloadPostfix + ": typeof " + constructor.spelling + overloadPostfix + ";" + os.linesep
   return [constructorBindings, constructorTypescriptDef, constructorTypescriptList]
 
@@ -920,6 +936,8 @@ def isAbstractClass(theClass, allClasses):
   return numPureVirtualMethods > numImplementedPureVirtualMethods
 
 class overloadedConstrutorObject(object):
+  def __init__(self):
+    self.brief_comment = None
   def get_arguments(self):
     return self.arguments
   def get_tokens(self):
@@ -957,17 +975,17 @@ def getHandleTypeBindings(children):
     bindingsOutput += "    .function(\"operator_bool\", &" + handleName + "::operator bool)" + os.linesep
     bindingsOutput += "  ;" + os.linesep
 
-    typescriptDefOutput += "  class " + handleName + " {" + os.linesep
-    typescriptDefOutput += "    Nullify: () => void;" + os.linesep
-    typescriptDefOutput += "    IsNull: () => Standard_Boolean;" + os.linesep
-    typescriptDefOutput += "    reset: (thePtr: " + targetType + ") => void;" + os.linesep
-    typescriptDefOutput += "    operator_assign_1: (theHandle: " + handleName + ") => " + handleName + ";" + os.linesep
-    typescriptDefOutput += "    operator_assign_2: (thePtr: " + targetType + ") => " + handleName + ";" + os.linesep
-    typescriptDefOutput += "    operator_assign_3: (theHandle: " + handleName + ") => " + handleName + ";" + os.linesep
-    typescriptDefOutput += "    get: () => " + targetType + ";" + os.linesep
-    typescriptDefOutput += "    operator_dereference: () => " + targetType + ";" + os.linesep
-    typescriptDefOutput += "    operator_bool: () => Standard_Boolean" + ";" + os.linesep
-    typescriptDefOutput += "  }" + os.linesep
+    typescriptDefOutput += "class " + handleName + " {" + os.linesep
+    typescriptDefOutput += "  Nullify: () => void;" + os.linesep
+    typescriptDefOutput += "  IsNull: () => Standard_Boolean;" + os.linesep
+    typescriptDefOutput += "  reset: (thePtr: " + targetType + ") => void;" + os.linesep
+    typescriptDefOutput += "  operator_assign_1: (theHandle: " + handleName + ") => " + handleName + ";" + os.linesep
+    typescriptDefOutput += "  operator_assign_2: (thePtr: " + targetType + ") => " + handleName + ";" + os.linesep
+    typescriptDefOutput += "  operator_assign_3: (theHandle: " + handleName + ") => " + handleName + ";" + os.linesep
+    typescriptDefOutput += "  get: () => " + targetType + ";" + os.linesep
+    typescriptDefOutput += "  operator_dereference: () => " + targetType + ";" + os.linesep
+    typescriptDefOutput += "  operator_bool: () => Standard_Boolean" + ";" + os.linesep
+    typescriptDefOutput += "}" + os.linesep + os.linesep
 
     typescriptListOutput += "  " + handleName + ": typeof " + handleName + ";" + os.linesep
 
@@ -1005,15 +1023,19 @@ def getHandleTypeBindings(children):
     oc3arg1.children = []
     oc3.arguments = [oc3arg1]
 
-    [bindingsOutput, typescriptDef, typescriptList] = getOverloadedConstructorsBinding(handleName, [
+    [bindingsOutput, typescriptDef, typescriptList] = getOverloadedConstructorsBinding(handleTypedef, [
       oc1, oc2, oc3
-    ])
+    ], children)
     bindingsOutput += bindingsOutput
+    typescriptDefOutput += typescriptDef
+    typescriptListOutput += typescriptList
 
   return [bindingsOutput, typescriptDefOutput, typescriptListOutput]
 
 def getNCollection_Array1TypeBindings(children):
   bindingsOutput = ""
+  typescriptDefOutput = ""
+  typescriptListOutput = ""
   print("generating bindings for NCollection_Array1 types...")
   nCollection_Array1Typedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("NCollection_Array1"), children))
   for nCollection_Array1Typedef in nCollection_Array1Typedefs:
@@ -1124,15 +1146,19 @@ def getNCollection_Array1TypeBindings(children):
     oc4arg3.children = []
     oc4.arguments = [oc4arg1, oc4arg2, oc4arg3]
 
-    [bindingsOutput, typescriptDef, typescriptList] = getOverloadedConstructorsBinding(theName, [
+    [bindingsOutput, typescriptDef, typescriptList] = getOverloadedConstructorsBinding(nCollection_Array1Typedef, [
       oc1, oc2, oc3, oc4
-    ])
+    ], children)
     bindingsOutput += bindingsOutput
+    typescriptDefOutput += typescriptDef
+    typescriptListOutput += typescriptList
   
-  return [bindingsOutput]
+  return [bindingsOutput, typescriptDefOutput, typescriptListOutput]
 
 def getNCollection_ListTypeBindings(children):
   bindingsOutput = ""
+  typescriptDefOutput = ""
+  typescriptListOutput = ""
   print("generating bindings for NCollection_List types...")
 
   bindingsOutput += "  class_<NCollection_BaseList>(\"NCollection_BaseList\")" + os.linesep
@@ -1212,12 +1238,14 @@ def getNCollection_ListTypeBindings(children):
     oc3arg1.children = []
     oc3.arguments = [oc3arg1]
 
-    [bindingsOutput, typescriptDef, typescriptList] = getOverloadedConstructorsBinding(theName, [
+    [bindingsOutput, typescriptDef, typescriptList] = getOverloadedConstructorsBinding(nCollection_ListTypedef, [
       oc1, oc2, oc3
-    ])
+    ], children)
     bindingsOutput += bindingsOutput
+    typescriptDefOutput += typescriptDef
+    typescriptListOutput += typescriptList
   
-  return [bindingsOutput]
+  return [bindingsOutput, typescriptDefOutput, typescriptListOutput]
 
 # Generates bindings for all classes (with some exceptions).
 # parameters:
@@ -1256,7 +1284,7 @@ def getClassBindings(newChildren, typedefs):
           classTypeDefOutput += typescriptDef
           classTypeDefOutput += "}" + os.linesep + os.linesep
           if not abstract:
-            [oConstructorBindings, oConstructorTypescriptDef, oconstructorTypescriptList] = getOverloadedConstructorsBinding(theClass.spelling, list(theClass.get_children()))
+            [oConstructorBindings, oConstructorTypescriptDef, oconstructorTypescriptList] = getOverloadedConstructorsBinding(theClass, list(theClass.get_children()), typedefs)
             bindingsOutput += oConstructorBindings
             classTypeDefOutput += oConstructorTypescriptDef
             classTypeListOutput += oconstructorTypescriptList
@@ -1413,10 +1441,12 @@ export interface opencascade {
   typescriptFile.write(handleTypescriptDefList)
   enumBindingsOutput = getEnumBindings(newChildren)[0]
   bindingsFile.write(enumBindingsOutput)
-  nCollection_Array1BindingsOutput = getNCollection_Array1TypeBindings(children)[0]
-  bindingsFile.write(nCollection_Array1BindingsOutput)
-  nCollection_ListBindingsOutput = getNCollection_ListTypeBindings(children)[0]
-  bindingsFile.write(nCollection_ListBindingsOutput)
+  nCollection_Array1Bindings, nCollection_Array1TypescriptDef, nCollection_Array1TypescriptDefList = getNCollection_Array1TypeBindings(children)
+  bindingsFile.write(nCollection_Array1Bindings)
+  typescriptFile.write(nCollection_Array1TypescriptDefList)
+  nCollection_ListBindings, nCollection_ListTypescriptDef, nCollection_ListTypescriptDefList = getNCollection_ListTypeBindings(children)
+  bindingsFile.write(nCollection_ListBindings)
+  typescriptFile.write(nCollection_ListTypescriptDefList)
 
   bindingsFile.write("}" + os.linesep + os.linesep)
   bindingsFile.write(classEpilog)
@@ -1424,6 +1454,8 @@ export interface opencascade {
   typescriptFile.write("}" + os.linesep + os.linesep)
   typescriptFile.write(classTypescriptDef)
   typescriptFile.write(handleTypescriptDef)
+  typescriptFile.write(nCollection_Array1TypescriptDef)
+  typescriptFile.write(nCollection_ListTypescriptDef)
 
 main()
 den = (numExportedClasses+numIgnoredClasses)
