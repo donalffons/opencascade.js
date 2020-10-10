@@ -773,7 +773,7 @@ def getTypescriptDefFromArg(arg, typedefs):
 
 # Returns typescript definition for function return type
 # parameters:
-#  arg: the argument
+#  res: the argument
 #  typedefs: all typedefs
 # returns:
 #   string
@@ -786,6 +786,23 @@ def getTypescriptDefFromResultType(res, typedefs):
   else:
     resTypeName = resTypedefType
   return resTypeName
+
+# Returns typescript definition for function return type
+# parameters:
+#  res: the argument
+#  typedefs: all typedefs
+# returns:
+#   string
+def getTypescriptDefFromTypedef(t, typedefs):
+  tTypedefType = t.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
+  if not tTypedefType == "void" and (":" in tTypedefType or "<" in tTypedefType):
+    typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == tTypedefType), None)
+    if typedefType is None:
+      raise SkipException("There is no typedef for " + tTypedefType + "! Please create one to support typescript definitions.")
+    tTypeName = typedefType.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
+  else:
+    tTypeName = tTypedefType
+  return tTypeName
 
 # Generates bindings for a "simple" constructor, i.e. using Embind's ".constructor<...>()" tag. Simple constructors can be used, when no overloads of the constructor exsist.
 # parameters:
@@ -975,7 +992,8 @@ def getHandleTypeBindings(children):
     bindingsOutput += "    .function(\"operator_bool\", &" + handleName + "::operator bool)" + os.linesep
     bindingsOutput += "  ;" + os.linesep
 
-    typescriptType = getTypescriptDefFromResultType(handleTypedef.underlying_typedef_type.get_template_argument_type(0), children)
+    typescriptType = getTypescriptDefFromTypedef(handleTypedef.underlying_typedef_type.get_template_argument_type(0), children)
+
     typescriptDefOutput += "class " + handleName + " {" + os.linesep
     typescriptDefOutput += "  Nullify: () => void;" + os.linesep
     typescriptDefOutput += "  IsNull: () => Standard_Boolean;" + os.linesep
@@ -1033,7 +1051,7 @@ def getHandleTypeBindings(children):
 
   return [bindingsOutput, typescriptDefOutput, typescriptListOutput]
 
-def getNCollection_Array1TypeBindings(children):
+def getNCollection_Array1TypeBindings(children, typedefs):
   bindingsOutput = ""
   typescriptDefOutput = ""
   typescriptListOutput = ""
@@ -1075,7 +1093,7 @@ def getNCollection_Array1TypeBindings(children):
     bindingsOutput += "    .function(\"Resize\", &" + theName + "::Resize)" + os.linesep
     bindingsOutput += "  ;" + os.linesep
 
-    typescriptType = getTypescriptDefFromResultType(nCollection_Array1Typedef.underlying_typedef_type.get_template_argument_type(0), children)
+    typescriptType = getTypescriptDefFromTypedef(nCollection_Array1Typedef.underlying_typedef_type.get_template_argument_type(0), typedefs)
     typescriptDefOutput += "class " + theName + " {" + os.linesep
     typescriptDefOutput += "  begin: () => any;" + os.linesep
     typescriptDefOutput += "  end: () => any;" + os.linesep
@@ -1184,7 +1202,7 @@ def getNCollection_Array1TypeBindings(children):
   
   return [bindingsOutput, typescriptDefOutput, typescriptListOutput]
 
-def getNCollection_ListTypeBindings(children):
+def getNCollection_ListTypeBindings(children, typedefs):
   bindingsOutput = ""
   typescriptDefOutput = ""
   typescriptListOutput = ""
@@ -1233,7 +1251,7 @@ def getNCollection_ListTypeBindings(children):
     bindingsOutput += "    // .function(\"Contains\", ...)" + os.linesep
     bindingsOutput += "  ;" + os.linesep
 
-    typescriptType = getTypescriptDefFromResultType(nCollection_ListTypedef.underlying_typedef_type.get_template_argument_type(0), children)
+    typescriptType = getTypescriptDefFromTypedef(nCollection_ListTypedef.underlying_typedef_type.get_template_argument_type(0), typedefs)
     typescriptDefOutput += "class " + theName + " {" + os.linesep
     typescriptDefOutput += "  begin: () => any;" + os.linesep
     typescriptDefOutput += "  end: () => any;" + os.linesep
@@ -1267,7 +1285,7 @@ def getNCollection_ListTypeBindings(children):
     oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
     oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
     oc2arg1type = overloadedConstrutorObject()
-    oc2arg1type.spelling = "const Handle(NCollection_BaseAllocator)&"
+    oc2arg1type.spelling = "const Handle_NCollection_BaseAllocator&"
     oc2arg1type.kind = None
     oc2arg1 = overloadedConstrutorObject()
     oc2arg1.type = oc2arg1type
@@ -1404,6 +1422,15 @@ def main():
     ] + list(map(lambda x: "-I" + x, includePaths))
   includeDirectives = list(sorted(occtFiles))
   includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", includeDirectives))
+  includeDirectives += os.linesep + '''
+typedef opencascade::handle<Prs3d_Presentation> Handle_Prs3d_Presentation;
+typedef opencascade::handle<SelectMgr_TriangularFrustum> Handle_SelectMgr_TriangularFrustum;
+typedef opencascade::handle<Standard_Persistent> Handle_Storage_PArray;
+
+typedef NCollection_Handle<Message_Msg> Handle_Message_Msg;
+typedef opencascade::handle<BVH_Tree<Standard_ShortReal, 3, BVH_QuadTree> > Handle_Handle_QuadBvhHandle;
+typedef BVH_Tree<Standard_ShortReal, 3, BVH_QuadTree> Handle_QuadBvhHandle;
+''' + os.linesep
 
   libFolder = "/clang/clang_10/lib"
   clang.cindex.Config.library_path = libFolder
@@ -1493,10 +1520,10 @@ export interface opencascade {
   typescriptFile.write(handleTypescriptDefList)
   enumBindingsOutput = getEnumBindings(newChildren)[0]
   bindingsFile.write(enumBindingsOutput)
-  nCollection_Array1Bindings, nCollection_Array1TypescriptDef, nCollection_Array1TypescriptDefList = getNCollection_Array1TypeBindings(children)
+  nCollection_Array1Bindings, nCollection_Array1TypescriptDef, nCollection_Array1TypescriptDefList = getNCollection_Array1TypeBindings(children, filteredTypedefs)
   bindingsFile.write(nCollection_Array1Bindings)
   typescriptFile.write(nCollection_Array1TypescriptDefList)
-  nCollection_ListBindings, nCollection_ListTypescriptDef, nCollection_ListTypescriptDefList = getNCollection_ListTypeBindings(children)
+  nCollection_ListBindings, nCollection_ListTypescriptDef, nCollection_ListTypescriptDefList = getNCollection_ListTypeBindings(children, filteredTypedefs)
   bindingsFile.write(nCollection_ListBindings)
   typescriptFile.write(nCollection_ListTypescriptDefList)
 
