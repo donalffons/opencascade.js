@@ -680,7 +680,7 @@ def getSingleMethodBinding(theClass, method, typedefs):
     else:
       functionCommand = "function"
 
-    argsTypescriptDef = ", ".join(list(map(lambda x: getTypescriptDefFromArg(x, typedefs), method.get_arguments())))
+    argsTypescriptDef = ", ".join(list(map(lambda x: getTypescriptDefFromArg(x[1], typedefs, x[0]), enumerate(method.get_arguments()))))
     cast = getCastMethodBindings(className, method)
     return [
       "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())" + os.linesep,
@@ -764,12 +764,15 @@ def getMethodsBinding(theClass, children, typedefs):
 #  typedefs: all typedefs
 # returns:
 #   string
-def getTypescriptDefFromArg(arg, typedefs):
+def getTypescriptDefFromArg(arg, typedefs, suffix=""):
   argTypedefType = arg.type.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
   typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == argTypedefType), None)
   argTypeName = (arg.type.spelling if typedefType is None else typedefType.spelling)
   argTypeName = argTypeName.replace("&", "").replace("const", "").replace("*", "").strip()
-  return arg.spelling + ": " + argTypeName
+  if argTypeName == "":
+    argTypeName = "any"
+    print("this is wrong")
+  return (arg.spelling if not arg.spelling == "" else ("a" + str(suffix))) + ": " + argTypeName
 
 # Returns typescript definition for function return type
 # parameters:
@@ -993,6 +996,9 @@ def getHandleTypeBindings(children):
     bindingsOutput += "  ;" + os.linesep
 
     typescriptType = getTypescriptDefFromTypedef(handleTypedef.underlying_typedef_type.get_template_argument_type(0), children)
+    if typescriptType == "":
+      typescriptType = "any"
+      print("this is wrong...")
 
     typescriptDefOutput += "class " + handleName + " {" + os.linesep
     typescriptDefOutput += "  Nullify: () => void;" + os.linesep
