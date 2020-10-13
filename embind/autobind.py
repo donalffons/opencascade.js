@@ -604,26 +604,27 @@ def getClassBinding(theClass, children):
   if len(baseSpec) > 1:
     raise SkipException("cannot handle multiple base classes (" + className + ")")
 
-  genTypescriptDef = True
   if len(baseSpec) > 0:
+    genTypescriptDefBaseClass = True
     if "<" in baseSpec[0].type.spelling:
-      genTypescriptDef = False
       print("Cannot generate types for class with template class as base class (" + className + ")")
+      genTypescriptDefBaseClass = False
     if ":" in baseSpec[0].type.spelling:
-      genTypescriptDef = False
       print("Cannot generate types for class with colon operator in base class (" + className + ")")
+      genTypescriptDefBaseClass = False
     baseClassBinding = ", base<" + baseSpec[0].type.spelling + ">"
-    baseClassTypescriptDef = " extends " + baseSpec[0].type.spelling + " "
+    if genTypescriptDefBaseClass:
+      baseClassTypescriptDef = " extends " + baseSpec[0].type.spelling + " "
+    else: 
+      baseClassTypescriptDef = " "
   else:
     baseClassBinding = ""
     baseClassTypescriptDef = " "
 
   return [
     "  class_<" + className + baseClassBinding + ">(\"" + className + "\")" + os.linesep,
-    (
-      "class " + className + baseClassTypescriptDef + "{" + os.linesep
-    ) if (genTypescriptDef) else "",
-    ("  " + className + ": typeof " + className + ";" + os.linesep) if genTypescriptDef else ""
+    "class " + className + baseClassTypescriptDef + "{" + os.linesep,
+    "  " + className + ": typeof " + className + ";" + os.linesep
   ]
 
 # Generates cast bindings for a method. Some methods neet to be reinterpret_cast'd or static_cast'd
@@ -769,10 +770,13 @@ def getTypescriptDefFromArg(arg, typedefs, suffix=""):
   typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == argTypedefType), None)
   argTypeName = (arg.type.spelling if typedefType is None else typedefType.spelling)
   argTypeName = argTypeName.replace("&", "").replace("const", "").replace("*", "").strip()
-  if argTypeName == "":
+  if argTypeName == "" or "(" in argTypeName or ":" in argTypeName:
     argTypeName = "any"
-    print("this is wrong")
-  return (arg.spelling if not arg.spelling == "" else ("a" + str(suffix))) + ": " + argTypeName
+    print("could not generate proper types for type name '" + argTypeName + "', using 'any' instead.")
+  argname = (arg.spelling if not arg.spelling == "" else ("a" + str(suffix)))
+  if argname in ["var", "with", "super"]:
+    argname += "_"
+  return argname + ": " + argTypeName
 
 # Returns typescript definition for function return type
 # parameters:
@@ -788,6 +792,9 @@ def getTypescriptDefFromResultType(res, typedefs):
     resTypeName = resTypeName.replace("&", "").replace("const", "").replace("*", "").strip()
   else:
     resTypeName = resTypedefType
+  if resTypeName == "" or "(" in resTypeName or ":" in resTypeName:
+    print("could not generate proper types for type name '" + resTypeName + "', using 'any' instead.")
+    resTypeName = "any"
   return resTypeName
 
 # Returns typescript definition for function return type
@@ -997,8 +1004,8 @@ def getHandleTypeBindings(children):
 
     typescriptType = getTypescriptDefFromTypedef(handleTypedef.underlying_typedef_type.get_template_argument_type(0), children)
     if typescriptType == "":
+      print("using type 'any' instead of '" + handleTypedef.underlying_typedef_type.get_template_argument_type(0).spelling + "'")
       typescriptType = "any"
-      print("this is wrong...")
 
     typescriptDefOutput += "class " + handleName + " {" + os.linesep
     typescriptDefOutput += "  Nullify: () => void;" + os.linesep
