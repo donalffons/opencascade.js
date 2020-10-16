@@ -173,24 +173,6 @@ def build():
     tar.extractall("regal")
     tar.close()
 
-  if not os.path.exists('freetype'):
-    stage("downloading and extracting freetype...")
-    url = "https://git.savannah.gnu.org/cgit/freetype/freetype2.git/snapshot/freetype2-VER-2-10-1.tar.gz"
-    myfile = requests.get(url, stream=True)
-    open("freetype.tar.gz", 'wb').write(myfile.content)
-    tar = tarfile.open("freetype.tar.gz", "r:gz")
-    tar.extractall("freetype")
-    tar.close()
-
-  if not os.path.exists('fontconfig'):
-    stage("downloading and extracting fontconfig...")
-    url = "https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/2.13.92/fontconfig-2.13.92.tar.gz"
-    myfile = requests.get(url, stream=True)
-    open("fontconfig.tar.gz", 'wb').write(myfile.content)
-    tar = tarfile.open("fontconfig.tar.gz", "r:gz")
-    tar.extractall("fontconfig")
-    tar.close()
-
   ######################################
   stage("checking EMSCRIPTEN...")
   envEMSDK = os.environ.get('EMSDK')
@@ -227,11 +209,9 @@ def build():
       'cmake',
       '../occt/',
       '-DCMAKE_BUILD_TYPE=Release',
-      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=../freetype/freetype2-VER-2-10-1/include/freetype',
-      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_ft2build=../freetype/freetype2-VER-2-10-1/include',
       '-DBUILD_LIBRARY_TYPE=Static',
       '-DCMAKE_CXX_FLAGS="-DIGNORE_NO_ATOMICS=1 -frtti"',
-      '-D3RDPARTY_INCLUDE_DIRS=../regal/regal-master/src/apitrace/thirdparty/khronos/\;../fontconfig/fontconfig-2.13.92',
+      '-D3RDPARTY_INCLUDE_DIRS=../regal/regal-master/src/apitrace/thirdparty/khronos/\;/fontconfig',
       '-DUSE_GLES2=ON',
       '-DBUILD_MODULE_Draw=OFF',
       '-DBUILD_ADDITIONAL_TOOLKITS=ON',
@@ -282,6 +262,7 @@ def build():
   emcc_args += ['-s', 'EXPORT_ES6=1']
   emcc_args += ['-s', 'USE_ES6_IMPORT_META=0']
   emcc_args += ['-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1']
+  emcc_args += ['-s', 'USE_FREETYPE=1']
   
   # Debugging options
   # emcc_args += ['-s', 'ASSERTIONS=2']
@@ -314,7 +295,7 @@ def build():
   for path in includePaths:
     includeArgs.append('-I' + os.path.join(".", includePrefix, path))
 
-  emccArgs = ['--bind'] + includeArgs + opencascade_libs + emcc_args
+  emccArgs = ['--bind'] + includeArgs + opencascade_libs + emcc_args + ['/fontconfig/src/.libs/libfontconfig.a', '/expat/expat/lib/.libs/libexpat.a']
   emscripten.emcc(os.path.join('.', 'bindings.cpp'), emccArgs, temp)
 
   stage('wrap')
