@@ -29,7 +29,29 @@ RUN \
 
 RUN apt install -y libncurses5 libncurses6 libncurses5-dev libncursesw5-dev
 
-RUN npm install --global yarn
+RUN apt install -y git autoconf gperf libtool gettext autopoint pkg-config
+WORKDIR /freetype/
+RUN \
+  git clone https://git.savannah.nongnu.org/git/freetype/freetype2.git .
+
+WORKDIR /expat/
+RUN \
+  git clone https://github.com/libexpat/libexpat.git . && \
+  git checkout R_2_2_10
+WORKDIR /expat/expat/
+RUN \
+  ./buildconf.sh && \
+  emconfigure ./configure --enable-static=yes --enable-shared=no && \
+  emmake make
+
+WORKDIR /fontconfig/
+RUN \
+  git clone https://gitlab.freedesktop.org/fontconfig/fontconfig.git .
+RUN \
+  CFLAGS="-D__linux__ -I/freetype/include" LDFLAGS="-s USE_FREETYPE=1" FREETYPE_CFLAGS=" " FREETYPE_LIBS=" " emconfigure ./autogen.sh --with-expat-includes=/expat/expat/lib/ --with-expat-lib=/expat/expat/lib/.libs/ --enable-static=yes --enable-shared=no && \
+  emmake make
+
+RUN apt install -y fontconfig
 
 WORKDIR /opencascade/
 COPY . .
