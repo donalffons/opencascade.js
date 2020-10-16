@@ -1485,15 +1485,15 @@ EMSCRIPTEN_BINDINGS(opencascadejs) {
 ''')
   typescriptFile = open("../dist/opencascade.d.ts", "w")
   typescriptFile.write(
-'''export declare function initOpenCascade(): Promise<opencascade>;
+'''export declare function initOpenCascade(): Promise<opencascadeInterface>;
 
 type Standard_Boolean = boolean;
 type Standard_Real = number;
 type Standard_Integer = number;
 type Standard_CString = string;
 
-export interface opencascade {
-  ready: Promise<opencascade>;
+export interface opencascadeInterface {
+  ready: Promise<opencascadeInterface>;
   
   _malloc: (size: number) => number;
   _free: (ptr: number) => void;
