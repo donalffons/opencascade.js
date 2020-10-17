@@ -134,8 +134,24 @@ def processIncludeFile(filename):
 # returns:
 #   bool
 def processClass(theClass):
-  # error: undefined symbol: FT_Done_Face and many more
-  if theClass.spelling.startswith("F") :
+  # error: rvalue reference to type 'Storage_BaseDriver' cannot bind to lvalue of type 'Storage_BaseDriver'
+  # error: allocating an object of abstract class type 'Storage_BaseDriver'
+  if theClass.spelling == "FSD_BinaryFile":
+    return False
+
+  # error: calling a private constructor of class 'Standard_Mutex'
+  # error: 'operator new' is a protected member of 'Standard_Transient'
+  # error: 'operator delete' is a protected member of 'Standard_Transient'
+  if theClass.spelling == "Font_BRepFont":
+    return False
+
+  # error: rvalue reference to type 'Storage_BaseDriver' cannot bind to lvalue of type 'Storage_BaseDriver'
+  # error: allocating an object of abstract class type 'Storage_BaseDriver'
+  if theClass.spelling == "FSD_File":
+    return False
+
+  # error: calling a private constructor of class 'Image_PixMap'
+  if theClass.spelling == "Font_FTFont":
     return False
 
   # error: undefined symbol: a hundred times
