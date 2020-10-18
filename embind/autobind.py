@@ -477,7 +477,6 @@ def processClass(theClass):
 
   # error: call to implicitly-deleted copy constructor / private constructor
   if (
-    theClass.spelling == "AIS_ViewController" or
     theClass.spelling == "AdvApp2Var_Framework" or
     theClass.spelling == "AdvApp2Var_Network" or
     theClass.spelling == "Image_VideoRecorder" or
@@ -528,7 +527,6 @@ def processClass(theClass):
   if (
     theClass.spelling == "D3DHost_FrameBuffer" or
     theClass.spelling == "D3DHost_GraphicDriver" or
-    theClass.spelling.startswith("AIS") or
     theClass.spelling.startswith("Aspect") or
     theClass.spelling == "IntPatch_Polyhedron" or
     theClass.spelling == "IVtkOCC_ViewerSelector" or
@@ -561,6 +559,18 @@ def processClass(theClass):
 # returns:
 #   bool
 def processMethod(className, child):
+  if child.result_type.spelling.startswith("Standard_OStream"):
+    return False
+
+  # error: call to implicitly-deleted copy constructor of 'Aspect_VKeySet'
+  # error: rvalue reference to type 'Aspect_VKeySet' cannot bind to lvalue of type 'Aspect_VKeySet'
+  # error: call to implicitly-deleted copy constructor of 'Aspect_VKeySet'
+  if className == "AIS_ViewController" and (
+    child.spelling == "Keys" or
+    child.spelling == "ChangeKeys"
+  ):
+    return False
+
   # error: private copy constructor used in this function
   if className == "BRepClass3d_SolidExplorer" and child.spelling == "GetTree":
     return False
@@ -688,8 +698,6 @@ def getSingleMethodBinding(theClass, method, typedefs):
       return ["", ""]
     overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(method) + 1)
 
-    if method.result_type.spelling.startswith("Standard_OStream"):
-      return ["", ""]
     if len(allOverloads) == 1:
       functor = "&" + className + "::" + method.spelling
     else:
