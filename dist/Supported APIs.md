@@ -13,139 +13,139 @@ This list only lists class definitions. It does not contain information about:
 
 ## List of supported API's
 
-### ![](https://bit.ly/3hIVfqr) `AIS`
+### ![](https://bit.ly/2El7GLC) `AIS`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_AngleDimension`
+### ![](https://bit.ly/2El7GLC) `AIS_AngleDimension`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_Animation`
+### ![](https://bit.ly/2El7GLC) `AIS_Animation`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_AnimationCamera`
+### ![](https://bit.ly/2El7GLC) `AIS_AnimationCamera`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_AnimationObject`
+### ![](https://bit.ly/2El7GLC) `AIS_AnimationObject`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_AttributeFilter`
+### ![](https://bit.ly/2El7GLC) `AIS_AttributeFilter`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_Axis`
+### ![](https://bit.ly/2El7GLC) `AIS_Axis`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_BadEdgeFilter`
+### ![](https://bit.ly/2El7GLC) `AIS_BadEdgeFilter`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_C0RegularityFilter`
+### ![](https://bit.ly/2El7GLC) `AIS_C0RegularityFilter`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_CameraFrustum`
+### ![](https://bit.ly/2El7GLC) `AIS_CameraFrustum`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_Chamf2dDimension`
+### ![](https://bit.ly/2El7GLC) `AIS_Chamf2dDimension`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_Chamf3dDimension`
+### ![](https://bit.ly/2El7GLC) `AIS_Chamf3dDimension`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_Circle`
+### ![](https://bit.ly/2El7GLC) `AIS_Circle`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_ColorScale`
+### ![](https://bit.ly/2El7GLC) `AIS_ColorScale`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_ColoredDrawer`
+### ![](https://bit.ly/2El7GLC) `AIS_ColoredDrawer`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_ColoredShape`
+### ![](https://bit.ly/2El7GLC) `AIS_ColoredShape`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_ConcentricRelation`
+### ![](https://bit.ly/2El7GLC) `AIS_ConcentricRelation`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_ConnectedInteractive`
+### ![](https://bit.ly/2El7GLC) `AIS_ConnectedInteractive`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_DiameterDimension`
+### ![](https://bit.ly/2El7GLC) `AIS_DiameterDimension`
 
 ### ![](https://bit.ly/3hIVfqr) `AIS_Dimension`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_DimensionOwner`
+### ![](https://bit.ly/2El7GLC) `AIS_DimensionOwner`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_EllipseRadiusDimension`
+### ![](https://bit.ly/2El7GLC) `AIS_EllipseRadiusDimension`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_EqualDistanceRelation`
+### ![](https://bit.ly/2El7GLC) `AIS_EqualDistanceRelation`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_EqualRadiusRelation`
+### ![](https://bit.ly/2El7GLC) `AIS_EqualRadiusRelation`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_ExclusionFilter`
+### ![](https://bit.ly/2El7GLC) `AIS_ExclusionFilter`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_FixRelation`
+### ![](https://bit.ly/2El7GLC) `AIS_FixRelation`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_GlobalStatus`
+### ![](https://bit.ly/2El7GLC) `AIS_GlobalStatus`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_GraphicTool`
+### ![](https://bit.ly/2El7GLC) `AIS_GraphicTool`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_IdenticRelation`
+### ![](https://bit.ly/2El7GLC) `AIS_IdenticRelation`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_InteractiveContext`
+### ![](https://bit.ly/2El7GLC) `AIS_InteractiveContext`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_InteractiveObject`
+### ![](https://bit.ly/2El7GLC) `AIS_InteractiveObject`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_LengthDimension`
+### ![](https://bit.ly/2El7GLC) `AIS_LengthDimension`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_Line`
+### ![](https://bit.ly/2El7GLC) `AIS_Line`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_Manipulator`
+### ![](https://bit.ly/2El7GLC) `AIS_Manipulator`
 
 ### ![](https://bit.ly/3hIVfqr) `AIS_ManipulatorObjectSequence`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_ManipulatorOwner`
+### ![](https://bit.ly/2El7GLC) `AIS_ManipulatorOwner`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_MaxRadiusDimension`
+### ![](https://bit.ly/2El7GLC) `AIS_MaxRadiusDimension`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_MediaPlayer`
+### ![](https://bit.ly/2El7GLC) `AIS_MediaPlayer`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_MidPointRelation`
+### ![](https://bit.ly/2El7GLC) `AIS_MidPointRelation`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_MinRadiusDimension`
+### ![](https://bit.ly/2El7GLC) `AIS_MinRadiusDimension`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_MultipleConnectedInteractive`
+### ![](https://bit.ly/2El7GLC) `AIS_MultipleConnectedInteractive`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_OffsetDimension`
+### ![](https://bit.ly/2El7GLC) `AIS_OffsetDimension`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_ParallelRelation`
+### ![](https://bit.ly/2El7GLC) `AIS_ParallelRelation`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_PerpendicularRelation`
+### ![](https://bit.ly/2El7GLC) `AIS_PerpendicularRelation`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_Plane`
+### ![](https://bit.ly/2El7GLC) `AIS_Plane`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_PlaneTrihedron`
+### ![](https://bit.ly/2El7GLC) `AIS_PlaneTrihedron`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_Point`
+### ![](https://bit.ly/2El7GLC) `AIS_Point`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_PointCloud`
+### ![](https://bit.ly/2El7GLC) `AIS_PointCloud`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_PointCloudOwner`
+### ![](https://bit.ly/2El7GLC) `AIS_PointCloudOwner`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_RadiusDimension`
+### ![](https://bit.ly/2El7GLC) `AIS_RadiusDimension`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_Relation`
+### ![](https://bit.ly/2El7GLC) `AIS_Relation`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_RubberBand`
+### ![](https://bit.ly/2El7GLC) `AIS_RubberBand`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_Selection`
+### ![](https://bit.ly/2El7GLC) `AIS_Selection`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_Shape`
+### ![](https://bit.ly/2El7GLC) `AIS_Shape`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_SignatureFilter`
+### ![](https://bit.ly/2El7GLC) `AIS_SignatureFilter`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_SymmetricRelation`
+### ![](https://bit.ly/2El7GLC) `AIS_SymmetricRelation`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_TangentRelation`
+### ![](https://bit.ly/2El7GLC) `AIS_TangentRelation`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_TextLabel`
+### ![](https://bit.ly/2El7GLC) `AIS_TextLabel`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_TexturedShape`
+### ![](https://bit.ly/2El7GLC) `AIS_TexturedShape`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_Triangulation`
+### ![](https://bit.ly/2El7GLC) `AIS_Triangulation`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_Trihedron`
+### ![](https://bit.ly/2El7GLC) `AIS_Trihedron`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_TrihedronOwner`
+### ![](https://bit.ly/2El7GLC) `AIS_TrihedronOwner`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_TypeFilter`
+### ![](https://bit.ly/2El7GLC) `AIS_TypeFilter`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_ViewController`
+### ![](https://bit.ly/2El7GLC) `AIS_ViewController`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_ViewCube`
+### ![](https://bit.ly/2El7GLC) `AIS_ViewCube`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_ViewCubeOwner`
+### ![](https://bit.ly/2El7GLC) `AIS_ViewCubeOwner`
 
-### ![](https://bit.ly/3hIVfqr) `AIS_ViewInputBuffer`
+### ![](https://bit.ly/2El7GLC) `AIS_ViewInputBuffer`
 
 ### ![](https://bit.ly/2El7GLC) `APIHeaderSection_EditHeader`
 
