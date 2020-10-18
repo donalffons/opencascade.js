@@ -211,6 +211,8 @@ def build():
       '-DCMAKE_BUILD_TYPE=Release',
       '-DBUILD_LIBRARY_TYPE=Static',
       '-DCMAKE_CXX_FLAGS="-DIGNORE_NO_ATOMICS=1 -frtti"',
+      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=/freetype/include/freetype',
+      '-D3RDPARTY_FREETYPE_INCLUDE_DIR_ft2build=/freetype/include',
       '-D3RDPARTY_INCLUDE_DIRS=../regal/regal-master/src/apitrace/thirdparty/khronos/\;/fontconfig',
       '-DUSE_GLES2=ON',
       '-DBUILD_MODULE_Draw=OFF',
@@ -263,7 +265,7 @@ def build():
   emcc_args += ['-s', 'USE_ES6_IMPORT_META=0']
   emcc_args += ['-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1']
   emcc_args += ['-s', 'USE_FREETYPE=1']
-  
+
   # Debugging options
   # emcc_args += ['-s', 'ASSERTIONS=2']
   # emcc_args += ['-s', 'STACK_OVERFLOW_CHECK=1']
