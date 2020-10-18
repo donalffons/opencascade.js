@@ -122,10 +122,6 @@ def processIncludeFile(filename):
   if filename == "math_Householder.hxx":
     return False
 
-  # fatal error: 'rapidjson/prettywriter.h' file not found
-  if filename == "RWGltf_GltfOStreamWriter.hxx":
-    return False
-
   return True
 
 # indicates if bindings for a class should be generated (returns True) or not (returns False)
@@ -598,6 +594,16 @@ def processTypedef(typedef):
   if typedef.spelling == "Handle_Xw_Window":
     return False
 
+  # error: member pointer refers into non-class type 'opencascade::handle<TCollection_HAsciiString> (*)(const opencascade::handle<MoniTool_TypedValue> &, const opencascade::handle<TCollection_HAsciiString> &, bool)'
+  # error: 'MoniTool_ValueInterpret' (aka 'handle<TCollection_HAsciiString> (*)(const handle<MoniTool_TypedValue> &, const handle<TCollection_HAsciiString> &, const bool)') is not a class, namespace, or enumeration
+  if typedef.spelling == "MoniTool_ValueInterpret":
+    return False
+
+  # error: member pointer refers into non-class type 'opencascade::handle<TCollection_HAsciiString> (*)(const opencascade::handle<Interface_TypedValue> &, const opencascade::handle<TCollection_HAsciiString> &, bool)'
+  # error: 'Interface_ValueInterpret' (aka 'handle<TCollection_HAsciiString> (*)(const handle<Interface_TypedValue> &, const handle<TCollection_HAsciiString> &, const bool)') is not a class, namespace, or enumeration
+  if typedef.spelling == "Interface_ValueInterpret":
+    return False
+
   return True
 
 # indicates if bindings for an enum should be generated (returns True) or not (returns False)
@@ -993,13 +999,13 @@ class overloadedConstrutorObject(object):
 #   children (list of libclang objects): all libclang objects
 # returns:
 #   None
-def getHandleTypeBindings(children):
+def getHandleTypeBindings(typedefs):
   bindingsOutput = ""
   typescriptDefOutput = ""
   typescriptListOutput = ""
   print("generating bindings for handle types...")
 
-  handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle"), children))
+  handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle"), typedefs))
   for handleTypedef in handleTypedefs:
     if not processTypedef(handleTypedef):
       continue
@@ -1018,7 +1024,7 @@ def getHandleTypeBindings(children):
     bindingsOutput += "    .function(\"operator_bool\", &" + handleName + "::operator bool)" + os.linesep
     bindingsOutput += "  ;" + os.linesep
 
-    typescriptType = getTypescriptDefFromTypedef(handleTypedef.underlying_typedef_type.get_template_argument_type(0), children)
+    typescriptType = getTypescriptDefFromTypedef(handleTypedef.underlying_typedef_type.get_template_argument_type(0), typedefs)
     if typescriptType == "":
       print("using type 'any' instead of '" + handleTypedef.underlying_typedef_type.get_template_argument_type(0).spelling + "'")
       typescriptType = "any"
@@ -1071,21 +1077,21 @@ def getHandleTypeBindings(children):
     oc3arg1.children = []
     oc3.arguments = [oc3arg1]
 
-    [bindingsOutput, typescriptDef, typescriptList] = getOverloadedConstructorsBinding(handleTypedef, [
+    [newBindingsOutput, newTypescriptDef, newTypescriptList] = getOverloadedConstructorsBinding(handleTypedef, [
       oc1, oc2, oc3
-    ], children)
-    bindingsOutput += bindingsOutput
-    typescriptDefOutput += typescriptDef
-    typescriptListOutput += typescriptList
+    ], typedefs)
+    bindingsOutput += newBindingsOutput
+    typescriptDefOutput += newTypescriptDef
+    typescriptListOutput += newTypescriptList
 
   return [bindingsOutput, typescriptDefOutput, typescriptListOutput]
 
-def getNCollection_Array1TypeBindings(children, typedefs):
+def getNCollection_Array1TypeBindings(typedefs):
   bindingsOutput = ""
   typescriptDefOutput = ""
   typescriptListOutput = ""
   print("generating bindings for NCollection_Array1 types...")
-  nCollection_Array1Typedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("NCollection_Array1"), children))
+  nCollection_Array1Typedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("NCollection_Array1"), typedefs))
   for nCollection_Array1Typedef in nCollection_Array1Typedefs:
     if not processTypedef(nCollection_Array1Typedef):
       continue
@@ -1222,16 +1228,16 @@ def getNCollection_Array1TypeBindings(children, typedefs):
     oc4arg3.children = []
     oc4.arguments = [oc4arg1, oc4arg2, oc4arg3]
 
-    [bindingsOutput, typescriptDef, typescriptList] = getOverloadedConstructorsBinding(nCollection_Array1Typedef, [
+    [newBindingsOutput, newTypescriptDef, newTypescriptList] = getOverloadedConstructorsBinding(nCollection_Array1Typedef, [
       oc1, oc2, oc3, oc4
-    ], children)
-    bindingsOutput += bindingsOutput
-    typescriptDefOutput += typescriptDef
-    typescriptListOutput += typescriptList
+    ], typedefs)
+    bindingsOutput += newBindingsOutput
+    typescriptDefOutput += newTypescriptDef
+    typescriptListOutput += newTypescriptList
   
   return [bindingsOutput, typescriptDefOutput, typescriptListOutput]
 
-def getNCollection_ListTypeBindings(children, typedefs):
+def getNCollection_ListTypeBindings(typedefs):
   bindingsOutput = ""
   typescriptDefOutput = ""
   typescriptListOutput = ""
@@ -1243,7 +1249,7 @@ def getNCollection_ListTypeBindings(children, typedefs):
   bindingsOutput += "    .function(\"Allocator\", &NCollection_BaseList::Allocator)" + os.linesep
   bindingsOutput += "  ;" + os.linesep
 
-  nCollection_ListTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("NCollection_List") and not x.underlying_typedef_type.spelling.endswith("::Iterator"), children))
+  nCollection_ListTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("NCollection_List") and not x.underlying_typedef_type.spelling.endswith("::Iterator"), typedefs))
   for nCollection_ListTypedef in nCollection_ListTypedefs:
     if not processTypedef(nCollection_ListTypedef):
       continue
@@ -1337,12 +1343,12 @@ def getNCollection_ListTypeBindings(children, typedefs):
     oc3arg1.children = []
     oc3.arguments = [oc3arg1]
 
-    [bindingsOutput, typescriptDef, typescriptList] = getOverloadedConstructorsBinding(nCollection_ListTypedef, [
+    [newBindingsOutput, newTypescriptDef, newTypescriptList] = getOverloadedConstructorsBinding(nCollection_ListTypedef, [
       oc1, oc2, oc3
-    ], children)
-    bindingsOutput += bindingsOutput
-    typescriptDefOutput += typescriptDef
-    typescriptListOutput += typescriptList
+    ], typedefs)
+    bindingsOutput += newBindingsOutput
+    typescriptDefOutput += newTypescriptDef
+    typescriptListOutput += newTypescriptList
   
   return [bindingsOutput, typescriptDefOutput, typescriptListOutput]
 
@@ -1549,10 +1555,10 @@ export interface opencascade {
   typescriptFile.write(handleTypescriptDefList)
   enumBindingsOutput = getEnumBindings(newChildren)[0]
   bindingsFile.write(enumBindingsOutput)
-  nCollection_Array1Bindings, nCollection_Array1TypescriptDef, nCollection_Array1TypescriptDefList = getNCollection_Array1TypeBindings(children, filteredTypedefs)
+  nCollection_Array1Bindings, nCollection_Array1TypescriptDef, nCollection_Array1TypescriptDefList = getNCollection_Array1TypeBindings(filteredTypedefs)
   bindingsFile.write(nCollection_Array1Bindings)
   typescriptFile.write(nCollection_Array1TypescriptDefList)
-  nCollection_ListBindings, nCollection_ListTypescriptDef, nCollection_ListTypescriptDefList = getNCollection_ListTypeBindings(children, filteredTypedefs)
+  nCollection_ListBindings, nCollection_ListTypescriptDef, nCollection_ListTypescriptDefList = getNCollection_ListTypeBindings(filteredTypedefs)
   bindingsFile.write(nCollection_ListBindings)
   typescriptFile.write(nCollection_ListTypescriptDefList)
 
