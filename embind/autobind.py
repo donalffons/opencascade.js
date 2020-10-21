@@ -768,6 +768,35 @@ def getMethodsBinding(theClass, children, typedefs):
       print(str(e))
   return [methodsBinding, methodsTypescriptDef]
 
+def convertBuiltinTypes(typeName):
+  if typeName in [
+    "int",
+    "unsigned",
+    "unsigned int",
+    "long",
+    "long int",
+    "short",
+    "short int",
+    "float",
+    "unsigned float",
+    "double",
+    "unsigned double"
+  ]:
+    return "sumber"
+
+  if typeName in [
+    "char",
+    "unsigned char",
+    "std::string"
+  ]:
+    return "string"
+
+  if typeName in [
+    "bool"
+  ]:
+    return "boolean"
+  return typeName
+
 # Returns typescript definition for one function argument
 # parameters:
 #  arg: the argument
@@ -779,6 +808,7 @@ def getTypescriptDefFromArg(arg, typedefs, suffix=""):
   typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == argTypedefType), None)
   argTypeName = (arg.type.spelling if typedefType is None else typedefType.spelling)
   argTypeName = argTypeName.replace("&", "").replace("const", "").replace("*", "").strip()
+  argTypeName = convertBuiltinTypes(argTypeName)
   if argTypeName == "" or "(" in argTypeName or ":" in argTypeName:
     argTypeName = "any"
     print("could not generate proper types for type name '" + argTypeName + "', using 'any' instead.")
@@ -799,6 +829,7 @@ def getTypescriptDefFromResultType(res, typedefs):
     typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == resTypedefType), None)
     resTypeName = (res.spelling if typedefType is None else typedefType.spelling)
     resTypeName = resTypeName.replace("&", "").replace("const", "").replace("*", "").strip()
+    resTypeName = convertBuiltinTypes(resTypeName)
   else:
     resTypeName = resTypedefType
   if resTypeName == "" or "(" in resTypeName or ":" in resTypeName:
