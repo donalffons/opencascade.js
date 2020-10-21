@@ -573,6 +573,9 @@ def processTypedef(typedef):
   # Same as above, but with TopoDS_ListOfShape / TopTools_ListOfShape
   if typedef.spelling == "TopoDS_ListOfShape":
     return False
+  # Same as above, but with Handle_Graphic3d_Structure / Handle_Prs3d_Presentation
+  if typedef.spelling == "Handle_Graphic3d_Structure":
+    return False
 
   # error: unknown type name 'Handle_Xw_Window'; did you mean 'Handle_Cocoa_Window'?
   if typedef.spelling == "Handle_Xw_Window":
@@ -1413,6 +1416,156 @@ def getEnumBindings(newChildren):
       bindingsOutput += "  ;" + os.linesep
   return [bindingsOutput]
 
+# checks if the current typedef has duplicates and returns true if it should be ignored
+# parameters:
+#   typedef: current typedef
+# returns:
+#   Boolean
+def ignoreDuplicateTypedef(typedef, sortedTypedefs):
+  if typedef.underlying_typedef_type.spelling in [
+    "long",
+    "unsigned long",
+    "unsigned char",
+    "unsigned short",
+    "unsigned int",
+    "signed char",
+    "short",
+    "int",
+    "__int8_t",
+    "__uint8_t",
+    "__int16_t",
+    "__uint16_t",
+    "__int32_t",
+    "__uint32_t",
+    "__int64_t",
+    "__uint64_t",
+    "void *",
+    "char *",
+    "double",
+    "float",
+    "char",
+    "size_t",
+    "char16_t",
+    "struct _IO_FILE",
+    "Standard_Character *",
+    "Standard_Integer",
+    "BVH_Box<Standard_Real, 3>",
+    "Standard_ExtCharacter *",
+    "int (*)(...)",
+    "doublereal (*)(...)",
+    "void (*)(...)",
+    "void",
+    "XID",
+    "XKeyEvent",
+    "XButtonEvent",
+    "XCrossingEvent",
+    "XFocusChangeEvent",
+    "struct _XOC *",
+    "Standard_Byte *",
+    "Standard_Boolean (*)(const opencascade::handle<TCollection_HAsciiString> &)",
+    "Standard_Real"
+  ]:
+    return True
+
+  # --> underlying_typedef_type.spelling
+  # ----> type1.spelling
+  # ----> type2.spelling
+
+  # --> opencascade::handle<NCollection_BaseAllocator>
+  # ----> Handle_NCollection_BaseAllocator
+  # ----> TDF_HAllocator
+  # ----> IntSurf_Allocator
+  if (
+    typedef.underlying_typedef_type.spelling == "opencascade::handle<NCollection_BaseAllocator>" and
+    typedef.spelling in ["TDF_HAllocator", "IntSurf_Allocator"]
+  ):
+    return True
+
+  # --> NCollection_Vec3<Standard_Real>
+  # ----> Graphic3d_Vec3d
+  # ----> Select3D_Vec3
+  # ----> SelectMgr_Vec3
+  if (
+    typedef.underlying_typedef_type.spelling == "NCollection_Vec3<Standard_Real>" and
+    typedef.spelling in ["Select3D_Vec3", "SelectMgr_Vec3"]
+  ):
+    return True
+
+  # --> NCollection_Vec4<Standard_Real>
+  # ----> Graphic3d_Vec4d
+  # ----> SelectMgr_Vec4
+  if (
+    typedef.underlying_typedef_type.spelling == "NCollection_Vec4<Standard_Real>" and
+    typedef.spelling in ["SelectMgr_Vec4"]
+  ):
+    return True
+
+  # --> NCollection_Mat4<Standard_Real>
+  # ----> Graphic3d_Mat4d
+  # ----> SelectMgr_Mat4
+  if (
+    typedef.underlying_typedef_type.spelling == "NCollection_Mat4<Standard_Real>" and
+    typedef.spelling in ["SelectMgr_Mat4"]
+  ):
+    return True
+
+  # --> void (*)(NCollection_ListNode *, opencascade::handle<NCollection_BaseAllocator> &)
+  # ----> NCollection_DelMapNode
+  # ----> NCollection_DelListNode
+  if (
+    typedef.underlying_typedef_type.spelling == "void (*)(NCollection_ListNode *, opencascade::handle<NCollection_BaseAllocator> &)" and
+    typedef.spelling in ["NCollection_DelMapNode"]
+  ):
+    return True
+
+  # --> NCollection_List<TopoDS_Shape>
+  # ----> TopoDS_ListOfShape
+  # ----> TopTools_ListOfShape
+  if (
+    typedef.underlying_typedef_type.spelling == "NCollection_List<TopoDS_Shape>" and
+    typedef.spelling in ["TopoDS_ListOfShape"]
+  ):
+    return True
+
+  # --> NCollection_List<TopoDS_Shape>::Iterator
+  # ----> TopoDS_ListIteratorOfListOfShape
+  # ----> TopTools_ListIteratorOfListOfShape
+  if (
+    typedef.underlying_typedef_type == "NCollection_List<TopoDS_Shape>::Iterator" and
+    typedef.spelling in ["TopoDS_ListIteratorOfListOfShape"]
+  ):
+    return True
+
+  # --> NCollection_UBTree<Standard_Integer, Bnd_Box>
+  # ----> BRepBuilderAPI_BndBoxTree
+  # ----> BRepClass3d_BndBoxTree
+  # ----> ShapeAnalysis_BoxBndTree
+  if (
+    typedef.underlying_typedef_type.spelling == "NCollection_UBTree<Standard_Integer, Bnd_Box>" and
+    typedef.spelling in ["BRepClass3d_BndBoxTree", "ShapeAnalysis_BoxBndTree"]
+  ):
+    return True
+
+  # --> NCollection_IndexedDataMap<TCollection_AsciiString, Standard_Integer, TCollection_AsciiString>
+  # ----> StdStorage_MapOfTypes
+  # ----> Storage_PType
+  if (
+    typedef.underlying_typedef_type.spelling == "NCollection_IndexedDataMap<TCollection_AsciiString, Standard_Integer, TCollection_AsciiString>" and
+    typedef.spelling in ["StdStorage_MapOfTypes"]
+  ):
+    return True
+
+  # --> opencascade::handle<BVH_Tree<Standard_ShortReal, 3, BVH_QuadTree> >
+  # ----> QuadBvhHandle
+  # ----> Handle_Handle_QuadBvhHandle
+  if (
+    typedef.underlying_typedef_type.spelling == "opencascade::handle<BVH_Tree<Standard_ShortReal, 3, BVH_QuadTree> >" and
+    typedef.spelling in ["QuadBvhHandle"]
+  ):
+    return True
+
+  return False
+
 # The entry point of the auto-binding algorithm.
 # parameters:
 # returns:
@@ -1525,10 +1678,33 @@ export interface opencascadeInterface {
   newChildren = sorted(newChildren, key=lambda x: x.spelling)
 
   typedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL, children))
-  filteredTypedefs = []
+
+  sortedTypedefs = {}
   for child in typedefs:
-    if not any(x.underlying_typedef_type.spelling == child.underlying_typedef_type.spelling for x in filteredTypedefs):
-      filteredTypedefs.append(child)
+    if not child.underlying_typedef_type.spelling in sortedTypedefs:
+      sortedTypedefs[child.underlying_typedef_type.spelling] = []
+    sortedTypedefs[child.underlying_typedef_type.spelling].append(child)
+
+  # # debug print duplicate typedefs
+  # for key, value in sortedTypedefs.items():
+  #   if len(value) > 1:
+  #     print("--> " + key)
+  #     for val in value:
+  #       print("----> " + val.spelling)
+  
+  filteredTypedefs = []
+  for key, children in sortedTypedefs.items():
+    if len(children) == 1:
+      filteredTypedefs.append(children[0])
+    else:
+      allNames = map(lambda x: x.spelling, children)
+      deDupedCount = len(list(dict.fromkeys(allNames)))
+      if deDupedCount == 1 and not any(x.spelling == children[0].spelling for x in filteredTypedefs):
+        filteredTypedefs.append(children[0])
+      else:
+        for child in children:
+          if not ignoreDuplicateTypedef(child, sortedTypedefs):
+            filteredTypedefs.append(child)
 
   classBindings, classEpilog, classDocs, classTypescriptDef, classTypescriptDefList = getClassBindings(newChildren, filteredTypedefs)
   bindingsFile.write(classBindings)
