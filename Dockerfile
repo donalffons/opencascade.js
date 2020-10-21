@@ -1,4 +1,4 @@
-FROM emscripten/emsdk:2.0.4
+FROM emscripten/emsdk:2.0.7
 
 RUN apt update -y
 RUN apt install -y build-essential python3 python3-pip git cmake bash curl npm
