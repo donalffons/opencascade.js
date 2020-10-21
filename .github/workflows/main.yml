@@ -48,45 +48,45 @@ jobs:
       - name: Print Available Docker Images
         run: docker image ls
 
-      # Build the docker container
-      - name: Build OpenCascade.js Bindings
-        timeout-minutes: 200
-        run: |
-          docker run --init \
-          -v "$(pwd)/build/":"/opencascade/build/" \
-          -v "$(pwd)/dist/":"/opencascade/dist/" \
-          -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
-          my_awesome_image
-      # I'm not thrilled that this says my_awesome_image, but this is what works :(
+      # # Build the docker container
+      # - name: Build OpenCascade.js Bindings
+      #   timeout-minutes: 200
+      #   run: |
+      #     docker run --init \
+      #     -v "$(pwd)/build/":"/opencascade/build/" \
+      #     -v "$(pwd)/dist/":"/opencascade/dist/" \
+      #     -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
+      #     my_awesome_image
+      # # I'm not thrilled that this says my_awesome_image, but this is what works :(
 
-      # Debug
-      - name: Debug Print Files
-        run: |
-          ls
-          ls build
-          ls dist
-          ls emscripten-cache
+      # # Debug
+      # - name: Debug Print Files
+      #   run: |
+      #     ls
+      #     ls build
+      #     ls dist
+      #     ls emscripten-cache
 
-      # Upload the build results in-case the push fails...
-      - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v2
-        if: ${{ always() }}
-        with:
-          name: Build Products
-          path: dist
+      # # Upload the build results in-case the push fails...
+      # - name: Upload Build Artifacts
+      #   uses: actions/upload-artifact@v2
+      #   if: ${{ always() }}
+      #   with:
+      #     name: Build Products
+      #     path: dist
 
-      - name: Commit Build Artifacts in dist
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add dist/*
-          git diff-index --quiet HEAD || git commit -m "Build OpenCascade.js"
+      # - name: Commit Build Artifacts in dist
+      #   run: |
+      #     git config --local user.email "action@github.com"
+      #     git config --local user.name "GitHub Action"
+      #     git add dist/*
+      #     git diff-index --quiet HEAD || git commit -m "Build OpenCascade.js"
 
-      - name: Push Changes to branch
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+      # - name: Push Changes to branch
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ github.ref }}
   test:
     name: Test OpenCascade.js
     runs-on: ubuntu-latest
