@@ -51,7 +51,11 @@ RUN \
   CFLAGS="-D__linux__ -I/freetype/include" LDFLAGS="-s USE_FREETYPE=1" FREETYPE_CFLAGS=" " FREETYPE_LIBS=" " emconfigure ./autogen.sh --with-expat-includes=/expat/expat/lib/ --with-expat-lib=/expat/expat/lib/.libs/ --enable-static=yes --enable-shared=no && \
   emmake make
 
-RUN apt install -y fontconfig
+RUN \
+  apt install -y gnupg && \
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+  apt update && apt install -y yarn
 
 WORKDIR /opencascade/
 COPY . .

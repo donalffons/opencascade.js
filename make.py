@@ -265,7 +265,7 @@ def build():
   emcc_args += ['-s', 'USE_ES6_IMPORT_META=0']
   emcc_args += ['-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1']
   emcc_args += ['-s', 'USE_FREETYPE=1']
-
+  
   # Debugging options
   # emcc_args += ['-s', 'ASSERTIONS=2']
   # emcc_args += ['-s', 'STACK_OVERFLOW_CHECK=1']
