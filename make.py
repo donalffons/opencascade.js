@@ -213,12 +213,21 @@ def build():
       '-DCMAKE_CXX_FLAGS="-DIGNORE_NO_ATOMICS=1 -frtti"',
       '-D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=/freetype/include/freetype',
       '-D3RDPARTY_FREETYPE_INCLUDE_DIR_ft2build=/freetype/include',
-      '-D3RDPARTY_INCLUDE_DIRS=../regal/regal-master/src/apitrace/thirdparty/khronos/\;/fontconfig',
+      '-D3RDPARTY_FREETYPE_LIBRARY_DIR="/tmp"',
+      '-D3RDPARTY_EGL_LIBRARY_DIR_EGL="/tmp"',
+      '-D3RDPARTY_EGL_LIBRARY_DIR_GLESv2="/tmp"',
+      '-D3RDPARTY_GLES2_LIBRARY_DIR_EGL="/tmp"',
+      '-D3RDPARTY_GLES2_LIBRARY_DIR_GLESv2="/tmp"',
+      '-D3RDPARTY_VTK_INCLUDE_DIR=/vtk/Common/Core/',
+      '-D3RDPARTY_INCLUDE_DIRS=/vtk/build/Filters/General;/vtk/Filters/General;/vtk/build/Common/ExecutionModel;/vtk/build/Common/Math;/vtk/build/Common/Transforms;/vtk/Common/Transforms;/vtk/build/Filters/Core;/vtk/build/Rendering/Core;/vtk/Common/ExecutionModel;/vtk/Common/Math;/vtk/build/Common/DataModel;/vtk/Common/DataModel;/vtk/Rendering/Core;/vtk/Utilities/KWIML;/vtk/build/Common/Core;../regal/regal-master/src/apitrace/thirdparty/khronos/;/fontconfig',
       '-DUSE_GLES2=ON',
       '-DBUILD_MODULE_Draw=OFF',
       '-DBUILD_ADDITIONAL_TOOLKITS=ON',
       '-DBUILD_MODULE_Visualization=ON',
-      '-DBUILD_MODULE_ApplicationFramework=ON'
+      '-DBUILD_MODULE_ApplicationFramework=ON',
+      '-DBUILD_TOOLKITS=TKIVtk TKIVtkDraw',
+      '-DUSE_VTK=ON',
+      '-DCMAKE_SYSTEM_NAME=WindowsStore'
     ])
 
   ###############
@@ -265,6 +274,7 @@ def build():
   emcc_args += ['-s', 'USE_ES6_IMPORT_META=0']
   emcc_args += ['-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1']
   emcc_args += ['-s', 'USE_FREETYPE=1']
+  emcc_args += ['-s', 'USE_WEBGL2=1']
   
   # Debugging options
   # emcc_args += ['-s', 'ASSERTIONS=2']
@@ -292,7 +302,8 @@ def build():
   includePaths = os.listdir(includePrefix)
   includeArgs = [
     '-I' + os.path.join('.', 'occt', 'src'),
-    '-I' + os.path.join('.', 'regal', 'regal-master', 'src', 'apitrace', 'thirdparty', 'khronos')
+    '-I' + os.path.join('.', 'regal', 'regal-master', 'src', 'apitrace', 'thirdparty', 'khronos'),
+    '-I/rapidjson/include'
   ]
   for path in includePaths:
     includeArgs.append('-I' + os.path.join(".", includePrefix, path))

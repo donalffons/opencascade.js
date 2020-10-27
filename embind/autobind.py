@@ -1655,6 +1655,8 @@ def main():
     "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/8/include/",
     "-I/clang/clang_10/include/c++/v1/",
     "-isystem", "/usr/lib/gcc/x86_64-linux-gnu/8/include/",
+    "-I/rapidjson/include",
+    "-I/clang/clang_10/include/c++/v1/support/newlib",
     ] + list(map(lambda x: "-I" + x, includePaths))
   includeDirectives = list(sorted(occtFiles))
   includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", includeDirectives))
@@ -1671,7 +1673,7 @@ typedef BVH_Tree<Standard_ShortReal, 3, BVH_QuadTree> Handle_QuadBvhHandle;
   libFolder = "/clang/clang_10/lib"
   clang.cindex.Config.library_path = libFolder
   index = clang.cindex.Index.create()
-  tu = index.parse("main.h", ["-x", "c++", "-ferror-limit=1000000", "-stdlib=libc++"] + includePathArgs, [["main.h", includeDirectives]])
+  tu = index.parse("main.h", ["-x", "c++", "-ferror-limit=1000000", "-stdlib=libc++", "-D__EMSCRIPTEN__"] + includePathArgs, [["main.h", includeDirectives]])
 
   if len(list(tu.diagnostics)) > 0:
     print("Diagnostic Messages:")
