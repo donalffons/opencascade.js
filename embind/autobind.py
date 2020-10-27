@@ -130,6 +130,36 @@ def processIncludeFile(filename):
 # returns:
 #   bool
 def processClass(theClass):
+  # error: undefined symbol: _ZN21CDF_DirectoryIteratorC2Ev
+  if theClass.spelling == "CDF_DirectoryIterator":
+    return False
+
+  # error: undefined symbol: _ZN15Geom2dEvaluator16AdjustDerivativeEidR8gp_Vec2dS1_S1_S1_ (referenced by top-level compiled C/C++ code)
+  if theClass.spelling == "Geom2dEvaluator":
+    return False
+
+  # error: call to implicitly-deleted copy constructor of 'std::__2::basic_stringstream<char, std::__2::char_traits<char>, std::__2::allocator<char>>'
+  if theClass.spelling == "Message_AttributeStream":
+    return False
+
+  # error: allocating an object of abstract class type 'PrsDim_Dimension'
+  if theClass.spelling == "PrsDim_Dimension":
+    return False
+
+  # error: implicit instantiation of undefined template 'emscripten::internal::RegisterClassMethod<unsigned long OpenGl_Context::*>'
+  # error: implicit instantiation of undefined template 'emscripten::internal::RegisterClassMethod<unsigned long Event::*>'
+  if theClass.spelling == "OpenGl_Context":
+    return False
+
+  # error: call to implicitly-deleted copy constructor of 'IntTools_FClass2d'
+  # error: call to implicitly-deleted copy constructor of 'BRepClass3d_SolidClassifier'
+  if theClass.spelling == "IntTools_Context":
+    return False
+
+  # error: undefined symbol: _ZN20OpenGl_ShaderProgram20compileShaderVerboseERKN11opencascade6handleI14OpenGl_ContextEERKNS1_I19OpenGl_ShaderObjectEERK23TCollection_AsciiStringb
+  if theClass.spelling == "OpenGl_ShaderProgram":
+    return False
+
   # error: rvalue reference to type 'Storage_BaseDriver' cannot bind to lvalue of type 'Storage_BaseDriver'
   # error: allocating an object of abstract class type 'Storage_BaseDriver'
   if theClass.spelling == "FSD_BinaryFile":
@@ -144,10 +174,6 @@ def processClass(theClass):
   # error: rvalue reference to type 'Storage_BaseDriver' cannot bind to lvalue of type 'Storage_BaseDriver'
   # error: allocating an object of abstract class type 'Storage_BaseDriver'
   if theClass.spelling == "FSD_File":
-    return False
-
-  # error: calling a private constructor of class 'Image_PixMap'
-  if theClass.spelling == "Font_FTFont":
     return False
 
   # error: undefined symbol: a hundred times
@@ -475,19 +501,6 @@ def processClass(theClass):
   ):
     return False
 
-  # error: call to implicitly-deleted copy constructor / private constructor
-  if (
-    theClass.spelling == "AdvApp2Var_Framework" or
-    theClass.spelling == "AdvApp2Var_Network" or
-    theClass.spelling == "Image_VideoRecorder" or
-    theClass.spelling == "IntTools_Context" or
-    theClass.spelling == "LDOMString" or
-    theClass.spelling == "VrmlData_Node" or
-    theClass.spelling == "LDOM_MemManager" or
-    theClass.spelling == "LDOM_Node"
-  ):
-    return False
-
   # error: allocating an object of abstract class type
   if (
     theClass.spelling == "Graphic3d_CubeMap" or
@@ -515,28 +528,16 @@ def processClass(theClass):
   if theClass.spelling == "AIS_Dimension":
     return False
 
-  # error: calling a private constructor of class 'OpenGl_Clipping'
-  if theClass.spelling == "OpenGl_Context":
-    return False
-
-  # error: calling a private constructor of class 'OpenGl_Caps'
-  if theClass.spelling == "OpenGl_GraphicDriver":
-    return False
-
   # error: undefined symbol
   if (
     theClass.spelling == "D3DHost_FrameBuffer" or
     theClass.spelling == "D3DHost_GraphicDriver" or
-    theClass.spelling.startswith("Aspect") or
     theClass.spelling == "IntPatch_Polyhedron" or
     theClass.spelling == "IVtkOCC_ViewerSelector" or
     theClass.spelling == "IVtkDraw" or
     theClass.spelling == "IntPatch_RLine" or
     theClass.spelling == "IVtk_Interface" or
     theClass.spelling == "IVtk_IView" or
-    theClass.spelling == "OpenGl_VertexBuffer" or
-    theClass.spelling == "OpenGl_ShaderProgram" or
-    theClass.spelling.startswith("OpenGl") or
     theClass.spelling == "Xw_Window"
   ):
     return False
@@ -601,6 +602,9 @@ def processTypedef(typedef):
     return False
   # Same as above, but with Handle_Graphic3d_Structure / Handle_Prs3d_Presentation
   if typedef.spelling == "Handle_Graphic3d_Structure":
+    return False
+  # Cannot register type 'PCDM_BaseDriverPointer' twice
+  if typedef.spelling == "PCDM_BaseDriverPointer":
     return False
 
   # error: unknown type name 'Handle_Xw_Window'; did you mean 'Handle_Cocoa_Window'?
