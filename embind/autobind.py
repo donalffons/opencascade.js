@@ -1472,7 +1472,7 @@ def getEnumBindings(newChildren):
   print("generating bindings for enums...")
   for enum in newChildren:
     if enum.kind == clang.cindex.CursorKind.ENUM_DECL:
-      if not processEnum(enum):
+      if not processEnum(enum) or enum.spelling == "":
         continue
       bindingsOutput += "  enum_<" + enum.spelling + ">(\"" + enum.spelling + "\")" + os.linesep
       for enumChild in list(enum.get_children()):
