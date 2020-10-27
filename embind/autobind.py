@@ -676,11 +676,18 @@ def getCastMethodBindings(className, method):
   returnType = method.result_type.spelling
   const = "const" if method.is_const_method() else ""
   classQualifier = (className + "::" if not method.is_static_method() else "" ) + "*"
+
+  returnTypeHasNonPublicCopyConstructor = any(x.is_copy_constructor() and not x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC for x in method.result_type.get_pointee().get_declaration().get_children())
+
+  if returnTypeHasNonPublicCopyConstructor:
+    needReinterpretCast = True
+    returnType = method.result_type.get_pointee().get_declaration().spelling + "*"
+
   if needReinterpretCast:
     castedArgResults = list(map(getSingleArgumentBinding(False), args))
     somethingChanged = any(map(lambda x: x[1], castedArgResults))
     castedArgTypes = list(map(lambda x: x[0], castedArgResults))
-    if somethingChanged:
+    if somethingChanged or returnTypeHasNonPublicCopyConstructor:
       return ["reinterpret_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
     else:
       return ["static_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
