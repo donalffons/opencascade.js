@@ -1,0 +1,29 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Tests",
+      "request": "launch",
+      "runtimeArgs": [
+        "test"
+      ],
+      "runtimeExecutable": "yarn",
+      "runtimeVersion": "14.12.0",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/main.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/src"
+    }
+  ]
+}

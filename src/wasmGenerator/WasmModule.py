@@ -1,0 +1,774 @@
+import clang.cindex
+import os
+import subprocess
+
+from filter.filterClasses import filterClass
+from filter.filterMethods import filterMethod
+from filter.filterTypedefs import filterTypedef
+from filter.filterEnums import filterEnum
+
+class SkipException(Exception):
+  pass
+
+def getClassEmbindings(theClass):
+  children = theClass.get_children()
+  className = theClass.spelling
+  baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
+  if len(baseSpec) > 1:
+    raise SkipException("cannot handle multiple base classes (" + className + ")")
+
+  if len(baseSpec) > 0:
+    baseClassBinding = ", base<" + baseSpec[0].type.spelling + ">"
+  else:
+    baseClassBinding = ""
+
+  return "  class_<" + className + baseClassBinding + ">(\"" + className + "\")" + os.linesep
+
+def getMethodsEmbindings(theClass):
+  methodsBinding = ""
+  for child in theClass.get_children():
+    if not filterMethod(theClass, child):
+      continue
+    try:
+      pass
+      methodsBinding += getSingleMethodBinding(theClass, child)
+    except SkipException as e:
+      print(str(e))
+  return methodsBinding
+
+def getSingleMethodBinding(theClass, method):
+  className = theClass.spelling
+  if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD:
+    allOverloads = [m for m in theClass.get_children() if m.spelling == method.spelling]
+    if method.spelling.startswith("operator"):
+      return ""
+    overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(method) + 1)
+
+    if len(allOverloads) == 1:
+      functor = "&" + className + "::" + method.spelling
+    else:
+      returnType = method.result_type.spelling
+      const = "const" if method.is_const_method() else ""
+      args = ", ".join(list(map(lambda x: x.type.spelling + " " + x.spelling, list(method.get_arguments()))))
+      functor = "(" + returnType + " (" + ((className + "::") if not method.is_static_method() else "") + "*)(" + args + ") " + const + ") &" + className + "::" + method.spelling
+
+    if method.is_static_method():
+      functionCommand = "class_function"
+    else:
+      functionCommand = "function"
+
+    cast = getCastMethodBindings(theClass, method)
+    return "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())" + os.linesep
+
+  if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.USING_DECLARATION:
+    raise SkipException("Using declarations are not supported! (" + className + ", " + method.spelling + ")")
+  return ""
+
+def getCastMethodBindings(theClass, method):
+  className = theClass.spelling
+  args = list(method.get_arguments())
+  hasConstCharArg = any(any(x.spelling == "Standard_CString" for x in a.get_tokens()) for a in args)
+  hasRefArg = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE for x in args)
+  needReinterpretCast = hasConstCharArg or hasRefArg
+  returnType = method.result_type.spelling
+  const = "const" if method.is_const_method() else ""
+  classQualifier = (className + "::" if not method.is_static_method() else "" ) + "*"
+
+  returnTypeHasNonPublicCopyConstructor = any(x.is_copy_constructor() and not x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC for x in method.result_type.get_pointee().get_declaration().get_children())
+
+  if returnTypeHasNonPublicCopyConstructor:
+    needReinterpretCast = True
+    returnType = method.result_type.get_pointee().get_declaration().spelling + "*"
+
+  if needReinterpretCast:
+    castedArgResults = list(map(getSingleArgumentBinding(False), args))
+    somethingChanged = any(map(lambda x: x[1], castedArgResults))
+    castedArgTypes = list(map(lambda x: x[0], castedArgResults))
+    if somethingChanged or returnTypeHasNonPublicCopyConstructor:
+      return ["reinterpret_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
+    else:
+      return ["static_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
+  return ["", ""]
+
+def getSingleArgumentBinding(argNames = True, isConstructor = False):
+  def f(arg):
+    argChildren = list(arg.get_children())
+    argBinding = ""
+    hasDefaultValue = any(x.spelling == "=" for x in list(arg.get_tokens()))
+    isArray = not hasDefaultValue and len(argChildren) > 1 and argChildren[1].kind == clang.cindex.CursorKind.INTEGER_LITERAL
+    changed = False
+    if isArray:
+      const = "const " if list(arg.get_tokens())[0].spelling == "const" else ""
+      arrayCount = list(argChildren[1].get_tokens())[0].spelling
+      argBinding = const + argChildren[0].type.spelling + " (&" + (arg.spelling if argNames else "") + ")[" + arrayCount + "]"
+      changed = True
+    else:
+      typename = arg.type.spelling
+      if arg.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE:
+        tokenList = list(arg.get_tokens())
+        isConstRef = len(tokenList) > 0 and tokenList[0].spelling == "const"
+        if not isConstRef:
+          if arg.type.spelling[-2] == "*" or "".join(arg.type.spelling.rsplit("&", 1)).strip() in ["Standard_Boolean", "Standard_Real", "Standard_Integer"]: # types that can be copied
+            typename = "".join(arg.type.spelling.rsplit("&", 1))
+            changed = True
+          else:
+            if isConstructor:
+              typename = arg.type.spelling
+              changed = True
+            else:
+              typename = "const " + arg.type.spelling
+              changed = True
+      if any(x.spelling == "Standard_CString" for x in arg.get_tokens()):
+        typename = "std::string"
+        changed = True
+      argBinding = typename + ((" " + arg.spelling) if argNames else "")
+    return [argBinding, changed]
+  return f
+
+def getEpilogEmbindings(theClass):
+  nonPublicDestructor = any(x.kind == clang.cindex.CursorKind.DESTRUCTOR and not x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC for x in theClass.get_children())
+  placementDelete = next((x for x in theClass.get_children() if x.spelling == "operator delete" and len(list(x.get_arguments())) == 2), None) is not None
+  if nonPublicDestructor or placementDelete:
+    return "namespace emscripten { namespace internal { template<> void raw_destructor<" + theClass.spelling + ">(" + theClass.spelling + "* ptr) { /* do nothing */ } } }" + os.linesep
+  return ""
+
+def getPureVirtualMethods(theClass):
+  return list(filter(lambda x: x.is_pure_virtual_method(), list(theClass.get_children())))
+
+def isAbstractClass(theClass, tu):
+  allClasses = list(filter(lambda x:
+    x.kind == clang.cindex.CursorKind.CLASS_DECL and
+    not (
+      x.get_definition() is None or
+      not x == x.get_definition()
+    ),
+    tu.cursor.get_children()))
+  baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, list(theClass.get_children())))
+  baseClasses = list(map(lambda y: next((x for x in allClasses if x.spelling == y.type.spelling)), baseSpec))
+
+  pureVirtualMethods = getPureVirtualMethods(theClass)
+  if len(pureVirtualMethods) > 0:
+    return True
+  
+  pvmsInBaseClasses = list(map(lambda x: getPureVirtualMethods(x), baseClasses))
+
+  numPureVirtualMethods = 0
+  numImplementedPureVirtualMethods = 0
+  for bc in pvmsInBaseClasses:
+    for bcPvm in bc:
+      numPureVirtualMethods += 1
+      if bcPvm.spelling in list(map(lambda x: x.spelling, list(theClass.get_children()))):
+        numImplementedPureVirtualMethods += 1
+  
+  return numPureVirtualMethods > numImplementedPureVirtualMethods
+
+def getSimpleConstructorBinding(theClass):
+  children = list(theClass.get_children())
+  constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR, children))
+
+  if len(constructors) == 0:
+    return "    .constructor<>()" + os.linesep
+  publicConstructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
+  if len(publicConstructors) == 0 or len(publicConstructors) > 1:
+    return ""
+  standardConstructor = publicConstructors[0]
+  if not standardConstructor:
+    return ""
+
+  # if any(map(lambda x: x.spelling == "operator new" and not len(list(x.get_arguments())) == len(list(standardConstructor.get_arguments())), theClass.get_children())):
+  #   print("Operator new has different number of arguments than constructor. Skipping... " + theClass.spelling)
+  #   return ""
+    
+  argTypesBindings = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
+  
+  return "    .constructor<" + argTypesBindings + ">()" + os.linesep
+
+class overloadedConstrutorObject(object):
+  def __init__(self):
+    self.brief_comment = None
+  def get_arguments(self):
+    return self.arguments
+  def get_tokens(self):
+    return self.tokens
+  def get_children(self):
+    return self.children
+
+def getOverloadedConstructorsBinding(theClass, children = None):
+  if children is None:
+    children = list(theClass.get_children())
+  constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
+  if len(constructors) == 1:
+    return ""
+  constructorBindings = ""
+  allOverloads = [m for m in children if m.kind == clang.cindex.CursorKind.CONSTRUCTOR and m.access_specifier == clang.cindex.AccessSpecifier.PUBLIC]
+  if len(allOverloads) == 1:
+    raise Exception("Something weird happened")
+  for constructor in constructors:
+    overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
+
+    args = ", ".join(list(map(lambda x: getSingleArgumentBinding(True, True)(x)[0], list(constructor.get_arguments()))))
+    argNames = ", ".join(list(map(lambda x: x.spelling if not any(y.spelling == "Standard_CString" for y in x.get_tokens()) else x.spelling + ".c_str()", list(constructor.get_arguments()))))
+    argTypes = ", ".join(list(map(lambda x: getSingleArgumentBinding(False, True)(x)[0], list(constructor.get_arguments()))))
+
+    constructorBindings += "    struct " + constructor.spelling + overloadPostfix + " : public " + constructor.spelling + " {" + os.linesep
+    constructorBindings += "      " + constructor.spelling + overloadPostfix + "(" + args + ") : " + constructor.spelling + "(" + argNames + ") {}" + os.linesep
+    constructorBindings += "    };" + os.linesep
+    constructorBindings += "    class_<" + constructor.spelling + overloadPostfix + ", base<" + constructor.spelling + ">>(\"" + constructor.spelling + overloadPostfix + "\")" + os.linesep
+    constructorBindings += "      .constructor<" + argTypes + ">()" + os.linesep
+    constructorBindings += "    ;" + os.linesep
+
+  return constructorBindings
+
+def ignoreDuplicateTypedef(typedef, sortedTypedefs):
+  if typedef.underlying_typedef_type.spelling in [
+    "long",
+    "unsigned long",
+    "unsigned char",
+    "unsigned short",
+    "unsigned int",
+    "signed char",
+    "short",
+    "int",
+    "__int8_t",
+    "__uint8_t",
+    "__int16_t",
+    "__uint16_t",
+    "__int32_t",
+    "__uint32_t",
+    "__int64_t",
+    "__uint64_t",
+    "void *",
+    "char *",
+    "double",
+    "float",
+    "char",
+    "size_t",
+    "char16_t",
+    "struct _IO_FILE",
+    "Standard_Character *",
+    "Standard_Integer",
+    "BVH_Box<Standard_Real, 3>",
+    "Standard_ExtCharacter *",
+    "int (*)(...)",
+    "doublereal (*)(...)",
+    "void (*)(...)",
+    "void",
+    "XID",
+    "XKeyEvent",
+    "XButtonEvent",
+    "XCrossingEvent",
+    "XFocusChangeEvent",
+    "struct _XOC *",
+    "Standard_Byte *",
+    "Standard_Boolean (*)(const opencascade::handle<TCollection_HAsciiString> &)",
+    "Standard_Real"
+  ]:
+    return True
+
+  # --> underlying_typedef_type.spelling
+  # ----> type1.spelling
+  # ----> type2.spelling
+
+  # --> opencascade::handle<NCollection_BaseAllocator>
+  # ----> Handle_NCollection_BaseAllocator
+  # ----> TDF_HAllocator
+  # ----> IntSurf_Allocator
+  if (
+    typedef.underlying_typedef_type.spelling == "opencascade::handle<NCollection_BaseAllocator>" and
+    typedef.spelling in ["TDF_HAllocator", "IntSurf_Allocator"]
+  ):
+    return True
+
+  # --> NCollection_Vec3<Standard_Real>
+  # ----> Graphic3d_Vec3d
+  # ----> Select3D_Vec3
+  # ----> SelectMgr_Vec3
+  if (
+    typedef.underlying_typedef_type.spelling == "NCollection_Vec3<Standard_Real>" and
+    typedef.spelling in ["Select3D_Vec3", "SelectMgr_Vec3"]
+  ):
+    return True
+
+  # --> NCollection_Vec4<Standard_Real>
+  # ----> Graphic3d_Vec4d
+  # ----> SelectMgr_Vec4
+  if (
+    typedef.underlying_typedef_type.spelling == "NCollection_Vec4<Standard_Real>" and
+    typedef.spelling in ["SelectMgr_Vec4"]
+  ):
+    return True
+
+  # --> NCollection_Mat4<Standard_Real>
+  # ----> Graphic3d_Mat4d
+  # ----> SelectMgr_Mat4
+  if (
+    typedef.underlying_typedef_type.spelling == "NCollection_Mat4<Standard_Real>" and
+    typedef.spelling in ["SelectMgr_Mat4"]
+  ):
+    return True
+
+  # --> void (*)(NCollection_ListNode *, opencascade::handle<NCollection_BaseAllocator> &)
+  # ----> NCollection_DelMapNode
+  # ----> NCollection_DelListNode
+  if (
+    typedef.underlying_typedef_type.spelling == "void (*)(NCollection_ListNode *, opencascade::handle<NCollection_BaseAllocator> &)" and
+    typedef.spelling in ["NCollection_DelMapNode"]
+  ):
+    return True
+
+  # --> NCollection_List<TopoDS_Shape>
+  # ----> TopoDS_ListOfShape
+  # ----> TopTools_ListOfShape
+  if (
+    typedef.underlying_typedef_type.spelling == "NCollection_List<TopoDS_Shape>" and
+    typedef.spelling in ["TopoDS_ListOfShape"]
+  ):
+    return True
+
+  # --> NCollection_List<TopoDS_Shape>::Iterator
+  # ----> TopoDS_ListIteratorOfListOfShape
+  # ----> TopTools_ListIteratorOfListOfShape
+  if (
+    typedef.underlying_typedef_type == "NCollection_List<TopoDS_Shape>::Iterator" and
+    typedef.spelling in ["TopoDS_ListIteratorOfListOfShape"]
+  ):
+    return True
+
+  # --> NCollection_UBTree<Standard_Integer, Bnd_Box>
+  # ----> BRepBuilderAPI_BndBoxTree
+  # ----> BRepClass3d_BndBoxTree
+  # ----> ShapeAnalysis_BoxBndTree
+  if (
+    typedef.underlying_typedef_type.spelling == "NCollection_UBTree<Standard_Integer, Bnd_Box>" and
+    typedef.spelling in ["BRepClass3d_BndBoxTree", "ShapeAnalysis_BoxBndTree"]
+  ):
+    return True
+
+  # --> NCollection_IndexedDataMap<TCollection_AsciiString, Standard_Integer, TCollection_AsciiString>
+  # ----> StdStorage_MapOfTypes
+  # ----> Storage_PType
+  if (
+    typedef.underlying_typedef_type.spelling == "NCollection_IndexedDataMap<TCollection_AsciiString, Standard_Integer, TCollection_AsciiString>" and
+    typedef.spelling in ["StdStorage_MapOfTypes"]
+  ):
+    return True
+
+  # --> opencascade::handle<BVH_Tree<Standard_ShortReal, 3, BVH_QuadTree> >
+  # ----> QuadBvhHandle
+  # ----> Handle_Handle_QuadBvhHandle
+  if (
+    typedef.underlying_typedef_type.spelling == "opencascade::handle<BVH_Tree<Standard_ShortReal, 3, BVH_QuadTree> >" and
+    typedef.spelling in ["QuadBvhHandle"]
+  ):
+    return True
+
+  return False
+
+def getEnumBindings(enum):
+  bindingsOutput = "  enum_<" + enum.spelling + ">(\"" + enum.spelling + "\")" + os.linesep
+  for enumChild in list(enum.get_children()):
+    bindingsOutput += "    .value(\"" + enumChild.spelling + "\", " + enum.spelling + "::" + enumChild.spelling + ")" + os.linesep
+  bindingsOutput += "  ;" + os.linesep
+  return bindingsOutput
+
+def getHandleTypeBindings(typedefs):
+  bindingsOutput = ""
+  print("generating bindings for handle types...")
+
+  handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle"), typedefs))
+  for handleTypedef in handleTypedefs:
+    handleName = handleTypedef.spelling
+    targetType = handleTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
+    bindingsOutput += "  class_<" + handleName + ">(\"" + handleName + "\")" + os.linesep
+    bindingsOutput += "    .function(\"Nullify\", &" + handleName + "::Nullify)" + os.linesep
+    bindingsOutput += "    .function(\"IsNull\", &" + handleName + "::IsNull)" + os.linesep
+    bindingsOutput += "    .function(\"reset\", &" + handleName + "::reset, allow_raw_pointers())" + os.linesep
+    bindingsOutput += "    .function(\"operator_assign_1\", select_overload<" + handleName + "&(const " + handleName + "&)>(&" + handleName + "::operator=))" + os.linesep
+    bindingsOutput += "    .function(\"operator_assign_2\", select_overload<" + handleName + "&(const " + targetType + "*)>(&" + handleName + "::operator=), allow_raw_pointers())" + os.linesep
+    bindingsOutput += "    .function(\"operator_assign_3\", select_overload<" + handleName + "&(" + handleName + "&&)>(&" + handleName + "::operator=))" + os.linesep
+    bindingsOutput += "    .function(\"get\", select_overload<" + targetType + "*()const>(&" + handleName + "::get), allow_raw_pointers())" + os.linesep
+    bindingsOutput += "    .function(\"operator_dereference\", &" + handleName + "::operator->, allow_raw_pointers())" + os.linesep
+    bindingsOutput += "    .function(\"operator_bool\", &" + handleName + "::operator bool)" + os.linesep
+    bindingsOutput += "  ;" + os.linesep
+
+    oc1 = overloadedConstrutorObject()
+    oc1.spelling = handleName
+    oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc1.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc1.arguments = []
+
+    oc2 = overloadedConstrutorObject()
+    oc2.spelling = handleName
+    oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc2arg1type = overloadedConstrutorObject()
+    oc2arg1type.spelling = "const " + targetType + "*"
+    oc2arg1type.kind = None
+    oc2arg1 = overloadedConstrutorObject()
+    oc2arg1.type = oc2arg1type
+    oc2arg1.spelling = "thePtr"
+    oc2arg1.tokens = []
+    oc2arg1.children = []
+    oc2.arguments = [oc2arg1]
+
+    oc3 = overloadedConstrutorObject()
+    oc3.spelling = handleName
+    oc3.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc3.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc3arg1type = overloadedConstrutorObject()
+    oc3arg1type.spelling = "const " + handleName + "&"
+    oc3arg1type.kind = None
+    oc3arg1 = overloadedConstrutorObject()
+    oc3arg1.type = oc3arg1type
+    oc3arg1.spelling = "theHandle"
+    oc3arg1.tokens = []
+    oc3arg1.children = []
+    oc3.arguments = [oc3arg1]
+
+    bindingsOutput += getOverloadedConstructorsBinding(handleTypedef, [
+      oc1, oc2, oc3
+    ])
+
+  return bindingsOutput
+
+def getNCollection_Array1TypeBindings(typedefs):
+  bindingsOutput = ""
+  print("generating bindings for NCollection_Array1 types...")
+  nCollection_Array1Typedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("NCollection_Array1"), typedefs))
+  for nCollection_Array1Typedef in nCollection_Array1Typedefs:
+    theName = nCollection_Array1Typedef.spelling
+    theType = nCollection_Array1Typedef.underlying_typedef_type.get_template_argument_type(0).spelling
+    bindingsOutput += "  class_<" + theName + ">(\"" + theName + "\")" + os.linesep
+    bindingsOutput += "    .function(\"begin\", &" + theName + "::begin)" + os.linesep
+    bindingsOutput += "    .function(\"end\", &" + theName + "::end)" + os.linesep
+    bindingsOutput += "    .function(\"cbegin\", &" + theName + "::cbegin)" + os.linesep
+    bindingsOutput += "    .function(\"cend\", &" + theName + "::cend)" + os.linesep
+    bindingsOutput += "    .function(\"Init\", &" + theName + "::Init)" + os.linesep
+    bindingsOutput += "    .function(\"Size\", &" + theName + "::Size)" + os.linesep
+    bindingsOutput += "    .function(\"Length\", &" + theName + "::Length)" + os.linesep
+    bindingsOutput += "    .function(\"IsEmpty\", &" + theName + "::IsEmpty)" + os.linesep
+    bindingsOutput += "    .function(\"Lower\", &" + theName + "::Lower)" + os.linesep
+    bindingsOutput += "    .function(\"Upper\", &" + theName + "::Upper)" + os.linesep
+    bindingsOutput += "    .function(\"IsDeletable\", &" + theName + "::IsDeletable)" + os.linesep
+    bindingsOutput += "    .function(\"IsAllocated\", &" + theName + "::IsAllocated)" + os.linesep
+    bindingsOutput += "    .function(\"Assign\", &" + theName + "::Assign)" + os.linesep
+    bindingsOutput += "    .function(\"Move\", &" + theName + "::Move)" + os.linesep
+    bindingsOutput += "    // .function(\"operator_assign\", &" + theName + "::operator=)" + os.linesep
+    bindingsOutput += "    .function(\"First\", &" + theName + "::First)" + os.linesep
+    bindingsOutput += "    .function(\"ChangeFirst\", &" + theName + "::ChangeFirst)" + os.linesep
+    bindingsOutput += "    .function(\"Last\", &" + theName + "::Last)" + os.linesep
+    bindingsOutput += "    .function(\"ChangeLast\", &" + theName + "::ChangeLast)" + os.linesep
+    bindingsOutput += "    .function(\"Value\", &" + theName + "::Value)" + os.linesep
+    bindingsOutput += "    // .function(\"operator()_1\", ...)" + os.linesep
+    bindingsOutput += "    // .function(\"operator[]_1\", ...)" + os.linesep
+    bindingsOutput += "    .function(\"ChangeValue\", &" + theName + "::ChangeValue)" + os.linesep
+    bindingsOutput += "    // .function(\"operator()_2\", ...)" + os.linesep
+    bindingsOutput += "    // .function(\"operator[]_2\", ...)" + os.linesep
+    bindingsOutput += "    .function(\"SetValue\", &" + theName + "::SetValue)" + os.linesep
+    bindingsOutput += "    .function(\"Resize\", &" + theName + "::Resize)" + os.linesep
+    bindingsOutput += "  ;" + os.linesep
+
+    oc1 = overloadedConstrutorObject()
+    oc1.spelling = theName
+    oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc1.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc1.arguments = []
+
+    oc2 = overloadedConstrutorObject()
+    oc2.spelling = theName
+    oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc2arg1type = overloadedConstrutorObject()
+    oc2arg1type.spelling = "const Standard_Integer"
+    oc2arg1type.kind = None
+    oc2arg1 = overloadedConstrutorObject()
+    oc2arg1.type = oc2arg1type
+    oc2arg1.spelling = "theLower"
+    oc2arg1.tokens = []
+    oc2arg1.children = []
+    oc2arg2type = overloadedConstrutorObject()
+    oc2arg2type.spelling = "const Standard_Integer"
+    oc2arg2type.kind = None
+    oc2arg2 = overloadedConstrutorObject()
+    oc2arg2.type = oc2arg2type
+    oc2arg2.spelling = "theUpper"
+    oc2arg2.tokens = []
+    oc2arg2.children = []
+    oc2.arguments = [oc2arg1, oc2arg2]
+
+    oc3 = overloadedConstrutorObject()
+    oc3.spelling = theName
+    oc3.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc3.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc3arg1type = overloadedConstrutorObject()
+    oc3arg1type.spelling = "const " + theName + "&"
+    oc3arg1type.kind = None
+    oc3arg1 = overloadedConstrutorObject()
+    oc3arg1.type = oc3arg1type
+    oc3arg1.spelling = "theOther"
+    oc3arg1.tokens = []
+    oc3arg1.children = []
+    oc3.arguments = [oc3arg1]
+
+    oc4 = overloadedConstrutorObject()
+    oc4.spelling = theName
+    oc4.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc4.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc4arg1type = overloadedConstrutorObject()
+    oc4arg1type.spelling = "const " + theType + "&"
+    oc4arg1type.kind = None
+    oc4arg1 = overloadedConstrutorObject()
+    oc4arg1.type = oc4arg1type
+    oc4arg1.spelling = "theBegin"
+    oc4arg1.tokens = []
+    oc4arg1.children = []
+    oc4arg2type = overloadedConstrutorObject()
+    oc4arg2type.spelling = "const Standard_Integer"
+    oc4arg2type.kind = None
+    oc4arg2 = overloadedConstrutorObject()
+    oc4arg2.type = oc4arg2type
+    oc4arg2.spelling = "theLower"
+    oc4arg2.tokens = []
+    oc4arg2.children = []
+    oc4arg3type = overloadedConstrutorObject()
+    oc4arg3type.spelling = "const Standard_Integer"
+    oc4arg3type.kind = None
+    oc4arg3 = overloadedConstrutorObject()
+    oc4arg3.type = oc4arg2type
+    oc4arg3.spelling = "theUpper"
+    oc4arg3.tokens = []
+    oc4arg3.children = []
+    oc4.arguments = [oc4arg1, oc4arg2, oc4arg3]
+
+    bindingsOutput += getOverloadedConstructorsBinding(nCollection_Array1Typedef, [
+      oc1, oc2, oc3, oc4
+    ])
+  
+  return bindingsOutput
+
+def getNCollection_ListTypeBindings(typedefs):
+  bindingsOutput = ""
+  print("generating bindings for NCollection_List types...")
+
+  nCollection_ListTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("NCollection_List") and not x.underlying_typedef_type.spelling.endswith("::Iterator"), typedefs))
+  for nCollection_ListTypedef in nCollection_ListTypedefs:
+    theName = nCollection_ListTypedef.spelling
+    theType = nCollection_ListTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
+
+    bindingsOutput += "  class_<" + theName + ">(\"" + theName + "\")" + os.linesep
+    bindingsOutput += "    .function(\"begin\", &" + theName + "::begin)" + os.linesep
+    bindingsOutput += "    .function(\"end\", &" + theName + "::end)" + os.linesep
+    bindingsOutput += "    .function(\"cbegin\", &" + theName + "::cbegin)" + os.linesep
+    bindingsOutput += "    .function(\"cend\", &" + theName + "::cend)" + os.linesep
+    bindingsOutput += "    .function(\"Size\", &" + theName + "::Size)" + os.linesep
+    bindingsOutput += "    .function(\"Assign\", static_cast<" + theName + "& (" + theName + "::*) (const " + theName + "&) >((" + theName + "& (" + theName + "::*)(const " + theName + "&) ) &" + theName + "::Assign))" + os.linesep
+    bindingsOutput += "    .function(\"operator_assign\", static_cast<" + theName + "& (" + theName + "::*) (const " + theName + "&) >((" + theName + "& (" + theName + "::*)(const " + theName + "&) ) &" + theName + "::operator=))" + os.linesep
+    bindingsOutput += "    .function(\"Clear\", &" + theName + "::Clear)" + os.linesep
+    bindingsOutput += "    .function(\"First_1\", static_cast<const " + theType + "& (" + theName + "::*) () const>((const " + theType + "& (" + theName + "::*)() const) &" + theName + "::First))" + os.linesep
+    bindingsOutput += "    .function(\"First_2\", static_cast<" + theType + "& (" + theName + "::*) () >((" + theType + "& (" + theName + "::*)() ) &" + theName + "::First))" + os.linesep
+    bindingsOutput += "    .function(\"Last_1\", static_cast<const " + theType + "& (" + theName + "::*) () const>((const " + theType + "& (" + theName + "::*)() const) &" + theName + "::Last))" + os.linesep
+    bindingsOutput += "    .function(\"Last_2\", static_cast<" + theType + "& (" + theName + "::*) () >((" + theType + "& (" + theName + "::*)() ) &" + theName + "::Last))" + os.linesep
+    bindingsOutput += "    .function(\"Append_1\", static_cast<" + theType + "& (" + theName + "::*) (const " + theType + "&) >((" + theType + "& (" + theName + "::*)(const " + theType + "&) ) &" + theName + "::Append))" + os.linesep
+    bindingsOutput += "    // .function(\"Append_2\", ...)" + os.linesep
+    bindingsOutput += "    .function(\"Append_3\", static_cast<void (" + theName + "::*) (" + theName + "&) >((void (" + theName + "::*)(" + theName + "&) ) &" + theName + "::Append))" + os.linesep
+    bindingsOutput += "    .function(\"Prepend_1\", static_cast<" + theType + "& (" + theName + "::*) (const " + theType + "&) >((" + theType + "& (" + theName + "::*)(const " + theType + "&) ) &" + theName + "::Prepend))" + os.linesep
+    bindingsOutput += "    .function(\"Prepend_2\", static_cast<void (" + theName + "::*) (" + theName + "&) >((void (" + theName + "::*)(" + theName + "&) ) &" + theName + "::Prepend))" + os.linesep
+    bindingsOutput += "    .function(\"RemoveFirst\", &" + theName + "::RemoveFirst)" + os.linesep
+    bindingsOutput += "    // .function(\"Remove_1\", ...)" + os.linesep
+    bindingsOutput += "    // .function(\"Remove_2\", ...)" + os.linesep
+    bindingsOutput += "    // .function(\"InsertBefore_1\", ...)" + os.linesep
+    bindingsOutput += "    // .function(\"InsertBefore_2\", ...)" + os.linesep
+    bindingsOutput += "    // .function(\"InsertAfter_1\", ...)" + os.linesep
+    bindingsOutput += "    // .function(\"InsertAfter_2\", ...)" + os.linesep
+    bindingsOutput += "    .function(\"Reverse\", &" + theName + "::Reverse)" + os.linesep
+    bindingsOutput += "    // .function(\"Contains\", ...)" + os.linesep
+    bindingsOutput += "  ;" + os.linesep
+
+    oc1 = overloadedConstrutorObject()
+    oc1.spelling = theName
+    oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc1.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc1.arguments = []
+
+    oc2 = overloadedConstrutorObject()
+    oc2.spelling = theName
+    oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc2arg1type = overloadedConstrutorObject()
+    oc2arg1type.spelling = "const Handle_NCollection_BaseAllocator&"
+    oc2arg1type.kind = None
+    oc2arg1 = overloadedConstrutorObject()
+    oc2arg1.type = oc2arg1type
+    oc2arg1.spelling = "theAllocator"
+    oc2arg1.tokens = []
+    oc2arg1.children = []
+    oc2.arguments = [oc2arg1]
+
+    oc3 = overloadedConstrutorObject()
+    oc3.spelling = theName
+    oc3.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc3.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc3arg1type = overloadedConstrutorObject()
+    oc3arg1type.spelling = "const " + theName + "&"
+    oc3arg1type.kind = None
+    oc3arg1 = overloadedConstrutorObject()
+    oc3arg1.type = oc3arg1type
+    oc3arg1.spelling = "theOther"
+    oc3arg1.tokens = []
+    oc3arg1.children = []
+    oc3.arguments = [oc3arg1]
+
+    bindingsOutput += getOverloadedConstructorsBinding(nCollection_ListTypedef, [
+      oc1, oc2, oc3
+    ])
+  
+  return bindingsOutput
+
+class WasmModule:
+  def __init__(self, name):
+    self.name = name
+    self.headerFiles = []
+    self.sourceFiles = []
+
+  def addHeaderFile(self, file):
+    self.headerFiles.append(file)
+
+  def addSourceFile(self, file):
+    self.sourceFiles.append(file)
+
+  def parse(self, includeFiles, additionalIncludePaths, additionalSystemIncludePaths):
+    includePathArgs = \
+      list(dict.fromkeys(map(lambda x: "-I" + os.path.dirname(x), self.headerFiles))) + \
+      list(map(lambda x: "-I" + x, additionalIncludePaths)) + \
+      list(map(lambda x: "-isystem" + x, additionalSystemIncludePaths))
+    self.includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", list(sorted(includeFiles))))
+
+    libFolder = "/clang/clang_10/lib"
+    clang.cindex.Config.library_path = libFolder
+    index = clang.cindex.Index.create()
+    self.tu = index.parse(
+      "main.h", [
+        "-x",
+        "c++",
+        "-stdlib=libc++",
+        "-D__EMSCRIPTEN__"
+      ] + includePathArgs,
+      [["main.h", self.includeDirectives]]
+    )
+    
+    if len(self.tu.diagnostics) > 0:
+      print("Diagnostic Messages:")
+      for d in self.tu.diagnostics:
+        print("  " + d.format())
+
+  def generateEmbindings(self, outputFile):
+    self.embindFile = outputFile
+
+    bindingsFile = open(self.embindFile, "w")
+    bindingsFile.write(
+      self.includeDirectives + "\n" +
+      "\n" +
+      "#include <emscripten/bind.h>\n" +
+      "using namespace emscripten;\n" +
+      "\n" +
+      "EMSCRIPTEN_BINDINGS(" + self.name + ") {\n"
+    )
+
+    for child in self.tu.cursor.get_children():
+      if child.get_definition() is None or not child == child.get_definition():
+        continue
+      if not child.extent.start.file.name in self.headerFiles:
+        continue
+      if not filterClass(child):
+        continue
+      if child.kind == clang.cindex.CursorKind.CLASS_DECL:
+        try:
+          if not child.type.get_num_template_arguments() == -1:
+            print("Cannot handle template classes (must be typedef'd): " + child.spelling)
+            continue
+          bindingsFile.write(getClassEmbindings(child))
+          isAbstract = isAbstractClass(child, self.tu)
+          if not isAbstract:
+            bindingsFile.write(getSimpleConstructorBinding(child))
+          bindingsFile.write(getMethodsEmbindings(child))
+          bindingsFile.write("  ;" + "\n")
+          if not isAbstract:
+            bindingsFile.write(getOverloadedConstructorsBinding(child))
+        except SkipException as e:
+          print(str(e))
+
+    typedefs = filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL, self.tu.cursor.get_children())
+
+    sortedTypedefs = {}
+    for child in typedefs:
+      if child.get_definition() is None or not child == child.get_definition():
+        continue
+      if not child.extent.start.file.name in self.headerFiles:
+        continue
+      if not filterTypedef(child):
+        continue
+      if not child.underlying_typedef_type.spelling in sortedTypedefs:
+        sortedTypedefs[child.underlying_typedef_type.spelling] = []
+      sortedTypedefs[child.underlying_typedef_type.spelling].append(child)
+    
+    filteredTypedefs = []
+    for key, children in sortedTypedefs.items():
+      if len(children) == 1:
+        filteredTypedefs.append(children[0])
+      else:
+        allNames = map(lambda x: x.spelling, children)
+        deDupedCount = len(list(dict.fromkeys(allNames)))
+        if deDupedCount == 1 and not any(x.spelling == children[0].spelling for x in filteredTypedefs):
+          filteredTypedefs.append(children[0])
+        else:
+          for child in children:
+            if not ignoreDuplicateTypedef(child, sortedTypedefs):
+              filteredTypedefs.append(child)
+
+    bindingsFile.write(getHandleTypeBindings(filteredTypedefs))
+    bindingsFile.write(getNCollection_Array1TypeBindings(filteredTypedefs))
+    bindingsFile.write(getNCollection_ListTypeBindings(filteredTypedefs))
+
+    for child in self.tu.cursor.get_children():
+      if child.get_definition() is None or not child == child.get_definition():
+        continue
+      if not child.extent.start.file.name in self.headerFiles:
+        continue
+      if not filterEnum(child):
+        continue
+      if child.kind == clang.cindex.CursorKind.ENUM_DECL:
+        bindingsFile.write(getEnumBindings(child))
+
+    bindingsFile.write("}" + os.linesep + os.linesep)
+
+    for child in self.tu.cursor.get_children():
+      if child.get_definition() is None or not child == child.get_definition():
+        continue
+      if not child.extent.start.file.name in self.headerFiles:
+        continue
+      if not filterClass(child):
+        continue
+      if child.kind == clang.cindex.CursorKind.CLASS_DECL:
+        bindingsFile.write(getEpilogEmbindings(child))
+
+  def build(self, includePaths, libraries, outputFile):
+    includePathArgs = list(dict.fromkeys(map(lambda x: "-I" + os.path.dirname(x), self.headerFiles)))
+    command = [
+      'em++',
+      *self.sourceFiles,
+      "--bind", self.embindFile,
+      *list(map(lambda x: "-I" + x, includePaths)),
+      # *libraries,
+      "-s", "SIDE_MODULE=1",
+      # "-s", "EXPORT_ALL=1",
+      "-s", "ASSERTIONS=1",
+      "-s", "ALLOW_MEMORY_GROWTH=1",
+      # "-s", "WARN_ON_UNDEFINED_SYMBOLS=0",
+      # "-s", "ERROR_ON_UNDEFINED_SYMBOLS=0",
+      "-s", "SAFE_HEAP=1",
+      "-O2",
+      # "-g",
+      "-o", outputFile
+    ]
+    subprocess.call(command)
+  

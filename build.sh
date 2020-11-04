@@ -6,7 +6,6 @@ while true; do
     "Build opencascade.js in docker container (run option 1 before using this option)"
     "Run tests (run option 1 before using this option)"
     "Start opencascade.js docker container with a terminal for development & debugging (run option 1 before using this option)"
-    "Clear all caches"
     "Quit"
   )
 
@@ -20,20 +19,18 @@ while true; do
       2)
         echo "Building opencascade.js in docker container..."
         docker run --init -it \
-          -v "$(pwd)/build/":"/opencascade/build/" \
-          -v "$(pwd)/dist/":"/opencascade/dist/" \
-          -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
-          -v "$(pwd)/embind/":"/opencascade/embind/" \
+          -v "$(pwd)/dist/":"/opencascade.js/dist/" \
+          -v "$(pwd)/src/":"/opencascade.js/src/" \
+          -v "$(pwd)/build/":"/opencascade.js/build/" \
           opencascade.js build
         break
         ;;
       3)
         echo "Running tests for opencascade.js..."
         docker run --init -it \
-          -v "$(pwd)/build/":"/opencascade/build/" \
-          -v "$(pwd)/dist/":"/opencascade/dist/" \
-          -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
-          -v "$(pwd)/embind/":"/opencascade/embind/" \
+          -v "$(pwd)/dist/":"/opencascade.js/dist/" \
+          -v "$(pwd)/src/":"/opencascade.js/src/" \
+          -v "$(pwd)/build/":"/opencascade.js/build/" \
           opencascade.js test
         break
         ;;
@@ -41,20 +38,13 @@ while true; do
         echo "Starting opencascade.js docker container with a terminal for development & debugging..."
         docker run --init -it \
           --entrypoint=/bin/bash \
-          -v "$(pwd)/build/":"/opencascade/build/" \
-          -v "$(pwd)/dist/":"/opencascade/dist/" \
-          -v "$(pwd)/emscripten-cache/":"/emscripten/upstream/emscripten/cache/" \
-          -v "$(pwd)/build/":"/opencascade/build/" \
-          -v "$(pwd)/embind/":"/opencascade/embind/" \
+          -v "$(pwd)/dist/":"/opencascade.js/dist/" \
+          -v "$(pwd)/src/":"/opencascade.js/src/" \
+          -v "$(pwd)/build/":"/opencascade.js/build/" \
           opencascade.js
         break
         ;;
       5)
-        echo "Clearing all caches..."
-        sudo rm build emscripten-cache -fr
-        break
-        ;;
-      6)
         echo "Bye..."
         exit
         ;;

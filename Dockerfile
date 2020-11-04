@@ -103,8 +103,56 @@ RUN \
 WORKDIR /rapidjson/
 RUN \
   git clone https://github.com/Tencent/rapidjson.git .
-  
-WORKDIR /opencascade/
-COPY . .
 
-ENTRYPOINT ["./run.sh"]
+WORKDIR /occt/
+RUN \
+  curl "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=278da162dc52c26c8cfe9d002a6f07db12405194;sf=tgz" -o occt.tar.gz && \
+  tar -xvf occt.tar.gz && \
+  cd occt-278da16/ && \
+  mkdir build && \
+  cd build && \
+  emcmake cmake .. \
+    -DBUILD_LIBRARY_TYPE=Static \
+    -DBUILD_MODULE_Draw=OFF \
+    -DBUILD_MODULE_TKXMesh=OFF \
+    -D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=/freetype/include/freetype \
+    -D3RDPARTY_FREETYPE_INCLUDE_DIR_ft2build=/freetype/include \
+    # -DCMAKE_CXX_FLAGS="-fPIC -frtti -s DEMANGLE_SUPPORT=1" \
+    -D3RDPARTY_INCLUDE_DIRS="\
+      /vtk/build/Filters/General;\
+      /vtk/Filters/General;\
+      /vtk/build/Common/ExecutionModel;\
+      /vtk/build/Common/Math;\
+      /vtk/build/Common/Transforms;\
+      /vtk/Common/Transforms;\
+      /vtk/build/Filters/Core;\
+      /vtk/build/Rendering/Core;\
+      /vtk/Common/ExecutionModel;\
+      /vtk/Common/Math;\
+      /vtk/build/Common/DataModel;\
+      /vtk/Common/DataModel;\
+      /vtk/Rendering/Core;\
+      /vtk/Utilities/KWIML;\
+      /vtk/build/Common/Core;\
+      ../regal/regal-master/src/apitrace/thirdparty/khronos/;\
+      /fontconfig" && \
+    emmake make -j$(nproc)
+  # && \
+  # emcmake cmake .. \
+  #   -DCMAKE_BUILD_TYPE=Release \
+  #   -D3RDPARTY_VTK_INCLUDE_DIR=/vtk/Common/Core/ \
+  #   -DUSE_GLES2=ON \
+  #   -DBUILD_ADDITIONAL_TOOLKITS=ON \
+  #   -DBUILD_MODULE_Visualization=ON \
+  #   -DBUILD_MODULE_ApplicationFramework=ON \
+  #   -DBUILD_TOOLKITS=TKIVtk TKIVtkDraw \
+  #   -DUSE_VTK=ON
+
+# wasm-ld: error: duplicate symbol: DISCRETALGO
+# RUN rm /occt/occt-278da16/build/lin32/clang/lib/libTKXMesh.a
+
+WORKDIR /opencascade.js/
+RUN mkdir build
+WORKDIR /opencascade.js/src/
+
+ENTRYPOINT [ "./main.py" ]

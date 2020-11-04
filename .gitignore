@@ -1,7 +1,4 @@
 /build/
-yarn-error.log
-.vscode/
-/emscripten-cache/
-/node_modules/
-/types/
-/actions-runner/
+/dist/
+__pycache__
+*.pyc
