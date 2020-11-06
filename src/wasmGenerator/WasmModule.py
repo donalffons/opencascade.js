@@ -7,6 +7,8 @@ from filter.filterMethods import filterMethod
 from filter.filterTypedefs import filterTypedef
 from filter.filterEnums import filterEnum
 
+from enum import Enum
+
 class SkipException(Exception):
   pass
 
@@ -624,17 +626,31 @@ def getNCollection_ListTypeBindings(typedefs):
   
   return bindingsOutput
 
+class ModuleType:
+  Standalone = 1
+  DynamicMain = 2
+  DynamicSide = 3
+
 class WasmModule:
-  def __init__(self, name):
+  def __init__(self, name, moduleType):
     self.name = name
     self.headerFiles = []
     self.sourceFiles = []
+    self.libraryFiles = []
+    self.moduleType = moduleType
+    self.buildSettings = []
 
   def addHeaderFile(self, file):
     self.headerFiles.append(file)
 
   def addSourceFile(self, file):
     self.sourceFiles.append(file)
+
+  def addLibraryFile(self, file):
+    self.libraryFiles.append(file)
+
+  def setBuildSettings(self, settings):
+    self.buildSettings = settings
 
   def parse(self, includeFiles, additionalIncludePaths, additionalSystemIncludePaths):
     includePathArgs = \
@@ -713,6 +729,12 @@ class WasmModule:
     
     filteredTypedefs = []
     for key, children in sortedTypedefs.items():
+      skip = False
+      for child in children:
+        if ignoreDuplicateTypedef(child, sortedTypedefs):
+          skip = True
+      if skip:
+        continue
       if len(children) == 1:
         filteredTypedefs.append(children[0])
       else:
@@ -722,8 +744,7 @@ class WasmModule:
           filteredTypedefs.append(children[0])
         else:
           for child in children:
-            if not ignoreDuplicateTypedef(child, sortedTypedefs):
-              filteredTypedefs.append(child)
+            filteredTypedefs.append(child)
 
     bindingsFile.write(getHandleTypeBindings(filteredTypedefs))
     bindingsFile.write(getNCollection_Array1TypeBindings(filteredTypedefs))
@@ -751,24 +772,35 @@ class WasmModule:
       if child.kind == clang.cindex.CursorKind.CLASS_DECL:
         bindingsFile.write(getEpilogEmbindings(child))
 
-  def build(self, includePaths, libraries, outputFile):
+  def build(self, includePaths, outputFile):
     includePathArgs = list(dict.fromkeys(map(lambda x: "-I" + os.path.dirname(x), self.headerFiles)))
     command = [
       'em++',
       *self.sourceFiles,
       "--bind", self.embindFile,
       *list(map(lambda x: "-I" + x, includePaths)),
-      # *libraries,
-      "-s", "SIDE_MODULE=1",
+      *self.libraryFiles,
+      "-s", "SIDE_MODULE=" + ("1" if self.moduleType == ModuleType.DynamicSide else "0"),
+      "-s", "MAIN_MODULE=" + ("1" if self.moduleType == ModuleType.DynamicMain else "0"),
       # "-s", "EXPORT_ALL=1",
-      "-s", "ASSERTIONS=1",
+      # "-s", "ASSERTIONS=1",
       "-s", "ALLOW_MEMORY_GROWTH=1",
       # "-s", "WARN_ON_UNDEFINED_SYMBOLS=0",
       # "-s", "ERROR_ON_UNDEFINED_SYMBOLS=0",
-      "-s", "SAFE_HEAP=1",
-      "-O2",
-      # "-g",
-      "-o", outputFile
+      # "-s", "ALLOW_MEMORY_GROWTH=1",
+      # "-s", "NO_DYNAMIC_EXECUTION=1",
+      # "-s", "SAFE_HEAP=1",
+      # "-s", "EXIT_RUNTIME=0",
+      '-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1',
+      "-O3",
+      # "-std=c++1z",
+      # "-s", "DEMANGLE_SUPPORT=1",
+      # "-s", "DISABLE_EXCEPTION_CATCHING=0",
+      # "--profiling",
+      # " -fsanitize=undefined",
+      # "-g4",
+      *self.buildSettings,
+      "-o", outputFile + (".wasm" if self.moduleType == ModuleType.DynamicSide else ".js")
     ]
     subprocess.call(command)
   

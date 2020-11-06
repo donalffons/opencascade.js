@@ -1,4 +1,4 @@
-FROM emscripten/emsdk:2.0.7
+FROM emscripten/emsdk:2.0.8
 
 RUN apt update -y
 RUN apt install -y build-essential python3 python3-pip git cmake bash curl npm
@@ -106,18 +106,19 @@ RUN \
 
 WORKDIR /occt/
 RUN \
-  curl "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=278da162dc52c26c8cfe9d002a6f07db12405194;sf=tgz" -o occt.tar.gz && \
+  curl "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=628c0211d53c7fe1036a85e7a7b2b067c9c50f7a;sf=tgz" -o occt.tar.gz && \
   tar -xvf occt.tar.gz && \
-  cd occt-278da16/ && \
+  cd occt-628c021/ && \
   mkdir build && \
   cd build && \
   emcmake cmake .. \
+    -DCMAKE_BUILD_TYPE=Release \
     -DBUILD_LIBRARY_TYPE=Static \
+    -DCMAKE_CXX_FLAGS="-DIGNORE_NO_ATOMICS=1 -frtti -fPIC" \
     -DBUILD_MODULE_Draw=OFF \
     -DBUILD_MODULE_TKXMesh=OFF \
     -D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=/freetype/include/freetype \
     -D3RDPARTY_FREETYPE_INCLUDE_DIR_ft2build=/freetype/include \
-    # -DCMAKE_CXX_FLAGS="-fPIC -frtti -s DEMANGLE_SUPPORT=1" \
     -D3RDPARTY_INCLUDE_DIRS="\
       /vtk/build/Filters/General;\
       /vtk/Filters/General;\
@@ -147,9 +148,6 @@ RUN \
   #   -DBUILD_MODULE_ApplicationFramework=ON \
   #   -DBUILD_TOOLKITS=TKIVtk TKIVtkDraw \
   #   -DUSE_VTK=ON
-
-# wasm-ld: error: duplicate symbol: DISCRETALGO
-# RUN rm /occt/occt-278da16/build/lin32/clang/lib/libTKXMesh.a
 
 WORKDIR /opencascade.js/
 RUN mkdir build
