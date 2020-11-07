@@ -632,13 +632,15 @@ class ModuleType:
   DynamicSide = 3
 
 class WasmModule:
-  def __init__(self, name, moduleType):
+  def __init__(self, name, moduleType, embindFile, outputFile):
     self.name = name
     self.headerFiles = []
     self.sourceFiles = []
     self.libraryFiles = []
     self.moduleType = moduleType
     self.buildSettings = []
+    self.embindFile = embindFile
+    self.outputFile = outputFile
 
   def addHeaderFile(self, file):
     self.headerFiles.append(file)
@@ -677,9 +679,7 @@ class WasmModule:
       for d in self.tu.diagnostics:
         print("  " + d.format())
 
-  def generateEmbindings(self, outputFile):
-    self.embindFile = outputFile
-
+  def generateEmbindings(self):
     bindingsFile = open(self.embindFile, "w")
     bindingsFile.write(
       self.includeDirectives + "\n" +
@@ -772,16 +772,18 @@ class WasmModule:
       if child.kind == clang.cindex.CursorKind.CLASS_DECL:
         bindingsFile.write(getEpilogEmbindings(child))
 
-  def build(self, includePaths, outputFile):
+  def build(self, includePaths):
     includePathArgs = list(dict.fromkeys(map(lambda x: "-I" + os.path.dirname(x), self.headerFiles)))
+    moduleFlags = ["-DIGNORE_NO_ATOMICS=1", "-frtti", "-fPIC"] if not self.moduleType == ModuleType.Standalone else []
     command = [
-      'em++',
+      'emcc',
       *self.sourceFiles,
       "--bind", self.embindFile,
       *list(map(lambda x: "-I" + x, includePaths)),
       *self.libraryFiles,
       "-s", "SIDE_MODULE=" + ("1" if self.moduleType == ModuleType.DynamicSide else "0"),
       "-s", "MAIN_MODULE=" + ("1" if self.moduleType == ModuleType.DynamicMain else "0"),
+      *moduleFlags,
       # "-s", "EXPORT_ALL=1",
       # "-s", "ASSERTIONS=1",
       "-s", "ALLOW_MEMORY_GROWTH=1",
@@ -800,7 +802,7 @@ class WasmModule:
       # " -fsanitize=undefined",
       # "-g4",
       *self.buildSettings,
-      "-o", outputFile + (".wasm" if self.moduleType == ModuleType.DynamicSide else ".js")
+      "-o", self.outputFile + (".wasm" if self.moduleType == ModuleType.DynamicSide else ".js")
     ]
     subprocess.call(command)
   

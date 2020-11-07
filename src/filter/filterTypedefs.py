@@ -1,4 +1,7 @@
 def filterTypedef(typedef):
+  if typedef.spelling == "Handle_Cocoa_Window":
+    return False
+
   # error: ?
   if (
     typedef.spelling == "Handle_Font_BRepFont" or
