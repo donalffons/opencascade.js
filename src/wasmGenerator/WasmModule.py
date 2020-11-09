@@ -626,13 +626,86 @@ def getNCollection_ListTypeBindings(typedefs):
   
   return bindingsOutput
 
+def getNCollection_SequenceTypeBindings(typedefs):
+  bindingsOutput = ""
+  print("generating bindings for NCollection_Sequence types...")
+
+  nCollection_ListTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("NCollection_Sequence") and not x.underlying_typedef_type.spelling.endswith("::Iterator"), typedefs))
+  for nCollection_ListTypedef in nCollection_ListTypedefs:
+    theName = nCollection_ListTypedef.spelling
+    theType = nCollection_ListTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
+
+    bindingsOutput += "  class_<" + theName + ">(\"" + theName + "\")" + os.linesep
+    bindingsOutput += "    .function(\"begin\", &" + theName + "::begin)" + os.linesep
+    bindingsOutput += "    .function(\"end\", &" + theName + "::end)" + os.linesep
+    bindingsOutput += "    .function(\"cbegin\", &" + theName + "::cbegin)" + os.linesep
+    bindingsOutput += "    .function(\"cend\", &" + theName + "::cend)" + os.linesep
+    bindingsOutput += "    .function(\"Size\", &" + theName + "::Size)" + os.linesep
+    bindingsOutput += "    .function(\"Length\", &" + theName + "::Length)" + os.linesep
+    bindingsOutput += "    .function(\"Lower\", &" + theName + "::Lower)" + os.linesep
+    bindingsOutput += "    .function(\"Upper\", &" + theName + "::Upper)" + os.linesep
+    bindingsOutput += "    .function(\"IsEmpty\", &" + theName + "::IsEmpty)" + os.linesep
+    bindingsOutput += "    .function(\"Reverse\", &" + theName + "::Reverse)" + os.linesep
+    bindingsOutput += "    .function(\"Exchange\", &" + theName + "::Exchange)" + os.linesep
+    bindingsOutput += "    .function(\"Clear\", &" + theName + "::Clear)" + os.linesep
+    bindingsOutput += "    .function(\"Assign\", &" + theName + "::Assign)" + os.linesep
+    bindingsOutput += "  ;" + os.linesep
+
+    oc1 = overloadedConstrutorObject()
+    oc1.spelling = theName
+    oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc1.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc1.arguments = []
+
+    oc2 = overloadedConstrutorObject()
+    oc2.spelling = theName
+    oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc2arg1type = overloadedConstrutorObject()
+    oc2arg1type.spelling = "const Handle_NCollection_BaseAllocator&"
+    oc2arg1type.kind = None
+    oc2arg1 = overloadedConstrutorObject()
+    oc2arg1.type = oc2arg1type
+    oc2arg1.spelling = "theAllocator"
+    oc2arg1.tokens = []
+    oc2arg1.children = []
+    oc2.arguments = [oc2arg1]
+
+    oc3 = overloadedConstrutorObject()
+    oc3.spelling = theName
+    oc3.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc3.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc3arg1type = overloadedConstrutorObject()
+    oc3arg1type.spelling = "const " + theName + "&"
+    oc3arg1type.kind = None
+    oc3arg1 = overloadedConstrutorObject()
+    oc3arg1.type = oc3arg1type
+    oc3arg1.spelling = "theOther"
+    oc3arg1.tokens = []
+    oc3arg1.children = []
+    oc3.arguments = [oc3arg1]
+
+    bindingsOutput += getOverloadedConstructorsBinding(nCollection_ListTypedef, [
+      oc1, oc2, oc3
+    ])
+  
+  return bindingsOutput
+
 class ModuleType:
   Standalone = 1
   DynamicMain = 2
   DynamicSide = 3
 
+class BuildType:
+  Debug = "debug"
+  Release = "release"
+
+class EnvType:
+  Web = "web"
+  Node = "node"
+
 class WasmModule:
-  def __init__(self, name, moduleType, embindFile, outputFile):
+  def __init__(self, name, moduleType, embindFile, outputFile, buildType, envType):
     self.name = name
     self.headerFiles = []
     self.sourceFiles = []
@@ -641,6 +714,8 @@ class WasmModule:
     self.buildSettings = []
     self.embindFile = embindFile
     self.outputFile = outputFile
+    self.buildType = buildType
+    self.envType = envType
 
   def addHeaderFile(self, file):
     self.headerFiles.append(file)
@@ -749,6 +824,7 @@ class WasmModule:
     bindingsFile.write(getHandleTypeBindings(filteredTypedefs))
     bindingsFile.write(getNCollection_Array1TypeBindings(filteredTypedefs))
     bindingsFile.write(getNCollection_ListTypeBindings(filteredTypedefs))
+    bindingsFile.write(getNCollection_SequenceTypeBindings(filteredTypedefs))
 
     for child in self.tu.cursor.get_children():
       if child.get_definition() is None or not child == child.get_definition():
@@ -774,7 +850,26 @@ class WasmModule:
 
   def build(self, includePaths):
     includePathArgs = list(dict.fromkeys(map(lambda x: "-I" + os.path.dirname(x), self.headerFiles)))
-    moduleFlags = ["-DIGNORE_NO_ATOMICS=1", "-frtti", "-fPIC"] if not self.moduleType == ModuleType.Standalone else []
+    standaloneModuleFlags = [
+      "-DIGNORE_NO_ATOMICS=1", "-frtti", "-fPIC"
+    ] if not self.moduleType == ModuleType.Standalone else []
+    debugFlags = [
+      "-s", "ASSERTIONS=1",
+      "-g3",
+      "-s", "SAFE_HEAP=1",
+      "-s", "DISABLE_EXCEPTION_CATCHING=0",
+      "-s", "DEMANGLE_SUPPORT=1",
+    ] if self.buildType == BuildType.Debug else []
+    envFlags = [
+      "-s", "ENVIRONMENT='node'",
+    ] if self.envType == EnvType.Node else [
+      "-s", "ENVIRONMENT='web'",
+    ]
+    if self.moduleType == ModuleType.Standalone and self.envType == EnvType.Node:
+      envFlags += [
+        "-s", "NODE_CODE_CACHING=1",
+        "-s", "WASM_ASYNC_COMPILATION=0",
+      ]
     command = [
       'emcc',
       *self.sourceFiles,
@@ -783,7 +878,9 @@ class WasmModule:
       *self.libraryFiles,
       "-s", "SIDE_MODULE=" + ("1" if self.moduleType == ModuleType.DynamicSide else "0"),
       "-s", "MAIN_MODULE=" + ("1" if self.moduleType == ModuleType.DynamicMain else "0"),
-      *moduleFlags,
+      *standaloneModuleFlags,
+      *debugFlags,
+      *envFlags,
       # "-s", "EXPORT_ALL=1",
       # "-s", "ASSERTIONS=1",
       "-s", "ALLOW_MEMORY_GROWTH=1",
@@ -797,7 +894,6 @@ class WasmModule:
       "-O3",
       # "-std=c++1z",
       # "-s", "DEMANGLE_SUPPORT=1",
-      # "-s", "DISABLE_EXCEPTION_CATCHING=0",
       # "--profiling",
       # " -fsanitize=undefined",
       # "-g4",
