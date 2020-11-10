@@ -16,12 +16,12 @@ includePaths = []
 allWasmModules = []
 includeFiles = []
 
-def addPackageToWasmModule(packageName, currModule):
+def addPackageToWasmModule(packageName, currModule, addSourceFiles):
   for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-628c021/src/", packageName)):
     for item in filenames:
       if filterIncludeFile(item):
         currModule.addHeaderFile(str(os.path.join(dirpath, item)))
-      elif filterSourceFile(item):
+      if filterSourceFile(item) and addSourceFiles:
         currModule.addSourceFile(str(os.path.join(dirpath, item)))
 
 def prepareMainWasmModules(buildType):
@@ -43,27 +43,8 @@ def prepareMainWasmModules(buildType):
 
   return modules
 
-def prepareOCCTModuleWasmModules(buildType, includeFullModules = True):
+def prepareOCCTModuleWasmModules(buildType):
   modules = []
-
-  if includeFullModules:
-    completeStandaloneWebModule = WasmModule("full_web", ModuleType.Standalone, "/opencascade.js/build/full_web.cpp", "/opencascade.js/dist/" + buildType + "/full_web", buildType, EnvType.Web)
-    completeStandaloneWebModule.setBuildSettings([
-      "-s", "MODULARIZE=1",
-      "-s", "USE_FREETYPE=1",
-      '-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]',
-      "-s", "ASSERTIONS=1",
-    ])
-    modules.append(completeStandaloneWebModule)
-
-    completeStandaloneNodeModule = WasmModule("full_node", ModuleType.Standalone, "/opencascade.js/build/full_node.cpp", "/opencascade.js/dist/" + buildType + "/full_node", buildType, EnvType.Node)
-    completeStandaloneNodeModule.setBuildSettings([
-      "-s", "MODULARIZE=1",
-      "-s", "USE_FREETYPE=1",
-      '-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]',
-      "-s", "ASSERTIONS=1",
-    ])
-    modules.append(completeStandaloneNodeModule)
 
   for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
     parentDir = os.path.basename(os.path.dirname(dirpath))
@@ -87,10 +68,54 @@ def prepareOCCTModuleWasmModules(buildType, includeFullModules = True):
 
     with open(dirpath + "/PACKAGES", "r") as a_file:
       for line in a_file:
-        addPackageToWasmModule(line.strip(), currModule)
-        if includeFullModules:
-          addPackageToWasmModule(line.strip(), completeStandaloneNodeModule)
-          addPackageToWasmModule(line.strip(), completeStandaloneWebModule)
+        addPackageToWasmModule(line.strip(), currModule, True)
+
+  return modules
+
+def prepareFullWasmModules(buildType):
+  modules = []
+
+  completeStandaloneWebModule = WasmModule("full_web", ModuleType.Standalone, "/opencascade.js/build/full_web.cpp", "/opencascade.js/dist/" + buildType + "/full_web", buildType, EnvType.Web)
+  completeStandaloneWebModule.setBuildSettings([
+    "-s", "MODULARIZE=1",
+    "-s", "USE_FREETYPE=1",
+    '-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]',
+    "-s", "ASSERTIONS=1",
+  ])
+  modules.append(completeStandaloneWebModule)
+
+  completeStandaloneNodeModule = WasmModule("full_node", ModuleType.Standalone, "/opencascade.js/build/full_node.cpp", "/opencascade.js/dist/" + buildType + "/full_node", buildType, EnvType.Node)
+  completeStandaloneNodeModule.setBuildSettings([
+    "-s", "MODULARIZE=1",
+    "-s", "USE_FREETYPE=1",
+    '-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]',
+    "-s", "ASSERTIONS=1",
+  ])
+  modules.append(completeStandaloneNodeModule)
+
+  for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
+    parentDir = os.path.basename(os.path.dirname(dirpath))
+    if not parentDir == "src":
+      raise Exception("Packages with sub-folders are not supported!")
+
+    moduleName = os.path.basename(dirpath)
+    if moduleName == "":
+      continue
+
+    if not any(x for x in filenames if x == "PACKAGES"):
+      continue
+
+    libraryFile = os.path.join("/occt/occt-628c021/build/lin32/clang/lib/", "lib" + moduleName + ".a")
+    if not os.path.isfile(libraryFile):
+      print("skipping module due to missing library: " + moduleName)
+      continue
+
+    with open(dirpath + "/PACKAGES", "r") as a_file:
+      for line in a_file:
+        addPackageToWasmModule(line.strip(), completeStandaloneNodeModule, False)
+        completeStandaloneNodeModule.addLibraryFile(libraryFile)
+        addPackageToWasmModule(line.strip(), completeStandaloneWebModule, False)
+        completeStandaloneWebModule.addLibraryFile(libraryFile)
 
   return modules
 
@@ -111,7 +136,7 @@ def prepareOCCTPackageWasmModules(buildType):
 
     currModule = WasmModule(packageName, ModuleType.DynamicSide, "/opencascade.js/build/packages/" + packageName + ".cpp", "/opencascade.js/dist/" + buildType + "/packages/" + packageName, buildType, EnvType.Node)
     modules.append(currModule)
-    addPackageToWasmModule(packageName, currModule)
+    addPackageToWasmModule(packageName, currModule, True)
 
   return modules
 
@@ -166,17 +191,17 @@ def chunks(lst, n):
   for i in range(0, len(lst), n):
     yield lst[i:i + n]
 
-allWasmModules.extend(prepareMainWasmModules(BuildType.Debug))
-allWasmModules.extend(prepareOCCTModuleWasmModules(BuildType.Debug, False))
-allWasmModules.extend(prepareOCCTPackageWasmModules(BuildType.Debug))
+# allWasmModules.extend(prepareMainWasmModules(BuildType.Debug))
+# allWasmModules.extend(prepareOCCTModuleWasmModules(BuildType.Debug))
+# allWasmModules.extend(prepareFullWasmModules(BuildType.Debug))
+# allWasmModules.extend(prepareOCCTPackageWasmModules(BuildType.Debug))
 
-allWasmModules.extend(prepareMainWasmModules(BuildType.Release))
-allWasmModules.extend(prepareOCCTModuleWasmModules(BuildType.Release, False))
-allWasmModules.extend(prepareOCCTPackageWasmModules(BuildType.Release))
+# allWasmModules.extend(prepareMainWasmModules(BuildType.Release))
+# allWasmModules.extend(prepareOCCTModuleWasmModules(BuildType.Release))
+allWasmModules.extend(prepareFullWasmModules(BuildType.Release))
+# allWasmModules.extend(prepareOCCTPackageWasmModules(BuildType.Release))
 
-allWasmModules = list(filter(lambda x: x.name.startswith("full"), allWasmModules))
-
-chunkedModules = list(chunks(allWasmModules, multiprocessing.cpu_count()*8))
+chunkedModules = list(chunks(allWasmModules, multiprocessing.cpu_count()*4))
 
 for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
   includePaths.append(str(dirpath))
