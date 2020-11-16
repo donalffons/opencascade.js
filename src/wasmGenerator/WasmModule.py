@@ -864,6 +864,7 @@ class WasmModule:
       "-s", "ENVIRONMENT='node'",
     ] if self.envType == EnvType.Node else [
       "-s", "ENVIRONMENT='web'",
+      "-s", "EXPORT_ES6=1",
     ]
     if self.moduleType == ModuleType.Standalone and self.envType == EnvType.Node:
       envFlags += [

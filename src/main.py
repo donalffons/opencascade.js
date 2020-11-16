@@ -191,15 +191,15 @@ def chunks(lst, n):
   for i in range(0, len(lst), n):
     yield lst[i:i + n]
 
-# allWasmModules.extend(prepareMainWasmModules(BuildType.Debug))
-# allWasmModules.extend(prepareOCCTModuleWasmModules(BuildType.Debug))
-# allWasmModules.extend(prepareFullWasmModules(BuildType.Debug))
-# allWasmModules.extend(prepareOCCTPackageWasmModules(BuildType.Debug))
+allWasmModules.extend(prepareMainWasmModules(BuildType.Debug))
+allWasmModules.extend(prepareOCCTModuleWasmModules(BuildType.Debug))
+allWasmModules.extend(prepareFullWasmModules(BuildType.Debug))
+allWasmModules.extend(prepareOCCTPackageWasmModules(BuildType.Debug))
 
-# allWasmModules.extend(prepareMainWasmModules(BuildType.Release))
-# allWasmModules.extend(prepareOCCTModuleWasmModules(BuildType.Release))
+allWasmModules.extend(prepareMainWasmModules(BuildType.Release))
+allWasmModules.extend(prepareOCCTModuleWasmModules(BuildType.Release))
 allWasmModules.extend(prepareFullWasmModules(BuildType.Release))
-# allWasmModules.extend(prepareOCCTPackageWasmModules(BuildType.Release))
+allWasmModules.extend(prepareOCCTPackageWasmModules(BuildType.Release))
 
 chunkedModules = list(chunks(allWasmModules, multiprocessing.cpu_count()*4))
 
