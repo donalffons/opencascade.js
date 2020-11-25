@@ -854,7 +854,7 @@ class WasmModule:
       "-DIGNORE_NO_ATOMICS=1", "-frtti", "-fPIC"
     ] if not self.moduleType == ModuleType.Standalone else []
     debugFlags = [
-      "-s", "ASSERTIONS=0",
+      "-s", "ASSERTIONS=1",
       "-g3",
       "-s", "SAFE_HEAP=1",
       "-s", "DEMANGLE_SUPPORT=1",
