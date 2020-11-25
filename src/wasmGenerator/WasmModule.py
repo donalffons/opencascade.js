@@ -854,10 +854,9 @@ class WasmModule:
       "-DIGNORE_NO_ATOMICS=1", "-frtti", "-fPIC"
     ] if not self.moduleType == ModuleType.Standalone else []
     debugFlags = [
-      "-s", "ASSERTIONS=1",
-      "-g2",
+      "-s", "ASSERTIONS=0",
+      "-g3",
       "-s", "SAFE_HEAP=1",
-      "-s", "DISABLE_EXCEPTION_CATCHING=0",
       "-s", "DEMANGLE_SUPPORT=1",
     ] if self.buildType == BuildType.Debug else []
     envFlags = [
@@ -898,6 +897,10 @@ class WasmModule:
       # "--profiling",
       # " -fsanitize=undefined",
       # "-g4",
+
+      # Enabling exception catching leads to errors in "TKTopAlgo" and "TKV3d" and maybe others. Therefore, this (default) value has to be used at all times.
+      "-s", "DISABLE_EXCEPTION_CATCHING=1",
+
       *self.buildSettings,
       "-o", self.outputFile + (".wasm" if self.moduleType == ModuleType.DynamicSide else ".js")
     ]
