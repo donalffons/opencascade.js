@@ -169,10 +169,6 @@ def getSimpleConstructorBinding(theClass):
   if not standardConstructor:
     return ""
 
-  # if any(map(lambda x: x.spelling == "operator new" and not len(list(x.get_arguments())) == len(list(standardConstructor.get_arguments())), theClass.get_children())):
-  #   print("Operator new has different number of arguments than constructor. Skipping... " + theClass.spelling)
-  #   return ""
-    
   argTypesBindings = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
   
   return "    .constructor<" + argTypesBindings + ">()" + os.linesep
