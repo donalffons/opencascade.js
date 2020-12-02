@@ -1,17 +1,13 @@
 import clang.cindex
 import os
 
-from .Common import shouldProcessClass, isAbstractClass
-
-class SkipException(Exception):
-  pass
+from .Common import shouldProcessClass, isAbstractClass, SkipException
 
 def getClassEmbindings(theClass):
   children = theClass.get_children()
   className = theClass.spelling
-  baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
-  if len(baseSpec) > 1:
-    raise SkipException("cannot handle multiple base classes (" + className + ")")
+
+  baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, theClass.get_children()))
 
   if len(baseSpec) > 0:
     baseClassBinding = ", base<" + baseSpec[0].type.spelling + ">"
