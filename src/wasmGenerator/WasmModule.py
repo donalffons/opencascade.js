@@ -9,6 +9,7 @@ from filter.filterEnums import filterEnum
 
 from .Embindings import getEmbindings
 from .TypescriptDefinitions import getTypescriptDefinitions
+from .Exports import getExports
 
 from enum import Enum
 
@@ -89,10 +90,16 @@ class WasmModule:
 
     bindingsFile.write(getEmbindings(self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum))
 
+  def getExports(self):
+    return getExports(self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum)
+
+  def setModuleExportsDict(self, moduleExportsDict):
+    self.moduleExportsDict = moduleExportsDict
+
   def generateTypescriptDefinitions(self):
     typescriptFileName = "./" + "/".join(self.outputFile.split("/")[3:]) + ".wasm.d.ts"
     typescriptFile = open(self.typescriptDefinitionFile, "w")
-    typescriptFile.write(getTypescriptDefinitions(typescriptFileName, self.name, self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum))
+    typescriptFile.write(getTypescriptDefinitions(typescriptFileName, self.name, self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, self.moduleExportsDict))
     
   def build(self, includePaths):
     includePathArgs = list(dict.fromkeys(map(lambda x: "-I" + os.path.dirname(x), self.headerFiles)))

@@ -108,7 +108,18 @@ def getSimpleConstructorBinding(theClass, typedefs):
   
   return "  constructor(" + argsTypescriptDef + ")\n"
 
-def getClassTypescriptDefinitions(theClass, filterClass, translationUnit, typedefs):
+def addImportIfWeHaveTo(thisLibName, libItem, moduleExportsDict, imports):
+  if not libItem in moduleExportsDict[thisLibName]:
+    importLib = next((x for x in moduleExportsDict if libItem in moduleExportsDict[x]), None)
+    if not importLib == None:
+      if not importLib in imports:
+        imports[importLib] = []
+      if not libItem in imports[importLib]:
+        imports[importLib].append(libItem)
+    else:
+      print("Base class \"" + libItem + "\" is not part of this module and has not been exported by any other module")
+
+def getClassTypescriptDefinitions(theClass, filterClass, translationUnit, typedefs, thisLibName, moduleExportsDict, imports):
   baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, theClass.get_children()))
   baseClassDefinition = ""
   if len(baseSpec) > 0:
@@ -117,7 +128,8 @@ def getClassTypescriptDefinitions(theClass, filterClass, translationUnit, typede
     else:
       if filterClass(baseSpec[0].type):
         baseClassDefinition = " extends " + baseSpec[0].type.spelling
-  
+        addImportIfWeHaveTo(thisLibName, baseSpec[0].type.spelling, moduleExportsDict, imports)
+
   output = ""
   output += "export declare class " + theClass.spelling + baseClassDefinition + " {\n"
 
@@ -128,7 +140,7 @@ def getClassTypescriptDefinitions(theClass, filterClass, translationUnit, typede
 
   return output
 
-def getTypescriptDefinitions(libName, libExportName, translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum):
+def getTypescriptDefinitions(libName, libExportName, translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, moduleExportsDict):
   typedefOutput = ""
   exportOutput = ""
 
@@ -160,15 +172,23 @@ def getTypescriptDefinitions(libName, libExportName, translationUnit, headerFile
           if not ignoreDuplicateTypedef(child, sortedTypedefs):
             filteredTypedefs.append(child)
 
+  imports = {}
   for child in translationUnit.cursor.get_children():
     if shouldProcessClass(child, headerFiles, filterClass):
       try:
-        typedefOutput += getClassTypescriptDefinitions(child, filterClass, translationUnit, filteredTypedefs)
+        typedefOutput += getClassTypescriptDefinitions(child, filterClass, translationUnit, filteredTypedefs, libExportName, moduleExportsDict, imports)
         exportOutput += "  " + child.spelling + ": typeof " + child.spelling + ";\n"
       except SkipException as e:
         print(str(e))
   
-  output = \
+  output = ""
+
+  for importLib, importItems in imports.items():
+    output += "import { " + ", ".join(importItems) + " } from './" + importLib + ".wasm';\n"
+
+  output += "\n"
+
+  output += \
     "declare const libName = \"" + libName + "\";\n" + \
     "export default libName;\n\n" + \
     "type Standard_Boolean = boolean;\n" + \
@@ -180,7 +200,7 @@ def getTypescriptDefinitions(libName, libExportName, translationUnit, headerFile
     "type Standard_ShortReal = number;\n" + \
     "type Standard_Size = number;\n\n" + \
     typedefOutput + \
-    "export declare type " + libExportName + " = {\n" + \
+    "export declare type " + libExportName + "Lib = {\n" + \
     exportOutput + \
     "};\n"
   return output

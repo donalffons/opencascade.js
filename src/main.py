@@ -205,6 +205,28 @@ for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
     if filterIncludeFile(item):
       includeFiles.append(str(os.path.join(dirpath, item)))
 
+moduleExportsDict = {}
+for aModule in allWasmModules:
+  aModule.setModuleExportsDict(moduleExportsDict)
+  aModule.parse(
+    includeFiles,
+    includePaths + [
+      "/emsdk/upstream/emscripten/system/include/",
+      "/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed/",
+      "/clang/clang_10/include/c++/v1/",
+      "/clang/clang_10/include/c++/v1/support/newlib",
+      "/rapidjson/include",
+    ], [
+      "/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed/",
+      "/usr/lib/gcc/x86_64-linux-gnu/8/include/",
+      "/usr/lib/gcc/x86_64-linux-gnu/8/include/",
+    ]
+  )
+  moduleExportsDict[aModule.name] = aModule.getExports()
+  aModule.tu = None
+
+chunkedModules = list(chunks(allWasmModules, multiprocessing.cpu_count()*4))
+
 for iChunk, chunk in enumerate(chunkedModules):
   print("processing chunk " + str(iChunk+1) + " of " + str(len(chunkedModules)))
   with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
