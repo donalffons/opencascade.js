@@ -172,6 +172,7 @@ def f(aModule):
     os.makedirs('../dist/debug/packages')
 
   aModule.generateEmbindings()
+  aModule.generateTypescriptDefinitions()
 
   aModule.build(includePaths + [
     "/rapidjson/include",

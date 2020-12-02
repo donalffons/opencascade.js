@@ -1,6 +1,8 @@
 import clang.cindex
 import os
 
+from .Common import shouldProcessClass, isAbstractClass
+
 class SkipException(Exception):
   pass
 
@@ -125,36 +127,6 @@ def getEpilogEmbindings(theClass):
   if nonPublicDestructor or placementDelete:
     return "namespace emscripten { namespace internal { template<> void raw_destructor<" + theClass.spelling + ">(" + theClass.spelling + "* ptr) { /* do nothing */ } } }" + os.linesep
   return ""
-
-def getPureVirtualMethods(theClass):
-  return list(filter(lambda x: x.is_pure_virtual_method(), list(theClass.get_children())))
-
-def isAbstractClass(theClass, tu):
-  allClasses = list(filter(lambda x:
-    x.kind == clang.cindex.CursorKind.CLASS_DECL and
-    not (
-      x.get_definition() is None or
-      not x == x.get_definition()
-    ),
-    tu.cursor.get_children()))
-  baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, list(theClass.get_children())))
-  baseClasses = list(map(lambda y: next((x for x in allClasses if x.spelling == y.type.spelling)), baseSpec))
-
-  pureVirtualMethods = getPureVirtualMethods(theClass)
-  if len(pureVirtualMethods) > 0:
-    return True
-  
-  pvmsInBaseClasses = list(map(lambda x: getPureVirtualMethods(x), baseClasses))
-
-  numPureVirtualMethods = 0
-  numImplementedPureVirtualMethods = 0
-  for bc in pvmsInBaseClasses:
-    for bcPvm in bc:
-      numPureVirtualMethods += 1
-      if bcPvm.spelling in list(map(lambda x: x.spelling, list(theClass.get_children()))):
-        numImplementedPureVirtualMethods += 1
-  
-  return numPureVirtualMethods > numImplementedPureVirtualMethods
 
 def getSimpleConstructorBinding(theClass):
   children = list(theClass.get_children())
@@ -683,17 +655,8 @@ def getEmbindings(translationUnit, headerFiles, filterClass, filterMethod, filte
   output = ""
 
   for child in translationUnit.cursor.get_children():
-    if child.get_definition() is None or not child == child.get_definition():
-      continue
-    if not child.extent.start.file.name in headerFiles:
-      continue
-    if not filterClass(child):
-      continue
-    if child.kind == clang.cindex.CursorKind.CLASS_DECL:
+    if shouldProcessClass(child, headerFiles, filterClass):
       try:
-        if not child.type.get_num_template_arguments() == -1:
-          print("Cannot handle template classes (must be typedef'd): " + child.spelling)
-          continue
         output += getClassEmbindings(child)
         isAbstract = isAbstractClass(child, translationUnit)
         if not isAbstract:
