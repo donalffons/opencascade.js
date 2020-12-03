@@ -1,7 +1,7 @@
 import clang.cindex
 import os
 
-from .Common import shouldProcessClass, isAbstractClass, SkipException, getMethodOverloadPostfix, ignoreDuplicateTypedef
+from .Common import shouldProcessClass, isAbstractClass, SkipException, getMethodOverloadPostfix, ignoreDuplicateTypedef, overloadedConstrutorObject
 
 def getClassEmbindings(theClass):
   children = theClass.get_children()
@@ -134,16 +134,6 @@ def getSimpleConstructorBinding(theClass):
   argTypesBindings = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
   
   return "    .constructor<" + argTypesBindings + ">()" + os.linesep
-
-class overloadedConstrutorObject(object):
-  def __init__(self):
-    self.brief_comment = None
-  def get_arguments(self):
-    return self.arguments
-  def get_tokens(self):
-    return self.tokens
-  def get_children(self):
-    return self.children
 
 def getOverloadedConstructorsBinding(theClass, children = None):
   if children is None:

@@ -1,6 +1,6 @@
 import clang.cindex
 
-from .Common import shouldProcessClass, isAbstractClass, SkipException, getMethodOverloadPostfix, ignoreDuplicateTypedef
+from .Common import shouldProcessClass, isAbstractClass, SkipException, getMethodOverloadPostfix, ignoreDuplicateTypedef, overloadedConstrutorObject
 
 def convertBuiltinTypes(typeName):
   if typeName in [
@@ -16,7 +16,7 @@ def convertBuiltinTypes(typeName):
     "double",
     "unsigned double"
   ]:
-    return "sumber"
+    return "number"
 
   if typeName in [
     "char",
@@ -164,6 +164,97 @@ def getClassTypescriptDefinitions(theClass, filterClass, translationUnit, typede
 
   return output
 
+def getTypescriptDefFromTypedef(t, typedefs):
+  tTypedefType = t.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
+  if not tTypedefType == "void" and (":" in tTypedefType or "<" in tTypedefType):
+    typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == tTypedefType), None)
+    if typedefType is None:
+      raise SkipException("There is no typedef for " + tTypedefType + "! Please create one to support typescript definitions.")
+    tTypeName = typedefType.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
+  else:
+    tTypeName = tTypedefType
+  return tTypeName
+
+def getEnumTypescriptDefinitions(enum):
+  allExports = []
+  typescriptOutput = "export declare class " + enum.spelling + " {\n"
+  for enumChild in list(enum.get_children()):
+    typescriptOutput += "  " + enumChild.spelling + ": any;\n"
+  typescriptOutput += "}\n\n"
+  return typescriptOutput
+
+def getHandleTypeTypescriptDefinitions(typedefs):
+  allExports = []
+  typescriptOutput = ""
+  print("generating bindings for handle types...")
+
+  handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle"), typedefs))
+  for handleTypedef in handleTypedefs:
+    handleName = handleTypedef.spelling
+    targetType = handleTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
+
+    typescriptType = getTypescriptDefFromTypedef(handleTypedef.underlying_typedef_type.get_template_argument_type(0), typedefs)
+    if typescriptType == "":
+      print("using type 'any' instead of '" + handleTypedef.underlying_typedef_type.get_template_argument_type(0).spelling + "'")
+      typescriptType = "any"
+
+    typescriptOutput += "export declare class " + handleName + " {\n"
+    typescriptOutput += "  Nullify(): void;\n"
+    typescriptOutput += "  IsNull(): Standard_Boolean;\n"
+    typescriptOutput += "  reset(thePtr: " + typescriptType + "): void;\n"
+    typescriptOutput += "  operator_assign_1(theHandle: " + handleName + "): " + handleName + ";\n"
+    typescriptOutput += "  operator_assign_2(thePtr: " + typescriptType + "): " + handleName + ";\n"
+    typescriptOutput += "  operator_assign_3(theHandle: " + handleName + "): " + handleName + ";\n"
+    typescriptOutput += "  get(): " + typescriptType + ";\n"
+    typescriptOutput += "  operator_dereference(): " + typescriptType + ";\n"
+    typescriptOutput += "  operator_bool(): Standard_Boolean" + ";\n"
+    typescriptOutput += "}\n\n"
+
+    oc1 = overloadedConstrutorObject()
+    oc1.spelling = handleName
+    oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc1.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc1.arguments = []
+
+    oc2 = overloadedConstrutorObject()
+    oc2.spelling = handleName
+    oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc2arg1type = overloadedConstrutorObject()
+    oc2arg1type.spelling = "const " + targetType + "*"
+    oc2arg1type.kind = None
+    oc2arg1 = overloadedConstrutorObject()
+    oc2arg1.type = oc2arg1type
+    oc2arg1.spelling = "thePtr"
+    oc2arg1.tokens = []
+    oc2arg1.children = []
+    oc2.arguments = [oc2arg1]
+
+    oc3 = overloadedConstrutorObject()
+    oc3.spelling = handleName
+    oc3.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc3.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc3arg1type = overloadedConstrutorObject()
+    oc3arg1type.spelling = "const " + handleName + "&"
+    oc3arg1type.kind = None
+    oc3arg1 = overloadedConstrutorObject()
+    oc3arg1.type = oc3arg1type
+    oc3arg1.spelling = "theHandle"
+    oc3arg1.tokens = []
+    oc3arg1.children = []
+    oc3.arguments = [oc3arg1]
+
+    allExports.append(handleName)
+
+    [ocTypes, ocs] = getOverloadedConstructorsTypescriptDefinition(handleTypedef, [
+      oc1, oc2, oc3
+    ])
+
+    typescriptOutput += ocTypes
+    allExports.extend(ocs)
+
+  return [typescriptOutput, allExports]
+
 def getTypescriptDefinitions(libName, libExportName, translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, moduleExportsDict):
   typedefOutput = ""
   exportOutput = ""
@@ -171,19 +262,24 @@ def getTypescriptDefinitions(libName, libExportName, translationUnit, headerFile
   typedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL, translationUnit.cursor.get_children()))
   sortedTypedefs = {}
   for child in typedefs:
+    if child.get_definition() is None or not child == child.get_definition():
+      continue
+    if not child.extent.start.file.name in headerFiles:
+      continue
+    if not filterTypedef(child):
+      continue
     if not child.underlying_typedef_type.spelling in sortedTypedefs:
       sortedTypedefs[child.underlying_typedef_type.spelling] = []
     sortedTypedefs[child.underlying_typedef_type.spelling].append(child)
 
-  # # debug print duplicate typedefs
-  # for key, value in sortedTypedefs.items():
-  #   if len(value) > 1:
-  #     print("--> " + key)
-  #     for val in value:
-  #       print("----> " + val.spelling)
-
   filteredTypedefs = []
   for key, children in sortedTypedefs.items():
+    skip = False
+    for child in children:
+      if ignoreDuplicateTypedef(child, sortedTypedefs):
+        skip = True
+    if skip:
+      continue
     if len(children) == 1:
       filteredTypedefs.append(children[0])
     else:
@@ -193,8 +289,7 @@ def getTypescriptDefinitions(libName, libExportName, translationUnit, headerFile
         filteredTypedefs.append(children[0])
       else:
         for child in children:
-          if not ignoreDuplicateTypedef(child, sortedTypedefs):
-            filteredTypedefs.append(child)
+          filteredTypedefs.append(child)
 
   imports = {}
   for child in translationUnit.cursor.get_children():
@@ -205,21 +300,36 @@ def getTypescriptDefinitions(libName, libExportName, translationUnit, headerFile
         exportOutput += "  " + theClass.spelling + ": typeof " + theClass.spelling + ";\n"
         if not isAbstractClass(theClass, translationUnit):
           [ocTypes, ocs] = getOverloadedConstructorsTypescriptDefinition(theClass, filteredTypedefs)
-          typedefOutput+= ocTypes
+          typedefOutput += ocTypes
           for oc in ocs:
             exportOutput += "  " + oc + ": typeof " + oc + ";\n"
 
       except SkipException as e:
         print(str(e))
   
+  [handleTypescriptDefinitions, handleExports] = getHandleTypeTypescriptDefinitions(filteredTypedefs)
+  typedefOutput += handleTypescriptDefinitions
+  for handleExport in handleExports:
+    exportOutput += "  " + handleExport + ": typeof " + handleExport + ";\n"
+
+  for child in translationUnit.cursor.get_children():
+    if child.get_definition() is None or not child == child.get_definition():
+      continue
+    if not child.extent.start.file.name in headerFiles:
+      continue
+    if not filterEnum(child):
+      continue
+    if child.kind == clang.cindex.CursorKind.ENUM_DECL:
+      typedefOutput += getEnumTypescriptDefinitions(child)
+      exportOutput += "  " + child.spelling + ": typeof " + child.spelling + ";\n"
+
   output = ""
 
   for importLib, importItems in imports.items():
     output += "import { " + ", ".join(importItems) + " } from './" + importLib + ".wasm';\n"
 
-  output += "\n"
-
   output += \
+    "\n" + \
     "declare const libName = \"" + libName + "\";\n" + \
     "export default libName;\n\n" + \
     "type Standard_Boolean = boolean;\n" + \
