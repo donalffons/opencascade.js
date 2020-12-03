@@ -169,8 +169,10 @@ def getTypescriptDefFromTypedef(t, typedefs):
   if not tTypedefType == "void" and (":" in tTypedefType or "<" in tTypedefType):
     typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == tTypedefType), None)
     if typedefType is None:
-      raise SkipException("There is no typedef for " + tTypedefType + "! Please create one to support typescript definitions.")
-    tTypeName = typedefType.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
+      print("There is no typedef for " + tTypedefType + "! Using any instead.")
+      tTypeName = "any"
+    else:
+      tTypeName = typedefType.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
   else:
     tTypeName = tTypedefType
   return tTypeName
@@ -183,10 +185,10 @@ def getEnumTypescriptDefinitions(enum):
   typescriptOutput += "}\n\n"
   return typescriptOutput
 
-def getHandleTypeTypescriptDefinitions(typedefs):
+def getHandleTypescriptDefinitions(typedefs):
   allExports = []
   typescriptOutput = ""
-  print("generating bindings for handle types...")
+  print("generating typescript definitions for handle types...")
 
   handleTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("opencascade::handle"), typedefs))
   for handleTypedef in handleTypedefs:
@@ -255,6 +257,272 @@ def getHandleTypeTypescriptDefinitions(typedefs):
 
   return [typescriptOutput, allExports]
 
+def getNCollection_Array1TypescriptDefinitions(typedefs):
+  allExports = []
+  typescriptOutput = ""
+  print("generating typescript definitions for NCollection_Array1 types...")
+
+  nCollection_Array1Typedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("NCollection_Array1"), typedefs))
+  for nCollection_Array1Typedef in nCollection_Array1Typedefs:
+    theName = nCollection_Array1Typedef.spelling
+    theType = nCollection_Array1Typedef.underlying_typedef_type.get_template_argument_type(0).spelling
+    typescriptType = getTypescriptDefFromTypedef(nCollection_Array1Typedef.underlying_typedef_type.get_template_argument_type(0), typedefs)
+    typescriptOutput += "export declare class " + theName + " {\n"
+    typescriptOutput += "  begin(): any;\n"
+    typescriptOutput += "  end(): any;\n"
+    typescriptOutput += "  cbegin(): any;\n"
+    typescriptOutput += "  cend(): any;\n"
+    typescriptOutput += "  Init(theValue: " + typescriptType + "): void;\n"
+    typescriptOutput += "  Size(): Standard_Integer;\n"
+    typescriptOutput += "  Length(): Standard_Integer;\n"
+    typescriptOutput += "  IsEmpty(): Standard_Boolean;\n"
+    typescriptOutput += "  Lower(): Standard_Integer;\n"
+    typescriptOutput += "  Upper(): Standard_Integer;\n"
+    typescriptOutput += "  IsDeletable(): Standard_Boolean;\n"
+    typescriptOutput += "  IsAllocated(): Standard_Boolean;\n"
+    typescriptOutput += "  Assign(theOther: " + theName + "): " + theName+ ";\n"
+    typescriptOutput += "  Move(theOther: " + theName + "): " + theName+ ";\n"
+    typescriptOutput += "  First(): " + typescriptType + ";\n"
+    typescriptOutput += "  ChangeFirst(): " + typescriptType + ";\n"
+    typescriptOutput += "  Last(): " + typescriptType + ";\n"
+    typescriptOutput += "  ChangeLast(): " + typescriptType + ";\n"
+    typescriptOutput += "  Value(theIndex: Standard_Integer): " + typescriptType + ";\n"
+    typescriptOutput += "  ChangeValue(theIndex: Standard_Integer): " + typescriptType + ";\n"
+    typescriptOutput += "  SetValue(theIndex: Standard_Integer, theItem: " + typescriptType + "): void;\n"
+    typescriptOutput += "  Resize(theLower: Standard_Integer, theUpper: Standard_Integer, theToCopyData: Standard_Boolean): void;\n"
+    typescriptOutput += "}\n\n"
+
+    allExports.append(theName)
+
+    oc1 = overloadedConstrutorObject()
+    oc1.spelling = theName
+    oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc1.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc1.arguments = []
+
+    oc2 = overloadedConstrutorObject()
+    oc2.spelling = theName
+    oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc2arg1type = overloadedConstrutorObject()
+    oc2arg1type.spelling = "const Standard_Integer"
+    oc2arg1type.kind = None
+    oc2arg1 = overloadedConstrutorObject()
+    oc2arg1.type = oc2arg1type
+    oc2arg1.spelling = "theLower"
+    oc2arg1.tokens = []
+    oc2arg1.children = []
+    oc2arg2type = overloadedConstrutorObject()
+    oc2arg2type.spelling = "const Standard_Integer"
+    oc2arg2type.kind = None
+    oc2arg2 = overloadedConstrutorObject()
+    oc2arg2.type = oc2arg2type
+    oc2arg2.spelling = "theUpper"
+    oc2arg2.tokens = []
+    oc2arg2.children = []
+    oc2.arguments = [oc2arg1, oc2arg2]
+
+    oc3 = overloadedConstrutorObject()
+    oc3.spelling = theName
+    oc3.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc3.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc3arg1type = overloadedConstrutorObject()
+    oc3arg1type.spelling = "const " + theName + "&"
+    oc3arg1type.kind = None
+    oc3arg1 = overloadedConstrutorObject()
+    oc3arg1.type = oc3arg1type
+    oc3arg1.spelling = "theOther"
+    oc3arg1.tokens = []
+    oc3arg1.children = []
+    oc3.arguments = [oc3arg1]
+
+    oc4 = overloadedConstrutorObject()
+    oc4.spelling = theName
+    oc4.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc4.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc4arg1type = overloadedConstrutorObject()
+    oc4arg1type.spelling = "const " + theType + "&"
+    oc4arg1type.kind = None
+    oc4arg1 = overloadedConstrutorObject()
+    oc4arg1.type = oc4arg1type
+    oc4arg1.spelling = "theBegin"
+    oc4arg1.tokens = []
+    oc4arg1.children = []
+    oc4arg2type = overloadedConstrutorObject()
+    oc4arg2type.spelling = "const Standard_Integer"
+    oc4arg2type.kind = None
+    oc4arg2 = overloadedConstrutorObject()
+    oc4arg2.type = oc4arg2type
+    oc4arg2.spelling = "theLower"
+    oc4arg2.tokens = []
+    oc4arg2.children = []
+    oc4arg3type = overloadedConstrutorObject()
+    oc4arg3type.spelling = "const Standard_Integer"
+    oc4arg3type.kind = None
+    oc4arg3 = overloadedConstrutorObject()
+    oc4arg3.type = oc4arg2type
+    oc4arg3.spelling = "theUpper"
+    oc4arg3.tokens = []
+    oc4arg3.children = []
+    oc4.arguments = [oc4arg1, oc4arg2, oc4arg3]
+
+    [ocTypes, ocs] = getOverloadedConstructorsTypescriptDefinition(nCollection_Array1Typedef, [
+      oc1, oc2, oc3, oc4
+    ])
+
+    typescriptOutput += ocTypes
+    allExports.extend(ocs)
+  
+  return [typescriptOutput, allExports]
+
+def getNCollection_ListTypescriptDefinitions(typedefs):
+  allExports = []
+  typescriptOutput = ""
+  print("generating typescript definitions for NCollection_List types...")
+
+  nCollection_ListTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("NCollection_List") and not x.underlying_typedef_type.spelling.endswith("::Iterator"), typedefs))
+  for nCollection_ListTypedef in nCollection_ListTypedefs:
+    theName = nCollection_ListTypedef.spelling
+    theType = nCollection_ListTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
+
+    typescriptType = getTypescriptDefFromTypedef(nCollection_ListTypedef.underlying_typedef_type.get_template_argument_type(0), typedefs)
+    typescriptOutput += "export declare class " + theName + " {\n"
+    typescriptOutput += "  begin(): any;\n"
+    typescriptOutput += "  end(): any;\n"
+    typescriptOutput += "  cbegin(): any;\n"
+    typescriptOutput += "  cend(): any;\n"
+    typescriptOutput += "  Size(): Standard_Integer;\n"
+    typescriptOutput += "  Assign(theOther: " + theName + "): " + theName + ";\n"
+    typescriptOutput += "  Clear(theAllocator: any): void;\n"
+    typescriptOutput += "  First_1(): " + typescriptType + ";\n"
+    typescriptOutput += "  First_2(): " + typescriptType + ";\n"
+    typescriptOutput += "  Last_1(): " + typescriptType + ";\n"
+    typescriptOutput += "  Last_2(): " + typescriptType + ";\n"
+    typescriptOutput += "  Append_1(theItem: " + typescriptType + "): " + typescriptType + ";\n"
+    typescriptOutput += "  Append_3(theOther: " + theName + "): void;\n"
+    typescriptOutput += "  Prepend_1(theItem: " + typescriptType + "): " + typescriptType + ";\n"
+    typescriptOutput += "  Prepend_2(theOther: " + theName + "): void;\n"
+    typescriptOutput += "  RemoveFirst(): void;\n"
+    typescriptOutput += "  Reverse(): void;\n"
+    typescriptOutput += "}\n\n"
+
+    allExports.append(theName)
+
+    oc1 = overloadedConstrutorObject()
+    oc1.spelling = theName
+    oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc1.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc1.arguments = []
+
+    oc2 = overloadedConstrutorObject()
+    oc2.spelling = theName
+    oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc2arg1type = overloadedConstrutorObject()
+    oc2arg1type.spelling = "const Handle_NCollection_BaseAllocator&"
+    oc2arg1type.kind = None
+    oc2arg1 = overloadedConstrutorObject()
+    oc2arg1.type = oc2arg1type
+    oc2arg1.spelling = "theAllocator"
+    oc2arg1.tokens = []
+    oc2arg1.children = []
+    oc2.arguments = [oc2arg1]
+
+    oc3 = overloadedConstrutorObject()
+    oc3.spelling = theName
+    oc3.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc3.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc3arg1type = overloadedConstrutorObject()
+    oc3arg1type.spelling = "const " + theName + "&"
+    oc3arg1type.kind = None
+    oc3arg1 = overloadedConstrutorObject()
+    oc3arg1.type = oc3arg1type
+    oc3arg1.spelling = "theOther"
+    oc3arg1.tokens = []
+    oc3arg1.children = []
+    oc3.arguments = [oc3arg1]
+
+    [ocTypes, ocs] = getOverloadedConstructorsTypescriptDefinition(nCollection_ListTypedef, [
+      oc1, oc2, oc3
+    ])
+
+    typescriptOutput += ocTypes
+    allExports.extend(ocs)
+  
+  return [typescriptOutput, allExports]
+
+def getNCollection_SequenceTypescriptDefinitions(typedefs):
+  allExports = []
+  typescriptOutput = ""
+  print("generating typescript definitions for NCollection_Sequence types...")
+
+  nCollection_ListTypedefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and x.underlying_typedef_type.spelling.startswith("NCollection_Sequence") and not x.underlying_typedef_type.spelling.endswith("::Iterator"), typedefs))
+  for nCollection_ListTypedef in nCollection_ListTypedefs:
+    theName = nCollection_ListTypedef.spelling
+    theType = nCollection_ListTypedef.underlying_typedef_type.get_template_argument_type(0).spelling
+
+    typescriptType = getTypescriptDefFromTypedef(nCollection_ListTypedef.underlying_typedef_type.get_template_argument_type(0), typedefs)
+    typescriptOutput += "export declare class " + theName + " {\n"
+    typescriptOutput += "  begin(): any;\n"
+    typescriptOutput += "  end(): any;\n"
+    typescriptOutput += "  cbegin(): any;\n"
+    typescriptOutput += "  cend(): any;\n"
+    typescriptOutput += "  Size(): Standard_Integer;\n"
+    typescriptOutput += "  Length(): Standard_Integer;\n"
+    typescriptOutput += "  Lower(): Standard_Integer;\n"
+    typescriptOutput += "  Upper(): Standard_Integer;\n"
+    typescriptOutput += "  IsEmpty(): Standard_Boolean;\n"
+    typescriptOutput += "  Reverse(): void;\n"
+    typescriptOutput += "  Exchange(): void;\n"
+    typescriptOutput += "  Clear(): void;\n"
+    typescriptOutput += "  Assign(): any;\n"
+    typescriptOutput += "}\n\n"
+
+    allExports.append(theName)
+
+    oc1 = overloadedConstrutorObject()
+    oc1.spelling = theName
+    oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc1.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc1.arguments = []
+
+    oc2 = overloadedConstrutorObject()
+    oc2.spelling = theName
+    oc2.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc2.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc2arg1type = overloadedConstrutorObject()
+    oc2arg1type.spelling = "const Handle_NCollection_BaseAllocator&"
+    oc2arg1type.kind = None
+    oc2arg1 = overloadedConstrutorObject()
+    oc2arg1.type = oc2arg1type
+    oc2arg1.spelling = "theAllocator"
+    oc2arg1.tokens = []
+    oc2arg1.children = []
+    oc2.arguments = [oc2arg1]
+
+    oc3 = overloadedConstrutorObject()
+    oc3.spelling = theName
+    oc3.kind = clang.cindex.CursorKind.CONSTRUCTOR
+    oc3.access_specifier = clang.cindex.AccessSpecifier.PUBLIC
+    oc3arg1type = overloadedConstrutorObject()
+    oc3arg1type.spelling = "const " + theName + "&"
+    oc3arg1type.kind = None
+    oc3arg1 = overloadedConstrutorObject()
+    oc3arg1.type = oc3arg1type
+    oc3arg1.spelling = "theOther"
+    oc3arg1.tokens = []
+    oc3arg1.children = []
+    oc3.arguments = [oc3arg1]
+
+    [ocTypes, ocs] = getOverloadedConstructorsTypescriptDefinition(nCollection_ListTypedef, [
+      oc1, oc2, oc3
+    ])
+
+    typescriptOutput += ocTypes
+    allExports.extend(ocs)
+  
+  return [typescriptOutput, allExports]
+
 def getTypescriptDefinitions(libName, libExportName, translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, moduleExportsDict):
   typedefOutput = ""
   exportOutput = ""
@@ -307,10 +575,25 @@ def getTypescriptDefinitions(libName, libExportName, translationUnit, headerFile
       except SkipException as e:
         print(str(e))
   
-  [handleTypescriptDefinitions, handleExports] = getHandleTypeTypescriptDefinitions(filteredTypedefs)
+  [handleTypescriptDefinitions, handleExports] = getHandleTypescriptDefinitions(filteredTypedefs)
   typedefOutput += handleTypescriptDefinitions
   for handleExport in handleExports:
     exportOutput += "  " + handleExport + ": typeof " + handleExport + ";\n"
+
+  [nCollectionArray1TypescriptDefinitions, nCollectionArray1Exports] = getNCollection_Array1TypescriptDefinitions(filteredTypedefs)
+  typedefOutput += nCollectionArray1TypescriptDefinitions
+  for nCollectionArray1Export in nCollectionArray1Exports:
+    exportOutput += "  " + nCollectionArray1Export + ": typeof " + nCollectionArray1Export + ";\n"
+
+  [nCollectionListTypescriptDefinitions, nCollectionListExports] = getNCollection_ListTypescriptDefinitions(filteredTypedefs)
+  typedefOutput += nCollectionListTypescriptDefinitions
+  for nCollectionListExport in nCollectionListExports:
+    exportOutput += "  " + nCollectionListExport + ": typeof " + nCollectionListExport + ";\n"
+
+  [nCollectionSequenceTypescriptDefinitions, nCollectionSequenceExports] = getNCollection_SequenceTypescriptDefinitions(filteredTypedefs)
+  typedefOutput += nCollectionSequenceTypescriptDefinitions
+  for nCollectionSequenceExport in nCollectionSequenceExports:
+    exportOutput += "  " + nCollectionSequenceExport + ": typeof " + nCollectionSequenceExport + ";\n"
 
   for child in translationUnit.cursor.get_children():
     if child.get_definition() is None or not child == child.get_definition():
