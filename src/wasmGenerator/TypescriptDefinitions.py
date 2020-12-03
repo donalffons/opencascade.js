@@ -1,6 +1,6 @@
 import clang.cindex
 
-from .Common import shouldProcessClass, isAbstractClass, SkipException
+from .Common import shouldProcessClass, isAbstractClass, SkipException, getMethodOverloadPostfix
 
 def convertBuiltinTypes(typeName):
   if typeName in [
@@ -119,7 +119,57 @@ def addImportIfWeHaveTo(thisLibName, libItem, moduleExportsDict, imports):
     else:
       print("Base class \"" + libItem + "\" is not part of this module and has not been exported by any other module")
 
-def getClassTypescriptDefinitions(theClass, filterClass, translationUnit, typedefs, thisLibName, moduleExportsDict, imports):
+def getTypescriptDefFromArg(arg, typedefs, suffix = ""):
+  argTypedefType = arg.type.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
+  typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == argTypedefType), None)
+  argTypeName = (arg.type.spelling if typedefType is None else typedefType.spelling)
+  argTypeName = argTypeName.replace("&", "").replace("const", "").replace("*", "").strip()
+  argTypeName = convertBuiltinTypes(argTypeName)
+  if argTypeName == "" or "(" in argTypeName or ":" in argTypeName:
+    argTypeName = "any"
+    print("could not generate proper types for type name '" + argTypeName + "', using 'any' instead.")
+  argname = (arg.spelling if not arg.spelling == "" else ("a" + str(suffix)))
+  if argname in ["var", "with", "super"]:
+    argname += "_"
+  return argname + ": " + argTypeName
+
+def getTypescriptDefFromResultType(res, typedefs):
+  resTypedefType = res.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
+  if not resTypedefType == "void":
+    typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == resTypedefType), None)
+    resTypeName = (res.spelling if typedefType is None else typedefType.spelling)
+    resTypeName = resTypeName.replace("&", "").replace("const", "").replace("*", "").strip()
+    resTypeName = convertBuiltinTypes(resTypeName)
+  else:
+    resTypeName = resTypedefType
+  if resTypeName == "" or "(" in resTypeName or ":" in resTypeName:
+    print("could not generate proper types for type name '" + resTypeName + "', using 'any' instead.")
+    resTypeName = "any"
+  return resTypeName
+
+def getMethodsTypescriptDefinitions(theClass, filterMethod, typedefs):
+  output = ""
+  for child in theClass.get_children():
+    if not filterMethod(theClass, child):
+      continue
+    try:
+      output += getSingleMethodTypescriptDefinition(theClass, child, typedefs)
+    except SkipException as e:
+      print(str(e))
+  return output
+
+def getSingleMethodTypescriptDefinition(theClass, method, typedefs):
+  className = theClass.spelling
+  if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
+    [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
+
+    args = ", ".join(list(map(lambda x: getTypescriptDefFromArg(x[1], typedefs, x[0]), enumerate(method.get_arguments()))))
+    returnType = getTypescriptDefFromResultType(method.result_type, typedefs)
+
+    return "  " + method.spelling + overloadPostfix + "(" + args + "): " + returnType + ";\n"
+  return ""
+
+def getClassTypescriptDefinitions(theClass, filterClass, translationUnit, typedefs, thisLibName, moduleExportsDict, imports, filterMethod):
   baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, theClass.get_children()))
   baseClassDefinition = ""
   if len(baseSpec) > 0:
@@ -136,6 +186,7 @@ def getClassTypescriptDefinitions(theClass, filterClass, translationUnit, typede
   if not isAbstractClass(theClass, translationUnit):
     output += getSimpleConstructorBinding(theClass, typedefs)
 
+  output += getMethodsTypescriptDefinitions(theClass, filterMethod, typedefs)
   output += "}\n\n"
 
   return output
@@ -176,7 +227,7 @@ def getTypescriptDefinitions(libName, libExportName, translationUnit, headerFile
   for child in translationUnit.cursor.get_children():
     if shouldProcessClass(child, headerFiles, filterClass):
       try:
-        typedefOutput += getClassTypescriptDefinitions(child, filterClass, translationUnit, filteredTypedefs, libExportName, moduleExportsDict, imports)
+        typedefOutput += getClassTypescriptDefinitions(child, filterClass, translationUnit, filteredTypedefs, libExportName, moduleExportsDict, imports, filterMethod)
         exportOutput += "  " + child.spelling + ": typeof " + child.spelling + ";\n"
       except SkipException as e:
         print(str(e))

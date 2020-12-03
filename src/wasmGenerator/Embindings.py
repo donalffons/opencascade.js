@@ -1,7 +1,7 @@
 import clang.cindex
 import os
 
-from .Common import shouldProcessClass, isAbstractClass, SkipException
+from .Common import shouldProcessClass, isAbstractClass, SkipException, getMethodOverloadPostfix
 
 def getClassEmbindings(theClass):
   children = theClass.get_children()
@@ -22,7 +22,6 @@ def getMethodsEmbindings(theClass, filterMethod):
     if not filterMethod(theClass, child):
       continue
     try:
-      pass
       methodsBinding += getSingleMethodBinding(theClass, child)
     except SkipException as e:
       print(str(e))
@@ -30,13 +29,10 @@ def getMethodsEmbindings(theClass, filterMethod):
 
 def getSingleMethodBinding(theClass, method):
   className = theClass.spelling
-  if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD:
-    allOverloads = [m for m in theClass.get_children() if m.spelling == method.spelling]
-    if method.spelling.startswith("operator"):
-      return ""
-    overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(method) + 1)
+  if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
+    [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
 
-    if len(allOverloads) == 1:
+    if numOverloads == 1:
       functor = "&" + className + "::" + method.spelling
     else:
       returnType = method.result_type.spelling
@@ -52,8 +48,6 @@ def getSingleMethodBinding(theClass, method):
     cast = getCastMethodBindings(theClass, method)
     return "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())" + os.linesep
 
-  if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.USING_DECLARATION:
-    raise SkipException("Using declarations are not supported! (" + className + ", " + method.spelling + ")")
   return ""
 
 def getCastMethodBindings(theClass, method):
