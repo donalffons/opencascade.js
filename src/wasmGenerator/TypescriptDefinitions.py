@@ -108,6 +108,25 @@ def getSimpleConstructorBinding(theClass, typedefs):
   
   return "  constructor(" + argsTypescriptDef + ")\n"
 
+def getOverloadedConstructorsTypescriptDefinition(theClass, typedefs):
+  children = theClass.get_children()
+  constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
+  if len(constructors) == 1:
+    return ["", []]
+
+  constructorTypescriptDef = ""
+  allOverloadedConstructors = []
+
+  for constructor in constructors:
+    [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, constructor)
+
+    argsTypescriptDef = ", ".join(list(map(lambda x: getTypescriptDefFromArg(x, typedefs), list(constructor.get_arguments()))))
+    constructorTypescriptDef += "  export declare class " + constructor.spelling + overloadPostfix + " extends " + constructor.spelling + " {\n"
+    constructorTypescriptDef += "    constructor(" + argsTypescriptDef + ");\n"
+    constructorTypescriptDef += "  }\n\n"
+    allOverloadedConstructors.append(constructor.spelling + overloadPostfix)
+  return [constructorTypescriptDef, allOverloadedConstructors]
+
 def addImportIfWeHaveTo(thisLibName, libItem, moduleExportsDict, imports):
   if not libItem in moduleExportsDict[thisLibName]:
     importLib = next((x for x in moduleExportsDict if libItem in moduleExportsDict[x]), None)
@@ -126,8 +145,8 @@ def getTypescriptDefFromArg(arg, typedefs, suffix = ""):
   argTypeName = argTypeName.replace("&", "").replace("const", "").replace("*", "").strip()
   argTypeName = convertBuiltinTypes(argTypeName)
   if argTypeName == "" or "(" in argTypeName or ":" in argTypeName:
-    argTypeName = "any"
     print("could not generate proper types for type name '" + argTypeName + "', using 'any' instead.")
+    argTypeName = "any"
   argname = (arg.spelling if not arg.spelling == "" else ("a" + str(suffix)))
   if argname in ["var", "with", "super"]:
     argname += "_"
@@ -226,9 +245,16 @@ def getTypescriptDefinitions(libName, libExportName, translationUnit, headerFile
   imports = {}
   for child in translationUnit.cursor.get_children():
     if shouldProcessClass(child, headerFiles, filterClass):
+      theClass = child
       try:
-        typedefOutput += getClassTypescriptDefinitions(child, filterClass, translationUnit, filteredTypedefs, libExportName, moduleExportsDict, imports, filterMethod)
-        exportOutput += "  " + child.spelling + ": typeof " + child.spelling + ";\n"
+        typedefOutput += getClassTypescriptDefinitions(theClass, filterClass, translationUnit, filteredTypedefs, libExportName, moduleExportsDict, imports, filterMethod)
+        exportOutput += "  " + theClass.spelling + ": typeof " + theClass.spelling + ";\n"
+        if not isAbstractClass(theClass, translationUnit):
+          [ocTypes, ocs] = getOverloadedConstructorsTypescriptDefinition(theClass, filteredTypedefs)
+          typedefOutput+= ocTypes
+          for oc in ocs:
+            exportOutput += "  " + oc + ": typeof " + oc + ";\n"
+
       except SkipException as e:
         print(str(e))
   
