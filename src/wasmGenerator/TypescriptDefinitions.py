@@ -1,6 +1,6 @@
 import clang.cindex
 
-from .Common import shouldProcessClass, isAbstractClass, SkipException, getMethodOverloadPostfix
+from .Common import shouldProcessClass, isAbstractClass, SkipException, getMethodOverloadPostfix, ignoreDuplicateTypedef
 
 def convertBuiltinTypes(typeName):
   if typeName in [
@@ -30,52 +30,6 @@ def convertBuiltinTypes(typeName):
   ]:
     return "boolean"
   return typeName
-
-def ignoreDuplicateTypedef(typedef, sortedTypedefs):
-  if typedef.underlying_typedef_type.spelling in [
-    "long",
-    "unsigned long",
-    "unsigned char",
-    "unsigned short",
-    "unsigned int",
-    "signed char",
-    "short",
-    "int",
-    "__int8_t",
-    "__uint8_t",
-    "__int16_t",
-    "__uint16_t",
-    "__int32_t",
-    "__uint32_t",
-    "__int64_t",
-    "__uint64_t",
-    "void *",
-    "char *",
-    "double",
-    "float",
-    "char",
-    "size_t",
-    "char16_t",
-    "struct _IO_FILE",
-    "Standard_Character *",
-    "Standard_Integer",
-    "BVH_Box<Standard_Real, 3>",
-    "Standard_ExtCharacter *",
-    "int (*)(...)",
-    "doublereal (*)(...)",
-    "void (*)(...)",
-    "void",
-    "XID",
-    "XKeyEvent",
-    "XButtonEvent",
-    "XCrossingEvent",
-    "XFocusChangeEvent",
-    "struct _XOC *",
-    "Standard_Byte *",
-    "Standard_Boolean (*)(const opencascade::handle<TCollection_HAsciiString> &)",
-    "Standard_Real"
-  ]:
-    return True
 
 def getTypescriptDefFromArg(arg, typedefs, suffix = ""):
   argTypedefType = arg.type.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
