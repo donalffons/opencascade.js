@@ -2,7 +2,7 @@ import clang.cindex
 
 def filterMethod(theClass, method):
   if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.USING_DECLARATION:
-    print("Using declarations are not supported! (" + className + ", " + method.spelling + ")")
+    print("Using declarations are not supported! (" + theClass.spelling + ", " + method.spelling + ")")
     return False
 
   if method.result_type.spelling.startswith("Standard_OStream"):

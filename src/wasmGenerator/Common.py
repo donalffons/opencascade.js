@@ -57,8 +57,10 @@ def shouldProcessClass(child, headerFiles, filterClass):
     
   return False
 
-def getMethodOverloadPostfix(theClass, method):
-  allOverloads = [m for m in theClass.get_children() if m.spelling == method.spelling]
+def getMethodOverloadPostfix(theClass, method, children = None):
+  if children == None:
+    children = theClass.get_children() 
+  allOverloads = [m for m in children if m.spelling == method.spelling]
   overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(method) + 1)
 
   return [overloadPostfix, len(allOverloads)]

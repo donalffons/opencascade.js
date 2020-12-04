@@ -31,21 +31,7 @@ def convertBuiltinTypes(typeName):
     return "boolean"
   return typeName
 
-def getTypescriptDefFromArg(arg, typedefs, suffix = ""):
-  argTypedefType = arg.type.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
-  typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == argTypedefType), None)
-  argTypeName = (arg.type.spelling if typedefType is None else typedefType.spelling)
-  argTypeName = argTypeName.replace("&", "").replace("const", "").replace("*", "").strip()
-  argTypeName = convertBuiltinTypes(argTypeName)
-  if argTypeName == "" or "(" in argTypeName or ":" in argTypeName:
-    argTypeName = "any"
-    print("could not generate proper types for type name '" + argTypeName + "', using 'any' instead.")
-  argname = (arg.spelling if not arg.spelling == "" else ("a" + str(suffix)))
-  if argname in ["var", "with", "super"]:
-    argname += "_"
-  return argname + ": " + argTypeName
-
-def getSimpleConstructorBinding(theClass, typedefs):
+def getSimpleConstructorBinding(theClass, typedefs, thisLibName, moduleExportsDict, imports):
   children = list(theClass.get_children())
   constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR, children))
 
@@ -58,12 +44,13 @@ def getSimpleConstructorBinding(theClass, typedefs):
   if not standardConstructor:
     return ""
 
-  argsTypescriptDef = ", ".join(list(map(lambda x: getTypescriptDefFromArg(x, typedefs), list(standardConstructor.get_arguments()))))
+  argsTypescriptDef = ", ".join(list(map(lambda x: getTypescriptDefFromArg(x, typedefs, thisLibName, moduleExportsDict, imports), list(standardConstructor.get_arguments()))))
   
   return "  constructor(" + argsTypescriptDef + ")\n"
 
-def getOverloadedConstructorsTypescriptDefinition(theClass, typedefs):
-  children = theClass.get_children()
+def getOverloadedConstructorsTypescriptDefinition(theClass, children, typedefs, thisLibName, moduleExportsDict, imports):
+  if children is None:
+    children = list(theClass.get_children())
   constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
   if len(constructors) == 1:
     return ["", []]
@@ -72,9 +59,9 @@ def getOverloadedConstructorsTypescriptDefinition(theClass, typedefs):
   allOverloadedConstructors = []
 
   for constructor in constructors:
-    [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, constructor)
+    [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, constructor, children)
 
-    argsTypescriptDef = ", ".join(list(map(lambda x: getTypescriptDefFromArg(x, typedefs), list(constructor.get_arguments()))))
+    argsTypescriptDef = ", ".join(list(map(lambda x: getTypescriptDefFromArg(x, typedefs, thisLibName, moduleExportsDict, imports), list(constructor.get_arguments()))))
     constructorTypescriptDef += "  export declare class " + constructor.spelling + overloadPostfix + " extends " + constructor.spelling + " {\n"
     constructorTypescriptDef += "    constructor(" + argsTypescriptDef + ");\n"
     constructorTypescriptDef += "  }\n\n"
@@ -92,7 +79,7 @@ def addImportIfWeHaveTo(thisLibName, libItem, moduleExportsDict, imports):
     else:
       print("Base class \"" + libItem + "\" is not part of this module and has not been exported by any other module")
 
-def getTypescriptDefFromArg(arg, typedefs, suffix = ""):
+def getTypescriptDefFromArg(arg, typedefs, thisLibName, moduleExportsDict, imports, suffix = ""):
   argTypedefType = arg.type.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
   typedefType = next((x for x in typedefs if x.underlying_typedef_type.spelling == argTypedefType), None)
   argTypeName = (arg.type.spelling if typedefType is None else typedefType.spelling)
@@ -101,6 +88,8 @@ def getTypescriptDefFromArg(arg, typedefs, suffix = ""):
   if argTypeName == "" or "(" in argTypeName or ":" in argTypeName:
     print("could not generate proper types for type name '" + argTypeName + "', using 'any' instead.")
     argTypeName = "any"
+  addImportIfWeHaveTo(thisLibName, argTypeName, moduleExportsDict, imports)
+  
   argname = (arg.spelling if not arg.spelling == "" else ("a" + str(suffix)))
   if argname in ["var", "with", "super"]:
     argname += "_"
@@ -120,23 +109,23 @@ def getTypescriptDefFromResultType(res, typedefs):
     resTypeName = "any"
   return resTypeName
 
-def getMethodsTypescriptDefinitions(theClass, filterMethod, typedefs):
+def getMethodsTypescriptDefinitions(theClass, filterMethod, typedefs, thisLibName, moduleExportsDict, imports):
   output = ""
   for child in theClass.get_children():
     if not filterMethod(theClass, child):
       continue
     try:
-      output += getSingleMethodTypescriptDefinition(theClass, child, typedefs)
+      output += getSingleMethodTypescriptDefinition(theClass, child, typedefs, thisLibName, moduleExportsDict, imports)
     except SkipException as e:
       print(str(e))
   return output
 
-def getSingleMethodTypescriptDefinition(theClass, method, typedefs):
+def getSingleMethodTypescriptDefinition(theClass, method, typedefs, thisLibName, moduleExportsDict, imports):
   className = theClass.spelling
   if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
     [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
 
-    args = ", ".join(list(map(lambda x: getTypescriptDefFromArg(x[1], typedefs, x[0]), enumerate(method.get_arguments()))))
+    args = ", ".join(list(map(lambda x: getTypescriptDefFromArg(x[1], typedefs, thisLibName, moduleExportsDict, imports, x[0]), enumerate(method.get_arguments()))))
     returnType = getTypescriptDefFromResultType(method.result_type, typedefs)
 
     return "  " + method.spelling + overloadPostfix + "(" + args + "): " + returnType + ";\n"
@@ -157,9 +146,9 @@ def getClassTypescriptDefinitions(theClass, filterClass, translationUnit, typede
   output += "export declare class " + theClass.spelling + baseClassDefinition + " {\n"
 
   if not isAbstractClass(theClass, translationUnit):
-    output += getSimpleConstructorBinding(theClass, typedefs)
+    output += getSimpleConstructorBinding(theClass, typedefs, thisLibName, moduleExportsDict, imports)
 
-  output += getMethodsTypescriptDefinitions(theClass, filterMethod, typedefs)
+  output += getMethodsTypescriptDefinitions(theClass, filterMethod, typedefs, thisLibName, moduleExportsDict, imports)
   output += "}\n\n"
 
   return output
@@ -185,7 +174,7 @@ def getEnumTypescriptDefinitions(enum):
   typescriptOutput += "}\n\n"
   return typescriptOutput
 
-def getHandleTypescriptDefinitions(typedefs):
+def getHandleTypescriptDefinitions(typedefs, thisLibName, moduleExportsDict, imports):
   allExports = []
   typescriptOutput = ""
   print("generating typescript definitions for handle types...")
@@ -246,18 +235,19 @@ def getHandleTypescriptDefinitions(typedefs):
     oc3arg1.children = []
     oc3.arguments = [oc3arg1]
 
-    allExports.append(handleName)
+    if(theName == "TDF_LabelSequence"):
+      print("HIER")
 
     [ocTypes, ocs] = getOverloadedConstructorsTypescriptDefinition(handleTypedef, [
       oc1, oc2, oc3
-    ])
+    ], typedefs, thisLibName, moduleExportsDict, imports)
 
     typescriptOutput += ocTypes
     allExports.extend(ocs)
 
   return [typescriptOutput, allExports]
 
-def getNCollection_Array1TypescriptDefinitions(typedefs):
+def getNCollection_Array1TypescriptDefinitions(typedefs, thisLibName, moduleExportsDict, imports):
   allExports = []
   typescriptOutput = ""
   print("generating typescript definitions for NCollection_Array1 types...")
@@ -291,8 +281,6 @@ def getNCollection_Array1TypescriptDefinitions(typedefs):
     typescriptOutput += "  SetValue(theIndex: Standard_Integer, theItem: " + typescriptType + "): void;\n"
     typescriptOutput += "  Resize(theLower: Standard_Integer, theUpper: Standard_Integer, theToCopyData: Standard_Boolean): void;\n"
     typescriptOutput += "}\n\n"
-
-    allExports.append(theName)
 
     oc1 = overloadedConstrutorObject()
     oc1.spelling = theName
@@ -368,14 +356,14 @@ def getNCollection_Array1TypescriptDefinitions(typedefs):
 
     [ocTypes, ocs] = getOverloadedConstructorsTypescriptDefinition(nCollection_Array1Typedef, [
       oc1, oc2, oc3, oc4
-    ])
+    ], typedefs, thisLibName, moduleExportsDict, imports)
 
     typescriptOutput += ocTypes
     allExports.extend(ocs)
   
   return [typescriptOutput, allExports]
 
-def getNCollection_ListTypescriptDefinitions(typedefs):
+def getNCollection_ListTypescriptDefinitions(typedefs, thisLibName, moduleExportsDict, imports):
   allExports = []
   typescriptOutput = ""
   print("generating typescript definitions for NCollection_List types...")
@@ -406,8 +394,6 @@ def getNCollection_ListTypescriptDefinitions(typedefs):
     typescriptOutput += "  Reverse(): void;\n"
     typescriptOutput += "}\n\n"
 
-    allExports.append(theName)
-
     oc1 = overloadedConstrutorObject()
     oc1.spelling = theName
     oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
@@ -444,14 +430,14 @@ def getNCollection_ListTypescriptDefinitions(typedefs):
 
     [ocTypes, ocs] = getOverloadedConstructorsTypescriptDefinition(nCollection_ListTypedef, [
       oc1, oc2, oc3
-    ])
+    ], typedefs, thisLibName, moduleExportsDict, imports)
 
     typescriptOutput += ocTypes
     allExports.extend(ocs)
   
   return [typescriptOutput, allExports]
 
-def getNCollection_SequenceTypescriptDefinitions(typedefs):
+def getNCollection_SequenceTypescriptDefinitions(typedefs, thisLibName, moduleExportsDict, imports):
   allExports = []
   typescriptOutput = ""
   print("generating typescript definitions for NCollection_Sequence types...")
@@ -478,8 +464,6 @@ def getNCollection_SequenceTypescriptDefinitions(typedefs):
     typescriptOutput += "  Assign(): any;\n"
     typescriptOutput += "}\n\n"
 
-    allExports.append(theName)
-
     oc1 = overloadedConstrutorObject()
     oc1.spelling = theName
     oc1.kind = clang.cindex.CursorKind.CONSTRUCTOR
@@ -516,7 +500,7 @@ def getNCollection_SequenceTypescriptDefinitions(typedefs):
 
     [ocTypes, ocs] = getOverloadedConstructorsTypescriptDefinition(nCollection_ListTypedef, [
       oc1, oc2, oc3
-    ])
+    ], typedefs, thisLibName, moduleExportsDict, imports)
 
     typescriptOutput += ocTypes
     allExports.extend(ocs)
@@ -567,7 +551,7 @@ def getTypescriptDefinitions(libName, libExportName, translationUnit, headerFile
         typedefOutput += getClassTypescriptDefinitions(theClass, filterClass, translationUnit, filteredTypedefs, libExportName, moduleExportsDict, imports, filterMethod)
         exportOutput += "  " + theClass.spelling + ": typeof " + theClass.spelling + ";\n"
         if not isAbstractClass(theClass, translationUnit):
-          [ocTypes, ocs] = getOverloadedConstructorsTypescriptDefinition(theClass, filteredTypedefs)
+          [ocTypes, ocs] = getOverloadedConstructorsTypescriptDefinition(theClass, None, filteredTypedefs, libExportName, moduleExportsDict, imports)
           typedefOutput += ocTypes
           for oc in ocs:
             exportOutput += "  " + oc + ": typeof " + oc + ";\n"
@@ -575,22 +559,22 @@ def getTypescriptDefinitions(libName, libExportName, translationUnit, headerFile
       except SkipException as e:
         print(str(e))
   
-  [handleTypescriptDefinitions, handleExports] = getHandleTypescriptDefinitions(filteredTypedefs)
+  [handleTypescriptDefinitions, handleExports] = getHandleTypescriptDefinitions(filteredTypedefs, libExportName, moduleExportsDict, imports)
   typedefOutput += handleTypescriptDefinitions
   for handleExport in handleExports:
     exportOutput += "  " + handleExport + ": typeof " + handleExport + ";\n"
 
-  [nCollectionArray1TypescriptDefinitions, nCollectionArray1Exports] = getNCollection_Array1TypescriptDefinitions(filteredTypedefs)
+  [nCollectionArray1TypescriptDefinitions, nCollectionArray1Exports] = getNCollection_Array1TypescriptDefinitions(filteredTypedefs, libExportName, moduleExportsDict, imports)
   typedefOutput += nCollectionArray1TypescriptDefinitions
   for nCollectionArray1Export in nCollectionArray1Exports:
     exportOutput += "  " + nCollectionArray1Export + ": typeof " + nCollectionArray1Export + ";\n"
 
-  [nCollectionListTypescriptDefinitions, nCollectionListExports] = getNCollection_ListTypescriptDefinitions(filteredTypedefs)
+  [nCollectionListTypescriptDefinitions, nCollectionListExports] = getNCollection_ListTypescriptDefinitions(filteredTypedefs, libExportName, moduleExportsDict, imports)
   typedefOutput += nCollectionListTypescriptDefinitions
   for nCollectionListExport in nCollectionListExports:
     exportOutput += "  " + nCollectionListExport + ": typeof " + nCollectionListExport + ";\n"
 
-  [nCollectionSequenceTypescriptDefinitions, nCollectionSequenceExports] = getNCollection_SequenceTypescriptDefinitions(filteredTypedefs)
+  [nCollectionSequenceTypescriptDefinitions, nCollectionSequenceExports] = getNCollection_SequenceTypescriptDefinitions(filteredTypedefs, libExportName, moduleExportsDict, imports)
   typedefOutput += nCollectionSequenceTypescriptDefinitions
   for nCollectionSequenceExport in nCollectionSequenceExports:
     exportOutput += "  " + nCollectionSequenceExport + ": typeof " + nCollectionSequenceExport + ";\n"
