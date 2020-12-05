@@ -84,7 +84,7 @@ class WasmModule:
       self.includeDirectives, self.name,
       self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum)
     p.process()
-    
+
     bindingsFile = open(self.embindFile, "w")
     bindingsFile.write(p.output)
 
