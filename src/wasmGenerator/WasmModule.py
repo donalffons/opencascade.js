@@ -84,9 +84,12 @@ class WasmModule:
       self.includeDirectives, self.name,
       self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum)
     p.process()
-
+    
     bindingsFile = open(self.embindFile, "w")
-    bindingsFile.write(getEmbindings(self.includeDirectives, self.name, self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum))
+    bindingsFile.write(p.output)
+
+    # bindingsFile = open(self.embindFile, "w")
+    # bindingsFile.write(getEmbindings(self.includeDirectives, self.name, self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum))
 
   def getExports(self):
     return getExports(self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum)
@@ -103,7 +106,10 @@ class WasmModule:
     p.process()
 
     typescriptFile = open(self.typescriptDefinitionFile, "w")
-    typescriptFile.write(getTypescriptDefinitions(typescriptFileName, self.name, self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, self.moduleExportsDict))
+    typescriptFile.write(p.output)
+
+    # typescriptFile = open(self.typescriptDefinitionFile, "w")
+    # typescriptFile.write(getTypescriptDefinitions(typescriptFileName, self.name, self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, self.moduleExportsDict))
     
   def build(self, includePaths):
     includePathArgs = list(dict.fromkeys(map(lambda x: "-I" + os.path.dirname(x), self.headerFiles)))
