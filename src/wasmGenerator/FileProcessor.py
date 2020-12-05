@@ -106,8 +106,22 @@ class EmbindProcessor(FileProcessor):
     self.output += "  ;\n"
 
   def processSimpleConstructor(self, theClass):
-    self.output += "// processSimpleConstructor\n";
-    pass
+    children = list(theClass.get_children())
+    constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR, children))
+
+    if len(constructors) == 0:
+      self.output += "    .constructor<>()\n"
+      return
+    publicConstructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
+    if len(publicConstructors) == 0 or len(publicConstructors) > 1:
+      return
+    standardConstructor = publicConstructors[0]
+    if not standardConstructor:
+      return
+
+    argTypesBindings = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
+    
+    self.output += "    .constructor<" + argTypesBindings + ">()\n"
 
   def getSingleArgumentBinding(self, argNames = True, isConstructor = False):
     def f(arg):
@@ -191,9 +205,31 @@ class EmbindProcessor(FileProcessor):
       cast = self.getCastMethodBindings(theClass, method)
       self.output += "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())\n"
 
-  def processOverloadedConstructors(self, theClass):
-    self.output += "// processOverloadedConstructors\n";
-    pass
+  def processOverloadedConstructors(self, theClass, children = None):
+    if children is None:
+      children = list(theClass.get_children())
+    constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
+    if len(constructors) == 1:
+      return
+    constructorBindings = ""
+    allOverloads = [m for m in children if m.kind == clang.cindex.CursorKind.CONSTRUCTOR and m.access_specifier == clang.cindex.AccessSpecifier.PUBLIC]
+    if len(allOverloads) == 1:
+      raise Exception("Something weird happened")
+    for constructor in constructors:
+      overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
+
+      args = ", ".join(list(map(lambda x: self.getSingleArgumentBinding(True, True)(x)[0], list(constructor.get_arguments()))))
+      argNames = ", ".join(list(map(lambda x: x.spelling if not any(y.spelling == "Standard_CString" for y in x.get_tokens()) else x.spelling + ".c_str()", list(constructor.get_arguments()))))
+      argTypes = ", ".join(list(map(lambda x: self.getSingleArgumentBinding(False, True)(x)[0], list(constructor.get_arguments()))))
+
+      constructorBindings += "    struct " + constructor.spelling + overloadPostfix + " : public " + constructor.spelling + " {\n"
+      constructorBindings += "      " + constructor.spelling + overloadPostfix + "(" + args + ") : " + constructor.spelling + "(" + argNames + ") {}\n"
+      constructorBindings += "    };\n"
+      constructorBindings += "    class_<" + constructor.spelling + overloadPostfix + ", base<" + constructor.spelling + ">>(\"" + constructor.spelling + overloadPostfix + "\")\n"
+      constructorBindings += "      .constructor<" + argTypes + ">()\n"
+      constructorBindings += "    ;\n"
+
+    self.output += constructorBindings
 
 class TypescriptProcessor(FileProcessor):
   def __init__(
@@ -206,6 +242,8 @@ class TypescriptProcessor(FileProcessor):
     self.name = name
     self.moduleExportsDict = moduleExportsDict
     self.imports = {}
+
+    self.exports = []
 
   def process(self):
     super().process()
@@ -238,8 +276,22 @@ class TypescriptProcessor(FileProcessor):
     self.output += "}\n\n"
 
   def processSimpleConstructor(self, theClass):
-    self.output += "// processSimpleConstructor\n";
-    pass
+    children = list(theClass.get_children())
+    constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR, children))
+
+    if len(constructors) == 0:
+      self.output += "  constructor();\n"
+      return
+    publicConstructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
+    if len(publicConstructors) == 0 or len(publicConstructors) > 1:
+      return
+    standardConstructor = publicConstructors[0]
+    if not standardConstructor:
+      return
+
+    argsTypescriptDef = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x), list(standardConstructor.get_arguments()))))
+    
+    self.output += "  constructor(" + argsTypescriptDef + ")\n"
 
   def convertBuiltinTypes(self, typeName):
     if typeName in [
@@ -284,7 +336,7 @@ class TypescriptProcessor(FileProcessor):
       resTypeName = "any"
     return resTypeName
 
-  def getTypescriptDefFromArg(self, arg, thisLibName, suffix = ""):
+  def getTypescriptDefFromArg(self, arg, suffix = ""):
     argTypedefType = arg.type.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
     typedefType = next((x for x in self.typedefs if x.underlying_typedef_type.spelling == argTypedefType), None)
     argTypeName = (arg.type.spelling if typedefType is None else typedefType.spelling)
@@ -305,11 +357,28 @@ class TypescriptProcessor(FileProcessor):
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
 
-      args = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x[1], self.name, x[0]), enumerate(method.get_arguments()))))
+      args = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x[1], x[0]), enumerate(method.get_arguments()))))
       returnType = self.getTypescriptDefFromResultType(method.result_type)
 
       self.output += "  " + method.spelling + overloadPostfix + "(" + args + "): " + returnType + ";\n"
 
-  def processOverloadedConstructors(self, theClass):
-    self.output += "// processOverloadedConstructors\n";
-    pass
+  def processOverloadedConstructors(self, theClass, children = None):
+    if children is None:
+      children = list(theClass.get_children())
+    constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
+    if len(constructors) == 1:
+      return
+
+    constructorTypescriptDef = ""
+    allOverloadedConstructors = []
+
+    for constructor in constructors:
+      [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, constructor, children)
+
+      argsTypescriptDef = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x), list(constructor.get_arguments()))))
+      constructorTypescriptDef += "  export declare class " + constructor.spelling + overloadPostfix + " extends " + constructor.spelling + " {\n"
+      constructorTypescriptDef += "    constructor(" + argsTypescriptDef + ");\n"
+      constructorTypescriptDef += "  }\n\n"
+      allOverloadedConstructors.append(constructor.spelling + overloadPostfix)
+    self.output += constructorTypescriptDef
+    self.exports.extend(allOverloadedConstructors)
