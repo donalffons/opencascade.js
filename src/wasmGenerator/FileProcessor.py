@@ -89,6 +89,19 @@ class EmbindProcessor(FileProcessor):
 
     self.output += "}\n"
 
+    for theClass in self.translationUnit.cursor.get_children():
+      if theClass.get_definition() is None or not theClass == theClass.get_definition():
+        continue
+      if not theClass.extent.start.file.name in self.headerFiles:
+        continue
+      if not self.filterClass(theClass):
+        continue
+      if theClass.kind == clang.cindex.CursorKind.CLASS_DECL:
+        nonPublicDestructor = any(x.kind == clang.cindex.CursorKind.DESTRUCTOR and not x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC for x in theClass.get_children())
+        placementDelete = next((x for x in theClass.get_children() if x.spelling == "operator delete" and len(list(x.get_arguments())) == 2), None) is not None
+        if nonPublicDestructor or placementDelete:
+          self.output += "namespace emscripten { namespace internal { template<> void raw_destructor<" + theClass.spelling + ">(" + theClass.spelling + "* ptr) { /* do nothing */ } } }\n"
+
   def processClass(self, theClass):
     children = theClass.get_children()
     className = theClass.spelling
