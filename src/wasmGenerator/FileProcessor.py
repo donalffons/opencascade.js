@@ -259,7 +259,27 @@ class TypescriptProcessor(FileProcessor):
     self.exports = []
 
   def process(self):
+    for importLib, importItems in self.imports.items():
+      self.output += "import { " + ", ".join(importItems) + " } from './" + importLib + ".wasm';\n\n"
+    
+    self.output += \
+      "declare const libName = \"" + self.typescriptFileName + "\";\n" + \
+      "export default libName;\n\n" + \
+      "type Standard_Boolean = boolean;\n" + \
+      "type Standard_Byte = number;\n" + \
+      "type Standard_Character = string;\n" + \
+      "type Standard_CString = string;\n" + \
+      "type Standard_Integer = number;\n" + \
+      "type Standard_Real = number;\n" + \
+      "type Standard_ShortReal = number;\n" + \
+      "type Standard_Size = number;\n\n"
+
     super().process()
+
+    self.output += "export declare type " + self.name + "Lib = {\n"
+    for export in self.exports:
+      self.output += "  " + export + ": typeof " + export + ";\n"
+    self.output += "};\n"
 
   def addImportIfWeHaveTo(self, libItem):
     if not libItem in self.moduleExportsDict[self.name]:
@@ -305,6 +325,7 @@ class TypescriptProcessor(FileProcessor):
     argsTypescriptDef = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x), list(standardConstructor.get_arguments()))))
     
     self.output += "  constructor(" + argsTypescriptDef + ")\n"
+    self.exports.append(theClass.spelling)
 
   def convertBuiltinTypes(self, typeName):
     if typeName in [
