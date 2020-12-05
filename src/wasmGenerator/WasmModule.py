@@ -11,6 +11,8 @@ from .Embindings import getEmbindings
 from .TypescriptDefinitions import getTypescriptDefinitions
 from .Exports import getExports
 
+from .FileProcessor import EmbindProcessor, TypescriptProcessor
+
 from enum import Enum
 
 class ModuleType:
@@ -78,6 +80,11 @@ class WasmModule:
         print("  " + d.format())
 
   def generateEmbindings(self):
+    p = EmbindProcessor(
+      self.includeDirectives, self.name,
+      self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum)
+    p.process()
+
     bindingsFile = open(self.embindFile, "w")
     bindingsFile.write(getEmbindings(self.includeDirectives, self.name, self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum))
 
@@ -89,6 +96,12 @@ class WasmModule:
 
   def generateTypescriptDefinitions(self):
     typescriptFileName = "./" + "/".join(self.outputFile.split("/")[3:]) + ".wasm.d.ts"
+    
+    p = TypescriptProcessor(
+      typescriptFileName, self.name, self.moduleExportsDict,
+      self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum)
+    p.process()
+
     typescriptFile = open(self.typescriptDefinitionFile, "w")
     typescriptFile.write(getTypescriptDefinitions(typescriptFileName, self.name, self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, self.moduleExportsDict))
     

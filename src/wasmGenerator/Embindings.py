@@ -496,22 +496,7 @@ def getEmbindings(includeDirectives, name, translationUnit, headerFiles, filterC
     "\n" + \
     "EMSCRIPTEN_BINDINGS(" + name + ") {\n"
 
-  for child in translationUnit.cursor.get_children():
-    if shouldProcessClass(child, headerFiles, filterClass):
-      try:
-        output += getClassEmbindings(child)
-        isAbstract = isAbstractClass(child, translationUnit)
-        if not isAbstract:
-          output += getSimpleConstructorBinding(child)
-        output += getMethodsEmbindings(child, filterMethod)
-        output += "  ;" + "\n"
-        if not isAbstract:
-          output += getOverloadedConstructorsBinding(child)
-      except SkipException as e:
-        print(str(e))
-
   typedefs = filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL, translationUnit.cursor.get_children())
-
   sortedTypedefs = {}
   for child in typedefs:
     if child.get_definition() is None or not child == child.get_definition():
@@ -542,6 +527,20 @@ def getEmbindings(includeDirectives, name, translationUnit, headerFiles, filterC
       else:
         for child in children:
           filteredTypedefs.append(child)
+          
+  for child in translationUnit.cursor.get_children():
+    if shouldProcessClass(child, headerFiles, filterClass):
+      try:
+        output += getClassEmbindings(child)
+        isAbstract = isAbstractClass(child, translationUnit)
+        if not isAbstract:
+          output += getSimpleConstructorBinding(child)
+        output += getMethodsEmbindings(child, filterMethod)
+        output += "  ;" + "\n"
+        if not isAbstract:
+          output += getOverloadedConstructorsBinding(child)
+      except SkipException as e:
+        print(str(e))
 
   output += getHandleTypeBindings(filteredTypedefs)
   output += getNCollection_Array1TypeBindings(filteredTypedefs)
