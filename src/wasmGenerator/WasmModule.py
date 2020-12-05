@@ -79,16 +79,7 @@ class WasmModule:
 
   def generateEmbindings(self):
     bindingsFile = open(self.embindFile, "w")
-    bindingsFile.write(
-      self.includeDirectives + "\n" +
-      "\n" +
-      "#include <emscripten/bind.h>\n" +
-      "using namespace emscripten;\n" +
-      "\n" +
-      "EMSCRIPTEN_BINDINGS(" + self.name + ") {\n"
-    )
-
-    bindingsFile.write(getEmbindings(self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum))
+    bindingsFile.write(getEmbindings(self.includeDirectives, self.name, self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum))
 
   def getExports(self):
     return getExports(self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum)

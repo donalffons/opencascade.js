@@ -486,8 +486,15 @@ def getNCollection_SequenceTypeBindings(typedefs):
   
   return bindingsOutput
 
-def getEmbindings(translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum):
+def getEmbindings(includeDirectives, name, translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum):
   output = ""
+
+  output += includeDirectives + "\n" + \
+    "\n" + \
+    "#include <emscripten/bind.h>\n" + \
+    "using namespace emscripten;\n" + \
+    "\n" + \
+    "EMSCRIPTEN_BINDINGS(" + name + ") {\n"
 
   for child in translationUnit.cursor.get_children():
     if shouldProcessClass(child, headerFiles, filterClass):
