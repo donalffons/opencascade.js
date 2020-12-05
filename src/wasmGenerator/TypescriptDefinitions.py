@@ -235,9 +235,6 @@ def getHandleTypescriptDefinitions(typedefs, thisLibName, moduleExportsDict, imp
     oc3arg1.children = []
     oc3.arguments = [oc3arg1]
 
-    if(theName == "TDF_LabelSequence"):
-      print("HIER")
-
     [ocTypes, ocs] = getOverloadedConstructorsTypescriptDefinition(handleTypedef, [
       oc1, oc2, oc3
     ], typedefs, thisLibName, moduleExportsDict, imports)
