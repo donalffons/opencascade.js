@@ -50,21 +50,23 @@ class FileProcessor:
       if shouldProcessClass(theClass, self.headerFiles, self.filterClass):
         try:
           self.processClass(theClass)
-          isAbstract = isAbstractClass(theClass, self.translationUnit)
-          if not isAbstract:
-            self.processSimpleConstructor(theClass)
-          for method in theClass.get_children():
-            if not self.filterMethod(theClass, method):
-              continue
-            try:
-              self.processMethod(theClass, method)
-            except SkipException as e:
-              print(str(e))
-          self.processFinalizeClass()
-          if not isAbstract:
-            self.processOverloadedConstructors(theClass)
         except SkipException as e:
           print(str(e))
+
+  def processClass(self, theClass):
+    isAbstract = isAbstractClass(theClass, self.translationUnit)
+    if not isAbstract:
+      self.processSimpleConstructor(theClass)
+    for method in theClass.get_children():
+      if not self.filterMethod(theClass, method):
+        continue
+      try:
+        self.processMethod(theClass, method)
+      except SkipException as e:
+        print(str(e))
+    self.processFinalizeClass()
+    if not isAbstract:
+      self.processOverloadedConstructors(theClass)
 
 class EmbindProcessor(FileProcessor):
   def __init__(
@@ -114,6 +116,8 @@ class EmbindProcessor(FileProcessor):
       baseClassBinding = ""
 
     self.output += "  class_<" + className + baseClassBinding + ">(\"" + className + "\")\n"
+
+    super().processClass(theClass)
 
   def processFinalizeClass(self):
     self.output += "  ;\n"
@@ -304,6 +308,8 @@ class TypescriptProcessor(FileProcessor):
           self.addImportIfWeHaveTo(baseSpec[0].type.spelling)
 
     self.output += "export declare class " + theClass.spelling + baseClassDefinition + " {\n"
+
+    super().processClass(theClass)
 
   def processFinalizeClass(self):
     self.output += "}\n\n"
