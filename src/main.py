@@ -142,13 +142,11 @@ def f(aModule):
     includePaths + [
       "/emsdk/upstream/emscripten/system/include/",
       "/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed/",
-      "/clang/clang_10/include/c++/v1/",
-      "/clang/clang_10/include/c++/v1/support/newlib",
+      "/clang/clang_11/include/c++/v1/",
+      "/clang/clang_11/include/c++/v1/support/newlib",
       "/rapidjson/include",
     ], [
-      "/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed/",
-      "/usr/lib/gcc/x86_64-linux-gnu/8/include/",
-      "/usr/lib/gcc/x86_64-linux-gnu/8/include/",
+      "/usr/lib/gcc/x86_64-linux-gnu/10/include",
     ]
   )
 
@@ -213,13 +211,11 @@ for aModule in allWasmModules:
     includePaths + [
       "/emsdk/upstream/emscripten/system/include/",
       "/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed/",
-      "/clang/clang_10/include/c++/v1/",
-      "/clang/clang_10/include/c++/v1/support/newlib",
+      "/clang/clang_11/include/c++/v1/",
+      "/clang/clang_11/include/c++/v1/support/newlib",
       "/rapidjson/include",
     ], [
-      "/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed/",
-      "/usr/lib/gcc/x86_64-linux-gnu/8/include/",
-      "/usr/lib/gcc/x86_64-linux-gnu/8/include/",
+      "/usr/lib/gcc/x86_64-linux-gnu/10/include",
     ]
   )
   moduleExportsDict[aModule.name] = aModule.getExports()

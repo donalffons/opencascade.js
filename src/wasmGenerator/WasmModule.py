@@ -61,7 +61,7 @@ class WasmModule:
       list(map(lambda x: "-isystem" + x, additionalSystemIncludePaths))
     self.includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", list(sorted(includeFiles))))
 
-    libFolder = "/clang/clang_10/lib"
+    libFolder = "/clang/clang_11/lib"
     clang.cindex.Config.library_path = libFolder
     index = clang.cindex.Index.create()
     self.tu = index.parse(

@@ -15,17 +15,17 @@ RUN \
 RUN python3.8 -m pip install patch requests
 
 WORKDIR /clang/
-RUN python3.8 -m pip install -Iv clang==10.0.1
-RUN curl -SL https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.0/clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz \
+RUN python3.8 -m pip install -Iv clang==11.0
+RUN curl -SL https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz \
  | tar -xJC . && \
- mv clang+llvm-10.0.0-x86_64-linux-gnu-ubuntu-18.04 clang_10 && \
- PATH=/clang/clang_10/bin:$PATH && \
- LD_LIBRARY_PATH=/clang/clang_10/lib:$LD_LIBRARY_PATH
-RUN PATH=/clang/clang_10/lib:$PATH
-RUN LD_LIBRARY_PATH=/clang/clang_10/lib:$LD_LIBRARY_PATHLD_LIBRARY_PATH
+ mv clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04 clang_11 && \
+ PATH=/clang/clang_11/bin:$PATH && \
+ LD_LIBRARY_PATH=/clang/clang_11/lib:$LD_LIBRARY_PATH
+RUN PATH=/clang/clang_11/lib:$PATH
+RUN LD_LIBRARY_PATH=/clang/clang_11/lib:$LD_LIBRARY_PATHLD_LIBRARY_PATH
 RUN \
-  cd clang_10/lib && \
-  ln -s libclang.so.10 libclang-10.so
+  cd clang_11/lib && \
+  ln -s libclang.so.11 libclang-11.so
 
 RUN apt install -y libncurses5 libncurses6 libncurses5-dev libncursesw5-dev
 
@@ -109,6 +109,17 @@ RUN \
   curl "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=628c0211d53c7fe1036a85e7a7b2b067c9c50f7a;sf=tgz" -o occt.tar.gz && \
   tar -xvf occt.tar.gz && \
   cd occt-628c021/
+
+RUN \
+  curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash && \
+  sudo apt-get install git-lfs && \
+  git lfs install
+
+RUN \
+  apt remove libgcc-8-dev -y && \
+  echo "deb http://ftp.us.debian.org/debian testing main contrib non-free" >> /etc/apt/sources.list && \
+  apt update -y && \
+  apt install build-essential -y
 
 RUN \
   mkdir /opencascade.js/ && \
