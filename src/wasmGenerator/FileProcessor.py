@@ -1,4 +1,5 @@
 import clang.cindex
+import re
 
 from .Common import ignoreDuplicateTypedef, shouldProcessClass, SkipException, isAbstractClass, getMethodOverloadPostfix
 
@@ -12,6 +13,26 @@ class FileProcessor:
     self.filterMethod = filterMethod
     self.filterTypedef = filterTypedef
     self.filterEnum = filterEnum
+
+  def getTypedefedTemplateTypeAsString(self, theTypeSpelling, templateDecl = None, templateArgs = None):
+    if templateDecl is None:
+      typedefType = next((x for x in self.typedefs if x.underlying_typedef_type.spelling == theTypeSpelling), None)
+      typedefType = None if typedefType is None else typedefType.spelling
+    else:
+      templateType = self.replaceTemplateArgs(theTypeSpelling, templateArgs)
+      rawTemplateType = templateType.replace("&", "").replace("const", "").strip()
+      rawTypedefType = next((x for x in self.templateTypedefs if (x.underlying_typedef_type.spelling == rawTemplateType or x.underlying_typedef_type.spelling == "opencascade::" + rawTemplateType)), None)
+      rawTypedefType = rawTemplateType if rawTypedefType is None else rawTypedefType.spelling
+      typedefType = templateType.replace(rawTemplateType, rawTypedefType)
+    return theTypeSpelling if typedefType is None else typedefType
+
+  def replaceTemplateArgs(self, string, templateArgs = None):
+    if templateArgs is None:
+      return string
+    for key in templateArgs:
+      p = re.compile(r"(\W+|^)T")
+      string = p.sub("\\1" + templateArgs[key].spelling, string)
+    return string
 
   def process(self):
     self.typedefs = filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL, self.translationUnit.cursor.get_children())
@@ -53,7 +74,33 @@ class FileProcessor:
         except SkipException as e:
           print(str(e))
 
-  def processClass(self, theClass):
+    self.templateTypedefs = list(filter(
+      lambda x:
+        x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and
+        not (x.get_definition() is None or not x == x.get_definition()) and
+        x.extent.start.file.name in self.headerFiles and
+        self.filterTypedef(x) and
+        x.type.get_num_template_arguments() != -1,
+      self.translationUnit.cursor.get_children()))
+
+    for templateTypedef in self.templateTypedefs:
+      templateRefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TEMPLATE_REF, templateTypedef.get_children()))
+      if len(templateRefs) != 1:
+        print("The number of template refs for the template typedef \"" + templateTypedef.spelling + "\" is not 1!")
+        continue
+
+      if not templateTypedef.spelling.startswith("Handle_"):
+        continue
+
+      templateClass = templateRefs[0].get_definition()
+      templateArgNames = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TEMPLATE_TYPE_PARAMETER, templateClass.get_children()))
+      templateArgs = {}
+      for i, templateArgName in enumerate(templateArgNames):
+        templateArgs[templateArgName.spelling] = templateTypedef.type.get_template_argument_type(i)
+
+      self.processClass(templateClass, templateTypedef, templateArgs)
+
+  def processClass(self, theClass, templateDecl = None, templateArgs = None):
     isAbstract = isAbstractClass(theClass, self.translationUnit)
     if not isAbstract:
       self.processSimpleConstructor(theClass)
@@ -61,12 +108,12 @@ class FileProcessor:
       if not self.filterMethod(theClass, method):
         continue
       try:
-        self.processMethod(theClass, method)
+        self.processMethod(theClass, method, templateDecl, templateArgs)
       except SkipException as e:
         print(str(e))
     self.processFinalizeClass()
     if not isAbstract:
-      self.processOverloadedConstructors(theClass)
+      self.processOverloadedConstructors(theClass, None, templateDecl, templateArgs)
 
 class EmbindProcessor(FileProcessor):
   def __init__(
@@ -91,6 +138,7 @@ class EmbindProcessor(FileProcessor):
 
     self.output += "}\n"
 
+    # Epilog
     for theClass in self.translationUnit.cursor.get_children():
       if theClass.get_definition() is None or not theClass == theClass.get_definition():
         continue
@@ -104,9 +152,9 @@ class EmbindProcessor(FileProcessor):
         if nonPublicDestructor or placementDelete:
           self.output += "namespace emscripten { namespace internal { template<> void raw_destructor<" + theClass.spelling + ">(" + theClass.spelling + "* ptr) { /* do nothing */ } } }\n"
 
-  def processClass(self, theClass):
+  def processClass(self, theClass, templateDecl = None, templateArgs = None):
     children = theClass.get_children()
-    className = theClass.spelling
+    className = theClass.spelling if templateDecl is None else templateDecl.spelling
 
     baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, theClass.get_children()))
 
@@ -117,7 +165,7 @@ class EmbindProcessor(FileProcessor):
 
     self.output += "  class_<" + className + baseClassBinding + ">(\"" + className + "\")\n"
 
-    super().processClass(theClass)
+    super().processClass(theClass, templateDecl, templateArgs)
 
   def processFinalizeClass(self):
     self.output += "  ;\n"
@@ -140,7 +188,7 @@ class EmbindProcessor(FileProcessor):
     
     self.output += "    .constructor<" + argTypesBindings + ">()\n"
 
-  def getSingleArgumentBinding(self, argNames = True, isConstructor = False):
+  def getSingleArgumentBinding(self, argNames = True, isConstructor = False, templateDecl = None, templateArgs = None):
     def f(arg):
       argChildren = list(arg.get_children())
       argBinding = ""
@@ -153,20 +201,20 @@ class EmbindProcessor(FileProcessor):
         argBinding = const + argChildren[0].type.spelling + " (&" + (arg.spelling if argNames else "") + ")[" + arrayCount + "]"
         changed = True
       else:
-        typename = arg.type.spelling
+        typename = self.getTypedefedTemplateTypeAsString(arg.type.spelling, templateDecl, templateArgs)
         if arg.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE:
           tokenList = list(arg.get_tokens())
           isConstRef = len(tokenList) > 0 and tokenList[0].spelling == "const"
           if not isConstRef:
-            if arg.type.spelling[-2] == "*" or "".join(arg.type.spelling.rsplit("&", 1)).strip() in ["Standard_Boolean", "Standard_Real", "Standard_Integer"]: # types that can be copied
-              typename = "".join(arg.type.spelling.rsplit("&", 1))
+            if typename[-2] == "*" or "".join(typename.rsplit("&", 1)).strip() in ["Standard_Boolean", "Standard_Real", "Standard_Integer"]: # types that can be copied
+              typename = "".join(typename.rsplit("&", 1))
               changed = True
             else:
               if isConstructor:
-                typename = arg.type.spelling
+                typename = typename
                 changed = True
               else:
-                typename = "const " + arg.type.spelling
+                typename = "const " + typename
                 changed = True
         if any(x.spelling == "Standard_CString" for x in arg.get_tokens()):
           typename = "std::string"
@@ -201,8 +249,8 @@ class EmbindProcessor(FileProcessor):
         return ["static_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
     return ["", ""]
 
-  def processMethod(self, theClass, method):
-    className = theClass.spelling
+  def processMethod(self, theClass, method, templateDecl = None, templateArgs = None):
+    className = theClass.spelling if templateDecl is None else templateDecl.spelling
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
 
@@ -211,7 +259,7 @@ class EmbindProcessor(FileProcessor):
       else:
         returnType = method.result_type.spelling
         const = "const" if method.is_const_method() else ""
-        args = ", ".join(list(map(lambda x: x.type.spelling + " " + x.spelling, list(method.get_arguments()))))
+        args = ", ".join(list(map(lambda x: self.replaceTemplateArgs(x.type.spelling, templateArgs) + " " + x.spelling, list(method.get_arguments()))))
         functor = "(" + returnType + " (" + ((className + "::") if not method.is_static_method() else "") + "*)(" + args + ") " + const + ") &" + className + "::" + method.spelling
 
       if method.is_static_method():
@@ -222,7 +270,7 @@ class EmbindProcessor(FileProcessor):
       cast = self.getCastMethodBindings(theClass, method)
       self.output += "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())\n"
 
-  def processOverloadedConstructors(self, theClass, children = None):
+  def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):
     if children is None:
       children = list(theClass.get_children())
     constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
@@ -235,14 +283,15 @@ class EmbindProcessor(FileProcessor):
     for constructor in constructors:
       overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
 
-      args = ", ".join(list(map(lambda x: self.getSingleArgumentBinding(True, True)(x)[0], list(constructor.get_arguments()))))
+      args = ", ".join(list(map(lambda x: self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], list(constructor.get_arguments()))))
       argNames = ", ".join(list(map(lambda x: x.spelling if not any(y.spelling == "Standard_CString" for y in x.get_tokens()) else x.spelling + ".c_str()", list(constructor.get_arguments()))))
-      argTypes = ", ".join(list(map(lambda x: self.getSingleArgumentBinding(False, True)(x)[0], list(constructor.get_arguments()))))
+      argTypes = ", ".join(list(map(lambda x: self.getSingleArgumentBinding(False, True, templateDecl, templateArgs)(x)[0], list(constructor.get_arguments()))))
 
-      constructorBindings += "    struct " + constructor.spelling + overloadPostfix + " : public " + constructor.spelling + " {\n"
-      constructorBindings += "      " + constructor.spelling + overloadPostfix + "(" + args + ") : " + constructor.spelling + "(" + argNames + ") {}\n"
+      name = constructor.spelling if templateDecl is None else templateDecl.spelling
+      constructorBindings += "    struct " + name + overloadPostfix + " : public " + name + " {\n"
+      constructorBindings += "      " + name + overloadPostfix + "(" + args + ") : " + name + "(" + argNames + ") {}\n"
       constructorBindings += "    };\n"
-      constructorBindings += "    class_<" + constructor.spelling + overloadPostfix + ", base<" + constructor.spelling + ">>(\"" + constructor.spelling + overloadPostfix + "\")\n"
+      constructorBindings += "    class_<" + name + overloadPostfix + ", base<" + name + ">>(\"" + name + overloadPostfix + "\")\n"
       constructorBindings += "      .constructor<" + argTypes + ">()\n"
       constructorBindings += "    ;\n"
 
@@ -296,7 +345,7 @@ class TypescriptProcessor(FileProcessor):
       else:
         print("Base class \"" + libItem + "\" is not part of this module and has not been exported by any other module")
 
-  def processClass(self, theClass):
+  def processClass(self, theClass, templateDecl = None, templateArgs = None):
     baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, theClass.get_children()))
     baseClassDefinition = ""
     if len(baseSpec) > 0:
@@ -307,9 +356,10 @@ class TypescriptProcessor(FileProcessor):
           baseClassDefinition = " extends " + baseSpec[0].type.spelling
           self.addImportIfWeHaveTo(baseSpec[0].type.spelling)
 
-    self.output += "export declare class " + theClass.spelling + baseClassDefinition + " {\n"
+    name = theClass.spelling if templateDecl is None else templateDecl.spelling
+    self.output += "export declare class " + name + baseClassDefinition + " {\n"
 
-    super().processClass(theClass)
+    super().processClass(theClass, templateDecl, templateArgs)
 
   def processFinalizeClass(self):
     self.output += "}\n\n"
@@ -362,24 +412,21 @@ class TypescriptProcessor(FileProcessor):
       return "boolean"
     return typeName
 
-  def getTypescriptDefFromResultType(self, res):
-    resTypedefType = res.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
-    if not resTypedefType == "void":
-      typedefType = next((x for x in self.typedefs if x.underlying_typedef_type.spelling == resTypedefType), None)
-      resTypeName = (res.spelling if typedefType is None else typedefType.spelling)
-      resTypeName = resTypeName.replace("&", "").replace("const", "").replace("*", "").strip()
+  def getTypescriptDefFromResultType(self, res, templateDecl = None, templateArgs = None):
+    if not res.spelling == "void":
+      typedefType = self.getTypedefedTemplateTypeAsString(res.spelling.replace("&", "").replace("const", "").replace("*", "").strip(), templateDecl, templateArgs)
+      resTypeName = typedefType.replace("&", "").replace("const", "").replace("*", "").strip()
       resTypeName = self.convertBuiltinTypes(resTypeName)
     else:
+      resTypedefType = res.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
       resTypeName = resTypedefType
     if resTypeName == "" or "(" in resTypeName or ":" in resTypeName:
       print("could not generate proper types for type name '" + resTypeName + "', using 'any' instead.")
       resTypeName = "any"
     return resTypeName
 
-  def getTypescriptDefFromArg(self, arg, suffix = ""):
-    argTypedefType = arg.type.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
-    typedefType = next((x for x in self.typedefs if x.underlying_typedef_type.spelling == argTypedefType), None)
-    argTypeName = (arg.type.spelling if typedefType is None else typedefType.spelling)
+  def getTypescriptDefFromArg(self, arg, suffix = "", templateDecl = None, templateArgs = None):
+    argTypeName = self.getTypedefedTemplateTypeAsString(arg.type.spelling.replace("&", "").replace("const", "").replace("*", "").strip(), templateDecl, templateArgs)
     argTypeName = argTypeName.replace("&", "").replace("const", "").replace("*", "").strip()
     argTypeName = self.convertBuiltinTypes(argTypeName)
     if argTypeName == "" or "(" in argTypeName or ":" in argTypeName:
@@ -392,17 +439,16 @@ class TypescriptProcessor(FileProcessor):
       argname += "_"
     return argname + ": " + argTypeName
 
-  def processMethod(self, theClass, method):
-    className = theClass.spelling
+  def processMethod(self, theClass, method, templateDecl = None, templateArgs = None):
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
 
-      args = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x[1], x[0]), enumerate(method.get_arguments()))))
-      returnType = self.getTypescriptDefFromResultType(method.result_type)
+      args = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x[1], x[0], templateDecl, templateArgs), enumerate(method.get_arguments()))))
+      returnType = self.getTypescriptDefFromResultType(method.result_type, templateDecl, templateArgs)
 
       self.output += "  " + method.spelling + overloadPostfix + "(" + args + "): " + returnType + ";\n"
 
-  def processOverloadedConstructors(self, theClass, children = None):
+  def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):
     if children is None:
       children = list(theClass.get_children())
     constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
@@ -415,10 +461,11 @@ class TypescriptProcessor(FileProcessor):
     for constructor in constructors:
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, constructor, children)
 
-      argsTypescriptDef = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x), list(constructor.get_arguments()))))
-      constructorTypescriptDef += "  export declare class " + constructor.spelling + overloadPostfix + " extends " + constructor.spelling + " {\n"
+      argsTypescriptDef = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x, "", templateDecl, templateArgs), list(constructor.get_arguments()))))
+      name = constructor.spelling if templateDecl is None else templateDecl.spelling
+      constructorTypescriptDef += "  export declare class " + name + overloadPostfix + " extends " + name + " {\n"
       constructorTypescriptDef += "    constructor(" + argsTypescriptDef + ");\n"
       constructorTypescriptDef += "  }\n\n"
-      allOverloadedConstructors.append(constructor.spelling + overloadPostfix)
+      allOverloadedConstructors.append(name + overloadPostfix)
     self.output += constructorTypescriptDef
     self.exports.extend(allOverloadedConstructors)
