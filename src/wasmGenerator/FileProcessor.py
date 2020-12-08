@@ -27,12 +27,13 @@ class FileProcessor:
     return theTypeSpelling if typedefType is None else typedefType
 
   def replaceTemplateArgs(self, string, templateArgs = None):
+    newString = string
     if templateArgs is None:
-      return string
+      return newString
     for key in templateArgs:
-      p = re.compile(r"(\W+|^)T")
-      string = p.sub("\\1" + templateArgs[key].spelling, string)
-    return string
+      p = re.compile("(\\W+|^)" + key + "(\\W|$)")
+      newString = p.sub("\\1" + templateArgs[key].spelling + "\\2", newString)
+    return newString
 
   def process(self):
     self.typedefs = filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL, self.translationUnit.cursor.get_children())
@@ -84,21 +85,27 @@ class FileProcessor:
       self.translationUnit.cursor.get_children()))
 
     for templateTypedef in self.templateTypedefs:
-      templateRefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TEMPLATE_REF, templateTypedef.get_children()))
-      if len(templateRefs) != 1:
-        print("The number of template refs for the template typedef \"" + templateTypedef.spelling + "\" is not 1!")
-        continue
+      try:
+        templateRefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TEMPLATE_REF, templateTypedef.get_children()))
+        if len(templateRefs) != 1:
+          print("The number of template refs for the template typedef \"" + templateTypedef.spelling + "\" is not 1!")
+          continue
+        if ":" in templateTypedef.underlying_typedef_type.spelling:
+          print("unsupported character ':' in template typedef underlying type.")
+          continue
 
-      if not templateTypedef.spelling.startswith("Handle_"):
-        continue
+        templateClass = templateRefs[0].get_definition()
+        templateArgNames = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TEMPLATE_TYPE_PARAMETER, templateClass.get_children()))
+        templateArgs = {}
+        for i, templateArgName in enumerate(templateArgNames):
+          templateArgType = templateTypedef.type.get_template_argument_type(i)
+          if templateArgType.spelling == "":
+            raise SkipException("Template argument type is empty for at least one argument. Is this class using default values for template arguments? This is currently not supported (" + templateTypedef.spelling + ")")
+          templateArgs[templateArgName.spelling] = templateArgType
 
-      templateClass = templateRefs[0].get_definition()
-      templateArgNames = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TEMPLATE_TYPE_PARAMETER, templateClass.get_children()))
-      templateArgs = {}
-      for i, templateArgName in enumerate(templateArgNames):
-        templateArgs[templateArgName.spelling] = templateTypedef.type.get_template_argument_type(i)
-
-      self.processClass(templateClass, templateTypedef, templateArgs)
+        self.processClass(templateClass, templateTypedef, templateArgs)
+      except SkipException as e:
+        print(str(e))
 
   def processClass(self, theClass, templateDecl = None, templateArgs = None):
     isAbstract = isAbstractClass(theClass, self.translationUnit)
@@ -113,7 +120,10 @@ class FileProcessor:
         print(str(e))
     self.processFinalizeClass()
     if not isAbstract:
-      self.processOverloadedConstructors(theClass, None, templateDecl, templateArgs)
+      try:
+        self.processOverloadedConstructors(theClass, None, templateDecl, templateArgs)
+      except SkipException as e:
+        print(str(e))
 
 class EmbindProcessor(FileProcessor):
   def __init__(
@@ -190,6 +200,8 @@ class EmbindProcessor(FileProcessor):
 
   def getSingleArgumentBinding(self, argNames = True, isConstructor = False, templateDecl = None, templateArgs = None):
     def f(arg):
+      if ":" in arg.type.spelling:
+        raise SkipException("Function argument type contains the unsupported character ':'.")
       argChildren = list(arg.get_children())
       argBinding = ""
       hasDefaultValue = any(x.spelling == "=" for x in list(arg.get_tokens()))
@@ -223,13 +235,13 @@ class EmbindProcessor(FileProcessor):
       return [argBinding, changed]
     return f
 
-  def getCastMethodBindings(self, theClass, method):
-    className = theClass.spelling
+  def getCastMethodBindings(self, theClass, method, templateDecl = None, templateArgs = None):
+    className = theClass.spelling if templateDecl is None else templateDecl.spelling
     args = list(method.get_arguments())
     hasConstCharArg = any(any(x.spelling == "Standard_CString" for x in a.get_tokens()) for a in args)
     hasRefArg = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE for x in args)
     needReinterpretCast = hasConstCharArg or hasRefArg
-    returnType = method.result_type.spelling
+    returnType = self.getTypedefedTemplateTypeAsString(method.result_type.spelling, templateDecl, templateArgs)
     const = "const" if method.is_const_method() else ""
     classQualifier = (className + "::" if not method.is_static_method() else "" ) + "*"
 
@@ -240,7 +252,7 @@ class EmbindProcessor(FileProcessor):
       returnType = method.result_type.get_pointee().get_declaration().spelling + "*"
 
     if needReinterpretCast:
-      castedArgResults = list(map(self.getSingleArgumentBinding(False), args))
+      castedArgResults = list(map(self.getSingleArgumentBinding(False, False, templateDecl, templateArgs), args))
       somethingChanged = any(map(lambda x: x[1], castedArgResults))
       castedArgTypes = list(map(lambda x: x[0], castedArgResults))
       if somethingChanged or returnTypeHasNonPublicCopyConstructor:
@@ -257,9 +269,9 @@ class EmbindProcessor(FileProcessor):
       if numOverloads == 1:
         functor = "&" + className + "::" + method.spelling
       else:
-        returnType = method.result_type.spelling
+        returnType = self.getTypedefedTemplateTypeAsString(method.result_type.spelling, templateDecl, templateArgs)
         const = "const" if method.is_const_method() else ""
-        args = ", ".join(list(map(lambda x: self.replaceTemplateArgs(x.type.spelling, templateArgs) + " " + x.spelling, list(method.get_arguments()))))
+        args = ", ".join(list(map(lambda x: self.getTypedefedTemplateTypeAsString(x.type.spelling, templateDecl, templateArgs) + " " + x.spelling, list(method.get_arguments()))))
         functor = "(" + returnType + " (" + ((className + "::") if not method.is_static_method() else "") + "*)(" + args + ") " + const + ") &" + className + "::" + method.spelling
 
       if method.is_static_method():
@@ -267,7 +279,7 @@ class EmbindProcessor(FileProcessor):
       else:
         functionCommand = "function"
 
-      cast = self.getCastMethodBindings(theClass, method)
+      cast = self.getCastMethodBindings(theClass, method, templateDecl, templateArgs)
       self.output += "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())\n"
 
   def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):

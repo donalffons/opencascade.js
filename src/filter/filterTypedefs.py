@@ -40,4 +40,45 @@ def filterTypedef(typedef):
   if typedef.spelling == "Interface_ValueInterpret":
     return False
 
-  return True
+  # error: call to implicitly-deleted copy constructor of 'BRepClass3d_SolidClassifier'
+  # error: object of type 'BRepClass3d_SolidClassifier' cannot be assigned because its copy assignment operator is implicitly deleted
+  if typedef.spelling == "TopOpeBRepTool_IndexedDataMapOfSolidClassifier":
+    return False
+
+  # error: object of type 'BRepClass3d_SolidClassifier' cannot be assigned because its copy assignment operator is implicitly deleted
+  # error: rvalue reference to type 'BRepClass3d_SolidClassifier' cannot bind to lvalue of type 'BRepClass3d_SolidClassifier'
+  if typedef.spelling == "TopOpeBRepTool_IndexedDataMapOfSolidClassifier":
+    return False
+
+  # error: unknown type name 'Type'; did you mean 'rapidjson::Type'?
+  if typedef.spelling in [
+    "NCollection_Utf8Iter",
+    "NCollection_Utf16Iter",
+    "NCollection_Utf32Iter",
+    "NCollection_UtfWideIter",
+  ]:
+    return False
+
+  # error: 'NCollection_UBTreeFiller' is not a class, namespace, or enumeration
+  if typedef.spelling == "Extrema_UBTreeFillerOfSphere":
+    return False
+
+  # error: call to 'abs' is ambiguous
+  if typedef.spelling.startswith("Graphic3d_Vec"):
+    return False
+
+  # error: call to implicitly-deleted copy constructor of 'NCollection_SparseArray<int>'
+  if typedef.spelling in [
+    "TObj_TIntSparseArray_VecOfData",
+    "TObj_TIntSparseArray_MapOfData"
+  ]:
+    return False
+
+  if typedef.underlying_typedef_type.spelling.startswith((
+    "opencascade::handle",
+    "handle",
+    "NCollection"
+  )):
+    return True
+
+  return False
