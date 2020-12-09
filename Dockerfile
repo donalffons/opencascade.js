@@ -4,13 +4,25 @@ RUN apt update -y
 RUN apt install -y build-essential python3 python3-pip git cmake bash curl npm
 
 WORKDIR /python/
-RUN apt install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev
-RUN curl -O https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tar.xz
-RUN tar -xf Python-3.8.2.tar.xz
+RUN apt install -y \
+  build-essential \
+  zlib1g-dev \
+  libncurses5-dev \
+  libgdbm-dev \
+  libnss3-dev \
+  libssl-dev \
+  libsqlite3-dev \
+  libreadline-dev \
+  libffi-dev \
+  curl \
+  libbz2-dev \
+  software-properties-common
+
 RUN \
-  cd Python-3.8.2 && \
-  ./configure --enable-optimizations && \
-  make -j 12 && make altinstall
+  add-apt-repository -y ppa:deadsnakes/ppa && \
+  apt update && \
+  apt install -y python3.8 && \
+  which python3.8
 
 RUN python3.8 -m pip install patch requests
 
