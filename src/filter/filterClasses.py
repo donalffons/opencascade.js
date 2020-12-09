@@ -431,8 +431,4 @@ def filterClass(theClass):
   ):
     return False
 
-  # leads to excessize memory growth during build time
-  if theClass.spelling in "NCollection_BaseMap":
-    return False
-
   return True
