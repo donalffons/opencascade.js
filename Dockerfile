@@ -17,19 +17,12 @@ RUN \
     libffi-dev \
     curl \
     libbz2-dev \
-    software-properties-common \
-    gpg-agent
+    python3-setuptools
 
-RUN \
-  add-apt-repository -y ppa:deadsnakes/ppa && \
-  apt update && \
-  apt install -y python3.8 && \
-  which python3.8
-
-RUN python3.8 -m pip install patch requests
+RUN python3 -m pip install patch requests
 
 WORKDIR /clang/
-RUN python3.8 -m pip install -Iv clang==11.0
+RUN python3 -m pip install -Iv clang==11.0
 RUN curl -SL https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz \
  | tar -xJC . && \
  mv clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04 clang_11 && \
@@ -71,48 +64,48 @@ RUN \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
   apt update && apt install -y yarn
 
-WORKDIR /vtk/
-RUN \
-  git clone https://gitlab.kitware.com/vtk/vtk.git . && \
-  git submodule update --init --recursive && \
-  mkdir build && \
-  cd build && \
-  emcmake cmake \
-    -DBUILD_SHARED_LIBS:BOOL=OFF \
-    -DCMAKE_BUILD_TYPE:STRING=Release \
-    -DVTK_ENABLE_LOGGING:BOOL=OFF \
-    -DVTK_ENABLE_WRAPPING:BOOL=OFF \
-    -DVTK_LEGACY_REMOVE:BOOL=ON \
-    -DVTK_OPENGL_USE_GLES:BOOL=ON \
-    -DVTK_USE_SDL2:BOOL=ON \
-    -DVTK_NO_PLATFORM_SOCKETS:BOOL=ON \
-    -DVTK_MODULE_ENABLE_VTK_hdf5:STRING=NO \
-    .. \
-    && \
-  emmake make -j12
+# WORKDIR /vtk/
+# RUN \
+#   git clone https://gitlab.kitware.com/vtk/vtk.git . && \
+#   git submodule update --init --recursive && \
+#   mkdir build && \
+#   cd build && \
+#   emcmake cmake \
+#     -DBUILD_SHARED_LIBS:BOOL=OFF \
+#     -DCMAKE_BUILD_TYPE:STRING=Release \
+#     -DVTK_ENABLE_LOGGING:BOOL=OFF \
+#     -DVTK_ENABLE_WRAPPING:BOOL=OFF \
+#     -DVTK_LEGACY_REMOVE:BOOL=ON \
+#     -DVTK_OPENGL_USE_GLES:BOOL=ON \
+#     -DVTK_USE_SDL2:BOOL=ON \
+#     -DVTK_NO_PLATFORM_SOCKETS:BOOL=ON \
+#     -DVTK_MODULE_ENABLE_VTK_hdf5:STRING=NO \
+#     .. \
+#     && \
+#   emmake make -j12
 
-WORKDIR /glfw/
-RUN \
-  apt install -y libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev && \
-  git clone https://github.com/glfw/glfw.git . && \
-  sed -i 's/find_package(X11 REQUIRED)//g' CMakeLists.txt && \
-  mkdir build && \
-  cd build && \
-  emcmake cmake \
-    -DX11_Xrandr_INCLUDE_PATH=" " \
-    -DX11_Xinerama_INCLUDE_PATH=" " \
-    -DX11_Xkb_INCLUDE_PATH=" " \
-    -DX11_Xcursor_INCLUDE_PATH=" " \
-    -DX11_Xi_INCLUDE_PATH=" " \
-    -DX11_Xshape_INCLUDE_PATH=" " \
-    -DBUILD_SHARED_LIBS=OFF \
-    -DGLFW_BUILD_EXAMPLES=OFF \
-    -DGLFW_BUILD_TESTS=OFF \
-    -DGLFW_BUILD_DOCS=OFF \
-    -DGLFW_VULKAN_STATIC=OFF \
-    .. && \
-  cp /usr/include/X11 /emsdk/upstream/emscripten/system/include -r && \
-  emmake make
+# WORKDIR /glfw/
+# RUN \
+#   apt install -y libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev && \
+#   git clone https://github.com/glfw/glfw.git . && \
+#   sed -i 's/find_package(X11 REQUIRED)//g' CMakeLists.txt && \
+#   mkdir build && \
+#   cd build && \
+#   emcmake cmake \
+#     -DX11_Xrandr_INCLUDE_PATH=" " \
+#     -DX11_Xinerama_INCLUDE_PATH=" " \
+#     -DX11_Xkb_INCLUDE_PATH=" " \
+#     -DX11_Xcursor_INCLUDE_PATH=" " \
+#     -DX11_Xi_INCLUDE_PATH=" " \
+#     -DX11_Xshape_INCLUDE_PATH=" " \
+#     -DBUILD_SHARED_LIBS=OFF \
+#     -DGLFW_BUILD_EXAMPLES=OFF \
+#     -DGLFW_BUILD_TESTS=OFF \
+#     -DGLFW_BUILD_DOCS=OFF \
+#     -DGLFW_VULKAN_STATIC=OFF \
+#     .. && \
+#   cp /usr/include/X11 /emsdk/upstream/emscripten/system/include -r && \
+#   emmake make
 
 WORKDIR /rapidjson/
 RUN \
