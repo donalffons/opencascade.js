@@ -176,7 +176,7 @@ class WasmModule:
 
       # Enabling exception catching leads to errors in "TKTopAlgo" and "TKV3d" and maybe others. Therefore, this (default) value has to be used at all times.
       "-s", "DISABLE_EXCEPTION_CATCHING=1",
-
+      "-DHAVE_RAPIDJSON",
       *self.buildSettings,
       "-o", self.outputFile + (".wasm" if self.moduleType == ModuleType.DynamicSide else ".js")
     ]
