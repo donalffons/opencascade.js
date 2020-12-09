@@ -4,7 +4,7 @@ import re
 from .Common import ignoreDuplicateTypedef, shouldProcessClass, SkipException, isAbstractClass, getMethodOverloadPostfix
 
 class FileProcessor:
-  def __init__(self, translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum):
+  def __init__(self, translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs):
     self.output = ""
     
     self.translationUnit = translationUnit
@@ -13,6 +13,7 @@ class FileProcessor:
     self.filterMethod = filterMethod
     self.filterTypedef = filterTypedef
     self.filterEnum = filterEnum
+    self.duplicateTypedefs = duplicateTypedefs
 
   def getTypedefedTemplateTypeAsString(self, theTypeSpelling, templateDecl = None, templateArgs = None):
     if templateDecl is None:
@@ -37,36 +38,6 @@ class FileProcessor:
 
   def process(self):
     self.typedefs = filter(lambda x: x.kind == clang.cindex.CursorKind.TYPEDEF_DECL, self.translationUnit.cursor.get_children())
-    sortedTypedefs = {}
-    for child in self.typedefs:
-      if child.get_definition() is None or not child == child.get_definition():
-        continue
-      if not child.extent.start.file.name in self.headerFiles:
-        continue
-      if not self.filterTypedef(child):
-        continue
-      if not child.underlying_typedef_type.spelling in sortedTypedefs:
-        sortedTypedefs[child.underlying_typedef_type.spelling] = []
-      sortedTypedefs[child.underlying_typedef_type.spelling].append(child)
-    
-    filteredTypedefs = []
-    for key, children in sortedTypedefs.items():
-      skip = False
-      for child in children:
-        if ignoreDuplicateTypedef(child, sortedTypedefs):
-          skip = True
-      if skip:
-        continue
-      if len(children) == 1:
-        filteredTypedefs.append(children[0])
-      else:
-        allNames = map(lambda x: x.spelling, children)
-        deDupedCount = len(list(dict.fromkeys(allNames)))
-        if deDupedCount == 1 and not any(x.spelling == children[0].spelling for x in filteredTypedefs):
-          filteredTypedefs.append(children[0])
-        else:
-          for child in children:
-            filteredTypedefs.append(child)
 
     for theClass in self.translationUnit.cursor.get_children():
       if shouldProcessClass(theClass, self.headerFiles, self.filterClass):
@@ -85,13 +56,14 @@ class FileProcessor:
       self.translationUnit.cursor.get_children()))
 
     for templateTypedef in self.templateTypedefs:
+      duplicatesForThisTypedef = self.duplicateTypedefs[templateTypedef.underlying_typedef_type.spelling]
+      if not templateTypedef.spelling == duplicatesForThisTypedef[0]:
+        print("Template typedef \"" + templateTypedef.spelling + "\" for type \"" + templateTypedef.underlying_typedef_type.spelling + "\" has already been processed with the name \"" + duplicatesForThisTypedef[0] + "\", skipping.")
+        continue
       try:
         templateRefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TEMPLATE_REF, templateTypedef.get_children()))
         if len(templateRefs) != 1:
           print("The number of template refs for the template typedef \"" + templateTypedef.spelling + "\" is not 1!")
-          continue
-        if ":" in templateTypedef.underlying_typedef_type.spelling:
-          print("unsupported character ':' in template typedef underlying type.")
           continue
 
         templateClass = templateRefs[0].get_definition()
@@ -106,6 +78,16 @@ class FileProcessor:
         self.processClass(templateClass, templateTypedef, templateArgs)
       except SkipException as e:
         print(str(e))
+
+    self.enums = list(filter(
+      lambda x:
+        x.kind == clang.cindex.CursorKind.ENUM_DECL and
+        x.extent.start.file.name in self.headerFiles and
+        self.filterEnum(x),
+      self.translationUnit.cursor.get_children()))
+
+    for theEnum in self.enums:
+      self.processEnum(theEnum)
 
   def processClass(self, theClass, templateDecl = None, templateArgs = None):
     isAbstract = isAbstractClass(theClass, self.translationUnit)
@@ -129,9 +111,9 @@ class EmbindProcessor(FileProcessor):
   def __init__(
     self,
     includeDirectives, name,
-    translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum
+    translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs
   ):
-    super().__init__(translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum)
+    super().__init__(translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs)
     self.includeDirectives = includeDirectives
     self.name = name
 
@@ -200,8 +182,6 @@ class EmbindProcessor(FileProcessor):
 
   def getSingleArgumentBinding(self, argNames = True, isConstructor = False, templateDecl = None, templateArgs = None):
     def f(arg):
-      if ":" in arg.type.spelling:
-        raise SkipException("Function argument type contains the unsupported character ':'.")
       argChildren = list(arg.get_children())
       argBinding = ""
       hasDefaultValue = any(x.spelling == "=" for x in list(arg.get_tokens()))
@@ -309,13 +289,20 @@ class EmbindProcessor(FileProcessor):
 
     self.output += constructorBindings
 
+  def processEnum(self, theEnum):
+    bindingsOutput = "  enum_<" + theEnum.spelling + ">(\"" + theEnum.spelling + "\")\n"
+    for enumChild in list(theEnum.get_children()):
+      bindingsOutput += "    .value(\"" + enumChild.spelling + "\", " + theEnum.spelling + "::" + enumChild.spelling + ")\n"
+    bindingsOutput += "  ;\n"
+    self.output += bindingsOutput
+
 class TypescriptProcessor(FileProcessor):
   def __init__(
     self,
     typescriptFileName, name, moduleExportsDict,
-    translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum
+    translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs
   ):
-    super().__init__(translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum)
+    super().__init__(translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs)
     self.typescriptFileName = typescriptFileName
     self.name = name
     self.moduleExportsDict = moduleExportsDict
@@ -481,3 +468,11 @@ class TypescriptProcessor(FileProcessor):
       allOverloadedConstructors.append(name + overloadPostfix)
     self.output += constructorTypescriptDef
     self.exports.extend(allOverloadedConstructors)
+
+  def processEnum(self, theEnum):
+    bindingsOutput = "export declare type " + theEnum.spelling + " = {\n"
+    for enumChild in list(theEnum.get_children()):
+      bindingsOutput += "  " + enumChild.spelling + ": {};\n"
+    bindingsOutput += "}\n\n"
+    self.output += bindingsOutput
+    self.exports.append(theEnum.spelling)

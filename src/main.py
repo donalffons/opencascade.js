@@ -43,7 +43,7 @@ def prepareMainWasmModules(buildType):
 
   return modules
 
-def prepareOCCTModuleWasmModules(buildType):
+def prepareOCCTModuleWasmModules(buildType, duplicateTypedefs):
   modules = []
 
   for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
@@ -58,7 +58,7 @@ def prepareOCCTModuleWasmModules(buildType):
     if not any(x for x in filenames if x == "PACKAGES"):
       continue
 
-    currModule = WasmModule(moduleName, ModuleType.DynamicSide, "../build/modules/" + moduleName + ".cpp", "../dist/" + buildType + "/modules/" + moduleName, buildType, EnvType.Node)
+    currModule = WasmModule(moduleName, ModuleType.DynamicSide, "../build/modules/" + moduleName + ".cpp", "../dist/" + buildType + "/modules/" + moduleName, buildType, EnvType.Node, duplicateTypedefs)
     modules.append(currModule)
 
     with open(dirpath + "/PACKAGES", "r") as a_file:
@@ -185,27 +185,62 @@ def chunks(lst, n):
   for i in range(0, len(lst), n):
     yield lst[i:i + n]
 
-allWasmModules.extend(prepareMainWasmModules(BuildType.Debug))
-allWasmModules.extend(prepareOCCTModuleWasmModules(BuildType.Debug))
-# allWasmModules.extend(prepareFullWasmModules(BuildType.Debug))
-allWasmModules.extend(prepareOCCTPackageWasmModules(BuildType.Debug))
-
-allWasmModules.extend(prepareMainWasmModules(BuildType.Release))
-allWasmModules.extend(prepareOCCTModuleWasmModules(BuildType.Release))
-# allWasmModules.extend(prepareFullWasmModules(BuildType.Release))
-allWasmModules.extend(prepareOCCTPackageWasmModules(BuildType.Release))
-
-chunkedModules = list(chunks(allWasmModules, multiprocessing.cpu_count()*4))
-
 for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
   includePaths.append(str(dirpath))
   for item in filenames:
     if filterIncludeFile(item):
       includeFiles.append(str(os.path.join(dirpath, item)))
 
-moduleExportsDict = {}
-for aModule in allWasmModules:
-  aModule.setModuleExportsDict(moduleExportsDict)
+preproc = WasmModule()
+for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
+  moduleName = os.path.basename(dirpath)
+  if moduleName == "":
+    continue
+
+  if not any(x for x in filenames if x == "PACKAGES"):
+    continue
+
+  with open(dirpath + "/PACKAGES", "r") as a_file:
+    for line in a_file:
+      addPackageToWasmModule(line.strip(), preproc, False)
+preproc.parse(
+  includeFiles,
+  includePaths + [
+    "/emsdk/upstream/emscripten/system/include/",
+    "/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed/",
+    "/clang/clang_11/include/c++/v1/",
+    "/clang/clang_11/include/c++/v1/support/newlib",
+    "/rapidjson/include",
+  ], [
+    "/usr/lib/gcc/x86_64-linux-gnu/10/include",
+  ]
+)
+duplicateTypedefs = preproc.getDuplicateTypedefMap()
+
+
+# allWasmModules.extend(prepareMainWasmModules(BuildType.Debug))
+# allWasmModules.extend(prepareOCCTModuleWasmModules(BuildType.Debug))
+# allWasmModules.extend(prepareFullWasmModules(BuildType.Debug))
+# allWasmModules.extend(prepareOCCTPackageWasmModules(BuildType.Debug))
+
+# allWasmModules.extend(prepareMainWasmModules(BuildType.Release))
+allWasmModules.extend(prepareOCCTModuleWasmModules(BuildType.Release, duplicateTypedefs))
+# allWasmModules.extend(prepareFullWasmModules(BuildType.Release))
+# allWasmModules.extend(prepareOCCTPackageWasmModules(BuildType.Release))
+
+# TKBRep, TKCAF, TKFillet seem to cause excessive memory growth
+
+# Currently unsupported modules
+allWasmModules = list(filter(lambda x: not x.name in [
+  "TKD3DHost",
+  "TKDraw",
+  "TKIVtk",
+  "TKIVtkDraw",
+  "TKViewerTest",
+], allWasmModules))
+
+def preProcess(aModule):
+  print("[Pre-processing " + aModule.name + "]")
   aModule.parse(
     includeFiles,
     includePaths + [
@@ -218,10 +253,19 @@ for aModule in allWasmModules:
       "/usr/lib/gcc/x86_64-linux-gnu/10/include",
     ]
   )
-  moduleExportsDict[aModule.name] = aModule.getExports()
+  exports = aModule.getExports()
   aModule.tu = None
+  return exports
 
-chunkedModules = list(chunks(allWasmModules, multiprocessing.cpu_count()*4))
+with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
+  res = p.map(preProcess, allWasmModules)
+
+moduleExportsDict = {}
+for i, aModule in enumerate(allWasmModules):
+  aModule.setModuleExportsDict(moduleExportsDict)
+  moduleExportsDict[aModule.name] = res[i]
+
+chunkedModules = list(chunks(allWasmModules, multiprocessing.cpu_count()*4*4))
 
 for iChunk, chunk in enumerate(chunkedModules):
   print("processing chunk " + str(iChunk+1) + " of " + str(len(chunkedModules)))

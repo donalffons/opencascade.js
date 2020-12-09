@@ -431,18 +431,8 @@ def filterClass(theClass):
   ):
     return False
 
-  # if (
-  #   theClass.spelling.startswith("STEPControl_Reader") or
-  #   theClass.spelling.startswith("XSControl_Reader") or
-  #   theClass.spelling.startswith("Message") or
-  #   theClass.spelling.startswith("BRepMesh_IncrementalMesh") or
-  #   theClass.spelling.startswith("TopExp_Explorer") or
-  #   theClass.spelling.startswith("TopLoc_Location") or
-  #   theClass.spelling.startswith("BRep_Tool") or
-  #   theClass.spelling.startswith("Poly_Connect") or
-  #   theClass.spelling.startswith("StdPrs_ToolTriangulatedShape") or
-  #   theClass.spelling == "TopoDS_Shape"
-  # ):
-  #   return True
-  # return False
+  # leads to excessize memory growth during build time
+  if theClass.spelling in "NCollection_BaseMap":
+    return False
+
   return True

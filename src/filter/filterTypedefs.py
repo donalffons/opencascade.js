@@ -74,6 +74,27 @@ def filterTypedef(typedef):
   ]:
     return False
 
+  # error: use of undeclared identifier 'thePosition'
+  if typedef.spelling == "XCAFDimTolObjects_DatumModifiersSequence":
+    return False
+
+  # causes extreme memory growth which fails the build (see corresponding methods filter)
+  if "::Iterator" in typedef.underlying_typedef_type.spelling:
+    return False
+
+  # error: 'NCollection_UBTree' is not a class, namespace, or enumeration
+  if typedef.spelling in [
+    "BRepBuilderAPI_BndBoxTree",
+    "Extrema_UBTreeOfSphere",
+  ]:
+    return False
+
+  # error: 'NCollection_CellFilter' is not a class, namespace, or enumeration
+  if typedef.spelling in [
+    "BRepBuilderAPI_CellFilter"
+  ]:
+    return False
+
   if typedef.underlying_typedef_type.spelling.startswith((
     "opencascade::handle",
     "handle",

@@ -29,7 +29,7 @@ class EnvType:
   Node = "node"
 
 class WasmModule:
-  def __init__(self, name, moduleType, embindFile, outputFile, buildType, envType):
+  def __init__(self, name="", moduleType=None, embindFile="", outputFile="", buildType=None, envType=None, duplicateTypedefs={}):
     self.name = name
     self.headerFiles = []
     self.sourceFiles = []
@@ -41,6 +41,7 @@ class WasmModule:
     self.outputFile = outputFile
     self.buildType = buildType
     self.envType = envType
+    self.duplicateTypedefs = duplicateTypedefs
 
   def addHeaderFile(self, file):
     self.headerFiles.append(file)
@@ -82,7 +83,7 @@ class WasmModule:
   def generateEmbindings(self):
     p = EmbindProcessor(
       self.includeDirectives, self.name,
-      self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum)
+      self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, self.duplicateTypedefs)
     p.process()
 
     bindingsFile = open(self.embindFile, "w")
@@ -92,7 +93,7 @@ class WasmModule:
     # bindingsFile.write(getEmbindings(self.includeDirectives, self.name, self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum))
 
   def getExports(self):
-    return getExports(self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum)
+    return getExports(self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, self.duplicateTypedefs)
 
   def setModuleExportsDict(self, moduleExportsDict):
     self.moduleExportsDict = moduleExportsDict
@@ -102,7 +103,7 @@ class WasmModule:
     
     p = TypescriptProcessor(
       typescriptFileName, self.name, self.moduleExportsDict,
-      self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum)
+      self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, self.duplicateTypedefs)
     p.process()
 
     typescriptFile = open(self.typescriptDefinitionFile, "w")
@@ -111,6 +112,17 @@ class WasmModule:
     # typescriptFile = open(self.typescriptDefinitionFile, "w")
     # typescriptFile.write(getTypescriptDefinitions(typescriptFileName, self.name, self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, self.moduleExportsDict))
     
+  def getDuplicateTypedefMap(self):
+    duplicateTypedefMap = {}
+    for child in self.tu.cursor.get_children():
+      if not child.kind == clang.cindex.CursorKind.TYPEDEF_DECL:
+        continue
+      if not child.underlying_typedef_type.spelling in duplicateTypedefMap:
+        duplicateTypedefMap[child.underlying_typedef_type.spelling] = []
+      duplicateTypedefMap[child.underlying_typedef_type.spelling].append(child.spelling)
+
+    return duplicateTypedefMap
+
   def build(self, includePaths):
     includePathArgs = list(dict.fromkeys(map(lambda x: "-I" + os.path.dirname(x), self.headerFiles)))
     standaloneModuleFlags = [

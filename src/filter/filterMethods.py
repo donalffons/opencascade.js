@@ -27,4 +27,8 @@ def filterMethod(theClass, method):
   if theClass.spelling == "NCollection_Lerp" and method.spelling == "Interpolate" and method.is_static_method():
     return False
 
+  # causes extreme memory growth which fails the build (see corresponding typedef filter)
+  if theClass.spelling in ["NCollection_Sequence", "NCollection_List"] and "::Iterator" in method.displayname:
+    return False
+
   return True
