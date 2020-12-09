@@ -4,19 +4,21 @@ RUN apt update -y
 RUN apt install -y build-essential python3 python3-pip git cmake bash curl npm
 
 WORKDIR /python/
-RUN apt install -y \
-  build-essential \
-  zlib1g-dev \
-  libncurses5-dev \
-  libgdbm-dev \
-  libnss3-dev \
-  libssl-dev \
-  libsqlite3-dev \
-  libreadline-dev \
-  libffi-dev \
-  curl \
-  libbz2-dev \
-  software-properties-common
+RUN \
+  apt install -y \
+    build-essential \
+    zlib1g-dev \
+    libncurses5-dev \
+    libgdbm-dev \
+    libnss3-dev \
+    libssl-dev \
+    libsqlite3-dev \
+    libreadline-dev \
+    libffi-dev \
+    curl \
+    libbz2-dev \
+    software-properties-common \
+    gpg-agent
 
 RUN \
   add-apt-repository -y ppa:deadsnakes/ppa && \
