@@ -22,10 +22,6 @@ jobs:
           password: "${{ secrets.GITHUB_TOKEN }}"
           image_name: opencascade.js
 
-      - name: Build Docker Image
-        run: |
-          docker build -t opencascade.js .
-
       - name: Build OpenCascade.js
         timeout-minutes: 240
         run: |
