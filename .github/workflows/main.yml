@@ -13,39 +13,13 @@ jobs:
         with:
           lfs: true
 
-      # # Attempt to Load Build Cache
-      # - name: Cache Intermediate Build Products
-      #   id: cache-build
-      #   uses: actions/cache@v2
-      #   env:
-      #     cache-name: cache-build-intermediates
-      #   with:
-      #     path: ./build
-      #     key: ${{ runner.os }}-build-${{ env.cache-name }}-2
-
-      # # Attempt to Load Emscripten Cache
-      # - name: Cache Intermediate Emscripten Products
-      #   id: cache-build-3
-      #   uses: actions/cache@v2
-      #   env:
-      #     cache-name: cache-emscripten-intermediates
-      #   with:
-      #     path: ./emscripten-cache
-      #     key: ${{ runner.os }}-build-${{ env.cache-name }}-2
-
-      # - name: Build OpenCascade.js Docker Image
-      #   uses: whoan/docker-build-with-cache-action@v5
-      #   with:
-      #     registry: docker.pkg.github.com
-      #     username: donalffons
-      #     password: "${{ secrets.GITHUB_TOKEN }}"
-      #     image_name: opencascade.js
-      #     # build_extra_args: "--no-cache" # activate this if you want to disable the docker cache
-      #     #image_tag: opencascade.js
-
-      # # Debug
-      # - name: Print Available Docker Images
-      #   run: docker image ls
+      - name: Build OpenCascade.js Docker Image
+        uses: whoan/docker-build-with-cache-action@v5
+        with:
+          registry: docker.pkg.github.com
+          username: donalffons
+          password: "${{ secrets.GITHUB_TOKEN }}"
+          image_name: opencascade.js
 
       - name: Build OpenCascade.js
         timeout-minutes: 240
@@ -60,6 +34,7 @@ jobs:
           path: dist
 
       - name: Create new beta version
+        if: github.ref == 'refs/heads/beta'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -71,11 +46,16 @@ jobs:
           git add -A
           git diff-index --quiet HEAD || git commit -m "Build OpenCascade.js"
 
-      # - name: Push Changes to branch
-      #   uses: ad-m/github-push-action@master
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     branch: ${{ github.ref }}
+      - name: Push Changes to branch
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+
+      - name: Publish to NPM
+        run: |
+          npm publish
+
   # test:
   #   name: Test OpenCascade.js
   #   runs-on: ubuntu-latest
