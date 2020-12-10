@@ -239,11 +239,6 @@ allWasmModules = list(filter(lambda x: not x.name in [
   "TKViewerTest",
 ], allWasmModules))
 
-allWasmModules = list(filter(lambda x: x.name in [
-  "TKRWMesh",
-  "TKPrim",
-], allWasmModules))
-
 def preProcess(aModule):
   print("[Pre-processing " + aModule.name + "]")
   aModule.parse(
