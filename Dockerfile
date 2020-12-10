@@ -129,10 +129,6 @@ RUN \
 RUN \
   mkdir /opencascade.js/ && \
   mkdir /opencascade.js/build/
-WORKDIR /opencascade.js/
-
-COPY . .
-
 WORKDIR /opencascade.js/src/
 
 ENTRYPOINT [ "./main.py" ]

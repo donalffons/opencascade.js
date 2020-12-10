@@ -31,7 +31,7 @@ jobs:
       - name: Build OpenCascade.js Bindings
         timeout-minutes: 240
         run: |
-          docker run my_awesome_image
+          docker run my_awesome_image -v $(pwd):/opencascade.js opencascade.js
 
       # Upload the build results in-case the push fails...
       - name: Upload Build Artifacts
