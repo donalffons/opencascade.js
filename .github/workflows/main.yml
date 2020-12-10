@@ -14,14 +14,18 @@ jobs:
         with:
           lfs: true
 
-      - name: Build OpenCascade.js Docker Image
-        uses: whoan/docker-build-with-cache-action@v5
-        with:
-          registry: docker.pkg.github.com
-          username: donalffons
-          password: "${{ secrets.GITHUB_TOKEN }}"
-          image_name: opencascade.js
-          # build_extra_args: "--no-cache" # activate this if you want to disable the docker cache
+      # - name: Build OpenCascade.js Docker Image
+      #   uses: whoan/docker-build-with-cache-action@v5
+      #   with:
+      #     registry: docker.pkg.github.com
+      #     username: donalffons
+      #     password: "${{ secrets.GITHUB_TOKEN }}"
+      #     image_name: opencascade.js
+      #     # build_extra_args: "--no-cache" # activate this if you want to disable the docker cache
+
+      - name: Build Docker Image
+        run: |
+          docker build -t my_awesome_image .
 
       # Build the docker container
       - name: Build OpenCascade.js Bindings

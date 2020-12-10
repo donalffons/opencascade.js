@@ -1,7 +1,7 @@
 FROM emscripten/emsdk:2.0.9
 
 RUN apt update -y
-RUN apt install -y build-essential python3 python3-pip git cmake bash curl npm
+RUN apt install -y build-essential python3 python-pip git cmake bash curl npm
 
 WORKDIR /python/
 RUN \
@@ -19,10 +19,7 @@ RUN \
     libbz2-dev \
     python3-setuptools
 
-RUN python3 -m pip install patch requests
-
 WORKDIR /clang/
-RUN python3 -m pip install -Iv clang==11.0
 RUN curl -SL https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz \
  | tar -xJC . && \
  mv clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04 clang_11 && \
@@ -126,11 +123,16 @@ RUN \
   apt remove libgcc-8-dev -y && \
   echo "deb http://ftp.us.debian.org/debian testing main contrib non-free" >> /etc/apt/sources.list && \
   apt update -y && \
-  apt install build-essential -y
+  apt install build-essential -y && \
+  pip3 install clang
 
 RUN \
   mkdir /opencascade.js/ && \
   mkdir /opencascade.js/build/
+WORKDIR /opencascade.js/
+
+COPY . .
+
 WORKDIR /opencascade.js/src/
 
 ENTRYPOINT [ "./main.py" ]
