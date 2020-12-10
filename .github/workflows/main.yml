@@ -33,13 +33,14 @@ jobs:
           name: Build Products
           path: dist
 
-      - name: Create new beta version
+      - name: Publish new beta version to NPM
         if: github.ref == 'refs/heads/beta'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
           npm version $(node -p -e "require('./package.json').version.split('-')[0]")-beta.$(git log --pretty=format:'%h' -n 1) --force
+          npm publish
 
       - name: Commit Build Artifacts in dist
         run: |
@@ -51,10 +52,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
-
-      - name: Publish to NPM
-        run: |
-          npm publish
 
   # test:
   #   name: Test OpenCascade.js
