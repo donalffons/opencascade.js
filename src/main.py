@@ -241,6 +241,7 @@ allWasmModules = list(filter(lambda x: not x.name in [
 
 allWasmModules = list(filter(lambda x: x.name in [
   "TKRWMesh",
+  "TKPrim",
 ], allWasmModules))
 
 def preProcess(aModule):
