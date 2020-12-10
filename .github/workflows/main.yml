@@ -37,7 +37,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          npm set //registry.npmjs.org/:_authToken $(NPM_AUTH_TOKEN)
+          npm set //registry.npmjs.org/:_authToken=$(NPM_AUTH_TOKEN)
           npm version $(node -p -e "require('./package.json').version.split('-')[0]")-beta.$(git log --pretty=format:'%h' -n 1) --force
 
       - name: Commit Build Artifacts in dist
