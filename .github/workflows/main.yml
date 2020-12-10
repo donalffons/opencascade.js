@@ -6,7 +6,6 @@ on:
 jobs:
   build:
     name: Build OpenCascade.js
-    # runs-on: self-hosted
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -36,6 +35,7 @@ jobs:
 
       - name: Create new beta version
         run: |
+          npm set //registry.npmjs.org/:_authToken $(NPM_AUTH_TOKEN)
           npm version $(node -p -e "require('./package.json').version.split('-')[0]")-beta.$(git log --pretty=format:'%h' -n 1) --force
 
       - name: Commit Build Artifacts in dist
@@ -59,7 +59,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-          
+
   # test:
   #   name: Test OpenCascade.js
   #   runs-on: ubuntu-latest
