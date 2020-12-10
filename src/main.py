@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3.8
+#!/usr/bin/python3
 
 import multiprocessing
 import os
@@ -237,6 +237,11 @@ allWasmModules = list(filter(lambda x: not x.name in [
   "TKIVtk",
   "TKIVtkDraw",
   "TKViewerTest",
+], allWasmModules))
+
+allWasmModules = list(filter(lambda x: x.name in [
+  "TKRWMesh",
+  "TKPrim",
 ], allWasmModules))
 
 def preProcess(aModule):
