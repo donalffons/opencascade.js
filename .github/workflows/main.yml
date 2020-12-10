@@ -52,13 +52,8 @@ jobs:
           branch: ${{ github.ref }}
 
       - name: Publish to NPM
-        uses: pascalgn/npm-publish-action@1.3.5
-        with:
-          workspace: "."
-          publish_command: "npm"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: |
+          npm publish
 
   # test:
   #   name: Test OpenCascade.js
