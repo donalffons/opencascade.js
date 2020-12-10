@@ -4,3 +4,4 @@ __pycache__
 node_modules
 build-output.log
 pull-stages-output.log
+/dist/
