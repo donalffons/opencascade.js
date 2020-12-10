@@ -14,26 +14,23 @@ jobs:
         with:
           lfs: true
 
-      # - name: Build OpenCascade.js Docker Image
-      #   uses: whoan/docker-build-with-cache-action@v5
-      #   with:
-      #     registry: docker.pkg.github.com
-      #     username: donalffons
-      #     password: "${{ secrets.GITHUB_TOKEN }}"
-      #     image_name: opencascade.js
-      #     # build_extra_args: "--no-cache" # activate this if you want to disable the docker cache
+      - name: Build OpenCascade.js Docker Image
+        uses: whoan/docker-build-with-cache-action@v5
+        with:
+          registry: docker.pkg.github.com
+          username: donalffons
+          password: "${{ secrets.GITHUB_TOKEN }}"
+          image_name: opencascade.js
 
       - name: Build Docker Image
         run: |
           docker build -t opencascade.js .
 
-      # Build the docker container
-      - name: Build OpenCascade.js Bindings
+      - name: Build OpenCascade.js
         timeout-minutes: 240
         run: |
           docker run -v "$(pwd)":"/opencascade.js" opencascade.js
 
-      # Upload the build results in-case the push fails...
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v2
         if: ${{ always() }}
