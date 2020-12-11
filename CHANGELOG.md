@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.1.4 (unreleased)
+version only used for testing on npm
+
+## v1.1.3 (unreleased)
+version only used for testing on npm
+
 ## v1.1.2 (unreleased)
 * CI-Testing system implemented, which uses some of the code in the `opencascade-examples` repository (but can also define stand-alone tests).
 
