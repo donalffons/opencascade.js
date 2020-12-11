@@ -31,4 +31,19 @@ def filterMethod(theClass, method):
   if theClass.spelling in ["NCollection_Sequence", "NCollection_List"] and "::Iterator" in method.displayname:
     return False
 
+  # This seems to fix thie following randomly occuring error during wasm instantiation:
+  # 013bb652:0x2fb97a Uncaught (in promise) RuntimeError: function signature mismatch
+  #   at _ZN8Standard8AllocateEm (<anonymous>:wasm-function[1074]:0x2fb97a)
+  #   at _ZN25NCollection_BaseAllocator19CommonBaseAllocatorEv (<anonymous>:wasm-function[2193]:0x32a74f)
+  #   at obj.<computed> (http://localhost:9000/polygon.js:106:24109)
+  #   at <anonymous>:wasm-function[1549]:0x1eaa64
+  #   at __post_instantiate (<anonymous>:wasm-function[470]:0x16f719)
+  #   at callRuntimeCallbacks (http://localhost:9000/polygon.js:106:18919)
+  #   at initRuntime (http://localhost:9000/polygon.js:106:14373)
+  #   at doRun (http://localhost:9000/polygon.js:106:2985866)
+  #   at run (http://localhost:9000/polygon.js:106:2986173)
+  #   at runCaller (http://localhost:9000/polygon.js:106:2985225)
+  if theClass.spelling == "NCollection_BaseAllocator":
+    return False
+
   return True
