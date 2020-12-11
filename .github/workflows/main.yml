@@ -33,12 +33,15 @@ jobs:
           name: Build Products
           path: dist
 
-      - name: Publish new beta version to NPM
-        if: github.ref == 'refs/heads/beta'
+      - name: Git and NPM config
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: Publish new beta version to NPM
+        if: github.ref == 'refs/heads/beta'
+        run: |
           npm version $(node -p -e "require('./package.json').version.split('-')[0]")-beta.$(git log --pretty=format:'%h' -n 1) --force
           npm publish --tag=beta
 
