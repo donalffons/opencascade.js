@@ -14,24 +14,6 @@ Current OCCT version: [V7_4_0p1](https://git.dev.opencascade.org/gitweb/?p=occt.
 
 # FAQ
 
-## Which parts of the OpenCascade library are supported?
-
-As of right now, approximately 74% of all classes defined in OpenCascade are supported. Some of those classes have been tested and are confirmed working via WebAssembly. However, large parts of this project are currently untested.
-
-![](https://image-charts.com/chart?cht=p3&chs=700x250&chd=t:26.0,74.0&chl=Unsupported\n(26.0%)|Supported\n(74.0%)&chf=ps0-0,lg,45,ffeb3b,0.2,f44336,1|ps0-1,lg,45,8bc34a,0.2,009688,1)
-
-[Detailed list of supported classes](dist/Supported%20APIs.md)
-
-Many `typedef`'d template classes are currently not supported by the build system. If you need support for a particular feature, feel free to add it yourself or [reach out](https://github.com/donalffons/opencascade.js/issues).
-
-## What if I need some parts of the OpenCascade library in my project that are currently not supported by the build system?
-
-Adding missing features is easy. Just go ahead and edit the [`manualBindings.h`](embind/manualBindings.h) header-file and add your custom bindings. Some examples are already in that file. A full overview of Emscripten's Embind system can be found [here](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html). Please try to stick to the [conventions](embind/conventions.md).
-
-You can also try to modify the binding auto-generation code, although this can be a slightly more difficult challenge.
-
-Please make a pull request if you add or improve anything in this project.
-
 ## Is this a fork of the OpenCascade library?
 
 No. This project is making no changes to the OpenCascade library, apart from few very small modifications which are applied as patches. All this project does is
