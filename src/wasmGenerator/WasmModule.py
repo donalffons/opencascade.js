@@ -8,7 +8,6 @@ from filter.filterTypedefs import filterTypedef
 from filter.filterEnums import filterEnum
 
 from .Embindings import getEmbindings
-from .TypescriptDefinitions import getTypescriptDefinitions
 from .Exports import getExports
 
 from .FileProcessor import EmbindProcessor, TypescriptProcessor
@@ -89,9 +88,6 @@ class WasmModule:
     bindingsFile = open(self.embindFile, "w")
     bindingsFile.write(p.output)
 
-    # bindingsFile = open(self.embindFile, "w")
-    # bindingsFile.write(getEmbindings(self.includeDirectives, self.name, self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum))
-
   def getExports(self):
     return getExports(self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, self.duplicateTypedefs)
 
@@ -108,9 +104,6 @@ class WasmModule:
 
     typescriptFile = open(self.typescriptDefinitionFile, "w")
     typescriptFile.write(p.output)
-
-    # typescriptFile = open(self.typescriptDefinitionFile, "w")
-    # typescriptFile.write(getTypescriptDefinitions(typescriptFileName, self.name, self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, self.moduleExportsDict))
     
   def getDuplicateTypedefMap(self):
     duplicateTypedefMap = {}
@@ -135,9 +128,9 @@ class WasmModule:
       "-s", "DEMANGLE_SUPPORT=1",
     ] if self.buildType == BuildType.Debug else []
     envFlags = [
-      "-s", "ENVIRONMENT='node'",
+      "-s", "ENVIRONMENT='node,worker'",
     ] if self.envType == EnvType.Node else [
-      "-s", "ENVIRONMENT='web'",
+      "-s", "ENVIRONMENT='web,worker'",
       "-s", "EXPORT_ES6=1",
       "-s", "USE_ES6_IMPORT_META=0",
     ]
@@ -157,22 +150,9 @@ class WasmModule:
       *standaloneModuleFlags,
       *debugFlags,
       *envFlags,
-      # "-s", "EXPORT_ALL=1",
-      # "-s", "ASSERTIONS=1",
       "-s", "ALLOW_MEMORY_GROWTH=1",
-      # "-s", "WARN_ON_UNDEFINED_SYMBOLS=0",
-      # "-s", "ERROR_ON_UNDEFINED_SYMBOLS=0",
-      # "-s", "ALLOW_MEMORY_GROWTH=1",
-      # "-s", "NO_DYNAMIC_EXECUTION=1",
-      # "-s", "SAFE_HEAP=1",
-      # "-s", "EXIT_RUNTIME=0",
       '-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1',
       "-O3",
-      # "-std=c++1z",
-      # "-s", "DEMANGLE_SUPPORT=1",
-      # "--profiling",
-      # " -fsanitize=undefined",
-      # "-g4",
 
       # Enabling exception catching leads to errors in "TKTopAlgo" and "TKV3d" and maybe others. Therefore, this (default) value has to be used at all times.
       "-s", "DISABLE_EXCEPTION_CATCHING=1",
@@ -180,5 +160,5 @@ class WasmModule:
       *self.buildSettings,
       "-o", self.outputFile + (".wasm" if self.moduleType == ModuleType.DynamicSide else ".js")
     ]
-    subprocess.call(command)
+    retcode = subprocess.check_call(command)
   
