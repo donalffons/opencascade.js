@@ -56,10 +56,11 @@ class FileProcessor:
       self.translationUnit.cursor.get_children()))
 
     for templateTypedef in self.templateTypedefs:
-      duplicatesForThisTypedef = self.duplicateTypedefs[templateTypedef.underlying_typedef_type.spelling]
-      if not templateTypedef.spelling == duplicatesForThisTypedef[0]:
-        print("Template typedef \"" + templateTypedef.spelling + "\" for type \"" + templateTypedef.underlying_typedef_type.spelling + "\" has already been processed with the name \"" + duplicatesForThisTypedef[0] + "\", skipping.")
-        continue
+      if templateTypedef.underlying_typedef_type.spelling in self.duplicateTypedefs:
+        duplicatesForThisTypedef = self.duplicateTypedefs[templateTypedef.underlying_typedef_type.spelling]
+        if not templateTypedef.spelling == duplicatesForThisTypedef[0]:
+          print("Template typedef \"" + templateTypedef.spelling + "\" for type \"" + templateTypedef.underlying_typedef_type.spelling + "\" has already been processed with the name \"" + duplicatesForThisTypedef[0] + "\", skipping.")
+          continue
       try:
         templateRefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TEMPLATE_REF, templateTypedef.get_children()))
         if len(templateRefs) != 1:
