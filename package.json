@@ -8,14 +8,8 @@
   "repository": "github:donalffons/opencascade.js",
   "types": "dist/opencascade.d.ts",
   "devDependencies": {
-    "@babel/core": "^7.0.0-0",
-    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
-    "@babel/plugin-transform-runtime": "^7.11.5",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/runtime": "^7.11.2",
     "jest": "^26.4.2",
-    "opencascade.js-examples": "git://github.com/donalffons/opencascade.js-examples.git#master",
-    "three": "^0.120.1"
+    "opencascade.js-examples": "git://github.com/donalffons/opencascade.js-examples.git#master"
   },
   "scripts": {
     "test": "jest"
@@ -25,9 +19,5 @@
       "<rootDir>/actions-runner/"
     ]
   },
-  "peerDependencies": {
-    "bufferutil": "^4.0.2",
-    "utf-8-validate": "^5.0.3",
-    "ws": "^7.4.0"
-  }
+  "peerDependencies": {}
 }
