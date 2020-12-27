@@ -7,7 +7,6 @@ from filter.filterMethods import filterMethod
 from filter.filterTypedefs import filterTypedef
 from filter.filterEnums import filterEnum
 
-from .Embindings import getEmbindings
 from .Exports import getExports
 
 from .FileProcessor import EmbindProcessor, TypescriptProcessor
