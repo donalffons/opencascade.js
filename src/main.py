@@ -248,6 +248,11 @@ allWasmModules = list(filter(lambda x: not x.name in [
   "DBRep",
   "DrawTrSurf",
   "ViewerTest",
+  "TKDCAF", # TKDCAF needs Draw_Drawable3 during instantiation, which is part of the unsupported TKDraw module
+  "TKQADraw", # TKQADraw needs dout during instantiation, which is part of the unsupported TKDraw module
+  "TKTopTest", # TKTopTest needs BRep_DrawableShape during instantiation, which is part of the unsupported TKDraw module
+  "TKXDEDRAW", # TKXDEDRAW needs DDF_Browser during instantiation, which is part of the unsupported TKDCAF module
+  "TKXSDRAW", # TKXSDRAW needs Draw_Drawable3D during instantiation, which is part of the unsupported TKDraw module
 ], allWasmModules))
 
 def preProcess(aModule):
