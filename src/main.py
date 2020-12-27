@@ -237,6 +237,17 @@ allWasmModules = list(filter(lambda x: not x.name in [
   "TKIVtk",
   "TKIVtkDraw",
   "TKViewerTest",
+
+  "IVtkDraw",
+  "D3DHost",
+  "IVtk",
+  "IVtkOCC",
+  "IVtkVTK",
+  "IVtkTools",
+  "Draw",
+  "DBRep",
+  "DrawTrSurf",
+  "ViewerTest",
 ], allWasmModules))
 
 def preProcess(aModule):

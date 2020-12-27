@@ -95,6 +95,24 @@ def filterTypedef(typedef):
   ]:
     return False
 
+  # error: 'NCollection_CellFilter' is not a class, namespace, or enumeration
+  if typedef.spelling in [
+    "BRepBuilderAPI_CellFilter"
+  ]:
+    return False
+
+  # error during instantiation: Uncaught (in promise) BindingError: Cannot register type 'IntSurf_Allocator' twice
+  if typedef.spelling in [
+    "IntSurf_Allocator"
+  ]:
+    return False
+
+  # error during instantiation: Uncaught (in promise) BindingError: Cannot register type 'TDF_HAllocator' twice
+  if typedef.spelling in [
+    "TDF_HAllocator"
+  ]:
+    return False
+
   if typedef.underlying_typedef_type.spelling.startswith((
     "opencascade::handle",
     "handle",

@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8d14f5d23b05e6929cfbb2239f48e8eb7c77d68cd1122f4e0e65f1056874a19a
-size 70
+declare const libName = "./dynamic_node.wasm.d.ts";
+export default libName;
+
+type Standard_Boolean = boolean;
+type Standard_Byte = number;
+type Standard_Character = string;
+type Standard_CString = string;
+type Standard_Integer = number;
+type Standard_Real = number;
+type Standard_ShortReal = number;
+type Standard_Size = number;
+
+export declare class LibraryLoader {
+  loadLibrary(filename: string): void;
+}
+
+export declare type dynamic_nodeLib = {
+};
