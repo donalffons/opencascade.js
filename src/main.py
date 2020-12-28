@@ -59,11 +59,13 @@ def prepareOCCTModuleWasmModules(buildType, duplicateTypedefs):
       continue
 
     currModule = WasmModule(moduleName, ModuleType.DynamicSide, "../build/modules/" + moduleName + ".cpp", "../dist/" + buildType + "/modules/" + moduleName, buildType, EnvType.Node, duplicateTypedefs)
+    libraryFile = os.path.join("/occt/occt-628c021/build/lin32/clang/lib/", "lib" + moduleName + ".a")
+    currModule.addLibraryFile(libraryFile)
     modules.append(currModule)
 
     with open(dirpath + "/PACKAGES", "r") as a_file:
       for line in a_file:
-        addPackageToWasmModule(line.strip(), currModule, True)
+        addPackageToWasmModule(line.strip(), currModule, False)
 
   return modules
 
@@ -170,7 +172,7 @@ def f(aModule):
     os.makedirs('../dist/debug/packages')
 
   aModule.generateEmbindings()
-  aModule.generateTypescriptDefinitions()
+  # aModule.generateTypescriptDefinitions()
 
   aModule.build(includePaths + [
     "/rapidjson/include",
@@ -232,12 +234,6 @@ allWasmModules.extend(prepareOCCTModuleWasmModules(BuildType.Release, duplicateT
 
 # Currently unsupported modules
 allWasmModules = list(filter(lambda x: not x.name in [
-  "TKD3DHost",
-  "TKDraw",
-  "TKIVtk",
-  "TKIVtkDraw",
-  "TKViewerTest",
-
   "IVtkDraw",
   "D3DHost",
   "IVtk",
@@ -248,11 +244,18 @@ allWasmModules = list(filter(lambda x: not x.name in [
   "DBRep",
   "DrawTrSurf",
   "ViewerTest",
+  
+  "TKD3DHost",
+  "TKDraw",
+  "TKIVtk",
+  "TKIVtkDraw",
+  "TKViewerTest",
   "TKDCAF", # TKDCAF needs Draw_Drawable3 during instantiation, which is part of the unsupported TKDraw module
   "TKQADraw", # TKQADraw needs dout during instantiation, which is part of the unsupported TKDraw module
   "TKTopTest", # TKTopTest needs BRep_DrawableShape during instantiation, which is part of the unsupported TKDraw module
   "TKXDEDRAW", # TKXDEDRAW needs DDF_Browser during instantiation, which is part of the unsupported TKDCAF module
   "TKXSDRAW", # TKXSDRAW needs Draw_Drawable3D during instantiation, which is part of the unsupported TKDraw module
+  "TKTObjDRAW", # Not being built by OpenCascade CMake build system
 ], allWasmModules))
 
 def preProcess(aModule):
