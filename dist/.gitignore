@@ -1,4 +1,4 @@
-/release/modules/
-/release/packages/
-/debug/modules/
-/debug/packages/
+*.wasm
+*.wasm.map
+opencascade.js
+opencascade.debug.js
