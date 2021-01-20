@@ -1,4 +1,4 @@
-FROM emscripten/emsdk:2.0.10
+FROM emscripten/emsdk:2.0.11
 
 RUN apt update -y
 RUN apt install -y build-essential python3 python-pip git cmake bash curl npm
@@ -118,7 +118,7 @@ RUN \
   emcmake cmake .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DBUILD_LIBRARY_TYPE=Static \
-    -DCMAKE_CXX_FLAGS="-DIGNORE_NO_ATOMICS=1 -frtti -fPIC" \
+    -DCMAKE_CXX_FLAGS="-DIGNORE_NO_ATOMICS=1 -frtti -fPIC -DHAVE_RAPIDJSON" \
     -DBUILD_MODULE_Draw=OFF \
     -DBUILD_MODULE_TKXMesh=OFF \
     -D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=/freetype/include/freetype \
@@ -140,6 +140,7 @@ RUN \
       /vtk/Utilities/KWIML;\
       /vtk/build/Common/Core;\
       ../regal/regal-master/src/apitrace/thirdparty/khronos/;\
+      /rapidjson/include;\
       /fontconfig" && \
     emmake make -j$(nproc)
     
@@ -156,8 +157,16 @@ RUN \
   pip3 install clang
 
 RUN \
+  apt update -y && \
+  DEBIAN_FRONTEND=noninteractive apt upgrade -y && \
+  pip3 install pyyaml patch
+
+RUN \
+  apt install -y bison flex
+
+RUN \
   mkdir /opencascade.js/ && \
   mkdir /opencascade.js/build/
 WORKDIR /opencascade.js/src/
 
-ENTRYPOINT [ "./main.py" ]
+ENTRYPOINT [ "./run.sh" ]

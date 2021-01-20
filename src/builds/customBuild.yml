@@ -1,0 +1,324 @@
+# Example on how to define a custom OpenCascade.js build
+
+rocketExample:
+  items:
+    # TKernel
+    - regex: ^FSD(\..*|_.*|)$
+    - regex: ^MMgt(\..*|_.*|)$
+    - regex: ^OSD(\..*|_.*|)$
+    - regex: ^Plugin(\..*|_.*|)$
+    - regex: ^Quantity(\..*|_.*|)$
+    - regex: ^Resource(\..*|_.*|)$
+    - regex: ^Standard(\..*|_.*|)$
+    - regex: ^Standard_Transient
+      bindings: true
+    - regex: ^StdFail(\..*|_.*|)$
+    - regex: ^Storage(\..*|_.*|)$
+    - regex: ^TColStd(\..*|_.*|)$
+    - regex: ^TColStd_IndexedDataMapOfStringString
+      bindings: true
+    - regex: ^TCollection(\..*|_.*|)$
+    - regex: ^TCollection_ExtendedString
+      bindings: true
+    - regex: ^TCollection_AsciiString
+      bindings: true
+    - regex: ^TShort(\..*|_.*|)$
+    - regex: ^Units(\..*|_.*|)$
+    - regex: ^UnitsAPI(\..*|_.*|)$
+    - regex: ^NCollection(\..*|_.*|)$
+    - regex: ^NCollection_BaseSequence
+      bindings: true
+    - regex: ^NCollection_BaseMap
+      bindings: true
+    - regex: ^Message(\..*|_.*|)$
+    - regex: ^Message_ProgressRange
+      bindings: true
+
+    # TKMath
+    - regex: ^math(\..*|_.*|)$
+    - regex: ^ElCLib(\..*|_.*|)$
+    - regex: ^ElSLib(\..*|_.*|)$
+    - regex: ^BSplCLib(\..*|_.*|)$
+    - regex: ^BSplSLib(\..*|_.*|)$
+    - regex: ^PLib(\..*|_.*|)$
+    - regex: ^Poly(\..*|_.*|)$
+    - regex: ^CSLib(\..*|_.*|)$
+    - regex: ^BVH(\..*|_.*|)$
+    - regex: ^Bnd(\..*|_.*|)$
+    - regex: ^gp(\..*|_.*|)$
+    - regex: ^TopLoc(\..*|_.*|)$
+
+    # TKG2d
+    - regex: ^Geom2d(\..*|_.*|)$
+    # - regex: ^LProp(\..*|_.*|)$
+    # - regex: ^TColGeom2d(\..*|_.*|)$
+    - regex: ^Adaptor2d(\..*|_.*|)$
+    # - regex: ^Geom2dLProp(\..*|_.*|)$
+    - regex: ^Geom2dAdaptor(\..*|_.*|)$
+    # - regex: ^Geom2dEvaluator(\..*|_.*|)$
+
+    # TKG3d
+    - regex: ^Geom(\..*|_.*|)$
+    # - regex: ^TColGeom(\..*|_.*|)$
+    - regex: ^GeomAdaptor(\..*|_.*|)$
+    - regex: ^AdvApprox(\..*|_.*|)$
+    - regex: ^GeomLProp(\..*|_.*|)$
+    - regex: ^Adaptor3d(\..*|_.*|)$
+    # - regex: ^LProp3d(\..*|_.*|)$
+    - regex: ^TopAbs(\..*|_.*|)$
+    # - regex: ^GeomEvaluator(\..*|_.*|)$
+    # - regex: ^GProp(\..*|_.*|)$
+
+    # TKV3d:
+    # - regex: ^V3d(\..*|_.*|)$
+    - regex: ^Select3D(\..*|_.*|)$
+    - regex: ^Prs3d(\..*|_.*|)$
+    - regex: ^StdPrs(\..*|_.*|)$
+    # - regex: ^SelectBasics(\..*|_.*|)$
+    - regex: ^SelectMgr(\..*|_.*|)$
+    - regex: ^PrsMgr(\..*|_.*|)$
+    - regex: ^AIS(\..*|_.*|)$
+    - regex: ^StdSelect(\..*|_.*|)$
+    # - regex: ^DsgPrs(\..*|_.*|)$
+    - regex: ^PrsDim(\..*|_.*|)$
+
+    # TKService:
+    - regex: ^Aspect(\..*|_.*|)$
+    # - regex: ^InterfaceGraphic(\..*|_.*|)$
+    - regex: ^Graphic3d(\..*|_.*|)$
+    # - regex: ^Xw(\..*|_.*|)$
+    - regex: ^Image(\..*|_.*|)$
+    - regex: ^Media(\..*|_.*|)$
+    # - regex: ^WNT(\..*|_.*|)$
+    # - regex: ^Cocoa(\..*|_.*|)$
+    # - regex: ^Font(\..*|_.*|)$
+
+    # TKMesh
+    - regex: ^IMeshData(\..*|_.*|)$
+    - regex: ^IMeshTools(\..*|_.*|)$
+    - regex: ^BRepMeshData(\..*|_.*|)$
+    - regex: ^BRepMesh(\..*|_.*|)$
+    - regex: ^BRepMesh_IncrementalMesh
+      bindings: true
+    - regex: ^BRepMesh_DiscretRoot
+      bindings: true
+
+    # TKSTEP
+    - regex: ^STEPControl_Reader(\..*|_.*|)$
+    - regex: ^STEPControl_ActorRead(\..*|_.*|)$
+    - regex: ^STEPControl_ActorWrite(\..*|_.*|)$
+    - regex: ^STEPControl_Controller(\..*|_.*|)$
+    - regex: ^RWStepAP214(\..*|_.*|)$
+    - regex: ^StepAP214(\..*|_.*|)$
+    - regex: ^StepAP242(\..*|_.*|)$
+    - regex: ^StepAP203(\..*|_.*|)$
+    - regex: ^STEPConstruct(\..*|_.*|)$
+    - regex: ^STEPEdit(\..*|_.*|)$
+    - regex: ^StepToTopoDS(\..*|_.*|)$
+    - regex: ^STEPSelections(\..*|_.*|)$
+    - regex: ^StepToGeom(\..*|_.*|)$
+
+    # TKSTEP209
+    - regex: ^StepElement(\..*|_.*|)$
+    - regex: ^StepFEA(\..*|_.*|)$
+    - regex: ^RWStepElement(\..*|_.*|)$
+    - regex: ^RWStepFEA(\..*|_.*|)$
+
+    # TKSTEPAttr
+    - regex: ^StepVisual(\..*|_.*|)$
+    - regex: ^RWStepVisual(\..*|_.*|)$
+    - regex: ^StepDimTol(\..*|_.*|)$
+    - regex: ^RWStepDimTol(\..*|_.*|)$
+
+    # TKSTEPBase
+    - regex: ^StepBasic(\..*|_.*|)$
+    - regex: ^RWStepBasic(\..*|_.*|)$
+    - regex: ^StepRepr(\..*|_.*|)$
+    - regex: ^RWStepRepr(\..*|_.*|)$
+    - regex: ^StepGeom(\..*|_.*|)$
+    - regex: ^RWStepGeom(\..*|_.*|)$
+    - regex: ^StepShape(\..*|_.*|)$
+    - regex: ^RWStepShape(\..*|_.*|)$
+
+    # TKGeomAlgo
+    # - regex: ^Hatch(\..*|_.*|)$
+    # - regex: ^GeomInt(\..*|_.*|)$
+    # - regex: ^IntStart(\..*|_.*|)$
+    # - regex: ^IntWalk(\..*|_.*|)$
+    # - regex: ^IntImp(\..*|_.*|)$
+    - regex: ^IntCurveSurface(\..*|_.*|)$
+    # - regex: ^IntSurf(\..*|_.*|)$
+    # - regex: ^IntPatch(\..*|_.*|)$
+    - regex: ^Geom2dInt(\..*|_.*|)$
+    - regex: ^IntImpParGen(\..*|_.*|)$
+    - regex: ^IntRes2d(\..*|_.*|)$
+    - regex: ^IntCurve(\..*|_.*|)$
+    - regex: ^TopTrans(\..*|_.*|)$
+    - regex: ^Intf(\..*|_.*|)$
+    # - regex: ^ApproxInt(\..*|_.*|)$
+    # - regex: ^GccAna(\..*|_.*|)$
+    # - regex: ^GccEnt(\..*|_.*|)$
+    # - regex: ^GccInt(\..*|_.*|)$
+    # - regex: ^HatchGen(\..*|_.*|)$
+    # - regex: ^Geom2dHatch(\..*|_.*|)$
+    # - regex: ^Law(\..*|_.*|)$
+    # - regex: ^AppBlend(\..*|_.*|)$
+    # - regex: ^Plate(\..*|_.*|)$
+    # - regex: ^GeomPlate(\..*|_.*|)$
+    # - regex: ^LocalAnalysis(\..*|_.*|)$
+    # - regex: ^GeomAPI(\..*|_.*|)$
+    # - regex: ^GeomFill(\..*|_.*|)$
+    - regex: ^Geom2dAPI(\..*|_.*|)$
+    # - regex: ^Geom2dGcc(\..*|_.*|)$
+    # - regex: ^FairCurve(\..*|_.*|)$
+    # - regex: ^NLPlate(\..*|_.*|)$
+    # - regex: ^IntPolyh(\..*|_.*|)$
+    # - regex: ^TopClass(\..*|_.*|)$
+
+    # TKBRep
+    - regex: ^TopoDS(\..*|_.*|)$
+    - regex: ^TopoDS_Shape
+      bindings: true
+    - regex: ^TopExp(\..*|_.*|)$
+    - regex: ^TopTools(\..*|_.*|)$
+    - regex: ^BRep(\..*|_.*|)$
+    - regex: ^BRepLProp(\..*|_.*|)$
+    - regex: ^BRepAdaptor(\..*|_.*|)$
+    - regex: ^BRepTools(\..*|_.*|)$
+    - regex: ^BRepTools
+      bindings: true
+    # - regex: ^BinTools(\..*|_.*|)$
+
+    # TKGeomBase
+    - regex: ^ProjLib(\..*|_.*|)$
+    - regex: ^GeomProjLib(\..*|_.*|)$
+    - regex: ^GCPnts(\..*|_.*|)$
+    # - regex: ^CPnts(\..*|_.*|)$
+    # - regex: ^Approx(\..*|_.*|)$
+    - regex: ^AppParCurves(\..*|_.*|)$
+    # - regex: ^FEmTool(\..*|_.*|)$
+    # - regex: ^AppCont(\..*|_.*|)$
+    - regex: ^Extrema(\..*|_.*|)$
+    - regex: ^IntAna(\..*|_.*|)$
+    # - regex: ^IntAna2d(\..*|_.*|)$
+    # - regex: ^GeomConvert(\..*|_.*|)$
+    # - regex: ^AdvApp2Var(\..*|_.*|)$
+    - regex: ^GeomLib(\..*|_.*|)$
+    # - regex: ^Geom2dConvert(\..*|_.*|)$
+    # - regex: ^Hermit(\..*|_.*|)$
+    - regex: ^BndLib(\..*|_.*|)$
+    - regex: ^AppDef(\..*|_.*|)$
+    # - regex: ^GeomTools(\..*|_.*|)$
+    # - regex: ^GC(\..*|_.*|)$
+    # - regex: ^GCE2d(\..*|_.*|)$
+    # - regex: ^gce(\..*|_.*|)$
+
+    # TKCDF
+    - regex: ^CDM(\..*|_.*|)$
+    - regex: ^PCDM(\..*|_.*|)$
+    - regex: ^CDF(\..*|_.*|)$
+    - regex: CDM_Document
+      bindings: true
+    - regex: ^UTL(\..*|_.*|)$
+    - regex: ^LDOM(\..*|_.*|)$
+    - regex: LDOMParser
+      bindings: true
+
+    # TKLCAF
+    - regex: ^TDF(\..*|_.*|)$
+    - regex: ^TDF_Label
+      bindings: true
+    - regex: ^TDF_Attribute
+      bindings: true
+    - regex: ^TDataStd
+    - regex: ^TDataStd_GenericEmpty
+      bindings: true
+    - regex: ^TDocStd_Document
+      bindings: true
+    - regex: ^TDocStd_CompoundDelta
+    - regex: ^TDocStd_Application
+    - regex: ^TDocStd_Owner
+    - regex: ^Handle_TDocStd_Document
+      bindings: true
+
+    # TKCAF
+    - regex: ^TNaming
+    - regex: ^TDataXtd
+
+    # TKVCAF
+    - regex: ^TPrsStd(\..*|_.*|)$
+
+    # TKXCAF
+    - regex: ^XCAFDimTolObjects_DimensionObject
+    - regex: ^XCAFDimTolObjects_DatumObject
+    - regex: ^XCAFDimTolObjects_GeomToleranceObject
+    - regex: ^XCAFDoc(\..*|_.*|)$
+    - regex: ^XCAFDoc_DocumentTool
+      bindings: true
+    - regex: ^XCAFDoc_ShapeTool
+      bindings: true
+    - regex: ^Handle_XCAFDoc_ShapeTool
+      bindings: true
+    - regex: ^XCAFPrs(\..*|_.*|)$
+
+    # TKXDESTEP
+    - regex: ^STEPCAFControl_Reader
+      bindings: true
+    - regex: ^STEPCAFControl_Controller
+    - regex: ^STEPCAFControl_ActorWrite
+
+    # TKTopAlgo
+    - regex: ^IntCurvesFace(\..*|_.*|)$
+      bindings: true
+    - regex: ^BRepCheck(\..*|_.*|)$
+    - regex: ^BRepBndLib(\..*|_.*|)$
+    - regex: ^BRepClass(\..*|_.*|)$
+    - regex: ^BRepClass3d(\..*|_.*|)$
+      bindings: true
+    - regex: ^BRepLib(\..*|_.*|)$
+    - regex: ^BRepTopAdaptor(\..*|_.*|)$
+      bindings: true
+    - regex: ^BRepBuilderAPI(\..*|_.*|)$
+
+    # # TKShHealing
+    - regex: ^ShapeBuild(\..*|_.*|)$
+    - regex: ^ShapeExtend(\..*|_.*|)$
+    - regex: ^ShapeConstruct(\..*|_.*|)$
+    - regex: ^ShapeCustom(\..*|_.*|)$
+    - regex: ^ShapeAnalysis(\..*|_.*|)$
+      bindings: true
+    - regex: ^Handle_ShapeAnalysis
+      bindings: true
+    - regex: ^ShapeFix(\..*|_.*|)$
+      bindings: true
+    - regex: ^ShapeUpgrade(\..*|_.*|)$
+    - regex: ^ShapeAlgo(\..*|_.*|)$
+    - regex: ^ShapeProcess(\..*|_.*|)$
+
+    # TKXSBase
+    - regex: ^Interface(\..*|_.*|)$
+    - regex: ^Transfer(\..*|_.*|)$
+    - regex: ^IFGraph(\..*|_.*|)$
+    - regex: ^IFSelect(\..*|_.*|)$
+      bindings: true
+    - regex: ^TransferBRep(\..*|_.*|)$
+    - regex: ^XSControl(\..*|_.*|)$
+    - regex: ^StepData(\..*|_.*|)$
+    - regex: ^StepFile(\..*|_.*|)$
+    - regex: ^stepread(\..*|_.*|)$
+    - regex: ^lex.step(\..*|_.*|)$
+    - regex: ^step.tab(\..*|_.*|)$
+    - regex: ^HeaderSection(\..*|_.*|)$
+    - regex: ^RWHeaderSection(\..*|_.*|)$
+    - regex: ^APIHeaderSection(\..*|_.*|)$
+    - regex: ^StepSelect(\..*|_.*|)$
+    - regex: ^UnitsMethods(\..*|_.*|)$
+    - regex: ^XSAlgo(\..*|_.*|)$
+      bindings: true
+    - regex: ^MoniTool(\..*|_.*|)$
+
+    # TKRWMesh
+    - regex: ^RWGltf(\..*|_.*|)$
+    - regex: ^RWGltf_CafWriter
+      bindings: true
+    - regex: ^RWMesh(\..*|_.*|)$

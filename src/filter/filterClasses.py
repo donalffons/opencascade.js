@@ -1,4 +1,4 @@
-def filterClass(theClass):
+def filterClass(theClass, additionalInfo=None):
   if theClass.spelling == "Standard_Dump":
     return False
 

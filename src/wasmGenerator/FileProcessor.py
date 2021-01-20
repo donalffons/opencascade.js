@@ -50,7 +50,6 @@ class FileProcessor:
       lambda x:
         x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and
         not (x.get_definition() is None or not x == x.get_definition()) and
-        x.extent.start.file.name in self.headerFiles and
         self.filterTypedef(x) and
         x.type.get_num_template_arguments() != -1,
       self.translationUnit.cursor.get_children()))
@@ -68,6 +67,8 @@ class FileProcessor:
           continue
 
         templateClass = templateRefs[0].get_definition()
+        if templateClass is None:
+          continue
         templateArgNames = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TEMPLATE_TYPE_PARAMETER, templateClass.get_children()))
         templateArgs = {}
         for i, templateArgName in enumerate(templateArgNames):
@@ -83,7 +84,6 @@ class FileProcessor:
     self.enums = list(filter(
       lambda x:
         x.kind == clang.cindex.CursorKind.ENUM_DECL and
-        x.extent.start.file.name in self.headerFiles and
         self.filterEnum(x),
       self.translationUnit.cursor.get_children()))
 
@@ -134,8 +134,6 @@ class EmbindProcessor(FileProcessor):
     # Epilog
     for theClass in self.translationUnit.cursor.get_children():
       if theClass.get_definition() is None or not theClass == theClass.get_definition():
-        continue
-      if not theClass.extent.start.file.name in self.headerFiles:
         continue
       if not self.filterClass(theClass):
         continue

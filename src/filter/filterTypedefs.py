@@ -1,4 +1,11 @@
-def filterTypedef(typedef):
+def filterTypedef(typedef, additionalInfo=None):
+  # Cannot register type 'SelectMgr_Vec3' / 'SelectMgr_Mat4' twice
+  if typedef.spelling in [
+    "SelectMgr_Vec3",
+    "SelectMgr_Mat4",
+  ]:
+    return False
+
   if typedef.spelling == "Handle_Cocoa_Window":
     return False
 
@@ -86,6 +93,8 @@ def filterTypedef(typedef):
   if typedef.spelling in [
     "BRepBuilderAPI_BndBoxTree",
     "Extrema_UBTreeOfSphere",
+    "ShapeAnalysis_BoxBndTree",
+    "BRepClass3d_BndBoxTree"
   ]:
     return False
 
@@ -111,6 +120,10 @@ def filterTypedef(typedef):
   if typedef.spelling in [
     "TDF_HAllocator"
   ]:
+    return False
+
+  # RuntimeError: function signature mismatch when calling STEPCAFontrol_Reader.ReadFile()
+  if typedef.spelling == "Interface_VectorOfFileParameter":
     return False
 
   if typedef.underlying_typedef_type.spelling.startswith((
