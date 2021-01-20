@@ -18,10 +18,27 @@
       "type": "node"
     },
     {
-      "name": "Python: Current File",
+      "name": "Python: Main",
       "type": "python",
       "request": "launch",
       "program": "${workspaceFolder}/src/main.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/src"
+    },
+    {
+      "name": "Python: Build Standard Modules",
+      "type": "python",
+      "python": "/usr/bin/python3",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/buildStandardModules.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/src"
+    },
+    {
+      "name": "Python: Create Libraries",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/compile.py",
       "console": "integratedTerminal",
       "cwd": "${workspaceFolder}/src"
     }
