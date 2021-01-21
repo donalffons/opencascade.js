@@ -22,7 +22,7 @@ jobs:
           image_name: opencascade.js
 
       - name: Build OpenCascade.js
-        timeout-minutes: 240
+        timeout-minutes: 480
         run: |
           docker run -v "$(pwd)":"/opencascade.js" my_awesome_image
 
