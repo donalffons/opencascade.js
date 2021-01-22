@@ -1,58 +1,31 @@
 # Example on how to define a custom OpenCascade.js build
 
 rocketExample.js:
-  inputs:
-    - module: TKernel.debug
-    - allModules.debug
   bindings:
-    - symbol:
-      regex: ^STEPCAFControl_Reader$
-    - symbol:
-      regex: ^IFSelect_ReturnStatus$
-    - symbol:
-      regex: ^TCollection_ExtendedString$
-    - symbol:
-      regex: ^TDocStd_Document$
-    - symbol:
-      regex: ^Handle_TDocStd_Document$
-    - symbol:
-      regex: ^Message_ProgressRange$
-    - symbol:
-      regex: ^XCAFDoc_DocumentTool$
-    - symbol:
-      regex: ^TDF_LabelSequence$
-    - symbol:
-      regex: ^XCAFDoc_ShapeTool$
-    - symbol:
-      regex: ^TCollection_AsciiString$
-    - symbol:
-      regex: ^RWGltf_CafWriter$
-    - symbol:
-      regex: ^BRepTools$
-    - symbol:
-      regex: ^BRepMesh_IncrementalMesh$
-    - symbol:
-      regex: ^TColStd_IndexedDataMapOfStringString$
-    - symbol:
-      regex: ^CDM_Document$
-    - symbol:
-      regex: ^Standard_Transient$
-    - symbol:
-      regex: ^TDF_Label$
-    - symbol:
-      regex: ^TDataStd_GenericEmpty$
-    - symbol:
-      regex: ^TDF_Attribute$
-    - symbol:
-      regex: ^Handle_XCAFDoc_ShapeTool$
-    - symbol:
-      regex: ^NCollection_BaseSequence$
-    - symbol:
-      regex: ^TopoDS_Shape$
-    - symbol:
-      regex: ^BRepMesh_DiscretRoot$
-    - symbol:
-      regex: ^NCollection_BaseMap$
+    - symbol: STEPCAFControl_Reader
+    - symbol: IFSelect_ReturnStatus
+    - symbol: TCollection_ExtendedString
+    - symbol: TDocStd_Document
+    - symbol: Handle_TDocStd_Document
+    - symbol: Message_ProgressRange
+    - symbol: XCAFDoc_DocumentTool
+    - symbol: TDF_LabelSequence
+    - symbol: XCAFDoc_ShapeTool
+    - symbol: TCollection_AsciiString
+    - symbol: RWGltf_CafWriter
+    - symbol: BRepTools
+    - symbol: BRepMesh_IncrementalMesh
+    - symbol: TColStd_IndexedDataMapOfStringString
+    - symbol: CDM_Document
+    - symbol: Standard_Transient
+    - symbol: TDF_Label
+    - symbol: TDataStd_GenericEmpty
+    - symbol: TDF_Attribute
+    - symbol: Handle_XCAFDoc_ShapeTool
+    - symbol: NCollection_BaseSequence
+    - symbol: TopoDS_Shape
+    - symbol: BRepMesh_DiscretRoot
+    - symbol: NCollection_BaseMap
   emccFlags:
     - -sEXPORT_ES6=1
     - -sUSE_ES6_IMPORT_META=0
