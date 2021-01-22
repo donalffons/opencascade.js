@@ -6,9 +6,10 @@ import re
 
 from filter.filterIncludeFiles import filterIncludeFile
 from filter.filterSourceFiles import filterSourceFile
+from filter.filterPackagesAndModules import filterPackagesAndModules
 from wasmGenerator.WasmModule import WasmModule
 
-libraryBasePath = "../build/fullLibrary"
+libraryBasePath = "/opencascade.js/build/fullLibrary"
 
 def getGlobalIncludes():
   includeFiles = set()
@@ -42,9 +43,11 @@ def getModuleIncludes(moduleName):
 
 def getBindingsFilterFunction(bindingSettings):
   def filterFunction(theItem):
+    if bindingSettings is None:
+      return False
     shouldProcess = False
     for bindingSetting in bindingSettings:
-      if "global" in bindingSetting:
+      if "symbol" in bindingSetting:
         shouldProcess = re.match(bindingSetting["regex"], theItem.spelling)
       if "package" in bindingSetting:
         currPackageName = os.path.basename(os.path.dirname(theItem.extent.start.file.name))
@@ -66,11 +69,24 @@ def getBindingsFilterFunction(bindingSettings):
     return shouldProcess
   return filterFunction
 
-def buildWasmModule(moduleName, buildConfig):
-  if not os.path.exists('../build'):
-    os.makedirs('../build')
-  if not os.path.exists('../build/modules'):
-    os.makedirs('../build/modules')
+def addAllOcctModulesToWasmModule(thisModule, postfix = ""):
+  for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
+    packageOrModuleName = os.path.basename(dirpath)
+    if not any(x for x in filenames if x == "PACKAGES"):
+      continue
+
+    if not filterPackagesAndModules(packageOrModuleName):
+      continue
+
+    thisModule.addLibraryFile(packageOrModuleName + postfix, "/opencascade.js/build/fullLibrary/")
+
+def buildWasmModule(moduleName, buildConfig, outputFile = None):
+  if not os.path.exists('/opencascade.js/build'):
+    os.makedirs('/opencascade.js/build')
+  if not os.path.exists('/opencascade.js/build/modules'):
+    os.makedirs('/opencascade.js/build/modules')
+  if outputFile is None:
+    outputFile = "/opencascade.js/dist/" + moduleName
 
   includeFiles = set()
   additionalIncludePaths = {
@@ -81,27 +97,30 @@ def buildWasmModule(moduleName, buildConfig):
   additionalSystemIncludePaths = {
     "/usr/lib/gcc/x86_64-linux-gnu/10/include",
   }
-  thisModule = WasmModule(moduleName.replace(".", "_"), "../build/modules/" + moduleName + ".cpp", "../dist/" + moduleName)
+  thisModule = WasmModule(moduleName.replace(".", "_"), "/opencascade.js/build/modules/" + moduleName + ".cpp", outputFile)
   
-  if "inputs" in buildConfig:
+  if "inputs" in buildConfig and not buildConfig["inputs"] is None:
     for input in buildConfig["inputs"]:
       if "package" in input:
-        for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-628c021/src/", input["package"])):
-          for item in filenames:
-            if filterSourceFile(item):
-              thisModule.addLibraryFile(dirpath + "/" + item, None)
+        thisModule.addLibraryFile(input["package"], "/opencascade.js/build/fullLibrary/")
       if "module" in input:
-        with open("/occt/occt-628c021/src/" + input["module"] + "/PACKAGES", "r") as a_file:
-          packageNames = list(map(lambda x: x.strip(), filter(lambda x: not x.strip() == "", a_file)))
-          for packageName in packageNames:
-            for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-628c021/src/", packageName)):
-              for item in filenames:
-                if filterSourceFile(item):
-                  thisModule.addLibraryFile(dirpath + "/" + item, None)
+        thisModule.addLibraryFile(input["module"], "/opencascade.js/build/fullLibrary/")
       if "sourceFile" in input:
         libFile = input["sourceFile"]
         libPath = None
         thisModule.addLibraryFile(libFile, libPath)
+      if type(input) == str and input.startswith("allModules"):
+        if input == "allModules.debug":
+          print("debug libraries")
+          addAllOcctModulesToWasmModule(thisModule, ".debug")
+        else:
+          if input == "allModules":
+            print("release libraries")
+            addAllOcctModulesToWasmModule(thisModule)
+          else:
+            print("unknown input: " + input)
+  else:
+    addAllOcctModulesToWasmModule(thisModule)
 
   includes = getGlobalIncludes()
   includeFiles = includes[0]
@@ -109,7 +128,7 @@ def buildWasmModule(moduleName, buildConfig):
   thisModule.setBindingsFilterFunction(getBindingsFilterFunction(buildConfig["bindings"]))
 
   emccFlags = []
-  if "emccFlags" in buildConfig:
+  if "emccFlags" in buildConfig and not buildConfig["emccFlags"] is None:
     emccFlags.extend(buildConfig["emccFlags"])
   thisModule.headerFiles = list(includeFiles)
   print("Parsing " + moduleName)

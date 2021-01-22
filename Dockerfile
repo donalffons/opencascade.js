@@ -167,6 +167,9 @@ RUN \
 RUN \
   mkdir /opencascade.js/ && \
   mkdir /opencascade.js/build/
-WORKDIR /opencascade.js/src/
+WORKDIR /opencascade.js/
+COPY . .
 
-ENTRYPOINT [ "./run.sh" ]
+WORKDIR /src/
+
+ENTRYPOINT [ "/opencascade.js/src/run.sh" ]

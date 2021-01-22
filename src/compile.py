@@ -6,8 +6,31 @@ import multiprocessing
 
 from filter.filterIncludeFiles import filterIncludeFile
 from filter.filterSourceFiles import filterSourceFile
+from filter.filterPackagesAndModules import filterPackagesAndModules
 
 libraryBasePath = "../build/fullLibrary"
+
+# Potentially problematic packages, when used with dynamic linking
+# These files contain function pointer definitions and header files and are therefore likely to cause problems.
+# https://github.com/emscripten-core/emscripten/issues/13241
+# "AdvApp2Var"
+# "BRepGProp"
+# "BRepMesh"
+# "BSplSLib"
+# "CPnts"
+# "DDF"
+# "Draw"
+# "Graphic3d"
+# "IFSelect"
+# "Interface"
+# "MoniTool"
+# "NCollection"
+# "OpenGl"
+# "OSD"
+# "ShapeProcess"
+# "Standard"
+# "StdObjMgt"
+# "TDF
 
 if not os.path.exists(libraryBasePath):
   os.makedirs(libraryBasePath)
@@ -121,19 +144,10 @@ def addLibrary(packageOrModuleName):
 
 for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
   packageOrModuleName = os.path.basename(dirpath)
-  if packageOrModuleName == "":
-    continue
-
   if not any(x for x in filenames if x == "PACKAGES"):
     continue
 
-  if packageOrModuleName in [
-    "TKViewerTest",
-    "TKD3DHost",
-    "TKIVtk",
-    "TKDraw",
-    "TKIVtkDraw",
-  ]:
+  if not filterPackagesAndModules(packageOrModuleName):
     continue
 
   addLibrary(packageOrModuleName)
@@ -141,18 +155,7 @@ for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
   with open(dirpath + "/PACKAGES", "r") as a_file:
     for package in a_file:
       packageName = package.strip()
-      if packageName == "":
-        continue
-      if packageName in [
-        "D3DHost",
-        "IVtk",
-        "IVtkVTK",
-        "IVtkTools",
-        "ViewerTest",
-        "IVtkOCC",
-        "IVtkDraw",
-        "Draw",
-      ]:
+      if not filterPackagesAndModules(packageName):
         continue
       addObjectFiles(packageName)
       addLibrary(packageName)
