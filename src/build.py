@@ -156,8 +156,8 @@ def buildWasmModule(moduleName, buildConfig, outputFile = None):
   thisModule.parse(includeFiles, additionalIncludePaths, additionalSystemIncludePaths)
   print("Generate Bindings for " + moduleName)
   thisModule.generateEmbindings()
-  print("Generate Typescript definitions for " + moduleName)
-  thisModule.generateTypescriptDefinitions()
+  # print("Generate Typescript definitions for " + moduleName)
+  # thisModule.generateTypescriptDefinitions()
   print("Building " + moduleName)
   thisModule.build(additionalIncludePaths, emccFlags)
 
