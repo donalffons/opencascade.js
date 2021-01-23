@@ -15,6 +15,7 @@ jobs:
 
       - name: Build OpenCascade.js Docker Image
         uses: whoan/docker-build-with-cache-action@v5
+        timeout-minutes: 480
         with:
           registry: docker.pkg.github.com
           username: donalffons
