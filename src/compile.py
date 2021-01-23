@@ -8,7 +8,7 @@ from filter.filterIncludeFiles import filterIncludeFile
 from filter.filterSourceFiles import filterSourceFile
 from filter.filterPackagesAndModules import filterPackagesAndModules
 
-libraryBasePath = "../build/fullLibrary"
+libraryBasePath = "/opencascade.js/build/fullLibrary"
 
 # Potentially problematic packages, when used with dynamic linking
 # These files contain function pointer definitions and header files and are therefore likely to cause problems.
@@ -62,11 +62,11 @@ def buildObjectFiles(package):
       "-c",
       dirpath + "/" + theFile,
     ]
-    # if not os.path.exists(libBasePath + ".o"):
-    #   print("Building " + theName)
-    #   subprocess.check_call([*command, "-o", libBasePath + ".o"])
-    # else:
-    #   print(theName + " already exists, skipping")
+    if not os.path.exists(libBasePath + ".o"):
+      print("Building " + theName)
+      subprocess.check_call([*command, "-o", libBasePath + ".o"])
+    else:
+      print(theName + " already exists, skipping")
 
     if not os.path.exists(libBasePath + ".debug.o"):
       print("Building " + theName + ".debug")
@@ -82,15 +82,15 @@ def buildLibrary(library):
     "emar",
     "rs",
   ]
-  # if not os.path.exists(libBasePath + "lib" + libraryName + ".a"):
-  #   print("Building library " + libraryName)
-  #   subprocess.check_call([
-  #     *command, 
-  #     libraryBasePath + "/lib" + libraryName + ".a",
-  #     *map(lambda x: libBasePath + x["packageName"] + "/" + x["name"] + ".o", libraryFiles),
-  #   ])
-  # else:
-  #   print(libraryName + " already exists, skipping")
+  if not os.path.exists(libBasePath + "lib" + libraryName + ".a"):
+    print("Building library " + libraryName)
+    subprocess.check_call([
+      *command, 
+      libraryBasePath + "/lib" + libraryName + ".a",
+      *map(lambda x: libBasePath + x["packageName"] + "/" + x["name"] + ".o", libraryFiles),
+    ])
+  else:
+    print(libraryName + " already exists, skipping")
 
   if not os.path.exists(libBasePath + "lib" + libraryName + ".debug.a"):
     print("Building library " + libraryName + ".debug")
