@@ -25,7 +25,7 @@ jobs:
       - name: Build OpenCascade.js
         timeout-minutes: 480
         run: |
-          docker run -v "$(pwd)":"/opencascade.js" my_awesome_image
+          docker run -v "$(pwd)/dist/":"/opencascade.js/dist/" my_awesome_image
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v2
