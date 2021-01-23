@@ -103,27 +103,27 @@ def buildWasmModule(moduleName, buildConfig, outputFile = None):
     for input in buildConfig["inputs"]:
       if "package" in input:
         if not "preBuilt" in input["package"] or not input["package"]["preBuilt"]:
-          if "preBuilt" in input["package"] and input["package"]["preBuilt"]:
-            for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-628c021/src/", input["package"])):
-              for item in filenames:
-                if filterSourceFile(item):
-                  thisModule.addLibraryFile(dirpath + "/" + item, None)
+          for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-628c021/src/", input["package"])):
+            for item in filenames:
+              if filterSourceFile(item):
+                thisModule.addLibraryFile(dirpath + "/" + item, None)
         else:
-          thisModule.addLibraryFile(input["package"], "/opencascade.js/build/fullLibrary/")
+          if "preBuilt" in input["package"] and input["package"]["preBuilt"]:
+            thisModule.addLibraryFile(input["package"], "/opencascade.js/build/fullLibrary/")
           else:
             print("could not process preBuilt setting")
       if "module" in input:
         if not "preBuilt" in input["module"] or not input["module"]["preBuilt"]:
-          if "preBuilt" in input["module"] and input["module"]["preBuilt"]:
-            with open("/occt/occt-628c021/src/" + input["module"] + "/PACKAGES", "r") as a_file:
-              packageNames = list(map(lambda x: x.strip(), filter(lambda x: not x.strip() == "", a_file)))
-              for packageName in packageNames:
-                for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-628c021/src/", packageName)):
-                  for item in filenames:
-                    if filterSourceFile(item):
-                      thisModule.addLibraryFile(dirpath + "/" + item, None)
+          with open("/occt/occt-628c021/src/" + input["module"] + "/PACKAGES", "r") as a_file:
+            packageNames = list(map(lambda x: x.strip(), filter(lambda x: not x.strip() == "", a_file)))
+            for packageName in packageNames:
+              for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-628c021/src/", packageName)):
+                for item in filenames:
+                  if filterSourceFile(item):
+                    thisModule.addLibraryFile(dirpath + "/" + item, None)
         else:
-          thisModule.addLibraryFile(input["module"], "/opencascade.js/build/fullLibrary/")
+          if "preBuilt" in input["module"] and input["module"]["preBuilt"]:
+            thisModule.addLibraryFile(input["module"], "/opencascade.js/build/fullLibrary/")
           else:
             print("could not process preBuilt setting")
       if "sourceFile" in input:
@@ -156,6 +156,8 @@ def buildWasmModule(moduleName, buildConfig, outputFile = None):
   thisModule.parse(includeFiles, additionalIncludePaths, additionalSystemIncludePaths)
   print("Generate Bindings for " + moduleName)
   thisModule.generateEmbindings()
+  print("Generate Typescript definitions for " + moduleName)
+  thisModule.generateTypescriptDefinitions()
   print("Building " + moduleName)
   thisModule.build(additionalIncludePaths, emccFlags)
 
