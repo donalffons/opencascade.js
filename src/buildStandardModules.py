@@ -58,6 +58,7 @@ def addModuleBuildConfigs():
       "inputs": [
         {
           "module": packageOrModuleName,
+          "preBuilt": False,
         }
       ],
       "bindings": [
@@ -77,6 +78,7 @@ def addModuleBuildConfigs():
       "inputs": [
         {
           "module": packageOrModuleName,
+          "preBuilt": False,
         }
       ],
       "bindings": [
@@ -131,6 +133,7 @@ def addPackageBuildConfigs():
           "inputs": [
             {
               "package": packageName,
+              "preBuilt": False,
             }
           ],
           "bindings": [
@@ -150,6 +153,7 @@ def addPackageBuildConfigs():
           "inputs": [
             {
               "package": packageName,
+              "preBuilt": False,
             }
           ],
           "bindings": [
