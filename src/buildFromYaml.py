@@ -2,9 +2,8 @@
 
 import yaml
 import sys
-from build import buildWasmModule
+from build import buildWasmModuleSet
 
 with open(sys.argv[1], 'r') as stream:
-  yamlContents = yaml.safe_load(stream)
-  for buildConfigName, buildConfig in yamlContents.items():
-    buildWasmModule(buildConfigName, buildConfig, buildConfigName)
+  buildConfigs = yaml.safe_load(stream)
+  buildWasmModuleSet(buildConfigs)

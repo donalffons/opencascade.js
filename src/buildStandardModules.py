@@ -2,11 +2,12 @@
 
 import os
 
-from build import buildWasmModule
+from build import buildWasmModuleSet
 import multiprocessing
 from filter.filterSourceFiles import filterSourceFile
 
-buildConfigs = {}
+releaseBuildConfigs = {}
+debugBuildConfigs = {}
 
 defaultEmccFlags = [
   "-DIGNORE_NO_ATOMICS=1",
@@ -54,7 +55,7 @@ def addModuleBuildConfigs():
     ]:
       continue
 
-    buildConfigs["module." + packageOrModuleName + ".wasm"] = {
+    releaseBuildConfigs["module." + packageOrModuleName + ".wasm"] = {
       "inputs": [
         {
           "module": packageOrModuleName,
@@ -74,7 +75,7 @@ def addModuleBuildConfigs():
       ]
     }
 
-    buildConfigs["module." + packageOrModuleName + ".debug.wasm"] = {
+    debugBuildConfigs["module." + packageOrModuleName + ".debug.wasm"] = {
       "inputs": [
         {
           "module": packageOrModuleName,
@@ -129,7 +130,7 @@ def addPackageBuildConfigs():
         ]:
           continue
 
-        buildConfigs["package." + packageName + ".wasm"] = {
+        releaseBuildConfigs["package." + packageName + ".wasm"] = {
           "inputs": [
             {
               "package": packageName,
@@ -149,7 +150,7 @@ def addPackageBuildConfigs():
           ]
         }
 
-        buildConfigs["package." + packageName + ".debug.wasm"] = {
+        debugBuildConfigs["package." + packageName + ".debug.wasm"] = {
           "inputs": [
             {
               "package": packageName,
@@ -170,7 +171,7 @@ def addPackageBuildConfigs():
         }
 
 def addMainModuleConfigs():
-  buildConfigs["opencascade.js"] = {
+  releaseBuildConfigs["opencascade.js"] = {
     "inputs": [],
     "bindings": [],
     "emccFlags": [
@@ -184,7 +185,7 @@ def addMainModuleConfigs():
       *memoryEmccFlags
     ]
   }
-  buildConfigs["opencascade.debug.js"] = {
+  debugBuildConfigs["opencascade.debug.js"] = {
     "inputs": [],
     "bindings": [],
     "emccFlags": [
@@ -203,42 +204,5 @@ addModuleBuildConfigs()
 # addPackageBuildConfigs()
 addMainModuleConfigs()
 
-def runBuild(buildItem):
-  buildConfigName = buildItem[0]
-  buildConfig = buildItem[1]
-  buildWasmModule(buildConfigName, buildConfig)
-
-with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
-  p.map(runBuild, buildConfigs.items())
-#   p.map(runBuild, list(filter(lambda x: x[0] in [
-# # "opencascade.js",
-# # "opencascade.debug.js",
-# # "module.TKernel.wasm",
-# # "module.TKernel.debug.wasm",
-# # "module.TKMath.debug.wasm",
-# # "module.TKG2d.debug.wasm",
-# # "module.TKG3d.debug.wasm",
-# # "module.TKService.debug.wasm",
-# # "module.TKGeomBase.debug.wasm",
-# # "module.TKBRep.debug.wasm",
-# # "module.TKGeomAlgo.debug.wasm",
-# # "module.TKTopAlgo.debug.wasm",
-# # "module.TKHLR.debug.wasm",
-# # "module.TKV3d.debug.wasm",
-# # "module.TKShHealing.debug.wasm",
-# # "module.TKMesh.debug.wasm",
-# # "module.TKXSBase.debug.wasm",
-# # "module.TKSTEPBase.debug.wasm",
-# # "module.TKSTEP209.debug.wasm",
-# # "module.TKSTEPAttr.debug.wasm",
-# # "module.TKCDF.debug.wasm",
-# # "module.TKSTEP.debug.wasm",
-# # "module.TKLCAF.debug.wasm",
-# # "module.TKCAF.debug.wasm",
-# # "module.TKVCAF.debug.wasm",
-# # "module.TKXCAF.debug.wasm",
-# # "module.TKXDESTEP.debug.wasm",
-# # "module.TKRWMesh.debug.wasm",
-# "module.TKBO.debug.wasm",
-# # "module.TKPrim.debug.wasm",
-#   ], buildConfigs.items())))
+buildWasmModuleSet(releaseBuildConfigs)
+buildWasmModuleSet(debugBuildConfigs)

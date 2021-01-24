@@ -9,7 +9,7 @@ from filter.filterEnums import filterEnum
 
 from .Exports import getExports
 
-from .FileProcessor import EmbindProcessor, TypescriptProcessor
+from .FileProcessor import EmbindProcessor, TypescriptProcessor, ExportsProcessor
 
 from enum import Enum
 
@@ -31,6 +31,9 @@ class WasmModule:
     self.outputFile = outputFile
     self.duplicateTypedefs = duplicateTypedefs
     self.bindingsFilterFunction = lambda x, y: True
+    self.additionalIncludePaths = []
+    self.additionalSystemIncludePaths = []
+    self.buildFlags = []
 
   def setBindingsFilterFunction(self, bindingsFilterFunction):
     self.bindingsFilterFunction = bindingsFilterFunction
@@ -50,7 +53,7 @@ class WasmModule:
         "-l" + file
       ])
 
-  def parse(self, includeFiles, additionalIncludePaths, additionalSystemIncludePaths):
+  def parse(self):
     includePathArgs = \
       list(dict.fromkeys(map(lambda x: "-I" + os.path.dirname(x), self.headerFiles))) + \
       list(map(lambda x: "-I" + x, [
@@ -59,9 +62,9 @@ class WasmModule:
         "/clang/clang_11/include/c++/v1",
         "/clang/clang_11/include/c++/v1/support/newlib/"
       ])) + \
-      list(map(lambda x: "-I" + x, additionalIncludePaths)) + \
-      list(map(lambda x: "-isystem" + x, additionalSystemIncludePaths))
-    self.includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", list(sorted(includeFiles))))
+      list(map(lambda x: "-I" + x, self.additionalIncludePaths)) + \
+      list(map(lambda x: "-isystem" + x, self.additionalSystemIncludePaths))
+    self.includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", list(sorted(self.headerFiles))))
 
     libFolder = "/clang/clang_11/lib"
     clang.cindex.Config.library_path = libFolder
@@ -90,8 +93,15 @@ class WasmModule:
     bindingsFile = open(self.embindFile, "w")
     bindingsFile.write(p.output)
 
-  def getExports(self):
-    return getExports(self.tu, self.headerFiles, customFilterFunction(self.bindingsFilterFunction, filterClass), filterMethod, customFilterFunction(self.bindingsFilterFunction, filterTypedef), customFilterFunction(self.bindingsFilterFunction, filterEnum), self.duplicateTypedefs)
+  def generateExports(self):
+    self.parse()
+    p = ExportsProcessor(
+      self.includeDirectives, self.name,
+      self.tu, self.headerFiles, customFilterFunction(self.bindingsFilterFunction, filterClass), filterMethod, customFilterFunction(self.bindingsFilterFunction, filterTypedef), customFilterFunction(self.bindingsFilterFunction, filterEnum), self.duplicateTypedefs)
+    p.process()
+
+    self.tu = None
+    return p.exportObjects
 
   def setModuleExportsDict(self, moduleExportsDict):
     self.moduleExportsDict = moduleExportsDict
@@ -118,15 +128,14 @@ class WasmModule:
 
     return duplicateTypedefMap
 
-  def build(self, includePaths, buildFlags):
-    includePathArgs = list(dict.fromkeys(map(lambda x: "-I" + os.path.dirname(x), self.headerFiles)))
+  def build(self):
     command = [
       'emcc',
       *self.sourceFiles,
       "--bind", self.embindFile,
-      *list(map(lambda x: "-I" + x, includePaths)),
+      *list(map(lambda x: "-I" + x, self.additionalIncludePaths)),
       *self.libraryFiles,
-      *buildFlags,
+      *self.buildFlags,
       "-o", self.outputFile
     ]
     retcode = subprocess.check_call(command)

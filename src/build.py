@@ -3,11 +3,13 @@
 import yaml
 import os
 import re
+import multiprocessing
 
 from filter.filterIncludeFiles import filterIncludeFile
 from filter.filterSourceFiles import filterSourceFile
 from filter.filterPackagesAndModules import filterPackagesAndModules
 from wasmGenerator.WasmModule import WasmModule
+from wasmGenerator.Exports import getExports
 
 libraryBasePath = "/opencascade.js/build/fullLibrary"
 
@@ -80,7 +82,23 @@ def addAllOcctModulesToWasmModule(thisModule, postfix = ""):
 
     thisModule.addLibraryFile(packageOrModuleName + postfix, "/opencascade.js/build/fullLibrary/")
 
-def buildWasmModule(moduleName, buildConfig, outputFile = None):
+def buildWasmModule(buildItem):
+  buildConfigName = buildItem["buildConfig"][0]
+  buildConfig = buildItem["buildConfig"][1]
+  moduleExportsDict = buildItem["moduleExportsDict"]
+  
+  thisModule = generateWasmModule(buildConfigName, buildConfig)
+  thisModule.setModuleExportsDict(moduleExportsDict)
+  print("Parsing " + buildConfigName)
+  thisModule.parse()
+  print("Generate Bindings for " + buildConfigName)
+  thisModule.generateEmbindings()
+  # print("Generate Typescript definitions for " + buildConfigName)
+  # thisModule.generateTypescriptDefinitions()
+  print("Building " + buildConfigName)
+  thisModule.build()
+
+def generateWasmModule(moduleName, buildConfig, outputFile = None):
   if not os.path.exists('/opencascade.js/build'):
     os.makedirs('/opencascade.js/build')
   if not os.path.exists('/opencascade.js/build/modules'):
@@ -98,7 +116,7 @@ def buildWasmModule(moduleName, buildConfig, outputFile = None):
     "/usr/lib/gcc/x86_64-linux-gnu/10/include",
   }
   thisModule = WasmModule(moduleName.replace(".", "_"), "/opencascade.js/build/modules/" + moduleName + ".cpp", outputFile)
-  
+
   if "inputs" in buildConfig and not buildConfig["inputs"] is None:
     for input in buildConfig["inputs"]:
       if "package" in input:
@@ -132,11 +150,9 @@ def buildWasmModule(moduleName, buildConfig, outputFile = None):
         thisModule.addLibraryFile(libFile, libPath)
       if type(input) == str and input.startswith("allModules"):
         if input == "allModules.debug":
-          print("debug libraries")
           addAllOcctModulesToWasmModule(thisModule, ".debug")
         else:
           if input == "allModules":
-            print("release libraries")
             addAllOcctModulesToWasmModule(thisModule)
           else:
             print("unknown input: " + input)
@@ -152,17 +168,32 @@ def buildWasmModule(moduleName, buildConfig, outputFile = None):
   if "emccFlags" in buildConfig and not buildConfig["emccFlags"] is None:
     emccFlags.extend(buildConfig["emccFlags"])
   thisModule.headerFiles = list(includeFiles)
-  print("Parsing " + moduleName)
-  thisModule.parse(includeFiles, additionalIncludePaths, additionalSystemIncludePaths)
-  print("Generate Bindings for " + moduleName)
-  thisModule.generateEmbindings()
-  # print("Generate Typescript definitions for " + moduleName)
-  # thisModule.generateTypescriptDefinitions()
-  print("Building " + moduleName)
-  thisModule.build(additionalIncludePaths, emccFlags)
+  thisModule.additionalIncludePaths = additionalIncludePaths
+  thisModule.additionalSystemIncludePaths = additionalSystemIncludePaths
+  thisModule.buildFlags = emccFlags
 
-def buildYaml(filename):
-  with open(filename, "r") as fileContents:
-    buildConfigs = yaml.safe_load(fileContents)
-    for wasmModuleName in buildConfigs:
-      buildWasmModule(wasmModuleName, buildConfigs[wasmModuleName])
+  return thisModule
+
+def runPreProcessing(buildItem):
+  buildConfigName = buildItem[0]
+  buildConfig = buildItem[1]
+  print("pre-processing " + buildConfigName)
+  currModule = generateWasmModule(buildConfigName, buildConfig)
+  return {
+    "name": buildConfigName,
+    "exports": currModule.generateExports(),
+  }
+
+def buildWasmModuleSet(buildConfigs):
+  with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
+    allModuleResults = p.map(runPreProcessing, buildConfigs.items())
+
+  moduleExportsDict = {}
+  for moduleResult in allModuleResults:
+    moduleExportsDict[moduleResult["name"]] = moduleResult["exports"]
+
+  with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
+    p.map(buildWasmModule, map(lambda x: {
+      "buildConfig": x,
+      "moduleExportsDict": moduleExportsDict,
+    }, buildConfigs.items()))

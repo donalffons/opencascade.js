@@ -108,6 +108,38 @@ class FileProcessor:
       except SkipException as e:
         print(str(e))
 
+class ExportsProcessor(FileProcessor):
+  def __init__(
+    self,
+    includeDirectives, name,
+    translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs
+  ):
+    super().__init__(translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs)
+    self.includeDirectives = includeDirectives
+    self.name = name
+    self.exportObjects = []
+
+  def processClass(self, theClass, templateDecl = None, templateArgs = None):
+    className = theClass.spelling if templateDecl is None else templateDecl.spelling
+    self.exportObjects.append(className)
+    super().processClass(theClass, templateDecl, templateArgs)
+
+  def processFinalizeClass(self):
+    pass
+
+  def processSimpleConstructor(self, theClass):
+    pass
+
+  def processMethod(self, theClass, method, templateDecl = None, templateArgs = None):
+    pass
+
+  def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):
+    name = theClass.spelling if templateDecl is None else templateDecl.spelling
+    self.exportObjects.append(name)
+
+  def processEnum(self, theEnum):
+    self.exportObjects.append(theEnum.spelling)
+
 class EmbindProcessor(FileProcessor):
   def __init__(
     self,
