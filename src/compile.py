@@ -32,8 +32,10 @@ libraryBasePath = "/opencascade.js/build/fullLibrary"
 # "StdObjMgt"
 # "TDF
 
-if not os.path.exists(libraryBasePath):
+try:
   os.makedirs(libraryBasePath)
+except:
+  pass
 
 includePaths = []
 includePaths.extend([
@@ -47,8 +49,10 @@ for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-628c021/src
 def buildObjectFiles(package):
   packageName = package["name"]
   packageFiles = package["files"]
-  if not os.path.exists(libraryBasePath + "/" + packageName):
+  try:
     os.makedirs(libraryBasePath + "/" + packageName)
+  except:
+    pass
   for fileToBuild in packageFiles:
     theFile = fileToBuild["file"]
     theName = fileToBuild["name"]
