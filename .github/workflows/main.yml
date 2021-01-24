@@ -7,6 +7,7 @@ jobs:
   build:
     name: Build OpenCascade.js
     runs-on: self-hosted
+    timeout-minutes: 600
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
