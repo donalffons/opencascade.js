@@ -99,11 +99,10 @@ def buildWasmModule(buildItem):
   thisModule.build()
 
 def generateWasmModule(moduleName, buildConfig, outputFile = None):
-  try:
-    os.makedirs('/opencascade.js/build')
-    os.makedirs('/opencascade.js/build/modules')
-  except:
-    pass
+  try: os.makedirs('/opencascade.js/build')
+  except: pass
+  try: os.makedirs('/opencascade.js/build/modules')
+  except: pass
   if outputFile is None:
     outputFile = "/opencascade.js/dist/" + moduleName
 
