@@ -4,7 +4,7 @@ import os
 
 from build import buildWasmModuleSet
 import multiprocessing
-from filter.filterSourceFiles import filterSourceFile
+from ..src_build.filter.filterSourceFiles import filterSourceFile
 
 releaseBuildConfigs = {}
 debugBuildConfigs = {}
