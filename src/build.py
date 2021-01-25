@@ -5,9 +5,9 @@ import os
 import re
 import multiprocessing
 
-from ..src_build.filter.filterIncludeFiles import filterIncludeFile
-from ..src_build.filter.filterSourceFiles import filterSourceFile
-from ..src_build.filter.filterPackagesAndModules import filterPackagesAndModules
+from filter.filterIncludeFiles import filterIncludeFile
+from filter.filterSourceFiles import filterSourceFile
+from filter.filterPackagesAndModules import filterPackagesAndModules
 from wasmGenerator.WasmModule import WasmModule
 from wasmGenerator.Exports import getExports
 
