@@ -169,12 +169,13 @@ RUN \
   mkdir /opencascade.js/build/ && \
   mkdir /opencascade.js/dist/
 WORKDIR /opencascade.js/
-COPY . .
+COPY src-build src-build
 
 RUN \
-  /opencascade.js/src/applyPatches.py && \
-  /opencascade.js/src/compile.py
+  /opencascade.js/src-build/applyPatches.py && \
+  /opencascade.js/src-build/compile.py
 
+COPY . .
 WORKDIR /src/
 
 ENTRYPOINT [ "/opencascade.js/src/run.sh" ]
