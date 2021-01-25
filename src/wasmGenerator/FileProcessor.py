@@ -157,7 +157,7 @@ class EmbindProcessor(FileProcessor):
       "#include <emscripten/bind.h>\n" + \
       "using namespace emscripten;\n" + \
       "\n" + \
-      "EMSCRIPTEN_BINDINGS(" + self.name + ") {\n"
+      "EMSCRIPTEN_BINDINGS(" + self.name.replace(".", "_") + ") {\n"
 
     super().process()
 

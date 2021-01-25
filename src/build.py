@@ -86,25 +86,26 @@ def buildWasmModule(buildItem):
   buildConfigName = buildItem["buildConfig"][0]
   buildConfig = buildItem["buildConfig"][1]
   moduleExportsDict = buildItem["moduleExportsDict"]
+  outputFolder = buildItem["outputFolder"]
   
-  thisModule = generateWasmModule(buildConfigName, buildConfig)
+  thisModule = generateWasmModule(buildConfigName, buildConfig, outputFolder)
   thisModule.setModuleExportsDict(moduleExportsDict)
   print("Parsing " + buildConfigName)
   thisModule.parse()
   print("Generate Bindings for " + buildConfigName)
   thisModule.generateEmbindings()
-  # print("Generate Typescript definitions for " + buildConfigName)
-  # thisModule.generateTypescriptDefinitions()
+  print("Generate Typescript definitions for " + buildConfigName)
+  thisModule.generateTypescriptDefinitions()
   print("Building " + buildConfigName)
   thisModule.build()
 
-def generateWasmModule(moduleName, buildConfig, outputFile = None):
+def generateWasmModule(moduleName, buildConfig, outputFolder = None):
   try: os.makedirs('/opencascade.js/build')
   except: pass
   try: os.makedirs('/opencascade.js/build/modules')
   except: pass
-  if outputFile is None:
-    outputFile = "/opencascade.js/dist/" + moduleName
+  if outputFolder is None:
+    outputFolder = "/opencascade.js/dist"
 
   includeFiles = set()
   additionalIncludePaths = {
@@ -115,7 +116,7 @@ def generateWasmModule(moduleName, buildConfig, outputFile = None):
   additionalSystemIncludePaths = {
     "/usr/lib/gcc/x86_64-linux-gnu/10/include",
   }
-  thisModule = WasmModule(moduleName.replace(".", "_"), "/opencascade.js/build/modules/" + moduleName + ".cpp", outputFile)
+  thisModule = WasmModule(moduleName, "/opencascade.js/build/modules/" + moduleName + ".cpp", outputFolder + "/" + moduleName)
 
   if "inputs" in buildConfig and not buildConfig["inputs"] is None:
     for input in buildConfig["inputs"]:
@@ -184,7 +185,7 @@ def runPreProcessing(buildItem):
     "exports": currModule.generateExports(),
   }
 
-def buildWasmModuleSet(buildConfigs):
+def buildWasmModuleSet(buildConfigs, outputFolder = None):
   with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
     allModuleResults = p.map(runPreProcessing, buildConfigs.items())
 
@@ -196,4 +197,5 @@ def buildWasmModuleSet(buildConfigs):
     p.map(buildWasmModule, map(lambda x: {
       "buildConfig": x,
       "moduleExportsDict": moduleExportsDict,
+      "outputFolder": outputFolder,
     }, buildConfigs.items()))
