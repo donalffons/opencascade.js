@@ -382,9 +382,8 @@ class TypescriptProcessor(FileProcessor):
       if any(x in baseSpec[0].type.spelling for x in [":", "<"]):
         print("Unsupported character for base class \"" + baseSpec[0].type.spelling + "\" (" + theClass.spelling + ")")
       else:
-        if self.filterClass(baseSpec[0].type):
-          baseClassDefinition = " extends " + baseSpec[0].type.spelling
-          self.addImportIfWeHaveTo(baseSpec[0].type.spelling)
+        baseClassDefinition = " extends " + baseSpec[0].type.spelling
+        self.addImportIfWeHaveTo(baseSpec[0].type.spelling)
 
     name = theClass.spelling if templateDecl is None else templateDecl.spelling
     self.output += "export declare class " + name + baseClassDefinition + " {\n"
