@@ -27,7 +27,7 @@ class WasmModule:
     self.sourceFiles = []
     self.libraryFiles = []
     self.embindFile = embindFile
-    self.typescriptDefinitionFile = outputFile + ".wasm.d.ts"
+    self.typescriptDefinitionFile = outputFile + ".d.ts"
     self.outputFile = outputFile
     self.duplicateTypedefs = duplicateTypedefs
     self.bindingsFilterFunction = lambda x, y: True
@@ -107,7 +107,7 @@ class WasmModule:
     self.moduleExportsDict = moduleExportsDict
 
   def generateTypescriptDefinitions(self):
-    typescriptFileName = "./" + "/".join(self.outputFile.split("/")[3:]) + ".wasm.d.ts"
+    typescriptFileName = "./" + "/".join(self.outputFile.split("/")[3:]) + ".d.ts"
     
     p = TypescriptProcessor(
       typescriptFileName, self.name, self.moduleExportsDict,
