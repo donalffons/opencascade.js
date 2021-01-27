@@ -330,11 +330,10 @@ class EmbindProcessor(FileProcessor):
 class TypescriptProcessor(FileProcessor):
   def __init__(
     self,
-    typescriptFileName, name, moduleExportsDict,
+    name, moduleExportsDict,
     translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs
   ):
     super().__init__(translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs)
-    self.typescriptFileName = typescriptFileName
     self.name = name
     self.moduleExportsDict = moduleExportsDict
     self.imports = {}
@@ -346,8 +345,6 @@ class TypescriptProcessor(FileProcessor):
       self.output += "import { " + ", ".join(importItems) + " } from './" + importLib + ".wasm';\n\n"
     
     self.output += \
-      "declare const libName = \"" + self.typescriptFileName + "\";\n" + \
-      "export default libName;\n\n" + \
       "type Standard_Boolean = boolean;\n" + \
       "type Standard_Byte = number;\n" + \
       "type Standard_Character = string;\n" + \
@@ -359,7 +356,7 @@ class TypescriptProcessor(FileProcessor):
 
     super().process()
 
-    self.output += "export declare type " + self.name + "Lib = {\n"
+    self.output += "export declare type " + self.name.replace(".", "_") + " = {\n"
     for export in self.exports:
       self.output += "  " + export + ": typeof " + export + ";\n"
     self.output += "};\n"

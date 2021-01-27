@@ -27,7 +27,7 @@ class WasmModule:
     self.sourceFiles = []
     self.libraryFiles = []
     self.embindFile = embindFile
-    self.typescriptDefinitionFile = outputFile + ".d.ts"
+    self.typescriptDefinitionFile = (os.path.splitext(outputFile)[0] if outputFile.endswith(".js") else outputFile) + ".d.ts"
     self.outputFile = outputFile
     self.duplicateTypedefs = duplicateTypedefs
     self.bindingsFilterFunction = lambda x, y: True
@@ -107,15 +107,66 @@ class WasmModule:
     self.moduleExportsDict = moduleExportsDict
 
   def generateTypescriptDefinitions(self):
-    typescriptFileName = "./" + "/".join(self.outputFile.split("/")[3:]) + ".d.ts"
+    typescriptPreamble = ""
+    if self.name.endswith(".js"):
+      for libName, libExports in self.moduleExportsDict.items():
+        if not libName == self.name:
+          typescriptPreamble += "import { " + libName.replace(".", "_") + " } from './" + libName + "';\n"
+    else:
+      typescriptPreamble += "declare const libName = \"" + "./" + "/".join(self.outputFile.split("/")[3:]) + ".d.ts" + "\";\n"
+      typescriptPreamble += "export default libName;\n"
+
+    if not typescriptPreamble == "":
+      typescriptPreamble += "\n"
     
     p = TypescriptProcessor(
-      typescriptFileName, self.name, self.moduleExportsDict,
+      self.name, self.moduleExportsDict,
       self.tu, self.headerFiles, customFilterFunction(self.bindingsFilterFunction, filterClass), filterMethod, customFilterFunction(self.bindingsFilterFunction, filterTypedef), customFilterFunction(self.bindingsFilterFunction, filterEnum), self.duplicateTypedefs)
     p.process()
 
+    typescriptEpilogue = ""
+    if self.name.endswith(".js"):
+      typescriptEpilogue += "\n"
+      typescriptEpilogue += "type ModuleObject = {\n"
+      typescriptEpilogue += "  locateFile?: (f: string) => string,\n"
+      typescriptEpilogue += "  dynamicLibraries?: string[],\n"
+      typescriptEpilogue += "};\n"
+      typescriptEpilogue += "\n"
+      typescriptEpilogue += "type resolved_path = string;\n"
+      typescriptEpilogue += "type resolved_node = string;\n"
+      typescriptEpilogue += "type resolved_parent_path = string;\n"
+      typescriptEpilogue += "type resolved_parent_node = string;\n"
+      typescriptEpilogue += "\n"
+      typescriptEpilogue += "type FS = {\n"
+      typescriptEpilogue += "  FS: {\n"
+      typescriptEpilogue += "    analyzePath(path: string, dontResolveLastLink?: boolean): {\n"
+      typescriptEpilogue += "      isRoot: boolean,\n"
+      typescriptEpilogue += "      exists: boolean,\n"
+      typescriptEpilogue += "      error: Error,\n"
+      typescriptEpilogue += "      name: string,\n"
+      typescriptEpilogue += "      path: resolved_path,\n"
+      typescriptEpilogue += "      object: resolved_node,\n"
+      typescriptEpilogue += "      parentExists: boolean,\n"
+      typescriptEpilogue += "      parentPath: resolved_parent_path,\n"
+      typescriptEpilogue += "      parentObject: resolved_parent_node\n"
+      typescriptEpilogue += "    },\n"
+      typescriptEpilogue += "    unlink(path: string): void,\n"
+      typescriptEpilogue += "  }\n"
+      typescriptEpilogue += "};\n"
+      typescriptEpilogue += "\n"
+      typescriptEpilogue += "type openCascadeInstance = FS"
+      for libName, libExports in self.moduleExportsDict.items():
+        if not libName == self.name:
+          typescriptEpilogue += " & " + libName.replace(".", "_")
+      typescriptEpilogue += ";\n"
+      typescriptEpilogue += "\n"
+      typescriptEpilogue += "declare function openCascade(module: ModuleObject): Promise<openCascadeInstance>;\n"
+      typescriptEpilogue += "\n"
+      typescriptEpilogue += "export default openCascade;\n"
+
+
     typescriptFile = open(self.typescriptDefinitionFile, "w")
-    typescriptFile.write(p.output)
+    typescriptFile.write(typescriptPreamble + p.output + typescriptEpilogue)
     
   def getDuplicateTypedefMap(self):
     duplicateTypedefMap = {}
