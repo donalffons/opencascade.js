@@ -3,7 +3,7 @@
 import os
 
 from build import buildWasmModuleSet
-import multiprocessing
+from multiprocessing import Process
 from filter.filterSourceFiles import filterSourceFile
 
 releaseBuildConfigs = {}
@@ -204,5 +204,13 @@ addModuleBuildConfigs()
 # addPackageBuildConfigs()
 addMainModuleConfigs()
 
-buildWasmModuleSet(releaseBuildConfigs)
-buildWasmModuleSet(debugBuildConfigs)
+def runInParallel(*fns):
+  proc = []
+  for fn in fns:
+    p = Process(target=fn)
+    p.start()
+    proc.append(p)
+  for p in proc:
+    p.join()
+
+runInParallel(lambda: buildWasmModuleSet(releaseBuildConfigs), lambda: buildWasmModuleSet(debugBuildConfigs))
