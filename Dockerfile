@@ -1,4 +1,4 @@
-FROM emscripten/emsdk:2.0.10
+FROM emscripten/emsdk:2.0.12
 
 RUN apt update -y
 RUN apt install -y build-essential python3 python-pip git cmake bash curl npm
@@ -111,9 +111,39 @@ RUN \
 WORKDIR /occt/
 RUN \
   curl "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=628c0211d53c7fe1036a85e7a7b2b067c9c50f7a;sf=tgz" -o occt.tar.gz && \
-  tar -xvf occt.tar.gz && \
-  cd occt-628c021/
-
+  tar -xvf occt.tar.gz
+  # cd occt-628c021/ && \
+  # mkdir build && \
+  # cd build && \
+  # emcmake cmake .. \
+  #   -DCMAKE_BUILD_TYPE=Release \
+  #   -DBUILD_LIBRARY_TYPE=Static \
+  #   -DCMAKE_CXX_FLAGS="-DIGNORE_NO_ATOMICS=1 -frtti -fPIC -DHAVE_RAPIDJSON" \
+  #   -DBUILD_MODULE_Draw=OFF \
+  #   -DBUILD_MODULE_TKXMesh=OFF \
+  #   -D3RDPARTY_FREETYPE_INCLUDE_DIR_freetype2=/freetype/include/freetype \
+  #   -D3RDPARTY_FREETYPE_INCLUDE_DIR_ft2build=/freetype/include \
+  #   -D3RDPARTY_INCLUDE_DIRS="\
+  #     /vtk/build/Filters/General;\
+  #     /vtk/Filters/General;\
+  #     /vtk/build/Common/ExecutionModel;\
+  #     /vtk/build/Common/Math;\
+  #     /vtk/build/Common/Transforms;\
+  #     /vtk/Common/Transforms;\
+  #     /vtk/build/Filters/Core;\
+  #     /vtk/build/Rendering/Core;\
+  #     /vtk/Common/ExecutionModel;\
+  #     /vtk/Common/Math;\
+  #     /vtk/build/Common/DataModel;\
+  #     /vtk/Common/DataModel;\
+  #     /vtk/Rendering/Core;\
+  #     /vtk/Utilities/KWIML;\
+  #     /vtk/build/Common/Core;\
+  #     ../regal/regal-master/src/apitrace/thirdparty/khronos/;\
+  #     /rapidjson/include;\
+  #     /fontconfig" && \
+  #   emmake make -j$(nproc)
+    
 RUN \
   curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
   apt-get install git-lfs && \
@@ -127,8 +157,25 @@ RUN \
   pip3 install clang
 
 RUN \
-  mkdir /opencascade.js/ && \
-  mkdir /opencascade.js/build/
-WORKDIR /opencascade.js/src/
+  apt update -y && \
+  DEBIAN_FRONTEND=noninteractive apt upgrade -y && \
+  pip3 install pyyaml patch
 
-ENTRYPOINT [ "./main.py" ]
+RUN \
+  apt install -y bison flex
+
+RUN \
+  mkdir /opencascade.js/ && \
+  mkdir /opencascade.js/build/ && \
+  mkdir /opencascade.js/dist/
+WORKDIR /opencascade.js/
+COPY src_build src_build
+
+RUN \
+  /opencascade.js/src_build/applyPatches.py && \
+  /opencascade.js/src_build/compile.py
+
+COPY . .
+WORKDIR /src/
+
+ENTRYPOINT [ "/opencascade.js/src/run.sh" ]

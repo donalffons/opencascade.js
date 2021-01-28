@@ -50,7 +50,6 @@ class FileProcessor:
       lambda x:
         x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and
         not (x.get_definition() is None or not x == x.get_definition()) and
-        x.extent.start.file.name in self.headerFiles and
         self.filterTypedef(x) and
         x.type.get_num_template_arguments() != -1,
       self.translationUnit.cursor.get_children()))
@@ -68,6 +67,8 @@ class FileProcessor:
           continue
 
         templateClass = templateRefs[0].get_definition()
+        if templateClass is None:
+          continue
         templateArgNames = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TEMPLATE_TYPE_PARAMETER, templateClass.get_children()))
         templateArgs = {}
         for i, templateArgName in enumerate(templateArgNames):
@@ -83,7 +84,6 @@ class FileProcessor:
     self.enums = list(filter(
       lambda x:
         x.kind == clang.cindex.CursorKind.ENUM_DECL and
-        x.extent.start.file.name in self.headerFiles and
         self.filterEnum(x),
       self.translationUnit.cursor.get_children()))
 
@@ -108,6 +108,38 @@ class FileProcessor:
       except SkipException as e:
         print(str(e))
 
+class ExportsProcessor(FileProcessor):
+  def __init__(
+    self,
+    includeDirectives, name,
+    translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs
+  ):
+    super().__init__(translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs)
+    self.includeDirectives = includeDirectives
+    self.name = name
+    self.exportObjects = []
+
+  def processClass(self, theClass, templateDecl = None, templateArgs = None):
+    className = theClass.spelling if templateDecl is None else templateDecl.spelling
+    self.exportObjects.append(className)
+    super().processClass(theClass, templateDecl, templateArgs)
+
+  def processFinalizeClass(self):
+    pass
+
+  def processSimpleConstructor(self, theClass):
+    pass
+
+  def processMethod(self, theClass, method, templateDecl = None, templateArgs = None):
+    pass
+
+  def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):
+    name = theClass.spelling if templateDecl is None else templateDecl.spelling
+    self.exportObjects.append(name)
+
+  def processEnum(self, theEnum):
+    self.exportObjects.append(theEnum.spelling)
+
 class EmbindProcessor(FileProcessor):
   def __init__(
     self,
@@ -125,7 +157,7 @@ class EmbindProcessor(FileProcessor):
       "#include <emscripten/bind.h>\n" + \
       "using namespace emscripten;\n" + \
       "\n" + \
-      "EMSCRIPTEN_BINDINGS(" + self.name + ") {\n"
+      "EMSCRIPTEN_BINDINGS(" + self.name.replace(".", "_") + ") {\n"
 
     super().process()
 
@@ -134,8 +166,6 @@ class EmbindProcessor(FileProcessor):
     # Epilog
     for theClass in self.translationUnit.cursor.get_children():
       if theClass.get_definition() is None or not theClass == theClass.get_definition():
-        continue
-      if not theClass.extent.start.file.name in self.headerFiles:
         continue
       if not self.filterClass(theClass):
         continue
@@ -300,11 +330,10 @@ class EmbindProcessor(FileProcessor):
 class TypescriptProcessor(FileProcessor):
   def __init__(
     self,
-    typescriptFileName, name, moduleExportsDict,
+    name, moduleExportsDict,
     translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs
   ):
     super().__init__(translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs)
-    self.typescriptFileName = typescriptFileName
     self.name = name
     self.moduleExportsDict = moduleExportsDict
     self.imports = {}
@@ -316,8 +345,6 @@ class TypescriptProcessor(FileProcessor):
       self.output += "import { " + ", ".join(importItems) + " } from './" + importLib + ".wasm';\n\n"
     
     self.output += \
-      "declare const libName = \"" + self.typescriptFileName + "\";\n" + \
-      "export default libName;\n\n" + \
       "type Standard_Boolean = boolean;\n" + \
       "type Standard_Byte = number;\n" + \
       "type Standard_Character = string;\n" + \
@@ -329,7 +356,7 @@ class TypescriptProcessor(FileProcessor):
 
     super().process()
 
-    self.output += "export declare type " + self.name + "Lib = {\n"
+    self.output += "export declare type " + self.name.replace(".", "_") + " = {\n"
     for export in self.exports:
       self.output += "  " + export + ": typeof " + export + ";\n"
     self.output += "};\n"
@@ -352,9 +379,8 @@ class TypescriptProcessor(FileProcessor):
       if any(x in baseSpec[0].type.spelling for x in [":", "<"]):
         print("Unsupported character for base class \"" + baseSpec[0].type.spelling + "\" (" + theClass.spelling + ")")
       else:
-        if self.filterClass(baseSpec[0].type):
-          baseClassDefinition = " extends " + baseSpec[0].type.spelling
-          self.addImportIfWeHaveTo(baseSpec[0].type.spelling)
+        baseClassDefinition = " extends " + baseSpec[0].type.spelling
+        self.addImportIfWeHaveTo(baseSpec[0].type.spelling)
 
     name = theClass.spelling if templateDecl is None else templateDecl.spelling
     self.output += "export declare class " + name + baseClassDefinition + " {\n"

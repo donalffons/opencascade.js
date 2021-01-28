@@ -37,9 +37,6 @@ def shouldProcessClass(child, headerFiles, filterClass):
   if child.get_definition() is None or not child == child.get_definition():
     return False
 
-  if not child.extent.start.file.name in headerFiles:
-    return False
-
   if not filterClass(child):
     return False
 

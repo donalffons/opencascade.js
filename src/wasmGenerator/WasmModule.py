@@ -9,37 +9,34 @@ from filter.filterEnums import filterEnum
 
 from .Exports import getExports
 
-from .FileProcessor import EmbindProcessor, TypescriptProcessor
+from .FileProcessor import EmbindProcessor, TypescriptProcessor, ExportsProcessor
 
 from enum import Enum
 
-class ModuleType:
-  Standalone = 1
-  DynamicMain = 2
-  DynamicSide = 3
-
-class BuildType:
-  Debug = "debug"
-  Release = "release"
-
-class EnvType:
-  Web = "web"
-  Node = "node"
+def customFilterFunction(bindingsFilterFunction, otherFilter):
+  def filterFunction(theItem, additionalInfo=None):
+    if bindingsFilterFunction(theItem):
+      return otherFilter(theItem, additionalInfo)
+    return False
+  return filterFunction
 
 class WasmModule:
-  def __init__(self, name="", moduleType=None, embindFile="", outputFile="", buildType=None, envType=None, duplicateTypedefs={}):
+  def __init__(self, name="", embindFile="", outputFile="", duplicateTypedefs={}):
     self.name = name
     self.headerFiles = []
     self.sourceFiles = []
     self.libraryFiles = []
-    self.moduleType = moduleType
-    self.buildSettings = []
     self.embindFile = embindFile
-    self.typescriptDefinitionFile = outputFile + ".wasm.d.ts"
+    self.typescriptDefinitionFile = (os.path.splitext(outputFile)[0] if outputFile.endswith(".js") else outputFile) + ".d.ts"
     self.outputFile = outputFile
-    self.buildType = buildType
-    self.envType = envType
     self.duplicateTypedefs = duplicateTypedefs
+    self.bindingsFilterFunction = lambda x, y: True
+    self.additionalIncludePaths = []
+    self.additionalSystemIncludePaths = []
+    self.buildFlags = []
+
+  def setBindingsFilterFunction(self, bindingsFilterFunction):
+    self.bindingsFilterFunction = bindingsFilterFunction
 
   def addHeaderFile(self, file):
     self.headerFiles.append(file)
@@ -47,18 +44,27 @@ class WasmModule:
   def addSourceFile(self, file):
     self.sourceFiles.append(file)
 
-  def addLibraryFile(self, file):
-    self.libraryFiles.append(file)
+  def addLibraryFile(self, file, path=None):
+    if path is None:
+      self.libraryFiles.append(file)
+    else:
+      self.libraryFiles.extend([
+        "-L" + path,
+        "-l" + file
+      ])
 
-  def setBuildSettings(self, settings):
-    self.buildSettings = settings
-
-  def parse(self, includeFiles, additionalIncludePaths, additionalSystemIncludePaths):
+  def parse(self):
     includePathArgs = \
       list(dict.fromkeys(map(lambda x: "-I" + os.path.dirname(x), self.headerFiles))) + \
-      list(map(lambda x: "-I" + x, additionalIncludePaths)) + \
-      list(map(lambda x: "-isystem" + x, additionalSystemIncludePaths))
-    self.includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", list(sorted(includeFiles))))
+      list(map(lambda x: "-I" + x, [
+        "/emsdk/upstream/emscripten/system/include/",
+        "/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed/",
+        "/clang/clang_11/include/c++/v1",
+        "/clang/clang_11/include/c++/v1/support/newlib/"
+      ])) + \
+      list(map(lambda x: "-I" + x, self.additionalIncludePaths)) + \
+      list(map(lambda x: "-isystem" + x, self.additionalSystemIncludePaths))
+    self.includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", list(sorted(self.headerFiles))))
 
     libFolder = "/clang/clang_11/lib"
     clang.cindex.Config.library_path = libFolder
@@ -81,28 +87,86 @@ class WasmModule:
   def generateEmbindings(self):
     p = EmbindProcessor(
       self.includeDirectives, self.name,
-      self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, self.duplicateTypedefs)
+      self.tu, self.headerFiles, customFilterFunction(self.bindingsFilterFunction, filterClass), filterMethod, customFilterFunction(self.bindingsFilterFunction, filterTypedef), customFilterFunction(self.bindingsFilterFunction, filterEnum), self.duplicateTypedefs)
     p.process()
 
     bindingsFile = open(self.embindFile, "w")
     bindingsFile.write(p.output)
 
-  def getExports(self):
-    return getExports(self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, self.duplicateTypedefs)
+  def generateExports(self):
+    self.parse()
+    p = ExportsProcessor(
+      self.includeDirectives, self.name,
+      self.tu, self.headerFiles, customFilterFunction(self.bindingsFilterFunction, filterClass), filterMethod, customFilterFunction(self.bindingsFilterFunction, filterTypedef), customFilterFunction(self.bindingsFilterFunction, filterEnum), self.duplicateTypedefs)
+    p.process()
+
+    self.tu = None
+    return p.exportObjects
 
   def setModuleExportsDict(self, moduleExportsDict):
     self.moduleExportsDict = moduleExportsDict
 
   def generateTypescriptDefinitions(self):
-    typescriptFileName = "./" + "/".join(self.outputFile.split("/")[3:]) + ".wasm.d.ts"
+    typescriptPreamble = ""
+    if self.name.endswith(".js"):
+      for libName, libExports in self.moduleExportsDict.items():
+        if not libName == self.name:
+          typescriptPreamble += "import { " + libName.replace(".", "_") + " } from './" + libName + "';\n"
+    else:
+      typescriptPreamble += "declare const libName = \"" + "./" + "/".join(self.outputFile.split("/")[3:]) + ".d.ts" + "\";\n"
+      typescriptPreamble += "export default libName;\n"
+
+    if not typescriptPreamble == "":
+      typescriptPreamble += "\n"
     
     p = TypescriptProcessor(
-      typescriptFileName, self.name, self.moduleExportsDict,
-      self.tu, self.headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, self.duplicateTypedefs)
+      self.name, self.moduleExportsDict,
+      self.tu, self.headerFiles, customFilterFunction(self.bindingsFilterFunction, filterClass), filterMethod, customFilterFunction(self.bindingsFilterFunction, filterTypedef), customFilterFunction(self.bindingsFilterFunction, filterEnum), self.duplicateTypedefs)
     p.process()
 
+    typescriptEpilogue = ""
+    if self.name.endswith(".js"):
+      typescriptEpilogue += "\n"
+      typescriptEpilogue += "type ModuleObject = {\n"
+      typescriptEpilogue += "  locateFile?: (f: string) => string,\n"
+      typescriptEpilogue += "  dynamicLibraries?: string[],\n"
+      typescriptEpilogue += "};\n"
+      typescriptEpilogue += "\n"
+      typescriptEpilogue += "type resolved_path = string;\n"
+      typescriptEpilogue += "type resolved_node = string;\n"
+      typescriptEpilogue += "type resolved_parent_path = string;\n"
+      typescriptEpilogue += "type resolved_parent_node = string;\n"
+      typescriptEpilogue += "\n"
+      typescriptEpilogue += "type FS = {\n"
+      typescriptEpilogue += "  FS: {\n"
+      typescriptEpilogue += "    analyzePath(path: string, dontResolveLastLink?: boolean): {\n"
+      typescriptEpilogue += "      isRoot: boolean,\n"
+      typescriptEpilogue += "      exists: boolean,\n"
+      typescriptEpilogue += "      error: Error,\n"
+      typescriptEpilogue += "      name: string,\n"
+      typescriptEpilogue += "      path: resolved_path,\n"
+      typescriptEpilogue += "      object: resolved_node,\n"
+      typescriptEpilogue += "      parentExists: boolean,\n"
+      typescriptEpilogue += "      parentPath: resolved_parent_path,\n"
+      typescriptEpilogue += "      parentObject: resolved_parent_node\n"
+      typescriptEpilogue += "    },\n"
+      typescriptEpilogue += "    unlink(path: string): void,\n"
+      typescriptEpilogue += "  }\n"
+      typescriptEpilogue += "};\n"
+      typescriptEpilogue += "\n"
+      typescriptEpilogue += "type openCascadeInstance = FS"
+      for libName, libExports in self.moduleExportsDict.items():
+        if not libName == self.name:
+          typescriptEpilogue += " & " + libName.replace(".", "_")
+      typescriptEpilogue += ";\n"
+      typescriptEpilogue += "\n"
+      typescriptEpilogue += "declare function openCascade(module: ModuleObject): Promise<openCascadeInstance>;\n"
+      typescriptEpilogue += "\n"
+      typescriptEpilogue += "export default openCascade;\n"
+
+
     typescriptFile = open(self.typescriptDefinitionFile, "w")
-    typescriptFile.write(p.output)
+    typescriptFile.write(typescriptPreamble + p.output + typescriptEpilogue)
     
   def getDuplicateTypedefMap(self):
     duplicateTypedefMap = {}
@@ -115,49 +179,15 @@ class WasmModule:
 
     return duplicateTypedefMap
 
-  def build(self, includePaths):
-    includePathArgs = list(dict.fromkeys(map(lambda x: "-I" + os.path.dirname(x), self.headerFiles)))
-    standaloneModuleFlags = [
-      "-DIGNORE_NO_ATOMICS=1", "-frtti", "-fPIC"
-    ] if not self.moduleType == ModuleType.Standalone else []
-    debugFlags = [
-      "-s", "ASSERTIONS=1",
-      "-g3",
-      "-s", "SAFE_HEAP=1",
-      "-s", "DEMANGLE_SUPPORT=1",
-    ] if self.buildType == BuildType.Debug else []
-    envFlags = [
-      "-s", "ENVIRONMENT='node,worker'",
-    ] if self.envType == EnvType.Node else [
-      "-s", "ENVIRONMENT='web,worker'",
-      "-s", "EXPORT_ES6=1",
-      "-s", "USE_ES6_IMPORT_META=0",
-    ]
-    if self.moduleType == ModuleType.Standalone and self.envType == EnvType.Node:
-      envFlags += [
-        "-s", "NODE_CODE_CACHING=1",
-        "-s", "WASM_ASYNC_COMPILATION=0",
-      ]
+  def build(self):
     command = [
       'emcc',
       *self.sourceFiles,
       "--bind", self.embindFile,
-      *list(map(lambda x: "-I" + x, includePaths)),
+      *list(map(lambda x: "-I" + x, self.additionalIncludePaths)),
       *self.libraryFiles,
-      "-s", "SIDE_MODULE=" + ("1" if self.moduleType == ModuleType.DynamicSide else "0"),
-      "-s", "MAIN_MODULE=" + ("1" if self.moduleType == ModuleType.DynamicMain else "0"),
-      *standaloneModuleFlags,
-      *debugFlags,
-      *envFlags,
-      "-s", "ALLOW_MEMORY_GROWTH=1",
-      '-s', 'AGGRESSIVE_VARIABLE_ELIMINATION=1',
-      "-O3",
-
-      # Enabling exception catching leads to errors in "TKTopAlgo" and "TKV3d" and maybe others. Therefore, this (default) value has to be used at all times.
-      "-s", "DISABLE_EXCEPTION_CATCHING=1",
-      "-DHAVE_RAPIDJSON",
-      *self.buildSettings,
-      "-o", self.outputFile + (".wasm" if self.moduleType == ModuleType.DynamicSide else ".js")
+      *self.buildFlags,
+      "-o", self.outputFile
     ]
     retcode = subprocess.check_call(command)
   

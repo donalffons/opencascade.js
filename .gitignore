@@ -1,6 +1,8 @@
-/build/
+/build/*
+!/build/.gitkeep
 __pycache__
 *.pyc
 node_modules
 build-output.log
 pull-stages-output.log
+/occt-src/

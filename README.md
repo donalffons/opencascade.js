@@ -3,7 +3,7 @@ OpenCascade.js
 
 This is OpenCascade.js - a port of the [OpenCascade](https://www.opencascade.com/) CAD library to JavaScript and WebAssembly via Emscripten.
 
-Current OCCT version: [V7_4_0p1](https://git.dev.opencascade.org/gitweb/?p=occt.git;a=commit;h=33d9a6fa21ca4fa711da7066655aa2ba854545ee)
+Current OCCT version: [V7_5_0](https://git.dev.opencascade.org/gitweb/?p=occt.git;a=commit;h=628c0211d53c7fe1036a85e7a7b2b067c9c50f7a)
 
 ![opencascade.js - Build Library](https://github.com/donalffons/opencascade.js/workflows/opencascade.js%20-%20Build%20Library/badge.svg)
 
@@ -77,42 +77,6 @@ This project is (hopefully) keeping itself (mostly) up-to-date with the OpenCasc
     });
     ```
     This code will load the WebAssembly version of the library.
-
-# Build it
-
-You can build OpenCascade.js yourself. The easiest way to do that is to build and run the docker container, which is correctly configured for building the library. Follow these steps:
-
-## On Linux
-
-If you're using Linux (probably also if you're on MacOS), you may want to use the `build.sh` script. This is a helper-script, which will allow you to
-
-  * build the container
-  * execute the build
-  * open a shell inside the container
-  * clear your build cache
-
-## On Windows
-
-To build the container, open a command prompt or terminal in the directory of `opencascade.js` and enter:
-
-    ```
-    docker build -t opencascade.js .
-    ```
-
-Then execute the build, while sharing several folders with your current directory:
-
-    ```
-    docker run -it ^
-      -v "%cd%\build":"/opencascade/build/" ^
-      -v "%cd%\dist":"/opencascade/dist/" ^
-      -v "%cd%\emscripten-cache":"/emscripten/upstream/emscripten/cache/" ^
-      -v "%cd%\embind":"/opencascade/embind/" ^
-      opencascade.js
-    ```
-
-## Re-building
-
-Currrently, you have to run the `docker build` and `docker run` commands after each change, for every build.
 
 # Contributing
 

@@ -1,0 +1,36 @@
+# Example on how to define a custom OpenCascade.js build
+
+rocketExample.js:
+  bindings:
+    - symbol: STEPCAFControl_Reader
+    - symbol: IFSelect_ReturnStatus
+    - symbol: TCollection_ExtendedString
+    - symbol: TDocStd_Document
+    - symbol: Handle_TDocStd_Document
+    - symbol: Message_ProgressRange
+    - symbol: XCAFDoc_DocumentTool
+    - symbol: TDF_LabelSequence
+    - symbol: XCAFDoc_ShapeTool
+    - symbol: TCollection_AsciiString
+    - symbol: RWGltf_CafWriter
+    - symbol: BRepTools
+    - symbol: BRepMesh_IncrementalMesh
+    - symbol: TColStd_IndexedDataMapOfStringString
+    - symbol: CDM_Document
+    - symbol: Standard_Transient
+    - symbol: TDF_Label
+    - symbol: TDataStd_GenericEmpty
+    - symbol: TDF_Attribute
+    - symbol: Handle_XCAFDoc_ShapeTool
+    - symbol: NCollection_BaseSequence
+    - symbol: TopoDS_Shape
+    - symbol: BRepMesh_DiscretRoot
+    - symbol: NCollection_BaseMap
+  emccFlags:
+    - -sEXPORT_ES6=1
+    - -sUSE_ES6_IMPORT_META=0
+    - -sEXTRA_EXPORTED_RUNTIME_METHODS=["FS"]
+    - -O3
+    - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
+    - -sALLOW_MEMORY_GROWTH=1
+    - -sMAXIMUM_MEMORY=4GB
