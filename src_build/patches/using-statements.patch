@@ -92,61 +92,6 @@ diff -ruN /occt/occt-628c021/src/BRepAlgoAPI/BRepAlgoAPI_Algo.hxx /occt/occt-628
  
  protected:
  
-diff -ruN /occt/occt-628c021/src/BRepExtrema/BRepExtrema_TriangleSet.hxx /occt/occt-628c021/src/BRepExtrema/BRepExtrema_TriangleSet.hxx
---- /occt/occt-628c021/src/BRepExtrema/BRepExtrema_TriangleSet.hxx	2020-11-02 17:52:44.000000000 +0100
-+++ /occt/occt-628c021/src/BRepExtrema/BRepExtrema_TriangleSet.hxx	2021-01-20 21:04:28.233415153 +0100
-@@ -45,7 +45,9 @@
-   Standard_EXPORT BVH_Box<Standard_Real, 3> Box (const Standard_Integer theIndex) const Standard_OVERRIDE;
- 
-   //! Make inherited method Box() visible to avoid CLang warning
--  using BVH_PrimitiveSet3d::Box;
-+  // using BVH_PrimitiveSet3d::Box;
-+  BVH_Box<Standard_Real, 3> Box() { return BVH_PrimitiveSet3d::Box(); }
-+  BVH_Box<Standard_Real, 3> Box (const Standard_Integer theIndex) { return BVH_PrimitiveSet3d::Box(theIndex); }
- 
-   //! Returns centroid position along specified axis.
-   Standard_EXPORT Standard_Real Center (const Standard_Integer theIndex, const Standard_Integer theAxis) const Standard_OVERRIDE;
-diff -ruN /occt/occt-628c021/src/BRepFeat/BRepFeat_MakeCylindricalHole.hxx /occt/occt-628c021/src/BRepFeat/BRepFeat_MakeCylindricalHole.hxx
---- /occt/occt-628c021/src/BRepFeat/BRepFeat_MakeCylindricalHole.hxx	2020-11-02 17:52:44.000000000 +0100
-+++ /occt/occt-628c021/src/BRepFeat/BRepFeat_MakeCylindricalHole.hxx	2021-01-20 20:57:49.866081270 +0100
-@@ -99,7 +99,8 @@
- protected:
- 
-   //! Unhide the base class member to avoid Clang warnings
--  using BRepFeat_Builder::Perform;
-+  // using BRepFeat_Builder::Perform;
-+  void Perform() { BRepFeat_Builder::Perform(); }
- 
- 
- private:
-diff -ruN /occt/occt-628c021/src/BVH/BVH_BoxSet.hxx /occt/occt-628c021/src/BVH/BVH_BoxSet.hxx
---- /occt/occt-628c021/src/BVH/BVH_BoxSet.hxx	2020-11-02 17:52:44.000000000 +0100
-+++ /occt/occt-628c021/src/BVH/BVH_BoxSet.hxx	2021-01-20 21:10:59.561187152 +0100
-@@ -87,7 +87,9 @@
- public: //! @name Necessary overrides for BVH construction
- 
-   //! Make inherited method Box() visible to avoid CLang warning
--  using BVH_PrimitiveSet <NumType, Dimension>::Box;
-+  // using BVH_PrimitiveSet <NumType, Dimension>::Box;
-+  BVH_Box<NumType, Dimension> Box() { return BVH_PrimitiveSet <NumType, Dimension>::Box(); }
-+  BVH_Box<NumType, Dimension> Box (const Standard_Integer theIndex) { return BVH_PrimitiveSet <NumType, Dimension>::Box(theIndex); }
- 
-   //! Returns the bounding box with the given index.
-   virtual BVH_Box <NumType, Dimension> Box (const Standard_Integer theIndex) const Standard_OVERRIDE
-diff -ruN /occt/occt-628c021/src/BVH/BVH_IndexedBoxSet.hxx /occt/occt-628c021/src/BVH/BVH_IndexedBoxSet.hxx
---- /occt/occt-628c021/src/BVH/BVH_IndexedBoxSet.hxx	2020-11-02 17:52:44.000000000 +0100
-+++ /occt/occt-628c021/src/BVH/BVH_IndexedBoxSet.hxx	2021-01-20 21:03:14.309912339 +0100
-@@ -79,7 +79,9 @@
- public: //! @name Necessary overrides for BVH construction
- 
-   //! Make inherited method Box() visible to avoid CLang warning
--  using BVH_BoxSet <NumType, Dimension, DataType>::Box;
-+  // using BVH_BoxSet <NumType, Dimension, DataType>::Box;
-+  BVH_Box<NumType, Dimension> Box() { return BVH_BoxSet <NumType, Dimension, DataType>::Box(); }
-+  BVH_Box<NumType, Dimension> Box (const Standard_Integer theIndex) { return BVH_BoxSet <NumType, Dimension, DataType>::Box(); }
- 
-   //! Returns the bounding box with the given index.
-   virtual BVH_Box <NumType, Dimension> Box (const Standard_Integer theIndex) const Standard_OVERRIDE
 diff -ruN /occt/occt-628c021/src/BVH/BVH_ObjectSet.hxx /occt/occt-628c021/src/BVH/BVH_ObjectSet.hxx
 --- /occt/occt-628c021/src/BVH/BVH_ObjectSet.hxx	2020-11-02 17:52:44.000000000 +0100
 +++ /occt/occt-628c021/src/BVH/BVH_ObjectSet.hxx	2021-01-20 21:06:44.880433339 +0100
@@ -170,7 +115,7 @@ diff -ruN /occt/occt-628c021/src/BVH/BVH_Triangulation.hxx /occt/occt-628c021/sr
 -  using BVH_PrimitiveSet<T, N>::Box;
 +  // using BVH_PrimitiveSet<T, N>::Box;
 +  BVH_Box<T, N> Box() { return BVH_PrimitiveSet<T, N>::Box(); }
-+  BVH_Box<T, N> Box (const Standard_Integer theIndex) { return BVH_PrimitiveSet<T, N>::Box(theIndex); }
++  
  
    //! Returns AABB of the given triangle.
    virtual BVH_Box<T, N> Box (const Standard_Integer theIndex) const Standard_OVERRIDE
@@ -190,43 +135,6 @@ diff -ruN /occt/occt-628c021/src/Graphic3d/Graphic3d_Buffer.hxx /occt/occt-628c0
  
    //! Return the attribute data with stride size specific to this attribute.
    //! @param theAttrib       attribute to find
-diff -ruN /occt/occt-628c021/src/Select3D/Select3D_SensitiveSet.hxx /occt/occt-628c021/src/Select3D/Select3D_SensitiveSet.hxx
---- /occt/occt-628c021/src/Select3D/Select3D_SensitiveSet.hxx	2020-11-02 17:52:44.000000000 +0100
-+++ /occt/occt-628c021/src/Select3D/Select3D_SensitiveSet.hxx	2021-01-20 21:12:39.268174294 +0100
-@@ -186,7 +186,9 @@
-     virtual Select3D_BndBox3d Box (const Standard_Integer theIdx) const Standard_OVERRIDE { return mySensitiveSet->Box (theIdx); }
- 
-     //! Make inherited method Box() visible to avoid CLang warning
--    using BVH_PrimitiveSet3d::Box;
-+    // using BVH_PrimitiveSet3d::Box;
-+    BVH_Box<Standard_Real, 3> Box() { return BVH_PrimitiveSet <Standard_Real, 3>::Box(); }
-+    BVH_Box<Standard_Real, 3> Box (const Standard_Integer theIndex) { return BVH_PrimitiveSet <Standard_Real, 3>::Box(theIndex); }
- 
-     //! Returns center of sensitive with index theIdx in the set along the given axis theAxis
-     virtual Standard_Real Center (const Standard_Integer theIdx,
-diff -ruN /occt/occt-628c021/src/SelectMgr/SelectMgr_SelectableObjectSet.cxx /occt/occt-628c021/src/SelectMgr/SelectMgr_SelectableObjectSet.cxx
---- /occt/occt-628c021/src/SelectMgr/SelectMgr_SelectableObjectSet.cxx	2020-11-02 17:52:44.000000000 +0100
-+++ /occt/occt-628c021/src/SelectMgr/SelectMgr_SelectableObjectSet.cxx	2021-01-20 21:13:42.858384310 +0100
-@@ -62,7 +62,8 @@
-     }
- 
-     //! Make inherited method Box() visible to avoid CLang warning
--    using BVH_Set<Standard_Real, 3>::Box;
-+    // using BVH_Set<Standard_Real, 3>::Box;
-+    BVH_Box<Standard_Real, 3> Box() { return BVH_Set<Standard_Real, 3>::Box(); }
- 
-     //! Returns center of object with index theIndex in the set
-     //! along the given axis theAxis
-@@ -159,7 +160,8 @@
-     }
- 
-     //! Make inherited method Box() visible to avoid CLang warning
--    using BVH_Set<Standard_Real, 3>::Box;
-+    // using BVH_Set<Standard_Real, 3>::Box;
-+    BVH_Box<Standard_Real, 3> Box() { return BVH_Set<Standard_Real, 3>::Box(); }
- 
-     //! Returns center of object with index theIndex in the set
-     //! along the given axis theAxis
 diff -ruN /occt/occt-628c021/src/SelectMgr/SelectMgr_SensitiveEntitySet.hxx /occt/occt-628c021/src/SelectMgr/SelectMgr_SensitiveEntitySet.hxx
 --- /occt/occt-628c021/src/SelectMgr/SelectMgr_SensitiveEntitySet.hxx	2020-11-02 17:52:44.000000000 +0100
 +++ /occt/occt-628c021/src/SelectMgr/SelectMgr_SensitiveEntitySet.hxx	2021-01-20 21:26:16.837735995 +0100
@@ -237,7 +145,7 @@ diff -ruN /occt/occt-628c021/src/SelectMgr/SelectMgr_SensitiveEntitySet.hxx /occ
 -  using BVH_PrimitiveSet3d::Box;
 +  // using BVH_PrimitiveSet3d::Box;
 +  BVH_Box<Standard_Real, 3> Box() { return BVH_PrimitiveSet <Standard_Real, 3>::Box(); }
-+  BVH_Box<Standard_Real, 3> Box (const Standard_Integer theIndex) { return BVH_PrimitiveSet <Standard_Real, 3>::Box(theIndex); }
++  
  
    //! Returns geometry center of sensitive entity index theIdx
    //! along the given axis theAxis
