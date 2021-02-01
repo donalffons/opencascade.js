@@ -1,0 +1,22 @@
+diff -ruN /occt/original/occt-628c021/src/BVH/BVH_BoxSet.hxx /occt/occt-628c021/src/BVH/BVH_BoxSet.hxx
+--- /occt/original/occt-628c021/src/BVH/BVH_BoxSet.hxx	2020-11-02 16:52:44.000000000 +0000
++++ /occt/occt-628c021/src/BVH/BVH_BoxSet.hxx	2021-02-01 17:49:29.398894427 +0000
+@@ -86,8 +86,16 @@
+ 
+ public: //! @name Necessary overrides for BVH construction
+ 
+-  //! Make inherited method Box() visible to avoid CLang warning
+-  using BVH_PrimitiveSet <NumType, Dimension>::Box;
++  // Those lines are removed to avoid an error message about an undefined function "Box(...)",
++  // when running the Bottle Example. The error occurrs in the line
++  // myBody = new openCascade.BRepAlgoAPI_Fuse_3(myBody, myNeck);
++  // which calls this method internally (through several layers).
++  // It seems like Emscripten decides not to export the "Box(...)" function at all, when those two
++  // (contradicting?) definitions are available.
++  // //! Make inherited method Box() visible to avoid CLang warning
++  // // using BVH_PrimitiveSet <NumType, Dimension>::Box;
++  // BVH_Box<NumType, Dimension> Box() { return BVH_PrimitiveSet <NumType, Dimension>::Box(); }
++  // BVH_Box<NumType, Dimension> Box (const Standard_Integer theIndex) { return BVH_PrimitiveSet <NumType, Dimension>::Box(theIndex); }
+ 
+   //! Returns the bounding box with the given index.
+   virtual BVH_Box <NumType, Dimension> Box (const Standard_Integer theIndex) const Standard_OVERRIDE
