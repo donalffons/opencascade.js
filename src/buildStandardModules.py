@@ -24,7 +24,6 @@ releaseEmccFlags = [
 
 debugEmccFlags = [
   "-s", "DISABLE_EXCEPTION_CATCHING=0",
-  "-s", "AGGRESSIVE_VARIABLE_ELIMINATION=1",
   "-O1",
   "-g4",
   "--source-map-base", "http://localhost:3000/opencascade.js/",
