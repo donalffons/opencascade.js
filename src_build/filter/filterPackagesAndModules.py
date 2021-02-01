@@ -8,6 +8,12 @@ def filterPackagesAndModules(packageOrModuleName):
     "TKIVtk",
     "TKDraw",
     "TKIVtkDraw",
+    "TKDCAF", # requires TKDRAW
+    "KQADraw", # requires TKDRAW
+    "TKTopTest", # requires TKDRAW
+    "TKXDEDRAW", # requires TKDCAF
+    "TKXSDRAW", # requires TKDRAW
+    "TKTObjDRAW", # requires TKDRAW
   ]:
     return False
 
