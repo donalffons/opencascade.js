@@ -1,36 +1,104 @@
-# Example on how to define a custom OpenCascade.js build
+# Core build of OpenCascade.js
 
-rocketExample.js:
+opencascade.core.js:
   bindings:
-    - symbol: STEPCAFControl_Reader
-    - symbol: IFSelect_ReturnStatus
-    - symbol: TCollection_ExtendedString
-    - symbol: TDocStd_Document
-    - symbol: Handle_TDocStd_Document
-    - symbol: Message_ProgressRange
-    - symbol: XCAFDoc_DocumentTool
-    - symbol: TDF_LabelSequence
-    - symbol: XCAFDoc_ShapeTool
-    - symbol: TCollection_AsciiString
-    - symbol: RWGltf_CafWriter
-    - symbol: BRepTools
-    - symbol: BRepMesh_IncrementalMesh
-    - symbol: TColStd_IndexedDataMapOfStringString
-    - symbol: CDM_Document
-    - symbol: Standard_Transient
-    - symbol: TDF_Label
-    - symbol: TDataStd_GenericEmpty
-    - symbol: TDF_Attribute
-    - symbol: Handle_XCAFDoc_ShapeTool
-    - symbol: NCollection_BaseSequence
-    - symbol: TopoDS_Shape
-    - symbol: BRepMesh_DiscretRoot
-    - symbol: NCollection_BaseMap
+    - symbol: "math"
+    # FoundationClasses
+    - module: "TKernel"
+    - module: "TKMath"
+
+    # ModelingData
+    - module: "TKG2d"
+    - module: "TKG3d"
+    - module: "TKGeomBase"
+    - module: "TKBRep"
+
+    # ModelingAlgorithms
+    - module: "TKGeomAlgo"
+    - module: "TKTopAlgo"
+    - module: "TKShHealing"
+    - module: "TKPrim"
+    - module: "TKHLR" # could be a niche use case
+    - module: "TKBO"
+    - module: "TKMesh"
+    - module: "TKBool"
+    # - module: "TKXMesh" # possibly not working
+    - module: "TKFillet"
+    - module: "TKFeat"
+    - module: "TKOffset"
+    
+    # Visualization
+    - module: "TKV3d"
+    - module: "TKService"
+    # - module: "TKOpenGl" # probably not needed
+    - module: "TKMeshVS"
+
+  inputs:
+    # FoundationClasses
+    - module: "TKernel"
+      preBuilt: True
+    - module: "TKMath"
+      preBuilt: True
+
+    # ModelingData
+    - module: "TKG2d"
+      preBuilt: True
+    - module: "TKG3d"
+      preBuilt: True
+    - module: "TKGeomBase"
+      preBuilt: True
+    - module: "TKBRep"
+      preBuilt: True
+
+    # ModelingAlgorithms
+    - module: "TKGeomAlgo"
+      preBuilt: True
+    - module: "TKTopAlgo"
+      preBuilt: True
+    - module: "TKShHealing"
+      preBuilt: True
+    - module: "TKPrim"
+      preBuilt: True
+    - module: "TKHLR" # could be a niche use case
+      preBuilt: True
+    - module: "TKBO"
+      preBuilt: True
+    - module: "TKMesh"
+      preBuilt: True
+    - module: "TKBool"
+      preBuilt: True
+    # - module: "TKXMesh" # possibly not working
+    #   preBuilt: True
+    - module: "TKFillet"
+      preBuilt: True
+    - module: "TKFeat"
+      preBuilt: True
+    - module: "TKOffset"
+      preBuilt: True
+    
+    # Visualization
+    - module: "TKV3d"
+      preBuilt: True
+    - module: "TKService"
+      preBuilt: True
+    # - module: "TKOpenGl" # probably not needed
+    #   preBuilt: True
+    - module: "TKMeshVS"
+      preBuilt: True
+
   emccFlags:
+    - -DIGNORE_NO_ATOMICS=1
+    - -frtti
+    - -fPIC
+    - -O3
+    - -flto
+    - -DHAVE_RAPIDJSON
     - -sEXPORT_ES6=1
     - -sUSE_ES6_IMPORT_META=0
+    - -sUSE_FREETYPE=1
     - -sEXTRA_EXPORTED_RUNTIME_METHODS=["FS"]
-    - -O3
+    - -sMAIN_MODULE=1
+    - -sDISABLE_EXCEPTION_CATCHING=1
     - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
     - -sALLOW_MEMORY_GROWTH=1
     - -sMAXIMUM_MEMORY=4GB

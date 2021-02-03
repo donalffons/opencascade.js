@@ -5,6 +5,7 @@ import os
 from build import buildWasmModuleSet
 from multiprocessing import Process
 from filter.filterSourceFiles import filterSourceFile
+import subprocess
 
 releaseBuildConfigs = {}
 debugBuildConfigs = {}
@@ -205,6 +206,13 @@ def addMainModuleConfigs(release = True, debug = True):
       ]
     }
 
+def buildCustom():
+  os.chdir("/opencascade.js/dist/")
+  subprocess.check_call([
+    "/opencascade.js/src/buildFromYaml.py", 
+    "/opencascade.js/src/builds/customBuild.yml"
+  ])
+
 addModuleBuildConfigs(True, False)
 addMainModuleConfigs(True, False)
 
@@ -217,4 +225,4 @@ def runInParallel(*fns):
   for p in proc:
     p.join()
 
-runInParallel(lambda: buildWasmModuleSet(releaseBuildConfigs), lambda: buildWasmModuleSet(debugBuildConfigs))
+runInParallel(lambda: buildWasmModuleSet(releaseBuildConfigs), lambda: buildWasmModuleSet(debugBuildConfigs), lambda: buildCustom())
