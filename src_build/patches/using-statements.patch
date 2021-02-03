@@ -92,33 +92,6 @@ diff -ruN /occt/occt-628c021/src/BRepAlgoAPI/BRepAlgoAPI_Algo.hxx /occt/occt-628
  
  protected:
  
-diff -ruN /occt/occt-628c021/src/BVH/BVH_ObjectSet.hxx /occt/occt-628c021/src/BVH/BVH_ObjectSet.hxx
---- /occt/occt-628c021/src/BVH/BVH_ObjectSet.hxx	2020-11-02 17:52:44.000000000 +0100
-+++ /occt/occt-628c021/src/BVH/BVH_ObjectSet.hxx	2021-01-20 21:06:44.880433339 +0100
-@@ -62,7 +62,8 @@
-   virtual Standard_Integer Size() const Standard_OVERRIDE { return myObjects.Size(); }
- 
-   //! Returns AABB of entire set of objects.
--  using BVH_Set<T, N>::Box;
-+  // using BVH_Set<T, N>::Box;
-+  BVH_Box<T, N> Box() { return BVH_Set<T, N>::Box(); }
- 
-   //! Returns AABB of the given object.
-   virtual BVH_Box<T, N> Box (const Standard_Integer theIndex) const Standard_OVERRIDE { return myObjects.Value (theIndex)->Box(); }
-diff -ruN /occt/occt-628c021/src/BVH/BVH_Triangulation.hxx /occt/occt-628c021/src/BVH/BVH_Triangulation.hxx
---- /occt/occt-628c021/src/BVH/BVH_Triangulation.hxx	2020-11-02 17:52:44.000000000 +0100
-+++ /occt/occt-628c021/src/BVH/BVH_Triangulation.hxx	2021-01-20 21:07:47.233940872 +0100
-@@ -60,7 +60,9 @@
-   }
- 
-   //! Returns AABB of entire set of objects.
--  using BVH_PrimitiveSet<T, N>::Box;
-+  // using BVH_PrimitiveSet<T, N>::Box;
-+  BVH_Box<T, N> Box() { return BVH_PrimitiveSet<T, N>::Box(); }
-+  
- 
-   //! Returns AABB of the given triangle.
-   virtual BVH_Box<T, N> Box (const Standard_Integer theIndex) const Standard_OVERRIDE
 diff -ruN /occt/occt-628c021/src/Graphic3d/Graphic3d_Buffer.hxx /occt/occt-628c021/src/Graphic3d/Graphic3d_Buffer.hxx
 --- /occt/occt-628c021/src/Graphic3d/Graphic3d_Buffer.hxx	2020-11-02 17:52:44.000000000 +0100
 +++ /occt/occt-628c021/src/Graphic3d/Graphic3d_Buffer.hxx	2021-01-20 21:09:23.494223787 +0100
@@ -135,20 +108,6 @@ diff -ruN /occt/occt-628c021/src/Graphic3d/Graphic3d_Buffer.hxx /occt/occt-628c0
  
    //! Return the attribute data with stride size specific to this attribute.
    //! @param theAttrib       attribute to find
-diff -ruN /occt/occt-628c021/src/SelectMgr/SelectMgr_SensitiveEntitySet.hxx /occt/occt-628c021/src/SelectMgr/SelectMgr_SensitiveEntitySet.hxx
---- /occt/occt-628c021/src/SelectMgr/SelectMgr_SensitiveEntitySet.hxx	2020-11-02 17:52:44.000000000 +0100
-+++ /occt/occt-628c021/src/SelectMgr/SelectMgr_SensitiveEntitySet.hxx	2021-01-20 21:26:16.837735995 +0100
-@@ -53,7 +53,9 @@
-   Standard_EXPORT virtual Select3D_BndBox3d Box (const Standard_Integer theIndex) const Standard_OVERRIDE;
- 
-   //! Make inherited method Box() visible to avoid CLang warning
--  using BVH_PrimitiveSet3d::Box;
-+  // using BVH_PrimitiveSet3d::Box;
-+  BVH_Box<Standard_Real, 3> Box() { return BVH_PrimitiveSet <Standard_Real, 3>::Box(); }
-+  
- 
-   //! Returns geometry center of sensitive entity index theIdx
-   //! along the given axis theAxis
 diff -ruN /occt/occt-628c021/src/V3d/V3d_DirectionalLight.hxx /occt/occt-628c021/src/V3d/V3d_DirectionalLight.hxx
 --- /occt/occt-628c021/src/V3d/V3d_DirectionalLight.hxx	2020-11-02 17:52:44.000000000 +0100
 +++ /occt/occt-628c021/src/V3d/V3d_DirectionalLight.hxx	2021-01-20 21:30:08.791719250 +0100
