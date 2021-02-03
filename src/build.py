@@ -50,17 +50,17 @@ def getBindingsFilterFunction(bindingSettings):
     shouldProcess = False
     for bindingSetting in bindingSettings:
       if "symbol" in bindingSetting:
-        if isinstance(bindingSetting["symbol"], dict) and "regex" in bindingSetting["symbol"]:
+        if "regex" in bindingSetting:
           shouldProcess = re.match(bindingSetting["regex"], theItem.spelling)
         else:
           shouldProcess = bindingSetting["symbol"] == theItem.spelling
       if "package" in bindingSetting:
         currPackageName = os.path.basename(os.path.dirname(theItem.extent.start.file.name))
         if currPackageName == bindingSetting["package"]:
-          if isinstance(bindingSetting["package"], dict) and "regex" in bindingSetting["package"]:
+          if "regex" in bindingSetting:
             shouldProcess = re.match(bindingSetting["regex"], theItem.spelling)
           else:
-            shouldProcess = bindingSetting["package"] == theItem.spelling
+            shouldProcess = True
       if "module" in bindingSetting:
         moduleDir = "/occt/occt-628c021/src/" + bindingSetting["module"]
         currPackageName = os.path.basename(os.path.dirname(theItem.extent.start.file.name))
@@ -69,10 +69,10 @@ def getBindingsFilterFunction(bindingSettings):
             if packageFileLine.strip() == "":
               continue
             if packageFileLine.strip() == currPackageName:
-              if isinstance(bindingSetting["module"], dict) and "regex" in bindingSetting["module"]:
+              if "regex" in bindingSetting:
                 shouldProcess = re.match(bindingSetting["regex"], theItem.spelling)
               else:
-                shouldProcess = bindingSetting["module"] == theItem.spelling
+                shouldProcess = True
             if shouldProcess:
               break
       if shouldProcess:
