@@ -70,7 +70,6 @@ def buildObjectFiles(package):
       subprocess.check_call([
         *command,
         "-O3",
-        "-flto",
         "-o", libBasePath + ".o",
         ])
     else:
