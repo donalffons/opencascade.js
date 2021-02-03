@@ -121,18 +121,18 @@ def generateWasmModule(moduleName, buildConfig, outputFolder = None):
   if "inputs" in buildConfig and not buildConfig["inputs"] is None:
     for input in buildConfig["inputs"]:
       if "package" in input:
-        if not "preBuilt" in input["package"] or not input["package"]["preBuilt"]:
+        if not "preBuilt" in input or not input["preBuilt"]:
           for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-628c021/src/", input["package"])):
             for item in filenames:
               if filterSourceFile(item):
                 thisModule.addLibraryFile(dirpath + "/" + item, None)
         else:
-          if "preBuilt" in input["package"] and input["package"]["preBuilt"]:
+          if "preBuilt" in input and input["preBuilt"]:
             thisModule.addLibraryFile(input["package"], "/opencascade.js/build/fullLibrary/")
           else:
             print("could not process preBuilt setting")
       if "module" in input:
-        if not "preBuilt" in input["module"] or not input["module"]["preBuilt"]:
+        if not "preBuilt" in input or not input["preBuilt"]:
           with open("/occt/occt-628c021/src/" + input["module"] + "/PACKAGES", "r") as a_file:
             packageNames = list(map(lambda x: x.strip(), filter(lambda x: not x.strip() == "", a_file)))
             for packageName in packageNames:
@@ -141,7 +141,7 @@ def generateWasmModule(moduleName, buildConfig, outputFolder = None):
                   if filterSourceFile(item):
                     thisModule.addLibraryFile(dirpath + "/" + item, None)
         else:
-          if "preBuilt" in input["module"] and input["module"]["preBuilt"]:
+          if "preBuilt" in input and input["preBuilt"]:
             thisModule.addLibraryFile(input["module"], "/opencascade.js/build/fullLibrary/")
           else:
             print("could not process preBuilt setting")
