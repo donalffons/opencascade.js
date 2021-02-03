@@ -20,6 +20,7 @@ releaseEmccFlags = [
   "-s", "DISABLE_EXCEPTION_CATCHING=1",
   "-s", "AGGRESSIVE_VARIABLE_ELIMINATION=1",
   "-O3",
+  "-flto",
 ]
 
 debugEmccFlags = [

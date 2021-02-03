@@ -62,19 +62,26 @@ def buildObjectFiles(package):
       "emcc",
       "-DIGNORE_NO_ATOMICS=1", "-frtti", "-fPIC", "-DHAVE_RAPIDJSON",
       *list(map(lambda x: "-I" + x, includePaths)),
-      # "-O3",
       "-c",
       dirpath + "/" + theFile,
     ]
     if not os.path.exists(libBasePath + ".o"):
       print("Building " + theName)
-      subprocess.check_call([*command, "-o", libBasePath + ".o"])
+      subprocess.check_call([
+        *command,
+        "-O3",
+        "-flto",
+        "-o", libBasePath + ".o",
+        ])
     else:
       print(theName + " already exists, skipping")
 
     if not os.path.exists(libBasePath + ".debug.o"):
       print("Building " + theName + ".debug")
-      subprocess.check_call([*command, "-o", libBasePath + ".debug.o", "-g4"])
+      subprocess.check_call([
+        *command, "-o",
+        libBasePath + ".debug.o", "-g4"
+      ])
     else:
       print(theName + ".debug already exists, skipping")
 
