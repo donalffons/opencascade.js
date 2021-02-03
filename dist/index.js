@@ -52,60 +52,6 @@ export { default as TKXmlTObj } from './module.TKXmlTObj.wasm';
 export { default as TKXml } from './module.TKXml.wasm';
 export { default as TKXmlXCAF } from './module.TKXmlXCAF.wasm';
 
-// Debug builds
-export { default as ocMainDebug } from "./opencascade.debug.js";
-export { default as ocMainWasmDebug } from "./opencascade.debug.wasm";
-
-export { default as TKernelDebug } from './module.TKernel.debug.wasm';
-export { default as TKMathDebug } from './module.TKMath.debug.wasm';
-export { default as TKG2dDebug } from './module.TKG2d.debug.wasm';
-export { default as TKG3dDebug } from './module.TKG3d.debug.wasm';
-export { default as TKServiceDebug } from './module.TKService.debug.wasm';
-export { default as TKGeomBaseDebug } from './module.TKGeomBase.debug.wasm';
-export { default as TKBRepDebug } from './module.TKBRep.debug.wasm';
-export { default as TKGeomAlgoDebug } from './module.TKGeomAlgo.debug.wasm';
-export { default as TKTopAlgoDebug } from './module.TKTopAlgo.debug.wasm';
-export { default as TKHLRDebug } from './module.TKHLR.debug.wasm';
-export { default as TKShHealingDebug } from './module.TKShHealing.debug.wasm';
-export { default as TKMeshDebug } from './module.TKMesh.debug.wasm';
-export { default as TKV3dDebug } from './module.TKV3d.debug.wasm';
-export { default as TKXSBaseDebug } from './module.TKXSBase.debug.wasm';
-export { default as TKSTEPBaseDebug } from './module.TKSTEPBase.debug.wasm';
-export { default as TKSTEP209Debug } from './module.TKSTEP209.debug.wasm';
-export { default as TKSTEPAttrDebug } from './module.TKSTEPAttr.debug.wasm';
-export { default as TKCDFDebug } from './module.TKCDF.debug.wasm';
-export { default as TKSTEPDebug } from './module.TKSTEP.debug.wasm';
-export { default as TKLCAFDebug } from './module.TKLCAF.debug.wasm';
-export { default as TKPrimDebug } from './module.TKPrim.debug.wasm';
-export { default as TKBODebug } from './module.TKBO.debug.wasm';
-export { default as TKCAFDebug } from './module.TKCAF.debug.wasm';
-export { default as TKVCAFDebug } from './module.TKVCAF.debug.wasm';
-export { default as TKXCAFDebug } from './module.TKXCAF.debug.wasm';
-export { default as TKXDESTEPDebug } from './module.TKXDESTEP.debug.wasm';
-export { default as TKRWMeshDebug } from './module.TKRWMesh.debug.wasm';
-export { default as TKBoolDebug } from './module.TKBool.debug.wasm';
-export { default as TKFilletDebug } from './module.TKFillet.debug.wasm';
-export { default as TKBinLDebug } from './module.TKBinL.debug.wasm';
-export { default as TKTObjDebug } from './module.TKTObj.debug.wasm';
-export { default as TKBinTObjDebug } from './module.TKBinTObj.debug.wasm';
-export { default as TKBinDebug } from './module.TKBin.debug.wasm';
-export { default as TKBinXCAFDebug } from './module.TKBinXCAF.debug.wasm';
-export { default as TKFeatDebug } from './module.TKFeat.debug.wasm';
-export { default as TKIGESDebug } from './module.TKIGES.debug.wasm';
-export { default as TKMeshVSDebug } from './module.TKMeshVS.debug.wasm';
-export { default as TKOffsetDebug } from './module.TKOffset.debug.wasm';
-export { default as TKOpenGlDebug } from './module.TKOpenGl.debug.wasm';
-export { default as TKStdLDebug } from './module.TKStdL.debug.wasm';
-export { default as TKStdDebug } from './module.TKStd.debug.wasm';
-export { default as TKSTLDebug } from './module.TKSTL.debug.wasm';
-export { default as TKVRMLDebug } from './module.TKVRML.debug.wasm';
-export { default as TKXDEIGESDebug } from './module.TKXDEIGES.debug.wasm';
-export { default as TKXMeshDebug } from './module.TKXMesh.debug.wasm';
-export { default as TKXmlLDebug } from './module.TKXmlL.debug.wasm';
-export { default as TKXmlTObjDebug } from './module.TKXmlTObj.debug.wasm';
-export { default as TKXmlDebug } from './module.TKXml.debug.wasm';
-export { default as TKXmlXCAFDebug } from './module.TKXmlXCAF.debug.wasm';
-
 export const initOpenCascade = (mainJS, mainWasm, libs = [], module = {}) => {
   const loadLibraries = async (oc, libs, allowUndefined = false) => {
     const promises = [];

@@ -36,7 +36,7 @@ memoryEmccFlags = [
   "-s", "MAXIMUM_MEMORY=4294967296",
 ]
 
-def addModuleBuildConfigs():
+def addModuleBuildConfigs(release = True, debug = True):
   for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
     packageOrModuleName = os.path.basename(dirpath)
     if packageOrModuleName == "":
@@ -54,47 +54,49 @@ def addModuleBuildConfigs():
     ]:
       continue
 
-    releaseBuildConfigs["module." + packageOrModuleName + ".wasm"] = {
-      "inputs": [
-        {
-          "module": packageOrModuleName,
-          "preBuilt": False,
-        }
-      ],
-      "bindings": [
-        {
-          "module": packageOrModuleName,
-          "regex": ".*",
-        }
-      ],
-      "emccFlags": [
-        "-s", "SIDE_MODULE=1",
-        *defaultEmccFlags,
-        *releaseEmccFlags,
-      ]
-    }
+    if release:
+      releaseBuildConfigs["module." + packageOrModuleName + ".wasm"] = {
+        "inputs": [
+          {
+            "module": packageOrModuleName,
+            "preBuilt": False,
+          }
+        ],
+        "bindings": [
+          {
+            "module": packageOrModuleName,
+            "regex": ".*",
+          }
+        ],
+        "emccFlags": [
+          "-s", "SIDE_MODULE=1",
+          *defaultEmccFlags,
+          *releaseEmccFlags,
+        ]
+      }
 
-    debugBuildConfigs["module." + packageOrModuleName + ".debug.wasm"] = {
-      "inputs": [
-        {
-          "module": packageOrModuleName,
-          "preBuilt": False,
-        }
-      ],
-      "bindings": [
-        {
-          "module": packageOrModuleName,
-          "regex": ".*",
-        }
-      ],
-      "emccFlags": [
-        "-s", "SIDE_MODULE=1",
-        *defaultEmccFlags,
-        *debugEmccFlags,
-      ]
-    }
+    if debug:
+      debugBuildConfigs["module." + packageOrModuleName + ".debug.wasm"] = {
+        "inputs": [
+          {
+            "module": packageOrModuleName,
+            "preBuilt": False,
+          }
+        ],
+        "bindings": [
+          {
+            "module": packageOrModuleName,
+            "regex": ".*",
+          }
+        ],
+        "emccFlags": [
+          "-s", "SIDE_MODULE=1",
+          *defaultEmccFlags,
+          *debugEmccFlags,
+        ]
+      }
 
-def addPackageBuildConfigs():
+def addPackageBuildConfigs(release = True, debug = True):
   for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
     packageOrModuleName = os.path.basename(dirpath)
     if packageOrModuleName == "":
@@ -129,79 +131,82 @@ def addPackageBuildConfigs():
         ]:
           continue
 
-        releaseBuildConfigs["package." + packageName + ".wasm"] = {
-          "inputs": [
-            {
-              "package": packageName,
-              "preBuilt": False,
-            }
-          ],
-          "bindings": [
-            {
-              "package": packageName,
-              "regex": ".*",
-            }
-          ],
-          "emccFlags": [
-            "-s", "SIDE_MODULE=1",
-            *defaultEmccFlags,
-            *releaseEmccFlags,
-          ]
-        }
+        if release:
+          releaseBuildConfigs["package." + packageName + ".wasm"] = {
+            "inputs": [
+              {
+                "package": packageName,
+                "preBuilt": False,
+              }
+            ],
+            "bindings": [
+              {
+                "package": packageName,
+                "regex": ".*",
+              }
+            ],
+            "emccFlags": [
+              "-s", "SIDE_MODULE=1",
+              *defaultEmccFlags,
+              *releaseEmccFlags,
+            ]
+          }
 
-        debugBuildConfigs["package." + packageName + ".debug.wasm"] = {
-          "inputs": [
-            {
-              "package": packageName,
-              "preBuilt": False,
-            }
-          ],
-          "bindings": [
-            {
-              "package": packageName,
-              "regex": ".*",
-            }
-          ],
-          "emccFlags": [
-            "-s", "SIDE_MODULE=1",
-            *defaultEmccFlags,
-            *debugEmccFlags,
-          ]
-        }
+        if debug:
+          debugBuildConfigs["package." + packageName + ".debug.wasm"] = {
+            "inputs": [
+              {
+                "package": packageName,
+                "preBuilt": False,
+              }
+            ],
+            "bindings": [
+              {
+                "package": packageName,
+                "regex": ".*",
+              }
+            ],
+            "emccFlags": [
+              "-s", "SIDE_MODULE=1",
+              *defaultEmccFlags,
+              *debugEmccFlags,
+            ]
+          }
 
-def addMainModuleConfigs():
-  releaseBuildConfigs["opencascade.js"] = {
-    "inputs": [],
-    "bindings": [],
-    "emccFlags": [
-      "-s", "MAIN_MODULE=1",
-      "-s", "EXPORT_ES6=1",
-      "-s", "USE_ES6_IMPORT_META=0",
-      "-s", "USE_FREETYPE=1",
-      '-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]',
-      *defaultEmccFlags,
-      *releaseEmccFlags,
-      *memoryEmccFlags
-    ]
-  }
-  debugBuildConfigs["opencascade.debug.js"] = {
-    "inputs": [],
-    "bindings": [],
-    "emccFlags": [
-      "-s", "MAIN_MODULE=1",
-      "-s", "EXPORT_ES6=1",
-      "-s", "USE_ES6_IMPORT_META=0",
-      "-s", "USE_FREETYPE=1",
-      '-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]',
-      *defaultEmccFlags,
-      *debugEmccFlags,
-      *memoryEmccFlags
-    ]
-  }
+def addMainModuleConfigs(release = True, debug = True):
+  if release:
+    releaseBuildConfigs["opencascade.js"] = {
+      "inputs": [],
+      "bindings": [],
+      "emccFlags": [
+        "-s", "MAIN_MODULE=1",
+        "-s", "EXPORT_ES6=1",
+        "-s", "USE_ES6_IMPORT_META=0",
+        "-s", "USE_FREETYPE=1",
+        '-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]',
+        *defaultEmccFlags,
+        *releaseEmccFlags,
+        *memoryEmccFlags
+      ]
+    }
+  if debug:
+    debugBuildConfigs["opencascade.debug.js"] = {
+      "inputs": [],
+      "bindings": [],
+      "emccFlags": [
+        "-s", "MAIN_MODULE=1",
+        "-s", "EXPORT_ES6=1",
+        "-s", "USE_ES6_IMPORT_META=0",
+        "-s", "USE_FREETYPE=1",
+        '-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]',
+        *defaultEmccFlags,
+        *debugEmccFlags,
+        *memoryEmccFlags
+      ]
+    }
 
-addModuleBuildConfigs()
-# addPackageBuildConfigs()
-addMainModuleConfigs()
+addModuleBuildConfigs(True, False)
+addMainModuleConfigs(True, False)
 
 def runInParallel(*fns):
   proc = []
