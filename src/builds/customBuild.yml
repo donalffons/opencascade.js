@@ -37,7 +37,6 @@ opencascade.core.js:
 
 opencascade.modelingAlgorithms.wasm:
   bindings:
-    # ModelingAlgorithms
     - module: "TKGeomAlgo"
     - module: "TKTopAlgo"
     - module: "TKShHealing"
@@ -46,7 +45,7 @@ opencascade.modelingAlgorithms.wasm:
     - module: "TKBO"
     - module: "TKMesh"
     - module: "TKBool"
-    - module: "TKXMesh"
+    # - module: "TKXMesh" # gives error about duplicate symbol DISCRETALGO with libTKMesh
     - module: "TKFillet"
     - module: "TKFeat"
     - module: "TKOffset"
@@ -67,8 +66,8 @@ opencascade.modelingAlgorithms.wasm:
       preBuilt: True
     - module: "TKBool"
       preBuilt: True
-    - module: "TKXMesh"
-      preBuilt: True
+    # - module: "TKXMesh"
+    #   preBuilt: True
     - module: "TKFillet"
       preBuilt: True
     - module: "TKFeat"
@@ -94,13 +93,13 @@ opencascade.visualApp.wasm:
     - module: "TKBinL"
     - module: "TKCAF"
     - module: "TKTObj"
-    - module: "TKXmlL"
-    - module: "TKStdL"
+    # - module: "TKXmlL" # gives error about duplicate symbol PLUGINFACTORY with libTKBinL, libTKStdL
+    # - module: "TKStdL" # gives error about duplicate symbol PLUGINFACTORY with libTKBin
     - module: "TKBin"
-    - module: "TKBinTObj"
+    # - module: "TKBinTObj" # gives error about duplicate symbol PLUGINFACTORY with libTKBin, libTKXml
     - module: "TKVCAF"
     - module: "TKXml"
-    - module: "TKXmlTObj"
+    # - module: "TKXmlTObj" # gives error about duplicate symbol PLUGINFACTORY with libTKXml, libTKStd
     - module: "TKStd"
     - module: "TKService"
     - module: "TKV3d"
@@ -117,20 +116,20 @@ opencascade.visualApp.wasm:
       preBuilt: True
     - module: "TKTObj"
       preBuilt: True
-    - module: "TKXmlL"
-      preBuilt: True
-    - module: "TKStdL"
-      preBuilt: True
+    # - module: "TKXmlL"
+    #   preBuilt: True
+    # - module: "TKStdL"
+    #   preBuilt: True
     - module: "TKBin"
       preBuilt: True
-    - module: "TKBinTObj"
-      preBuilt: True
+    # - module: "TKBinTObj"
+    #   preBuilt: True
     - module: "TKVCAF"
       preBuilt: True
     - module: "TKXml"
       preBuilt: True
-    - module: "TKXmlTObj"
-      preBuilt: True
+    # - module: "TKXmlTObj"
+    #   preBuilt: True
     - module: "TKStd"
       preBuilt: True
     - module: "TKService"
@@ -164,7 +163,7 @@ opencascade.dataExchange.wasm:
     - module: "TKSTEPAttr"
     - module: "TKXDEIGES"
     - module: "TKVRML"
-    - module: "TKXmlXCAF"
+    # - module: "TKXmlXCAF" # gives error about duplicate symbol PLUGINFACTORY with libTKBinXCAF
     - module: "TKBinXCAF"
     - module: "TKRWMesh"
     - module: "TKSTEP"
@@ -188,8 +187,8 @@ opencascade.dataExchange.wasm:
       preBuilt: True
     - module: "TKVRML"
       preBuilt: True
-    - module: "TKXmlXCAF"
-      preBuilt: True
+    # - module: "TKXmlXCAF"
+    #   preBuilt: True
     - module: "TKBinXCAF"
       preBuilt: True
     - module: "TKRWMesh"
