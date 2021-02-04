@@ -90,7 +90,7 @@ opencascade.visualApp.wasm:
   bindings:
     - module: "TKCDF"
     - module: "TKLCAF"
-    - module: "TKBinL"
+    # - module: "TKBinL" # gives error about duplicate symbol PLUGINFACTORY with libTKBin
     - module: "TKCAF"
     - module: "TKTObj"
     # - module: "TKXmlL" # gives error about duplicate symbol PLUGINFACTORY with libTKBinL, libTKStdL
@@ -98,7 +98,7 @@ opencascade.visualApp.wasm:
     - module: "TKBin"
     # - module: "TKBinTObj" # gives error about duplicate symbol PLUGINFACTORY with libTKBin, libTKXml
     - module: "TKVCAF"
-    - module: "TKXml"
+    # - module: "TKXml" # gives error about duplicate symbol PLUGINFACTORY with libTKBin, libTKStd
     # - module: "TKXmlTObj" # gives error about duplicate symbol PLUGINFACTORY with libTKXml, libTKStd
     - module: "TKStd"
     - module: "TKService"
@@ -110,8 +110,8 @@ opencascade.visualApp.wasm:
       preBuilt: True
     - module: "TKLCAF"
       preBuilt: True
-    - module: "TKBinL"
-      preBuilt: True
+    # - module: "TKBinL"
+    #   preBuilt: True
     - module: "TKCAF"
       preBuilt: True
     - module: "TKTObj"
@@ -126,8 +126,8 @@ opencascade.visualApp.wasm:
     #   preBuilt: True
     - module: "TKVCAF"
       preBuilt: True
-    - module: "TKXml"
-      preBuilt: True
+    # - module: "TKXml"
+    #   preBuilt: True
     # - module: "TKXmlTObj"
     #   preBuilt: True
     - module: "TKStd"
