@@ -1,34 +1,16 @@
-# Core build of OpenCascade.js
-
 opencascade.core.js:
   bindings:
-    # FoundationClasses
     - module: "TKernel"
     - module: "TKMath"
-
-    # ModelingData
     - module: "TKG2d"
     - module: "TKG3d"
     - module: "TKGeomBase"
     - module: "TKBRep"
-
-    # ModelingAlgorithms
-    - module: "TKGeomAlgo"
-    - module: "TKTopAlgo"
-    - module: "TKShHealing"
-    - module: "TKPrim"
-    - module: "TKBO"
-    - module: "TKMesh"
-    - module: "TKBool"
-
   inputs:
-    # FoundationClasses
     - module: "TKernel"
       preBuilt: True
     - module: "TKMath"
       preBuilt: True
-
-    # ModelingData
     - module: "TKG2d"
       preBuilt: True
     - module: "TKG3d"
@@ -37,23 +19,6 @@ opencascade.core.js:
       preBuilt: True
     - module: "TKBRep"
       preBuilt: True
-
-    # ModelingAlgorithms
-    - module: "TKGeomAlgo"
-      preBuilt: True
-    - module: "TKTopAlgo"
-      preBuilt: True
-    - module: "TKShHealing"
-      preBuilt: True
-    - module: "TKPrim"
-      preBuilt: True
-    - module: "TKBO"
-      preBuilt: True
-    - module: "TKMesh"
-      preBuilt: True
-    - module: "TKBool"
-      preBuilt: True
-
   emccFlags:
     - -DIGNORE_NO_ATOMICS=1
     - -frtti
@@ -70,26 +35,46 @@ opencascade.core.js:
     - -sALLOW_MEMORY_GROWTH=1
     - -sMAXIMUM_MEMORY=4GB
 
-opencascade.complexModeling.wasm:
+opencascade.modelingAlgorithms.wasm:
   bindings:
-    # - module: "TKHLR" # could be a niche use case
-    # - module: "TKXMesh" # possibly not working
+    # ModelingAlgorithms
+    - module: "TKGeomAlgo"
+    - module: "TKTopAlgo"
+    - module: "TKShHealing"
+    - module: "TKPrim"
+    - module: "TKHLR"
+    - module: "TKBO"
+    - module: "TKMesh"
+    - module: "TKBool"
+    - module: "TKXMesh"
     - module: "TKFillet"
     - module: "TKFeat"
     - module: "TKOffset"
-
   inputs:
-    # - module: "TKHLR" # could be a niche use case
-    #   preBuilt: False
-    # - module: "TKXMesh" # possibly not working
-    #   preBuilt: False
+    - module: "TKGeomAlgo"
+      preBuilt: True
+    - module: "TKTopAlgo"
+      preBuilt: True
+    - module: "TKShHealing"
+      preBuilt: True
+    - module: "TKPrim"
+      preBuilt: True
+    - module: "TKHLR"
+      preBuilt: True
+    - module: "TKBO"
+      preBuilt: True
+    - module: "TKMesh"
+      preBuilt: True
+    - module: "TKBool"
+      preBuilt: True
+    - module: "TKXMesh"
+      preBuilt: True
     - module: "TKFillet"
-      preBuilt: False
+      preBuilt: True
     - module: "TKFeat"
-      preBuilt: False
+      preBuilt: True
     - module: "TKOffset"
-      preBuilt: False
-
+      preBuilt: True
   emccFlags:
     - -DIGNORE_NO_ATOMICS=1
     - -frtti
@@ -102,25 +87,117 @@ opencascade.complexModeling.wasm:
     - -sDISABLE_EXCEPTION_CATCHING=1
     - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
 
-opencascade.visualization.wasm:
+opencascade.visualApp.wasm:
   bindings:
-    # Visualization
-    - module: "TKV3d"
+    - module: "TKCDF"
+    - module: "TKLCAF"
+    - module: "TKBinL"
+    - module: "TKCAF"
+    - module: "TKTObj"
+    - module: "TKXmlL"
+    - module: "TKStdL"
+    - module: "TKBin"
+    - module: "TKBinTObj"
+    - module: "TKVCAF"
+    - module: "TKXml"
+    - module: "TKXmlTObj"
+    - module: "TKStd"
     - module: "TKService"
-    # - module: "TKOpenGl" # probably not needed
+    - module: "TKV3d"
+    - module: "TKOpenGl"
     - module: "TKMeshVS"
-
   inputs:
-    # Visualization
-    - module: "TKV3d"
-      preBuilt: False
+    - module: "TKCDF"
+      preBuilt: True
+    - module: "TKLCAF"
+      preBuilt: True
+    - module: "TKBinL"
+      preBuilt: True
+    - module: "TKCAF"
+      preBuilt: True
+    - module: "TKTObj"
+      preBuilt: True
+    - module: "TKXmlL"
+      preBuilt: True
+    - module: "TKStdL"
+      preBuilt: True
+    - module: "TKBin"
+      preBuilt: True
+    - module: "TKBinTObj"
+      preBuilt: True
+    - module: "TKVCAF"
+      preBuilt: True
+    - module: "TKXml"
+      preBuilt: True
+    - module: "TKXmlTObj"
+      preBuilt: True
+    - module: "TKStd"
+      preBuilt: True
     - module: "TKService"
-      preBuilt: False
-    # - module: "TKOpenGl" # probably not needed
-    #   preBuilt: False
+      preBuilt: True
+    - module: "TKV3d"
+      preBuilt: True
+    - module: "TKOpenGl"
+      preBuilt: True
     - module: "TKMeshVS"
-      preBuilt: False
+      preBuilt: True
+  emccFlags:
+    - -DIGNORE_NO_ATOMICS=1
+    - -frtti
+    - -fPIC
+    - -O3
+    - -DHAVE_RAPIDJSON
+    - -sEXPORT_ES6=1
+    - -sUSE_ES6_IMPORT_META=0
+    - -sSIDE_MODULE=1
+    - -sDISABLE_EXCEPTION_CATCHING=1
+    - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
 
+opencascade.dataExchange.wasm:
+  bindings:
+    - module: "TKXSBase"
+    - module: "TKSTL"
+    - module: "TKSTEPBase"
+    - module: "TKIGES"
+    - module: "TKXCAF"
+    - module: "TKSTEP209"
+    - module: "TKSTEPAttr"
+    - module: "TKXDEIGES"
+    - module: "TKVRML"
+    - module: "TKXmlXCAF"
+    - module: "TKBinXCAF"
+    - module: "TKRWMesh"
+    - module: "TKSTEP"
+    - module: "TKXDESTEP"
+  inputs:
+    - module: "TKXSBase"
+      preBuilt: True
+    - module: "TKSTL"
+      preBuilt: True
+    - module: "TKSTEPBase"
+      preBuilt: True
+    - module: "TKIGES"
+      preBuilt: True
+    - module: "TKXCAF"
+      preBuilt: True
+    - module: "TKSTEP209"
+      preBuilt: True
+    - module: "TKSTEPAttr"
+      preBuilt: True
+    - module: "TKXDEIGES"
+      preBuilt: True
+    - module: "TKVRML"
+      preBuilt: True
+    - module: "TKXmlXCAF"
+      preBuilt: True
+    - module: "TKBinXCAF"
+      preBuilt: True
+    - module: "TKRWMesh"
+      preBuilt: True
+    - module: "TKSTEP"
+      preBuilt: True
+    - module: "TKXDESTEP"
+      preBuilt: True
   emccFlags:
     - -DIGNORE_NO_ATOMICS=1
     - -frtti
