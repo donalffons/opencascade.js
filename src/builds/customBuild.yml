@@ -2,7 +2,6 @@
 
 opencascade.core.js:
   bindings:
-    - symbol: "math"
     # FoundationClasses
     - module: "TKernel"
     - module: "TKMath"
@@ -18,20 +17,9 @@ opencascade.core.js:
     - module: "TKTopAlgo"
     - module: "TKShHealing"
     - module: "TKPrim"
-    - module: "TKHLR" # could be a niche use case
     - module: "TKBO"
     - module: "TKMesh"
     - module: "TKBool"
-    # - module: "TKXMesh" # possibly not working
-    - module: "TKFillet"
-    - module: "TKFeat"
-    - module: "TKOffset"
-    
-    # Visualization
-    - module: "TKV3d"
-    - module: "TKService"
-    # - module: "TKOpenGl" # probably not needed
-    - module: "TKMeshVS"
 
   inputs:
     # FoundationClasses
@@ -59,31 +47,11 @@ opencascade.core.js:
       preBuilt: True
     - module: "TKPrim"
       preBuilt: True
-    - module: "TKHLR" # could be a niche use case
-      preBuilt: True
     - module: "TKBO"
       preBuilt: True
     - module: "TKMesh"
       preBuilt: True
     - module: "TKBool"
-      preBuilt: True
-    # - module: "TKXMesh" # possibly not working
-    #   preBuilt: True
-    - module: "TKFillet"
-      preBuilt: True
-    - module: "TKFeat"
-      preBuilt: True
-    - module: "TKOffset"
-      preBuilt: True
-    
-    # Visualization
-    - module: "TKV3d"
-      preBuilt: True
-    - module: "TKService"
-      preBuilt: True
-    # - module: "TKOpenGl" # probably not needed
-    #   preBuilt: True
-    - module: "TKMeshVS"
       preBuilt: True
 
   emccFlags:
@@ -91,7 +59,6 @@ opencascade.core.js:
     - -frtti
     - -fPIC
     - -O3
-    - -flto
     - -DHAVE_RAPIDJSON
     - -sEXPORT_ES6=1
     - -sUSE_ES6_IMPORT_META=0
@@ -102,3 +69,66 @@ opencascade.core.js:
     - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
     - -sALLOW_MEMORY_GROWTH=1
     - -sMAXIMUM_MEMORY=4GB
+
+opencascade.complexModeling.wasm:
+  bindings:
+    # - module: "TKHLR" # could be a niche use case
+    # - module: "TKXMesh" # possibly not working
+    - module: "TKFillet"
+    - module: "TKFeat"
+    - module: "TKOffset"
+
+  inputs:
+    # - module: "TKHLR" # could be a niche use case
+    #   preBuilt: False
+    # - module: "TKXMesh" # possibly not working
+    #   preBuilt: False
+    - module: "TKFillet"
+      preBuilt: False
+    - module: "TKFeat"
+      preBuilt: False
+    - module: "TKOffset"
+      preBuilt: False
+
+  emccFlags:
+    - -DIGNORE_NO_ATOMICS=1
+    - -frtti
+    - -fPIC
+    - -O3
+    - -DHAVE_RAPIDJSON
+    - -sEXPORT_ES6=1
+    - -sUSE_ES6_IMPORT_META=0
+    - -sSIDE_MODULE=1
+    - -sDISABLE_EXCEPTION_CATCHING=1
+    - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
+
+opencascade.visualization.wasm:
+  bindings:
+    # Visualization
+    - module: "TKV3d"
+    - module: "TKService"
+    # - module: "TKOpenGl" # probably not needed
+    - module: "TKMeshVS"
+
+  inputs:
+    # Visualization
+    - module: "TKV3d"
+      preBuilt: False
+    - module: "TKService"
+      preBuilt: False
+    # - module: "TKOpenGl" # probably not needed
+    #   preBuilt: False
+    - module: "TKMeshVS"
+      preBuilt: False
+
+  emccFlags:
+    - -DIGNORE_NO_ATOMICS=1
+    - -frtti
+    - -fPIC
+    - -O3
+    - -DHAVE_RAPIDJSON
+    - -sEXPORT_ES6=1
+    - -sUSE_ES6_IMPORT_META=0
+    - -sSIDE_MODULE=1
+    - -sDISABLE_EXCEPTION_CATCHING=1
+    - -sAGGRESSIVE_VARIABLE_ELIMINATION=1

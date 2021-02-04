@@ -1,6 +1,6 @@
 // Release Builds
-export { default as ocMain } from "./opencascade.js";
-export { default as ocMainWasm } from "./opencascade.wasm";
+export { default as main } from "./opencascade.js";
+export { default as mainWasm } from "./opencascade.wasm";
 
 export { default as TKernel } from './module.TKernel.wasm';
 export { default as TKMath } from './module.TKMath.wasm';
@@ -51,6 +51,11 @@ export { default as TKXmlL } from './module.TKXmlL.wasm';
 export { default as TKXmlTObj } from './module.TKXmlTObj.wasm';
 export { default as TKXml } from './module.TKXml.wasm';
 export { default as TKXmlXCAF } from './module.TKXmlXCAF.wasm';
+
+export { default as ocCore } from "./opencascade.core.js";
+export { default as ocCoreWasm } from "./opencascade.core.wasm";
+export { default as ocComplexModelingWasm } from "./opencascade.complexModeling.wasm";
+export { default as ocVisualizationWasm } from "./opencascade.visualization.wasm";
 
 export const initOpenCascade = (mainJS, mainWasm, libs = [], module = {}) => {
   const loadLibraries = async (oc, libs, allowUndefined = false) => {
