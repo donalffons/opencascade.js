@@ -73,7 +73,8 @@ def addModuleBuildConfigs(release = True, debug = True):
           "-s", "SIDE_MODULE=1",
           *defaultEmccFlags,
           *releaseEmccFlags,
-        ]
+        ],
+        "typescriptDefinitions": True,
       }
 
     if debug:
@@ -94,7 +95,8 @@ def addModuleBuildConfigs(release = True, debug = True):
           "-s", "SIDE_MODULE=1",
           *defaultEmccFlags,
           *debugEmccFlags,
-        ]
+        ],
+        "typescriptDefinitions": True,
       }
 
 def addPackageBuildConfigs(release = True, debug = True):
@@ -150,7 +152,8 @@ def addPackageBuildConfigs(release = True, debug = True):
               "-s", "SIDE_MODULE=1",
               *defaultEmccFlags,
               *releaseEmccFlags,
-            ]
+            ],
+            "typescriptDefinitions": True,
           }
 
         if debug:
@@ -171,7 +174,8 @@ def addPackageBuildConfigs(release = True, debug = True):
               "-s", "SIDE_MODULE=1",
               *defaultEmccFlags,
               *debugEmccFlags,
-            ]
+            ],
+            "typescriptDefinitions": True,
           }
 
 def addMainModuleConfigs(release = True, debug = True):

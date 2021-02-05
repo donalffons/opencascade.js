@@ -103,8 +103,9 @@ def buildWasmModule(buildItem):
   thisModule.parse()
   print("Generate Bindings for " + buildConfigName)
   thisModule.generateEmbindings()
-  print("Generate Typescript definitions for " + buildConfigName)
-  thisModule.generateTypescriptDefinitions()
+  if "typescriptDefinitions" in buildConfig and buildConfig["typescriptDefinitions"] == True:
+    print("Generate Typescript definitions for " + buildConfigName)
+    thisModule.generateTypescriptDefinitions()
   print("Building " + buildConfigName)
   thisModule.build()
 
@@ -189,9 +190,10 @@ def runPreProcessing(buildItem):
   buildConfig = buildItem[1]
   print("pre-processing " + buildConfigName)
   currModule = generateWasmModule(buildConfigName, buildConfig)
+  exports = currModule.generateExports() if ("typescriptDefinitions" in buildConfig and buildConfig["typescriptDefinitions"] == True) else {}
   return {
     "name": buildConfigName,
-    "exports": currModule.generateExports(),
+    "exports": exports,
   }
 
 def buildWasmModuleSet(buildConfigs, outputFolder = None):
