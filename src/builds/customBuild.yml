@@ -152,15 +152,40 @@ opencascade.visualApp.wasm:
     - -sDISABLE_EXCEPTION_CATCHING=1
     - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
 
-opencascade.dataExchange.wasm:
+opencascade.dataExchangeBase.wasm:
   bindings:
     - module: "TKXSBase"
     - module: "TKSTL"
     - module: "TKSTEPBase"
-    - module: "TKIGES"
-    - module: "TKXCAF"
     - module: "TKSTEP209"
     - module: "TKSTEPAttr"
+  inputs:
+    - module: "TKXSBase"
+      preBuilt: False
+    - module: "TKSTL"
+      preBuilt: False
+    - module: "TKSTEPBase"
+      preBuilt: False
+    - module: "TKSTEP209"
+      preBuilt: False
+    - module: "TKSTEPAttr"
+      preBuilt: False
+  emccFlags:
+    - -DIGNORE_NO_ATOMICS=1
+    - -frtti
+    - -fPIC
+    - -O3
+    - -DHAVE_RAPIDJSON
+    - -sEXPORT_ES6=1
+    - -sUSE_ES6_IMPORT_META=0
+    - -sSIDE_MODULE=1
+    - -sDISABLE_EXCEPTION_CATCHING=1
+    - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
+
+opencascade.dataExchangeExtra.wasm:
+  bindings:
+    - module: "TKIGES"
+    - module: "TKXCAF"
     - module: "TKXDEIGES"
     - module: "TKVRML"
     # - module: "TKXmlXCAF" # gives error about duplicate symbol PLUGINFACTORY with libTKBinXCAF
@@ -169,19 +194,9 @@ opencascade.dataExchange.wasm:
     - module: "TKSTEP"
     - module: "TKXDESTEP"
   inputs:
-    - module: "TKXSBase"
-      preBuilt: False
-    - module: "TKSTL"
-      preBuilt: False
-    - module: "TKSTEPBase"
-      preBuilt: False
     - module: "TKIGES"
       preBuilt: False
     - module: "TKXCAF"
-      preBuilt: False
-    - module: "TKSTEP209"
-      preBuilt: False
-    - module: "TKSTEPAttr"
       preBuilt: False
     - module: "TKXDEIGES"
       preBuilt: False
