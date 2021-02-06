@@ -51,7 +51,8 @@ class FileProcessor:
         x.kind == clang.cindex.CursorKind.TYPEDEF_DECL and
         not (x.get_definition() is None or not x == x.get_definition()) and
         self.filterTypedef(x) and
-        x.type.get_num_template_arguments() != -1,
+        x.type.get_num_template_arguments() != -1 and
+        not ignoreDuplicateTypedef(x),
       self.translationUnit.cursor.get_children()))
 
     for templateTypedef in self.templateTypedefs:
