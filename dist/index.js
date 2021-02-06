@@ -54,26 +54,12 @@ export { default as TKXmlXCAF } from './module.TKXmlXCAF.wasm';
 
 export { default as ocCore } from "./opencascade.core.js";
 export { default as ocCoreWasm } from "./opencascade.core.wasm";
-export { default as ocComplexModelingWasm } from "./opencascade.complexModeling.wasm";
-export { default as ocVisualizationWasm } from "./opencascade.visualization.wasm";
+export { default as ocDataExchangeBase } from "./opencascade.dataExchangeBase.wasm";
+export { default as ocDataExchangeExtra } from "./opencascade.dataExchangeExtra.wasm";
+export { default as ocModelingAlgorithms } from "./opencascade.modelingAlgorithms.wasm";
+export { default as ocVisualApp } from "./opencascade.visualApp.wasm";
 
 export const initOpenCascade = (mainJS, mainWasm, libs = [], module = {}) => {
-  const loadLibraries = async (oc, libs, allowUndefined = false) => {
-    const promises = [];
-    for(let lib of libs) {
-      console.log("start loading " + lib);
-      promises.push(oc.loadDynamicLibrary(lib, {loadAsync: true, global: true, nodelete: true, allowUndefined}));
-      console.log("finished loading");
-    }
-    await Promise.all(promises);
-  };
-
-  const loadLibrariesQueue = async (oc, libs, allowUndefined = false) => {
-    for(let lib of libs) {
-      await loadLibraries(oc, [lib], allowUndefined);
-    }
-  };
-
   return new Promise((resolve, reject) => {
     new mainJS({
       locateFile(path) {
@@ -84,10 +70,9 @@ export const initOpenCascade = (mainJS, mainWasm, libs = [], module = {}) => {
       },
       ...module
     }).then(async oc => {
-      await loadLibrariesQueue(
-        oc,
-        libs
-      );
+      for(let lib of libs) {
+        await oc.loadDynamicLibrary(lib, {loadAsync: true, global: true, nodelete: true, allowUndefined: false});
+      }
       resolve(oc);
     });
   });
