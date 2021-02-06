@@ -21,6 +21,7 @@ opencascade.core.js:
       preBuilt: False
   emccFlags:
     - -DIGNORE_NO_ATOMICS=1
+    - -DOCCT_NO_PLUGINS
     - -frtti
     - -fPIC
     - -O3
@@ -76,6 +77,7 @@ opencascade.modelingAlgorithms.wasm:
       preBuilt: False
   emccFlags:
     - -DIGNORE_NO_ATOMICS=1
+    - -DOCCT_NO_PLUGINS
     - -frtti
     - -fPIC
     - -O3
@@ -90,17 +92,17 @@ opencascade.visualApp.wasm:
   bindings:
     - module: "TKCDF"
     - module: "TKLCAF"
-    # - module: "TKBinL" # gives error about duplicate symbol PLUGINFACTORY with libTKBin
+    - module: "TKBinL"
     - module: "TKCAF"
     - module: "TKTObj"
-    # - module: "TKXmlL" # gives error about duplicate symbol PLUGINFACTORY with libTKBinL, libTKStdL
-    # - module: "TKStdL" # gives error about duplicate symbol PLUGINFACTORY with libTKBin
-    # - module: "TKBin" # gives error bad export type for `_ZTI35BinLDrivers_DocumentRetrievalDriver`: undefined) during instantiation
-    # - module: "TKBinTObj" # gives error about duplicate symbol PLUGINFACTORY with libTKBin, libTKXml
-    # - module: "TKVCAF" # gives error bad export type for `_ZTI15PrsDim_Relation`: undefined) during instantiation
-    # - module: "TKXml" # gives error about duplicate symbol PLUGINFACTORY with libTKBin, libTKStd
-    # - module: "TKXmlTObj" # gives error about duplicate symbol PLUGINFACTORY with libTKXml, libTKStd
-    # - module: "TKStd" # gives error about duplicate symbol PLUGINFACTORY with libTKBin
+    - module: "TKXmlL"
+    - module: "TKStdL"
+    - module: "TKBin"
+    - module: "TKBinTObj"
+    - module: "TKVCAF"
+    - module: "TKXml"
+    - module: "TKXmlTObj"
+    - module: "TKStd"
     - module: "TKService"
     - module: "TKV3d"
     - module: "TKOpenGl"
@@ -110,28 +112,28 @@ opencascade.visualApp.wasm:
       preBuilt: False
     - module: "TKLCAF"
       preBuilt: False
-    # - module: "TKBinL"
-    #   preBuilt: False
+    - module: "TKBinL"
+      preBuilt: False
     - module: "TKCAF"
       preBuilt: False
     - module: "TKTObj"
       preBuilt: False
-    # - module: "TKXmlL"
-    #   preBuilt: False
-    # - module: "TKStdL"
-    #   preBuilt: False
-    # - module: "TKBin"
-    #   preBuilt: False
-    # - module: "TKBinTObj"
-    #   preBuilt: False
-    # - module: "TKVCAF"
-    #   preBuilt: False
-    # - module: "TKXml"
-    #   preBuilt: False
-    # - module: "TKXmlTObj"
-    #   preBuilt: False
-    # - module: "TKStd"
-    #   preBuilt: False
+    - module: "TKXmlL"
+      preBuilt: False
+    - module: "TKStdL"
+      preBuilt: False
+    - module: "TKBin"
+      preBuilt: False
+    - module: "TKBinTObj"
+      preBuilt: False
+    - module: "TKVCAF"
+      preBuilt: False
+    - module: "TKXml"
+      preBuilt: False
+    - module: "TKXmlTObj"
+      preBuilt: False
+    - module: "TKStd"
+      preBuilt: False
     - module: "TKService"
       preBuilt: False
     - module: "TKV3d"
@@ -142,6 +144,7 @@ opencascade.visualApp.wasm:
       preBuilt: False
   emccFlags:
     - -DIGNORE_NO_ATOMICS=1
+    - -DOCCT_NO_PLUGINS
     - -frtti
     - -fPIC
     - -O3
@@ -172,6 +175,7 @@ opencascade.dataExchangeBase.wasm:
       preBuilt: False
   emccFlags:
     - -DIGNORE_NO_ATOMICS=1
+    - -DOCCT_NO_PLUGINS
     - -frtti
     - -fPIC
     - -O3
@@ -188,7 +192,7 @@ opencascade.dataExchangeExtra.wasm:
     - module: "TKXCAF"
     - module: "TKXDEIGES"
     - module: "TKVRML"
-    # - module: "TKXmlXCAF" # gives error about duplicate symbol PLUGINFACTORY with libTKBinXCAF
+    - module: "TKXmlXCAF"
     - module: "TKBinXCAF"
     - module: "TKRWMesh"
     - module: "TKSTEP"
@@ -202,8 +206,8 @@ opencascade.dataExchangeExtra.wasm:
       preBuilt: False
     - module: "TKVRML"
       preBuilt: False
-    # - module: "TKXmlXCAF"
-    #   preBuilt: False
+    - module: "TKXmlXCAF"
+      preBuilt: False
     - module: "TKBinXCAF"
       preBuilt: False
     - module: "TKRWMesh"
@@ -214,6 +218,7 @@ opencascade.dataExchangeExtra.wasm:
       preBuilt: False
   emccFlags:
     - -DIGNORE_NO_ATOMICS=1
+    - -DOCCT_NO_PLUGINS
     - -frtti
     - -fPIC
     - -O3
