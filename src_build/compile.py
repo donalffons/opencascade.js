@@ -60,7 +60,7 @@ def buildObjectFiles(package):
     libBasePath = libraryBasePath + "/" + packageName + "/" + theName
     command = [
       "emcc",
-      "-DIGNORE_NO_ATOMICS=1", "-frtti", "-fPIC", "-DHAVE_RAPIDJSON",
+      "-DIGNORE_NO_ATOMICS=1", "-DOCCT_NO_PLUGINS", "-frtti", "-fPIC", "-DHAVE_RAPIDJSON",
       *list(map(lambda x: "-I" + x, includePaths)),
       "-c",
       dirpath + "/" + theFile,
