@@ -6,7 +6,7 @@
   "author": "Sebastian Alff <donalffons@gmail.com>",
   "license": "LGPL-2.1-only",
   "repository": "github:donalffons/opencascade.js",
-  "types": "dist/opencascade.d.ts",
+  "types": "dist/index.d.ts",
   "devDependencies": {
     "jest": "^26.4.2",
     "opencascade.js-examples": "git://github.com/donalffons/opencascade.js-examples.git#master"
