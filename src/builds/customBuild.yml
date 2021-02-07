@@ -36,6 +36,44 @@ opencascade.core.js:
     - -sALLOW_MEMORY_GROWTH=1
     - -sMAXIMUM_MEMORY=4GB
 
+opencascade.coreSide.js:
+  bindings:
+    - module: "TKernel"
+    - module: "TKMath"
+    - module: "TKG2d"
+    - module: "TKG3d"
+    - module: "TKGeomBase"
+    - module: "TKBRep"
+  inputs:
+    - module: "TKernel"
+      preBuilt: False
+    - module: "TKMath"
+      preBuilt: False
+    - module: "TKG2d"
+      preBuilt: False
+    - module: "TKG3d"
+      preBuilt: False
+    - module: "TKGeomBase"
+      preBuilt: False
+    - module: "TKBRep"
+      preBuilt: False
+  emccFlags:
+    - -DIGNORE_NO_ATOMICS=1
+    - -DOCCT_NO_PLUGINS
+    - -frtti
+    - -fPIC
+    - -O3
+    - -DHAVE_RAPIDJSON
+    - -sEXPORT_ES6=1
+    - -sUSE_ES6_IMPORT_META=0
+    - -sUSE_FREETYPE=1
+    - -sEXTRA_EXPORTED_RUNTIME_METHODS=["FS"]
+    - -sSIDE_MODULE=1
+    - -sDISABLE_EXCEPTION_CATCHING=1
+    - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
+    - -sALLOW_MEMORY_GROWTH=1
+    - -sMAXIMUM_MEMORY=4GB
+
 opencascade.modelingAlgorithms.wasm:
   bindings:
     - module: "TKGeomAlgo"
