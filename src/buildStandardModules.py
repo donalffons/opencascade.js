@@ -192,7 +192,8 @@ def addMainModuleConfigs(release = True, debug = True):
         *defaultEmccFlags,
         *releaseEmccFlags,
         *memoryEmccFlags
-      ]
+      ],
+      "typescriptDefinitions": True,
     }
   if debug:
     debugBuildConfigs["opencascade.debug.js"] = {
@@ -207,7 +208,8 @@ def addMainModuleConfigs(release = True, debug = True):
         *defaultEmccFlags,
         *debugEmccFlags,
         *memoryEmccFlags
-      ]
+      ],
+      "typescriptDefinitions": True,
     }
 
 def buildCustom():
