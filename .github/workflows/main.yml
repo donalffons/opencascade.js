@@ -23,6 +23,14 @@ jobs:
           password: "${{ secrets.DOCKER_PASSWORD }}"
           image_name: donalffons/opencascade.js
 
+      - name: Docker Hub Description
+        if: github.ref == 'refs/heads/beta'
+        uses: peter-evans/dockerhub-description@v2
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKERHUB_REPOSITORY: donalffons/opencascade.js
+
       - name: Build OpenCascade.js
         if: github.ref == 'refs/heads/beta'
         timeout-minutes: 480
