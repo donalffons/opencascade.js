@@ -1,6 +1,7 @@
-// Release Builds
-export { default as main } from "./opencascade.js";
-export { default as mainWasm } from "./opencascade.wasm";
+import ocMainJS from "./opencascade.js";
+export { ocMainJS }
+import ocMainWasm from "./opencascade.wasm";
+export { ocMainWasm }
 
 export { default as TKernel } from './module.TKernel.wasm';
 export { default as TKMath } from './module.TKMath.wasm';
@@ -52,14 +53,19 @@ export { default as TKXmlTObj } from './module.TKXmlTObj.wasm';
 export { default as TKXml } from './module.TKXml.wasm';
 export { default as TKXmlXCAF } from './module.TKXmlXCAF.wasm';
 
-export { default as ocCore } from "./opencascade.core.js";
-export { default as ocCoreWasm } from "./opencascade.core.wasm";
+export { default as ocCore } from "./opencascade.core.wasm";
 export { default as ocDataExchangeBase } from "./opencascade.dataExchangeBase.wasm";
 export { default as ocDataExchangeExtra } from "./opencascade.dataExchangeExtra.wasm";
 export { default as ocModelingAlgorithms } from "./opencascade.modelingAlgorithms.wasm";
 export { default as ocVisualApp } from "./opencascade.visualApp.wasm";
 
-export const initOpenCascade = (mainJS, mainWasm, libs = [], module = {}) => {
+export const initOpenCascade = (
+  {
+    mainJS = ocMainJS,
+    mainWasm = ocMainWasm,
+    libs = [],
+    module = {},
+  } = {}) => {
   return new Promise((resolve, reject) => {
     new mainJS({
       locateFile(path) {
