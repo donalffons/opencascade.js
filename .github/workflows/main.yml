@@ -15,6 +15,7 @@ jobs:
           lfs: true
 
       - name: Build OpenCascade.js Docker Image
+        if: github.ref == 'refs/heads/beta'
         uses: whoan/docker-build-with-cache-action@v5
         timeout-minutes: 480
         with:
@@ -23,11 +24,13 @@ jobs:
           image_name: donalffons/opencascade.js
 
       - name: Build OpenCascade.js
+        if: github.ref == 'refs/heads/beta'
         timeout-minutes: 480
         run: |
           docker run -v "$(pwd)/dist/":"/opencascade.js/dist/" my_awesome_image
 
       - name: Upload Build Artifacts
+        if: github.ref == 'refs/heads/master'
         uses: actions/upload-artifact@v2
         if: ${{ always() }}
         with:
@@ -35,6 +38,7 @@ jobs:
           path: dist
 
       - name: Git and NPM config
+        if: github.ref == 'refs/heads/beta'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -47,11 +51,13 @@ jobs:
           npm publish --tag=beta
 
       - name: Commit Build Artifacts in dist
+        if: github.ref == 'refs/heads/beta'
         run: |
           git add -A
           git diff-index --quiet HEAD || git commit -m "Build OpenCascade.js"
 
       - name: Push Changes to branch
+        if: github.ref == 'refs/heads/beta'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
