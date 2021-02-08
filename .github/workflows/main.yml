@@ -37,14 +37,6 @@ jobs:
         run: |
           docker run -v "$(pwd)/dist/":"/opencascade.js/dist/" my_awesome_image
 
-      - name: Upload Build Artifacts
-        if: github.ref == 'refs/heads/master'
-        uses: actions/upload-artifact@v2
-        if: ${{ always() }}
-        with:
-          name: Build Products
-          path: dist
-
       - name: Git and NPM config
         if: github.ref == 'refs/heads/beta'
         run: |
