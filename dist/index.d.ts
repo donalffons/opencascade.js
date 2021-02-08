@@ -1,6 +1,13 @@
 import { openCascadeInstance, openCascadeModuleObject } from "opencascade.js/dist/opencascade";
 
-export function initOpenCascade(mainJS: openCascadeInstance, mainWasm: string, libs: string[] = [], module: openCascadeModuleObject = {}): Promise<openCascadeInstance>;
+export function initOpenCascade(
+  settings: {
+    mainJS?: openCascadeInstance,
+    mainWasm?: string,
+    libs?: string[],
+    module?: openCascadeModuleObject,
+  },
+): Promise<openCascadeInstance>;
 
 const main: openCascadeInstance;
 const mainWasm: string;
