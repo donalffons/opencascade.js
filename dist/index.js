@@ -59,8 +59,7 @@ export { default as ocDataExchangeExtra } from "./opencascade.dataExchangeExtra.
 export { default as ocModelingAlgorithms } from "./opencascade.modelingAlgorithms.wasm";
 export { default as ocVisualApplication } from "./opencascade.visualApplication.wasm";
 
-export const initOpenCascade = (
-  {
+export const initOpenCascade = ({
     mainJS = ocMainJS,
     mainWasm = ocMainWasm,
     libs = [],
