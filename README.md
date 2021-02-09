@@ -3,7 +3,7 @@
 ![OpenCascade Version](https://img.shields.io/badge/OpenCascade%20Version-7.5.0-green.svg)
 
 <p align="center">
-  <img src="images/logo.svg" alt="Logo">
+  <img src="images/logo.svg" alt="Logo" width="50%">
 
   <h3 align="center">OpenCascade.js</h3>
 
@@ -28,7 +28,7 @@
 
 # Getting Started
 
-(Instructions for the upcoming `@beta` release. See [here](https://github.com/donalffons/opencascade.js/tree/v1.1.1) for instructions of the `v1.1.1` release.)
+(These instructions are for the upcoming `@beta` release. All information is likely to change. See [here](https://github.com/donalffons/opencascade.js/tree/v1.1.1) for instructions of the `v1.1.1` release.)
 
 1. Add the library as a dependency to your project
 
@@ -67,22 +67,22 @@
     import {
       initOpenCascade,
       ocCore,
-      ocDataExchangeBase,
-      ocDataExchangeExtra,
       ocModelingAlgorithms,
       ocVisualApplication,
+      ocDataExchangeBase,
+      ocDataExchangeExtra,
     } from "opencascade.js";
 
     initOpenCascade({
       libs: [ // Specify which modules to use and the sequence in which to load them
         ocCore,
         ocModelingAlgorithms,
-        ocVisualApp,
+        ocVisualApplication,
         ocDataExchangeBase,
         ocDataExchangeExtra,
       ]
     }).then(oc => {
-      // Check out the examples for how to use this library!
+      // Check out the examples on how to use this library!
     });
     ```
 
@@ -99,58 +99,6 @@ No. This project is making no changes to the OpenCascade library, apart from few
 ## Who is going to keep this project up-to-date with the OpenCascade library?
 
 This project is (hopefully) keeping itself (mostly) up-to-date with the OpenCascade library, since most bindings are generated automatically.
-
-# Use it
-
-1. Add the library as a dependency to your project
-
-    ```sh
-    # with yarn
-    yarn add opencascade.js
-    # with npm
-    npm install opencascade.js
-    ```
-
-2. Assuming that you use webpack in your project, you need to add the following configuration to your `webpack.config.js`
-
-    ``` javascript
-    module: {
-      rules: [
-        {
-          test: /opencascade\.wasm\.wasm$/,
-          type: "javascript/auto",
-          loader: "file-loader"
-        }
-      ]
-    },
-    node: {
-      fs: "empty"
-    }
-    ```
-    You will also need to add `file-loader` as a dev-dependency to your project, i.e.
-
-    ```sh
-    # with yarn
-    yarn add file-loader --dev
-    # with npm
-    npm install file-loader --save-dev
-    ```
-
-    This will
-
-    * make sure that the path to the opencascade WASM file is made available by webpack. This is required to enable support for `WebAssembly.InstantiateStreaming` & Co.
-    * stop webpack from complaining about `fs` being undefined in the Emscripten-generated loading script.
-    
-    For more info, see [here](https://gist.github.com/surma/b2705b6cca29357ebea1c9e6e15684cc).
-
-3. Use the library in your project:
-    ``` javascript
-    import { initOpenCascade } from "opencascade.js";
-    initOpenCascade().then(openCascade => {
-      // use it!
-    });
-    ```
-    This code will load the WebAssembly version of the library.
 
 # Contributing
 
