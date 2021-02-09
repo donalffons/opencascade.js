@@ -98,12 +98,7 @@ Custom builds are defined using YAML files. One YAML file can contain multiple m
       import opencascadeWasm from 'rocketExample.wasm';
 
       opencascade({
-        locateFile(path) {
-          if(path.endsWith('.wasm')) {
-            return opencascadeWasm;
-          }
-          return path;
-        },
+        locateFile: file => opencascadeWasm,
       }).then(oc => {
         // Custom build is ready to use!
       });
