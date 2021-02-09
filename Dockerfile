@@ -176,6 +176,7 @@ RUN \
   /opencascade.js/src_build/compile.py
 
 COPY . .
+RUN chmod -R 777 .
 WORKDIR /src/
 
 ENTRYPOINT [ "/opencascade.js/src/run.sh" ]
