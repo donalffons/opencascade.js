@@ -65,9 +65,9 @@ export { main, mainWasm, TKernel, TKMath, TKG2d, TKG3d, TKService, TKGeomBase, T
 
 const ocCore: openCascadeInstance;
 const ocCoreWasm: string;
+const ocModelingAlgorithms: string;
+const ocVisualApplication: string;
 const ocDataExchangeBase: string;
 const ocDataExchangeExtra: string;
-const ocModelingAlgorithms: string;
-const ocVisualApp: string;
 
-export { ocCore, ocCoreWasm, ocDataExchangeBase, ocDataExchangeExtra, ocModelingAlgorithms, ocVisualApp };
+export { ocCore, ocCoreWasm, ocDataExchangeBase, ocDataExchangeExtra, ocModelingAlgorithms, ocVisualApplication };
