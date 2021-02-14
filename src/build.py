@@ -16,7 +16,7 @@ libraryBasePath = "/opencascade.js/build/fullLibrary"
 def getGlobalIncludes():
   includeFiles = set()
   additionalIncludePaths = set()
-  for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
+  for dirpath, dirnames, filenames in os.walk("/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/"):
     additionalIncludePaths.add(str(dirpath))
     for item in filenames:
       if filterIncludeFile(item):
@@ -25,7 +25,7 @@ def getGlobalIncludes():
 
 def getPackageIncludes(packageName):
   includeFiles = set()
-  packageDir = "/occt/occt-628c021/src/" + packageName
+  packageDir = "/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/" + packageName
   for dirpath, dirnames, filenames in os.walk(packageDir):
     for item in filenames:
       if filterIncludeFile(item):
@@ -34,7 +34,7 @@ def getPackageIncludes(packageName):
 
 def getModuleIncludes(moduleName):
   includeFiles = set()
-  moduleDir = "/occt/occt-628c021/src/" + moduleName
+  moduleDir = "/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/" + moduleName
   with open(moduleDir + "/PACKAGES", "r") as packageFile:
     for packageFileLine in packageFile:
       if packageFileLine.strip() == "":
@@ -62,7 +62,7 @@ def getBindingsFilterFunction(bindingSettings):
           else:
             shouldProcess = True
       if "module" in bindingSetting:
-        moduleDir = "/occt/occt-628c021/src/" + bindingSetting["module"]
+        moduleDir = "/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/" + bindingSetting["module"]
         currPackageName = os.path.basename(os.path.dirname(theItem.extent.start.file.name))
         with open(moduleDir + "/PACKAGES", "r") as packageFile:
           for packageFileLine in packageFile:
@@ -81,7 +81,7 @@ def getBindingsFilterFunction(bindingSettings):
   return filterFunction
 
 def addAllOcctModulesToWasmModule(thisModule, postfix = ""):
-  for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
+  for dirpath, dirnames, filenames in os.walk("/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/"):
     packageOrModuleName = os.path.basename(dirpath)
     if not any(x for x in filenames if x == "PACKAGES"):
       continue
@@ -132,7 +132,7 @@ def generateWasmModule(moduleName, buildConfig, outputFolder = None):
     for input in buildConfig["inputs"]:
       if "package" in input:
         if not "preBuilt" in input or not input["preBuilt"]:
-          for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-628c021/src/", input["package"])):
+          for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/", input["package"])):
             for item in filenames:
               if filterSourceFile(item):
                 thisModule.addLibraryFile(dirpath + "/" + item, None)
@@ -143,10 +143,10 @@ def generateWasmModule(moduleName, buildConfig, outputFolder = None):
             print("could not process preBuilt setting")
       if "module" in input:
         if not "preBuilt" in input or not input["preBuilt"]:
-          with open("/occt/occt-628c021/src/" + input["module"] + "/PACKAGES", "r") as a_file:
+          with open("/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/" + input["module"] + "/PACKAGES", "r") as a_file:
             packageNames = list(map(lambda x: x.strip(), filter(lambda x: not x.strip() == "", a_file)))
             for packageName in packageNames:
-              for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-628c021/src/", packageName)):
+              for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/", packageName)):
                 for item in filenames:
                   if filterSourceFile(item):
                     thisModule.addLibraryFile(dirpath + "/" + item, None)

@@ -38,7 +38,7 @@ memoryEmccFlags = [
 ]
 
 def addModuleBuildConfigs(release = True, debug = True):
-  for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
+  for dirpath, dirnames, filenames in os.walk("/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/"):
     packageOrModuleName = os.path.basename(dirpath)
     if packageOrModuleName == "":
       continue
@@ -100,7 +100,7 @@ def addModuleBuildConfigs(release = True, debug = True):
       }
 
 def addPackageBuildConfigs(release = True, debug = True):
-  for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
+  for dirpath, dirnames, filenames in os.walk("/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/"):
     packageOrModuleName = os.path.basename(dirpath)
     if packageOrModuleName == "":
       continue

@@ -1,6 +1,6 @@
 
 ![opencascade.js - Build Library](https://github.com/donalffons/opencascade.js/workflows/opencascade.js%20-%20Build%20Library/badge.svg)
-![OpenCascade Version](https://img.shields.io/badge/OpenCascade%20Version-7.5.0-green.svg)
+![OpenCascade Version](https://img.shields.io/badge/OpenCascade%20Version-7.5.1-green.svg)
 
 <p align="center">
   <img src="images/logo.svg" alt="Logo" width="50%">

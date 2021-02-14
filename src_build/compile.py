@@ -43,7 +43,7 @@ includePaths.extend([
   "/freetype/include/freetype",
   "/freetype/include",
 ])
-for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-628c021/src/")):
+for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/")):
   includePaths.append(dirpath)
 
 def buildObjectFiles(package):
@@ -120,7 +120,7 @@ def addObjectFiles(packageName):
   thisPackage["name"] = packageName
   thisPackage["files"] = []
   objectFilesToBuild.append(thisPackage)
-  for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-628c021/src/", packageName)):
+  for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/", packageName)):
     for item in filenames:
       if filterSourceFile(item):
         thisPackage["files"].append({
@@ -135,7 +135,7 @@ def addPackageLibrary(libraryName, packageNames):
   thisLibrary["files"] = []
   librariesToBuild.append(thisLibrary)
   for packageName in packageNames:
-    for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-628c021/src/", packageName)):
+    for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/", packageName)):
       for item in filenames:
         if filterSourceFile(item):
           thisLibrary["files"].append({
@@ -144,15 +144,15 @@ def addPackageLibrary(libraryName, packageNames):
           })
 
 def addLibrary(packageOrModuleName):
-  filenames = list(os.walk("/occt/occt-628c021/src/" + packageOrModuleName))[0][2]
+  filenames = list(os.walk("/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/" + packageOrModuleName))[0][2]
   if not any(x for x in filenames if x == "PACKAGES"):
     addPackageLibrary(packageOrModuleName, [packageOrModuleName])
   else:
-    with open("/occt/occt-628c021/src/" + packageOrModuleName + "/PACKAGES", "r") as a_file:
+    with open("/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/" + packageOrModuleName + "/PACKAGES", "r") as a_file:
       packageNames = list(map(lambda x: x.strip(), filter(lambda x: not x.strip() == "", a_file)))
       addPackageLibrary(packageOrModuleName, packageNames)
 
-for dirpath, dirnames, filenames in os.walk("/occt/occt-628c021/src/"):
+for dirpath, dirnames, filenames in os.walk("/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/"):
   packageOrModuleName = os.path.basename(dirpath)
   if not any(x for x in filenames if x == "PACKAGES"):
     continue
