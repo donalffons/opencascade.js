@@ -14,4 +14,4 @@ for dirpath, dirnames, filenames in os.walk("/opencascade.js/src_build/patches")
     try:
       subprocess.check_call(["patch -p0 < '"+ dirpath + "/" + filename + "'"], stdout=subprocess.PIPE, shell=True)
     except:
-      print("Could not apply patch. Maybe it has already been applied?")
+      raise Exception("Could not apply patch!")
