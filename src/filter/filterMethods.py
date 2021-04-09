@@ -31,4 +31,70 @@ def filterMethod(theClass, method):
   if theClass.spelling in ["NCollection_Sequence", "NCollection_List"] and "::Iterator" in method.displayname:
     return False
 
+  # Creates error during instantiation:
+  # Uncaught (in promise) RuntimeError: abort(Assertion failed: bad export type for `_ZNK19Geom2dHatch_Hatcher6IsDoneEv`: undefined). Build with -s ASSERTIONS=1 for more info.
+  # Seems like ::isDone() is not defined anywhere
+  if theClass.spelling == "Geom2dHatch_Hatcher" and method.spelling == "IsDone":
+    return False
+
+  # Creates error during instantiation:
+  # Uncaught (in promise) RuntimeError: abort(Assertion failed: bad export type for `_ZN21Geom2dAPI_Interpolate13ClearTangentsEv`: undefined). Build with -s ASSERTIONS=1 for more info.
+  if theClass.spelling == "Geom2dAPI_Interpolate" and method.spelling == "ClearTangents":
+    return False
+
+  # Creates error during instantiation:
+  # Uncaught (in promise) RuntimeError: abort(Assertion failed: bad export type for `_ZNK21Geom2dGcc_Lin2dTanObl11IsParallel2Ev`: undefined). Build with -s ASSERTIONS=1 for more info.
+  if theClass.spelling == "Geom2dGcc_Lin2dTanObl" and method.spelling == "IsParallel2":
+    return False
+
+  # Creates error during instantiation:
+  # Uncaught (in promise) RuntimeError: abort(Assertion failed: bad export type for `_ZN25Geom2dInt_Geom2dCurveTool11IsCompositeERK17Adaptor2d_Curve2d`: undefined). Build with -s ASSERTIONS=1 for more info.
+  if theClass.spelling == "Geom2dInt_Geom2dCurveTool" and method.spelling == "IsComposite":
+    return False
+
+  # Creates error during instantiation:
+  # Uncaught (in promise) RuntimeError: abort(Assertion failed: bad export type for `_ZN46Geom2dInt_TheCurveLocatorOfTheProjPCurOfGInter6LocateERK17Adaptor2d_Curve2dS2_iiR17Extrema_POnCurv2dS4_`: undefined). Build with -s ASSERTIONS=1 for more info.
+  if theClass.spelling == "Geom2dInt_TheCurveLocatorOfTheProjPCurOfGInter" and method.spelling == "Locate":
+    return False
+
+  # Creates error during instantiation:
+  # see above
+  if theClass.spelling == "GeomInt_IntSS" and method.spelling == "SetTolFixTangents":
+    return False
+
+  # Creates error during instantiation:
+  # see above
+  if theClass.spelling == "GeomInt_IntSS" and method.spelling == "TolFixTangents":
+    return False
+
+  # Creates error during instantiation:
+  # see above
+  if theClass.spelling == "GeomAPI_Interpolate" and method.spelling == "ClearTangents":
+    return False
+
+  # Creates error during instantiation:
+  # see above
+  if theClass.spelling == "GeomFill_FunctionGuide" and method.spelling == "Deriv2T":
+    return False
+
+  # Creates error during instantiation:
+  # see above
+  if theClass.spelling == "GeomFill_SweepSectionGenerator" and method.spelling == "Init":
+    return False
+
+  # Creates error during instantiation:
+  # see above
+  if theClass.spelling == "GeomInt_ResConstraintOfMyGradientOfTheComputeLineBezierOfWLApprox" and method.spelling == "Error":
+    return False
+
+  # Creates error during instantiation:
+  # see above
+  if theClass.spelling == "GeomInt_ResConstraintOfMyGradientbisOfTheComputeLineOfWLApprox" and method.spelling == "Error":
+    return False
+
+  # Creates error during instantiation:
+  # see above
+  if theClass.spelling == "GeomInt_WLApprox" and method.spelling == "Perform":
+    return False
+
   return True
