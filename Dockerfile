@@ -1,7 +1,7 @@
-FROM emscripten/emsdk:2.0.13
+FROM emscripten/emsdk:2.0.18
 
 RUN apt update -y
-RUN apt install -y build-essential python3 python-pip git cmake bash curl npm
+RUN apt install -y build-essential python3 python3-pip git cmake bash curl npm
 
 WORKDIR /python/
 RUN \
@@ -150,13 +150,6 @@ RUN \
   curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
   apt-get install git-lfs && \
   git lfs install
-
-RUN \
-  apt remove libgcc-8-dev -y && \
-  echo "deb http://ftp.us.debian.org/debian testing main contrib non-free" >> /etc/apt/sources.list && \
-  apt update -y && \
-  apt install build-essential -y && \
-  pip3 install clang
 
 RUN \
   apt update -y && \
