@@ -153,6 +153,11 @@ RUN \
 
 RUN \
   apt update -y && \
+  apt install build-essential -y && \
+  pip3 install clang
+
+RUN \
+  apt update -y && \
   DEBIAN_FRONTEND=noninteractive apt upgrade -y && \
   pip3 install pyyaml patch
 
