@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build OpenCascade.js
+    name: Build OpenCascade.js Beta
     runs-on: self-hosted
     timeout-minutes: 600
     steps:
