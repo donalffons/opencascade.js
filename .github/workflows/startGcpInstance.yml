@@ -1,7 +1,13 @@
 name: Start GCP Compute Instance
-on: [push]
+
+on:
+  push:
+    branches:
+      - beta
+
 jobs:
   StartGcpComputeInstance:
+    name: Start GCP Compute Instance
     runs-on: ubuntu-latest
     steps:
       - name: Set up Google Cloud SDK

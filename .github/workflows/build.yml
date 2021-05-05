@@ -1,7 +1,9 @@
-name: opencascade.js - Build Library
+name: Build OpenCascade.js
 
 on:
-  push
+  push:
+    branches:
+      - beta
 
 jobs:
   build:
