@@ -8,13 +8,13 @@ GH_API_TOKEN=$(curl -f http://metadata.google.internal/computeMetadata/v1/instan
 UUID=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/UUID -H "Metadata-Flavor: Google")
 
 gcloud auth activate-service-account --key-file /saKey.json
-GH_ACTION_TOKEN_RESPONSE=$(curl -u opencascade.js-build:$GH_API_TOKEN   -X POST   -H "Accept: application/vnd.github.v3+json"   https://api.github.com/repos/donalffons/build-test/actions/runners/registration-token)
+GH_ACTION_TOKEN_RESPONSE=$(curl -u opencascade.js-build:$GH_API_TOKEN   -X POST   -H "Accept: application/vnd.github.v3+json"   https://api.github.com/repos/donalffons/opencascade.js/actions/runners/registration-token)
 GH_ACTION_TOKEN=$(echo $GH_ACTION_TOKEN_RESPONSE | jq -r ".token")
 
 mkdir actions-runner && cd actions-runner
 curl -o actions-runner-linux-x64-2.278.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.278.0/actions-runner-linux-x64-2.278.0.tar.gz
 tar xzf ./actions-runner-linux-x64-2.278.0.tar.gz
-./config.sh --unattended --url https://github.com/donalffons/build-test --token $GH_ACTION_TOKEN --replace --name opencascade-js-build
+./config.sh --unattended --url https://github.com/donalffons/opencascade.js --token $GH_ACTION_TOKEN --replace --name opencascade-js-build
 ./run.sh --once
 sleep 60
 
