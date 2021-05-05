@@ -21,6 +21,7 @@ apt install -y docker-ce docker-ce-cli containerd.io
 
 # Install Git LFS
 apt install -y install git-lfs
+git lfs install
 
 echo $(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/SA_KEY -H "Metadata-Flavor: Google") > /saKey.json
 GH_API_TOKEN=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/GH_API_TOKEN -H "Metadata-Flavor: Google")
@@ -34,7 +35,7 @@ mkdir actions-runner && cd actions-runner
 curl -o actions-runner-linux-x64-2.278.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.278.0/actions-runner-linux-x64-2.278.0.tar.gz
 tar xzf ./actions-runner-linux-x64-2.278.0.tar.gz
 ./config.sh --unattended --url https://github.com/donalffons/opencascade.js --token $GH_ACTION_TOKEN --replace --name opencascade-js-build
-./run.sh --once
+./run.sh --once || true
 sleep 60
 
 gcloud compute instances delete opencascade-js-build-$UUID --zone us-central1-a -q
