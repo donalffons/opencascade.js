@@ -32,7 +32,7 @@ jobs:
           gcloud beta compute \
             instances create opencascade-js-build-$UUID \
             --zone=us-central1-a \
-            --machine-type=n2d-standard-8 \
+            --machine-type=c2-standard-16 \
             --subnet=default \
             --network-tier=PREMIUM \
             --metadata-from-file startup-script=runAction.sh,SA_KEY=GCP_SA_KEY.json,GH_API_TOKEN=GH_API_TOKEN.json,UUID=UUID \

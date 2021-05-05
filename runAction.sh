@@ -23,7 +23,7 @@ apt install -y docker-ce docker-ce-cli containerd.io
 apt install -y git-lfs
 
 # Install GCP Disk Space Monitoring
-curl -sSO https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh && sudo bash add-monitoring-agent-repo.sh && sudo apt-get update && sudo apt-get install stackdriver-agent && sudo service stackdriver-agent start
+curl -sSO https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh && sudo bash add-monitoring-agent-repo.sh && sudo apt-get update -y && sudo apt-get install -y stackdriver-agent && sudo service stackdriver-agent start
 
 echo $(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/SA_KEY -H "Metadata-Flavor: Google") > /saKey.json
 GH_API_TOKEN=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/GH_API_TOKEN -H "Metadata-Flavor: Google")
