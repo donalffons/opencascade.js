@@ -1,7 +1,10 @@
 #!/bin/bash
 export RUNNER_ALLOW_RUNASROOT="1"
 
+# Install jq
 snap install jq
+
+# Install Docker
 apt update -y
 apt install -y \
   apt-transport-https \
@@ -15,6 +18,9 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 apt update -y
 apt install -y docker-ce docker-ce-cli containerd.io
+
+# Install Git LFS
+apt install -y install git-lfs
 
 echo $(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/SA_KEY -H "Metadata-Flavor: Google") > /saKey.json
 GH_API_TOKEN=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/GH_API_TOKEN -H "Metadata-Flavor: Google")
