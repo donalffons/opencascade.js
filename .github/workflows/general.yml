@@ -7,6 +7,8 @@ jobs:
     name: General CI/CD Tasks
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
       - name: Docker Hub Description
         if: github.ref == 'refs/heads/beta'
         uses: peter-evans/dockerhub-description@v2
