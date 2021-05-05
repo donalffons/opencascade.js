@@ -20,8 +20,7 @@ apt update -y
 apt install -y docker-ce docker-ce-cli containerd.io
 
 # Install Git LFS
-apt install -y install git-lfs
-git lfs install
+apt install -y git-lfs
 
 echo $(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/SA_KEY -H "Metadata-Flavor: Google") > /saKey.json
 GH_API_TOKEN=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/GH_API_TOKEN -H "Metadata-Flavor: Google")
