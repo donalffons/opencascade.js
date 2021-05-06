@@ -6,6 +6,7 @@ from build import buildWasmModuleSet
 from multiprocessing import Process
 from filter.filterSourceFiles import filterSourceFile
 import subprocess
+from filter.filterPackagesAndModules import filterPackagesAndModules
 
 releaseBuildConfigs = {}
 debugBuildConfigs = {}
@@ -46,13 +47,7 @@ def addModuleBuildConfigs(release = True, debug = True):
     if not any(x for x in filenames if x == "PACKAGES"):
       continue
 
-    if packageOrModuleName in [
-      "TKViewerTest",
-      "TKD3DHost",
-      "TKIVtk",
-      "TKDraw",
-      "TKIVtkDraw",
-    ]:
+    if not filterPackagesAndModules(packageOrModuleName):
       continue
 
     if release:
@@ -108,13 +103,7 @@ def addPackageBuildConfigs(release = True, debug = True):
     if not any(x for x in filenames if x == "PACKAGES"):
       continue
 
-    if packageOrModuleName in [
-      "TKViewerTest",
-      "TKD3DHost",
-      "TKIVtk",
-      "TKDraw",
-      "TKIVtkDraw",
-    ]:
+    if not filterPackagesAndModules(packageOrModuleName):
       continue
 
     with open(dirpath + "/PACKAGES", "r") as a_file:
