@@ -15,6 +15,7 @@ def filterPackagesAndModules(packageOrModuleName):
     "TKXSDRAW", # requires TKDRAW
     "TKTObjDRAW", # requires TKDRAW
     "TKOpenGl", # emcc: error: EM_ASM is not supported in side modules / emcc: error: EM_JS is not supported in side modules during build
+    "Tkernel",
   ]:
     return False
 
