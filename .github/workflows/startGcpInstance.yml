@@ -43,7 +43,7 @@ jobs:
             --image=ubuntu-2004-focal-v20210429 \
             --image-project=ubuntu-os-cloud \
             --boot-disk-size=50GB \
-            --boot-disk-type=pd-balanced \
+            --boot-disk-type=pd-ssd \
             --boot-disk-device-name=opencascade-js-build \
             --no-shielded-secure-boot \
             --shielded-vtpm \

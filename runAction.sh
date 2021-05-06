@@ -25,6 +25,11 @@ apt install -y git-lfs
 # Install GCP Disk Space Monitoring
 curl -sSO https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh && sudo bash add-monitoring-agent-repo.sh && sudo apt-get update -y && sudo apt-get install -y stackdriver-agent && sudo service stackdriver-agent start
 
+# Install Node and NPM
+apt install -y nodejs npm
+
+# Prepare Actinon Execution
+
 echo $(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/SA_KEY -H "Metadata-Flavor: Google") > /saKey.json
 GH_API_TOKEN=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/GH_API_TOKEN -H "Metadata-Flavor: Google")
 UUID=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/UUID -H "Metadata-Flavor: Google")
