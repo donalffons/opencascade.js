@@ -230,5 +230,8 @@ def runInParallel(*fns):
     proc.append(p)
   for p in proc:
     p.join()
+  for p in proc:
+    if p.exitcode != 0:
+      raise Exception("Error in child process")
 
 runInParallel(lambda: buildWasmModuleSet(releaseBuildConfigs), lambda: buildWasmModuleSet(debugBuildConfigs), lambda: buildCustom())
