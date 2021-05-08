@@ -59,9 +59,9 @@ class WasmModule:
       list(map(lambda x: "-I" + x, [
         "/emsdk/upstream/emscripten/system/include/",
         "/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed/",
-        "/clang/clang_11/include/c++/v1/",
-        "/clang/clang_11/lib/clang/11.0.0/include/",
-        "/clang/clang_11/include/c++/v1/support/newlib/",
+        "/emsdk/upstream/emscripten/system/lib/libcxx/include/",
+        "/emsdk/upstream/lib/clang/13.0.0/include/",
+        "/emsdk/upstream/emscripten/system/lib/libcxx/include/support/newlib/"
       ])) + \
       list(map(lambda x: "-I" + x, self.additionalIncludePaths)) + \
       list(map(lambda x: "-isystem" + x, self.additionalSystemIncludePaths))

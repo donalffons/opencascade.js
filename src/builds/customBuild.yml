@@ -20,13 +20,14 @@ opencascade.core.wasm:
     - module: "TKBRep"
       preBuilt: False
   emccFlags:
+    - --no-entry
     - -DIGNORE_NO_ATOMICS=1
     - -DOCCT_NO_PLUGINS
     - -frtti
     - -fPIC
     - -O3
     - -DHAVE_RAPIDJSON
-    - -sSIDE_MODULE=1
+    - -sMAIN_MODULE=1
     - -sDISABLE_EXCEPTION_CATCHING=1
     - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
 

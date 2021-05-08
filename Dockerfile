@@ -1,4 +1,4 @@
-FROM emscripten/emsdk:2.0.18
+FROM emscripten/emsdk:2.0.20
 
 RUN apt update -y
 RUN apt install -y build-essential python3 python3-pip git cmake bash curl npm
@@ -108,8 +108,8 @@ WORKDIR /rapidjson/
 RUN \
   git clone https://github.com/Tencent/rapidjson.git .
 
-ENV OCCT_COMMIT_HASH_FULL 94c00556ea33f3895196b30c45b1fa901ad4c377
-ENV OCCT_COMMIT_HASH 94c0055
+ENV OCCT_COMMIT_HASH_FULL 0dc2c377fc5a2d8cf065f4ec005e356240cb484c
+ENV OCCT_COMMIT_HASH 0dc2c37
 WORKDIR /occt/
 RUN \
   curl "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=${OCCT_COMMIT_HASH_FULL};sf=tgz" -o occt.tar.gz && \

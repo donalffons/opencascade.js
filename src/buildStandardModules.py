@@ -106,6 +106,12 @@ def addPackageBuildConfigs(release = True, debug = True):
     if not filterPackagesAndModules(packageOrModuleName):
       continue
 
+    if packageOrModuleName in [ # emcc: error: EM_ASM is not supported in side modules / emcc: error: EM_JS is not supported in side modules during build
+      "TKOpenGl",
+      "TKernel",
+    ]:
+      continue
+
     with open(dirpath + "/PACKAGES", "r") as a_file:
       for package in a_file:
         packageName = package.strip()
@@ -170,14 +176,23 @@ def addPackageBuildConfigs(release = True, debug = True):
 def addMainModuleConfigs(release = True, debug = True):
   if release:
     releaseBuildConfigs["opencascade.js"] = {
-      "inputs": [],
-      "bindings": [],
+      "inputs": [
+        {
+          "module": "TKernel",
+          "preBuilt": False,
+        }
+      ],
+      "bindings": [
+        {
+          "module": "TKernel",
+        }
+      ],
       "emccFlags": [
         "-s", "MAIN_MODULE=1",
         "-s", "EXPORT_ES6=1",
         "-s", "USE_ES6_IMPORT_META=0",
         "-s", "USE_FREETYPE=1",
-        '-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]',
+        '-s', 'EXPORTED_RUNTIME_METHODS=["FS"]',
         *defaultEmccFlags,
         *releaseEmccFlags,
         *memoryEmccFlags
@@ -186,14 +201,23 @@ def addMainModuleConfigs(release = True, debug = True):
     }
   if debug:
     debugBuildConfigs["opencascade.debug.js"] = {
-      "inputs": [],
-      "bindings": [],
+      "inputs": [
+        {
+          "module": "TKernel",
+          "preBuilt": False,
+        }
+      ],
+      "bindings": [
+        {
+          "module": "TKernel",
+        }
+      ],
       "emccFlags": [
         "-s", "MAIN_MODULE=1",
         "-s", "EXPORT_ES6=1",
         "-s", "USE_ES6_IMPORT_META=0",
         "-s", "USE_FREETYPE=1",
-        '-s', 'EXTRA_EXPORTED_RUNTIME_METHODS=["FS"]',
+        '-s', 'EXPORTED_RUNTIME_METHODS=["FS"]',
         *defaultEmccFlags,
         *debugEmccFlags,
         *memoryEmccFlags
