@@ -197,6 +197,8 @@ def runPreProcessing(buildItem):
   }
 
 def buildWasmModuleSet(buildConfigs, outputFolder = None):
+  if buildConfigs == None:
+    return
   with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
     allModuleResults = p.map(runPreProcessing, buildConfigs.items())
 

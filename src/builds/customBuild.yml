@@ -1,14 +1,14 @@
 opencascade.core.wasm:
   bindings:
-    - module: "TKernel"
+    # - module: "TKernel"
     - module: "TKMath"
     - module: "TKG2d"
     - module: "TKG3d"
     - module: "TKGeomBase"
     - module: "TKBRep"
   inputs:
-    - module: "TKernel"
-      preBuilt: False
+    # - module: "TKernel"
+    #   preBuilt: False
     - module: "TKMath"
       preBuilt: False
     - module: "TKG2d"
@@ -20,15 +20,13 @@ opencascade.core.wasm:
     - module: "TKBRep"
       preBuilt: False
   emccFlags:
-    - --no-entry
-    - -sERROR_ON_UNDEFINED_SYMBOLS=0 # --no-entry currently does not seem to work properly
     - -DIGNORE_NO_ATOMICS=1
     - -DOCCT_NO_PLUGINS
     - -frtti
     - -fPIC
     - -O3
     - -DHAVE_RAPIDJSON
-    - -sMAIN_MODULE=1
+    - -sSIDE_MODULE=1
     - -sDISABLE_EXCEPTION_CATCHING=1
     - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
 
