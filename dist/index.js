@@ -3,7 +3,6 @@ export { ocMainJS }
 import ocMainWasm from "./opencascade.wasm";
 export { ocMainWasm }
 
-export { default as TKernel } from './module.TKernel.wasm';
 export { default as TKMath } from './module.TKMath.wasm';
 export { default as TKG2d } from './module.TKG2d.wasm';
 export { default as TKG3d } from './module.TKG3d.wasm';
@@ -41,7 +40,6 @@ export { default as TKFeat } from './module.TKFeat.wasm';
 export { default as TKIGES } from './module.TKIGES.wasm';
 export { default as TKMeshVS } from './module.TKMeshVS.wasm';
 export { default as TKOffset } from './module.TKOffset.wasm';
-export { default as TKOpenGl } from './module.TKOpenGl.wasm';
 export { default as TKStdL } from './module.TKStdL.wasm';
 export { default as TKStd } from './module.TKStd.wasm';
 export { default as TKSTL } from './module.TKSTL.wasm';
