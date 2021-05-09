@@ -21,6 +21,7 @@ opencascade.core.wasm:
       preBuilt: False
   emccFlags:
     - --no-entry
+    - -sERROR_ON_UNDEFINED_SYMBOLS=0 # --no-entry currently does not seem to work properly
     - -DIGNORE_NO_ATOMICS=1
     - -DOCCT_NO_PLUGINS
     - -frtti
