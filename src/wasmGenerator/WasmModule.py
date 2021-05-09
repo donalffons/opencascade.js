@@ -178,11 +178,11 @@ class WasmModule:
   def build(self):
     command = [
       'emcc',
+      *self.buildFlags,
       *self.sourceFiles,
       "--bind", self.embindFile,
       *list(map(lambda x: "-I" + x, self.additionalIncludePaths)),
       *self.libraryFiles,
-      *self.buildFlags,
       "-o", self.outputFile
     ]
     retcode = subprocess.check_call(command)
