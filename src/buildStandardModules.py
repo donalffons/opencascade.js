@@ -50,6 +50,12 @@ def addModuleBuildConfigs(release = True, debug = True):
     if not filterPackagesAndModules(packageOrModuleName):
       continue
 
+    if packageOrModuleName in [ # emcc: error: EM_ASM is not supported in side modules / emcc: error: EM_JS is not supported in side modules during build
+      "TKOpenGl",
+      "TKernel",
+    ]:
+      continue
+
     if release:
       releaseBuildConfigs["module." + packageOrModuleName + ".wasm"] = {
         "inputs": [
@@ -104,12 +110,6 @@ def addPackageBuildConfigs(release = True, debug = True):
       continue
 
     if not filterPackagesAndModules(packageOrModuleName):
-      continue
-
-    if packageOrModuleName in [ # emcc: error: EM_ASM is not supported in side modules / emcc: error: EM_JS is not supported in side modules during build
-      "TKOpenGl",
-      "TKernel",
-    ]:
       continue
 
     with open(dirpath + "/PACKAGES", "r") as a_file:
@@ -213,6 +213,7 @@ def addMainModuleConfigs(release = True, debug = True):
         }
       ],
       "emccFlags": [
+        "--no-entry",
         "-s", "MAIN_MODULE=1",
         "-s", "EXPORT_ES6=1",
         "-s", "USE_ES6_IMPORT_META=0",
