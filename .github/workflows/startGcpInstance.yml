@@ -1,9 +1,6 @@
 name: Start GCP Compute Instance
 
-on:
-  push:
-    branches:
-      - beta
+on: [push]
 
 jobs:
   StartGcpComputeInstance:

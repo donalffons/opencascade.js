@@ -1,9 +1,6 @@
 name: Build OpenCascade.js
 
-on:
-  push:
-    branches:
-      - beta
+on: [push]
 
 jobs:
   build:
@@ -17,7 +14,6 @@ jobs:
           lfs: true
 
       - name: Build OpenCascade.js Docker Image
-        if: github.ref == 'refs/heads/beta'
         uses: whoan/docker-build-with-cache-action@v5
         timeout-minutes: 480
         with:
@@ -26,10 +22,19 @@ jobs:
           image_name: donalffons/opencascade.js
 
       - name: Build OpenCascade.js
-        if: github.ref == 'refs/heads/beta'
         timeout-minutes: 480
         run: |
           docker run -v "$(pwd)/dist/":"/opencascade.js/dist/" my_awesome_image
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: ./dist/
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: ./build/
 
       - name: Git and NPM config
         if: github.ref == 'refs/heads/beta'
