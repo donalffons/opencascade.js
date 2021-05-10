@@ -27,11 +27,13 @@ jobs:
           docker run -v "$(pwd)/dist/":"/opencascade.js/dist/" my_awesome_image
 
       - uses: actions/upload-artifact@v2
+        if: ${{ always() }}
         with:
           name: dist
           path: ./dist/
 
       - uses: actions/upload-artifact@v2
+        if: ${{ always() }}
         with:
           name: build
           path: ./build/
