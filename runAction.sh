@@ -28,6 +28,13 @@ curl -sSO https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh && sudo
 # Install Node and NPM
 apt install -y nodejs npm
 
+# Add swap space
+fallocate -l 20G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+swapon --show
+
 # Prepare Actinon Execution
 
 echo $(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/SA_KEY -H "Metadata-Flavor: Google") > /saKey.json
@@ -41,7 +48,7 @@ GH_ACTION_TOKEN=$(echo $GH_ACTION_TOKEN_RESPONSE | jq -r ".token")
 mkdir actions-runner && cd actions-runner
 curl -o actions-runner-linux-x64-2.278.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.278.0/actions-runner-linux-x64-2.278.0.tar.gz
 tar xzf ./actions-runner-linux-x64-2.278.0.tar.gz
-./config.sh --unattended --url https://github.com/donalffons/opencascade.js --token $GH_ACTION_TOKEN --replace --name opencascade-js-build
+./config.sh --unattended --url https://github.com/donalffons/opencascade.js --token $GH_ACTION_TOKEN --replace --name opencascade-js-build --labels $LABEL
 ./run.sh --once || true
 sleep 60
 

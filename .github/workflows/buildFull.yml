@@ -1,0 +1,40 @@
+name: Build OpenCascade.js
+
+on: [push]
+
+jobs:
+  build:
+    name: Build OpenCascade.js Beta (Full)
+    runs-on: [self-hosted, full]
+    timeout-minutes: 600
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      - name: Build OpenCascade.js Docker Image
+        uses: whoan/docker-build-with-cache-action@v5
+        timeout-minutes: 600
+        with:
+          username: "${{ secrets.DOCKER_USERNAME }}"
+          password: "${{ secrets.DOCKER_PASSWORD }}"
+          image_name: donalffons/opencascade.js
+          push_image_and_stages: false
+
+      - name: Build OpenCascade.js Full Module
+        timeout-minutes: 600
+        run: |
+          docker run -v "$(pwd)/dist/":"/opencascade.js/dist/" my_awesome_image /opencascade.js/src/builds/opencascade.full.yml
+
+      - uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: dist
+          path: ./dist/
+
+      - uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: build
+          path: ./build/

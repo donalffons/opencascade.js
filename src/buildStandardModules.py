@@ -226,13 +226,6 @@ def addMainModuleConfigs(release = True, debug = True):
       "typescriptDefinitions": True,
     }
 
-def buildCustom():
-  os.chdir("/opencascade.js/dist/")
-  subprocess.check_call([
-    "/opencascade.js/src/buildFromYaml.py", 
-    "/opencascade.js/src/builds/customBuild.yml"
-  ])
-
 addModuleBuildConfigs(True, False)
 addMainModuleConfigs(True, False)
 
@@ -248,4 +241,4 @@ def runInParallel(*fns):
     if p.exitcode != 0:
       raise Exception("Error in child process")
 
-runInParallel(lambda: buildWasmModuleSet(releaseBuildConfigs), lambda: buildWasmModuleSet(debugBuildConfigs), lambda: buildCustom())
+runInParallel(lambda: buildWasmModuleSet(releaseBuildConfigs), lambda: buildWasmModuleSet(debugBuildConfigs))
