@@ -29,7 +29,7 @@ curl -sSO https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh && sudo
 apt install -y nodejs npm
 
 # Add swap space
-fallocate -l 20G /swapfile
+fallocate -l 50G /swapfile
 chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
