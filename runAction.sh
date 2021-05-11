@@ -48,8 +48,8 @@ GH_ACTION_TOKEN=$(echo $GH_ACTION_TOKEN_RESPONSE | jq -r ".token")
 mkdir actions-runner && cd actions-runner
 curl -o actions-runner-linux-x64-2.278.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.278.0/actions-runner-linux-x64-2.278.0.tar.gz
 tar xzf ./actions-runner-linux-x64-2.278.0.tar.gz
-./config.sh --unattended --url https://github.com/donalffons/opencascade.js --token $GH_ACTION_TOKEN --replace --name opencascade-js-build --labels $LABEL
-./run.sh --once || true
+./config.sh --unattended --url https://github.com/donalffons/opencascade.js --token $GH_ACTION_TOKEN --replace --name opencascade-js-build
+./run.sh  --labels $LABEL --once || true
 sleep 60
 
 gcloud compute instances delete opencascade-js-build-$UUID --zone us-central1-a -q
