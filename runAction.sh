@@ -40,6 +40,7 @@ swapon --show
 echo $(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/SA_KEY -H "Metadata-Flavor: Google") > /saKey.json
 GH_API_TOKEN=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/GH_API_TOKEN -H "Metadata-Flavor: Google")
 UUID=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/UUID -H "Metadata-Flavor: Google")
+LABEL=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/LABEL -H "Metadata-Flavor: Google")
 
 gcloud auth activate-service-account --key-file /saKey.json
 GH_ACTION_TOKEN_RESPONSE=$(curl -u opencascade.js-build:$GH_API_TOKEN   -X POST   -H "Accept: application/vnd.github.v3+json"   https://api.github.com/repos/donalffons/opencascade.js/actions/runners/registration-token)
