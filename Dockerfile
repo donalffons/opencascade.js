@@ -179,8 +179,8 @@ WORKDIR /opencascade.js/
 COPY src_build src_build
 
 RUN \
-  /opencascade.js/src_build/applyPatches.py && \
-  /opencascade.js/src_build/compile.py
+  /opencascade.js/src_build/applyPatches.py
+#  /opencascade.js/src_build/compile.py
 
 COPY . .
 RUN chmod -R 777 .
