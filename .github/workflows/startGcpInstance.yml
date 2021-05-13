@@ -18,6 +18,7 @@ jobs:
       - run: |
           gcloud components install beta
       - name: Start GCP Compute Instance (Standard + Combined)
+        if: contains(github.event.head_commit.message, 'ci_full') || contains(github.event.head_commit.message, 'ci_default')
         env:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
           GH_API_TOKEN: ${{ secrets.GH_API_TOKEN }}
@@ -49,6 +50,7 @@ jobs:
             --reservation-affinity=any \
 
       - name: Start GCP Compute Instance (Full)
+        if: contains(github.event.head_commit.message, 'ci_full')
         env:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
           GH_API_TOKEN: ${{ secrets.GH_API_TOKEN }}
