@@ -34,7 +34,7 @@ opencascade.full.js: # 09:15
     - module: "TKStd"
     - module: "TKService"
     - module: "TKV3d"
-    - module: "TKOpenGl"
+    # - module: "TKOpenGl"
     - module: "TKMeshVS"
 
     - module: "TKXSBase"
