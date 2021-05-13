@@ -5,6 +5,7 @@ on: [push]
 jobs:
   StartGcpComputeInstance:
     name: Start GCP Compute Instance
+    if: contains(github.event.head_commit.message, 'ci_full') || contains(github.event.head_commit.message, 'ci_default')
     runs-on: ubuntu-latest
     steps:
       - name: Set up Google Cloud SDK
