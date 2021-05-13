@@ -160,7 +160,6 @@ opencascade.full.js: # 09:15
     - -DOCCT_NO_PLUGINS
     - -frtti
     - -O3
-    - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
     - -sEXPORT_ES6=1
     - -sUSE_ES6_IMPORT_META=0
     - -sEXPORTED_RUNTIME_METHODS=["FS"]

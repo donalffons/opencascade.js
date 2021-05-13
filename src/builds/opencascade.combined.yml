@@ -28,7 +28,6 @@ opencascade.core.wasm:
     - -DHAVE_RAPIDJSON
     - -sSIDE_MODULE=1
     - -sDISABLE_EXCEPTION_CATCHING=1
-    - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
 
 opencascade.modelingAlgorithms.wasm:
   bindings:
@@ -78,7 +77,6 @@ opencascade.modelingAlgorithms.wasm:
     - -DHAVE_RAPIDJSON
     - -sSIDE_MODULE=1
     - -sDISABLE_EXCEPTION_CATCHING=1
-    - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
 
 opencascade.visualApplication.wasm:
   bindings:
@@ -143,7 +141,6 @@ opencascade.visualApplication.wasm:
     - -DHAVE_RAPIDJSON
     - -sSIDE_MODULE=1
     - -sDISABLE_EXCEPTION_CATCHING=1
-    - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
 
 opencascade.dataExchangeBase.wasm:
   bindings:
@@ -172,7 +169,6 @@ opencascade.dataExchangeBase.wasm:
     - -DHAVE_RAPIDJSON
     - -sSIDE_MODULE=1
     - -sDISABLE_EXCEPTION_CATCHING=1
-    - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
 
 opencascade.dataExchangeExtra.wasm:
   bindings:
@@ -213,4 +209,3 @@ opencascade.dataExchangeExtra.wasm:
     - -DHAVE_RAPIDJSON
     - -sSIDE_MODULE=1
     - -sDISABLE_EXCEPTION_CATCHING=1
-    - -sAGGRESSIVE_VARIABLE_ELIMINATION=1

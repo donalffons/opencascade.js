@@ -199,7 +199,6 @@ Custom builds are defined using YAML files. One YAML file can contain multiple m
         - -sUSE_ES6_IMPORT_META=0
         - -sEXTRA_EXPORTED_RUNTIME_METHODS=["FS"]
         - -O3
-        - -sAGGRESSIVE_VARIABLE_ELIMINATION=1
     ```
 
     This will:
@@ -208,7 +207,7 @@ Custom builds are defined using YAML files. One YAML file can contain multiple m
 
     * Generate bindings for the classes defined in the `bindings` property.
 
-    * Apply the flags given in the `emccFlags` property during compilation. See [here](https://github.com/emscripten-core/emscripten/blob/master/src/settings.js) for a complete list of settings. `-sEXPORT_ES6=1` and `-sUSE_ES6_IMPORT_META=0` produce a ES6 module (as opposed to a UMD module), which should work nicely with most browser-based workflows. `-sEXTRA_EXPORTED_RUNTIME_METHODS=["FS"]` adds support for Emscripten's virtual file system. `-O3` and `-sAGGRESSIVE_VARIABLE_ELIMINATION=1` are used to create an optimized build.
+    * Apply the flags given in the `emccFlags` property during compilation. See [here](https://github.com/emscripten-core/emscripten/blob/master/src/settings.js) for a complete list of settings. `-sEXPORT_ES6=1` and `-sUSE_ES6_IMPORT_META=0` produce a ES6 module (as opposed to a UMD module), which should work nicely with most browser-based workflows. `-sEXTRA_EXPORTED_RUNTIME_METHODS=["FS"]` adds support for Emscripten's virtual file system. `-O3` is used to create an optimized build.
 
     When creating builds in "standalone"-mode and applying `-O3` optimizations, Emscripten is able to perform dead code elimination. This results in very small binary sizes without the need to manually specify which OpenCascade sources to include during the build process.
 
