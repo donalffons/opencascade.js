@@ -26,7 +26,8 @@ jobs:
       - name: Build OpenCascade.js Full Module
         timeout-minutes: 10000
         run: |
-          docker run -v "$(pwd)/dist/":"/opencascade.js/dist/" -v "$(pwd)/build/":"/opencascade.js/build/" my_awesome_image /opencascade.js/src/builds/opencascade.full.yml
+          cd dist &&
+          docker run -v "$(pwd)":"/opencascade.js/dist/" -v "$(pwd)/../build/":"/opencascade.js/build/" donalffons/opencascade.js /opencascade.js/src/builds/opencascade.full.yml
 
       - uses: actions/upload-artifact@v2
         if: ${{ always() }}
