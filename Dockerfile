@@ -1,11 +1,11 @@
 FROM emscripten/emsdk:2.0.20
 
-WORKDIR /emsdk/
-RUN \
-  rm * .* -fr || true && \
-  git clone https://github.com/emscripten-core/emsdk.git . && \
-  emsdk install 2.0.20-lto && \
-  emsdk activate 2.0.20-lto
+# WORKDIR /emsdk/
+# RUN \
+#   rm * .* -fr || true && \
+#   git clone https://github.com/emscripten-core/emsdk.git . && \
+#   emsdk install 2.0.20-lto && \
+#   emsdk activate 2.0.20-lto
 
 RUN apt update -y
 RUN apt install -y build-essential python3 python3-pip git cmake bash curl npm
