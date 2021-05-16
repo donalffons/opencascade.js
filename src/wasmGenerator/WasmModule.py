@@ -3,7 +3,7 @@ import os
 import subprocess
 
 from filter.filterClasses import filterClass
-from filter.filterMethods import filterMethod
+from filter.filterMethodOrProperties import filterMethodOrProperty
 from filter.filterTypedefs import filterTypedef
 from filter.filterEnums import filterEnum
 
@@ -88,7 +88,7 @@ class WasmModule:
   def generateEmbindings(self):
     p = EmbindProcessor(
       self.includeDirectives, self.name,
-      self.tu, self.headerFiles, customFilterFunction(self.bindingsFilterFunction, filterClass), filterMethod, customFilterFunction(self.bindingsFilterFunction, filterTypedef), customFilterFunction(self.bindingsFilterFunction, filterEnum), self.duplicateTypedefs)
+      self.tu, self.headerFiles, customFilterFunction(self.bindingsFilterFunction, filterClass), filterMethodOrProperty, customFilterFunction(self.bindingsFilterFunction, filterTypedef), customFilterFunction(self.bindingsFilterFunction, filterEnum), self.duplicateTypedefs)
     p.process()
 
     bindingsFile = open(self.embindFile, "w")
@@ -98,7 +98,7 @@ class WasmModule:
     self.parse()
     p = ExportsProcessor(
       self.includeDirectives, self.name,
-      self.tu, self.headerFiles, customFilterFunction(self.bindingsFilterFunction, filterClass), filterMethod, customFilterFunction(self.bindingsFilterFunction, filterTypedef), customFilterFunction(self.bindingsFilterFunction, filterEnum), self.duplicateTypedefs)
+      self.tu, self.headerFiles, customFilterFunction(self.bindingsFilterFunction, filterClass), filterMethodOrProperty, customFilterFunction(self.bindingsFilterFunction, filterTypedef), customFilterFunction(self.bindingsFilterFunction, filterEnum), self.duplicateTypedefs)
     p.process()
 
     self.tu = None
@@ -122,7 +122,7 @@ class WasmModule:
     
     p = TypescriptProcessor(
       self.name, self.moduleExportsDict,
-      self.tu, self.headerFiles, customFilterFunction(self.bindingsFilterFunction, filterClass), filterMethod, customFilterFunction(self.bindingsFilterFunction, filterTypedef), customFilterFunction(self.bindingsFilterFunction, filterEnum), self.duplicateTypedefs)
+      self.tu, self.headerFiles, customFilterFunction(self.bindingsFilterFunction, filterClass), filterMethodOrProperty, customFilterFunction(self.bindingsFilterFunction, filterTypedef), customFilterFunction(self.bindingsFilterFunction, filterEnum), self.duplicateTypedefs)
     p.process()
 
     typescriptEpilogue = ""

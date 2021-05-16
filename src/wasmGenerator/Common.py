@@ -8,7 +8,10 @@ def getPureVirtualMethods(theClass):
 
 def isAbstractClass(theClass, tu):
   allClasses = list(filter(lambda x:
-    x.kind == clang.cindex.CursorKind.CLASS_DECL and
+    (
+      x.kind == clang.cindex.CursorKind.CLASS_DECL or
+      x.kind == clang.cindex.CursorKind.STRUCT_DECL
+    ) and
     not (
       x.get_definition() is None or
       not x == x.get_definition()
@@ -40,11 +43,17 @@ def shouldProcessClass(child, headerFiles, filterClass):
   if not filterClass(child):
     return False
 
-  if child.kind == clang.cindex.CursorKind.CLASS_DECL and not child.type.get_num_template_arguments() == -1:
+  if (
+    child.kind == clang.cindex.CursorKind.CLASS_DECL or
+    child.kind == clang.cindex.CursorKind.STRUCT_DECL
+  ) and not child.type.get_num_template_arguments() == -1:
     print("Cannot handle template classes (must be typedef'd): " + child.spelling)
     return False
 
-  if child.kind == clang.cindex.CursorKind.CLASS_DECL:
+  if (
+    child.kind == clang.cindex.CursorKind.CLASS_DECL or
+    child.kind == clang.cindex.CursorKind.STRUCT_DECL
+  ):
     baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, child.get_children()))
     if len(baseSpec) > 1:
       print("cannot handle multiple base classes (" + child.spelling + ")")

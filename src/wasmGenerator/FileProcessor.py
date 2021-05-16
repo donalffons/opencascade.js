@@ -4,13 +4,13 @@ import re
 from .Common import ignoreDuplicateTypedef, shouldProcessClass, SkipException, isAbstractClass, getMethodOverloadPostfix
 
 class FileProcessor:
-  def __init__(self, translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs):
+  def __init__(self, translationUnit, headerFiles, filterClass, filterMethodOrProperty, filterTypedef, filterEnum, duplicateTypedefs):
     self.output = ""
     
     self.translationUnit = translationUnit
     self.headerFiles = headerFiles
     self.filterClass = filterClass
-    self.filterMethod = filterMethod
+    self.filterMethodOrProperty = filterMethodOrProperty
     self.filterTypedef = filterTypedef
     self.filterEnum = filterEnum
     self.duplicateTypedefs = duplicateTypedefs
@@ -96,10 +96,10 @@ class FileProcessor:
     if not isAbstract:
       self.processSimpleConstructor(theClass)
     for method in theClass.get_children():
-      if not self.filterMethod(theClass, method):
+      if not self.filterMethodOrProperty(theClass, method):
         continue
       try:
-        self.processMethod(theClass, method, templateDecl, templateArgs)
+        self.processMethodOrProperty(theClass, method, templateDecl, templateArgs)
       except SkipException as e:
         print(str(e))
     self.processFinalizeClass()
@@ -113,9 +113,9 @@ class ExportsProcessor(FileProcessor):
   def __init__(
     self,
     includeDirectives, name,
-    translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs
+    translationUnit, headerFiles, filterClass, filterMethodOrProperty, filterTypedef, filterEnum, duplicateTypedefs
   ):
-    super().__init__(translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs)
+    super().__init__(translationUnit, headerFiles, filterClass, filterMethodOrProperty, filterTypedef, filterEnum, duplicateTypedefs)
     self.includeDirectives = includeDirectives
     self.name = name
     self.exportObjects = []
@@ -131,7 +131,7 @@ class ExportsProcessor(FileProcessor):
   def processSimpleConstructor(self, theClass):
     pass
 
-  def processMethod(self, theClass, method, templateDecl = None, templateArgs = None):
+  def processMethodOrProperty(self, theClass, method, templateDecl = None, templateArgs = None):
     pass
 
   def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):
@@ -145,9 +145,9 @@ class EmbindProcessor(FileProcessor):
   def __init__(
     self,
     includeDirectives, name,
-    translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs
+    translationUnit, headerFiles, filterClass, filterMethodOrProperty, filterTypedef, filterEnum, duplicateTypedefs
   ):
-    super().__init__(translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs)
+    super().__init__(translationUnit, headerFiles, filterClass, filterMethodOrProperty, filterTypedef, filterEnum, duplicateTypedefs)
     self.includeDirectives = includeDirectives
     self.name = name
 
@@ -170,7 +170,10 @@ class EmbindProcessor(FileProcessor):
         continue
       if not self.filterClass(theClass):
         continue
-      if theClass.kind == clang.cindex.CursorKind.CLASS_DECL:
+      if (
+        theClass.kind == clang.cindex.CursorKind.CLASS_DECL or
+        theClass.kind == clang.cindex.CursorKind.STRUCT_DECL
+      ):
         nonPublicDestructor = any(x.kind == clang.cindex.CursorKind.DESTRUCTOR and not x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC for x in theClass.get_children())
         placementDelete = next((x for x in theClass.get_children() if x.spelling == "operator delete" and len(list(x.get_arguments())) == 2), None) is not None
         if nonPublicDestructor or placementDelete:
@@ -273,7 +276,7 @@ class EmbindProcessor(FileProcessor):
         return ["static_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
     return ["", ""]
 
-  def processMethod(self, theClass, method, templateDecl = None, templateArgs = None):
+  def processMethodOrProperty(self, theClass, method, templateDecl = None, templateArgs = None):
     className = theClass.spelling if templateDecl is None else templateDecl.spelling
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
@@ -293,6 +296,11 @@ class EmbindProcessor(FileProcessor):
 
       cast = self.getCastMethodBindings(theClass, method, templateDecl, templateArgs)
       self.output += "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())\n"
+    if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.FIELD_DECL:
+      if method.type.kind == clang.cindex.TypeKind.CONSTANTARRAY:
+        print("Cannot handle array properties, skipping " + theClass.spelling + "::" + method.spelling)
+      else:
+        self.output += "    .property(\"" + method.spelling + "\", &" + theClass.spelling + "::" + method.spelling + ")\n"
 
   def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):
     if children is None:
@@ -332,9 +340,9 @@ class TypescriptProcessor(FileProcessor):
   def __init__(
     self,
     name, moduleExportsDict,
-    translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs
+    translationUnit, headerFiles, filterClass, filterMethodOrProperty, filterTypedef, filterEnum, duplicateTypedefs
   ):
-    super().__init__(translationUnit, headerFiles, filterClass, filterMethod, filterTypedef, filterEnum, duplicateTypedefs)
+    super().__init__(translationUnit, headerFiles, filterClass, filterMethodOrProperty, filterTypedef, filterEnum, duplicateTypedefs)
     self.name = name
     self.moduleExportsDict = moduleExportsDict
     self.imports = {}
@@ -466,7 +474,7 @@ class TypescriptProcessor(FileProcessor):
       argname += "_"
     return argname + ": " + argTypeName
 
-  def processMethod(self, theClass, method, templateDecl = None, templateArgs = None):
+  def processMethodOrProperty(self, theClass, method, templateDecl = None, templateArgs = None):
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
 
