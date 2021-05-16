@@ -21,17 +21,20 @@ jobs:
           username: "${{ secrets.DOCKER_USERNAME }}"
           password: "${{ secrets.DOCKER_PASSWORD }}"
           image_name: donalffons/opencascade.js
-          pull_image_and_stages: false
+          pull_image_and_stages: true
+          push_image_and_stages: github.ref == 'refs/heads/beta'
 
       - name: Build OpenCascade.js Standard Modules
         timeout-minutes: 600
         run: |
-          docker run -v "$(pwd)/dist/":"/opencascade.js/dist/" -v "$(pwd)/build/":"/opencascade.js/build/" my_awesome_image
+          docker run -v "$(pwd)/dist/":"/opencascade.js/dist/" -v "$(pwd)/build/":"/opencascade.js/build/" donalffons/opencascade.js
 
       - name: Build OpenCascade.js Combined Modules
         timeout-minutes: 600
         run: |
-          docker run -v "$(pwd)/dist/":"/opencascade.js/dist/" -v "$(pwd)/build/":"/opencascade.js/build/" my_awesome_image /opencascade.js/src/builds/opencascade.combined.yml
+          cd dist
+          docker run -v "$(pwd)/":"/opencascade.js/dist/" -v "$(pwd)/../build/":"/opencascade.js/build/" donalffons/opencascade.js /opencascade.js/src/builds/opencascade.combined.yml
+          cd ..
 
       - uses: actions/upload-artifact@v2
         if: ${{ always() }}

@@ -8,17 +8,17 @@ opencascade.core.wasm:
     - module: "TKBRep"
   inputs:
     # - module: "TKernel"
-    #   preBuilt: True
+    #   preBuilt: False
     - module: "TKMath"
-      preBuilt: True
+      preBuilt: False
     - module: "TKG2d"
-      preBuilt: True
+      preBuilt: False
     - module: "TKG3d"
-      preBuilt: True
+      preBuilt: False
     - module: "TKGeomBase"
-      preBuilt: True
+      preBuilt: False
     - module: "TKBRep"
-      preBuilt: True
+      preBuilt: False
   emccFlags:
     - -DIGNORE_NO_ATOMICS=1
     - -DOCCT_NO_PLUGINS
@@ -45,29 +45,29 @@ opencascade.modelingAlgorithms.wasm:
     - module: "TKOffset"
   inputs:
     - module: "TKGeomAlgo"
-      preBuilt: True
+      preBuilt: False
     - module: "TKTopAlgo"
-      preBuilt: True
+      preBuilt: False
     - module: "TKShHealing"
-      preBuilt: True
+      preBuilt: False
     - module: "TKPrim"
-      preBuilt: True
+      preBuilt: False
     - module: "TKHLR"
-      preBuilt: True
+      preBuilt: False
     - module: "TKBO"
-      preBuilt: True
+      preBuilt: False
     - module: "TKMesh"
-      preBuilt: True
+      preBuilt: False
     - module: "TKBool"
-      preBuilt: True
+      preBuilt: False
     # - module: "TKXMesh"
-    #   preBuilt: True
+    #   preBuilt: False
     - module: "TKFillet"
-      preBuilt: True
+      preBuilt: False
     - module: "TKFeat"
-      preBuilt: True
+      preBuilt: False
     - module: "TKOffset"
-      preBuilt: True
+      preBuilt: False
   emccFlags:
     - -DIGNORE_NO_ATOMICS=1
     - -DOCCT_NO_PLUGINS
@@ -99,39 +99,39 @@ opencascade.visualApplication.wasm:
     - module: "TKMeshVS"
   inputs:
     - module: "TKCDF"
-      preBuilt: True
+      preBuilt: False
     - module: "TKLCAF"
-      preBuilt: True
+      preBuilt: False
     - module: "TKBinL"
-      preBuilt: True
+      preBuilt: False
     - module: "TKCAF"
-      preBuilt: True
+      preBuilt: False
     - module: "TKTObj"
-      preBuilt: True
+      preBuilt: False
     - module: "TKXmlL"
-      preBuilt: True
+      preBuilt: False
     - module: "TKStdL"
-      preBuilt: True
+      preBuilt: False
     - module: "TKBin"
-      preBuilt: True
+      preBuilt: False
     - module: "TKBinTObj"
-      preBuilt: True
+      preBuilt: False
     - module: "TKVCAF"
-      preBuilt: True
+      preBuilt: False
     - module: "TKXml"
-      preBuilt: True
+      preBuilt: False
     - module: "TKXmlTObj"
-      preBuilt: True
+      preBuilt: False
     - module: "TKStd"
-      preBuilt: True
+      preBuilt: False
     - module: "TKService"
-      preBuilt: True
+      preBuilt: False
     - module: "TKV3d"
-      preBuilt: True
+      preBuilt: False
     # - module: "TKOpenGl" # Emcc error during build
-    #   preBuilt: True
+    #   preBuilt: False
     - module: "TKMeshVS"
-      preBuilt: True
+      preBuilt: False
   emccFlags:
     - -DIGNORE_NO_ATOMICS=1
     - -DOCCT_NO_PLUGINS
@@ -151,15 +151,15 @@ opencascade.dataExchangeBase.wasm:
     - module: "TKSTEPAttr"
   inputs:
     - module: "TKXSBase"
-      preBuilt: True
+      preBuilt: False
     - module: "TKSTL"
-      preBuilt: True
+      preBuilt: False
     - module: "TKSTEPBase"
-      preBuilt: True
+      preBuilt: False
     - module: "TKSTEP209"
-      preBuilt: True
+      preBuilt: False
     - module: "TKSTEPAttr"
-      preBuilt: True
+      preBuilt: False
   emccFlags:
     - -DIGNORE_NO_ATOMICS=1
     - -DOCCT_NO_PLUGINS
@@ -183,23 +183,23 @@ opencascade.dataExchangeExtra.wasm:
     - module: "TKXDESTEP"
   inputs:
     - module: "TKIGES"
-      preBuilt: True
+      preBuilt: False
     - module: "TKXCAF"
-      preBuilt: True
+      preBuilt: False
     - module: "TKXDEIGES"
-      preBuilt: True
+      preBuilt: False
     - module: "TKVRML"
-      preBuilt: True
+      preBuilt: False
     - module: "TKXmlXCAF"
-      preBuilt: True
+      preBuilt: False
     - module: "TKBinXCAF"
-      preBuilt: True
+      preBuilt: False
     - module: "TKRWMesh"
-      preBuilt: True
+      preBuilt: False
     - module: "TKSTEP"
-      preBuilt: True
+      preBuilt: False
     - module: "TKXDESTEP"
-      preBuilt: True
+      preBuilt: False
   emccFlags:
     - -DIGNORE_NO_ATOMICS=1
     - -DOCCT_NO_PLUGINS
