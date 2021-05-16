@@ -197,7 +197,7 @@ Custom builds are defined using YAML files. One YAML file can contain multiple m
       emccFlags:
         - -sEXPORT_ES6=1
         - -sUSE_ES6_IMPORT_META=0
-        - -sEXTRA_EXPORTED_RUNTIME_METHODS=["FS"]
+        - -sEXPORTED_RUNTIME_METHODS=["FS"]
         - -O3
     ```
 
