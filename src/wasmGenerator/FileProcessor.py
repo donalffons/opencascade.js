@@ -298,9 +298,9 @@ class EmbindProcessor(FileProcessor):
       self.output += "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())\n"
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.FIELD_DECL:
       if method.type.kind == clang.cindex.TypeKind.CONSTANTARRAY:
-        print("Cannot handle array properties, skipping " + theClass.spelling + "::" + method.spelling)
+        print("Cannot handle array properties, skipping " + className + "::" + method.spelling)
       else:
-        self.output += "    .property(\"" + method.spelling + "\", &" + theClass.spelling + "::" + method.spelling + ")\n"
+        self.output += "    .property(\"" + method.spelling + "\", &" + className + "::" + method.spelling + ")\n"
 
   def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):
     if children is None:

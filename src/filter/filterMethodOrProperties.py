@@ -5,7 +5,10 @@ def filterMethodOrProperty(theClass, methodOrProperty):
     print("Using declarations are not supported! (" + theClass.spelling + ", " + methodOrProperty.spelling + ")")
     return False
 
-  if methodOrProperty.result_type.spelling.startswith("Standard_OStream"):
+  if (
+    methodOrProperty.result_type.spelling.startswith("Standard_OStream") or
+    methodOrProperty.type.spelling == "std::ifstream"
+  ):
     return False
 
   # error: call to implicitly-deleted copy constructor of 'Aspect_VKeySet'
