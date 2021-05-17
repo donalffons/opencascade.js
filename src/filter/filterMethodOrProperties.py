@@ -5,6 +5,10 @@ def filterMethodOrProperty(theClass, methodOrProperty):
   # error: static_assert failed due to requirement '!std::is_pointer<void (*)(Graphic3d_CView *)>::value' "Implicitly binding raw pointers is illegal.  Specify allow_raw_pointer<arg<?>>"
   if theClass.spelling == "Graphic3d_GraduatedTrihedron" and methodOrProperty.spelling == "CubicAxesCallback":
     return False
+
+  # Error during build: error: address of bit-field requested
+  if theClass.type.spelling == "MeshVS_TwoColors":
+    return False
   
   # Error during build: error: address of bit-field requested
   if (
