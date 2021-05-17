@@ -180,8 +180,9 @@ class EmbindProcessor(FileProcessor):
           self.output += "namespace emscripten { namespace internal { template<> void raw_destructor<" + theClass.spelling + ">(" + theClass.spelling + "* ptr) { /* do nothing */ } } }\n"
 
   def processClass(self, theClass, templateDecl = None, templateArgs = None):
-    children = theClass.get_children()
     className = theClass.spelling if templateDecl is None else templateDecl.spelling
+    if className == "":
+      className = theClass.type.spelling
 
     baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, theClass.get_children()))
 
@@ -278,6 +279,8 @@ class EmbindProcessor(FileProcessor):
 
   def processMethodOrProperty(self, theClass, method, templateDecl = None, templateArgs = None):
     className = theClass.spelling if templateDecl is None else templateDecl.spelling
+    if className == "":
+      className = theClass.type.spelling
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
 
@@ -299,6 +302,8 @@ class EmbindProcessor(FileProcessor):
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.FIELD_DECL:
       if method.type.kind == clang.cindex.TypeKind.CONSTANTARRAY:
         print("Cannot handle array properties, skipping " + className + "::" + method.spelling)
+      elif not method.type.get_pointee().kind == clang.cindex.TypeKind.INVALID:
+        print("Cannot handle pointer properties, skipping " + className + "::" + method.spelling)
       else:
         self.output += "    .property(\"" + method.spelling + "\", &" + className + "::" + method.spelling + ")\n"
 
