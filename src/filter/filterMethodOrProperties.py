@@ -1,6 +1,27 @@
 import clang.cindex
 
 def filterMethodOrProperty(theClass, methodOrProperty):
+  # Error during build
+  # error: static_assert failed due to requirement '!std::is_pointer<void (*)(Graphic3d_CView *)>::value' "Implicitly binding raw pointers is illegal.  Specify allow_raw_pointer<arg<?>>"
+  if theClass.spelling == "Graphic3d_GraduatedTrihedron" and methodOrProperty.spelling == "CubicAxesCallback":
+    return False
+  
+  # Error during build: error: address of bit-field requested
+  if (
+    theClass.spelling == "Graphic3d_CStructure" and
+    methodOrProperty.spelling in [
+      "IsInfinite",
+      "stick",
+      "highlight",
+      "visible",
+      "HLRValidation",
+      "IsForHighlight",
+      "IsMutable",
+      "Is2dText",
+    ]
+  ):
+    return False
+
   if methodOrProperty.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and methodOrProperty.kind == clang.cindex.CursorKind.USING_DECLARATION:
     print("Using declarations are not supported! (" + theClass.spelling + ", " + methodOrProperty.spelling + ")")
     return False
