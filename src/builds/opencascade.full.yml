@@ -154,6 +154,7 @@ opencascade.full.js: # 09:15
       preBuilt: False
     - module: "TKXDESTEP"
       preBuilt: False
+  typescriptDefinitions: True
   emccFlags:
     - -pthread
     - -DIGNORE_NO_ATOMICS=1

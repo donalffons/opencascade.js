@@ -426,10 +426,14 @@ class TypescriptProcessor(FileProcessor):
   def convertBuiltinTypes(self, typeName):
     if typeName in [
       "int",
+      "int16_t",
       "unsigned",
+      "uint32_t",
       "unsigned int",
+      "unsigned long"
       "long",
       "long int",
+      "unsigned short",
       "short",
       "short int",
       "float",

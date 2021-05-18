@@ -63,7 +63,7 @@ const TKXmlXCAF: string;
 
 export { main, mainWasm, TKernel, TKMath, TKG2d, TKG3d, TKService, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo, TKHLR, TKShHealing, TKMesh, TKV3d, TKXSBase, TKSTEPBase, TKSTEP209, TKSTEPAttr, TKCDF, TKSTEP, TKLCAF, TKPrim, TKBO, TKCAF, TKVCAF, TKXCAF, TKXDESTEP, TKRWMesh, TKBool, TKFillet, TKBinL, TKTObj, TKBinTObj, TKBin, TKBinXCAF, TKFeat, TKIGES, TKMeshVS, TKOffset, TKOpenGl, TKStdL, TKStd, TKSTL, TKVRML, TKXDEIGES, TKXMesh, TKXmlL, TKXmlTObj, TKXml, TKXmlXCAF };
 
-const ocCore: openCascadeInstance;
+const ocCore: string;
 const ocCoreWasm: string;
 const ocModelingAlgorithms: string;
 const ocVisualApplication: string;

@@ -150,7 +150,7 @@ class WasmModule:
       typescriptEpilogue += "  }\n"
       typescriptEpilogue += "};\n"
       typescriptEpilogue += "\n"
-      typescriptEpilogue += "export type openCascadeInstance = FS & {{ready: Promise<openCascadeInstance>}}"
+      typescriptEpilogue += "export type openCascadeInstance = FS & {ready: Promise<openCascadeInstance>}"
       for libName, libExports in self.moduleExportsDict.items():
         if not libName == self.name:
           typescriptEpilogue += " & " + libName.replace(".", "_")
