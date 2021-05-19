@@ -29,13 +29,14 @@ jobs:
           echo "$GH_API_TOKEN" > ./GH_API_TOKEN.json
           echo "$UUID" > ./UUID
           echo "combined" > ./LABEL
+          echo "50G" > ./SWAPSPACE
           gcloud beta compute \
             instances create opencascade-js-build-$UUID \
             --zone=us-central1-a \
             --machine-type=c2-standard-8 \
             --subnet=default \
             --network-tier=PREMIUM \
-            --metadata-from-file startup-script=runAction.sh,SA_KEY=GCP_SA_KEY.json,GH_API_TOKEN=GH_API_TOKEN.json,UUID=UUID,LABEL=LABEL \
+            --metadata-from-file startup-script=runAction.sh,SA_KEY=GCP_SA_KEY.json,GH_API_TOKEN=GH_API_TOKEN.json,UUID=UUID,LABEL=LABEL,SWAPSPACE=SWAPSPACE \
             --no-restart-on-failure \
             --maintenance-policy=TERMINATE \
             --preemptible \
@@ -61,13 +62,14 @@ jobs:
           echo "$GH_API_TOKEN" > ./GH_API_TOKEN.json
           echo "$UUID" > ./UUID
           echo "full" > ./LABEL
+          echo "500G" > ./SWAPSPACE
           gcloud beta compute \
             instances create opencascade-js-build-$UUID \
             --zone=us-central1-a \
             --machine-type=n2d-highmem-2 \
             --subnet=default \
             --network-tier=PREMIUM \
-            --metadata-from-file startup-script=runAction.sh,SA_KEY=GCP_SA_KEY.json,GH_API_TOKEN=GH_API_TOKEN.json,UUID=UUID,LABEL=LABEL \
+            --metadata-from-file startup-script=runAction.sh,SA_KEY=GCP_SA_KEY.json,GH_API_TOKEN=GH_API_TOKEN.json,UUID=UUID,LABEL=LABEL,SWAPSPACE=SWAPSPACE \
             --no-restart-on-failure \
             --maintenance-policy=TERMINATE \
             --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
