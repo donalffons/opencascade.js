@@ -102,5 +102,5 @@ This project is (hopefully) keeping itself (mostly) up-to-date with the OpenCasc
 
 # Contributing
 
-Contributions are welcome! Feel free to have a look at the [todo-list](Todo.md) if you need some inspiration on what else needs to be done.
+Contributions are welcome! Feel free to have a look at the [todo-list](TODO.md) if you need some inspiration on what else needs to be done.
  
