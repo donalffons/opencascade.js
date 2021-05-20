@@ -29,7 +29,8 @@ curl -sSO https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh && sudo
 apt install -y nodejs npm
 
 # Add swap space
-fallocate -l 50G /swapfile
+SWAPSPACE=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/SWAPSPACE -H "Metadata-Flavor: Google")
+fallocate -l $SWAPSPACE /swapfile
 chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
