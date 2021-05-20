@@ -35,9 +35,3 @@ jobs:
         with:
           name: dist
           path: ./dist/
-
-      - uses: actions/upload-artifact@v2
-        if: ${{ always() }}
-        with:
-          name: build
-          path: ./build/
