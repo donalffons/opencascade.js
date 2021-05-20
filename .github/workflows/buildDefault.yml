@@ -27,13 +27,22 @@ jobs:
       - name: Build OpenCascade.js Standard Modules
         timeout-minutes: 600
         run: |
-          docker run -v "$(pwd)/dist/":"/opencascade.js/dist/" -v "$(pwd)/build/":"/opencascade.js/build/" donalffons/opencascade.js
+          cd dist
+          docker run \
+            -v $(pwd):/src \
+            -u $(id -u):$(id -g) \
+            donalffons/opencascade.js
+          cd ..
 
       - name: Build OpenCascade.js Combined Modules
         timeout-minutes: 600
         run: |
           cd dist
-          docker run -v "$(pwd)/":"/opencascade.js/dist/" -v "$(pwd)/../build/":"/opencascade.js/build/" donalffons/opencascade.js /opencascade.js/src/builds/opencascade.combined.yml
+          docker run \
+            -v $(pwd):/src \
+            -u $(id -u):$(id -g) \
+            donalffons/opencascade.js \
+            /opencascade.js/src/builds/opencascade.combined.yml
           cd ..
 
       - uses: actions/upload-artifact@v2
