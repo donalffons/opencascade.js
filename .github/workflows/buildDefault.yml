@@ -42,12 +42,6 @@ jobs:
           name: dist
           path: ./dist/
 
-      - uses: actions/upload-artifact@v2
-        if: ${{ always() }}
-        with:
-          name: build
-          path: ./build/
-
       - name: Git and NPM config
         if: github.ref == 'refs/heads/beta'
         run: |
