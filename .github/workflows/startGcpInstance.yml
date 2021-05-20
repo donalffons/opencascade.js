@@ -62,7 +62,7 @@ jobs:
           echo "$GH_API_TOKEN" > ./GH_API_TOKEN.json
           echo "$UUID" > ./UUID
           echo "full" > ./LABEL
-          echo "500G" > ./SWAPSPACE
+          echo "50G" > ./SWAPSPACE
           gcloud beta compute \
             instances create opencascade-js-build-$UUID \
             --zone=us-central1-a \
