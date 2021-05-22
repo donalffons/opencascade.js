@@ -46,7 +46,7 @@ includePaths.extend([
 for dirpath, dirnames, filenames in os.walk(os.path.join("/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/")):
   includePaths.append(dirpath)
 
-def buildObjectFiles(package):
+def buildObjectFiles(package, release = True, debug = True):
   packageName = package["name"]
   packageFiles = package["files"]
   try:
@@ -65,26 +65,30 @@ def buildObjectFiles(package):
       "-c",
       dirpath + "/" + theFile,
     ]
-    if not os.path.exists(libBasePath + ".o"):
-      print("Building " + theName)
-      subprocess.check_call([
-        *command,
-        "-O3",
-        "-o", libBasePath + ".o",
+
+    if release:
+      if not os.path.exists(libBasePath + ".o"):
+        print("Building " + theName + ".o")
+        subprocess.check_call([
+          *command,
+          "-O3",
+          "-o", libBasePath + ".o",
+          ])
+      else:
+        print(theName + ".o already exists, skipping")
+
+    if debug:
+      if not os.path.exists(libBasePath + ".debug.o"):
+        print("Building " + theName + ".debug.o")
+        subprocess.check_call([
+          *command,
+          "-gsource-map",
+          "-o", libBasePath + ".debug.o",
         ])
-    else:
-      print(theName + " already exists, skipping")
+      else:
+        print(theName + ".debug.o already exists, skipping")
 
-    if not os.path.exists(libBasePath + ".debug.o"):
-      print("Building " + theName + ".debug")
-      subprocess.check_call([
-        *command, "-o",
-        libBasePath + ".debug.o", "-g4"
-      ])
-    else:
-      print(theName + ".debug already exists, skipping")
-
-def buildLibrary(library):
+def buildLibrary(library, release = True, debug = True):
   libBasePath = libraryBasePath + "/"
   libraryName = library["name"]
   libraryFiles = library["files"]
@@ -92,25 +96,28 @@ def buildLibrary(library):
     "emar",
     "rs",
   ]
-  if not os.path.exists(libBasePath + "lib" + libraryName + ".a"):
-    print("Building library " + libraryName)
-    subprocess.check_call([
-      *command, 
-      libraryBasePath + "/lib" + libraryName + ".a",
-      *map(lambda x: libBasePath + x["packageName"] + "/" + x["name"] + ".o", libraryFiles),
-    ])
-  else:
-    print(libraryName + " already exists, skipping")
 
-  if not os.path.exists(libBasePath + "lib" + libraryName + ".debug.a"):
-    print("Building library " + libraryName + ".debug")
-    subprocess.check_call([
-      *command, 
-      libraryBasePath + "/lib" + libraryName + ".debug.a",
-      *map(lambda x: libBasePath + x["packageName"] + "/" + x["name"] + ".debug.o", libraryFiles),
-    ])
-  else:
-    print(libraryName + ".debug already exists, skipping")
+  if release:
+    if not os.path.exists(libBasePath + "lib" + libraryName + ".a"):
+      print("Building library " + libraryName + ".a")
+      subprocess.check_call([
+        *command, 
+        libraryBasePath + "/lib" + libraryName + ".a",
+        *map(lambda x: libBasePath + x["packageName"] + "/" + x["name"] + ".o", libraryFiles),
+      ])
+    else:
+      print(libraryName + ".a already exists, skipping")
+
+  if debug:
+    if not os.path.exists(libBasePath + "lib" + libraryName + ".debug.a"):
+      print("Building library " + libraryName + ".debug.a")
+      subprocess.check_call([
+        *command, 
+        libraryBasePath + "/lib" + libraryName + ".debug.a",
+        *map(lambda x: libBasePath + x["packageName"] + "/" + x["name"] + ".debug.o", libraryFiles),
+      ])
+    else:
+      print(libraryName + ".debug.a already exists, skipping")
 
 objectFilesToBuild = []
 librariesToBuild = []
@@ -170,8 +177,16 @@ for dirpath, dirnames, filenames in os.walk("/occt/occt-" + os.environ['OCCT_COM
       addObjectFiles(packageName)
       addLibrary(packageName)
 
-with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
-  p.map(buildObjectFiles, objectFilesToBuild)
+def myBuildObjectFiles(x):
+  buildObjectFiles(x, True, False)
+  pass
+
+def myBuildLibrary(x):
+  buildLibrary(x, True, False)
+  pass
 
 with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
-  p.map(buildLibrary, librariesToBuild)
+  p.map(myBuildObjectFiles, objectFilesToBuild)
+
+with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
+  p.map(myBuildLibrary, librariesToBuild)
