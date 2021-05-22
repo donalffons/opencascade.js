@@ -21,6 +21,7 @@ jobs:
           username: "${{ secrets.DOCKER_USERNAME }}"
           password: "${{ secrets.DOCKER_PASSWORD }}"
           image_name: donalffons/opencascade.js
+          pull_image_and_stages: true
           push_image_and_stages: false
 
       - name: Build OpenCascade.js Full Module

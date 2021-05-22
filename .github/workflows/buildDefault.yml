@@ -22,7 +22,7 @@ jobs:
           password: "${{ secrets.DOCKER_PASSWORD }}"
           image_name: donalffons/opencascade.js
           pull_image_and_stages: true
-          push_image_and_stages: true
+          push_image_and_stages: ${{ github.ref == 'refs/heads/beta' }}
 
       - name: Build OpenCascade.js Standard Modules
         timeout-minutes: 600
