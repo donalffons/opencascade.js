@@ -26,7 +26,7 @@ releaseEmccFlags = [
 debugEmccFlags = [
   "-s", "DISABLE_EXCEPTION_CATCHING=0",
   "-O1",
-  "-g4",
+  "-gsource-map",
   "--source-map-base", "http://localhost:3000/opencascade.js/",
   "-s", "ASSERTIONS=1",
   "-s", "DEMANGLE_SUPPORT=1",
@@ -240,4 +240,5 @@ def runInParallel(*fns):
     if p.exitcode != 0:
       raise Exception("Error in child process")
 
-runInParallel(lambda: buildWasmModuleSet(releaseBuildConfigs), lambda: buildWasmModuleSet(debugBuildConfigs))
+runInParallel(lambda: buildWasmModuleSet(releaseBuildConfigs))
+# runInParallel(lambda: buildWasmModuleSet(debugBuildConfigs))
