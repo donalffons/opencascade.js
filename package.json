@@ -8,7 +8,7 @@
   "repository": "github:donalffons/opencascade.js",
   "types": "dist/index.d.ts",
   "devDependencies": {
-    "jest": "^26.4.2",
+    "jest": "^27.0.1",
     "opencascade.js-examples": "git://github.com/donalffons/opencascade.js-examples.git#master"
   },
   "scripts": {
@@ -20,6 +20,6 @@
     ]
   },
   "peerDependencies": {
-    "ws": "^7.4.2"
+    "ws": "^7.4.5"
   }
 }
