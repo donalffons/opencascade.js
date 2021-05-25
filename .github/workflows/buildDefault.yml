@@ -29,7 +29,7 @@ jobs:
         run: |
           cd dist
           docker run \
-            -v $(pwd):/src \
+            -v $(pwd):/opencascade.js/dist \
             -u $(id -u):$(id -g) \
             donalffons/opencascade.js
           cd ..
