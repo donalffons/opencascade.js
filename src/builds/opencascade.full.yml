@@ -154,7 +154,8 @@ opencascade.full.js: # 09:15
       preBuilt: False
     - module: "TKXDESTEP"
       preBuilt: False
-  typescriptDefinitions: True
+  additionalCppCode: |
+    typedef Handle(IMeshTools_Context) Handle_IMeshTools_Context;
   emccFlags:
     - -pthread
     - -DIGNORE_NO_ATOMICS=1
@@ -164,8 +165,11 @@ opencascade.full.js: # 09:15
     - -sEXPORT_ES6=1
     - -sUSE_ES6_IMPORT_META=0
     - -sEXPORTED_RUNTIME_METHODS=["FS"]
-    - -sINITIAL_MEMORY=50MB
     - -sUSE_FREETYPE=1
     - -sDISABLE_EXCEPTION_CATCHING=1
-    - -sMAXIMUM_MEMORY=4294901760
     - -sERROR_ON_UNDEFINED_SYMBOLS=0
+    - -sINITIAL_MEMORY=1024mb
+    - -sMAXIMUM_MEMORY=4294901760
+    - -sMEMORY_GROWTH_GEOMETRIC_STEP=0.5
+    - -sMEMORY_GROWTH_GEOMETRIC_CAP=2gb
+    - -sALLOW_MEMORY_GROWTH=1

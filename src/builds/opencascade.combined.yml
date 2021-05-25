@@ -68,6 +68,8 @@ opencascade.modelingAlgorithms.wasm:
       preBuilt: False
     - module: "TKOffset"
       preBuilt: False
+  additionalCppCode: |
+    typedef Handle(IMeshTools_Context) Handle_IMeshTools_Context;
   emccFlags:
     - -DIGNORE_NO_ATOMICS=1
     - -DOCCT_NO_PLUGINS

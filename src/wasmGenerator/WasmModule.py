@@ -21,7 +21,7 @@ def customFilterFunction(bindingsFilterFunction, otherFilter):
   return filterFunction
 
 class WasmModule:
-  def __init__(self, name="", embindFile="", outputFile="", duplicateTypedefs={}):
+  def __init__(self, name="", embindFile="", outputFile="", duplicateTypedefs={}, additionalCppCode=None):
     self.name = name
     self.headerFiles = []
     self.sourceFiles = []
@@ -34,6 +34,7 @@ class WasmModule:
     self.additionalIncludePaths = []
     self.additionalSystemIncludePaths = []
     self.buildFlags = []
+    self.additionalCppCode = additionalCppCode
 
   def setBindingsFilterFunction(self, bindingsFilterFunction):
     self.bindingsFilterFunction = bindingsFilterFunction
@@ -65,7 +66,10 @@ class WasmModule:
       ])) + \
       list(map(lambda x: "-I" + x, self.additionalIncludePaths)) + \
       list(map(lambda x: "-isystem" + x, self.additionalSystemIncludePaths))
-    self.includeDirectives = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", list(sorted(self.headerFiles))))
+    self.preamble = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", list(sorted(self.headerFiles))))
+    if not self.additionalCppCode == None:
+      self.preamble += "\n\n"
+      self.preamble += self.additionalCppCode
 
     libFolder = "/clang/clang_11/lib"
     clang.cindex.Config.library_path = libFolder
@@ -77,9 +81,9 @@ class WasmModule:
         "-stdlib=libc++",
         "-D__EMSCRIPTEN__"
       ] + includePathArgs,
-      [["main.h", self.includeDirectives]]
+      [["main.h", self.preamble]]
     )
-    
+
     if len(self.tu.diagnostics) > 0:
       print("Diagnostic Messages:")
       for d in self.tu.diagnostics:
@@ -87,7 +91,7 @@ class WasmModule:
 
   def generateEmbindings(self):
     p = EmbindProcessor(
-      self.includeDirectives, self.name,
+      self.preamble, self.name,
       self.tu, self.headerFiles, customFilterFunction(self.bindingsFilterFunction, filterClass), filterMethodOrProperty, customFilterFunction(self.bindingsFilterFunction, filterTypedef), customFilterFunction(self.bindingsFilterFunction, filterEnum), self.duplicateTypedefs)
     p.process()
 
@@ -97,7 +101,7 @@ class WasmModule:
   def generateExports(self):
     self.parse()
     p = ExportsProcessor(
-      self.includeDirectives, self.name,
+      self.preamble, self.name,
       self.tu, self.headerFiles, customFilterFunction(self.bindingsFilterFunction, filterClass), filterMethodOrProperty, customFilterFunction(self.bindingsFilterFunction, filterTypedef), customFilterFunction(self.bindingsFilterFunction, filterEnum), self.duplicateTypedefs)
     p.process()
 

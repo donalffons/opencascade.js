@@ -126,7 +126,7 @@ def generateWasmModule(moduleName, buildConfig, outputFolder = None):
   additionalSystemIncludePaths = {
     "/usr/lib/gcc/x86_64-linux-gnu/10/include",
   }
-  thisModule = WasmModule(moduleName, "/opencascade.js/build/modules/" + moduleName + ".cpp", outputFolder + "/" + moduleName)
+  thisModule = WasmModule(moduleName, "/opencascade.js/build/modules/" + moduleName + ".cpp", outputFolder + "/" + moduleName, {}, buildConfig["additionalCppCode"] if "additionalCppCode" in buildConfig else None)
 
   if "inputs" in buildConfig and not buildConfig["inputs"] is None:
     for input in buildConfig["inputs"]:
