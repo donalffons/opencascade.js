@@ -241,4 +241,4 @@ def runInParallel(*fns):
       raise Exception("Error in child process")
 
 runInParallel(lambda: buildWasmModuleSet(releaseBuildConfigs))
-# runInParallel(lambda: buildWasmModuleSet(debugBuildConfigs))
+runInParallel(lambda: buildWasmModuleSet(debugBuildConfigs))
