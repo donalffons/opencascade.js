@@ -95,12 +95,12 @@ Pre-built modules are shipped in two flavors.
 
     Supported Modules:
     ```
-    TKernel, TKMath, TKG2d, TKG3d, TKService, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo, TKHLR, TKShHealing, TKMesh, TKV3d, TKXSBase, TKSTEPBase, TKSTEP209, TKSTEPAttr, TKCDF, TKSTEP, TKLCAF, TKPrim, TKBO, TKCAF, TKVCAF, TKXCAF, TKXDESTEP, TKRWMesh, TKBool, TKFillet, TKBinL, TKTObj, TKBinTObj, TKBin, TKBinXCAF, TKFeat, TKIGES, TKMeshVS, TKOffset, TKOpenGl, TKStdL, TKStd, TKSTL, TKVRML, TKXDEIGES, TKXMesh, TKXmlL, TKXmlTObj, TKXml, TKXmlXCAF
+    TKernel, TKMath, TKG2d, TKG3d, TKService, TKGeomBase, TKBRep, TKGeomAlgo, TKTopAlgo, TKHLR, TKShHealing, TKMesh, TKV3d, TKXSBase, TKSTEPBase, TKSTEP209, TKSTEPAttr, TKCDF, TKSTEP, TKLCAF, TKPrim, TKBO, TKCAF, TKVCAF, TKXCAF, TKXDESTEP, TKRWMesh, TKBool, TKFillet, TKBinL, TKTObj, TKBinTObj, TKBin, TKBinXCAF, TKFeat, TKIGES, TKMeshVS, TKOffset, TKStdL, TKStd, TKSTL, TKVRML, TKXDEIGES, TKXMesh, TKXmlL, TKXmlTObj, TKXml, TKXmlXCAF
     ```
 
     Currently unsupported Modules:
     ```
-    TKViewerTest, TKD3DHost, TKIVtk, TKDraw, TKIVtkDraw, TKDCAF, KQADraw, TKTopTest, TKXDEDRAW, TKXSDRAW, TKTObjDRAW
+    TKOpenGl, TKViewerTest, TKD3DHost, TKIVtk, TKDraw, TKIVtkDraw, TKDCAF, KQADraw, TKTopTest, TKXDEDRAW, TKXSDRAW, TKTObjDRAW
     ```
 
     For more information about these modules, have a look at the [OCCT documentation](https://dev.opencascade.org/doc/refman/html/index.html).
