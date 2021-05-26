@@ -1,4 +1,8 @@
 def filterClass(theClass, additionalInfo=None):
+  # "unsigned long" as function argument type breaks typescript
+  if theClass.spelling == "WNT_HIDSpaceMouse":
+    return False
+
   if theClass.spelling == "Standard_Dump":
     return False
 
