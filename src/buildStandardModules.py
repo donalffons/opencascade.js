@@ -189,7 +189,6 @@ def addMainModuleConfigs(release = True, debug = True):
       "emccFlags": [
         "-s", "MAIN_MODULE=1",
         "-s", "EXPORT_ES6=1",
-        "-s", "USE_ES6_IMPORT_META=0",
         "-s", "USE_FREETYPE=1",
         '-s', 'EXPORTED_RUNTIME_METHODS=["FS"]',
         *defaultEmccFlags,
@@ -215,7 +214,6 @@ def addMainModuleConfigs(release = True, debug = True):
         "--no-entry",
         "-s", "MAIN_MODULE=1",
         "-s", "EXPORT_ES6=1",
-        "-s", "USE_ES6_IMPORT_META=0",
         "-s", "USE_FREETYPE=1",
         '-s', 'EXPORTED_RUNTIME_METHODS=["FS"]',
         *defaultEmccFlags,
