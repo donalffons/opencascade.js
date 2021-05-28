@@ -1,4 +1,4 @@
-FROM emscripten/emsdk:2.0.22
+FROM emscripten/emsdk:2.0.23
 
 # WORKDIR /emsdk/
 # RUN \

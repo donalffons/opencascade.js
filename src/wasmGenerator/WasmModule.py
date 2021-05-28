@@ -62,7 +62,7 @@ class WasmModule:
         "/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed/",
         "/emsdk/upstream/emscripten/system/lib/libcxx/include/",
         "/emsdk/upstream/lib/clang/13.0.0/include/",
-        "/emsdk/upstream/emscripten/system/lib/libcxx/include/support/newlib/"
+        "/emsdk/upstream/emscripten/system/lib/libcxx/include/__support/newlib/"
       ])) + \
       list(map(lambda x: "-I" + x, self.additionalIncludePaths)) + \
       list(map(lambda x: "-isystem" + x, self.additionalSystemIncludePaths))

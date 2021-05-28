@@ -156,6 +156,12 @@ opencascade.full.js: # 09:15
       preBuilt: False
   additionalCppCode: |
     typedef Handle(IMeshTools_Context) Handle_IMeshTools_Context;
+    class Helpers {
+    public:
+      std::string ConvertAsciiString(TCollection_AsciiString& s) {
+        return s.ToCString();
+      }
+    };
   emccFlags:
     - -pthread
     - -DIGNORE_NO_ATOMICS=1
@@ -163,9 +169,10 @@ opencascade.full.js: # 09:15
     - -frtti
     - -O3
     - -sEXPORT_ES6=1
+    - -sUSE_ES6_IMPORT_META=0
     - -sEXPORTED_RUNTIME_METHODS=["FS"]
     - -sUSE_FREETYPE=1
-    - -sDISABLE_EXCEPTION_CATCHING=1
+    - -sDISABLE_EXCEPTION_CATCHING=0
     - -sERROR_ON_UNDEFINED_SYMBOLS=0
     - -sINITIAL_MEMORY=1024mb
     - -sMAXIMUM_MEMORY=4294901760

@@ -184,11 +184,13 @@ def addMainModuleConfigs(release = True, debug = True):
       "bindings": [
         {
           "module": "TKernel",
+          "symbol": "Helpers",
         }
       ],
       "emccFlags": [
         "-s", "MAIN_MODULE=1",
         "-s", "EXPORT_ES6=1",
+        "-s", "USE_ES6_IMPORT_META=0",
         "-s", "USE_FREETYPE=1",
         '-s', 'EXPORTED_RUNTIME_METHODS=["FS"]',
         *defaultEmccFlags,
@@ -196,6 +198,13 @@ def addMainModuleConfigs(release = True, debug = True):
         *memoryEmccFlags
       ],
       "typescriptDefinitions": True,
+      "additionalCppCode": 
+        "class Helpers {\n" +
+        "public:\n" +
+        "  static std::string ConvertAsciiString(TCollection_AsciiString& s) {\n" +
+        "    return s.ToCString();\n" +
+        "  }\n" +
+        "};\n"
     }
   if debug:
     debugBuildConfigs["opencascade.debug.js"] = {
@@ -208,12 +217,14 @@ def addMainModuleConfigs(release = True, debug = True):
       "bindings": [
         {
           "module": "TKernel",
+          "symbol": "Helpers",
         }
       ],
       "emccFlags": [
         "--no-entry",
         "-s", "MAIN_MODULE=1",
         "-s", "EXPORT_ES6=1",
+        "-s", "USE_ES6_IMPORT_META=0",
         "-s", "USE_FREETYPE=1",
         '-s', 'EXPORTED_RUNTIME_METHODS=["FS"]',
         *defaultEmccFlags,
@@ -221,6 +232,13 @@ def addMainModuleConfigs(release = True, debug = True):
         *memoryEmccFlags
       ],
       "typescriptDefinitions": True,
+      "additionalCppCode": 
+        "class Helpers {\n" +
+        "public:\n" +
+        "  static std::string ConvertAsciiString(TCollection_AsciiString& s) {\n" +
+        "    return s.ToCString();\n" +
+        "  }\n" +
+        "};\n"
     }
 
 addModuleBuildConfigs(True, False)
