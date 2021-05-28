@@ -402,7 +402,7 @@ class TypescriptProcessor(FileProcessor):
     super().processClass(theClass, templateDecl, templateArgs)
 
   def processFinalizeClass(self):
-    self.output += " delete(): void;\n"
+    self.output += "  delete(): void;\n"
     self.output += "}\n\n"
 
   def processSimpleConstructor(self, theClass):
