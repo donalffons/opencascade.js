@@ -163,7 +163,6 @@ opencascade.full.js: # 09:15
       }
     };
   emccFlags:
-    - -pthread
     - -DIGNORE_NO_ATOMICS=1
     - -DOCCT_NO_PLUGINS
     - -frtti
