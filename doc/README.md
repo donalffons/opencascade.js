@@ -194,6 +194,16 @@ Custom builds are defined using YAML files. One YAML file can contain multiple m
         - symbol: TopoDS_Shape
         - symbol: BRepMesh_DiscretRoot
         - symbol: NCollection_BaseMap
+
+        - symbol: CustomClass
+      additionalCppCode: |
+        #include <iostream>
+        class CustomClass {
+        public:
+          static void SayHello() {
+            std::cout << "Hello, World" << std::endl;
+          }
+        };
       emccFlags:
         - -sEXPORT_ES6=1
         - -sUSE_ES6_IMPORT_META=0
@@ -206,6 +216,8 @@ Custom builds are defined using YAML files. One YAML file can contain multiple m
     * Create a "standalone"-build of the library without support for dynamically linked libraries. Standalone builds must have the `.js` extension, which is why this build is called `rocketExample.js`.
 
     * Generate bindings for the classes defined in the `bindings` property.
+
+    * Add the additional C++ Code from the field `additionalCppCode` into the C++ file, which is used for the build (the code will be placed after all include statements and before the `EMSCRIPTEN_BINDINGS` block). In order for the build system to expose this C++ code to JavaScript, it needs to be class-based (the build system currently cannot handle plain functions) and you must add the class name to the bindings object (in the example above, by specifying `symbol: CustomClass`).
 
     * Apply the flags given in the `emccFlags` property during compilation. See [here](https://github.com/emscripten-core/emscripten/blob/master/src/settings.js) for a complete list of settings. `-sEXPORT_ES6=1` and `-sUSE_ES6_IMPORT_META=0` produce a ES6 module (as opposed to a UMD module), which should work nicely with most browser-based workflows. `-sEXTRA_EXPORTED_RUNTIME_METHODS=["FS"]` adds support for Emscripten's virtual file system. `-O3` is used to create an optimized build.
 
