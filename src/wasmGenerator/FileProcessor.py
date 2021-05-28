@@ -402,6 +402,7 @@ class TypescriptProcessor(FileProcessor):
     super().processClass(theClass, templateDecl, templateArgs)
 
   def processFinalizeClass(self):
+    self.output += " delete(): void;\n"
     self.output += "}\n\n"
 
   def processSimpleConstructor(self, theClass):
@@ -490,7 +491,7 @@ class TypescriptProcessor(FileProcessor):
       args = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x[1], x[0], templateDecl, templateArgs), enumerate(method.get_arguments()))))
       returnType = self.getTypescriptDefFromResultType(method.result_type, templateDecl, templateArgs)
 
-      self.output += "  " + method.spelling + overloadPostfix + "(" + args + "): " + returnType + ";\n"
+      self.output += "  " + ("static " if method.is_static_method() else "") + method.spelling + overloadPostfix + "(" + args + "): " + returnType + ";\n"
 
   def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):
     if children is None:
