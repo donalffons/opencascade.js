@@ -372,7 +372,8 @@ class TypescriptProcessor(FileProcessor):
 
     self.output += "export declare type " + self.name.replace(".", "_") + " = {\n"
     for export in self.exports:
-      self.output += "  " + export + ": typeof " + export + ";\n"
+      if export != "":
+        self.output += "  " + export + ": typeof " + export + ";\n"
     self.output += "};\n"
 
   def addImportIfWeHaveTo(self, libItem):
@@ -398,6 +399,7 @@ class TypescriptProcessor(FileProcessor):
 
     name = theClass.spelling if templateDecl is None else templateDecl.spelling
     self.output += "export declare class " + name + baseClassDefinition + " {\n"
+    self.exports.append(theClass.spelling)
 
     super().processClass(theClass, templateDecl, templateArgs)
 
@@ -422,7 +424,6 @@ class TypescriptProcessor(FileProcessor):
     argsTypescriptDef = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x), list(standardConstructor.get_arguments()))))
     
     self.output += "  constructor(" + argsTypescriptDef + ")\n"
-    self.exports.append(theClass.spelling)
 
   def convertBuiltinTypes(self, typeName):
     if typeName in [
