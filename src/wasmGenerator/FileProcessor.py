@@ -361,7 +361,7 @@ class TypescriptProcessor(FileProcessor):
     self.output += \
       "type Standard_Boolean = boolean;\n" + \
       "type Standard_Byte = number;\n" + \
-      "type Standard_Character = string;\n" + \
+      "type Standard_Character = number;\n" + \
       "type Standard_CString = string;\n" + \
       "type Standard_Integer = number;\n" + \
       "type Standard_Real = number;\n" + \
