@@ -158,7 +158,7 @@ opencascade.full.js: # 09:15
     typedef Handle(IMeshTools_Context) Handle_IMeshTools_Context;
     class Helpers {
     public:
-      std::string ConvertAsciiString(TCollection_AsciiString& s) {
+      static std::string ConvertAsciiString(TCollection_AsciiString& s) {
         return s.ToCString();
       }
     };
