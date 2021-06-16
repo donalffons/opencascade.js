@@ -1,6 +1,61 @@
 import clang.cindex
 
 def filterMethodOrProperty(theClass, methodOrProperty):
+  # error: no matching conversion for functional-style cast from '(lambda at /opencascade.js/build/modules/module.TKHLR.wasm.cpp:8477:153)' to 'std::function<HLRAlgo_BiPoint::PointsT &(HLRAlgo_PolyAlgo &, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val)>'
+  if \
+    (theClass.spelling == "HLRAlgo_PolyAlgo" and methodOrProperty.spelling == "Show") or \
+    (theClass.spelling == "HLRAlgo_PolyAlgo" and methodOrProperty.spelling == "Hide") or \
+    (theClass.spelling == "TopOpeBRepDS_DataStructure" and methodOrProperty.spelling == "ChangeMapOfShapeWithState") or \
+    (theClass.spelling == "TopOpeBRepDS_TKI" and methodOrProperty.spelling == "ChangeValue"):
+    return False
+
+  # error: no matching function for call to object of type 'std::function<bool (MeshVS_DataSource &, int, bool, NCollection_Array1<double> &, emscripten::val, MeshVS_EntityType &)>'
+  if \
+    (theClass.spelling == "MeshVS_DataSource" and methodOrProperty.spelling == "GetGeom") or \
+    (theClass.spelling == "MeshVS_DataSource" and methodOrProperty.spelling == "GetGeomType") or \
+    (theClass.spelling == "MeshVS_DeformedDataSource" and methodOrProperty.spelling == "GetGeom") or \
+    (theClass.spelling == "MeshVS_DeformedDataSource" and methodOrProperty.spelling == "GetGeomType") or \
+    (theClass.spelling == "Interface_STAT" and methodOrProperty.spelling == "Description") or \
+    (theClass.spelling == "Interface_STAT" and methodOrProperty.spelling == "Phase"):
+    return False
+
+  # error: calling a private constructor of class 'X'
+  if \
+    (theClass.spelling == "VrmlData_Node" and methodOrProperty.spelling == "Scene") or \
+    (theClass.spelling == "Font_FTFont" and methodOrProperty.spelling == "GlyphImage") or \
+    (theClass.spelling == "LDOMString" and methodOrProperty.spelling == "getOwnerDocument") or \
+    (theClass.spelling == "LDOM_MemManager" and methodOrProperty.spelling == "Self") or \
+    (theClass.spelling == "Aspect_VKeySet" and methodOrProperty.spelling == "Mutex") or \
+    (theClass.spelling == "Image_VideoRecorder" and methodOrProperty.spelling == "ChangeFrame") or \
+    (theClass.spelling == "StdPrs_BRepFont" and methodOrProperty.spelling == "Mutex") or \
+    (theClass.spelling == "AdvApp2Var_Network" and methodOrProperty.spelling == "ChangePatch") or \
+    (theClass.spelling == "AdvApp2Var_Framework" and methodOrProperty.spelling == "IsoU") or \
+    (theClass.spelling == "LDOM_Node" and methodOrProperty.spelling == "getOwnerDocument") or \
+    (theClass.spelling == "AdvApp2Var_Network" and methodOrProperty.spelling == "Patch") or \
+    (theClass.spelling == "AdvApp2Var_Framework" and methodOrProperty.spelling == "IsoV"):
+    return False
+
+  # error: non-const lvalue reference to type 'X' cannot bind to a temporary of type 'X'
+  if \
+    (theClass.spelling == "Resource_Unicode") or \
+    (theClass.spelling == "NCollection_DataMap" and methodOrProperty.spelling == "Find") or \
+    (theClass.spelling == "OSD_Thread" and methodOrProperty.spelling == "Wait") or \
+    (theClass.spelling == "TCollection_ExtendedString" and methodOrProperty.spelling == "ToUTF8CString") or \
+    (theClass.spelling == "Message" and methodOrProperty.spelling == "ToOSDMetric") or \
+    (theClass.spelling == "OSD" and methodOrProperty.spelling == "RealToCString") or \
+    (theClass.spelling == "XmlObjMgt" and methodOrProperty.spelling == "GetInteger") or \
+    (theClass.spelling == "NCollection_IndexedDataMap" and methodOrProperty.spelling == "FindFromKey") or \
+    (theClass.spelling == "XmlObjMgt" and methodOrProperty.spelling == "GetReal") or \
+    (theClass.spelling == "BOPAlgo_Tools" and methodOrProperty.spelling == "PerformCommonBlocks") or \
+    (theClass.spelling == "Transfer_Finder" and methodOrProperty.spelling == "GetStringAttribute") or \
+    (theClass.spelling == "MoniTool_TypedValue" and methodOrProperty.spelling == "Internals") or \
+    (theClass.spelling == "MoniTool_AttrList" and methodOrProperty.spelling == "GetStringAttribute") or \
+    (theClass.spelling == "MoniTool_CaseData" and methodOrProperty.spelling == "Text") or \
+    (theClass.spelling == "StepData_StepReaderData" and methodOrProperty.spelling == "ReadEnumParam") or \
+    (theClass.spelling == "XSControl_Vars") or \
+    (theClass.spelling == "MeshVS_DataSource" and methodOrProperty.spelling == "GetGroup"):
+    return False
+
   # Error during build
   # error: static_assert failed due to requirement '!std::is_pointer<void (*)(Graphic3d_CView *)>::value' "Implicitly binding raw pointers is illegal.  Specify allow_raw_pointer<arg<?>>"
   if theClass.spelling == "Graphic3d_GraduatedTrihedron" and methodOrProperty.spelling == "CubicAxesCallback":

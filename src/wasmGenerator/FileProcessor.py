@@ -3,6 +3,28 @@ import re
 
 from .Common import ignoreDuplicateTypedef, shouldProcessClass, SkipException, isAbstractClass, getMethodOverloadPostfix
 
+builtInTypes = [ # according to https://en.cppreference.com/w/cpp/language/types
+  # Integer types
+  "int",
+  "short", "short int", "signed short", "signed short int",
+  "unsigned short", "unsigned short int",
+  "int", "signed", "signed int",
+  "unsigned", "unsigned int",
+  "long", "long int", "signed long", "signed long int",
+  "unsigned long", "unsigned long int",
+  "long long", "long long int", "signed long long", "signed long long int",
+  "unsigned long long", "unsigned long long int",
+  # Boolean type
+  "bool",
+  # Character types
+  "char",
+  "signed char", "unsigned char",
+  "wchar_t",
+  "char16_t", "char32_t", "char8_t",
+  # Floating point types
+  "float", "double", "long double"
+]
+
 class FileProcessor:
   def __init__(self, translationUnit, headerFiles, filterClass, filterMethodOrProperty, filterTypedef, filterEnum, duplicateTypedefs):
     self.output = ""
@@ -157,6 +179,24 @@ class EmbindProcessor(FileProcessor):
       "\n" + \
       "#include <emscripten/bind.h>\n" + \
       "using namespace emscripten;\n" + \
+      "#include <functional>\n" + \
+      "\n" + \
+      "template<typename T>\n" + \
+      "T getReferenceValue(emscripten::val& v) {\n" + \
+      "  if(!(v.typeOf().as<std::string>() == \"object\")) {\n" + \
+      "    return v.as<T>(allow_raw_pointers());\n" + \
+      "  } else if(v.typeOf().as<std::string>() == \"object\" && v.hasOwnProperty(\"current\")) {\n" + \
+      "    return v[\"current\"].as<T>(allow_raw_pointers());\n" + \
+      "  }\n" + \
+      "  throw(\"unsupported type\");\n" + \
+      "}\n" + \
+      "\n" + \
+      "template<typename T>\n" + \
+      "void updateReferenceValue(emscripten::val& v, T& val) {\n" + \
+      "  if(v.typeOf().as<std::string>() == \"object\" && v.hasOwnProperty(\"current\")) {\n" + \
+      "    v.set(\"current\", val);\n" + \
+      "  }\n" + \
+      "}\n" + \
       "\n" + \
       "EMSCRIPTEN_BINDINGS(" + self.name.replace(".", "_") + ") {\n"
 
@@ -244,38 +284,9 @@ class EmbindProcessor(FileProcessor):
               else:
                 typename = "const " + typename
                 changed = True
-        if any(x.spelling == "Standard_CString" for x in arg.get_tokens()):
-          typename = "std::string"
-          changed = True
         argBinding = typename + ((" " + arg.spelling) if argNames else "")
       return [argBinding, changed]
     return f
-
-  def getCastMethodBindings(self, theClass, method, templateDecl = None, templateArgs = None):
-    className = theClass.spelling if templateDecl is None else templateDecl.spelling
-    args = list(method.get_arguments())
-    hasConstCharArg = any(any(x.spelling == "Standard_CString" for x in a.get_tokens()) for a in args)
-    hasRefArg = any(x.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE for x in args)
-    needReinterpretCast = hasConstCharArg or hasRefArg
-    returnType = self.getTypedefedTemplateTypeAsString(method.result_type.spelling, templateDecl, templateArgs)
-    const = "const" if method.is_const_method() else ""
-    classQualifier = (className + "::" if not method.is_static_method() else "" ) + "*"
-
-    returnTypeHasNonPublicCopyConstructor = any(x.is_copy_constructor() and not x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC for x in method.result_type.get_pointee().get_declaration().get_children())
-
-    if returnTypeHasNonPublicCopyConstructor:
-      needReinterpretCast = True
-      returnType = method.result_type.get_pointee().get_declaration().spelling + "*"
-
-    if needReinterpretCast:
-      castedArgResults = list(map(self.getSingleArgumentBinding(False, False, templateDecl, templateArgs), args))
-      somethingChanged = any(map(lambda x: x[1], castedArgResults))
-      castedArgTypes = list(map(lambda x: x[0], castedArgResults))
-      if somethingChanged or returnTypeHasNonPublicCopyConstructor:
-        return ["reinterpret_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
-      else:
-        return ["static_cast<" + returnType + " (" + classQualifier + ") (" + ", ".join(castedArgTypes) + ") " + const + ">(", ")"]
-    return ["", ""]
 
   def processMethodOrProperty(self, theClass, method, templateDecl = None, templateArgs = None):
     className = theClass.spelling if templateDecl is None else templateDecl.spelling
@@ -284,21 +295,41 @@ class EmbindProcessor(FileProcessor):
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
 
-      if numOverloads == 1:
-        functor = "&" + className + "::" + method.spelling
+      needsWrapper = list(map(lambda arg: {
+        "needsWrapper": arg.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE and (
+          arg.type.get_pointee().get_canonical().spelling in builtInTypes or
+          arg.type.get_pointee().kind == clang.cindex.TypeKind.ENUM or
+          arg.type.get_pointee().kind == clang.cindex.TypeKind.POINTER or (
+            theClass.kind == clang.cindex.CursorKind.CLASS_TEMPLATE and
+            arg.type.get_pointee().spelling in templateArgs and
+            templateArgs[arg.type.get_pointee().spelling].get_canonical().spelling in builtInTypes
+          )
+        ), "arg": arg,
+      }, method.get_arguments()))
+      if any(x["needsWrapper"] for x in needsWrapper):
+        wrappedParamTypes = ", ".join(map(lambda x: "emscripten::val" if x[1]["needsWrapper"] else (x[1]["arg"].type.spelling.replace(x[1]["arg"].type.get_pointee().spelling.replace("const ", ""), templateArgs[x[1]["arg"].type.get_pointee().spelling.replace("const ", "")].spelling) if (templateArgs is not None and x[1]["arg"].type.get_pointee().spelling.replace("const ", "") in templateArgs) else x[1]["arg"].type.spelling), enumerate(needsWrapper)))
+        wrappedParamTypesAndNames = ", ".join(map(lambda x: "emscripten::val " + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo" + str(x[0])) if x[1]["needsWrapper"] else (x[1]["arg"].type.spelling.replace(x[1]["arg"].type.get_pointee().spelling.replace("const ", ""), templateArgs[x[1]["arg"].type.get_pointee().spelling.replace("const ", "")].spelling) if (templateArgs is not None and x[1]["arg"].type.get_pointee().spelling.replace("const ", "") in templateArgs) else x[1]["arg"].type.spelling) + " " + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo" + str(x[0])), enumerate(needsWrapper)))
+        functionBinding = \
+          "\n" + \
+          "      " + ("std::function<" + method.result_type.spelling if not method.is_static_method() else "((" + method.result_type.spelling + " (*)") + "(" + ((templateDecl.spelling if templateDecl is not None else theClass.spelling) + "&, " if not method.is_static_method() else "") + wrappedParamTypes + (")>(" if not method.is_static_method() else "))") + "[](" + ((templateDecl.spelling if templateDecl is not None else theClass.spelling) + "& that, " if not method.is_static_method() else "") + wrappedParamTypesAndNames + ")" + ("" if not method.is_static_method() else " -> " + method.result_type.spelling) + " {\n" + \
+          "".join(map(lambda x: "        auto ref_" + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo"+str(x[0])) + " = getReferenceValue<" + (x[1]["arg"].type.get_pointee().spelling.replace(x[1]["arg"].type.get_pointee().spelling.replace("const ", ""), templateArgs[x[1]["arg"].type.get_pointee().spelling.replace("const ", "")].spelling) if (templateArgs is not None and x[1]["arg"].type.get_pointee().spelling.replace("const ", "") in templateArgs) else x[1]["arg"].type.get_pointee().spelling) + ">(" + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo" + str(x[0])) + ");\n" if x[1]["needsWrapper"] else "", enumerate(needsWrapper))) + \
+          "        " + ("const auto& ret = " if not method.result_type.spelling == "void" else "") + ("that." if not method.is_static_method() else theClass.spelling + "::") + method.spelling + "(" + ", ".join(map(lambda x: ("ref_" if x[1]["needsWrapper"] else "") + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo" + str(x[0])), enumerate(needsWrapper))) + ");\n" + \
+          "".join(map(lambda x: ("        updateReferenceValue<" + (x[1]["arg"].type.get_pointee().spelling.replace(x[1]["arg"].type.get_pointee().spelling.replace("const ", ""), templateArgs[x[1]["arg"].type.get_pointee().spelling.replace("const ", "")].spelling) if (templateArgs is not None and x[1]["arg"].type.get_pointee().spelling.replace("const ", "") in templateArgs) else x[1]["arg"].type.get_pointee().spelling) + ">(" + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo" + str(x[0])) + ", ref_" + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo" + str(x[0])) + ");\n") if x[1]["needsWrapper"] else "", enumerate(needsWrapper))) + \
+          ("        return ret;\n" if not method.result_type.spelling == "void" else "") + \
+          "      }\n" + \
+          "    )"
       else:
-        returnType = self.getTypedefedTemplateTypeAsString(method.result_type.spelling, templateDecl, templateArgs)
-        const = "const" if method.is_const_method() else ""
-        args = ", ".join(list(map(lambda x: self.getTypedefedTemplateTypeAsString(x.type.spelling, templateDecl, templateArgs) + " " + x.spelling, list(method.get_arguments()))))
-        functor = "(" + returnType + " (" + ((className + "::") if not method.is_static_method() else "") + "*)(" + args + ") " + const + ") &" + className + "::" + method.spelling
+        if numOverloads == 1:
+          functionBinding = "&" + className + "::" + method.spelling
+        else:
+          functionBinding = "select_overload<" + self.getTypedefedTemplateTypeAsString(method.result_type.spelling, templateDecl, templateArgs) + "(" + ", ".join(map(lambda x: self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], list(method.get_arguments()))) + ")" + ("const" if method.is_const_method() else "") + (", " + (theClass.spelling if templateDecl is None else templateDecl.spelling) if not method.is_static_method() else "") + ">(&" + className + "::" + method.spelling + ")"
 
       if method.is_static_method():
         functionCommand = "class_function"
       else:
         functionCommand = "function"
 
-      cast = self.getCastMethodBindings(theClass, method, templateDecl, templateArgs)
-      self.output += "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + cast[0] + functor + cast[1] + ", allow_raw_pointers())\n"
+      self.output += "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + functionBinding + ", allow_raw_pointers())\n"
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.FIELD_DECL:
       if method.type.kind == clang.cindex.TypeKind.CONSTANTARRAY:
         print("Cannot handle array properties, skipping " + className + "::" + method.spelling)
@@ -321,7 +352,7 @@ class EmbindProcessor(FileProcessor):
       overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
 
       args = ", ".join(list(map(lambda x: self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], list(constructor.get_arguments()))))
-      argNames = ", ".join(list(map(lambda x: x.spelling if not any(y.spelling == "Standard_CString" for y in x.get_tokens()) else x.spelling + ".c_str()", list(constructor.get_arguments()))))
+      argNames = ", ".join(list(map(lambda x: x.spelling, list(constructor.get_arguments()))))
       argTypes = ", ".join(list(map(lambda x: self.getSingleArgumentBinding(False, True, templateDecl, templateArgs)(x)[0], list(constructor.get_arguments()))))
 
       name = constructor.spelling if templateDecl is None else templateDecl.spelling
