@@ -25,6 +25,19 @@ builtInTypes = [ # according to https://en.cppreference.com/w/cpp/language/types
   "float", "double", "long double"
 ]
 
+cStringTypes = [
+  "const char *",
+  "const char *const",
+  "char *",
+  "char *const",
+]
+
+def isString(x):
+  return x.type.get_canonical().spelling in cStringTypes
+
+def getClassTypeName(theClass, templateDecl = None):
+  return templateDecl.spelling if templateDecl is not None else theClass.spelling
+
 class FileProcessor:
   def __init__(self, translationUnit, headerFiles, filterClass, filterMethodOrProperty, filterTypedef, filterEnum, duplicateTypedefs):
     self.output = ""
@@ -143,7 +156,7 @@ class ExportsProcessor(FileProcessor):
     self.exportObjects = []
 
   def processClass(self, theClass, templateDecl = None, templateArgs = None):
-    className = theClass.spelling if templateDecl is None else templateDecl.spelling
+    className = getClassTypeName(theClass, templateDecl)
     self.exportObjects.append(className)
     super().processClass(theClass, templateDecl, templateArgs)
 
@@ -157,7 +170,7 @@ class ExportsProcessor(FileProcessor):
     pass
 
   def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):
-    name = theClass.spelling if templateDecl is None else templateDecl.spelling
+    name = getClassTypeName(theClass, templateDecl)
     self.exportObjects.append(name)
 
   def processEnum(self, theEnum):
@@ -220,7 +233,7 @@ class EmbindProcessor(FileProcessor):
           self.output += "namespace emscripten { namespace internal { template<> void raw_destructor<" + theClass.spelling + ">(" + theClass.spelling + "* ptr) { /* do nothing */ } } }\n"
 
   def processClass(self, theClass, templateDecl = None, templateArgs = None):
-    className = theClass.spelling if templateDecl is None else templateDecl.spelling
+    className = getClassTypeName(theClass, templateDecl)
     if className == "":
       className = theClass.type.spelling
 
@@ -289,7 +302,7 @@ class EmbindProcessor(FileProcessor):
     return f
 
   def processMethodOrProperty(self, theClass, method, templateDecl = None, templateArgs = None):
-    className = theClass.spelling if templateDecl is None else templateDecl.spelling
+    className = getClassTypeName(theClass, templateDecl)
     if className == "":
       className = theClass.type.spelling
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
@@ -304,17 +317,56 @@ class EmbindProcessor(FileProcessor):
             arg.type.get_pointee().spelling in templateArgs and
             templateArgs[arg.type.get_pointee().spelling].get_canonical().spelling in builtInTypes
           )
-        ), "arg": arg,
+        ) or
+        isString(arg),
+        "arg": arg,
       }, method.get_arguments()))
       if any(x["needsWrapper"] for x in needsWrapper):
-        wrappedParamTypes = ", ".join(map(lambda x: "emscripten::val" if x[1]["needsWrapper"] else (x[1]["arg"].type.spelling.replace(x[1]["arg"].type.get_pointee().spelling.replace("const ", ""), templateArgs[x[1]["arg"].type.get_pointee().spelling.replace("const ", "")].spelling) if (templateArgs is not None and x[1]["arg"].type.get_pointee().spelling.replace("const ", "") in templateArgs) else x[1]["arg"].type.spelling), enumerate(needsWrapper)))
-        wrappedParamTypesAndNames = ", ".join(map(lambda x: "emscripten::val " + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo" + str(x[0])) if x[1]["needsWrapper"] else (x[1]["arg"].type.spelling.replace(x[1]["arg"].type.get_pointee().spelling.replace("const ", ""), templateArgs[x[1]["arg"].type.get_pointee().spelling.replace("const ", "")].spelling) if (templateArgs is not None and x[1]["arg"].type.get_pointee().spelling.replace("const ", "") in templateArgs) else x[1]["arg"].type.spelling) + " " + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo" + str(x[0])), enumerate(needsWrapper)))
+        def replaceTemplateArgs(x):
+          if templateArgs is not None and x[1]["arg"].type.get_pointee().spelling.replace("const ", "") in templateArgs:
+            return x[1]["arg"].type.spelling.replace(x[1]["arg"].type.get_pointee().spelling.replace("const ", ""), templateArgs[x[1]["arg"].type.get_pointee().spelling.replace("const ", "")].spelling)
+          else:
+            return x[1]["arg"].type.spelling
+        def getArgName(x):
+          if not x[1]["arg"].spelling == "":
+            return x[1]["arg"].spelling
+          else:
+            return "argNo" + str(x[0])
+        def getArgType(x):
+          if templateArgs is not None and x[1]["arg"].type.get_pointee().spelling.replace("const ", "") in templateArgs:
+            return x[1]["arg"].type.get_pointee().spelling.replace(x[1]["arg"].type.get_pointee().spelling.replace("const ", ""), templateArgs[x[1]["arg"].type.get_pointee().spelling.replace("const ", "")].spelling)
+          else:
+            return x[1]["arg"].type.get_pointee().spelling
+        classTypeName = getClassTypeName(theClass, templateDecl)
+        wrappedParamTypes = ", ".join(map(lambda x: ("std::string" if isString(x[1]["arg"]) else "emscripten::val") if x[1]["needsWrapper"] else replaceTemplateArgs(x), enumerate(needsWrapper)))
+        wrappedParamTypesAndNames = ", ".join(map(lambda x: (("std::string " if isString(x[1]["arg"]) else "emscripten::val ") + getArgName(x)) if x[1]["needsWrapper"] else replaceTemplateArgs(x) + " " + getArgName(x), enumerate(needsWrapper)))
+        def generateGetReferenceValue(x):
+          if x[1]["needsWrapper"] and not isString(x[1]["arg"]):
+            return "        auto ref_" + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo"+str(x[0])) + " = getReferenceValue<" + getArgType(x) + ">(" + getArgName(x) + ");\n"
+          else:
+            return ""
+        def generateUpdateReferenceValue(x):
+          if x[1]["needsWrapper"] and not isString(x[1]["arg"]):
+            return "        updateReferenceValue<" + getArgType(x) + ">(" + getArgName(x) + ", ref_" + getArgName(x) + ");\n"
+          else:
+            return ""
+        def generateInvocationArgs(x):
+          if x[1]["needsWrapper"]:
+            if not isString(x[1]["arg"]):
+              return "ref_" + getArgName(x)
+            else:
+              if not x[1]["arg"].type.get_canonical().get_pointee().is_const_qualified() or x[1]["arg"].type.is_const_qualified():
+                return "strdup(" + getArgName(x) + ".c_str())"
+              else:
+                return getArgName(x) + ".c_str()"
+          else:
+            return getArgName(x)
         functionBinding = \
           "\n" + \
-          "      " + ("std::function<" + method.result_type.spelling if not method.is_static_method() else "((" + method.result_type.spelling + " (*)") + "(" + ((templateDecl.spelling if templateDecl is not None else theClass.spelling) + "&, " if not method.is_static_method() else "") + wrappedParamTypes + (")>(" if not method.is_static_method() else "))") + "[](" + ((templateDecl.spelling if templateDecl is not None else theClass.spelling) + "& that, " if not method.is_static_method() else "") + wrappedParamTypesAndNames + ")" + ("" if not method.is_static_method() else " -> " + method.result_type.spelling) + " {\n" + \
-          "".join(map(lambda x: "        auto ref_" + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo"+str(x[0])) + " = getReferenceValue<" + (x[1]["arg"].type.get_pointee().spelling.replace(x[1]["arg"].type.get_pointee().spelling.replace("const ", ""), templateArgs[x[1]["arg"].type.get_pointee().spelling.replace("const ", "")].spelling) if (templateArgs is not None and x[1]["arg"].type.get_pointee().spelling.replace("const ", "") in templateArgs) else x[1]["arg"].type.get_pointee().spelling) + ">(" + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo" + str(x[0])) + ");\n" if x[1]["needsWrapper"] else "", enumerate(needsWrapper))) + \
-          "        " + ("const auto& ret = " if not method.result_type.spelling == "void" else "") + ("that." if not method.is_static_method() else theClass.spelling + "::") + method.spelling + "(" + ", ".join(map(lambda x: ("ref_" if x[1]["needsWrapper"] else "") + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo" + str(x[0])), enumerate(needsWrapper))) + ");\n" + \
-          "".join(map(lambda x: ("        updateReferenceValue<" + (x[1]["arg"].type.get_pointee().spelling.replace(x[1]["arg"].type.get_pointee().spelling.replace("const ", ""), templateArgs[x[1]["arg"].type.get_pointee().spelling.replace("const ", "")].spelling) if (templateArgs is not None and x[1]["arg"].type.get_pointee().spelling.replace("const ", "") in templateArgs) else x[1]["arg"].type.get_pointee().spelling) + ">(" + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo" + str(x[0])) + ", ref_" + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo" + str(x[0])) + ");\n") if x[1]["needsWrapper"] else "", enumerate(needsWrapper))) + \
+          "      " + ("std::function<" + method.result_type.spelling if not method.is_static_method() else "((" + method.result_type.spelling + " (*)") + "(" + (classTypeName + "&, " if not method.is_static_method() else "") + wrappedParamTypes + (")>(" if not method.is_static_method() else "))") + "[](" + (classTypeName + "& that, " if not method.is_static_method() else "") + wrappedParamTypesAndNames + ")" + " -> " + method.result_type.spelling + " {\n" + \
+          "".join(map(lambda x: generateGetReferenceValue(x), enumerate(needsWrapper))) + \
+          "        " + ((("const " if method.result_type.is_const_qualified() or method.result_type.get_pointee().is_const_qualified() else "") + "auto" + ("& " if method.result_type.kind == clang.cindex.TypeKind.LVALUEREFERENCE else " ") + "ret = ") if not method.result_type.spelling == "void" else "") + ("that." if not method.is_static_method() else theClass.spelling + "::") + method.spelling + "(" + ", ".join(map(lambda x: generateInvocationArgs(x), enumerate(needsWrapper))) + ");\n" + \
+          "".join(map(lambda x: generateUpdateReferenceValue(x), enumerate(needsWrapper))) + \
           ("        return ret;\n" if not method.result_type.spelling == "void" else "") + \
           "      }\n" + \
           "    )"
@@ -322,7 +374,7 @@ class EmbindProcessor(FileProcessor):
         if numOverloads == 1:
           functionBinding = "&" + className + "::" + method.spelling
         else:
-          functionBinding = "select_overload<" + self.getTypedefedTemplateTypeAsString(method.result_type.spelling, templateDecl, templateArgs) + "(" + ", ".join(map(lambda x: self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], list(method.get_arguments()))) + ")" + ("const" if method.is_const_method() else "") + (", " + (theClass.spelling if templateDecl is None else templateDecl.spelling) if not method.is_static_method() else "") + ">(&" + className + "::" + method.spelling + ")"
+          functionBinding = "select_overload<" + self.getTypedefedTemplateTypeAsString(method.result_type.spelling, templateDecl, templateArgs) + "(" + ", ".join(map(lambda x: self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], list(method.get_arguments()))) + ")" + ("const" if method.is_const_method() else "") + (", " + getClassTypeName(theClass, templateDecl) if not method.is_static_method() else "") + ">(&" + className + "::" + method.spelling + ")"
 
       if method.is_static_method():
         functionCommand = "class_function"
@@ -351,11 +403,11 @@ class EmbindProcessor(FileProcessor):
     for constructor in constructors:
       overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
 
-      args = ", ".join(list(map(lambda x: self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], list(constructor.get_arguments()))))
-      argNames = ", ".join(list(map(lambda x: x.spelling, list(constructor.get_arguments()))))
-      argTypes = ", ".join(list(map(lambda x: self.getSingleArgumentBinding(False, True, templateDecl, templateArgs)(x)[0], list(constructor.get_arguments()))))
+      args = ", ".join(list(map(lambda x: ("std::string " + x.spelling) if isString(x) else self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], constructor.get_arguments())))
+      argNames = ", ".join(list(map(lambda x: (x.spelling + ".c_str()") if isString(x) else x.spelling, constructor.get_arguments())))
+      argTypes = ", ".join(list(map(lambda x: "std::string" if isString(x) else self.getSingleArgumentBinding(False, True, templateDecl, templateArgs)(x)[0], constructor.get_arguments())))
 
-      name = constructor.spelling if templateDecl is None else templateDecl.spelling
+      name = getClassTypeName(theClass, templateDecl)
       constructorBindings += "    struct " + name + overloadPostfix + " : public " + name + " {\n"
       constructorBindings += "      " + name + overloadPostfix + "(" + args + ") : " + name + "(" + argNames + ") {}\n"
       constructorBindings += "    };\n"
@@ -428,7 +480,7 @@ class TypescriptProcessor(FileProcessor):
         baseClassDefinition = " extends " + baseSpec[0].type.spelling
         self.addImportIfWeHaveTo(baseSpec[0].type.spelling)
 
-    name = theClass.spelling if templateDecl is None else templateDecl.spelling
+    name = getClassTypeName(theClass, templateDecl)
     self.output += "export declare class " + name + baseClassDefinition + " {\n"
     self.exports.append(theClass.spelling)
 
@@ -539,7 +591,7 @@ class TypescriptProcessor(FileProcessor):
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, constructor, children)
 
       argsTypescriptDef = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x, "", templateDecl, templateArgs), list(constructor.get_arguments()))))
-      name = constructor.spelling if templateDecl is None else templateDecl.spelling
+      name = getClassTypeName(theClass, templateDecl)
       constructorTypescriptDef += "  export declare class " + name + overloadPostfix + " extends " + name + " {\n"
       constructorTypescriptDef += "    constructor(" + argsTypescriptDef + ");\n"
       constructorTypescriptDef += "  }\n\n"

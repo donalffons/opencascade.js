@@ -1,13 +1,13 @@
 import clang.cindex
 
 def filterMethodOrProperty(theClass, methodOrProperty):
-  # error: no matching conversion for functional-style cast from '(lambda at /opencascade.js/build/modules/module.TKHLR.wasm.cpp:8477:153)' to 'std::function<HLRAlgo_BiPoint::PointsT &(HLRAlgo_PolyAlgo &, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val)>'
-  if \
-    (theClass.spelling == "HLRAlgo_PolyAlgo" and methodOrProperty.spelling == "Show") or \
-    (theClass.spelling == "HLRAlgo_PolyAlgo" and methodOrProperty.spelling == "Hide") or \
-    (theClass.spelling == "TopOpeBRepDS_DataStructure" and methodOrProperty.spelling == "ChangeMapOfShapeWithState") or \
-    (theClass.spelling == "TopOpeBRepDS_TKI" and methodOrProperty.spelling == "ChangeValue"):
-    return False
+  # # error: no matching conversion for functional-style cast from '(lambda at /opencascade.js/build/modules/module.TKHLR.wasm.cpp:8477:153)' to 'std::function<HLRAlgo_BiPoint::PointsT &(HLRAlgo_PolyAlgo &, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val)>'
+  # if \
+  #   (theClass.spelling == "HLRAlgo_PolyAlgo" and methodOrProperty.spelling == "Show") or \
+  #   (theClass.spelling == "HLRAlgo_PolyAlgo" and methodOrProperty.spelling == "Hide") or \
+  #   (theClass.spelling == "TopOpeBRepDS_DataStructure" and methodOrProperty.spelling == "ChangeMapOfShapeWithState") or \
+  #   (theClass.spelling == "TopOpeBRepDS_TKI" and methodOrProperty.spelling == "ChangeValue"):
+  #   return False
 
   # error: no matching function for call to object of type 'std::function<bool (MeshVS_DataSource &, int, bool, NCollection_Array1<double> &, emscripten::val, MeshVS_EntityType &)>'
   if \
