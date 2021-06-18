@@ -195,7 +195,7 @@ class EmbindProcessor(FileProcessor):
       "#include <functional>\n" + \
       "\n" + \
       "template<typename T>\n" + \
-      "T getReferenceValue(emscripten::val& v) {\n" + \
+      "T getReferenceValue(const emscripten::val& v) {\n" + \
       "  if(!(v.typeOf().as<std::string>() == \"object\")) {\n" + \
       "    return v.as<T>(allow_raw_pointers());\n" + \
       "  } else if(v.typeOf().as<std::string>() == \"object\" && v.hasOwnProperty(\"current\")) {\n" + \
