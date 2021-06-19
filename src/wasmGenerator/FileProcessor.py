@@ -3,7 +3,8 @@ import re
 
 from .Common import ignoreDuplicateTypedef, shouldProcessClass, SkipException, isAbstractClass, getMethodOverloadPostfix
 
-builtInTypes = [ # according to https://en.cppreference.com/w/cpp/language/types
+# according to https://en.cppreference.com/w/cpp/language/types
+builtInNumbers = [
   # Integer types
   "int",
   "short", "short int", "signed short", "signed short int",
@@ -14,8 +15,6 @@ builtInTypes = [ # according to https://en.cppreference.com/w/cpp/language/types
   "unsigned long", "unsigned long int",
   "long long", "long long int", "signed long long", "signed long long int",
   "unsigned long long", "unsigned long long int",
-  # Boolean type
-  "bool",
   # Character types
   "char",
   "signed char", "unsigned char",
@@ -24,6 +23,13 @@ builtInTypes = [ # according to https://en.cppreference.com/w/cpp/language/types
   # Floating point types
   "float", "double", "long double"
 ]
+
+builtInBooleans = [
+  # Boolean type
+  "bool",
+]
+
+builtInTypes = builtInNumbers + builtInBooleans
 
 cStringTypes = [
   "const char *",
@@ -34,6 +40,23 @@ cStringTypes = [
 
 def isString(x):
   return x.type.get_canonical().spelling in cStringTypes
+
+def isSupportedReferenceType(arg, theClass, templateArgs):
+  return arg.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE and (
+    arg.type.get_pointee().get_canonical().spelling in builtInTypes or
+    arg.type.get_pointee().kind == clang.cindex.TypeKind.ENUM or
+    arg.type.get_pointee().kind == clang.cindex.TypeKind.POINTER or (
+      theClass.kind == clang.cindex.CursorKind.CLASS_TEMPLATE and
+      arg.type.get_pointee().spelling in templateArgs and
+      templateArgs[arg.type.get_pointee().spelling].get_canonical().spelling in builtInTypes
+    )
+  )
+
+def getArgName(arg, argNo):
+  if not arg.spelling == "":
+    return arg.spelling
+  else:
+    return "argNo" + str(argNo)
 
 def getClassTypeName(theClass, templateDecl = None):
   return templateDecl.spelling if templateDecl is not None else theClass.spelling
@@ -309,16 +332,7 @@ class EmbindProcessor(FileProcessor):
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
 
       needsWrapper = list(map(lambda arg: {
-        "needsWrapper": arg.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE and (
-          arg.type.get_pointee().get_canonical().spelling in builtInTypes or
-          arg.type.get_pointee().kind == clang.cindex.TypeKind.ENUM or
-          arg.type.get_pointee().kind == clang.cindex.TypeKind.POINTER or (
-            theClass.kind == clang.cindex.CursorKind.CLASS_TEMPLATE and
-            arg.type.get_pointee().spelling in templateArgs and
-            templateArgs[arg.type.get_pointee().spelling].get_canonical().spelling in builtInTypes
-          )
-        ) or
-        isString(arg),
+        "needsWrapper": isSupportedReferenceType(arg, theClass, templateArgs) or isString(arg),
         "arg": arg,
       }, method.get_arguments()))
       if any(x["needsWrapper"] for x in needsWrapper):
@@ -327,11 +341,6 @@ class EmbindProcessor(FileProcessor):
             return x[1]["arg"].type.spelling.replace(x[1]["arg"].type.get_pointee().spelling.replace("const ", ""), templateArgs[x[1]["arg"].type.get_pointee().spelling.replace("const ", "")].spelling)
           else:
             return x[1]["arg"].type.spelling
-        def getArgName(x):
-          if not x[1]["arg"].spelling == "":
-            return x[1]["arg"].spelling
-          else:
-            return "argNo" + str(x[0])
         def getArgType(x):
           if templateArgs is not None and x[1]["arg"].type.get_pointee().spelling.replace("const ", "") in templateArgs:
             return x[1]["arg"].type.get_pointee().spelling.replace(x[1]["arg"].type.get_pointee().spelling.replace("const ", ""), templateArgs[x[1]["arg"].type.get_pointee().spelling.replace("const ", "")].spelling)
@@ -339,28 +348,28 @@ class EmbindProcessor(FileProcessor):
             return x[1]["arg"].type.get_pointee().spelling
         classTypeName = getClassTypeName(theClass, templateDecl)
         wrappedParamTypes = ", ".join(map(lambda x: ("std::string" if isString(x[1]["arg"]) else "emscripten::val") if x[1]["needsWrapper"] else replaceTemplateArgs(x), enumerate(needsWrapper)))
-        wrappedParamTypesAndNames = ", ".join(map(lambda x: (("std::string " if isString(x[1]["arg"]) else "emscripten::val ") + getArgName(x)) if x[1]["needsWrapper"] else replaceTemplateArgs(x) + " " + getArgName(x), enumerate(needsWrapper)))
+        wrappedParamTypesAndNames = ", ".join(map(lambda x: (("std::string " if isString(x[1]["arg"]) else "emscripten::val ") + getArgName(x[1]["arg"], x[0])) if x[1]["needsWrapper"] else replaceTemplateArgs(x) + " " + getArgName(x[1]["arg"], x[0]), enumerate(needsWrapper)))
         def generateGetReferenceValue(x):
           if x[1]["needsWrapper"] and not isString(x[1]["arg"]):
-            return "        auto ref_" + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo"+str(x[0])) + " = getReferenceValue<" + getArgType(x) + ">(" + getArgName(x) + ");\n"
+            return "        auto ref_" + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo"+str(x[0])) + " = getReferenceValue<" + getArgType(x) + ">(" + getArgName(x[1]["arg"], x[0]) + ");\n"
           else:
             return ""
         def generateUpdateReferenceValue(x):
           if x[1]["needsWrapper"] and not isString(x[1]["arg"]):
-            return "        updateReferenceValue<" + getArgType(x) + ">(" + getArgName(x) + ", ref_" + getArgName(x) + ");\n"
+            return "        updateReferenceValue<" + getArgType(x) + ">(" + getArgName(x[1]["arg"], x[0]) + ", ref_" + getArgName(x[1]["arg"], x[0]) + ");\n"
           else:
             return ""
         def generateInvocationArgs(x):
           if x[1]["needsWrapper"]:
             if not isString(x[1]["arg"]):
-              return "ref_" + getArgName(x)
+              return "ref_" + getArgName(x[1]["arg"], x[0])
             else:
               if not x[1]["arg"].type.get_canonical().get_pointee().is_const_qualified() or x[1]["arg"].type.is_const_qualified():
-                return "strdup(" + getArgName(x) + ".c_str())"
+                return "strdup(" + getArgName(x[1]["arg"], x[0]) + ".c_str())"
               else:
-                return getArgName(x) + ".c_str()"
+                return getArgName(x[1]["arg"], x[0]) + ".c_str()"
           else:
-            return getArgName(x)
+            return getArgName(x[1]["arg"], x[0])
         functionBinding = \
           "\n" + \
           "      " + ("std::function<" + method.result_type.spelling if not method.is_static_method() else "((" + method.result_type.spelling + " (*)") + "(" + (classTypeName + "&, " if not method.is_static_method() else "") + wrappedParamTypes + (")>(" if not method.is_static_method() else "))") + "[](" + (classTypeName + "& that, " if not method.is_static_method() else "") + wrappedParamTypesAndNames + ")" + " -> " + method.result_type.spelling + " {\n" + \
@@ -449,7 +458,8 @@ class TypescriptProcessor(FileProcessor):
       "type Standard_Integer = number;\n" + \
       "type Standard_Real = number;\n" + \
       "type Standard_ShortReal = number;\n" + \
-      "type Standard_Size = number;\n\n"
+      "type Standard_Size = number;\n\n" + \
+      "type ReferenceType<Type> = {current: Type} | Type;\n\n"
 
     super().process()
 
@@ -572,7 +582,17 @@ class TypescriptProcessor(FileProcessor):
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
 
-      args = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x[1], x[0], templateDecl, templateArgs), enumerate(method.get_arguments()))))
+      def getReferenceTypeDefinition(arg, argNo):
+        varName = getArgName(arg, argNo)
+        if arg.type.get_pointee().get_canonical().spelling in builtInNumbers:
+          typeName = "number"
+        elif arg.type.get_pointee().get_canonical().spelling in builtInBooleans:
+          typeName = "boolean"
+        else:
+          typeName = "any"
+        return varName + ": ReferenceType<" + typeName + ">"
+        
+      args = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x[1], x[0], templateDecl, templateArgs) if not isSupportedReferenceType(x[1], theClass, templateArgs) else getReferenceTypeDefinition(x[1], x[0]), enumerate(method.get_arguments()))))
       returnType = self.getTypescriptDefFromResultType(method.result_type, templateDecl, templateArgs)
 
       self.output += "  " + ("static " if method.is_static_method() else "") + method.spelling + overloadPostfix + "(" + args + "): " + returnType + ";\n"
