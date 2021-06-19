@@ -34,7 +34,7 @@ debugEmccFlags = [
 
 memoryEmccFlags = [
   "-s", "ALLOW_MEMORY_GROWTH=1",
-  "-s", "MAXIMUM_MEMORY=" + str(4294967296-64*1024),
+  "-s", "MAXIMUM_MEMORY=4GB",
 ]
 
 def addModuleBuildConfigs(release = True, debug = True):
