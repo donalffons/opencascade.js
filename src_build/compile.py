@@ -8,7 +8,7 @@ from filter.filterIncludeFiles import filterIncludeFile
 from filter.filterSourceFiles import filterSourceFile
 from filter.filterPackagesAndModules import filterPackagesAndModules
 
-libraryBasePath = "/opencascade.js/build/fullLibrary"
+libraryBasePath = "/opencascade.js/build/sources"
 
 # Potentially problematic packages, when used with dynamic linking
 # These files contain function pointer definitions and header files and are therefore likely to cause problems.
@@ -179,14 +179,12 @@ for dirpath, dirnames, filenames in os.walk("/occt/occt-" + os.environ['OCCT_COM
 
 def myBuildObjectFiles(x):
   buildObjectFiles(x, True, False)
-  pass
-
-def myBuildLibrary(x):
-  buildLibrary(x, True, False)
-  pass
 
 with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
   p.map(myBuildObjectFiles, objectFilesToBuild)
+
+def myBuildLibrary(x):
+  buildLibrary(x, True, False)
 
 with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
   p.map(myBuildLibrary, librariesToBuild)

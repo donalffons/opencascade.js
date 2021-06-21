@@ -10,7 +10,7 @@ from filter.filterSourceFiles import filterSourceFile
 from filter.filterPackagesAndModules import filterPackagesAndModules
 from wasmGenerator.WasmModule import WasmModule
 
-libraryBasePath = "/opencascade.js/build/fullLibrary"
+libraryBasePath = "/opencascade.js/build/sources"
 
 def getGlobalIncludes():
   includeFiles = set()
@@ -88,7 +88,7 @@ def addAllOcctModulesToWasmModule(thisModule, postfix = ""):
     if not filterPackagesAndModules(packageOrModuleName):
       continue
 
-    thisModule.addLibraryFile(packageOrModuleName + postfix, "/opencascade.js/build/fullLibrary/")
+    thisModule.addLibraryFile(packageOrModuleName + postfix, "/opencascade.js/build/sources/")
 
 def buildWasmModule(buildItem):
   buildConfigName = buildItem["buildConfig"][0]
@@ -137,7 +137,7 @@ def generateWasmModule(moduleName, buildConfig, outputFolder = None):
                 thisModule.addLibraryFile(dirpath + "/" + item, None)
         else:
           if "preBuilt" in input and input["preBuilt"]:
-            thisModule.addLibraryFile(input["package"], "/opencascade.js/build/fullLibrary/")
+            thisModule.addLibraryFile(input["package"], "/opencascade.js/build/sources/")
           else:
             print("could not process preBuilt setting")
       if "module" in input:
@@ -151,7 +151,7 @@ def generateWasmModule(moduleName, buildConfig, outputFolder = None):
                     thisModule.addLibraryFile(dirpath + "/" + item, None)
         else:
           if "preBuilt" in input and input["preBuilt"]:
-            thisModule.addLibraryFile(input["module"], "/opencascade.js/build/fullLibrary/")
+            thisModule.addLibraryFile(input["module"], "/opencascade.js/build/sources/")
           else:
             print("could not process preBuilt setting")
       if "sourceFile" in input:
