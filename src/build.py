@@ -22,26 +22,6 @@ def getGlobalIncludes():
         includeFiles.add(str(os.path.join(dirpath, item)))
   return [includeFiles, additionalIncludePaths]
 
-def getPackageIncludes(packageName):
-  includeFiles = set()
-  packageDir = "/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/" + packageName
-  for dirpath, dirnames, filenames in os.walk(packageDir):
-    for item in filenames:
-      if filterIncludeFile(item):
-        includeFiles.add(str(os.path.join(dirpath, item)))
-  return includeFiles
-
-def getModuleIncludes(moduleName):
-  includeFiles = set()
-  moduleDir = "/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/" + moduleName
-  with open(moduleDir + "/PACKAGES", "r") as packageFile:
-    for packageFileLine in packageFile:
-      if packageFileLine.strip() == "":
-        continue
-      includes = getPackageIncludes(packageFileLine.strip())
-      includeFiles.update(includes)
-  return includeFiles
-
 def getBindingsFilterFunction(bindingSettings):
   def filterFunction(theItem):
     if bindingSettings is None:
