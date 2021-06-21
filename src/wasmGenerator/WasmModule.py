@@ -6,8 +6,17 @@ from filter.filterClasses import filterClass
 from filter.filterMethodOrProperties import filterMethodOrProperty
 from filter.filterTypedefs import filterTypedef
 from filter.filterEnums import filterEnum
+from .Common import shouldProcessClass
 
-from .Exports import getExports
+def getExports(translationUnit, headerFiles, filterClass, filterMethodOrProperty, filterTypedef, filterEnum, duplicateTypedefs):
+  exportObjects = []
+
+  for child in translationUnit.cursor.get_children():
+    if shouldProcessClass(child, headerFiles, filterClass):
+        exportObjects.append(child.spelling)
+  
+  return exportObjects
+
 
 from .FileProcessor import EmbindProcessor, TypescriptProcessor, ExportsProcessor
 

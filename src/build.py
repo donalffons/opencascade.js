@@ -9,7 +9,6 @@ from filter.filterIncludeFiles import filterIncludeFile
 from filter.filterSourceFiles import filterSourceFile
 from filter.filterPackagesAndModules import filterPackagesAndModules
 from wasmGenerator.WasmModule import WasmModule
-from wasmGenerator.Exports import getExports
 
 libraryBasePath = "/opencascade.js/build/fullLibrary"
 
