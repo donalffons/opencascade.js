@@ -215,13 +215,3 @@ def ignoreDuplicateTypedef(typedef):
     return True
 
   return False
-
-class overloadedConstrutorObject(object):
-  def __init__(self):
-    self.brief_comment = None
-  def get_arguments(self):
-    return self.arguments
-  def get_tokens(self):
-    return self.tokens
-  def get_children(self):
-    return self.children
