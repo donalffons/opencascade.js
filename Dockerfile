@@ -175,15 +175,14 @@ RUN \
   mkdir /opencascade.js/ && \
   mkdir /opencascade.js/build/ && \
   mkdir /opencascade.js/dist/
+
 WORKDIR /opencascade.js/
-COPY src_build src_build
-
-RUN \
-  /opencascade.js/src_build/applyPatches.py && \
-  /opencascade.js/src_build/compile.py
-
 COPY . .
 RUN chmod -R 777 .
-WORKDIR /src/
+
+RUN /opencascade.js/src/applyPatches.py
+RUN /opencascade.js/src/compileSources.py
+RUN /opencascade.js/src/generateBindings.py
+RUN /opencascade.js/src/compileBindings.py
 
 ENTRYPOINT [ "/opencascade.js/src/run.sh" ]

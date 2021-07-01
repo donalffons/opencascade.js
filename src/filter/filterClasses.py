@@ -1,4 +1,13 @@
 def filterClass(theClass, additionalInfo=None):
+  if theClass.spelling.startswith("AdvApp2Var"):
+    return False
+
+  if theClass.spelling == "OpenGl_GlFunctions":
+    return False
+
+  if theClass.spelling == "OpenGl_GraphicDriver":
+    return False
+
   # "unsigned long" as function argument type breaks typescript
   if theClass.spelling == "WNT_HIDSpaceMouse":
     return False

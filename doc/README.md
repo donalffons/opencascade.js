@@ -168,34 +168,36 @@ Custom builds are defined using YAML files. One YAML file can contain multiple m
 
 2. Create a new file called test.yml with the following content
     ```yml
-    rocketExample.js:
-      bindings:
-        - symbol: STEPCAFControl_Reader
-        - symbol: IFSelect_ReturnStatus
-        - symbol: TCollection_ExtendedString
-        - symbol: TDocStd_Document
-        - symbol: Handle_TDocStd_Document
-        - symbol: Message_ProgressRange
-        - symbol: XCAFDoc_DocumentTool
-        - symbol: TDF_LabelSequence
-        - symbol: XCAFDoc_ShapeTool
-        - symbol: TCollection_AsciiString
-        - symbol: RWGltf_CafWriter
-        - symbol: BRepTools
-        - symbol: BRepMesh_IncrementalMesh
-        - symbol: TColStd_IndexedDataMapOfStringString
-        - symbol: CDM_Document
-        - symbol: Standard_Transient
-        - symbol: TDF_Label
-        - symbol: TDataStd_GenericEmpty
-        - symbol: TDF_Attribute
-        - symbol: Handle_XCAFDoc_ShapeTool
-        - symbol: NCollection_BaseSequence
-        - symbol: TopoDS_Shape
-        - symbol: BRepMesh_DiscretRoot
-        - symbol: NCollection_BaseMap
+      mainBuild:
+        name: rocketExample
+        bindings:
+          - symbol: STEPCAFControl_Reader
+          - symbol: IFSelect_ReturnStatus
+          - symbol: TCollection_ExtendedString
+          - symbol: TDocStd_Document
+          - symbol: Handle_TDocStd_Document
+          - symbol: Message_ProgressRange
+          - symbol: XCAFDoc_DocumentTool
+          - symbol: TDF_LabelSequence
+          - symbol: XCAFDoc_ShapeTool
+          - symbol: TCollection_AsciiString
+          - symbol: RWGltf_CafWriter
+          - symbol: BRepTools
+          - symbol: BRepMesh_IncrementalMesh
+          - symbol: TColStd_IndexedDataMapOfStringString
+          - symbol: CDM_Document
+          - symbol: Standard_Transient
+          - symbol: TDF_Label
+          - symbol: TDataStd_GenericEmpty
+          - symbol: TDF_Attribute
+          - symbol: Handle_XCAFDoc_ShapeTool
+          - symbol: NCollection_BaseSequence
+          - symbol: TopoDS_Shape
+          - symbol: BRepMesh_DiscretRoot
+          - symbol: NCollection_BaseMap
 
-        - symbol: CustomClass
+          - symbol: CustomClass
+
       additionalCppCode: |
         #include <iostream>
         class CustomClass {
@@ -204,11 +206,6 @@ Custom builds are defined using YAML files. One YAML file can contain multiple m
             std::cout << "Hello, World" << std::endl;
           }
         };
-      emccFlags:
-        - -sEXPORT_ES6=1
-        - -sUSE_ES6_IMPORT_META=0
-        - -sEXPORTED_RUNTIME_METHODS=["FS"]
-        - -O3
     ```
 
     This will:
@@ -228,6 +225,7 @@ Custom builds are defined using YAML files. One YAML file can contain multiple m
       ```
       docker run \
         --rm \
+        -it \
         -v $(pwd):/src \
         -u $(id -u):$(id -g) \
         donalffons/opencascade.js \
