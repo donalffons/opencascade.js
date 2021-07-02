@@ -310,9 +310,9 @@ if buildConfig["generateTypescriptDefinitions"]:
     "  }\n" + \
     "  function analyzePath(path: string): AnalysisResults;\n" + \
     "}\n\n" + \
-    "\ntype openCascade = {FS: typeof FS} & {\n  " + ";\n  ".join(map(lambda x: x + ": typeof " + x, typescriptExports)) + \
+    "\nexport type OpenCascadeInstance = {FS: typeof FS} & {\n  " + ";\n  ".join(map(lambda x: x + ": typeof " + x, typescriptExports)) + ";\n" + \
     "};\n\n" + \
-    "declare function init(): Promise<openCascade>;\n\n" + \
+    "declare function init(): Promise<OpenCascadeInstance>;\n\n" + \
     "export default init;\n"
 
   typescriptDefinitionsFile = open(os.getcwd() + "/" + os.path.splitext(buildConfig["mainBuild"]["name"])[0] + ".d.ts", "w")
