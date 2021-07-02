@@ -4,7 +4,6 @@ import os
 import subprocess
 import multiprocessing
 
-from filter.filterIncludeFiles import filterIncludeFile
 from filter.filterSourceFiles import filterSourceFile
 from filter.filterPackages import filterPackages
 
