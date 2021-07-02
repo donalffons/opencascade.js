@@ -18,10 +18,15 @@ if not "extraBuilds" in buildConfig:
   buildConfig["extraBuilds"] = []
 
 defaultEmccFlags = [
+  "-O3",
   "-sEXPORT_ES6=1",
   "-sUSE_ES6_IMPORT_META=0",
   "-sEXPORTED_RUNTIME_METHODS=['FS']",
-  "-O3",
+  "-sINITIAL_MEMORY=100MB",
+  "-sMAXIMUM_MEMORY=4GB",
+  "-sALLOW_MEMORY_GROWTH=1",
+  "-sDISABLE_EXCEPTION_CATCHING=0",
+  "-sUSE_FREETYPE=1",
 ]
 if not "bindings" in buildConfig["mainBuild"]:
   buildConfig["mainBuild"]["bindings"] = []
@@ -40,7 +45,7 @@ if not "additionalCppCode" in buildConfig:
 
 try:
   shutil.rmtree(libraryBasePath + "/bindings/myMain.h")
-except:
+except Exception:
   pass
 
 generateCustomCodeBindings(buildConfig["additionalCppCode"])

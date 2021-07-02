@@ -10,6 +10,7 @@ from filter.filterEnums import filterEnum
 from wasmGenerator.Common import ignoreDuplicateTypedef, SkipException
 from Common import ocIncludeFiles, includePathArgs
 import json
+import multiprocessing
 
 libraryBasePath = "/opencascade.js/build/bindings"
 buildDirectory = "/opencascade.js/build"
@@ -191,7 +192,7 @@ referenceTypeTemplateDefs = \
 def generateCustomCodeBindings(customCode):
   try:
     os.makedirs(libraryBasePath)
-  except:
+  except Exception:
     pass
 
   [translationUnit, myOcIncludeStatements] = parse(customCode)
@@ -205,11 +206,21 @@ def generateCustomCodeBindings(customCode):
 if __name__ == "__main__":
   try:
     os.makedirs(libraryBasePath)
-  except:
+  except Exception:
     pass
 
-  [translationUnit, myOcIncludeStatements] = parse()
-  embindPreamble = myOcIncludeStatements + "\n" + referenceTypeTemplateDefs
+  def processEmbindings():
+    [translationUnit, myOcIncludeStatements] = parse()
+    embindPreamble = myOcIncludeStatements + "\n" + referenceTypeTemplateDefs
+    process(translationUnit, ".cpp", embindGenerationFuncClasses, embindGenerationFuncTemplates, embindGenerationFuncEnums, embindPreamble)
 
-  process(translationUnit, ".cpp", embindGenerationFuncClasses, embindGenerationFuncTemplates, embindGenerationFuncEnums, embindPreamble)
-  process(translationUnit, ".d.ts.json", typescriptGenerationFuncClasses, typescriptGenerationFuncTemplates, typescriptGenerationFuncEnums, "")
+  def processTypescriptDefinitions():
+    [translationUnit, myOcIncludeStatements] = parse()
+    process(translationUnit, ".d.ts.json", typescriptGenerationFuncClasses, typescriptGenerationFuncTemplates, typescriptGenerationFuncEnums, "")
+
+  p1 = multiprocessing.Process(target=processEmbindings)
+  p1.start()
+  p2 = multiprocessing.Process(target=processTypescriptDefinitions)
+  p2.start()
+  p1.join()
+  p2.join()
