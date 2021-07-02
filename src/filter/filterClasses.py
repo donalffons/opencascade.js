@@ -1,4 +1,28 @@
 def filterClass(theClass, additionalInfo=None):
+  # undefined references during final build stage
+  if (
+    theClass.spelling.startswith("DNaming") or
+    theClass.spelling.startswith("BRepTest") or
+    theClass.spelling.startswith("Draw") or
+    theClass.spelling.startswith("DDataStd") or
+    theClass.spelling.startswith("DDocStd") or
+    theClass.spelling.startswith("DDF") or
+    theClass.spelling.startswith("DrawFairCurve") or
+    theClass.spelling.startswith("DrawTrSurf") or
+    theClass.spelling.startswith("DrawDim") or
+    theClass.spelling.startswith("DBRep") or
+    theClass.spelling.startswith("D3DHost") or
+    theClass.spelling.startswith("BOPTest") or
+    theClass.spelling.startswith("GeomFill") or
+    theClass.spelling.startswith("Geom2dGcc") or
+    theClass.spelling.startswith("IVtkOCC") or
+    theClass.spelling.startswith("IVtk") or
+    theClass.spelling.startswith("HLRTest") or
+    theClass.spelling.startswith("GeomliteTest") or
+    theClass.spelling.startswith("GeometryTest")
+  ):
+    return False
+
   if theClass.spelling.startswith("AdvApp2Var"):
     return False
 
