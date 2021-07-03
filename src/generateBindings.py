@@ -11,6 +11,8 @@ from wasmGenerator.Common import ignoreDuplicateTypedef, SkipException
 from Common import ocIncludeFiles, includePathArgs
 import json
 import multiprocessing
+import os
+from filter.filterPackages import filterPackages
 
 libraryBasePath = "/opencascade.js/build/bindings"
 buildDirectory = "/opencascade.js/build"
@@ -24,10 +26,17 @@ def mkdirp(name: str) -> None:
       raise
 
 def filterClasses(child, additionalFilterFunction):
-  return additionalFilterFunction(child) and shouldProcessClass(child, occtBasePath)
+  packageName = os.path.basename(os.path.dirname(child.location.file.name))
+  return (
+    filterPackages(packageName) and
+    additionalFilterFunction(child) and
+    shouldProcessClass(child, occtBasePath)
+  )
 
 def filterTemplates(child, additionalFilterFunction):
+  packageName = os.path.basename(os.path.dirname(child.location.file.name))
   return (
+    filterPackages(packageName) and
     additionalFilterFunction(child) and
     child.extent.start.file.name.startswith(occtBasePath) and
     child.kind == clang.cindex.CursorKind.TYPEDEF_DECL and
@@ -38,7 +47,12 @@ def filterTemplates(child, additionalFilterFunction):
   )
 
 def filterEnums(child, additionalFilterFunction):
-  return additionalFilterFunction(child) and child.extent.start.file.name.startswith(occtBasePath)
+  packageName = os.path.basename(os.path.dirname(child.location.file.name))
+  return (
+    filterPackages(packageName) and
+    additionalFilterFunction(child) and
+    child.extent.start.file.name.startswith(occtBasePath)
+  )
 
 def processChildren(children, buildType: str, extension: str, filterFunction: Callable[[any], bool], processFunction: Callable[[any, any], str], typedefs: any, templateTypedefs: any, tu: any, preamble: str, additionalFilterFunction: any):
   for child in children:
