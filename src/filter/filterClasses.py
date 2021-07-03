@@ -19,7 +19,9 @@ def filterClass(theClass, additionalInfo=None):
     theClass.spelling.startswith("IVtk") or
     theClass.spelling.startswith("HLRTest") or
     theClass.spelling.startswith("GeomliteTest") or
-    theClass.spelling.startswith("GeometryTest")
+    theClass.spelling.startswith("GeometryTest") or
+    theClass.spelling.startswith("XSDRAWSTLVRML") or
+    theClass.spelling.startswith("ViewerTest")
   ):
     return False
 
