@@ -1,6 +1,9 @@
 name: General CI/CD Jobs
 
-on: [push]
+on:
+  push:
+    branches:
+      - beta
 
 jobs:
   general:
@@ -10,7 +13,6 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Docker Hub Description
-        if: github.ref == 'refs/heads/beta'
         uses: peter-evans/dockerhub-description@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}

@@ -1,6 +1,9 @@
 name: Build OpenCascade.js
 
-on: [push]
+on:
+  push:
+    branches:
+      - beta
 
 jobs:
   build:
