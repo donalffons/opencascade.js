@@ -22,7 +22,7 @@ jobs:
           password: "${{ secrets.DOCKER_PASSWORD }}"
           image_name: donalffons/opencascade.js
           pull_image_and_stages: true
-          push_image_and_stages: false
+          push_image_and_stages: true
 
       - name: Build OpenCascade.js Full Module
         timeout-minutes: 10000
@@ -34,6 +34,28 @@ jobs:
             donalffons/opencascade.js \
             /opencascade.js/src/builds/opencascade.full.yml
           cd ..
+
+      - name: Git and NPM config
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: Publish new beta version to NPM
+        run: |
+          npm version ${{steps.version.outputs.version}} --force
+          npm publish --tag=beta
+
+      - name: Commit Build Artifacts in dist
+        run: |
+          git add -A
+          git diff-index --quiet HEAD || git commit -m "Build OpenCascade.js"
+
+      - name: Push Changes to branch
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
 
       - uses: actions/upload-artifact@v2
         if: ${{ always() }}
