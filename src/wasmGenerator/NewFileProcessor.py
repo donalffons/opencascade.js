@@ -620,9 +620,9 @@ class TypescriptProcessor(FileProcessor):
     self.exports.extend(allOverloadedConstructors)
 
   def processEnum(self, theEnum):
-    bindingsOutput = "export declare type " + theEnum.spelling + " = {\n"
+    bindingsOutput = "export declare class " + theEnum.spelling + " {\n"
     for enumChild in list(theEnum.get_children()):
       bindingsOutput += "  " + enumChild.spelling + ": {};\n"
-    bindingsOutput += "}\n\n"
+    bindingsOutput += "};\n\n"
     self.output += bindingsOutput
     self.exports.append(theEnum.spelling)

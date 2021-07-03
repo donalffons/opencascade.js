@@ -120,6 +120,7 @@ def typescriptGenerationFuncClasses(tu, preamble, child, typedefs, templateTyped
 
   return json.dumps({
     ".d.ts": preamble + typescript.output,
+    "kind": "class",
     "exports": typescript.exports,
   })
 
@@ -130,6 +131,7 @@ def typescriptGenerationFuncTemplates(tu, preamble, child, typedefs, templateTyp
 
   return json.dumps({
     ".d.ts": preamble + typescript.output,
+    "kind": "class",
     "exports": typescript.exports,
   })
 
@@ -139,6 +141,7 @@ def typescriptGenerationFuncEnums(tu, preamble, child, typedefs, templateTypedef
 
   return json.dumps({
     ".d.ts": preamble + typescript.output,
+    "kind": "enum",
     "exports": typescript.exports,
   })
 
