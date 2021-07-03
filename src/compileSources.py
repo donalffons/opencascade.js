@@ -163,8 +163,8 @@ def getModuleNameByPackageName(inputPackageName):
 
 filesToBuild = []
 for dirpath, dirnames, filenames in os.walk(sourceBasePath):
+  packageOrModuleName = os.path.basename(dirpath.replace(sourceBasePath, ""))
   for item in filenames:
-    packageOrModuleName = os.path.basename(dirpath.replace(sourceBasePath, ""))
     if not filterPackages(packageOrModuleName) or not filterPackages(getModuleNameByPackageName(packageOrModuleName)):
       continue
     if filterSourceFile(dirpath + "/" + item):
