@@ -67,44 +67,6 @@ verifyBindings(buildConfig["mainBuild"]["bindings"])
 for extraBuild in buildConfig["extraBuilds"]:
   verifyBindings(extraBuild)
 
-# buildConfig = {
-#   "generateTypescriptDefinitions": True,
-#   "mainBuild": {
-#     "name": "rocketExample",
-#     "bindings": [
-#       {
-#         "symbol": "STEPCAFControl_Reader",
-#       },
-#       {
-#         "symbol": "IFSelect_ReturnStatus",
-#       },
-#     ],
-#     "emccFlags": [
-#       "-sEXPORT_ES6=1",
-#       "-sUSE_ES6_IMPORT_META=0",
-#       '-sEXPORTED_RUNTIME_METHODS=["FS"]',
-#       "-O3",
-#       "-sERROR_ON_UNDEFINED_SYMBOLS=0",
-#     ],
-#   },
-#   "extraBuilds": [
-#     {
-#       "name": "someSideModule",
-#       "bindings": [
-#         {
-#           "symbol": "TopoDS_Shape",
-#         },
-#         {
-#           "symbol": "BRepBuilderAPI_Contruct",
-#         },
-#       ],
-#       "emccFlags": [
-#         "-sERROR_ON_UNDEFINED_SYMBOLS=0",
-#       ],
-#     },
-#   ],
-# }
-
 def shouldProcessSymbol(symbol: str, bindings) -> bool:
   if len(bindings) == 0:
     return True
