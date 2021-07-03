@@ -64,24 +64,9 @@
 3. In your JavaScript file, instantiate the library:
 
     ```js
-    import {
-      initOpenCascade,
-      ocCore,
-      ocModelingAlgorithms,
-      ocVisualApplication,
-      ocDataExchangeBase,
-      ocDataExchangeExtra,
-    } from "opencascade.js";
+    import initOpenCascade from "opencascade.js";
 
-    initOpenCascade({
-      libs: [ // Specify which modules to use and the sequence in which to load them
-        ocCore,
-        ocModelingAlgorithms,
-        ocVisualApplication,
-        ocDataExchangeBase,
-        ocDataExchangeExtra,
-      ]
-    }).then(oc => {
+    initOpenCascade().then(oc => {
       // Check out the examples on how to use this library!
     });
     ```
