@@ -27,6 +27,8 @@ defaultEmccFlags = [
   "-sALLOW_MEMORY_GROWTH=1",
   "-sDISABLE_EXCEPTION_CATCHING=0",
   "-sUSE_FREETYPE=1",
+  "-pthread",
+  "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
 ]
 if not "bindings" in buildConfig["mainBuild"]:
   buildConfig["mainBuild"]["bindings"] = []
