@@ -28,13 +28,13 @@ curl -sSO https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh && sudo
 # Install Node and NPM
 apt install -y nodejs npm
 
-# Add swap space
-SWAPSPACE=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/SWAPSPACE -H "Metadata-Flavor: Google")
-fallocate -l $SWAPSPACE /swapfile
-chmod 600 /swapfile
-mkswap /swapfile
-swapon /swapfile
-swapon --show
+# # Add swap space
+# SWAPSPACE=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/SWAPSPACE -H "Metadata-Flavor: Google")
+# fallocate -l $SWAPSPACE /swapfile
+# chmod 600 /swapfile
+# mkswap /swapfile
+# swapon /swapfile
+# swapon --show
 
 # Prepare Actinon Execution
 
