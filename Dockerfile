@@ -185,4 +185,6 @@ RUN /opencascade.js/src/compileSources.py
 RUN /opencascade.js/src/generateBindings.py
 RUN /opencascade.js/src/compileBindings.py
 
+WORKDIR /src/
+
 ENTRYPOINT [ "/opencascade.js/src/run.sh" ]

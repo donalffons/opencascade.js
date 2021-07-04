@@ -1,8 +1,6 @@
 import ocFullJS from "./opencascade.full.js";
 import ocFullWasm from "./opencascade.full.wasm";
 
-console.log({ocFullJS})
-
 const initOpenCascade = ({
     mainJS = ocFullJS,
     mainWasm = ocFullWasm,

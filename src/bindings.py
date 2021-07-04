@@ -95,50 +95,6 @@ class Bindings:
       newString = p.sub("\\1" + templateArgs[key].spelling + "\\2", newString)
     return newString
 
-  # def process(self):
-  #   for theClass in self.translationUnit.cursor.get_children():
-  #     if shouldProcessClass(theClass):
-  #       try:
-  #         self.processClass(theClass)
-  #       except SkipException as e:
-  #         print(str(e))
-
-  #   for templateTypedef in self.templateTypedefs:
-  #     if templateTypedef.underlying_typedef_type.spelling in self.duplicateTypedefs:
-  #       duplicatesForThisTypedef = self.duplicateTypedefs[templateTypedef.underlying_typedef_type.spelling]
-  #       if not templateTypedef.spelling == duplicatesForThisTypedef[0]:
-  #         print("Template typedef \"" + templateTypedef.spelling + "\" for type \"" + templateTypedef.underlying_typedef_type.spelling + "\" has already been processed with the name \"" + duplicatesForThisTypedef[0] + "\", skipping.")
-  #         continue
-  #     try:
-  #       templateRefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TEMPLATE_REF, templateTypedef.get_children()))
-  #       if len(templateRefs) != 1:
-  #         print("The number of template refs for the template typedef \"" + templateTypedef.spelling + "\" is not 1!")
-  #         continue
-
-  #       templateClass = templateRefs[0].get_definition()
-  #       if templateClass is None:
-  #         continue
-  #       templateArgNames = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TEMPLATE_TYPE_PARAMETER, templateClass.get_children()))
-  #       templateArgs = {}
-  #       for i, templateArgName in enumerate(templateArgNames):
-  #         templateArgType = templateTypedef.type.get_template_argument_type(i)
-  #         if templateArgType.spelling == "":
-  #           raise SkipException("Template argument type is empty for at least one argument. Is this class using default values for template arguments? This is currently not supported (" + templateTypedef.spelling + ")")
-  #         templateArgs[templateArgName.spelling] = templateArgType
-
-  #       self.processClass(templateClass, templateTypedef, templateArgs)
-  #     except SkipException as e:
-  #       print(str(e))
-
-  #   self.enums = list(filter(
-  #     lambda x:
-  #       x.kind == clang.cindex.CursorKind.ENUM_DECL and
-  #       filterEnum(x),
-  #     self.translationUnit.cursor.get_children()))
-
-  #   for theEnum in self.enums:
-  #     self.processEnum(theEnum)
-
   def processClass(self, theClass, templateDecl = None, templateArgs = None):
     isAbstract = isAbstractClass(theClass, self.translationUnit)
     if not isAbstract:
@@ -194,24 +150,6 @@ class EmbindBindings(Bindings):
     translationUnit
   ):
     super().__init__(typedefs, templateTypedefs, translationUnit)
-
-  # def process(self):
-  #   super().process()
-
-  #   # Epilog
-  #   for theClass in self.translationUnit.cursor.get_children():
-  #     if theClass.get_definition() is None or not theClass == theClass.get_definition():
-  #       continue
-  #     if not filterClass(theClass):
-  #       continue
-  #     if (
-  #       theClass.kind == clang.cindex.CursorKind.CLASS_DECL or
-  #       theClass.kind == clang.cindex.CursorKind.STRUCT_DECL
-  #     ):
-  #       nonPublicDestructor = any(x.kind == clang.cindex.CursorKind.DESTRUCTOR and not x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC for x in theClass.get_children())
-  #       placementDelete = next((x for x in theClass.get_children() if x.spelling == "operator delete" and len(list(x.get_arguments())) == 2), None) is not None
-  #       if nonPublicDestructor or placementDelete:
-  #         self.output += "namespace emscripten { namespace internal { template<> void raw_destructor<" + theClass.spelling + ">(" + theClass.spelling + "* ptr) { /* do nothing */ } } }\n"
 
   def processClass(self, theClass, templateDecl = None, templateArgs = None):
     className = getClassTypeName(theClass, templateDecl)
@@ -428,39 +366,6 @@ class TypescriptBindings(Bindings):
     self.imports = {}
 
     self.exports = []
-
-  # def process(self):
-  #   for importLib, importItems in self.imports.items():
-  #     self.output += "import { " + ", ".join(importItems) + " } from './" + importLib + ".wasm';\n\n"
-    
-  #   self.output += \
-  #     "type Standard_Boolean = boolean;\n" + \
-  #     "type Standard_Byte = number;\n" + \
-  #     "type Standard_Character = number;\n" + \
-  #     "type Standard_CString = string;\n" + \
-  #     "type Standard_Integer = number;\n" + \
-  #     "type Standard_Real = number;\n" + \
-  #     "type Standard_ShortReal = number;\n" + \
-  #     "type Standard_Size = number;\n\n"
-
-  #   super().process()
-
-  #   self.output += "export declare type " + self.name.replace(".", "_") + " = {\n"
-  #   for export in self.exports:
-  #     if export != "":
-  #       self.output += "  " + export + ": typeof " + export + ";\n"
-  #   self.output += "};\n"
-
-  # def addImportIfWeHaveTo(self, libItem):
-  #   if not libItem in self.moduleExportsDict[self.name]:
-  #     importLib = next((x for x in self.moduleExportsDict if libItem in self.moduleExportsDict[x]), None)
-  #     if not importLib == None:
-  #       if not importLib in self.imports:
-  #         self.imports[importLib] = []
-  #       if not libItem in self.imports[importLib]:
-  #         self.imports[importLib].append(libItem)
-  #     else:
-  #       print("Item \"" + libItem + "\" is not part of this module and has not been exported by any other module")
 
   def processClass(self, theClass, templateDecl = None, templateArgs = None):
     baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, theClass.get_children()))
