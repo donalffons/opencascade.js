@@ -1,14 +1,12 @@
 name: Build OpenCascade.js
 
 on:
-  push:
-    branches:
-      - beta
+  push
 
 jobs:
   build:
     name: Build OpenCascade.js Beta (Full)
-    if: "contains(github.event.head_commit.message, 'ci_full')"
+    if: ${{ contains(github.event.head_commit.message, 'ci_full') }}
     runs-on: [self-hosted, full]
     timeout-minutes: 10000
     steps:
@@ -37,11 +35,12 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           image_name: donalffons/opencascade.js
           pull_image_and_stages: true
-          push_image_and_stages: true
+          push_image_and_stages: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
           image_tag: ${{ steps.version.outputs.tags }}
 
       - name: Build OpenCascade.js Full Module
         timeout-minutes: 10000
+        if: ${{ contains(github.event.head_commit.message, 'ci_full') }}
         run: |
           cd dist
           docker run \
@@ -52,18 +51,21 @@ jobs:
           cd ..
 
       - name: Git and NPM config
+        if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Publish new beta version to NPM
+        if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
         run: |
           npm version ${{steps.version.outputs.version}} --force
           npm publish --tag=beta
 
       - name: Push Changes to branch
         uses: ad-m/github-push-action@master
+        if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
