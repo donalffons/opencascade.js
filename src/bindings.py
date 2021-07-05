@@ -349,7 +349,10 @@ class EmbindBindings(Bindings):
     self.output += "EMSCRIPTEN_BINDINGS(" + theEnum.spelling + ") {\n"
 
     bindingsOutput = "  enum_<" + theEnum.spelling + ">(\"" + theEnum.spelling + "\")\n"
-    for enumChild in list(theEnum.get_children()):
+    enumChildren = list(theEnum.get_children())
+    if len(enumChildren) == 1 and enumChildren[0].kind == clang.cindex.CursorKind.TYPE_REF:
+      raise SkipException()
+    for enumChild in enumChildren:
       bindingsOutput += "    .value(\"" + enumChild.spelling + "\", " + theEnum.spelling + "::" + enumChild.spelling + ")\n"
     bindingsOutput += "  ;\n"
     self.output += bindingsOutput
