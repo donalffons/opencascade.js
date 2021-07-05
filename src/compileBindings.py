@@ -13,8 +13,8 @@ def buildOneFile(item):
     command = [
       "emcc", "--bind",
       "-DIGNORE_NO_ATOMICS=1", "-DOCCT_NO_PLUGINS", "-frtti", "-fPIC", "-DHAVE_RAPIDJSON",
-      "-pthread",
-      "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
+      # "-pthread",
+      # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
       *list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths)),
       "-c",
       item,
