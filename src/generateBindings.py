@@ -84,8 +84,9 @@ def split(a, n):
 def processChildren(generator, buildType: str, extension: str, filterFunction: Callable[[any], bool], processFunction: Callable[[any, any], str], typedefs: any, templateTypedefs: any, preamble: str, additionalFilterFunction: any, customCode):
   tu = parse(customCode)
   func = partial(processChildBatch, customCode, generator, buildType, extension, filterFunction, processFunction, typedefs, templateTypedefs, preamble, additionalFilterFunction)
-  batches = split(range(len(generator(tu))), multiprocessing.cpu_count())
-  with multiprocessing.Pool(processes=int(multiprocessing.cpu_count() / 1)) as p:
+  numthreads = multiprocessing.cpu_count()
+  batches = split(range(len(generator(tu))), numthreads)
+  with multiprocessing.Pool(processes=numthreads) as p:
     p.map(func, batches)
 
 def processTemplate(child):
