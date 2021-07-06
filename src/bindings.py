@@ -350,8 +350,6 @@ class EmbindBindings(Bindings):
 
     bindingsOutput = "  enum_<" + theEnum.spelling + ">(\"" + theEnum.spelling + "\")\n"
     enumChildren = list(theEnum.get_children())
-    if len(enumChildren) == 1 and enumChildren[0].kind == clang.cindex.CursorKind.TYPE_REF:
-      raise SkipException()
     for enumChild in enumChildren:
       bindingsOutput += "    .value(\"" + enumChild.spelling + "\", " + theEnum.spelling + "::" + enumChild.spelling + ")\n"
     bindingsOutput += "  ;\n"
