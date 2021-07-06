@@ -4,6 +4,7 @@ import re
 from wasmGenerator.Common import SkipException, isAbstractClass, getMethodOverloadPostfix
 from filter.filterClasses import filterClass
 from filter.filterMethodOrProperties import filterMethodOrProperty
+from Common import occtBasePath
 
 def shouldProcessClass(child: clang.cindex.Cursor, occtBasePath: str):
   if child.get_definition() is None or not child == child.get_definition():
@@ -76,7 +77,7 @@ class Bindings:
 
   def getTypedefedTemplateTypeAsString(self, theTypeSpelling, templateDecl = None, templateArgs = None):
     if templateDecl is None:
-      typedefType = next((x for x in self.typedefs if x.underlying_typedef_type.spelling == theTypeSpelling), None)
+      typedefType = next((x for x in self.typedefs if x.location.file.name.startswith(occtBasePath) and x.underlying_typedef_type.spelling == theTypeSpelling), None)
       typedefType = None if typedefType is None else typedefType.spelling
     else:
       templateType = self.replaceTemplateArgs(theTypeSpelling, templateArgs)
