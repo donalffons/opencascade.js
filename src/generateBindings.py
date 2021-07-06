@@ -53,42 +53,40 @@ def filterEnums(child, additionalFilterFunction):
     child.extent.start.file.name.startswith(occtBasePath)
   )
 
-def processOneChild(tuOrFilename, generator, buildType: str, extension: str, filterFunction: Callable[[any], bool], processFunction: Callable[[any, any], str], typedefGenerator: any, templateTypedefGenerator: any, preamble: str, additionalFilterFunction: any, i):
-  if type(tuOrFilename) is str:
-    tu = clang.cindex.Index.read(None, path=tuOrFilename)
-    child = list(generator(tu))[i]
-  else:
-    tu = tuOrFilename
-    child = i
+def processChildBatch(customCode, generator, buildType: str, extension: str, filterFunction: Callable[[any], bool], processFunction: Callable[[any, any], str], typedefGenerator: any, templateTypedefGenerator: any, preamble: str, additionalFilterFunction: any, batch):
+  tu = parse(customCode)
+  children = list(generator(tu)[batch.start:batch.stop])
 
-  if not filterFunction(child, additionalFilterFunction) or child.spelling == "":
-    return
+  for child in children:
+    if not filterFunction(child, additionalFilterFunction) or child.spelling == "":
+      continue
 
-  relOcFileName: str = child.extent.start.file.name.replace(occtBasePath, "")
-  mkdirp(buildDirectory + "/" + buildType + "/" + os.path.dirname(relOcFileName))
-  mkdirp(buildDirectory + "/" + buildType + "/" + relOcFileName)
-  filename = buildDirectory + "/" + buildType + "/" + relOcFileName + "/" + (child.spelling if not child.spelling == "" else child.type.spelling) + extension
+    relOcFileName: str = child.extent.start.file.name.replace(occtBasePath, "")
+    mkdirp(buildDirectory + "/" + buildType + "/" + os.path.dirname(relOcFileName))
+    mkdirp(buildDirectory + "/" + buildType + "/" + relOcFileName)
+    filename = buildDirectory + "/" + buildType + "/" + relOcFileName + "/" + (child.spelling if not child.spelling == "" else child.type.spelling) + extension
 
-  if not os.path.exists(filename):
-    print("Processing " + child.spelling)
-    try:
-      output = processFunction(tu, preamble, child, typedefGenerator(tu), templateTypedefGenerator(tu))
-      bindingsFile = open(filename, "w")
-      bindingsFile.write(output)
-    except SkipException as e:
-      print(str(e))
-  else:
-    print("file " + child.spelling + ".cpp already exists, skipping")
+    if not os.path.exists(filename):
+      print("Processing " + child.spelling)
+      try:
+        output = processFunction(tu, preamble, child, typedefGenerator(tu), templateTypedefGenerator(tu))
+        bindingsFile = open(filename, "w")
+        bindingsFile.write(output)
+      except SkipException as e:
+        print(str(e))
+    else:
+      print("file " + child.spelling + ".cpp already exists, skipping")
 
-def processChildren(tuOrFilename, generator, buildType: str, extension: str, filterFunction: Callable[[any], bool], processFunction: Callable[[any, any], str], typedefs: any, templateTypedefs: any, preamble: str, additionalFilterFunction: any):
-  if type(tuOrFilename) is str:
-    tu = clang.cindex.Index.read(None, path=tuOrFilename)
-    func = partial(processOneChild, tuOrFilename, generator, buildType, extension, filterFunction, processFunction, typedefs, templateTypedefs, preamble, additionalFilterFunction)
-    with multiprocessing.Pool(processes=int(multiprocessing.cpu_count() / 1)) as p:
-      p.map(func, range(len(generator(tu))))
-  else:
-    for i, child in enumerate(tuOrFilename.cursor.get_children()):
-      processOneChild(tuOrFilename, generator, buildType, extension, filterFunction, processFunction, typedefs, templateTypedefs, preamble, additionalFilterFunction, child)
+def split(a, n):
+  k, m = divmod(len(a), n)
+  return (a[i * k + min(i, m):(i + 1) * k + min(i + 1, m)] for i in range(n))
+
+def processChildren(generator, buildType: str, extension: str, filterFunction: Callable[[any], bool], processFunction: Callable[[any, any], str], typedefs: any, templateTypedefs: any, preamble: str, additionalFilterFunction: any, customCode):
+  tu = parse(customCode)
+  func = partial(processChildBatch, customCode, generator, buildType, extension, filterFunction, processFunction, typedefs, templateTypedefs, preamble, additionalFilterFunction)
+  batches = split(range(len(generator(tu))), multiprocessing.cpu_count())
+  with multiprocessing.Pool(processes=int(multiprocessing.cpu_count() / 1)) as p:
+    p.map(func, batches)
 
 def processTemplate(child):
   templateRefs = list(filter(lambda x: x.kind == clang.cindex.CursorKind.TEMPLATE_REF, child.get_children()))
@@ -149,10 +147,10 @@ def enumGenerator(tu):
 def defaultAdditionalFilterFunction(child):
   return child.extent.start.file.name.startswith(occtBasePath)
 
-def process(tuOrFilename, extension, embindGenerationFuncClasses, embindGenerationFuncTemplates, embindGenerationFuncEnums, preamble, additionalFilterFunction = defaultAdditionalFilterFunction):
-  processChildren(tuOrFilename, allChildrenGenerator, "bindings", extension, filterClasses, embindGenerationFuncClasses, typedefGenerator, templateTypedefGenerator, preamble, additionalFilterFunction)
-  processChildren(tuOrFilename, templateTypedefGenerator, "bindings", extension, filterTemplates, embindGenerationFuncTemplates, typedefGenerator, templateTypedefGenerator, preamble, additionalFilterFunction)
-  processChildren(tuOrFilename, enumGenerator, "bindings", extension, filterEnums, embindGenerationFuncEnums, typedefGenerator, templateTypedefGenerator, preamble, additionalFilterFunction)
+def process(extension, embindGenerationFuncClasses, embindGenerationFuncTemplates, embindGenerationFuncEnums, preamble, customCode, additionalFilterFunction = defaultAdditionalFilterFunction):
+  processChildren(allChildrenGenerator, "bindings", extension, filterClasses, embindGenerationFuncClasses, typedefGenerator, templateTypedefGenerator, preamble, additionalFilterFunction, customCode)
+  processChildren(templateTypedefGenerator, "bindings", extension, filterTemplates, embindGenerationFuncTemplates, typedefGenerator, templateTypedefGenerator, preamble, additionalFilterFunction, customCode)
+  processChildren(enumGenerator, "bindings", extension, filterEnums, embindGenerationFuncEnums, typedefGenerator, templateTypedefGenerator, preamble, additionalFilterFunction, customCode)
 
 def typescriptGenerationFuncClasses(tu, preamble, child, typedefs, templateTypedefs) -> str:
   typescript = TypescriptBindings(typedefs, templateTypedefs, tu)
@@ -239,11 +237,10 @@ def generateCustomCodeBindings(customCode):
   except Exception:
     pass
 
-  translationUnit = parse(customCode)
   embindPreamble = ocIncludeStatements + "\n" + referenceTypeTemplateDefs + "\n" + customCode
 
-  process(translationUnit, ".cpp", embindGenerationFuncClasses, embindGenerationFuncTemplates, embindGenerationFuncEnums, embindPreamble, customFilter)
-  process(translationUnit, ".d.ts.json", typescriptGenerationFuncClasses, typescriptGenerationFuncTemplates, typescriptGenerationFuncEnums, "", customFilter)
+  process(".cpp", embindGenerationFuncClasses, embindGenerationFuncTemplates, embindGenerationFuncEnums, embindPreamble, customCode, customFilter)
+  process(".d.ts.json", typescriptGenerationFuncClasses, typescriptGenerationFuncTemplates, typescriptGenerationFuncEnums, "", customCode, customFilter)
 
 if __name__ == "__main__":
   try:
@@ -251,15 +248,12 @@ if __name__ == "__main__":
   except Exception:
     pass
 
-  translationUnit = parse()
-  translationUnit.save(libraryBasePath + "/translationUnit.bin")
-
   def processEmbindings():
     embindPreamble = ocIncludeStatements + "\n" + referenceTypeTemplateDefs
-    process(libraryBasePath + "/translationUnit.bin", ".cpp", embindGenerationFuncClasses, embindGenerationFuncTemplates, embindGenerationFuncEnums, embindPreamble)
+    process(".cpp", embindGenerationFuncClasses, embindGenerationFuncTemplates, embindGenerationFuncEnums, embindPreamble, "")
 
   def processTypescriptDefinitions():
-    process(libraryBasePath + "/translationUnit.bin", ".d.ts.json", typescriptGenerationFuncClasses, typescriptGenerationFuncTemplates, typescriptGenerationFuncEnums, "")
+    process(".d.ts.json", typescriptGenerationFuncClasses, typescriptGenerationFuncTemplates, typescriptGenerationFuncEnums, "", "")
 
   processEmbindings()
   processTypescriptDefinitions()
