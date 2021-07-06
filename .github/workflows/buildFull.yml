@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    name: Build OpenCascade.js Beta (Full)
+    name: Build OpenCascade.js
     if: ${{ contains(github.event.head_commit.message, 'ci_full') }}
     runs-on: [self-hosted, full]
     timeout-minutes: 10000
@@ -29,6 +29,7 @@ jobs:
 
       - name: Build OpenCascade.js Docker Image
         uses: whoan/docker-build-with-cache-action@v5
+        if: ${{ contains(github.event.head_commit.message, 'ci_full') }}
         timeout-minutes: 10000
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
@@ -37,6 +38,18 @@ jobs:
           pull_image_and_stages: true
           push_image_and_stages: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
           image_tag: ${{ steps.version.outputs.tags }}
+
+      - name: Save Docker Image if not on beta branch
+        if: ${{ github.ref != 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
+        run: |
+          docker save -o ./dockerImage donalffons/opencascade.js
+
+      - name: Upload Docker Image if not on beta branch
+        uses: actions/upload-artifact@v2
+        if: ${{ github.ref != 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
+        with:
+          name: dockerImage
+          path: ./dockerImage
 
       - name: Build OpenCascade.js Full Module
         timeout-minutes: 10000
@@ -71,7 +84,7 @@ jobs:
           branch: ${{ github.ref }}
 
       - uses: actions/upload-artifact@v2
-        if: ${{ always() }}
+        if: ${{ contains(github.event.head_commit.message, 'ci_full') }}
         with:
           name: dist
           path: ./dist/
