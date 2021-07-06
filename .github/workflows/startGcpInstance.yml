@@ -33,7 +33,7 @@ jobs:
           gcloud beta compute \
             instances create opencascade-js-build-$UUID \
             --zone=us-central1-a \
-            --machine-type=c2-standard-16 \
+            --machine-type=c2-standard-30 \
             --subnet=default \
             --network-tier=PREMIUM \
             --metadata-from-file startup-script=runAction.sh,SA_KEY=GCP_SA_KEY.json,GH_API_TOKEN=GH_API_TOKEN.json,UUID=UUID,LABEL=LABEL \
@@ -43,7 +43,7 @@ jobs:
             --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
             --image=ubuntu-2004-focal-v20210429 \
             --image-project=ubuntu-os-cloud \
-            --boot-disk-size=40GB \
+            --boot-disk-size=50GB \
             --boot-disk-type=pd-ssd \
             --boot-disk-device-name=opencascade-js-build \
             --no-shielded-secure-boot \
