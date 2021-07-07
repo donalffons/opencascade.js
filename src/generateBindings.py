@@ -70,7 +70,7 @@ def filterEnums(child, customBuild):
       child.extent.start.file.name.startswith(occtBasePath) and
       filterPackages(os.path.basename(os.path.dirname(child.location.file.name)))
     ) and
-    child.kind == clang.cindex.TypeKind.ENUM
+    child.kind == clang.cindex.TypeKind.ENUM_DECL
   )
 
 def processChildBatch(customCode, generator, buildType: str, extension: str, filterFunction: Callable[[any], bool], processFunction: Callable[[any, any], str], typedefGenerator: any, templateTypedefGenerator: any, preamble: str, customBuild: bool, batch):
