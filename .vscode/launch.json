@@ -5,42 +5,48 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run Tests",
-      "request": "launch",
-      "runtimeArgs": [
-        "test"
-      ],
-      "runtimeExecutable": "yarn",
-      "runtimeVersion": "14.12.0",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "type": "node"
-    },
-    {
-      "name": "Python: Main",
-      "type": "python",
-      "request": "launch",
-      "program": "${workspaceFolder}/src/main.py",
-      "console": "integratedTerminal",
-      "cwd": "${workspaceFolder}/src"
-    },
-    {
-      "name": "Python: Build Standard Modules",
+      "name": "Step 1: Apply Patches",
       "type": "python",
       "python": "/usr/bin/python3",
       "request": "launch",
-      "program": "${workspaceFolder}/src/buildStandardModules.py",
+      "program": "${workspaceFolder}/src/applyPatches.py",
       "console": "integratedTerminal",
-      "cwd": "${workspaceFolder}/src"
     },
     {
-      "name": "Python: Create Libraries",
+      "name": "Step 2: Compile OCCT Sources to .o files",
       "type": "python",
+      "python": "/usr/bin/python3",
       "request": "launch",
-      "program": "${workspaceFolder}/src/compile.py",
+      "program": "${workspaceFolder}/src/compileSources.py",
       "console": "integratedTerminal",
-      "cwd": "${workspaceFolder}/src"
+    },
+    {
+      "name": "Step 3: Generate bindings (Embind .cpp files + typescript definitions) from OCCT headers",
+      "type": "python",
+      "python": "/usr/bin/python3",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/generateBindings.py",
+      "console": "integratedTerminal",
+    },
+    {
+      "name": "Step 4: Compile Embind .cpp files to .o files",
+      "type": "python",
+      "python": "/usr/bin/python3",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/compileBindings.py",
+      "console": "integratedTerminal",
+    },
+    {
+      "name": "Step 5: Create build: opencascade.full.yml",
+      "type": "python",
+      "python": "/usr/bin/python3",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/buildFromYaml.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/dist",
+      "args": [
+        "/opencascade.js/src/fullBuild.yml"
+      ]
     }
   ]
 }
