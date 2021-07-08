@@ -17,7 +17,6 @@
 
 	"mounts": [
 		"source=${localWorkspaceFolder}/src,target=/opencascade.js/src,type=bind,consistency=cached",
-		"source=${localWorkspaceFolder}/src_build,target=/opencascade.js/src_build,type=bind,consistency=cached",
 		"source=${localWorkspaceFolder}/build,target=/opencascade.js/build,type=bind,consistency=cached",
 		"source=${localWorkspaceFolder}/dist,target=/opencascade.js/dist,type=bind,consistency=cached",
 		"source=${localWorkspaceFolder}/occt-src,target=/occt/occt-0dc2c37/src,type=bind,consistency=cached",
