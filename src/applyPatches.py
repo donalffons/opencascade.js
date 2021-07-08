@@ -5,7 +5,7 @@ import subprocess
 
 os.chdir("/")
 
-for dirpath, dirnames, filenames in os.walk("/opencascade.js/src_build/patches"):
+for dirpath, dirnames, filenames in os.walk("/opencascade.js/src/patches"):
   for filename in filenames:
     print("applying patch " + dirpath + "/" + filename)
     patchFile = open(dirpath + "/" + filename, 'r')
