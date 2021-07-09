@@ -1,1 +1,14 @@
 TODO.md
+.dockerignore
+Dockerfile
+README.md
+build-output.log
+pull-stages-output.log
+runAction.sh
+/src/
+/images/
+/doc/
+/build/
+/.vscode/
+/.github/
+/.devcontainer/
