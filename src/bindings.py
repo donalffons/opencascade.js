@@ -448,7 +448,7 @@ class TypescriptBindings(Bindings):
     else:
       resTypedefType = res.spelling.replace("&", "").replace("const", "").replace("*", "").strip()
       resTypeName = resTypedefType
-    if resTypeName == "" or "(" in resTypeName or ":" in resTypeName:
+    if resTypeName == "" or "(" in resTypeName or ":" in resTypeName or "<" in resTypeName:
       print("could not generate proper types for type name '" + resTypeName + "', using 'any' instead.")
       resTypeName = "any"
     return resTypeName
@@ -460,8 +460,7 @@ class TypescriptBindings(Bindings):
     if argTypeName == "" or "(" in argTypeName or ":" in argTypeName:
       print("could not generate proper types for type name '" + argTypeName + "', using 'any' instead.")
       argTypeName = "any"
-    # self.addImportIfWeHaveTo(argTypeName)
-    
+
     argname = (arg.spelling if not arg.spelling == "" else ("a" + str(suffix)))
     if argname in ["var", "with", "super"]:
       argname += "_"
