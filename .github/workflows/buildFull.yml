@@ -34,7 +34,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          image_name: ${{ secrets.DOCKER_IMAGE_NAME }}
+          image_name: ${{ secrets.PROJECT_NAME }}
           pull_image_and_stages: true
           push_image_and_stages: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
           image_tag: ${{ steps.version.outputs.tags }}
@@ -43,13 +43,13 @@ jobs:
         timeout-minutes: 10000
         if: ${{ contains(github.event.head_commit.message, 'ci_full') }}
         env:
-          DOCKER_IMAGE_NAME: ${{ secrets.DOCKER_IMAGE_NAME }}
+          PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
         run: |
           cd dist
           docker run \
             -v $(pwd):/src \
             -u $(id -u):$(id -g) \
-            $DOCKER_IMAGE_NAME \
+            $PROJECT_NAME \
             /opencascade.js/src/builds/opencascade.full.yml
           cd ..
 
