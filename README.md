@@ -3,7 +3,7 @@
 ![OpenCascade Version](https://img.shields.io/badge/OpenCascade%20Version-7.5.2-green.svg)
 
 <p align="center">
-  <img src="images/logo.svg" alt="Logo" width="50%">
+  <img src="https://github.com/donalffons/opencascade.js/raw/master/images/logo.svg" alt="Logo" width="50%">
 
   <h3 align="center">OpenCascade.js</h3>
 
