@@ -392,10 +392,6 @@ def filterClass(theClass, additionalInfo=None):
   if theClass.spelling.startswith("TPrsStd"):
     return False
 
-  # error: undefined symbol
-  if theClass.spelling == "XCAFApp_Application":
-    return False
-
   if (
     theClass.spelling == "math_NewtonMinimum" or
     theClass.spelling == "math_NewtonFunctionSetRoot"
