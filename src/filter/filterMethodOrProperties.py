@@ -9,6 +9,20 @@ def filterMethodOrProperty(theClass, methodOrProperty):
   #   (theClass.spelling == "TopOpeBRepDS_TKI" and methodOrProperty.spelling == "ChangeValue"):
   #   return False
 
+  # error: call to deleted constructor of 'std::istream'
+  if (
+    (theClass.spelling == "BinObjMgt_Persistent" and methodOrProperty.spelling == "Read") or
+    (theClass.spelling == "BinTools" and methodOrProperty.spelling == "GetReal") or
+    (theClass.spelling == "BinTools" and methodOrProperty.spelling == "GetShortReal") or
+    (theClass.spelling == "BinTools" and methodOrProperty.spelling == "GetInteger") or
+    (theClass.spelling == "BinTools" and methodOrProperty.spelling == "GetBool") or
+    (theClass.spelling == "BinTools" and methodOrProperty.spelling == "GetExtChar") or
+    (theClass.spelling == "BinTools_SurfaceSet" and methodOrProperty.spelling == "ReadSurface") or
+    (theClass.spelling == "BinTools_Curve2dSet" and methodOrProperty.spelling == "ReadCurve2d") or
+    (theClass.spelling == "BinTools_CurveSet" and methodOrProperty.spelling == "ReadCurve2d")
+  ):
+    return False
+
   # error: no matching function for call to object of type 'std::function<bool (MeshVS_DataSource &, int, bool, NCollection_Array1<double> &, emscripten::val, MeshVS_EntityType &)>'
   if \
     (theClass.spelling == "MeshVS_DataSource" and methodOrProperty.spelling == "GetGeom") or \
