@@ -19,7 +19,7 @@ def filterMethodOrProperty(theClass, methodOrProperty):
     (theClass.spelling == "BinTools" and methodOrProperty.spelling == "GetExtChar") or
     (theClass.spelling == "BinTools_SurfaceSet" and methodOrProperty.spelling == "ReadSurface") or
     (theClass.spelling == "BinTools_Curve2dSet" and methodOrProperty.spelling == "ReadCurve2d") or
-    (theClass.spelling == "BinTools_CurveSet" and methodOrProperty.spelling == "ReadCurve2d")
+    (theClass.spelling == "BinTools_CurveSet" and methodOrProperty.spelling == "ReadCurve")
   ):
     return False
 
