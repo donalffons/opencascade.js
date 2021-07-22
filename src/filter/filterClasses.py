@@ -1,4 +1,12 @@
 def filterClass(theClass, additionalInfo=None):
+  # method "Add" has no implementation
+  if theClass.spelling == "DsgPrs_RadiusPresentation":
+    return False
+
+  # constructor GCPnts_DistFunction(const GCPnts_DistFunction& theOther) is not implemented
+  if theClass.spelling == "GCPnts_DistFunction":
+    return False
+
   if theClass.spelling.startswith("AdvApp2Var"):
     return False
 

@@ -9,6 +9,34 @@ def filterMethodOrProperty(theClass, methodOrProperty):
   #   (theClass.spelling == "TopOpeBRepDS_TKI" and methodOrProperty.spelling == "ChangeValue"):
   #   return False
 
+  # error: undefined symbol: _ZN16AppDef_MultiLine12SetParameterEid
+  if theClass.spelling == "AppDef_MultiLine" and methodOrProperty.spelling == "SetParameter":
+    return False
+
+  # error: overload of method DN has no implementation
+  if theClass.spelling == "BSplCLib" and methodOrProperty.spelling == "DN":
+    return False
+
+  # error: overload of method Knots has no implementation
+  if theClass.spelling == "BlendFunc" and (
+    methodOrProperty.spelling == "Knots" or
+    methodOrProperty.spelling == "Mults"
+  ):
+    return False
+
+  # error: overload of method Error has no implementation
+  if (
+    theClass.spelling == "AppDef_TheResol" or
+    theClass.spelling == "AppDef_ResConstraintOfTheGradient" or
+    theClass.spelling == "AppDef_ResConstraintOfMyGradientOfCompute" or
+    theClass.spelling == "AppDef_ResConstraintOfMyGradientbisOfBSplineCompute"
+  ) and methodOrProperty.spelling == "Error":
+    return False
+
+  # error: overload of method Dump has no implementation
+  if theClass.spelling == "BinTools_Curve2dSet" and methodOrProperty.spelling == "Dump":
+    return False
+
   # error: call to deleted constructor of 'std::istream'
   if (
     (theClass.spelling == "BinObjMgt_Persistent" and methodOrProperty.spelling == "Read") or
