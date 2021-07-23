@@ -1,4 +1,20 @@
 def filterClass(theClass, additionalInfo=None):
+  # undefined symbol: GCPnts_DistFunction2d::GCPnts_DistFunction2d(GCPnts_DistFunction2d const&)
+  if theClass.spelling == "GCPnts_DistFunction2d":
+    return False
+
+  # undefined symbol: GeomFill_SweepSectionGenerator::GeomFill_SweepSectionGenerator(opencascade::handle<Geom_Curve> const&, opencascade::handle<Geom_Curve> const&, opencascade::handle<Geom_Curve> const&, double)
+  if theClass.spelling == "GeomFill_SweepSectionGenerator":
+    return False
+
+  # undefined symbol: Geom2dGcc_FunctionTanCuCuCu::Geom2dGcc_FunctionTanCuCuCu(gp_Circ2d const&, Geom2dAdaptor_Curve const&, gp_Pnt2d const&)
+  if theClass.spelling == "Geom2dGcc_FunctionTanCuCuCu":
+    return False
+
+  # Cocoa is not supported due to missing TargetConditionals.h header
+  if theClass.spelling.startswith("Cocoa"):
+    return False
+
   # method "Add" has no implementation
   if theClass.spelling == "DsgPrs_RadiusPresentation":
     return False
