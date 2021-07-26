@@ -1,4 +1,12 @@
 def filterClass(theClass, additionalInfo=None):
+  # out of scope of this project
+  if (
+    theClass.spelling.startswith("D3DHost") or
+    theClass.spelling.startswith("IVtk") or
+    theClass.spelling.startswith("OpenGl")
+  ):
+    return False
+
   # undefined symbol: GCPnts_DistFunction2d::GCPnts_DistFunction2d(GCPnts_DistFunction2d const&)
   if theClass.spelling == "GCPnts_DistFunction2d":
     return False
@@ -26,12 +34,6 @@ def filterClass(theClass, additionalInfo=None):
   if theClass.spelling.startswith("AdvApp2Var"):
     return False
 
-  if theClass.spelling == "OpenGl_GlFunctions":
-    return False
-
-  if theClass.spelling == "OpenGl_GraphicDriver":
-    return False
-
   # "unsigned long" as function argument type breaks typescript
   if theClass.spelling == "WNT_HIDSpaceMouse":
     return False
@@ -55,18 +57,9 @@ def filterClass(theClass, additionalInfo=None):
   if theClass.spelling == "PrsDim_Dimension":
     return False
 
-  # error: implicit instantiation of undefined template 'emscripten::internal::RegisterClassMethod<unsigned long OpenGl_Context::*>'
-  # error: implicit instantiation of undefined template 'emscripten::internal::RegisterClassMethod<unsigned long Event::*>'
-  if theClass.spelling == "OpenGl_Context":
-    return False
-
   # error: call to implicitly-deleted copy constructor of 'IntTools_FClass2d'
   # error: call to implicitly-deleted copy constructor of 'BRepClass3d_SolidClassifier'
   if theClass.spelling == "IntTools_Context":
-    return False
-
-  # error: undefined symbol: _ZN20OpenGl_ShaderProgram20compileShaderVerboseERKN11opencascade6handleI14OpenGl_ContextEERKNS1_I19OpenGl_ShaderObjectEERK23TCollection_AsciiStringb
-  if theClass.spelling == "OpenGl_ShaderProgram":
     return False
 
   # error: rvalue reference to type 'Storage_BaseDriver' cannot bind to lvalue of type 'Storage_BaseDriver'
@@ -425,14 +418,8 @@ def filterClass(theClass, additionalInfo=None):
 
   # error: undefined symbol
   if (
-    theClass.spelling == "D3DHost_FrameBuffer" or
-    theClass.spelling == "D3DHost_GraphicDriver" or
     theClass.spelling == "IntPatch_Polyhedron" or
-    theClass.spelling == "IVtkOCC_ViewerSelector" or
-    theClass.spelling == "IVtkDraw" or
     theClass.spelling == "IntPatch_RLine" or
-    theClass.spelling == "IVtk_Interface" or
-    theClass.spelling == "IVtk_IView" or
     theClass.spelling == "Xw_Window"
   ):
     return False
