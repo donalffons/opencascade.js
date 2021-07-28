@@ -75,7 +75,7 @@ def filterPackages(packageName):
       "OpenGl",
 
       ## Toolkit TKService
-      "Aspect",
+      # "Aspect",
       "Cocoa",
       # "Font",
       # "Graphic3d",
@@ -88,7 +88,7 @@ def filterPackages(packageName):
       ## Toolkit TKV3d
       "AIS",
       "DsgPrs",
-      "Prs3d",
+      # "Prs3d",
       "PrsDim",
       # "PrsMgr",
       # "Select3D",
