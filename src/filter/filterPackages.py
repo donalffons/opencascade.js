@@ -78,7 +78,7 @@ def filterPackages(packageName):
       "Aspect",
       "Cocoa",
       # "Font",
-      "Graphic3d",
+      # "Graphic3d",
       "Image",
       "Media",
       "WNT",
