@@ -86,7 +86,7 @@ def filterPackages(packageName):
       # "Xw",
 
       ## Toolkit TKV3d
-      "AIS",
+      # "AIS",
       "DsgPrs",
       # "Prs3d",
       "PrsDim",
@@ -94,7 +94,7 @@ def filterPackages(packageName):
       # "Select3D",
       # "SelectBasics",
       # "SelectMgr",
-      "StdPrs",
+      # "StdPrs",
       # "StdSelect",
       "V3d",
 
