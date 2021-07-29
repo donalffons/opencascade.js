@@ -87,7 +87,7 @@ def filterPackages(packageName):
 
       ## Toolkit TKV3d
       # "AIS",
-      "DsgPrs",
+      # "DsgPrs",
       # "Prs3d",
       # "PrsDim",
       # "PrsMgr",
