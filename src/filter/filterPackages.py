@@ -89,7 +89,7 @@ def filterPackages(packageName):
       # "AIS",
       "DsgPrs",
       # "Prs3d",
-      "PrsDim",
+      # "PrsDim",
       # "PrsMgr",
       # "Select3D",
       # "SelectBasics",
