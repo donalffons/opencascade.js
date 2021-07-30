@@ -96,7 +96,7 @@ def filterPackages(packageName):
       # "SelectMgr",
       # "StdPrs",
       # "StdSelect",
-      "V3d",
+      # "V3d",
 
     "XBRepMesh", # This leads to a naming clas with BRepMesh
   ]:
