@@ -30,13 +30,14 @@ jobs:
           echo "$GH_API_TOKEN" > ./GH_API_TOKEN.json
           echo "$UUID" > ./UUID
           echo "full" > ./LABEL
+          echo "donalffons/opencascade.js" > ./PROJECT_NAME
           gcloud beta compute \
             instances create opencascade-js-build-$UUID \
             --zone=us-central1-a \
             --machine-type=c2-standard-30 \
             --subnet=default \
             --network-tier=PREMIUM \
-            --metadata-from-file startup-script=runAction.sh,SA_KEY=GCP_SA_KEY.json,GH_API_TOKEN=GH_API_TOKEN.json,UUID=UUID,LABEL=LABEL \
+            --metadata-from-file startup-script=runAction.sh,SA_KEY=GCP_SA_KEY.json,GH_API_TOKEN=GH_API_TOKEN.json,UUID=UUID,LABEL=LABEL,PROJECT_NAME=PROJECT_NAME \
             --no-restart-on-failure \
             --maintenance-policy=TERMINATE \
             --preemptible \

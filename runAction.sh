@@ -42,16 +42,11 @@ echo $(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attri
 GH_API_TOKEN=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/GH_API_TOKEN -H "Metadata-Flavor: Google")
 UUID=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/UUID -H "Metadata-Flavor: Google")
 LABEL=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/LABEL -H "Metadata-Flavor: Google")
+PROJECT_NAME=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/PROJECT_NAME -H "Metadata-Flavor: Google")
 
 gcloud auth activate-service-account --key-file /saKey.json
 GH_ACTION_TOKEN_RESPONSE=$(curl -u opencascade.js-build:$GH_API_TOKEN   -X POST   -H "Accept: application/vnd.github.v3+json"   https://api.github.com/repos/donalffons/opencascade.js/actions/runners/registration-token)
 GH_ACTION_TOKEN=$(echo $GH_ACTION_TOKEN_RESPONSE | jq -r ".token")
-echo "-ASDA"
-echo $GH_ACTION_TOKEN
-echo https://github.com/$PROJECT_NAME
-echo opencascade-js-build-$UUID
-echo $LABEL
-echo "-ASDA"
 
 mkdir actions-runner && cd actions-runner
 curl -o actions-runner-linux-x64-2.280.3.tar.gz -L https://github.com/actions/runner/releases/download/v2.280.3/actions-runner-linux-x64-2.280.3.tar.gz
