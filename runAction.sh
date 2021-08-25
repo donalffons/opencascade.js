@@ -47,8 +47,10 @@ gcloud auth activate-service-account --key-file /saKey.json
 GH_ACTION_TOKEN_RESPONSE=$(curl -u opencascade.js-build:$GH_API_TOKEN   -X POST   -H "Accept: application/vnd.github.v3+json"   https://api.github.com/repos/donalffons/opencascade.js/actions/runners/registration-token)
 GH_ACTION_TOKEN=$(echo $GH_ACTION_TOKEN_RESPONSE | jq -r ".token")
 echo "-ASDA"
-curl -u opencascade.js-build:$GH_API_TOKEN   -X POST   -H "Accept: application/vnd.github.v3+json"   https://api.github.com/repos/donalffons/opencascade.js/actions/runners/registration-token
 echo $GH_ACTION_TOKEN
+echo https://github.com/$PROJECT_NAME
+echo opencascade-js-build-$UUID
+echo $LABEL
 echo "-ASDA"
 
 mkdir actions-runner && cd actions-runner
