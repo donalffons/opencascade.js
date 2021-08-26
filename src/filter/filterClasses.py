@@ -1,4 +1,12 @@
 def filterClass(theClass, additionalInfo=None):
+  # Debug
+  if (
+    theClass.spelling.startswith("Geom2dGcc") or
+    theClass.spelling.startswith("GeomFill") or
+    theClass.spelling == "XCAFApp_Application"
+  ):
+    return False
+
   # out of scope of this project
   if (
     theClass.spelling.startswith("D3DHost") or
