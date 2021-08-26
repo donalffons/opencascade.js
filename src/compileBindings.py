@@ -22,7 +22,6 @@ def buildOneFile(item):
     subprocess.check_call([
       *command,
       "-O3",
-      "-flto",
       "-sDISABLE_EXCEPTION_CATCHING=0",
       # "-g3",
       # "-gsource-map",
