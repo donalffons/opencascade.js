@@ -68,6 +68,11 @@ def buildObjectFiles(file):
     subprocess.check_call([
       *command,
       "-O3",
+      "-flto",
+      "-sDISABLE_EXCEPTION_CATCHING=0",
+      # "-g3",
+      # "-gsource-map",
+      # "--source-map-base=http://localhost:8080",
       "-o", libraryBasePath + "/" + relativeFile + ".o",
       ])
   else:

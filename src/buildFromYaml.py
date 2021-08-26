@@ -19,6 +19,7 @@ if not "extraBuilds" in buildConfig:
 
 defaultEmccFlags = [
   "-O3",
+  "-flto",
   "-sEXPORT_ES6=1",
   "-sUSE_ES6_IMPORT_META=0",
   "-sEXPORTED_RUNTIME_METHODS=['FS']",
