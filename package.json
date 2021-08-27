@@ -8,8 +8,7 @@
   "repository": "github:donalffons/opencascade.js",
   "types": "dist/index.d.ts",
   "devDependencies": {
-    "jest": "^27.0.1",
-    "opencascade.js-examples": "git://github.com/donalffons/opencascade.js-examples.git#master"
+    "jest": "^27.0.1"
   },
   "scripts": {
     "test": "jest"
