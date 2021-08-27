@@ -25,7 +25,6 @@ defaultEmccFlags = [
   "-sINITIAL_MEMORY=100MB",
   "-sMAXIMUM_MEMORY=4GB",
   "-sALLOW_MEMORY_GROWTH=1",
-  "-sDISABLE_EXCEPTION_CATCHING=1",
   "-sUSE_FREETYPE=1",
   # "-pthread",
   # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",

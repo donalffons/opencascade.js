@@ -106,7 +106,6 @@ Custom builds are defined using YAML files. One YAML file can contain multiple m
           - -sINITIAL_MEMORY=100MB
           - -sMAXIMUM_MEMORY=4GB
           - -sALLOW_MEMORY_GROWTH=1
-          - -sDISABLE_EXCEPTION_CATCHING=0
           - -sUSE_FREETYPE=1
       additionalCppCode: |
         #include <iostream>
