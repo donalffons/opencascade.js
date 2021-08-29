@@ -67,9 +67,7 @@ def buildObjectFiles(file):
     print("Building " + relativeFile)
     subprocess.check_call([
       *command,
-      "-O1",
-      "-flto",
-      "-sDISABLE_EXCEPTION_CATCHING=0",
+      "-O3",
       # "-g3",
       # "-gsource-map",
       # "--source-map-base=http://localhost:8080",
