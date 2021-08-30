@@ -1,12 +1,4 @@
 def filterClass(theClass, additionalInfo=None):
-  # Debug
-  if (
-    theClass.spelling.startswith("Geom2dGcc") or
-    theClass.spelling.startswith("GeomFill") or
-    theClass.spelling == "XCAFApp_Application"
-  ):
-    return False
-
   # out of scope of this project
   if (
     theClass.spelling.startswith("D3DHost") or
@@ -84,37 +76,6 @@ def filterClass(theClass, additionalInfo=None):
   # error: rvalue reference to type 'Storage_BaseDriver' cannot bind to lvalue of type 'Storage_BaseDriver'
   # error: allocating an object of abstract class type 'Storage_BaseDriver'
   if theClass.spelling == "FSD_File":
-    return False
-
-  # error: undefined symbol: a hundred times
-  if (
-    theClass.spelling.startswith("Draw") or
-    theClass.spelling == "BRep_Edge" or 
-    theClass.spelling == "BRep_Face" or
-    theClass.spelling.startswith("DDF") or
-    theClass.spelling.startswith("Cocoa") or
-    theClass.spelling.startswith("Bin") or
-    theClass.spelling.startswith("DNaming") or
-    theClass.spelling.startswith("DPrs") or
-    theClass.spelling == "DDataStd" or
-    theClass.spelling.startswith("DBRep") or
-    theClass.spelling == "AdvApp2Var" or
-    theClass.spelling == "AdvApp2Var_Iso" or
-    theClass.spelling.startswith("AppDef") or
-    theClass.spelling.startswith("DDataStd") or
-    theClass.spelling.startswith("DDocStd") or
-    theClass.spelling == "DsgPrs_RadiusPresentation" or
-    theClass.spelling == "BSplCLib" or
-    theClass.spelling == "BlendFunc" or
-    theClass.spelling == "AppDef_TheResol"
-  ):
-    return False
-
-  # error: undefined symbol
-  if (
-    theClass.spelling == "GCPnts_DistFunction" or
-    theClass.spelling == "GCPnts_DistFunction2d"
-  ):
     return False
 
   # error: no matching function for call to 'operator new'
@@ -195,13 +156,6 @@ def filterClass(theClass, additionalInfo=None):
   if theClass.spelling == "Poly_CoherentTriPtr":
     return False
 
-  # error: constexpr variable 'types' must be initialized by a constant expression
-  # and many others...
-  if (
-    theClass.spelling.startswith("IGES") and not theClass.spelling.startswith("IGESControl")
-  ):
-    return False
-
   # error: undefined symbol: _ZNK22STEPSelections_Counter3POPEv (referenced by top-level compiled C/C++ code)
   if theClass.spelling == "STEPSelections_Counter":
     return False
@@ -221,29 +175,92 @@ def filterClass(theClass, additionalInfo=None):
   if theClass.spelling == "HLRBRep_CLProps":
     return False
 
+  # error: non-const lvalue reference to type 'void *' cannot bind to a temporary of type 'void *'
+  if theClass.spelling == "HLRBRep_Intersector":
+    return False
+
+  # error: undefined symbol: _ZN20HLRBRep_BSurfaceTool4AxisERK19BRepAdaptor_Surface (referenced by top-level compiled C/C++ code)
+  if theClass.spelling == "HLRBRep_BSurfaceTool":
+    return False
+
+  # error: no matching function for call to object of type 'std::function<void (IGESData_IGESReaderData &, int, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val, emscripten::val, const char *&, const char *&, const char *&, const char *&)>'
+  if theClass.spelling == "IGESData_IGESReaderData":
+    return False
+
+  # error: /opencascade.js/build/bindings/IGESToBRep/IGESToBRep_TopoSurface.hxx/IGESToBRep_TopoSurface.cpp.o: undefined symbol: IGESToBRep_TopoSurface::TransferPlaneSurface(opencascade::handle<IGESSolid_PlaneSurface> const&)
+  if theClass.spelling == "IGESToBRep_TopoSurface":
+    return False
+
+  # error: /opencascade.js/build/bindings/StepData/StepData_FreeFormEntity.hxx/StepData_FreeFormEntity.cpp.o: undefined symbol: StepData_FreeFormEntity::StepData_FreeFormEntity()
+  if theClass.spelling == "StepData_FreeFormEntity":
+    return False
+
+  # error: /opencascade.js/build/bindings/StepData/StepData_UndefinedEntity.hxx/StepData_UndefinedEntity.cpp.o: undefined symbol: StepData_UndefinedEntity::Super() const
+  if theClass.spelling == "StepData_UndefinedEntity":
+    return False
+
+  # error: /opencascade.js/build/bindings/HLRBRep/HLRBRep_Surface.hxx/HLRBRep_Surface.cpp.o: undefined symbol: HLRBRep_Surface::UIntervalContinuity() const
+  if theClass.spelling == "HLRBRep_Surface":
+    return False
+
+  # error: /opencascade.js/build/bindings/HLRBRep/HLRBRep_ThePolyhedronOfInterCSurf.hxx/HLRBRep_ThePolyhedronOfInterCSurf.cpp.o: undefined symbol: HLRBRep_ThePolyhedronOfInterCSurf::UMinSingularity(bool)
+  if theClass.spelling == "HLRBRep_ThePolyhedronOfInterCSurf":
+    return False
+
+  # error: /opencascade.js/build/bindings/HLRBRep/HLRBRep_TheCurveLocatorOfTheProjPCurOfCInter.hxx/HLRBRep_TheCurveLocatorOfTheProjPCurOfCInter.cpp.o: undefined symbol: HLRBRep_TheCurveLocatorOfTheProjPCurOfCInter::Locate(void* const&, void* const&, int, int, Extrema_POnCurv2d&, Extrema_POnCurv2d&)
+  if theClass.spelling == "HLRBRep_TheCurveLocatorOfTheProjPCurOfCInter":
+    return False
+
+  # error: /opencascade.js/build/bindings/IntCurveSurface/IntCurveSurface_ThePolyhedronOfHInter.hxx/IntCurveSurface_ThePolyhedronOfHInter.cpp.o: undefined symbol: IntCurveSurface_ThePolyhedronOfHInter::UMinSingularity(bool)
+  if theClass.spelling == "IntCurveSurface_ThePolyhedronOfHInter":
+    return False
+
+  # error: /opencascade.js/build/bindings/IntPolyh/IntPolyh_MaillageAffinage.hxx/IntPolyh_MaillageAffinage.cpp.o: undefined symbol: IntPolyh_MaillageAffinage::GetFinTE(int) const
+  if theClass.spelling == "IntPolyh_MaillageAffinage":
+    return False
+
+  # error: /opencascade.js/build/bindings/IGESSelect/IGESSelect_SelectBasicGeom.hxx/IGESSelect_SelectBasicGeom.cpp.o: undefined symbol: IGESSelect_SelectBasicGeom::CurvesOnly() const
+  if theClass.spelling == "IGESSelect_SelectBasicGeom":
+    return False
+
+  # error: /opencascade.js/build/bindings/ShapeFix/ShapeFix_WireSegment.hxx/ShapeFix_WireSegment.cpp.o: undefined symbol: ShapeFix_WireSegment::ShapeFix_WireSegment(TopoDS_Wire const&, TopAbs_Orientation)
+  if theClass.spelling == "ShapeFix_WireSegment":
+    return False
+
+  # error: /opencascade.js/build/bindings/StepFEA/StepFEA_SymmetricTensor43d.hxx/StepFEA_SymmetricTensor43d.cpp.o: undefined symbol: StepFEA_SymmetricTensor43d::SetFeaIsotropicSymmetricTensor43d(opencascade::handle<TColStd_HArray1OfReal> const&)
+  if theClass.spelling == "StepFEA_SymmetricTensor43d":
+    return False
+
+  # error: /opencascade.js/build/bindings/IFSelect/IFSelect_EditForm.hxx/IFSelect_EditForm.cpp.o: undefined symbol: IFSelect_EditForm::NbTouched() const
+  if theClass.spelling == "IFSelect_EditForm":
+    return False
+
+  # error: /opencascade.js/build/bindings/IFSelect/IFSelect_IntParam.hxx/IFSelect_IntParam.cpp.o: undefined symbol: IFSelect_IntParam::StaticName() const
+  if theClass.spelling == "IFSelect_IntParam":
+    return False
+
+  # error: /opencascade.js/build/bindings/IFSelect/IFSelect_ContextModif.hxx/IFSelect_ContextModif.cpp.o: undefined symbol: IFSelect_ContextModif::Search(opencascade::handle<Standard_Transient> const&, opencascade::handle<Standard_Transient>&) const
+  if theClass.spelling == "IFSelect_ContextModif":
+    return False
+
+  # error: error: /opencascade.js/build/bindings/IntTools/IntTools_PntOnFace.hxx/IntTools_PntOnFace.cpp.o: undefined symbol: IntTools_PntOnFace::IsValid() const
+  if theClass.spelling == "IntTools_PntOnFace":
+    return False
+
+  # error: /opencascade.js/build/bindings/IntImpParGen/IntImpParGen_ImpTool.hxx/IntImpParGen_ImpTool.cpp.o: undefined symbol: IntImpParGen_ImpTool::Value(double) const
+  if theClass.spelling == "IntImpParGen_ImpTool":
+    return False
+
   # error: incomplete type 'Interface_FileParameter' used in type trait expression
   if theClass.spelling == "Interface_FileReaderData":
     return False
-  
+
   # error: incomplete type 'Interface_ShareTool' used in type trait expression
   if theClass.spelling == "Interface_GeneralModule":
     return False
 
   # error: incomplete type 'Interface_GTool' used in type trait expression
   if theClass.spelling == "Interface_HGraph":
-    return False
-
-  if (
-    theClass.spelling.startswith("HLRTest") or
-    theClass.spelling.startswith("HLRBRep") or
-    theClass.spelling.startswith("IntCurveSurface_ThePolyhedronOfHI") or
-    theClass.spelling == "IFSelect_EditForm" or
-    theClass.spelling == "IFSelect_IntParam" or
-    theClass.spelling == "IntTools_PntOnFace" or
-    theClass.spelling.startswith("IntImpParGen") or
-    theClass.spelling.startswith("IFSelect_ContextModif") or
-    theClass.spelling.startswith("IntPolyh_MaillageAffinage")
-  ):
     return False
 
   # error: incomplete type 'Interface_ShareTool' used in type trait expression
@@ -262,10 +279,6 @@ def filterClass(theClass, additionalInfo=None):
   if theClass.spelling == "OSD_File":
     return False
 
-  # # error: no matching function for call to 'operator new'
-  # if theClass.spelling.startswith("NCollection"):
-  #   return False
-
   # error: no matching function for call to 'operator new'
   if theClass.spelling == "NCollection_ListNode":
     return False
@@ -280,10 +293,6 @@ def filterClass(theClass, additionalInfo=None):
 
   # error: incomplete type 'Interface_ShareTool' used in type trait expression
   if theClass.spelling == "RWStepAP214_GeneralModule":
-    return False
-
-  # error: constexpr variable 'types' must be initialized by a constant expression
-  if theClass.spelling.startswith("RWStepGeom"):
     return False
 
   # error: constexpr variable 'types' must be initialized by a constant expression
@@ -371,24 +380,8 @@ def filterClass(theClass, additionalInfo=None):
   if theClass.spelling == "XBRepMesh":
     return False
 
-  if (
-    theClass.spelling.startswith("ViewerTest") or
-    theClass.spelling.startswith("XDEDRAW") or
-    theClass.spelling.startswith("XSDRAW") or
-    theClass.spelling.startswith("SWDRAW") or
-    theClass.spelling == "ShapeFix_WireSegment" or
-    theClass.spelling == "ShapeFix_Edge" or
-    theClass.spelling == "StepFEA_SymmetricTensor43d" or
-    theClass.spelling == "TransferBRep" or
-    theClass.spelling == "StepToTopoDS_Builder" or
-    theClass.spelling == "StepData_FreeFormEntity" or
-    theClass.spelling == "StepData_UndefinedEntity" or
-    theClass.spelling == "TObjDRAW"
-  ):
-    return False
-
-  # error: undefined symbol
-  if theClass.spelling.startswith("TPrsStd"):
+  # error: error: undefined symbol: _ZN12TransferBRep9BRepCheckERK12TopoDS_Shapei (referenced by top-level compiled C/C++ code)
+  if theClass.spelling == "TransferBRep":
     return False
 
   if (
