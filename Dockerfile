@@ -115,8 +115,8 @@ WORKDIR /rapidjson/
 RUN \
   git clone https://github.com/Tencent/rapidjson.git .
 
-ENV OCCT_COMMIT_HASH_FULL 0dc2c377fc5a2d8cf065f4ec005e356240cb484c
-ENV OCCT_COMMIT_HASH 0dc2c37
+ENV OCCT_COMMIT_HASH_FULL fecb042498514186bd37fa621cdcf09eb61899a3
+ENV OCCT_COMMIT_HASH fecb042
 WORKDIR /occt/
 RUN \
   curl "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=${OCCT_COMMIT_HASH_FULL};sf=tgz" -o occt.tar.gz && \

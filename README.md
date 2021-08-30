@@ -1,6 +1,6 @@
 
 ![opencascade.js - Build Library](https://github.com/donalffons/opencascade.js/workflows/opencascade.js%20-%20Build%20Library/badge.svg)
-![OpenCascade Version](https://img.shields.io/badge/OpenCascade%20Version-7.5.2-green.svg)
+![OpenCascade Version](https://img.shields.io/badge/OpenCascade%20Version-7.5.3-green.svg)
 
 <p align="center">
   <img src="https://github.com/donalffons/opencascade.js/raw/master/images/logo.svg" alt="Logo" width="50%">
@@ -88,4 +88,3 @@ This project is (hopefully) keeping itself (mostly) up-to-date with the OpenCasc
 # Contributing
 
 Contributions are welcome! Feel free to have a look at the [todo-list](TODO.md) if you need some inspiration on what else needs to be done.
-
