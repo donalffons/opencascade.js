@@ -20,5 +20,6 @@
   },
   "peerDependencies": {
     "ws": "^7.4.5"
-  }
+  },
+  "type": "module"
 }
