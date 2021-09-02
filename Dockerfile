@@ -22,7 +22,10 @@ RUN \
     python3-setuptools \
     zlib1g-dev
 
-RUN pip install libclang
+RUN \
+  pip install \
+    libclang \
+    pyyaml
 
 WORKDIR /rapidjson/
 RUN \
