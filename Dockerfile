@@ -28,6 +28,10 @@ WORKDIR /rapidjson/
 RUN \
   git clone https://github.com/Tencent/rapidjson.git .
 
+WORKDIR /freetype/
+RUN \
+  git clone https://git.savannah.nongnu.org/git/freetype/freetype2.git .
+
 ENV OCCT_COMMIT_HASH_FULL fecb042498514186bd37fa621cdcf09eb61899a3
 ENV OCCT_COMMIT_HASH fecb042
 WORKDIR /occt/
