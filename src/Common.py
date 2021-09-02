@@ -28,7 +28,7 @@ includePathArgs = \
     "/emsdk/upstream/emscripten/system/include/",
     "/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed/",
     "/emsdk/upstream/emscripten/system/lib/libcxx/include/",
-    "/emsdk/upstream/lib/clang/13.0.0/include/",
+    "/emsdk/upstream/lib/clang/" + next(os.walk('/emsdk/upstream/lib/clang/'))[1][0] + "/include/",
     "/emsdk/upstream/emscripten/system/lib/libcxx/include/__support/newlib/"
   ])) + \
   list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths))

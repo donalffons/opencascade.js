@@ -205,8 +205,6 @@ def typescriptGenerationFuncEnums(tu, preamble, child, typedefs, templateTypedef
   })
 
 def parse(additionalCppCode = ""):
-  libFolder = "/clang/clang_11/lib"
-  clang.cindex.Config.library_path = libFolder
   index = clang.cindex.Index.create()
   translationUnit = index.parse(
     "myMain.h", [
