@@ -21,7 +21,7 @@ def buildOneFile(item):
     ]
     subprocess.check_call([
       *command,
-      "-O3",
+      "-Os",
       # "-g3",
       # "-gsource-map",
       # "--source-map-base=http://localhost:8080",
