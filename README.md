@@ -36,6 +36,8 @@
     npm install opencascade.js@beta
     ```
 
+**Option A:** If you're using a bundler like Webpack (browser-based and server-side applications)
+
 2. Configure your bundler to load `.wasm` files as URLs. If you don't want to use a bundler, you can manually pass in the URLs to the WASM files in the next step.
 
     For webpack, first add the `file-loader` dependency.
@@ -65,6 +67,18 @@
 
     ```js
     import initOpenCascade from "opencascade.js";
+
+    initOpenCascade().then(oc => {
+      // Check out the examples on how to use this library!
+    });
+    ```
+
+**Option B:** If you're using Node.js without a bundler in a server-side application
+
+2. In this case, you can import the library directly without having to configure your bundler
+
+    ```js
+    import initOpenCascade from "opencascade.js/dist/node.js";
 
     initOpenCascade().then(oc => {
       // Check out the examples on how to use this library!
