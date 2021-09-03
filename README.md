@@ -62,6 +62,27 @@
       fs: "empty"
     }
     ```
+    
+    If you're using create-react-app, you'll need to install react-app-rewired, then save the following as config-overrides.js
+    ``` javascript
+    module.exports = {
+      webpack: (config) => {
+        config.module.rules.find(k => k.oneOf !== undefined).oneOf.unshift(
+          {
+            test: /\.wasm$/,
+            type: "javascript/auto",
+            loader: "file-loader",
+            options: {
+              name: "static/js/[name].[contenthash:8].[ext]",
+            },
+          }
+        );
+        return config;
+      },
+    };
+    ```
+    
+    A CRA+opencascade.js reference example is available [here](https://github.com/MattFerraro/openCascadeTest1).
 
 3. In your JavaScript file, instantiate the library:
 
