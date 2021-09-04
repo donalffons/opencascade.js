@@ -50,12 +50,11 @@ RUN \
 WORKDIR /opencascade.js/
 COPY src ./src
 
-RUN /opencascade.js/src/applyPatches.py
-RUN /opencascade.js/src/compileSources.py
-RUN /opencascade.js/src/generateBindings.py
-RUN /opencascade.js/src/compileBindings.py
-
 RUN \
+  /opencascade.js/src/applyPatches.py && \
+  /opencascade.js/src/compileSources.py && \
+  /opencascade.js/src/generateBindings.py && \
+  /opencascade.js/src/compileBindings.py && \
   chmod -R 777 /opencascade.js/ && \
   chmod -R 777 /occt
 
