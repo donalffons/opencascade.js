@@ -53,6 +53,13 @@ jobs:
             /opencascade.js/src/builds/opencascade.full.yml
           cd ..
 
+      - name: Test
+        if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
+        run: |
+          cd test
+          npm install
+          NODE_OPTIONS=--experimental-vm-modules npm run test
+
       - name: Git and NPM config
         if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
         run: |
@@ -78,3 +85,16 @@ jobs:
         with:
           name: dist
           path: ./dist/
+
+  test:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/beta' && !contains(github.event.head_commit.message, 'ci_full') }}
+    steps:
+      - name: Test
+        if: ${{ github.ref == 'refs/heads/beta' && !contains(github.event.head_commit.message, 'ci_full') }}
+        run: |
+          cd test
+          npm install
+          npm install opencascade.js@beta
+          NODE_OPTIONS=--experimental-vm-modules npm run test
+  

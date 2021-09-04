@@ -7,17 +7,6 @@
   "license": "LGPL-2.1-only",
   "repository": "github:donalffons/opencascade.js",
   "types": "dist/index.d.ts",
-  "devDependencies": {
-    "jest": "^27.0.1"
-  },
-  "scripts": {
-    "test": "jest"
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "<rootDir>/actions-runner/"
-    ]
-  },
   "peerDependencies": {
     "ws": "^7.4.5"
   },

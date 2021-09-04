@@ -1,0 +1,24 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "LGPL-2.1-only",
+  "dependencies": {
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/jest": "^27.0.1",
+    "jest": "^27.1.0",
+    "opencascade.js": "file:..",
+    "ts-node": "^10.2.1"
+  },
+  "jest": {
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ]
+  }
+}
