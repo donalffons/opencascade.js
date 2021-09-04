@@ -90,6 +90,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.head_commit.message, 'ci_full') }}
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+
       - name: Test
         if: ${{ !contains(github.event.head_commit.message, 'ci_full') }}
         run: |
