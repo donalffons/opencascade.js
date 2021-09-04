@@ -58,6 +58,8 @@ RUN \
   chmod -R 777 /opencascade.js/ && \
   chmod -R 777 /occt
 
+COPY builds ./builds
+
 WORKDIR /src/
 
 ENTRYPOINT [ "/opencascade.js/src/run.sh" ]
