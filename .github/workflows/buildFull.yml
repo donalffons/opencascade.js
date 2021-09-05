@@ -47,7 +47,7 @@ jobs:
         run: |
           cd dist
           docker run \
-            -v $(pwd):/src \
+            -v $(pwd)/..:/src \
             -u $(id -u):$(id -g) \
             $DOCKER_IMAGE_NAME \
             /src/builds/opencascade.full.yml
