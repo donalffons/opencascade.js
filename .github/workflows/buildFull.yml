@@ -68,7 +68,7 @@ jobs:
         run: |
           cd test
           npm install
-          NODE_OPTIONS=--experimental-vm-modules npm run test
+          npm run test
 
       - name: Git and NPM config
         if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
@@ -109,5 +109,5 @@ jobs:
           cd test
           npm install
           npm install opencascade.js@beta
-          NODE_OPTIONS=--experimental-vm-modules npm run test
+          npm run test
   
