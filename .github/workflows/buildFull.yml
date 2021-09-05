@@ -92,6 +92,7 @@ jobs:
           branch: ${{ github.ref }}
 
   test:
+    name: Run tests
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.head_commit.message, 'ci_full') }}
     steps:
