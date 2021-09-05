@@ -50,7 +50,7 @@ jobs:
             -v $(pwd):/src \
             -u $(id -u):$(id -g) \
             $DOCKER_IMAGE_NAME \
-            /opencascade.js/src/builds/opencascade.full.yml
+            /src/builds/opencascade.full.yml
           cd ..
 
       - uses: actions/upload-artifact@v2
@@ -63,10 +63,8 @@ jobs:
         with:
           node-version: '15'
 
-      - name: Test
+      - name: Run tests
         if: ${{ contains(github.event.head_commit.message, 'ci_full') }}
-        env:
-          NODE_OPTIONS: --experimental-vm-modules
         run: |
           cd test
           npm install
