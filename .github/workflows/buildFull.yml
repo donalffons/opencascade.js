@@ -80,9 +80,11 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          docker image tag $DOCKER_IMAGE_NAME $DOCKER_IMAGE_NAME:$VERSION
+          docker tag $DOCKER_IMAGE_NAME $VERSION
+          docker tag $DOCKER_IMAGE_NAME latest
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker push $DOCKER_IMAGE_NAME:$VERSION
+          docker push $DOCKER_IMAGE_NAME:latest
           docker push $DOCKER_IMAGE_NAME-stages:1
 
       - name: Git and NPM config
