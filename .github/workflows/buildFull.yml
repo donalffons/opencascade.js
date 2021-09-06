@@ -80,7 +80,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           image_name: ${{ secrets.DOCKER_IMAGE_NAME }}
-          pull_image_and_stages: false
+          pull_image_and_stages: true
           push_image_and_stages: true
           image_tag: ${{ steps.version.outputs.tags }}
 
