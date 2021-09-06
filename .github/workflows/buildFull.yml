@@ -83,7 +83,7 @@ jobs:
           docker image tag $DOCKER_IMAGE_NAME $DOCKER_IMAGE_NAME:$VERSION
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker push $DOCKER_IMAGE_NAME:$VERSION
-          docker push $DOCKER_IMAGE_NAME-stages
+          docker push $DOCKER_IMAGE_NAME-stages:1
 
       - name: Git and NPM config
         if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
