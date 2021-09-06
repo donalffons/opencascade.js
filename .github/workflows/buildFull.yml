@@ -22,34 +22,34 @@ jobs:
           then
             export NEW_OPENCASCADEJS_VERSION=$(node -p -e "require('./package.json').version.split('-')[0]")-beta.$(git log --pretty=format:'%h' -n 1)
             echo "::set-output name=version::$NEW_OPENCASCADEJS_VERSION"
-            echo "::set-output name=tags::$NEW_OPENCASCADEJS_VERSION,latest"
+            echo "::set-output name=tags::${{ secrets.DOCKER_IMAGE_NAME }}:$NEW_OPENCASCADEJS_VERSION,${{ secrets.DOCKER_IMAGE_NAME }}:latest"
           else
-            echo "::set-output name=tags::latest"
+            echo "::set-output name=tags::${{ secrets.DOCKER_IMAGE_NAME }}:latest"
           fi
 
+      - name: Initialize Docker layer cache
+        uses: satackey/action-docker-layer-caching@v0.0.11
+        if: ${{ contains(github.event.head_commit.message, 'ci_full') }}
+
       - name: Build OpenCascade.js Docker Image
-        uses: whoan/docker-build-with-cache-action@v5
         if: ${{ contains(github.event.head_commit.message, 'ci_full') }}
         timeout-minutes: 10000
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          image_name: ${{ secrets.DOCKER_IMAGE_NAME }}
-          pull_image_and_stages: true
-          push_image_and_stages: false
-          image_tag: ${{ steps.version.outputs.tags }}
+        run: |
+          docker build -t ${{ secrets.DOCKER_IMAGE_NAME }} .
+          for i in $(echo ${{ steps.version.outputs.tags }} | sed "s/,/ /g")
+          do
+            docker tag ${{ secrets.DOCKER_IMAGE_NAME }} $i
+          done
 
       - name: Build OpenCascade.js Full Module
         timeout-minutes: 10000
         if: ${{ contains(github.event.head_commit.message, 'ci_full') }}
-        env:
-          DOCKER_IMAGE_NAME: ${{ secrets.DOCKER_IMAGE_NAME }}
         run: |
           cd dist
           docker run \
             -v $(pwd)/..:/src \
             -u $(id -u):$(id -g) \
-            $DOCKER_IMAGE_NAME \
+            ${{ secrets.DOCKER_IMAGE_NAME }} \
             /src/builds/opencascade.full.yml
           cd ..
           mv opencascade.full.* dist
@@ -72,17 +72,21 @@ jobs:
           npm run test
           cd ..
 
-      - name: Publish docker image
-        uses: whoan/docker-build-with-cache-action@v5
-        if: ${{ contains(github.event.head_commit.message, 'ci_full') }}
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v1
+        if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
         timeout-minutes: 10000
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          image_name: ${{ secrets.DOCKER_IMAGE_NAME }}
-          pull_image_and_stages: true
-          push_image_and_stages: true
-          image_tag: ${{ steps.version.outputs.tags }}
+          repository: ${{ secrets.DOCKER_IMAGE_NAME }}
+          tags: ${{ steps.version.outputs.tags }}
 
       - name: Git and NPM config
         if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
@@ -94,7 +98,7 @@ jobs:
       - name: Publish new beta version to NPM
         if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
         run: |
-          npm version ${{steps.version.outputs.version}} --force
+          npm version ${{ steps.version.outputs.version }} --force
           npm publish --tag=beta
 
       - name: Push Changes to branch
