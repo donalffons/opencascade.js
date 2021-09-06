@@ -76,9 +76,12 @@ jobs:
         if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
         env:
           DOCKER_IMAGE_NAME: ${{ secrets.DOCKER_IMAGE_NAME }}
-          VERSION: ${{ steps.version.outputs.tags }}
+          VERSION: ${{ steps.version.outputs.version }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           docker image tag $DOCKER_IMAGE_NAME $DOCKER_IMAGE_NAME:$VERSION
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
           docker push $DOCKER_IMAGE_NAME:$VERSION
           docker push $DOCKER_IMAGE_NAME-stages
 
