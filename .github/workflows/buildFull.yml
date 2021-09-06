@@ -36,7 +36,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           image_name: ${{ secrets.DOCKER_IMAGE_NAME }}
           pull_image_and_stages: true
-          push_image_and_stages: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
+          push_image_and_stages: false
           image_tag: ${{ steps.version.outputs.tags }}
 
       - name: Build OpenCascade.js Full Module
@@ -70,6 +70,22 @@ jobs:
           cd test
           npm install
           npm run test
+          cd ..
+
+      - name: Publish docker image
+        if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
+        env:
+          DOCKER_IMAGE_NAME: ${{ secrets.DOCKER_IMAGE_NAME }}
+          VERSION: ${{ steps.version.outputs.version }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          docker tag $DOCKER_IMAGE_NAME $VERSION
+          docker tag $DOCKER_IMAGE_NAME latest
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker push $DOCKER_IMAGE_NAME:$VERSION
+          docker push $DOCKER_IMAGE_NAME:latest
+          docker push $DOCKER_IMAGE_NAME-stages:1
 
       - name: Git and NPM config
         if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
