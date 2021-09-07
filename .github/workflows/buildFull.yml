@@ -80,7 +80,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: ${{ secrets.DOCKER_IMAGE_NAME }}
-          tags: ${{ steps.version.outputs.tags }}
 
       - name: Git and NPM config
         if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
