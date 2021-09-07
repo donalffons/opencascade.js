@@ -33,7 +33,6 @@ jobs:
         run: |
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
           docker build -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }} .
-          docker tag ${{ secrets.DOCKER_IMAGE_NAME }} ${{ steps.version.outputs.version }}
 
       - name: Build OpenCascade.js Full Module
         timeout-minutes: 10000
@@ -76,6 +75,8 @@ jobs:
         if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
         run: |
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}
+          docker tag ${{ secrets.DOCKER_IMAGE_NAME }} ${{ steps.version.outputs.version }}
+          docker push ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}
 
       - name: Git and NPM config
         if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
