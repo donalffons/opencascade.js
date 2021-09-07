@@ -75,7 +75,7 @@ jobs:
         if: ${{ github.ref == 'refs/heads/beta' && contains(github.event.head_commit.message, 'ci_full') }}
         run: |
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}
-          docker tag ${{ secrets.DOCKER_IMAGE_NAME }} ${{ steps.version.outputs.version }}
+          docker tag ${{ secrets.DOCKER_IMAGE_NAME }} ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}
 
       - name: Git and NPM config
