@@ -1,0 +1,13 @@
+diff -ruN /occt/original/occt-fecb042/src/OSD/OSD_Process.cxx /occt/occt-fecb042/src/OSD/OSD_Process.cxx
+--- /occt/original/occt-fecb042/src/OSD/OSD_Process.cxx	2021-02-02 08:51:56.000000000 +0000
++++ /occt/occt-fecb042/src/OSD/OSD_Process.cxx	2021-02-14 13:25:00.243949219 +0000
+@@ -99,8 +99,7 @@
+ 
+ TCollection_AsciiString OSD_Process::UserName()
+ {
+-  struct passwd *anInfos = getpwuid (getuid());
+-  return TCollection_AsciiString (anInfos ? anInfos->pw_name : "");
++  return TCollection_AsciiString ("");
+ }
+ 
+ Standard_Boolean OSD_Process::IsSuperUser (){
