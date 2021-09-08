@@ -55,7 +55,15 @@ def buildObjectFiles(file):
     pass
   command = [
     "emcc",
-    "-DIGNORE_NO_ATOMICS=1", "-DOCCT_NO_PLUGINS", "-frtti", "-fPIC", "-DHAVE_RAPIDJSON", 
+    "-DIGNORE_NO_ATOMICS=1",
+    "-DOCCT_NO_PLUGINS",
+    "-frtti",
+    "-DHAVE_RAPIDJSON", 
+    "-Os",
+    # "-g3",
+    # "-gsource-map",
+    # "--source-map-base=http://localhost:8080",
+    # "-fPIC",
     # "-pthread",
     # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
     *list(map(lambda x: "-I" + x, includePaths)),
@@ -67,10 +75,6 @@ def buildObjectFiles(file):
     print("Building " + relativeFile)
     subprocess.check_call([
       *command,
-      "-Os",
-      # "-g3",
-      # "-gsource-map",
-      # "--source-map-base=http://localhost:8080",
       "-o", libraryBasePath + "/" + relativeFile + ".o",
       ])
   else:
