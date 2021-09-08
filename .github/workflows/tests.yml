@@ -1,4 +1,4 @@
-name: Build OpenCascade.js
+name: Run Tests
 
 on: push
 
