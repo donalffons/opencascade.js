@@ -49,7 +49,6 @@
     Then add the following configuration to your `webpack.config.js`.
 
     ``` javascript
-    // For Webpack 4 (e.g. Create-React-App, ...)
     module: {
       rules: [
         {
@@ -59,10 +58,11 @@
         }
       ]
     },
+    // For Webpack 4, you have to add the following properties to the "node" object (e.g. Create-React-App, ...)
     node: {
       fs: "empty"
     }
-    // For Webpack 5 (e.g. NextJs, ...)
+    // For Webpack 5, you you have to add the following properties to the "fallback" object (e.g. NextJs, ...)
     fallback: {
       fs: false,
       perf_hooks: false,
