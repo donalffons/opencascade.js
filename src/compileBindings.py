@@ -11,20 +11,23 @@ def buildOneFile(item):
   if not os.path.exists(item + ".o"):
     print("building " + item)
     command = [
-      "emcc", "--bind",
-      "-DIGNORE_NO_ATOMICS=1", "-DOCCT_NO_PLUGINS", "-frtti", "-fPIC", "-DHAVE_RAPIDJSON",
-      # "-pthread",
-      # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
-      *list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths)),
-      "-c",
-      item,
-    ]
-    subprocess.check_call([
-      *command,
+      "emcc",
+      "--bind",
+      "-DIGNORE_NO_ATOMICS=1",
+      "-DOCCT_NO_PLUGINS",
+      "-frtti",
+      "-DHAVE_RAPIDJSON",
       "-Os",
       # "-g3",
       # "-gsource-map",
       # "--source-map-base=http://localhost:8080",
+      # "-pthread",
+      # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
+      *list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths)),
+      "-c", item,
+    ]
+    subprocess.check_call([
+      *command,
       "-o", item + ".o",
     ])
   else:
