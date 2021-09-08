@@ -42,15 +42,12 @@ RUN \
   curl "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=${OCCT_COMMIT_HASH_FULL};sf=tgz" -o occt.tar.gz && \
   tar -xvf occt.tar.gz
 
-RUN \
-  mkdir /opencascade.js/ && \
-  mkdir /opencascade.js/build/ && \
-  mkdir /opencascade.js/dist/
-
 WORKDIR /opencascade.js/
 COPY src ./src
 
 RUN \
+  mkdir /opencascade.js/build/ && \
+  mkdir /opencascade.js/dist/ && \
   /opencascade.js/src/applyPatches.py && \
   /opencascade.js/src/compileSources.py && \
   /opencascade.js/src/generateBindings.py && \

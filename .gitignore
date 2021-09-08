@@ -1,5 +1,4 @@
 /build/*
-!/build/.gitkeep
 __pycache__
 *.pyc
 node_modules
