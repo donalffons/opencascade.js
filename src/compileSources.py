@@ -59,7 +59,7 @@ def buildObjectFiles(file):
     "-DOCCT_NO_PLUGINS",
     "-frtti",
     "-DHAVE_RAPIDJSON", 
-    "-Os",
+    "-O3",
     # "-g3",
     # "-gsource-map",
     # "--source-map-base=http://localhost:8080",
