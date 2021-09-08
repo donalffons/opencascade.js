@@ -22,7 +22,7 @@ jobs:
       - name: Generate version number
         id: version
         run: |
-          if ${{ github.ref == 'refs/heads/beta' }}
+          if ${{ github.event.inputs.release == 'yes' }}
           then
             export NEW_OPENCASCADEJS_VERSION=$(node -p -e "require('./package.json').version.split('-')[0]")-beta.$(git log --pretty=format:'%h' -n 1)
             echo "::set-output name=version::$NEW_OPENCASCADEJS_VERSION"
@@ -72,7 +72,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push to Docker Hub
-        if: ${{ github.event.inputs.release == "yes" }}
+        if: ${{ github.event.inputs.release == 'yes' }}
         run: |
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}
           docker tag ${{ secrets.DOCKER_IMAGE_NAME }} ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}
@@ -85,7 +85,7 @@ jobs:
           npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Publish new beta version to NPM
-        if: ${{ github.event.inputs.release == "yes" }}
+        if: ${{ github.event.inputs.release == 'yes' }}
         run: |
           npm version ${{ steps.version.outputs.version }} --force
           npm publish --tag=beta
