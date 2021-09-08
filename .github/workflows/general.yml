@@ -3,7 +3,7 @@ name: General CI/CD Jobs
 on:
   push:
     branches:
-      - beta
+      - master
 
 jobs:
   general:
