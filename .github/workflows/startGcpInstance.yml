@@ -1,7 +1,16 @@
 name: Start GCP Compute Instance
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      machineType:
+        description: 'Machine Type'
+        required: true
+        default: 'c2-standard-4/c2-standard-30'
+      preemptible:
+        description: 'Preemptible'
+        required: false
+        default: '--preemptible'
 
 jobs:
   StartGcpComputeInstance:
@@ -33,7 +42,7 @@ jobs:
           gcloud beta compute \
             instances create opencascade-js-build-$UUID \
             --zone=us-central1-a \
-            --machine-type=c2-standard-30 \
+            --machine-type=${{ github.event.inputs.machineType }} \
             --subnet=default \
             --network-tier=PREMIUM \
             --metadata-from-file startup-script=runAction.sh,SA_KEY=GCP_SA_KEY.json,GH_API_TOKEN=GH_API_TOKEN.json,UUID=UUID,LABEL=LABEL,PROJECT_NAME=PROJECT_NAME \
@@ -49,3 +58,4 @@ jobs:
             --shielded-vtpm \
             --shielded-integrity-monitoring \
             --reservation-affinity=any \
+            ${{ github.event.inputs.preemptible }}
