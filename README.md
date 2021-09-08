@@ -49,6 +49,7 @@
     Then add the following configuration to your `webpack.config.js`.
 
     ``` javascript
+    // For Webpack 4 (e.g. Create-React-App, ...)
     module: {
       rules: [
         {
@@ -60,6 +61,15 @@
     },
     node: {
       fs: "empty"
+    }
+    // For Webpack 5 (e.g. NextJs, ...)
+    fallback: {
+      fs: false,
+      perf_hooks: false,
+      os: false,
+      worker_threads: false,
+      crypto: false,
+      stream: false
     }
     ```
     
