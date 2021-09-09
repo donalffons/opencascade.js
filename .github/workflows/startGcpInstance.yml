@@ -31,7 +31,6 @@ jobs:
         env:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
           GH_API_TOKEN: ${{ secrets.GH_API_TOKEN }}
-          PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
         run: |
           UUID=$(uuidgen)
           echo "$GCP_SA_KEY" > ./GCP_SA_KEY.json
