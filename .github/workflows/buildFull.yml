@@ -40,7 +40,7 @@ jobs:
       - name: Build OpenCascade.js Docker Image
         timeout-minutes: 10000
         run: |
-          docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
+          docker pull ${{ secrets.DOCKER_IMAGE_NAME }} || true
           docker build -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }} .
 
       - name: Build OpenCascade.js Full Module
