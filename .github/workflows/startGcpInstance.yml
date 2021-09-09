@@ -37,7 +37,7 @@ jobs:
           echo "$GH_API_TOKEN" > ./GH_API_TOKEN.json
           echo "$UUID" > ./UUID
           echo "full" > ./LABEL
-          echo "donalffons/opencascade.js" > ./PROJECT_NAME
+          echo ${{ github.repository }} > ./PROJECT_NAME
           gcloud beta compute \
             instances create opencascade-js-build-$UUID \
             --zone=us-central1-a \
