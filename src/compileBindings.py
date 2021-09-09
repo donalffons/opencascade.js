@@ -17,7 +17,7 @@ def buildOneFile(item):
       "-DOCCT_NO_PLUGINS",
       "-frtti",
       "-DHAVE_RAPIDJSON",
-      "-O3",
+      "-Os",
       # "-g3",
       # "-gsource-map",
       # "--source-map-base=http://localhost:8080",
