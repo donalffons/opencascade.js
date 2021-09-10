@@ -1,4 +1,5 @@
 typedef Handle(IMeshTools_Context) Handle_IMeshTools_Context;
+typedef Handle(TColgp_HArray1OfPnt) Handle_TColgp_HArray1OfPnt;
 
 class JSTools {
 public:
