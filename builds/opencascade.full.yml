@@ -1,4 +1,4 @@
 mainBuild:
   name: opencascade.full.js
 additionalCppCode: |
-  #include "/src/library.h"
+  #include "/src/builds/library.h"
