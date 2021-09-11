@@ -64,7 +64,7 @@ def buildObjectFiles(file):
     # "-gsource-map",
     # "--source-map-base=http://localhost:8080",
     "-fPIC",
-    # "-pthread",
+    "-pthread",
     # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
     *list(map(lambda x: "-I" + x, includePaths)),
     "-c",
