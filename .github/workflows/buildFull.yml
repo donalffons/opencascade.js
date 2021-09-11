@@ -51,9 +51,9 @@ jobs:
             -v $(pwd)/..:/src \
             -u $(id -u):$(id -g) \
             ${{ secrets.DOCKER_IMAGE_NAME }} \
-            /src/builds/opencascade.full.yml
+            /src/builds/opencascade.cad-viewer.yml
           cd ..
-          mv opencascade.full.* dist
+          mv opencascade.cad-viewer.* dist
 
       - uses: actions/upload-artifact@v2
         with:
