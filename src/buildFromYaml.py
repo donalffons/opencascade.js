@@ -30,6 +30,7 @@ defaultEmccFlags = [
   "--no-entry",
   "-pthread",
   "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
+  "-flto",
 ]
 if not "bindings" in buildConfig["mainBuild"]:
   buildConfig["mainBuild"]["bindings"] = []

@@ -66,6 +66,7 @@ def buildObjectFiles(file):
     "-fPIC",
     "-pthread",
     # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
+    "-flto",
     *list(map(lambda x: "-I" + x, includePaths)),
     "-c",
     file,
