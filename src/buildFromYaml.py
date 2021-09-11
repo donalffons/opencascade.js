@@ -20,7 +20,7 @@ if not "extraBuilds" in buildConfig:
 defaultEmccFlags = [
   "-O3",
   "-sEXPORT_ES6=1",
-  "-sUSE_ES6_IMPORT_META=0",
+  "-sUSE_ES6_IMPORT_META=1",
   "-sEXPORTED_RUNTIME_METHODS=['FS']",
   "-sINITIAL_MEMORY=100MB",
   "-sMAXIMUM_MEMORY=4GB",
