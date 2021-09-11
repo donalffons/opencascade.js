@@ -64,12 +64,12 @@ jobs:
         with:
           node-version: '15'
 
-      - name: Run tests
-        run: |
-          cd test
-          npm install
-          npm run test
-          cd ..
+      # - name: Run tests
+      #   run: |
+      #     cd test
+      #     npm install
+      #     npm run test
+      #     cd ..
 
       - name: Push to Docker Hub
         if: ${{ github.event.inputs.release == 'yes' }}
