@@ -82,7 +82,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
+          npm set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish new beta version to NPM
         if: ${{ github.event.inputs.release == 'yes' }}

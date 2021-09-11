@@ -1,11 +1,11 @@
 {
-  "name": "opencascade.js",
-  "version": "2.0.0-beta.bab6bec",
+  "name": "@interactiveimpressions/opencascade.js-cad-viewer",
+  "version": "2.0.0-beta.956ba75",
   "description": "A port of the OpenCascade CAD library to JavaScript and WebAssembly via Emscripten.",
   "main": "dist/",
   "author": "Sebastian Alff <donalffons@gmail.com>",
   "license": "LGPL-2.1-only",
-  "repository": "github:donalffons/opencascade.js",
+  "repository": "github:InteractiveImpressions/opencascade.js-cad-viewer",
   "types": "dist/index.d.ts",
   "peerDependencies": {
     "ws": "^8.2.1"
