@@ -1,6 +1,6 @@
 {
   "name": "@interactiveimpressions/opencascade.js-cad-viewer",
-  "version": "2.0.0-beta.956ba75",
+  "version": "2.0.0-beta.00459ff",
   "description": "A port of the OpenCascade CAD library to JavaScript and WebAssembly via Emscripten.",
   "main": "dist/",
   "author": "Sebastian Alff <donalffons@gmail.com>",
