@@ -1,0 +1,5 @@
+mainBuild:
+  name: customBuild.errorUnknownProp2.js
+  bindings:
+    - symbol: TopoDS_Shape
+foo: bar
