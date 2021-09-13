@@ -22,7 +22,7 @@
 		"source=${localWorkspaceFolder}/dist,target=/opencascade.js/dist,type=bind,consistency=cached",
 		"source=${localWorkspaceFolder}/test,target=/opencascade.js/test,type=bind,consistency=cached"
 		// "source=${localWorkspaceFolder}/occt-src,target=/occt/occt-0dc2c37/src,type=bind,consistency=cached",
-	]
+	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
