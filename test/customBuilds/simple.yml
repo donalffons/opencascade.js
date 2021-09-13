@@ -1,0 +1,4 @@
+mainBuild:
+  name: customBuild.simple.js
+  bindings:
+    - symbol: TopoDS_Shape
