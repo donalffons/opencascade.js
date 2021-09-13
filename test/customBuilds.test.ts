@@ -9,7 +9,7 @@ const isFileSizeCorrect = (actual: number, target: number, epsPct: number) => ac
 
 it("can create custom build: simple", () => {
   shell.exec("cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) donalffons/opencascade.js simple.yml");
-  const { size: sizeJs } = fs.statSync("./customBuild.simple.mjs");
+  const { size: sizeJs } = fs.statSync("./customBuild.simple.js");
   const { size: sizeWasm } = fs.statSync("./customBuild.simple.wasm");
   const { size: sizeDTs } = fs.statSync("./customBuild.simple.d.ts");
   const epsPct = 0.1;
@@ -19,7 +19,7 @@ it("can create custom build: simple", () => {
 });
 
 it("can use custom build: simple", async () => {
-  const mainJs = await import(path.join(__dirname, "customBuilds", "customBuild.simple.mjs"));
+  const mainJs = await import(path.join(__dirname, "customBuilds", "customBuild.simple.js"));
   const oc = await initOpenCascade({
     mainJS: mainJs.default,
     mainWasm: path.join(__dirname, "customBuilds", "customBuild.simple.wasm"),
