@@ -46,6 +46,16 @@ if not "generateTypescriptDefinitions" in buildConfig:
 if not "additionalCppCode" in buildConfig:
   buildConfig["additionalCppCode"] = ""
 
+allowedPropsMain = ["mainBuild", "extraBuilds", "additionalCppCode", "generateTypescriptDefinitions"]
+if not set(buildConfig.keys()) == set(allowedPropsMain):
+  raise Exception("Invalid global build configuration. Allowed values are: " + ", ".join(allowedPropsMain) + ". Given values were: " + ", ".join(buildConfig.keys()))
+allowedPropsBuild = ["bindings", "emccFlags", "name"]
+if not set(buildConfig["mainBuild"].keys()) == set(allowedPropsBuild):
+  raise Exception("Invalid mainBuild configuration. Allowed values are: " + ", ".join(allowedPropsBuild) + ". Given values were: " + ", ".join(buildConfig["mainBuild"].keys()))
+for extraBuild in buildConfig["extraBuilds"]:
+  if not set(extraBuild.keys()) == set(allowedPropsBuild):
+    raise Exception("Invalid extraBuild configuration. Allowed values are: " + ", ".join(allowedPropsBuild) + ". Given values were: " + ", ".join(extraBuild.keys()))
+
 try:
   shutil.rmtree(libraryBasePath + "/bindings/myMain.h")
 except Exception:
