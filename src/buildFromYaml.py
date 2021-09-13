@@ -46,7 +46,7 @@ if not "generateTypescriptDefinitions" in buildConfig:
 if not "additionalCppCode" in buildConfig:
   buildConfig["additionalCppCode"] = ""
 
-def checkAllowedProps(props, allowedProps, ):
+def checkAllowedProps(props, allowedProps, configName):
   if not set(props) == set(allowedProps):
     raise Exception("Invalid " + configName + " build configuration. Allowed values are: " + ", ".join(allowedProps) + ". Given values were: " + ", ".join(props))
 
