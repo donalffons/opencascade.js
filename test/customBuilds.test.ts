@@ -9,7 +9,7 @@ const isFileSizeCorrect = (actual: number, target: number, epsPct: number) => ac
 
 it("can create custom build: simple", () => {
   shell.exec("cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) donalffons/opencascade.js simple.yml");
-  const { size: sizeJs } = fs.statSync("./customBuild.simple.js");
+  const { size: sizeJs } = fs.statSync("./customBuild.simple.mjs");
   const { size: sizeWasm } = fs.statSync("./customBuild.simple.wasm");
   const { size: sizeDTs } = fs.statSync("./customBuild.simple.d.ts");
   const epsPct = 0.1;
