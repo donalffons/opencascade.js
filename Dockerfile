@@ -25,7 +25,8 @@ RUN \
 RUN \
   pip install \
     libclang \
-    pyyaml
+    pyyaml \
+    cerberus
 
 WORKDIR /rapidjson/
 RUN \
