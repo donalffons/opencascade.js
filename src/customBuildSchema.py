@@ -88,6 +88,7 @@
         "type": "string",
       },
     },
+    "default": [],
   },
   "additionalCppCode": {
     "required": False,
