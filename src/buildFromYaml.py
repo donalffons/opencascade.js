@@ -9,43 +9,16 @@ import yaml
 from generateBindings import generateCustomCodeBindings
 from compileBindings import compileCustomCodeBindings
 import shutil
+from cerberus import Validator
 
 libraryBasePath = "/opencascade.js/build"
 
 buildConfig = yaml.safe_load(open(sys.argv[1], "r"))
-
-if not "extraBuilds" in buildConfig:
-  buildConfig["extraBuilds"] = []
-
-defaultEmccFlags = [
-  "-O3",
-  "-sEXPORT_ES6=1",
-  "-sUSE_ES6_IMPORT_META=1",
-  "-sEXPORTED_RUNTIME_METHODS=['FS']",
-  "-sINITIAL_MEMORY=100MB",
-  "-sMAXIMUM_MEMORY=4GB",
-  "-sALLOW_MEMORY_GROWTH=1",
-  "-sUSE_FREETYPE=1",
-  "-sLLD_REPORT_UNDEFINED",
-  "--no-entry",
-  "-pthread",
-  "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
-  "-flto",
-]
-if not "bindings" in buildConfig["mainBuild"]:
-  buildConfig["mainBuild"]["bindings"] = []
-for extraBuild in buildConfig["extraBuilds"]:
-  if not "bindings" in extraBuild:
-    extraBuild["bindings"] = []
-if not "emccFlags" in buildConfig["mainBuild"]:
-  buildConfig["mainBuild"]["emccFlags"] = defaultEmccFlags
-for extraBuild in buildConfig["extraBuilds"]:
-  if not "emccFlags" in extraBuild:
-    extraBuild["emccFlags"] = defaultEmccFlags
-if not "generateTypescriptDefinitions" in buildConfig:
-  buildConfig["generateTypescriptDefinitions"] = True
-if not "additionalCppCode" in buildConfig:
-  buildConfig["additionalCppCode"] = ""
+schema = eval(open("/opencascade.js/src/customBuildSchema.py", "r").read())
+v = Validator(schema)
+if not v.validate(buildConfig, schema):
+  raise Exception(v.errors)
+buildConfig = v.normalized(buildConfig)
 
 try:
   shutil.rmtree(libraryBasePath + "/bindings/myMain.h")

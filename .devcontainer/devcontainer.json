@@ -18,9 +18,11 @@
 	"mounts": [
 		"source=${localWorkspaceFolder}/src,target=/opencascade.js/src,type=bind,consistency=cached",
 		"source=${localWorkspaceFolder}/build,target=/opencascade.js/build,type=bind,consistency=cached",
+		"source=${localWorkspaceFolder}/builds,target=/opencascade.js/builds,type=bind,consistency=cached",
 		"source=${localWorkspaceFolder}/dist,target=/opencascade.js/dist,type=bind,consistency=cached",
+		"source=${localWorkspaceFolder}/test,target=/opencascade.js/test,type=bind,consistency=cached"
 		// "source=${localWorkspaceFolder}/occt-src,target=/occt/occt-0dc2c37/src,type=bind,consistency=cached",
-	]
+	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
@@ -36,4 +38,11 @@
 
 	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
+
+	"initializeCommand": [
+		"docker",
+		"build",
+		"--cache-from=donalffons/opencascade.js",
+		"."
+	],
 }
