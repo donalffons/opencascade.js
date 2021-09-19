@@ -64,9 +64,6 @@ mainBuild:
     - -DHAVE_RAPIDJSON=1
     - -DOCCT_NO_PLUGINS
     - -O3
-    - -g3
-    - -gsource-map
-    - --source-map-base=http://localhost:8080
     - -flto
     - -sEXPORT_ES6=1
     - -sUSE_ES6_IMPORT_META=1
