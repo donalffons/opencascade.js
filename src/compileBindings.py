@@ -21,9 +21,8 @@ def buildOneFile(item):
       # "-g3",
       # "-gsource-map",
       # "--source-map-base=http://localhost:8080",
-      "-pthread",
+      # "-pthread",
       # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
-      "-flto",
       *list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths)),
       "-c", item,
     ]
