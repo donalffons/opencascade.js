@@ -51,9 +51,9 @@ jobs:
             -v $(pwd)/..:/src \
             -u $(id -u):$(id -g) \
             ${{ secrets.DOCKER_IMAGE_NAME }} \
-            /src/builds/opencascade.full.yml
+            /src/builds/opencascade.cad-viewer.yml
           cd ..
-          mv opencascade.full.* dist
+          mv opencascade.cad-viewer.* dist
 
       - uses: actions/upload-artifact@v2
         with:
@@ -64,12 +64,12 @@ jobs:
         with:
           node-version: '15'
 
-      - name: Run tests
-        run: |
-          cd test
-          npm install
-          npm run test
-          cd ..
+      # - name: Run tests
+      #   run: |
+      #     cd test
+      #     npm install
+      #     npm run test
+      #     cd ..
 
       - name: Push to Docker Hub
         if: ${{ github.event.inputs.release == 'yes' }}
@@ -82,7 +82,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
+          npm set //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish new beta version to NPM
         if: ${{ github.event.inputs.release == 'yes' }}

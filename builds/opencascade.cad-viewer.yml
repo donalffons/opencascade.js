@@ -1,0 +1,125 @@
+mainBuild:
+  name: opencascade.cad-viewer.js
+  bindings:
+    - symbol: STEPCAFControl_Reader
+    - symbol: IFSelect_ReturnStatus
+    - symbol: TCollection_ExtendedString
+    - symbol: TDocStd_Document
+    - symbol: Handle_TDocStd_Document
+    - symbol: Message_ProgressRange
+    - symbol: XCAFDoc_DocumentTool
+    - symbol: TDF_LabelSequence
+    - symbol: XCAFDoc_ShapeTool
+    - symbol: TCollection_AsciiString
+    - symbol: RWGltf_CafWriter
+    - symbol: BRepTools
+    - symbol: BRepMesh_IncrementalMesh
+    - symbol: TColStd_IndexedDataMapOfStringString
+    - symbol: CDM_Document
+    - symbol: Standard_Transient
+    - symbol: TDF_Label
+    - symbol: TDataStd_GenericEmpty
+    - symbol: TDF_Attribute
+    - symbol: Handle_XCAFDoc_ShapeTool
+    - symbol: NCollection_BaseSequence
+    - symbol: TopoDS_Shape
+    - symbol: BRepMesh_DiscretRoot
+    - symbol: NCollection_BaseMap
+    - symbol: TDataStd_Name
+    - symbol: Helpers
+    - symbol: TDataStd_GenericExtString
+    - symbol: Handle_TDF_Attribute
+    - symbol: Standard_GUID
+    - symbol: MyProgressIndicator
+    - symbol: Message_ProgressIndicator
+    - symbol: IMeshTools_Parameters
+    - symbol: IMeshTools_MeshAlgoType
+    - symbol: Interface_Static
+    - symbol: STEPControl_Controller
+    - symbol: Interface_TypedValue
+    - symbol: MoniTool_TypedValue
+    - symbol: XSControl_Controller
+    - symbol: XCAFApp_Application
+    - symbol: TDocStd_Application
+    - symbol: CDF_Application
+    - symbol: CDM_Application
+    - symbol: PCDM_ReaderStatus
+    - symbol: PCDM_StoreStatus
+    - symbol: BinDrivers
+    - symbol: Handle_TDocStd_Application
+    - symbol: BinXCAFDrivers
+    - symbol: TDF_Tool
+    - symbol: Handle_TNaming_NamedShape
+    - symbol: TNaming_NamedShape
+    - symbol: TColStd_MapOfAsciiString
+    - symbol: TopLoc_Location
+    - symbol: gp_Trsf
+    - symbol: gp_XYZ
+    - symbol: Graphic3d_Mat4d
+    - symbol: TopAbs_Orientation
+    - symbol: STEPControl_ActorRead
+    - symbol: BRepBndLib
+    - symbol: Bnd_Box
+  emccFlags:
+    - -DHAVE_RAPIDJSON=1
+    - -DOCCT_NO_PLUGINS
+    - -O3
+    - -flto
+    - -sEXPORT_ES6=1
+    - -sUSE_ES6_IMPORT_META=1
+    - -sEXPORTED_RUNTIME_METHODS=["FS"]
+    - -sINITIAL_MEMORY=128mb
+    - -sEXCEPTION_CATCHING_ALLOWED=["_ZN21BRepMesh_BaseMeshAlgo7PerformERKN11opencascade6handleI14IMeshData_FaceEERK21IMeshTools_ParametersRK21Message_ProgressRange", "_ZN10StepToGeom11MakeSurfaceERKN11opencascade6handleI16StepGeom_SurfaceEE", "_ZN21STEPControl_ActorRead14TransferEntityERKN11opencascade6handleI55StepRepr_ConstructiveGeometryRepresentationRelationshipEERKNS1_I25Transfer_TransientProcessEE", "_ZN21STEPControl_ActorRead14TransferEntityERKN11opencascade6handleI45StepShape_ContextDependentShapeRepresentationEERKNS1_I25Transfer_TransientProcessEERK21Message_ProgressRange", "_ZN21STEPControl_ActorRead14TransferEntityERKN11opencascade6handleI40StepRepr_ShapeRepresentationRelationshipEERKNS1_I25Transfer_TransientProcessEEibRK21Message_ProgressRange", "_ZN21STEPControl_ActorRead14TransferEntityERKN11opencascade6handleI36StepRepr_NextAssemblyUsageOccurrenceEERKNS1_I25Transfer_TransientProcessEERK21Message_ProgressRange", "_ZN21STEPControl_ActorRead14TransferEntityERKN11opencascade6handleI36StepGeom_GeometricRepresentationItemEERKNS1_I25Transfer_TransientProcessEEbRK21Message_ProgressRange", "_ZN21STEPControl_ActorRead14TransferEntityERKN11opencascade6handleI29StepShape_ShapeRepresentationEERKNS1_I25Transfer_TransientProcessEERbbRK21Message_ProgressRange", "_ZN21STEPControl_ActorRead14TransferEntityERKN11opencascade6handleI27StepBasic_ProductDefinitionEERKNS1_I25Transfer_TransientProcessEEbRK21Message_ProgressRange", "_ZN21STEPControl_ActorRead14TransferEntityERKN11opencascade6handleI21StepShape_FaceSurfaceEERKNS1_I25Transfer_TransientProcessEERK21Message_ProgressRange", "_ZN21STEPControl_ActorRead14TransferEntityERKN11opencascade6handleI19StepRepr_MappedItemEERKNS1_I25Transfer_TransientProcessEERK21Message_ProgressRange"]
+    - -sMAXIMUM_MEMORY=4GB
+    - -sERROR_ON_UNDEFINED_SYMBOLS=0
+    - -sMEMORY_GROWTH_GEOMETRIC_STEP=1
+    - -sMEMORY_GROWTH_GEOMETRIC_CAP=2GB
+    - -sALLOW_MEMORY_GROWTH=1
+    - -pthread
+    - -sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'
+    - -sUSE_FREETYPE=1
+    - --no-entry
+    - -sENVIRONMENT='web,worker'
+
+additionalCppCode: |
+  #include "/src/builds/library.h"
+  class Helpers {
+  public:
+    static std::string ConvertAsciiString(const TCollection_AsciiString& s) {
+      return s.ToCString();
+    }
+    static TCollection_ExtendedString makeExtString(std::string s) {
+      return TCollection_ExtendedString(s.c_str());
+    }
+    static Graphic3d_Mat4d Mat4FromTrsf(gp_Trsf& t) {
+      Graphic3d_Mat4d m;
+      t.GetMat4(m);
+      return m;
+    }
+  };
+  class MyProgressIndicator : public Message_ProgressIndicator {
+    int* progress;
+    int* userBreak;
+  public:
+    MyProgressIndicator() : progress(new int), userBreak(new int) {
+      *progress = 0;
+      *userBreak = 0;
+    }
+    int getProgressPtr() {
+      return (int)(size_t)(progress);
+    }
+    int getUserBreakPtr() {
+      return (int)(size_t)(userBreak);
+    }
+  protected:
+    void Show (const Message_ProgressScope& theScope, const Standard_Boolean isForce) {
+      *progress = GetPosition() * 100;
+    }
+    Standard_Boolean UserBreak() {
+      return *userBreak;
+    }
+    void Reset() {
+      *userBreak = 0;
+      *progress = 0;
+    }
+  };
