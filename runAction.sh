@@ -49,8 +49,8 @@ GH_ACTION_TOKEN_RESPONSE=$(curl -u opencascade.js-build:$GH_API_TOKEN   -X POST 
 GH_ACTION_TOKEN=$(echo $GH_ACTION_TOKEN_RESPONSE | jq -r ".token")
 
 mkdir actions-runner && cd actions-runner
-curl -o actions-runner-linux-x64-2.282.1.tar.gz -L https://github.com/actions/runner/releases/download/v2.282.1/actions-runner-linux-x64-2.282.1.tar.gz
-tar xzf ./actions-runner-linux-x64-2.282.1.tar.gz
+curl -o actions-runner-linux-x64-2.283.1.tar.gz -L https://github.com/actions/runner/releases/download/v2.282.1/actions-runner-linux-x64-2.283.1.tar.gz
+tar xzf ./actions-runner-linux-x64-2.283.1.tar.gz
 ./config.sh --unattended --url https://github.com/$PROJECT_NAME --token $GH_ACTION_TOKEN --replace --name opencascade-js-build-$UUID --labels $LABEL
 ./run.sh --once || true
 sleep 60
