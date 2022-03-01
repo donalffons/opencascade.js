@@ -1,4 +1,4 @@
-FROM emscripten/emsdk:2.0.30
+FROM emscripten/emsdk:3.1.6
 
 RUN \
   apt update -y && \
