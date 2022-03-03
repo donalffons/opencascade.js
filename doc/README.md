@@ -206,3 +206,107 @@ As a side note: You are free to either pass in a "reference type" or a built-in 
 ```js
 this.oc.BRepTools.UVBounds_1(makeFace.Face(), 123, 234, 345, 456);
 ```
+
+# Progress indicators and cancelling of long-running processes (user break)
+
+OpenCascade offers support for progress indicators and user breaks via the `Message_ProgressIndicator` base class. Specialized objects of this base class can be used in calls to certain methods (e.g. `STEPCAFControl_Reader::Transfer`) to report of a long-running operation or to cancel it. Since OpenCascade requires the user to derive a custom class based on `Message_ProgressIndicator` (called `MyProgressIndicator` from here), using those features in OpenCascade.js currently requires creating a custom build. They also require the use of a `SharedArrayBuffer`, which requires certain assets to be served with additional headers and security considerations.
+
+## How does it work?
+
+Using either of those features requires at least two threads, i.e. workers: The "OpenCascade thread" (which performs the long-running task) and a "Supervisor thread" (which will most likely be the main thread - it is responsible for reporting the progress and cancellation of the long-running task). When instantiating OpenCascade.js, the WebAssembly memory must be created in "shared" mode, which ceates a `SharedArrayBuffer`, which both threads can access and then use to exchange information.
+
+**Progress:** `MyProgressIndicator` implements the `Show` function, which is called periodically by OpenCascade and can be used to extract information about the current state of the progress. This information is written to a fixed address in the `SharedArrayBuffer`, from where it can be periodically polled by the "Supervisor thread".
+
+**User Break:** `MyProgressIndicator` implements the `UserBreak` function, which is called periodically by OpenCascade and should return `true` if a cancellation of the long-running process is requested or `false` otherwise. This flag is read from a fixed address in the `SharedArrayBuffer`, which allows the "Supervisor thread" to request a cancellation by simple changing the value.
+
+TODO: I have only tested with the multi-threaded version of the OpenCascade.js (which currently requires re-building the Docker image from scratch with some small modifications). There is a chance that this also works with the single-threaded version of OpenCascade.js, but that hasn't been tested yet.
+
+## Step 1: Derive custom class from `Message_ProgressIndicator`
+
+Create a custom build and add the following code to the `additionalCppCode` section.
+
+```cpp
+class MyProgressIndicator : public Message_ProgressIndicator {
+  int* progress;
+  int* userBreak;
+public:
+  MyProgressIndicator() : progress(new int), userBreak(new int) {
+    *progress = 0;
+    *userBreak = 0;
+  }
+  ~MyProgressIndicator() {
+    delete progress;
+    delete userBreak;
+  }
+  int getProgressPtr() {
+    return (int)(size_t)(progress);
+  }
+  int getUserBreakPtr() {
+    return (int)(size_t)(userBreak);
+  }
+protected:
+  void Show (const Message_ProgressScope& theScope, const Standard_Boolean isForce) {
+    *progress = GetPosition() * 100;
+  }
+  Standard_Boolean UserBreak() {
+    return *userBreak;
+  }
+  void Reset() {
+    *userBreak = 0;
+    *progress = 0;
+  }
+};
+```
+
+## Step 2: Initialize OpenCascade.js with `SharedArrayBuffer` and use `MyProgressIndicator`
+
+```js
+// SupervisorThread.js
+
+const mem = new WebAssembly.Memory({
+  "initial": 2147450880 / 65536,
+  "maximum": 4294901760 / 65536,
+  "shared": true
+});
+
+// Start the "OpenCascade Thread" and pass our SharedArray as a reference.
+// The returned values are a UInt8Array representation of the memory and
+// pointers (indices) to the respective values.
+const { HEAP8, progressPtr, userBreakPtr } = await initializeOpencascadeThread(mem);
+
+startLongRunningProcessInOpencascadeThread();
+
+setInterval(() => {
+  // Report progress
+  const progress = HEAP8[progressPtr];
+  console.log(progress);
+}, 1000);
+
+setTimeout(() => {
+  // Cancel long-running task after 5 seconds
+  HEAP8[userBreakPtr] = 1;
+}, 5000);
+```
+
+```js
+// OpenCascadeThread.worker.js
+
+let oc = undefined;
+
+const onInitializeOpencascadeThread = async (mem) => {
+  oc = await initOpenCascade({
+    wasmMemory: memory,
+  });
+  p = new oc.MyProgressIndicator();
+  return {progressPtr: p.getProgressPtr(), userBreakPtr: p.getUserBreakPtr(), HEAP8: oc.HEAP8};
+};
+
+const onStartLongRunningProcessInOpencascadeThread = async () => {
+  const reader = new oc.STEPCAFControl_Reader_1();
+  reader.ReadFile("./file.stp");
+
+  const doc = new oc.Handle_TDocStd_Document_2(new oc.TDocStd_Document(new oc.TCollection_ExtendedString_1()));
+
+  if(!reader.Transfer_1(doc, p.Start_1())) throw new Error();
+};
+```
