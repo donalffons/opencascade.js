@@ -10,12 +10,12 @@
   "author": "",
   "license": "LGPL-2.1-only",
   "dependencies": {
-    "@babel/preset-typescript": "^7.15.0",
-    "@types/jest": "^27.0.1",
-    "jest": "^27.1.0",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/jest": "^27.4.1",
+    "jest": "^27.5.1",
     "opencascade.js": "file:..",
-    "shelljs": "^0.8.4",
-    "ts-node": "^10.2.1"
+    "shelljs": "^0.8.5",
+    "ts-node": "^10.6.0"
   },
   "jest": {
     "extensionsToTreatAsEsm": [

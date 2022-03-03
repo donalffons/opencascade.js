@@ -8,7 +8,7 @@
   "repository": "github:donalffons/opencascade.js",
   "types": "dist/index.d.ts",
   "peerDependencies": {
-    "ws": "^8.2.1"
+    "ws": "^8.5.0"
   },
   "type": "module"
 }
