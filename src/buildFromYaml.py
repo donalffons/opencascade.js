@@ -76,7 +76,7 @@ def runBuild(build):
       if item.endswith(".o"):
         sourcesO.append(dirpath + "/" + item)
   subprocess.check_call([
-    "emcc", "--bind",
+    "emcc", "-lembind",
     *bindingsO, *sourcesO,
     "-o", os.getcwd() + "/" + build["name"],
     *build["emccFlags"],

@@ -12,7 +12,6 @@ def buildOneFile(item):
     print("building " + item)
     command = [
       "emcc",
-      "--bind",
       "-DIGNORE_NO_ATOMICS=1",
       "-DOCCT_NO_PLUGINS",
       "-frtti",
