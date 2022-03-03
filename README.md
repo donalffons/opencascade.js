@@ -23,8 +23,11 @@
 
 # Projects & Examples:
 
-* [CascadeStudio](https://github.com/zalo/CascadeStudio) is a SCAD (Scripted-Computer-Aided-Design) editor, which runs in the browser.
-* [OpenCascade.js-examples](https://github.com/donalffons/opencascade.js-examples) contains general examples on how to use the library.
+* [ArchiYou](https://archiyou.com/): Library, Code-CAD Design Tool, Community Hub
+* [BitByBit](https://bitbybit.dev/): Code- & node-based - CAD Design Tool
+* [CascadeStudio](https://github.com/zalo/CascadeStudio): Library and Code-CAD Design Tool
+* [RepliCAD](https://replicad.xyz/): Library and Code-CAD Design Tool
+* [OpenCascade.js-examples](https://github.com/donalffons/opencascade.js-examples): Contains general examples on how to use the library.
 
 # Getting Started
 
