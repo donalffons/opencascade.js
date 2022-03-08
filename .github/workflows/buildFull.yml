@@ -55,6 +55,11 @@ jobs:
           cd ..
           mv opencascade.full.* dist
 
+      - name: Push to Docker Hub (staging)
+        run: |
+          docker tag ${{ secrets.DOCKER_IMAGE_NAME }} ${{ secrets.DOCKER_IMAGE_NAME }}:staging
+          docker push ${{ secrets.DOCKER_IMAGE_NAME }}:staging
+
       - uses: actions/upload-artifact@v2
         with:
           name: dist
