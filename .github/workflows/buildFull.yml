@@ -41,7 +41,7 @@ jobs:
         timeout-minutes: 10000
         run: |
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }} || true
-          docker build --build-arg threading=single -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }} .
+          docker build --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }} .
 
       - name: Push to Docker Hub (staging)
         run: |

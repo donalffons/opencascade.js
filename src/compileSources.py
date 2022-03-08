@@ -9,16 +9,7 @@ from filter.filterPackages import filterPackages
 
 from argparse import ArgumentParser
 
-parser = ArgumentParser()
-parser.add_argument(dest="threading", choices=["single", "multi"], help="Build in single vs. multi-threaded mode")
-args = parser.parse_args()
-
 libraryBasePath = "/opencascade.js/build/sources"
-
-try:
-  os.makedirs(libraryBasePath)
-except Exception:
-  pass
 
 # Potentially problematic packages, when used with dynamic linking
 # These files contain function pointer definitions and header files and are therefore likely to cause problems.
@@ -53,7 +44,7 @@ includePaths.extend([
 for dirpath, dirnames, filenames in os.walk(os.path.join(sourceBasePath)):
   includePaths.append(dirpath)
 
-def buildObjectFiles(file):
+def buildObjectFiles(file, args):
   relativeFile = file.replace(sourceBasePath, "")
   try:
     os.makedirs(libraryBasePath + "/" + os.path.dirname(relativeFile))
@@ -111,8 +102,17 @@ for dirpath, dirnames, filenames in os.walk(sourceBasePath):
     if filterSourceFile(dirpath + "/" + item):
       filesToBuild.append(dirpath + "/" + item)
 
-def myBuildObjectFiles(x):
-  buildObjectFiles(x)
+if __name__ == "__main__":
+  parser = ArgumentParser()
+  parser.add_argument(dest="threading", choices=["single-threaded", "multi-threaded"], help="Build in single vs. multi-threaded mode")
+  args = parser.parse_args()
 
-with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
-  p.map(myBuildObjectFiles, filesToBuild)
+  try:
+    os.makedirs(libraryBasePath)
+  except Exception:
+    pass
+
+  with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
+    def myBuildFunction(x):
+      buildObjectFiles(x, args)
+    p.map(myBuildFunction, filesToBuild)

@@ -7,13 +7,9 @@ import multiprocessing
 
 from argparse import ArgumentParser
 
-parser = ArgumentParser()
-parser.add_argument(dest="threading", choices=["single", "multi"], help="Build in single vs. multi-threaded mode")
-args = parser.parse_args()
-
 libraryBasePath = "/opencascade.js/build/bindings"
 
-def buildOneFile(item):
+def buildOneFile(item, args):
   if not os.path.exists(item + ".o"):
     print("building " + item)
     command = [
@@ -26,7 +22,7 @@ def buildOneFile(item):
       # "-g3",
       # "-gsource-map",
       # "--source-map-base=http://localhost:8080",
-    "-pthread" if args.threading == "multi" else "",
+      "-pthread" if args.threading == "multi" else "",
       *list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths)),
       "-c", item,
     ]
@@ -37,18 +33,24 @@ def buildOneFile(item):
   else:
     print("file " + item + ".o already exists, skipping")
 
-def compileCustomCodeBindings():
+def compileCustomCodeBindings(args):
   filesToBuild = []
   for dirpath, dirnames, filenames in os.walk(libraryBasePath + "/myMain.h"):
     filesToBuild.extend(map(lambda x: dirpath + "/" + x, filter(lambda x: x.endswith(".cpp"), filenames)))
 
   with multiprocessing.Pool(processes=int(multiprocessing.cpu_count() / 1)) as p:
-    p.map(buildOneFile, sorted(filesToBuild))
+    p.map(lambda x: buildOneFile(x, args), sorted(filesToBuild))
 
 if __name__ == "__main__":
+  parser = ArgumentParser()
+  parser.add_argument(dest="threading", choices=["single-threaded", "multi-threaded"], help="Build in single vs. multi-threaded mode")
+  args = parser.parse_args()
+
   filesToBuild = []
   for dirpath, dirnames, filenames in os.walk(libraryBasePath):
     filesToBuild.extend(map(lambda x: dirpath + "/" + x, filter(lambda x: x.endswith(".cpp"), filenames)))
 
   with multiprocessing.Pool(processes=int(multiprocessing.cpu_count() / 1)) as p:
-    p.map(buildOneFile, sorted(filesToBuild))
+    def myBuildFunction(x):
+      buildOneFile(x, args)
+    p.map(myBuildFunction, sorted(filesToBuild))

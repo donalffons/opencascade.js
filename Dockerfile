@@ -47,7 +47,7 @@ RUN \
 WORKDIR /opencascade.js/
 COPY src ./src
 
-ARG threading=single
+ARG threading=single-threaded
 
 RUN \
   mkdir /opencascade.js/build/ && \
@@ -63,4 +63,4 @@ COPY builds ./builds
 
 WORKDIR /src/
 
-ENTRYPOINT [ "/opencascade.js/src/buildFromYaml.py" ]
+ENTRYPOINT ["/opencascade.js/src/buildFromYaml.py", "${threading}" ]

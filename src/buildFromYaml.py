@@ -12,6 +12,7 @@ from cerberus import Validator
 from argparse import ArgumentParser
 
 parser = ArgumentParser()
+parser.add_argument(dest="threading", choices=["single-threaded", "multi-threaded"], help="Build in single vs. multi-threaded mode")
 parser.add_argument(dest="filename", help="Custom build input file (.yml)", metavar="FILE.yml")
 args = parser.parse_args()
 
@@ -30,7 +31,7 @@ except Exception:
   pass
 
 generateCustomCodeBindings(buildConfig["additionalCppCode"])
-compileCustomCodeBindings()
+compileCustomCodeBindings(args)
 
 def verifyBinding(binding) -> bool:
   for dirpath, dirnames, filenames in os.walk(libraryBasePath + "/bindings"):
