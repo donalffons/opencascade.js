@@ -5,6 +5,12 @@ from Common import ocIncludePaths, additionalIncludePaths
 import subprocess
 import multiprocessing
 
+from argparse import ArgumentParser
+
+parser = ArgumentParser()
+parser.add_argument(dest="threading", choices=["single", "multi"], help="Build in single vs. multi-threaded mode")
+args = parser.parse_args()
+
 libraryBasePath = "/opencascade.js/build/bindings"
 
 def buildOneFile(item):
@@ -20,8 +26,7 @@ def buildOneFile(item):
       # "-g3",
       # "-gsource-map",
       # "--source-map-base=http://localhost:8080",
-      # "-pthread",
-      # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
+    "-pthread" if args.threading == "multi" else "",
       *list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths)),
       "-c", item,
     ]

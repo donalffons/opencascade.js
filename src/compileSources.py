@@ -7,6 +7,12 @@ import multiprocessing
 from filter.filterSourceFiles import filterSourceFile
 from filter.filterPackages import filterPackages
 
+from argparse import ArgumentParser
+
+parser = ArgumentParser()
+parser.add_argument(dest="threading", choices=["single", "multi"], help="Build in single vs. multi-threaded mode")
+args = parser.parse_args()
+
 libraryBasePath = "/opencascade.js/build/sources"
 
 try:
@@ -64,8 +70,7 @@ def buildObjectFiles(file):
     # "-gsource-map",
     # "--source-map-base=http://localhost:8080",
     # "-fPIC",
-    # "-pthread",
-    # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
+    "-pthread" if args.threading == "multi" else "",
     *list(map(lambda x: "-I" + x, includePaths)),
     "-c",
     file,

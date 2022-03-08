@@ -4,16 +4,20 @@ import os
 import subprocess
 import json
 from itertools import chain
-import sys
 import yaml
 from generateBindings import generateCustomCodeBindings
 from compileBindings import compileCustomCodeBindings
 import shutil
 from cerberus import Validator
+from argparse import ArgumentParser
+
+parser = ArgumentParser()
+parser.add_argument(dest="filename", help="Custom build input file (.yml)", metavar="FILE.yml")
+args = parser.parse_args()
 
 libraryBasePath = "/opencascade.js/build"
 
-buildConfig = yaml.safe_load(open(sys.argv[1], "r"))
+buildConfig = yaml.safe_load(open(args.filename, "r"))
 schema = eval(open("/opencascade.js/src/customBuildSchema.py", "r").read())
 v = Validator(schema)
 if not v.validate(buildConfig, schema):

@@ -26,7 +26,8 @@ RUN \
   pip install \
     libclang \
     pyyaml \
-    cerberus
+    cerberus \
+    argparse
 
 WORKDIR /rapidjson/
 RUN \
@@ -46,13 +47,15 @@ RUN \
 WORKDIR /opencascade.js/
 COPY src ./src
 
+ARG threading=single
+
 RUN \
   mkdir /opencascade.js/build/ && \
   mkdir /opencascade.js/dist/ && \
   /opencascade.js/src/applyPatches.py && \
-  /opencascade.js/src/compileSources.py && \
+  /opencascade.js/src/compileSources.py ${threading} && \
   /opencascade.js/src/generateBindings.py && \
-  /opencascade.js/src/compileBindings.py && \
+  /opencascade.js/src/compileBindings.py ${threading} && \
   chmod -R 777 /opencascade.js/ && \
   chmod -R 777 /occt
 
@@ -60,4 +63,4 @@ COPY builds ./builds
 
 WORKDIR /src/
 
-ENTRYPOINT [ "/opencascade.js/src/run.sh" ]
+ENTRYPOINT [ "/opencascade.js/src/buildFromYaml.py" ]
