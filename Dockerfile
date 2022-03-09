@@ -65,4 +65,4 @@ WORKDIR /src/
 
 ENV threading=$threading
 
-ENTRYPOINT /opencascade.js/src/buildFromYaml.py $threading
+ENTRYPOINT ["/opencascade.js/src/buildFromYaml.py", "$threading"]
