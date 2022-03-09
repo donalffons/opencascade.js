@@ -38,8 +38,11 @@ def compileCustomCodeBindings(args):
   for dirpath, dirnames, filenames in os.walk(libraryBasePath + "/myMain.h"):
     filesToBuild.extend(map(lambda x: dirpath + "/" + x, filter(lambda x: x.endswith(".cpp"), filenames)))
 
+  def myBuildFunction(x):
+    buildOneFile(x, args)
+
   with multiprocessing.Pool(processes=int(multiprocessing.cpu_count() / 1)) as p:
-    p.map(lambda x: buildOneFile(x, args), sorted(filesToBuild))
+    p.map(myBuildFunction, sorted(filesToBuild))
 
 if __name__ == "__main__":
   parser = ArgumentParser()
@@ -50,7 +53,8 @@ if __name__ == "__main__":
   for dirpath, dirnames, filenames in os.walk(libraryBasePath):
     filesToBuild.extend(map(lambda x: dirpath + "/" + x, filter(lambda x: x.endswith(".cpp"), filenames)))
 
+  def myBuildFunction(x):
+    buildOneFile(x, args)
+
   with multiprocessing.Pool(processes=int(multiprocessing.cpu_count() / 1)) as p:
-    def myBuildFunction(x):
-      buildOneFile(x, args)
     p.map(myBuildFunction, sorted(filesToBuild))

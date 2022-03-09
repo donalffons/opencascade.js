@@ -112,7 +112,8 @@ if __name__ == "__main__":
   except Exception:
     pass
 
+  def myBuildFunction(x):
+    buildObjectFiles(x, args)
+
   with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
-    def myBuildFunction(x):
-      buildObjectFiles(x, args)
     p.map(myBuildFunction, filesToBuild)
