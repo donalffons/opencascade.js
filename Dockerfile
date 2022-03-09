@@ -63,4 +63,6 @@ COPY builds ./builds
 
 WORKDIR /src/
 
-ENTRYPOINT ["/opencascade.js/src/buildFromYaml.py", "${threading}" ]
+ENV threading=$threading
+
+ENTRYPOINT /opencascade.js/src/buildFromYaml.py $threading
