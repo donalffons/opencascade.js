@@ -42,7 +42,7 @@ jobs:
         run: |
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:latest || true
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:staging || true
-          docker build --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }} .
+          docker build --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging .
 
       - name: Push to Docker Hub (staging)
         run: |
