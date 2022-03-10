@@ -57,7 +57,7 @@ jobs:
             -v $(pwd):/src \
             -u $(id -u):$(id -g) \
             ${{ secrets.DOCKER_IMAGE_NAME }} \
-            /src/builds/opencascade.full.yml
+            /opencascade.js/builds/opencascade.full.yml
 
       - uses: actions/upload-artifact@v2
         with:
