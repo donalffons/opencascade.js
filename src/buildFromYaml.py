@@ -31,7 +31,7 @@ except Exception:
 
 generateCustomCodeBindings(buildConfig["additionalCppCode"])
 compileCustomCodeBindings({
-  "threading": os.environ['OCCT_COMMIT_HASH'],
+  "threading": os.environ['threading'],
 })
 
 def verifyBinding(binding) -> bool:
@@ -85,6 +85,8 @@ def runBuild(build):
     "emcc", "-lembind",
     *bindingsO, *sourcesO,
     "-o", os.getcwd() + "/" + build["name"],
+    "-pthread" if os.environ["threading"] == "multi-threaded" else "",
+    "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'" if os.environ["threading"] == "multi-threaded" else "",
     *build["emccFlags"],
   ])
   print("Build finished")
