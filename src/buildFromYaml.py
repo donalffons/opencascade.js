@@ -31,7 +31,7 @@ except Exception:
 
 generateCustomCodeBindings(buildConfig["additionalCppCode"])
 compileCustomCodeBindings({
-  "threading": os.environ['OCCT_COMMIT_HASH'],
+  "threading": os.environ['threading'],
 })
 
 def verifyBinding(binding) -> bool:
