@@ -85,6 +85,8 @@ def runBuild(build):
     "emcc", "-lembind",
     *bindingsO, *sourcesO,
     "-o", os.getcwd() + "/" + build["name"],
+    "-pthread" if os.environ["threading"] == "multi-threaded" else "",
+    "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'" if os.environ["threading"] == "multi-threaded" else "",
     *build["emccFlags"],
   ])
   print("Build finished")
