@@ -206,3 +206,28 @@ As a side note: You are free to either pass in a "reference type" or a built-in 
 ```js
 this.oc.BRepTools.UVBounds_1(makeFace.Face(), 123, 234, 345, 456);
 ```
+
+# Multi-Threading
+
+OpenCascade supports multi-threading for certain operations, e.g. when creating triangulations using `BRepMesh_IncrementalMesh`. OpenCascade.js offers support for these multi-threaded operations using Emscripten's `-pthread` flag. Currently, multi-threading is done by spawing multiple worker-threads, which can access the same memory using a `SharedArrayBuffer`. For security reasons, usage of this feature requires you to host your site in cross-origin isolated mode, as described [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer). Refer to the [Emscripten documentation](https://emscripten.org/docs/porting/pthreads.html) for more information.
+
+By default, OpenCascade.js is distrubted as a single-threaded JavaScript library via NPM and a Docker Image, which allows you to create single-threaded [custom builds](#creating-a-custom-build). In order to use multi-threading, you have to first create a Docker Image with enabled multi-threading and then produce a multi-threaded custom build of the JavaScript library. Here's how:
+
+1. Clone this repository, then from the main directory, build the Docker Image with multi-threading enabled. Use the Docker `--build-arg threading=multi-threaded` which will set Emscripten flag while building the assets. Building the image takes a long time and depending on your hardware is probably best done over night.
+
+    ```
+    docker build --build-arg threading=multi-threaded -t my-opencascade.js-multi-threaded .
+    ```
+
+2. Build the multi-threaded version of the JavaScript library. The build outputs will be located in the `./dist` directory.
+
+    ```
+    cd dist
+    docker run \
+      -v $(pwd):/src \
+      -u $(id -u):$(id -g) \
+      my-opencascade.js-multi-threaded \
+      /opencascade.js/builds/opencascade.full.yml
+    ```
+
+3. Add the library to your project (e.g. `npm install file:/path/to/opencascade.js`) and use it normally.
