@@ -38,11 +38,14 @@ RUN \
   git clone https://git.savannah.nongnu.org/git/freetype/freetype2.git .
 
 ENV OCCT_COMMIT_HASH_FULL fecb042498514186bd37fa621cdcf09eb61899a3
-ENV OCCT_COMMIT_HASH fecb042
 WORKDIR /occt/
 RUN \
   curl "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=${OCCT_COMMIT_HASH_FULL};sf=tgz" -o occt.tar.gz && \
-  tar -xvf occt.tar.gz
+  tar -xvf occt.tar.gz && \
+  export OCCT_COMMIT_HASH=$(echo ${OCCT_COMMIT_HASH_FULL} | cut -c 1-7) && \
+  mv occt-$OCCT_COMMIT_HASH/* . && \
+  mv occt-$OCCT_COMMIT_HASH/.* . || true && \
+  rm occt-$OCCT_COMMIT_HASH -r
 
 WORKDIR /opencascade.js/
 COPY src ./src

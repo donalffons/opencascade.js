@@ -2,7 +2,7 @@ from filter.filterIncludeFiles import filterIncludeFile
 from typing import Set
 import os
 
-occtBasePath = "/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/"
+occtBasePath = "/occt/src/"
 
 def getGlobalIncludes() -> Set[str]:
   includeFiles = list()

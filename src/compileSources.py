@@ -33,7 +33,7 @@ libraryBasePath = "/opencascade.js/build/sources"
 # "StdObjMgt"
 # "TDF
 
-sourceBasePath = "/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/"
+sourceBasePath = "/occt/src/"
 
 includePaths = []
 includePaths.extend([
