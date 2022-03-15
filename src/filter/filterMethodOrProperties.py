@@ -222,4 +222,8 @@ def filterMethodOrProperty(theClass, methodOrProperty):
   if theClass.spelling == "GeomInt_WLApprox" and methodOrProperty.spelling == "Perform":
     return False
 
+  # error: no matching constructor for initialization of 'Extrema_ExtCC'
+  if theClass.spelling == "GeomAPI_ExtremaCurveCurve" and methodOrProperty.spelling == "Extrema":
+    return False
+
   return True

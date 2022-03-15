@@ -56,9 +56,9 @@ RUN \
   mkdir /opencascade.js/build/ && \
   mkdir /opencascade.js/dist/ && \
   /opencascade.js/src/applyPatches.py && \
-  /opencascade.js/src/compileSources.py ${threading} && \
   /opencascade.js/src/generateBindings.py && \
   /opencascade.js/src/compileBindings.py ${threading} && \
+  /opencascade.js/src/compileSources.py ${threading} && \
   chmod -R 777 /opencascade.js/ && \
   chmod -R 777 /occt
 
