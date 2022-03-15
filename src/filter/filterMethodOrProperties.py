@@ -47,7 +47,8 @@ def filterMethodOrProperty(theClass, methodOrProperty):
     (theClass.spelling == "BinTools" and methodOrProperty.spelling == "GetExtChar") or
     (theClass.spelling == "BinTools_SurfaceSet" and methodOrProperty.spelling == "ReadSurface") or
     (theClass.spelling == "BinTools_Curve2dSet" and methodOrProperty.spelling == "ReadCurve2d") or
-    (theClass.spelling == "BinTools_CurveSet" and methodOrProperty.spelling == "ReadCurve")
+    (theClass.spelling == "BinTools_CurveSet" and methodOrProperty.spelling == "ReadCurve") or
+    (theClass.spelling == "BinTools_IStream" and methodOrProperty.spelling == "Stream")
   ):
     return False
 
@@ -136,9 +137,16 @@ def filterMethodOrProperty(theClass, methodOrProperty):
   # error: call to implicitly-deleted copy constructor of 'Aspect_VKeySet'
   # error: rvalue reference to type 'Aspect_VKeySet' cannot bind to lvalue of type 'Aspect_VKeySet'
   # error: call to implicitly-deleted copy constructor of 'Aspect_VKeySet'
-  if theClass.spelling == "AIS_ViewController" and (
-    methodOrProperty.spelling == "Keys" or
-    methodOrProperty.spelling == "ChangeKeys"
+  if (
+    theClass.spelling == "AIS_ViewController" and (
+      methodOrProperty.spelling == "Keys" or
+      methodOrProperty.spelling == "ChangeKeys"
+    )
+  ) or (
+    theClass.spelling == "Aspect_WindowInputListener" and (
+      methodOrProperty.spelling == "Keys" or
+      methodOrProperty.spelling == "ChangeKeys"
+    )
   ):
     return False
 
@@ -224,6 +232,10 @@ def filterMethodOrProperty(theClass, methodOrProperty):
 
   # error: no matching constructor for initialization of 'Extrema_ExtCC'
   if theClass.spelling == "GeomAPI_ExtremaCurveSurface" and methodOrProperty.spelling == "Extrema":
+    return False
+
+  # error: no matching function for call to 'select_overload'
+  if theClass.spelling == "Select3D_SensitiveTriangulation" and methodOrProperty.spelling == "LastDetectedTriangle":
     return False
 
   return True
