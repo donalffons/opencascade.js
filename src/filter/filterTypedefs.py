@@ -138,4 +138,8 @@ def filterTypedef(typedef, additionalInfo=None):
   )):
     return True
 
+  # error: no template named 'handle'; did you mean 'opencascade::handle'?
+  if typedef.spelling == "Handle_StepKinematics_UnconstrainedPair":
+    return False
+
   return False

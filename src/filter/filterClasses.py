@@ -438,8 +438,4 @@ def filterClass(theClass, additionalInfo=None):
   ):
     return False
 
-  # error: no template named 'handle'; did you mean 'opencascade::handle'?
-  if theClass.spelling == "Handle_StepKinematics_UnconstrainedPair":
-    return False
-
   return True
