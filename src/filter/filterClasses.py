@@ -343,11 +343,6 @@ def filterClass(theClass, additionalInfo=None):
   if theClass.spelling == "ShapePersistent_Geom_Surface":
     return False
 
-  # error: use of undeclared identifier 'Element_t'
-  # no matching function for call to object of type 'std::function<bool (NCollection_Mat4<float> &, int &, emscripten::val)>
-  if theClass.spelling == "Graphic3d_Mat4":
-    return False
-
   # error: unknown type name ...
   if (
     theClass.spelling == "ShapePersistent_Poly" or

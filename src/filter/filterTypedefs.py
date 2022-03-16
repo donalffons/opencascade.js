@@ -70,6 +70,11 @@ def filterTypedef(typedef, additionalInfo=None):
   if typedef.spelling == "Extrema_UBTreeFillerOfSphere":
     return False
 
+  # error: use of undeclared identifier 'Element_t'
+  # no matching function for call to object of type 'std::function<bool (NCollection_Mat4<float> &, int &, emscripten::val)>
+  if typedef.spelling == "Graphic3d_Mat4":
+    return False
+
   # error: call to 'abs' is ambiguous
   if typedef.spelling.startswith("Graphic3d_Vec"):
     return False
