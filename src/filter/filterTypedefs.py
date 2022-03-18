@@ -72,7 +72,10 @@ def filterTypedef(typedef, additionalInfo=None):
 
   # error: use of undeclared identifier 'Element_t'
   # no matching function for call to object of type 'std::function<bool (NCollection_Mat4<float> &, int &, emscripten::val)>
-  if typedef.spelling == "Graphic3d_Mat4":
+  if typedef.spelling in [
+    "Graphic3d_Mat4",
+    "Graphic3d_Mat4d"
+  ]:
     return False
 
   # error: call to 'abs' is ambiguous
@@ -131,15 +134,18 @@ def filterTypedef(typedef, additionalInfo=None):
   if typedef.spelling == "Interface_VectorOfFileParameter":
     return False
 
+  # error: no template named 'handle'; did you mean 'opencascade::handle'?
+  if typedef.spelling in [
+    "Handle_StepKinematics_UnconstrainedPair",
+    "Handle_StepKinematics_UnconstrainedPairValue"
+  ]:
+    return False
+
   if typedef.underlying_typedef_type.spelling.startswith((
     "opencascade::handle",
     "handle",
     "NCollection"
   )):
     return True
-
-  # error: no template named 'handle'; did you mean 'opencascade::handle'?
-  if typedef.spelling == "Handle_StepKinematics_UnconstrainedPair":
-    return False
 
   return False

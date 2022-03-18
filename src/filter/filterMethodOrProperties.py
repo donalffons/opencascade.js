@@ -231,7 +231,10 @@ def filterMethodOrProperty(theClass, methodOrProperty):
     return False
 
   # error: no matching constructor for initialization of 'Extrema_ExtCC'
-  if theClass.spelling == "GeomAPI_ExtremaCurveSurface" and methodOrProperty.spelling == "Extrema":
+  if theClass.spelling in [
+    "GeomAPI_ExtremaCurveSurface",
+    "GeomAPI_ExtremaCurveCurve"
+   ] and methodOrProperty.spelling == "Extrema":
     return False
 
   # error: no matching function for call to 'select_overload'
