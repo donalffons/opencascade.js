@@ -15,7 +15,7 @@ it("can create polygon", () => {
 it("can create bottle", () => {
   const makeBottle = (openCascade: OpenCascadeInstance, myWidth: number, myHeight: number, myThickness: number) => {
     // Profile : Define Support Points
-    const aPnt1 = new openCascade.gp_Pnt_3(-myWidth / 2., 0, 0);        
+    const aPnt1 = new openCascade.gp_Pnt_3(-myWidth / 2., 0, 0);
     const aPnt2 = new openCascade.gp_Pnt_3(-myWidth / 2., -myThickness / 4., 0);
     const aPnt3 = new openCascade.gp_Pnt_3(0, -myThickness / 2., 0);
     const aPnt4 = new openCascade.gp_Pnt_3(myWidth / 2., -myThickness / 4., 0);
@@ -30,63 +30,63 @@ it("can create bottle", () => {
     const anEdge1 = new openCascade.BRepBuilderAPI_MakeEdge_24(new openCascade.Handle_Geom_Curve_2(aSegment1.Value().get()));
     const anEdge2 = new openCascade.BRepBuilderAPI_MakeEdge_24(new openCascade.Handle_Geom_Curve_2(anArcOfCircle.Value().get()));
     const anEdge3 = new openCascade.BRepBuilderAPI_MakeEdge_24(new openCascade.Handle_Geom_Curve_2(aSegment2.Value().get()));
-    const aWire  = new openCascade.BRepBuilderAPI_MakeWire_4(anEdge1.Edge(), anEdge2.Edge(), anEdge3.Edge());
-    
+    const aWire = new openCascade.BRepBuilderAPI_MakeWire_4(anEdge1.Edge(), anEdge2.Edge(), anEdge3.Edge());
+
     // Complete Profile
     const xAxis = openCascade.gp.OX();
     const aTrsf = new openCascade.gp_Trsf_1();
-    
+
     aTrsf.SetMirror_2(xAxis);
     const aBRepTrsf = new openCascade.BRepBuilderAPI_Transform_2(aWire.Wire(), aTrsf, false);
     const aMirroredShape = aBRepTrsf.Shape();
-    
+
     const mkWire = new openCascade.BRepBuilderAPI_MakeWire_1();
     mkWire.Add_2(aWire.Wire());
     mkWire.Add_2(openCascade.TopoDS.Wire_1(aMirroredShape));
     const myWireProfile = mkWire.Wire();
-    
+
     // Body : Prism the Profile
     const myFaceProfile = new openCascade.BRepBuilderAPI_MakeFace_15(myWireProfile, false);
     const aPrismVec = new openCascade.gp_Vec_4(0, 0, myHeight);
     let myBody = new openCascade.BRepPrimAPI_MakePrism_1(myFaceProfile.Face(), aPrismVec, false, true);
-    
+
     // Body : Apply Fillets
     const mkFillet = new openCascade.BRepFilletAPI_MakeFillet(myBody.Shape(), openCascade.ChFi3d_FilletShape.ChFi3d_Rational);
     const anEdgeExplorer = new openCascade.TopExp_Explorer_2(myBody.Shape(), openCascade.TopAbs_ShapeEnum.TopAbs_EDGE, openCascade.TopAbs_ShapeEnum.TopAbs_SHAPE);
-    while(anEdgeExplorer.More()) {
+    while (anEdgeExplorer.More()) {
       const anEdge = openCascade.TopoDS.Edge_1(anEdgeExplorer.Current());
       // Add edge to fillet algorithm
       mkFillet.Add_2(myThickness / 12., anEdge);
       anEdgeExplorer.Next();
     }
     myBody = mkFillet.Shape();
-    
+
     // Body : Add the Neck
     const neckLocation = new openCascade.gp_Pnt_3(0, 0, myHeight);
     const neckAxis = openCascade.gp.DZ();
     const neckAx2 = new openCascade.gp_Ax2_3(neckLocation, neckAxis);
-    
+
     const myNeckRadius = myThickness / 4.;
     const myNeckHeight = myHeight / 10.;
-    
+
     const MKCylinder = new openCascade.BRepPrimAPI_MakeCylinder_3(neckAx2, myNeckRadius, myNeckHeight);
     const myNeck = MKCylinder.Shape();
-    
-    myBody = new openCascade.BRepAlgoAPI_Fuse_3(myBody, myNeck);
+
+    myBody = new openCascade.BRepAlgoAPI_Fuse_3(myBody, myNeck, new oc.Message_ProgressRange_1());
 
     // Body : Create a Hollowed Solid
     let faceToRemove;
     let zMax = -1;
     const aFaceExplorer = new openCascade.TopExp_Explorer_2(myBody.Shape(), openCascade.TopAbs_ShapeEnum.TopAbs_FACE, openCascade.TopAbs_ShapeEnum.TopAbs_SHAPE);
-    for(; aFaceExplorer.More(); aFaceExplorer.Next()) {
+    for (; aFaceExplorer.More(); aFaceExplorer.Next()) {
       const aFace = openCascade.TopoDS.Face_1(aFaceExplorer.Current());
       // Check if <aFace> is the top face of the bottle's neck 
       const aSurface = openCascade.BRep_Tool.Surface_2(aFace);
-      if(aSurface.get().$$.ptrType.name === "Geom_Plane*") {
+      if (aSurface.get().$$.ptrType.name === "Geom_Plane*") {
         const aPlane = new openCascade.Handle_Geom_Plane_2(aSurface.get()).get();
         const aPnt = aPlane.Location();
         const aZ = aPnt.Z();
-        if(aZ > zMax) {
+        if (aZ > zMax) {
           zMax = aZ;
           faceToRemove = new openCascade.TopExp_Explorer_2(aFace, openCascade.TopAbs_ShapeEnum.TopAbs_FACE, openCascade.TopAbs_ShapeEnum.TopAbs_SHAPE).Current();
         }
@@ -96,8 +96,8 @@ it("can create bottle", () => {
     const facesToRemove = new openCascade.TopTools_ListOfShape_1();
     facesToRemove.Append_1(faceToRemove);
     const s = myBody.Shape();
-    myBody = new openCascade.BRepOffsetAPI_MakeThickSolid_1();
-    myBody.MakeThickSolidByJoin(s, facesToRemove, -myThickness / 50, 1.e-3, openCascade.BRepOffset_Mode.BRepOffset_Skin, false, false, openCascade.GeomAbs_JoinType.GeomAbs_Arc, false);
+    myBody = new openCascade.BRepOffsetAPI_MakeThickSolid();
+    myBody.MakeThickSolidByJoin(s, facesToRemove, -myThickness / 50, 1.e-3, openCascade.BRepOffset_Mode.BRepOffset_Skin, false, false, openCascade.GeomAbs_JoinType.GeomAbs_Arc, false, new oc.Message_ProgressRange_1());
     // Threading : Create Surfaces
     const aCyl1 = new openCascade.Geom_CylindricalSurface_1(new openCascade.gp_Ax3_2(neckAx2), myNeckRadius * 0.99);
     const aCyl2 = new openCascade.Geom_CylindricalSurface_1(new openCascade.gp_Ax3_2(neckAx2), myNeckRadius * 1.05);
