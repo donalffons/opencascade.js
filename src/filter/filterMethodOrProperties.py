@@ -237,6 +237,10 @@ def filterMethodOrProperty(theClass, methodOrProperty):
    ] and methodOrProperty.spelling == "Extrema":
     return False
 
+  # error: call to implicitly-deleted copy constructor of 'Extrema_ExtPS'
+  if theClass.spelling == "GeomAPI_ProjectPointOnSurf" and methodOrProperty.spelling == "Extrema":
+    return False
+
   # error: no matching function for call to 'select_overload'
   if theClass.spelling == "Select3D_SensitiveTriangulation" and methodOrProperty.spelling == "LastDetectedTriangle":
     return False
