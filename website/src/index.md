@@ -1,7 +1,7 @@
 ---
 home: true
-heroImage: https://v1.vuepress.vuejs.org/hero.png
-tagline: Documentation website for opencascade.js
+heroImage: /logo.svg
+tagline: Port of the OpenCascade library to JavaScript / WebAssembly using Emscripten
 actionText: Quick Start →
 actionLink: /guide/
 features:
