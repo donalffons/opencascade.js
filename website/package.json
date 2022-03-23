@@ -10,7 +10,8 @@
   "repository": "https://github.com/donalffons/opencascade.js/opencascade.js-docs",
   "scripts": {
     "dev": "vuepress dev src",
-    "build": "vuepress build src"
+    "build": "vuepress build src",
+    "disallow-search-bots": "echo \"User-agent: *\nDisallow: \/\" >> src/.vuepress/dist/robots.txt"
   },
   "license": "MIT",
   "devDependencies": {
