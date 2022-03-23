@@ -65,4 +65,4 @@ node_modules/
 # dotenv environment variables file
 .env
 
-src/.vuepress
+src/.vuepress/dist
