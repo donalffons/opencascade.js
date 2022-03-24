@@ -4,12 +4,13 @@ import os
 from Common import ocIncludePaths, additionalIncludePaths
 import subprocess
 import multiprocessing
+from functools import partial
 
 from argparse import ArgumentParser
 
 libraryBasePath = "/opencascade.js/build/bindings"
 
-def buildOneFile(item, args):
+def buildOneFile(args, item):
   if not os.path.exists(item + ".o"):
     print("building " + item)
     command = [
@@ -22,7 +23,7 @@ def buildOneFile(item, args):
       # "-g3",
       # "-gsource-map",
       # "--source-map-base=http://localhost:8080",
-      "-pthread" if args.threading == "multi" else "",
+      "-pthread" if args["threading"] == "multi" else "",
       *list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths)),
       "-c", item,
     ]
@@ -38,11 +39,8 @@ def compileCustomCodeBindings(args):
   for dirpath, dirnames, filenames in os.walk(libraryBasePath + "/myMain.h"):
     filesToBuild.extend(map(lambda x: dirpath + "/" + x, filter(lambda x: x.endswith(".cpp"), filenames)))
 
-  def myBuildFunction(x):
-    buildOneFile(x, args)
-
   with multiprocessing.Pool(processes=int(multiprocessing.cpu_count() / 1)) as p:
-    p.map(myBuildFunction, sorted(filesToBuild))
+    p.map(partial(buildOneFile, args), sorted(filesToBuild))
 
 if __name__ == "__main__":
   parser = ArgumentParser()
@@ -53,8 +51,5 @@ if __name__ == "__main__":
   for dirpath, dirnames, filenames in os.walk(libraryBasePath):
     filesToBuild.extend(map(lambda x: dirpath + "/" + x, filter(lambda x: x.endswith(".cpp"), filenames)))
 
-  def myBuildFunction(x):
-    buildOneFile(x, args)
-
   with multiprocessing.Pool(processes=int(multiprocessing.cpu_count() / 1)) as p:
-    p.map(myBuildFunction, sorted(filesToBuild))
+    p.map(partial(buildOneFile, args), sorted(filesToBuild))
