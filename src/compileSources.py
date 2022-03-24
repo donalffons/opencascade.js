@@ -61,7 +61,7 @@ def buildObjectFiles(file, args):
     # "-gsource-map",
     # "--source-map-base=http://localhost:8080",
     # "-fPIC",
-    "-pthread" if args.threading == "multi" else "",
+    "-pthread" if args["threading"] == "multi" else "",
     *list(map(lambda x: "-I" + x, includePaths)),
     "-c",
     file,
@@ -113,7 +113,9 @@ if __name__ == "__main__":
     pass
 
   def myBuildFunction(x):
-    buildObjectFiles(x, args)
+    buildObjectFiles(x, {
+      "threading": args.threading,
+    })
 
   with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
     p.map(myBuildFunction, filesToBuild)

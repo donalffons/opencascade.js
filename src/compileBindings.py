@@ -23,7 +23,7 @@ def buildOneFile(args, item):
       # "-g3",
       # "-gsource-map",
       # "--source-map-base=http://localhost:8080",
-      "-pthread" if args.threading == "multi" else "",
+      "-pthread" if args["threading"] == "multi" else "",
       *list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths)),
       "-c", item,
     ]
@@ -52,4 +52,6 @@ if __name__ == "__main__":
     filesToBuild.extend(map(lambda x: dirpath + "/" + x, filter(lambda x: x.endswith(".cpp"), filenames)))
 
   with multiprocessing.Pool(processes=int(multiprocessing.cpu_count() / 1)) as p:
-    p.map(partial(buildOneFile, args), sorted(filesToBuild))
+    p.map(partial(buildOneFile, {
+      "threading": args.threading,
+    }), sorted(filesToBuild))
