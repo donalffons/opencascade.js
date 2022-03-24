@@ -30,9 +30,9 @@ except Exception:
   pass
 
 generateCustomCodeBindings(buildConfig["additionalCppCode"])
-compileCustomCodeBindings({
+compileCustomCodeBindings(type('', (), {
   "threading": os.environ['threading'],
-})
+})())
 
 def verifyBinding(binding) -> bool:
   for dirpath, dirnames, filenames in os.walk(libraryBasePath + "/bindings"):
