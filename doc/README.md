@@ -221,11 +221,20 @@ Using either of those features requires at least two threads, i.e. workers: The 
 
 TODO: I have only tested with the multi-threaded version of the OpenCascade.js (which currently requires re-building the Docker image from scratch with some small modifications). There is a chance that this also works with the single-threaded version of OpenCascade.js, but that hasn't been tested yet.
 
-## Step 1: Derive custom class from `Message_ProgressIndicator`
+## Step 1: Pull the latest Docker image
 
-Create a custom build and add the following code to the `additionalCppCode` section.
+```sh
+docker pull donalffons/opencascade.js
+```
 
-```cpp
+## Step 2: Derive custom class from `Message_ProgressIndicator`
+
+Create a custom build definition with the following content:
+
+```yaml
+mainBuild:
+  name: customBuild.progressIndicator.js
+additionalCppCode: |
 class MyProgressIndicator : public Message_ProgressIndicator {
   int* progress;
   int* userBreak;
@@ -258,7 +267,7 @@ protected:
 };
 ```
 
-## Step 2: Initialize OpenCascade.js with `SharedArrayBuffer` and use `MyProgressIndicator`
+## Step 3: Initialize OpenCascade.js with `SharedArrayBuffer` and use `MyProgressIndicator`
 
 ```js
 // SupervisorThread.js
