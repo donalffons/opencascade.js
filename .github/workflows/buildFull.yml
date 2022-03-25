@@ -40,20 +40,24 @@ jobs:
       - name: Build OpenCascade.js Docker Image
         timeout-minutes: 10000
         run: |
-          docker pull ${{ secrets.DOCKER_IMAGE_NAME }} || true
-          docker build -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }} .
+          docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:latest || true
+          docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:staging || true
+          docker build --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging .
+
+      - name: Push to Docker Hub (staging)
+        run: |
+          docker tag ${{ secrets.DOCKER_IMAGE_NAME }} ${{ secrets.DOCKER_IMAGE_NAME }}:staging
+          docker push ${{ secrets.DOCKER_IMAGE_NAME }}:staging
 
       - name: Build OpenCascade.js Full Module
         timeout-minutes: 10000
         run: |
           cd dist
           docker run \
-            -v $(pwd)/..:/src \
+            -v $(pwd):/src \
             -u $(id -u):$(id -g) \
             ${{ secrets.DOCKER_IMAGE_NAME }} \
-            /src/builds/opencascade.full.yml
-          cd ..
-          mv opencascade.full.* dist
+            /opencascade.js/builds/opencascade.full.yml
 
       - uses: actions/upload-artifact@v2
         with:

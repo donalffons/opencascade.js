@@ -73,6 +73,10 @@ def filterClass(theClass, additionalInfo=None):
   if theClass.spelling == "Font_BRepFont":
     return False
 
+  # error: 'operator delete' is a protected member of 'Message_ProgressScope'
+  if theClass.spelling == "Message_LazyProgressScope":
+    return False
+
   # error: rvalue reference to type 'Storage_BaseDriver' cannot bind to lvalue of type 'Storage_BaseDriver'
   # error: allocating an object of abstract class type 'Storage_BaseDriver'
   if theClass.spelling == "FSD_File":
@@ -432,6 +436,13 @@ def filterClass(theClass, additionalInfo=None):
     theClass.spelling == "Draw_Drawable3D" or
     theClass.spelling == "DBRep_DrawableShape"
   ):
+    return False
+
+  # error: no template named 'handle'; did you mean 'opencascade::handle'?
+  if theClass.spelling in [
+    "StepKinematics_UnconstrainedPair",
+    "StepKinematics_UnconstrainedPairValue"
+  ]:
     return False
 
   return True

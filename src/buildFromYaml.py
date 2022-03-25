@@ -4,16 +4,20 @@ import os
 import subprocess
 import json
 from itertools import chain
-import sys
 import yaml
 from generateBindings import generateCustomCodeBindings
 from compileBindings import compileCustomCodeBindings
 import shutil
 from cerberus import Validator
+from argparse import ArgumentParser
+
+parser = ArgumentParser()
+parser.add_argument(dest="filename", help="Custom build input file (.yml)", metavar="FILE.yml")
+args = parser.parse_args()
 
 libraryBasePath = "/opencascade.js/build"
 
-buildConfig = yaml.safe_load(open(sys.argv[1], "r"))
+buildConfig = yaml.safe_load(open(args.filename, "r"))
 schema = eval(open("/opencascade.js/src/customBuildSchema.py", "r").read())
 v = Validator(schema)
 if not v.validate(buildConfig, schema):
@@ -26,7 +30,9 @@ except Exception:
   pass
 
 generateCustomCodeBindings(buildConfig["additionalCppCode"])
-compileCustomCodeBindings()
+compileCustomCodeBindings({
+  "threading": os.environ['threading'],
+})
 
 def verifyBinding(binding) -> bool:
   for dirpath, dirnames, filenames in os.walk(libraryBasePath + "/bindings"):
@@ -76,9 +82,11 @@ def runBuild(build):
       if item.endswith(".o"):
         sourcesO.append(dirpath + "/" + item)
   subprocess.check_call([
-    "emcc", "--bind",
+    "emcc", "-lembind",
     *bindingsO, *sourcesO,
     "-o", os.getcwd() + "/" + build["name"],
+    "-pthread" if os.environ["threading"] == "multi-threaded" else "",
+    "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'" if os.environ["threading"] == "multi-threaded" else "",
     *build["emccFlags"],
   ])
   print("Build finished")

@@ -5,7 +5,7 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const isFileSizeCorrect = (actual: number, target: number, epsPct: number) => actual >= target * (1-epsPct) && actual <= target * (1+epsPct);
+const isFileSizeCorrect = (actual: number, target: number, epsPct: number) => actual >= target * (1 - epsPct) && actual <= target * (1 + epsPct);
 
 const customBuildCmd = "cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) donalffons/opencascade.js";
 
@@ -15,9 +15,9 @@ it("can create custom build: simple", () => {
   const { size: sizeWasm } = fs.statSync(path.join(__dirname, "customBuilds", "./customBuild.simple.wasm"));
   const { size: sizeDTs } = fs.statSync(path.join(__dirname, "customBuilds", "./customBuild.simple.d.ts"));
   const epsPct = 0.1;
-  expect(isFileSizeCorrect(sizeJs, 117392, epsPct)).toBeTruthy();
-  expect(isFileSizeCorrect(sizeWasm, 413352, epsPct)).toBeTruthy();
-  expect(isFileSizeCorrect(sizeDTs, 6993, epsPct)).toBeTruthy();
+  expect(isFileSizeCorrect(sizeJs, 118004, epsPct)).toBeTruthy();
+  expect(isFileSizeCorrect(sizeWasm, 443948, epsPct)).toBeTruthy();
+  expect(isFileSizeCorrect(sizeDTs, 7238, epsPct)).toBeTruthy();
 });
 
 it("can use custom build: simple", async () => {
@@ -28,6 +28,8 @@ it("can use custom build: simple", async () => {
   });
   const testShape = new oc.TopoDS_Shape();
   expect(testShape.IsNull()).toBeTruthy();
+  const fooResult = oc.Test.foo();
+  expect(fooResult).toBe(123);
   expect(oc.TopoDS_Face).toBeUndefined();
 });
 

@@ -7,12 +7,9 @@ import multiprocessing
 from filter.filterSourceFiles import filterSourceFile
 from filter.filterPackages import filterPackages
 
-libraryBasePath = "/opencascade.js/build/sources"
+from argparse import ArgumentParser
 
-try:
-  os.makedirs(libraryBasePath)
-except Exception:
-  pass
+libraryBasePath = "/opencascade.js/build/sources"
 
 # Potentially problematic packages, when used with dynamic linking
 # These files contain function pointer definitions and header files and are therefore likely to cause problems.
@@ -36,7 +33,7 @@ except Exception:
 # "StdObjMgt"
 # "TDF
 
-sourceBasePath = "/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/"
+sourceBasePath = "/occt/src/"
 
 includePaths = []
 includePaths.extend([
@@ -47,7 +44,7 @@ includePaths.extend([
 for dirpath, dirnames, filenames in os.walk(os.path.join(sourceBasePath)):
   includePaths.append(dirpath)
 
-def buildObjectFiles(file):
+def buildObjectFiles(file, args):
   relativeFile = file.replace(sourceBasePath, "")
   try:
     os.makedirs(libraryBasePath + "/" + os.path.dirname(relativeFile))
@@ -64,8 +61,7 @@ def buildObjectFiles(file):
     # "-gsource-map",
     # "--source-map-base=http://localhost:8080",
     # "-fPIC",
-    # "-pthread",
-    # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
+    "-pthread" if args["threading"] == "multi" else "",
     *list(map(lambda x: "-I" + x, includePaths)),
     "-c",
     file,
@@ -106,8 +102,20 @@ for dirpath, dirnames, filenames in os.walk(sourceBasePath):
     if filterSourceFile(dirpath + "/" + item):
       filesToBuild.append(dirpath + "/" + item)
 
-def myBuildObjectFiles(x):
-  buildObjectFiles(x)
+if __name__ == "__main__":
+  parser = ArgumentParser()
+  parser.add_argument(dest="threading", choices=["single-threaded", "multi-threaded"], help="Build in single vs. multi-threaded mode")
+  args = parser.parse_args()
 
-with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
-  p.map(myBuildObjectFiles, filesToBuild)
+  try:
+    os.makedirs(libraryBasePath)
+  except Exception:
+    pass
+
+  def myBuildFunction(x):
+    buildObjectFiles(x, {
+      "threading": args.threading,
+    })
+
+  with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as p:
+    p.map(myBuildFunction, filesToBuild)
