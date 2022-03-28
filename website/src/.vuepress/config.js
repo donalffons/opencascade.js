@@ -80,6 +80,7 @@ module.exports = {
           children: [
             'advanced-guides/gotchas',
             'advanced-guides/web-worker',
+            'advanced-guides/nodejs',
             'advanced-guides/progress-indicators',
             'advanced-guides/user-break',
             'advanced-guides/multi-threading',
