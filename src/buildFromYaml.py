@@ -67,6 +67,36 @@ for dirpath, dirnames, filenames in os.walk(libraryBasePath + "/bindings"):
       typescriptDefinitions.append(json.loads(f.read()))
 
 def runBuild(build):
+  def getAdditionalBindCodeO():
+    if "additionalBindCode" in build:
+      try:
+        os.mkdir(libraryBasePath + "/additionalBindCode")
+      except Exception:
+        pass
+      additionalBindCodeFileName = libraryBasePath + "/additionalBindCode/" + build["name"] + ".cpp"
+      f = open(additionalBindCodeFileName, "w")
+      f.write(build["additionalBindCode"])
+      f.close()
+      print("building " + additionalBindCodeFileName)
+      command = [
+        "emcc",
+        "-DIGNORE_NO_ATOMICS=1",
+        "-DOCCT_NO_PLUGINS",
+        "-frtti",
+        "-DHAVE_RAPIDJSON",
+        "-Os",
+        "-pthread" if os.environ["threading"] == "multi" else "",
+        *list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths)),
+        "-c", additionalBindCodeFileName,
+      ]
+      subprocess.check_call([
+        *command,
+        "-o", additionalBindCodeFileName + ".o",
+      ])
+      return additionalBindCodeFileName + ".o"
+    else:
+      return None
+  additionalBindCodeO = getAdditionalBindCodeO()
   print("Running build: " + build["name"])
   bindingsO = []
   for dirpath, dirnames, filenames in os.walk(libraryBasePath + "/bindings"):
@@ -83,7 +113,7 @@ def runBuild(build):
       if item.endswith(".o"):
         sourcesO.append(dirpath + "/" + item)
   subprocess.check_call([
-    "emcc", "-lembind",
+    "emcc", "-lembind", ("" if additionalBindCodeO is None else additionalBindCodeO),
     *bindingsO, *sourcesO,
     "-o", os.getcwd() + "/" + build["name"],
     "-pthread" if os.environ["threading"] == "multi-threaded" else "",
@@ -91,32 +121,6 @@ def runBuild(build):
     *build["emccFlags"],
   ])
   print("Build finished")
-
-if "additionalBindCode" in buildConfig:
-  try:
-    os.mkdir(libraryBasePath + "/bindings/additionalBindCode")
-  except Exception:
-    pass
-  fileName = libraryBasePath + "/bindings/additionalBindCode/main.cpp"
-  f = open(fileName, "w")
-  f.write(buildConfig["additionalBindCode"])
-  f.close()
-  print("building /bindings/additionalBindCode/main.cpp")
-  command = [
-    "emcc",
-    "-DIGNORE_NO_ATOMICS=1",
-    "-DOCCT_NO_PLUGINS",
-    "-frtti",
-    "-DHAVE_RAPIDJSON",
-    "-Os",
-    "-pthread" if os.environ["threading"] == "multi" else "",
-    *list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths)),
-    "-c", fileName,
-  ]
-  subprocess.check_call([
-    *command,
-    "-o", fileName + ".o",
-  ])
 
 runBuild(buildConfig["mainBuild"])
 for extraBuild in buildConfig["extraBuilds"]:
