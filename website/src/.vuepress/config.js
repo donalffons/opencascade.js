@@ -16,9 +16,9 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/config/#head
    */
   head: [
-    ['meta', { name: 'theme-color', content: '#3eaf7c' }],
+    ['meta', { name: 'theme-color', content: '#b49d01' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
   ],
 
   /**
@@ -34,30 +34,80 @@ module.exports = {
     lastUpdated: false,
     nav: [
       {
-        text: 'Guide',
-        link: '/guide/',
+        text: 'Docs',
+        link: '/docs/about/',
       },
       {
-        text: 'Config',
-        link: '/config/'
+        text: 'Examples',
+        link: '/examples/',
       },
       {
-        text: 'VuePress',
-        link: 'https://v1.vuepress.vuejs.org'
-      }
+        text: 'Starter Templates',
+        link: '/starter-templates/',
+      },
+      {
+        text: 'Community Projects',
+        link: '/community-projects/',
+      },
+      {
+        text: 'Github',
+        link: 'https://github.com/donalffons/opencascade.js',
+      },
     ],
     sidebar: {
-      '/guide/': [
+      '/docs/': [
         {
-          title: 'Guide',
+          title: 'About',
           collapsable: false,
           children: [
-            '',
-            'using-vue',
-          ]
-        }
+            'about/',
+            'about/getting-started',
+            'about/app-dev-workflow',
+            'about/acknowledgements',
+          ],
+        },
+        {
+          title: 'Beginner Guides',
+          collapsable: false,
+          children: [
+            'beginner-guides/hello-world',
+            'beginner-guides/bottle',
+          ],
+        },
+        {
+          title: 'Advanced Guides',
+          collapsable: false,
+          children: [
+            'advanced-guides/gotchas',
+            'advanced-guides/web-worker',
+            'advanced-guides/progress-indicators',
+            'advanced-guides/user-break',
+            'advanced-guides/multi-threading',
+          ],
+        },
+        {
+          title: 'OpenCascade vs OpenCascade.js',
+          collapsable: false,
+          children: [
+            'cpp-in-js/',
+            'cpp-in-js/overloaded-methods',
+            'cpp-in-js/references-to-built-ins',
+            'cpp-in-js/limitations',
+          ],
+        },
+        {
+          title: 'Custom Builds',
+          collapsable: false,
+          children: [
+            'custom-builds/',
+            'custom-builds/file-size-comparison',
+            'custom-builds/how-to',
+            'custom-builds/additional-cpp-code',
+            'custom-builds/additional-bind-code',
+          ],
+        },
       ],
-    }
+    },
   },
 
   /**
