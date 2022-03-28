@@ -10,6 +10,7 @@ from compileBindings import compileCustomCodeBindings
 import shutil
 from cerberus import Validator
 from argparse import ArgumentParser
+from Common import ocIncludePaths, additionalIncludePaths
 
 parser = ArgumentParser()
 parser.add_argument(dest="filename", help="Custom build input file (.yml)", metavar="FILE.yml")
@@ -90,6 +91,32 @@ def runBuild(build):
     *build["emccFlags"],
   ])
   print("Build finished")
+
+if "additionalBindCode" in buildConfig:
+  try:
+    os.mkdir(libraryBasePath + "/bindings/additionalBindCode")
+  except Exception:
+    pass
+  fileName = libraryBasePath + "/bindings/additionalBindCode/main.cpp"
+  f = open(fileName, "w")
+  f.write(buildConfig["additionalBindCode"])
+  f.close()
+  print("building /bindings/additionalBindCode/main.cpp")
+  command = [
+    "emcc",
+    "-DIGNORE_NO_ATOMICS=1",
+    "-DOCCT_NO_PLUGINS",
+    "-frtti",
+    "-DHAVE_RAPIDJSON",
+    "-Os",
+    "-pthread" if os.environ["threading"] == "multi" else "",
+    *list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths)),
+    "-c", fileName,
+  ]
+  subprocess.check_call([
+    *command,
+    "-o", fileName + ".o",
+  ])
 
 runBuild(buildConfig["mainBuild"])
 for extraBuild in buildConfig["extraBuilds"]:

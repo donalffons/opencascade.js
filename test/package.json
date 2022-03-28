@@ -15,7 +15,7 @@
     "jest": "^27.5.1",
     "opencascade.js": "file:..",
     "shelljs": "^0.8.5",
-    "ts-node": "^10.6.0"
+    "ts-node": "^10.7.0"
   },
   "jest": {
     "extensionsToTreatAsEsm": [

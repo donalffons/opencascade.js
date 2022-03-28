@@ -95,6 +95,11 @@
     "type": "string",
     "default": "",
   },
+  "additionalBindCode": {
+    "required": False,
+    "type": "string",
+    "default": "",
+  },
   "generateTypescriptDefinitions": {
     "required": False,
     "type": "boolean",
