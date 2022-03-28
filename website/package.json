@@ -9,8 +9,8 @@
   },
   "repository": "https://github.com/donalffons/opencascade.js/opencascade.js-docs",
   "scripts": {
-    "dev": "NODE_OPTIONS=--openssl-legacy-provider vuepress dev src",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider vuepress build src",
+    "dev": "vuepress dev src",
+    "build": "vuepress build src",
     "disallow-search-bots": "echo \"User-agent: *\nDisallow: \/\" >> src/.vuepress/dist/robots.txt"
   },
   "license": "MIT",
