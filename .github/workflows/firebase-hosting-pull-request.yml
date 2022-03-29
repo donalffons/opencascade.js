@@ -7,8 +7,20 @@ jobs:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
       - name: Check out repository code
         uses: actions/checkout@v2
+      - name: Add reference docs to website
+        run: |
+          cd website/src/.vuepress/public
+          gsutil cp gs://opencascade-js/reference-docs.zip .
+          unzip reference-docs.zip
+          rm reference-docs.zip
       - name: build website
         run: |
           cd website
