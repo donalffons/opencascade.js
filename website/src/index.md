@@ -3,7 +3,7 @@ home: true
 heroImage: /logo.svg
 tagline: Port of the OpenCascade library to JavaScript / WebAssembly using Emscripten
 actionText: Get Started →
-actionLink: /docs/about/getting-started
+actionLink: /guides/about/getting-started
 features:
 - title: Web-enabled CAD
   details: Build web-enabled CAD applications that run in the browser, on the server or at near-native speeds on almost any device.

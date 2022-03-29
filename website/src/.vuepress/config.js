@@ -34,8 +34,12 @@ module.exports = {
     lastUpdated: false,
     nav: [
       {
-        text: 'Docs',
-        link: '/docs/about/',
+        text: 'Guides',
+        link: '/guides/about/',
+      },
+      {
+        text: 'Reference',
+        link: '/reference/',
       },
       {
         text: 'Examples',
@@ -55,7 +59,7 @@ module.exports = {
       },
     ],
     sidebar: {
-      '/docs/': [
+      '/guides/': [
         {
           title: 'About',
           collapsable: false,
