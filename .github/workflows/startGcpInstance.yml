@@ -61,4 +61,4 @@ jobs:
             --shielded-vtpm \
             --shielded-integrity-monitoring \
             --reservation-affinity=any \
-            ${{ github.event.inputs.preemptible && "--preemptible" || "" }}
+            ${{ github.event.inputs.preemptible && '--preemptible' || '' }}
