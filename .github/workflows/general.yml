@@ -22,9 +22,21 @@ jobs:
     name: Deploy website
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: build website
+      - name: Add reference docs to website
+        run: |
+          cd website/src/.vuepress/public
+          gsutil cp gs://opencascade-js/reference-docs.zip .
+          unzip reference-docs.zip
+          rm reference-docs.zip
+      - name: Build website
         run: |
           cd website
           npm ci

@@ -66,3 +66,6 @@ node_modules/
 .env
 
 src/.vuepress/dist
+
+src/.vuepress/public/reference-docs.zip
+src/.vuepress/public/reference-docs/
