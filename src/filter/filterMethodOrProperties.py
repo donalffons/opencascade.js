@@ -245,4 +245,17 @@ def filterMethodOrProperty(theClass, methodOrProperty):
   if theClass.spelling == "Select3D_SensitiveTriangulation" and methodOrProperty.spelling == "LastDetectedTriangle":
     return False
 
+  # error: call to implicitly-deleted copy constructor of 'IntTools_FClass2d'
+  # error: call to implicitly-deleted copy constructor of 'BRepClass3d_SolidClassifier'
+  if theClass.spelling == "IntTools_Context" and methodOrProperty.spelling in [
+    "FClass2d",
+    "ProjPS",
+    "SolidClassifier"
+  ]:
+    return False
+
+  # error: call to implicitly-deleted copy constructor of 'std::__2::basic_stringstream<char, std::__2::char_traits<char>, std::__2::allocator<char>>'
+  if theClass.spelling == "Message_AttributeStream" and methodOrProperty.spelling == "Stream":
+    return False
+
   return True

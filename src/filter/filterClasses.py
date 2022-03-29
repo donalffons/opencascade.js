@@ -49,17 +49,8 @@ def filterClass(theClass, additionalInfo=None):
   if theClass.spelling == "Geom2dEvaluator":
     return False
 
-  # error: call to implicitly-deleted copy constructor of 'std::__2::basic_stringstream<char, std::__2::char_traits<char>, std::__2::allocator<char>>'
-  if theClass.spelling == "Message_AttributeStream":
-    return False
-
   # error: allocating an object of abstract class type 'PrsDim_Dimension'
   if theClass.spelling == "PrsDim_Dimension":
-    return False
-
-  # error: call to implicitly-deleted copy constructor of 'IntTools_FClass2d'
-  # error: call to implicitly-deleted copy constructor of 'BRepClass3d_SolidClassifier'
-  if theClass.spelling == "IntTools_Context":
     return False
 
   # error: rvalue reference to type 'Storage_BaseDriver' cannot bind to lvalue of type 'Storage_BaseDriver'
