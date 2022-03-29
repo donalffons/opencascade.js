@@ -4,9 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       machineType:
+        type: choice
         description: 'Machine Type'
         required: true
-        default: 'c2-standard-4/c2-standard-30'
+        options:
+          - c2-standard-16 # (0,041761875 USD/core)
+          - c2-standard-30 # (0,04176 USD/core)
+          - c2d-highcpu-32 # (0,02998375 USD/core)
+          - c2d-highcpu-56 # (0,02998375 USD/core)
       preemptible:
         type: boolean
         description: 'Preemptible'
