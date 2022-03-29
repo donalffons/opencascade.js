@@ -1,0 +1,19 @@
+{
+  "name": "opencascade.js-docs",
+  "version": "0.0.1",
+  "description": "Documentation website for opencascade.js",
+  "main": "index.js",
+  "authors": {
+    "name": "Sebastian Alff",
+    "email": "donalffons@gmail.com"
+  },
+  "repository": "https://github.com/donalffons/opencascade.js/opencascade.js-docs",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.9.7"
+  }
+}

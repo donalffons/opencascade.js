@@ -17,7 +17,7 @@ from functools import partial
 
 libraryBasePath = "/opencascade.js/build/bindings"
 buildDirectory = "/opencascade.js/build"
-occtBasePath = "/occt/occt-" + os.environ['OCCT_COMMIT_HASH'] + "/src/"
+occtBasePath = "/occt/src/"
 ocIncludeStatements = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", list(sorted(ocIncludeFiles))))
 
 def mkdirp(name: str) -> None:

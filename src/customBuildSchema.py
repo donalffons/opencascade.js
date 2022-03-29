@@ -42,6 +42,11 @@
         "required": True,
         "type": "string",
       },
+      "additionalBindCode": {
+        "required": False,
+        "type": "string",
+        "default": "",
+      },
     },
   },
   "extraBuilds": {
@@ -82,6 +87,11 @@
           # "-pthread",
           # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
         ],
+      },
+      "additionalBindCode": {
+        "required": False,
+        "type": "string",
+        "default": "",
       },
       "name": {
         "required": True,
