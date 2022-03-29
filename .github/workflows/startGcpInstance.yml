@@ -8,9 +8,8 @@ on:
         required: true
         default: 'c2-standard-4/c2-standard-30'
       preemptible:
+        type: boolean
         description: 'Preemptible'
-        required: false
-        default: '--preemptible'
 
 jobs:
   StartGcpComputeInstance:
@@ -57,4 +56,4 @@ jobs:
             --shielded-vtpm \
             --shielded-integrity-monitoring \
             --reservation-affinity=any \
-            ${{ github.event.inputs.preemptible }}
+            ${{ github.event.inputs.preemptible && "--preemptible" || "" }}
