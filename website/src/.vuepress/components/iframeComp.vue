@@ -5,7 +5,7 @@
       top: 0;
       left: 0;
       width: 100vw;
-      height: 100vh;
+      height: calc(100vh - 3.6rem);
       border: none;
     "
     :src="ihtml"
