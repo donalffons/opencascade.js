@@ -101,8 +101,8 @@ jobs:
         if: ${{ github.event.inputs.release && github.event.inputs.multithreaded }}
         run: |
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:latest-multi-threaded
-          docker tag ${{ secrets.DOCKER_IMAGE_NAME }}:latest-multi-threaded ${{ secrets.DOCKER_IMAGE_NAME }}:latest-multi-threaded-${{ steps.version.outputs.version }}
-          docker push ${{ secrets.DOCKER_IMAGE_NAME }}:latest-multi-threaded-${{ steps.version.outputs.version }}
+          docker tag ${{ secrets.DOCKER_IMAGE_NAME }}:latest-multi-threaded ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}-multi-threaded
+          docker push ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}-multi-threaded
 
       - name: Git and NPM config
         run: |
