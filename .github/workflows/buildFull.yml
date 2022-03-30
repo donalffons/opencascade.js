@@ -55,13 +55,13 @@ jobs:
         if: ${{ github.event.inputs.multithreaded }}
         timeout-minutes: 10000
         run: |
-          docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:latest-multi-threaded || true
+          docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded || true
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded || true
-          docker build --build-arg threading=multi-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}:latest-multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest-multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded .
+          docker build --build-arg threading=multi-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded .
 
       - name: Push to Docker Hub (Staging, Multi-Threaded)
         run: |
-          docker tag ${{ secrets.DOCKER_IMAGE_NAME }}:latest-multi-threaded ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded
+          docker tag ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded
 
       - name: Build OpenCascade.js Full Module
@@ -100,8 +100,8 @@ jobs:
       - name: Push to Docker Hub (Multi-Threaded)
         if: ${{ github.event.inputs.release && github.event.inputs.multithreaded }}
         run: |
-          docker push ${{ secrets.DOCKER_IMAGE_NAME }}:latest-multi-threaded
-          docker tag ${{ secrets.DOCKER_IMAGE_NAME }}:latest-multi-threaded ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}-multi-threaded
+          docker push ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded
+          docker tag ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}-multi-threaded
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}-multi-threaded
 
       - name: Git and NPM config
