@@ -25,6 +25,7 @@ jobs:
           npm view opencascade.js@beta dist.tarball | xargs curl | tar -xz
           cd package
           mv * ../
+          cd ..
           rm package -r
           cd ..
       - name: Update Reference Docs
