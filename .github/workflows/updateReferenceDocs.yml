@@ -24,11 +24,10 @@ jobs:
           cd dist
           npm view opencascade.js@beta dist.tarball | xargs curl | tar -xz
           cd package
-          mv * ../
+          mv dist/* ../
           cd ..
           rm package -r
           cd ..
-          ls -al dist
       - name: Update Reference Docs
         timeout-minutes: 10000
         run: |
