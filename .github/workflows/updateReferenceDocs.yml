@@ -1,10 +1,7 @@
 name: Update Reference Docs
 
 on:
-  push:
-    branches:
-      - master
-      - website
+  - workflow_dispatch
 
 jobs:
   update:
