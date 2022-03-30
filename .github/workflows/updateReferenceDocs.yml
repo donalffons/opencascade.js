@@ -19,6 +19,14 @@ jobs:
         uses: actions/checkout@v2
       - run: |
           gcloud components install beta
+      - name: Download Latest OpenCascade.js Release
+        run: |
+          cd dist
+          wget $(npm view opencascade.js@beta dist.tarball)
+          cd package
+          mv * ../
+          rm package -r
+          cd ..
       - name: Update Reference Docs
         timeout-minutes: 10000
         run: |
@@ -27,5 +35,3 @@ jobs:
           zip -r reference-docs.zip ./reference-docs
           gsutil cp ./reference-docs.zip gs://opencascade-js/reference-docs.zip
           rm ./reference-docs.zip
-
-
