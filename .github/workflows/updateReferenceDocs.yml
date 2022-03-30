@@ -1,6 +1,11 @@
 name: Update Reference Docs
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        type: boolean
+        description: Release?
 
 jobs:
   update:
