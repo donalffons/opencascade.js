@@ -23,7 +23,7 @@ def buildOneFile(args, item):
       # "-g3",
       # "-gsource-map",
       # "--source-map-base=http://localhost:8080",
-      "-pthread" if args["threading"] == "multi" else "",
+      "-pthread" if args["threading"] == "multi-threaded" else "",
       *list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths)),
       "-c", item,
     ]
