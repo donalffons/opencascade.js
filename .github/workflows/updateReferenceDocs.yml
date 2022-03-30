@@ -22,7 +22,7 @@ jobs:
       - name: Download Latest OpenCascade.js Release
         run: |
           cd dist
-          wget $(npm view opencascade.js@beta dist.tarball)
+          npm view opencascade.js@beta dist.tarball | xargs curl | tar -xz
           cd package
           mv * ../
           rm package -r
