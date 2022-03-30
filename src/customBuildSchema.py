@@ -42,6 +42,11 @@
         "required": True,
         "type": "string",
       },
+      "additionalBindCode": {
+        "required": False,
+        "type": "string",
+        "default": "",
+      },
     },
   },
   "extraBuilds": {
@@ -83,6 +88,11 @@
           # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
         ],
       },
+      "additionalBindCode": {
+        "required": False,
+        "type": "string",
+        "default": "",
+      },
       "name": {
         "required": True,
         "type": "string",
@@ -91,11 +101,6 @@
     "default": [],
   },
   "additionalCppCode": {
-    "required": False,
-    "type": "string",
-    "default": "",
-  },
-  "additionalBindCode": {
     "required": False,
     "type": "string",
     "default": "",
