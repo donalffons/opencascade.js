@@ -1,0 +1,30 @@
+name: Update Reference Docs
+
+on: workflow_dispatch
+
+jobs:
+  update:
+    name: Update Reference Docs
+    runs-on: ubuntu-latest
+    timeout-minutes: 10000
+    steps:
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: |
+          gcloud components install beta
+      - name: Update Reference Docs
+        timeout-minutes: 10000
+        run: |
+          npm install -g typedoc
+          typedoc --out ./reference-docs
+          zip -r reference-docs.zip ./reference-docs
+          gsutil cp ./reference-docs.zip gs://opencascade-js/reference-docs.zip
+          rm ./reference-docs.zip
+
+
