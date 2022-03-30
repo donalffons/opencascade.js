@@ -28,6 +28,7 @@ jobs:
           cd ..
           rm package -r
           cd ..
+          ls -al dist
       - name: Update Reference Docs
         timeout-minutes: 10000
         run: |
