@@ -1,0 +1,35 @@
+mainBuild:
+  name: customBuild.multi-threaded.js
+  bindings:
+    - symbol: BRepPrimAPI_MakeSphere
+    - symbol: BRepPrimAPI_MakeOneAxis
+    - symbol: BRepBuilderAPI_MakeShape
+    - symbol: BRepBuilderAPI_Command
+    - symbol: BRepMesh_IncrementalMesh
+    - symbol: BRepMesh_DiscretRoot
+    - symbol: Standard_Transient
+    - symbol: Message_ProgressRange
+    - symbol: TopoDS_Compound
+    - symbol: TopoDS_Shape
+    - symbol: gp_Pnt
+    - symbol: BRep_Builder
+    - symbol: TopoDS_Builder
+  emccFlags:
+    # These are just the default values as defined in /src/customBuildSchema.py
+    - -O3
+    - -sEXPORT_ES6=1
+    - -sUSE_ES6_IMPORT_META=0
+    - -sEXPORTED_RUNTIME_METHODS=['FS']
+    - -sINITIAL_MEMORY=100MB
+    - -sMAXIMUM_MEMORY=4GB
+    - -sALLOW_MEMORY_GROWTH=1
+    - -sUSE_FREETYPE=1
+    - -sLLD_REPORT_UNDEFINED
+    - --no-entry
+
+    # Currently, the thread pool size has to be defined at compile time, otherwise
+    # the execution will hang indefinitely during initialization. The value below
+    # will allocate as many threads as there are cpu cores in the system - for
+    # NodeJS. When building a browser application, you might want to use
+    # ='navigator.hardwareConcurrency' instead.
+    - -sPTHREAD_POOL_SIZE='require("os").cpus().length'
