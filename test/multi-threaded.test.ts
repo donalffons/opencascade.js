@@ -33,7 +33,7 @@ it("can tessellate in multi-threaded mode", async () => {
   const aBuilder = new oc.BRep_Builder();
   aBuilder.MakeCompound(aRes);
   spheres.map(s => aBuilder.Add(aRes, s.Shape()));
-  const tessellation = new oc.BRepMesh_IncrementalMesh_2(aRes, 0.001, false, 0.1, true);
+  const tessellation = new oc.BRepMesh_IncrementalMesh_2(aRes, 0.1, false, 0.1, true);
   tessellation.Perform_1(new oc.Message_ProgressRange_1());
   expect(tessellation.IsDone()).toBeTruthy();
 });
