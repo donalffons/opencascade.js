@@ -34,6 +34,8 @@ jobs:
       - name: Update Reference Docs
         timeout-minutes: 10000
         run: |
+          apt-get update
+          apt-get install -y zip
           npm install -g typescript typedoc
           typedoc --out ./reference-docs
           zip -r reference-docs.zip ./reference-docs
