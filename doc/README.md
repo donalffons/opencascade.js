@@ -207,6 +207,107 @@ As a side note: You are free to either pass in a "reference type" or a built-in 
 this.oc.BRepTools.UVBounds_1(makeFace.Face(), 123, 234, 345, 456);
 ```
 
+# Progress indicators and cancelling of long-running processes (user break)
+
+Have a look at [progressIndicator.test.ts](/test/progressIndicator.test.ts) for a working example.
+
+OpenCascade offers support for progress indicators and user breaks via the `Message_ProgressIndicator` base class. Specializations of this base class can be used in calls to certain methods (e.g. `BRepAlgoAPI_Fuse::BRepAlgoAPI_Fuse`) to report the progress of a long-running operation or to cancel it. Since OpenCascade requires the user to derive a custom class based on `Message_ProgressIndicator` (called `MyProgressIndicator` from here) which isn't currently supported by OpenCascade.js, using those features in OpenCascade.js requires creating a custom build.
+
+When deriving your specialized `MyProgressIndicator` class, you have to override 1 - 3 methods.
+
+**Show:** This method must be overriden, as it is a purely virtual method. It is called by OpenCascade internally, whenever there is an update to the value of the progress of the current operation.
+
+**UserBreak:** This method can be overriden if required. It returns a boolean value, indicating if a long-running process should be cancelled. By default, it returns `false`.
+
+**Reset:** This method can be overriden if required. It is called when a new long-running process is started.
+
+## Step 1: Pull the latest Docker image
+
+```sh
+docker pull donalffons/opencascade.js
+```
+
+## Step 2: Create a custom build with the required bindings
+
+The 3 methods mentioned above are marked as `protected` in the declaration of `Message_ProgressIndicator`. They need to be public to be accessible by Emscripten. In addition, we don't want to override OpenCascade.js' implementation of `Message_ProgressIndicator`. Therefore we derive a simple specialization named `Message_ProgressIndicator_JS` from `Message_ProgressIndicator`.
+
+```cpp
+struct Message_ProgressIndicator_JS : public Message_ProgressIndicator {
+  using Message_ProgressIndicator::Show;
+  using Message_ProgressIndicator::UserBreak;
+  using Message_ProgressIndicator::Reset;
+};
+```
+
+Later, we want to derive our own specialization from `Message_ProgressIndicator_JS`. Following [Emscripten's documentation](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#deriving-from-c-classes-in-javascript) on that matter, we set up a wrapper (to allow overriding the mentioned methods from JavaScript) and the required bindings:
+
+```cpp
+struct Message_ProgressIndicator_JSWrapper : public wrapper<Message_ProgressIndicator_JS> {
+  EMSCRIPTEN_WRAPPER(Message_ProgressIndicator_JSWrapper);
+  void Show(const Message_ProgressScope& theScope, const Standard_Boolean isForce) {
+    val valTheScope = val::object();
+    valTheScope.set("current", &theScope);
+    return call<void>("Show", valTheScope, isForce);
+  }
+  Standard_Boolean UserBreak() {
+    return call<Standard_Boolean>("UserBreak");
+  }
+  void Reset() {
+    return call<void>("Reset");
+  }
+};
+
+EMSCRIPTEN_BINDINGS(Message_ProgressIndicator_JS) {
+  class_<Message_ProgressIndicator_JS, base<Message_ProgressIndicator>>("Message_ProgressIndicator_JS")
+    // Same bindings as Message_ProgressIndicator
+    .class_function("get_type_name", &Message_ProgressIndicator_JS::get_type_name, allow_raw_pointers())
+    .class_function("get_type_descriptor", &Message_ProgressIndicator_JS::get_type_descriptor, allow_raw_pointers())
+    .function("DynamicType", &Message_ProgressIndicator_JS::DynamicType, allow_raw_pointers())
+    .function("Start_1", select_overload<Message_ProgressRange(), Message_ProgressIndicator_JS>(&Message_ProgressIndicator_JS::Start), allow_raw_pointers())
+    .class_function("Start_2", select_overload<Message_ProgressRange(const opencascade::handle<Message_ProgressIndicator> & theProgress)>(&Message_ProgressIndicator_JS::Start), allow_raw_pointers())
+    .function("GetPosition", &Message_ProgressIndicator_JS::GetPosition, allow_raw_pointers())
+
+    // Extra bindings for deriving a specialized class in JS
+    .function("Show", &Message_ProgressIndicator_JS::Show, pure_virtual())
+    .function("UserBreak", optional_override([](Message_ProgressIndicator_JS& self) {
+      return self.Message_ProgressIndicator_JS::UserBreak();
+    }))
+    .function("Reset", optional_override([](Message_ProgressIndicator_JS& self) {
+      return self.Message_ProgressIndicator_JS::Reset();
+    }))
+    .allow_subclass<Message_ProgressIndicator_JSWrapper>("Message_ProgressIndicator_JSWrapper")
+  ;
+}
+```
+
+Next, we throw all this code into a custom build definition and create our custom build.
+
+## Step 3: Derive a specialization from `Message_ProgressIndicator_JS` and use it in JS
+
+Again following [Emscripten's documentation](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#extend-example), we create `MyProgressIndicator` as a specialization of `Message_ProgressIndicator_JS` (and therefore `Message_ProgressIndicator`) and implement our own logic for `Show`. We can then use it in certain OpenCascade API's like `BRepAlgoAPI_Fuse` in this example.
+
+```js
+const MyProgressIndicator = oc.Message_ProgressIndicator_JS.extend("Message_ProgressIndicator_JS", {
+  Show: function (theScope, isForce) {
+    console.log("Show", this.GetPosition());
+  },
+});
+const p = new MyProgressIndicator();
+const box1 = new oc.BRepPrimAPI_MakeBox_3(new oc.gp_Pnt_3(0, 0, 0), 2, 1, 1);
+const box2 = new oc.BRepPrimAPI_MakeBox_3(new oc.gp_Pnt_3(1, 0, 0), 2, 1, 1);
+const myBody = new oc.BRepAlgoAPI_Fuse_3(box1.Shape(), box2.Shape(), p.Start_1());
+```
+
+Note, how you can call `this.GetPosition()` from that method's body, i.e. `this` gives you access to the classes properties, as you would expect. This code gives the following output:
+
+```
+Show 0
+Show 0.035
+...
+Show 0.9955000000000034
+Show 1
+```
+
 # Multi-Threading
 
 OpenCascade supports multi-threading for certain operations, e.g. when creating triangulations using `BRepMesh_IncrementalMesh`. OpenCascade.js offers support for these multi-threaded operations using Emscripten's `-pthread` flag. Currently, multi-threading is done by spawing multiple worker-threads, which can access the same memory using a `SharedArrayBuffer`. For security reasons, usage of this feature requires you to host your site in cross-origin isolated mode, as described [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer). Refer to the [Emscripten documentation](https://emscripten.org/docs/porting/pthreads.html) for more information.

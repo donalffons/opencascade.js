@@ -47,6 +47,23 @@
       "args": [
         "/opencascade.js/src/fullBuild.yml"
       ]
+    },
+    {
+      "name": "Debug Tests",
+      "type": "node",
+      "request": "launch",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "${workspaceRoot}/test/node_modules/.bin/jest",
+        "--runInBand"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229,
+      "cwd": "${workspaceFolder}/test",
+      "env": {
+        "NODE_OPTIONS": "--experimental-vm-modules"
+      }
     }
   ]
 }
