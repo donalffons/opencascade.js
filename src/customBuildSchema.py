@@ -34,8 +34,6 @@
           "-sUSE_FREETYPE=1",
           "-sLLD_REPORT_UNDEFINED",
           "--no-entry",
-          # "-pthread",
-          # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
         ],
       },
       "name": {
@@ -84,8 +82,6 @@
           "-sUSE_FREETYPE=1",
           "-sLLD_REPORT_UNDEFINED",
           "--no-entry",
-          # "-pthread",
-          # "-sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'",
         ],
       },
       "additionalBindCode": {
