@@ -314,6 +314,34 @@ OpenCascade supports multi-threading for certain operations, e.g. when creating 
 
 By default, OpenCascade.js is distributed as a single-threaded JavaScript library via NPM and a Docker Image, which allows you to create single-threaded [custom builds](#creating-a-custom-build). For the multi-threaded version, currently only a Docker Image is distributed, which you can use to create multi-threaded custom builds.
 
+The simplest way is to create a full build of the library:
+
+```sh
+docker run \
+  -v $(pwd):/src \
+  -u $(id -u):$(id -g) \
+  donalffons/opencascade.js:multi-threaded \
+  /opencascade.js/builds/opencascade.full.yml
+```
+
+This will output 3 files (as opposed to 2 when creating a single-threaded build) into the current folder: `openascade.full.js`, `opencascade.full.wasm` and `opencascade.worker.js`. The web worker will be used for spawning new threads. This file must be accessible at run-time and depending on your bundler and folder structure, you might have to define the file path at which it can be accessed when initializing OpenCascade.js using the optional `worker` property.
+
+```js
+import initOpenCascade from "opencascade.js";
+import opencascade from "./openascade.full.js";
+import opencascadeWasm from "./openascade.full.wasm";
+// When building web-apps, you might want to import the worker to give your bundler a chance to hash the file name.
+// import opencascadeWorker from "./openascade.full.worker.js";
+
+initOpenCascade({
+  mainJs: opencascade,
+  mainWasm: opencascadeWasm,
+  worker: "/path/to/opencascade.full.worker.js", // or pass opencascadeWorker (contain a string with the path to the worker)
+}).then(oc => {
+  // ready to use multi-threaded build
+});
+```
+
 # Developer Documentation
 
 The following flow-chart gives a broad overview of the steps performed by the build system.

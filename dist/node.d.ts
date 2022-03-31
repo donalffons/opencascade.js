@@ -7,9 +7,10 @@ type OpenCascadeModuleObject = {
 
 export default function initOpenCascade(
   settings?: {
-    mainJS?: init,
-    mainWasm?: string,
-    libs?: string[],
-    module?: OpenCascadeModuleObject,
+    mainJS?: init;
+    mainWasm?: string;
+    worker?: string;
+    libs?: string[];
+    module?: OpenCascadeModuleObject;
   },
 ): Promise<OpenCascadeInstance>;
