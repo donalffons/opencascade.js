@@ -31,7 +31,7 @@ jobs:
       - name: Update Reference Docs
         timeout-minutes: 10000
         run: |
-          npm install -g typedoc
+          npm install -g typescript typedoc
           typedoc --out ./reference-docs
           zip -r reference-docs.zip ./reference-docs
           gsutil cp ./reference-docs.zip gs://opencascade-js/reference-docs.zip
