@@ -370,7 +370,7 @@ import opencascadeWasm from "./openascade.full.wasm";
 initOpenCascade({
   mainJs: opencascade,
   mainWasm: opencascadeWasm,
-  worker: "/path/to/opencascade.full.worker.js", // or pass opencascadeWorker (contain a string with the path to the worker)
+  worker: "/path/to/opencascade.full.worker.js", // or pass opencascadeWorker (containing a string with the path to the worker)
 }).then(oc => {
   // ready to use multi-threaded build
 });
