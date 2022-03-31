@@ -9,10 +9,10 @@ jest.setTimeout(10000);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const customBuildCmd = "cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) donalffons/opencascade.js:multi-threaded";
 
-// it("can create custom build: multi-threaded", () => {
-//   expect(shell.exec(`${customBuildCmd} multi-threaded.yml`).code).toBe(0);
-//   shell.mv("customBuilds/customBuild.multi-threaded.worker.js", "customBuilds/customBuild.multi-threaded.worker.cjs"); // stop jest from crying about cjs modules
-// });
+it("can create custom build: multi-threaded", () => {
+  expect(shell.exec(`${customBuildCmd} multi-threaded.yml`).code).toBe(0);
+  shell.mv("customBuilds/customBuild.multi-threaded.worker.js", "customBuilds/customBuild.multi-threaded.worker.cjs"); // stop jest from crying about cjs modules
+});
 
 let mainJs: any = undefined;
 let oc: OpenCascadeInstance = undefined;
