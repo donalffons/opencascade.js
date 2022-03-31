@@ -8,8 +8,9 @@ on:
         description: 'Machine Type'
         required: true
         options:
-          - n2-highmem-2 # ($0.10481 hourly for reference Docs)
-          - n2d-highmem-4 # ($0.18237 hourly for reference Docs)
+          - n2d-standard-2 # ($0.06759 hourly hourly for reference docs)
+          - n2-highmem-2 # ($0.10481 hourly for reference docs)
+          - n2d-highmem-4 # ($0.18237 hourly for reference docs)
           - c2-standard-16 # (0,041761875 USD/core)
           - c2-standard-30 # (0,04176 USD/core)
           - c2d-highcpu-32 # (0,02998375 USD/core)
