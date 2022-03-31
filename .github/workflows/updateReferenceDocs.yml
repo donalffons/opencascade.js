@@ -6,7 +6,7 @@ on:
 jobs:
   update:
     name: Update Reference Docs
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, referenceDocs]
     timeout-minutes: 10000
     steps:
       - name: Set up Google Cloud SDK
