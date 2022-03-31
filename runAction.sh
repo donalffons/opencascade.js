@@ -41,7 +41,7 @@ apt install -y nodejs npm
 echo $(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/SA_KEY -H "Metadata-Flavor: Google") > /saKey.json
 GH_API_TOKEN=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/GH_API_TOKEN -H "Metadata-Flavor: Google")
 UUID=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/UUID -H "Metadata-Flavor: Google")
-LABEL=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/LABEL -H "Metadata-Flavor: Google")
+LABELS=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/LABELS -H "Metadata-Flavor: Google")
 PROJECT_NAME=$(curl -f http://metadata.google.internal/computeMetadata/v1/instance/attributes/PROJECT_NAME -H "Metadata-Flavor: Google")
 
 gcloud auth activate-service-account --key-file /saKey.json
@@ -55,7 +55,7 @@ RUNNERURL=$(curl -s https://api.github.com/repos/actions/runner/releases/latest 
 | tr -d \")
 curl -o actions-runner-linux.tar.gz -L $RUNNERURL
 tar xzf ./actions-runner-linux.tar.gz
-./config.sh --unattended --url https://github.com/$PROJECT_NAME --token $GH_ACTION_TOKEN --replace --name opencascade-js-build-$UUID --labels $LABEL
+./config.sh --unattended --url https://github.com/$PROJECT_NAME --token $GH_ACTION_TOKEN --replace --name opencascade-js-build-$UUID --labels $LABELS
 ./run.sh --once || true
 sleep 60
 

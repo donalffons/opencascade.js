@@ -8,6 +8,7 @@ on:
         description: 'Machine Type'
         required: true
         options:
+          - n2-highmem-2 # ($0.10481 hourly for reference Docs)
           - c2-standard-16 # (0,041761875 USD/core)
           - c2-standard-30 # (0,04176 USD/core)
           - c2d-highcpu-32 # (0,02998375 USD/core)
@@ -15,6 +16,12 @@ on:
       preemptible:
         type: boolean
         description: 'Preemptible'
+      full:
+        type: boolean
+        description: 'Full build'
+      referenceDocs:
+        type: boolean
+        description: 'Reference Docs'
 
 jobs:
   StartGcpComputeInstance:
@@ -40,7 +47,15 @@ jobs:
           echo "$GCP_SA_KEY" > ./GCP_SA_KEY.json
           echo "$GH_API_TOKEN" > ./GH_API_TOKEN.json
           echo "$UUID" > ./UUID
-          echo "full" > ./LABEL
+          labelsArray=()
+          if ${{ github.event.inputs.full }}
+            labelsArray+=("full")
+          fi
+          if ${{ github.event.inputs.referenceDocs }}
+            labelsArray+=("referenceDocs")
+          fi
+          printf -v joinedLabels '%s,' "${labelsArray[@]}"
+          echo "${joinedLabels%,}" > ./LABELS
           echo ${{ github.repository }} > ./PROJECT_NAME
           gcloud beta compute \
             instances create opencascade-js-build-$UUID \
@@ -48,7 +63,7 @@ jobs:
             --machine-type=${{ github.event.inputs.machineType }} \
             --subnet=default \
             --network-tier=PREMIUM \
-            --metadata-from-file startup-script=runAction.sh,SA_KEY=GCP_SA_KEY.json,GH_API_TOKEN=GH_API_TOKEN.json,UUID=UUID,LABEL=LABEL,PROJECT_NAME=PROJECT_NAME \
+            --metadata-from-file startup-script=runAction.sh,SA_KEY=GCP_SA_KEY.json,GH_API_TOKEN=GH_API_TOKEN.json,UUID=UUID,LABELS=LABELS,PROJECT_NAME=PROJECT_NAME \
             --no-restart-on-failure \
             --maintenance-policy=TERMINATE \
             --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
