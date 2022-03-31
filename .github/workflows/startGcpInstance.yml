@@ -49,9 +49,11 @@ jobs:
           echo "$UUID" > ./UUID
           labelsArray=()
           if ${{ github.event.inputs.full }}
+          then
             labelsArray+=("full")
           fi
           if ${{ github.event.inputs.referenceDocs }}
+          then
             labelsArray+=("referenceDocs")
           fi
           printf -v joinedLabels '%s,' "${labelsArray[@]}"
