@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Create a Multi-Threading-Enabled Custom Build
 
-Have a look at [this test](/test/multi-threaded.test.ts) for a working example.
+Have a look at [this test](https://github.com/donalffons/opencascade.js/blob/master/test/multi-threaded.test.ts) for a working example.
 
 Start by pulling the latest Docker image with multi-threading support.
 
@@ -12,7 +12,7 @@ Start by pulling the latest Docker image with multi-threading support.
 docker pull donalffons/opencascade.js:multi-threaded
 ```
 
-Next, create a custom build definition. The following will create a full build (based on [this one](/builds/opencascade.full.yml), which is distributed as the NPM package) with multi-threading support.
+Next, create a custom build definition. The following will create a full build (based on [this one](https://github.com/donalffons/opencascade.js/blob/master/builds/opencascade.full.yml), which is distributed as the NPM package) with multi-threading support.
 
 ```yml
 mainBuild:

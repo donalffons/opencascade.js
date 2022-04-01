@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Intro
 
-Have a look at [progressIndicator.test.ts](/test/progressIndicator.test.ts) for a working example.
+Have a look at [progressIndicator.test.ts](https://github.com/donalffons/opencascade.js/blob/master/test/progressIndicator.test.ts) for a working example.
 
 OpenCascade offers support for progress indicators and cancellation of long-running processes ("user break") via the `Message_ProgressIndicator` base class. Specializations of this base class can be used in calls to certain methods (e.g. `BRepAlgoAPI_Fuse::BRepAlgoAPI_Fuse`) to report the progress of a long-running operation or to cancel it. Since OpenCascade requires the user to derive a custom class based on `Message_ProgressIndicator` (called `MyProgressIndicator` from here) which isn't currently supported by OpenCascade.js, using those features in OpenCascade.js requires creating a custom build.
 
