@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Add reference docs to website
         run: |
-          cd website/src/.vuepress/public
+          cd website/static
           gsutil cp gs://opencascade-js/reference-docs.zip .
           unzip reference-docs.zip
           rm reference-docs.zip

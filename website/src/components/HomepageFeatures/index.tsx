@@ -10,38 +10,35 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Web-First CAD',
+    Svg: require('@site/static/img/undraw_internet_on_the_go_re_vben.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Build web-enabled CAD applications that run in the browser, in the cloud or on any device that supports WebAssembly.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Blazingly Fast',
+    Svg: require('@site/static/img/undraw_outer_space_re_u9vd.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Using the power of Emscripten and WebAssembly, the CAD Kernel runs at near-native speeds and even supports multi-threading on all modern browsers.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Small Footprint',
+    Svg: require('@site/static/img/undraw_add_files_re_v09g.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Ship only the code that your application needs using custom builds of the library. Save your user's bandwidth and memory and allow your code to run on low-end devices.
       </>
     ),
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({ title, Svg, description }: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">

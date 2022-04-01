@@ -6,9 +6,9 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
-  url: 'https://your-docusaurus-test-site.com',
+  title: 'OpenCascade.js',
+  tagline: 'Port of the OpenCascade library to JavaScript / WebAssembly using Emscripten',
+  url: 'http://ocjs.com/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -25,12 +25,9 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          remarkPlugins: [
+            require('mdx-mermaid'),
+          ],
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -43,21 +40,26 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'My Site',
+        title: 'OpenCascade.js',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'OpenCascade.js Logo',
           src: 'img/logo.svg',
         },
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'about',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Guides',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            position: 'left',
+            label: 'Reference',
+            href: '/reference-docs',
+            target: '_blank',
+          },
+          {
+            href: 'https://github.com/donalffons/opencascade.js/discussions',
             label: 'GitHub',
             position: 'right',
           },
@@ -70,8 +72,13 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Guides',
+                to: '/docs/about',
+              },
+              {
+                label: 'Reference',
+                href: '/reference-docs',
+                target: '_blank',
               },
             ],
           },
@@ -79,16 +86,8 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                label: 'Github Discussions',
+                href: 'https://github.com/donalffons/opencascade.js/discussions',
               },
             ],
           },
@@ -96,12 +95,8 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/donalffons/opencascade.js',
               },
             ],
           },
