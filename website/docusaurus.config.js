@@ -59,6 +59,10 @@ const config = {
             target: '_blank',
           },
           {
+            type: "search",
+            position: "right",
+          },
+          {
             href: 'https://github.com/donalffons/opencascade.js/discussions',
             label: 'GitHub',
             position: 'right',
@@ -108,6 +112,10 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+
+  plugins: [
+    require.resolve('docusaurus-lunr-search'),
+  ],
 };
 
 module.exports = config;
