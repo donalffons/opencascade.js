@@ -85,7 +85,6 @@ def runBuild(build):
         "-frtti",
         "-DHAVE_RAPIDJSON",
         "-Os",
-        "-fwasm-exceptions",
         "-pthread" if os.environ["threading"] == "multi-threaded" else "",
         *list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths)),
         "-c", additionalBindCodeFileName,

@@ -20,7 +20,6 @@ def buildOneFile(args, item):
       "-frtti",
       "-DHAVE_RAPIDJSON",
       "-Os",
-      "-fwasm-exceptions",
       # "-g3",
       # "-gsource-map",
       # "--source-map-base=http://localhost:8080",
