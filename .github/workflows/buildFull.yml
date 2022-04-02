@@ -60,6 +60,7 @@ jobs:
           docker build --build-arg threading=multi-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded .
 
       - name: Push to Docker Hub (Staging, Multi-Threaded)
+        if: ${{ github.event.inputs.multithreaded == true }}
         run: |
           docker tag ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded
