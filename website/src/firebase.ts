@@ -2,7 +2,7 @@ import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
 import { initializeApp, getApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
 
-const isProd = window.location.hostname !== "localhost";
+const isProd = () => window.location.hostname !== "localhost";
 
 if (ExecutionEnvironment.canUseDOM) {
   const firebaseConfig = {
@@ -17,13 +17,13 @@ if (ExecutionEnvironment.canUseDOM) {
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  if (isProd) {
+  if (isProd()) {
     getAnalytics(app); // reports start location automatically
   }
 }
 
 export const onRouteUpdate = ({ location }) => {
-  if (!isProd) return;
+  if (!isProd()) return;
   setTimeout(() => { // wait for document.title to update
     console.log("onRouteUpdate", location, document.title);
     logEvent(getAnalytics(getApp()), "page_view", {
