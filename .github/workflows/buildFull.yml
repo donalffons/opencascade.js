@@ -24,7 +24,7 @@ jobs:
       - name: Generate version number
         id: version
         run: |
-          if ${{ github.event.inputs.release }}
+          if ${{ github.event.inputs.release == true }}
           then
             export NEW_OPENCASCADEJS_VERSION=$(node -p -e "require('./package.json').version.split('-')[0]")-beta.$(git log --pretty=format:'%h' -n 1)
             echo "::set-output name=version::$NEW_OPENCASCADEJS_VERSION"
@@ -52,7 +52,7 @@ jobs:
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:staging
 
       - name: Build OpenCascade.js Docker Image (Multi-Threaded)
-        if: ${{ github.event.inputs.multithreaded }}
+        if: ${{ github.event.inputs.multithreaded == true }}
         timeout-minutes: 10000
         run: |
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded || true
@@ -60,6 +60,7 @@ jobs:
           docker build --build-arg threading=multi-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded .
 
       - name: Push to Docker Hub (Staging, Multi-Threaded)
+        if: ${{ github.event.inputs.multithreaded == true }}
         run: |
           docker tag ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded
@@ -81,7 +82,7 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: '15'
+          node-version: '16'
 
       - name: Run tests
         run: |
@@ -91,14 +92,14 @@ jobs:
           cd ..
 
       - name: Push to Docker Hub
-        if: ${{ github.event.inputs.release }}
+        if: ${{ github.event.inputs.release == true }}
         run: |
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}
           docker tag ${{ secrets.DOCKER_IMAGE_NAME }} ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}
 
       - name: Push to Docker Hub (Multi-Threaded)
-        if: ${{ github.event.inputs.release && github.event.inputs.multithreaded }}
+        if: ${{ github.event.inputs.release == true && github.event.inputs.multithreaded == true }}
         run: |
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded
           docker tag ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}-multi-threaded
@@ -111,7 +112,7 @@ jobs:
           npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Publish new beta version to NPM
-        if: ${{ github.event.inputs.release }}
+        if: ${{ github.event.inputs.release == true }}
         run: |
           npm version ${{ steps.version.outputs.version }} --force
           npm publish --tag=beta
