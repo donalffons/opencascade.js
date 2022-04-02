@@ -15,5 +15,4 @@ if (ExecutionEnvironment.canUseDOM && window.location.hostname !== "localhost") 
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  getAnalytics(app);
 }
