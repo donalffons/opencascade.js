@@ -116,6 +116,10 @@ const config = {
   plugins: [
     require.resolve('docusaurus-lunr-search'),
   ],
+
+  clientModules: [
+    require.resolve("./src/firebase.ts"),
+  ],
 };
 
 module.exports = config;
