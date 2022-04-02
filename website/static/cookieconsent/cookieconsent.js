@@ -73,14 +73,12 @@ if(typeof(window) !== undefined) {
       },
   
       onAccept: function (cookie) {
-        console.log(cookie);
         if(cookie.level.indexOf("analytics") !== -1) {
           window.startFirebaseAnalytics?.();
         }
       },
   
       onChange: function (cookie, changed_preferences) {
-        console.log(changed_preferences);
       },
   
       languages: {
