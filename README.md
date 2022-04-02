@@ -10,7 +10,7 @@
   <p align="center">
     A port of the <a href="https://www.opencascade.com/">OpenCascade</a> CAD library to JavaScript and WebAssembly via Emscripten.
     <br />
-    <a href="./doc/README.md"><strong>Explore the docs »</strong></a>
+    <a href="https://ocjs.org/"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/donalffons/opencascade.js-examples">Examples</a>
