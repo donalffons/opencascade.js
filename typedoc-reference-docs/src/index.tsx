@@ -164,5 +164,8 @@ export class MyTheme extends DefaultTheme {
 }
 
 export function load(app: Application) {
+  app.renderer.hooks.on("head.begin", () => (
+    <link rel="icon" href="/img/favicon.ico" />
+  ));
   app.renderer.defineTheme("footer", MyTheme);
 }
