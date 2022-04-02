@@ -102,6 +102,10 @@ const config = {
                 label: 'GitHub',
                 href: 'https://github.com/donalffons/opencascade.js',
               },
+              {
+                label: 'OpenCascade',
+                href: 'https://dev.opencascade.org/',
+              },
             ],
           },
         ],
