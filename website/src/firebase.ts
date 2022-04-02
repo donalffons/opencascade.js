@@ -3,6 +3,7 @@ import { initializeApp, getApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
 
 const isProd = () => window.location.hostname !== "localhost";
+let analyticsEnabled = false;
 
 if (ExecutionEnvironment.canUseDOM) {
   const firebaseConfig = {
@@ -17,15 +18,19 @@ if (ExecutionEnvironment.canUseDOM) {
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  if (isProd()) {
-    getAnalytics(app); // reports start location automatically
-  }
+
+  (window as any).startFirebaseAnalytics = () => {
+    if (isProd()) {
+      analyticsEnabled = true;
+      getAnalytics(app); // reports start location automatically
+    }
+  };
 }
 
 export const onRouteUpdate = ({ location }) => {
-  if (!isProd()) return;
+  console.log(analyticsEnabled);
+  if (!isProd() || !analyticsEnabled) return;
   setTimeout(() => { // wait for document.title to update
-    console.log("onRouteUpdate", location, document.title);
     logEvent(getAnalytics(getApp()), "page_view", {
       page_location: location.pathName,
       language: "en_us",

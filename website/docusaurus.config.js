@@ -124,6 +124,15 @@ const config = {
   clientModules: [
     require.resolve("./src/firebase.ts"),
   ],
+
+  scripts: [{
+    src: "/cookieconsent/cookieconsent.js",
+    defer: true,
+  }],
+
+  stylesheets: [
+    "/cookieconsent/cookieconsent.css",
+  ],
 };
 
 module.exports = config;
