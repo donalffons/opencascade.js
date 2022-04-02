@@ -18,8 +18,6 @@ OpenCascade.js is a port of the [OpenCascade](https://www.opencascade.com) CAD l
 
 ## Getting Started
 
-(These instructions are for the upcoming `@beta` release. All information is likely to change. See [here](https://github.com/donalffons/opencascade.js/tree/v1.1.1) for instructions of the `v1.1.1` release.)
-
 1. Add the library as a dependency to your project
 
     ```
