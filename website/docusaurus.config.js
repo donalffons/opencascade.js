@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'OpenCascade.js',
-  tagline: 'Port of the OpenCascade library to JavaScript / WebAssembly using Emscripten',
+  tagline: 'Port of the OpenCascade CAD library to JavaScript and WebAssembly via Emscripten.',
   url: 'http://ocjs.com/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
