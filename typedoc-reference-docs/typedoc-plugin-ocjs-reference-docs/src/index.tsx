@@ -97,7 +97,7 @@ const header = (context: DefaultThemeRenderContext, props: PageEvent<Reflection>
     <div class="tsd-page-title">
       <div class="container" style="display: flex">
         <img src="/img/logo.svg" style="width: 50px" />
-        <div style="margin-left: 10px">
+        <div style="margin-left: 10px; display: flex; flex-direction: column; justify-content: center">
           {!!props.model.parent && <ul class="tsd-breadcrumb">{context.breadcrumb(props.model)}</ul>}
           <h1>
             {props.model.kindString !== "Project" && `${props.model.kindString ?? ""} `}
