@@ -93,6 +93,7 @@ jobs:
       - name: Push to Docker Hub
         if: ${{ github.event.inputs.release }}
         run: |
+          echo ${{ github.event.inputs.release }}
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}
           docker tag ${{ secrets.DOCKER_IMAGE_NAME }} ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}
