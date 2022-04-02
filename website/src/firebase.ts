@@ -1,8 +1,10 @@
 import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { initializeApp, getApp } from "firebase/app";
+import { getAnalytics, logEvent } from "firebase/analytics";
 
-if (ExecutionEnvironment.canUseDOM && window.location.hostname !== "localhost") {
+const isProd = window.location.hostname !== "localhost";
+
+if (ExecutionEnvironment.canUseDOM) {
   const firebaseConfig = {
     apiKey: "AIzaSyARJVISiYhfj86d1n3wFYcXChqHML3iejQ",
     authDomain: "opencascade-js.firebaseapp.com",
@@ -15,5 +17,21 @@ if (ExecutionEnvironment.canUseDOM && window.location.hostname !== "localhost") 
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  getAnalytics(app);
+  if (isProd) {
+    getAnalytics(app); // reports start location automatically
+  }
+}
+
+export const onRouteUpdate = ({ location }) => {
+  if (!isProd) return;
+  setTimeout(() => { // wait for document.title to update
+    console.log("onRouteUpdate", location, document.title);
+    logEvent(getAnalytics(getApp()), "page_view", {
+      page_location: location.pathName,
+      language: "en_us",
+      page_encoding: "UTF-8",
+      page_title: document.title,
+      user_agent: window.navigator.userAgent,
+    });
+  }, 100);
 }
