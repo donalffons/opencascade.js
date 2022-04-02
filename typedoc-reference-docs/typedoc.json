@@ -1,0 +1,13 @@
+{
+  "entryPoints": [
+    "../dist/opencascade.full.d.ts"
+  ],
+  "out": "../website/static/reference-docs/",
+  "tsconfig": "../dist/tsconfig.json",
+  "readme": "none",
+  "plugin": "./typedoc-plugin-ocjs-reference-docs/dist/index.js",
+  "theme": "footer",
+  "name": "OpenCascade.js",
+  "disableSources": true,
+  "includeVersion": true
+}

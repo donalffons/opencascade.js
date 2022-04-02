@@ -36,8 +36,8 @@ jobs:
         run: |
           apt-get update
           apt-get install -y zip
-          npm install -g typescript typedoc
-          typedoc --out ./reference-docs
+          cd typedoc-reference-docs
+          npm ci && npm run build -- --out ./reference-docs
           zip -r reference-docs.zip ./reference-docs
           gsutil cp ./reference-docs.zip gs://opencascade-js/reference-docs.zip
           rm ./reference-docs.zip
