@@ -84,7 +84,7 @@ if(typeof(window) !== undefined) {
       languages: {
         'en': {
           consent_modal: {
-            title: 'We would like to use cookies',
+            title: 'Help us improve OpenCascade.js!',
             description: 'To improve OpenCascade.js and its documentation, we would like to use analytics. Therefore, we need to set cookies. Is that OK with you?',
             primary_btn: {
               text: 'Yeah, sure!',
