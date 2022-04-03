@@ -131,20 +131,28 @@ export class MyThemeContext extends DefaultThemeRenderContext {
           import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
           import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
 
-          if (window.location.hostname !== "localhost") {
-            const firebaseConfig = {
-              apiKey: "AIzaSyARJVISiYhfj86d1n3wFYcXChqHML3iejQ",
-              authDomain: "opencascade-js.firebaseapp.com",
-              projectId: "opencascade-js",
-              storageBucket: "opencascade-js.appspot.com",
-              messagingSenderId: "192043386146",
-              appId: "1:192043386146:web:67db78511b3e00d081917b",
-              measurementId: "G-F2GYWNDL2E"
-            };
-  
-            const app = initializeApp(firebaseConfig);
-            getAnalytics(app);
-          }
+          const isProd = () => window.location.hostname !== "localhost";
+          let analyticsEnabled = false;
+
+          const firebaseConfig = {
+            apiKey: "AIzaSyARJVISiYhfj86d1n3wFYcXChqHML3iejQ",
+            authDomain: "opencascade-js.firebaseapp.com",
+            projectId: "opencascade-js",
+            storageBucket: "opencascade-js.appspot.com",
+            messagingSenderId: "192043386146",
+            appId: "1:192043386146:web:67db78511b3e00d081917b",
+            measurementId: "G-F2GYWNDL2E"
+          };
+
+          // Initialize Firebase
+          const app = initializeApp(firebaseConfig);
+
+          window.startFirebaseAnalytics = () => {
+            if (isProd()) {
+              analyticsEnabled = true;
+              getAnalytics(app); // reports start location automatically
+            }
+          };
         `} />
       </script>
     )
@@ -165,7 +173,11 @@ export class MyTheme extends DefaultTheme {
 
 export function load(app: Application) {
   app.renderer.hooks.on("head.begin", () => (
-    <link rel="icon" href="/img/favicon.ico" />
+    <>
+      <link rel="icon" href="/img/favicon.ico" />
+      <link rel="stylesheet" href="/cookieconsent/cookieconsent.css" />
+      <script src="/cookieconsent/cookieconsent.js" defer />
+    </>
   ));
   app.renderer.defineTheme("footer", MyTheme);
 }
