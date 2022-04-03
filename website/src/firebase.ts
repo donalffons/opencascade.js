@@ -28,7 +28,6 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 export const onRouteUpdate = ({ location }) => {
-  console.log(analyticsEnabled);
   if (!isProd() || !analyticsEnabled) return;
   setTimeout(() => { // wait for document.title to update
     logEvent(getAnalytics(getApp()), "page_view", {
