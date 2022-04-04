@@ -1,8 +1,0 @@
-{
-  "entryPoints": [
-    "dist/opencascade.full.d.ts"
-  ],
-  "out": "website/src/.vuepress/public/reference-docs/",
-  "tsconfig": "dist/tsconfig.json",
-  "readme": "none"
-}

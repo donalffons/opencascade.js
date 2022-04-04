@@ -1,25 +1,10 @@
-name: General CI/CD Jobs
+name: Deploy website to preview channel on PR
 
-on:
-  push:
-    branches:
-      - master
+'on': pull_request
 
 jobs:
-  general:
-    name: General CI/CD Tasks
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - name: Docker Hub Description
-        uses: peter-evans/dockerhub-description@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: ${{ secrets.DOCKER_IMAGE_NAME }}
-  website:
-    name: Deploy website
+  build_and_preview:
+    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
       - name: Set up Google Cloud SDK
@@ -36,16 +21,17 @@ jobs:
           gsutil cp gs://opencascade-js/reference-docs.zip .
           unzip reference-docs.zip
           rm reference-docs.zip
-      - name: Build website
+      - name: build website
         run: |
           cd website
           npm ci
           npm run build
-      - name: Deploy to firebase
+          npm run disallow-search-bots
+      - name: Deploy to firebase preview channel
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_OPENCASCADE_JS }}'
-          channelId: live
           projectId: opencascade-js
           entryPoint: website
+          expires: 30d
