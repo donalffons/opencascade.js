@@ -18,6 +18,17 @@ OpenCascade.js is a port of the [OpenCascade](https://www.opencascade.com) CAD l
 
 ## Getting Started
 
+```js ocjs
+code: |
+  const box = new oc.BRepPrimAPI_MakeBox_2(1, 1, 1);
+  const sphere = new oc.BRepPrimAPI_MakeSphere_5(new oc.gp_Pnt_3(0.5, 0.5, 0.5), 0.65);
+  const cut = new oc.BRepAlgoAPI_Cut_3(box.Shape(), sphere.Shape(), new oc.Message_ProgressRange_1());
+  cut.Build(new oc.Message_ProgressRange_1());
+  visualize(cut.Shape());
+```
+
+## Configuring your Bundler
+
 1. Add the library as a dependency to your project
 
     ```

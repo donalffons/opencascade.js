@@ -144,6 +144,28 @@ const config = {
         getTypeScriptThemePath: () => {
           return "./ocjs-editor-theme/src/theme";
         },
+        configureWebpack() {
+          return {
+            experiments: {
+              syncWebAssembly: false,
+              asyncWebAssembly: false,
+            },
+            module: {
+              rules: [
+                {
+                  test: /.(wasm)$/,
+                  loader: "file-loader",
+                },
+                {
+                  test: /\.worker\.js$/,
+                  use: {
+                    loader: "worker-loader",
+                  },
+                },
+              ],
+            },
+          };
+        },
       };
     }
   ],
