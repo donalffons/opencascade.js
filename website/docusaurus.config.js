@@ -133,6 +133,21 @@ const config = {
   stylesheets: [
     "/cookieconsent/cookieconsent.css",
   ],
+
+  themes: [
+    async function myTheme() {
+      return {
+        name: "my theme",
+        getThemePath: () => {
+          return "./ocjs-editor-theme/lib/theme";
+        },
+        getTypeScriptThemePath: () => {
+          return "./ocjs-editor-theme/src/theme";
+        },
+      };
+    }
+  ],
+
 };
 
 module.exports = config;
