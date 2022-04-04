@@ -7,6 +7,7 @@ import styles from "./styles.module.css";
 import { suspend } from "suspend-react";
 import { wrap } from "comlink";
 import MyComlinkWorker, { runOCJSCode } from "./opencascade.worker";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 
 interface ModelViewerJSX {
   src: string | undefined;
@@ -48,11 +49,15 @@ function OCJSEditor(props: Props & { Component: typeof CodeBlock }) {
       </props.Component>
       <div className={styles.viewportSpacer}>
         <div className={styles.viewportWrapper}>
-          <Suspense fallback={null}>
-            <Preview
-              code={yamlData.code}
-            />
-          </Suspense>
+          <BrowserOnly>
+            {() => (
+              <Suspense fallback={null}>
+                <Preview
+                  code={yamlData.code}
+                />
+              </Suspense>
+            )}
+          </BrowserOnly>
         </div>
       </div>
     </div>
