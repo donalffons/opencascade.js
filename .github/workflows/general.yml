@@ -41,7 +41,7 @@ jobs:
           cd website
           npm ci
           cd ocjs-editor-theme
-          npm ci
+          npm ci && npm run build
           cd ..
           npm run build
       - name: Deploy to firebase
