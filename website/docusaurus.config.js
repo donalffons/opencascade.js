@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'OpenCascade.js',
   tagline: 'Port of the OpenCascade CAD library to JavaScript and WebAssembly via Emscripten.',
-  url: 'https://ocjs.com',
+  url: 'https://ocjs.org',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
