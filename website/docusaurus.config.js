@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'OpenCascade.js',
   tagline: 'Port of the OpenCascade CAD library to JavaScript and WebAssembly via Emscripten.',
-  url: 'http://ocjs.com',
+  url: 'https://ocjs.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -133,6 +133,30 @@ const config = {
   stylesheets: [
     "/cookieconsent/cookieconsent.css",
   ],
+
+  themes: [
+    async function myTheme() {
+      return {
+        name: "my theme",
+        getThemePath: () => {
+          return "./ocjs-editor-theme/lib/theme";
+        },
+        // getTypeScriptThemePath: () => {
+        //   return "./ocjs-editor-theme/src/theme";
+        // },
+        configureWebpack() {
+          return {
+            resolve: {
+              alias: {
+                buble: require.resolve('./ocjs-editor-theme/lib/custom-buble.js'),
+              },
+            },
+          };
+        },
+      };
+    }
+  ],
+
 };
 
 module.exports = config;
