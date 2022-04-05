@@ -19,3 +19,9 @@ code: |
 
   visualize(aComp);
 ```
+
+:::caution Just because you can doesn't mean you should
+
+If you solely want to operate on polygonal data then there's no need for a fully blown CAD kernel like OpenCascade.js.
+
+:::
