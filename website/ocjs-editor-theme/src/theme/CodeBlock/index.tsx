@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import CodeBlock, { type Props } from "@theme-init/CodeBlock";
 import yaml from "js-yaml";
 // @ts-ignore
-import styles from "./styles.module.css";
+import styles from "./index.module.css";
 import BrowserOnly from "@docusaurus/BrowserOnly";
 import Loadable from "react-loadable";
 
