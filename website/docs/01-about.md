@@ -18,6 +18,8 @@ OpenCascade.js is a port of the [OpenCascade](https://www.opencascade.com) CAD l
 
 ## Getting Started
 
+### Hello World
+
 ```js ocjs
 code: |
   const box = new oc.BRepPrimAPI_MakeBox_2(1, 1, 1);
@@ -25,6 +27,26 @@ code: |
   const cut = new oc.BRepAlgoAPI_Cut_3(box.Shape(), sphere.Shape(), new oc.Message_ProgressRange_1());
   cut.Build(new oc.Message_ProgressRange_1());
   visualize(cut.Shape());
+```
+
+### OCJS Logo
+
+```js ocjs
+code: |
+  const largeCyl = new oc.BRepPrimAPI_MakeCylinder_2(1, 0.1, Math.PI * 31/32);
+  const smallCyl = new oc.BRepPrimAPI_MakeCylinder_2(0.75, 0.1, Math.PI * 31/32);
+  const cut = new oc.BRepAlgoAPI_Cut_3(largeCyl.Shape(), smallCyl.Shape(), new oc.Message_ProgressRange_1());
+  cut.Build(new oc.Message_ProgressRange_1());
+  const cShape = cut.Shape();
+
+  const getTf = (r) => {
+    const tf = new oc.gp_Trsf_1();
+    tf.SetRotation_1(new oc.gp_Ax1_2(new oc.gp_Pnt_1(), new oc.gp_Dir_4(0, 0, 1)), r);
+    return tf;
+  };
+  const leftC = cShape.Moved(new oc.TopLoc_Location_2(getTf(Math.PI/2-Math.PI/8)), false);
+  const rightC = cShape.Moved(new oc.TopLoc_Location_2(getTf(-Math.PI/2-Math.PI/8)), false);
+  visualize([leftC, rightC], false);
 ```
 
 ## Configuring your Bundler
