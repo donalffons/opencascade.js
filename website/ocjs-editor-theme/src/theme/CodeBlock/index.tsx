@@ -1,13 +1,15 @@
-import React, { Suspense, useMemo } from "react";
+import React, { useMemo } from "react";
 import CodeBlock, { type Props } from "@theme-init/CodeBlock";
-import "@google/model-viewer";
 import yaml from "js-yaml";
 // @ts-ignore
 import styles from "./styles.module.css";
-import { suspend } from "suspend-react";
-import { wrap } from "comlink";
-import MyComlinkWorker, { runOCJSCode } from "./opencascade.worker";
 import BrowserOnly from "@docusaurus/BrowserOnly";
+import Loadable from "react-loadable";
+
+const OCJSPreview = Loadable({
+  loader: () => import("./OCJSPreview"),
+  loading: () => null,
+});
 
 interface ModelViewerJSX {
   src: string | undefined;
@@ -21,24 +23,7 @@ declare global {
   }
 }
 
-function Preview({ code }: { code?: string }) {
-  const data = suspend(async () => {
-    if (code === undefined) return;
-    const myComlinkWorkerInstance: Worker = new MyComlinkWorker();
-    const myOCJSCodeRunner = wrap<typeof runOCJSCode>(myComlinkWorkerInstance);
-    const ret = await myOCJSCodeRunner(code);
-    if (ret === undefined) return;
-    return URL.createObjectURL(new Blob([ret.buffer], { type: "model/gltf-binary" }));
-  }, [code])
-  return (
-    <model-viewer
-      src={data}
-      camera-controls
-    />
-  );
-}
-
-function OCJSEditor(props: Props & { Component: typeof CodeBlock }) {
+function OCJSEditor(props: any & { Component: any }) {
   const yamlData = useMemo(() => (typeof (props.children) === "string") ? yaml.load(props.children) : undefined, [props]) as {
     code?: string;
   };
@@ -51,11 +36,9 @@ function OCJSEditor(props: Props & { Component: typeof CodeBlock }) {
         <div className={styles.viewportWrapper}>
           <BrowserOnly>
             {() => (
-              <Suspense fallback={null}>
-                <Preview
-                  code={yamlData.code}
-                />
-              </Suspense>
+              <OCJSPreview
+                code={yamlData.code}
+              />
             )}
           </BrowserOnly>
         </div>
