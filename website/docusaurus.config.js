@@ -1,110 +1,110 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
-/** @type {import('@docusaurus/types').Config} */
+/** @type {import("@docusaurus/types").Config} */
 const config = {
-  title: 'OpenCascade.js',
-  tagline: 'Port of the OpenCascade CAD library to JavaScript and WebAssembly via Emscripten.',
-  url: 'https://ocjs.org',
-  baseUrl: '/',
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  title: "OpenCascade.js",
+  tagline: "Port of the OpenCascade CAD library to JavaScript and WebAssembly via Emscripten.",
+  url: "https://ocjs.org",
+  baseUrl: "/",
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
+  favicon: "img/favicon.ico",
+  organizationName: "facebook", // Usually your GitHub org/user name.
+  projectName: "docusaurus", // Usually your repo name.
 
   presets: [
     [
-      'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
+      "classic",
+      /** @type {import("@docusaurus/preset-classic").Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
-          editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
           remarkPlugins: [
-            require('mdx-mermaid'),
+            require("mdx-mermaid"),
           ],
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve("./src/css/custom.css"),
         },
       }),
     ],
   ],
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    /** @type {import("@docusaurus/preset-classic").ThemeConfig} */
     ({
       navbar: {
-        title: 'OpenCascade.js',
+        title: "OpenCascade.js",
         logo: {
-          alt: 'OpenCascade.js Logo',
-          src: 'img/logo.svg',
+          alt: "OpenCascade.js Logo",
+          src: "img/logo.svg",
         },
         items: [
           {
-            type: 'doc',
-            docId: 'about',
-            position: 'left',
-            label: 'Guides',
+            type: "doc",
+            docId: "about",
+            position: "left",
+            label: "Guides",
           },
           {
-            position: 'left',
-            label: 'Reference Docs',
-            href: '/reference-docs',
-            target: '_blank',
+            position: "left",
+            label: "Reference Docs",
+            href: "/reference-docs",
+            target: "_blank",
           },
           {
             type: "search",
             position: "right",
           },
           {
-            href: 'https://github.com/donalffons/opencascade.js/discussions',
-            label: 'GitHub',
-            position: 'right',
+            href: "https://github.com/donalffons/opencascade.js/discussions",
+            label: "GitHub",
+            position: "right",
           },
         ],
       },
       footer: {
-        style: 'dark',
+        style: "dark",
         links: [
           {
-            title: 'Docs',
+            title: "Docs",
             items: [
               {
-                label: 'Guides',
-                to: '/docs/about',
+                label: "Guides",
+                to: "/docs/about",
               },
               {
-                label: 'Reference Docs',
-                href: '/reference-docs',
-                target: '_blank',
+                label: "Reference Docs",
+                href: "/reference-docs",
+                target: "_blank",
               },
             ],
           },
           {
-            title: 'Community',
+            title: "Community",
             items: [
               {
-                label: 'Github Discussions',
-                href: 'https://github.com/donalffons/opencascade.js/discussions',
+                label: "Github Discussions",
+                href: "https://github.com/donalffons/opencascade.js/discussions",
               },
             ],
           },
           {
-            title: 'More',
+            title: "More",
             items: [
               {
-                label: 'GitHub',
-                href: 'https://github.com/donalffons/opencascade.js',
+                label: "GitHub",
+                href: "https://github.com/donalffons/opencascade.js",
               },
               {
-                label: 'OpenCascade',
-                href: 'https://dev.opencascade.org/',
+                label: "OpenCascade",
+                href: "https://dev.opencascade.org/",
               },
             ],
           },
@@ -118,7 +118,7 @@ const config = {
     }),
 
   plugins: [
-    require.resolve('docusaurus-lunr-search'),
+    require.resolve("docusaurus-lunr-search"),
   ],
 
   clientModules: [
@@ -133,6 +133,46 @@ const config = {
   stylesheets: [
     "/cookieconsent/cookieconsent.css",
   ],
+
+  themes: [
+    async function myTheme() {
+      return {
+        name: "my theme",
+        getThemePath: () => {
+          return "./ocjs-editor-theme/lib/theme";
+        },
+        getTypeScriptThemePath: () => {
+          return "./ocjs-editor-theme/src/theme";
+        },
+        configureWebpack() {
+          return {
+            experiments: {
+              syncWebAssembly: false,
+              asyncWebAssembly: false,
+            },
+            module: {
+              rules: [
+                {
+                  test: /.(wasm)$/,
+                  loader: "file-loader",
+                  options: {
+                    outputPath: "assets/wasm/",
+                  },
+                },
+                {
+                  test: /\.worker\.js$/,
+                  use: {
+                    loader: "worker-loader",
+                  },
+                },
+              ],
+            },
+          };
+        },
+      };
+    }
+  ],
+
 };
 
 module.exports = config;

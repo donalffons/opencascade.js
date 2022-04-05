@@ -25,6 +25,9 @@ jobs:
         run: |
           cd website
           npm ci
+          cd ocjs-editor-theme
+          npm ci && npm run build
+          cd ..
           npm run build
           npm run disallow-search-bots
       - name: Deploy to firebase preview channel
