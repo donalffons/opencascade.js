@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 ---
 
-# OCJS Logo
+# OpenCascade.js Logo
 
 Here is a slightly more advanced example, which shows how to create a version of the OpenCascade.js logo with a bunch of boolean operations and 1 sphere.
 
