@@ -30,7 +30,7 @@ export default async function shapeToUrl(shape) => {
   cafWriter.Perform_2(docHandle, new oc.TColStd_IndexedDataMapOfStringString_1(), new oc.Message_ProgressRange_1());
 
   // Read the GLB file from the virtual file system
-  const glbFile oc.FS.readFile("./file.glb", { encoding: "binary" });
+  const glbFile = oc.FS.readFile("./file.glb", { encoding: "binary" });
 
   return URL.createObjectURL(new Blob([glbFile.buffer], { type: "model/gltf-binary" }));
 };
