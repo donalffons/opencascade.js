@@ -6,6 +6,8 @@ import MyComlinkWorker, { runOCJSCode } from "./opencascade.worker";
 import { PuffLoader } from "react-spinners";
 // @ts-ignore
 import styles from "./OCJSPreview.module.css";
+import { ErrorBoundary, FallbackProps } from "react-error-boundary"
+import Admonition from "@theme/Admonition";
 
 function Preview({ code }: { code?: string }) {
   const data = suspend(async () => {
@@ -24,14 +26,42 @@ function Preview({ code }: { code?: string }) {
   );
 }
 
+function ErrorFallback({ error }: FallbackProps) {
+  return (
+    <>
+      <Admonition type="danger" title="There was an error loading this example">
+        Please file a <a href="https://github.com/donalffons/opencascade.js/issues">bug report</a> including:
+        <ul>
+          <li>
+            What's your device and browser (including version)?
+          </li>
+          <li>
+            Which example crashed?
+          </li>
+          <li>
+            What are the error details, shown below?
+          </li>
+        </ul>
+      </Admonition>
+      <pre className={styles.errorPre}>
+        name: {error.name}<br />
+        message: {error.message}<br />
+        stack: {error.stack}
+      </pre>
+    </>
+  )
+}
+
 export default function OCJSPreview({ code }: { code?: string }) {
   return (
-    <Suspense fallback={(
-      <div className={styles.loadingSpinnerContainer}>
-        <PuffLoader color="yellow" />
-      </div>
-    )}>
-      <Preview code={code} />
-    </Suspense>
+    <div className={styles.previewContainer}>
+      <Suspense fallback={<PuffLoader color="#b39b00" />}>
+        <ErrorBoundary
+          FallbackComponent={ErrorFallback}
+        >
+          <Preview code={code} />
+        </ErrorBoundary>
+      </Suspense>
+    </div>
   );
 }
