@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Configuring your Bundler
+# Configuring Your Bundler
 
 ## Why Import the `.wasm` Assets
 
