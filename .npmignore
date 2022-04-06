@@ -15,3 +15,5 @@ runAction.sh
 /test/
 /website/
 /typedoc-reference-docs/
+/builds/
+CHANGELOG.md
