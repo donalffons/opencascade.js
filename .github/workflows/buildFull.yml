@@ -16,6 +16,13 @@ jobs:
     runs-on: [self-hosted, full]
     timeout-minutes: 10000
     steps:
+      - name: Test
+        run : |
+          echo ${{ github.event.inputs.release == true }}
+          echo ${{ github.event.inputs.release }}
+          echo ${{ github.event.inputs.release }} == true
+          exit 1
+
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
