@@ -14,3 +14,4 @@ runAction.sh
 /.devcontainer/
 /test/
 /website/
+/typedoc-reference-docs/
