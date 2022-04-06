@@ -11,12 +11,8 @@ One of the very powerful feature of OpenCascade is the ability to perform Boolea
 Before we start, we need to find a simple of way of visualizing the 3D model we're about to create. Therefore, we will define a helper function that will convert a shape (of type `TopoDS_Shape`) into a GLB file. We can then use this common 3D file format and plug it into a 3D viewer component, like [model-viewer](https://modelviewer.dev/).
 
 ```js title="/src/shapeToUrl.js"
-import initOpenCascade from "opencascade.js";
-
 // Takes a TopoDS_Shape, creates a GLB file from it and returns a ObjectURL
-export default async function shapeToUrl(shape) => {
-  const oc = await initOpenCascade();
-
+export default function shapeToUrl(oc, shape) {
   // Create a document and add our shape
   const docHandle = new oc.Handle_TDocStd_Document_2(new oc.TDocStd_Document(new oc.TCollection_ExtendedString_1()));
   const shapeTool = oc.XCAFDoc_DocumentTool.ShapeTool(docHandle.get().Main()).get();
@@ -37,16 +33,20 @@ export default async function shapeToUrl(shape) => {
 ```
 
 ```js title="/src/index.js"
+import "@google/model-viewer";
 import shapeToUrl from "./visualize.js";
 
-const modelUrl = shapeToUrl(myShape);
+// ...
+
+const oc = await initOpenCascade();
+const modelUrl = shapeToUrl(oc, myShape);
 
 // ...
 
 export default function App() {
   return (
     // Now we can simply use the URL with model-viewer.
-    <model-viewer src={modelUrl} />
+    <model-viewer src={modelUrl} camera-controls />
   );
 }
 ```
