@@ -18,9 +18,8 @@ jobs:
     steps:
       - name: Test
         run : |
-          echo ${{ github.event.inputs.release == true }}
           echo ${{ github.event.inputs.release }}
-          echo ${{ github.event.inputs.release }} == true
+          echo ${{ github.event.inputs.release && github.event.inputs.multithreaded }}
           exit 1
 
       - name: Checkout Repository
