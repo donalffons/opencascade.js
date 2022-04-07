@@ -24,7 +24,6 @@
           "type": "string",
         },
         "default": [
-          "-fexceptions",
           "-O3",
           "-sEXPORT_ES6=1",
           "-sUSE_ES6_IMPORT_META=0",
@@ -73,7 +72,6 @@
           "type": "string",
         },
         "default": [
-          "-fexceptions",
           "-O3",
           "-sEXPORT_ES6=1",
           "-sUSE_ES6_IMPORT_META=0",
