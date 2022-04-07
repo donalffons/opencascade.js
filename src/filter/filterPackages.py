@@ -10,10 +10,10 @@ def filterPackages(packageName):
       "DrawTrSurf",
 
       ## Toolkit TKD3DHostTest
-      # "D3DHostTest",
+      "D3DHostTest",
 
       ## Toolkit TKIVtkDraw
-      # "IVtkDraw",
+      "IVtkDraw",
 
       ## Toolkit TKTopTest
       "BOPTest",
@@ -26,10 +26,10 @@ def filterPackages(packageName):
       "SWDRAW",
 
       ## Toolkit TKViewerTest
-      # "ViewerTest",
+      "ViewerTest",
 
       ## Toolkit TKOpenGlTest
-      # "OpenGlTest",
+      "OpenGlTest",
 
       ## Toolkit TKDCAF
       "DDF",
@@ -49,34 +49,34 @@ def filterPackages(packageName):
       "XSDRAWSTLVRML",
 
       ## Toolkit TKQADraw
-      # "QABugs",
-      # "QADNaming",
-      # "QADraw",
-      # "QANCollection",
+      "QABugs",
+      "QADNaming",
+      "QADraw",
+      "QANCollection",
 
       ## Toolkit TKXDEDRAW
       "XDEDRAW",
 
     ## Partial Module Visualization
       ## Toolkit TKD3DHost
-      # "D3DHost",
+      "D3DHost",
 
       ## Toolkit TKIVtk
-      # "IVtk",
-      # "IVtkOCC",
-      # "IVtkTools",
-      # "IVtkVTK",
+      "IVtk",
+      "IVtkOCC",
+      "IVtkTools",
+      "IVtkVTK",
 
       ## Toolkit TKMeshVS
-      # "MeshVS",
+      "MeshVS",
 
       ## Toolkit TKOpenGl
       ## Toolkit TKOpenGles
-      # "OpenGl",
+      "OpenGl",
 
       ## Toolkit TKService
       # "Aspect",
-      # "Cocoa",
+      "Cocoa",
       # "Font",
       # "Graphic3d",
       # "Image",
