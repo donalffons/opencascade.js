@@ -24,6 +24,7 @@
           "type": "string",
         },
         "default": [
+          "-flto",
           "-sINLINING_LIMIT=1",
           "-fexceptions",
           "-O3",
@@ -74,6 +75,7 @@
           "type": "string",
         },
         "default": [
+          "-flto",
           "-sINLINING_LIMIT=1",
           "-fexceptions",
           "-O3",
