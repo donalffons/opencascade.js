@@ -17,15 +17,15 @@ jobs:
     timeout-minutes: 10000
     steps:
       - run: |
-          echo github.event.inputs.multithreaded
+          echo ${{ github.event.inputs.multithreaded }}
         if: ${{ github.event.inputs.multithreaded }}
 
       - run: |
-          echo github.event.inputs.release
+          echo ${{ github.event.inputs.release }}
         if: ${{ github.event.inputs.release }}
 
       - run: |
-          echo github.event.inputs.release && github.event.inputs.multithreaded
+          echo ${{ github.event.inputs.release && github.event.inputs.multithreaded }}
         if: ${{ github.event.inputs.release && github.event.inputs.multithreaded }}
 
       - run: |
