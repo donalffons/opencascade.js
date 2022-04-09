@@ -18,15 +18,15 @@ jobs:
     steps:
       - run: |
           echo ${{ github.event.inputs.multithreaded }}
-        if: ${{ github.event.inputs.multithreaded }}
+        if: github.event.inputs.multithreaded
 
       - run: |
           echo ${{ github.event.inputs.release }}
-        if: ${{ github.event.inputs.release }}
+        if: github.event.inputs.release
 
       - run: |
           echo ${{ github.event.inputs.release && github.event.inputs.multithreaded }}
-        if: ${{ github.event.inputs.release && github.event.inputs.multithreaded }}
+        if: github.event.inputs.release && github.event.inputs.multithreaded
 
       - run: |
           exit 1
