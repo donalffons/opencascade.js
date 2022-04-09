@@ -16,6 +16,21 @@ jobs:
     runs-on: [self-hosted, full]
     timeout-minutes: 10000
     steps:
+      - run: |
+          echo github.event.inputs.multithreaded
+        if: ${{ github.event.inputs.multithreaded }}
+
+      - run: |
+          echo github.event.inputs.release
+        if: ${{ github.event.inputs.release }}
+
+      - run: |
+          echo github.event.inputs.release && github.event.inputs.multithreaded
+        if: ${{ github.event.inputs.release && github.event.inputs.multithreaded }}
+
+      - run: |
+          exit 1
+
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
