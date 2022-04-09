@@ -15,6 +15,7 @@ def buildOneFile(args, item):
     print("building " + item)
     command = [
       "emcc",
+      "-sINLINING_LIMIT=1",
       "-fexceptions",
       "-DIGNORE_NO_ATOMICS=1",
       "-DOCCT_NO_PLUGINS",
