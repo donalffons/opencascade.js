@@ -18,6 +18,9 @@
       "python": "/usr/bin/python3",
       "request": "launch",
       "program": "${workspaceFolder}/src/compileSources.py",
+      "args": [
+        "single-threaded"
+      ],
       "console": "integratedTerminal",
     },
     {
@@ -34,6 +37,9 @@
       "python": "/usr/bin/python3",
       "request": "launch",
       "program": "${workspaceFolder}/src/compileBindings.py",
+      "args": [
+        "single-threaded"
+      ],
       "console": "integratedTerminal",
     },
     {
