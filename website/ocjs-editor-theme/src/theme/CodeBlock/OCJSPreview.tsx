@@ -22,6 +22,7 @@ function Preview({ code }: { code?: string }) {
     <model-viewer
       src={data}
       camera-controls
+      enable-pan
     />
   );
 }

@@ -54,7 +54,7 @@ const modelUrl = visualizeShapes(oc, myShape);
 export default function App() {
   return (
     // Now we can simply use the URL with model-viewer.
-    <model-viewer src={modelUrl} camera-controls />
+    <model-viewer src={modelUrl} camera-controls enable-pan />
   );
 }
 ```
