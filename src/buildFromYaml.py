@@ -83,6 +83,7 @@ def runBuild(build):
         "-flto",
         "-sINLINING_LIMIT=1",
         "-fexceptions",
+        "-sDISABLE_EXCEPTION_CATCHING=0",
         "-DIGNORE_NO_ATOMICS=1",
         "-DOCCT_NO_PLUGINS",
         "-frtti",
