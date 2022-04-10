@@ -150,7 +150,7 @@ code: |
   tf.SetRotation_1(new oc.gp_Ax1_2(new oc.gp_Pnt_1(), new oc.gp_Dir_4(1, 0, 0)), -Math.PI/2);
   const loc = new oc.TopLoc_Location_2(tf);
 
-  visualize(aRes.Moved(loc, false));
+  visualizeShapes(aRes.Moved(loc, false));
 ```
 
 :::tip What exactly is happening here?

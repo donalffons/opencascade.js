@@ -17,7 +17,7 @@ code: |
   const f = new oc.BRepBuilderAPI_MakeFace_15(wire, false);
   builder.Add(aComp, f.Shape());
 
-  visualize(aComp);
+  visualizeShapes(aComp);
 ```
 
 :::caution Just because you can doesn't mean you should
