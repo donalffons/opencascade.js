@@ -41,11 +41,11 @@ code: |
   const fuse = new oc.BRepAlgoAPI_Fuse_3(cut4, cut4.Moved(makeRotation(Math.PI), false), new oc.Message_ProgressRange_1());
   fuse.Build(new oc.Message_ProgressRange_1());
   const result = fuse.Shape().Moved(makeRotation(-30*Math.PI/180), false);
+  new oc.BRepMesh_IncrementalMesh_2(result, 0.1, false, 0.1, false);
 
-  // Create document, add result and tessellate
+  // Create document
   const doc = new oc.TDocStd_Document(new oc.TCollection_ExtendedString_1());
   const shapeTool = oc.XCAFDoc_DocumentTool.ShapeTool(doc.Main()).get();
-  new oc.BRepMesh_IncrementalMesh_2(result, 0.1, false, 0.1, false);
 
   // Add colors
   for(const it1 = new oc.TopoDS_Iterator_2(result, true, true); it1.More(); it1.Next()) {
