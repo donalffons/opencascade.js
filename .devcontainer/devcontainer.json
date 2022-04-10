@@ -13,7 +13,14 @@
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [],
+	"extensions": [
+		"ms-vscode.cpptools",
+		"ms-vscode.cpptools-extension-pack",
+		"mhutchie.git-graph",
+		"eamodio.gitlens",
+		"ms-python.python",
+		"dtsvet.vscode-wasm"
+	],
 
 	"mounts": [
 		"source=${localWorkspaceFolder}/src,target=/opencascade.js/src,type=bind,consistency=cached",
