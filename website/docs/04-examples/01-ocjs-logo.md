@@ -69,9 +69,6 @@ code: |
       i++;
     }
   }
-  const freeShapes = new oc.TDF_LabelSequence_1();
-  shapeTool.GetFreeShapes(freeShapes);
-  console.log(freeShapes.Length());
 
   visualizeDoc(doc);
 ```
