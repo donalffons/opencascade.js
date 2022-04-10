@@ -15,8 +15,8 @@ it("can create custom build: simple", () => {
   const { size: sizeWasm } = fs.statSync(path.join(__dirname, "customBuilds", "./customBuild.simple.wasm"));
   const { size: sizeDTs } = fs.statSync(path.join(__dirname, "customBuilds", "./customBuild.simple.d.ts"));
   const epsPct = 0.1;
-  expect(isFileSizeCorrect(sizeJs, 118004, epsPct)).toBeTruthy();
-  expect(isFileSizeCorrect(sizeWasm, 443948, epsPct)).toBeTruthy();
+  expect(isFileSizeCorrect(sizeJs, 124946, epsPct)).toBeTruthy();
+  expect(isFileSizeCorrect(sizeWasm, 559402, epsPct)).toBeTruthy();
   expect(isFileSizeCorrect(sizeDTs, 7238, epsPct)).toBeTruthy();
 });
 
