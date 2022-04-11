@@ -1,8 +1,9 @@
 import shell from "shelljs";
 import { type OpenCascadeInstance } from "opencascade.js/dist/node";
-import * as path from 'path';
-import { fileURLToPath } from 'url';
-import { createRequire } from 'module';
+import * as path from "path";
+import * as fs from "fs";
+import { fileURLToPath } from "url";
+import { createRequire } from "module";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const bindingsTestImage = process.env.bindingsTestImage ?? "donalffons/opencascade.js";
@@ -18,6 +19,7 @@ it("can initialize custom build: testBindings", async () => {
   const mainJs = await import(path.join(__dirname, "customBuilds", "customBuild.testBindings.js"));
   globalThis.__dirname = __dirname;
   globalThis.require = createRequire(import.meta.url);
+  globalThis.FS = fs;
   oc = await mainJs.default({
     locateFile: f => f.endsWith(".wasm") ? path.join(__dirname, "customBuilds", "customBuild.testBindings.wasm") : f,
   });
