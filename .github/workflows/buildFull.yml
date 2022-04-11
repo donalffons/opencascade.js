@@ -50,9 +50,9 @@ jobs:
         run: |
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:latest || true
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:staging || true
-          docker build --target testImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}-testImage --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging .
+          docker build --target testImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}-test-image --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging .
           cd test
-          npm run test -- ./testBindings.test.ts
+          bindingsTestImage="donalffons/opencascade.js-test-image" npm run test -- ./testBindings.test.ts
           cd ..
           docker build --target customBuildImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging .
 
