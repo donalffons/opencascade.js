@@ -58,6 +58,9 @@ FROM baseImage AS testImage
 
 RUN \
   mkdir /opencascade.js/build/ && \
+  mkdir /opencascade.js/build/bindings && \
+  mkdir /opencascade.js/build/sources && \
+  mkdir /opencascade.js/build/additionalBindCode && \
   mkdir /opencascade.js/dist/ && \
   /opencascade.js/src/applyPatches.py
 
