@@ -6,7 +6,7 @@ import { createRequire } from 'module';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const bindingsTestImage = process.env.bindingsTestImage ?? "donalffons/opencascade.js";
-const customBuildCmd = `cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) ${bindingsTestImage}`;
+const customBuildCmd = `cd customBuilds && docker run --rm -v $(pwd):/src ${bindingsTestImage}`;
 
 it("can create custom build: testBindings", () => {
   expect(shell.exec(`${customBuildCmd} testBindings.yml`).code).toBe(0);
