@@ -56,13 +56,15 @@ ENV threading=$threading
 
 FROM baseImage AS testImage
 
+RUN \
+  mkdir /opencascade.js/build/ && \
+  mkdir /opencascade.js/dist/
+
 ENTRYPOINT ["/opencascade.js/src/buildFromYaml.py"]
 
 FROM baseImage AS customBuildImage
 
 RUN \
-  mkdir /opencascade.js/build/ && \
-  mkdir /opencascade.js/dist/ && \
   /opencascade.js/src/applyPatches.py && \
   /opencascade.js/src/generateBindings.py && \
   /opencascade.js/src/compileBindings.py ${threading} && \
