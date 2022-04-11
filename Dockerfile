@@ -1,4 +1,4 @@
-FROM emscripten/emsdk:3.1.7
+FROM emscripten/emsdk:3.1.7 AS baseImage
 
 RUN \
   apt update -y && \
@@ -49,8 +49,16 @@ RUN \
 
 WORKDIR /opencascade.js/
 COPY src ./src
+WORKDIR /src/
 
 ARG threading=single-threaded
+ENV threading=$threading
+
+FROM baseImage AS testImage
+
+ENTRYPOINT ["/opencascade.js/src/buildFromYaml.py"]
+
+FROM baseImage AS customBuildImage
 
 RUN \
   mkdir /opencascade.js/build/ && \
@@ -61,11 +69,5 @@ RUN \
   /opencascade.js/src/compileSources.py ${threading} && \
   chmod -R 777 /opencascade.js/ && \
   chmod -R 777 /occt
-
-COPY builds ./builds
-
-WORKDIR /src/
-
-ENV threading=$threading
 
 ENTRYPOINT ["/opencascade.js/src/buildFromYaml.py"]

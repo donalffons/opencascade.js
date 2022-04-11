@@ -39,12 +39,22 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: NPM install tests
+        run: |
+          cd test
+          npm install
+          cd ..
+
       - name: Build OpenCascade.js Docker Image
         timeout-minutes: 10000
         run: |
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:latest || true
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:staging || true
-          docker build --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging .
+          docker build --target testImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}-testImage --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging .
+          cd test
+          npm run test -- ./testBindings.test.ts
+          cd ..
+          docker build --target customBuildImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging .
 
       - name: Push to Docker Hub (staging)
         run: |
@@ -57,7 +67,7 @@ jobs:
         run: |
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded || true
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded || true
-          docker build --build-arg threading=multi-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded .
+          docker build --target customBuildImage --build-arg threading=multi-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded .
 
       - name: Push to Docker Hub (Staging, Multi-Threaded)
         if: github.event.inputs.multithreaded == 'true'
@@ -83,13 +93,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-
-      - name: Run tests
-        run: |
-          cd test
-          npm install
-          npm run test
-          cd ..
 
       - name: Push to Docker Hub
         if: github.event.inputs.release == 'true'

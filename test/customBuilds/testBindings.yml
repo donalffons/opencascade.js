@@ -1,0 +1,16 @@
+mainBuild:
+  name: customBuild.testBindings.js
+  bindings:
+    - symbol: StaticMethods
+additionalCppCode: |
+  class StaticMethods {
+  public:
+    static int intReturn() {
+      return 123;
+    }
+    static void intArgument(int i) {
+      if(i != 123) {
+        throw("incorrect value");
+      }
+    }
+  };
