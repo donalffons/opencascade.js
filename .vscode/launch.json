@@ -51,7 +51,7 @@
       "console": "integratedTerminal",
       "cwd": "${workspaceFolder}/dist",
       "args": [
-        "/opencascade.js/src/fullBuild.yml"
+        "/opencascade.js/builds/opencascade.full.yml"
       ]
     },
     {
