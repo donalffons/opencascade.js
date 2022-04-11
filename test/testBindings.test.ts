@@ -1,5 +1,5 @@
 import shell from "shelljs";
-import initOpenCascade, { OpenCascadeInstance } from "opencascade.js/dist/node";
+import initOpenCascade from "opencascade.js/dist/node";
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -11,7 +11,7 @@ it("can create custom build: testBindings", () => {
   expect(shell.exec(`${customBuildCmd} testBindings.yml`).code).toBe(0);
 });
 
-let oc: OpenCascadeInstance = undefined;
+let oc: any = undefined;
 
 it("can initialize custom build: testBindings", async () => {
   const mainJs = await import(path.join(__dirname, "customBuilds", "customBuild.testBindings.js"));
