@@ -25,6 +25,15 @@ it("can initialize custom build: testBindings", async () => {
   });
 });
 
+it("correctly binds StaticMethods::StaticMethods", async () => {
+  expect(() => {
+    new oc.StaticMethods();
+  }).toThrow();
+  expect(() => {
+    new oc.StaticMethods_1();
+  }).toThrow();
+});
+
 it("correctly binds StaticMethods::intReturn", async () => {
   expect(oc.StaticMethods.intReturn.argCount).toBe(0);
   expect(oc.StaticMethods.intReturn()).toBe(123);
@@ -123,4 +132,46 @@ it("correctly binds StaticMethods::intRefArgument", async () => {
     oc.StaticMethods.intRefArgument(intRef);
   }).not.toThrow();
   expect(intRef.current).toBe(234);
+});
+
+it("correctly binds Instantiable1", async () => {
+  expect(() => {
+    new oc.Instantiable1();
+  }).toThrow();
+  expect(() => {
+    new oc.Instantiable1(123);
+  }).not.toThrow();
+  const instance = new oc.Instantiable1(123);
+  expect(() => {
+    instance.getVal();
+  }).toThrow();
+  expect(() => {
+    instance.getVal_1();
+  }).not.toThrow();
+  expect(instance.getVal_1()).toBe(123);
+  expect(() => {
+    instance.getVal_2(1);
+  }).not.toThrow();
+  expect(instance.getVal_2(1)).toBe(124);
+  expect(() => {
+    instance.getVal_3(1, 1.234);
+  }).not.toThrow();
+  expect(instance.getVal_3(1, 1.234)).toBeCloseTo(153.0159912109375);
+});
+
+it("correctly binds Instantiable2", async () => {
+  expect(() => {
+    new oc.Instantiable2();
+  }).toThrow();
+  expect(() => {
+    new oc.Instantiable2_1();
+    new oc.Instantiable2_2(123);
+    new oc.Instantiable2_3(123, 1);
+  }).not.toThrow();
+  expect((new oc.Instantiable2_1()).getVal()).toBe(0);
+  expect((new oc.Instantiable2_2(123)).getVal()).toBe(123);
+  expect((new oc.Instantiable2_3(123, 1)).getVal()).toBe(124);
+  const instance1 = new oc.Instantiable2_3(123, 1);
+  const instance2 = new oc.Instantiable2_2(123);
+  expect(instance1.addInstantiable2(instance2)).toBe(247);
 });
