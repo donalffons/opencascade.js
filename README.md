@@ -1,5 +1,4 @@
-
-[![Build OpenCascade.js](https://github.com/donalffons/opencascade.js/actions/workflows/buildFull.yml/badge.svg)](https://github.com/donalffons/opencascade.js/actions/workflows/buildFull.yml)
+[![Build OpenCascade.js](https://github.com/donalffons/opencascade.js/actions/workflows/buildFull.yml/badge.svg?branch=master)](https://github.com/donalffons/opencascade.js/actions/workflows/buildFull.yml)
 ![OpenCascade Version](https://img.shields.io/badge/OpenCascade%20Version-7.6.1-green.svg)
 
 <p align="center">
