@@ -13,4 +13,10 @@ additionalCppCode: |
         throw("incorrect value");
       }
     }
+    static void intRefArgument(int& i) {
+      if(i != 123) {
+        throw("incorrect value");
+      }
+      i = 234;
+    }
   };

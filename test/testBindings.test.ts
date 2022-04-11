@@ -72,3 +72,55 @@ it("correctly binds StaticMethods::intArgument", async () => {
     oc.StaticMethods.intArgument({});
   }).toThrow();
 });
+
+it("correctly binds StaticMethods::intRefArgument", async () => {
+  expect(oc.StaticMethods.intRefArgument.argCount).toBe(1);
+  expect(() => {
+    oc.StaticMethods.intRefArgument(123);
+  }).not.toThrow();
+  expect(() => {
+    oc.StaticMethods.intRefArgument({ current: 123 });
+  }).not.toThrow();
+  expect(() => {
+    oc.StaticMethods.intRefArgument("123");
+  }).not.toThrow();
+  expect(() => {
+    oc.StaticMethods.intRefArgument({ current: "123" });
+  }).not.toThrow();
+  expect(() => {
+    oc.StaticMethods.intRefArgument(234);
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.intRefArgument({ current: 234 });
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.intRefArgument();
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.intRefArgument("keks");
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.intRefArgument({ current: "keks" });
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.intRefArgument(undefined);
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.intRefArgument({ current: undefined });
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.intRefArgument(null);
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.intRefArgument({ current: null });
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.intRefArgument({});
+  }).toThrow();
+
+  const intRef = { current: 123 };
+  expect(() => {
+    oc.StaticMethods.intRefArgument(intRef);
+  }).not.toThrow();
+  expect(intRef.current).toBe(234);
+});
