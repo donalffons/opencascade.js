@@ -3,31 +3,31 @@ FROM emscripten/emsdk:3.1.7 AS baseImage
 RUN \
   apt update -y && \
   apt install -y \
-    bash \
-    build-essential \
-    cmake \
-    curl \
-    git \
-    libffi-dev \
-    libgdbm-dev \
-    libncurses5-dev \
-    libnss3-dev \
-    libreadline-dev \
-    libsqlite3-dev \
-    libssl-dev \
-    libbz2-dev \
-    npm \
-    python3 \
-    python3-pip \
-    python3-setuptools \
-    zlib1g-dev
+  bash \
+  build-essential \
+  cmake \
+  curl \
+  git \
+  libffi-dev \
+  libgdbm-dev \
+  libncurses5-dev \
+  libnss3-dev \
+  libreadline-dev \
+  libsqlite3-dev \
+  libssl-dev \
+  libbz2-dev \
+  npm \
+  python3 \
+  python3-pip \
+  python3-setuptools \
+  zlib1g-dev
 
 RUN \
   pip install \
-    libclang \
-    pyyaml \
-    cerberus \
-    argparse
+  libclang \
+  pyyaml \
+  cerberus \
+  argparse
 
 WORKDIR /rapidjson/
 RUN \
@@ -58,14 +58,14 @@ FROM baseImage AS testImage
 
 RUN \
   mkdir /opencascade.js/build/ && \
-  mkdir /opencascade.js/dist/
+  mkdir /opencascade.js/dist/ && \
+  /opencascade.js/src/applyPatches.py
 
 ENTRYPOINT ["/opencascade.js/src/buildFromYaml.py"]
 
 FROM baseImage AS customBuildImage
 
 RUN \
-  /opencascade.js/src/applyPatches.py && \
   /opencascade.js/src/generateBindings.py && \
   /opencascade.js/src/compileBindings.py ${threading} && \
   /opencascade.js/src/compileSources.py ${threading} && \
