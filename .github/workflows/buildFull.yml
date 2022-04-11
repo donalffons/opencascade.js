@@ -82,12 +82,12 @@ jobs:
       - name: Build OpenCascade.js Full Module
         timeout-minutes: 10000
         run: |
-          cd dist
           docker run \
             -v $(pwd):/src \
             -u $(id -u):$(id -g) \
             ${{ secrets.DOCKER_IMAGE_NAME }} \
-            /opencascade.js/builds/opencascade.full.yml
+            /src/builds/opencascade.full.yml
+          cp opencascade.full.* dist
 
       - uses: actions/upload-artifact@v2
         with:
