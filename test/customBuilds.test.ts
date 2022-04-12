@@ -5,19 +5,22 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const isFileSizeCorrect = (actual: number, target: number, epsPct: number) => actual >= target * (1 - epsPct) && actual <= target * (1 + epsPct);
-
 const customBuildCmd = "cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) donalffons/opencascade.js";
 
 it("can create custom build: simple", () => {
-  expect(shell.exec(`${customBuildCmd} simple.yml`).code).toBe(0);
   const { size: sizeJs } = fs.statSync(path.join(__dirname, "customBuilds", "./customBuild.simple.js"));
   const { size: sizeWasm } = fs.statSync(path.join(__dirname, "customBuilds", "./customBuild.simple.wasm"));
   const { size: sizeDTs } = fs.statSync(path.join(__dirname, "customBuilds", "./customBuild.simple.d.ts"));
   const epsPct = 0.1;
-  expect(isFileSizeCorrect(sizeJs, 118004, epsPct)).toBeTruthy();
-  expect(isFileSizeCorrect(sizeWasm, 443948, epsPct)).toBeTruthy();
-  expect(isFileSizeCorrect(sizeDTs, 7238, epsPct)).toBeTruthy();
+  const targetSizeJs = 117964;
+  expect(sizeJs).toBeGreaterThan((1 - epsPct / 2) * targetSizeJs);
+  expect(sizeJs).toBeLessThan((1 + epsPct / 2) * targetSizeJs);
+  const targetSizeWasm = 443938;
+  expect(sizeWasm).toBeGreaterThan((1 - epsPct / 2) * targetSizeWasm);
+  expect(sizeWasm).toBeLessThan((1 + epsPct / 2) * targetSizeWasm);
+  const targetSizeDTs = 7238;
+  expect(sizeDTs).toBeGreaterThan((1 - epsPct / 2) * targetSizeDTs);
+  expect(sizeDTs).toBeLessThan((1 + epsPct / 2) * targetSizeDTs);
 });
 
 it("can use custom build: simple", async () => {
