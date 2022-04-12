@@ -27,21 +27,21 @@ additionalCppCode: |
 
   class Instantiable1 {
     int _val;
-    public:
-      Instantiable1(int val) : _val(val) {}
-      int getVal() { return _val; }
-      int getVal(int add) { return _val + add; }
-      float getVal(int add, float fac) { return (_val + add) * fac; }
+  public:
+    Instantiable1(int val) : _val(val) {}
+    int getVal() { return _val; }
+    int getVal(int add) { return _val + add; }
+    float getVal(int add, float fac) { return (_val + add) * fac; }
   };
 
   class Instantiable2 {
     int _val;
-    public:
-      Instantiable2() : _val(0) {}
-      Instantiable2(int val) : _val(val) {}
-      Instantiable2(int val, int add) : _val(val + add) {}
-      int getVal() { return _val; }
-      int addInstantiable2(Instantiable2& theOther) { // TODO: The bindings should also allow passing a reference type using the '{ current: x }' syntax
-        return _val + theOther._val;
-      }
+  public:
+    Instantiable2() : _val(0) {}
+    Instantiable2(int val) : _val(val) {}
+    Instantiable2(int val, int add) : _val(val + add) {}
+    int getVal() { return _val; }
+    int addInstantiable2(Instantiable2& theOther) { // TODO: The bindings should also allow passing a reference type using the '{ current: x }' syntax
+      return _val + theOther._val;
+    }
   };
