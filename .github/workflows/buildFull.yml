@@ -1,4 +1,4 @@
-name: Build OpenCascade.js
+name: Build OCJS
 
 on:
   workflow_dispatch:
