@@ -6,9 +6,35 @@ sidebar_position: 1
 
 One of the very powerful feature of OpenCascade is the ability to perform Boolean Operations. With them, you can simply add or subtract different shapes. Let's try that.
 
+## Install OpenCascade.js
+
+In your JavaScript project, first install OpenCascade.js via `npm` or `yarn` using the `@beta` tag.
+
+```bash
+npm install opencascade.js@beta # or: yarn add opencascade.js@beta
+```
+
+## Configure Your Bundler
+
+Before you start, you need to [configure your bundler](/docs/getting-started/configure-bundler).
+
 ## Visualize 3D Models
 
-Before we start, we need to find a simple of way of visualizing the 3D model we're about to create. Therefore, we will define a helper function that will convert a shape (of type `TopoDS_Shape`) into a GLB file. We can then use this common 3D file format and plug it into a 3D viewer component, like [model-viewer](https://modelviewer.dev/).
+Next, we need to find a simple of way of visualizing the 3D model we're about to create. We will do that using the following steps:
+1. Triangulate our model
+2. Export it as a GLB file to the virtual file system
+3. Read that GLB file and convert it into an [ObjectURL](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL)
+4. Pass the ObjectURL to the [model-viewer](https://modelviewer.dev/) web component, which takes care of rendering
+
+We will use two helper functions to achieve that:
+* `visualizeDoc` processes all steps 1-3 for a given document (of type [`TDocStd_Document`](https://ocjs.org/reference-docs/classes/TDocStd_Document.html)) and returns the ObjectURL.
+* `visualizeShapes` is creates a document and then adds all given shapes to it. Then it calls `visualizeDoc` and returns the resulting `ObjectURL`.
+
+:::info
+
+All [examples](https://ocjs.org/docs/examples/ocjs-logo) in this documentation use these two functions to visualize the results.
+
+:::
 
 ```js title="/src/visualize.js"
 // Takes a TDocStd_Document, creates a GLB file from it and returns a ObjectURL
@@ -40,9 +66,12 @@ export function visualizeShapes(oc, shapes) {
 }
 ```
 
+We can now simply initialize OpenCascade.js, create our model and visualize it like this:
+
 ```js title="/src/index.js"
 import "@google/model-viewer";
 import { visualizeShapes } from "./visualize.js";
+import initOpenCascade from "opencascade.js";
 
 // ...
 
@@ -60,11 +89,10 @@ export default function App() {
 ```
 
 :::info The example code above shows a syntax that you would use with React
+
 The exact syntax depends on your framework and setup. OpenCascade.js is framework-independent.
 
 :::
-
-The examples in this documentation use this approach when presenting 3D previews of the code examples using the function `visualize` as shown below.
 
 ## Our First Model
 
@@ -78,3 +106,5 @@ code: |
   cut.Build(new oc.Message_ProgressRange_1());
   visualizeShapes(cut.Shape());
 ```
+
+If you want to learn more, check out our other [examples](/docs/examples/ocjs-logo)!
