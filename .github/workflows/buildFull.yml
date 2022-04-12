@@ -92,6 +92,7 @@ jobs:
           cp opencascade.full.* dist
 
       - name: Run all tests
+        if: github.event.inputs.buildType != 'testBindings'
         run: |
           cd test
           npm run test
