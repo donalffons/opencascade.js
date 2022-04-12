@@ -62,10 +62,7 @@ def filterTemplates(child, customBuild):
 
 def filterEnums(child, customBuild):
   if customBuild:
-    return (
-      child.location.file.name == "myMain.h" and
-      child.kind == clang.cindex.TypeKind.ENUM
-    )
+    return child.location.file.name == "myMain.h"
   return ((
       child.extent.start.file.name.startswith(occtBasePath) and
       filterPackages(os.path.basename(os.path.dirname(child.location.file.name)))
@@ -256,7 +253,7 @@ def generateCustomCodeBindings(customCode):
   embindPreamble = ocIncludeStatements + "\n" + referenceTypeTemplateDefs + "\n" + customCode
 
   process(".cpp", embindGenerationFuncClasses, embindGenerationFuncTemplates, embindGenerationFuncEnums, embindPreamble, customCode, True)
-  process(".d.ts.json", typescriptGenerationFuncClasses, typescriptGenerationFuncTemplates, typescriptGenerationFuncEnums, "", customCode, True)
+  # process(".d.ts.json", typescriptGenerationFuncClasses, typescriptGenerationFuncTemplates, typescriptGenerationFuncEnums, "", customCode, True)
 
 if __name__ == "__main__":
   try:
@@ -267,4 +264,4 @@ if __name__ == "__main__":
   embindPreamble = ocIncludeStatements + "\n" + referenceTypeTemplateDefs
   process(".cpp", embindGenerationFuncClasses, embindGenerationFuncTemplates, embindGenerationFuncEnums, embindPreamble, "", False)
 
-  process(".d.ts.json", typescriptGenerationFuncClasses, typescriptGenerationFuncTemplates, typescriptGenerationFuncEnums, "", "", False)
+  # process(".d.ts.json", typescriptGenerationFuncClasses, typescriptGenerationFuncTemplates, typescriptGenerationFuncEnums, "", "", False)
