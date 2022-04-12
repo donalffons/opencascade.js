@@ -3,9 +3,13 @@ name: Build OpenCascade.js
 on:
   workflow_dispatch:
     inputs:
-      release:
-        type: boolean
-        description: Release?
+      buildType:
+        type: choice
+        description: Type of build
+        choices:
+          - testBindings
+          - dryRun
+          - release
       multithreaded:
         type: boolean
         description: Include Multi-Threaded build?
@@ -24,7 +28,7 @@ jobs:
       - name: Generate version number
         id: version
         run: |
-          if ${{ github.event.inputs.release }}
+          if [[ "${{ github.event.inputs.buildType }}" == "release"]]
           then
             export NEW_OPENCASCADEJS_VERSION=$(node -p -e "require('./package.json').version.split('-')[0]")-beta.$(git log --pretty=format:'%h' -n 1)
             echo "::set-output name=version::$NEW_OPENCASCADEJS_VERSION"
@@ -49,7 +53,7 @@ jobs:
           npm install
           cd ..
 
-      - name: Build OpenCascade.js Docker Image
+      - name: Build OpenCascade.js Docker Image "testImage" and run binding tests
         timeout-minutes: 10000
         run: |
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:latest || true
@@ -58,15 +62,21 @@ jobs:
           cd test
           bindingsTestImage="donalffons/opencascade.js-test-image" npm run test -- ./testBindings.test.ts
           cd ..
+
+      - name: Build OpenCascade.js Docker Image "customBuildImage"
+        if: github.event.inputs.buildType != 'testBindings'
+        timeout-minutes: 10000
+        run: |
           docker build --target customBuildImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging .
 
       - name: Push to Docker Hub (staging)
+        if: github.event.inputs.buildType != 'testBindings'
         run: |
           docker tag ${{ secrets.DOCKER_IMAGE_NAME }} ${{ secrets.DOCKER_IMAGE_NAME }}:staging
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:staging
 
       - name: Build OpenCascade.js Docker Image (Multi-Threaded)
-        if: github.event.inputs.multithreaded == 'true'
+        if: github.event.inputs.buildType != 'testBindings' && github.event.inputs.multithreaded == 'true'
         timeout-minutes: 10000
         run: |
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded || true
@@ -74,12 +84,13 @@ jobs:
           docker build --target customBuildImage --build-arg threading=multi-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded .
 
       - name: Push to Docker Hub (Staging, Multi-Threaded)
-        if: github.event.inputs.multithreaded == 'true'
+        if: github.event.inputs.buildType != 'testBindings' && github.event.inputs.multithreaded == 'true'
         run: |
           docker tag ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded
 
       - name: Build OpenCascade.js Full Module
+        if: github.event.inputs.buildType != 'testBindings'
         timeout-minutes: 10000
         run: |
           docker run \
@@ -90,19 +101,20 @@ jobs:
           cp opencascade.full.* dist
 
       - uses: actions/upload-artifact@v2
+        if: github.event.inputs.buildType != 'testBindings'
         with:
           name: dist
           path: ./dist/
 
       - name: Push to Docker Hub
-        if: github.event.inputs.release == 'true'
+        if: github.event.inputs.buildType == 'release'
         run: |
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}
           docker tag ${{ secrets.DOCKER_IMAGE_NAME }} ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}
 
       - name: Push to Docker Hub (Multi-Threaded)
-        if: github.event.inputs.release == 'true' && github.event.inputs.multithreaded == 'true'
+        if: github.event.inputs.buildType == 'release' && github.event.inputs.multithreaded == 'true'
         run: |
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded
           docker tag ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded ${{ secrets.DOCKER_IMAGE_NAME }}:${{ steps.version.outputs.version }}-multi-threaded
@@ -115,7 +127,7 @@ jobs:
           npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Publish new beta version to NPM
-        if: github.event.inputs.release == 'true'
+        if: github.event.inputs.buildType == 'release'
         run: |
           npm version ${{ steps.version.outputs.version }} --force
           npm publish --tag=beta
