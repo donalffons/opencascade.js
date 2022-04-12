@@ -65,6 +65,18 @@ jobs:
           bindingsTestImage="donalffons/opencascade.js-test-image" npm run test -- ./testBindings.test.ts
           cd ..
 
+      - name: Build OpenCascade.js Docker Image "customBuildImage"
+        if: github.event.inputs.buildType != 'testBindings'
+        timeout-minutes: 10000
+        run: |
+          docker build --target customBuildImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.version.outputs.lowerCaseBranchName }} .
+
+      - name: Push to Docker Hub (staging)
+        if: github.event.inputs.buildType != 'testBindings'
+        run: |
+          docker tag ${{ secrets.DOCKER_IMAGE_NAME }} ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.version.outputs.lowerCaseBranchName }}
+          docker push ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.version.outputs.lowerCaseBranchName }}
+
       - name: Build OpenCascade.js Full Module
         if: github.event.inputs.buildType != 'testBindings'
         timeout-minutes: 10000
@@ -80,18 +92,6 @@ jobs:
         run: |
           cd test
           npm run test
-
-      - name: Build OpenCascade.js Docker Image "customBuildImage"
-        if: github.event.inputs.buildType != 'testBindings'
-        timeout-minutes: 10000
-        run: |
-          docker build --target customBuildImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.version.outputs.lowerCaseBranchName }} .
-
-      - name: Push to Docker Hub (staging)
-        if: github.event.inputs.buildType != 'testBindings'
-        run: |
-          docker tag ${{ secrets.DOCKER_IMAGE_NAME }} ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.version.outputs.lowerCaseBranchName }}
-          docker push ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.version.outputs.lowerCaseBranchName }}
 
       - name: Build OpenCascade.js Docker Image (Multi-Threaded)
         if: github.event.inputs.buildType != 'testBindings' && github.event.inputs.multithreaded == 'true'
