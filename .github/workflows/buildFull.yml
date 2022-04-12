@@ -63,6 +63,22 @@ jobs:
           bindingsTestImage="donalffons/opencascade.js-test-image" npm run test -- ./testBindings.test.ts
           cd ..
 
+      - name: Build OpenCascade.js Full Module
+        if: github.event.inputs.buildType != 'testBindings'
+        timeout-minutes: 10000
+        run: |
+          docker run \
+            -v $(pwd):/src \
+            -u $(id -u):$(id -g) \
+            ${{ secrets.DOCKER_IMAGE_NAME }} \
+            /src/builds/opencascade.full.yml
+          cp opencascade.full.* dist
+
+      - name: Run all tests
+        run: |
+          cd test
+          npm run test
+
       - name: Build OpenCascade.js Docker Image "customBuildImage"
         if: github.event.inputs.buildType != 'testBindings'
         timeout-minutes: 10000
@@ -88,17 +104,6 @@ jobs:
         run: |
           docker tag ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:staging-multi-threaded
-
-      - name: Build OpenCascade.js Full Module
-        if: github.event.inputs.buildType != 'testBindings'
-        timeout-minutes: 10000
-        run: |
-          docker run \
-            -v $(pwd):/src \
-            -u $(id -u):$(id -g) \
-            ${{ secrets.DOCKER_IMAGE_NAME }} \
-            /src/builds/opencascade.full.yml
-          cp opencascade.full.* dist
 
       - uses: actions/upload-artifact@v2
         if: github.event.inputs.buildType != 'testBindings'
