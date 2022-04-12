@@ -141,7 +141,7 @@ def filterTypedef(typedef, additionalInfo=None):
   ]:
     return False
 
-  if typedef.underlying_typedef_type.spelling.startswith((
+  if typedef.location.file.name == "myMain.h" or typedef.underlying_typedef_type.spelling.startswith((
     "opencascade::handle",
     "handle",
     "NCollection"

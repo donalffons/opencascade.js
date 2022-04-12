@@ -41,8 +41,36 @@ code: |
   const fuse = new oc.BRepAlgoAPI_Fuse_3(cut4, cut4.Moved(makeRotation(Math.PI), false), new oc.Message_ProgressRange_1());
   fuse.Build(new oc.Message_ProgressRange_1());
   const result = fuse.Shape().Moved(makeRotation(-30*Math.PI/180), false);
+  new oc.BRepMesh_IncrementalMesh_2(result, 0.1, false, 0.1, false);
 
-  visualize(result);
+  // Create document
+  const doc = new oc.TDocStd_Document(new oc.TCollection_ExtendedString_1());
+  const shapeTool = oc.XCAFDoc_DocumentTool.ShapeTool(doc.Main()).get();
+
+  // Add colors
+  for(const it1 = new oc.TopoDS_Iterator_2(result, true, true); it1.More(); it1.Next()) {
+    let i = 0;
+    for(const it2 = new oc.TopoDS_Iterator_2((new oc.TopoDS_Iterator_2(it1.Value(), true, true)).Value(), true, true); it2.More(); it2.Next()) {
+      const newShape = shapeTool.NewShape();
+      shapeTool.SetShape(newShape, it2.Value());
+
+      const vmtool = oc.XCAFDoc_DocumentTool.VisMaterialTool(newShape).get();
+      const visMat = new oc.XCAFDoc_VisMaterial();
+      const matLabel = vmtool.AddMaterial_1(new oc.Handle_XCAFDoc_VisMaterial_2(visMat), new oc.TCollection_AsciiString_2(`myMatName${Math.random()}`));
+      vmtool.SetShapeMaterial_1(newShape, matLabel);
+      const visMatPbr = new oc.XCAFDoc_VisMaterialPBR();
+      if(i === 3) {
+        visMatPbr.BaseColor = new oc.Quantity_ColorRGBA_5(0.6, 0.5, 0, 1);
+      } else {
+        visMatPbr.BaseColor = new oc.Quantity_ColorRGBA_5(0.3, 0.3, 0.3, 1);
+      }
+      visMat.SetPbrMaterial(visMatPbr);
+
+      i++;
+    }
+  }
+
+  visualizeDoc(doc);
 ```
 
 :::tip If this code looks confusing, don't worry

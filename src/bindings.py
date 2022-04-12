@@ -351,8 +351,9 @@ class EmbindBindings(Bindings):
 
     bindingsOutput = "  enum_<" + theEnum.spelling + ">(\"" + theEnum.spelling + "\")\n"
     enumChildren = list(theEnum.get_children())
+    prefix = (theEnum.spelling + "::") if theEnum.is_scoped_enum() else ""
     for enumChild in enumChildren:
-      bindingsOutput += "    .value(\"" + enumChild.spelling + "\", " + theEnum.spelling + "::" + enumChild.spelling + ")\n"
+      bindingsOutput += "    .value(\"" + enumChild.spelling + "\", " + prefix + enumChild.spelling + ")\n"
     bindingsOutput += "  ;\n"
     self.output += bindingsOutput
 
