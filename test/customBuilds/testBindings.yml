@@ -6,7 +6,20 @@ mainBuild:
     - symbol: Instantiable2
     - symbol: TemplateClassInt
     - symbol: TemplateClassBool
+    - symbol: NotScopedEnum
+    - symbol: ScopedEnum
 additionalCppCode: |
+  enum NotScopedEnum {
+    NotScopedEnum_A,
+    NotScopedEnum_B,
+    NotScopedEnum_C
+  };
+  enum class ScopedEnum {
+    A,
+    B,
+    C
+  };
+
   class StaticMethods {
   private:
     StaticMethods() {}
@@ -24,6 +37,22 @@ additionalCppCode: |
         throw("incorrect value");
       }
       i = 234;
+    }
+    static void notScopedEnumArgument(NotScopedEnum e) {
+      if(e != NotScopedEnum_B) {
+        throw("incorrect value");
+      }
+    }
+    static NotScopedEnum notScopedEnumReturn() {
+      return NotScopedEnum_B;
+    }
+    static void scopedEnumArgument(ScopedEnum e) {
+      if(e != ScopedEnum::B) {
+        throw("incorrect value");
+      }
+    }
+    static ScopedEnum scopedEnumReturn() {
+      return ScopedEnum::B;
     }
   };
 

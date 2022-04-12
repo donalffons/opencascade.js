@@ -134,6 +134,60 @@ it("correctly binds StaticMethods::intRefArgument", async () => {
   expect(intRef.current).toBe(234);
 });
 
+it("correctly binds StaticMethods::notScopedEnumArgument", async () => {
+  expect(oc.StaticMethods.notScopedEnumArgument.argCount).toBe(1);
+  expect(() => {
+    oc.StaticMethods.notScopedEnumArgument(1);
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.notScopedEnumArgument(oc.NotScopedEnum.NotScopedEnum_B);
+  }).not.toThrow();
+  expect(() => {
+    oc.StaticMethods.notScopedEnumArgument(oc.NotScopedEnum.NotScopedEnum_C);
+  }).toThrow();
+});
+
+it("correctly binds StaticMethods::notScopedEnumReturn", async () => {
+  expect(oc.StaticMethods.notScopedEnumReturn.argCount).toBe(0);
+  expect(() => {
+    oc.StaticMethods.notScopedEnumReturn(1);
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.notScopedEnumReturn(oc.NotScopedEnum.NotScopedEnum_B);
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.notScopedEnumReturn();
+  }).not.toThrow();
+  expect(oc.StaticMethods.notScopedEnumReturn().value).toBe(oc.NotScopedEnum.NotScopedEnum_B.value);
+});
+
+it("correctly binds StaticMethods::scopedEnumArgument", async () => {
+  expect(oc.StaticMethods.scopedEnumArgument.argCount).toBe(1);
+  expect(() => {
+    oc.StaticMethods.scopedEnumArgument(1);
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.scopedEnumArgument(oc.ScopedEnum.B);
+  }).not.toThrow();
+  expect(() => {
+    oc.StaticMethods.scopedEnumArgument(oc.ScopedEnum.C);
+  }).toThrow();
+});
+
+it("correctly binds StaticMethods::scopedEnumReturn", async () => {
+  expect(oc.StaticMethods.scopedEnumReturn.argCount).toBe(0);
+  expect(() => {
+    oc.StaticMethods.scopedEnumReturn(1);
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.scopedEnumReturn(oc.ScopedEnum.B);
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.scopedEnumReturn();
+  }).not.toThrow();
+  expect(oc.StaticMethods.scopedEnumReturn().value).toBe(oc.ScopedEnum.B.value);
+});
+
 it("correctly binds Instantiable1", async () => {
   expect(() => {
     new oc.Instantiable1();
