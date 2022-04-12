@@ -174,7 +174,7 @@ export class MyTheme extends DefaultTheme {
 export function load(app: Application) {
   app.renderer.hooks.on("head.begin", () => (
     <>
-      <link rel="icon" href="/img/favicon.ico" />
+      <link rel="icon" href="/favicon.ico" />
       <link rel="stylesheet" href="/cookieconsent/cookieconsent.css" />
       <script src="/cookieconsent/cookieconsent.js" defer />
     </>
