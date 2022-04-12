@@ -4,6 +4,8 @@ mainBuild:
     - symbol: StaticMethods
     - symbol: Instantiable1
     - symbol: Instantiable2
+    - symbol: TemplateClassInt
+    - symbol: TemplateClassBool
 additionalCppCode: |
   class StaticMethods {
   private:
@@ -45,3 +47,14 @@ additionalCppCode: |
       return _val + theOther._val;
     }
   };
+
+  template <typename T>
+  class TemplateClass {
+    T _val;
+  public:
+    TemplateClass() {}
+    TemplateClass(T val) : _val(val) {}
+    T getVal() { return _val; }
+  };
+  typedef TemplateClass<int> TemplateClassInt;
+  typedef TemplateClass<bool> TemplateClassBool;
