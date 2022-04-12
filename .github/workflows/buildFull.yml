@@ -33,8 +33,11 @@ jobs:
             export NEW_OPENCASCADEJS_VERSION=$(node -p -e "require('./package.json').version.split('-')[0]")-beta.$(git log --pretty=format:'%h' -n 1)
             echo "::set-output name=version::$NEW_OPENCASCADEJS_VERSION"
             echo "::set-output name=tags::${{ secrets.DOCKER_IMAGE_NAME }}:$NEW_OPENCASCADEJS_VERSION,${{ secrets.DOCKER_IMAGE_NAME }}:latest"
-            BRANCHNAME=$(echo "${{ github.ref }}" | tr '[:upper:]' '[:lower:]')
-            echo "::set-output name=lowerCaseBranchName::$BRANCHNAME"
+            githubRef=${{ github.ref }}
+            githubBranch=$(echo "${githubRef##*/}")
+            lowerCaseBranchName=$(echo "$githubBranch" | tr '[:upper:]' '[:lower:]')
+            echo $lowerCaseBranchName
+            echo "::set-output name=lowerCaseBranchName::$lowerCaseBranchName"
           else
             echo "::set-output name=tags::${{ secrets.DOCKER_IMAGE_NAME }}:latest"
           fi
