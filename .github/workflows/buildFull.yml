@@ -63,6 +63,11 @@ jobs:
           bindingsTestImage="donalffons/opencascade.js-test-image" npm run test -- ./testBindings.test.ts
           cd ..
 
+      - name: Run all tests
+        run: |
+          cd test
+          npm run test
+
       - name: Build OpenCascade.js Docker Image "customBuildImage"
         if: github.event.inputs.buildType != 'testBindings'
         timeout-minutes: 10000
