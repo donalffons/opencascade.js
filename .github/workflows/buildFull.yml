@@ -112,7 +112,7 @@ jobs:
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.version.outputs.lowerCaseBranchName }}-multi-threaded
 
       - uses: actions/upload-artifact@v2
-        if: github.event.inputs.buildType != 'testBindings'
+        if: ${{ always() }}
         with:
           name: dist
           path: ./dist/
