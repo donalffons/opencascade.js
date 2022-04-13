@@ -63,7 +63,7 @@ RUN \
 
 ENTRYPOINT ["/opencascade.js/src/buildFromYaml.py"]
 
-FROM baseImage AS customBuildImage
+FROM testImage AS customBuildImage
 
 RUN \
   /opencascade.js/src/generateBindings.py && \
