@@ -8,6 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const customBuildCmd = "cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) donalffons/opencascade.js";
 
 it("can create custom build: simple", () => {
+  expect(shell.exec(`${customBuildCmd} simple.yml`).code).toBe(0);
   const { size: sizeJs } = fs.statSync(path.join(__dirname, "customBuilds", "./customBuild.simple.js"));
   const { size: sizeWasm } = fs.statSync(path.join(__dirname, "customBuilds", "./customBuild.simple.wasm"));
   const { size: sizeDTs } = fs.statSync(path.join(__dirname, "customBuilds", "./customBuild.simple.d.ts"));
