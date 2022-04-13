@@ -237,54 +237,52 @@ class EmbindBindings(Bindings):
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
 
-      needsWrapper = list(map(lambda arg: {
-        "needsWrapper": arg.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE and (
-          arg.type.get_pointee().get_canonical().spelling in builtInTypes or
-          arg.type.get_pointee().kind == clang.cindex.TypeKind.ENUM or
-          arg.type.get_pointee().kind == clang.cindex.TypeKind.POINTER or (
-            theClass.kind == clang.cindex.CursorKind.CLASS_TEMPLATE and
-            arg.type.get_pointee().spelling in templateArgs and
-            templateArgs[arg.type.get_pointee().spelling].get_canonical().spelling in builtInTypes
-          )
-        ) or
-        isString(arg),
-        "arg": arg,
-      }, method.get_arguments()))
-      if any(x["needsWrapper"] for x in needsWrapper):
+      args = list(method.get_arguments())
+      needsWrapper = list(map(lambda arg: arg.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE and (
+        arg.type.get_pointee().get_canonical().spelling in builtInTypes or
+        arg.type.get_pointee().kind == clang.cindex.TypeKind.ENUM or
+        arg.type.get_pointee().kind == clang.cindex.TypeKind.POINTER or (
+          theClass.kind == clang.cindex.CursorKind.CLASS_TEMPLATE and
+          arg.type.get_pointee().spelling in templateArgs and
+          templateArgs[arg.type.get_pointee().spelling].get_canonical().spelling in builtInTypes
+        )
+      ) or
+      isString(arg), args))
+      if any(needsWrapper):
         def replaceTemplateArgs(x):
-          if templateArgs is not None and x[1]["arg"].type.get_pointee().spelling.replace("const ", "") in templateArgs:
-            return x[1]["arg"].type.spelling.replace(x[1]["arg"].type.get_pointee().spelling.replace("const ", ""), templateArgs[x[1]["arg"].type.get_pointee().spelling.replace("const ", "")].spelling)
+          if templateArgs is not None and args[x[0]].type.get_pointee().spelling.replace("const ", "") in templateArgs:
+            return args[x[0]].type.spelling.replace(args[x[0]].type.get_pointee().spelling.replace("const ", ""), templateArgs[args[x[0]].type.get_pointee().spelling.replace("const ", "")].spelling)
           else:
-            return x[1]["arg"].type.spelling
+            return args[x[0]].type.spelling
         def getArgName(x):
-          if not x[1]["arg"].spelling == "":
-            return x[1]["arg"].spelling
+          if not args[x[0]].spelling == "":
+            return args[x[0]].spelling
           else:
             return "argNo" + str(x[0])
         def getArgType(x):
-          if templateArgs is not None and x[1]["arg"].type.get_pointee().spelling.replace("const ", "") in templateArgs:
-            return x[1]["arg"].type.get_pointee().spelling.replace(x[1]["arg"].type.get_pointee().spelling.replace("const ", ""), templateArgs[x[1]["arg"].type.get_pointee().spelling.replace("const ", "")].spelling)
+          if templateArgs is not None and args[x[0]].type.get_pointee().spelling.replace("const ", "") in templateArgs:
+            return args[x[0]].type.get_pointee().spelling.replace(args[x[0]].type.get_pointee().spelling.replace("const ", ""), templateArgs[args[x[0]].type.get_pointee().spelling.replace("const ", "")].spelling)
           else:
-            return x[1]["arg"].type.get_pointee().spelling
+            return args[x[0]].type.get_pointee().spelling
         classTypeName = getClassTypeName(theClass, templateDecl)
-        wrappedParamTypes = ", ".join(map(lambda x: ("std::string" if isString(x[1]["arg"]) else "emscripten::val") if x[1]["needsWrapper"] else replaceTemplateArgs(x), enumerate(needsWrapper)))
-        wrappedParamTypesAndNames = ", ".join(map(lambda x: (("std::string " if isString(x[1]["arg"]) else "emscripten::val ") + getArgName(x)) if x[1]["needsWrapper"] else replaceTemplateArgs(x) + " " + getArgName(x), enumerate(needsWrapper)))
+        wrappedParamTypes = ", ".join(map(lambda x: ("std::string" if isString(args[x[0]]) else "emscripten::val") if x[1] else replaceTemplateArgs(x), enumerate(needsWrapper)))
+        wrappedParamTypesAndNames = ", ".join(map(lambda x: (("std::string " if isString(args[x[0]]) else "emscripten::val ") + getArgName(x)) if x[1] else replaceTemplateArgs(x) + " " + getArgName(x), enumerate(needsWrapper)))
         def generateGetReferenceValue(x):
-          if x[1]["needsWrapper"] and not isString(x[1]["arg"]):
-            return "        auto ref_" + (x[1]["arg"].spelling if not x[1]["arg"].spelling == "" else "argNo"+str(x[0])) + " = getReferenceValue<" + getArgType(x) + ">(" + getArgName(x) + ");\n"
+          if x[1] and not isString(args[x[0]]):
+            return "        auto ref_" + (args[x[0]].spelling if not args[x[0]].spelling == "" else "argNo"+str(x[0])) + " = getReferenceValue<" + getArgType(x) + ">(" + getArgName(x) + ");\n"
           else:
             return ""
         def generateUpdateReferenceValue(x):
-          if x[1]["needsWrapper"] and not isString(x[1]["arg"]):
+          if x[1] and not isString(args[x[0]]):
             return "        updateReferenceValue<" + getArgType(x) + ">(" + getArgName(x) + ", ref_" + getArgName(x) + ");\n"
           else:
             return ""
         def generateInvocationArgs(x):
-          if x[1]["needsWrapper"]:
-            if not isString(x[1]["arg"]):
+          if x[1]:
+            if not isString(args[x[0]]):
               return "ref_" + getArgName(x)
             else:
-              if not x[1]["arg"].type.get_canonical().get_pointee().is_const_qualified() or x[1]["arg"].type.is_const_qualified():
+              if not args[x[0]].type.get_canonical().get_pointee().is_const_qualified() or args[x[0]].type.is_const_qualified():
                 return "strdup(" + getArgName(x) + ".c_str())"
               else:
                 return getArgName(x) + ".c_str()"
