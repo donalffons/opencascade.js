@@ -94,11 +94,11 @@ jobs:
             /src/builds/opencascade.full.yml
           cp opencascade.full.* dist
 
-      - name: Run all tests
+      - name: Run all tests except multi-threading
         if: github.event.inputs.buildType != 'testBindings'
         run: |
           cd test
-          npm run test
+          dockerImageName="${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}" skipMultiThreaded=true npm run test
 
       - name: Build OpenCascade.js Docker Image (Multi-Threaded)
         if: github.event.inputs.buildType != 'testBindings' && github.event.inputs.multithreaded == 'true'
@@ -113,6 +113,12 @@ jobs:
         run: |
           docker tag ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}-multi-threaded
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}-multi-threaded
+
+      - name: Run all tests
+        if: github.event.inputs.buildType != 'testBindings'
+        run: |
+          cd test
+          dockerImageName="${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}-multi-threaded" npm run test
 
       - uses: actions/upload-artifact@v2
         if: ${{ always() }}
