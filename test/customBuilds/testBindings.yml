@@ -73,6 +73,20 @@ additionalCppCode: |
     int getVal() { return _val; }
     int getVal(int add) { return _val + add; }
     float getVal(int add, float fac) { return (_val + add) * fac; }
+    void intRefArgument(int& i) {
+      if(i != 123) {
+        throw("incorrect value");
+      }
+      i = 234;
+    }
+    const char* cStringReturn() {
+      return "Hello, World!";
+    }
+    void cStringArgument(const char* s) {
+      if(strcmp("Hello, World!", s) != 0) {
+        throw("incorrect value");
+      }
+    }
   };
 
   class Instantiable2 {
