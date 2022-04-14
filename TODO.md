@@ -1,33 +1,53 @@
 # OpenCascade.js To-Do's
 
-## 1. Testing (non-breaking changes)
+## 1. Examples and Tests
 
-* Add tests + examples
-  * Bottle example
-  * Polygon
-  * STEP loading
-  * GLTF export
-  * references to built-in types
-  * Multithreaded tessellation, usage of Message_ProgressRange
+* Allow interactive code editing on the home page
+  * Either by building a simple "Playground" page using [monaco](https://microsoft.github.io/monaco-editor/)
+  * Or by linking to example code using CodeSandbox / StackBlitz
+* When the above step done, we can archive the examples repository
+* Add more examples and / or tests
 
-## 2. Examples
+## 2. Starter Templates
 
-* Show some love to the examples, simplify, cleanup
-* Remove custom tessellation code, instead export to GLTF
-* Integrate them into the main repository
+* Create starter templates for different frameworks (ongoing)
+* Add documentation page to website
+* CI/CD so that starter templates are automatically updated and published
+* Make starter templates downloadable from website
 
-## 3. Documentation
-* [Let's make a website!](https://github.com/donalffons/opencascade.js/pull/102)
-  * Use typedoc to create a reference documentation
-  * Add starter templates
-  * Add page about featured community projects
-* Add `tsdoc` comments, extracted from OpenCascade sources
+## 3. Community Project Section
 
-## 4. Improve Bindings
+* Add section about featured community projects?!
+* Ask first if the community really wants / needs that (yet) or not
 
-* Add support for references to built-ins as return types, as mentioned [here](https://github.com/donalffons/opencascade.js/issues/94#issuecomment-1008318474)
+## 4. Explicit binding-tests / smoke-tests
+
+* Add more smoke tests for binding generation (wip at /test/testBindings.test.ts)
+* Also add smoke tests for typescript definitions (need to find a system that works)
+
+## 5. Exception support
+
+* Add support + bindings for exceptions
+
+## 6. Straighten out support for reference types
+
+* Passing objects as references is not consistent with passing built-in types, right now. The fix should be fairly easy and non-breaking.
+* It is impossible to return references to built-in types, right now. Is there a way to avoid a breaking change?
+
+## 7. Default values in bindings
+
 * Add support for default values
 
-## 5. Other
+## 8. More flexibility when defining custom build bindings in YAML files
+
+* Currently, only "symbol: bla" is supported.
+* Add support for regex
+* Maybe support for inline python functions?!
+
+## 9. TSDoc comments in typescript definitions
+
+* Helpful in IDEs that support intellisense
+
+## 10. Other
 
 * Experiment with opencascade's built-in visualization and see if it works with Emscripten and if it's any good. Create example.
