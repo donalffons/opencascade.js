@@ -265,22 +265,22 @@ class EmbindBindings(Bindings):
             return args[x[0]].spelling
           else:
             return "argNo" + str(x[0])
-        def getArgType(x):
-          if templateArgs is not None and args[x[0]].type.get_pointee().spelling.replace("const ", "") in templateArgs:
-            return args[x[0]].type.get_pointee().spelling.replace(args[x[0]].type.get_pointee().spelling.replace("const ", ""), templateArgs[args[x[0]].type.get_pointee().spelling.replace("const ", "")].spelling)
+        def getArgTypeName(type):
+          if templateArgs is not None and type.get_pointee().spelling.replace("const ", "") in templateArgs:
+            return type.get_pointee().spelling.replace(type.get_pointee().spelling.replace("const ", ""), templateArgs[type.get_pointee().spelling.replace("const ", "")].spelling)
           else:
-            return args[x[0]].type.get_pointee().spelling
+            return type.get_pointee().spelling
         classTypeName = getClassTypeName(theClass, templateDecl)
         wrappedParamTypes = ", ".join(map(lambda x: ("std::string" if isCString(args[x[0]].type) else "emscripten::val") if x[1] else replaceTemplateArgs(x), enumerate(argsNeedingWrapper)))
         wrappedParamTypesAndNames = ", ".join(map(lambda x: (("std::string " if isCString(args[x[0]].type) else "emscripten::val ") + getArgName(x)) if x[1] else replaceTemplateArgs(x) + " " + getArgName(x), enumerate(argsNeedingWrapper)))
         def generateGetReferenceValue(x):
           if x[1] and not isCString(args[x[0]].type):
-            return "        auto ref_" + (args[x[0]].spelling if not args[x[0]].spelling == "" else "argNo"+str(x[0])) + " = getReferenceValue<" + getArgType(x) + ">(" + getArgName(x) + ");\n"
+            return "        auto ref_" + (args[x[0]].spelling if not args[x[0]].spelling == "" else "argNo"+str(x[0])) + " = getReferenceValue<" + getArgTypeName(args[x[0]].type) + ">(" + getArgName(x) + ");\n"
           else:
             return ""
         def generateUpdateReferenceValue(x):
           if x[1] and not isCString(args[x[0]].type):
-            return "        updateReferenceValue<" + getArgType(x) + ">(" + getArgName(x) + ", ref_" + getArgName(x) + ");\n"
+            return "        updateReferenceValue<" + getArgTypeName(args[x[0]].type) + ">(" + getArgName(x) + ", ref_" + getArgName(x) + ");\n"
           else:
             return ""
         def generateInvocationArgs(x):
