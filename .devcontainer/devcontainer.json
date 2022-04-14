@@ -47,6 +47,7 @@
 	// "remoteUser": "vscode"
 
 	"build": {
-		"cacheFrom": "donalffons/opencascade.js:staging"
+		"cacheFrom": "donalffons/opencascade.js:staging-master",
+		"target": "customBuildImage"
 	}
 }
