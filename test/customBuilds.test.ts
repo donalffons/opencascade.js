@@ -3,9 +3,10 @@ import * as fs from "fs";
 import initOpenCascade from "opencascade.js/dist/node";
 import * as path from 'path';
 import { fileURLToPath } from 'url';
+import dockerImageName from "./dockerImageName";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const customBuildCmd = "cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) donalffons/opencascade.js";
+const customBuildCmd = `cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) ${dockerImageName}`;
 
 it("can create custom build: simple", () => {
   expect(shell.exec(`${customBuildCmd} simple.yml`).code).toBe(0);

@@ -2,14 +2,16 @@ import shell from "shelljs";
 import initOpenCascade, { OpenCascadeInstance } from "opencascade.js/dist/node";
 import * as path from 'path';
 import { fileURLToPath } from 'url';
-import { exit } from "process";
 
 import { jest } from "@jest/globals";
+import dockerImageName from "./dockerImageName";
 jest.setTimeout(10000);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const customBuildCmd = "cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) donalffons/opencascade.js:multi-threaded";
+const customBuildCmd = `cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) ${dockerImageName.indexOf(":") ? `${dockerImageName}-` : dockerImageName} multi-threaded`;
 
-it("can create custom build: multi-threaded", () => {
+const it_ = process.env.skipMultiThreaded ? it.skip : it;
+
+it_("can create custom build: multi-threaded", () => {
   expect(shell.exec(`${customBuildCmd} multi-threaded.yml`).code).toBe(0);
   shell.mv("customBuilds/customBuild.multi-threaded.worker.js", "customBuilds/customBuild.multi-threaded.worker.cjs"); // stop jest from crying about cjs modules
 });
@@ -17,7 +19,7 @@ it("can create custom build: multi-threaded", () => {
 let mainJs: any = undefined;
 let oc: OpenCascadeInstance = undefined;
 
-it("can load custom build: multi-threaded", async () => {
+it_("can load custom build: multi-threaded", async () => {
   mainJs = await import(path.join(__dirname, "customBuilds", "customBuild.multi-threaded.js"));
   oc = await initOpenCascade({
     mainJS: mainJs.default,
@@ -27,7 +29,7 @@ it("can load custom build: multi-threaded", async () => {
   expect((oc as any).wasmMemory.buffer).toBeInstanceOf(SharedArrayBuffer);
 });
 
-it("can tessellate in multi-threaded mode", async () => {
+it_("can tessellate in multi-threaded mode", async () => {
   const spheres = new Array(50).fill(undefined).map((_, i) => new oc.BRepPrimAPI_MakeSphere_5(new oc.gp_Pnt_3(i, 0, 0), 2));
   const aRes = new oc.TopoDS_Compound();
   const aBuilder = new oc.BRep_Builder();
