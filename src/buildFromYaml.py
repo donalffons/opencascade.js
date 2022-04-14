@@ -81,7 +81,6 @@ def runBuild(build):
       command = [
         "emcc",
         "-flto",
-        "-sINLINING_LIMIT=1",
         "-fexceptions",
         "-sDISABLE_EXCEPTION_CATCHING=0",
         "-DIGNORE_NO_ATOMICS=1",

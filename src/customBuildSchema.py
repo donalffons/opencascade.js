@@ -25,7 +25,6 @@
         },
         "default": [
           "-flto",
-          "-sINLINING_LIMIT=1",
           "-fexceptions",
           "-sDISABLE_EXCEPTION_CATCHING=0",
           "-O3",
@@ -77,7 +76,6 @@
         },
         "default": [
           "-flto",
-          "-sINLINING_LIMIT=1",
           "-fexceptions",
           "-sDISABLE_EXCEPTION_CATCHING=0",
           "-O3",
