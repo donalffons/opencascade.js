@@ -61,8 +61,8 @@ cStringTypes = [
   "char *const",
 ]
 
-def isString(x):
-  return x.type.get_canonical().spelling in cStringTypes
+def isString(type):
+  return type.get_canonical().spelling in cStringTypes
 
 def getClassTypeName(theClass, templateDecl = None):
   return templateDecl.spelling if templateDecl is not None else theClass.spelling
@@ -247,7 +247,7 @@ class EmbindBindings(Bindings):
           templateArgs[arg.type.get_pointee().spelling].get_canonical().spelling in builtInTypes
         )
       ) or
-      isString(arg), args))
+      isString(arg.type), args))
       if any(needsWrapper):
         def replaceTemplateArgs(x):
           if templateArgs is not None and args[x[0]].type.get_pointee().spelling.replace("const ", "") in templateArgs:
@@ -265,21 +265,21 @@ class EmbindBindings(Bindings):
           else:
             return args[x[0]].type.get_pointee().spelling
         classTypeName = getClassTypeName(theClass, templateDecl)
-        wrappedParamTypes = ", ".join(map(lambda x: ("std::string" if isString(args[x[0]]) else "emscripten::val") if x[1] else replaceTemplateArgs(x), enumerate(needsWrapper)))
-        wrappedParamTypesAndNames = ", ".join(map(lambda x: (("std::string " if isString(args[x[0]]) else "emscripten::val ") + getArgName(x)) if x[1] else replaceTemplateArgs(x) + " " + getArgName(x), enumerate(needsWrapper)))
+        wrappedParamTypes = ", ".join(map(lambda x: ("std::string" if isString(args[x[0]].type) else "emscripten::val") if x[1] else replaceTemplateArgs(x), enumerate(needsWrapper)))
+        wrappedParamTypesAndNames = ", ".join(map(lambda x: (("std::string " if isString(args[x[0]].type) else "emscripten::val ") + getArgName(x)) if x[1] else replaceTemplateArgs(x) + " " + getArgName(x), enumerate(needsWrapper)))
         def generateGetReferenceValue(x):
-          if x[1] and not isString(args[x[0]]):
+          if x[1] and not isString(args[x[0]].type):
             return "        auto ref_" + (args[x[0]].spelling if not args[x[0]].spelling == "" else "argNo"+str(x[0])) + " = getReferenceValue<" + getArgType(x) + ">(" + getArgName(x) + ");\n"
           else:
             return ""
         def generateUpdateReferenceValue(x):
-          if x[1] and not isString(args[x[0]]):
+          if x[1] and not isString(args[x[0]].type):
             return "        updateReferenceValue<" + getArgType(x) + ">(" + getArgName(x) + ", ref_" + getArgName(x) + ");\n"
           else:
             return ""
         def generateInvocationArgs(x):
           if x[1]:
-            if not isString(args[x[0]]):
+            if not isString(args[x[0]].type):
               return "ref_" + getArgName(x)
             else:
               if not args[x[0]].type.get_canonical().get_pointee().is_const_qualified() or args[x[0]].type.is_const_qualified():
@@ -330,9 +330,9 @@ class EmbindBindings(Bindings):
     for constructor in constructors:
       overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
 
-      args = ", ".join(list(map(lambda x: ("std::string " + x.spelling) if isString(x) else self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], constructor.get_arguments())))
-      argNames = ", ".join(list(map(lambda x: (x.spelling + ".c_str()") if isString(x) else x.spelling, constructor.get_arguments())))
-      argTypes = ", ".join(list(map(lambda x: "std::string" if isString(x) else self.getSingleArgumentBinding(False, True, templateDecl, templateArgs)(x)[0], constructor.get_arguments())))
+      args = ", ".join(list(map(lambda x: ("std::string " + x.spelling) if isString(x.type) else self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], constructor.get_arguments())))
+      argNames = ", ".join(list(map(lambda x: (x.spelling + ".c_str()") if isString(x.type) else x.spelling, constructor.get_arguments())))
+      argTypes = ", ".join(list(map(lambda x: "std::string" if isString(x.type) else self.getSingleArgumentBinding(False, True, templateDecl, templateArgs)(x)[0], constructor.get_arguments())))
 
       name = getClassTypeName(theClass, templateDecl)
       constructorBindings += "    struct " + name + overloadPostfix + " : public " + name + " {\n"
