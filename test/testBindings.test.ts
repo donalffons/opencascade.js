@@ -306,9 +306,23 @@ it("correctly binds TemplateClass specializations", async () => {
   expect(() => {
     new oc.TemplateClassInt_1();
     new oc.TemplateClassInt_2(123);
-    new oc.TemplateClassBool_1();
-    new oc.TemplateClassBool_2(true);
+    new oc.TemplateClassFloat_1();
+    new oc.TemplateClassFloat_2(123);
   }).not.toThrow();
-  expect((new oc.TemplateClassInt_2(123)).getVal()).toBe(123);
-  expect((new oc.TemplateClassBool_2(true)).getVal()).toBe(true);
+  expect((new oc.TemplateClassInt_2(123)).getVal_1()).toBe(123);
+  expect((new oc.TemplateClassFloat_2(123)).getVal_1()).toBe(123);
+  const intTemplate = new oc.TemplateClassInt_2(123);
+  expect(() => {
+    intTemplate.getVal_2(122);
+  }).not.toThrow();
+  expect(() => {
+    intTemplate.getVal_2(124);
+  }).toThrow();
+  const intRef1 = { current: 122 };
+  const intRef2 = { current: 124 };
+  expect(intTemplate.getVal_2(intRef1)).toBe(165);
+  expect(intRef1.current).toBe(42);
+  expect(() => {
+    intTemplate.get_val_2(intRef2);
+  }).toThrow();
 });

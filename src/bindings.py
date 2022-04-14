@@ -294,7 +294,7 @@ class EmbindBindings(Bindings):
                 return getArgName(x) + ".c_str()"
           else:
             return getArgName(x)
-        resultTypeSpelling = "std::string" if isCString(method.result_type) else method.result_type.spelling
+        resultTypeSpelling = "std::string" if isCString(method.result_type) else self.getTypedefedTemplateTypeAsString(method.result_type.spelling, templateDecl, templateArgs)
         functionBinding = \
           "\n" + \
           "      " + ("std::function<" + resultTypeSpelling if not method.is_static_method() else "((" + resultTypeSpelling + " (*)") + "(" + (classTypeName + "&" if not method.is_static_method() else "") + (", " if not method.is_static_method() and len(args) > 0 else "") + wrappedParamTypes + (")>(" if not method.is_static_method() else "))") + "[](" + (classTypeName + "& that" if not method.is_static_method() else "") + (", " if not method.is_static_method() and len(args) > 0 else "") + wrappedParamTypesAndNames + ")" + " -> " + resultTypeSpelling + " {\n" + \

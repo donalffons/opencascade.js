@@ -5,7 +5,7 @@ mainBuild:
     - symbol: Instantiable1
     - symbol: Instantiable2
     - symbol: TemplateClassInt
-    - symbol: TemplateClassBool
+    - symbol: TemplateClassFloat
     - symbol: NotScopedEnum
     - symbol: ScopedEnum
 additionalCppCode: |
@@ -108,6 +108,13 @@ additionalCppCode: |
     TemplateClass() {}
     TemplateClass(T val) : _val(val) {}
     T getVal() { return _val; }
+    T getVal(T& someOtherVal) {
+      if(someOtherVal > _val) {
+        throw("incorrect value");
+      }
+      someOtherVal = 42;
+      return _val + someOtherVal;
+    }
   };
   typedef TemplateClass<int> TemplateClassInt;
-  typedef TemplateClass<bool> TemplateClassBool;
+  typedef TemplateClass<float> TemplateClassFloat;
