@@ -237,18 +237,23 @@ class EmbindBindings(Bindings):
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
 
-      args = list(method.get_arguments())
-      needsWrapper = list(map(lambda arg: arg.type.kind == clang.cindex.TypeKind.LVALUEREFERENCE and (
-        arg.type.get_pointee().get_canonical().spelling in builtInTypes or
-        arg.type.get_pointee().kind == clang.cindex.TypeKind.ENUM or
-        arg.type.get_pointee().kind == clang.cindex.TypeKind.POINTER or (
-          theClass.kind == clang.cindex.CursorKind.CLASS_TEMPLATE and
-          arg.type.get_pointee().spelling in templateArgs and
-          templateArgs[arg.type.get_pointee().spelling].get_canonical().spelling in builtInTypes
+      def needsWrapper(type):
+        return (
+          type.kind == clang.cindex.TypeKind.LVALUEREFERENCE and (
+            type.get_pointee().get_canonical().spelling in builtInTypes or
+            type.get_pointee().kind == clang.cindex.TypeKind.ENUM or
+            type.get_pointee().kind == clang.cindex.TypeKind.POINTER or (
+              theClass.kind == clang.cindex.CursorKind.CLASS_TEMPLATE and
+              type.get_pointee().spelling in templateArgs and
+              templateArgs[type.get_pointee().spelling].get_canonical().spelling in builtInTypes
+            )
+          ) or
+          isString(type)
         )
-      ) or
-      isString(arg.type), args))
-      if any(needsWrapper):
+
+      args = list(method.get_arguments())
+      argsNeedingWrapper = list(map(lambda arg: needsWrapper(arg.type), args))
+      if any(argsNeedingWrapper):
         def replaceTemplateArgs(x):
           if templateArgs is not None and args[x[0]].type.get_pointee().spelling.replace("const ", "") in templateArgs:
             return args[x[0]].type.spelling.replace(args[x[0]].type.get_pointee().spelling.replace("const ", ""), templateArgs[args[x[0]].type.get_pointee().spelling.replace("const ", "")].spelling)
@@ -265,8 +270,8 @@ class EmbindBindings(Bindings):
           else:
             return args[x[0]].type.get_pointee().spelling
         classTypeName = getClassTypeName(theClass, templateDecl)
-        wrappedParamTypes = ", ".join(map(lambda x: ("std::string" if isString(args[x[0]].type) else "emscripten::val") if x[1] else replaceTemplateArgs(x), enumerate(needsWrapper)))
-        wrappedParamTypesAndNames = ", ".join(map(lambda x: (("std::string " if isString(args[x[0]].type) else "emscripten::val ") + getArgName(x)) if x[1] else replaceTemplateArgs(x) + " " + getArgName(x), enumerate(needsWrapper)))
+        wrappedParamTypes = ", ".join(map(lambda x: ("std::string" if isString(args[x[0]].type) else "emscripten::val") if x[1] else replaceTemplateArgs(x), enumerate(argsNeedingWrapper)))
+        wrappedParamTypesAndNames = ", ".join(map(lambda x: (("std::string " if isString(args[x[0]].type) else "emscripten::val ") + getArgName(x)) if x[1] else replaceTemplateArgs(x) + " " + getArgName(x), enumerate(argsNeedingWrapper)))
         def generateGetReferenceValue(x):
           if x[1] and not isString(args[x[0]].type):
             return "        auto ref_" + (args[x[0]].spelling if not args[x[0]].spelling == "" else "argNo"+str(x[0])) + " = getReferenceValue<" + getArgType(x) + ">(" + getArgName(x) + ");\n"
@@ -291,9 +296,9 @@ class EmbindBindings(Bindings):
         functionBinding = \
           "\n" + \
           "      " + ("std::function<" + method.result_type.spelling if not method.is_static_method() else "((" + method.result_type.spelling + " (*)") + "(" + (classTypeName + "&, " if not method.is_static_method() else "") + wrappedParamTypes + (")>(" if not method.is_static_method() else "))") + "[](" + (classTypeName + "& that, " if not method.is_static_method() else "") + wrappedParamTypesAndNames + ")" + " -> " + method.result_type.spelling + " {\n" + \
-          "".join(map(lambda x: generateGetReferenceValue(x), enumerate(needsWrapper))) + \
-          "        " + ((("const " if method.result_type.is_const_qualified() or method.result_type.get_pointee().is_const_qualified() else "") + "auto" + ("& " if method.result_type.kind == clang.cindex.TypeKind.LVALUEREFERENCE else " ") + "ret = ") if not method.result_type.spelling == "void" else "") + ("that." if not method.is_static_method() else theClass.spelling + "::") + method.spelling + "(" + ", ".join(map(lambda x: generateInvocationArgs(x), enumerate(needsWrapper))) + ");\n" + \
-          "".join(map(lambda x: generateUpdateReferenceValue(x), enumerate(needsWrapper))) + \
+          "".join(map(lambda x: generateGetReferenceValue(x), enumerate(argsNeedingWrapper))) + \
+          "        " + ((("const " if method.result_type.is_const_qualified() or method.result_type.get_pointee().is_const_qualified() else "") + "auto" + ("& " if method.result_type.kind == clang.cindex.TypeKind.LVALUEREFERENCE else " ") + "ret = ") if not method.result_type.spelling == "void" else "") + ("that." if not method.is_static_method() else theClass.spelling + "::") + method.spelling + "(" + ", ".join(map(lambda x: generateInvocationArgs(x), enumerate(argsNeedingWrapper))) + ");\n" + \
+          "".join(map(lambda x: generateUpdateReferenceValue(x), enumerate(argsNeedingWrapper))) + \
           ("        return ret;\n" if not method.result_type.spelling == "void" else "") + \
           "      }\n" + \
           "    )"
