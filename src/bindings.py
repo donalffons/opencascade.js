@@ -61,7 +61,7 @@ cStringTypes = [
   "char *const",
 ]
 
-def isString(type):
+def isCString(type):
   return type.get_canonical().spelling in cStringTypes
 
 def getClassTypeName(theClass, templateDecl = None):
@@ -248,12 +248,13 @@ class EmbindBindings(Bindings):
               templateArgs[type.get_pointee().spelling].get_canonical().spelling in builtInTypes
             )
           ) or
-          isString(type)
+          isCString(type)
         )
 
       args = list(method.get_arguments())
       argsNeedingWrapper = list(map(lambda arg: needsWrapper(arg.type), args))
-      if any(argsNeedingWrapper):
+      returnNeedsWrapper = needsWrapper(method.result_type)
+      if any(argsNeedingWrapper) or returnNeedsWrapper:
         def replaceTemplateArgs(x):
           if templateArgs is not None and args[x[0]].type.get_pointee().spelling.replace("const ", "") in templateArgs:
             return args[x[0]].type.spelling.replace(args[x[0]].type.get_pointee().spelling.replace("const ", ""), templateArgs[args[x[0]].type.get_pointee().spelling.replace("const ", "")].spelling)
@@ -270,21 +271,21 @@ class EmbindBindings(Bindings):
           else:
             return args[x[0]].type.get_pointee().spelling
         classTypeName = getClassTypeName(theClass, templateDecl)
-        wrappedParamTypes = ", ".join(map(lambda x: ("std::string" if isString(args[x[0]].type) else "emscripten::val") if x[1] else replaceTemplateArgs(x), enumerate(argsNeedingWrapper)))
-        wrappedParamTypesAndNames = ", ".join(map(lambda x: (("std::string " if isString(args[x[0]].type) else "emscripten::val ") + getArgName(x)) if x[1] else replaceTemplateArgs(x) + " " + getArgName(x), enumerate(argsNeedingWrapper)))
+        wrappedParamTypes = ", ".join(map(lambda x: ("std::string" if isCString(args[x[0]].type) else "emscripten::val") if x[1] else replaceTemplateArgs(x), enumerate(argsNeedingWrapper)))
+        wrappedParamTypesAndNames = ", ".join(map(lambda x: (("std::string " if isCString(args[x[0]].type) else "emscripten::val ") + getArgName(x)) if x[1] else replaceTemplateArgs(x) + " " + getArgName(x), enumerate(argsNeedingWrapper)))
         def generateGetReferenceValue(x):
-          if x[1] and not isString(args[x[0]].type):
+          if x[1] and not isCString(args[x[0]].type):
             return "        auto ref_" + (args[x[0]].spelling if not args[x[0]].spelling == "" else "argNo"+str(x[0])) + " = getReferenceValue<" + getArgType(x) + ">(" + getArgName(x) + ");\n"
           else:
             return ""
         def generateUpdateReferenceValue(x):
-          if x[1] and not isString(args[x[0]].type):
+          if x[1] and not isCString(args[x[0]].type):
             return "        updateReferenceValue<" + getArgType(x) + ">(" + getArgName(x) + ", ref_" + getArgName(x) + ");\n"
           else:
             return ""
         def generateInvocationArgs(x):
           if x[1]:
-            if not isString(args[x[0]].type):
+            if not isCString(args[x[0]].type):
               return "ref_" + getArgName(x)
             else:
               if not args[x[0]].type.get_canonical().get_pointee().is_const_qualified() or args[x[0]].type.is_const_qualified():
@@ -293,27 +294,28 @@ class EmbindBindings(Bindings):
                 return getArgName(x) + ".c_str()"
           else:
             return getArgName(x)
+        resultTypeSpelling = "std::string" if isCString(method.result_type) else method.result_type.spelling
         functionBinding = \
           "\n" + \
-          "      " + ("std::function<" + method.result_type.spelling if not method.is_static_method() else "((" + method.result_type.spelling + " (*)") + "(" + (classTypeName + "&, " if not method.is_static_method() else "") + wrappedParamTypes + (")>(" if not method.is_static_method() else "))") + "[](" + (classTypeName + "& that, " if not method.is_static_method() else "") + wrappedParamTypesAndNames + ")" + " -> " + method.result_type.spelling + " {\n" + \
+          "      " + ("std::function<" + resultTypeSpelling if not method.is_static_method() else "((" + resultTypeSpelling + " (*)") + "(" + (classTypeName + "&, " if not method.is_static_method() else "") + wrappedParamTypes + (")>(" if not method.is_static_method() else "))") + "[](" + (classTypeName + "& that, " if not method.is_static_method() else "") + wrappedParamTypesAndNames + ")" + " -> " + resultTypeSpelling + " {\n" + \
           "".join(map(lambda x: generateGetReferenceValue(x), enumerate(argsNeedingWrapper))) + \
-          "        " + ((("const " if method.result_type.is_const_qualified() or method.result_type.get_pointee().is_const_qualified() else "") + "auto" + ("& " if method.result_type.kind == clang.cindex.TypeKind.LVALUEREFERENCE else " ") + "ret = ") if not method.result_type.spelling == "void" else "") + ("that." if not method.is_static_method() else theClass.spelling + "::") + method.spelling + "(" + ", ".join(map(lambda x: generateInvocationArgs(x), enumerate(argsNeedingWrapper))) + ");\n" + \
+          "        " + ((("const " if (not isCString(method.result_type) and (method.result_type.is_const_qualified() or method.result_type.get_pointee().is_const_qualified())) else "") + "auto" + ("& " if not isCString(method.result_type) and method.result_type.kind == clang.cindex.TypeKind.LVALUEREFERENCE else " ") + "ret = ") if not method.result_type.spelling == "void" else "") + ("static_cast<std::string>(" if isCString(method.result_type) else "") + ("that." if not method.is_static_method() else theClass.spelling + "::") + method.spelling + "(" + ", ".join(map(lambda x: generateInvocationArgs(x), enumerate(argsNeedingWrapper))) + ")" + (")" if isCString(method.result_type) else "") + ";\n" + \
           "".join(map(lambda x: generateUpdateReferenceValue(x), enumerate(argsNeedingWrapper))) + \
           ("        return ret;\n" if not method.result_type.spelling == "void" else "") + \
           "      }\n" + \
           "    )"
       else:
         if numOverloads == 1:
-          functionBinding = "&" + className + "::" + method.spelling
+          functionBinding = " &" + className + "::" + method.spelling
         else:
-          functionBinding = "select_overload<" + self.getTypedefedTemplateTypeAsString(method.result_type.spelling, templateDecl, templateArgs) + "(" + ", ".join(map(lambda x: self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], list(method.get_arguments()))) + ")" + ("const" if method.is_const_method() else "") + (", " + getClassTypeName(theClass, templateDecl) if not method.is_static_method() else "") + ">(&" + className + "::" + method.spelling + ")"
+          functionBinding = " select_overload<" + self.getTypedefedTemplateTypeAsString(method.result_type.spelling, templateDecl, templateArgs) + "(" + ", ".join(map(lambda x: self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], list(method.get_arguments()))) + ")" + ("const" if method.is_const_method() else "") + (", " + getClassTypeName(theClass, templateDecl) if not method.is_static_method() else "") + ">(&" + className + "::" + method.spelling + ")"
 
       if method.is_static_method():
         functionCommand = "class_function"
       else:
         functionCommand = "function"
 
-      self.output += "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\", " + functionBinding + ", allow_raw_pointers())\n"
+      self.output += "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\"," + functionBinding + ", allow_raw_pointers())\n"
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.FIELD_DECL:
       if method.type.kind == clang.cindex.TypeKind.CONSTANTARRAY:
         print("Cannot handle array properties, skipping " + className + "::" + method.spelling)
@@ -335,9 +337,9 @@ class EmbindBindings(Bindings):
     for constructor in constructors:
       overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
 
-      args = ", ".join(list(map(lambda x: ("std::string " + x.spelling) if isString(x.type) else self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], constructor.get_arguments())))
-      argNames = ", ".join(list(map(lambda x: (x.spelling + ".c_str()") if isString(x.type) else x.spelling, constructor.get_arguments())))
-      argTypes = ", ".join(list(map(lambda x: "std::string" if isString(x.type) else self.getSingleArgumentBinding(False, True, templateDecl, templateArgs)(x)[0], constructor.get_arguments())))
+      args = ", ".join(list(map(lambda x: ("std::string " + x.spelling) if isCString(x.type) else self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], constructor.get_arguments())))
+      argNames = ", ".join(list(map(lambda x: (x.spelling + ".c_str()") if isCString(x.type) else x.spelling, constructor.get_arguments())))
+      argTypes = ", ".join(list(map(lambda x: "std::string" if isCString(x.type) else self.getSingleArgumentBinding(False, True, templateDecl, templateArgs)(x)[0], constructor.get_arguments())))
 
       name = getClassTypeName(theClass, templateDecl)
       constructorBindings += "    struct " + name + overloadPostfix + " : public " + name + " {\n"

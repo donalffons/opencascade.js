@@ -188,6 +188,33 @@ it("correctly binds StaticMethods::scopedEnumReturn", async () => {
   expect(oc.StaticMethods.scopedEnumReturn().value).toBe(oc.ScopedEnum.B.value);
 });
 
+it("correctly binds StaticMethods::cStringReturn", async () => {
+  expect(oc.StaticMethods.cStringReturn.argCount).toBe(0);
+  expect(() => {
+    oc.StaticMethods.cStringReturn(1);
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.cStringReturn();
+  }).not.toThrow();
+  expect(oc.StaticMethods.cStringReturn()).toBe("Hello, World!");
+});
+
+it("correctly binds StaticMethods::cStringArgument", async () => {
+  expect(oc.StaticMethods.cStringArgument.argCount).toBe(1);
+  expect(() => {
+    oc.StaticMethods.cStringArgument();
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.cStringArgument(1);
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.cStringArgument("keks");
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.cStringArgument("Hello, World!");
+  }).not.toThrow();
+});
+
 it("correctly binds Instantiable1", async () => {
   expect(() => {
     new oc.Instantiable1();

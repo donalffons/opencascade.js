@@ -9,6 +9,8 @@ mainBuild:
     - symbol: NotScopedEnum
     - symbol: ScopedEnum
 additionalCppCode: |
+  #include <string.h>
+
   enum NotScopedEnum {
     NotScopedEnum_A,
     NotScopedEnum_B,
@@ -53,6 +55,14 @@ additionalCppCode: |
     }
     static ScopedEnum scopedEnumReturn() {
       return ScopedEnum::B;
+    }
+    static const char* cStringReturn() {
+      return "Hello, World!";
+    }
+    static void cStringArgument(const char* s) {
+      if(strcmp("Hello, World!", s) != 0) {
+        throw("incorrect value");
+      }
     }
   };
 
