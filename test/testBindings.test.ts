@@ -238,6 +238,21 @@ it("correctly binds Instantiable1", async () => {
     instance.getVal_3(1, 1.234);
   }).not.toThrow();
   expect(instance.getVal_3(1, 1.234)).toBeCloseTo(153.0159912109375);
+  expect(instance.intRefArgument.argCount).toBe(1);
+  expect(() => {
+    instance.intRefArgument();
+  }).toThrow();
+  expect(() => {
+    instance.intRefArgument(122);
+  }).toThrow();
+  expect(() => {
+    instance.intRefArgument(123);
+  }).not.toThrow();
+  const intRef = { current: 123 };
+  expect(() => {
+    instance.intRefArgument(intRef);
+  }).not.toThrow();
+  expect(intRef.current).toBe(234);
 });
 
 it("correctly binds Instantiable2", async () => {
