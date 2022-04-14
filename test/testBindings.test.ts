@@ -253,6 +253,27 @@ it("correctly binds Instantiable1", async () => {
     instance.intRefArgument(intRef);
   }).not.toThrow();
   expect(intRef.current).toBe(234);
+  expect(instance.cStringReturn.argCount).toBe(0);
+  expect(() => {
+    instance.cStringReturn(1);
+  }).toThrow();
+  expect(() => {
+    instance.cStringReturn();
+  }).not.toThrow();
+  expect(instance.cStringReturn()).toBe("Hello, World!");
+  expect(instance.cStringArgument.argCount).toBe(1);
+  expect(() => {
+    instance.cStringArgument();
+  }).toThrow();
+  expect(() => {
+    instance.cStringArgument(1);
+  }).toThrow();
+  expect(() => {
+    instance.cStringArgument("keks");
+  }).toThrow();
+  expect(() => {
+    instance.cStringArgument("Hello, World!");
+  }).not.toThrow();
 });
 
 it("correctly binds Instantiable2", async () => {

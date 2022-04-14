@@ -79,6 +79,14 @@ additionalCppCode: |
       }
       i = 234;
     }
+    const char* cStringReturn() {
+      return "Hello, World!";
+    }
+    void cStringArgument(const char* s) {
+      if(strcmp("Hello, World!", s) != 0) {
+        throw("incorrect value");
+      }
+    }
   };
 
   class Instantiable2 {
