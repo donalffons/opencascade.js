@@ -29,20 +29,25 @@
 
 * Add support + bindings for exceptions
 
-## 6. Default values in bindings
+## 6. Straighten out support for reference types
+
+* Passing objects as references is not consistent with passing built-in types, right now. The fix should be fairly easy and non-breaking.
+* It is impossible to return references to built-in types, right now. Is there a way to avoid a breaking change?
+
+## 7. Default values in bindings
 
 * Add support for default values
 
-## 7. More flexibility when defining custom build bindings in YAML files
+## 8. More flexibility when defining custom build bindings in YAML files
 
 * Currently, only "symbol: bla" is supported.
 * Add support for regex
 * Maybe support for inline python functions?!
 
-## 8. TSDoc comments in typescript definitions
+## 9. TSDoc comments in typescript definitions
 
 * Helpful in IDEs that support intellisense
 
-## 9. Other
+## 10. Other
 
 * Experiment with opencascade's built-in visualization and see if it works with Emscripten and if it's any good. Create example.
