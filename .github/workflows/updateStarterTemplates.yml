@@ -34,9 +34,10 @@ jobs:
         run: |
           npm install -g npm-check-updates
           cd starter-templates
-          for dir in ./*/
+          for dir in  */
           do
-            cd $dir
+            dir=${dir%*/}
+            cd ${dir}
             ncu -u
             npm install
             npm run build
