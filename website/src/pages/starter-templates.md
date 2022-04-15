@@ -14,8 +14,8 @@ If you want to add a configuration, please head over to [Github](https://github.
 
 #### Create-React-App
 
-#### NextJS
+<!-- #### NextJS
 
 ## Server-Side
 
-### NodeJS
+### NodeJS -->
