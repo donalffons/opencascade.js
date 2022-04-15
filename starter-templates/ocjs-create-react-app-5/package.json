@@ -1,5 +1,5 @@
 {
-  "name": "ocjs-create-react-app",
+  "name": "ocjs-create-react-app-5",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,7 +17,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "clean": "rm build -r"
   },
   "eslintConfig": {
     "extends": [
