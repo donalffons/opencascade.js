@@ -27,7 +27,7 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: '15'
+          node-version: '16'
 
       - name: Upgrade Dependencies
         if: github.event.inputs.upgrade == 'true'
