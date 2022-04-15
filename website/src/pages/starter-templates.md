@@ -8,16 +8,18 @@ If you want to add a configuration, please head over to [Github](https://github.
 
 :::
 
-## Browser-Side
+## Browser
+
+For running OpenCascade.js in a web browser.
 
 ### ReactJS
 
-#### Create-React-App 5
+[**Create-React-App**](/download-starter-templates/ocjs-create-react-app-5.zip)
 
-[Download](/download-starter-templates/ocjs-create-react-app-5.zip)
+[**Create-Next-App**](/download-starter-templates/ocjs-create-next-app-12.zip)
 
-#### NextJS
+## Server
 
-## Server-Side
+For running OpenCascade.js on a server or cloud function.
 
-### NodeJS
+[**NodeJS**](#)
