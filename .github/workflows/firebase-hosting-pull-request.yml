@@ -27,6 +27,7 @@ jobs:
       - name: Add starter templates to website
         run: |
           cd website/static
+          mkdir download-starter-templates
           gsutil cp -r gs://opencascade-js/starter-templates ./download-starter-templates
 
       - name: build website
