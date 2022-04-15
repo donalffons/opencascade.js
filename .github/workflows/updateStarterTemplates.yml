@@ -47,6 +47,7 @@ jobs:
             cd ..
           done
           cd ..
+          git status
 
       - name: Update Starter Templates
         timeout-minutes: 10000
@@ -61,9 +62,11 @@ jobs:
             gsutil cp ./${dir}.zip gs://opencascade-js/starter-templates/${dir}.zip
             rm ${dir}.zip
           done
+          git status
 
       - name: Git pull
         run: |
+          git status
           git pull
 
       - name: Push Changes to branch
