@@ -66,7 +66,7 @@ jobs:
         run: |
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:latest || true
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }} || true
-          docker build --target testImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}-test-image --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }} .
+          docker build --target testImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}-test-image --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest .
           cd test
           bindingsTestImage="${{ secrets.DOCKER_IMAGE_NAME }}-test-image" npm run test -- ./testBindings.test.ts
           cd ..
@@ -75,7 +75,7 @@ jobs:
         if: github.event.inputs.buildType != 'testBindings'
         timeout-minutes: 10000
         run: |
-          docker build --target customBuildImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }} .
+          docker build --target customBuildImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest .
 
       - name: Push to Docker Hub (staging)
         if: github.event.inputs.buildType != 'testBindings'
@@ -106,7 +106,7 @@ jobs:
         run: |
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded || true
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}-multi-threaded || true
-          docker build --target customBuildImage --build-arg threading=multi-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}-multi-threaded .
+          docker build --target customBuildImage --build-arg threading=multi-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}-multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded .
 
       - name: Push to Docker Hub (Staging, Multi-Threaded)
         if: github.event.inputs.buildType != 'testBindings' && github.event.inputs.multithreaded == 'true'
