@@ -46,15 +46,11 @@ jobs:
           done
           cd ..
 
-      - name: Git pull
-        run: |
-          git pull
-
       - name: Update Starter Templates
         timeout-minutes: 10000
         run: |
-          apt-get update
-          apt-get install -y zip
+          sudo apt-get update
+          sudo apt-get install -y zip
           cd starter-templates
           for dir in ./*/
           do
@@ -62,6 +58,10 @@ jobs:
             gsutil cp ./$(dir).zip gs://opencascade-js/starter-templates/$(dir).zip
             rm $(dir).zip
           done
+
+      - name: Git pull
+        run: |
+          git pull
 
       - name: Push Changes to branch
         uses: ad-m/github-push-action@master
