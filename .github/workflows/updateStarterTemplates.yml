@@ -40,6 +40,7 @@ jobs:
             cd ${dir}
             ncu -u
             npm install
+            npm install opencascade.js@beta
             npm run build
             npm run clean
             rm node_modules -r
