@@ -12,12 +12,14 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: ${{ secrets.DOCKER_IMAGE_NAME }}
+
   website:
     name: Deploy website
     runs-on: ubuntu-latest
@@ -28,14 +30,22 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
+
       - name: Check out repository code
         uses: actions/checkout@v2
+
       - name: Add reference docs to website
         run: |
           cd website/static
           gsutil cp gs://opencascade-js/reference-docs.zip .
           unzip reference-docs.zip
           rm reference-docs.zip
+
+      - name: Add starter templates to website
+        run: |
+          cd website/static
+          gsutil cp -r gs://opencascade-js/starter-templates ./download-starter-templates
+
       - name: Build website
         run: |
           cd website
@@ -44,6 +54,7 @@ jobs:
           npm ci && npm run build
           cd ..
           npm run build
+
       - name: Deploy to firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

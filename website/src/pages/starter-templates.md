@@ -12,7 +12,9 @@ If you want to add a configuration, please head over to [Github](https://github.
 
 ### ReactJS
 
-#### Create-React-App
+#### Create-React-App 5
+
+[Download](/download-starter-templates/ocjs-create-react-app-5.zip)
 
 #### NextJS
 

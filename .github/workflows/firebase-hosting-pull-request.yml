@@ -13,14 +13,22 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
+
       - name: Check out repository code
         uses: actions/checkout@v2
+
       - name: Add reference docs to website
         run: |
           cd website/static
           gsutil cp gs://opencascade-js/reference-docs.zip .
           unzip reference-docs.zip
           rm reference-docs.zip
+
+      - name: Add starter templates to website
+        run: |
+          cd website/static
+          gsutil cp -r gs://opencascade-js/starter-templates ./download-starter-templates
+
       - name: build website
         run: |
           cd website
@@ -30,6 +38,7 @@ jobs:
           cd ..
           npm run build
           npm run disallow-search-bots
+
       - name: Deploy to firebase preview channel
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
