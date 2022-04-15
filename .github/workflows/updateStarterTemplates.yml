@@ -47,7 +47,6 @@ jobs:
             cd ..
           done
           cd ..
-          git status
 
       - name: Update Starter Templates
         timeout-minutes: 10000
@@ -62,12 +61,14 @@ jobs:
             gsutil cp ./${dir}.zip gs://opencascade-js/starter-templates/${dir}.zip
             rm ${dir}.zip
           done
-          git status
 
-      - name: Git pull
+      - name: Commit Changes
         run: |
           git status
           git pull
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Upgrade starter template dependencies" -a
 
       - name: Push Changes to branch
         uses: ad-m/github-push-action@master
