@@ -46,16 +46,20 @@ const config = {
         },
         items: [
           {
-            type: "doc",
-            docId: "about",
-            position: "left",
             label: "Guides",
+            to: "/docs/about",
+            position: "left",
           },
           {
             position: "left",
             label: "Reference Docs",
             href: "/reference-docs",
             target: "_blank",
+          },
+          {
+            label: "Starter Templates",
+            to: "/starter-templates",
+            position: "left",
           },
           {
             type: "search",
@@ -82,6 +86,10 @@ const config = {
                 label: "Reference Docs",
                 href: "/reference-docs",
                 target: "_blank",
+              },
+              {
+                label: "Starter Templates",
+                to: "/starter-templates",
               },
             ],
           },
