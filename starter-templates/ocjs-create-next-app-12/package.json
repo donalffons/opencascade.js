@@ -10,14 +10,14 @@
     "clean": "rm -r .next"
   },
   "dependencies": {
-    "@google/model-viewer": "^1.11.0",
-    "next": "12.1.4",
-    "opencascade.js": "^2.0.0-beta.34eb483",
+    "@google/model-viewer": "^1.11.1",
+    "next": "12.1.5",
+    "opencascade.js": "^2.0.0-beta.6d53e40",
     "react": "18.0.0",
     "react-dom": "18.0.0"
   },
   "devDependencies": {
-    "eslint": "8.12.0",
-    "eslint-config-next": "12.1.4"
+    "eslint": "8.13.0",
+    "eslint-config-next": "12.1.5"
   }
 }
