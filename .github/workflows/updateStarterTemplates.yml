@@ -55,6 +55,10 @@ jobs:
           for dir in ./*/
           do
             zip -r $(dir).zip ./$(dir)
+            ls -al
+            echo "---"
+            echo $(dir)
+            echo "---"
             gsutil cp ./$(dir).zip gs://opencascade-js/starter-templates/$(dir).zip
             rm $(dir).zip
           done
