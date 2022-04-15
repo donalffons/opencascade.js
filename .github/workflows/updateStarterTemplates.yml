@@ -52,15 +52,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y zip
           cd starter-templates
-          for dir in ./*/
+          for dir in  */
           do
-            zip -r $(dir).zip ./$(dir)
-            ls -al
-            echo "---"
-            echo $(dir)
-            echo "---"
-            gsutil cp ./$(dir).zip gs://opencascade-js/starter-templates/$(dir).zip
-            rm $(dir).zip
+            dir=${dir%*/}
+            zip -r ${dir}.zip ./${dir}
+            gsutil cp ./${dir}.zip gs://opencascade-js/starter-templates/${dir}.zip
+            rm ${dir}.zip
           done
 
       - name: Git pull
