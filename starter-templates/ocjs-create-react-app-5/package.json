@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@google/model-viewer": "^1.11.0",
+    "@google/model-viewer": "^1.11.1",
     "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^12.1.4",
-    "@testing-library/user-event": "^13.5.0",
-    "opencascade.js": "^2.0.0-beta.34eb483",
+    "@testing-library/react": "^13.0.1",
+    "@testing-library/user-event": "^14.1.0",
+    "opencascade.js": "^2.0.0-beta.6d53e40",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-scripts": "5.0.0",
+    "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
