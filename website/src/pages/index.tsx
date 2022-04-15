@@ -31,7 +31,7 @@ export default function Home(): JSX.Element {
   return (
     <Layout
       title={siteConfig.title}
-      description="Port of the OpenCascade CAD library to JavaScript and WebAssembly via Emscripten.">
+      description="Port of the OpenCascade CAD library to JavaScript and WebAssembly. Build web-enabled CAD applications that run in the browser or in the cloud.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
