@@ -11,7 +11,7 @@ export class OpenCascadeWorker {
   async initOpenCascade() {
     oc = await initOpenCascade();
   };
-  async runOCJSCode(code: string, params: { [key: string]: number | undefined }): Promise<Uint8Array | undefined> {
+  async runOCJSCode(code: string, params?: { [key: string]: number | undefined }): Promise<Uint8Array | undefined> {
     const visualizeDoc_ = (doc: TDocStd_Document) => {
       if (!oc) throw ("OpenCascade.js not initialized");
       const docHandle = new oc.Handle_TDocStd_Document_2(doc);

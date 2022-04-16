@@ -9,7 +9,7 @@ import styles from "./OCJSPreview.module.css";
 import { ErrorBoundary, FallbackProps } from "react-error-boundary"
 import Admonition from "@theme/Admonition";
 
-function Preview({ code, params = {} }: { code?: string; params?: { [key: string]: number | undefined } }) {
+function Preview({ code, params }: { code?: string; params?: { [key: string]: number | undefined } }) {
   const worker = suspend(async () => {
     const WrappedOpenCascadeWorker = wrap<typeof OpenCascadeWorker>(new MyComlinkWorker());
     const worker = await new WrappedOpenCascadeWorker();
