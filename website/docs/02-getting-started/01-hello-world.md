@@ -99,9 +99,17 @@ The exact syntax depends on your framework and setup. OpenCascade.js is framewor
 We can now simply visualize our models. Let's subtract a sphere from a box.
 
 ```js ocjs
+params:
+  sphereSize:
+    type: range
+    default: 0.65
+    lower: 0.51
+    upper: 0.8
+    step: 0.01
 code: |
+  const { sphereSize } = params
   const box = new oc.BRepPrimAPI_MakeBox_2(1, 1, 1);
-  const sphere = new oc.BRepPrimAPI_MakeSphere_5(new oc.gp_Pnt_3(0.5, 0.5, 0.5), 0.65);
+  const sphere = new oc.BRepPrimAPI_MakeSphere_5(new oc.gp_Pnt_3(0.5, 0.5, 0.5), sphereSize);
   const cut = new oc.BRepAlgoAPI_Cut_3(box.Shape(), sphere.Shape(), new oc.Message_ProgressRange_1());
   cut.Build(new oc.Message_ProgressRange_1());
   visualizeShapes(cut.Shape());

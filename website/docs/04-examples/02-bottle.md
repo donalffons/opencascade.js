@@ -13,16 +13,19 @@ params:
     default: 50
     lower: 20
     upper: 100
+    step: 1
   height:
     type: range
     default: 70
     lower: 50
     upper: 120
+    step: 1
   thickness:
     type: range
     default: 30
     lower: 15
     upper: 50
+    step: 1
 code: |
   const { width, height, thickness } = params;
 

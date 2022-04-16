@@ -30,6 +30,7 @@ type Param = {
   default: number;
   lower: number;
   upper: number;
+  step: number;
 };
 
 function ParamInput({ title, param, onUpdate }: { title: string; param: Param; onUpdate: (val: number) => void }) {
@@ -43,6 +44,7 @@ function ParamInput({ title, param, onUpdate }: { title: string; param: Param; o
         type="range"
         min={param.lower}
         max={param.upper}
+        step={param.step}
         value={val}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setVal(parseFloat(e.target.value));
