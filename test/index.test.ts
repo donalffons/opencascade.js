@@ -151,3 +151,11 @@ it("can create bottle", () => {
   }
   makeBottle(oc, 50, 70, 30);
 });
+
+it("can catch exceptions", async () => {
+  try {
+    new oc.BRepPrimAPI_MakeCone_1(1, 0.5, 0);
+  } catch (e) {
+    expect(oc.OCJS.getStandard_FailureData(e).GetMessageString()).toBe("cone with negative or null height");
+  }
+});
