@@ -326,3 +326,13 @@ it("correctly binds TemplateClass specializations", async () => {
     intTemplate.get_val_2(intRef2);
   }).toThrow();
 });
+
+it("can handle exceptions thrown and caught in C++", async () => {
+  expect(() => {
+    oc.ExceptionTest.throwingFunc();
+  }).toThrow();
+  expect(() => {
+    oc.ExceptionTest.catchingFunc();
+  }).not.toThrow();
+  expect(oc.ExceptionTest.catchingFunc()).toBe(true);
+});
