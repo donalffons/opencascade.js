@@ -126,6 +126,16 @@ jobs:
           name: dist
           path: ./dist/
 
+      - uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: customBuilds
+          path: |
+            ./customBuilds/*.js
+            ./customBuilds/*.wasm
+            ./customBuilds/*.d.ts
+            ./customBuilds/*.yml
+
       - name: Push to Docker Hub
         if: github.event.inputs.buildType == 'release'
         run: |
