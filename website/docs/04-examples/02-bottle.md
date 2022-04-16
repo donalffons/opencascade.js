@@ -7,10 +7,24 @@ sidebar_position: 1
 [OpenCascade's bottle example](https://dev.opencascade.org/doc/overview/html/occt__tutorial.html) is one of the classic examples of that library. The code below is a translation of the original C++ code into JavaScript.
 
 ```js ocjs
+params:
+  width:
+    type: range
+    default: 50
+    lower: 20
+    upper: 100
+  height:
+    type: range
+    default: 70
+    lower: 50
+    upper: 120
+  thickness:
+    type: range
+    default: 30
+    lower: 15
+    upper: 50
 code: |
-  const width = 50;
-  const height = 70;
-  const thickness = 30;
+  const { width, height, thickness } = params;
 
   // Profile : Define Support Points
   const aPnt1 = new oc.gp_Pnt_3(-width / 2., 0, 0);
@@ -64,8 +78,8 @@ code: |
   const neckAxis = oc.gp.DZ();
   const neckAx2 = new oc.gp_Ax2_3(neckLocation, neckAxis);
 
-  const myNeckRadius = thickness / 4.;
-  const myNeckHeight = height / 10.;
+  const myNeckRadius = 5;
+  const myNeckHeight = 5;
 
   const MKCylinder = new oc.BRepPrimAPI_MakeCylinder_3(neckAx2, myNeckRadius, myNeckHeight);
   const myNeck = MKCylinder.Shape();
