@@ -68,7 +68,7 @@ jobs:
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }} || true
           docker build --target testImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}-test-image --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest .
           cd test
-          bindingsTestImage="${{ secrets.DOCKER_IMAGE_NAME }}-test-image" npm run test -- ./testBindings.test.ts
+          dockerImageName="${{ secrets.DOCKER_IMAGE_NAME }}-test-image" npm run test -- ./testBindings.test.ts
           cd ..
 
       - name: Build OpenCascade.js Docker Image "customBuildImage"
@@ -114,11 +114,11 @@ jobs:
           docker tag ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}-multi-threaded
           docker push ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}-multi-threaded
 
-      - name: Run all tests
+      - name: Run multi-threading tests
         if: github.event.inputs.buildType != 'testBindings'
         run: |
           cd test
-          dockerImageName="${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}-multi-threaded" npm run test
+          dockerImageName="${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}-multi-threaded" npm run test -- ./multi-threaded.test.ts
 
       - uses: actions/upload-artifact@v2
         if: ${{ always() }}

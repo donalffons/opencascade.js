@@ -2,12 +2,12 @@ import shell from "shelljs";
 import initOpenCascade, { OpenCascadeInstance } from "opencascade.js/dist/node";
 import * as path from 'path';
 import { fileURLToPath } from 'url';
-
 import { jest } from "@jest/globals";
-import dockerImageName from "./dockerImageName";
 jest.setTimeout(10000);
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const customBuildCmd = `cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) ${dockerImageName.indexOf(":") ? `${dockerImageName}-` : dockerImageName} multi-threaded`;
+const dockerImageName = process.env.dockerImageName ?? "donalffons/opencascade.js";
+const customBuildCmd = `cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) ${dockerImageName.indexOf(":") ? `${dockerImageName}` : dockerImageName} multi-threaded`;
 
 const it_ = process.env.skipMultiThreaded ? it.skip : it;
 
