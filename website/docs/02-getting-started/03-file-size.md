@@ -41,3 +41,9 @@ Downloading 8MB on a good 3G connection would take around 9 seconds. On a 4G con
 Especially on slow network connections, this file size might be too large. Another important aspect is the significant amount of resources and time it takes to compile and optimize the WASM file for your user's target architecture. This process might take longer than downloading the WASM asset itself.
 
 If you want to support such use-cases, first have a look at the [App-Development Workflow](/docs/app-dev-workflow/workflow) documentation and then read the guide on how to create [custom builds](/docs/app-dev-workflow/custom-builds), which can be significantly smaller and faster to load than the (developer-focused) official NPM package.
+
+:::info Disabling exceptions greatly reduces file size
+
+For many applications, exception support is not required in OpenCascade.js and can be disabled. For a full build, this reduces the file size by ~45% and greatly improves performance (even if exceptions are never thrown). Pass `-sDISABLE_EXCEPTION_CATCHING=1` in the `emccFlags` of your custom build to disable exceptions. Check out [this custom build definition](https://github.com/donalffons/opencascade.js/blob/exception-support/test/customBuilds/no-exceptions.yml) for an example.
+
+:::
