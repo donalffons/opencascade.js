@@ -131,10 +131,10 @@ jobs:
         with:
           name: customBuilds
           path: |
-            ./customBuilds/*.js
-            ./customBuilds/*.wasm
-            ./customBuilds/*.d.ts
-            ./customBuilds/*.yml
+            ./test/customBuilds/*.js
+            ./test/customBuilds/*.wasm
+            ./test/customBuilds/*.d.ts
+            ./test/customBuilds/*.yml
 
       - name: Push to Docker Hub
         if: github.event.inputs.buildType == 'release'
