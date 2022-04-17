@@ -34,7 +34,7 @@ const initCustomBuild = async (name: string) => {
 };
 
 it("can create custom build: simple", () => {
-  createCustomBuild("simple", 148238, 559402, 7238);
+  createCustomBuild("simple", 124946, 559402, 7238);
 });
 
 it("can run custom build: simple", async () => {
@@ -55,7 +55,7 @@ it("fails on custom build: errorUnknownProp2", () => {
 });
 
 it("can create custom build: no-exceptions", () => {
-  createCustomBuild("no-exceptions", 166702, 38634736, 9205397);
+  createCustomBuild("no-exceptions", 166702, 32653528, 9205436);
 });
 
 it("can run custom build: no-exceptions", async () => {
