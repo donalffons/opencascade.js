@@ -7,7 +7,7 @@ jest.setTimeout(10000);
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const dockerImageName = process.env.dockerImageName ?? "donalffons/opencascade.js";
-const customBuildCmd = `cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) ${dockerImageName.indexOf(":") ? `${dockerImageName}` : dockerImageName} multi-threaded`;
+const customBuildCmd = `cd customBuilds && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) ${dockerImageName.indexOf(":") ? `${dockerImageName}` : dockerImageName}`;
 
 const it_ = process.env.skipMultiThreaded ? it.skip : it;
 
