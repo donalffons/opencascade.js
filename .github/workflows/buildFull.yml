@@ -121,13 +121,13 @@ jobs:
           dockerImageName="${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}-multi-threaded" npm run test -- ./multi-threaded.test.ts
 
       - uses: actions/upload-artifact@v2
-        if: ${{ always() }}
+        if: always()
         with:
           name: dist
           path: ./dist/
 
       - uses: actions/upload-artifact@v2
-        if: ${{ always() }}
+        if: always()
         with:
           name: customBuilds
           path: |
