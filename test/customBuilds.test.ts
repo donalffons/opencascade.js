@@ -11,8 +11,11 @@ const customBuildCmd = `cd customBuilds && docker run --rm -v $(pwd):/src -u $(i
 const createCustomBuild = (name: string, targetSizeJs: number, targetSizeWasm: number, targetSizeDTs: number, epsPct = 0.1) => {
   expect(shell.exec(`${customBuildCmd} ${name}.yml`).code).toBe(0);
   const { size: sizeJs } = fs.statSync(path.join(__dirname, "customBuilds", `./customBuild.${name}.js`));
+  console.log(`size of: ./customBuild.${name}.js: ${sizeJs}`);
   const { size: sizeWasm } = fs.statSync(path.join(__dirname, "customBuilds", `./customBuild.${name}.wasm`));
+  console.log(`size of: ./customBuild.${name}.wasm: ${sizeWasm}`);
   const { size: sizeDTs } = fs.statSync(path.join(__dirname, "customBuilds", `./customBuild.${name}.d.ts`));
+  console.log(`size of: ./customBuild.${name}.d.ts: ${sizeDTs}`);
   expect(sizeJs).toBeGreaterThan((1 - epsPct / 2) * targetSizeJs);
   expect(sizeJs).toBeLessThan((1 + epsPct / 2) * targetSizeJs);
   expect(sizeWasm).toBeGreaterThan((1 - epsPct / 2) * targetSizeWasm);
