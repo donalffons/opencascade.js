@@ -1,7 +1,12 @@
 # OpenCascade.js To-Do's
 
+## 0. AdditionalCppCode
+
+* not specifying additionalCppCode should give you the default tools from opencascade.full.yml
+
 ## 1. Examples and Tests
 
+* Make custom build for examples on website - so that they work on older / weaker devices
 * Allow interactive code editing on the home page
   * Either by building a simple "Playground" page using [monaco](https://microsoft.github.io/monaco-editor/)
   * Or by linking to example code using CodeSandbox / StackBlitz
