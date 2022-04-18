@@ -1,5 +1,9 @@
 # OpenCascade.js To-Do's
 
+## 0. AdditionalCppCode
+
+* not specifying additionalCppCode should give you the default tools from opencascade.full.yml
+
 ## 1. Examples and Tests
 
 * Make custom build for examples on website - so that they work on older / weaker devices
