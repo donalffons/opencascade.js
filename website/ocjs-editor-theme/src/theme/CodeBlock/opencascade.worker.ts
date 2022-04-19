@@ -1,4 +1,7 @@
 import initOpenCascade, { OpenCascadeInstance, TDocStd_Document } from "opencascade.js";
+// @ts-ignore
+import customBuildWasm from "../../customBuild/customBuild.examples.wasm";
+import customBuildJs from "../../customBuild/customBuild.examples.js";
 import { expose } from "comlink";
 import { TopoDS_Shape } from "opencascade.js";
 
@@ -9,7 +12,10 @@ let oc: OpenCascadeInstance | undefined = undefined;
 export class OpenCascadeWorker {
   oc: OpenCascadeInstance | undefined = undefined;
   async initOpenCascade() {
-    oc = await initOpenCascade();
+    oc = await initOpenCascade({
+      mainJS: customBuildJs,
+      mainWasm: customBuildWasm,
+    });
   };
   async runOCJSCode(code: string, params?: { [key: string]: number | undefined }): Promise<Uint8Array | undefined> {
     const visualizeDoc_ = (doc: TDocStd_Document) => {

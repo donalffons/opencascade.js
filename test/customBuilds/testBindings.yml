@@ -8,6 +8,7 @@ mainBuild:
     - symbol: TemplateClassFloat
     - symbol: NotScopedEnum
     - symbol: ScopedEnum
+    - symbol: ExceptionTest
 additionalCppCode: |
   #include <string.h>
 
@@ -118,3 +119,18 @@ additionalCppCode: |
   };
   typedef TemplateClass<int> TemplateClassInt;
   typedef TemplateClass<float> TemplateClassFloat;
+
+  class ExceptionTest {
+  public:
+    static bool catchingFunc() {
+      try {
+        throwingFunc();
+        return false;
+      } catch (...) {
+        return true;
+      }
+    }
+    static void throwingFunc() {
+      throw("catch me if you can");
+    }
+  };

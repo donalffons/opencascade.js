@@ -52,6 +52,9 @@ def buildObjectFiles(file, args):
     pass
   command = [
     "emcc",
+    "-flto",
+    "-fexceptions",
+    "-sDISABLE_EXCEPTION_CATCHING=0",
     "-DIGNORE_NO_ATOMICS=1",
     "-DOCCT_NO_PLUGINS",
     "-frtti",
