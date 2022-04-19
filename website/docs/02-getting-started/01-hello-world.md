@@ -107,7 +107,7 @@ params:
     upper: 0.8
     step: 0.01
 code: |
-  const { sphereSize } = params
+  const { sphereSize } = params;
   const box = new oc.BRepPrimAPI_MakeBox_2(1, 1, 1);
   const sphere = new oc.BRepPrimAPI_MakeSphere_5(new oc.gp_Pnt_3(0.5, 0.5, 0.5), sphereSize);
   const cut = new oc.BRepAlgoAPI_Cut_3(box.Shape(), sphere.Shape(), new oc.Message_ProgressRange_1());
