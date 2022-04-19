@@ -8,7 +8,7 @@ At a first glance, the file size of this library might look huge. NPM reports it
 
 :::tip TL;DR
 
-The total amoun of data shipped to your users is probably "only" around 8MB or even less if you're creating a custom build.
+The total amoun of (compressed) data shipped to your users is around 9.1MB for the full version of OpenCascadee.js. It can be significantly less if you're creating a custom build.
 
 :::
 
