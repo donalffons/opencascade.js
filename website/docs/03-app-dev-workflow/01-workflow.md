@@ -17,6 +17,7 @@ However, this version comes with the drawback that it includes a lot of code tha
 ## 2. Create custom builds for production
 
 To solve the previously mentioned issues, this project provides a way to create custom builds. Custom builds allow you to define
-* The parts of the OpenCascade library should be included.
 * The parts of the API that you are using in your application (called bindings).
 * Which compiler settings to use during a build.
+* Additional C++ source code, for which bindings are generated automatically (via the `additionalCppCode` prop).
+* Additional C++ source code for which no bindings are generated (via the `additionalBindCode` prop), so that you are free to implement your own code and bindings.
