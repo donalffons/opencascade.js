@@ -32,7 +32,7 @@ The largest asset is obviously the WASM file. However, an important aspect of WA
 
 :::info What does that mean for loading times?
 
-Downloading 8MB on a good 3G connection would take around 9 seconds. On a 4G connection or a modern DSL connection, it should takes less than a second.
+Downloading 9MB on a good 3G connection would take around 9 seconds. On a 4G connection or a modern DSL connection, it should takes less than a second.
 
 :::
 
@@ -42,7 +42,7 @@ Especially on slow network connections, this file size might be too large. Anoth
 
 :::info The examples on this website are using a custom build
 
-A custom build of OpenCascade.js is powering all examples on this website. It has a combined JS+WASM size of 7.1MB (compressed 2.4MB). Check out the custom [build definition](https://github.com/donalffons/opencascade.js/blob/master/website/ocjs-editor-theme/customBuild/customBuild.yml).
+A custom build of OpenCascade.js is powering all examples on this website. It has a combined JS+WASM size of 7.1MB (compressed 2.4MB). Check out the custom [build definition](https://github.com/donalffons/opencascade.js/blob/master/website/ocjs-editor-theme/src/customBuild/customBuild.yml).
 
 :::
 
