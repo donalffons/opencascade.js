@@ -5,6 +5,19 @@ from wasmGenerator.Common import SkipException, isAbstractClass, getMethodOverlo
 from filter.filterClasses import filterClass
 from filter.filterMethodOrProperties import filterMethodOrProperty
 from Common import occtBasePath
+from typing import Tuple, List
+
+def merge(sep: str, *strings: List[str]):
+  return sep.join(strings)
+
+def pick(condition: bool, strTrue: str, strFalse: str):
+  return strTrue if condition else strFalse
+
+def pickWrap(condition: bool, wrapStart: Tuple[str, str], center: str, wrapEnd: Tuple[str, str]):
+  return (wrapStart[0] if condition else wrapStart[1]) + center + (wrapEnd[0] if condition else wrapEnd[1])
+
+def indent(level: int):
+  return " " * level * 2
 
 def shouldProcessClass(child: clang.cindex.Cursor, occtBasePath: str):
   if child.get_definition() is None or not child == child.get_definition():
@@ -294,21 +307,75 @@ class EmbindBindings(Bindings):
                 return getArgName(x) + ".c_str()"
           else:
             return getArgName(x)
-        resultTypeSpelling = "std::string" if isCString(method.result_type) else self.getTypedefedTemplateTypeAsString(method.result_type.spelling, templateDecl, templateArgs)
+        resultTypeSpelling = \
+          pick(isCString(method.result_type), "std::string", self.getTypedefedTemplateTypeAsString(method.result_type.spelling, templateDecl, templateArgs))
+        functionBindingHead = \
+          merge("",
+            "\n",
+            indent(3),
+            pickWrap(not method.is_static_method(),
+              [f"std::function<{resultTypeSpelling}(", f"(({resultTypeSpelling} (*)("],
+              merge("",
+                pick(not method.is_static_method(), f"{classTypeName}&", ""),
+                pick(not method.is_static_method() and len(args) > 0, ", ", ""),
+                wrappedParamTypes,
+              ),
+              [")>(", "))"]
+            ),
+            merge("",
+              "[](",
+              pick(not method.is_static_method(), f"{classTypeName}& that", ""),
+              pick(not method.is_static_method() and len(args) > 0, ", ", ""),
+              wrappedParamTypesAndNames,
+              ")",
+            ),
+            f" -> {resultTypeSpelling} {{\n",
+            merge("", *map(lambda x: generateGetReferenceValue(x), enumerate(argsNeedingWrapper))),
+          )
+        functionBindingBody = \
+          merge("",
+            indent(4),
+            pick(
+              not method.result_type.spelling == "void",
+              merge("",
+                pick(not isCString(method.result_type) and (method.result_type.is_const_qualified() or method.result_type.get_pointee().is_const_qualified()), "const ", ""),
+                "auto",
+                pick(not isCString(method.result_type) and method.result_type.kind == clang.cindex.TypeKind.LVALUEREFERENCE, "& ", " "),
+                "ret = "
+              ),
+              ""
+            ),
+            pickWrap(isCString(method.result_type),
+              ["static_cast<std::string>(", ""],
+              merge("",
+                pick(not method.is_static_method(), "that.", f"{theClass.spelling}::"),
+                f'{method.spelling}({merge(", ", *map(lambda x: generateInvocationArgs(x), enumerate(argsNeedingWrapper)))})',
+              ),
+              [")", ""],
+            ),
+            ";\n",
+            merge("", *map(lambda x: generateUpdateReferenceValue(x), enumerate(argsNeedingWrapper))),
+            pick(not method.result_type.spelling == "void", f"{indent(4)}return ret;\n", ""),
+          )
         functionBinding = \
-          "\n" + \
-          "      " + ("std::function<" + resultTypeSpelling if not method.is_static_method() else "((" + resultTypeSpelling + " (*)") + "(" + (classTypeName + "&" if not method.is_static_method() else "") + (", " if not method.is_static_method() and len(args) > 0 else "") + wrappedParamTypes + (")>(" if not method.is_static_method() else "))") + "[](" + (classTypeName + "& that" if not method.is_static_method() else "") + (", " if not method.is_static_method() and len(args) > 0 else "") + wrappedParamTypesAndNames + ")" + " -> " + resultTypeSpelling + " {\n" + \
-          "".join(map(lambda x: generateGetReferenceValue(x), enumerate(argsNeedingWrapper))) + \
-          "        " + ((("const " if (not isCString(method.result_type) and (method.result_type.is_const_qualified() or method.result_type.get_pointee().is_const_qualified())) else "") + "auto" + ("& " if not isCString(method.result_type) and method.result_type.kind == clang.cindex.TypeKind.LVALUEREFERENCE else " ") + "ret = ") if not method.result_type.spelling == "void" else "") + ("static_cast<std::string>(" if isCString(method.result_type) else "") + ("that." if not method.is_static_method() else theClass.spelling + "::") + method.spelling + "(" + ", ".join(map(lambda x: generateInvocationArgs(x), enumerate(argsNeedingWrapper))) + ")" + (")" if isCString(method.result_type) else "") + ";\n" + \
-          "".join(map(lambda x: generateUpdateReferenceValue(x), enumerate(argsNeedingWrapper))) + \
-          ("        return ret;\n" if not method.result_type.spelling == "void" else "") + \
-          "      }\n" + \
-          "    )"
+          merge("",
+            functionBindingHead,
+            functionBindingBody,
+            f"{indent(3)}}}\n",
+            f"{indent(2)})",
+          )
       else:
         if numOverloads == 1:
           functionBinding = " &" + className + "::" + method.spelling
         else:
-          functionBinding = " select_overload<" + self.getTypedefedTemplateTypeAsString(method.result_type.spelling, templateDecl, templateArgs) + "(" + ", ".join(map(lambda x: self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], list(method.get_arguments()))) + ")" + ("const" if method.is_const_method() else "") + (", " + getClassTypeName(theClass, templateDecl) if not method.is_static_method() else "") + ">(&" + className + "::" + method.spelling + ")"
+          functionBinding = merge("",
+            " select_overload<",
+            self.getTypedefedTemplateTypeAsString(method.result_type.spelling, templateDecl, templateArgs),
+            f'({merge(", ", *map(lambda x: self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], list(method.get_arguments())))})',
+            pick(method.is_const_method(), "const", ""),
+            pick(not method.is_static_method(), f", {getClassTypeName(theClass, templateDecl)}", ""),
+            f">(&{className}::{method.spelling})",
+          )
 
       if method.is_static_method():
         functionCommand = "class_function"
