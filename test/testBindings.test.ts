@@ -199,6 +199,17 @@ it("correctly binds StaticMethods::cStringReturn", async () => {
   expect(oc.StaticMethods.cStringReturn()).toBe("Hello, World!");
 });
 
+it("correctly binds StaticMethods::cStringNullReturn", async () => {
+  expect(oc.StaticMethods.cStringNullReturn.argCount).toBe(0);
+  expect(() => {
+    oc.StaticMethods.cStringNullReturn(1);
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.cStringNullReturn();
+  }).not.toThrow();
+  expect(oc.StaticMethods.cStringNullReturn()).toBe(null);
+});
+
 it("correctly binds StaticMethods::cStringArgument", async () => {
   expect(oc.StaticMethods.cStringArgument.argCount).toBe(1);
   expect(() => {
@@ -212,6 +223,9 @@ it("correctly binds StaticMethods::cStringArgument", async () => {
   }).toThrow();
   expect(() => {
     oc.StaticMethods.cStringArgument("Hello, World!");
+  }).not.toThrow();
+  expect(() => {
+    oc.StaticMethods.cStringArgument(null);
   }).not.toThrow();
 });
 

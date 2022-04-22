@@ -60,7 +60,13 @@ additionalCppCode: |
     static const char* cStringReturn() {
       return "Hello, World!";
     }
+    static const char* cStringNullReturn() {
+      return nullptr;
+    }
     static void cStringArgument(const char* s) {
+      if(s == nullptr) {
+        return;
+      }
       if(strcmp("Hello, World!", s) != 0) {
         throw("incorrect value");
       }
