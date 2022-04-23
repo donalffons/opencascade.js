@@ -34,7 +34,7 @@ All [examples](https://ocjs.org/docs/examples/ocjs-logo) in this documentation u
 
 ```js title="/src/visualize.js"
 // Takes a TDocStd_Document, creates a GLB file from it and returns a ObjectURL
-export function visualizeDoc = (oc, doc) => {
+export function visualizeDoc(oc, doc) {
   // Export a GLB file (this will also perform the meshing)
   const cafWriter = new oc.RWGltf_CafWriter(new oc.TCollection_AsciiString_2("./file.glb"), true);
   cafWriter.Perform_2(new oc.Handle_TDocStd_Document_2(doc), new oc.TColStd_IndexedDataMapOfStringString_1(), new oc.Message_ProgressRange_1());
@@ -45,7 +45,7 @@ export function visualizeDoc = (oc, doc) => {
 }
 
 // Takes TopoDS_Shape, add to document, create GLB file from it and returns a ObjectURL
-export function visualizeShapes(oc, shapes) {
+export function visualizeShapes(oc, shapes_) {
   const shapes = Array.isArray(shapes_) ? shapes_ : [shapes_];
 
   // Create a document add our shapes
@@ -58,7 +58,7 @@ export function visualizeShapes(oc, shapes) {
   }
 
   // Return our visualized document
-  return visualizeDoc_(oc, doc);
+  return visualizeDoc(oc, doc);
 }
 ```
 
