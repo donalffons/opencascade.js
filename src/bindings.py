@@ -260,8 +260,10 @@ class EmbindBindings(Bindings):
               type.get_pointee().spelling in templateArgs and
               templateArgs[type.get_pointee().spelling].get_canonical().spelling in builtInTypes
             )
-          ) or
-          type.kind == clang.cindex.TypeKind.POINTER
+          ) or (
+            type.kind == clang.cindex.TypeKind.POINTER and 
+            isCString(type)
+          )
         )
 
       args = list(method.get_arguments())
