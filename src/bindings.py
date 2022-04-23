@@ -261,7 +261,7 @@ class EmbindBindings(Bindings):
               templateArgs[type.get_pointee().spelling].get_canonical().spelling in builtInTypes
             )
           ) or (
-            type.kind == clang.cindex.TypeKind.POINTER and 
+            type.get_canonical().kind == clang.cindex.TypeKind.POINTER and 
             isCString(type)
           )
         )
