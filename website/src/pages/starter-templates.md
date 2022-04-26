@@ -19,7 +19,7 @@ For running OpenCascade.js in a web browser.
 
 ### <img src="/img/logos/vue.svg" width="50" height="50" /> Vue
 
-[**Create-Nuxt-App**](/download-starter-templates/ocjs-create-nuxt-app.zip)
+* [**Create-Nuxt-App**](/download-starter-templates/ocjs-create-nuxt-app.zip)
 
 ## Server
 
@@ -27,4 +27,4 @@ For running OpenCascade.js on a server or cloud function.
 
 ### <img src="/img/logos/node.svg" width="50" height="50" /> NodeJS
 
-* [Plain NodeJS](/download-starter-templates/ocjs-node.zip)
+* [**Plain NodeJS**](/download-starter-templates/ocjs-node.zip)
