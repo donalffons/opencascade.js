@@ -46,6 +46,15 @@ jobs:
           cd website/static
           gsutil cp -r gs://opencascade-js/starter-templates ./download-starter-templates
 
+      - name: Create custom build
+        run: |
+          cd website/ocjs-editor-theme/src/customBuild
+          docker run --rm \
+            -v $(pwd):/src \
+            -u $(id -u):$(id -g) \
+            ${{ secrets.DOCKER_IMAGE_NAME }} \
+            /src/customBuild.yml
+
       - name: Build website
         run: |
           cd website

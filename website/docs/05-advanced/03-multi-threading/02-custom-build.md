@@ -16,6 +16,7 @@ Next, create a custom build definition. The following will create a full build (
 
 ```yml
 mainBuild:
+  name: customBuild.multi-threaded.js
   # not specifying any bindings will bind everything
   emccFlags:
     # These are just the default values as defined in /src/customBuildSchema.py
@@ -36,10 +37,6 @@ mainBuild:
     # the browser. When building a NodeJS application, you might want to use
     # ='require("os").cpus().length' instead.
     - -sPTHREAD_POOL_SIZE='navigator.hardwareConcurrency'
-  name: customBuild.multi-threaded.js
-
-additionalCppCode: |
-  #include "/opencascade.js/builds/library.h"
 ```
 
 ```sh

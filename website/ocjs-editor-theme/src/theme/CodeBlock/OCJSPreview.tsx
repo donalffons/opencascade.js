@@ -2,22 +2,26 @@ import React, { Suspense } from "react";
 import "@google/model-viewer";
 import { suspend } from "suspend-react";
 import { wrap } from "comlink";
-import MyComlinkWorker, { runOCJSCode } from "./opencascade.worker";
+import MyComlinkWorker, { OpenCascadeWorker } from "./opencascade.worker";
 import { PuffLoader } from "react-spinners";
 // @ts-ignore
 import styles from "./OCJSPreview.module.css";
 import { ErrorBoundary, FallbackProps } from "react-error-boundary"
 import Admonition from "@theme/Admonition";
 
-function Preview({ code }: { code?: string }) {
+function Preview({ code, params }: { code?: string; params?: { [key: string]: number | undefined } }) {
+  const worker = suspend(async () => {
+    const WrappedOpenCascadeWorker = wrap<typeof OpenCascadeWorker>(new MyComlinkWorker());
+    const worker = await new WrappedOpenCascadeWorker();
+    await worker.initOpenCascade();
+    return worker;
+  }, []);
   const data = suspend(async () => {
     if (code === undefined) return;
-    const myComlinkWorkerInstance: Worker = new MyComlinkWorker();
-    const myOCJSCodeRunner = wrap<typeof runOCJSCode>(myComlinkWorkerInstance);
-    const ret = await myOCJSCodeRunner(code);
+    const ret = await worker.runOCJSCode(code, params);
     if (ret === undefined) return;
     return URL.createObjectURL(new Blob([ret.buffer], { type: "model/gltf-binary" }));
-  }, [code])
+  }, [worker, code, params])
   return (
     <model-viewer
       src={data}
@@ -53,14 +57,14 @@ function ErrorFallback({ error }: FallbackProps) {
   )
 }
 
-export default function OCJSPreview({ code }: { code?: string }) {
+export default function OCJSPreview({ code, params }: { code?: string; params?: { [key: string]: number | undefined } }) {
   return (
     <div className={styles.previewContainer}>
       <Suspense fallback={<PuffLoader color="#b39b00" />}>
         <ErrorBoundary
           FallbackComponent={ErrorFallback}
         >
-          <Preview code={code} />
+          <Preview code={code} params={params} />
         </ErrorBoundary>
       </Suspense>
     </div>

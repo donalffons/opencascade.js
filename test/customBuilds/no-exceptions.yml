@@ -1,0 +1,32 @@
+mainBuild:
+  name: customBuild.no-exceptions.js
+  emccFlags:
+    - -flto
+    - -fexceptions
+    - -sDISABLE_EXCEPTION_CATCHING=1
+    - -O3
+    - -sEXPORT_ES6=1
+    - -sUSE_ES6_IMPORT_META=0
+    - -sEXPORTED_RUNTIME_METHODS=['FS']
+    - -sINITIAL_MEMORY=100MB
+    - -sMAXIMUM_MEMORY=4GB
+    - -sALLOW_MEMORY_GROWTH=1
+    - -sUSE_FREETYPE=1
+    - -sLLD_REPORT_UNDEFINED
+    - --no-entry
+additionalCppCode: |
+  class ExceptionTest {
+  public:
+    static bool catchingFunc() {
+      try {
+        throwingFunc();
+        return false;
+      } catch (...) {
+        return true;
+      }
+    }
+    static BRepPrimAPI_MakeCone& throwingFunc() {
+      BRepPrimAPI_MakeCone* c = new BRepPrimAPI_MakeCone(1.0, 0.5, 0.0);
+      return *c;
+    }
+  };

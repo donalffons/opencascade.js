@@ -24,6 +24,9 @@
           "type": "string",
         },
         "default": [
+          "-flto",
+          "-fexceptions",
+          "-sDISABLE_EXCEPTION_CATCHING=0",
           "-O3",
           "-sEXPORT_ES6=1",
           "-sUSE_ES6_IMPORT_META=0",
@@ -72,6 +75,9 @@
           "type": "string",
         },
         "default": [
+          "-flto",
+          "-fexceptions",
+          "-sDISABLE_EXCEPTION_CATCHING=0",
           "-O3",
           "-sEXPORT_ES6=1",
           "-sUSE_ES6_IMPORT_META=0",

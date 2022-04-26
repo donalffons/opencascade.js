@@ -6,8 +6,8 @@ import { fileURLToPath } from "url";
 import { createRequire } from "module";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const bindingsTestImage = process.env.bindingsTestImage ?? "donalffons/opencascade.js";
-const customBuildCmd = `cd customBuilds && docker run --rm -v $(pwd):/src ${bindingsTestImage}`;
+const dockerImageName = process.env.dockerImageName ?? "donalffons/opencascade.js";
+const customBuildCmd = `cd customBuilds && docker run --rm -v $(pwd):/src ${dockerImageName}`;
 
 it("can create custom build: testBindings", () => {
   expect(shell.exec(`${customBuildCmd} testBindings.yml`).code).toBe(0);
@@ -199,6 +199,17 @@ it("correctly binds StaticMethods::cStringReturn", async () => {
   expect(oc.StaticMethods.cStringReturn()).toBe("Hello, World!");
 });
 
+it("correctly binds StaticMethods::cStringNullReturn", async () => {
+  expect(oc.StaticMethods.cStringNullReturn.argCount).toBe(0);
+  expect(() => {
+    oc.StaticMethods.cStringNullReturn(1);
+  }).toThrow();
+  expect(() => {
+    oc.StaticMethods.cStringNullReturn();
+  }).not.toThrow();
+  expect(oc.StaticMethods.cStringNullReturn()).toBe(null);
+});
+
 it("correctly binds StaticMethods::cStringArgument", async () => {
   expect(oc.StaticMethods.cStringArgument.argCount).toBe(1);
   expect(() => {
@@ -212,6 +223,9 @@ it("correctly binds StaticMethods::cStringArgument", async () => {
   }).toThrow();
   expect(() => {
     oc.StaticMethods.cStringArgument("Hello, World!");
+  }).not.toThrow();
+  expect(() => {
+    oc.StaticMethods.cStringArgument(null);
   }).not.toThrow();
 });
 
@@ -325,4 +339,14 @@ it("correctly binds TemplateClass specializations", async () => {
   expect(() => {
     intTemplate.get_val_2(intRef2);
   }).toThrow();
+});
+
+it("can handle exceptions thrown and caught in C++", async () => {
+  expect(() => {
+    oc.ExceptionTest.throwingFunc();
+  }).toThrow();
+  expect(() => {
+    oc.ExceptionTest.catchingFunc();
+  }).not.toThrow();
+  expect(oc.ExceptionTest.catchingFunc()).toBe(true);
 });

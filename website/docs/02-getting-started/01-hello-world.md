@@ -14,21 +14,17 @@ In your JavaScript project, first install OpenCascade.js via `npm` or `yarn` usi
 npm install opencascade.js@beta # or: yarn add opencascade.js@beta
 ```
 
-## Configure Your Bundler
-
-Before you start, you need to [configure your bundler](/docs/getting-started/configure-bundler).
-
 ## Visualize 3D Models
 
-Next, we need to find a simple of way of visualizing the 3D model we're about to create. We will do that using the following steps:
-1. Triangulate our model
-2. Export it as a GLB file to the virtual file system
-3. Read that GLB file and convert it into an [ObjectURL](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL)
-4. Pass the ObjectURL to the [model-viewer](https://modelviewer.dev/) web component, which takes care of rendering
+Next, we need a simple of way of visualizing the 3D model we're about to create. We will do that using two helper functions:
 
-We will use two helper functions to achieve that:
-* `visualizeDoc` processes all steps 1-3 for a given document (of type [`TDocStd_Document`](https://ocjs.org/reference-docs/classes/TDocStd_Document.html)) and returns the ObjectURL.
-* `visualizeShapes` is creates a document and then adds all given shapes to it. Then it calls `visualizeDoc` and returns the resulting `ObjectURL`.
+* `visualizeDoc`: Takes a document (of type [`TDocStd_Document`](https://ocjs.org/reference-docs/classes/TDocStd_Document.html)) as a parameter and returns an [ObjectURL](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL) to a [GLB](https://www.khronos.org/gltf/) via the following steps
+  1. Triangulate the document
+  2. Export it as a GLB file to the virtual file system
+  3. Read that GLB file and convert it into an ObjectURL
+  4. Pass the ObjectURL to the [model-viewer](https://modelviewer.dev/) web component, which takes care of rendering
+
+* `visualizeShapes`: Takes one or more shapes (of type [`TopoDS_Shape`](https://ocjs.org/reference-docs/classes/TopoDS_Shape.html)) as a parameter, then creates a document and adds all given shapes to it. Then it calls `visualizeDoc` and returns the resulting `ObjectURL`.
 
 :::info
 
@@ -38,7 +34,7 @@ All [examples](https://ocjs.org/docs/examples/ocjs-logo) in this documentation u
 
 ```js title="/src/visualize.js"
 // Takes a TDocStd_Document, creates a GLB file from it and returns a ObjectURL
-export function visualizeDoc = (oc, doc) => {
+export function visualizeDoc(oc, doc) {
   // Export a GLB file (this will also perform the meshing)
   const cafWriter = new oc.RWGltf_CafWriter(new oc.TCollection_AsciiString_2("./file.glb"), true);
   cafWriter.Perform_2(new oc.Handle_TDocStd_Document_2(doc), new oc.TColStd_IndexedDataMapOfStringString_1(), new oc.Message_ProgressRange_1());
@@ -49,7 +45,7 @@ export function visualizeDoc = (oc, doc) => {
 }
 
 // Takes TopoDS_Shape, add to document, create GLB file from it and returns a ObjectURL
-export function visualizeShapes(oc, shapes) {
+export function visualizeShapes(oc, shapes_) {
   const shapes = Array.isArray(shapes_) ? shapes_ : [shapes_];
 
   // Create a document add our shapes
@@ -62,7 +58,7 @@ export function visualizeShapes(oc, shapes) {
   }
 
   // Return our visualized document
-  return visualizeDoc_(oc, doc);
+  return visualizeDoc(oc, doc);
 }
 ```
 
@@ -99,12 +95,24 @@ The exact syntax depends on your framework and setup. OpenCascade.js is framewor
 We can now simply visualize our models. Let's subtract a sphere from a box.
 
 ```js ocjs
+params:
+  sphereSize:
+    type: range
+    default: 0.65
+    lower: 0.51
+    upper: 0.8
+    step: 0.01
 code: |
+  const { sphereSize } = params;
   const box = new oc.BRepPrimAPI_MakeBox_2(1, 1, 1);
-  const sphere = new oc.BRepPrimAPI_MakeSphere_5(new oc.gp_Pnt_3(0.5, 0.5, 0.5), 0.65);
+  const sphere = new oc.BRepPrimAPI_MakeSphere_5(new oc.gp_Pnt_3(0.5, 0.5, 0.5), sphereSize);
   const cut = new oc.BRepAlgoAPI_Cut_3(box.Shape(), sphere.Shape(), new oc.Message_ProgressRange_1());
   cut.Build(new oc.Message_ProgressRange_1());
   visualizeShapes(cut.Shape());
 ```
+
+## Configure Your Bundler
+
+Before you can run this code, you likely need to [configure your bundler](/docs/getting-started/configure-bundler).
 
 If you want to learn more, check out our other [examples](/docs/examples/ocjs-logo)!

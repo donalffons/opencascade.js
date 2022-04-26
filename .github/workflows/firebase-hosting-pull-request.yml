@@ -33,6 +33,27 @@ jobs:
           rm -r download-starter-templates/starter-templates
 
       - name: build website
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v5.2
+
+      - name: Generate Docker Staging Tag Name
+        id: dockerStagingTag
+        run: |
+          githubBranch=${{ steps.branch-name.outputs.current_branch }}
+          tag=$(echo "$githubBranch" | tr '[:upper:]' '[:lower:]')
+          echo "::set-output name=tag::$tag"
+
+      - name: Create custom build
+        run: |
+          cd website/ocjs-editor-theme/src/customBuild
+          docker run --rm \
+            -v $(pwd):/src \
+            -u $(id -u):$(id -g) \
+            ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }} \
+            /src/customBuild.yml
+
+      - name: Build website
         run: |
           cd website
           npm ci
