@@ -38,7 +38,7 @@ jobs:
           do
             dir=${dir%*/}
             cd ${dir}
-            ncu -u
+            ncu -u -f opencascade.js
             npm install
             npm install opencascade.js@beta
             npm run build
