@@ -10,8 +10,8 @@
     "clean": "rm -r .nuxt"
   },
   "dependencies": {
-    "@google/model-viewer": "1.0",
-    "core-js": "^3.19.3",
+    "@google/model-viewer": "1.10.0",
+    "core-js": "^3.22.2",
     "file-loader": "^6.2.0",
     "nuxt": "^2.15.8",
     "opencascade.js": "2.0.0-beta.55db72a",
@@ -19,6 +19,5 @@
     "vue-server-renderer": "^2.6.14",
     "vue-template-compiler": "^2.6.14",
     "webpack": "^4.46.0"
-  },
-  "devDependencies": {}
+  }
 }
