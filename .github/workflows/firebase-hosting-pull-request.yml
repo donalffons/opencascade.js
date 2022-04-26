@@ -32,7 +32,6 @@ jobs:
           mv download-starter-templates/starter-templates/* download-starter-templates/
           rm -r download-starter-templates/starter-templates
 
-      - name: build website
       - name: Get branch name
         id: branch-name
         uses: tj-actions/branch-names@v5.2
