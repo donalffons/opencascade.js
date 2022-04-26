@@ -5,48 +5,30 @@
 </template>
 
 <script>
+import "@google/model-viewer/dist/model-viewer";
 
-import '@google/model-viewer/dist/model-viewer'
+export default {
+  name: "Viewer",
+  components: {},
+  data: () => {
+    return {};
+  },
 
-export default 
-{
-    name: "Viewer",
-    components: { },
-    data: () => {
-    return {
-          
-        }
-    },
+  props: ["url"],
 
-    props: ['url'],
+  mounted() {},
 
-    mounted() {
-      
-   },
+  computed: {},
 
-    computed: 
-    {
-      
-    },
+  watch: {},
 
-    watch : {
-        
-    },
-
-    methods: 
-    {
-      
-    }
-}
-
+  methods: {},
+};
 </script>
 
 <style>
-
-model-viewer 
-{
-  width:  100% !important;
+model-viewer {
+  width: 100% !important;
   height: 100% !important;
 }
-
 </style>
