@@ -95,7 +95,7 @@ jobs:
             -u $(id -u):$(id -g) \
             ${{ secrets.DOCKER_IMAGE_NAME }} \
             /src/builds/opencascade.full.yml
-          cp opencascade.full.* dist
+          mv opencascade.full.* dist
 
       - name: Run all tests except multi-threading
         if: github.event.inputs.buildType != 'testBindings'
