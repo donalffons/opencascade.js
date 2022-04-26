@@ -12,14 +12,18 @@ If you want to add a configuration, please head over to [Github](https://github.
 
 For running OpenCascade.js in a web browser.
 
-### ReactJS
+### React
 
 [**Create-React-App**](/download-starter-templates/ocjs-create-react-app-5.zip)
 
 [**Create-Next-App**](/download-starter-templates/ocjs-create-next-app-12.zip)
 
+### Vue
+
+[**Create-Nuxt-App**](/download-starter-templates/ocjs-create-nuxt-app.zip)
+
 ## Server
 
 For running OpenCascade.js on a server or cloud function.
 
-[**NodeJS**](#)
+[**NodeJS**](/download-starter-templates/ocjs-node.zip)
