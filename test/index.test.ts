@@ -277,3 +277,29 @@ it("Can catch exceptions", async () => {
     expect(oc.OCJS.getStandard_FailureData(e).GetMessageString()).toBe("cone with negative or null height");
   }
 });
+
+it("Correctly uses FuzzyValue (if patch gets applied correctly)", () => {
+  const pos1 = new oc.gp_Pnt_3(0, 0, 0);
+  const box1 = new oc.BRepPrimAPI_MakeBox_3(pos1, 1, 1, 1);
+
+  const pos2 = new oc.gp_Pnt_3(1.01, 0, 0);
+  const box2 = new oc.BRepPrimAPI_MakeBox_3(pos2, 1, 1, 1);
+
+  let combined = new oc.BRepAlgoAPI_Fuse_1();
+  {
+    const argList = new oc.TopTools_ListOfShape_1();
+    argList.Append_1(box1.Shape());
+    combined.SetArguments(argList);
+  }
+  {
+    const toolList = new oc.TopTools_ListOfShape_1();
+    toolList.Append_1(box2.Shape());
+    combined.SetTools(toolList);
+  }
+  combined.SetFuzzyValue(0.1);
+  combined.Build(new oc.Message_ProgressRange_1());
+
+  let count = 0;
+  for (let it = new oc.TopoDS_Iterator_2(combined.Shape(), true, true); it.More(); it.Next(), count++) { }
+  expect(count).toBe(1);
+});
