@@ -307,6 +307,17 @@ it("correctly binds Instantiable2", async () => {
   expect(instance1.addInstantiable2(instance2)).toBe(247);
 });
 
+it("correctly binds Instantiable3", async () => {
+  console.log(oc.Instantiable3);
+  expect(() => {
+    new oc.Instantiable3();
+  }).not.toThrow();
+  const i = new oc.Instantiable3();;
+  expect(() => {
+    i.noop();
+  }).not.toThrow();
+});
+
 it("correctly binds TemplateClass specializations", async () => {
   expect(() => {
     new oc.TemplateClass();

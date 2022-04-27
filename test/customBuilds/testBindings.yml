@@ -4,6 +4,7 @@ mainBuild:
     - symbol: StaticMethods
     - symbol: Instantiable1
     - symbol: Instantiable2
+    - symbol: Instantiable3
     - symbol: TemplateClassInt
     - symbol: TemplateClassFloat
     - symbol: NotScopedEnum
@@ -106,6 +107,11 @@ additionalCppCode: |
     int addInstantiable2(Instantiable2& theOther) { // TODO: The bindings should also allow passing a reference type using the '{ current: x }' syntax
       return _val + theOther._val;
     }
+  };
+
+  class Instantiable3 {
+  public:
+    void noop() {}
   };
 
   template <typename T>

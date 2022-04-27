@@ -172,13 +172,13 @@ class EmbindBindings(Bindings):
 
     if len(constructors) == 0:
       output += "    .constructor<>()\n"
-      return ""
+      return output
     publicConstructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
     if len(publicConstructors) == 0 or len(publicConstructors) > 1:
-      return ""
+      return output
     standardConstructor = publicConstructors[0]
     if not standardConstructor:
-      return ""
+      return output
 
     argTypesBindings = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
     
@@ -411,7 +411,7 @@ class EmbindBindings(Bindings):
       children = list(theClass.get_children())
     constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
     if len(constructors) == 1:
-      return ""
+      return output
     constructorBindings = ""
     allOverloads = [m for m in children if m.kind == clang.cindex.CursorKind.CONSTRUCTOR and m.access_specifier == clang.cindex.AccessSpecifier.PUBLIC]
     if len(allOverloads) == 1:
@@ -490,13 +490,13 @@ class TypescriptBindings(Bindings):
 
     if len(constructors) == 0:
       output += "  constructor();\n"
-      return ""
+      return output
     publicConstructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
     if len(publicConstructors) == 0 or len(publicConstructors) > 1:
-      return ""
+      return output
     standardConstructor = publicConstructors[0]
     if not standardConstructor:
-      return ""
+      return output
 
     argsTypescriptDef = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x), list(standardConstructor.get_arguments()))))
     
@@ -579,7 +579,7 @@ class TypescriptBindings(Bindings):
       children = list(theClass.get_children())
     constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
     if len(constructors) == 1:
-      return ""
+      return output
 
     constructorTypescriptDef = ""
     allOverloadedConstructors = []
