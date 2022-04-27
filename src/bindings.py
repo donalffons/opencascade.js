@@ -271,37 +271,63 @@ class EmbindBindings(Bindings):
       returnNeedsWrapper = needsWrapper(method.result_type)
       if any(argsNeedingWrapper) or returnNeedsWrapper:
         def replaceTemplateArgs(x):
-          if templateArgs is not None and args[x[0]].type.get_pointee().spelling.replace("const ", "") in templateArgs:
-            return args[x[0]].type.spelling.replace(args[x[0]].type.get_pointee().spelling.replace("const ", ""), templateArgs[args[x[0]].type.get_pointee().spelling.replace("const ", "")].spelling)
-          else:
-            return args[x[0]].type.spelling
+          return pick(
+            templateArgs is not None and args[x[0]].type.get_pointee().spelling.replace("const ", "") in templateArgs,
+            args[x[0]].type.spelling.replace(args[x[0]].type.get_pointee().spelling.replace("const ", ""), templateArgs[args[x[0]].type.get_pointee().spelling.replace("const ", "")].spelling),
+            args[x[0]].type.spelling
+          )
         def getArgName(x):
-          if not args[x[0]].spelling == "":
-            return args[x[0]].spelling
-          else:
-            return "argNo" + str(x[0])
+          return pick(
+            not args[x[0]].spelling == "",
+            args[x[0]].spelling,
+            f"argNo{str(x[0])}"
+          )
         def getArgTypeName(type):
-          if templateArgs is not None and type.get_pointee().spelling.replace("const ", "") in templateArgs:
-            return type.get_pointee().spelling.replace(type.get_pointee().spelling.replace("const ", ""), templateArgs[type.get_pointee().spelling.replace("const ", "")].spelling)
-          else:
-            return type.get_pointee().spelling
+          return pick(
+            templateArgs is not None and type.get_pointee().spelling.replace("const ", "") in templateArgs,
+            type.get_pointee().spelling.replace(type.get_pointee().spelling.replace("const ", ""), templateArgs[type.get_pointee().spelling.replace("const ", "")].spelling),
+            type.get_pointee().spelling
+          )
         classTypeName = getClassTypeName(theClass, templateDecl)
-        wrappedParamTypes = ", ".join(map(lambda x: "emscripten::val" if x[1] else replaceTemplateArgs(x), enumerate(argsNeedingWrapper)))
-        wrappedParamTypesAndNames = ", ".join(map(lambda x: ("emscripten::val " + getArgName(x)) if x[1] else replaceTemplateArgs(x) + " " + getArgName(x), enumerate(argsNeedingWrapper)))
+        wrappedParamTypes = merge(", ", *map(lambda x:
+          pick(
+            x[1],
+            "emscripten::val",
+            replaceTemplateArgs(x)
+          ),
+          enumerate(argsNeedingWrapper)
+        ))
+        wrappedParamTypesAndNames = merge(", ", *map(lambda x:
+          pick(
+            x[1],
+            f"emscripten::val {getArgName(x)}",
+            f"{replaceTemplateArgs(x)} {getArgName(x)}",
+          enumerate(argsNeedingWrapper))
+        ))
         def generateGetReferenceValue(x):
           if x[1] and not isCString(args[x[0]].type):
-            return "        auto ref_" + (args[x[0]].spelling if not args[x[0]].spelling == "" else "argNo"+str(x[0])) + " = getReferenceValue<" + getArgTypeName(args[x[0]].type) + ">(" + getArgName(x) + ");\n"
+            return (
+              merge("",
+                indent(4),
+                "auto ref_",
+                pick(not args[x[0]].spelling == "",
+                  args[x[0]].spelling,
+                  f"argNo{str(x[0])}"
+                ),
+                f" = getReferenceValue<{getArgTypeName(args[x[0]].type)}>({getArgName(x)});\n"
+              )
+            )
           else:
             return ""
         def generateUpdateReferenceValue(x):
           if x[1] and not isCString(args[x[0]].type):
-            return "        updateReferenceValue<" + getArgTypeName(args[x[0]].type) + ">(" + getArgName(x) + ", ref_" + getArgName(x) + ");\n"
+            return  f"{indent(4)}updateReferenceValue<{getArgTypeName(args[x[0]].type)}>({getArgName(x)}, ref_{getArgName(x)});\n"
           else:
             return ""
         def generateInvocationArgs(x):
           if x[1]:
             if not isCString(args[x[0]].type):
-              return "ref_" + getArgName(x)
+              return f"ref_{getArgName(x)}"
             else:
               if not args[x[0]].type.get_canonical().get_pointee().is_const_qualified() or args[x[0]].type.is_const_qualified():
                 return f"{getArgName(x)}.isNull() ? nullptr : strdup({getArgName(x)}.as<std::string>().c_str())"
@@ -381,7 +407,7 @@ class EmbindBindings(Bindings):
           )
       else:
         if numOverloads == 1:
-          functionBinding = " &" + className + "::" + method.spelling
+          functionBinding = f" &{className}::{method.spelling}"
         else:
           functionBinding = merge("",
             " select_overload<",
@@ -397,14 +423,14 @@ class EmbindBindings(Bindings):
       else:
         functionCommand = "function"
 
-      self.output += "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\"," + functionBinding + ", allow_raw_pointers())\n"
+      self.output += f"{indent(2)}.{functionCommand}(\"{method.spelling}{overloadPostfix}\",{functionBinding}, allow_raw_pointers())\n"
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.FIELD_DECL:
       if method.type.kind == clang.cindex.TypeKind.CONSTANTARRAY:
-        print("Cannot handle array properties, skipping " + className + "::" + method.spelling)
+        print(f"Cannot handle array properties, skipping {className}::{method.spelling}")
       elif not method.type.get_pointee().kind == clang.cindex.TypeKind.INVALID:
-        print("Cannot handle pointer properties, skipping " + className + "::" + method.spelling)
+        print(f"Cannot handle pointer properties, skipping {className}::{method.spelling}")
       else:
-        self.output += "    .property(\"" + method.spelling + "\", &" + className + "::" + method.spelling + ")\n"
+        self.output += f"{indent(2)}.property(\"{method.spelling}\", &{className}::{method.spelling})\n"
 
   def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):
     if children is None:
