@@ -129,22 +129,22 @@ def processTemplate(child):
 
 def embindGenerationFuncClasses(tu, preamble, child, typedefs, templateTypedefs) -> str:
   embindings = EmbindBindings(typedefs, templateTypedefs, tu)
-  embindings.processClass(child)
+  output = embindings.processClass(child)
 
-  return preamble + embindings.output
+  return preamble + output
 
 def embindGenerationFuncTemplates(tu, preamble, child, typedefs, templateTypedefs) -> str:
   [templateClass, templateArgs] = processTemplate(child)
   embindings = EmbindBindings(typedefs, templateTypedefs, tu)
-  embindings.processClass(templateClass, child, templateArgs)
+  output = embindings.processClass(templateClass, child, templateArgs)
 
-  return preamble + embindings.output
+  return preamble + output
 
 def embindGenerationFuncEnums(tu, preamble, child, typedefs, templateTypedefs) -> str:
   embindings = EmbindBindings(typedefs, templateTypedefs, tu)
-  embindings.processEnum(child)
+  output = embindings.processEnum(child)
 
-  return preamble + embindings.output
+  return preamble + output
 
 def templateTypedefGenerator(tu):
   return list(filter(
@@ -172,10 +172,10 @@ def process(extension, embindGenerationFuncClasses, embindGenerationFuncTemplate
 
 def typescriptGenerationFuncClasses(tu, preamble, child, typedefs, templateTypedefs) -> str:
   typescript = TypescriptBindings(typedefs, templateTypedefs, tu)
-  typescript.processClass(child)
+  output = typescript.processClass(child)
 
   return json.dumps({
-    ".d.ts": preamble + typescript.output,
+    ".d.ts": preamble + output,
     "kind": "class",
     "exports": typescript.exports,
   })
@@ -183,20 +183,20 @@ def typescriptGenerationFuncClasses(tu, preamble, child, typedefs, templateTyped
 def typescriptGenerationFuncTemplates(tu, preamble, child, typedefs, templateTypedefs) -> str:
   [templateClass, templateArgs] = processTemplate(child)
   typescript = TypescriptBindings(typedefs, templateTypedefs, tu)
-  typescript.processClass(templateClass, child, templateArgs)
+  output = typescript.processClass(templateClass, child, templateArgs)
 
   return json.dumps({
-    ".d.ts": preamble + typescript.output,
+    ".d.ts": preamble + output,
     "kind": "class",
     "exports": typescript.exports,
   })
 
 def typescriptGenerationFuncEnums(tu, preamble, child, typedefs, templateTypedefs) -> str:
   typescript = TypescriptBindings(typedefs, templateTypedefs, tu)
-  typescript.processEnum(child)
+  output = typescript.processEnum(child)
 
   return json.dumps({
-    ".d.ts": preamble + typescript.output,
+    ".d.ts": preamble + output,
     "kind": "enum",
     "exports": typescript.exports,
   })

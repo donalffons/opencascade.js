@@ -82,8 +82,6 @@ def getClassTypeName(theClass, templateDecl = None):
 
 class Bindings:
   def __init__(self, typedefs, templateTypedefs, translationUnit):
-    self.output = ""
-
     self.templateTypedefs = templateTypedefs
     self.translationUnit = translationUnit
     self.typedefs = typedefs
@@ -110,52 +108,24 @@ class Bindings:
     return newString
 
   def processClass(self, theClass, templateDecl = None, templateArgs = None):
+    output = ""
     isAbstract = isAbstractClass(theClass, self.translationUnit)
     if not isAbstract:
-      self.processSimpleConstructor(theClass)
+      output += self.processSimpleConstructor(theClass)
     for method in theClass.get_children():
       if not filterMethodOrProperty(theClass, method):
         continue
       try:
-        self.processMethodOrProperty(theClass, method, templateDecl, templateArgs)
+        output += self.processMethodOrProperty(theClass, method, templateDecl, templateArgs)
       except SkipException as e:
         print(str(e))
-    self.processFinalizeClass()
+    output += self.processFinalizeClass()
     if not isAbstract:
       try:
-        self.processOverloadedConstructors(theClass, None, templateDecl, templateArgs)
+        output += self.processOverloadedConstructors(theClass, None, templateDecl, templateArgs)
       except SkipException as e:
         print(str(e))
-
-class ExportsBindings(Bindings):
-  def __init__(
-    self,
-    typedefs, templateTypedefs,
-    translationUnit
-  ):
-    super().__init__(typedefs, templateTypedefs, translationUnit)
-    self.exportObjects = []
-
-  def processClass(self, theClass, templateDecl = None, templateArgs = None):
-    className = getClassTypeName(theClass, templateDecl)
-    self.exportObjects.append(className)
-    super().processClass(theClass, templateDecl, templateArgs)
-
-  def processFinalizeClass(self):
-    pass
-
-  def processSimpleConstructor(self, theClass):
-    pass
-
-  def processMethodOrProperty(self, theClass, method, templateDecl = None, templateArgs = None):
-    pass
-
-  def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):
-    name = getClassTypeName(theClass, templateDecl)
-    self.exportObjects.append(name)
-
-  def processEnum(self, theEnum):
-    self.exportObjects.append(theEnum.spelling)
+    return output
 
 class EmbindBindings(Bindings):
   def __init__(
@@ -166,6 +136,7 @@ class EmbindBindings(Bindings):
     super().__init__(typedefs, templateTypedefs, translationUnit)
 
   def processClass(self, theClass, templateDecl = None, templateArgs = None):
+    output = ""
     className = getClassTypeName(theClass, templateDecl)
     if className == "":
       className = theClass.type.spelling
@@ -177,39 +148,42 @@ class EmbindBindings(Bindings):
     else:
       baseClassBinding = ""
 
-    self.output += "EMSCRIPTEN_BINDINGS(" + (theClass.spelling if templateDecl is None else templateDecl.spelling) + ") {\n"
-    self.output += "  class_<" + className + baseClassBinding + ">(\"" + className + "\")\n"
+    output += "EMSCRIPTEN_BINDINGS(" + (theClass.spelling if templateDecl is None else templateDecl.spelling) + ") {\n"
+    output += "  class_<" + className + baseClassBinding + ">(\"" + className + "\")\n"
 
-    super().processClass(theClass, templateDecl, templateArgs)
+    output += super().processClass(theClass, templateDecl, templateArgs)
 
-    self.output += "}\n\n"
+    output += "}\n\n"
 
     # Epilog
     nonPublicDestructor = any(x.kind == clang.cindex.CursorKind.DESTRUCTOR and not x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC for x in theClass.get_children())
     placementDelete = next((x for x in theClass.get_children() if x.spelling == "operator delete" and len(list(x.get_arguments())) == 2), None) is not None
     if nonPublicDestructor or placementDelete:
-      self.output += "namespace emscripten { namespace internal { template<> void raw_destructor<" + theClass.spelling + ">(" + theClass.spelling + "* ptr) { /* do nothing */ } } }\n"
+      output += "namespace emscripten { namespace internal { template<> void raw_destructor<" + theClass.spelling + ">(" + theClass.spelling + "* ptr) { /* do nothing */ } } }\n"
+    return output
 
   def processFinalizeClass(self):
-    self.output += "  ;\n"
+    return "  ;\n"
 
   def processSimpleConstructor(self, theClass):
+    output = ""
     children = list(theClass.get_children())
     constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR, children))
 
     if len(constructors) == 0:
-      self.output += "    .constructor<>()\n"
-      return
+      output += "    .constructor<>()\n"
+      return ""
     publicConstructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
     if len(publicConstructors) == 0 or len(publicConstructors) > 1:
-      return
+      return ""
     standardConstructor = publicConstructors[0]
     if not standardConstructor:
-      return
+      return ""
 
     argTypesBindings = ", ".join(list(map(lambda x: x.type.spelling, list(standardConstructor.get_arguments()))))
     
-    self.output += "    .constructor<" + argTypesBindings + ">()\n"
+    output += "    .constructor<" + argTypesBindings + ">()\n"
+    return output
 
   def getSingleArgumentBinding(self, argNames = True, isConstructor = False, templateDecl = None, templateArgs = None):
     def f(arg):
@@ -244,6 +218,7 @@ class EmbindBindings(Bindings):
     return f
 
   def processMethodOrProperty(self, theClass, method, templateDecl = None, templateArgs = None):
+    output = ""
     className = getClassTypeName(theClass, templateDecl)
     if className == "":
       className = theClass.type.spelling
@@ -420,21 +395,23 @@ class EmbindBindings(Bindings):
       else:
         functionCommand = "function"
 
-      self.output += "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\"," + functionBinding + ", allow_raw_pointers())\n"
+      output += f"{indent(2)}.{functionCommand}(\"{method.spelling}{overloadPostfix}\",{functionBinding}, allow_raw_pointers())\n"
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.FIELD_DECL:
       if method.type.kind == clang.cindex.TypeKind.CONSTANTARRAY:
         print("Cannot handle array properties, skipping " + className + "::" + method.spelling)
       elif not method.type.get_pointee().kind == clang.cindex.TypeKind.INVALID:
         print("Cannot handle pointer properties, skipping " + className + "::" + method.spelling)
       else:
-        self.output += "    .property(\"" + method.spelling + "\", &" + className + "::" + method.spelling + ")\n"
+        output += f"{indent(2)}.property(\"{method.spelling}\", &{className}::{method.spelling})\n"
+    return output
 
   def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):
+    output = ""
     if children is None:
       children = list(theClass.get_children())
     constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
     if len(constructors) == 1:
-      return
+      return ""
     constructorBindings = ""
     allOverloads = [m for m in children if m.kind == clang.cindex.CursorKind.CONSTRUCTOR and m.access_specifier == clang.cindex.AccessSpecifier.PUBLIC]
     if len(allOverloads) == 1:
@@ -454,10 +431,11 @@ class EmbindBindings(Bindings):
       constructorBindings += "      .constructor<" + argTypes + ">()\n"
       constructorBindings += "    ;\n"
 
-    self.output += constructorBindings
+    output += constructorBindings
+    return output
 
   def processEnum(self, theEnum):
-    self.output += "EMSCRIPTEN_BINDINGS(" + theEnum.spelling + ") {\n"
+    output = "EMSCRIPTEN_BINDINGS(" + theEnum.spelling + ") {\n"
 
     bindingsOutput = "  enum_<" + theEnum.spelling + ">(\"" + theEnum.spelling + "\")\n"
     enumChildren = list(theEnum.get_children())
@@ -465,9 +443,10 @@ class EmbindBindings(Bindings):
     for enumChild in enumChildren:
       bindingsOutput += "    .value(\"" + enumChild.spelling + "\", " + prefix + enumChild.spelling + ")\n"
     bindingsOutput += "  ;\n"
-    self.output += bindingsOutput
+    output += bindingsOutput
 
-    self.output += "}\n\n"
+    output += "}\n\n"
+    return output
 
 class TypescriptBindings(Bindings):
   def __init__(
@@ -481,6 +460,7 @@ class TypescriptBindings(Bindings):
     self.exports = []
 
   def processClass(self, theClass, templateDecl = None, templateArgs = None):
+    output = ""
     baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, theClass.get_children()))
     baseClassDefinition = ""
     if len(baseSpec) > 0:
@@ -491,32 +471,37 @@ class TypescriptBindings(Bindings):
         # self.addImportIfWeHaveTo(baseSpec[0].type.spelling)
 
     name = getClassTypeName(theClass, templateDecl)
-    self.output += "export declare class " + name + baseClassDefinition + " {\n"
+    output += "export declare class " + name + baseClassDefinition + " {\n"
     self.exports.append(name)
 
-    super().processClass(theClass, templateDecl, templateArgs)
+    output += super().processClass(theClass, templateDecl, templateArgs)
+    return output
 
   def processFinalizeClass(self):
-    self.output += "  delete(): void;\n"
-    self.output += "}\n\n"
+    output = ""
+    output += "  delete(): void;\n"
+    output += "}\n\n"
+    return output
 
   def processSimpleConstructor(self, theClass):
+    output = ""
     children = list(theClass.get_children())
     constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR, children))
 
     if len(constructors) == 0:
-      self.output += "  constructor();\n"
-      return
+      output += "  constructor();\n"
+      return ""
     publicConstructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
     if len(publicConstructors) == 0 or len(publicConstructors) > 1:
-      return
+      return ""
     standardConstructor = publicConstructors[0]
     if not standardConstructor:
-      return
+      return ""
 
     argsTypescriptDef = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x), list(standardConstructor.get_arguments()))))
     
-    self.output += "  constructor(" + argsTypescriptDef + ")\n"
+    output += "  constructor(" + argsTypescriptDef + ")\n"
+    return output
 
   def convertBuiltinTypes(self, typeName):
     if typeName in [
@@ -578,20 +563,23 @@ class TypescriptBindings(Bindings):
     return argname + ": " + argTypeName
 
   def processMethodOrProperty(self, theClass, method, templateDecl = None, templateArgs = None):
+    output = ""
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.CXX_METHOD and not method.spelling.startswith("operator"):
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, method)
 
       args = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x[1], x[0], templateDecl, templateArgs), enumerate(method.get_arguments()))))
       returnType = self.getTypescriptDefFromResultType(method.result_type, templateDecl, templateArgs)
 
-      self.output += "  " + ("static " if method.is_static_method() else "") + method.spelling + overloadPostfix + "(" + args + "): " + returnType + ";\n"
+      output += "  " + ("static " if method.is_static_method() else "") + method.spelling + overloadPostfix + "(" + args + "): " + returnType + ";\n"
+    return output
 
   def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):
+    output = ""
     if children is None:
       children = list(theClass.get_children())
     constructors = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CONSTRUCTOR and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, children))
     if len(constructors) == 1:
-      return
+      return ""
 
     constructorTypescriptDef = ""
     allOverloadedConstructors = []
@@ -605,13 +593,16 @@ class TypescriptBindings(Bindings):
       constructorTypescriptDef += "    constructor(" + argsTypescriptDef + ");\n"
       constructorTypescriptDef += "  }\n\n"
       allOverloadedConstructors.append(name + overloadPostfix)
-    self.output += constructorTypescriptDef
+    output += constructorTypescriptDef
     self.exports.extend(allOverloadedConstructors)
+    return output
 
   def processEnum(self, theEnum):
+    output = ""
     bindingsOutput = "export declare type " + theEnum.spelling + " = {\n"
     for enumChild in list(theEnum.get_children()):
       bindingsOutput += "  " + enumChild.spelling + ": {};\n"
     bindingsOutput += "}\n\n"
-    self.output += bindingsOutput
+    output += bindingsOutput
     self.exports.append(theEnum.spelling)
+    return output
