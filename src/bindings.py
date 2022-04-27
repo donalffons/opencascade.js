@@ -271,11 +271,10 @@ class EmbindBindings(Bindings):
       returnNeedsWrapper = needsWrapper(method.result_type)
       if any(argsNeedingWrapper) or returnNeedsWrapper:
         def replaceTemplateArgs(x):
-          return pick(
-            templateArgs is not None and args[x[0]].type.get_pointee().spelling.replace("const ", "") in templateArgs,
-            args[x[0]].type.spelling.replace(args[x[0]].type.get_pointee().spelling.replace("const ", ""), templateArgs[args[x[0]].type.get_pointee().spelling.replace("const ", "")].spelling),
-            args[x[0]].type.spelling
-          )
+          if templateArgs is not None and args[x[0]].type.get_pointee().spelling.replace("const ", "") in templateArgs:
+            return args[x[0]].type.spelling.replace(args[x[0]].type.get_pointee().spelling.replace("const ", ""), templateArgs[args[x[0]].type.get_pointee().spelling.replace("const ", "")].spelling)
+          else:
+            return args[x[0]].type.spelling
         def getArgName(x):
           return pick(
             not args[x[0]].spelling == "",
@@ -283,11 +282,10 @@ class EmbindBindings(Bindings):
             f"argNo{str(x[0])}"
           )
         def getArgTypeName(type):
-          return pick(
-            templateArgs is not None and type.get_pointee().spelling.replace("const ", "") in templateArgs,
-            type.get_pointee().spelling.replace(type.get_pointee().spelling.replace("const ", ""), templateArgs[type.get_pointee().spelling.replace("const ", "")].spelling),
-            type.get_pointee().spelling
-          )
+          if templateArgs is not None and type.get_pointee().spelling.replace("const ", "") in templateArgs:
+            return type.get_pointee().spelling.replace(type.get_pointee().spelling.replace("const ", ""), templateArgs[type.get_pointee().spelling.replace("const ", "")].spelling)
+          else:
+            return type.get_pointee().spelling
         classTypeName = getClassTypeName(theClass, templateDecl)
         wrappedParamTypes = merge(", ", *map(lambda x:
           pick(
@@ -302,8 +300,7 @@ class EmbindBindings(Bindings):
             x[1],
             f"emscripten::val {getArgName(x)}",
             f"{replaceTemplateArgs(x)} {getArgName(x)}",
-          enumerate(argsNeedingWrapper))
-        ))
+          ), enumerate(argsNeedingWrapper)))
         def generateGetReferenceValue(x):
           if x[1] and not isCString(args[x[0]].type):
             return (
@@ -407,7 +404,7 @@ class EmbindBindings(Bindings):
           )
       else:
         if numOverloads == 1:
-          functionBinding = f" &{className}::{method.spelling}"
+          functionBinding = " &" + className + "::" + method.spelling
         else:
           functionBinding = merge("",
             " select_overload<",
@@ -423,14 +420,14 @@ class EmbindBindings(Bindings):
       else:
         functionCommand = "function"
 
-      self.output += f"{indent(2)}.{functionCommand}(\"{method.spelling}{overloadPostfix}\",{functionBinding}, allow_raw_pointers())\n"
+      self.output += "    ." + functionCommand + "(\"" + method.spelling + overloadPostfix + "\"," + functionBinding + ", allow_raw_pointers())\n"
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.FIELD_DECL:
       if method.type.kind == clang.cindex.TypeKind.CONSTANTARRAY:
-        print(f"Cannot handle array properties, skipping {className}::{method.spelling}")
+        print("Cannot handle array properties, skipping " + className + "::" + method.spelling)
       elif not method.type.get_pointee().kind == clang.cindex.TypeKind.INVALID:
-        print(f"Cannot handle pointer properties, skipping {className}::{method.spelling}")
+        print("Cannot handle pointer properties, skipping " + className + "::" + method.spelling)
       else:
-        self.output += f"{indent(2)}.property(\"{method.spelling}\", &{className}::{method.spelling})\n"
+        self.output += "    .property(\"" + method.spelling + "\", &" + className + "::" + method.spelling + ")\n"
 
   def processOverloadedConstructors(self, theClass, children = None, templateDecl = None, templateArgs = None):
     if children is None:
