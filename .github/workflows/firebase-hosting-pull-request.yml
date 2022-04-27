@@ -24,6 +24,14 @@ jobs:
           unzip reference-docs.zip
           rm reference-docs.zip
 
+      - name: Add starter templates to website
+        run: |
+          cd website/static
+          mkdir download-starter-templates
+          gsutil cp -r gs://opencascade-js/starter-templates ./download-starter-templates
+          mv download-starter-templates/starter-templates/* download-starter-templates/
+          rm -r download-starter-templates/starter-templates
+
       - name: Get branch name
         id: branch-name
         uses: tj-actions/branch-names@v5.2

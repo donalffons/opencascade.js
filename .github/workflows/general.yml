@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v2
         with:
@@ -39,6 +40,11 @@ jobs:
           gsutil cp gs://opencascade-js/reference-docs.zip .
           unzip reference-docs.zip
           rm reference-docs.zip
+
+      - name: Add starter templates to website
+        run: |
+          cd website/static
+          gsutil cp -r gs://opencascade-js/starter-templates ./download-starter-templates
 
       - name: Create custom build
         run: |

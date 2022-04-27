@@ -27,18 +27,20 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: '15'
+          node-version: '16'
 
       - name: Upgrade Dependencies
         if: github.event.inputs.upgrade == 'true'
         run: |
           npm install -g npm-check-updates
           cd starter-templates
-          for dir in ./*/
+          for dir in  */
           do
-            cd $dir
-            ncu -u
+            dir=${dir%*/}
+            cd ${dir}
+            ncu -u -f opencascade.js
             npm install
+            npm install opencascade.js@beta
             npm run build
             npm run clean
             rm node_modules -r
@@ -46,22 +48,27 @@ jobs:
           done
           cd ..
 
-      - name: Git pull
-        run: |
-          git pull
-
       - name: Update Starter Templates
         timeout-minutes: 10000
         run: |
-          apt-get update
-          apt-get install -y zip
+          sudo apt-get update
+          sudo apt-get install -y zip
           cd starter-templates
-          for dir in ./*/
+          for dir in  */
           do
-            zip -r $(dir).zip ./$(dir)
-            gsutil cp ./$(dir).zip gs://opencascade-js/starter-templates/$(dir).zip
-            rm $(dir).zip
+            dir=${dir%*/}
+            zip -r ${dir}.zip ./${dir}
+            gsutil cp ./${dir}.zip gs://opencascade-js/starter-templates/${dir}.zip
+            rm ${dir}.zip
           done
+
+      - name: Commit Changes
+        run: |
+          git status
+          git pull
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Upgrade starter template dependencies" -a
 
       - name: Push Changes to branch
         uses: ad-m/github-push-action@master

@@ -1,0 +1,18 @@
+{
+  "name": "ocjs-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node index.js",
+    "clean": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "opencascade.js": "^2.0.0-beta.4368ca8"
+  },
+  "type": "module"
+}
