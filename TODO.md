@@ -18,32 +18,25 @@
 * When the above step done, we can archive the examples repository
 * Add more examples and / or tests
 
-## 4. Starter Templates
-
-* Create starter templates for different frameworks (ongoing)
-* Add documentation page to website
-* CI/CD so that starter templates are automatically updated and published
-* Make starter templates downloadable from website
-
-## 5. Community Project Section
+## 4. Community Project Section
 
 * Add section about featured community projects?!
 * Ask first if the community really wants / needs that (yet) or not
 
-## 6. Default values in bindings
+## 5. Default values in bindings
 
 * Add support for default values
 
-## 7. More flexibility when defining custom build bindings in YAML files
+## 6. More flexibility when defining custom build bindings in YAML files
 
 * Currently, only "symbol: bla" is supported.
 * Add support for regex
 * Maybe support for inline python functions?!
 
-## 8. TSDoc comments in typescript definitions
+## 7. TSDoc comments in typescript definitions
 
 * Helpful in IDEs that support intellisense
 
-## 9. Other
+## 8. Other
 
 * Experiment with opencascade's built-in visualization and see if it works with Emscripten and if it's any good. Create example.
