@@ -31,7 +31,7 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <a href="https://ocjs.org/reference-docs/index.html" className={styles.card}>
+          <a href="https://ocjs.org/reference-docs" className={styles.card}>
             <h2>Reference Documentation &rarr;</h2>
             <p>Find in-depth information about OpenCascade.js features and API.</p>
           </a>

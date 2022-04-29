@@ -53,7 +53,7 @@ const config = {
           {
             position: "left",
             label: "Reference Docs",
-            href: "/reference-docs/index.html",
+            href: "/reference-docs",
             target: "_blank",
           },
           {
@@ -84,7 +84,7 @@ const config = {
               },
               {
                 label: "Reference Docs",
-                href: "/reference-docs/index.html",
+                href: "/reference-docs",
                 target: "_blank",
               },
               {
