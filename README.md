@@ -1,5 +1,5 @@
 [![Build OpenCascade.js](https://github.com/donalffons/opencascade.js/actions/workflows/buildFull.yml/badge.svg?event=workflow_dispatch)](https://github.com/donalffons/opencascade.js/actions/workflows/buildFull.yml)
-![OpenCascade Version](https://img.shields.io/badge/OpenCascade%20Version-7.6.1-green.svg)
+![OpenCascade Version](https://img.shields.io/badge/OpenCascade%20Version-7.6.2-green.svg)
 
 <p align="center">
   <img src="https://github.com/donalffons/opencascade.js/raw/master/images/logo.svg" alt="Logo" width="50%">

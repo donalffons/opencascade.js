@@ -37,7 +37,7 @@ WORKDIR /freetype/
 RUN \
   git clone https://git.savannah.nongnu.org/git/freetype/freetype2.git .
 
-ENV OCCT_COMMIT_HASH_FULL d2abb6d844231cb8f29be6894440874a4700e4a5
+ENV OCCT_COMMIT_HASH_FULL bb368e271e24f63078129283148ce83db6b9670a
 WORKDIR /occt/
 RUN \
   curl "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=${OCCT_COMMIT_HASH_FULL};sf=tgz" -o occt.tar.gz && \
