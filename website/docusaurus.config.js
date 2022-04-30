@@ -53,7 +53,7 @@ const config = {
           {
             position: "left",
             label: "Reference Docs",
-            href: "/reference-docs",
+            href: "/reference-docs/index.html",
             target: "_blank",
           },
           {
@@ -84,7 +84,7 @@ const config = {
               },
               {
                 label: "Reference Docs",
-                href: "/reference-docs",
+                href: "/reference-docs/index.html",
                 target: "_blank",
               },
               {
@@ -179,8 +179,6 @@ const config = {
       };
     }
   ],
-
-  trailingSlash: true,
 };
 
 module.exports = config;
