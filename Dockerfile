@@ -1,4 +1,4 @@
-FROM emscripten/emsdk:3.1.7 AS baseImage
+FROM emscripten/emsdk:3.1.9 AS baseImage
 
 RUN \
   apt update -y && \
