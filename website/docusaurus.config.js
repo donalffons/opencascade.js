@@ -179,6 +179,8 @@ const config = {
       };
     }
   ],
+
+  trailingSlash: false,
 };
 
 module.exports = config;
