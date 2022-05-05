@@ -41,8 +41,8 @@ mainBuild:
 
 ```sh
 docker run \
-  -v $(pwd):/src \
-  -u $(id -u):$(id -g) \
+  -v "$(pwd):/src" \
+  -u "$(id -u):$(id -g)" \
   donalffons/opencascade.js:multi-threaded \
   ./opencascade.full.multi-threaded.yml
 ```

@@ -76,6 +76,18 @@ Unfortunately, bundlers behave inconsistently when dealing with `.wasm` assets, 
             },
           }
         );
+        
+        config.resolve.fallback =
+        {
+            fs: false,
+            perf_hooks: false,
+            os: false,
+            path: false,
+            worker_threads: false,
+            crypto: false,
+            stream: false
+        }
+        
         return config;
       },
     };

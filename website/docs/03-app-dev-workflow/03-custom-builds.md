@@ -79,8 +79,8 @@ Custom builds are defined using YAML files. One YAML file can contain multiple m
       docker run \
         --rm \
         -it \
-        -v $(pwd):/src \
-        -u $(id -u):$(id -g) \
+        -v "$(pwd):/src" \
+        -u "$(id -u):$(id -g)" \
         donalffons/opencascade.js \
         test.yml
       ```
