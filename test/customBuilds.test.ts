@@ -34,7 +34,7 @@ const initCustomBuild = async (name: string) => {
 };
 
 it("can create custom build: simple", () => {
-  createCustomBuild("simple", 124946, 559402, 7238);
+  createCustomBuild("simple", 110726, 445231, 7238);
 });
 
 it("can run custom build: simple", async () => {
