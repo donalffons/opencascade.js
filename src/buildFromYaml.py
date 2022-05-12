@@ -81,7 +81,7 @@ def runBuild(build):
       command = [
         "emcc",
         "-flto",
-        "-fexceptions",
+        "-fwasm-exceptions",
         "-sDISABLE_EXCEPTION_CATCHING=0",
         "-DIGNORE_NO_ATOMICS=1",
         "-DOCCT_NO_PLUGINS",

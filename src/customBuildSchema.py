@@ -25,7 +25,7 @@
         },
         "default": [
           "-flto",
-          "-fexceptions",
+          "-fwasm-exceptions",
           "-sDISABLE_EXCEPTION_CATCHING=0",
           "-O3",
           "-sEXPORT_ES6=1",
@@ -76,7 +76,7 @@
         },
         "default": [
           "-flto",
-          "-fexceptions",
+          "-fwasm-exceptions",
           "-sDISABLE_EXCEPTION_CATCHING=0",
           "-O3",
           "-sEXPORT_ES6=1",
