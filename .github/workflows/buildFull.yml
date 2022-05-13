@@ -162,6 +162,9 @@ jobs:
       - name: Publish new beta version to NPM
         if: github.event.inputs.buildType == 'release'
         run: |
+          cd website && npm version ${{ steps.version.outputs.version }} --force && cd ..
+          cd website/ocjs-editor-theme && npm version ${{ steps.version.outputs.version }} --force && cd ../..
+          cd typedoc-reference-docs && npm version ${{ steps.version.outputs.version }} --force && cd ..
           npm version ${{ steps.version.outputs.version }} --force
           npm publish --tag=beta
 
