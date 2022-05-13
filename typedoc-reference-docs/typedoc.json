@@ -1,9 +1,9 @@
 {
   "entryPoints": [
-    "../dist/opencascade.full.d.ts"
+    "./opencascade.full.d.ts"
   ],
   "out": "../website/static/reference-docs/",
-  "tsconfig": "../dist/tsconfig.json",
+  "tsconfig": "./tsconfig.json",
   "readme": "none",
   "plugin": "./dist/index.js",
   "theme": "footer",
