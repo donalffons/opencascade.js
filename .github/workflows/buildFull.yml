@@ -168,9 +168,13 @@ jobs:
           npm version ${{ steps.version.outputs.version }} --force
           npm publish --tag=beta
 
-      - name: Git pull
+      - name: Commit Changes
         run: |
+          git status
           git pull
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Update OpenCascade.js version" -a
 
       - name: Push Changes to branch
         uses: ad-m/github-push-action@master
