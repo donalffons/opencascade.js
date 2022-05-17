@@ -125,6 +125,11 @@ export class MyThemeContext extends DefaultThemeRenderContext {
     super(theme, options);
     this.header = bind(header, this);
 
+    // This is a work-around for typedoc's reliance on relative URL's, which is a weird concept in general (e.g. since /reference-docs vs /reference-docs/ results in a broken page) and doesn't work nicely with docusaurus and firebase.
+    this.relativeURL = url => url ? `/reference-docs/${url}` : url;
+    // @ts-ignore
+    this.theme.markedPlugin.getRelativeUrl = () => { throw "Unsupported!"; };
+
     this.analytics = () => (
       <script type="module">
         <JSX.Raw html={`
