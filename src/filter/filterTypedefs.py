@@ -17,9 +17,6 @@ def filterTypedef(typedef, additionalInfo=None):
   ):
     return False
 
-  if typedef.spelling == "OpenGl_ListOfStructure":
-    return False
-
   # Generates error "Cannot register type 'TColQuantity_Array1OfLength' twice" during initialization of the WASM file. Seems to be conflicting with 'TColStd_Array1OfReal'. Can be reproduced by including these two bindings in one bindings-file.
   if typedef.spelling == "TColQuantity_Array1OfLength":
     return False
@@ -139,6 +136,10 @@ def filterTypedef(typedef, additionalInfo=None):
     "Handle_StepKinematics_UnconstrainedPair",
     "Handle_StepKinematics_UnconstrainedPairValue"
   ]:
+    return False
+
+  # error: no matching function for call to 'select_overload'
+  if typedef.spelling == "OpenGl_ListOfStructure":
     return False
 
   if typedef.location.file.name == "myMain.h" or typedef.underlying_typedef_type.spelling.startswith((

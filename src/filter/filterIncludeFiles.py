@@ -43,15 +43,6 @@ def filterIncludeFile(filename):
   ):
     return False
 
-  # error: no member named 'random_shuffle' in namespace 'std'
-  if (
-    filename == "OpenGl_HaltonSampler.hxx" or
-    filename == "OpenGl_TileSampler.hxx" or
-    filename == "D3DHost_View.hxx" or
-    filename == "OpenGl_View.hxx"
-  ):
-    return False
-
   # fatal error: 'vtkType.h' file not found
   if (
     filename == "IVtk_Types.hxx" or

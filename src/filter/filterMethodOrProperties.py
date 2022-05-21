@@ -258,4 +258,34 @@ def filterMethodOrProperty(theClass, methodOrProperty):
   if theClass.spelling == "Message_AttributeStream" and methodOrProperty.spelling == "Stream":
     return False
 
+  # error: calling a private constructor of class 'OpenGl_Clipping'
+  if theClass.spelling == "OpenGl_Context" and methodOrProperty.spelling in [
+    "ChangeClipping",
+    "Clipping",
+  ]:
+    return False
+
+  # many errors
+  if theClass.spelling == "OpenGl_GlFunctions" and methodOrProperty.kind == clang.cindex.CursorKind.FIELD_DECL:
+    return False
+
+  if theClass.spelling == "OpenGl_GraphicDriver" and methodOrProperty.spelling in [
+    "Options",
+    "ChangeOptions",
+  ]:
+    return False
+
+  # wasm-ld: error: /opencascade.js/build/bindings/OpenGl/OpenGl_ShaderProgram.hxx/OpenGl_ShaderProgram.cpp.o: undefined symbol: OpenGl_ShaderProgram::compileShaderVerbose(opencascade::handle<OpenGl_Context> const&, opencascade::handle<OpenGl_ShaderObject> const&, TCollection_AsciiString const&, bool)
+  if theClass.spelling == "OpenGl_ShaderProgram" and methodOrProperty.spelling == "compileShaderVerbose":
+    return False
+
+  # wasm-ld: error: /opencascade.js/build/bindings/OpenGl/OpenGl_View.hxx/OpenGl_View.cpp.o: undefined symbol: OpenGl_View::SetTextureEnv(opencascade::handle<OpenGl_Context> const&, opencascade::handle<Graphic3d_TextureEnv> const&)
+  if theClass.spelling == "OpenGl_View" and methodOrProperty.spelling in [
+    "SetTextureEnv",
+    "SetBackgroundTextureStyle",
+    "SetBackgroundGradient",
+    "SetBackgroundGradientType",
+  ]:
+    return False
+
   return True

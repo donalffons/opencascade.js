@@ -72,7 +72,7 @@ def filterPackages(packageName):
 
       ## Toolkit TKOpenGl
       ## Toolkit TKOpenGles
-      "OpenGl",
+      # "OpenGl",
 
       ## Toolkit TKService
       # "Aspect",

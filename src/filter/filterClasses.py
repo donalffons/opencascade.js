@@ -2,8 +2,7 @@ def filterClass(theClass, additionalInfo=None):
   # out of scope of this project
   if (
     theClass.spelling.startswith("D3DHost") or
-    theClass.spelling.startswith("IVtk") or
-    theClass.spelling.startswith("OpenGl")
+    theClass.spelling.startswith("IVtk")
   ):
     return False
 
