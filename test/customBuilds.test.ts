@@ -55,7 +55,7 @@ it("fails on custom build: errorUnknownProp2", () => {
 });
 
 it("can create custom build: no-exceptions", () => {
-  createCustomBuild("no-exceptions", 166702, 32653528, 9205436);
+  createCustomBuild("no-exceptions", 240738, 33826894, 9334201);
 });
 
 it("can run custom build: no-exceptions", async () => {
