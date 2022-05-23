@@ -63,7 +63,7 @@ def buildObjectFiles(file, args):
     # "-g3",
     # "-gsource-map",
     # "--source-map-base=http://localhost:8080",
-    # "-fPIC",
+    "-fPIC",
     "-pthread" if args["threading"] == "multi-threaded" else "",
     *list(map(lambda x: "-I" + x, includePaths)),
     "-c",
