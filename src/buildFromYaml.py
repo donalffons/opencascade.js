@@ -47,9 +47,10 @@ def verifyBindings(bindings) -> bool:
     if not verifyBinding(binding):
       raise Exception("Requested binding " + json.dumps(binding) + " does not exist!")
 
-verifyBindings(buildConfig["mainBuild"]["bindings"])
+if "mainBuild" in buildConfig:
+  verifyBindings(buildConfig["mainBuild"]["bindings"])
 for extraBuild in buildConfig["extraBuilds"]:
-  verifyBindings(extraBuild)
+  verifyBindings(extraBuild["bindings"])
 
 def shouldProcessSymbol(symbol: str, bindings) -> bool:
   if len(bindings) == 0:
@@ -62,7 +63,8 @@ def shouldProcessSymbol(symbol: str, bindings) -> bool:
 typescriptDefinitions = []
 for dirpath, dirnames, filenames in os.walk(libraryBasePath + "/bindings"):
   for item in filenames:
-    if item.endswith(".d.ts.json") and shouldProcessSymbol(item[:-10], list(chain(buildConfig["mainBuild"]["bindings"], *list(map(lambda x: x["bindings"], buildConfig["extraBuilds"]))))):
+    bindings = list(chain([] if not "mainBuild" in buildConfig else buildConfig["mainBuild"]["bindings"], *list(map(lambda x: [] if not "bindings" in x else x["bindings"], buildConfig["extraBuilds"]))))
+    if item.endswith(".d.ts.json") and shouldProcessSymbol(item[:-10], bindings):
       f = open(dirpath + "/" + item, "r")
       typescriptDefinitions.append(json.loads(f.read()))
 
@@ -107,15 +109,18 @@ def runBuild(build):
     for item in filenames:
       if item.endswith(".cpp.o") and shouldProcessSymbol(item[:-6], build["bindings"]):
         bindingsO.append(dirpath + "/" + item)
-  sourcesO = []
-  for dirpath, dirnames, filenames in os.walk(libraryBasePath + "/sources"):
-    for item in filenames:
-      if item in [
-        "XBRepMesh.o",
-      ]:
-        continue
-      if item.endswith(".o"):
-        sourcesO.append(dirpath + "/" + item)
+  if len(build["sources"]) != 0:
+    sourcesO = build["sources"]
+  else:
+    sourcesO = []
+    for dirpath, dirnames, filenames in os.walk(libraryBasePath + "/sources"):
+      for item in filenames:
+        if item in [
+          "XBRepMesh.o",
+        ]:
+          continue
+        if item.endswith(".o"):
+          sourcesO.append(dirpath + "/" + item)
   subprocess.check_call([
     "emcc", "-lembind", ("" if additionalBindCodeO is None else additionalBindCodeO),
     *bindingsO, *sourcesO,
@@ -125,11 +130,12 @@ def runBuild(build):
   ])
   print("Build finished")
 
-runBuild(buildConfig["mainBuild"])
+if "mainBuild" in buildConfig:
+  runBuild(buildConfig["mainBuild"])
 for extraBuild in buildConfig["extraBuilds"]:
   runBuild(extraBuild)
 
-if buildConfig["generateTypescriptDefinitions"]:
+if buildConfig["generateTypescriptDefinitions"] and "mainBuild" in buildConfig:
   typescriptDefinitionOutput = ""
   typescriptExports = []
   for dts in typescriptDefinitions:
