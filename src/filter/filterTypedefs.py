@@ -138,15 +138,15 @@ def filterTypedef(typedef, additionalInfo=None):
   if typedef.spelling == "OpenGl_ListOfStructure":
     return False
 
+  # BindingError: Cannot register type 'gp_Vec2f' twice
+  if typedef.spelling == "Graphic3d_Vec2":
+    return False
+
   if typedef.location.file.name == "myMain.h" or typedef.underlying_typedef_type.spelling.startswith((
     "opencascade::handle",
     "handle",
     "NCollection"
   )):
     return True
-
-  # BindingError: Cannot register type 'gp_Vec2f' twice
-  if typedef.spelling == "Graphic3d_Vec2":
-    return False
 
   return False
