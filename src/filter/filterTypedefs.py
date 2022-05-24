@@ -75,10 +75,6 @@ def filterTypedef(typedef, additionalInfo=None):
   ]:
     return False
 
-  # error: call to 'abs' is ambiguous
-  if typedef.spelling.startswith("Graphic3d_Vec"):
-    return False
-
   # error: call to implicitly-deleted copy constructor of 'NCollection_SparseArray<int>'
   if typedef.spelling in [
     "TObj_TIntSparseArray_VecOfData",
