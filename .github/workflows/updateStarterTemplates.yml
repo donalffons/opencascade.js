@@ -63,6 +63,7 @@ jobs:
           done
 
       - name: Commit Changes
+        if: github.event.inputs.upgrade == 'true'
         run: |
           git status
           git pull
