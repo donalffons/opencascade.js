@@ -289,7 +289,14 @@ def filterMethodOrProperty(theClass, methodOrProperty):
     return False
 
   # error: call to 'abs' is ambiguous
-  if theClass.spelling == "NCollection_Vec2" and methodOrProperty.spelling == "cwiseAbs":
+  if (
+    (
+      theClass.spelling == "NCollection_Vec2" or
+      theClass.spelling == "NCollection_Vec3" or
+      theClass.spelling == "NCollection_Vec4"
+    ) and
+    methodOrProperty.spelling == "cwiseAbs"
+  ):
     return False
 
   return True
