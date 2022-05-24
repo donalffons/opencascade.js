@@ -15,6 +15,7 @@ For running OpenCascade.js in a web browser.
 ### <img src="/img/logos/react.svg" width="50" height="50" /> React
 
 * [**Create-React-App**](/download-starter-templates/ocjs-create-react-app-5.zip)
+* [**Create-React-App (Typescript, WebWorker)**](/download-starter-templates/ocjs-create-react-app-web-worker.zip)
 * [**Create-Next-App**](/download-starter-templates/ocjs-create-next-app-12.zip)
 
 ### <img src="/img/logos/vue.svg" width="50" height="50" /> Vue
