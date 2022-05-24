@@ -1,28 +1,11 @@
 mainBuild:
   name: opencascade.full.js
 
-  additionalBindCode: |
-    #include <emscripten/bind.h>
-    #include <emscripten/val.h>
-    #include <iostream>
-    #include <typeinfo>
-
-    #include "Standard_Failure.hxx"
-
-    using namespace emscripten;
-
-    class OCJS {
-    public:
-      static val getStandard_FailureData(intptr_t exceptionPtr) {
-        return val(*reinterpret_cast<Standard_Failure*>(exceptionPtr));
-      }
-    };
-
-    EMSCRIPTEN_BINDINGS(OCJS) {
-      class_<OCJS>("OCJS")
-        .class_function("getStandard_FailureData", &OCJS::getStandard_FailureData)
-      ;
-    }
-
 additionalCppCode: |
   typedef Handle(IMeshTools_Context) Handle_IMeshTools_Context;
+  class OCJS {
+  public:
+    static Standard_Failure* getStandard_FailureData(intptr_t exceptionPtr) {
+      return reinterpret_cast<Standard_Failure*>(exceptionPtr);
+    }
+  };
