@@ -145,4 +145,8 @@ def filterTypedef(typedef, additionalInfo=None):
   )):
     return True
 
+  # BindingError: Cannot register type 'gp_Vec2f' twice
+  if typedef.spelling == "Graphic3d_Vec2":
+    return False
+
   return False
