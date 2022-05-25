@@ -138,8 +138,13 @@ def filterTypedef(typedef, additionalInfo=None):
   if typedef.spelling == "OpenGl_ListOfStructure":
     return False
 
-  # BindingError: Cannot register type 'gp_Vec2f' twice
-  if typedef.spelling == "Graphic3d_Vec2":
+  # BindingError: Cannot register type 'gp_Vec2f' twice / BindingError: Cannot register type 'gp_Vec3f' twice / ...
+  if typedef.spelling in [
+    "Graphic3d_Vec2",
+    "Graphic3d_Vec3",
+    "Graphic3d_Vec3d",
+    "SelectMgr_Vec3",
+  ]:
     return False
 
   if typedef.location.file.name == "myMain.h" or typedef.underlying_typedef_type.spelling.startswith((
