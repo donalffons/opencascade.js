@@ -22,6 +22,7 @@ def buildOneFile(args, item):
       "-DOCCT_NO_PLUGINS",
       "-frtti",
       "-DHAVE_RAPIDJSON",
+      "-DHAVE_FREETYPE",
       "-Os",
       # "-g3",
       # "-gsource-map",
