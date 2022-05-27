@@ -143,7 +143,6 @@ def filterTypedef(typedef, additionalInfo=None):
     "Graphic3d_Vec2",
     "Graphic3d_Vec3",
     "Graphic3d_Vec3d",
-    "SelectMgr_Vec3",
   ]:
     return False
 
