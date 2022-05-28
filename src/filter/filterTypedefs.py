@@ -142,7 +142,6 @@ def filterTypedef(typedef, additionalInfo=None):
   if typedef.spelling in [
     "Graphic3d_Vec2",
     "Graphic3d_Vec3",
-    "Graphic3d_Vec3d",
   ]:
     return False
 
