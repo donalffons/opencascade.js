@@ -299,4 +299,12 @@ def filterMethodOrProperty(theClass, methodOrProperty):
   ):
     return False
 
+  # error: undefined symbol: _ZN21XCAFDoc_GeomToleranceC2ERKN11opencascade6handleIS_EE (referenced by top-level compiled C/C++ code)
+  if (
+    theClass.spelling == "XCAFDoc_GeomTolerance" and
+    methodOrProperty.kind == clang.cindex.CursorKind.CONSTRUCTOR and
+    methodOrProperty.type.spelling == "void (const opencascade::handle<XCAFDoc_GeomTolerance> &)"
+  ):
+    return False
+
   return True

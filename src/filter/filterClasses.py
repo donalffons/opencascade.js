@@ -395,10 +395,6 @@ def filterClass(theClass, additionalInfo=None):
   if theClass.spelling == "GeomFill_NSections":
     return False
 
-  # error: undefined symbol: _ZN21XCAFDoc_GeomToleranceC2ERKN11opencascade6handleIS_EE (referenced by top-level compiled C/C++ code)
-  if theClass.spelling == "XCAFDoc_GeomTolerance":
-    return False
-
   # error: expected unqualified-id
   if (
     theClass.spelling == "math_IntegerVector" or

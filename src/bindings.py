@@ -416,7 +416,7 @@ class EmbindBindings(Bindings):
     allOverloads = [m for m in children if m.kind == clang.cindex.CursorKind.CONSTRUCTOR and m.access_specifier == clang.cindex.AccessSpecifier.PUBLIC]
     if len(allOverloads) == 1:
       raise Exception("Something weird happened")
-    for constructor in constructors:
+    for constructor in filter(lambda x: filterMethodOrProperty(theClass, x), constructors):
       overloadPostfix = "" if (not len(allOverloads) > 1) else "_" + str(allOverloads.index(constructor) + 1)
 
       args = ", ".join(list(map(lambda x: ("std::string " + x.spelling) if isCString(x.type) else self.getSingleArgumentBinding(True, True, templateDecl, templateArgs)(x)[0], constructor.get_arguments())))
@@ -584,7 +584,7 @@ class TypescriptBindings(Bindings):
     constructorTypescriptDef = ""
     allOverloadedConstructors = []
 
-    for constructor in constructors:
+    for constructor in filter(lambda x: filterMethodOrProperty(theClass, x), constructors):
       [overloadPostfix, numOverloads] = getMethodOverloadPostfix(theClass, constructor, children)
 
       argsTypescriptDef = ", ".join(list(map(lambda x: self.getTypescriptDefFromArg(x, "", templateDecl, templateArgs), list(constructor.get_arguments()))))
