@@ -87,7 +87,6 @@ def runBuild(build):
         "-DOCCT_NO_PLUGINS",
         "-frtti",
         "-DHAVE_RAPIDJSON",
-        "-DHAVE_FREETYPE",
         "-Os",
         "-pthread" if os.environ["threading"] == "multi-threaded" else "",
         *list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths)),
