@@ -1,5 +1,6 @@
 import clang.cindex
 import re
+import sys
 
 from wasmGenerator.Common import SkipException, isAbstractClass, getMethodOverloadPostfix
 from filter.filterClasses import filterClass
@@ -36,11 +37,10 @@ def shouldProcessClass(child: clang.cindex.Cursor, occtBasePath: str):
     child.kind == clang.cindex.CursorKind.CLASS_DECL or
     child.kind == clang.cindex.CursorKind.STRUCT_DECL
   ):
-    baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, child.get_children()))
-    if len(baseSpec) > 1:
-      print("cannot handle multiple base classes (" + child.spelling + ")")
-      return False
-    
+    # baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, child.get_children()))
+    # if len(baseSpec) > 1:
+    #   print("cannot handle multiple base classes (" + child.spelling + ")")
+    #   return False
     return True
 
   return False
@@ -399,8 +399,10 @@ class EmbindBindings(Bindings):
     if method.access_specifier == clang.cindex.AccessSpecifier.PUBLIC and method.kind == clang.cindex.CursorKind.FIELD_DECL:
       if method.type.kind == clang.cindex.TypeKind.CONSTANTARRAY:
         print("Cannot handle array properties, skipping " + className + "::" + method.spelling)
+        sys.stdout.flush()
       elif not method.type.get_pointee().kind == clang.cindex.TypeKind.INVALID:
         print("Cannot handle pointer properties, skipping " + className + "::" + method.spelling)
+        sys.stdout.flush()
       else:
         output += f"{indent(2)}.property(\"{method.spelling}\", &{className}::{method.spelling})\n"
     return output
@@ -462,15 +464,23 @@ class TypescriptBindings(Bindings):
   def processClass(self, theClass, templateDecl = None, templateArgs = None):
     output = ""
     baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, theClass.get_children()))
+    name = getClassTypeName(theClass, templateDecl)
     baseClassDefinition = ""
     if len(baseSpec) > 0:
       if any(x in baseSpec[0].type.spelling for x in [":", "<"]):
         print("Unsupported character for base class \"" + baseSpec[0].type.spelling + "\" (" + theClass.spelling + ")")
+        sys.stdout.flush()
       else:
-        baseClassDefinition = " extends " + baseSpec[0].type.spelling
+        if len(baseSpec) == 1:
+          baseClassDefinition = " extends " + baseSpec[0].type.spelling
+        else:
+          classes = ", ".join(map(lambda x: x.type.spelling, baseSpec))
+          baseClassDefinition = " extends __" + name
+          output += "class __" + name + " {}\n"
+          output += "interface __" + name + " extends " + classes + " {}\n"
+          output += "applyMixins(__" + name + ", [" + classes + "]);\n"
         # self.addImportIfWeHaveTo(baseSpec[0].type.spelling)
 
-    name = getClassTypeName(theClass, templateDecl)
     output += "export declare class " + name + baseClassDefinition + " {\n"
     self.exports.append(name)
 
@@ -546,6 +556,7 @@ class TypescriptBindings(Bindings):
       resTypeName = resTypedefType
     if resTypeName == "" or "(" in resTypeName or ":" in resTypeName or "<" in resTypeName:
       print("could not generate proper types for type name '" + resTypeName + "', using 'any' instead.")
+      sys.stdout.flush()
       resTypeName = "any"
     return resTypeName
 
@@ -555,6 +566,7 @@ class TypescriptBindings(Bindings):
     argTypeName = self.convertBuiltinTypes(argTypeName)
     if argTypeName == "" or "(" in argTypeName or ":" in argTypeName:
       print("could not generate proper types for type name '" + argTypeName + "', using 'any' instead.")
+      sys.stdout.flush()
       argTypeName = "any"
 
     argname = (arg.spelling if not arg.spelling == "" else ("a" + str(suffix)))

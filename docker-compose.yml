@@ -1,0 +1,10 @@
+
+version: "3.9"
+services:
+  opencascade:
+    build: .
+    volumes:
+      - ./build:/opencascade.js/build
+      - ./src:/opencascade.js/src
+      - ./dist:/src
+

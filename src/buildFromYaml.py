@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+import sys
 import subprocess
 import json
 from itertools import chain
@@ -30,12 +31,14 @@ try:
 except Exception:
   pass
 
-generateCustomCodeBindings(buildConfig["additionalCppCode"])
-compileCustomCodeBindings({
-  "threading": os.environ['threading'],
-})
+# generateCustomCodeBindings(buildConfig["additionalCppCode"])
+# compileCustomCodeBindings({
+#   "threading": os.environ['threading'],
+# })
 
 def verifyBinding(binding) -> bool:
+  print("Verify Binding: " + binding["symbol"])
+  sys.stdout.flush()
   for dirpath, dirnames, filenames in os.walk(libraryBasePath + "/bindings"):
     for item in filenames:
       if item.endswith(".cpp.o") and binding["symbol"] == item[:-6]:
@@ -101,6 +104,7 @@ def runBuild(build):
       return None
   additionalBindCodeO = getAdditionalBindCodeO()
   print("Running build: " + build["name"])
+  sys.stdout.flush()
   bindingsO = []
   for dirpath, dirnames, filenames in os.walk(libraryBasePath + "/bindings"):
     for item in filenames:
@@ -115,20 +119,23 @@ def runBuild(build):
         continue
       if item.endswith(".o"):
         sourcesO.append(dirpath + "/" + item)
+  outFileName = os.getcwd() + "/" + build["name"]
   subprocess.check_call([
     "emcc", "-lembind", ("" if additionalBindCodeO is None else additionalBindCodeO),
     *bindingsO, *sourcesO,
-    "-o", os.getcwd() + "/" + build["name"],
+    "-o", outFileName,
     "-pthread" if os.environ["threading"] == "multi-threaded" else "",
     *build["emccFlags"],
   ])
-  print("Build finished")
+  print("Build finished: " + outFileName)
 
 runBuild(buildConfig["mainBuild"])
 for extraBuild in buildConfig["extraBuilds"]:
   runBuild(extraBuild)
 
 if buildConfig["generateTypescriptDefinitions"]:
+  print("Generate Typescript Definitions")
+  sys.stdout.flush()
   typescriptDefinitionOutput = ""
   typescriptExports = []
   for dts in typescriptDefinitions:
@@ -295,8 +302,25 @@ if buildConfig["generateTypescriptDefinitions"]:
     "}\n\n" + \
     "\nexport type OpenCascadeInstance = {FS: typeof FS} & {\n  " + ";\n  ".join(map(lambda x: x["export"] + ((": typeof " + x["export"]) if x["kind"] == "class" else (": " + x["export"])), typescriptExports)) + ";\n" + \
     "};\n\n" + \
+    "\n\n" + \
+    "function applyMixins(derivedCtor: any, constructors: any[]) {\n" + \
+    "  constructors.forEach((baseCtor) => {\n" + \
+    "    Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {\n" + \
+    "      Object.defineProperty(\n" + \
+    "          derivedCtor.prototype,\n" + \
+    "          name,\n" + \
+    "          Object.getOwnPropertyDescriptor(baseCtor.prototype, name) ||\n" + \
+    "          Object.create(null)\n" + \
+    "      );\n" + \
+    "    });\n" + \
+    "  });\n" + \
+    "}\n" + \
+    "\n\n" + \
     "declare function init(): Promise<OpenCascadeInstance>;\n\n" + \
     "export default init;\n"
 
-  typescriptDefinitionsFile = open(os.getcwd() + "/" + os.path.splitext(buildConfig["mainBuild"]["name"])[0] + ".d.ts", "w")
+  tsFilename = os.getcwd() + "/" + os.path.splitext(buildConfig["mainBuild"]["name"])[0] + ".d.ts"
+  typescriptDefinitionsFile = open(tsFilename, "w")
   typescriptDefinitionsFile.write(typescriptDefinitionOutput)
+  print("Typescript: " + tsFilename)
+  sys.stdout.flush()

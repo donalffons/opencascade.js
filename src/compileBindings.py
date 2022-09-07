@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+import sys
 from Common import ocIncludePaths, additionalIncludePaths
 import subprocess
 import multiprocessing
@@ -13,6 +14,7 @@ libraryBasePath = "/opencascade.js/build/bindings"
 def buildOneFile(args, item):
   if not os.path.exists(item + ".o"):
     print("building " + item)
+    sys.stdout.flush()
     command = [
       "emcc",
       "-flto",
@@ -36,6 +38,7 @@ def buildOneFile(args, item):
     ])
   else:
     print("file " + item + ".o already exists, skipping")
+    sys.stdout.flush()
 
 def compileCustomCodeBindings(args):
   filesToBuild = []
