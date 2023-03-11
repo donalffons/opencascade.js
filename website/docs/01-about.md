@@ -13,5 +13,6 @@ OpenCascade.js is a port of the [OpenCascade](https://www.opencascade.com) CAD l
 * [ArchiYou](https://archiyou.com/): Library, Code-CAD Design Tool, Community Hub
 * [BitByBit](https://bitbybit.dev/): Code- & node-based - CAD Design Tool
 * [CascadeStudio](https://github.com/zalo/CascadeStudio): Library and Code-CAD Design Tool
+* [Polygonjs](https://polygonjs.com): Procedural Design & Animation Tool for WebGL
 * [RepliCAD](https://replicad.xyz/): Library and Code-CAD Design Tool
 * [OpenCascade.js-examples](https://github.com/donalffons/opencascade.js-examples): Contains general examples on how to use the library.
