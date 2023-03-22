@@ -13,11 +13,11 @@
     "@google/model-viewer": "1.10.0",
     "core-js": "^3.22.2",
     "file-loader": "^6.2.0",
-    "nuxt": "^2.16.3",
+    "nuxt": "^3.3.1",
     "opencascade.js": "2.0.0-beta.c301f5e",
     "vue": "^2.6.14",
     "vue-server-renderer": "^2.6.14",
     "vue-template-compiler": "^2.6.14",
-    "webpack": "^4.46.0"
+    "webpack": "^5.76.3"
   }
 }
