@@ -48,6 +48,6 @@
 
 	"build": {
 		"cacheFrom": "donalffons/opencascade.js:staging-master",
-		"target": "customBuildImage"
+		"target": "custom-build-image"
 	}
 }
