@@ -84,13 +84,16 @@ def processChildBatch(customCode, generator, buildType: str, extension: str, fil
     filename = buildDirectory + "/" + buildType + "/" + relOcFileName + "/" + (child.spelling if not child.spelling == "" else child.type.spelling) + extension
 
     if not os.path.exists(filename):
-      print("Processing " + child.spelling)
-      try:
-        output = processFunction(tu, preamble, child, typedefGenerator(tu), templateTypedefGenerator(tu))
-        bindingsFile = open(filename, "w")
-        bindingsFile.write(output)
-      except SkipException as e:
-        print(str(e))
+      if not child.spelling.startswith("("):
+        print("Processing " + child.spelling)
+        try:
+          output = processFunction(tu, preamble, child, typedefGenerator(tu), templateTypedefGenerator(tu))
+          bindingsFile = open(filename, "w")
+          bindingsFile.write(output)
+        except SkipException as e:
+          print(str(e))
+      else:
+        print("Skipping " + child.spelling)
     else:
       print("file " + child.spelling + ".cpp already exists, skipping")
 
