@@ -30,7 +30,8 @@ jobs:
         run: |
           if [ "${{ github.event.inputs.buildType }}" == "release" ]
           then
-            export NEW_OPENCASCADEJS_VERSION=$(node -p -e "require('./package.json').version.split('-')[0]")-beta.$(git log --pretty=format:'%h' -n 1)
+            # export NEW_OPENCASCADEJS_VERSION=$(node -p -e "require('./package.json').version.split('-')[0]")-beta.$(git log --pretty=format:'%h' -n 1)
+            export NEW_OPENCASCADEJS_VERSION=2.0.0
             echo "::set-output name=version::$NEW_OPENCASCADEJS_VERSION"
             echo "::set-output name=tags::${{ secrets.DOCKER_IMAGE_NAME }}:$NEW_OPENCASCADEJS_VERSION,${{ secrets.DOCKER_IMAGE_NAME }}:latest"
           else
