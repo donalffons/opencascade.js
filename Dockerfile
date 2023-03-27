@@ -24,10 +24,10 @@ RUN \
 
 RUN \
   pip install \
-  libclang=15.0.6.1 \
-  pyyaml=6.0 \
-  cerberus=1.3.4 \
-  argparse=1.4.0
+  libclang==15.0.6.1 \
+  pyyaml==6.0 \
+  cerberus==1.3.4 \
+  argparse==1.4.0
 
 WORKDIR /rapidjson/
 RUN \
