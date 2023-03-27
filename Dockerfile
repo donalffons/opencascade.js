@@ -24,18 +24,18 @@ RUN \
 
 RUN \
   pip install \
-  libclang \
-  pyyaml \
-  cerberus \
-  argparse
+  libclang=15.0.6.1 \
+  pyyaml=6.0 \
+  cerberus=1.3.4 \
+  argparse=1.4.0
 
 WORKDIR /rapidjson/
 RUN \
-  git clone https://github.com/Tencent/rapidjson.git .
+  git clone -b v1.1.0 https://github.com/Tencent/rapidjson.git . 
 
 WORKDIR /freetype/
 RUN \
-  git clone https://git.savannah.nongnu.org/git/freetype/freetype2.git .
+  git clone -b VER-2-13-0 https://github.com/freetype/freetype.git .
 
 ENV OCCT_COMMIT_HASH_FULL bb368e271e24f63078129283148ce83db6b9670a
 WORKDIR /occt/
