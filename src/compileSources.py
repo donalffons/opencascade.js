@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+import sys
 import subprocess
 import multiprocessing
 
@@ -72,12 +73,14 @@ def buildObjectFiles(file, args):
 
   if not os.path.exists(libraryBasePath + "/" + relativeFile + ".o"):
     print("Building " + relativeFile)
+    sys.stdout.flush()
     subprocess.check_call([
       *command,
       "-o", libraryBasePath + "/" + relativeFile + ".o",
       ])
   else:
     print(relativeFile + ".o already exists, skipping")
+    sys.stdout.flush()
 
 allModules = {}
 for dirpath, dirnames, filenames in os.walk(sourceBasePath):

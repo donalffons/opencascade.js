@@ -1,4 +1,5 @@
-FROM emscripten/emsdk:3.1.14 AS base-image
+FROM emscripten/emsdk:3.1.20
+# FROM emscripten/emsdk:3.1.20 AS base-image
 
 RUN \
   apt update -y && \
@@ -54,16 +55,17 @@ WORKDIR /src/
 ARG threading=single-threaded
 ENV threading=$threading
 
-FROM base-image AS test-image
+# FROM base-image AS test-image
 
 RUN \
   mkdir /opencascade.js/build/ && \
-  mkdir /opencascade.js/dist/ && \
   /opencascade.js/src/applyPatches.py
 
-ENTRYPOINT ["/opencascade.js/src/buildFromYaml.py"]
+VOLUME /opencascade.js/src
+VOLUME /opencascade.js/build
+VOLUME /src
 
-FROM test-image AS custom-build-image
+# FROM test-image AS custom-build-image
 
 RUN \
   /opencascade.js/src/generateBindings.py && \

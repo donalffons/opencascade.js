@@ -4,6 +4,7 @@ from typing import Callable
 from bindings import EmbindBindings, TypescriptBindings, shouldProcessClass
 import clang.cindex
 import os
+import sys
 import errno
 from filter.filterTypedefs import filterTypedef
 from filter.filterEnums import filterEnum
@@ -85,14 +86,17 @@ def processChildBatch(customCode, generator, buildType: str, extension: str, fil
 
     if not os.path.exists(filename):
       print("Processing " + child.spelling)
+      sys.stdout.flush()
       try:
         output = processFunction(tu, preamble, child, typedefGenerator(tu), templateTypedefGenerator(tu))
         bindingsFile = open(filename, "w")
         bindingsFile.write(output)
       except SkipException as e:
         print(str(e))
+        sys.stdout.flush()
     else:
       print("file " + child.spelling + ".cpp already exists, skipping")
+      sys.stdout.flush()
 
 def split(a, n):
   k, m = divmod(len(a), n)
