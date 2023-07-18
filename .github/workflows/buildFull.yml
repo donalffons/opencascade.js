@@ -30,7 +30,8 @@ jobs:
         run: |
           if [ "${{ github.event.inputs.buildType }}" == "release" ]
           then
-            export NEW_OPENCASCADEJS_VERSION=$(node -p -e "require('./package.json').version.split('-')[0]")-beta.$(git log --pretty=format:'%h' -n 1)
+            # export NEW_OPENCASCADEJS_VERSION=$(node -p -e "require('./package.json').version.split('-')[0]")-beta.$(git log --pretty=format:'%h' -n 1)
+            export NEW_OPENCASCADEJS_VERSION=2.0.0
             echo "::set-output name=version::$NEW_OPENCASCADEJS_VERSION"
             echo "::set-output name=tags::${{ secrets.DOCKER_IMAGE_NAME }}:$NEW_OPENCASCADEJS_VERSION,${{ secrets.DOCKER_IMAGE_NAME }}:latest"
           else
@@ -64,21 +65,21 @@ jobs:
           npm install
           cd ..
 
-      - name: Build OpenCascade.js Docker Image "testImage" and run binding tests
+      - name: Build OpenCascade.js Docker Image "test-image" and run binding tests
         timeout-minutes: 10000
         run: |
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:latest || true
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }} || true
-          docker build --target testImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}-test-image --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest .
+          docker build --target test-image --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}-test-image --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest .
           cd test
           dockerImageName="${{ secrets.DOCKER_IMAGE_NAME }}-test-image" npm run test -- ./testBindings.test.ts
           cd ..
 
-      - name: Build OpenCascade.js Docker Image "customBuildImage"
+      - name: Build OpenCascade.js Docker Image "custom-build-image"
         if: github.event.inputs.buildType != 'testBindings'
         timeout-minutes: 10000
         run: |
-          docker build --target customBuildImage --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest .
+          docker build --target custom-build-image --build-arg threading=single-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }} --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:latest .
 
       - name: Push to Docker Hub (staging)
         if: github.event.inputs.buildType != 'testBindings'
@@ -109,7 +110,7 @@ jobs:
         run: |
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded || true
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}-multi-threaded || true
-          docker build --target customBuildImage --build-arg threading=multi-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}-multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded .
+          docker build --target custom-build-image --build-arg threading=multi-threaded -t ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:staging-${{ steps.dockerStagingTag.outputs.tag }}-multi-threaded --cache-from ${{ secrets.DOCKER_IMAGE_NAME }}:multi-threaded .
 
       - name: Push to Docker Hub (Staging, Multi-Threaded)
         if: github.event.inputs.buildType != 'testBindings' && github.event.inputs.multithreaded == 'true'

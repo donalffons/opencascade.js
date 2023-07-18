@@ -1,4 +1,5 @@
 FROM emscripten/emsdk:3.1.20
+# FROM emscripten/emsdk:3.1.20 AS base-image
 
 RUN \
   apt update -y && \
@@ -24,18 +25,18 @@ RUN \
 
 RUN \
   pip install \
-  libclang \
-  pyyaml \
-  cerberus \
-  argparse
+  libclang==15.0.6.1 \
+  pyyaml==6.0 \
+  cerberus==1.3.4 \
+  argparse==1.4.0
 
 WORKDIR /rapidjson/
 RUN \
-  git clone https://github.com/Tencent/rapidjson.git .
+  git clone -b v1.1.0 https://github.com/Tencent/rapidjson.git . 
 
 WORKDIR /freetype/
 RUN \
-  git clone https://git.savannah.nongnu.org/git/freetype/freetype2.git .
+  git clone -b VER-2-13-0 https://github.com/freetype/freetype.git .
 
 ENV OCCT_COMMIT_HASH_FULL bb368e271e24f63078129283148ce83db6b9670a
 WORKDIR /occt/
@@ -54,19 +55,17 @@ WORKDIR /src/
 ARG threading=single-threaded
 ENV threading=$threading
 
-# FROM base_image AS test_image
+# FROM base-image AS test-image
 
 RUN \
   mkdir /opencascade.js/build/ && \
   /opencascade.js/src/applyPatches.py
 
-# FROM test_image AS custom_build_image
-
 VOLUME /opencascade.js/src
 VOLUME /opencascade.js/build
 VOLUME /src
 
-# COPY build /opencascade.js/build
+# FROM test-image AS custom-build-image
 
 RUN \
   /opencascade.js/src/generateBindings.py && \
