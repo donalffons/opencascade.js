@@ -7,7 +7,7 @@
   <h3 align="center">OpenCascade.js</h3>
 
   <p align="center">
-    A port of the <a href="https://www.opencascade.com/">OpenCascade</a> CAD library to JavaScript and WebAssembly via Emscripten.
+    A port of the <a href="https://github.com/Open-Cascade-SAS/OCCT">OpenCascade</a> CAD library to JavaScript and WebAssembly via Emscripten.
     <br />
     <a href="https://ocjs.org/"><strong>Explore the docs »</strong></a>
     <br />
