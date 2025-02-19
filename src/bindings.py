@@ -599,9 +599,10 @@ class TypescriptBindings(Bindings):
 
   def processEnum(self, theEnum):
     output = ""
-    bindingsOutput = "export declare type " + theEnum.spelling + " = {\n"
+    bindingsOutput = "export declare type " + theEnum.spelling + " = { value: unique symbol };\n"
+    bindingsOutput += "export declare type " + theEnum.spelling + "_Vals = {\n"
     for enumChild in list(theEnum.get_children()):
-      bindingsOutput += "  " + enumChild.spelling + ": {};\n"
+      bindingsOutput += "  " + enumChild.spelling + ": " + theEnum.spelling + ";\n"
     bindingsOutput += "}\n\n"
     output += bindingsOutput
     self.exports.append(theEnum.spelling)

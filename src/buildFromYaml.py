@@ -293,7 +293,7 @@ if buildConfig["generateTypescriptDefinitions"]:
     "  }\n" + \
     "  function analyzePath(path: string): AnalysisResults;\n" + \
     "}\n\n" + \
-    "\nexport type OpenCascadeInstance = {FS: typeof FS} & {\n  " + ";\n  ".join(map(lambda x: x["export"] + ((": typeof " + x["export"]) if x["kind"] == "class" else (": " + x["export"])), typescriptExports)) + ";\n" + \
+    "\nexport type OpenCascadeInstance = {FS: typeof FS} & {\n  " + ";\n  ".join(map(lambda x: x["export"] + ((": typeof " + x["export"]) if x["kind"] == "class" else (": " + x["export"] + "_Vals")), typescriptExports)) + ";\n" + \
     "};\n\n" + \
     "declare function init(): Promise<OpenCascadeInstance>;\n\n" + \
     "export default init;\n"
