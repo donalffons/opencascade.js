@@ -33,3 +33,4 @@ includePathArgs = \
   ])) + \
   list(map(lambda x: "-I" + x, ocIncludePaths + additionalIncludePaths))
   
+ocIncludeStatements = os.linesep.join(map(lambda x: "#include \"" + os.path.basename(x) + "\"", list(sorted(ocIncludeFiles))))

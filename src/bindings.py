@@ -4,7 +4,6 @@ import re
 from wasmGenerator.Common import SkipException, isAbstractClass, getMethodOverloadPostfix
 from filter.filterClasses import filterClass
 from filter.filterMethodOrProperties import filterMethodOrProperty
-from Common import occtBasePath
 from typing import Tuple, List
 
 def merge(sep: str, *strings: List[str]):
@@ -81,20 +80,27 @@ def getClassTypeName(theClass, templateDecl = None):
   return templateDecl.spelling if templateDecl is not None else theClass.spelling
 
 class Bindings:
-  def __init__(self, typedefs, templateTypedefs, translationUnit):
-    self.templateTypedefs = templateTypedefs
-    self.translationUnit = translationUnit
-    self.typedefs = typedefs
+  def __init__(self, tuInfo):
+    self.tuInfo = tuInfo
 
   def getTypedefedTemplateTypeAsString(self, theTypeSpelling, templateDecl = None, templateArgs = None):
     if templateDecl is None:
-      typedefType = next((x for x in self.typedefs if x.location.file.name.startswith(occtBasePath) and x.underlying_typedef_type.spelling == theTypeSpelling), None)
-      typedefType = None if typedefType is None else typedefType.spelling
+      tud = self.tuInfo.typedefUnderlyingDict
+      if theTypeSpelling in tud:
+        typedefType = tud[theTypeSpelling].spelling
+      else:
+        typedefType = None
     else:
       templateType = self.replaceTemplateArgs(theTypeSpelling, templateArgs)
       rawTemplateType = templateType.replace("&", "").replace("const", "").strip()
-      rawTypedefType = next((x for x in self.templateTypedefs if (x.underlying_typedef_type.spelling == rawTemplateType or x.underlying_typedef_type.spelling == "opencascade::" + rawTemplateType)), None)
-      rawTypedefType = rawTemplateType if rawTypedefType is None else rawTypedefType.spelling
+      ttud = self.tuInfo.templateTypedefUnderlyingDict
+      oc_rawTemplateType = "opencascade::" + rawTemplateType
+      if rawTemplateType in ttud:
+        rawTypedefType = ttud[rawTemplateType].spelling
+      elif oc_rawTemplateType in ttud:
+        rawTypedefType = ttud[oc_rawTemplateType].spelling
+      else:
+        rawTypedefType = rawTemplateType
       typedefType = templateType.replace(rawTemplateType, rawTypedefType)
     return theTypeSpelling if typedefType is None else typedefType
 
@@ -109,7 +115,7 @@ class Bindings:
 
   def processClass(self, theClass, templateDecl = None, templateArgs = None):
     output = ""
-    isAbstract = isAbstractClass(theClass, self.translationUnit)
+    isAbstract = isAbstractClass(theClass, self.tuInfo.classDict)
     if not isAbstract:
       output += self.processSimpleConstructor(theClass)
     for method in theClass.get_children():
@@ -130,10 +136,9 @@ class Bindings:
 class EmbindBindings(Bindings):
   def __init__(
     self,
-    typedefs, templateTypedefs,
-    translationUnit
+    tuInfo
   ):
-    super().__init__(typedefs, templateTypedefs, translationUnit)
+    super().__init__(tuInfo)
 
   def processClass(self, theClass, templateDecl = None, templateArgs = None):
     output = ""
@@ -451,10 +456,9 @@ class EmbindBindings(Bindings):
 class TypescriptBindings(Bindings):
   def __init__(
     self,
-    typedefs, templateTypedefs,
-    translationUnit
+    tuInfo
   ):
-    super().__init__(typedefs, templateTypedefs, translationUnit)
+    super().__init__(tuInfo)
     self.imports = {}
 
     self.exports = []

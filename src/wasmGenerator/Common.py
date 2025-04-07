@@ -6,19 +6,9 @@ class SkipException(Exception):
 def getPureVirtualMethods(theClass):
   return list(filter(lambda x: x.is_pure_virtual_method(), list(theClass.get_children())))
 
-def isAbstractClass(theClass, tu):
-  allClasses = list(filter(lambda x:
-    (
-      x.kind == clang.cindex.CursorKind.CLASS_DECL or
-      x.kind == clang.cindex.CursorKind.STRUCT_DECL
-    ) and
-    not (
-      x.get_definition() is None or
-      not x == x.get_definition()
-    ),
-    tu.cursor.get_children()))
+def isAbstractClass(theClass, classDict):
   baseSpec = list(filter(lambda x: x.kind == clang.cindex.CursorKind.CXX_BASE_SPECIFIER and x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC, list(theClass.get_children())))
-  baseClasses = list(map(lambda y: next((x for x in allClasses if x.spelling == y.type.spelling)), baseSpec))
+  baseClasses = [classDict[y.type.spelling] for y in baseSpec if y.type.spelling in classDict]
 
   pureVirtualMethods = getPureVirtualMethods(theClass)
   if len(pureVirtualMethods) > 0:
