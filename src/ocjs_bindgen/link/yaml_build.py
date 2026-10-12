@@ -628,6 +628,42 @@ def _parse_exported_runtime_methods(emcc_flags):
   return ['FS']
 
 
+# Emscripten's own default is 64 KB, which deep OCCT recursion overflows
+# silently, corrupting static data and trapping later. Match the full build.
+DEFAULT_STACK_SIZE = 8 * 1024 * 1024
+
+
+def _sets_emcc_setting(emcc_flags, *names):
+  """True when emcc_flags set any of the named -s settings, joined or split."""
+  prefixes = tuple(f"{name}=" for name in names)
+  for index, flag in enumerate(emcc_flags):
+    if flag.startswith("-s") and flag[2:].startswith(prefixes):
+      return True
+    if flag == "-s" and index + 1 < len(emcc_flags) and emcc_flags[index + 1].startswith(prefixes):
+      return True
+  return False
+
+
+def _emits_symbol_map(emcc_flags):
+  return any(flag in ("--emit-symbol-map", "-emit-symbol-map") for flag in emcc_flags)
+
+
+def _wasm_opt_pass_flags(wasm_opt_level, converge, extra_passes, symbol_map=None):
+  """Order the post-link wasm-opt passes.
+
+  The function map has to be printed after every pass that can drop or
+  renumber functions and before the name section is stripped.
+  """
+  flags = [wasm_opt_level]
+  if converge:
+    flags.append("--converge")
+  flags.extend(extra_passes)
+  if symbol_map:
+    flags.append(f"--symbolmap={symbol_map}")
+  flags.extend(["--strip-debug", "--strip-producers"])
+  return flags
+
+
 def _internalize_runtime_declarations(source: str) -> tuple[str, list[str]]:
   """Keep runtime values private while exporting their TypeScript types."""
   type_names = set(
@@ -857,6 +893,20 @@ def runBuild(
   if not has_malloc:
     malloc_choice = os.environ.get("OCJS_MALLOC", "dlmalloc")
     fill_flags.append(f"-sMALLOC={malloc_choice}")
+  if not _sets_emcc_setting(emcc_flags, "STACK_SIZE", "TOTAL_STACK"):
+    fill_flags.append(f"-sSTACK_SIZE={DEFAULT_STACK_SIZE}")
+
+  emsdk = os.environ.get("EMSDK", "")
+  wasmOptPath = shutil.which("wasm-opt") or (os.path.join(emsdk, "upstream", "bin", "wasm-opt") if emsdk else None)
+  wasm_opt_level = os.environ.get("OCJS_WASM_OPT_LEVEL", "-O3")
+  skip_wasm_opt = os.environ.get("OCJS_SKIP_WASM_OPT", "0") == "1"
+  run_wasm_opt = bool(wasmOptPath and os.path.exists(wasmOptPath) and wasm_opt_level and not skip_wasm_opt)
+  # emcc writes the symbol map from its own final binary, but the wasm-opt
+  # pass below drops and renumbers functions. Keep the name section through
+  # emcc so that pass can write the map for the binary we actually ship.
+  regenerate_symbol_map = run_wasm_opt and _emits_symbol_map(emcc_flags)
+  if regenerate_symbol_map:
+    fill_flags.append("--profiling-funcs")
 
   output_dir = os.environ.get("OCJS_OUTPUT_DIR", os.getcwd())
   linkCmd = [
@@ -875,40 +925,33 @@ def runBuild(
   subprocess.check_call(linkCmd, env=binaryen_env)
 
   wasmFile = output_dir + "/" + os.path.splitext(build["name"])[0] + ".wasm"
-  emsdk = os.environ.get("EMSDK", "")
-  wasmOptPath = shutil.which("wasm-opt") or (os.path.join(emsdk, "upstream", "bin", "wasm-opt") if emsdk else None)
+  symbolMapFile = output_dir + "/" + build["name"] + ".symbols"
 
   sizeBefore = os.path.getsize(wasmFile) if os.path.exists(wasmFile) else 0
   sizeAfter = sizeBefore
   wasm_opt_flag_list = []
 
-  wasm_opt_level = os.environ.get("OCJS_WASM_OPT_LEVEL", "-O3")
-  skip_wasm_opt = os.environ.get("OCJS_SKIP_WASM_OPT", "0") == "1"
-  if os.path.exists(wasmFile) and wasmOptPath and os.path.exists(wasmOptPath) and wasm_opt_level and not skip_wasm_opt:
+  if os.path.exists(wasmFile) and run_wasm_opt:
     print(f"Running wasm-opt on {wasmFile} ({sizeBefore / (1024*1024):.1f} MB)...", flush=True)
-    wasm_opt_flag_list = [wasm_opt_level, "--strip-debug", "--strip-producers", "--enable-mutable-globals", "--enable-bulk-memory", "--enable-sign-ext", "--enable-nontrapping-float-to-int", "--traps-never-happen"]
-    if os.environ.get("OCJS_CONVERGE", "false") == "true":
-      wasm_opt_flag_list.append("--converge")
+    binaryen_extra_passes = os.environ.get("BINARYEN_EXTRA_PASSES", "").strip()
+    extra_passes = [s.strip() for s in binaryen_extra_passes.split(",") if s.strip()]
+    wasm_opt_flag_list = _wasm_opt_pass_flags(
+      wasm_opt_level,
+      converge=os.environ.get("OCJS_CONVERGE", "false") == "true",
+      extra_passes=extra_passes,
+      symbol_map=symbolMapFile if regenerate_symbol_map else None,
+    )
+    wasm_opt_flag_list += ["--enable-mutable-globals", "--enable-bulk-memory", "--enable-sign-ext", "--enable-nontrapping-float-to-int", "--traps-never-happen"]
     # --closed-world disabled: interacts badly with exception handling code present in non-No_Exception builds
     # wasm_opt_flag_list.append("--closed-world")
-    wasmOptCmd = [wasmOptPath] + wasm_opt_flag_list
-    wasmOptCmd.append("--enable-exception-handling")
     wasm_opt_flag_list.append("--enable-exception-handling")
     if os.environ.get("OCJS_SIMD", "0") == "1":
-      wasmOptCmd.append("--enable-simd")
       wasm_opt_flag_list.append("--enable-simd")
       if os.environ.get("OCJS_RELAXED_SIMD", "0") == "1":
-        wasmOptCmd.append("--enable-relaxed-simd")
         wasm_opt_flag_list.append("--enable-relaxed-simd")
     if os.environ.get("THREADING") == "multi-threaded":
-      wasmOptCmd.append("--enable-threads")
       wasm_opt_flag_list.append("--enable-threads")
-    binaryen_extra_passes = os.environ.get("BINARYEN_EXTRA_PASSES", "").strip()
-    if binaryen_extra_passes:
-      for pass_name in (s.strip() for s in binaryen_extra_passes.split(",")):
-        if pass_name:
-          wasm_opt_flag_list.append(pass_name)
-          wasmOptCmd.append(pass_name)
+    wasmOptCmd = [wasmOptPath] + wasm_opt_flag_list
     wasmOptCmd.extend([wasmFile, "-o", wasmFile])
     subprocess.check_call(wasmOptCmd, env=binaryen_env)
     sizeAfter = os.path.getsize(wasmFile)
@@ -923,7 +966,8 @@ def runBuild(
       bound_symbols=len(symbol_list),
       symbol_list=symbol_list,
       emcc_flags=list(fill_flags) + list(emcc_flags),
-      wasm_opt_flags=wasm_opt_flag_list,
+      # The symbol map path is machine-specific; record only that it was written.
+      wasm_opt_flags=["--symbolmap" if f.startswith("--symbolmap=") else f for f in wasm_opt_flag_list],
       pre_opt_size=sizeBefore,
       post_opt_size=sizeAfter,
       ncollection_linked=_ncollection_link_stats["linked"],

@@ -122,7 +122,7 @@ The output set per consumer YAML. Names come from the YAML's `mainBuild.name` (h
 | **`my_build.wasm`** | The compiled WebAssembly module — OCCT geometry kernel, embind glue, all linked together. The thing browsers and Node load. |
 | **`my_build.js`** | JS wrapper emitted by `emcc` — module loader, exported function thunks, embind runtime. Imports the `.wasm` and exposes the JS API. |
 | **`my_build.d.ts`** | TypeScript declarations emitted by the bindgen's codegen. Type fidelity here depends on the discover pass having enumerated every reachable NCollection instantiation; gaps surface as `: number` or `: unknown` downgrades. |
-| **`my_build.js.symbols`** | Symbol table emitted by `wasm-ld`. Useful for diffing two builds to see which symbols were retained or dropped. |
+| **`my_build.js.symbols`** | Function index to name map for the shipped `.wasm`, written by the link step's final `wasm-opt` pass (`--emit-symbol-map`). Use it to symbolize `wasm-function[N]` stack frames, or diff two builds to see which functions were retained or dropped. |
 
 ### CI validation boundaries
 
@@ -184,7 +184,7 @@ All named compile-time configurations live in `build-configs/configurations.json
 
 ### Supported keys
 
-The **bare default** column is what `build-wasm.sh` would fall back to if you set neither an env var nor `--config`. The **`single-threaded` config** column is what `configurations.json`'s `single-threaded` entry sets — the production compile preset selected when `OCJS_CONFIG` and `--config` are both unset. Link-only flags such as `-sWASM_BIGINT` and `-sEVAL_CTORS=2` remain in consumer YAML.
+The **bare default** column is what `build-wasm.sh` would fall back to if you set neither an env var nor `--config`. The **`single-threaded` config** column is what `configurations.json`'s `single-threaded` entry sets — the production compile preset selected when `OCJS_CONFIG` and `--config` are both unset. Link-only flags such as `-sWASM_BIGINT` and `-sEVAL_CTORS=2` remain in consumer YAML. A consumer YAML that leaves `-sSTACK_SIZE` unset links with an 8 MB stack rather than emcc's 64 KB default.
 
 | Key                   | Description                                             | Bare default      | `single-threaded` config |
 | --------------------- | ------------------------------------------------------- | ----------------- | ------------------------ |

@@ -48,6 +48,7 @@ compilerFlags: { optimize: 'O3', simd: true, exceptions: 'wasm', noEntry: true }
 | `ENVIRONMENT` | Strips dead environment detection. Without it the runtime probes for `process` / `window` / `importScripts`. |
 | `ALLOW_MEMORY_GROWTH` | Required for any non-trivial geometry. |
 | `MAXIMUM_MEMORY: '4GB'` | The wasm32 hard ceiling (2³² bytes). |
+| `STACK_SIZE: 8_388_608` | Deep OCCT recursion (offsets, booleans, healing) overflows emcc's 64 KB default, and an overflow corrupts static data before anything traps. The link step fills in 8 MB when you leave it unset, so set it only to change it. |
 
 Every setting name carries its upstream emsdk documentation as JSDoc, so
 hovering it in your editor shows what emcc says about it. There are 312 of
