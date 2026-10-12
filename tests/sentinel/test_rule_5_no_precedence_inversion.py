@@ -135,7 +135,7 @@ def test_patch_does_not_invert_ensureOverloadTable_iteration_order():
 
 
 def test_patch_hunk_chunk_count_within_tripwire():
-    """Soft ceiling on ``@@`` hunk-chunk count (currently 14, ceiling 20).
+    """Soft ceiling on ``@@`` hunk-chunk count (currently 16, ceiling 20).
 
     A future PR that explodes the chunk count is exporting structural
     behaviour that exceeds the v2 patch's bounded surface and must

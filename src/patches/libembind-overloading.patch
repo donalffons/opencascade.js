@@ -3,7 +3,7 @@
 @@ -55,23 +55,195 @@
      throw new UnboundTypeError(`${message}: ` + unboundTypes.map(getTypeName).join([', ']));
    },
-
+ 
 +  $getSignature__deps: ['$registeredTypes'],
 +  $getSignature: (args, keys) => {
 +    var signature = '';
@@ -199,7 +199,7 @@
 +      }
      }
    },
-
+ 
 @@ -81,44 +253,81 @@
     name: The name of the symbol that's being exposed.
     value: The object itself to expose (function, class, ...)
@@ -339,7 +339,41 @@
        return [];
      });
    },
-@@ -1654,7 +1868,7 @@
+@@ -1343,6 +1567,8 @@
+         return makeClassHandle(this.registeredClass.instancePrototype, {
+           ptrType: this,
+           ptr,
++          // OCJS: a raw `T*` from C++ is borrowed; delete() must not free it.
++          borrowed: !this.isReference,
+         });
+       }
+     }
+@@ -1377,11 +1603,16 @@
+       return makeClassHandle(toType.registeredClass.instancePrototype, {
+         ptrType: toType,
+         ptr: dp,
++        borrowed: !this.isReference,
+       });
+     }
+   },
+ 
+   $runDestructor: ($$) => {
++    // OCJS: borrowed handles point into memory C++ still owns.
++    if ($$.borrowed) {
++      return;
++    }
+     if ($$.smartPtr) {
+       $$.smartPtrType.rawDestructor($$.smartPtr);
+     } else {
+@@ -1645,6 +1876,7 @@
+       ptrType: o.ptrType,
+       smartPtr: o.smartPtr,
+       smartPtrType: o.smartPtrType,
++      borrowed: o.borrowed,
+     };
+   },
+ 
+@@ -1654,7 +1886,7 @@
      '$makeLegalFunctionName', '$AsciiToString',
      '$RegisteredClass', '$RegisteredPointer', '$replacePublicSymbol',
      '$embind__requireFunction', '$throwUnboundTypeError',
@@ -348,7 +382,7 @@
    _embind_register_class: (rawType,
                             rawPointerType,
                             rawConstPointerType,
-@@ -1702,9 +1916,45 @@
+@@ -1702,11 +1934,52 @@
            if (undefined === registeredClass.constructor_body) {
              throw new BindingError(`${name} has no accessible constructor`);
            }
@@ -394,9 +428,17 @@
 +              throw new BindingError(`Tried to invoke ctor of ${name} with invalid signature (${params}) - expected [${signatures}] parameters instead!`);
 +            }
            }
-           return body.apply(this, args);
+-          return body.apply(this, args);
++          // OCJS: a constructor's `T*` result is owned by the new JS handle.
++          var instance = body.apply(this, args);
++          if (instance && instance.$$) {
++            instance.$$.borrowed = false;
++          }
++          return instance;
          });
-@@ -1777,7 +2027,7 @@
+ 
+         var instancePrototype = Object.create(basePrototype, {
+@@ -1777,7 +2050,7 @@
    _embind_register_class_constructor__deps: [
      '$heap32VectorToArray', '$embind__requireFunction',
      '$whenDependentTypesAreResolved',
@@ -405,7 +447,7 @@
    _embind_register_class_constructor: (
      rawClassType,
      argCount,
-@@ -1801,17 +2061,47 @@
+@@ -1801,17 +2074,47 @@
        if (undefined === classType.registeredClass.constructor_body) {
          classType.registeredClass.constructor_body = [];
        }
@@ -437,7 +479,7 @@
 +      classType.registeredClass.constructor_body[argCount - 1].signatures[rawSignatureString] = unboundTypesHandler;
 +      // Reserve source-registration order before dependency callbacks run.
 +      classType.registeredClass.constructor_body[argCount - 1].signaturesArray.push(rawSignatureArray);
-
+ 
        whenDependentTypesAreResolved([], rawArgTypes, (argTypes) => {
          // Insert empty slot for context type (argTypes[1]).
          argTypes.splice(1, 0, null);
@@ -458,7 +500,7 @@
          return [];
        });
        return [];
-@@ -1866,7 +2142,8 @@
+@@ -1866,7 +2169,8 @@
    _embind_register_class_function__deps: [
      '$craftInvokerFunction', '$heap32VectorToArray', '$AsciiToString',
      '$embind__requireFunction', '$throwUnboundTypeError',
@@ -468,26 +510,26 @@
    _embind_register_class_function: (rawClassType,
                                      methodName,
                                      argCount,
-@@ -1900,21 +2177,42 @@
+@@ -1900,21 +2204,42 @@
  
        var proto = classType.registeredClass.instancePrototype;
        var method = proto[methodName];
 -      if (undefined === method || (undefined === method.overloadTable && method.className !== classType.name && method.argCount === argCount - 2)) {
+-        // This is the first overload to be registered, OR we are replacing a
+-        // function in the base class with a function in the derived class.
 +
 +      var rawSignatureArray = rawArgTypes.slice(2);
 +      var rawSignatureString = rawSignatureArray.join(', ');
 +      unboundTypesHandler.signature = rawSignatureString;
 +      unboundTypesHandler.signatureArray = rawSignatureArray;
 +      if (undefined === method) {
--        // This is the first overload to be registered, OR we are replacing a
--        // function in the base class with a function in the derived class.
 +        // First registrations use the same owned dispatcher representation.
 +        // Inherited methods take the same signature-table path regardless of timing.
          unboundTypesHandler.argCount = argCount - 2;
          unboundTypesHandler.className = classType.name;
          proto[methodName] = unboundTypesHandler;
-+        createOwnedSignatureDispatcher(proto, methodName, humanName, argCount - 2);
 -      } else {
++        createOwnedSignatureDispatcher(proto, methodName, humanName, argCount - 2);
 +      } else if (
 +        (undefined === proto[methodName].overloadTable && proto[methodName].argCount !== argCount - 2)
 +        || (undefined !== proto[methodName].overloadTable && undefined === proto[methodName].overloadTable[argCount - 2])) 
@@ -515,7 +557,7 @@
  
          // Replace the initial unbound-handler-stub function with the
          // appropriate member function, now that all types are resolved. If
-@@ -1923,9 +2213,16 @@
+@@ -1923,9 +2248,16 @@
          if (undefined === proto[methodName].overloadTable) {
            // Set argCount in case an overload is registered later
            memberFunction.argCount = argCount - 2;
@@ -533,7 +575,7 @@
          }
  
          return [];
-@@ -2004,7 +2302,8 @@
+@@ -2004,7 +2336,8 @@
    _embind_register_class_class_function__deps: [
      '$craftInvokerFunction', '$ensureOverloadTable', '$heap32VectorToArray',
      '$AsciiToString', '$embind__requireFunction', '$throwUnboundTypeError',
@@ -543,7 +585,7 @@
    _embind_register_class_class_function: (rawClassType,
                                            methodName,
                                            argCount,
-@@ -2031,15 +2330,27 @@
+@@ -2031,15 +2364,27 @@
        }
  
        var proto = classType.registeredClass.constructor;
@@ -555,8 +597,8 @@
 -        // This is the first function to be registered with this name.
          unboundTypesHandler.argCount = argCount-1;
          proto[methodName] = unboundTypesHandler;
-+        createOwnedSignatureDispatcher(proto, methodName, humanName, argCount - 1);
 -      } else {
++        createOwnedSignatureDispatcher(proto, methodName, humanName, argCount - 1);
 +      } else if (
 +        (undefined === proto[methodName].overloadTable && proto[methodName].argCount !== argCount - 1)
 +        || (undefined !== proto[methodName].overloadTable && undefined === proto[methodName].overloadTable[argCount - 1])
@@ -573,7 +615,7 @@
        }
  
        whenDependentTypesAreResolved([], rawArgTypes, (argTypes) => {
-@@ -2048,11 +2357,24 @@
+@@ -2048,11 +2393,24 @@
          // go into an overload table.
          var invokerArgsArray = [argTypes[0] /* return value */, null /* no class 'this'*/].concat(argTypes.slice(1) /* actual params */);
          var func = craftInvokerFunction(humanName, invokerArgsArray, null /* no class 'this'*/, rawInvoker, fn, isAsync);

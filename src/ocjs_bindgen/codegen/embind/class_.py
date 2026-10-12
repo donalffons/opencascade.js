@@ -152,10 +152,17 @@ def process_class(b, theClass, templateDecl=None, templateArgs=None):
 
   output += "}\n\n"
 
+  # embind's default `raw_destructor<T>` is `delete ptr`, which does not
+  # compile for a non-public destructor or for a class whose only
+  # class-scope `operator delete` is a placement form. Those classes get a
+  # specialization that defers to `ocjs::destroy`, which decides in C++
+  # whether `delete ptr` is well-formed. OCCT's DEFINE_STANDARD_ALLOC
+  # declares placement delete next to the ordinary `operator delete(void*)`,
+  # so most of these classes are deletable and must be freed (issue #40).
   nonPublicDestructor = any(x.kind == clang.cindex.CursorKind.DESTRUCTOR and not x.access_specifier == clang.cindex.AccessSpecifier.PUBLIC for x in theClass.get_children())
   placementDelete = next((x for x in theClass.get_children() if x.spelling == "operator delete" and len(list(x.get_arguments())) == 2), None) is not None
   if nonPublicDestructor or placementDelete:
-    output += "namespace emscripten { namespace internal { template<> void raw_destructor<" + classCpp + ">(" + classCpp + "* ptr) { /* do nothing */ } } }\n"
+    output += "namespace emscripten { namespace internal { template<> void raw_destructor<" + classCpp + ">(" + classCpp + "* ptr) { ::ocjs::destroy(ptr); } } }\n"
   return output
 
 

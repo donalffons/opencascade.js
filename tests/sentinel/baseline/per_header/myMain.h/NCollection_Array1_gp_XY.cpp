@@ -4649,6 +4649,28 @@ using namespace emscripten;
 #include "ocjs_handle_helpers.h"
 
 #include <emscripten/val.h>
+#include <type_traits>
+#include <utility>
+
+namespace ocjs {
+  // True when `delete p` is well-formed for `T*`: the destructor is
+  // accessible and class-scope `operator delete` lookup finds a usual
+  // (non-placement) form. Access and lookup failures are SFINAE errors.
+  template <typename T, typename = void>
+  struct is_deletable : std::false_type {};
+  template <typename T>
+  struct is_deletable<T, std::void_t<decltype(delete std::declval<T*>())>> : std::true_type {};
+
+  // Backs the `raw_destructor<T>` specializations bindgen emits for classes
+  // that declare placement `operator delete` or a non-public destructor.
+  // Frees the object when C++ allows it, and leaves it alone otherwise.
+  template <typename T>
+  void destroy(T* ptr) {
+    if constexpr (is_deletable<T>::value) {
+      delete ptr;
+    }
+  }
+}
 
 extern "C" void ocjs_register_rbv_dispose();
 
@@ -5596,4 +5618,4 @@ using math_VectorBase_int = math_VectorBase<int>;EMSCRIPTEN_BINDINGS(NCollection
   ;
 }
 
-namespace emscripten { namespace internal { template<> void raw_destructor<NCollection_Array1_gp_XY>(NCollection_Array1_gp_XY* ptr) { /* do nothing */ } } }
+namespace emscripten { namespace internal { template<> void raw_destructor<NCollection_Array1_gp_XY>(NCollection_Array1_gp_XY* ptr) { ::ocjs::destroy(ptr); } } }
