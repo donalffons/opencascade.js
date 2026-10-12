@@ -1,11 +1,12 @@
 /**
  * Smoke tests: STEPCAFControl_Writer.
  *
- * Guards two source patches in the STEPCAFControl package that are required
+ * Guards source patches in the STEPCAFControl package that are required
  * for WASM trimming: the `STEPCAFControl_ActorWrite` entry in
  * `patch_noexcept_destructors.py` (rewrites the destructor as `noexcept` so it
  * can be inlined and stripped) and `patch_stepcaf_dyntype.py` (rewrites
- * `DynamicType()` to drop the unused RTTI lookup). Both are easy to regress
+ * `DynamicType()` to drop the unused RTTI lookup), and the material-density
+ * unit exponent patch. These are easy to regress
  * because they touch generated method bodies. These tests verify that colored
  * STEP export still round-trips correctly after those rewrites.
  */
@@ -98,6 +99,48 @@ describe.skipIf(!wasmExists)('Smoke: STEPCAFControl_Writer', () => {
     } catch {
       /* best-effort cleanup */
     }
+  });
+
+  it('writes a material density as gram per cubic centimetre', () => {
+    const oc = getOC();
+    using name = new oc.TCollection_ExtendedString('XmlOcaf', true);
+    using doc = new oc.TDocStd_Document(name);
+    using mainLabel = doc.Main();
+    using shapeTool = oc.XCAFDoc_DocumentTool.ShapeTool(mainLabel);
+    using materialTool = oc.XCAFDoc_DocumentTool.MaterialTool(mainLabel);
+    using box = new oc.BRepPrimAPI_MakeBox(10, 8, 6);
+    using boxShape = box.Shape();
+    using label = shapeTool.AddShape(boxShape, false);
+    using materialName = new oc.TCollection_HAsciiString('tau-material');
+    using empty = new oc.TCollection_HAsciiString('');
+    using densityUnit = new oc.TCollection_HAsciiString('g/cm3');
+    using densityType = new oc.TCollection_HAsciiString('POSITIVE_RATIO_MEASURE');
+    materialTool.SetMaterial(label, materialName, empty, 2.7, densityUnit, densityType);
+
+    const path = '/tmp/_smoke_stepcaf_density.step';
+    using writer = new oc.STEPCAFControl_Writer();
+    using progress = new oc.Message_ProgressRange();
+    expect(writer.Perform(doc, path, progress)).toBe(true);
+    const step = new TextDecoder().decode(oc.FS.readFile(path));
+    oc.FS.unlink(path);
+
+    // Resolve the STEP entity graph from the density measure through its
+    // derived unit to mass/length definitions; token order is irrelevant.
+    const entities = new Map([...step.matchAll(/#(\d+)\s*=\s*([\s\S]*?);/gu)]
+      .map((match) => [match[1]!, match[2]!]));
+    const density = [...entities.values()].find((body) => body.includes("MEASURE_REPRESENTATION_ITEM('g/cm3'"));
+    expect(density).toMatch(/POSITIVE_RATIO_MEASURE\(2\.7\)/u);
+    const unitId = /POSITIVE_RATIO_MEASURE\(2\.7\),\s*#(\d+)\)/u.exec(density ?? '')?.[1];
+    const derived = entities.get(unitId ?? '');
+    const elementIds = [...(derived ?? '').matchAll(/#(\d+)/gu)].map((match) => match[1]!);
+    expect(elementIds).toHaveLength(2);
+    const exponents = Object.fromEntries(elementIds.map((id) => {
+      const element = /DERIVED_UNIT_ELEMENT\(#(\d+),(-?\d+(?:\.\d*)?)\)/u.exec(entities.get(id) ?? '');
+      const base = entities.get(element?.[1] ?? '') ?? '';
+      const kind = base.includes('MASS_UNIT()') ? 'mass' : base.includes('LENGTH_UNIT()') ? 'length' : 'unknown';
+      return [kind, Number(element?.[2])];
+    }));
+    expect(exponents).toEqual({ mass: 1, length: -3 });
   });
 
   it('should preserve a conical cylinder chamfer through STEPCAF round-trip', () => {

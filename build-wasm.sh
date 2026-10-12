@@ -53,7 +53,7 @@ Usage: ./build-wasm.sh <command> [options] [<yaml-config>]
 
 Commands:
   full <yaml>           Full pipeline: apply-patches + pch + generate + bindings + sources + bind-symbols + link
-  apply-patches         Apply OCCT source patches (idempotent — all 5 OCCT patches + libembind patch are hard requirements)
+  apply-patches         Apply OCCT source patches (idempotent — all required patches + libembind patch)
   link <yaml>           Link only (reuses compiled .o files, fastest)
   link-core <yaml>      Link into the internal cache-owned artifact directory
   materialize <yaml>    Copy cached artifacts to OCJS_OUTPUT_DIR
@@ -714,7 +714,7 @@ step_materialize() {
 }
 
 step_apply_patches() {
-  # The five OCCT source patches below are HARD REQUIREMENTS for every
+  # The OCCT source patches below are HARD REQUIREMENTS for every
   # supported build (single-threaded and multi-threaded alike). The legacy
   # OCJS_PATCH_DUMP / OCJS_PATCH_STEPCAF env-var toggles were removed —
   # making required behaviour optional was a footgun (a `OCJS_PATCH_DUMP=false`
@@ -736,6 +736,8 @@ step_apply_patches() {
   "$OCJS_PYTHON" src/patches/patch_noexcept_destructors.py
   echo "  Applying STEPCAFControl_Controller DynamicType patch..."
   "$OCJS_PYTHON" src/patches/patch_stepcaf_dyntype.py
+  echo "  Applying STEPCAF material density-unit patch..."
+  "$OCJS_PYTHON" src/patches/patch_stepcaf_material_density_unit.py
   echo "  Applying Geom2dGcc_Circ2dTanCenGeo uninitialised-Index patch..."
   "$OCJS_PYTHON" src/patches/patch_geom2dgcc_tancengeo_index.py
   echo "  Applying strict-link symbol patches..."
