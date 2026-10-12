@@ -740,6 +740,10 @@ step_apply_patches() {
   "$OCJS_PYTHON" src/patches/patch_stepcaf_material_density_unit.py
   echo "  Applying Geom2dGcc_Circ2dTanCenGeo uninitialised-Index patch..."
   "$OCJS_PYTHON" src/patches/patch_geom2dgcc_tancengeo_index.py
+  echo "  Applying BRepOffset MapSF iteration-order patch (#35)..."
+  "$OCJS_PYTHON" src/patches/patch_offset_mapsf_order.py
+  echo "  Applying NurbsConvert mesh-only face patch (#39)..."
+  "$OCJS_PYTHON" src/patches/patch_nurbsconvert_mesh_only_face.py
   echo "  Applying strict-link symbol patches..."
   "$OCJS_PYTHON" src/patches/patch_strict_link_symbols.py
   _ensure_standard_version_hxx

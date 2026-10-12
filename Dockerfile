@@ -359,7 +359,8 @@ ENV FREETYPE_ROOT=/freetype
 ENV EMSDK=/emsdk
 # OCCT source patches (using-statement, Standard_Dump stub, noexcept dtors,
 # STEPCAF DynamicType and material density units, Geom2dGcc_Circ2dTanCenGeo
-# uninitialised Index) are HARD
+# uninitialised Index, BRepOffset MapSF iteration order, NurbsConvert
+# mesh-only face) are HARD
 # REQUIREMENTS for every supported build —
 # they're applied unconditionally by build-wasm.sh::step_apply_patches.
 # The legacy OCJS_PATCH_DUMP / OCJS_PATCH_STEPCAF env-var toggles were
