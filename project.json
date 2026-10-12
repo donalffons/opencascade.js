@@ -61,7 +61,7 @@
       "inputs": [
         "{projectRoot}/src/extract-docs.py",
         "{projectRoot}/src/occt-docs.doxyfile",
-        "{projectRoot}/build/patches-applied.json",
+        { "dependentTasksOutputFiles": "**/patches-applied.json", "transitive": false },
         { "runtime": "doxygen --version 2>/dev/null || echo missing" }
       ],
       "outputs": ["{projectRoot}/build/occt-docs.json"],
@@ -108,7 +108,7 @@
         { "dependentTasksOutputFiles": "**/*.cpp", "transitive": false },
         { "dependentTasksOutputFiles": "**/bindings-manifest.json", "transitive": false },
         { "dependentTasksOutputFiles": "**/patches-applied.json", "transitive": true },
-        "{projectRoot}/build/pch.h.pch"
+        { "dependentTasksOutputFiles": "**/pch.h.pch", "transitive": false }
       ],
       "outputs": ["{projectRoot}/build/compiled-bindings/"],
       "options": {
@@ -129,7 +129,7 @@
         { "runtime": "cmake --version 2>/dev/null || echo missing" },
         { "env": "OCJS_CONFIG" },
         { "dependentTasksOutputFiles": "**/patches-applied.json", "transitive": false },
-        "{projectRoot}/build/build-flags.json"
+        { "dependentTasksOutputFiles": "**/build-flags.json", "transitive": false }
       ],
       "outputs": ["{projectRoot}/build/occt-libraries/"],
       "options": {
@@ -261,7 +261,7 @@
         "{projectRoot}/scripts/generate-api-reference.mjs",
         "{projectRoot}/scripts/lib/dts-parser.mjs",
         "{projectRoot}/scripts/lib/source-date-epoch.mjs",
-        "{projectRoot}/build/bindings/**/*.d.ts.json",
+        { "dependentTasksOutputFiles": "**/*.d.ts.json", "transitive": true },
         "{projectRoot}/dist/opencascade_single.d.ts",
         "{projectRoot}/dist/opencascade_single.js.symbols",
         "{projectRoot}/dist/opencascade_single.build-manifest.json",

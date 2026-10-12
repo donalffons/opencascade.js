@@ -19,6 +19,11 @@
 #
 # bindgen-base (OCJS_E2E_STAGE=bindgen-base):
 #   validate full configs and perform a real trimmed regenerate/compile/link.
+#   The custom build compiles all of OCCT and every binding from scratch
+#   (about an hour on a 4-core runner). Pull requests skip it with
+#   OCJS_E2E_BINDGEN_CUSTOM_BUILD=0 because compiled-single-threaded already
+#   compiles the same content from the same bindgen-content layer; main and
+#   release builds keep it before anything is published.
 #
 # Usage:
 #   ./scripts/docker-e2e-validate.sh [--build-config <path>] [--image-tag <name>]
@@ -30,6 +35,8 @@
 #   OCJS_E2E_CPUS          Default: host CPU count (nproc); GHA ubuntu-latest has 4
 #   OCJS_DOCKER_PLATFORM   Optional docker --platform (e.g. linux/amd64)
 #   OCJS_E2E_OUTPUT_DIR    Default: $REPO_ROOT/docker-e2e-output
+#   OCJS_E2E_BINDGEN_CUSTOM_BUILD  bindgen-base only: 0 skips the from-scratch
+#                          custom build and keeps config validation (default: 1).
 
 set -euo pipefail
 
@@ -52,6 +59,7 @@ IMAGE_TAG="${OCJS_E2E_IMAGE:-ocjs:e2e}"
 BUILD_CONFIG_DEFAULT="$REPO_ROOT/build-configs/full.yml"
 BUILD_CONFIG="${OCJS_E2E_BUILD_CONFIG:-$BUILD_CONFIG_DEFAULT}"
 OCJS_E2E_STAGE="${OCJS_E2E_STAGE:-final-single}"
+OCJS_E2E_BINDGEN_CUSTOM_BUILD="${OCJS_E2E_BINDGEN_CUSTOM_BUILD:-1}"
 OUTPUT_DIR="${OCJS_E2E_OUTPUT_DIR:-$REPO_ROOT/docker-e2e-output}"
 DOCKER_CPUS="$(_resolve_docker_cpus "${OCJS_E2E_CPUS:-}")"
 SKIP_BUILD=0
@@ -183,6 +191,13 @@ if [ "$OCJS_E2E_STAGE" = "bindgen-base" ]; then
     _run_validate "$cfg"
     _ok "validate $cfg"
   done
+
+  if [ "$OCJS_E2E_BINDGEN_CUSTOM_BUILD" = "0" ]; then
+    _section "RESULT: bindgen-base Docker E2E validation PASSED (custom build skipped)"
+    echo "  Image: $IMAGE_TAG"
+    echo "  OCJS_E2E_BINDGEN_CUSTOM_BUILD=0: the from-scratch custom build runs on main."
+    exit 0
+  fi
 
   _section "Phase 2/3  Minimal regenerate + compile + link"
   BUILD_CONFIG="$REPO_ROOT/tests/docker/fixtures/simple.yml"

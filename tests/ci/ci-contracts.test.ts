@@ -538,7 +538,7 @@ describe('CI contracts', () => {
     });
     expect(validation.if).toBe("github.event_name == 'pull_request'");
     expect(validation['runs-on']).toBe('ubuntu-24.04-arm');
-    expect(validation.needs).toEqual(['preflight', 'quality', 'docs-prose']);
+    expect(validation.needs).toBe('preflight');
     expect(build.if).toBe("github.event_name == 'push' || github.event_name == 'workflow_dispatch'");
 
     const rows = build.strategy.matrix.stage.flatMap((stage: string) =>
@@ -732,6 +732,35 @@ describe('CI contracts', () => {
     expect(initialBuild.with['cache-to']).toBe(
       'type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-${{ matrix.arch }}-${{ matrix.stage }},mode=max',
     );
+  });
+
+  it('should seed binding objects from release images only in candidate builds', () => {
+    const ci = workflow('docker.yml');
+    const seeds = [
+      'binding-objects-seed-single-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:single-threaded',
+      'binding-objects-seed-multi-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:multi-threaded',
+    ];
+    const candidateBuilds = ['candidate-validation', 'candidate-build'].flatMap((job) =>
+      ci.jobs[job].steps.filter(({ uses }: { uses?: string }) => uses?.startsWith('docker/build-push-action@')),
+    );
+    expect(candidateBuilds).toHaveLength(5);
+    for (const step of candidateBuilds) {
+      expect(step.with['build-contexts'].trim().split('\n')).toEqual(seeds);
+    }
+
+    const reproducibility = workflow('reproducibility.yml');
+    const coldBuilds = Object.values(reproducibility.jobs).flatMap((job: any) =>
+      (job.steps ?? []).filter(({ uses }: { uses?: string }) => uses?.startsWith('docker/build-push-action@')),
+    );
+    expect(coldBuilds.length).toBeGreaterThan(0);
+    for (const step of coldBuilds) {
+      expect(step.with['build-contexts']).toBeUndefined();
+      expect(step.with['no-cache']).toBe(true);
+    }
+
+    const source = fs.readFileSync(path.join(ROOT, 'Dockerfile'), 'utf8');
+    expect(source).toContain('FROM scratch AS binding-objects-seed-single-threaded');
+    expect(source).toContain('FROM scratch AS binding-objects-seed-multi-threaded');
   });
 
   it('should keep commit identity out of expensive Docker layers', () => {
@@ -1011,7 +1040,7 @@ sleep 1
     const ci = workflow('docker.yml');
     expect(ci.jobs.quality.needs).toBe('preflight');
     expect(ci.jobs['candidate-build'].needs).toBe('preflight');
-    expect(ci.jobs['candidate-validation'].needs).toEqual(['preflight', 'quality', 'docs-prose']);
+    expect(ci.jobs['candidate-validation'].needs).toBe('preflight');
     expect(ci.jobs['release-reproducibility'].needs).toEqual(['preflight', 'quality', 'docs-prose']);
     expect(ci.jobs['package-assemble'].needs).toEqual(['preflight', 'quality', 'candidate-gate']);
     expect(ci.jobs['ghcr-promote'].needs).toContain('package-gate');

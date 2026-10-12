@@ -54,6 +54,28 @@ class CMakeState:
     })
 
   @staticmethod
+  def published_matches(destination: Path, *, identity: str) -> bool:
+    """Return whether `destination` holds intact libraries published for `identity`.
+
+    Lets a build reuse libraries produced elsewhere (the Docker `occt-libs-*`
+    stages) without a CMake scratch tree: the manifest must carry the same
+    identity and the static libraries on disk must still match its ledger.
+    """
+    try:
+      manifest = json.loads((destination / "manifest.json").read_text())
+    except (FileNotFoundError, json.JSONDecodeError):
+      return False
+    if manifest.get("schema") != "ocjs-cmake-libraries-v1" or manifest.get("identity") != identity:
+      return False
+    if not any(destination.glob("*.a")):
+      return False
+    ledger = build_content_ledger(
+      destination,
+      include=lambda path: path.name not in {"manifest.json", "identity-inputs.json"},
+    )
+    return ledger["sha256"] == manifest.get("sha256") and ledger["files"] == manifest.get("files")
+
+  @staticmethod
   def publish_libraries(source: Path, destination: Path, *, identity: str) -> dict[str, Any]:
     source = source.resolve()
     libraries = sorted(source.glob("*.a"), key=lambda path: path.name)

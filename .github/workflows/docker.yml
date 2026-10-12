@@ -272,7 +272,7 @@ jobs:
   candidate-validation:
     name: candidate · ${{ matrix.stage }} · arm64
     if: github.event_name == 'pull_request'
-    needs: [preflight, quality, docs-prose]
+    needs: preflight
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 240
     permissions:
@@ -323,6 +323,13 @@ jobs:
             REVISION=${{ needs.preflight.outputs.full_sha }}
             OCJS_SOURCE_DATE_EPOCH=${{ needs.preflight.outputs.source_date_epoch }}
             VERSION=${{ needs.preflight.outputs.version }}
+          # Seed binding objects from the latest release image; compileBindings.py
+          # reuses only objects whose identity matches (see Dockerfile Stage 1d).
+          # The release tags move only on release, so the compiled-* layer cache
+          # stays valid between releases. Reproducibility builds pass no seed.
+          build-contexts: |
+            binding-objects-seed-single-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:single-threaded
+            binding-objects-seed-multi-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:multi-threaded
           cache-from: type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-arm64-${{ matrix.stage }}
           provenance: false
           sbom: false
@@ -341,6 +348,9 @@ jobs:
             REVISION=${{ needs.preflight.outputs.full_sha }}
             OCJS_SOURCE_DATE_EPOCH=${{ needs.preflight.outputs.source_date_epoch }}
             VERSION=${{ needs.preflight.outputs.version }}
+          build-contexts: |
+            binding-objects-seed-single-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:single-threaded
+            binding-objects-seed-multi-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:multi-threaded
           cache-from: type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-arm64-final-single
           provenance: false
           sbom: false
@@ -351,6 +361,9 @@ jobs:
           OCJS_E2E_IMAGE: ocjs:e2e-${{ matrix.stage }}
           OCJS_E2E_STAGE: ${{ matrix.stage }}
           OCJS_E2E_BUILD_CONFIG: ${{ matrix.stage == 'final-multi' && 'build-configs/full_multi.yml' || 'build-configs/full.yml' }}
+          # compiled-single-threaded already compiles this content; main keeps
+          # bindgen-base's from-scratch custom build before publishing.
+          OCJS_E2E_BINDGEN_CUSTOM_BUILD: '0'
           OCJS_E2E_OUTPUT_DIR: ${{ runner.temp }}/e2e
           OCJS_EXPECTED_SHA: ${{ needs.preflight.outputs.full_sha }}
           SOURCE_DATE_EPOCH: ${{ needs.preflight.outputs.source_date_epoch }}
@@ -513,6 +526,13 @@ jobs:
             REVISION=${{ needs.preflight.outputs.full_sha }}
             OCJS_SOURCE_DATE_EPOCH=${{ needs.preflight.outputs.source_date_epoch }}
             VERSION=${{ needs.preflight.outputs.version }}
+          # Seed binding objects from the latest release image; compileBindings.py
+          # reuses only objects whose identity matches (see Dockerfile Stage 1d).
+          # The release tags move only on release, so the compiled-* layer cache
+          # stays valid between releases. Reproducibility builds pass no seed.
+          build-contexts: |
+            binding-objects-seed-single-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:single-threaded
+            binding-objects-seed-multi-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:multi-threaded
           cache-from: |
             type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-${{ matrix.arch }}-${{ matrix.stage }}
           cache-to: type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-${{ matrix.arch }}-${{ matrix.stage }},mode=max
@@ -556,6 +576,9 @@ jobs:
             REVISION=${{ needs.preflight.outputs.full_sha }}
             OCJS_SOURCE_DATE_EPOCH=${{ needs.preflight.outputs.source_date_epoch }}
             VERSION=${{ needs.preflight.outputs.version }}
+          build-contexts: |
+            binding-objects-seed-single-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:single-threaded
+            binding-objects-seed-multi-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:multi-threaded
           cache-from: |
             type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-amd64-final-single
           provenance: false
@@ -657,6 +680,9 @@ jobs:
             REVISION=${{ needs.preflight.outputs.full_sha }}
             OCJS_SOURCE_DATE_EPOCH=${{ needs.preflight.outputs.source_date_epoch }}
             VERSION=${{ needs.preflight.outputs.version }}
+          build-contexts: |
+            binding-objects-seed-single-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:single-threaded
+            binding-objects-seed-multi-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:multi-threaded
           cache-from: |
             type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-${{ matrix.arch }}-${{ matrix.stage }}
           cache-to: type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-${{ matrix.arch }}-${{ matrix.stage }},mode=max
