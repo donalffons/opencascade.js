@@ -5587,6 +5587,7 @@ EMSCRIPTEN_BINDINGS(gp_Pnt) {
     .field("theYp", &gp_Pnt_Coord_Result::theYp)
     .field("theZp", &gp_Pnt_Coord_Result::theZp)
   ;
+  emscripten::register_optional<double>();
   class_<gp_Pnt>("gp_Pnt")
     .constructor<>()
     .constructor<const gp_XYZ &>()

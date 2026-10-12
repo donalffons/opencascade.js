@@ -81,8 +81,10 @@ void register_vector(const char* name) { (void)name; }
 template <typename K, typename V>
 void register_map(const char* name) { (void)name; }
 
+// Unnamed, matching emsdk's `register_optional<T>()`: embind names optional
+// types itself, so there is no string literal for the walker to collect.
 template <typename T>
-void register_optional(const char* name) { (void)name; }
+void register_optional() {}
 
 template <typename Callable, typename... Policies>
 void function(const char* name, Callable, Policies...) { (void)name; }

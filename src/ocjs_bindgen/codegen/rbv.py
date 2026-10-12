@@ -638,6 +638,13 @@ def emit_output_param_binding(b, theClass, method, args, className, classTypeNam
         or pointee.get_canonical().kind == clang.cindex.TypeKind.ENUM
       ):
         argType = b._getOptionalInnerType(arg, templateDecl, templateArgs)
+      # Every emitted `std::optional<T>` needs a matching
+      # `register_optional<T>()` in this class's EMSCRIPTEN_BINDINGS block,
+      # not just the enum ones `_getOptionalInnerType` records. Without it the
+      # binding only works when another TU happens to register `T` first.
+      inner_types = getattr(b, "_optional_inner_types", None)
+      if inner_types is not None and argType not in inner_types:
+        inner_types.append(argType)
       lambda_params.append(f"std::optional<{argType}> {name}")
       default_value = f"static_cast<{argType}>(0)" if " " in argType else f"{argType}{{}}"
       optional_output_decls.append(

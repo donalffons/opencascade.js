@@ -135,6 +135,22 @@ def test_consumer_additional_bind_code_extracts_each_registration() -> None:
   }
 
 
+def test_unnamed_register_optional_parses_and_registers_no_name() -> None:
+  """emsdk declares ``register_optional<T>()`` with no name argument, so
+  consumer code written against it must parse (a stub taking a name made
+  the parse fail, issue #39) and must not contribute a JS-visible name.
+  """
+  source = textwrap.dedent(r"""
+    #include <emscripten/bind.h>
+    struct Probe {};
+    EMSCRIPTEN_BINDINGS(consumer_optional) {
+      emscripten::register_optional<double>();
+      emscripten::class_<Probe>("Probe");
+    }
+    """)
+  assert _extract(source) == {"Probe"}
+
+
 # ----------------------------------------------------------------------------
 # Comments / string literals / preprocessor — every form of "looks like a
 # class_<X>(...) call but isn't" must be invisible to the AST walker.

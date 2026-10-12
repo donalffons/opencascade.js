@@ -82,7 +82,6 @@ _EMBIND_REGISTRATION_SPELLINGS: frozenset[str] = frozenset(
         "value_array",
         "register_vector",
         "register_map",
-        "register_optional",
         "function",
     }
 )
@@ -136,8 +135,9 @@ def extract_class_registrations(tu) -> set[str]:
     source) and collects the first string-literal argument of every
     Embind registration call — ``class_<T>("Name")``, ``enum_<T>("Name")``,
     ``value_object<T>("Name")``, ``register_vector<T>("Name")``,
-    ``register_map<K,V>("Name")``, ``register_optional<T>("Name")``,
-    ``function("Name", callable)``, ``value_array<T>("Name")``.
+    ``register_map<K,V>("Name")``, ``function("Name", callable)``,
+    ``value_array<T>("Name")``. ``register_optional<T>()`` takes no name
+    (embind derives one), so it registers nothing JS-visible here.
 
     Implementation visits every cursor in the TU (via :func:`_walk_all`)
     and matches by:
@@ -212,7 +212,7 @@ def extract_class_registrations(tu) -> set[str]:
             ):
                 continue
             # Free-function template registration (register_vector,
-            # register_map, register_optional, function). Member
+            # register_map, function). Member
             # `.function(...)` calls are excluded above. The constructor form
             # also produces a CALL_EXPR but it lives inside a
             # CXX_FUNCTIONAL_CAST_EXPR we will have already handled;

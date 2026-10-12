@@ -14,12 +14,9 @@ describe.skipIf(!wasmExists)('Smoke: mixed fan-out + std::optional dispatch in o
   it.skipIf(!MIXED_DISPATCH_AVAILABLE)(
     'fan-out method dispatches independently of std::optional method on same prototype',
     () => {
-      // Activation-gate premise pin: the flagship genuine-std::optional
-      // target (BRepGraph_*Explorer ctors) is runtime-broken because
-      // register_optional<BRepGraph_NodeId::Kind> is never emitted (see the
-      // file-level JSDoc + docs/research/ocjs-skipped-test-reactivation.md),
-      // and no other working register_optional instance carries an
-      // independent fan-out sibling on a constructible class. The
+      // Activation-gate premise pin: no constructible bound class pairs a
+      // genuine std::optional<T> parameter (the BRepGraph_*Explorer ctors)
+      // with an independent fan-out sibling (see the file-level JSDoc). The
       // mixed-dispatch condition therefore cannot yet be reproduced.
       // Flipping MIXED_DISPATCH_AVAILABLE un-skips this and fails here,
       // forcing the real body below to be written:

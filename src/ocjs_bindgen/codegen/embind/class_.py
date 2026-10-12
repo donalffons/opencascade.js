@@ -22,6 +22,53 @@ from ocjs_bindgen.naming.cpp import getClassQualifiedName
 from ocjs_bindgen.naming.ts import getClassJsPublicName
 
 
+def _std_optional_inner(clang_type):
+  """Return the `T` of a (possibly const/ref-qualified) `std::optional<T>`, else None."""
+  if clang_type.kind in (clang.cindex.TypeKind.LVALUEREFERENCE, clang.cindex.TypeKind.RVALUEREFERENCE):
+    clang_type = clang_type.get_pointee()
+  canonical = clang_type.get_canonical()
+  decl = canonical.get_declaration()
+  if decl is None or decl.spelling != "optional" or canonical.get_num_template_arguments() != 1:
+    return None
+  parent = decl.semantic_parent
+  while parent is not None and parent.kind == clang.cindex.CursorKind.NAMESPACE and parent.spelling != "std":
+    parent = parent.semantic_parent  # libc++ inline namespace (std::__2)
+  if parent is None or parent.spelling != "std":
+    return None
+  # Prefer the as-written argument (`BRepGraph_NodeId::Kind`) over the
+  # canonical one, which can expand typedefs into implementation spellings.
+  written = clang_type.get_template_argument_type(0)
+  return written if written.kind != clang.cindex.TypeKind.INVALID else canonical.get_template_argument_type(0)
+
+
+def _record_source_optional_params(b, theClass, templateDecl, templateArgs):
+  """Record `T` for every public ctor/method parameter declared `std::optional<T>` in OCCT.
+
+  These reach the fragment through several emission paths (direct
+  select_overload, val-default lambdas, merged ctor dispatch), so they are
+  collected from the AST here rather than at each path. A registration for a
+  method that later gets filtered out is harmless.
+  """
+  inner_types = getattr(b, "_optional_inner_types", None)
+  if inner_types is None:
+    return
+  for member in theClass.get_children():
+    if member.kind not in (clang.cindex.CursorKind.CONSTRUCTOR, clang.cindex.CursorKind.CXX_METHOD):
+      continue
+    if member.access_specifier != clang.cindex.AccessSpecifier.PUBLIC:
+      continue
+    for arg in member.get_arguments():
+      inner = _std_optional_inner(arg.type)
+      if inner is None:
+        continue
+      spelling = b.resolveWithCanonicalFallback(inner.spelling, inner, templateDecl, templateArgs)
+      if spelling.startswith("const "):
+        spelling = spelling[len("const "):]
+      if "type-parameter" in spelling or spelling in inner_types:
+        continue
+      inner_types.append(spelling)
+
+
 def process_class(b, theClass, templateDecl=None, templateArgs=None):
   """Emit the EMSCRIPTEN_BINDINGS block for `theClass`.
 
@@ -90,6 +137,7 @@ def process_class(b, theClass, templateDecl=None, templateArgs=None):
   # method/ctor invocation. The `register_optional<T>` thread-local guard
   # makes repeated calls safe across multiple TUs. See
   # docs/research/ocjs-optional-overload-resolution-blueprint.md.
+  _record_source_optional_params(b, theClass, templateDecl, templateArgs)
   for inner in b._optional_inner_types:
     output += "  emscripten::register_optional<" + inner + ">();\n"
 

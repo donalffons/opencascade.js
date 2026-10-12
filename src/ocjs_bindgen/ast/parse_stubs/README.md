@@ -5,8 +5,7 @@ Architectural-fixture include directory used **exclusively** by
 declare just enough Embind / Emscripten surface for libclang 18 to
 produce real `CALL_EXPR` cursors for `class_<T>("Name")`,
 `enum_<T>("Name")`, `value_object<T>("Name")`, `register_vector<T>("Name")`,
-`register_map<K,V>("Name")`, `register_optional<T>("Name")`, and
-`value_array<T>("Name")` calls in
+`register_map<K,V>("Name")`, and `value_array<T>("Name")` calls in
 `BUILTIN_BINDINGS_SOURCE + consumer additionalBindFiles` translation
 units.
 
