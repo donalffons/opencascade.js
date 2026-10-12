@@ -2,4 +2,4 @@
 ocjs: patch
 ---
 
-Add approval-gated Claude review automation pinned to Claude Opus 5, and exclude that non-package workflow from future package version-plan checks.
+Add approval-gated Claude review automation running on the latest Claude Opus through the `opus` model alias, and exclude that non-package workflow from future package version-plan checks.

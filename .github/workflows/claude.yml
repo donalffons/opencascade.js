@@ -91,7 +91,7 @@ jobs:
 
           # Claude CLI arguments - model and tools configuration
           claude_args: |
-            --model claude-opus-5
+            --model opus
             --allowedTools "Bash(pnpm *),Bash(nx *),Bash(npm *),Bash(git *),Bash(gh *)"
 
   # Job 3: Run Claude directly for trusted users (OWNER, MEMBER, COLLABORATOR)
@@ -141,5 +141,5 @@ jobs:
 
           # Claude CLI arguments - model and tools configuration
           claude_args: |
-            --model claude-opus-5
+            --model opus
             --allowedTools "Bash(pnpm *),Bash(nx *),Bash(npm *),Bash(git *),Bash(gh *)"
