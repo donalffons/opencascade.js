@@ -3,10 +3,10 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/libcascade"><img src="https://img.shields.io/npm/v/libcascade?logo=npm&logoColor=white&label=npm&color=cb3837" alt="npm version"></a>
-  <a href="https://github.com/taucad/opencascade.js/actions/workflows/docker.yml"><img src="https://github.com/taucad/opencascade.js/actions/workflows/docker.yml/badge.svg" alt="docker build"></a>
-  <a href="https://github.com/taucad/opencascade.js/pkgs/container/opencascade.js/versions?filters%5Bversion_type%5D=tagged&amp;q=single-threaded"><img src="https://img.shields.io/badge/ghcr-single--threaded-323330?logo=docker&logoColor=white" alt="ghcr single-threaded image"></a>
-  <a href="https://github.com/taucad/opencascade.js/pkgs/container/opencascade.js/versions?filters%5Bversion_type%5D=tagged&amp;q=multi-threaded"><img src="https://img.shields.io/badge/ghcr-multi--threaded-323330?logo=docker&logoColor=white" alt="ghcr multi-threaded image"></a>
+  <a href="https://www.npmjs.com/package/libcascade"><img src="https://img.shields.io/npm/v/libcascade?logo=npm&amp;logoColor=white&amp;label=npm&amp;color=cb3837&amp;cacheSeconds=21600" alt="npm version"></a>
+  <a href="https://github.com/taucad/opencascade.js/actions/workflows/docker.yml?query=branch%3Amain"><img src="https://github.com/taucad/opencascade.js/actions/workflows/docker.yml/badge.svg?branch=main&amp;event=push" alt="docker build"></a>
+  <a href="https://github.com/taucad/opencascade.js/pkgs/container/opencascade.js/versions?filters%5Bversion_type%5D=tagged&amp;q=single-threaded"><img src="images/badges/ghcr-single-threaded.svg" alt="ghcr single-threaded image"></a>
+  <a href="https://github.com/taucad/opencascade.js/pkgs/container/opencascade.js/versions?filters%5Bversion_type%5D=tagged&amp;q=multi-threaded"><img src="images/badges/ghcr-multi-threaded.svg" alt="ghcr multi-threaded image"></a>
 </p>
 
 <p align="center">
