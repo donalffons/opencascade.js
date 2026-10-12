@@ -1,3 +1,22 @@
+## 3.0.3 (2026-10-12)
+
+### 🩹 Fixes
+
+- Fingerprint the CMake scratch identity from the `EMSDK`, `FREETYPE_ROOT` and `RAPIDJSON_ROOT` directories the build actually uses, so builds with those set outside `deps/` no longer fail or hash the wrong checkout. ([#43](https://github.com/taucad/opencascade.js/pull/43), [#36](https://github.com/taucad/opencascade.js/issues/36))
+- Serve the README's static ghcr badges from the repository and cache the npm version badge longer, so the npm package page stops showing broken badge images, and point the CI badge at `main` push runs. ([#41](https://github.com/taucad/opencascade.js/pull/41))
+- Write STEP material densities in gram per cubic centimetre. OCCT's STEPCAF writer labelled the density unit as g³·cm², so other CAD tools read the wrong unit; libcascade now patches the two unit exponents to g·cm⁻³. ([#44](https://github.com/taucad/opencascade.js/pull/44))
+- Let image builds reuse binding objects from a previous image. The compiled stages copy `build/compiled-bindings/` from optional `binding-objects-seed-{threading}` build contexts, which are empty by default; CI points them at the latest release images. `compileBindings.py` keeps a seeded object only when its identity (source, command, PCH, patched OCCT state, compiler) matches, so a bindgen change recompiles only the bindings it touched. Release reproducibility builds still compile everything cold. ([#46](https://github.com/taucad/opencascade.js/pull/46), [#42](https://github.com/taucad/opencascade.js/issues/42), [#45](https://github.com/taucad/opencascade.js/issues/45))
+- Fix the multi-threaded image recompiling all of OCCT on every consumer link. `compile-sources` and `compile-bindings` hashed `build/build-flags.json` and `build/pch.h.pch` from the file snapshot Nx takes when a run starts, so the image baked a cache entry keyed on the single-threaded flags left by the shared bindgen layer. They now hash the `pch` task's outputs after it runs, and a new `.nxignore` keeps `build/` and `deps/` out of Nx's file map inside the image. ([#46](https://github.com/taucad/opencascade.js/pull/46), [#42](https://github.com/taucad/opencascade.js/issues/42), [#45](https://github.com/taucad/opencascade.js/issues/45))
+- Compile OCCT in its own Docker stage keyed only on the inputs that shape the static libraries, and install npm dependencies from version-free manifests. Bindgen, filter, YAML and release version changes no longer recompile OCCT in the published images. `build-wasm.sh` now reuses `build/occt-libraries/` when it was already published for the same CMake identity and still matches its ledger, and gains an `occt-libraries` command for a build tree that holds only OCCT. ([#46](https://github.com/taucad/opencascade.js/pull/46), [#42](https://github.com/taucad/opencascade.js/issues/42), [#45](https://github.com/taucad/opencascade.js/issues/45))
+- Add approval-gated Claude review automation running on the latest Claude Opus through the `opus` model alias, and exclude that non-package workflow from future package version-plan checks. ([#37](https://github.com/taucad/opencascade.js/pull/37))
+
+### ❤️ Thank You
+
+- Claude Opus 5.5
+- Claude Opus 5.5 (1M context)
+- paulftw @paulftw
+- Richard Fontein @rifont
+
 ## 3.0.2 (2026-08-16)
 
 ### 🩹 Fixes

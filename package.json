@@ -1,6 +1,6 @@
 {
   "name": "libcascade",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "OpenCascade CAD bindings for JavaScript and WebAssembly via Emscripten.",
   "keywords": [
     "opencascade",
