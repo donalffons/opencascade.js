@@ -1,6 +1,6 @@
 {
   "name": "libcascade",
-  "version": "3.0.3",
+  "version": "3.1.0",
   "description": "OpenCascade CAD bindings for JavaScript and WebAssembly via Emscripten.",
   "keywords": [
     "opencascade",
@@ -119,13 +119,14 @@
   "devDependencies": {
     "@gltf-transform/core": "^4.3.0",
     "@gltf-transform/functions": "^4.3.0",
+    "@nx/js": "22.5.2",
     "@types/node": "~24.0.15",
     "eslint": "^9.32.0",
     "nx": "22.5.2",
     "semver": "^7.7.2",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.0",
     "typescript-eslint": "^8.56.1",
+    "vitest": "^4.1.0",
     "yaml": "^2.8.2"
   }
 }

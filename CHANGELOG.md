@@ -1,3 +1,26 @@
+## 3.1.0 (2026-10-12)
+
+### 🚀 Features
+
+- `delete()` and `using` now free the C++ object for every class. Previously about 2,100 classes, including `gp_*`, `TopoDS_Shape`, every `BRep*API` builder and the `NCollection_*` containers, were bound with an empty destructor, so their memory was never released. ([#40](https://github.com/taucad/opencascade.js/issues/40)) ([#50](https://github.com/taucad/opencascade.js/pull/50), [#40](https://github.com/taucad/opencascade.js/issues/40))
+
+  Handles returned as raw pointers (for example `BRepAlgoAPI_Cut.Builder()`, map `Seek()` results, or `ExtremaPC_*.Perform()` results) are now borrowed: deleting one releases the JS handle without freeing memory its owner still uses. Previously some of these freed memory the owning object went on to use or free again.
+
+  **Upgrade note:** since `delete()` now frees memory, a handle must not be deleted while another OCCT object still uses it, and a handle to an object you deleted must not be used. For example, keep a curve adaptor alive while an `Extrema_*` object that was built from it is still in use, since the extrema object keeps a reference to the adaptor. Code that called `Clear()` before `delete()` as a leak workaround can drop that call.
+
+
+### 🩹 Fixes
+
+- Custom builds that leave `STACK_SIZE` unset now link with an 8 MB stack, matching the published builds, instead of emcc's 64 KB default that deep OCCT recursion overflows silently. The shipped `.js.symbols` map is now written by the link step's final `wasm-opt` pass, so its function indices match the `.wasm` that ships. ([#49](https://github.com/taucad/opencascade.js/pull/49), [#35](https://github.com/taucad/opencascade.js/issues/35), [#39](https://github.com/taucad/opencascade.js/issues/39), [#40](https://github.com/taucad/opencascade.js/issues/40))
+- Make `BRepOffset_MakeOffset` results independent of heap history (#35, taucad/tau#243) and stop `BRepBuilderAPI_NurbsConvert` trapping on meshed B-spline faces (#39). Arc-join offset results may list their faces in a different order than earlier releases; the geometry is unchanged. ([#48](https://github.com/taucad/opencascade.js/pull/48), [#35](https://github.com/taucad/opencascade.js/issues/35), [#243](https://github.com/taucad/opencascade.js/issues/243), [#39](https://github.com/taucad/opencascade.js/issues/39))
+- Register `std::optional<T>` for every optional output parameter and genuine `std::optional<T>` parameter in the fragment that uses it, so custom builds no longer fail with `Cannot construct ... due to unbound types`. Additional bind code can now call emsdk's unnamed `register_optional<T>()` (#39). ([#47](https://github.com/taucad/opencascade.js/pull/47), [#39](https://github.com/taucad/opencascade.js/issues/39))
+
+### ❤️ Thank You
+
+- Claude
+- Claude Opus 5.5 (1M context)
+- Richard Fontein @rifont
+
 ## 3.0.3 (2026-10-12)
 
 ### 🩹 Fixes
