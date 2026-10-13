@@ -1,0 +1,171 @@
+{
+  "results": {
+    "u1": {
+      "cases": [
+        {
+          "id": "fanout: method_fanout(2)             arity-1",
+          "actual": 503,
+          "expected": 503,
+          "pass": true
+        },
+        {
+          "id": "fanout: method_fanout(2, true)       arity-2",
+          "actual": 603,
+          "expected": 603,
+          "pass": true
+        },
+        {
+          "id": "fanout: method_fanout(2, false, 0.25) arity-3",
+          "actual": 253,
+          "expected": 253,
+          "pass": true
+        },
+        {
+          "id": "fanout: method_fanout(2, false, 0.5, true) arity-4",
+          "actual": 10503,
+          "expected": 10503,
+          "pass": true
+        },
+        {
+          "id": "optional: method_optional(2)         arity-1 → pad to 4",
+          "actual": 503,
+          "expected": 503,
+          "pass": true
+        },
+        {
+          "id": "optional: method_optional(2, true)   arity-2 → pad to 4",
+          "actual": 603,
+          "expected": 603,
+          "pass": true
+        },
+        {
+          "id": "optional: method_optional(2, false, 0.25)                   ",
+          "actual": 253,
+          "expected": 253,
+          "pass": true
+        },
+        {
+          "id": "optional: method_optional(2, false, 0.5, true)             ",
+          "actual": 10503,
+          "expected": 10503,
+          "pass": true
+        },
+        {
+          "id": "parity: fanout(*) === optional(*) across all 4 arities",
+          "actual": true,
+          "expected": true,
+          "pass": true
+        }
+      ]
+    },
+    "u3": {
+      "cases": [
+        {
+          "id": "explicit-arg path returns payload",
+          "actual": 7,
+          "expected": 7,
+          "pass": true
+        },
+        {
+          "id": "explicit-arg span: dtors === ctors+copies+moves (balanced)",
+          "actual": 2,
+          "expected": 2,
+          "pass": true
+        },
+        {
+          "id": "omitted-arg path returns -1 (nullopt)",
+          "actual": -1,
+          "expected": -1,
+          "pass": true
+        },
+        {
+          "id": "omitted-arg span: NO LifecycleTrack constructed",
+          "actual": 3,
+          "expected": 3,
+          "pass": true
+        },
+        {
+          "id": "omitted-arg span: NO LifecycleTrack destroyed",
+          "actual": 2,
+          "expected": 2,
+          "pass": true
+        },
+        {
+          "id": "1000x hammer: dtors === ctors+copies+moves (no leak per call)",
+          "actual": 2000,
+          "expected": 2000,
+          "pass": true
+        },
+        {
+          "id": "const-ref baseline: no special-member calls (clean wire)",
+          "actual": 0,
+          "expected": 0,
+          "pass": true
+        }
+      ],
+      "summary": {
+        "classMembersAllowed": true,
+        "perCallSpanBalanced": true,
+        "hammerBalanced": true
+      }
+    },
+    "u4": {
+      "cases": [
+        {
+          "id": "baseline refcount > 0 (handle is live in JS)",
+          "actual": true,
+          "expected": true,
+          "pass": true
+        },
+        {
+          "id": "100x exercise: every call returned IsDone=1",
+          "actual": true,
+          "expected": true,
+          "pass": true
+        },
+        {
+          "id": "100x exercise: refcount unchanged (no leak per call)",
+          "actual": 1,
+          "expected": 1,
+          "pass": true
+        },
+        {
+          "id": "300x null/undefined/omitted: all returned 0",
+          "actual": true,
+          "expected": true,
+          "pass": true
+        },
+        {
+          "id": "300x null/undefined/omitted: original handle refcount unchanged",
+          "actual": 1,
+          "expected": 1,
+          "pass": true
+        },
+        {
+          "id": "100x fresh-handle hammer: all returned 1",
+          "actual": true,
+          "expected": true,
+          "pass": true
+        },
+        {
+          "id": "100x fresh-handle hammer: ORIGINAL handle refcount unchanged",
+          "actual": 1,
+          "expected": 1,
+          "pass": true
+        },
+        {
+          "id": "fresh handle still works after original handle.delete()",
+          "actual": true,
+          "expected": true,
+          "pass": true
+        }
+      ],
+      "summary": {
+        "exerciseBalanced": true,
+        "freshHandleHammerBalanced": true
+      }
+    }
+  },
+  "verdict": "U1+U3+U4 all pass: mixed fan-out + std::optional coexist in the same class with byte-identical output across both patterns; std::optional<class T> ctor/dtor is balanced per call (no leak across 1000x hammer); std::optional<opencascade::handle<T>> refcount balanced across 100x exercise + 100x fresh-handle hammer + 300x null/undefined/omitted paths.",
+  "allPass": true
+}

@@ -1,0 +1,323 @@
+---
+title: Migrate from a yml build
+description: Move a v2-style build — hand-written yml, ytt templating, docker run and mv scripts — onto libcascade.config.ts and the CLI.
+---
+
+If your package builds a custom OCCT WASM, it probably owns some
+combination of: a hand-written build yml, a templating layer to express
+variants, a `docker run … && mv …` script per variant, one `.d.ts` per variant,
+and a hand-maintained image tag. All five collapse into one config file and two
+commands.
+
+This guide follows the shape of the largest real migration —
+`replicad-opencascadejs`, which had every one of those pieces.
+
+## Before
+
+```json title="package.json (before)"
+{
+  "scripts": {
+    "build": "pnpm run generateConfig && pnpm run buildSingle && pnpm run buildMulti",
+    "generateConfig": "ytt -f build-source/ --output-files build-config",
+    "buildSingle": "cd build-config && docker run --rm -v \"$(pwd):/src\" -u \"$(id -u):$(id -g)\" ghcr.io/taucad/opencascade.js:canary-ebd263f1-single-threaded link custom_build_single.yml && mkdir -p ../dist && mv replicad_single.js replicad_single.wasm replicad_single.d.ts ../dist/ && cd -",
+    "buildMulti": "cd build-config && docker run --rm … multi-threaded link custom_build_multi.yml && mv … && cd -"
+  }
+}
+```
+
+```text
+build-source/defaults.yml            # bindings + buildFlags, ~300 lines
+build-source/custom_build_single.yml # ytt template: name + EVAL_CTORS
+build-source/custom_build_multi.yml  # ytt template: name + pthread flags
+build-config/custom_build_single.yml # generated, committed
+build-config/custom_build_multi.yml  # generated, committed
+dist/replicad_single.d.ts            # ~260k lines
+dist/replicad_multi.d.ts             # ~260k near-identical lines
+```
+
+## After
+
+```json title="package.json (after)"
+{
+  "scripts": {
+    "build": "pnpm run buildSingle && pnpm run buildMulti && pnpm run assemble",
+    "buildSingle": "libcascade build --variant single",
+    "buildMulti": "libcascade build --variant multi",
+    "assemble": "libcascade assemble --write-exports"
+  },
+  "devDependencies": {
+    "@libcascade/toolchain": "{{version}}"
+  }
+}
+```
+
+```text
+libcascade.config.ts                 # the only build input
+build-config/wrappers/*.cpp          # unchanged, referenced in place
+dist/types.d.ts                      # one shared surface
+dist/init.js, dist/index.js          # generated entries
+```
+
+## Step 1 — install the toolchain
+
+```bash
+npm install --save-dev @libcascade/toolchain
+```
+
+## Step 2 — run the migrator
+
+```bash
+npx libcascade migrate build-config/custom_build_single.yml \
+                       build-config/custom_build_multi.yml \
+                       --out libcascade.config.ts
+```
+
+Pass every variant's yml to the one invocation. Two ymls that differ only in a
+name and a handful of flags are one config with two variants, so that is what
+comes out: the flags they share become the base, the rest become each variant's
+delta. The command writes nothing over an existing file without `--force`, and
+prints what a human has to check to stderr.
+
+The rest of this step is the mapping it applied — read it to review the result,
+or to do the translation by hand if your build is far enough from the reference
+shape that `migrate` refuses it.
+
+### The mapping
+
+The container-side yml has six concepts. Each maps to one `defineBuild` field.
+
+| yml | `defineBuild` |
+| --- | --- |
+| `mainBuild.name: replicad_single.js` | `name: 'replicad'` + `variants: [{ name: 'single' }]` — the artifact base name is derived, and the `.js` suffix disappears. Keep an exact legacy filename with `variants[].outputName`. |
+| `mainBuild.bindings[].symbol` | `bindings: [...]` — flat strings instead of a list of one-key maps. |
+| `mainBuild.emccFlags: -sNAME=value` | `settings: { NAME: value }` — typed, one entry per `-s` flag. |
+| `mainBuild.emccFlags: -O3 / -msimd128 / -fwasm-exceptions / --no-entry / -flto` | `compilerFlags: { optimize, simd, exceptions, noEntry, lto }`. |
+| any other `emccFlags` entry (`-pthread`, `-Wl,--allow-undefined`, `--emit-symbol-map`) | `rawFlags: [...]`. |
+| `mainBuild.additionalBindFiles` | `customBindings: [{ file, symbols, scope: 'main' }]`. |
+| `additionalCppFiles` (top level) | `customBindings: [{ file, symbols }]` — `scope` defaults to `'all'`. |
+| `extraBuilds[]` | `variants[]`. |
+| `generateTypescriptDefinitions` | same name, same meaning. |
+
+Value translations worth calling out:
+
+| yml flag | `settings` entry |
+| --- | --- |
+| `-sALLOW_MEMORY_GROWTH=1` | `ALLOW_MEMORY_GROWTH: true` |
+| `-sINITIAL_MEMORY=100MB` | `INITIAL_MEMORY: '100MB'` |
+| `-sSTACK_SIZE=8388608` | `STACK_SIZE: 8_388_608` |
+| `-sEXPORTED_RUNTIME_METHODS=["FS","wasmMemory"]` | `EXPORTED_RUNTIME_METHODS: ['FS', 'wasmMemory']` |
+| `-sENVIRONMENT=web,worker,node` | `ENVIRONMENT: ['web', 'worker', 'node']` |
+| `-sERROR_ON_UNDEFINED_SYMBOLS=0` | `ERROR_ON_UNDEFINED_SYMBOLS: false` |
+| `-sWASM_BIGINT` (bare) | `WASM_BIGINT: true` |
+
+Any `emccFlags` entry none of those rows claims is kept in `rawFlags` verbatim
+and listed in the generated header — `migrate` never drops a flag. An unknown
+*key* is the other way round: it stops the command, because the yml schema has
+no pass-through bucket for one.
+
+The ytt layer has no counterpart because it has nothing left to do: the shared
+list is the base config, and the templates were only ever adding a variant name
+and a handful of flags.
+
+For replicad's two ymls, the emitted config reads:
+
+```typescript title="libcascade.config.ts"
+import { defineBuild } from '@libcascade/toolchain';
+
+export default defineBuild({
+  name: 'replicad',
+  bindings: [/* the flat contents of defaults.yml */],
+  customBindings: [
+    { file: 'build-config/wrappers/shape-hasher.cpp', symbols: ['OCJS_ShapeHasher'] },
+    { file: 'build-config/wrappers/mesh-extractor.cpp', symbols: ['ReplicadMeshData', 'ReplicadMeshExtractor'] },
+    // …one entry per wrapper file
+  ],
+  settings: {
+    EXPORT_ES6: true,
+    MODULARIZE: true,
+    ALLOW_MEMORY_GROWTH: true,
+    INITIAL_MEMORY: '100MB',
+    MAXIMUM_MEMORY: '4GB',
+    EXPORTED_RUNTIME_METHODS: [
+      'FS',
+      'wasmMemory',
+      'getExceptionMessage',
+      'incrementExceptionRefcount',
+      'decrementExceptionRefcount',
+    ],
+    ENVIRONMENT: ['web', 'worker', 'node'],
+    STACK_SIZE: 8_388_608,
+    WASM_BIGINT: true,
+    EVAL_CTORS: 2,
+  },
+  compilerFlags: { exceptions: 'wasm', noEntry: true, simd: true, optimize: 'O3' },
+  variants: [
+    { name: 'single' },
+    {
+      name: 'multi',
+      compilerFlags: { threads: true },
+      settings: {
+        EVAL_CTORS: null,
+        PTHREAD_POOL_SIZE: 'navigator.hardwareConcurrency',
+        SHARED_MEMORY: true,
+      },
+    },
+  ],
+});
+```
+
+The base holds what both ymls agreed on; the `multi` variant holds the three
+lines they differed by. `EVAL_CTORS: null` is how a variant **removes** an
+inherited setting — the single-threaded yml had it and the multi-threaded one
+did not, because constructor evaluation order is non-deterministic under pthread
+workers. `requires: ['threads']` is absent on purpose: `compilerFlags.threads`
+implies it.
+
+### Review 1 — `customBindings` needs a symbol list your yml never declared
+
+The yml listed wrapper file paths and, separately, the symbols those files
+provide — in the same `bindings:` array as the OCCT ones, with nothing tying
+the two together. `customBindings` makes the link explicit: each file declares
+what it provides, which is what lets `bindings` stay type-checked (custom names
+are accepted precisely because a wrapper declared them) and what keeps
+[`detect` and `check`](../guides/detect-and-check) from reporting your own
+classes as unknown.
+
+`migrate` reconstructs the link by reading each `.cpp` for the classes it
+registers — top-level `class` / `struct` definitions and Embind
+`class_<T>("Name")` calls. That is a derivation, not a declaration, so it is the
+first thing to check. Where it finds nothing it writes a
+`TODO(libcascade migrate)` marker with the candidate names instead of guessing;
+`libcascade build` refuses the config until the marker is resolved.
+
+Each `Replicad*`-style name stays in `bindings` too — that is what requests it.
+
+### Review 2 — the exception-helpers delta
+
+emsdk 6.0.5 removed `-sEXPORT_EXCEPTION_HANDLING_HELPERS`. If your yml carried
+it, `migrate` deletes it and exports the three helpers directly — because with
+`-fwasm-exceptions` the link pipeline **hard-fails** without them:
+
+```diff
+- -sEXPORT_EXCEPTION_HANDLING_HELPERS
+- -sEXPORTED_RUNTIME_METHODS=["FS","wasmMemory"]
++ EXPORTED_RUNTIME_METHODS: [
++   'FS',
++   'wasmMemory',
++   'getExceptionMessage',
++   'incrementExceptionRefcount',
++   'decrementExceptionRefcount',
++ ],
+```
+
+This is the same delta the upstream `full.yml` received. The other rewrite
+`migrate` applies is `-sUSE_PTHREADS=1` → `compilerFlags: { threads: true }`:
+emcc keeps that setting name only as a deprecated legacy alias of the `-pthread`
+your yml already carried beside it, so the config states the request once. Both
+rewrites are commented at their site in the generated file.
+
+### Review 3 — the rest of the generated header
+
+The header block `migrate` writes names everything else it decided for you:
+
+| Item | What to check |
+| --- | --- |
+| Variant names | Split from the artifact names (`replicad_single` → `single`). A name that does not fit `<name>_<variant>` keeps its exact published filename through `variants[].outputName`. |
+| `rawFlags` | Every flag no typed member models, listed. Each is passed to emcc unchanged; the question is whether you still want it. |
+
+## Step 3 — replace the build scripts
+
+```bash
+npx libcascade build --render-only
+```
+
+Renders the yml the container will actually receive, without needing an engine.
+Diff it against your committed `build-config/*.yml` — flag order differs (the
+renderer emits a canonical order; emcc is order-insensitive for distinct
+flags), but the flag *set* should match. That diff is the migration's first
+gate.
+
+Then build for real:
+
+```bash
+npx libcascade build
+```
+
+The `mv` chains are gone: the driver mounts a scratch output directory, points
+`OCJS_OUTPUT_DIR` at it, and moves artifacts into `dist/` only after the run
+exits 0. `cd build-config && … && cd -` is gone too — paths resolve relative to
+the config file.
+
+The image tag is gone as well. The digest for your toolchain version is
+embedded in the package and verified after the pull, so the tag-drift problem —
+a tag string in a shell script that had to be kept in sync by hand with the
+`libcascade` version you depend on — no longer exists.
+
+## Step 4 — assemble the package surface
+
+```bash
+npx libcascade assemble --write-exports
+```
+
+This is where the duplicated `.d.ts` files die. One `types.d.ts` describes both
+variants, so a shape produced by the single-threaded instance is assignable to a
+function typed against the multi-threaded one. Downstream `as unknown as`
+erasure written to work around that incomparability can be deleted.
+
+`--write-exports` merges the generated subpaths (`.`, `./init`, `./single`,
+`./single/init`, `./single/wasm`, `./multi`, `./multi/init`,
+`./multi/wasm`) into your `package.json` while preserving hand-written ones
+such as `./wasm`. It also replaces generated `files` entries with the exact
+current surface while preserving hand-maintained files.
+
+## Step 5 — move consumers onto `createInstance`
+
+Whatever your package taught before — a hand-written `initOCSingle.js`, tests
+passing `mainScriptUrlOrBlob` themselves, per-variant loader modules in a
+downstream app — collapses into the generated lazy entries:
+
+```typescript notypecheck
+import { createInstance as createBest } from 'replicad-opencascadejs/init';
+import { createInstance as createMulti } from 'replicad-opencascadejs/multi/init';
+
+const oc = await createBest();     // best available
+const mt = await createMulti();    // fixed by the import path
+```
+
+See [Variants and assemble](../concepts/variants-and-assemble) for the selector,
+the override symbol, and the cross-origin-isolation requirement.
+
+## Step 6 — delete
+
+- `build-source/` and every ytt template.
+- The generated `build-config/*.yml`.
+- `ytt` from your tooling — the dependency and any CI install step.
+- The `generateConfig` script.
+- The `docker run` / `mkdir -p` / `mv` / `cd -` script bodies.
+- The per-variant `.d.ts` files from `dist/` and from `files`.
+- Any hard-coded `ghcr.io/taucad/opencascade.js:<tag>` string.
+
+Keep your `wrappers/*.cpp` exactly where they are — `customBindings` references
+them in place.
+
+Add `.libcascade/` to `.gitignore`.
+
+## Step 7 — prove parity
+
+1. `build-manifest.json` deltas — requested, compiled, and alias-resolved
+   counts — match the pre-migration build for each variant.
+2. Your package's own test suite passes against the regenerated artifacts.
+3. Downstream consumers build and run with the loaders replaced.
+
+Then wire the drift guard in, so the class of failure custom builds actually
+suffer from cannot come back silently:
+
+```bash
+npx libcascade check src
+```
+
+## Related
+
+- [Config reference](../reference/config) — every field and its type story.
+- [CLI reference](../reference/cli) — `build`, `assemble`, `detect`, `check`.
+- [Container yml contract](../reference/yaml-schema) — what the renderer emits, for when you diff it.

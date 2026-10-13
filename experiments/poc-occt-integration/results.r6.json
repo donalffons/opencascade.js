@@ -1,0 +1,6 @@
+{
+  "loudFailOnReferenceOptional": true,
+  "silentLossOnByValueMisclassification": true,
+  "controlCorrectSinkWorks": true,
+  "implication": "bindgen MUST classify trailing parameters by (a) presence of `=` initializer AND (b) const-ness of the reference. Only `const T& foo = T()` → std::optional<T> is safe. Any non-const T& parameter (with or without an = initializer) is an OUTPUT SINK and MUST remain a raw T& binding (the existing TR-OUT pathway). Misclassification mode A (emitting std::optional<T&>) fails LOUDLY at compile time. Misclassification mode B (emitting std::optional<T> by value for a non-const T& output param) is SILENT and corrupts data — bindgen needs an emit-time precondition check that refuses to wrap any non-const reference in std::optional<...>."
+}

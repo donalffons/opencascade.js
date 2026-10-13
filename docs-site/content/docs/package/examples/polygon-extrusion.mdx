@@ -1,0 +1,49 @@
+---
+title: Polygon extrusion
+description: Build a polygonal wire, face it, and extrude into a prism — three OCCT calls.
+---
+
+The minimum useful OCCT example: a four-point polygon extruded along Z.
+
+```typescript title="examples/polygon-extrusion.ts"
+import type { TopoDS_Shape } from 'libcascade';
+import { getOc } from './libcascade-init';
+
+export const buildExtrudedPolygon = async (): Promise<TopoDS_Shape> => {
+  const oc = await getOc();
+
+  using polygon = new oc.BRepBuilderAPI_MakePolygon();
+  polygon.Add(new oc.gp_Pnt(-50, -50, 0));
+  polygon.Add(new oc.gp_Pnt(50, -50, 0));
+  polygon.Add(new oc.gp_Pnt(50, 50, 0));
+  polygon.Add(new oc.gp_Pnt(-50, 50, 0));
+  polygon.Close();
+
+  using face = new oc.BRepBuilderAPI_MakeFace(polygon.Wire(), false);
+  using prismVec = new oc.gp_Vec(0, 0, 40);
+  using prism = new oc.BRepPrimAPI_MakePrism(face.Face(), prismVec, false, true);
+  return prism.Shape();
+};
+```
+
+## Why this matters
+
+- `BRepBuilderAPI_MakePolygon` accepts an arbitrary number of points — three
+  for a triangle, hundreds for a complex contour.
+- `Close()` adds the implicit closing edge.
+- `BRepBuilderAPI_MakeFace(wire, false)` faces the wire; `false` means "this
+  is the only wire of the face" (set `true` if you're adding holes later).
+- `BRepPrimAPI_MakePrism` extrudes along an arbitrary direction vector rather
+  than only Z.
+
+Swap `gp_Vec(0, 0, 40)` for `gp_Vec(0.5, 0.5, 1)` and you get a slanted
+prism. Swap the polygon for a `BRepBuilderAPI_MakeWire` with curved edges
+and you get an extruded curved profile.
+
+## Next steps
+
+- Combine multiple extrusions with `BRepAlgoAPI_Fuse` for additive construction.
+- Subtract holes with `BRepAlgoAPI_Cut`.
+- Fillet sharp edges with `BRepFilletAPI_MakeFillet`.
+
+See [First shape tutorial](../getting-started/first-shape-tutorial) for the fillet pattern.

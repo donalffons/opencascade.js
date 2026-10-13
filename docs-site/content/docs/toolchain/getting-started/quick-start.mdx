@@ -1,0 +1,216 @@
+---
+title: Quickstart — custom build
+description: Install @libcascade/toolchain, write libcascade.config.ts, run libcascade build, and consume the artifacts from dist/.
+---
+
+Most applications should install the prebuilt [`libcascade`](../../package/getting-started/quick-start-npm)
+package and stop there. Reach for the toolchain when you need a WASM binary the
+prebuilt one cannot be: a trimmed symbol set, your own C++ wrappers, or
+different Emscripten link settings.
+
+<Callout type="info">
+  `@libcascade/toolchain` ships lockstep-versioned with `libcascade` — the
+  toolchain that built the binary you depend on is the one whose types describe
+  it.
+</Callout>
+
+## Prerequisites
+
+- Node 22+.
+- A container engine installed **and running**: Docker Desktop, [colima](https://github.com/abiosoft/colima),
+  Rancher Desktop, OrbStack, or Podman. The toolchain drives the published image
+  for you — you never write a `docker` command.
+- A working directory under your home folder on macOS/Windows. Docker Desktop
+  does not share `/tmp` or `/opt` into its VM by default, and outputs vanish
+  silently.
+
+GitHub-hosted macOS runners ship no container engine at all. Run toolchain
+builds on a Linux runner.
+
+## 1. Install
+
+```bash
+npm install --save-dev @libcascade/toolchain
+```
+
+It is a `devDependency` on purpose: it shells out to a container engine and
+must never appear in a production dependency graph. It has no `postinstall`
+hook and does nothing until you invoke it.
+
+## 2. Write the config
+
+```typescript title="libcascade.config.ts"
+import { defineBuild } from '@libcascade/toolchain';
+
+export default defineBuild({
+  name: 'myapp',
+  bindings: [
+    'BRepPrimAPI_MakeBox',
+    'BRepAlgoAPI_Cut',
+    'BRepMesh_IncrementalMesh',
+    'STEPControl_Reader',
+    'STEPControl_Writer',
+    'TopExp_Explorer',
+    'TopoDS_Shape',
+    'gp_Pnt',
+  ],
+  settings: {
+    MODULARIZE: true,
+    EXPORT_ES6: true,
+    ALLOW_MEMORY_GROWTH: true,
+    INITIAL_MEMORY: '100MB',
+    MAXIMUM_MEMORY: '4GB',
+    // Required with `exceptions: 'wasm'` on emsdk 6.0.5 — the link fails
+    // without these three. See the exception-helpers note below.
+    EXPORTED_RUNTIME_METHODS: [
+      'FS',
+      'getExceptionMessage',
+      'incrementExceptionRefcount',
+      'decrementExceptionRefcount',
+    ],
+    ENVIRONMENT: ['web', 'worker', 'node'],
+  },
+  compilerFlags: { optimize: 'O3', simd: true, exceptions: 'wasm', noEntry: true },
+  variants: [{ name: 'single' }],
+});
+```
+
+Everything in that file is compile-checked. A typo in `bindings` is a
+TypeScript error with a "did you mean" suggestion, an unknown `-s` name in
+`settings` does not exist on the type, and `INITIAL_MEMORY: '100mb'` — which
+emcc silently misparses — does not match the `MemorySize` template literal.
+See [Config reference](../reference/config) for every field.
+
+Do not have a bindings list yet? `npx libcascade detect src` scans your source
+and prints one to paste in. Read
+[detect and check](../guides/detect-and-check) first — it is an onboarding
+tool, not a size optimizer.
+
+## 3. Build
+
+```bash
+npx libcascade build
+```
+
+For each variant the CLI renders the container-side yml into `.libcascade/`,
+pulls the digest-pinned image, runs the link with the artifact directory
+mounted, and moves the results into `dist/` only after the run exits 0 — a
+failed build never leaves half an artifact behind.
+
+```text
+dist/
+  myapp_single.js                    # Emscripten glue
+  myapp_single.wasm                  # the binary
+  myapp_single.d.ts                  # generated TypeScript declarations
+  myapp_single.js.symbols            # symbol map
+  myapp_single.build-manifest.json   # requested / compiled / missing symbols
+  myapp_single.provenance.json       # toolchain + source commits
+```
+
+Add `.libcascade/` to your `.gitignore`. The rendered ymls and the raw
+container output stay there for inspection after a failure.
+
+Useful flags:
+
+```bash
+npx libcascade build --variant single    # one variant instead of all
+npx libcascade build --render-only       # render the yml(s) and stop — no engine needed
+npx libcascade build --config path/to/libcascade.config.ts
+```
+
+`build` fails loudly when the container's own `build-manifest.json` reports
+`validation_passed: false`, printing the missing symbols. That matters because
+a **missing binding links successfully and fails at runtime** with a
+`BindingError` — the link step alone proves nothing.
+
+## 4. Assemble the package surface
+
+```bash
+npx libcascade assemble
+```
+
+`assemble` never touches a container. It reads the per-variant `.d.ts` and
+build manifests from `dist/` and writes the npm-publishable surface next to
+them: one shared `types.d.ts`, an `./init` entry exposing `createInstance`, a
+root entry, and an `exports.json` fragment. Add `--write-exports` to merge that
+fragment straight into your `package.json`.
+
+See [Variants and assemble](../concepts/variants-and-assemble) for what each
+generated file does and which entry to import.
+
+## 5. Consume the artifacts
+
+The package root is the ready-to-use path: it selects a variant, self-locates
+its WASM, and initializes at import time.
+
+```typescript title="src/oc.ts" notypecheck
+import oc, { BRepPrimAPI_MakeBox } from 'my-occt-package';
+
+using box = new BRepPrimAPI_MakeBox(10, 10, 10);
+using also = new oc.BRepPrimAPI_MakeBox(10, 10, 10);
+```
+
+Import `./init` when your code must control when initialization happens:
+
+```typescript title="src/oc-lazy.ts" notypecheck
+import { createInstance } from 'my-occt-package/init';
+
+export const oc = await createInstance();
+```
+
+Inside the package that produced `dist/`, import the generated entry directly:
+
+```typescript notypecheck
+import { createInstance } from './dist/init.js';
+
+const oc = await createInstance();
+using box = new oc.BRepPrimAPI_MakeBox(10, 10, 10);
+const shape = box.Shape();
+```
+
+`createInstance` owns the plumbing a consumer would otherwise hand-copy: variant
+selection, the glue self-reference pthread workers spawn from, Node `file:`
+URL → path conversion, and OCCT thread-pool sizing.
+
+## Exception helpers on emsdk 6.0.5
+
+The image's Emscripten removed `-sEXPORT_EXCEPTION_HANDLING_HELPERS`. With
+`compilerFlags: { exceptions: 'wasm' }` the link pipeline **hard-fails** unless
+`EXPORTED_RUNTIME_METHODS` exports the three helpers directly:
+
+```typescript notypecheck
+EXPORTED_RUNTIME_METHODS: [
+  'getExceptionMessage',
+  'incrementExceptionRefcount',
+  'decrementExceptionRefcount',
+],
+```
+
+Add whatever else your app needs (`'FS'`, `'wasmMemory'`) to the same array.
+
+## Keep it honest in CI
+
+```bash
+npx libcascade check src
+```
+
+`check` recomputes the symbols your source references and exits non-zero when
+any of them is missing from `bindings`. It converts the runtime-`BindingError`
+failure class into a build-time one. Put it next to your typecheck.
+
+## Next steps
+
+<Cards>
+  <Card title="Config reference" href="../reference/config">
+    Every `defineBuild` field, its type, and what the generated unions check.
+  </Card>
+  <Card title="Variants and assemble" href="../concepts/variants-and-assemble">
+    One bindings list, N binaries, one `types.d.ts`, and the generated entries.
+  </Card>
+  <Card title="Migrate from a yml build" href="./migrate-from-yaml">
+    Field-by-field mapping from `defaults.yml` + ytt + `docker run` scripts.
+  </Card>
+  <Card title="Extend with C++" href="../guides/extend-with-cpp">
+    Declare your own wrapper files and the symbols they provide.
+  </Card>
+</Cards>

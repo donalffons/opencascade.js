@@ -1,0 +1,48 @@
+{
+  "ts": "2026-05-28T00:24:41.440Z",
+  "samples": [
+    {
+      "label": "A: 5-arg explicit",
+      "median": 0.866250000000008,
+      "p95": 1.0376660000000015,
+      "mean": 0.8875698666666684,
+      "iters": 300
+    },
+    {
+      "label": "B: 5-arg explicit",
+      "median": 0.8613750000000095,
+      "p95": 1.0009999999999764,
+      "mean": 0.8807131966666691,
+      "iters": 300
+    },
+    {
+      "label": "B: free-fn explicit",
+      "median": 0.8323749999999563,
+      "p95": 0.9432920000000422,
+      "mean": 0.8451715033333335,
+      "iters": 300
+    },
+    {
+      "label": "B: free-fn omitted (Option C ergonomic path)",
+      "median": 0.82487500000002,
+      "p95": 1.014833000000067,
+      "mean": 0.8462609200000031,
+      "iters": 300
+    }
+  ],
+  "deltas": {
+    "ctor": {
+      "aMedian": 0.866250000000008,
+      "bMedian": 0.8613750000000095,
+      "deltaMs": -0.004874999999998408,
+      "deltaPct": -0.5627705627703739
+    },
+    "freeFnOmittedVsExplicit": {
+      "aMedian": 0.8323749999999563,
+      "bMedian": 0.82487500000002,
+      "deltaMs": -0.007499999999936335,
+      "deltaPct": -0.9010361916127622
+    }
+  },
+  "verdict": "Runtime cost neutral within noise — Option C imposes no measurable wall-clock penalty on real OCCT workloads"
+}

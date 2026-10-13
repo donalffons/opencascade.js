@@ -1,0 +1,72 @@
+From: <your name> <your@email>
+Subject: [PATCH] Modeling Algorithms - Fix uninitialised Index read in
+ Geom2dGcc_Circ2dTanCenGeo
+
+Geom2dGcc_Circ2dTanCenGeo's constructor decides how many tangent circles to
+emit with `if (Index(1) == Index(2))`, but `Index` is an
+`NCollection_Array1<int>` that is never written. Trivial element types are not
+value-initialised, so the comparison is `icmp eq undef, undef`, which the
+optimiser folds to a compile-time constant -- and different compilers fold it
+in opposite directions, so the same source silently produces either a dropped
+solution or a duplicated one depending on the toolchain.
+
+`Index` is one of four parallel two-slot arrays (`pTan`, `Index`, `theDist2`,
+`theParam`) declared together; slot 1 tracks the nearest extremum of the
+distance from `Pcenter` to the curve and slot 2 the farthest. Three of the four
+are written inside the two `if` blocks of the extremum scan -- `Index` is the
+only one that is not. Recording the extremum index in those same blocks makes
+the existing condition mean what it reads as: if the nearest and the farthest
+extremum are the same extremum there is one distinct tangent circle, otherwise
+two.
+
+The max accumulator is additionally seeded with -1. instead of 0. because 0. is
+a reachable squared distance (the centre point lying exactly on the curve). With
+the 0. seed the second `if` would never fire in that case, leaving both
+`Index(2)` and `theParam(2)` unwritten while `nbsol` became 2 -- i.e. the
+uninitialised read would move rather than disappear. -1. is not reachable for a
+squared distance, so slot 2 is always populated whenever the scan runs (`nbext
+== 0` already throws).
+
+Observed through the public Geom2dGcc_Circ2dTanCen facade with centre point
+(0, 5), which routes Line/Circle to the analytic GccAna path and every other
+curve type to this one:
+
+    curve     | clang 20 (emsdk 5.0.1) | clang 22 (emsdk 6.0.5) | expected
+    ----------+------------------------+------------------------+---------
+    circle    | 2 -> [4, 6]            | 2 -> [4, 6]            | 2
+    ellipse   | 2 -> [4, 6]            | 1 -> [4]               | 2
+    parabola  | 2 -> [2.933, 2.933]    | 1 -> [2.933]           | 1
+
+With this change all three rows read 2 / 2 / 1 on both toolchains.
+
+---
+diff --git a/src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Circ2dTanCenGeo.cxx b/src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Circ2dTanCenGeo.cxx
+index ba6939935c..8115060ac9 100644
+--- a/src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Circ2dTanCenGeo.cxx
++++ b/src/ModelingAlgorithms/TKGeomAlgo/Geom2dGcc/Geom2dGcc_Circ2dTanCenGeo.cxx
+@@ -54,7 +54,9 @@ Geom2dGcc_Circ2dTanCenGeo::Geom2dGcc_Circ2dTanCenGeo(const Geom2dGcc_QCurve& Qua
+   NCollection_Array1<double>   theDist2(1, 2);
+   NCollection_Array1<double>   theParam(1, 2);
+   theDist2(1)               = RealLast();
+-  theDist2(2)               = 0.;
++  theDist2(2)               = -1.;
++  Index(1)                  = 0;
++  Index(2)                  = 0;
+   int                 i     = 1;
+   int                 nbsol = 0;
+   gp_Dir2d            dirx(gp_Dir2d::D::X);
+@@ -82,12 +84,14 @@ Geom2dGcc_Circ2dTanCenGeo::Geom2dGcc_Circ2dTanCenGeo(const Geom2dGcc_QCurve& Qua
+       theDist2(1) = distmin.SquareDistance(i);
+       theParam(1) = thePar;
+       pTan(1)     = distmin.Point(i).Value();
++      Index(1)    = i;
+     }
+     if (distmin.SquareDistance(i) > theDist2(2))
+     {
+       theDist2(2) = distmin.SquareDistance(i);
+       theParam(2) = thePar;
+       pTan(2)     = distmin.Point(i).Value();
++      Index(2)    = i;
+     }
+     i++;
+   }

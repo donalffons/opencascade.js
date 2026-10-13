@@ -1,0 +1,84 @@
+{
+  "buildFlagAdded": "-sEVAL_CTORS=2",
+  "buildBehaviour": "Partial ctor eval; stops at first _embind_register_* import call",
+  "results": [
+    {
+      "id": "IM(sphere, 0.5) arity-pad to 5",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "id": "count_triangles(sphere)",
+      "actual": 306,
+      "expected": 306,
+      "pass": true
+    },
+    {
+      "id": "HandleIM(sphere, 0.5) arity-pad + smart_ptr",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "id": "AmbigCtor(pnt) routedBy",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "id": "AmbigCtor(pnt) tail (C++ default 99)",
+      "actual": 99,
+      "expected": 99,
+      "pass": true
+    },
+    {
+      "id": "StaticOptProbe.probe()  static + arity-pad",
+      "actual": 99,
+      "expected": 99,
+      "pass": true
+    },
+    {
+      "id": "StaticOptProbe.probe(7)",
+      "actual": 7,
+      "expected": 7,
+      "pass": true
+    },
+    {
+      "id": "t3_maybe_value(true)",
+      "actual": 42,
+      "expected": 42,
+      "pass": true
+    },
+    {
+      "id": "t3_maybe_value(false)",
+      "pass": true
+    },
+    {
+      "id": "t4_optional_nondefault(new NonDefault(7))",
+      "actual": 7,
+      "expected": 7,
+      "pass": true
+    },
+    {
+      "id": "t4_optional_nondefault()  arity-pad → nullopt → -1",
+      "actual": -1,
+      "expected": -1,
+      "pass": true
+    },
+    {
+      "id": "MultiOptAmbig.probe() winner (last-of-same-arity)",
+      "actual": "int+string",
+      "expected": "int+string",
+      "pass": true
+    },
+    {
+      "id": "MultiOptAmbigRev.probe() winner (last-of-same-arity)",
+      "actual": "double+bool",
+      "expected": "double+bool",
+      "pass": true
+    }
+  ],
+  "verdict": "-sEVAL_CTORS=2 is BEHAVIOURALLY NEUTRAL against the arity-pad + optional-wildcard dispatcher. The link-time ctor evaluator stops at the first imported binding-registration call (per the build-time log line \"stopping since could not eval: call import: env._embind_register_optional\"), so all EMSCRIPTEN_BINDINGS work happens at runtime exactly as in the default build. Every Gates-1–3 + T1–T4 assertion produces identical outcomes under T5.",
+  "allPass": true
+}

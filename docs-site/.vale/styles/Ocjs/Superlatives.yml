@@ -1,0 +1,14 @@
+extends: existence
+message: "Marketing superlatives ('%s') are banned — use concrete numbers or capability claims."
+level: error
+ignorecase: true
+tokens:
+  - 'blazing fast'
+  - 'lightning[\s-]?fast'
+  - 'state[\s-]?of[\s-]?the[\s-]?art'
+  - 'world[\s-]?class'
+  - 'cutting[\s-]?edge'
+  - 'best[\s-]?in[\s-]?class'
+  - 'next[\s-]?generation'
+  - 'revolutionary'
+  - 'game[\s-]?changing'

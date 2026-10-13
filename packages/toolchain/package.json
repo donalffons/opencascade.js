@@ -1,0 +1,71 @@
+{
+  "name": "@libcascade/toolchain",
+  "version": "3.0.0-beta.0",
+  "description": "Typed build configuration and container driver for custom libcascade WASM builds.",
+  "keywords": [
+    "opencascade",
+    "occt",
+    "wasm",
+    "emscripten",
+    "toolchain",
+    "build"
+  ],
+  "homepage": "https://github.com/taucad/opencascade.js#readme",
+  "bugs": {
+    "url": "https://github.com/taucad/opencascade.js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taucad/opencascade.js.git",
+    "directory": "packages/toolchain"
+  },
+  "license": "MIT",
+  "author": "Richard Fontein <32132657+rifont@users.noreply.github.com>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./driver": {
+      "types": "./dist/driver/index.d.ts",
+      "default": "./dist/driver/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "libcascade": "./bin/libcascade.mjs"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "generated/README.md",
+    "generated/emcc-settings.d.ts",
+    "generated/emcc-settings.meta.json",
+    "generated/images.json",
+    "generated/occt-symbols.d.ts",
+    "generated/symbol-catalog.json",
+    "LICENSE",
+    "NOTICE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "prepack": "npm run build",
+    "test": "npm run build && vitest run",
+    "typecheck": "tsc --project tsconfig.json"
+  },
+  "dependencies": {
+    "jiti": "^2.7.0",
+    "yaml": "^2.8.2"
+  },
+  "devDependencies": {
+    "tsdown": "^0.22.14"
+  }
+}

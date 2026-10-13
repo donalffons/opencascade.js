@@ -1,0 +1,109 @@
+---
+title: Derive a C++ class in JavaScript
+description: Override Message_ProgressIndicator virtual methods through a file-backed raw Embind registration.
+---
+
+OCCT progress callbacks require a derived `Message_ProgressIndicator` class.
+That needs Embind's `allow_subclass`, so it is a `customBindings` entry with
+`scope: 'main'` — raw Embind — rather than a generated binding.
+
+## 1. Add one self-contained binding file
+
+Create `bindings/progress-indicator.cpp` with the bridge class, wrapper, and
+registration in the same file:
+
+```cpp
+#include <Message_ProgressIndicator.hxx>
+#include <emscripten/bind.h>
+
+using namespace emscripten;
+
+struct Message_ProgressIndicator_JS : public Message_ProgressIndicator {
+  using Message_ProgressIndicator::Show;
+  using Message_ProgressIndicator::UserBreak;
+  using Message_ProgressIndicator::Reset;
+};
+
+struct Message_ProgressIndicator_JSWrapper
+    : public wrapper<Message_ProgressIndicator_JS> {
+  EMSCRIPTEN_WRAPPER(Message_ProgressIndicator_JSWrapper);
+
+  void Show(const Message_ProgressScope&, bool isForce) {
+    call<void>("Show", GetPosition(), isForce);
+  }
+  bool UserBreak() { return call<bool>("UserBreak"); }
+  void Reset() { call<void>("Reset"); }
+};
+
+EMSCRIPTEN_BINDINGS(progress_indicator_js) {
+  class_<Message_ProgressIndicator_JS, base<Message_ProgressIndicator>>(
+      "Message_ProgressIndicator_JS")
+    .function("Show", &Message_ProgressIndicator_JS::Show, pure_virtual())
+    .function("UserBreak", optional_override([](Message_ProgressIndicator_JS& self) {
+      return self.Message_ProgressIndicator_JS::UserBreak();
+    }))
+    .function("Reset", optional_override([](Message_ProgressIndicator_JS& self) {
+      self.Message_ProgressIndicator_JS::Reset();
+    }))
+    .allow_subclass<Message_ProgressIndicator_JSWrapper>(
+      "Message_ProgressIndicator_JSWrapper");
+}
+```
+
+The repository's executable Docker fixture contains the complete production
+registration, including inherited methods needed by its runtime test.
+
+## 2. Declare the file
+
+```typescript title="libcascade.config.ts"
+import { defineBuild } from '@libcascade/toolchain';
+
+export default defineBuild({
+  name: 'progress-callback',
+  bindings: [
+    'BRepAlgoAPI_Fuse',
+    'BRepPrimAPI_MakeBox',
+    'Message_ProgressIndicator',
+    'Message_ProgressRange',
+    'Message_ProgressScope',
+    'Message_ProgressIndicator_JS',
+    'gp_Pnt',
+  ],
+  customBindings: [
+    {
+      file: 'bindings/progress-indicator.cpp',
+      symbols: ['Message_ProgressIndicator_JS'],
+      scope: 'main',
+    },
+  ],
+  variants: [{ name: 'single' }],
+});
+```
+
+The registration name goes in `symbols`, which is what admits it to `bindings`
+without it being an `OcctSymbol`. Build with `npx libcascade build` — see the
+[Quickstart](../getting-started/quick-start). Raw Embind files skip the
+bindgen, so add a project-local TypeScript declaration for
+`Message_ProgressIndicator_JS` if the consumer is TypeScript.
+
+## 3. Derive in JavaScript
+
+```javascript notypecheck
+import { createInstance } from './dist/init.js';
+
+const oc = await createInstance();
+const Progress = oc.Message_ProgressIndicator_JS.extend('Progress', {
+  Show(position) {
+    console.log('progress', position);
+  },
+  UserBreak() {
+    return false;
+  },
+});
+
+using progress = new Progress();
+// Pass progress.Start() to a long-running OCCT algorithm.
+```
+
+See [Extend with C++](./extend-with-cpp) for the distinction between generated
+and raw bindings.

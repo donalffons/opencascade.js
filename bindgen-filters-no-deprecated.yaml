@@ -1,0 +1,12 @@
+# Overlay: excludes deprecated OCCT symbols from binding generation.
+# Use this config instead of the base bindgen-filters.yaml to build without deprecated APIs.
+#
+# Usage:
+#   python -m ocjs_bindgen --config bindgen-filters-no-deprecated.yaml
+#   python -m ocjs_bindgen --no-deprecated   (equivalent, uses base config)
+
+# Import base config
+extends: bindgen-filters.yaml
+
+deprecated:
+  include: false

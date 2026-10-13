@@ -1,0 +1,89 @@
+---
+title: Named compile-time configurations
+description: build-configs/configurations.json — every preset, the flags it sets, and when to pick it.
+---
+
+<Callout type="info">
+  **Maintainer track.** These presets are compiled into the published images.
+  A custom build selects between them implicitly — a variant declaring
+  `requires: ['threads']` gets the multi-threaded image, everything else the
+  single-threaded one — and configures the link step through
+  [`libcascade.config.ts`](./config).
+</Callout>
+
+Compile-time presets live in [`build-configs/configurations.json`](https://github.com/taucad/opencascade.js/blob/main/build-configs/configurations.json). Each entry is a flat map of `OCJS_*` environment-variable names to values; the build CLI loads the entry and exports each key before driving `emcc` and `wasm-opt`.
+
+All shipped presets use native WASM exceptions (`OCJS_EXCEPTIONS=1`,
+`OCJS_EH_MODE=wasm`) and the Closure Compiler. Link-only features such as
+BigInt and eval-ctors belong to each build YAML's `emccFlags`, not these
+compile-time presets.
+
+## Shipped presets
+
+| Preset                     | Use case                                                                                  | Differentiating flags                                                          |
+| -------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `single-threaded`          | Default custom-build preset when a variant does not require threads. | `OCJS_OPT=-O3`, `OCJS_WASM_OPT_LEVEL=-O4`, `THREADING=single-threaded`         |
+| `single-threaded-smallest` | Size-tuned variant — benchmark it against your workload before shipping.                | `OCJS_OPT=-Os`, `OCJS_WASM_OPT_LEVEL=-O3`, `THREADING=single-threaded`         |
+| `multi-threaded`           | Published `libcascade/multi` build. SAB/COOP+COEP-isolated deployments.     | `OCJS_OPT=-O3`, `OCJS_WASM_OPT_LEVEL=-O4`, `THREADING=multi-threaded`          |
+| `debug`                    | Fastest build for local iteration. Not for production — no SIMD, no converge, no BigInt.  | `OCJS_OPT=-O0`, `OCJS_WASM_OPT_LEVEL=-O0`, `OCJS_SIMD=0`, `OCJS_CONVERGE=false` |
+
+For the full `OCJS_*` matrix that each preset sets — including the flags they share — see [BUILD_SYSTEM.md](https://github.com/taucad/opencascade.js/blob/main/BUILD_SYSTEM.md#configurationsjson).
+
+## Selecting a preset
+
+`build-wasm.sh` reads the `OCJS_CONFIG` env var or the `--config <name>` CLI flag (the CLI flag wins if both are set). When neither is set, the script falls back to `single-threaded`:
+
+```bash
+OCJS_CONFIG=debug ./build-wasm.sh link build-configs/my-config.yml
+```
+
+Or via the CLI flag:
+
+```bash
+./build-wasm.sh --config debug link build-configs/my-config.yml
+```
+
+## Adding a custom preset
+
+Append a new entry to `build-configs/configurations.json`. The shape is a flat `OCJS_*` env-var map — same keys the shipped presets use:
+
+```json
+{
+  "single-threaded-no-simd": {
+    "OCJS_OPT": "-Os",
+    "OCJS_LTO": "0",
+    "OCJS_EXCEPTIONS": "1",
+    "OCJS_EH_MODE": "wasm",
+    "OCJS_SIMD": "0",
+    "THREADING": "single-threaded",
+    "OCJS_DEFINES": "OCCT_NO_DUMP",
+    "OCJS_UNDEFINES": "OCC_CONVERT_SIGNALS",
+    "OCJS_WASM_OPT_LEVEL": "-O3",
+    "OCJS_CLOSURE": "true",
+    "OCJS_CONVERGE": "true",
+    "OCJS_MALLOC": "mimalloc",
+    "BINARYEN_EXTRA_PASSES": ""
+  }
+}
+```
+
+Custom presets share the same compile-`.o` cache as shipped ones — the cache is keyed by the compile-flag fingerprint, not by the preset name. Two presets with identical compile-time flags share cache entries automatically.
+
+## Cache invalidation
+
+Changing any compile flag invalidates the cached `.o` files that depended on it. The build manifest records the active fingerprint:
+
+```bash
+cat build/build-flags.json
+```
+
+The published npm tarball ships `dist/opencascade_single.provenance.json` and
+`dist/opencascade_multi.provenance.json` — same preset / flag information
+for each variant, with the commit SHA the wasm was built from. CI scripts should
+diff these files across builds to detect surprise cache turnover.
+
+## Related
+
+- [Two-channel config model](../concepts/two-channel-config-model) — why compile-time and link-time config are separate channels.
+- [Emscripten settings and flags](../guides/custom-emcc-flags) — link-time `settings` rationale.
+- [Driver environment](./env-vars) — driver variables and the `OCJS_*` catalogue.

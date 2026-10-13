@@ -1,0 +1,202 @@
+---
+title: Classic bottle
+description: The canonical OCCT tutorial — bottle profile, fillets, neck, threading — translated to V3 TypeScript.
+---
+
+The [OpenCASCADE bottle tutorial](https://dev.opencascade.org/doc/overview/html/occt__tutorial.html)
+ported to V3 TypeScript with `using` syntax and suffix-free API.
+
+The example demonstrates **every major OCCT capability** in one script: 2D
+profile construction, mirroring, extrusion, fillets, cylinder primitives,
+boolean fuse, hollow-solid generation, threading via `ThruSections`, and
+final compound assembly.
+
+```typescript title="examples/classic-bottle.ts"
+import type { TopoDS_Shape } from 'libcascade';
+import { getOc } from './libcascade-init';
+
+export type BottleParams = {
+  width: number;     // 20–100, default 50
+  height: number;    // 50–120, default 70
+  thickness: number; // 15–50, default 30
+};
+
+export const buildBottle = async (
+  { width, height, thickness }: BottleParams = { width: 50, height: 70, thickness: 30 },
+): Promise<TopoDS_Shape> => {
+  const oc = await getOc();
+
+  // Profile — define support points
+  const aPnt1 = new oc.gp_Pnt(-width / 2, 0, 0);
+  const aPnt2 = new oc.gp_Pnt(-width / 2, -thickness / 4, 0);
+  const aPnt3 = new oc.gp_Pnt(0, -thickness / 2, 0);
+  const aPnt4 = new oc.gp_Pnt(width / 2, -thickness / 4, 0);
+  const aPnt5 = new oc.gp_Pnt(width / 2, 0, 0);
+
+  // Profile — define the geometry
+  using arc = new oc.GC_MakeArcOfCircle(aPnt2, aPnt3, aPnt4);
+  using seg1 = new oc.GC_MakeSegment(aPnt1, aPnt2);
+  using seg2 = new oc.GC_MakeSegment(aPnt4, aPnt5);
+
+  // Profile — define the topology
+  using edge1 = new oc.BRepBuilderAPI_MakeEdge(seg1.Value());
+  using edge2 = new oc.BRepBuilderAPI_MakeEdge(arc.Value());
+  using edge3 = new oc.BRepBuilderAPI_MakeEdge(seg2.Value());
+  using wire = new oc.BRepBuilderAPI_MakeWire(edge1.Edge(), edge2.Edge(), edge3.Edge());
+
+  // Mirror the wire across the X axis
+  const xAxis = oc.gp.OX();
+  using trsf = new oc.gp_Trsf();
+  trsf.SetMirror(xAxis);
+  using mirroredBuilder = new oc.BRepBuilderAPI_Transform(wire.Wire(), trsf, false);
+  const mirroredShape = mirroredBuilder.Shape();
+
+  using fullProfile = new oc.BRepBuilderAPI_MakeWire();
+  fullProfile.Add(wire.Wire());
+  fullProfile.Add(oc.TopoDS.Wire(mirroredShape));
+
+  // Body — extrude the profile
+  using faceProfile = new oc.BRepBuilderAPI_MakeFace(fullProfile.Wire(), false);
+  using prismVec = new oc.gp_Vec(0, 0, height);
+  using body = new oc.BRepPrimAPI_MakePrism(faceProfile.Face(), prismVec, false, true);
+  let workingBody = body.Shape();
+
+  // Body — apply edge fillets
+  using fillet = new oc.BRepFilletAPI_MakeFillet(workingBody, oc.ChFi3d_FilletShape.ChFi3d_Rational);
+  using edgeExp = new oc.TopExp_Explorer(workingBody, oc.TopAbs_ShapeEnum.TopAbs_EDGE);
+  while (edgeExp.More()) {
+    fillet.Add(thickness / 12, oc.TopoDS.Edge(edgeExp.Current()));
+    edgeExp.Next();
+  }
+  workingBody = fillet.Shape();
+
+  // Body — add the neck
+  using neckLocation = new oc.gp_Pnt(0, 0, height);
+  const neckAxis = oc.gp.DZ();
+  using neckAx2 = new oc.gp_Ax2(neckLocation, neckAxis);
+  const neckRadius = 5;
+  const neckHeight = 5;
+  using cyl = new oc.BRepPrimAPI_MakeCylinder(neckAx2, neckRadius, neckHeight);
+  using progress = new oc.Message_ProgressRange();
+  using fuse = new oc.BRepAlgoAPI_Fuse(workingBody, cyl.Shape(), progress);
+  workingBody = fuse.Shape();
+
+  // Body — hollow the solid (remove the top face of the neck)
+  let faceToRemove: ReturnType<typeof oc.TopoDS.Face> | undefined;
+  let zMax = -1;
+  using faceExp = new oc.TopExp_Explorer(workingBody, oc.TopAbs_ShapeEnum.TopAbs_FACE);
+  for (; faceExp.More(); faceExp.Next()) {
+    const aFace = oc.TopoDS.Face(faceExp.Current());
+    const aSurface = oc.BRep_Tool.Surface(aFace);
+    if (aSurface.get().$$.ptrType.name === 'Geom_Plane*') {
+      const aPlane = new oc.Handle_Geom_Plane(aSurface.get()).get();
+      const aPnt = aPlane.Location();
+      if (aPnt.Z() > zMax) {
+        zMax = aPnt.Z();
+        using topFaceExp = new oc.TopExp_Explorer(aFace, oc.TopAbs_ShapeEnum.TopAbs_FACE);
+        faceToRemove = oc.TopoDS.Face(topFaceExp.Current());
+      }
+    }
+  }
+
+  using facesToRemove = new oc.TopTools_ListOfShape();
+  if (faceToRemove) facesToRemove.Append(faceToRemove);
+  using thickSolid = new oc.BRepOffsetAPI_MakeThickSolid();
+  thickSolid.MakeThickSolidByJoin(
+    workingBody,
+    facesToRemove,
+    -thickness / 50,
+    1e-3,
+    oc.BRepOffset_Mode.BRepOffset_Skin,
+    false,
+    false,
+    oc.GeomAbs_JoinType.GeomAbs_Arc,
+    false,
+    progress,
+  );
+  workingBody = thickSolid.Shape();
+
+  // Threading — cylindrical surfaces + elliptical 2D curves
+  using aCyl1 = new oc.Geom_CylindricalSurface(new oc.gp_Ax3(neckAx2), neckRadius * 0.99);
+  using aCyl2 = new oc.Geom_CylindricalSurface(new oc.gp_Ax3(neckAx2), neckRadius * 1.05);
+
+  const aPnt2d = new oc.gp_Pnt2d(2 * Math.PI, neckHeight / 2);
+  const aDir2d = new oc.gp_Dir2d(2 * Math.PI, neckHeight / 4);
+  using anAx2d = new oc.gp_Ax2d(aPnt2d, aDir2d);
+
+  const aMajor = 2 * Math.PI;
+  const aMinor = neckHeight / 10;
+
+  using anEllipse1 = new oc.Geom2d_Ellipse(anAx2d, aMajor, aMinor, true);
+  using anEllipse2 = new oc.Geom2d_Ellipse(anAx2d, aMajor, aMinor / 4, true);
+  using anArc1 = new oc.Geom2d_TrimmedCurve(new oc.Handle_Geom2d_Curve(anEllipse1), 0, Math.PI, true, true);
+  using anArc2 = new oc.Geom2d_TrimmedCurve(new oc.Handle_Geom2d_Curve(anEllipse2), 0, Math.PI, true, true);
+
+  const tmp1 = anEllipse1.Value(0);
+  const anEllipsePnt1 = new oc.gp_Pnt2d(tmp1.X(), tmp1.Y());
+  const tmp2 = anEllipse1.Value(Math.PI);
+  const anEllipsePnt2 = new oc.gp_Pnt2d(tmp2.X(), tmp2.Y());
+  using aSegment = new oc.GCE2d_MakeSegment(anEllipsePnt1, anEllipsePnt2);
+
+  using anEdge1OnSurf1 = new oc.BRepBuilderAPI_MakeEdge(
+    new oc.Handle_Geom2d_Curve(anArc1),
+    new oc.Handle_Geom_Surface(aCyl1),
+  );
+  using anEdge2OnSurf1 = new oc.BRepBuilderAPI_MakeEdge(
+    new oc.Handle_Geom2d_Curve(aSegment.Value()),
+    new oc.Handle_Geom_Surface(aCyl1),
+  );
+  using anEdge1OnSurf2 = new oc.BRepBuilderAPI_MakeEdge(
+    new oc.Handle_Geom2d_Curve(anArc2),
+    new oc.Handle_Geom_Surface(aCyl2),
+  );
+  using anEdge2OnSurf2 = new oc.BRepBuilderAPI_MakeEdge(
+    new oc.Handle_Geom2d_Curve(aSegment.Value()),
+    new oc.Handle_Geom_Surface(aCyl2),
+  );
+  using threadingWire1 = new oc.BRepBuilderAPI_MakeWire(
+    anEdge1OnSurf1.Edge(),
+    anEdge2OnSurf1.Edge(),
+  );
+  using threadingWire2 = new oc.BRepBuilderAPI_MakeWire(
+    anEdge1OnSurf2.Edge(),
+    anEdge2OnSurf2.Edge(),
+  );
+  oc.BRepLib.BuildCurves3d(threadingWire1.Wire());
+  oc.BRepLib.BuildCurves3d(threadingWire2.Wire());
+
+  using aTool = new oc.BRepOffsetAPI_ThruSections(true, false, 1e-6);
+  aTool.AddWire(threadingWire1.Wire());
+  aTool.AddWire(threadingWire2.Wire());
+  aTool.CheckCompatibility(false);
+  const myThreading = aTool.Shape();
+
+  // Compound assembly + final rotation
+  using aRes = new oc.TopoDS_Compound();
+  using aBuilder = new oc.BRep_Builder();
+  aBuilder.MakeCompound(aRes);
+  aBuilder.Add(aRes, workingBody);
+  aBuilder.Add(aRes, myThreading);
+
+  using rotTrsf = new oc.gp_Trsf();
+  rotTrsf.SetRotation(new oc.gp_Ax1(new oc.gp_Pnt(), new oc.gp_Dir(1, 0, 0)), -Math.PI / 2);
+  using rotLoc = new oc.TopLoc_Location(rotTrsf);
+  return aRes.Moved(rotLoc, false);
+};
+```
+
+Every OCCT API used above has a direct V3 binding under `oc.<ClassName>` with no
+`_N` suffix. See the [OpenCASCADE tutorial](https://dev.opencascade.org/doc/overview/html/occt__tutorial.html)
+for the step-by-step walkthrough of the underlying geometry.
+
+## Migration from v2
+
+The v2 example used `gp_Pnt_3`, `GC_MakeArcOfCircle_4`, `BRepBuilderAPI_MakeEdge_24`,
+`gp_Trsf_1`, etc. V3 drops every `_N` suffix — overload dispatch happens in
+C++ via the unified RBV pipeline. Pass arguments by type and the right overload
+runs automatically.
+
+## Render
+
+See [Render with three.js](../guides/render-with-three-js) for the GLB → three.js wiring.
+See also [Visualize shape helper](../guides/visualize-shape-helper).

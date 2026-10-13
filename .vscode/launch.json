@@ -1,75 +1,63 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
+  "inputs": [
+    {
+      "id": "yamlPath",
+      "type": "promptString",
+      "description": "Path to a YAML build config (e.g. build-configs/full.yml)",
+      "default": "build-configs/link-filter-poc.yml"
+    }
+  ],
   "configurations": [
     {
-      "name": "Step 1: Apply Patches",
-      "type": "python",
-      "python": "/usr/bin/python3",
+      "name": "ocjs_bindgen: generate (Embind .cpp + .d.ts.json)",
+      "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/src/applyPatches.py",
+      "module": "ocjs_bindgen",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "cwd": "${workspaceFolder}",
+      "args": ["--config", "bindgen-filters.yaml"],
       "console": "integratedTerminal",
+      "justMyCode": false
     },
     {
-      "name": "Step 2: Compile OCCT Sources to .o files",
-      "type": "python",
-      "python": "/usr/bin/python3",
+      "name": "ocjs_bindgen.link.yaml_build: link",
+      "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/src/compileSources.py",
-      "args": [
-        "single-threaded"
-      ],
+      "module": "ocjs_bindgen.link.yaml_build",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "cwd": "${workspaceFolder}",
+      "args": ["${input:yamlPath}"],
       "console": "integratedTerminal",
+      "justMyCode": false
     },
     {
-      "name": "Step 3: Generate bindings (Embind .cpp files + typescript definitions) from OCCT headers",
-      "type": "python",
-      "python": "/usr/bin/python3",
+      "name": "extract-docs",
+      "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/src/generateBindings.py",
+      "program": "${workspaceFolder}/src/extract-docs.py",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
+      "justMyCode": false
     },
     {
-      "name": "Step 4: Compile Embind .cpp files to .o files",
-      "type": "python",
-      "python": "/usr/bin/python3",
+      "name": "compileBindings (single-threaded)",
+      "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/src/compileBindings.py",
-      "args": [
-        "single-threaded"
-      ],
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "cwd": "${workspaceFolder}",
+      "args": ["single-threaded"],
       "console": "integratedTerminal",
+      "justMyCode": false
     },
     {
-      "name": "Step 5: Create build: opencascade.full.yml",
-      "type": "python",
-      "python": "/usr/bin/python3",
+      "name": "build-wasm.sh full <yamlPath>",
+      "type": "node-terminal",
       "request": "launch",
-      "program": "${workspaceFolder}/src/buildFromYaml.py",
-      "console": "integratedTerminal",
-      "cwd": "${workspaceFolder}/dist",
-      "args": [
-        "/opencascade.js/builds/opencascade.full.yml"
-      ]
-    },
-    {
-      "name": "Debug Tests",
-      "type": "node",
-      "request": "launch",
-      "runtimeArgs": [
-        "--inspect-brk",
-        "${workspaceRoot}/test/node_modules/.bin/jest",
-        "--runInBand"
-      ],
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "port": 9229,
-      "cwd": "${workspaceFolder}/test",
-      "env": {
-        "NODE_OPTIONS": "--experimental-vm-modules"
-      }
+      "command": "./build-wasm.sh full ${input:yamlPath}",
+      "cwd": "${workspaceFolder}"
     }
   ]
 }

@@ -1,0 +1,95 @@
+{
+  "$schema": "deps-lock-v1",
+  "description": "Pinned dependency versions for reproducible libcascade builds. Both Dockerfile and build-wasm.sh reference this file.",
+  "ci_tools": {
+    "actionlint": {
+      "version": "1.7.12",
+      "base_url": "https://github.com/rhysd/actionlint/releases/download/v1.7.12",
+      "platforms": {
+        "darwin-arm64": {
+          "filename": "actionlint_1.7.12_darwin_arm64.tar.gz",
+          "sha256": "aba9ced2dee8d27fecca3dc7feb1a7f9a52caefa1eb46f3271ea66b6e0e6953f",
+          "binary_sha256": "8db11704dc296f096216db4db65d86cd7f0ebfdf4c38453a1da276b137b88388"
+        },
+        "linux-amd64": {
+          "filename": "actionlint_1.7.12_linux_amd64.tar.gz",
+          "sha256": "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8",
+          "binary_sha256": "c872d6db8c6bf83a8eaa704fc93999f027d55dffbc63b8a6abdccb47df5f4cd4"
+        },
+        "linux-arm64": {
+          "filename": "actionlint_1.7.12_linux_arm64.tar.gz",
+          "sha256": "325e971b6ba9bfa504672e29be93c24981eeb1c07576d730e9f7c8805afff0c6",
+          "binary_sha256": "ac0323433c2853ec3fb978c611430c5b3dc5d43c58d1a1ec031b00ab572beb60"
+        }
+      }
+    },
+    "vale": {
+      "version": "3.9.1",
+      "base_url": "https://github.com/errata-ai/vale/releases/download/v3.9.1",
+      "platforms": {
+        "darwin-arm64": {
+          "filename": "vale_3.9.1_macOS_arm64.tar.gz",
+          "sha256": "3d4b5038332784d9828cc6c31b55277603c9e210cc503979bbf4e6e2659aeaa9",
+          "binary_sha256": "6734446a0b792eb6f6e3995659aba59b2838aaeef0e3637a7fd2229480a1247f"
+        },
+        "linux-amd64": {
+          "filename": "vale_3.9.1_Linux_64-bit.tar.gz",
+          "sha256": "fbc2eb47d0b8c50220ed1a2c5c611fbe0904ed567d638143d482016a18fd2db0",
+          "binary_sha256": "efeb3a025c7364db8a3d3651be9689e8e54fd2fba4481a9b8870ce64b0def4a8"
+        },
+        "linux-arm64": {
+          "filename": "vale_3.9.1_Linux_arm64.tar.gz",
+          "sha256": "82facb1c73d65dbfeb40d2c04dcad6d40415a25deaeaf38bb296a9c04c23b86c",
+          "binary_sha256": "0c53b79c413df49b5c25610510e2fbb8e387ab041ce96c17a46e25b59e4b1415"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "occt": {
+      "repository": "https://github.com/Open-Cascade-SAS/OCCT.git",
+      "commit": "b8f597c677811d1f9f4d8a97f5ae2825c0353a42",
+      "version": "V8_0_1",
+      "description": "Open CASCADE Technology — the C++ CAD kernel"
+    },
+    "rapidjson": {
+      "repository": "https://github.com/Tencent/rapidjson.git",
+      "commit": "24b5e7a8b27f42fa16b96fc70aade9106cf7102f",
+      "version": "post-1.1.0 (master)",
+      "description": "JSON parser/generator for C++ (header-only)"
+    },
+    "freetype": {
+      "repository": "https://github.com/freetype/freetype.git",
+      "commit": "de8b92dd7ec634e9e2b25ef534c54a3537555c11",
+      "version": "VER-2-13-0",
+      "description": "Font rendering library"
+    },
+    "emscripten": {
+      "repository": "https://github.com/emscripten-core/emsdk.git",
+      "commit": "dfb9d1a46c3bb8f52e1e6324be23123b9d73c190",
+      "docker_image": "emscripten/emsdk:6.0.5",
+      "docker_digest": "sha256:76a44fff907397784decc435115d07fcb9587a4f1504977f39f3745e538e3a1e",
+      "emsdk_version": "6.0.5",
+      "description": "Emscripten SDK for compiling C++ to WebAssembly"
+    },
+    "llvm17": {
+      "version": "17.0.6",
+      "description": "Vendored prebuilt LLVM 17 — parse-side libc++ + clang resource headers for libclang 18.1.1 (N-1 compat window per libc++ support policy).",
+      "base_url": "https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.6",
+      "platforms": {
+        "darwin-arm64": {
+          "filename": "clang+llvm-17.0.6-arm64-apple-darwin22.0.tar.xz",
+          "sha256": "1264eb3c2a4a6d5e9354c3e5dc5cb6c6481e678f6456f36d2e0e566e9400fcad"
+        },
+        "linux-x86_64": {
+          "filename": "clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04.tar.xz",
+          "sha256": "884ee67d647d77e58740c1e645649e29ae9e8a6fe87c1376be0f3a30f3cc9ab3"
+        },
+        "linux-aarch64": {
+          "filename": "clang+llvm-17.0.6-aarch64-linux-gnu.tar.xz",
+          "sha256": "6dd62762285326f223f40b8e4f2864b5c372de3f7de0731cb7cd55ca5287b75a"
+        }
+      }
+    }
+  }
+}

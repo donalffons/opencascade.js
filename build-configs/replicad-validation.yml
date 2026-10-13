@@ -1,0 +1,19 @@
+mainBuild:
+  name: replicad_single.js
+  bindings:
+    # Downstream Replicad compatibility fixture. These ten OCCT typedef aliases
+    # are the exact set that exposed the historic direct-symbol/template-alias
+    # split. Keep this focused: the full Replicad product surface is owned by
+    # its repository, while this fixture pins the OCJS linker contract it needs.
+    - symbol: TColgp_Array1OfPnt
+    - symbol: TColgp_Array1OfPnt2d
+    - symbol: TColgp_Array1OfDir
+    - symbol: TColgp_Array1OfVec
+    - symbol: TColgp_Array2OfPnt
+    - symbol: TColStd_Array1OfBoolean
+    - symbol: TColStd_Array1OfInteger
+    - symbol: TColStd_Array1OfReal
+    - symbol: Poly_Array1OfTriangle
+    - symbol: TopTools_ListOfShape
+  emccFlags:
+    - --emit-symbol-map

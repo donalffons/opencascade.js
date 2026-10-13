@@ -1,0 +1,226 @@
+---
+title: Multi-threaded build
+description: Select pthread-enabled OCCT for parallel meshing and boolean workloads with createInstance.
+---
+
+The npm package ships **two** pre-built variants of one binding set:
+
+| Variant | Binary | When to use |
+| --- | --- | --- |
+| `single` | `opencascade_single.wasm` | Embeddable widgets, one-op-per-click UX, no COOP/COEP |
+| `multi` | `opencascade_multi.wasm` | Batch mesh/boolean, STEP→glTF pipelines, COOP/COEP-isolated surfaces |
+
+Ask for the threaded one by name:
+
+```typescript
+import { createInstance } from 'libcascade/multi/init';
+
+const oc = await createInstance();
+```
+
+`createInstance` owns the worker plumbing — the glue self-reference Emscripten
+spawns pthread workers from, Node `file:` URL → path conversion, and OCCT
+thread-pool sizing. The import path fixes the variant and excludes the
+single-threaded glue from the bundle. Pass `threadCount` to cap OCCT's default
+pool.
+
+Both variants share one `OpenCascadeInstance` type, so a shape from either is
+assignable wherever the other is expected. See
+[Bundler & locateFile](./bundler-locatefile#multi-threaded-variant) for Vite,
+Next.js, and Node recipes, and [Entry points](../reference/libcascade-api/init-function)
+for the full options contract.
+
+OCCT can drive multiple worker threads for mesh and boolean kernels once the pthread-enabled wasm is loaded. That requires hard browser prerequisites (`SharedArrayBuffer` + cross-origin isolation) in the browser; Node 22+ exposes `SharedArrayBuffer` without extra headers.
+
+## When to consider it
+
+| Measured workload | Speedup with 12 workers | Worth the COOP/COEP cost? |
+|---|---:|---|
+| STEP import + incremental mesh | 1.33× | Yes, for visualisation pipelines |
+| Boolean cut grid | 1.81× | Yes, for batch CAD operations |
+| Incremental mesh | 1.06× | Only after profiling the real assembly |
+| Tiny two-shape boolean fuse | 0.44× | No — pool overhead dominates |
+| Complete 11-sample suite | 1.24× | Yes, for sustained mixed workloads |
+
+If your app does one boolean and one mesh per user interaction, single-threaded
+is fine. If you batch hundreds of operations, threading pays off.
+
+See [BENCHMARKS.md](https://github.com/taucad/opencascade.js/blob/main/BENCHMARKS.md) for ST vs MT numbers on a representative workload mix.
+
+## Browser prerequisites
+
+Pthread builds use `SharedArrayBuffer`, which browsers gate behind
+**cross-origin isolation**. Your server must send:
+
+```http
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Embedder-Policy: require-corp
+```
+
+…on every page that imports the threaded wasm. Without these headers, browsers
+refuse to expose `SharedArrayBuffer` and the wasm fails to instantiate.
+
+Node 22+ exposes `SharedArrayBuffer` unconditionally — no headers needed.
+
+Under Vite, also set `worker: { format: 'es' }`: Emscripten's pthread workers
+are ES modules with top-level await, which the default `iife` worker format
+cannot emit.
+
+## Triggering OCCT parallelism
+
+OCCT respects its own `OSD_Parallel` switches once threads exist. Two
+levels of activation are available — **per-call** (granular, opt-in at
+each site) and **global** (sets a process-wide default).
+
+### Global activation — call once at startup
+
+The cleanest option: flip the OCCT-wide defaults once, then any subsequent
+call to a parallel-aware API inherits the toggle without an extra argument.
+
+```typescript
+// Run once after `await createInstance()` from `libcascade/multi/init`.
+oc.BOPAlgo_Options.SetParallelMode(true);                 // booleans
+oc.BRepMesh_IncrementalMesh.SetParallelDefault(true);     // meshing
+
+// Optional: inspect the lazily-created pool. -1 means "use all logical
+// processors" and is already the default.
+const pool = oc.OSD_ThreadPool.DefaultPool(-1);
+console.log(pool.NbThreads());
+```
+
+After the two global toggles every `new BRepMesh_IncrementalMesh(shape, lin)` and
+every `BRepAlgoAPI_*` automatically fans out across the pool. **No
+per-call argument required.**
+
+OCCT's default pool already uses `NbLogicalProcessors`, and its default
+per-launch fan-out is the full pool. Only call `Init` or
+`SetNbDefaultThreadsToLaunch` when deliberately capping concurrency, and do
+so before the pool's first job.
+
+### Per-call activation — granular
+
+If you want to keep the global default off and opt in selectively:
+
+```typescript
+using mesh = new oc.BRepMesh_IncrementalMesh(
+  shape,
+  0.1,    // linear deflection
+  false,  // not relative
+  0.5,    // angular deflection
+  true,   // inParallel — flips multi-threading on
+);
+```
+
+```typescript
+using bop = new oc.BRepAlgoAPI_BuilderAlgo();
+bop.SetRunParallel(true);
+// ... AddArgument / AddTool / Build()
+```
+
+`SetRunParallel(false)` is the default for per-instance APIs. libcascade does
+not auto-enable it unless you flip the global default above.
+
+### Other parallel-aware APIs
+
+Beyond mesh and boolean, the following APIs accept a parallel flag and
+benefit when the pool is sized correctly:
+
+| API | Activation |
+|---|---|
+| `BRepExtrema_DistShapeShape` | `.SetMultiThread(true)` |
+| `BRepCheck_Analyzer` | ctor `(shape, /*isParallel*/ true)` |
+| `RWGltf_CafReader` | `.SetParallel(true)` (glTF **read**) |
+| `RWGltf_CafWriter` | `.SetParallel(true)` (glTF **write**) |
+| `BVH_Builder` | `.SetParallel(true)` |
+| `BRepLib_ValidateEdge`, `BRepLib_CheckCurveOnSurface`, `GeomLib_CheckCurveOnSurface` | `.SetParallel(true)` — used transitively by `BRepCheck_Analyzer` |
+| `BRepFill_AdvancedEvolved` | already parallel by default — call `SetParallelMode(false)` to disable |
+
+**STEP/IGES readers (`STEPControl_Reader`, `IGESControl_Reader`) and
+`BRepBuilderAPI_Sewing` are sequential** in current OCCT — there is no
+parallel flag to flip.
+
+## Costs
+
+- **COOP/COEP headers** lock you out of third-party iframes that don't opt in
+  (e.g. embedded Stripe checkout, some auth providers). Subdomain-isolate
+  your CAD surface if that matters.
+- **Thread spawn time** added 188 ms in the 12-worker benchmark, scaling with pool size.
+  Memoise the `createInstance()` Promise.
+- **Memory** scales with `PTHREAD_POOL_SIZE × STACK_SIZE`. With the
+  shipped `navigator.hardwareConcurrency` sizing, a 12-core box
+  reserves ~96 MB of stack on top of `INITIAL_MEMORY`.
+- **Debuggability** drops — `console.log` from worker threads doesn't always
+  reach the main thread.
+
+## Performance notes
+
+Pthread + `-sALLOW_MEMORY_GROWTH=1` carries a documented Emscripten
+performance penalty. A typed-array view can become stale after
+`memory.grow`, so advanced pointer interop must create fresh views from
+`oc.wasmMemory.buffer` after calls that may allocate. The shipped binaries
+already mitigate the worst of this:
+
+- **mimalloc** is wired into the WASM allocator so per-thread allocation
+  bypasses the global malloc contention point. libcascade supplies OCCT's
+  optional `mallinfo` compatibility shim, so custom builds retain strict
+  undefined-symbol checking with either mimalloc or Emscripten's allocators.
+- **Create one typed-array view per allocation-free batch**. Do not retain it
+  across a call that may grow memory:
+
+```typescript
+const heap = new Uint8Array(oc.wasmMemory.buffer);
+for (let i = 0; i < n; i++) {
+  heap[buf + i] = bytes[i];
+}
+```
+
+### `toResizableBuffer()` support matrix (August 2026)
+
+The newer [`WebAssembly.Memory.prototype.toResizableBuffer()`](https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/JavaScript_interface/Memory)
+API lets a pthread-enabled binary keep typed-array views valid across growth
+entirely by returning a `SharedArrayBuffer` that automatically tracks
+`memory.grow`. The shipped `libcascade/multi` binary keeps
+`-sGROWABLE_ARRAYBUFFERS=0` (the default) because runtime support is uneven:
+
+| Runtime | Supports `toResizableBuffer()` |
+|---|---|
+| Chrome 144+ / Edge 144+ | Yes |
+| Firefox 154+ | Yes |
+| Firefox ≤153 | **No** — [WebAssembly worker transfer can hang](https://bugzilla.mozilla.org/show_bug.cgi?id=2021136) despite exposing the API |
+| Safari 26.2+ (desktop + iOS) | Yes |
+| Node.js 22 / 24 | **No** — `TypeError: wasmMemory.toResizableBuffer is not a function` |
+| Bun (all current) | **No** |
+| Deno (all current) | **No** |
+| Samsung Internet | **No** (as of May 2026) |
+
+The shipped `multi` variant therefore keeps `GROWABLE_ARRAYBUFFERS` off so the
+binary stays compatible with Node-based test runners, Bun, Deno, and the legacy
+mobile browser. A custom build can add a
+[browser-only variant](/docs/toolchain/guides/multi-threading#browser-only-mt-build)
+for deployments that have audited their runtime matrix and want the
+resizable-buffer fast path.
+
+For most consumers the cost is invisible — OCCT's per-call cost on
+mesh/boolean dominates the typed-view refresh cost by 2-3 orders of magnitude.
+Reach for the browser-only variant only when you've profiled and the
+JS↔WASM boundary is on the hot path.
+
+## When NOT to ship threaded
+
+- You can't (or won't) set COOP/COEP headers — most CDNs/marketing sites can't.
+- Your workload is one shape per second — Amdahl's law eats the speedup.
+- Your target users include Safari ≤16 — older Safari refused
+  `SharedArrayBuffer` in cross-origin-isolated contexts.
+
+For most consumers the single-threaded variant wins on simplicity. Import its
+fixed initializer:
+
+```typescript
+import { createInstance } from 'libcascade/single/init';
+
+const oc = await createInstance();
+```
+
+## Custom builds
+
+Need a smaller threaded binary (trimmed symbol list) or different Emscripten settings? See [Toolchain — Custom multi-threaded build](/docs/toolchain/guides/multi-threading) for the config recipe and `PTHREAD_POOL_SIZE` rationale.

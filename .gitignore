@@ -1,7 +1,70 @@
 /build/*
+/tools/*
+!/tools/eslint-plugin/
+!/tools/eslint-plugin/**
 __pycache__
 *.pyc
 node_modules
 build-output.log
 pull-stages-output.log
 /occt-src/
+
+# Build artifacts (output of build-wasm.sh placed alongside YAML configs)
+*.wasm
+*.wasm.symbols
+*.js.symbols
+/cache/
+build-configs/*.js
+build-configs/*.d.ts
+build-configs/provenance.json
+build-configs/*.provenance.json
+build-configs/*.build-manifest.json
+
+# Experiments — keep sources, ignore regenerated build outputs and bench results
+experiments/**/dist-*/
+experiments/**/build-config/dist/
+experiments/**/results/
+experiments/**/results-*.json
+experiments/**/results.json
+experiments/**/reports/*.json
+experiments/**/profiles/*.cpuprofile
+experiments/option-d-boundary-narrowing/experiment.d.ts
+experiments/option-d-comprehensive-poc/experiment.d.ts
+
+# Stray build/smoke/docker logs left in the repo root (regeneration + smoke runs)
+/build-*.log
+/smoke-*.log
+/docker-*.log
+/regression.log
+
+# Nx
+.nx/*
+!.nx/version-plans/
+!.nx/version-plans/**
+
+# Docs API data is derived atomically from the installed package's
+# `ocjs/api-reference.json` feed by `nx run ocjs:docs-sync`.
+docs-site/data/
+docs-site/data.staging-*/
+docs-site/data.backup-*/
+/nx-build-*.log
+
+# Project-local Python (scripts/clone-deps.sh)
+/.venv/
+/.ci-tools/
+/.uv-python/
+
+# Self-contained dependencies (Phase 2)
+/deps/
+
+# Build output
+/dist/
+packages/toolchain/dist/
+
+# Docker build-flow test scratch (per-test workdirs + manual trial dir)
+/tests/docker/.work/
+/tests/docker/.trial/
+.vercel
+
+# `libcascade build` scratch: rendered ymls + raw container output
+.libcascade/

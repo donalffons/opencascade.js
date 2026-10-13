@@ -1,0 +1,23 @@
+{
+  "name": "libcascade-vite-three-glb-multi",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "description": "v3 starter: libcascade/multi with COOP/COEP, parallel mesh/boolean, GLB export, three.js viewer.",
+  "scripts": {
+    "dev": "vite --port 3003",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173 --host 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "smoke": "node ../_shared/smoke-render.mjs --url http://localhost:4173 --canvas '#libcascade-canvas' --screenshot smoke.png"
+  },
+  "dependencies": {
+    "libcascade": "file:../..",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.184.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.13"
+  }
+}

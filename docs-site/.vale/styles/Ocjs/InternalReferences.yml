@@ -1,0 +1,17 @@
+extends: existence
+message: "Internal planning reference '%s' means nothing to a reader outside the project — describe the shipped behaviour."
+level: error
+ignorecase: true
+nonword: true
+tokens:
+  - 'docs/research/'
+  - '/Users/[\w./-]+'
+  - '\bblueprints?\b'
+  - '\b(the|this) audits?\b'
+  - '\brecommendation [A-Z]?\d+(\.\d+)?\b'
+  - '\b(wave )?W\d+(\.\d+)?\b(?!C)'
+  - '\bR\d+(\.\d+)?\b'
+  - '\bphase[-\s]+\d+(\.\d+)?\b'
+  - '\bfinding[-\s]+\d+(\.\d+)?\b'
+  - '\b(matrix[-\s]+)?row[-\s]+\d+(\.\d+)?\b'
+  - '\brule[-\s#]+\d+(\.\d+)?\b'

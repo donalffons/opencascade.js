@@ -1,0 +1,78 @@
+{
+  "schema": 2,
+  "shard": "FixtureModule__TKFixture__Fix",
+  "generatedAt": "2026-05-14T10:46:52.392Z",
+  "classes": [
+    {
+      "name": "Fix_Point",
+      "kind": "class",
+      "summary": "Sample point with x and y coordinates.",
+      "extends": [],
+      "ancestors": [],
+      "constructors": [
+        {
+          "name": "constructor",
+          "signature": "(x: number, y: number)",
+          "parameters": [
+            { "name": "x", "type": "number", "optional": false, "rest": false },
+            { "name": "y", "type": "number", "optional": false, "rest": false }
+          ],
+          "returnType": "Fix_Point",
+          "comment": "Constructs a fix point."
+        }
+      ],
+      "staticMethods": [],
+      "instanceMethods": [
+        {
+          "name": "translate",
+          "signature": "(dx: number, dy: number): void",
+          "parameters": [
+            { "name": "dx", "type": "number", "optional": false, "rest": false },
+            { "name": "dy", "type": "number", "optional": false, "rest": false }
+          ],
+          "returnType": "void",
+          "comment": "Translate by (dx, dy)."
+        },
+        {
+          "name": "scale",
+          "signature": "(s: number): void",
+          "parameters": [
+            { "name": "s", "type": "number", "optional": false, "rest": false }
+          ],
+          "returnType": "void",
+          "comment": "Scale by s."
+        },
+        {
+          "name": "scale",
+          "signature": "(sx: number, sy: number): void",
+          "parameters": [
+            { "name": "sx", "type": "number", "optional": false, "rest": false },
+            { "name": "sy", "type": "number", "optional": false, "rest": false }
+          ],
+          "returnType": "void",
+          "comment": "Scale by independent sx and sy."
+        }
+      ],
+      "properties": []
+    },
+    {
+      "name": "Fix_Vec",
+      "kind": "class",
+      "summary": "Vector derived from {@link Fix_Point | `Fix_Point`}.",
+      "extends": ["Fix_Point"],
+      "ancestors": ["Fix_Point"],
+      "constructors": [],
+      "staticMethods": [],
+      "instanceMethods": [
+        {
+          "name": "magnitude",
+          "signature": "(): number",
+          "parameters": [],
+          "returnType": "number",
+          "comment": "Returns the vector magnitude."
+        }
+      ],
+      "properties": []
+    }
+  ]
+}

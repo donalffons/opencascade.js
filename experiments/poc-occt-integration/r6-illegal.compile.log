@@ -1,0 +1,33 @@
+In file included from bindings-r6-illegal-ref.cpp:14:
+In file included from /Users/rifont/git/tau/repos/assimpjs/emsdk/upstream/emscripten/cache/sysroot/include/emscripten/bind.h:16:
+In file included from /Users/rifont/git/tau/repos/assimpjs/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/functional:557:
+In file included from /Users/rifont/git/tau/repos/assimpjs/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__functional/boyer_moore_searcher.h:24:
+In file included from /Users/rifont/git/tau/repos/assimpjs/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/array:566:
+In file included from /Users/rifont/git/tau/repos/assimpjs/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/algorithm:2064:
+/Users/rifont/git/tau/repos/assimpjs/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/optional:602:17: error: static assertion failed due to requirement '!is_reference_v<gp_Pnt &>': instantiation of optional with a reference type is ill-formed
+  602 |   static_assert(!is_reference_v<value_type>, "instantiation of optional with a reference type is ill-formed");
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+bindings-r6-illegal-ref.cpp:23:70: note: in instantiation of template class 'std::optional<gp_Pnt &>' requested here
+   23 |   function("r6_illegal", optional_override([](std::optional<gp_Pnt&> out) {
+      |                                                                      ^
+In file included from bindings-r6-illegal-ref.cpp:14:
+In file included from /Users/rifont/git/tau/repos/assimpjs/emsdk/upstream/emscripten/cache/sysroot/include/emscripten/bind.h:24:
+/Users/rifont/git/tau/repos/assimpjs/emsdk/upstream/emscripten/cache/sysroot/include/emscripten/val.h:838:16: error: no viable conversion from returned value of type 'gp_Pnt' to function return type 'std::optional<gp_Pnt &>'
+  838 |         return optional.as<T>();
+      |                ^~~~~~~~~~~~~~~~
+/Users/rifont/git/tau/repos/assimpjs/emsdk/upstream/emscripten/cache/sysroot/include/emscripten/bind.h:365:42: note: in instantiation of member function 'emscripten::internal::BindingType<std::optional<gp_Pnt &>>::fromWireType' requested here
+  365 |             internal::BindingType<Args>::fromWireType(args)...
+      |                                          ^
+/Users/rifont/git/tau/repos/assimpjs/emsdk/upstream/emscripten/cache/sysroot/include/emscripten/bind.h:438:63: note: in instantiation of member function 'emscripten::internal::Invoker<emscripten::internal::rvp::default_tag, void, std::optional<gp_Pnt &>>::invoke' requested here
+  438 |     auto invoke = Invoker<ReturnPolicy, ReturnType, Args...>::invoke;
+      |                                                               ^
+bindings-r6-illegal-ref.cpp:23:3: note: in instantiation of function template specialization 'emscripten::function<void, std::optional<gp_Pnt &>>' requested here
+   23 |   function("r6_illegal", optional_override([](std::optional<gp_Pnt&> out) {
+      |   ^
+/Users/rifont/git/tau/repos/assimpjs/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/optional:583:36: note: candidate constructor (the implicit copy constructor) not viable: no known conversion from 'gp_Pnt' to 'const optional<gp_Pnt &> &' for 1st argument
+  583 | class _LIBCPP_DECLSPEC_EMPTY_BASES optional
+      |                                    ^~~~~~~~
+/Users/rifont/git/tau/repos/assimpjs/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/optional:583:36: note: candidate constructor (the implicit move constructor) not viable: no known conversion from 'gp_Pnt' to 'optional<gp_Pnt &> &&' for 1st argument
+  583 | class _LIBCPP_DECLSPEC_EMPTY_BASES optional
+      |                                    ^~~~~~~~
+2 errors generated.

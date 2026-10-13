@@ -1,0 +1,34 @@
+---
+title: Package
+description: Consume libcascade from npm — render, export, integrate.
+---
+
+import { ApiClassCount } from '../../../components/api-class-count';
+
+Install `libcascade`, import the initialised instance, build shapes with the
+full OCCT surface, export STEP or GLB, and integrate into your bundler of
+choice.
+
+<Cards>
+  <Card title="Quickstart — npm" href="/docs/package/getting-started/quick-start-npm">
+    Install the package, render a box, export STEP in 4 minutes.
+  </Card>
+  <Card title="First Shape Tutorial" href="/docs/package/getting-started/first-shape-tutorial">
+    Build a filleted box and render it in three.js end-to-end.
+  </Card>
+  <Card title="API Reference" href="/docs/package/api">
+    All <ApiClassCount /> bound classes — searchable, fragment-stable, LLM-ingestible.
+  </Card>
+  <Card title="FAQ" href="/docs/package/getting-started/faq">
+    Project lineage, maintenance, and how to contribute.
+  </Card>
+</Cards>
+
+## What's in V3
+
+- ESM-only build — import the ready instance from the root, or `createInstance()` it yourself. No CommonJS fallback.
+- Suffix-free symbol generation — `gp_Pnt` (not `gp_Pnt_3`); overloads dispatched in C++.
+- `using` syntax for every disposable shape — RBV containers integrate `Symbol.dispose`.
+- Re-architected exception channel — catch JS errors instead of opaque `WebAssembly.Exception`.
+
+See `CHANGELOG.md` in the repo for the full release notes.

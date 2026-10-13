@@ -1,0 +1,46 @@
+# tests/docker/fixtures/multi-threaded.yml
+#
+# Custom multi-threaded build exercised by the Docker build-flow test against
+# the `:multi-threaded` image. Modern port of the legacy
+# `test/customBuilds/multi-threaded.yml`: a trimmed symbol set sufficient to
+# build a compound of spheres and mesh it in parallel. The emccFlags mirror the
+# multi-threading delta from `build-configs/full_multi.yml` (pthreads + shared
+# memory) so the produced module pre-spawns a worker pool and reports parallel
+# mode at runtime.
+mainBuild:
+  name: customBuild.multi-threaded.js
+  bindings:
+    - symbol: BRepPrimAPI_MakeSphere
+    - symbol: BRepPrimAPI_MakeOneAxis
+    - symbol: BRepBuilderAPI_MakeShape
+    - symbol: BRepBuilderAPI_Command
+    - symbol: BRepMesh_IncrementalMesh
+    - symbol: BRepMesh_DiscretRoot
+    - symbol: Standard_Transient
+    - symbol: Message_ProgressRange
+    - symbol: TopoDS_Compound
+    - symbol: TopoDS_Shape
+    - symbol: gp_Pnt
+    - symbol: BRep_Builder
+    - symbol: TopoDS_Builder
+    - symbol: OSD_ThreadPool
+  emccFlags:
+    - -fwasm-exceptions
+    - -sEXPORT_ES6=1
+    - -sMODULARIZE
+    - -sALLOW_MEMORY_GROWTH=1
+    - -sEXPORTED_RUNTIME_METHODS=["FS","getExceptionMessage","incrementExceptionRefcount","decrementExceptionRefcount"]
+    - -sINITIAL_MEMORY=128MB
+    - -sMAXIMUM_MEMORY=4GB
+    - --no-entry
+    - -sSTACK_SIZE=8388608
+    - -sWASM_BIGINT
+    - -msimd128
+    - -O3
+    - --emit-symbol-map
+    # Multi-threading delta (see build-configs/full_multi.yml):
+    - -pthread
+    - -sUSE_PTHREADS=1
+    - -sPTHREAD_POOL_SIZE=navigator.hardwareConcurrency
+    - -sSHARED_MEMORY=1
+    - -sENVIRONMENT=web,worker,node

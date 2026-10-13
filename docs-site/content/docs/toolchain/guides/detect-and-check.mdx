@@ -1,0 +1,134 @@
+---
+title: detect and check
+description: Seed a bindings list from your source, then guard it in CI — with the caveats that make both commands honest.
+---
+
+Two commands answer one question — *which OCCT symbols does this code actually
+reference?* — in the two directions that matter.
+
+```bash
+npx libcascade detect src    # onboarding: seed a bindings list
+npx libcascade check src     # CI: fail when a referenced symbol is not bound
+```
+
+<Callout type="info">
+  **Neither command is a size tool, and neither ever removes anything.** Read
+  the caveats below before acting on either output. Both are marked
+  experimental.
+</Callout>
+
+## Why they exist: the failure asymmetry
+
+A `bindings` list that is missing a symbol **links successfully**. The wasm
+builds, the manifest can pass, the package publishes — and the first time your
+code touches the missing class it throws a `BindingError` at runtime.
+`libcascade build` cannot catch that. Only running the code path can.
+
+`check` converts that failure class into a build-time error. That is the whole
+value proposition, and it is a correctness one, not a size one.
+
+## Why they are not size tools
+
+The measurement: dropping **14% of the symbols bought 0.9% of brotli size**.
+The ~5,400 embind registrations are GC roots, so unbound symbols free glue, not
+kernel code. (`--gufa`, the obvious next lever, is a measured size *regression*
+on top of that.)
+
+Trimming a binding set is still worth doing for the reasons in
+[Trim symbols](./trim-symbols) — startup work, honest dependency surface — but
+do not expect `detect` to hand you megabytes.
+
+## `detect` — the first bindings list
+
+Writing the initial `bindings` array is the scariest step of custom-build
+onboarding. `detect` scans your source for symbol references, closes over the
+symbol catalog, and prints a paste-ready fragment with per-symbol provenance:
+
+```bash
+npx libcascade detect src lib
+```
+
+```text
+  bindings: [
+    'BRepBuilderAPI_MakeShape', // closure: base of BRepPrimAPI_MakeBox
+    'BRepPrimAPI_MakeBox',      // seed: src/shapes.ts:41
+    'gp_XYZ',                   // closure: member type of gp_Pnt
+  ],
+```
+
+`--json` emits the same result machine-readably.
+
+The output is a **starting set, not a minimal one**. The scan cannot see symbols
+reserved for external callers or referenced only by custom C++ files. Review
+every consumer. Never delete the difference from an existing config
+automatically.
+
+## `check` — the drift guard
+
+```bash
+npx libcascade check src
+```
+
+`check` recomputes the referenced set from your source and fails when any of it
+is missing from `bindings ∪ customBindings[].symbols`, naming each symbol, the
+first `file:line` that references it, and the fix:
+
+```text
+libcascade check: 1 referenced symbol is not bound by libcascade.config.ts.
+
+  ChFi2d_FilletAPI
+      first referenced at src/fillet.ts:13
+```
+
+It exits non-zero, so it belongs in CI next to your typecheck:
+
+```yaml title=".github/workflows/ci.yml"
+- run: npx tsc --noEmit
+- run: npx libcascade check src
+```
+
+Symbols bound under an OCCT typedef alias (`TColgp_Array1OfPnt` for
+`NCollection_Array1_gp_Pnt`) count as bound. Names that are not in the catalog
+at all — your `customBindings` symbols, Emscripten runtime members such as
+`oc.FS`, plain typos — are never failures. `--verbose` lists them as ignored
+along with the scan's caveats.
+
+## How the scan works
+
+| Rule | Behaviour |
+| --- | --- |
+| Strong signal | `oc.Symbol` (also `this.oc.Symbol`) |
+| Weak signal | any bare identifier that exactly matches a catalog name **and contains an underscore** — this is what catches type-only imports such as `import type { TopoDS_Shape }` |
+| Single-word names | `Draft`, `Expr`, `BRepTools` and friends are excluded from bare matching because they collide with ordinary identifiers. Write them as `oc.BRepTools` to be seen. |
+| Overload suffixes | `Geom2d_Line_1` resolves to `Geom2d_Line`, but only when the full name is not itself a symbol |
+| Excluded paths | `.d.ts`, `node_modules`, `dist`, `build`, `out`, `coverage` |
+| Comments | blanked before matching, so a comment naming a deliberately-omitted class is not a reference |
+| Strings | scanned — which is what makes `oc['gp_Pnt']` visible |
+| Builtins | `OCJS`, `TopoDS` and friends are registered unconditionally, so they are never detected or demanded |
+
+`.d.ts` files are excluded for a specific reason: an OCCT `.d.ts` declares every
+symbol, which would make the scan vacuous.
+
+## Limits you must not forget
+
+The scanner is **regex and token based, not AST based** — the toolchain's
+runtime dependencies stay at two small packages. It therefore cannot see:
+
+- dynamic access — `oc[name]` where `name` is a variable
+- names built by concatenation
+- symbols only your C++ wrapper files call
+- anything reached through a dependency's compiled code
+
+So:
+
+- **`check` passing is not a proof.** It proves no symbol is missing from the
+  *written* references it can see. An unexercised code path can still hit a
+  runtime `BindingError`.
+- **`detect` output is a seed.** It is not an audit of what you could drop.
+- **Neither command edits your config.** They print; you decide.
+
+## Related
+
+- [CLI reference](../reference/cli) — flags and exit behaviour.
+- [Trim symbols](./trim-symbols) — the bindings list as a design signal.
+- [Config reference](../reference/config) — where the list lives.

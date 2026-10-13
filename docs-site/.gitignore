@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+.source
+.vercel
+.env*.local
+*.tsbuildinfo
+next-env.d.ts
+
+content/docs/package/api/**
+!content/docs/package/api/.gitkeep
+
+playwright-report
+test-results

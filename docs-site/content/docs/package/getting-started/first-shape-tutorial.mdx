@@ -1,0 +1,88 @@
+---
+title: First Shape Tutorial
+description: Build a filleted box from scratch, render it in three.js, and inspect the OCCT call sites.
+---
+
+This tutorial extends the npm quickstart with explanations of every OCCT type
+involved — useful if you've never touched OCCT before.
+
+## Step 1 — Choose a primitive
+
+`BRepPrimAPI_MakeBox` constructs an axis-aligned box from three lengths.
+
+```typescript
+using box = new oc.BRepPrimAPI_MakeBox(60, 40, 20);
+const shape = box.Shape();
+```
+
+`shape` is a `TopoDS_Shape` — the universal OCCT geometry handle. All booleans,
+fillets, and exports take and return `TopoDS_Shape` instances.
+
+## Step 2 — Walk topology
+
+OCCT shapes are hierarchical: `SOLID → SHELL → FACE → WIRE → EDGE → VERTEX`.
+`TopExp_Explorer` iterates entries of a given kind in declaration order.
+
+```typescript
+using explorer = new oc.TopExp_Explorer(shape, oc.TopAbs_ShapeEnum.TopAbs_EDGE);
+const edges: typeof oc.TopoDS_Edge[] = [];
+while (explorer.More()) {
+  edges.push(oc.TopoDS.Edge(explorer.Current()));
+  explorer.Next();
+}
+```
+
+A box has 12 edges — three groups of 4 parallel edges along each axis.
+
+## Step 3 — Apply a fillet
+
+`BRepFilletAPI_MakeFillet` takes the shape and a per-edge radius. Calling
+`Add(radius, edge)` once per edge marks them for filleting; `Shape()` runs the
+algorithm and returns the result.
+
+```typescript
+using fillet = new oc.BRepFilletAPI_MakeFillet(shape);
+for (const edge of edges) fillet.Add(3, edge);
+const filletedShape = fillet.Shape();
+```
+
+## Step 4 — Tessellate and export
+
+Until you call `BRepMesh_IncrementalMesh`, the shape has no triangulation —
+it's still analytic. The mesher caches per-shape triangulation; pass
+`decreate=true` on the third argument to force regeneration when you change
+tolerance.
+
+```typescript
+using _mesh = new oc.BRepMesh_IncrementalMesh(filletedShape, 0.1, false, 0.5, false);
+```
+
+The two tolerances are **linear** (mm) and **angular** (radians). 0.1 mm linear
+is fine for a 60 mm box; tighten it on small features.
+
+Export via the XCAF path documented in [Export glTF / GLB](../guides/export-gltf)
+to get a GLB your three.js viewer can load.
+
+## Step 5 — Render
+
+The npm quickstart shows the full three.js wiring. The minimal version:
+
+```typescript
+const loader = new GLTFLoader();
+loader.parse(glb.buffer, '', (gltf) => scene.add(gltf.scene));
+```
+
+## What went wrong if…
+
+| Symptom | Likely cause |
+|---|---|
+| `BindingError: ptr<-1>` | You called a method on a disposed object — `using` exited scope earlier than expected |
+| Black canvas, no errors | Camera is inside the shape — set `camera.position.set(100, 100, 100)` |
+| Fillet `Shape()` throws | One of your edges is degenerate; check `edge.Orientation()` |
+| `RWGltf_CafWriter.Perform` returns false | The XCAF doc has no shape attached — verify `ShapeTool.AddShape` succeeded |
+
+## Where to next
+
+- [Memory and disposables](../concepts/memory-and-disposables) for the OCCT memory model in depth.
+- [Two-channel config model](/docs/toolchain/concepts/two-channel-config-model) for compile-time vs link-time config.
+- [BRepPrimAPI](/docs/package/api/modeling-algorithms/tk-prim/b-rep-prim-api) for the primitive surface.

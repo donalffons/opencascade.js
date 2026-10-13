@@ -1,0 +1,51 @@
+---
+title: What is libcascade
+description: One-page concept — what libcascade is, why it exists, and when to reach for it.
+---
+
+libcascade brings the OpenCASCADE Technology kernel — a 30-year-old
+production-grade BRep CAD library — into the WebAssembly runtime. Every public
+OCCT symbol the package configures becomes a TypeScript class with overloaded
+constructors, typed methods, and full `.d.ts` coverage.
+
+The project is developed at
+[`taucad/opencascade.js`](https://github.com/taucad/opencascade.js) and
+published on npm as [`libcascade`](https://www.npmjs.com/package/libcascade). It
+was originally created by Sebastian Alff (`donalffons`) and is not an official
+Open CASCADE Technology distribution.
+
+## Why a CAD kernel in WebAssembly
+
+Browser-native CAD historically meant polygon-only mesh editing. A BRep kernel
+gives you:
+
+- **Exact geometry** — curves and surfaces are analytic, not polygonal. Booleans,
+  fillets, chamfers, threads all run on parametric primitives.
+- **Standards-grade interchange** — read and write STEP (`AP214` / `AP242`), IGES,
+  STL, and GLB out of the box; no external tooling required.
+- **Full feature parity with desktop CAD** — `BRepPrimAPI_*` primitives,
+  `BRepAlgoAPI_*` booleans, `BRepFilletAPI_*` fillets, `XCAF*` for assemblies
+  and materials.
+
+## When to use libcascade
+
+| Use case | Good fit | Bad fit |
+|---|---|---|
+| Parametric CAD app | Yes | — |
+| STEP / IGES interchange | Yes | — |
+| Procedural mesh generation | Yes | three.js or manifold-3d may be lighter |
+| Real-time interactive booleans (>60 fps) | Maybe — measure first | Reach for manifold-3d |
+| Cloud STEP-to-GLB conversion | Yes | — |
+
+## When NOT to use it
+
+- You only need polygon meshes — `three.js` + `manifold-3d` is smaller and faster.
+- You need sub-megabyte wasm — full OCCT is ~40 MB; even trimmed it sits at ~12 MB
+  for a typical "box + boolean + export" surface.
+- You need synchronous-only call sites — every `init` returns a Promise.
+
+## Where to next
+
+- [Quickstart — npm](./quick-start-npm) — render a box in 20 lines of TypeScript.
+- [Trim symbols](/docs/toolchain/guides/trim-symbols) — cut the wasm from 40 MB down to what your app uses.
+- [API Reference](/docs/package/api) — search every bound class and method.

@@ -1,0 +1,65 @@
+---
+title: Visualize shape helper
+description: Reusable shape-to-GLB pipeline extracted from the per-example boilerplate.
+---
+
+Every example in this docs site can inline the XCAF → mesh → GLB → blob URL
+pipeline. This page documents the canonical helper so you can import it once
+instead of copying the boilerplate into every script.
+
+## `visualizeDoc`
+
+Build a GLB blob URL from an XCAF document that already contains tessellated shapes:
+
+```typescript title="lib/visualize.ts"
+import type { OpenCascadeInstance } from 'libcascade';
+
+export const visualizeDoc = async (
+  oc: OpenCascadeInstance,
+  doc: InstanceType<OpenCascadeInstance['TDocStd_Document']>,
+): Promise<string> => {
+  using writer = new oc.RWGltf_CafWriter(new oc.TCollection_AsciiString_2('out.glb'), true);
+  writer.Perform(doc, new oc.TColStd_IndexedDataMapOfStringString(), new oc.Message_ProgressRange());
+
+  const fileName = 'out.glb';
+  const buffer = oc.FS.readFile(fileName, { encoding: 'binary' });
+  oc.FS.unlink(fileName);
+
+  const blob = new Blob([buffer], { type: 'model/gltf-binary' });
+  return URL.createObjectURL(blob);
+};
+```
+
+## `visualizeShapes`
+
+Convenience wrapper — accepts one or more `TopoDS_Shape` values, builds the XCAF
+document, meshes, and returns a GLB blob URL:
+
+```typescript title="lib/visualize.ts"
+import type { OpenCascadeInstance, TopoDS_Shape } from 'libcascade';
+
+export const visualizeShapes = async (
+  oc: OpenCascadeInstance,
+  ...shapes: TopoDS_Shape[]
+): Promise<string> => {
+  using doc = new oc.TDocStd_Document(new oc.TCollection_ExtendedString_1());
+  const shapeTool = oc.XCAFDoc_DocumentTool.ShapeTool(doc.Main()).get();
+
+  for (const shape of shapes) {
+    using mesh = new oc.BRepMesh_IncrementalMesh(shape, 0.1, false, 0.1, false);
+    const newShape = shapeTool.NewShape();
+    shapeTool.SetShape(newShape, shape);
+  }
+
+  return visualizeDoc(oc, doc);
+};
+```
+
+## When to inline vs import
+
+- **First read**: keep the pipeline inline in tutorials so every step is visible.
+- **Production code**: import from a single `lib/visualize.ts` module.
+- **Multi-material assemblies**: build the XCAF document yourself (see
+  [Boolean logo](../examples/boolean-logo) for per-subset PBR assignment).
+
+See also: [Render with three.js](./render-with-three-js).

@@ -1,19 +1,9 @@
-TODO.md
-.dockerignore
-Dockerfile
-README.md
-build-output.log
-pull-stages-output.log
-runAction.sh
-/src/
-/images/
-/doc/
-/build/
-/.vscode/
-/.github/
-/.devcontainer/
-/test/
-/website/
-/typedoc-reference-docs/
-/builds/
-CHANGELOG.md
+# Everything except dist/ is excluded via "files" in package.json.
+# This .npmignore serves as a safety net.
+
+*
+!dist/
+!dist/**
+!LICENSE
+!README.md
+!package.json

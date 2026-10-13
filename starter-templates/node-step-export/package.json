@@ -1,0 +1,27 @@
+{
+  "name": "libcascade-node-step-export",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "description": "v3 starter: headless Node 22+ CLI exporting a STEP AP214 file from libcascade.",
+  "bin": {
+    "libcascade-step": "./bin/libcascade-step.mjs"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "start": "tsx src/main.ts",
+    "smoke": "tsx src/main.ts --shape sphere --radius 10 --out smoke.step && node ./scripts/assert-step-magic.mjs smoke.step"
+  },
+  "dependencies": {
+    "libcascade": "file:../.."
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "tsx": "^4.22.3",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

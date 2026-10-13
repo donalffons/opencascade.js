@@ -1,0 +1,14 @@
+{
+  "v2PatchPath": "libembind-overloading.v2.patch",
+  "v2PatchLines":      483,
+  "v2PatchHunks": 14,
+  "productionPatchLines":      429,
+  "productionPatchHunks": 13,
+  "deltaLines": 54,
+  "deltaHunks": 1,
+  "cleanApply": "clean-apply",
+  "byteIdenticalRoundtrip": "identical",
+  "doubleApplyBehaviour": "loud-fail",
+  "verdict": "v2 patch is deployment-ready: applies cleanly to pristine upstream emscripten, produces a byte-identical libembind to the in-tree snapshot, and double-application is rejected loudly. Gate 4 can drop libembind-overloading.v2.patch into src/patches/ directly.",
+  "allPass": true
+}

@@ -1,0 +1,205 @@
+---
+title: Custom multi-threaded build
+description: Declare a threads variant in libcascade.config.ts, load it with createInstance, and size the pthread pool.
+---
+
+The npm package already ships a pre-built multi-threaded variant — see
+[Package — Multi-threaded build](../../package/guides/multi-threading) for the
+import recipe, COOP/COEP headers, and OCCT activation calls. Build your own
+only when you need:
+
+- A trimmed symbol list.
+- Different link settings (alternative `STACK_SIZE`, `INITIAL_MEMORY`, a capped
+  `PTHREAD_POOL_SIZE`).
+- A browser-only variant with growable array buffers (see below).
+
+## Declare the variant
+
+A threaded build is not a separate config. It is a variant of the same one:
+
+```typescript title="libcascade.config.ts"
+import { defineBuild } from '@libcascade/toolchain';
+
+export default defineBuild({
+  name: 'occt',
+  bindings: ['BRepMesh_IncrementalMesh', 'TopoDS_Shape', 'gp_Pnt'],
+  settings: {
+    MODULARIZE: true,
+    EXPORT_ES6: true,
+    ALLOW_MEMORY_GROWTH: true,
+    MAXIMUM_MEMORY: '4GB',
+    STACK_SIZE: 8_388_608,
+    WASM_BIGINT: true,
+    ENVIRONMENT: ['web', 'worker', 'node'],
+    EXPORTED_RUNTIME_METHODS: [
+      'FS',
+      'wasmMemory',
+      'getExceptionMessage',
+      'incrementExceptionRefcount',
+      'decrementExceptionRefcount',
+    ],
+    EVAL_CTORS: 2,
+  },
+  compilerFlags: { optimize: 'O3', simd: true, exceptions: 'wasm', noEntry: true },
+  variants: [
+    { name: 'single' },
+    {
+      name: 'multi',
+      compilerFlags: { threads: true },
+      settings: {
+        // Constructor evaluation order is non-deterministic under pthread
+        // workers, so the base EVAL_CTORS is removed for this variant.
+        EVAL_CTORS: null,
+        SHARED_MEMORY: true,
+        PTHREAD_POOL_SIZE: 'navigator.hardwareConcurrency',
+      },
+    },
+  ],
+});
+```
+
+`compilerFlags: { threads: true }` renders `-pthread`, and it is the line that
+matters twice over. From it the toolchain infers the variant's `threads`
+capability, which selects the multi-threaded container image at build time and
+becomes the capability the generated `createInstance` probes before handing you
+an instance at load time.
+
+You can still write `requires: ['threads']` explicitly, but you do not need to:
+a build against shared memory cannot instantiate without `SharedArrayBuffer`, so
+the capability follows from the flags. An explicit `requires` is *added to* what
+is inferred — declaring `requires: []` does not opt a threaded build out of its
+own probe, by design.
+
+```bash
+npx libcascade build --variant multi
+npx libcascade assemble
+```
+
+## Load it
+
+```typescript notypecheck
+import { createInstance as createBest } from 'my-occt-package/init';
+import { createInstance as createMulti } from 'my-occt-package/multi/init';
+
+const oc = await createBest();                 // best variant this host supports
+const mt = await createMulti();                // fixed by the import path
+const capped = await createMulti({ threadCount: 4 });
+```
+
+There is no `mainScriptUrlOrBlob` to pass, no `file:` URL to convert for Node
+workers, and no thread-pool call to remember: `createInstance` does all three.
+Importing `multi/init` on a host without cross-origin isolation throws with the
+remediation in the message rather than failing deep inside module
+instantiation.
+
+Browsers gate `SharedArrayBuffer` behind cross-origin isolation, so every page
+loading the threaded binary needs:
+
+```http
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Embedder-Policy: require-corp
+```
+
+Node exposes `SharedArrayBuffer` unconditionally. Under Vite, add
+`worker: { format: 'es' }` — Emscripten's workers are ES modules with top-level
+await and the default `iife` format cannot emit them. Both are covered in
+[Variants and assemble](../concepts/variants-and-assemble).
+
+## Sizing the pool
+
+`PTHREAD_POOL_SIZE: 'navigator.hardwareConcurrency'` is evaluated by the
+generated glue at module-instantiation time, so one binary adapts to whatever
+hardware loads it: an M2 Pro browser gets 12 workers, a mobile device 4–6, a
+Node server whatever `os.cpus().length` reports.
+
+Each worker costs `STACK_SIZE` (8 MB above) at module init, so a 12-core box
+reserves ~96 MB of stack on top of `INITIAL_MEMORY`. To cap it, either wrap the
+expression in the setting or pass `threadCount` at load:
+
+```typescript notypecheck
+const oc = await createMulti({ threadCount: 8 });
+```
+
+`threadCount` sizes OCCT's default pool and raises its launch cap to match. It
+does not shrink the pre-spawned worker pool baked into the binary — that is a
+build-time number.
+
+> ### Why not a small fixed pool size?
+>
+> A round number like `PTHREAD_POOL_SIZE: 4` caps concurrency on larger
+> machines and oversubscribes smaller ones.
+> `'navigator.hardwareConcurrency'` follows the host without a separate build.
+> Add a cap only after benchmarking your workload and target devices; the
+> published benchmark measures 12 workers and does not claim a universal
+> optimum.
+
+## Browser-only MT build
+
+If you can guarantee recent browsers (Chrome / Edge ≥ 144, Firefox ≥ 154,
+Safari ≥ 26.2 — August 2026 baseline) and do **not** need the binary under
+Node.js, Bun, or Deno, add a third variant so typed-array views track memory
+growth:
+
+```typescript notypecheck
+{
+  name: 'multi-browser',
+  compilerFlags: { threads: true },
+  settings: {
+    EVAL_CTORS: null,
+    SHARED_MEMORY: true,
+    PTHREAD_POOL_SIZE: 'navigator.hardwareConcurrency',
+    GROWABLE_ARRAYBUFFERS: true,
+    ENVIRONMENT: ['web', 'worker'],
+  },
+}
+```
+
+Emscripten then wraps the pthread `SharedArrayBuffer` in a
+[resizable `ArrayBuffer` view](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer/grow)
+via `WebAssembly.Memory.prototype.toResizableBuffer()`. Typed arrays created
+from `oc.wasmMemory.buffer` stay valid across memory growth, and the
+`-Wpthreads-mem-growth` advisory disappears.
+
+> ### Runtime support matrix — `toResizableBuffer()` (August 2026)
+>
+> **Supported** — ship browser-variant artefacts to:
+>
+> - Chrome / Edge ≥ 144
+> - Firefox ≥ 154
+> - Safari ≥ 26.2 (desktop + iOS)
+>
+> **NOT supported** — fall back to the plain threads variant for:
+>
+> - Node.js (all current LTS) — throws `TypeError: wasmMemory.toResizableBuffer is not a function` on module init.
+> - Bun and Deno (all current versions).
+> - Samsung Internet and other Chromium derivatives that lag mainline.
+> - Firefox ≤ 153 — WebAssembly worker transfer can hang even when the API exists; [the engine fix ships in Firefox 154](https://bugzilla.mozilla.org/show_bug.cgi?id=2021136).
+>
+> Because Node.js is the dominant test-harness runtime, the shipped
+> multi-threaded build keeps `GROWABLE_ARRAYBUFFERS` off so it stays loadable
+> under `vitest`, `jest`, and other Node-based runners. Opt in only for
+> production payloads served directly to browser clients.
+
+The selector picks the most capable variant whose requirements probe true and
+breaks ties by configuration order, so a browser-only variant needs an explicit
+`createInstance({ variant: 'multi-browser' })` — or the pre-import override
+symbol — rather than automatic selection.
+
+> ### Relaxed SIMD — advanced, non-default
+>
+> Safari 26.x does not support relaxed SIMD. If profiling justifies it for
+> Chromium, Firefox, or Node, add a sibling variant with
+> `rawFlags: ['-mrelaxed-simd']`, retain the baseline binary, and select it
+> yourself whenever relaxed-SIMD validation fails.
+
+## After building
+
+Activation calls, parallel-aware OCCT APIs, and benchmarks are the same as for
+the shipped binary — see
+[Package — Multi-threaded build](../../package/guides/multi-threading).
+
+## Related
+
+- [Variants and assemble](../concepts/variants-and-assemble) — selection, overrides, and the generated entries.
+- [Emscripten settings and flags](./custom-emcc-flags) — the settings baseline.
+- [Trim symbols](./trim-symbols) — shrink the symbol set before building.

@@ -1,0 +1,64 @@
+---
+title: Toolchain
+description: Build a custom OCCT WASM from a typed config — trim symbols, extend with C++, ship reproducible CI.
+---
+
+`@libcascade/toolchain` is the dev-time package for building your own OCCT
+WASM: a typed `libcascade.config.ts`, a CLI that drives the digest-pinned
+container for you, and an assemble step that turns the artifacts into an npm
+package surface.
+
+If you do not need a custom binary, install the prebuilt
+[`libcascade`](/docs/package/getting-started/quick-start-npm) package instead. The
+toolchain is a `devDependency`, it never runs on `postinstall`, and it does
+nothing until you invoke it.
+
+<Cards>
+  <Card title="Quickstart — custom build" href="/docs/toolchain/getting-started/quick-start">
+    Install, write `libcascade.config.ts`, run `libcascade build`, consume `dist/`.
+  </Card>
+  <Card title="Migrate from a yml build" href="/docs/toolchain/getting-started/migrate-from-yaml">
+    Field-by-field mapping from hand-written yml, ytt templating, and `docker run` scripts.
+  </Card>
+  <Card title="Config reference" href="/docs/toolchain/reference/config">
+    Every `defineBuild` field and the generated unions that check it.
+  </Card>
+  <Card title="Variants and assemble" href="/docs/toolchain/concepts/variants-and-assemble">
+    One bindings list, N binaries, one `types.d.ts`, `createInstance`.
+  </Card>
+  <Card title="Trim symbols" href="/docs/toolchain/guides/trim-symbols">
+    Cut the binding set to the surface your app uses.
+  </Card>
+  <Card title="Extend with C++" href="/docs/toolchain/guides/extend-with-cpp">
+    Declare your own wrapper files and the symbols they provide.
+  </Card>
+</Cards>
+
+## What the types check
+
+```typescript notypecheck
+import { defineBuild } from '@libcascade/toolchain';
+
+export default defineBuild({
+  name: 'myapp',
+  bindings: ['BRepPrimAPI_MakeBoox'],       // ✗ did you mean 'BRepPrimAPI_MakeBox'?
+  settings: {
+    INITIAL_MEMORY: '100mb',                // ✗ not a MemorySize
+    ENVIRONMENT: 'web,worker',              // ✗ expects an array of literals
+    EXPORT_ES7: true,                       // ✗ no such -s setting
+  },
+  variants: [{ name: 'single' }],
+});
+```
+
+Symbol names come from a 6,257-literal union generated from the release's own
+API reference. Settings come from the pinned image's own emsdk, with their
+upstream documentation attached. A toolchain version cannot express a config
+its own images cannot build.
+
+## Two channels of configuration
+
+Compile-time `OCJS_*` variables are baked into the published image; link-time
+`settings` and `compilerFlags` are yours. See
+[Two-channel config model](/docs/toolchain/concepts/two-channel-config-model) for why the
+split exists and what it buys.

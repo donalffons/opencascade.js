@@ -1,0 +1,170 @@
+---
+title: Trim symbols
+description: Cut the full binding set down to a consumer-sized one in libcascade.config.ts — workflow, size budget, and a worked example.
+---
+
+import { ApiClassCount } from '../../../../components/api-class-count';
+
+`opencascade_single.wasm` binds <ApiClassCount /> OCCT classes and weighs roughly
+40 MB. Most applications need a fraction of that surface — a STEP round-tripper
+might touch ~120 classes, a glTF mesher fewer. The `bindings` array in
+`libcascade.config.ts` is where you say so.
+
+## Prerequisites
+
+- The [Quickstart](../getting-started/quick-start) run once, so you know your
+  container engine works.
+- A working directory under your home folder on macOS/Windows. Docker Desktop
+  does not share `/tmp` or `/opt` into its VM by default and outputs vanish
+  silently.
+
+## Size budget
+
+Each bound class contributes roughly 15–25 KB to the linked wasm. A reasonable
+target by use case:
+
+| Use case                                       |             Symbols | Approximate wasm size |
+| ---------------------------------------------- | ------------------: | --------------------: |
+| Single-format viewer (read STEP → mesh)        |              80–150 |                2–4 MB |
+| Round-trip pipeline (STEP/IGES edit + write)   |             200–400 |               5–10 MB |
+| Full code-CAD tool (booleans + fillets + sweep) |           600–1,200 |              12–20 MB |
+| Reference / kitchen sink                        | <ApiClassCount /> |                ~40 MB |
+
+Numbers are after `optimize: 'O3'`, `simd: true`, `WASM_BIGINT: true`, and
+`EVAL_CTORS: 2`.
+
+Two things that budget does **not** buy you. First, the returns are
+front-loaded: below a few hundred symbols the embind registration glue, not the
+kernel, is what remains — dropping 14% of a trimmed list measured 0.9% of
+brotli size. Second, a missing symbol is not a build error. It links fine and
+throws a `BindingError` at runtime.
+
+## 1. Seed the list
+
+```bash
+npx libcascade detect src
+```
+
+`detect` scans your source, closes over the symbol catalog, and prints a
+paste-ready fragment with per-symbol provenance. It is an onboarding tool with
+real limits — read [detect and check](./detect-and-check) before you trust the
+output. In particular it is a *starting set*, never a minimal one, and it never
+proposes a removal.
+
+## 2. Put it in the config
+
+```typescript title="libcascade.config.ts"
+import { defineBuild } from '@libcascade/toolchain';
+
+export default defineBuild({
+  name: 'step_roundtrip',
+  bindings: [
+    'IFSelect_ReturnStatus',
+    'Interface_Static',
+    'Message_ProgressRange',
+    'STEPControl_Reader',
+    'STEPControl_StepModelType',
+    'STEPControl_Writer',
+    'Standard_Failure',
+    'TCollection_AsciiString',
+    'TCollection_ExtendedString',
+    'TopExp',
+    'TopExp_Explorer',
+    'TopoDS',
+    'TopoDS_Compound',
+    'TopoDS_Edge',
+    'TopoDS_Face',
+    'TopoDS_Shape',
+    'TopoDS_Shell',
+    'TopoDS_Solid',
+    'TopoDS_Vertex',
+    'TopoDS_Wire',
+    'gp_Ax2',
+    'gp_Dir',
+    'gp_Pnt',
+    'gp_Vec',
+  ],
+  settings: {
+    MODULARIZE: true,
+    EXPORT_ES6: true,
+    ALLOW_MEMORY_GROWTH: true,
+    WASM_BIGINT: true,
+    EXPORTED_RUNTIME_METHODS: [
+      'FS',
+      'getExceptionMessage',
+      'incrementExceptionRefcount',
+      'decrementExceptionRefcount',
+    ],
+    ENVIRONMENT: ['web', 'worker', 'node'],
+  },
+  compilerFlags: { optimize: 'O3', simd: true, exceptions: 'wasm', noEntry: true },
+  variants: [{ name: 'single', settings: { EVAL_CTORS: 2 } }],
+});
+```
+
+You list classes you instantiate or pass around — not their transitive closure.
+Base classes and the `NCollection_*` members of a bound class are
+auto-discovered at codegen time.
+
+Every name is checked against the generated `OcctSymbol` union as you type, so
+a mistake that would otherwise surface as a link failure ten minutes into a
+build is a red squiggle instead.
+
+## 3. Build
+
+```bash
+npx libcascade build
+```
+
+The link reuses the precompiled object files baked into the image for every
+still-bound class, so a trim that strips most of the full surface typically
+completes in 60–180 seconds on a warm image.
+
+Artifacts land in `dist/`:
+
+```text
+dist/step_roundtrip_single.wasm                 # the trimmed binary
+dist/step_roundtrip_single.js                   # Emscripten glue
+dist/step_roundtrip_single.d.ts                 # generated declarations
+dist/step_roundtrip_single.build-manifest.json  # symbol coverage
+```
+
+The build fails if the manifest reports `validation_passed: false`, printing
+the symbols the container could not satisfy. Add them back and re-run.
+
+## 4. Guard the list
+
+```bash
+npx libcascade check src
+```
+
+Run it in CI. A symbol you start referencing but forget to bind is otherwise a
+runtime crash for your users, and a build that succeeds proves nothing about it.
+
+## Iterating
+
+Repeated trims benefit from the engine's own image cache — the image is pulled
+once and verified by digest thereafter. To render and inspect the
+container-side yml without running anything:
+
+```bash
+npx libcascade build --render-only
+```
+
+To iterate against a locally built image instead of the pinned one, see the
+[dev loop](../reference/env-vars#local-image-dev-loop).
+
+## When trimming feeds back into your design
+
+A trimmed binary makes your application's OCCT dependency graph explicit.
+Adding a class to recover from a `check` failure is a signal: either the class
+is genuinely part of your call graph, or your code reaches into an OCCT
+subsystem it does not need. The second case is worth investigating.
+
+## Related
+
+- [Quickstart](../getting-started/quick-start) — end-to-end first custom build.
+- [detect and check](./detect-and-check) — seeding and guarding the list.
+- [Config reference](../reference/config) — every field, including `bindings`.
+- [Bindgen pipeline](../concepts/bindgen-pipeline) — why the trim works without
+  computing a transitive closure.

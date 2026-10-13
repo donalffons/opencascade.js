@@ -1,0 +1,195 @@
+---
+title: Config reference
+description: Every defineBuild field, the generated OcctSymbol and EmccSettings unions behind them, and the load-time validation.
+---
+
+`libcascade.config.ts` is the single source of truth for a custom build. The
+CLI looks for `libcascade.config.ts`, `libcascade.config.js`, or
+`libcascade.config.mjs` in the working directory, or the path you pass to
+`--config`. It is loaded with [jiti](https://github.com/unjs/jiti), so a
+TypeScript config needs no build step.
+
+```typescript
+import { defineBuild } from '@libcascade/toolchain';
+
+export default defineBuild({
+  name: 'myapp',
+  bindings: ['gp_Pnt', 'TopoDS_Shape'],
+  variants: [{ name: 'single' }],
+});
+```
+
+`defineBuild` is an identity function — it returns its argument unchanged. Its
+entire job is to attach types.
+
+## Fields
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `name` | `string` | **Required.** Artifact base name. With no `outputName`, variant `v` produces `<name>_<v>.*`. |
+| `bindings` | `(OcctSymbol \| CustomSymbol)[]` | **Required.** Symbols to expose to JavaScript. Rendered verbatim into the container's `bindings:` list. |
+| `customBindings` | `{ file, symbols, scope? }[]` | Your own C++ files and the symbols each provides. |
+| `settings` | `EmccSettings` | Emscripten `-s` settings. Generated type — see below. |
+| `compilerFlags` | `{ optimize?, simd?, exceptions?, lto?, noEntry?, threads? }` | The closed set of non-`-s` flags worth typing. |
+| `rawFlags` | `string[]` | Escape hatch. Appended verbatim after every typed flag. |
+| `variants` | `{ name, outputName?, requires?, settings?, compilerFlags?, rawFlags? }[]` | **Required, non-empty.** One binary per entry. |
+| `image` | `string` | Container image override. `$LIBCASCADE_IMAGE` wins over it; both skip digest verification. |
+| `generateTypescriptDefinitions` | `boolean` | Defaults to `true`. Set `false` only for fast throwaway iteration — `assemble` needs the `.d.ts`. |
+
+### `bindings`
+
+The element type is the generated `OcctSymbol` union — **6,257** string
+literals covering every OCCT class and enum in the release, every OCCT
+`typedef` alias the bindgen resolves (`TColgp_Array1OfPnt` →
+`NCollection_Array1_gp_Pnt`), and the Embind builtins — **plus** exactly the
+symbols this config's own `customBindings` declare.
+
+```typescript notypecheck
+bindings: ['BRepPrimAPI_MakeBoox'],
+//          ^ Type '"BRepPrimAPI_MakeBoox"' is not assignable…
+//            Did you mean '"BRepPrimAPI_MakeBox"'?
+```
+
+Base classes and `NCollection_*` members of a bound class are auto-discovered
+at codegen time, so the list holds classes you instantiate or pass around, not
+their transitive closure.
+
+The custom-symbol union is inferred **only** from `customBindings[].symbols`.
+That is deliberate: a typo'd OCCT name cannot silently widen the union and type
+itself as valid.
+
+### `customBindings`
+
+```typescript notypecheck
+customBindings: [
+  { file: 'wrappers/mesh-extractor.cpp', symbols: ['MyMeshData', 'MyMeshExtractor'] },
+  { file: 'build-configs/free-functions.cpp', symbols: ['TopoDS_Cast'], scope: 'main' },
+],
+```
+
+| Key | Meaning |
+| --- | --- |
+| `file` | Path to the `.cpp`, resolved relative to the config file's directory. Checked for existence at config load. |
+| `symbols` | The symbols this file provides. These are the only names `bindings` may carry that are not `OcctSymbol`. |
+| `scope` | `'all'` (default) renders the file into the container yml's top-level `additionalCppFiles`; `'main'` renders it into `mainBuild.additionalBindFiles`. |
+
+See [Extend with C++](../guides/extend-with-cpp) for which scope to pick.
+
+### `settings`
+
+`EmccSettings` is generated from the **image's own** emsdk `settings.js`
+(6.0.5) plus emcc's legacy/deprecated tables — 312 settings, each carrying its
+upstream documentation as JSDoc, so hovering a setting in your editor shows
+what emcc says about it. Legacy names such as `USE_PTHREADS` are typed and
+marked `@deprecated`.
+
+Values whose grammar emcc constrains are typed structurally rather than as
+`string`:
+
+| Setting family | Type | Why |
+| --- | --- | --- |
+| `INITIAL_MEMORY`, `MAXIMUM_MEMORY`, `STACK_SIZE`, `TOTAL_MEMORY`, … | `MemorySize` = <code>number \| `${number}KB` \| `${number}MB` \| `${number}GB`</code> | `'100mb'` and `'100 MB'` are silent misparses in a yml. Here they do not compile. |
+| `ENVIRONMENT` | `readonly EmccEnvironment[]` | An array of literals cannot express a typo or a duplicate; the renderer owns the comma joining. |
+| `EXPORTED_RUNTIME_METHODS`, `EXPORTED_FUNCTIONS`, and 19 more | `readonly string[]` | The renderer emits emcc's bracketed-list syntax, so the yml-quoting fragility disappears. |
+| `PTHREAD_POOL_SIZE` | `number \| 'navigator.hardwareConcurrency'` | The JS-expression form is a documented emcc idiom; the literal keeps it discoverable without admitting arbitrary strings. |
+| flags emcc declares as 0/1 ints | `boolean` (rendered `1`/`0`) | Boolean semantics, int encoding. |
+
+Serialization at render time:
+
+| Value | Rendered |
+| --- | --- |
+| `true` / `false` | `-sNAME=1` / `-sNAME=0` |
+| `number`, `string` | `-sNAME=<value>` verbatim |
+| `string[]` | `-sNAME=["a","b"]` |
+| `ENVIRONMENT: ['web', 'worker']` | `-sENVIRONMENT=web,worker` |
+
+There is no index signature on `EmccSettings`. That is what makes an unknown
+`-s` name a compile error — and why anything the typed surface cannot express
+belongs in `rawFlags`.
+
+### `compilerFlags`
+
+Only the non-`-s` flags the reference builds actually use are modelled.
+
+| Key | Emits |
+| --- | --- |
+| `optimize: 'O0' \| 'O1' \| 'O2' \| 'O3' \| 'Os' \| 'Oz'` | `-O3` … |
+| `simd: true` | `-msimd128` |
+| `exceptions: 'wasm' \| 'emscripten'` | `-fwasm-exceptions` / `-fexceptions` |
+| `lto: true` | `-flto` |
+| `noEntry: true` | `--no-entry` |
+| `threads: true` | `-pthread` |
+
+Anything else — `-mrelaxed-simd`, `--emit-symbol-map`,
+and other unmodelled flags — goes in `rawFlags`.
+
+The rendered flag order is fixed: exceptions → `-s` settings → `-flto` →
+`--no-entry` → `-pthread` → `-msimd128` → optimisation → base `rawFlags` →
+variant `rawFlags`. emcc treats distinct flags as order-insensitive.
+
+### `variants`
+
+```typescript notypecheck
+variants: [
+  { name: 'single', settings: { EVAL_CTORS: 2 } },
+  {
+    name: 'multi',
+    compilerFlags: { threads: true },
+    settings: { SHARED_MEMORY: true, PTHREAD_POOL_SIZE: 'navigator.hardwareConcurrency' },
+  },
+],
+```
+
+| Key | Meaning |
+| --- | --- |
+| `name` | Unique within the config. Names the rendered yml, the artifact, and the `--variant` selector. |
+| `outputName` | Overrides the default `<config.name>_<variant.name>` artifact base name. |
+| `compilerFlags` | Merged key by key over the base `compilerFlags`, variant wins. `threads: true` renders `-pthread`. |
+| `requires` | Capabilities this variant needs from the host. Normally **inferred** from the build flags — a threaded build implies `['threads']` — so most configs never declare it. Declaring it *adds* to what is inferred; it cannot subtract. |
+| `settings` | Merged over the base `settings`. A value of `null` **removes** an inherited key. |
+| `rawFlags` | Appended after the base `rawFlags`. |
+
+A variant's capabilities select its container image at build time and become the
+probes the generated `createInstance` runs before returning an instance.
+
+Base keys keep their declaration order when a variant overrides them in place;
+variant-only keys are appended. `null` is how the multi-threaded variant drops
+the base `EVAL_CTORS` — constructor evaluation order is non-deterministic under
+pthread workers. Unsetting a key the base never declared is a configuration
+error, caught at load.
+
+A single-variant config is first class: `variants: [{ name: 'single' }]` emits
+no selector machinery at assemble time.
+
+Variants share one `bindings` list on purpose. That is what lets `assemble`
+emit one `types.d.ts` for all of them — see
+[Variants and assemble](../concepts/variants-and-assemble).
+
+## Load-time validation
+
+Types cannot see the filesystem. `libcascade build`, `assemble`, and `check`
+all validate the loaded config first and report every problem at once, with
+resolved absolute paths:
+
+- empty `name`, empty `bindings`, empty `variants`
+- duplicate variant names
+- a variant `null`-unsetting a setting the base never declared
+- a `customBindings.file` that does not exist on disk
+- a `customBindings` entry declaring no symbols
+
+## Worked references
+
+Two real configs ship in the open:
+
+- [`libcascade.config.ts`](https://github.com/taucad/opencascade.js/blob/main/libcascade.config.ts) —
+  the full build itself: every OCCT symbol, one `scope: 'main'` wrapper file,
+  and single + multi variants.
+- [`replicad-opencascadejs`](https://github.com/sgenoud/replicad) — a trimmed
+  custom build: 11 wrapper files declaring 17 custom symbols and single +
+  multi variants.
+
+## Related
+
+- [CLI reference](./cli) — the commands that consume this file.
+- [Driver environment](./env-vars) — engine discovery, image override, digest pinning.
+- [Quickstart](../getting-started/quick-start) — from install to `dist/`.

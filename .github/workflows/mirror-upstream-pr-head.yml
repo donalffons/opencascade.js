@@ -1,0 +1,24 @@
+name: mirror upstream PR head
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    if: github.repository == 'taucad/opencascade.js'
+    name: mirror · upstream PR head
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fast-forward upstream PR branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --method PATCH \
+            "repos/${GITHUB_REPOSITORY}/git/refs/heads/occt-v8-emscripten-5" \
+            -f sha="${GITHUB_SHA}" \
+            -F force=false

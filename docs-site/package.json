@@ -1,0 +1,63 @@
+{
+  "name": "ocjs-docs-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "docs:sync": "node ./scripts/sync-api-reference.mjs",
+    "predev": "pnpm docs:sync",
+    "dev": "next dev",
+    "prebuild": "pnpm docs:sync",
+    "build": "next build",
+    "start": "next start",
+    "prelint": "pnpm docs:sync && fumadocs-mdx",
+    "lint": "eslint .",
+    "generate:source": "fumadocs-mdx",
+    "pretypecheck": "pnpm docs:sync && fumadocs-mdx",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run test:unit && npm run test:postbuild",
+    "pretest:unit": "pnpm docs:sync && fumadocs-mdx",
+    "test:unit": "vitest run --exclude tests/api/perf.test.ts",
+    "test:postbuild": "vitest run tests/api/perf.test.ts",
+    "test:all": "npm run test:unit && npm run build && npm run test:postbuild"
+  },
+  "dependencies": {
+    "@orama/orama": "^3.1.7",
+    "libcascade": "file:..",
+    "@vercel/og": "^0.6.5",
+    "eslint": "9.32.0",
+    "eslint-config-next": "^16.2.6",
+    "fumadocs-core": "^16.8.7",
+    "fumadocs-mdx": "14.3.2",
+    "fumadocs-typescript": "^5.2.6",
+    "fumadocs-ui": "^16.8.7",
+    "lucide-react": "^0.552.0",
+    "mermaid": "^11.15.0",
+    "next": "^16.2.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "remark-breaks": "^4.0.0",
+    "server-only": "^0.0.1",
+    "shiki": "^1.27.0",
+    "streamdown": "^2.5.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@tailwindcss/postcss": "^4.1.4",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.1.0",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.5",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^25.0.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^4.1.4",
+    "typescript": "^5.7.2",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

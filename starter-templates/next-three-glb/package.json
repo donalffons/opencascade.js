@@ -1,0 +1,29 @@
+{
+  "name": "libcascade-next-three-glb",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start --port 3000",
+    "typecheck": "tsc --noEmit",
+    "postinstall": "node ./scripts/copy-wasm.mjs",
+    "smoke": "node ../_shared/smoke-render.mjs --url http://localhost:3000 --canvas '#libcascade-canvas canvas' --screenshot smoke.png"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "libcascade": "file:../..",
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.184.1",
+    "typescript": "^6.0.3"
+  }
+}

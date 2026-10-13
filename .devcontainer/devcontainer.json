@@ -1,53 +1,41 @@
 {
-	"name": "Existing Dockerfile",
-
-	// Sets the run context to one level up instead of the .devcontainer folder.
+	"name": "opencascade.js (V8)",
 	"context": "..",
-
-	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
 	"dockerFile": "../Dockerfile",
 
-	// Set *default* container specific settings.json values on container create.
-	"settings": { 
-		"terminal.integrated.shell.linux": null
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"python.defaultInterpreterPath": "/opencascade.js/.venv/bin/python",
+				"python.analysis.extraPaths": ["/opencascade.js/src"],
+				"terminal.integrated.defaultProfile.linux": "bash"
+			},
+			"extensions": [
+				"ms-vscode.cpptools",
+				"ms-vscode.cpptools-extension-pack",
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"nrwl.angular-console",
+				"dtsvet.vscode-wasm",
+				"eamodio.gitlens"
+			]
+		}
 	},
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"ms-vscode.cpptools",
-		"ms-vscode.cpptools-extension-pack",
-		"mhutchie.git-graph",
-		"eamodio.gitlens",
-		"ms-python.python",
-		"dtsvet.vscode-wasm"
-	],
 
 	"mounts": [
 		"source=${localWorkspaceFolder}/src,target=/opencascade.js/src,type=bind,consistency=cached",
-		"source=${localWorkspaceFolder}/build,target=/opencascade.js/build,type=bind,consistency=cached",
-		"source=${localWorkspaceFolder}/builds,target=/opencascade.js/builds,type=bind,consistency=cached",
-		"source=${localWorkspaceFolder}/dist,target=/opencascade.js/dist,type=bind,consistency=cached",
-		"source=${localWorkspaceFolder}/test,target=/opencascade.js/test,type=bind,consistency=cached"
-		// "source=${localWorkspaceFolder}/occt-src,target=/occt/occt-0dc2c37/src,type=bind,consistency=cached",
+		"source=${localWorkspaceFolder}/build-configs,target=/opencascade.js/build-configs,type=bind,consistency=cached",
+		"source=${localWorkspaceFolder}/tests,target=/opencascade.js/tests,type=bind,consistency=cached",
+		"source=${localWorkspaceFolder}/scripts,target=/opencascade.js/scripts,type=bind,consistency=cached",
+		"source=${localWorkspaceFolder}/build-wasm.sh,target=/opencascade.js/build-wasm.sh,type=bind,consistency=cached",
+		"source=${localWorkspaceFolder}/bindgen-filters.yaml,target=/opencascade.js/bindgen-filters.yaml,type=bind,consistency=cached",
+		"source=${localWorkspaceFolder}/DEPS.json,target=/opencascade.js/DEPS.json,type=bind,consistency=cached"
 	],
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
-	// Uncomment the next line to run commands after the container is created - for example installing curl.
-	// "postCreateCommand": "apt-get update && apt-get install -y curl",
-
-	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
-	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
-
-	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
-	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
-
-	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "vscode"
-
-	"build": {
-		"cacheFrom": "donalffons/opencascade.js:staging-master",
-		"target": "custom-build-image"
+	"remoteEnv": {
+		"OCJS_CONFIG": "single-threaded"
 	}
+
+	// Uncomment when using a ptrace-based debugger like C++, Go, or Rust.
+	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
 }

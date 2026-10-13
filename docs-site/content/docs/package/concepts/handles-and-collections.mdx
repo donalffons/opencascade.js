@@ -1,0 +1,200 @@
+---
+title: Handles and collections
+description: Smart-pointer surfaces (isNull / nullify) and the NCollection_* container family — what shows up in JS and how to use it.
+---
+
+OCCT carries two long-running C++ idioms that V3's JS surface unifies under
+JS-native shapes: the `Handle<T>` smart pointer family and the `NCollection_*`
+templated container family. This page covers both and the everyday patterns
+they bring to your call sites.
+
+## Smart pointers are unified
+
+In OCCT C++, a `Handle<Geom_Curve>` is an intrusive refcount wrapper around a
+heap-allocated `Geom_Curve`. In the V3 JS bindings, the wrapper and the
+pointee are the same JS object — every `Standard_Transient` subclass _is_ the
+Handle.
+
+```typescript
+using pnt = new oc.gp_Pnt(0, 0, 0);
+using dir = new oc.gp_Dir(0, 0, 1);
+using ax2 = new oc.gp_Ax2(pnt, dir);
+using circle = new oc.Geom_Circle(ax2, 5);
+circle.isNull();          // false
+```
+
+You never reach for a `Handle_<T>` wrapper class — they don't exist on the
+binding object:
+
+```typescript
+oc['Handle_Geom_Curve'];  // undefined
+```
+
+You never call `.get()` to unwrap a Handle. Functions that expect a
+`Handle<Geom_Line>` accept the `Geom_Line` directly:
+
+```typescript
+using line = new oc.Geom_Line(ax1);
+using edge = new oc.BRepBuilderAPI_MakeEdge(line);
+```
+
+## `isNull()` vs `nullify()`
+
+Two methods carry the Handle nullability semantics into JS:
+
+- `isNull()` is a read — `true` if the smart pointer holds no object.
+- `nullify()` clears the smart pointer. **Method calls on a nullified Handle
+  throw.**
+
+```typescript
+using circle = new oc.Geom_Circle(ax2, 5);
+circle.isNull();            // false
+circle.nullify();
+circle.isNull();            // true
+circle.Radius();            // throws — decode via WebAssembly.Exception
+```
+
+The throw surfaces as a `WebAssembly.Exception` carrying the C++ tag; see
+[Debugging WASM exceptions](../guides/debugging-wasm-exceptions).
+
+Plain primitive value types (`gp_Pnt`, `gp_Dir`, `gp_Vec`) do **not** have
+`isNull` / `nullify` — they're not smart pointers, they're directly-owned
+value objects.
+
+## The `NCollection_*` container family
+
+OCCT predates `std::vector`, so it ships its own container family. The
+bindgen auto-discovers `NCollection_*` types referenced by surviving bound
+classes and emits one JS class per template instantiation. The JS class name
+is the mangled C++ name — `NCollection_List<TopoDS_Shape>` becomes
+`NCollection_List_TopoDS_Shape`, the legacy `TopTools_ListOfShape` typedef
+does **not** appear on the binding object.
+
+Auto-discovery is driven by C++ `using` typedef declarations in the
+generated bindings — not by the JS `using` declaration keyword. These two
+keywords share a name but solve different problems.
+
+### List — `NCollection_List_TopoDS_Shape`
+
+The list family is sequence-ordered, supports head/tail access and reversal,
+and is the workhorse for accumulating shapes during a topological walk.
+
+```typescript
+using box1 = new oc.BRepPrimAPI_MakeBox(10, 10, 10);
+using box2 = new oc.BRepPrimAPI_MakeBox(20, 20, 20);
+using shape1 = box1.Shape();
+using shape2 = box2.Shape();
+
+using list = new oc.NCollection_List_TopoDS_Shape();
+list.Size();                          // 0
+
+using appended1 = list.Append(shape1);   // see note below
+using appended2 = list.Append(shape2);
+appended1; appended2;                    // suppress unused-var lint
+
+list.Size();                          // 2
+using first = list.First();
+using last = list.Last();
+list.Reverse();
+list.RemoveFirst();
+```
+
+**Critical:** `list.Append(shape)` returns a disposable iterator handle.
+Capture it with `using` — leaving it unbound leaks the handle. The
+`require-using-on-disposable` lint rule catches this automatically.
+
+### Sequence — `NCollection_Sequence_TDF_Label`
+
+Sequence is the same conceptual shape as List but a different OCCT template;
+it shows up most often in XDE / TDocStd workflows. **Its `Append` does not
+return a disposable** — call it as a statement:
+
+```typescript
+using seq = new oc.NCollection_Sequence_TDF_Label();
+using label = new oc.TDF_Label();
+seq.Append(label);                    // void; no `using`
+seq.Size();                           // 1
+```
+
+The general rule across the `NCollection_*` family: `Append` semantics differ
+per template. Trust the `.d.ts` types — they're the source of truth — and
+check the smoke tests when uncertain.
+
+### Indexed map — `NCollection_IndexedMap_TopoDS_Shape_TopTools_ShapeMapHasher`
+
+Indexed maps combine set semantics with insertion-order indexing. The classic
+use is dedup-then-iterate over the faces of a shape:
+
+```typescript
+using box = new oc.BRepPrimAPI_MakeBox(10, 10, 10);
+using shape = box.Shape();
+using explorer = new oc.TopExp_Explorer(
+  shape,
+  oc.TopAbs_ShapeEnum.TopAbs_FACE,
+  oc.TopAbs_ShapeEnum.TopAbs_SHAPE,
+);
+using map = new oc.NCollection_IndexedMap_TopoDS_Shape_TopTools_ShapeMapHasher();
+while (explorer.More()) {
+  using current = explorer.Current();
+  map.Add(current);
+  explorer.Next();
+}
+
+map.Size();                           // 6 (cube faces)
+using face1 = map.FindKey(1);         // 1-based
+map.Contains(face1);                  // true
+map.FindIndex(face1);                 // 1
+```
+
+`FindKey` is **1-based**, matching OCCT's index convention.
+
+### Fixed-size array — `NCollection_Array1_gp_Pnt`
+
+`Array1` is OCCT's fixed-bounds array. The constructor takes lower and upper
+bounds; the array is 1-indexed by default.
+
+```typescript
+using arr = new oc.NCollection_Array1_gp_Pnt(1, 5);
+arr.Length();                         // 5
+arr.Lower();                          // 1
+arr.Upper();                          // 5
+
+const pts = [
+  new oc.gp_Pnt(1, 0, 0),
+  new oc.gp_Pnt(2, 0, 0),
+  new oc.gp_Pnt(3, 0, 0),
+  new oc.gp_Pnt(4, 0, 0),
+  new oc.gp_Pnt(5, 0, 0),
+];
+for (let i = 0; i < pts.length; i++) arr.SetValue(i + 1, pts[i]);
+
+using third = arr.Value(3);           // gp_Pnt at index 3
+using first = arr.First();
+using last = arr.Last();
+```
+
+Expect 1-based indexing everywhere in the `NCollection_*` family — `Value(0)`
+throws `Standard_OutOfRange`.
+
+## Lifetimes at a glance
+
+| Holder                          | Owns the heap allocation?                          |
+| ------------------------------- | -------------------------------------------------- |
+| Smart-pointer subclass (`Geom_Circle`, `Poly_Triangulation`, …) | Yes — refcounted; copying bumps the count.          |
+| Value class (`gp_Pnt`, `gp_Dir`, `gp_Vec`)                    | Yes — directly owned; dispose to free.              |
+| `T&` parameter                                                | No — borrowed for the duration of the call.         |
+| `NCollection_*`                                               | Yes — disposing the container disposes its contents.|
+
+In JS terms: every wrapper class — handles, value types, containers — exposes
+`[Symbol.dispose]`. Bind them with `using` so the wasm heap releases at scope
+exit. See [Memory and disposables](./memory-and-disposables) for the full
+ruleset and the `DisposableStack` patterns for ownership transfer.
+
+## Related
+
+- [Memory and disposables](./memory-and-disposables) — when `using` is
+  required, and the `DisposableStack` patterns.
+- [Return shapes](./return-shapes) — `NCollection_*` instances showing up
+  inside envelope fields.
+- [Debugging WASM exceptions](../guides/debugging-wasm-exceptions) — decoding
+  the throw from a nullified-Handle method call.

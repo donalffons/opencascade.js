@@ -1,0 +1,261 @@
+---
+title: Bundler & locateFile
+description: How to wire the OCCT wasm asset in Vite, Next.js, Bun, Deno, and plain Node.
+---
+
+Start with `import oc from 'libcascade'`. The package resolves its adjacent
+WASM asset without configuration in Node and compatible bundlers. Reach for
+`createInstance` from `libcascade/single/init` or `libcascade/multi/init` only
+when a bundler or deployment copies a fixed variant's binary to another URL.
+
+The package exposes the binaries through the `libcascade/single/wasm` and
+`libcascade/multi/wasm` subpath exports (`libcascade/wasm` remains the
+single-threaded alias). Every relocation recipe on this page resolves the WASM
+through its matching variant specifier; resolving it any other way (deep `node_modules` paths, direct
+`dist/*` imports) bypasses the package's `exports` map and breaks under
+strict bundler resolution.
+
+## Vite 6+
+
+Vite's `?url` suffix turns any asset import into a content-hashed URL string.
+Use it when you want Vite to emit a content-hashed asset URL:
+
+```typescript
+import { createInstance } from 'libcascade/single/init';
+import wasmUrl from 'libcascade/single/wasm?url';
+
+const oc = await createInstance({ locateFile: () => wasmUrl });
+```
+
+Add `libcascade` to `optimizeDeps.exclude` in `vite.config.ts` so
+Vite skips its dep-optimizer for the binary module:
+
+```typescript title="vite.config.ts"
+import { defineConfig } from 'vite';
+export default defineConfig({
+  optimizeDeps: { exclude: ['libcascade'] },
+});
+```
+
+## Next.js 15 (App Router)
+
+Next's App Router lacks a first-class `?url` wasm import. The reliable pattern
+is to copy the wasm into `public/` at install time via a postinstall script
+that resolves the subpath:
+
+```javascript title="scripts/copy-wasm.mjs"
+import { copyFile, mkdir } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+
+const src = fileURLToPath(import.meta.resolve('libcascade/single/wasm'));
+await mkdir('public', { recursive: true });
+await copyFile(src, 'public/opencascade_single.wasm');
+```
+
+```json title="package.json"
+{
+  "scripts": {
+    "postinstall": "node scripts/copy-wasm.mjs"
+  }
+}
+```
+
+Then reference the public path:
+
+```typescript title="lib/libcascade-init.ts"
+'use client';
+import { createInstance } from 'libcascade/single/init';
+
+let ocPromise: ReturnType<typeof createInstance> | undefined;
+export const getOc = () =>
+  (ocPromise ??= createInstance({ locateFile: () => '/opencascade_single.wasm' }));
+```
+
+Mark `libcascade` as a server external package if you only call it
+client-side:
+
+```typescript title="next.config.ts"
+import type { NextConfig } from 'next';
+const config: NextConfig = {
+  serverExternalPackages: ['libcascade'],
+};
+export default config;
+```
+
+## Bun
+
+Bun resolves wasm imports natively. The `?url` pattern works identically to
+Vite. No extra config required.
+
+## Node (ESM)
+
+Use `import.meta.resolve` to find the wasm sibling to the loader:
+
+```typescript
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import { createInstance } from 'libcascade/single/init';
+
+const WASM_DIR = dirname(
+  fileURLToPath(import.meta.resolve('libcascade/single/wasm')),
+);
+
+const oc = await createInstance({ locateFile: (file: string) => join(WASM_DIR, file) });
+```
+
+## Deno
+
+Deno exposes the same `import.meta.resolve` API as Node 22+. The Node snippet
+above works unchanged.
+
+## Webpack 5
+
+Webpack 5 handles wasm via `asset/resource` (preferred) or the legacy
+`file-loader`. Wire `locateFile` to the emitted URL:
+
+```typescript title="src/libcascade-init.ts"
+import { createInstance } from 'libcascade/single/init';
+import wasmUrl from 'libcascade/single/wasm';
+
+const oc = await createInstance({
+  locateFile: (file) => (file.endsWith('.wasm') ? wasmUrl : file),
+});
+```
+
+```javascript title="webpack.config.js"
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.wasm$/,
+        type: 'asset/resource',
+      },
+    ],
+  },
+  resolve: {
+    fallback: {
+      fs: false,
+      perf_hooks: false,
+      os: false,
+      path: false,
+      worker_threads: false,
+      crypto: false,
+      stream: false,
+    },
+  },
+};
+```
+
+Mark `libcascade` as an external or exclude it from aggressive
+bundle inlining — the 12+ MB wasm must stay a separate fetch.
+
+## Legacy bundlers
+
+Create-React-App, `react-app-rewired`, and Webpack 4 are **not supported** in
+V3 docs. Use Vite, current Next.js, Bun, Node, Deno, or Webpack 5 instead.
+
+## Common pitfalls
+
+- **Prefer zero configuration**. Add `locateFile` only when the deployed WASM
+  URL differs from the package-adjacent default.
+- **Don't bundle the wasm inline**. Bundling the 12+ MB binary as base64 explodes
+  your JS payload and prevents the browser's wasm streaming compiler.
+- **Cache the `createInstance` Promise**. Each call instantiates another wasm
+  module with its own C++ heap — memoize behind a singleton. The eager root
+  entry (`import oc from 'libcascade'`) needs no memoisation: ES module
+  evaluation already happens once per realm.
+
+## Multi-threaded variant
+
+The pthread-enabled build is a variant of the same package: import its fixed
+initializer from `libcascade/multi/init`. That entry also owns the worker
+plumbing the raw `libcascade/multi` glue leaves to you. Its wasm is exported at
+`libcascade/multi/wasm`.
+
+**Browser prerequisite:** every page that loads the threaded wasm must send cross-origin isolation headers:
+
+```http
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Embedder-Policy: require-corp
+```
+
+Without these headers, browsers refuse to expose `SharedArrayBuffer` and the wasm fails to instantiate. See the [multi-threaded build guide](./multi-threading) for benchmarks and when not to ship threaded.
+
+**Vite prerequisite:** Emscripten spawns its pthread workers as ES modules with
+top-level await, which Vite's default `iife` worker format cannot emit:
+
+```typescript title="vite.config.ts"
+import { defineConfig } from 'vite';
+export default defineConfig({
+  worker: { format: 'es' },
+  optimizeDeps: { exclude: ['libcascade'] },
+});
+```
+
+Run the following **once** after `await createInstance(...)` in every recipe below — it matches the benchmark harness and is required for full speedup on mesh/boolean workloads:
+
+```typescript
+oc.BOPAlgo_Options.SetParallelMode(true);
+oc.BRepMesh_IncrementalMesh.SetParallelDefault(true);
+```
+
+### Vite 6+
+
+```typescript
+import { createInstance } from 'libcascade/multi/init';
+import wasmUrl from 'libcascade/multi/wasm?url';
+
+const oc = await createInstance({ locateFile: () => wasmUrl });
+
+oc.BOPAlgo_Options.SetParallelMode(true);
+oc.BRepMesh_IncrementalMesh.SetParallelDefault(true);
+```
+
+### Next.js 15 (App Router)
+
+Copy the MT wasm into `public/` at install time:
+
+```javascript title="scripts/copy-wasm-multi.mjs"
+import { copyFile, mkdir } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+
+const src = fileURLToPath(import.meta.resolve('libcascade/multi/wasm'));
+await mkdir('public', { recursive: true });
+await copyFile(src, 'public/opencascade_multi.wasm');
+```
+
+```typescript title="lib/libcascade-init-multi.ts"
+'use client';
+import { createInstance } from 'libcascade/multi/init';
+
+let ocPromise: ReturnType<typeof createInstance> | undefined;
+export const getOcMulti = () =>
+  (ocPromise ??= createInstance({
+    locateFile: () => '/opencascade_multi.wasm',
+  }).then((oc) => {
+    oc.BOPAlgo_Options.SetParallelMode(true);
+    oc.BRepMesh_IncrementalMesh.SetParallelDefault(true);
+    return oc;
+  }));
+```
+
+### Node (ESM)
+
+```typescript
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import { createInstance } from 'libcascade/multi/init';
+
+const WASM_DIR = dirname(
+  fileURLToPath(import.meta.resolve('libcascade/multi/wasm')),
+);
+
+const oc = await createInstance({
+  locateFile: (file: string) => join(WASM_DIR, file),
+});
+
+oc.BOPAlgo_Options.SetParallelMode(true);
+oc.BRepMesh_IncrementalMesh.SetParallelDefault(true);
+```
+
+Per-call overrides (`SetRunParallel(true)`, `BRepMesh_IncrementalMesh(..., isInParallel=true)`) remain available for granular opt-in. See [Multi-threaded build — Per-call activation](./multi-threading#per-call-activation--granular).

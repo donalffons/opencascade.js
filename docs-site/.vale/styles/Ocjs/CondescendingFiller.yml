@@ -1,0 +1,10 @@
+extends: existence
+message: "Condescending filler '%s' adds no information — delete the word."
+level: error
+ignorecase: true
+tokens:
+  - '\bsimply\b'
+  - "\\bjust\\b(?!\\s+(in\\s+time|now|the))"
+  - 'as you can see'
+  - 'obviously'
+  - 'clearly[,\\s]'

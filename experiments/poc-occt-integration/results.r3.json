@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "id": "(a) omitted (arity-pad → nullopt)",
+      "expect": 0,
+      "outcome": "pass",
+      "value": 0
+    },
+    {
+      "id": "(b) explicit handle object",
+      "expect": 1,
+      "outcome": "pass",
+      "value": 1
+    },
+    {
+      "id": "(c) explicit null",
+      "expect": 0,
+      "outcome": "pass",
+      "value": 0
+    },
+    {
+      "id": "(d) explicit undefined",
+      "expect": 0,
+      "outcome": "pass",
+      "value": 0
+    }
+  ],
+  "verdict": "std::optional<opencascade::handle<T>> composes cleanly. EmValOptionalType.toWireType accepts JS handle objects via genericPointerToWireType, null/undefined collapse to nullopt, and .value_or(opencascade::handle<T>()) produces a valid null handle for the OCCT call.",
+  "allPass": true
+}

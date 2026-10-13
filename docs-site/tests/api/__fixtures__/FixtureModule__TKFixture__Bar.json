@@ -1,0 +1,28 @@
+{
+  "schema": 2,
+  "shard": "FixtureModule__TKFixture__Bar",
+  "generatedAt": "2026-05-14T10:46:52.392Z",
+  "classes": [
+    {
+      "name": "Bar_Tool",
+      "kind": "class",
+      "summary": "Bar helper.",
+      "extends": [],
+      "ancestors": [],
+      "constructors": [],
+      "staticMethods": [
+        {
+          "name": "compute",
+          "signature": "(input: string): number",
+          "parameters": [
+            { "name": "input", "type": "string", "optional": false, "rest": false }
+          ],
+          "returnType": "number",
+          "comment": "Computes a number from a string."
+        }
+      ],
+      "instanceMethods": [],
+      "properties": []
+    }
+  ]
+}

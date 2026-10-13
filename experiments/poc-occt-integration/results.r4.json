@@ -1,0 +1,64 @@
+{
+  "observed": [
+    {
+      "order": "val-first",
+      "id": "(1) probe(42)",
+      "dispatched": "val"
+    },
+    {
+      "order": "val-first",
+      "id": "(2) probe({})",
+      "dispatched": "val"
+    },
+    {
+      "order": "val-first",
+      "id": "(3) probe(undefined)",
+      "dispatched": "val"
+    },
+    {
+      "order": "val-first",
+      "id": "(4) probe() arity-pad",
+      "dispatched": "val"
+    },
+    {
+      "order": "opt-first",
+      "id": "(1) probe(42)",
+      "dispatched": "val"
+    },
+    {
+      "order": "opt-first",
+      "id": "(2) probe({})",
+      "dispatched": "val"
+    },
+    {
+      "order": "opt-first",
+      "id": "(3) probe(undefined)",
+      "dispatched": "val"
+    },
+    {
+      "order": "opt-first",
+      "id": "(4) probe() arity-pad",
+      "dispatched": "val"
+    }
+  ],
+  "valFirst": {
+    "order": "val-first",
+    "set": [
+      "val"
+    ],
+    "allSame": true,
+    "threw": false
+  },
+  "optFirst": {
+    "order": "opt-first",
+    "set": [
+      "val"
+    ],
+    "allSame": true,
+    "threw": false
+  },
+  "verdict": {
+    "classification": "benign-deterministic-always-val",
+    "detail": "Both registration orders dispatch to \"val\". Winner is type-priority-based, not registration-order-based. bindgen MUST forbid val+optional co-registration at same arity — the loser overload is permanently unreachable."
+  }
+}

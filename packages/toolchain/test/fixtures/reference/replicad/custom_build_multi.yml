@@ -1,0 +1,292 @@
+mainBuild:
+  name: replicad_multi.js
+  bindings:
+  - symbol: Message_ProgressRange
+  - symbol: TColgp_Array1OfDir
+  - symbol: TColgp_Array1OfPnt
+  - symbol: TColgp_Array1OfPnt2d
+  - symbol: TColgp_Array2OfPnt
+  - symbol: TColStd_Array1OfBoolean
+  - symbol: TColgp_Array1OfVec
+  - symbol: TColStd_Array1OfInteger
+  - symbol: TColStd_Array1OfReal
+  - symbol: Poly_Array1OfTriangle
+  - symbol: Standard_Transient
+  - symbol: Standard_Failure
+  - symbol: Precision
+  - symbol: Interface_Static
+  - symbol: Interface_InterfaceModel
+  - symbol: Interface_TypedValue
+  - symbol: MoniTool_TypedValue
+  - symbol: StepData_StepModel
+  - symbol: gp_XYZ
+  - symbol: gp_XY
+  - symbol: gp_Vec
+  - symbol: gp_Pnt
+  - symbol: gp_Dir
+  - symbol: gp_Ax1
+  - symbol: gp_Ax2
+  - symbol: gp_Ax3
+  - symbol: gp_Circ
+  - symbol: gp_Pln
+  - symbol: gp_Elips
+  - symbol: gp_Cylinder
+  - symbol: gp_Sphere
+  - symbol: gp_Trsf
+  - symbol: gp_GTrsf
+  - symbol: Geom2d_Line
+  - symbol: Geom2d_Curve
+  - symbol: Geom2d_OffsetCurve
+  - symbol: Geom2d_BoundedCurve
+  - symbol: Geom2d_TrimmedCurve
+  - symbol: Geom2d_BezierCurve
+  - symbol: Geom2d_BSplineCurve
+  - symbol: Geom2d_Geometry
+  - symbol: Geom2d_Ellipse
+  - symbol: Geom2d_Circle
+  - symbol: Geom2d_Conic
+  - symbol: Geom_SphericalSurface
+  - symbol: Geom_ElementarySurface
+  - symbol: gp_Vec2d
+  - symbol: gp_Pnt2d
+  - symbol: gp_Dir2d
+  - symbol: gp_Ax2d
+  - symbol: gp_Ax22d
+  - symbol: gp_Circ2d
+  - symbol: gp_Elips2d
+  - symbol: GC_MakeSegment2d
+  - symbol: GC_MakeArcOfCircle2d
+  - symbol: GC_MakeArcOfEllipse2d
+  - symbol: GC_MakeCircle2d
+  - symbol: GC_MakeEllipse2d
+  - symbol: GeomLib
+  - symbol: gp_Trsf2d
+  - symbol: gp_GTrsf2d
+  - symbol: Bnd_Box2d
+  - symbol: BndLib_Add2dCurve
+  - symbol: Geom2dAPI_InterCurveCurve
+  - symbol: Geom2dAPI_ProjectPointOnCurve
+  - symbol: Geom2dAPI_PointsToBSpline
+  - symbol: Geom2dAPI_ExtremaCurveCurve
+  - symbol: Bnd_Box
+  - symbol: Bnd_OBB
+  - symbol: BRepBndLib
+  - symbol: GeomAbs_CurveType
+  - symbol: GeomAbs_SurfaceType
+  - symbol: GeomAbs_Shape
+  - symbol: GeomTools
+  - symbol: Geom_Geometry
+  - symbol: Geom_Curve
+  - symbol: Geom_Surface
+  - symbol: Geom_ElementarySurface
+  - symbol: Geom_ConicalSurface
+  - symbol: Geom_CylindricalSurface
+  - symbol: Geom_BoundedSurface
+  - symbol: Geom_BSplineSurface
+  - symbol: Geom_BoundedCurve
+  - symbol: Geom_TrimmedCurve
+  - symbol: Geom_BezierCurve
+  - symbol: Geom_BSplineCurve
+  - symbol: GeomAPI_Interpolate
+  - symbol: GeomAPI_PointsToBSpline
+  - symbol: GeomAPI_PointsToBSplineSurface
+  - symbol: GeomAPI_ProjectPointOnSurf
+  - symbol: TopoDS
+  - symbol: TopoDS_Edge
+  - symbol: TopoDS_Face
+  - symbol: TopoDS_Wire
+  - symbol: TopoDS_Shell
+  - symbol: TopoDS_Vertex
+  - symbol: TopoDS_Solid
+  - symbol: TopoDS_Compound
+  - symbol: TopoDS_CompSolid
+  - symbol: TopoDS_Shape
+  - symbol: TopoDS_Builder
+  - symbol: TopAbs_ShapeEnum
+  - symbol: TopTools_ListOfShape
+  - symbol: TopAbs_Orientation
+  - symbol: TopLoc_Location
+  - symbol: TopExp_Explorer
+  - symbol: TopTools_ListOfShape
+  - symbol: NCollection_BaseList
+  - symbol: Poly_Connect
+  - symbol: BRepLib_ToolTriangulatedShape
+  - symbol: Poly_Triangle
+  - symbol: Poly_Triangulation
+  - symbol: Poly_PolygonOnTriangulation
+  - symbol: BinTools
+  - symbol: BRep_Tool
+  - symbol: BRepLib
+  - symbol: BRepTools
+  - symbol: BRepGProp
+  - symbol: BRepGProp_Face
+  - symbol: GProp_GProps
+  - symbol: GC_MakeArcOfCircle
+  - symbol: GC_MakeArcOfEllipse
+  - symbol: GC_Root
+  - symbol: GCPnts_TangentialDeflection
+  - symbol: BRepMesh_IncrementalMesh
+  - symbol: BRepMesh_DiscretRoot
+  - symbol: OSD_ThreadPool
+  - symbol: BRepAdaptor_Surface
+  - symbol: BRepAdaptor_Curve
+  - symbol: Adaptor3d_Curve
+  - symbol: Adaptor3d_Surface
+  - symbol: BRepAdaptor_CompCurve
+  - symbol: GeomAdaptor_TransformedSurface
+  - symbol: GeomAdaptor_TransformedCurve
+  - symbol: Geom2dAdaptor_Curve
+  - symbol: Adaptor2d_Curve2d
+  - symbol: BRepAdaptor_Curve2d
+  - symbol: Geom2dConvert_BSplineCurveToBezierCurve
+  - symbol: Geom2dConvert_ApproxCurve
+  - symbol: Geom2dConvert
+  - symbol: Convert_ParameterisationType
+  - symbol: GeomConvert
+  - symbol: StlAPI_Writer
+  - symbol: STEPControl_Writer
+  - symbol: STEPControl_StepModelType
+  - symbol: IFSelect_ReturnStatus
+  - symbol: Law_Function
+  - symbol: Law_Linear
+  - symbol: Law_Composite
+  - symbol: Law_Interpol
+  - symbol: Law_BSpFunc
+  - symbol: Law_S
+  - symbol: BRepAlgoAPI_Algo
+  - symbol: BRepAlgoAPI_BuilderAlgo
+  - symbol: BRepAlgoAPI_BooleanOperation
+  - symbol: BRepAlgoAPI_Cut
+  - symbol: BRepAlgoAPI_Fuse
+  - symbol: BOPAlgo_GlueEnum
+  - symbol: BOPAlgo_Options
+  - symbol: BRepAlgoAPI_Section
+  - symbol: BRepAlgoAPI_Common
+  - symbol: BRepExtrema_DistShapeShape
+  - symbol: BRepBuilderAPI_ModifyShape
+  - symbol: BRepBuilderAPI_MakeShape
+  - symbol: BRepBuilderAPI_Command
+  - symbol: BRepBuilderAPI_Transform
+  - symbol: BRepBuilderAPI_MakeEdge
+  - symbol: BRepBuilderAPI_MakeWire
+  - symbol: BRepBuilderAPI_MakeFace
+  - symbol: BRepBuilderAPI_MakeVertex
+  - symbol: BRepBuilderAPI_MakeSolid
+  - symbol: BRepBuilderAPI_TransitionMode
+  - symbol: BRepBuilderAPI_Sewing
+  - symbol: BRepBuilderAPI_WireError
+  - symbol: BRepBuilderAPI_MakeShell
+  - symbol: BRepPrimAPI_MakeOneAxis
+  - symbol: BRepPrimAPI_MakeCylinder
+  - symbol: BRepPrimAPI_MakeBox
+  - symbol: BRepCheck_Analyzer
+  - symbol: BRepPrimAPI_MakeSweep
+  - symbol: BRepPrimAPI_MakePrism
+  - symbol: BRepPrimAPI_MakeRevol
+  - symbol: BRepPrimAPI_MakeSphere
+  - symbol: BRepPrimAPI_MakeTorus
+  - symbol: BRepPrimAPI_MakeRevolution
+  - symbol: BRepOffsetAPI_DraftAngle
+  - symbol: BRepOffsetAPI_ThruSections
+  - symbol: BRepOffsetAPI_MakeThickSolid
+  - symbol: BRepOffsetAPI_MakeOffset
+  - symbol: BRepOffsetAPI_MakeOffsetShape
+  - symbol: BRepOffsetAPI_MakePipe
+  - symbol: BRepOffsetAPI_MakePipeShell
+  - symbol: BRepOffsetAPI_MakeFilling
+  - symbol: BRepOffset_Mode
+  - symbol: BRepFilletAPI_LocalOperation
+  - symbol: BRepFilletAPI_MakeFillet
+  - symbol: BRepFilletAPI_MakeChamfer
+  - symbol: BRepFeat_MakeDPrism
+  - symbol: BRepFeat_Form
+  - symbol: ChFi3d_FilletShape
+  - symbol: ChFiDS_ChamfMode
+  - symbol: GeomAbs_JoinType
+  - symbol: BRepFill_TypeOfContact
+  - symbol: Extrema_ExtAlgo
+  - symbol: ShapeFix_Root
+  - symbol: ShapeFix_Solid
+  - symbol: ShapeFix_Face
+  - symbol: ShapeFix_Wire
+  - symbol: STEPControl_Reader
+  - symbol: XSControl_Reader
+  - symbol: StlAPI_Reader
+  - symbol: ShapeUpgrade_UnifySameDomain
+  - symbol: ShapeFix_EdgeConnect
+  - symbol: StlAPI
+  - symbol: HLRBRep_Algo
+  - symbol: HLRBRep_InternalAlgo
+  - symbol: HLRAlgo_Projector
+  - symbol: HLRBRep_HLRToShape
+  - symbol: CDM_Document
+  - symbol: TDF_Attribute
+  - symbol: TDataStd_GenericEmpty
+  - symbol: TDocStd_Document
+  - symbol: TDataStd_GenericExtString
+  - symbol: XCAFDoc_LengthUnit
+  - symbol: TCollection_ExtendedString
+  - symbol: TCollection_HAsciiString
+  - symbol: XCAFDoc_DocumentTool
+  - symbol: XCAFDoc_ShapeTool
+  - symbol: XCAFDoc_ColorTool
+  - symbol: XCAFDoc_MaterialTool
+  - symbol: TDF_Label
+  - symbol: TDataStd_Name
+  - symbol: Quantity_ColorRGBA
+  - symbol: Quantity_Color
+  - symbol: XCAFDoc_ColorType
+  - symbol: XSControl_WorkSession
+  - symbol: STEPCAFControl_Writer
+  - symbol: STEPControl_StepModelType
+  - symbol: IFSelect_ReturnStatus
+  - symbol: IFSelect_WorkSession
+  - symbol: BRepToolsWrapper
+  - symbol: GeomToolsWrapper
+  - symbol: ReplicadShapeHasher
+  - symbol: ReplicadShapeCaster
+  - symbol: ReplicadMeshData
+  - symbol: ReplicadMeshExtractor
+  - symbol: ReplicadEdgeMeshData
+  - symbol: ReplicadEdgeMeshExtractor
+  - symbol: ReplicadRuntimeInfo
+  - symbol: ReplicadStepModelTools
+  - symbol: ReplicadPrototypeMeshData
+  - symbol: ReplicadPrototypeEdgeMeshData
+  - symbol: ReplicadPrototypeIdData
+  - symbol: ReplicadPrototypeMeshExtractor
+  - symbol: ReplicadShapeIdentityInfo
+  - symbol: ReplicadShapeIdentity
+  - symbol: ReplicadBooleanBatchResult
+  - symbol: ReplicadBooleanBatch
+  emccFlags:
+  - -fwasm-exceptions
+  - -sEXPORT_EXCEPTION_HANDLING_HELPERS
+  - -sEXPORT_ES6=1
+  - -sMODULARIZE
+  - -sALLOW_MEMORY_GROWTH=1
+  - -sINITIAL_MEMORY=100MB
+  - -sMAXIMUM_MEMORY=4GB
+  - -sEXPORTED_RUNTIME_METHODS=["FS","wasmMemory"]
+  - -sENVIRONMENT=web,worker,node
+  - --no-entry
+  - -sSTACK_SIZE=8388608
+  - -sWASM_BIGINT
+  - -msimd128
+  - -O3
+  - -pthread
+  - -sUSE_PTHREADS=1
+  - -sPTHREAD_POOL_SIZE=globalThis.navigator?.hardwareConcurrency??4
+  - -sSHARED_MEMORY=1
+additionalCppFiles:
+- wrappers/shape-hasher.cpp
+- wrappers/shape-caster.cpp
+- wrappers/mesh-extractor.cpp
+- wrappers/edge-mesh-extractor.cpp
+- wrappers/brep-io.cpp
+- wrappers/geom2d-io.cpp
+- wrappers/step-model-tools.cpp
+- wrappers/runtime-info.cpp
+- wrappers/prototype-mesh-extractor.cpp
+- wrappers/shape-identity.cpp
+- wrappers/boolean-batch.cpp

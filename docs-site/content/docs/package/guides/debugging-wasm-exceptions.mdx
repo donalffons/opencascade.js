@@ -1,0 +1,42 @@
+---
+title: Debugging wasm exceptions
+description: Decode WebAssembly.Exception into actionable OCCT type and message text.
+---
+
+OCCT failures compiled with native WASM exception handling reach JavaScript as
+`WebAssembly.Exception` values. Decode them through the initialized runtime:
+
+```typescript
+import oc from 'libcascade';
+
+try {
+  using fillet = new oc.BRepFilletAPI_MakeFillet(badShape);
+  fillet.Shape();
+} catch (error: unknown) {
+  if (error instanceof WebAssembly.Exception) {
+    const [type, message] = oc.getExceptionMessage(error);
+    console.error(`${type}: ${message}`);
+  } else {
+    throw error;
+  }
+}
+```
+
+`error.message` is not the C++ failure text. The helper returns a
+`[type, message]` tuple such as
+`['Standard_Failure', 'BRepFilletAPI_MakeFillet: Empty argument']`.
+
+## Common failures
+
+| Type or message | Likely cause |
+|---|---|
+| `Standard_OutOfRange` | Index past an OCCT collection boundary |
+| `Standard_NullObject` | Method called through a null `Handle<T>` |
+| `Standard_TypeMismatch` | Downcast to the wrong `TopoDS_*` subtype |
+| `BRepAlgoAPI_*` | Invalid or self-intersecting boolean input |
+| `BRepFilletAPI_MakeFillet` | Radius too large or a degenerate edge |
+
+## Debug builds
+
+For source-level debugging, build with `-g -fwasm-exceptions -O1` and use
+[Chrome's WASM DWARF debugger](https://developer.chrome.com/blog/wasm-debugging-2020).

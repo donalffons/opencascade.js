@@ -1,0 +1,85 @@
+---
+title: Export glTF / GLB
+description: RWGltf_CafWriter pipeline with XCAF documents, materials, and assembly support.
+---
+
+GLB is the binary single-file flavour of glTF and the format three.js, Babylon,
+Filament, and most realtime renderers consume natively. OCCT writes it via the
+`RWGltf_CafWriter` against an XCAF document.
+
+## Minimal single-shape GLB
+
+```typescript
+import type { TopoDS_Shape } from 'libcascade';
+import { getOc } from './libcascade-init';
+
+export const shapeToGlb = async (shape: TopoDS_Shape): Promise<Uint8Array> => {
+  const oc = await getOc();
+
+  using docName = new oc.TCollection_ExtendedString('doc', true);
+  const doc = new oc.TDocStd_Document(docName);
+  const shapeTool = oc.XCAFDoc_DocumentTool.ShapeTool(doc.Main()).get();
+  shapeTool.AddShape(shape, false, false);
+
+  using _mesh = new oc.BRepMesh_IncrementalMesh(shape, 0.1, false, 0.5, false);
+
+  const path = `/out_${Date.now()}.glb`;
+  using asciiPath = new oc.TCollection_AsciiString(path);
+  using writer = new oc.RWGltf_CafWriter(asciiPath, true); // true = binary GLB
+  using metadata = new oc.TColStd_IndexedDataMapOfStringString();
+  using progress = new oc.Message_ProgressRange();
+  writer.Perform(doc, metadata, progress);
+
+  const bytes = oc.FS.readFile(path) as Uint8Array;
+  oc.FS.unlink(path);
+  return bytes;
+};
+```
+
+## Per-shape PBR material
+
+Attach a `XCAFDoc_VisMaterial` to a shape label and the GLB writer emits a glTF
+`materials[]` entry with PBR base color, metalness, and roughness.
+
+```typescript
+const shapeLabel = shapeTool.AddShape(shape, false, false);
+
+using matName = new oc.TCollection_AsciiString('Brass');
+const vmTool = oc.XCAFDoc_DocumentTool.VisMaterialTool(doc.Main()).get();
+using visMat = new oc.XCAFDoc_VisMaterial();
+using pbr = new oc.XCAFDoc_VisMaterialPBR();
+pbr.BaseColor = new oc.Quantity_ColorRGBA(0.85, 0.65, 0.13, 1);
+pbr.Metallic = 0.9;
+pbr.Roughness = 0.25;
+visMat.SetPbrMaterial(pbr);
+const matLabel = vmTool.AddMaterial(visMat, matName);
+vmTool.SetShapeMaterial(shapeLabel, matLabel);
+```
+
+## Tessellation tolerances
+
+`BRepMesh_IncrementalMesh(shape, linearDeflection, isRelative, angularDeflection, inParallel)`
+
+| Param | Typical value | Effect |
+|---|---|---|
+| linearDeflection | 0.05 – 0.5 mm | Max chord–surface distance |
+| isRelative | `false` | When `true`, deflection scales with bbox |
+| angularDeflection | 0.5 rad | Max angle between facets along a curve |
+| inParallel | `false` | Single-threaded in browser builds |
+
+Tighten linear deflection for small features (M3 threads need ~0.01 mm).
+OCCT caches triangulation on the shape; pass `decreate=true` as the third
+positional argument to force regeneration when you change tolerances.
+
+## Coordinate system
+
+GLB is **Y-up** by convention; OCCT is **Z-up**. `RWGltf_CafWriter` emits Z-up
+data and lets the consumer interpret it. Most three.js workflows pre-rotate
+the scene with `-Math.PI/2` around the X axis to align with glTF Y-up
+expectations.
+
+## Validating the output
+
+- [glTF Viewer (Don McCurdy)](https://gltf-viewer.donmccurdy.com/) — drag-drop validation.
+- [gltf-validator](https://github.com/KhronosGroup/glTF-Validator) — Node CLI for CI.
+- Open in Blender — full PBR roundtrip with materials.

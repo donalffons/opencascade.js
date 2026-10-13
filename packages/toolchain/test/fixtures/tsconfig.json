@@ -1,0 +1,14 @@
+{
+  // Compile-failure gate. Driven by `test/fixtures.test.ts`, never by
+  // `npm run typecheck` — the negative fixtures are *supposed* to fail here.
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@libcascade/toolchain": ["../../src/index.ts"]
+    }
+  },
+  "include": ["negative/**/*.ts", "positive/**/*.ts"],
+  // Drop the parent's `exclude` (which exists to keep these files out of
+  // `npm run typecheck`); it would otherwise exclude this project's own inputs.
+  "exclude": []
+}

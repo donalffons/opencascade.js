@@ -1,0 +1,75 @@
+{
+  "description": "Pre-state snapshot before ocjs-bindgen-unknown-coverage R1-R7 fixes (audit Appendix C)",
+  "captured_at": "2026-05-15T16:35:00+12:00",
+  "artifact": "dist/opencascade_full.d.ts",
+  "size_bytes": 11657365,
+  "unknown_counts": {
+    "total_word_boundary": 4984,
+    "top_level_aliases": 57,
+    "return_position": 2108,
+    "param_position": 2961,
+    "unknown_array": 26
+  },
+  "any_type_report_buckets": [
+    {
+      "reason": "unbound_reference",
+      "count": 4446,
+      "distinct_types": 132
+    },
+    {
+      "reason": "unrecognized_template",
+      "count": 538,
+      "distinct_types": 81
+    }
+  ],
+  "expected_targets": {
+    "after_R1": {
+      "delta_unknown": -150,
+      "sentinels_rebaselined": [
+        "#4",
+        "#10"
+      ]
+    },
+    "after_R2": {
+      "delta_unknown": -2400,
+      "sentinels_rebaselined": [
+        "#2",
+        "#4",
+        "#7",
+        "#10"
+      ]
+    },
+    "after_R3": {
+      "delta_unknown": -750,
+      "sentinels_rebaselined": "broad"
+    },
+    "after_R4": {
+      "delta_unknown": -150,
+      "sentinels_rebaselined": [
+        "#7"
+      ]
+    },
+    "after_R5": {
+      "delta_unknown": -538,
+      "sentinels_rebaselined": [
+        "#2"
+      ]
+    },
+    "after_R6": {
+      "delta_top_level_aliases": -27,
+      "sentinels_rebaselined": [
+        "#3",
+        "#4"
+      ]
+    },
+    "after_R7": {
+      "delta_unknown": -7,
+      "sentinels_rebaselined": [
+        "#9"
+      ]
+    },
+    "final_target_unknown_total": 500,
+    "final_target_top_level_aliases": 0,
+    "final_target_return_position": 100
+  }
+}

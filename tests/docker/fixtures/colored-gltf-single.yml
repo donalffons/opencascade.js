@@ -1,0 +1,40 @@
+mainBuild:
+  name: customBuild.colored-gltf-single.js
+  bindings:
+    - symbol: BRepMesh_IncrementalMesh
+    - symbol: BRepMesh_DiscretRoot
+    - symbol: BRepBuilderAPI_Command
+    - symbol: BRepBuilderAPI_MakeShape
+    - symbol: BRepPrimAPI_MakeBox
+    - symbol: CDM_Document
+    - symbol: Message_ProgressRange
+    - symbol: Quantity_ColorRGBA
+    - symbol: RWGltf_CafWriter
+    - symbol: Standard_Transient
+    - symbol: TCollection_AsciiString
+    - symbol: TCollection_ExtendedString
+    - symbol: TDataStd_GenericEmpty
+    - symbol: TDF_Attribute
+    - symbol: TDF_Label
+    - symbol: TDocStd_Document
+    - symbol: TopoDS_Shape
+    - symbol: XCAFDoc_ColorTool
+    - symbol: XCAFDoc_ColorType
+    - symbol: XCAFDoc_DocumentTool
+    - symbol: XCAFDoc_ShapeTool
+  emccFlags:
+    - -fwasm-exceptions
+    - -sEXPORT_ES6=1
+    - -sMODULARIZE
+    - -sALLOW_MEMORY_GROWTH=1
+    - -sEXPORTED_RUNTIME_METHODS=["FS","wasmMemory","getExceptionMessage","incrementExceptionRefcount","decrementExceptionRefcount"]
+    - -sINITIAL_MEMORY=128MB
+    - -sMAXIMUM_MEMORY=4GB
+    - -sUSE_FREETYPE=1
+    - --no-entry
+    - --emit-symbol-map
+    - -sSTACK_SIZE=8388608
+    - -sWASM_BIGINT
+    - -sEVAL_CTORS=2
+    - -msimd128
+    - -O3

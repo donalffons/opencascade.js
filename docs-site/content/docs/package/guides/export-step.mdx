@@ -1,0 +1,107 @@
+---
+title: Export STEP
+description: Write AP214 / AP242 STEP files via STEPControl_Writer and STEPCAFControl_Writer for assemblies.
+---
+
+STEP is the de-facto interchange format for parametric CAD. OCCT exposes two
+writers depending on whether you need an assembly tree.
+
+## Single shape — STEPControl_Writer
+
+```typescript
+import type { TopoDS_Shape } from 'libcascade';
+import { getOc } from './libcascade-init';
+
+export const shapeToStep = async (shape: TopoDS_Shape): Promise<Uint8Array> => {
+  const oc = await getOc();
+  using writer = new oc.STEPControl_Writer();
+  using progress = new oc.Message_ProgressRange();
+  oc.Interface_Static.SetIVal('write.step.schema', 5); // AP214
+
+  const transferStatus = writer.Transfer(
+    shape,
+    oc.STEPControl_StepModelType.STEPControl_AsIs,
+    true,
+    progress,
+  );
+  if (transferStatus !== oc.IFSelect_ReturnStatus.IFSelect_RetDone) {
+    throw new Error('STEP Transfer failed');
+  }
+
+  const path = `/out_${Date.now()}.step`;
+  const writeStatus = writer.Write(path);
+  if (writeStatus !== oc.IFSelect_ReturnStatus.IFSelect_RetDone) {
+    throw new Error('STEP Write failed');
+  }
+
+  const bytes = oc.FS.readFile(path) as Uint8Array;
+  oc.FS.unlink(path);
+  return bytes;
+};
+```
+
+Two return-status checks are mandatory — OCCT silently produces a zero-byte
+file otherwise.
+
+## Multi-shape assembly — STEPCAFControl_Writer
+
+For assemblies with named parts, per-shape colors, or PBR materials, write the
+shape into an XCAF document first, then use `STEPCAFControl_Writer.Perform`.
+**Never** use the empty-filename `Transfer` overload — it silently activates
+multi-file mode and emits an empty STEP body.
+
+```typescript
+import { getOc } from './libcascade-init';
+
+export const assemblyToStep = async (shapes: Array<{ name: string; shape: TopoDS_Shape }>) => {
+  const oc = await getOc();
+  using docName = new oc.TCollection_ExtendedString('doc', true);
+  const doc = new oc.TDocStd_Document(docName);
+  const shapeTool = oc.XCAFDoc_DocumentTool.ShapeTool(doc.Main()).get();
+
+  for (const { name, shape } of shapes) {
+    const label = shapeTool.AddShape(shape, false, false);
+    using nameStr = new oc.TCollection_ExtendedString(name, true);
+    oc.TDataStd_Name.Set(label, nameStr);
+  }
+
+  using writer = new oc.STEPCAFControl_Writer();
+  using progress = new oc.Message_ProgressRange();
+  oc.Interface_Static.SetIVal('write.step.schema', 5);
+
+  const path = `/asm_${Date.now()}.step`;
+  const ok = writer.Perform(doc, path, progress);
+  if (!ok) throw new Error('STEP assembly write failed');
+
+  const bytes = oc.FS.readFile(path) as Uint8Array;
+  oc.FS.unlink(path);
+  return bytes;
+};
+```
+
+## Schema selection
+
+| Code | Schema | Use when |
+|---|---|---|
+| 1 | AP203 (config control) | Legacy mech CAD; avoid for new work |
+| 4 | AP214 (auto industry) | Default — broad tool support |
+| 5 | AP214 (alt revision) | Recommended for new projects |
+| 6 | AP242 (managed model-based) | If you need PMI / PBR materials |
+
+AP242 emits the same geometry as AP214 plus product manufacturing information
+attached to the model. Most consumers (Fusion 360, SolidWorks, FreeCAD)
+auto-detect schema and treat 5 and 6 interchangeably for pure geometry.
+
+## Bytes out, file in
+
+- **Browser**: `URL.createObjectURL(new Blob([bytes], { type: 'application/step' }))`
+  and trigger a download via a hidden `<a>` tag.
+- **Node**: `fs.writeFileSync('out.step', bytes)`.
+- **Cloud**: pipe directly to S3 / GCS as `application/octet-stream`.
+
+## Common pitfalls
+
+- Check `IFSelect_RetDone` after **both** `Transfer` and `Write` — partial
+  failures are silent otherwise.
+- Always `unlink` the MEMFS path after `FS.readFile` to free the wasm heap.
+- `FS.readFile` returns owned bytes that remain valid after `unlink`.

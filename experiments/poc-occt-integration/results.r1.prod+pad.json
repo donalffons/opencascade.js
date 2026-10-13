@@ -1,0 +1,246 @@
+{
+  "ts": "2026-05-28T03:05:06.926Z",
+  "libembindMode": "prod+pad",
+  "tests": [
+    {
+      "group": "1",
+      "name": "A: box+mesh (5 args explicit)",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 12,
+      "detail": "must build and mesh a 1x1x1 box"
+    },
+    {
+      "group": "1",
+      "name": "B: box+mesh (5 args explicit)",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 12,
+      "detail": "must build and mesh a 1x1x1 box"
+    },
+    {
+      "group": "1",
+      "name": "A: sphere+mesh (5 args explicit)",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "must build and mesh a sphere"
+    },
+    {
+      "group": "1",
+      "name": "B: sphere+mesh (5 args explicit)",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "must build and mesh a sphere"
+    },
+    {
+      "group": "2",
+      "name": "A: IM(shape, 0.5) — fan-out picks 2-arg form",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "production bindgen emits 4 arity-truncated registrations; arity-2 form exists"
+    },
+    {
+      "group": "2",
+      "name": "A: IM(shape, 0.5, false) — fan-out picks 3-arg form",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "production bindgen arity-3 form"
+    },
+    {
+      "group": "2",
+      "name": "A: IM(shape, 0.5, false, 0.5) — fan-out picks 4-arg form",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "production bindgen arity-4 form"
+    },
+    {
+      "group": "3",
+      "name": "B: IM(shape, 0.5) — arity-pad to {0,5} target=5",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "pad 3 trailing positions with undefined → nullopt → value_or(false,0.5,false)"
+    },
+    {
+      "group": "3",
+      "name": "B: IM(shape, 0.5, false) — arity-pad to {0,5} target=5",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "pad 2 trailing positions"
+    },
+    {
+      "group": "3",
+      "name": "B: TopExp_Explorer(shape, FACE) — arity-pad to {0,3} target=3",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": true,
+      "detail": "pad 1 trailing position"
+    },
+    {
+      "group": "4",
+      "name": "A vs B box parity (5 args explicit)",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 12,
+      "detail": "identical mesh output is the correctness guarantee for the std::optional path"
+    },
+    {
+      "group": "4",
+      "name": "A vs B sphere parity (5 args explicit)",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "identical mesh output"
+    },
+    {
+      "group": "5",
+      "name": "A: omitted-args mesh equals all-explicit mesh",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "production fan-out should apply C++ defaults equivalently"
+    },
+    {
+      "group": "7",
+      "name": "B: MakeSphere(10) — exact arity 1, no pad",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "baseline arity-1 ctor still works"
+    },
+    {
+      "group": "7",
+      "name": "B: MakeSphere(10, π/2) — C1 picks (R, angle) overload at arity 2",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 1,
+      "detail": "C1 type-dispatch must pick (double, double) overload by argument types"
+    },
+    {
+      "group": "7",
+      "name": "B: MakeSphere(pnt, 10) — C1 picks (Pnt, R) overload at arity 2",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 1,
+      "detail": "C1 type-dispatch must pick (gp_Pnt, double) overload by argument types"
+    },
+    {
+      "group": "8",
+      "name": "B: AmbigCtor() — exact arity 0",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": "default",
+      "detail": "default ctor exact match — no padding"
+    },
+    {
+      "group": "8",
+      "name": "B: AmbigCtor(pnt, 5) — exact arity 2, C1 picks Pnt overload",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": "pnt",
+      "detail": "C1 type-dispatch picks Pnt at exact arity, no padding involved"
+    },
+    {
+      "group": "8",
+      "name": "B: AmbigCtor(pnt) — pad arity 1 → 2, C1 picks Pnt with optional nullopt",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": "pnt+pad",
+      "detail": "arity-pad + C1 type-dispatch composition on real overload group"
+    },
+    {
+      "group": "9",
+      "name": "B: HandleIM(shape, 0.5) — smart_ptr<handle> + arity-pad + std::optional",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "production smart_ptr<handle<T>> composes with std::optional + arity-pad"
+    },
+    {
+      "group": "9",
+      "name": "B: HandleIM(shape, 0.5, false, 0.5, false) — full-arity smart_ptr call",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "full-arity baseline for HandleIM"
+    },
+    {
+      "group": "9",
+      "name": "B: HandleIM omitted vs explicit triangle parity",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "smart_ptr path must produce identical mesh under arity-pad"
+    },
+    {
+      "group": "6",
+      "name": "B: mesh_sphere_via_optional(10, 0.5) — single-overload omits 3 trailing args",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "proves std::optional padding works on real OCCT for single-overload functions"
+    },
+    {
+      "group": "6",
+      "name": "B: mesh_sphere_via_optional(10, 0.5, false, 0.5, false) — all explicit",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "parity check: explicit-args call against same single-overload function"
+    },
+    {
+      "group": "6",
+      "name": "B: omitted-args triangle count equals explicit-args count",
+      "expected": "pass",
+      "outcome": "pass",
+      "expectationMet": true,
+      "value": 306,
+      "detail": "C++ defaults (Ang=0.5, rel=F, par=F) applied via .value_or() match all-explicit"
+    }
+  ],
+  "summary": {
+    "expectationsMet": 25,
+    "total": 25,
+    "rate": "25/25",
+    "bundleSize": {
+      "wasmCurrent": 3477218,
+      "wasmOptional": 3490982,
+      "wasmDelta": 13764,
+      "jsCurrent": 106045,
+      "jsOptional": 112199,
+      "jsDelta": 6154,
+      "combinedDelta": 19918
+    }
+  },
+  "verdict": "R1 validated: the 3 Gate-1 hunks compose cleanly with the CURRENT production libembind patch on real OCCT."
+}

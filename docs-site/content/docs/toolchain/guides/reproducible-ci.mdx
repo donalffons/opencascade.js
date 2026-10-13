@@ -1,0 +1,136 @@
+---
+title: Reproducible CI
+description: Pin the toolchain version, let it pin the image digest, and gate builds on manifest validation, drift checks, and an artifact hash.
+---
+
+A reproducible custom build means: same inputs, same wasm bytes, every time.
+The toolchain closes most of that loop for you — what is left is choosing where
+to run it and what to assert afterwards.
+
+## 1. Pin the toolchain, not a tag
+
+```json title="package.json"
+{
+  "devDependencies": {
+    "@libcascade/toolchain": "{{version}}",
+    "libcascade": "{{version}}"
+  }
+}
+```
+
+Commit your lockfile. The toolchain package ships `images.json`, in which each
+image tag was resolved to an immutable `ghcr.io/taucad/opencascade.js@sha256:…`
+digest at publish time. `@libcascade/toolchain@{{version}}` therefore names one
+reproducible build environment forever, and `npm ls` answers "which toolchain
+built this artifact".
+
+The driver runs `repository@digest` — never a tag — and verifies the local repo
+digest after pulling. A mismatch is an error naming both digests, not a silent
+roll-forward.
+
+This replaces the pattern it supersedes: an image tag pasted into a shell
+script that had to be kept in sync by hand with the `libcascade` version the
+application depended on.
+
+Because the toolchain and `libcascade` are lockstep-versioned, keeping the two
+dependencies on the same version is the whole compatibility story.
+
+## 2. Run it where a container engine exists
+
+```yaml title=".github/workflows/wasm-build.yml"
+jobs:
+  build-wasm:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npx libcascade check src
+      - run: npx libcascade build
+      - run: npx libcascade assemble
+      - name: Assert wasm hash
+        run: |
+          EXPECTED=$(cat .wasm-hash)
+          ACTUAL=$(sha256sum dist/myapp_single.wasm | cut -d' ' -f1)
+          [ "$EXPECTED" = "$ACTUAL" ] || { echo "wasm hash drift"; exit 1; }
+```
+
+GitHub-hosted **macOS runners ship no container engine at all** — run toolchain
+builds on a Linux runner. The driver's engine probe order is
+`$LIBCASCADE_CONTAINER_CMD`, then `docker`, then `podman`; if none responds it
+fails with install options rather than a cryptic `ENOENT`.
+
+Three gates are doing work in that job:
+
+- `check` fails when your source references a symbol the config does not bind —
+  the failure that otherwise reaches production as a runtime `BindingError`.
+- `build` fails when the container's `build-manifest.json` reports
+  `validation_passed: false`, printing the unsatisfied symbols.
+- The hash assertion catches everything else. If `EXPECTED` and `ACTUAL`
+  diverge, something changed — either intentionally (bump `.wasm-hash`) or by
+  accident (investigate).
+
+## 3. Keep the provenance sidecars
+
+Every variant build emits `<outputName>.provenance.json` next to the binary,
+recording the active compile preset, flags, and the source commit the wasm was
+built from. Diff those across builds to detect surprise cache turnover, and
+publish them with your package.
+
+## 4. Verify the image supply chain (optional)
+
+The driver already proves the image is the digest the toolchain pinned. If your
+threat model wants the signature too, verify it before the build step. Every
+published image is signed with [cosign](https://github.com/sigstore/cosign) via
+OIDC keyless signing, with the signature on the manifest-list digest — one
+signature verifies regardless of which architecture pulls it.
+
+```bash
+IMAGES=node_modules/@libcascade/toolchain/generated/images.json
+REF="$(jq -r '.repository + "@" + .singleThreaded.digest' "$IMAGES")"
+
+cosign verify "$REF" \
+  --certificate-identity-regexp 'https://github.com/taucad/opencascade\.js/\.github/workflows/docker\.yml@.*' \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com
+```
+
+A successful verification confirms the image was built by the
+`taucad/opencascade.js` GitHub Actions `docker.yml` workflow and has not been
+tampered with since publication.
+
+The image also ships a SLSA provenance attestation and an SBOM:
+
+```bash
+cosign verify-attestation --type slsaprovenance \
+  --certificate-identity-regexp 'https://github\.com/taucad/opencascade\.js/\.github/workflows/docker\.yml@.*' \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+  "$REF"
+
+docker buildx imagetools inspect --format '{{ json .SBOM }}' "$REF"
+```
+
+The SBOM lists every apt package and pinned commit (OCCT, freetype, rapidjson)
+in the image. Diff it against the previous digest's SBOM to flag unexpected
+dependency bumps.
+
+## 5. Never opt out in CI
+
+`$LIBCASCADE_IMAGE` points the driver at any locally reachable image and skips
+digest verification, printing a provenance warning when it does. That is a dev
+loop, not a CI setting. Leave it unset in every automated build.
+
+## Upstream reproducibility
+
+The repository runs `.github/workflows/reproducibility.yml` weekly and on
+demand: two isolated Linux/amd64 cold builds in parallel, runtime smoke for
+each, and an exact artifact-ledger comparison. Stable npm publication invokes
+that same exact-commit gate; canary and beta builds keep the single-candidate
+path and rely on scheduled cold coverage.
+
+## Related
+
+- [Driver environment](../reference/env-vars) — engine probing, overrides, and what each one forfeits.
+- [CLI reference](../reference/cli) — the commands this workflow runs.
+- [Docker image](../reference/docker-image) — tags, labels, and the stage layout behind the digests.

@@ -1,0 +1,95 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+@source '../node_modules/fumadocs-ui/dist/**/*.js';
+@source '../node_modules/streamdown/dist/*.js';
+
+/*
+ * Streamdown ships shadcn/ui token class names (`text-foreground`, `bg-muted`,
+ * `text-muted-foreground`, `text-primary`, `border-border`) on the markdown
+ * elements it renders by default — most visibly its Shiki code blocks and
+ * tables. Fumadocs exposes the same palette under `--color-fd-*` tokens, so we
+ * alias the shadcn names onto the Fumadocs ones. `@theme inline` keeps the
+ * utilities referencing the `--color-fd-*` variables at use-site, so they flip
+ * automatically between light and dark with the rest of the theme.
+ */
+@theme inline {
+  --color-foreground: var(--color-fd-foreground);
+  --color-muted: var(--color-fd-muted);
+  --color-muted-foreground: var(--color-fd-muted-foreground);
+  --color-border: var(--color-fd-border);
+  --color-primary: var(--color-fd-primary);
+}
+
+/**
+ * API-reference signature token palette — aligned with VSCode's default
+ * TypeScript *semantic* highlighting (Default Light Modern / Default Dark
+ * Modern) so a signature line is coloured the way an editor would colour the
+ * equivalent `.d.ts`. The previous palette painted every OCCT identifier
+ * (class titles, `extends` chips, member names AND type references) with one
+ * purple `fn` hue, which made purple dominate the page.
+ *
+ * Mapping (VSCode semantic token → token below):
+ *   keyword  (`storage`/`keyword`: extends, readonly, new, constructor) →
+ *            keyword hue   (Light #AF00DB / Dark #C586C0 — VSCode's magenta)
+ *   type     (`entity.name.type`/`class`: OCCT classes, void, boolean,
+ *            number, return + param types) →
+ *            type hue      (Light #267F99 / Dark #4EC9B0 — VSCode's teal)
+ *   variable / `entity.name.function` (param names, method/property names,
+ *            identifiers) → plain foreground (`--color-fd-foreground`)
+ *   punctuation (`()`, `:`, `<>`, `|`, `?`, `...`) →
+ *            muted foreground (`--color-fd-muted-foreground`)
+ *
+ * `--color-api-fn` is retained solely for `{@link}` cross-reference links in
+ * the description prose (`api-markdown.tsx`), where an accent link colour is
+ * conventional and intentional.
+ */
+@theme {
+  --color-api-keyword: #af00db;
+  --color-api-type: #267f99;
+  --color-api-fn: #6f42c1;
+}
+
+.dark {
+  --color-api-keyword: #c586c0;
+  --color-api-type: #4ec9b0;
+  --color-api-fn: #b392f0;
+}
+
+body {
+  font-family:
+    'Inter',
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+/**
+ * Deep-link highlight. When the page loads with (or navigates to) a
+ * `#Class` / `#Class__kind__idx` hash, `ApiHashHighlight` adds this class to
+ * the target class card / member row to flash a primary-tinted ring that fades
+ * out. Box-shadow only (no background) so the card's `bg-fd-card` is never
+ * momentarily overridden, and the ring respects each element's own rounded
+ * corners. Theme-aware via the Fumadocs `--color-fd-primary` token.
+ */
+@keyframes api-anchor-flash {
+  0%,
+  12% {
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--color-fd-primary) 65%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 2px transparent;
+  }
+}
+
+.api-anchor-flash {
+  animation: api-anchor-flash 1.6s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .api-anchor-flash {
+    animation-duration: 0.01ms;
+  }
+}

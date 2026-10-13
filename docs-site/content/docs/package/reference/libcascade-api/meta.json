@@ -1,0 +1,9 @@
+{
+  "title": "libcascade API",
+  "pages": [
+    "init-function",
+    "module-shape",
+    "exception-classes",
+    "api-reference-data"
+  ]
+}

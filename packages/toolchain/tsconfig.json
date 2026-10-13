@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "types": ["node"],
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true,
+    "paths": {
+      "@libcascade/toolchain": ["./src/index.ts"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts",
+    "tsdown.config.ts",
+    "vitest.config.ts",
+    // The two real configs the renderer is proved against. The replicad one
+    // lives outside this repo and is only reachable through the `paths` mapping
+    // above (wave W1 adds no devDependency to the replicad workspace).
+    "../../libcascade.config.ts",
+    "../../../replicad/packages/replicad-opencascadejs/libcascade.config.ts"
+  ],
+  // The compile-failure gate has its own project (`test/fixtures/tsconfig.json`)
+  // driven by `test/fixtures.test.ts` — its negative fixtures are supposed to
+  // fail, so they must not fail `npm run typecheck`.
+  "exclude": ["test/fixtures/**"]
+}

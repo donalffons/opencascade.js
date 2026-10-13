@@ -1,0 +1,49 @@
+name: Bug report
+description: Report a reproducible defect in ocjs, its build, or its documentation.
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Do not report security vulnerabilities here; use private vulnerability reporting.
+  - type: input
+    id: version
+    attributes:
+      label: Package or image version
+      description: Use an exact npm version, source SHA, or GHCR tag.
+      placeholder: 3.0.0-canary.5bf5e36c
+    validations:
+      required: true
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: Runtime
+      options:
+        - Node.js
+        - Browser
+        - Docker
+        - Build toolchain
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Include code, configuration, inputs, and exact commands.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and logs
+      description: Remove secrets and sensitive data.
+    validations:
+      required: true

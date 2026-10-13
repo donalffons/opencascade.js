@@ -1,0 +1,167 @@
+---
+title: Calling OCCT from JavaScript
+description: How OCCT C++ surfaces project into JS — suffix-free overloads, val-dispatched calls, string enums, default args, and the TopoDS bridge.
+---
+
+The libcascade bindings present OCCT to JavaScript through a handful of conventions
+that hide most of the C++ idioms. This page covers the call-site rules that
+apply to every API surface — constructors, methods, statics, and downcasts. For
+the shape of what comes back, see [Return shapes](./return-shapes).
+
+## A worked example, top to bottom
+
+Most of the rules below show up in this 8-line construction of an arc-edge:
+
+```typescript
+using p1 = new oc.gp_Pnt(0, 0, 0);
+using p2 = new oc.gp_Pnt(5, 0, 5);
+using p3 = new oc.gp_Pnt(10, 0, 0);
+using arcMaker = new oc.GC_MakeArcOfCircle(p1, p2, p3);
+using curve = arcMaker.Value();          // Geom_TrimmedCurve smart pointer
+using edge = new oc.BRepBuilderAPI_MakeEdge(curve);
+using shape = edge.Edge();               // TopoDS_Edge
+using wire = new oc.BRepBuilderAPI_MakeWire(shape);
+```
+
+No `_2` / `_3` suffixes. No `Handle_*` wrappers. No `.get()` unwraps. No
+manual `.delete()`. The rest of the page explains why each line works.
+
+## No more `_N` overload suffixes
+
+libcascade V3 removed the legacy `_N` overload suffixes. You always call the
+suffix-free constructor or method; the runtime picks the right overload based
+on arity and argument shape.
+
+```typescript
+using p = new oc.gp_Pnt(1, 2, 3);                 // not gp_Pnt_3
+using box1 = new oc.BRepPrimAPI_MakeBox(10, 20, 30);
+using origin = new oc.gp_Pnt(1, 2, 3);
+using box2 = new oc.BRepPrimAPI_MakeBox(origin, 10, 20, 30);
+using corner = new oc.gp_Pnt(5, 10, 15);
+using box3 = new oc.BRepPrimAPI_MakeBox(origin, corner);
+```
+
+`gp_Pnt`, `BRepPrimAPI_MakeBox`, `BRepBuilderAPI_MakeEdge` — every multi-arity
+constructor surface works this way.
+
+## Overload dispatch is by argument shape
+
+Same-arity overloads are picked at call time by a small JS-side dispatcher.
+You don't pick the overload — you pass arguments of the right shape and the
+binding routes the call.
+
+Three kinds of dispatch you'll see most often:
+
+- **By class type** — `BRepBuilderAPI_MakeEdge(gp_Pnt, gp_Pnt)` and
+  `BRepBuilderAPI_MakeEdge(TopoDS_Vertex, TopoDS_Vertex)` both have arity 2;
+  the dispatcher routes by `instanceof`.
+- **By integer vs float** — `gp_XY.SetCoord(1, 5.0)` routes to the indexed
+  overload (`Number.isInteger(1) === true`). Float-only forms use the
+  coordinate overload.
+- **By enum value** — passing `oc.IntSurf_TypeTrans.IntSurf_In` selects the
+  enum-tagged constructor variant.
+
+Where C++ has parallel `int` and `size_t` overloads the bindgen collapses them
+to a single JS signature. `list.FindKey(1)` works without disambiguation.
+
+## Methods returning values use `()`
+
+Every value-returning accessor is a method call, not a property. The most
+common gotcha is reading a `gp_Pnt` as if its coordinates were fields:
+
+```typescript
+// Right — method calls.
+using p = new oc.gp_Pnt(1, 2, 3);
+console.log(p.X(), p.Y(), p.Z()); // 1 2 3
+
+// Wrong — these are the bound functions, not numbers.
+console.log(p.X, p.Y, p.Z);       // [Function: X] [Function: Y] [Function: Z]
+```
+
+The same rule applies to `face.IsNull()`, `list.Size()`, `curve.FirstParameter()`,
+and every other "looks like a getter" surface in the binding.
+
+## Enums are string-valued object members
+
+Every C++ enum is exposed as a plain JS object whose members are strings whose
+value equals the member name:
+
+```typescript
+oc.TopAbs_ShapeEnum.TopAbs_EDGE === 'TopAbs_EDGE';   // true
+oc.TopAbs_Orientation.TopAbs_FORWARD === 'TopAbs_FORWARD';
+```
+
+Always reach for the object-member spelling — it's the form IntelliSense
+surfaces, the bindings emit `.d.ts` types for, and the smoke tests use:
+
+```typescript
+using box = new oc.BRepPrimAPI_MakeBox(10, 10, 10);
+using shape = box.Shape();
+using explorer = new oc.TopExp_Explorer(
+  shape,
+  oc.TopAbs_ShapeEnum.TopAbs_FACE,
+  oc.TopAbs_ShapeEnum.TopAbs_SHAPE,
+);
+```
+
+Enum-typed return values are strings too:
+
+```typescript
+const transition = aline.TransitionOnS1();   // 'IntSurf_In'
+```
+
+There is no `.value` accessor — the member already _is_ the value.
+
+## Trailing default args fill themselves
+
+C++ default arguments work the way you'd expect: omit trailing parameters and
+the binding fills the C++ defaults.
+
+```typescript
+// BRepMesh_IncrementalMesh(shape, linearDeflection, isRelative=false,
+//                          angDeflection=0.5, isInParallel=false)
+using mesh = new oc.BRepMesh_IncrementalMesh(shape, 0.1);
+
+// BRepAlgoAPI_Fuse(S1, S2, ProgressRange=...)
+using fuse = new oc.BRepAlgoAPI_Fuse(s1, s2);
+```
+
+Non-trailing positions still need an argument — if you want to override
+`angDeflection` you must also pass `isRelative`.
+
+## `TopoDS` is the downcast bridge
+
+`oc.TopoDS` is the namespace bridge for casting a `TopoDS_Shape` down to its
+concrete subtype. Each member is a free function that takes a generic shape
+and returns the typed wrapper.
+
+```typescript
+using explorer = new oc.TopExp_Explorer(
+  shape,
+  oc.TopAbs_ShapeEnum.TopAbs_EDGE,
+  oc.TopAbs_ShapeEnum.TopAbs_SHAPE,
+);
+using current = explorer.Current();
+using edge = oc.TopoDS.Edge(current);            // typed TopoDS_Edge
+```
+
+The same shape exists for `Face`, `Wire`, `Vertex`, `Shell`, `Solid`,
+`CompSolid`, and `Compound`. Each is a function, not a constructor — no `new`.
+
+## Errors throw `WebAssembly.Exception`
+
+When OCCT raises a C++ exception, it surfaces in JS as a `WebAssembly.Exception`
+carrying the typed C++ tag. Decoding the tag gives you the actual OCCT error
+(e.g. `Standard_DomainError`, `Standard_NullObject`). See the dedicated
+[Debugging WASM exceptions](../guides/debugging-wasm-exceptions) guide for the
+matching pattern; this concepts page intentionally stays out of the
+runtime-decoding weeds.
+
+## Related
+
+- [Return shapes](./return-shapes) — what comes back from a call: native values,
+  in-place class outputs, envelopes, and Handle elision.
+- [Handles and collections](./handles-and-collections) — smart-pointer surfaces
+  (`isNull` / `nullify`) and the `NCollection_*` containers.
+- [Memory and disposables](./memory-and-disposables) — the `using` rule and the
+  `DisposableStack` patterns for ownership transfer.

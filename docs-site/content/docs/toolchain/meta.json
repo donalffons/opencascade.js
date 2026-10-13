@@ -1,0 +1,33 @@
+{
+  "title": "Toolchain",
+  "description": "Build a custom WASM from a typed config — trim symbols, extend with C++, ship reproducible CI.",
+  "icon": "lib:webassembly",
+  "root": true,
+  "pages": [
+    "index",
+    "---Getting Started---",
+    "getting-started/quick-start",
+    "getting-started/migrate-from-yaml",
+    "---Guides---",
+    "guides/trim-symbols",
+    "guides/custom-emcc-flags",
+    "guides/extend-with-cpp",
+    "guides/multi-threading",
+    "guides/detect-and-check",
+    "guides/derive-cpp-class-in-js",
+    "guides/reproducible-ci",
+    "---Concepts---",
+    "concepts/variants-and-assemble",
+    "concepts/bindgen-pipeline",
+    "concepts/two-channel-config-model",
+    "---Reference---",
+    "reference/config",
+    "reference/cli",
+    "reference/env-vars",
+    "reference/docker-image",
+    "---Internals---",
+    "reference/yaml-schema",
+    "reference/configurations",
+    "reference/cli-build-wasm"
+  ]
+}

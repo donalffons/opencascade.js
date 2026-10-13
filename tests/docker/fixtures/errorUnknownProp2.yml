@@ -1,0 +1,10 @@
+# tests/docker/fixtures/errorUnknownProp2.yml
+#
+# Negative fixture (modern port of legacy test/customBuilds/errorUnknownProp2.yml):
+# an unknown key at the TOP level of the config. As with errorUnknownProp1, the
+# strict Cerberus schema must reject this with a non-zero exit.
+mainBuild:
+  name: customBuild.errorUnknownProp2.js
+  bindings:
+    - symbol: TopoDS_Shape
+foo: bar

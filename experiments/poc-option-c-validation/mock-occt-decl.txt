@@ -1,0 +1,3 @@
+StrTool Set arg const_char_ptr arg OpenMode default ReadOnly
+CurveTool GetCurve arg const_Edge_ref arg double default 0.99
+Combo Proc arg const_char_ptr arg double default 0.99

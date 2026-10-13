@@ -1,0 +1,112 @@
+---
+title: Quickstart — npm
+description: Install libcascade, render a 60×40×20 box with a 3 mm fillet, and export GLB.
+---
+
+Target time: **4 minutes** from an empty directory to an orbit-controlled box
+in your browser.
+
+## Prerequisites
+
+- Node 22+ and pnpm 9+ (npm and yarn also work).
+- A bundler that supports wasm imports — Vite 6+, Next 15+, or Bun.
+
+## 1. Install
+
+```bash
+pnpm add libcascade three
+pnpm add -D @types/three typescript
+```
+
+## 2. Import the instance
+
+```typescript title="src/build-shape.ts"
+import oc from 'libcascade';
+```
+
+The root entry probes the host, picks the variant it supports, and initialises
+the WASM module with a top-level `await`. Module evaluation happens once per
+realm, so there is nothing to memoise — every importer shares one C++ heap.
+
+Need to control *when* that happens, or pass `locateFile` for a relocated
+binary? Import `createInstance` from `libcascade/init` instead; see
+[Entry points](../reference/libcascade-api/init-function).
+
+## 3. Build a shape
+
+```typescript title="src/build-shape.ts"
+import oc from 'libcascade';
+
+export const buildFilletedBox = async () => {
+  using box = new oc.BRepPrimAPI_MakeBox(60, 40, 20);
+  using fillet = new oc.BRepFilletAPI_MakeFillet(box.Shape());
+  using explorer = new oc.TopExp_Explorer(box.Shape(), oc.TopAbs_ShapeEnum.TopAbs_EDGE);
+  while (explorer.More()) {
+    fillet.Add(3, oc.TopoDS.Edge(explorer.Current()));
+    explorer.Next();
+  }
+  return fillet.Shape();
+};
+```
+
+Every OCCT object is disposable — `using` invokes `Symbol.dispose()` at scope
+exit so the C++ heap doesn't leak.
+
+## 4. Export to GLB
+
+```typescript title="src/shape-to-glb.ts"
+import oc, { type TopoDS_Shape } from 'libcascade';
+
+export const shapeToGlb = async (shape: TopoDS_Shape): Promise<Uint8Array> => {
+  using docName = new oc.TCollection_ExtendedString('doc', true);
+  const doc = new oc.TDocStd_Document(docName);
+  oc.XCAFDoc_DocumentTool.ShapeTool(doc.Main()).get().AddShape(shape, false, false);
+  using _mesh = new oc.BRepMesh_IncrementalMesh(shape, 0.1, false, 0.5, false);
+  const path = `/out_${Date.now()}.glb`;
+  using asciiPath = new oc.TCollection_AsciiString(path);
+  using writer = new oc.RWGltf_CafWriter(asciiPath, true);
+  using metadata = new oc.TColStd_IndexedDataMapOfStringString();
+  using progress = new oc.Message_ProgressRange();
+  writer.Perform(doc, metadata, progress);
+  const bytes = oc.FS.readFile(path) as Uint8Array;
+  oc.FS.unlink(path);
+  return bytes;
+};
+```
+
+## 5. Render in three.js
+
+```typescript title="src/main.ts"
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { buildFilletedBox } from './build-shape';
+import { shapeToGlb } from './shape-to-glb';
+
+const canvas = document.querySelector<HTMLCanvasElement>('#viewer')!;
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 5000);
+camera.position.set(100, 100, 100);
+scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+const dir = new THREE.DirectionalLight(0xffffff, 1);
+dir.position.set(1, 1, 1);
+scene.add(dir);
+new OrbitControls(camera, renderer.domElement);
+
+const shape = await buildFilletedBox();
+const glb = await shapeToGlb(shape);
+new GLTFLoader().parse(glb.buffer, '', (gltf) => scene.add(gltf.scene));
+
+renderer.setAnimationLoop(() => renderer.render(scene, camera));
+```
+
+Visit `localhost:5173` and you'll see a filleted gray box you can orbit.
+
+> **Want threading?** For batch meshing and boolean workloads, import `createInstance` from `libcascade/multi/init`. Browser deployments require COOP/COEP headers — see the [Multi-threaded build guide](../guides/multi-threading) and [Bundler & locateFile — Multi-threaded variant](../guides/bundler-locatefile#multi-threaded-variant).
+
+## Next steps
+
+- Need a different bundler? See [Bundler & locateFile](../guides/bundler-locatefile).
+- Want a smaller wasm? See [Trim symbols](/docs/toolchain/guides/trim-symbols).
+- Looking for STEP instead of GLB? See [Export STEP](../guides/export-step).

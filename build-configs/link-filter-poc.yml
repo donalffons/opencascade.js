@@ -1,0 +1,66 @@
+# build-configs/link-filter-poc.yml
+#
+# 22-symbol replicad-like trim — smoke YAML for docker.yml CI.
+#
+# Refreshed against OCCT V8 per the production-readiness blueprint:
+#   docs/research/ocjs-docker-production-readiness-blueprint.md
+#   (Appendix: link-filter-poc.yml Refresh Procedure)
+#
+# Source of truth: tests/sentinel/test_link_filter_poc_yaml.py::POC_YAML_SCOPE.
+# The sentinel reachability test (test_link_ncollection_reachability.py) MAY
+# reference a wider superset (`_REPLICAD_LIKE_SCOPE`) for filter-completeness
+# assertions, but this YAML MUST remain at exactly 22 symbols to keep CI smoke
+# link time bounded. The drift-prevention test in tests/sentinel/ enforces this.
+#
+# Category coverage (6 OCCT subsystems × 22 symbols):
+#   Standard       : 2
+#   gp             : 6
+#   TopoDS         : 8
+#   BRepPrimAPI    : 2
+#   BRepBuilderAPI : 3
+#   Bnd            : 1
+mainBuild:
+  name: opencascade_linkfilter_poc.js
+  bindings:
+    # Standard infra (2)
+    - symbol: Standard_Transient
+    - symbol: Standard_Type
+    # gp (6)
+    - symbol: gp_Pnt
+    - symbol: gp_Vec
+    - symbol: gp_Dir
+    - symbol: gp_Trsf
+    - symbol: gp_Ax2
+    - symbol: gp_XYZ
+    # TopoDS (8)
+    - symbol: TopoDS
+    - symbol: TopoDS_Shape
+    - symbol: TopoDS_Edge
+    - symbol: TopoDS_Wire
+    - symbol: TopoDS_Face
+    - symbol: TopoDS_Solid
+    - symbol: TopoDS_Compound
+    - symbol: TopoDS_Iterator
+    # BRepPrimAPI (2)
+    - symbol: BRepPrimAPI_MakeBox
+    - symbol: BRepPrimAPI_MakeSphere
+    # BRepBuilderAPI (3)
+    - symbol: BRepBuilderAPI_MakeEdge
+    - symbol: BRepBuilderAPI_MakeFace
+    - symbol: BRepBuilderAPI_MakeWire
+    # Bnd (1)
+    - symbol: Bnd_Box
+  emccFlags:
+    - -fwasm-exceptions
+    - -sEXPORT_ES6=1
+    - -sMODULARIZE
+    - -sALLOW_MEMORY_GROWTH=1
+    - -sEXPORTED_RUNTIME_METHODS=["FS","getExceptionMessage","incrementExceptionRefcount","decrementExceptionRefcount"]
+    - -sINITIAL_MEMORY=64MB
+    - -sMAXIMUM_MEMORY=2GB
+    - --no-entry
+    - --emit-symbol-map
+    - -sSTACK_SIZE=8388608
+    - -sWASM_BIGINT
+    - -msimd128
+    - -O3

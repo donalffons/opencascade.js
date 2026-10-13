@@ -1,0 +1,144 @@
+---
+title: Emscripten settings and flags
+description: The recommended settings baseline for a custom build, flag-by-flag rationale, and the trade-offs behind SIMD, exceptions, and EVAL_CTORS.
+---
+
+Once the `bindings` list is right, the second knob is how the binary is linked.
+Three fields cover it:
+
+| Field | Holds |
+| --- | --- |
+| `settings` | Emscripten `-s` settings, typed against the image's own emsdk. |
+| `compilerFlags` | The closed set of non-`-s` flags worth typing (`-O3`, `-msimd128`, `-fwasm-exceptions`, `-flto`, `--no-entry`). |
+| `rawFlags` | Everything else, passed through verbatim after the typed flags. |
+
+## Recommended baseline
+
+```typescript title="libcascade.config.ts" notypecheck
+settings: {
+  MODULARIZE: true,                    // init() returns Promise<Module>
+  EXPORT_ES6: true,                    // ESM output
+  ALLOW_MEMORY_GROWTH: true,           // the 16 MB initial heap is not enough
+  INITIAL_MEMORY: '100MB',
+  MAXIMUM_MEMORY: '4GB',               // the wasm32 ceiling
+  STACK_SIZE: 8_388_608,
+  WASM_BIGINT: true,                   // no i64 legalisation shim
+  EXPORTED_RUNTIME_METHODS: [
+    'FS',
+    'getExceptionMessage',
+    'incrementExceptionRefcount',
+    'decrementExceptionRefcount',
+  ],
+  ENVIRONMENT: ['web', 'worker', 'node'],
+  EVAL_CTORS: 2,                       // static-init evaluation at build time
+},
+compilerFlags: { optimize: 'O3', simd: true, exceptions: 'wasm', noEntry: true },
+```
+
+## Setting-by-setting rationale
+
+| Setting | Why |
+| --- | --- |
+| `optimize: 'O3'` | Production LLVM optimisation. `'Os'` is a size-tuned alternative — benchmark it against your workload. `'O0'` is for debugging only. |
+| `exceptions: 'wasm'` | Native Wasm exception instructions instead of JavaScript `invoke_*` trampolines. |
+| `simd: true` | Baseline WebAssembly SIMD, supported across the package's browser matrix. |
+| `WASM_BIGINT: true` | Removes the i64↔i32-pair legalisation shim. |
+| `EVAL_CTORS: 2` | Runs static initialisers at build time. Smaller payload, faster startup. Requires `O2` or better. |
+| `MODULARIZE` + `EXPORT_ES6` | Required for the ESM glue the generated entries import. |
+| `ENVIRONMENT` | Strips dead environment detection. Without it the runtime probes for `process` / `window` / `importScripts`. |
+| `ALLOW_MEMORY_GROWTH` | Required for any non-trivial geometry. |
+| `MAXIMUM_MEMORY: '4GB'` | The wasm32 hard ceiling (2³² bytes). |
+| `STACK_SIZE: 8_388_608` | Deep OCCT recursion (offsets, booleans, healing) overflows emcc's 64 KB default, and an overflow corrupts static data before anything traps. The link step fills in 8 MB when you leave it unset, so set it only to change it. |
+
+Every setting name carries its upstream emsdk documentation as JSDoc, so
+hovering it in your editor shows what emcc says about it. There are 312 of
+them; the ones above are the ones a custom build normally touches.
+
+## The exception helpers are not optional
+
+emsdk 6.0.5 removed `-sEXPORT_EXCEPTION_HANDLING_HELPERS`. With
+`exceptions: 'wasm'` the link pipeline **hard-fails** unless these three are in
+`EXPORTED_RUNTIME_METHODS`:
+
+```typescript notypecheck
+EXPORTED_RUNTIME_METHODS: [
+  'getExceptionMessage',
+  'incrementExceptionRefcount',
+  'decrementExceptionRefcount',
+],
+```
+
+Add whatever else you need (`'FS'`, `'wasmMemory'`) to the same array.
+
+## When to reach for `rawFlags`
+
+`settings` has no index signature — an unknown `-s` name is a compile error,
+not a silently-ignored flag. Anything the typed surface cannot express goes
+here, verbatim, after every typed flag:
+
+```typescript notypecheck
+rawFlags: ['-mrelaxed-simd', '--emit-symbol-map'],
+variants: [
+  { name: 'debug', rawFlags: ['-gsource-map'] },
+],
+```
+
+Variant `rawFlags` are appended after the base ones.
+
+Reach for `compilerFlags` first. `-pthread`, `-msimd128`, `-O3`,
+`-fwasm-exceptions`, `-flto`, and `--no-entry` are all typed there, on the base
+config or per variant — a flag that lands in `rawFlags` and turns out to
+be common is a candidate for `compilerFlags` tomorrow, not a permanent resident.
+
+## Trade-offs
+
+### Wasm exceptions vs JavaScript exceptions
+
+`-fwasm-exceptions` requires that **all** object files and the linker use the
+flag consistently. Mixed builds surface `__cpp_exception` as an unresolved
+import at link time. The published images compile everything with wasm
+exceptions; only override if you target a wasm engine without `try_table`
+support.
+
+### SIMD: baseline vs relaxed
+
+Baseline `simd: true` (`-msimd128`) is universal across the supported matrix.
+Relaxed SIMD is not: Safari 26.x refuses to parse the relaxed opcodes and the
+module fails to instantiate. If you ship it, ship it as an extra variant
+alongside a baseline one:
+
+```typescript notypecheck
+variants: [
+  { name: 'single' },
+  { name: 'relaxed', rawFlags: ['-mrelaxed-simd'] },
+],
+```
+
+and select between them yourself — the generated capability probes cover
+`threads`, not SIMD flavours.
+
+### `EVAL_CTORS` levels
+
+| Level | Behaviour |
+| --- | --- |
+| `0` | Off — every static initialiser runs at startup |
+| `1` | Evaluates constructors with safe side effects |
+| `2` | Recommended — full constructor evaluation, requires `O2`+ |
+
+Drop it in a threads variant. Constructor evaluation order is non-deterministic
+under pthread workers, which is exactly what `settings: { EVAL_CTORS: null }`
+on the variant is for — `null` removes an inherited base setting.
+
+## What you cannot change at link time
+
+The wasm bitwidth (`wasm32` vs `wasm64`), the C++ standard-library version, the
+OCCT commit pin, and the libclang version are all baked into the published
+image during the bindgen pipeline. Those live on the other side of the
+[two-channel split](../concepts/two-channel-config-model); changing them means
+forking the image build.
+
+## Related
+
+- [Config reference](../reference/config) — the full `settings` type story.
+- [Custom multi-threaded build](./multi-threading) — the pthread settings set.
+- [Two-channel config model](../concepts/two-channel-config-model) — compile-time vs link-time.

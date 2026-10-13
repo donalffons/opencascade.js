@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "shape": "1. function-call expr default (Precision::Confusion())",
+      "omitted": 10.0000001,
+      "explicit": 10.25,
+      "pass": true
+    },
+    {
+      "shape": "2. handle expression default (null Handle())",
+      "omitted": 1,
+      "explicit": 0,
+      "pass": true
+    },
+    {
+      "shape": "3. class-constructed value default (TopLoc_Location())",
+      "omitted": 1,
+      "pass": true
+    },
+    {
+      "shape": "4. const T& bound from anonymous temporary (TopLoc_Location())",
+      "omitted": 1,
+      "pass": true
+    }
+  ],
+  "verdict": "All four real OCCT trailing-default shapes translate cleanly: function-call expr (rvalue forwardable), handle expr (null handle), default-ctor by-value, and const& bound from value_or rvalue. Shape 4 confirms the \"const T& → std::optional<T> by-value\" ABI shift is mechanical — the value_or rvalue binds correctly to the const& parameter at call time inside the bindgen-emitted lambda body.",
+  "allPass": true
+}

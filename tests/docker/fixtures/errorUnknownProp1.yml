@@ -1,0 +1,11 @@
+# tests/docker/fixtures/errorUnknownProp1.yml
+#
+# Negative fixture (modern port of legacy test/customBuilds/errorUnknownProp1.yml):
+# an unknown key NESTED under `mainBuild`. The Cerberus schema in
+# src/customBuildSchema.py is strict (allow_unknown defaults to False), so the
+# link step must reject this config with a non-zero exit before building.
+mainBuild:
+  name: customBuild.errorUnknownProp1.js
+  bindings:
+    - symbol: TopoDS_Shape
+  foo: bar

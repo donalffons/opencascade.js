@@ -1,0 +1,116 @@
+{
+  "t1": {
+    "observed": [
+      {
+        "order": "double+bool-first",
+        "id": "probe(undefined, undefined)",
+        "dispatched": "int+string"
+      },
+      {
+        "order": "double+bool-first",
+        "id": "probe()  (arity-pad → 2)",
+        "dispatched": "int+string"
+      },
+      {
+        "order": "double+bool-first",
+        "id": "probe(1)  (arity-pad → 2)",
+        "dispatched": "int+string"
+      },
+      {
+        "order": "double+bool-first",
+        "id": "probe(undefined, true)",
+        "error": "Cannot pass non-string to std::string"
+      },
+      {
+        "order": "int+string-first",
+        "id": "probe(undefined, undefined)",
+        "dispatched": "double+bool"
+      },
+      {
+        "order": "int+string-first",
+        "id": "probe()  (arity-pad → 2)",
+        "dispatched": "double+bool"
+      },
+      {
+        "order": "int+string-first",
+        "id": "probe(1)  (arity-pad → 2)",
+        "dispatched": "double+bool"
+      },
+      {
+        "order": "int+string-first",
+        "id": "probe(undefined, true)",
+        "dispatched": "double+bool"
+      }
+    ],
+    "pass": true,
+    "classification": "registration-order-deterministic (last-of-same-arity wins)",
+    "detail": "Order [double+bool, int+string] → \"int+string\" wins; reversed [int+string, double+bool] → \"double+bool\" wins. Winner is the LAST-registered sibling for any given arity. Bindgen MUST either: (a) emit-time reject all-optional same-arity sibling groups; or (b) impose a deterministic registration order (alphabetical / source-line) so the choice is reproducible across builds. Bonus observation: probe(undefined, true) under [double+bool-first] THROWS because the dispatcher picks int+string (the winner) and toWireType rejects \"true\" → \"std::string\". Under the reverse order it dispatches to double+bool and succeeds. This corroborates that the wildcard match is reached BEFORE wire conversion, so type mismatches surface as loud BindingError at toWireType — not silent corruption."
+  },
+  "t2": {
+    "cases": [
+      {
+        "id": "StaticOptProbe.probe(7)",
+        "expect": 7,
+        "value": 7,
+        "pass": true
+      },
+      {
+        "id": "StaticOptProbe.probe()",
+        "expect": 99,
+        "value": 99,
+        "pass": true
+      },
+      {
+        "id": "StaticOptProbe.probe(undefined)",
+        "expect": 99,
+        "value": 99,
+        "pass": true
+      }
+    ],
+    "pass": true,
+    "detail": "Static methods (.class_function) share the $ensureOverloadTable machinery — arity-pad fires on omitted args identically to instance methods."
+  },
+  "t3": {
+    "cases": [
+      {
+        "id": "t3_maybe_value(true)",
+        "expect": 42,
+        "value": 42,
+        "pass": true
+      },
+      {
+        "id": "t3_maybe_value(false)",
+        "pass": true
+      }
+    ],
+    "pass": true,
+    "detail": "EmValOptionalType.fromWireType produces T for std::optional<T>(value) and undefined for std::nullopt — JS sees `T | undefined`."
+  },
+  "t4": {
+    "cases": [
+      {
+        "id": "t4_optional_nondefault(new NonDefault(7))",
+        "expect": 7,
+        "value": 7,
+        "pass": true
+      },
+      {
+        "id": "t4_optional_nondefault()  (arity-pad → nullopt → -1)",
+        "expect": -1,
+        "value": -1,
+        "pass": true
+      },
+      {
+        "id": "t4_optional_nondefault(undefined) → nullopt → -1",
+        "expect": -1,
+        "value": -1,
+        "pass": true
+      }
+    ],
+    "compiled": true,
+    "runtimePass": true,
+    "detail": "register_optional<T>() compiles for T without a default constructor. The std::optional machinery uses copy/move/destructor only — no T() invocation. Bindgen needs NO default-ctor precondition check for std::optional<T> emission."
+  },
+  "verdict": "All Tier-3 front-loadable risks resolved: T1 determinism characterised (action: bindgen guard or deterministic emit order), T2 static-method dispatcher confirmed shared with instance dispatcher, T3 std::optional<T> returns round-trip cleanly, T4 non-default-ctor T compiles and runs.",
+  "allPass": true
+}

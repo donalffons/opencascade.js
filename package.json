@@ -1,14 +1,132 @@
 {
-  "name": "opencascade.js",
-  "version": "2.0.0-beta.b5ff984",
-  "description": "Port of the OpenCascade CAD library to JavaScript and WebAssembly via Emscripten.",
-  "main": "dist/index.js",
-  "author": "Sebastian Alff <donalffons@gmail.com>",
-  "license": "LGPL-2.1-only",
-  "repository": "github:donalffons/opencascade.js",
-  "types": "dist/index.d.ts",
-  "peerDependencies": {
-    "ws": "^8.5.0"
+  "name": "libcascade",
+  "version": "3.1.0",
+  "description": "OpenCascade CAD bindings for JavaScript and WebAssembly via Emscripten.",
+  "keywords": [
+    "opencascade",
+    "occt",
+    "cad",
+    "wasm",
+    "webassembly",
+    "brep",
+    "step",
+    "iges",
+    "geometry",
+    "3d"
+  ],
+  "homepage": "https://github.com/taucad/opencascade.js#readme",
+  "bugs": {
+    "url": "https://github.com/taucad/opencascade.js/issues"
   },
-  "type": "module"
+  "license": "LGPL-2.1-only WITH Open-CASCADE-Exception-1.0",
+  "author": "Richard Fontein <32132657+rifont@users.noreply.github.com>",
+  "contributors": [
+    {
+      "name": "Sebastian Alff",
+      "email": "donalffons@gmail.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taucad/opencascade.js.git"
+  },
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./wasm": "./dist/opencascade_single.wasm",
+    "./multi": {
+      "types": "./dist/variant.d.ts",
+      "default": "./dist/opencascade_multi.js"
+    },
+    "./multi/wasm": "./dist/opencascade_multi.wasm",
+    "./api-reference.json": "./dist/api-reference.json",
+    "./package.json": "./package.json",
+    "./init": {
+      "types": "./dist/init.d.ts",
+      "default": "./dist/init.js"
+    },
+    "./single": {
+      "types": "./dist/variant.d.ts",
+      "default": "./dist/opencascade_single.js"
+    },
+    "./single/wasm": "./dist/opencascade_single.wasm",
+    "./single/init": {
+      "types": "./dist/init.single.d.ts",
+      "default": "./dist/init.single.js"
+    },
+    "./multi/init": {
+      "types": "./dist/init.multi.d.ts",
+      "default": "./dist/init.multi.js"
+    }
+  },
+  "files": [
+    "dist/types.d.ts",
+    "dist/init.js",
+    "dist/init.d.ts",
+    "dist/variant.d.ts",
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/init.single.js",
+    "dist/init.single.d.ts",
+    "dist/init.multi.js",
+    "dist/init.multi.d.ts",
+    "dist/opencascade_single.js",
+    "dist/opencascade_single.wasm",
+    "dist/opencascade_multi.js",
+    "dist/opencascade_multi.wasm",
+    "dist/opencascade_single.js.symbols",
+    "dist/opencascade_single.build-manifest.json",
+    "dist/opencascade_single.provenance.json",
+    "dist/opencascade_multi.js.symbols",
+    "dist/opencascade_multi.build-manifest.json",
+    "dist/opencascade_multi.provenance.json",
+    "dist/api-reference.json",
+    "CHANGELOG.md",
+    "BREAKING_CHANGES.md",
+    "LICENSE",
+    "LICENSE.OCCT-Exception"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "release:prepare": "node scripts/prepare-release.mjs",
+    "build:toolchain": "npm run build --workspace=@libcascade/toolchain",
+    "generate:toolchain": "node packages/toolchain/scripts/generate-toolchain.mjs",
+    "generate:brand": "node scripts/generate-logo.mjs && node scripts/generate-banner.mjs",
+    "generate:brand:check": "node scripts/generate-logo.mjs --check && node scripts/generate-banner.mjs --check",
+    "test": "vitest run",
+    "test:ci": "CI=true vitest run tests/ci tests/readme-shape.test.ts tests/docs-layout.test.ts starter-templates/*/tests",
+    "test:smoke": "vitest run tests/smoke/",
+    "test:regression": "vitest run --config vitest.regression.config.ts",
+    "test:docker": "vitest run --config vitest.docker.config.ts",
+    "test:package": "vitest run --config vitest.package.config.ts",
+    "test:toolchain": "npm test --workspace=@libcascade/toolchain",
+    "typecheck": "tsc --project tests/tsconfig.json",
+    "typecheck:toolchain": "tsc --project packages/toolchain/tsconfig.json",
+    "lint": "eslint --config eslint.config.mjs .",
+    "lint:fix": "eslint --config eslint.config.mjs --fix ."
+  },
+  "devDependencies": {
+    "@gltf-transform/core": "^4.3.0",
+    "@gltf-transform/functions": "^4.3.0",
+    "@nx/js": "22.5.2",
+    "@types/node": "~24.0.15",
+    "eslint": "^9.32.0",
+    "nx": "22.5.2",
+    "semver": "^7.7.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1",
+    "vitest": "^4.1.0",
+    "yaml": "^2.8.2"
+  }
 }

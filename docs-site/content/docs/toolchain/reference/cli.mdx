@@ -1,0 +1,226 @@
+---
+title: libcascade CLI
+description: build, assemble, detect, check, and migrate — every subcommand of the libcascade bin, its flags, and what it writes.
+---
+
+`@libcascade/toolchain` installs one bin, `libcascade`. Run it with `npx` (or
+your package manager's equivalent) from the directory holding
+`libcascade.config.ts`.
+
+```text
+libcascade build    [--variant <name>] [--config <path>] [--render-only]
+libcascade assemble [--config <path>] [--write-exports]
+libcascade detect   <srcDir…> [--json]
+libcascade check    <srcDir…> [--config <path>] [--verbose]
+libcascade migrate  <yml…> [--out <path>] [--force]
+```
+
+`libcascade --help` prints the same synopsis plus the environment variables.
+
+## `build`
+
+Links one WASM binary per variant through the container.
+
+```bash
+npx libcascade build
+npx libcascade build --variant multi
+npx libcascade build --render-only
+```
+
+What one invocation does, per variant:
+
+1. Load and validate the config (see [Config reference](./config)).
+2. Render the container-side yml into `.libcascade/`.
+3. Resolve the image — the digest pinned for this toolchain version, or your
+   override — and verify the local repo digest after pulling.
+4. Run the engine with the config directory mounted at `/src` and a scratch
+   directory mounted at `/out`, with `OCJS_OUTPUT_DIR` pointed at it.
+5. On exit 0, move the artifacts into `dist/`.
+6. Read `<outputName>.build-manifest.json` and fail if `validation_passed` is
+   not `true`, printing the missing symbols and the binding-report deltas.
+
+Step 6 is the reason to run this instead of the engine directly: **a missing
+binding links successfully and fails at runtime** with a `BindingError`.
+
+Artifacts per variant, in `dist/`:
+
+| File | Contents |
+| --- | --- |
+| `<outputName>.js` | Emscripten glue |
+| `<outputName>.wasm` | The binary |
+| `<outputName>.d.ts` | Generated TypeScript declarations |
+| `<outputName>.js.symbols` | Symbol map |
+| `<outputName>.build-manifest.json` | Requested / compiled / alias-resolved / missing symbols |
+| `<outputName>.provenance.json` | Toolchain and source commits |
+
+| Flag | Effect |
+| --- | --- |
+| `--variant <name>` | Build one variant. Default: every variant in the config. |
+| `--config <path>` | Config file path. Default: `./libcascade.config.{ts,js,mjs}`. |
+| `--render-only` | Render the yml(s), print their paths, and stop. No container engine required. |
+
+Failures leave `.libcascade/` in place — the rendered yml and the container's
+raw output directory are what you inspect. Add it to `.gitignore`.
+
+## `assemble`
+
+Generates the npm packaging surface from the artifacts `build` produced. Pure
+Node; it never touches a container.
+
+```bash
+npx libcascade assemble
+npx libcascade assemble --write-exports
+```
+
+Reads `<outputName>.d.ts` and `<outputName>.build-manifest.json` for every
+declared variant and writes, next to them:
+
+| File | Contents |
+| --- | --- |
+| `types.d.ts` | One d.ts unioning every variant's surface. Symbols only some variants bind are typed optional. |
+| `init.js` / `init.d.ts` | The `./init` subpath: `createInstance({ variant, threadCount, wasmBinary, wasmMemory, locateFile })`. |
+| `init.<variant>.js` / `init.<variant>.d.ts` | A fixed-variant initializer with no selector or `variant` option. Multi-variant packages only. |
+| `index.js` / `index.d.ts` | The eager root: a selected, initialized instance with self-located WASM and named OCCT values. |
+| `variant.d.ts` | Types for the raw per-variant glue subpaths (`./single`, `./multi`, …). |
+| `exports.json` | The generated `exports` fragment. |
+
+`--write-exports` merges that fragment into the package's own `package.json`:
+generated subpaths win, every other subpath you declared is preserved in place.
+It also replaces generated `files` entries with the exact current surface while
+preserving hand-maintained files.
+
+`assemble` fails with a pointer at `libcascade build --variant <name>` when a
+variant's `.d.ts` is missing. It packages artifacts; it never builds them.
+
+See [Variants and assemble](../concepts/variants-and-assemble) for the
+generated entries in detail.
+
+## `detect`
+
+Scans your source for OCCT symbol references, closes over the catalog, and
+prints a paste-ready `bindings` fragment with per-symbol provenance.
+
+```bash
+npx libcascade detect src
+npx libcascade detect src lib --json
+```
+
+```text
+  bindings: [
+    'BRepBuilderAPI_MakeShape', // closure: base of BRepPrimAPI_MakeBox
+    'BRepPrimAPI_MakeBox',      // seed: src/shapes.ts:41
+    'gp_XYZ',                   // closure: member type of gp_Pnt
+  ],
+```
+
+The output is a **starting set, not a minimal one**, and `detect` never removes
+anything. Read [detect and check](../guides/detect-and-check) before acting on
+it.
+
+## `check`
+
+The inverse direction, for CI: recompute the referenced set and fail when any
+of it is missing from `bindings ∪ customBindings[].symbols`.
+
+```bash
+npx libcascade check src
+npx libcascade check src --verbose
+```
+
+```text
+libcascade check: 1 referenced symbol is not bound by libcascade.config.ts.
+
+  ChFi2d_FilletAPI
+      first referenced at src/fillet.ts:13
+```
+
+Exits non-zero on a miss. Symbols bound under an OCCT typedef alias count as
+bound. Names not in the catalog at all — your custom symbols, `oc.FS`, typos —
+are never failures; `--verbose` lists them as ignored, along with the scan's
+caveats.
+
+## `migrate`
+
+Converts v2-style container ymls into a typed `libcascade.config.ts`. Pure
+Node, one shot, run once per package — it is an onboarding tool, not a sync.
+
+```bash
+npx libcascade migrate build-config/custom_build_single.yml \
+                       build-config/custom_build_multi.yml \
+                       --out libcascade.config.ts
+```
+
+Pass **every** variant's yml to one invocation. Sibling ymls that differ only in
+flags and artifact name are one config with one variant each, and that is what
+`migrate` emits: the values they all agree on become the base, each yml's
+differences become its variant. Ymls that disagree on `bindings`,
+`additionalCppFiles`, or `additionalBindFiles` are not variants of one build —
+the config has no per-variant form for those — so `migrate` names the
+disagreement and refuses. Migrate those separately.
+
+| Flag | Effect |
+| --- | --- |
+| `--out <path>` | Write the config here. Default: stdout. |
+| `--force` | Overwrite an existing `--out` file. Without it an existing file is an error, never a silent replacement. |
+
+Findings go to stderr, the config to stdout — so `> libcascade.config.ts` works
+too, and the findings still reach you.
+
+### Where each flag lands
+
+| `emccFlags` entry | Config |
+| --- | --- |
+| `-sNAME=VALUE`, or a bare `-sNAME` (which emcc reads as `=1`) | `settings: { NAME: … }`, the value deserialized with the generated grammar — memory sizes, bracketed lists, the `ENVIRONMENT` comma list, and the 0/1 integers that mean booleans |
+| `-O0`…`-O3`, `-Os`, `-Oz` | `compilerFlags.optimize` |
+| `-msimd128`, `-flto`, `--no-entry`, `-pthread` | `compilerFlags.simd` / `.lto` / `.noEntry` / `.threads` |
+| `-fwasm-exceptions`, `-fexceptions` | `compilerFlags.exceptions` |
+| Anything else — and any `-sNAME=VALUE` whose value the typed grammar cannot express | `rawFlags`, verbatim |
+
+That last row is what makes the output trustworthy: a flag nobody modelled is
+passed to emcc unchanged **and** listed in the emitted header, so it can never
+go missing between the yml and the build. An unknown *yml key* is the opposite
+case — the schema has no verbatim bucket for one, so it is an error.
+
+### Two rewrites it applies
+
+Both are required by the pinned emsdk, and each leaves a comment at its site in
+the emitted config:
+
+| yml | Config | Why |
+| --- | --- | --- |
+| `-pthread` + `-sUSE_PTHREADS=1` | `compilerFlags: { threads: true }` | `USE_PTHREADS` survives only as emcc's deprecated legacy alias of `-pthread`; the pair is one request written twice |
+| `-sEXPORT_EXCEPTION_HANDLING_HELPERS` | `getExceptionMessage`, `incrementExceptionRefcount`, `decrementExceptionRefcount` added to `EXPORTED_RUNTIME_METHODS` | emsdk 6.0.5 removed the setting and **hard-fails** a `-fwasm-exceptions` link without the three helpers |
+
+`requires: ['threads']` is not emitted at all: `threads` is inferred from the
+flags that cause it. See [Config reference](./config).
+
+### What it cannot know
+
+One thing the yml format never recorded is named in the emitted header as your
+review list:
+
+- **`customBindings[].symbols`.** The yml lists wrapper file *paths*; which
+  symbols each provides is what the typed config needs. `migrate` reads them out
+  of the `.cpp` — top-level `class` / `struct` definitions and Embind
+  `class_<T>("Name")` registrations — and where it finds none it emits a
+  `TODO(libcascade migrate)` marker plus the candidate names (the `bindings`
+  entries that are not OCCT symbols and that no wrapper claims). It never
+  guesses, and the config will not build until you fill the marker in.
+The full walkthrough, with the hand-mapping tables and the review checklist, is
+[Migrate from a yml build](../getting-started/migrate-from-yaml).
+
+## Environment
+
+`LIBCASCADE_CONTAINER_CMD`, `LIBCASCADE_IMAGE`, and `LIBCASCADE_PLATFORM` are
+documented in [Driver environment](./env-vars).
+
+## Programmatic use
+
+The container driver is exported for orchestration that needs to sequence runs
+itself:
+
+```typescript notypecheck
+import { createContainerDriver } from '@libcascade/toolchain/driver';
+```
+
+That is an escape hatch, not the supported path. Prefer the CLI.

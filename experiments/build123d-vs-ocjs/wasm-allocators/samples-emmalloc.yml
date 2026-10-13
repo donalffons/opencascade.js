@@ -1,0 +1,78 @@
+# Minimal samples-only OCJS build — emmalloc variant
+#
+# Sibling of samples-dlmalloc.yml and samples-mimalloc.yml.
+# Only differs from samples-dlmalloc.yml in the trailing -sMALLOC flag.
+#
+# emmalloc is Emscripten's compact allocator — smaller code size than dlmalloc,
+# fewer defensive checks. Per Emscripten docs, recommended when the workload is
+# NOT dominated by many small-object allocations (which is exactly the OCCT
+# regime — so we expect emmalloc to underperform dlmalloc here, but measuring it
+# is the point of the PoC).
+
+mainBuild:
+  name: opencascade_single.js
+  bindings:
+    - symbol: gp_Pnt
+    - symbol: gp_Dir
+    - symbol: gp_Ax2
+    - symbol: Geom_Circle
+    - symbol: TopoDS_Shape
+    - symbol: TopoDS_Edge
+    - symbol: TopoDS_Wire
+    - symbol: TopoDS_Face
+    - symbol: TopoDS
+    - symbol: TopExp_Explorer
+    - symbol: TopAbs_ShapeEnum
+    - symbol: TopLoc_Location
+    - symbol: GeomAbs_Shape
+    - symbol: ChFi3d_FilletShape
+    - symbol: Message_ProgressRange
+    - symbol: Poly_Triangulation
+    - symbol: BRep_Tool
+    - symbol: Standard_Transient
+    - symbol: Geom_Geometry
+    - symbol: Geom_Curve
+    - symbol: Geom_Conic
+    - symbol: BRepBuilderAPI_MakeShape
+    - symbol: BRepBuilderAPI_Command
+    - symbol: BRepPrimAPI_MakeOneAxis
+    - symbol: BRepPrimAPI_MakeSweep
+    - symbol: BRepAlgoAPI_BuilderAlgo
+    - symbol: BRepAlgoAPI_BooleanOperation
+    - symbol: BRepAlgoAPI_Algo
+    - symbol: BRepBuilderAPI_ModifyShape
+    - symbol: BRep_Builder
+    - symbol: TopoDS_Builder
+    - symbol: BRepFilletAPI_LocalOperation
+    - symbol: BRepMesh_DiscretRoot
+    # R5 multi-tool form: SetArguments + SetTools take NCollection_List_TopoDS_Shape;
+    # the canonical container is auto-included via the NCollection manifest, but its
+    # base class must be explicitly registered so embind can resolve the inheritance chain.
+    - symbol: NCollection_BaseList
+    - symbol: BRepPrimAPI_MakeBox
+    - symbol: BRepPrimAPI_MakeCylinder
+    - symbol: BRepBuilderAPI_MakeEdge
+    - symbol: BRepBuilderAPI_MakeWire
+    - symbol: BRepAlgoAPI_Fuse
+    - symbol: BRepAlgoAPI_Cut
+    - symbol: BRepOffsetAPI_ThruSections
+    - symbol: BRepOffsetAPI_MakePipeShell
+    - symbol: BRepOffsetAPI_MakeFilling
+    - symbol: BRepFilletAPI_MakeFillet
+    - symbol: BRepMesh_IncrementalMesh
+  emccFlags:
+    - -fwasm-exceptions
+    - -sEXPORT_ES6=1
+    - -sMODULARIZE
+    - -sALLOW_MEMORY_GROWTH=1
+    - -sINITIAL_MEMORY=100MB
+    - -sMAXIMUM_MEMORY=4GB
+    - -sEXPORTED_RUNTIME_METHODS=["FS","getExceptionMessage","incrementExceptionRefcount","decrementExceptionRefcount"]
+    - --no-entry
+    - --emit-symbol-map
+    - -sSTACK_SIZE=8388608
+    - -sWASM_BIGINT
+    - -sEVAL_CTORS=2
+    - -msimd128
+    - -O3
+    - -sMALLOC=emmalloc

@@ -1,0 +1,6 @@
+{
+  "outcome": "resolved-cleanly",
+  "triangles": 306,
+  "rootCause": "register_optional<T>() in emsdk bind.h:1801 uses a `thread_local static bool hasRun` guard. The C++ template instantiation is COMDAT-deduplicated at link time, so both TUs share the SAME hasRun. Second invocation is a guaranteed no-op — _embind_register_optional is only called ONCE per T per module regardless of how many TUs invoke register_optional<T>.",
+  "implication": "bindgen does NOT need TU-level emission dedup; no libembind hunk required. The C++ idempotency guarantee lives in upstream emscripten and is unconditional."
+}

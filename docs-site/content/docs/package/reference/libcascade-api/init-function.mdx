@@ -1,0 +1,136 @@
+---
+title: Entry points
+description: The eager root, shared and fixed-variant initializers, createInstance options, and raw glue subpaths.
+---
+
+`libcascade` exposes four entry shapes. Choose by lifecycle first, then by
+whether the host or the import path selects the variant.
+
+| Entry | Import | Gives you |
+| --- | --- | --- |
+| Root | `libcascade` | An already-initialised instance, plus every bound symbol as a named value export. |
+| Shared initializer | `libcascade/init` | Lazy `createInstance(options)` with runtime variant selection. |
+| Fixed initializer | `libcascade/single/init`, `libcascade/multi/init` | Lazy `createInstance(options)` for exactly the imported variant. |
+| Raw glue | `libcascade/single`, `libcascade/multi` | The Emscripten module factory for one binary. Advanced. |
+
+## Root — the initialised instance
+
+The root entry probes the host, picks the most capable variant it supports,
+and initialises it with a top-level `await`:
+
+```typescript
+import oc from 'libcascade';
+
+using box = new oc.BRepPrimAPI_MakeBox(10, 10, 10);
+const shape = box.Shape();
+```
+
+Every bound symbol is also a named value export, so you can import the classes
+you use directly:
+
+```typescript
+import { BRepPrimAPI_MakeBox } from 'libcascade';
+
+using box = new BRepPrimAPI_MakeBox(10, 10, 10);
+```
+
+Types are exported from the same specifier:
+
+```typescript
+import oc, { type OpenCascadeInstance, type TopoDS_Shape } from 'libcascade';
+```
+
+Because the module instantiates at import time, there is nothing to memoise —
+ES module evaluation happens once per realm.
+
+## `libcascade/init` — shared lazy selection
+
+Use this entry when you need options, a specific variant, or control over when
+the WASM comes up. Importing it never evaluates the eager root.
+
+```typescript
+import { createInstance } from 'libcascade/init';
+
+const oc = await createInstance();
+const mt = await createInstance({ variant: 'multi' });
+const capped = await createInstance({ variant: 'multi', threadCount: 4 });
+```
+
+### Options
+
+<auto-type-table path="../../../../../node_modules/libcascade/dist/types.d.ts" name="CreateInstanceOptions" />
+
+`createInstance` owns the plumbing that is otherwise the consumer's problem:
+the glue self-reference Emscripten's pthread workers spawn from, Node `file:`
+URL → path conversion, and OCCT thread-pool sizing for a threads variant. It
+throws with an actionable message when you request a variant this host cannot
+run.
+
+### Memoised singleton pattern
+
+WASM instantiation is expensive. Memoise the Promise when several call sites
+share one runtime and you are not using the eager root:
+
+```typescript
+import { createInstance } from 'libcascade/init';
+
+let ocPromise: ReturnType<typeof createInstance> | undefined;
+export const getOc = () => (ocPromise ??= createInstance());
+```
+
+### Variant selection
+
+Selection picks the most capable variant whose requirements the host meets;
+`multi` requires `SharedArrayBuffer` and cross-origin isolation (Node always
+qualifies). To force a choice before anything is imported:
+
+```typescript
+globalThis[Symbol.for('libcascade.select')] = 'single';
+```
+
+## Fixed-variant initializers
+
+When the variant is already a product decision, put it in the import path:
+
+```typescript
+import { createInstance as createSingle } from 'libcascade/single/init';
+import { createInstance as createMulti } from 'libcascade/multi/init';
+
+const single = await createSingle();
+const multi = await createMulti({ threadCount: 4 });
+```
+
+These modules export no selector and ignore the shared override symbol. Their
+types reject `variant`; the single-threaded entry also rejects `threadCount`.
+Passing `variant` from untyped JavaScript fails before any glue is loaded. Each
+entry names one glue asset, so bundlers can exclude the other variant.
+
+## Return type
+
+The resolved object exposes every bound class and namespace as instance
+properties (`oc.BRepPrimAPI_MakeBox`, `oc.TopoDS`) together with `oc.FS`,
+`oc.wasmMemory`, and exception helpers such as `oc.getExceptionMessage`.
+
+One `OpenCascadeInstance` type describes every variant, so a shape produced by
+the single-threaded instance is assignable wherever the multi-threaded one is
+expected.
+
+## Variant subpaths — advanced
+
+`libcascade/single` and `libcascade/multi` resolve to the raw Emscripten glue.
+Their default export is the module factory:
+
+```typescript
+import init from 'libcascade/multi';
+
+const oc = await init();
+```
+
+This bypasses `createInstance`, so **you** own the pthread plumbing —
+including the `mainScriptUrlOrBlob` self-reference workers need. Prefer
+`createInstance()` from `libcascade/multi/init` unless you have a reason not to. The
+matching binaries are exported as `libcascade/single/wasm` and
+`libcascade/multi/wasm`.
+
+Browser deployments of the threaded variant also need cross-origin isolation.
+See [Multi-threaded build](../../guides/multi-threading).

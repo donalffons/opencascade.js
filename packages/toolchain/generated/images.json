@@ -1,0 +1,12 @@
+{
+  "$generatedBy": "packages/toolchain/scripts/generate-images.mjs — tags resolved to digests against the registry; do not edit.",
+  "repository": "ghcr.io/taucad/opencascade.js",
+  "singleThreaded": {
+    "tag": "canary-9a4030a7-single-threaded",
+    "digest": "sha256:6f6bb075a539ced75ad2aa7242333379f4723a52376c158e9d1dded4a920a168"
+  },
+  "multiThreaded": {
+    "tag": "canary-9a4030a7-multi-threaded",
+    "digest": "sha256:65a40fd538eedc7701e8d1321aad67afc0de78f731a61fd801db463e6f7f50c0"
+  }
+}

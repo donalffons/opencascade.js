@@ -1,0 +1,45 @@
+---
+title: Exception classes
+description: OCCT exception classes and the instance-level getExceptionMessage helper.
+---
+
+OCCT throws subclasses of `Standard_Failure`. Native WASM exception handling
+surfaces them as `WebAssembly.Exception` values and the initialized runtime
+decodes their C++ type and message.
+
+```typescript
+import oc from 'libcascade';
+
+try {
+  riskyOcctCall();
+} catch (error: unknown) {
+  if (error instanceof WebAssembly.Exception) {
+    const [type, message] = oc.getExceptionMessage(error);
+    console.error(`${type}: ${message}`);
+  } else {
+    throw error;
+  }
+}
+```
+
+`WebAssembly.Exception.message` does not contain the C++ failure text. Use the
+helper while the exception belongs to the current runtime. The related
+`incrementExceptionRefcount` and `decrementExceptionRefcount` instance helpers
+exist only for code that retains an exception beyond its catch scope.
+
+## Common hierarchy
+
+```text
+Standard_Failure
+├── Standard_OutOfRange
+├── Standard_NullObject
+├── Standard_NoSuchObject
+├── Standard_TypeMismatch
+├── Standard_DomainError
+├── Standard_DivideByZero
+└── Standard_ProgramError
+    └── Standard_NotImplemented
+```
+
+See [Debugging WASM exceptions](../../guides/debugging-wasm-exceptions) for
+failure patterns and debug builds.

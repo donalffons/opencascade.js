@@ -1,0 +1,10 @@
+# Generated build state and vendored dependency checkouts are never Nx file
+# inputs. The host already excludes them through .gitignore, but the Docker
+# image ships without .gitignore, so without this file Nx would snapshot ~71k
+# files under build/ and deps/ when a run starts. Task inputs that read
+# generated files use `dependentTasksOutputFiles`, which hashes them after the
+# producing task has run; a plain `{projectRoot}/build/...` input was hashed
+# from the start-of-run snapshot instead, which made the multi-threaded image
+# miss its own compile-sources and compile-bindings cache entries.
+/build/
+/deps/

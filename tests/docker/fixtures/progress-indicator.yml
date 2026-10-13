@@ -1,0 +1,44 @@
+# tests/docker/fixtures/progress-indicator.yml
+#
+# Custom build exercised by the Docker build-flow test against the
+# `:single-threaded` image. Modern port of the legacy
+# `test/customBuilds/progressIndicator.yml`: it registers a JS-subclassable
+# `Message_ProgressIndicator_JS` via `additionalBindFiles` so a test can derive
+# a progress indicator in JavaScript and observe `Show` callbacks during a
+# boolean fuse. This capability is custom-build-only — the published full build
+# does not ship the subclassable wrapper — which is why it is verified through
+# the Docker flow rather than a smoke test.
+mainBuild:
+  name: customBuild.progress-indicator.js
+  bindings:
+    - symbol: BRepAlgoAPI_Fuse
+    - symbol: BRepPrimAPI_MakeBox
+    - symbol: gp_Pnt
+    - symbol: GProp_GProps
+    - symbol: Message_ProgressIndicator
+    - symbol: Standard_Transient
+    - symbol: BRepBuilderAPI_MakeShape
+    - symbol: BRepBuilderAPI_Command
+    - symbol: TopoDS_Shape
+    - symbol: Message_ProgressRange
+    - symbol: Message_ProgressScope
+    - symbol: BRepAlgoAPI_BooleanOperation
+    - symbol: BRepAlgoAPI_BuilderAlgo
+    - symbol: BRepAlgoAPI_Algo
+    - symbol: BRepGProp
+  emccFlags:
+    - -fwasm-exceptions
+    - -sEXPORT_ES6=1
+    - -sMODULARIZE
+    - -sALLOW_MEMORY_GROWTH=1
+    - -sEXPORTED_RUNTIME_METHODS=["FS","getExceptionMessage","incrementExceptionRefcount","decrementExceptionRefcount"]
+    - -sINITIAL_MEMORY=64MB
+    - -sMAXIMUM_MEMORY=2GB
+    - --no-entry
+    - -sSTACK_SIZE=8388608
+    - -sWASM_BIGINT
+    - -msimd128
+    - -O3
+    - --emit-symbol-map
+  additionalBindFiles:
+    - progress-indicator.cpp

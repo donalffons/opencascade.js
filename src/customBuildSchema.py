@@ -25,17 +25,15 @@
         },
         "default": [
           "-flto",
-          "-fexceptions",
-          "-sDISABLE_EXCEPTION_CATCHING=0",
           "-O3",
+          "-sMODULARIZE",
           "-sEXPORT_ES6=1",
-          "-sUSE_ES6_IMPORT_META=0",
           "-sEXPORTED_RUNTIME_METHODS=['FS']",
           "-sINITIAL_MEMORY=100MB",
           "-sMAXIMUM_MEMORY=4GB",
           "-sALLOW_MEMORY_GROWTH=1",
           "-sUSE_FREETYPE=1",
-          "-sLLD_REPORT_UNDEFINED",
+          "-sERROR_ON_UNDEFINED_SYMBOLS=1",
           "--no-entry",
         ],
       },
@@ -43,10 +41,13 @@
         "required": True,
         "type": "string",
       },
-      "additionalBindCode": {
+      "additionalBindFiles": {
         "required": False,
-        "type": "string",
-        "default": "",
+        "type": "list",
+        "schema": {
+          "type": "string",
+        },
+        "default": [],
       },
     },
   },
@@ -76,24 +77,25 @@
         },
         "default": [
           "-flto",
-          "-fexceptions",
-          "-sDISABLE_EXCEPTION_CATCHING=0",
           "-O3",
+          "-sMODULARIZE",
           "-sEXPORT_ES6=1",
-          "-sUSE_ES6_IMPORT_META=0",
           "-sEXPORTED_RUNTIME_METHODS=['FS']",
           "-sINITIAL_MEMORY=100MB",
           "-sMAXIMUM_MEMORY=4GB",
           "-sALLOW_MEMORY_GROWTH=1",
           "-sUSE_FREETYPE=1",
-          "-sLLD_REPORT_UNDEFINED",
+          "-sERROR_ON_UNDEFINED_SYMBOLS=1",
           "--no-entry",
         ],
       },
-      "additionalBindCode": {
+      "additionalBindFiles": {
         "required": False,
-        "type": "string",
-        "default": "",
+        "type": "list",
+        "schema": {
+          "type": "string",
+        },
+        "default": [],
       },
       "name": {
         "required": True,
@@ -102,10 +104,13 @@
     },
     "default": [],
   },
-  "additionalCppCode": {
+  "additionalCppFiles": {
     "required": False,
-    "type": "string",
-    "default": "",
+    "type": "list",
+    "schema": {
+      "type": "string",
+    },
+    "default": [],
   },
   "generateTypescriptDefinitions": {
     "required": False,

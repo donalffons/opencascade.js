@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+
+# production
+dist/
+dist-ssr/
+
+# local env / vite
+*.local
+
+# CI smoke artifacts
+smoke.png
+
+# misc
+.DS_Store
+*.tsbuildinfo
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*

@@ -1,0 +1,8 @@
+extends: existence
+message: "Avoid the 'powerful, flexible, easy-to-use' marketing triplet — describe a concrete capability instead."
+level: error
+ignorecase: true
+tokens:
+  - 'powerful'
+  - 'flexible'
+  - 'easy[\s-]?to[\s-]?use'

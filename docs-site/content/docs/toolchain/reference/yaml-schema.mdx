@@ -1,0 +1,166 @@
+---
+title: Container yml contract
+description: Internals — the yml the CLI renders for the container, its keys, and how requested symbols resolve into linked bindings.
+---
+
+<Callout type="info">
+  **Internals.** You do not write this file. `libcascade build` renders one yml
+  per variant from [`libcascade.config.ts`](./config) into `.libcascade/` and
+  hands it to the container. This page documents the contract between the two,
+  for reading a rendered yml or debugging a build. The user-facing surface is
+  the [config reference](./config); `libcascade build --render-only` shows you
+  what it produces.
+</Callout>
+
+The yml controls which OCCT classes get bound, which C++ wrapper code is
+injected, and which Emscripten linker flags drive the final wasm.
+
+## Top-level shape
+
+```yaml
+mainBuild:
+  name: <string>
+  bindings:
+    - symbol: <ClassName>
+  emccFlags:
+    - <flag>
+  additionalBindFiles:
+    - bindings/custom.cpp
+
+extraBuilds:
+  - name: <string>
+    bindings: [...]
+    emccFlags: [...]
+    additionalBindFiles:
+      - bindings/variant.cpp
+
+additionalCppFiles:
+  - path/to/extra.cpp
+
+generateTypescriptDefinitions: true
+```
+
+The canonical Cerberus definition lives in `src/customBuildSchema.py`; the renderer that emits this shape lives in the toolchain package.
+
+## `mainBuild`
+
+The primary wasm artifact produced by the YAML.
+
+### `mainBuild.name`
+
+Output filename without extension. `name: my-occt` produces `my-occt.wasm`,
+`my-occt.js`, `my-occt.d.ts`, and `my-occt.build-manifest.json`.
+
+### `mainBuild.bindings`
+
+Allowlist of OCCT classes to expose to JS via embind. Only classes listed
+here (and their transitive base classes) are accessible at runtime.
+
+```yaml
+bindings:
+  - symbol: BRepPrimAPI_MakeBox
+  - symbol: TopoDS_Shape
+  - symbol: gp_Pnt
+```
+
+The symbol name must match exactly the C++ class name in the generated
+binding `.cpp` files under `build/bindings/`. Base classes are auto-included
+if missing from the list.
+
+### `mainBuild.emccFlags`
+
+Emscripten linker flags. The renderer emits these from `settings`,
+`compilerFlags`, and `rawFlags` in a canonical order. See
+[Emscripten settings and flags](../guides/custom-emcc-flags) for the
+recommended baseline and per-flag rationale.
+
+### `mainBuild.additionalBindFiles`
+
+Per-build `.cpp` files containing raw `EMSCRIPTEN_BINDINGS(...)`
+registrations. The files compile directly, may include their own helper
+implementation, and skip generated TypeScript bindings. See
+[Extend with C++](../guides/extend-with-cpp).
+
+## Symbol resolution classes
+
+Every YAML-requested symbol becomes a linked binding through exactly one of four mechanisms. The post-link `build-manifest.json` (schema `build-manifest-v3`) buckets each requested symbol into one of these categories under `symbols`:
+
+1. **Direct compilation.** `bindings: - symbol: gp_Pnt` causes the generator to emit `build/bindings/gp_Pnt.cpp`, which `compileBindings.py` compiles into `build/compiled-bindings/gp_Pnt.cpp.o`. Detected by `ocjs_bindgen.link.manifest_registry.collect_compiled_symbols`. Reported as `satisfied_by_compiled` (count surfaces as `symbols.compiled`).
+2. **NCollection typedef alias.** `bindings: - symbol: TColgp_Array1OfPnt` resolves via the canonical mangled spelling `NCollection_Array1_gp_Pnt`; the linker substitutes the typedef at link time. Mapping lives in `build/ncollection-manifest.json`. Detected by `manifest_registry.load_ncollection_alias_index`. Reported under `symbols.alias_resolved` as `{alias, canonical}` entries.
+3. **Embind builtin.** libcascade's built-in binding source (`OCJS`, `TopoDS`, `TColStd_IndexedDataMapOfStringString`) registers Embind class wrappers with no generated binding object of their own. Detected by `manifest_registry.builtin_binding_symbols` reading `build/additional-bind-symbols.json`.
+4. **Consumer `additionalBindFiles`.** YAML's own `mainBuild.additionalBindFiles` undergoes the same Embind pathway. Each output compiles the built-in source plus its ordered consumer files as one translation unit; the AST producer records their registration-name union in `additional-bind-symbols.json`. Reported under `symbols.builtin` (no separate bucket).
+
+Anything that survives all four lookups lands in `symbols.missing` and triggers `validation_passed=false`. The link step also raises immediately via `yaml_build.verifyBindings` (no env-var gate) so a YAML asking for a symbol the toolchain cannot provide fails the link, not just the post-link audit.
+
+Auto-discovered NCollection canonicals (entries the YAML never named directly, but that became reachable from the YAML's scope) are tracked separately in `<variant>.provenance.json::nCollectionManifest.{linked, total, dropped}` (schema `wasm-build-provenance-v2`). They never appear in `symbols.requested` because they're produced by the discovery pass, not requested by the operator.
+
+## Producer-side manifest contract
+
+Every mechanism above has exactly one **producer** — a pipeline stage with the semantic knowledge to compute it — that writes a JSON manifest in `build/` or the dist sidecar. Every downstream **consumer** (link-time `verifyBindings`, post-link `validate-build.py`, `generate-api-reference.mjs`, `docker-e2e-validate.sh`) reads the manifest through the corresponding `manifest_registry` loader. No consumer re-parses C++, runs regex against source, or re-derives set-difference math.
+
+| Manifest                                         | Producer                                                                                                                                                      | Consumer loader                                       |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `build/ncollection-manifest.json`                | `ocjs_bindgen.discover`                                                                                                                                       | `manifest_registry.load_ncollection_alias_index`      |
+| `build/additional-bind-symbols.json`             | `runBuild::getAdditionalBindFilesO()` (libclang AST via `ocjs_bindgen.ast.parse_binding_source` + `ocjs_bindgen.ast.walker.extract_class_registrations`) | `manifest_registry.builtin_binding_symbols`           |
+| `build/compiled-bindings/*.cpp.o`                | `compileBindings.py`                                                                                                                                          | `manifest_registry.collect_compiled_symbols`          |
+| `build/compiled-bindings/binding-report.json`    | `compileBindings.py`                                                                                                                                          | `validate-build.py::validate_binding_report`          |
+| `<variant>.provenance.json::nCollectionManifest` | `yaml_build.main` via `provenance.add_linking(ncollection_linked=, ncollection_total=, ncollection_dropped=)`                                                 | `generate-api-reference.mjs`, `scripts/docker-e2e-validate.sh` |
+| `build/any-type-report.json`                     | `generate.py`                                                                                                                                                 | `validate-build.py::merge_any_reasons`                |
+
+When a manifest is missing, consumers fail loudly with a pointer at `pnpm nx run ocjs:build`. Stale artifacts are stale by definition; rendering them with degraded math produces docs whose numbers contradict the build that produced them.
+
+## `extraBuilds`
+
+Same schema as `mainBuild`. Each entry produces a sibling wasm artifact from
+one yml pass.
+
+The toolchain does not use this key: it renders **one yml per variant**, each
+with a single `mainBuild`, so a variant failure is isolated and `--variant`
+can select one. `extraBuilds` remains part of the container contract for
+hand-written ymls.
+
+## `additionalCppFiles`
+
+Top-level list of `.cpp` files inspected by bindgen before generated custom
+bindings are compiled.
+
+```yaml
+additionalCppFiles:
+  - wrappers/fair-curve.cpp
+  - wrappers/shape-cast.cpp
+```
+
+- Paths resolve relative to the YAML file's directory; absolute paths are accepted.
+- File contents are concatenated in declaration order and read as UTF-8.
+- Missing, unreadable, or non-file paths fail validation.
+- Normalized paths and SHA-256 digests are recorded in manifests and provenance.
+
+`additionalBindFiles` follows the same path, ordering, validation, and identity
+rules, but belongs inside each build block.
+
+## `generateTypescriptDefinitions`
+
+Default `true`. Set to `false` to skip `.d.ts` generation (rare — useful only
+for ultra-fast iteration builds).
+
+## Inspecting the rendered yml
+
+```bash
+npx libcascade build --render-only
+```
+
+Renders one yml per variant into `.libcascade/` and prints their paths without
+needing a container engine. That is the supported way to read this contract for
+your own build — and the first gate when migrating an existing hand-written
+yml, since the flag *set* should match even though the renderer emits a
+canonical flag order.
+
+The config's own invariants — wrapper files existing on disk, unique variant
+names, `null` unsets with a base key to unset — are checked when the config
+loads, before anything is rendered.
+
+## Related
+
+- [Config reference](./config) — the file you actually write.
+- [Migrate from a yml build](../getting-started/migrate-from-yaml) — the field-by-field mapping.
+- [Extend with C++](../guides/extend-with-cpp) — which `customBindings` scope renders into which key.

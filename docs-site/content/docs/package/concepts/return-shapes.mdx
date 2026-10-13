@@ -1,0 +1,182 @@
+---
+title: Return shapes
+description: What OCCT methods return in JS — native values, in-place class outputs, primitive envelopes, returnValue, and Handle elision.
+---
+
+A single OCCT method can have multiple output channels: its native C++ return,
+plus any number of `T&` output parameters. The bindings collapse these into a
+small set of JS-shaped return forms. This page covers each shape, how to
+recognise it from a signature, and whether the result needs `using`.
+
+For the rules on _how to call_ a method (overload dispatch, enums, defaults),
+see [Calling OCCT from JS](./calling-occt-from-js).
+
+## TL;DR
+
+| What the C++ method outputs                                | What JS sees                                                            |
+| ---------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Class output param (`Bnd_Box&`, `gp_Pnt&`, …)              | The class you passed in is mutated in place. Read it after the call.    |
+| Primitive / enum output param (`double&`, `Standard_Real&`) | An envelope is returned; **keep passing placeholder values** at the slot. |
+| Non-const `Handle<T>&` output param                        | The slot is **elided** from the JS signature; the Handle appears as an envelope field. |
+| Native C++ return alongside any output(s)                  | Surfaced on the envelope as `returnValue`.                              |
+
+## Decision tree
+
+Walk this table top-to-bottom for any signature you're reading off the `.d.ts`:
+
+| C++ return | C++ output params                                       | Resulting JS shape                                                                                                          |
+| ---------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Non-`void` | None                                                    | Native return (no envelope). Smart pointers count as native — see Handles below.                                            |
+| Non-`void` | Class only (mutated in place)                           | Native return. Read mutated classes from your input variables; they are not echoed in the return.                           |
+| `void`     | Class only                                              | `void`. Read mutated classes from your input variables.                                                                     |
+| Non-`void` | Primitives / enums / elided Handles (± class outputs)   | Envelope with `returnValue` for the C++ return + one named field per non-class, non-elided output. Class outputs are NOT echoed. |
+| `void`     | Primitives / enums / elided Handles (± class outputs)   | Same envelope shape, minus `returnValue`.                                                                                   |
+
+The four sections below walk each row with worked examples.
+
+## Class outputs mutate in place
+
+When a method takes a non-const class reference (`gp_Pnt&`, `Bnd_Box&`,
+`GProp_GProps&`, `TopoDS_Shape&`), the binding passes the JS wrapper's
+underlying C++ pointer straight through. The C++ method mutates the object you
+allocated; you read the result by querying your own variable after the call.
+
+```typescript
+using curve = makeSomeCurve();
+using inStartPt = new oc.gp_Pnt2d(0, 0);
+using inEndPt = new oc.gp_Pnt2d(0, 0);
+
+curve.D0(curve.FirstParameter(), inStartPt);
+curve.D0(curve.LastParameter(), inEndPt);
+
+console.log(inStartPt.X(), inStartPt.Y());   // mutated by D0
+console.log(inEndPt.X(), inEndPt.Y());
+```
+
+Same pattern for whole-shape evaluators:
+
+```typescript
+using props = new oc.GProp_GProps();
+oc.BRepGProp.VolumeProperties(shape, props, false, false, false);
+const volume = props.Mass();
+```
+
+The call itself returns `void` or a native value — never an envelope echoing
+the class output. The `using` declaration that matters is the one on your
+input class; the call site doesn't need its own `using`.
+
+## Primitive / enum envelopes — placeholder inputs are required
+
+When the method has primitive or enum output parameters, the binding wraps the
+return in an envelope object whose fields mirror those outputs. The C++
+signature is preserved at the call site — you keep passing values for those
+slots, but the values are placeholders that C++ overwrites.
+
+```typescript
+using surface = new oc.Geom_SphericalSurface(ax, 10);
+const bounds = surface.Bounds(0, 0, 0, 0);   // placeholders
+console.log(bounds.U1, bounds.U2, bounds.V1, bounds.V2);
+```
+
+The four `0`s are **not optional**. The binding uses input-passthrough
+return-by-value: it preserves the C++ argument list so overload resolution
+still works, then reads back the mutated values into the envelope. Calling
+`surface.Bounds()` with zero arguments either fails dispatch or picks the
+wrong overload.
+
+Primitive-only envelopes (every field is a number, boolean, or string) **do
+not carry `[Symbol.dispose]`**. Plain `const` works; you don't need `using` on
+the result. This is enforced by the type-level contract in
+`tests/disposable-containers.test-d.ts`; the generated declarations are the
+canonical truth.
+
+## `returnValue`, not `result`
+
+When a method has a non-`void` C++ return _and_ primitive/enum/Handle
+outputs, the envelope grows a `returnValue` field carrying the native return.
+The v2 name `result` is gone in V3.
+
+```typescript
+using batten = new oc.FairCurve_Batten(p1, p2, /* height */ 0.5);
+const r = batten.Compute(
+  oc.FairCurve_AnalysisCode.FairCurve_OK,   // input-passthrough enum
+  /* nbIters */ 50,
+  /* tolerance */ 1e-3,
+);
+console.log(r.returnValue);                    // boolean, the C++ return
+console.log(r.Code);                           // enum output mirror
+```
+
+`BRep_Tool.Curve` is another common case: the primitive-only outputs (`First`,
+`Last`) and the native Handle return appear together on a `{ returnValue,
+First, Last }` envelope.
+
+## Handle output elision
+
+Non-const `Handle<T>&` output parameters are the one case where the JS
+signature is _smaller_ than the C++ signature. The binding drops those
+positions from the JS argument list entirely; the freshly-assigned Handle
+surfaces as an envelope field instead.
+
+```typescript
+using r = oc.BRep_Tool.PolygonOnTriangulation(edge, loc);   // 2 args, not 4
+console.log(r.P, r.T);                                       // Handle outputs
+// `loc` (a class output) is mutated in place; not echoed in r.
+```
+
+Compare to the same method called with a triangulation in its overload slot —
+note that this is a **different overload**, picked by argument shape, that
+returns a native Handle instead of an envelope:
+
+```typescript
+using handle = oc.BRep_Tool.PolygonOnTriangulation(edge, tri, loc);  // 3 args
+// handle is a Handle<Poly_PolygonOnTriangulation>, not an envelope.
+```
+
+This is the asymmetry to internalise:
+
+- Primitive / enum output slots → **stay** in the JS arg list as placeholders.
+- `Handle<T>&` output slots → **disappear** from the JS arg list.
+
+Other elided signatures: `GeomInt_IntSS.BuildPCurves`,
+`ShapeAnalysis_Edge.TreatRLine`, the `ShapeConstruct.New*` family,
+`HelixGeom_BuilderApproxCurve3d.ApprHelix`.
+
+Handle-bearing envelopes do carry `[Symbol.dispose]` — they own embind
+wrappers that must be released. Always bind them with `using`.
+
+## When do I need `using`?
+
+| Return shape                                                            | `using` on the call site? |
+| ----------------------------------------------------------------------- | ------------------------- |
+| `void` with class-only outputs (e.g. `curve.D0(u, pt)`)                 | No — `using` goes on the input class.   |
+| Native primitive return (`pnt.X()`, `list.Size()`)                      | No — plain values.        |
+| Native Handle return (`arcMaker.Value() → Geom_TrimmedCurve`)           | Yes — Handle is disposable. |
+| Primitive / enum-only envelope (`surface.Bounds(0,0,0,0)`)              | No — envelope has no disposer.            |
+| Handle-bearing envelope (`BRep_Tool.PolygonOnTriangulation(edge, loc)`) | Yes — `[Symbol.dispose]` cascades through the Handle fields. |
+
+The canonical type-level contract lives in
+`tests/disposable-containers.test-d.ts` and `tests/output-params.test-d.ts`
+in the libcascade source repository — when in doubt, the type definitions are the source of
+truth.
+
+## Disposer idempotency
+
+Manual `r[Symbol.dispose]()` followed by a `using` scope-exit re-dispose is
+safe — the second call is a no-op rather than a `BindingError`. This is
+intentional so try/finally migration paths can co-exist with `using`:
+
+```typescript
+using r = oc.BRep_Tool.PolygonOnTriangulation(edge, loc);
+r[Symbol.dispose]();   // no-op for the scope-exit dispose
+```
+
+## Related
+
+- [Calling OCCT from JS](./calling-occt-from-js) — overload dispatch,
+  defaults, enums, and the `TopoDS` downcast bridge.
+- [Handles and collections](./handles-and-collections) — the smart-pointer
+  surface (`isNull` / `nullify`) and the `NCollection_*` containers that show
+  up in envelope fields.
+- [Memory and disposables](./memory-and-disposables) — when `using` is
+  required vs. optional, and the `DisposableStack` patterns.

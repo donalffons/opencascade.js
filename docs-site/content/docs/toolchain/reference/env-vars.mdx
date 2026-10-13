@@ -1,0 +1,137 @@
+---
+title: Driver environment
+description: LIBCASCADE_* variables the CLI honours, the local-image dev loop, digest pinning, and the OCJS_* variables inside the image.
+---
+
+The typed config is the only configuration channel for a build. The
+environment variables below control the **driver** — which engine runs, which
+image it runs, and on which platform.
+
+## Driver variables
+
+| Variable | Effect |
+| --- | --- |
+| `LIBCASCADE_CONTAINER_CMD` | Container engine to probe first. Default probe order: `docker`, then `podman`. |
+| `LIBCASCADE_IMAGE` | Image reference override. Wins over a config-level `image:`. Skips digest verification and prints a provenance warning. |
+| `LIBCASCADE_PLATFORM` | Passed to the engine as `--platform`. Unset by default; the published images are multi-arch. |
+
+### Engine discovery
+
+The driver probes each candidate with `<cmd> version` and takes the first that
+exits 0. With none available it fails with install options for Docker Desktop,
+colima, and Podman — and the reminder that GitHub-hosted macOS runners ship no
+container engine at all.
+
+Point `LIBCASCADE_CONTAINER_CMD` at any binary that speaks the same CLI:
+
+```bash
+LIBCASCADE_CONTAINER_CMD=podman npx libcascade build
+```
+
+### UID mapping and mounts
+
+`-u uid:gid` is emitted **only on Linux native engines**. On Docker Desktop for
+macOS and Windows the VM maps ownership itself and an explicit `-u` breaks the
+build, so the driver omits it. Mount paths are resolved absolute from the
+config file's directory.
+
+You do not configure any of this. Each consumer's `docker run` string carries
+slightly different platform-edge handling.
+
+### Platform
+
+The images are published as multi-arch manifest lists (`linux/amd64` +
+`linux/arm64`), so Apple Silicon and ARM Linux hosts pull the native
+architecture automatically. `LIBCASCADE_PLATFORM` exists as a narrow override
+for debugging cross-architecture issues:
+
+```bash
+LIBCASCADE_PLATFORM=linux/amd64 npx libcascade build
+```
+
+## Digest pinning
+
+The toolchain package ships `generated/images.json`, in which each image tag was
+resolved to an immutable digest at publish time. The driver runs
+`ghcr.io/taucad/opencascade.js@sha256:…` — never a tag — and after pulling it
+inspects the local repo digests to prove the image really is that one. A
+mismatch is an error naming both the expected and the local digest.
+
+Which of the two pinned images a variant gets is decided by its config:
+`requires: ['threads']` selects the multi-threaded image, everything else the
+single-threaded one.
+
+Consequence worth stating plainly: `@libcascade/toolchain@X` names one
+reproducible build environment forever. Pinning the toolchain version in your
+lockfile is the entire pinning story — there is no tag to keep in sync by hand.
+
+## Local-image dev loop
+
+Contributors who build the container image locally need the driver to run
+*that* image. `LIBCASCADE_IMAGE` accepts any reference the local engine can
+resolve:
+
+```bash
+# Build the image locally, then point the CLI at it.
+docker buildx build --target final-single -t ocjs-local:single-threaded .
+LIBCASCADE_IMAGE=ocjs-local:single-threaded npx libcascade build --variant single
+```
+
+While an override is active the driver:
+
+- skips digest verification — a locally built image has no repo digest to
+  verify against;
+- prints a one-line provenance warning naming the override, because the
+  artifacts it produces carry no reproducible toolchain provenance.
+
+A config-level `image:` behaves the same way; the environment variable wins
+over it.
+
+Never set either in CI. See [Reproducible CI](../guides/reproducible-ci).
+
+## Inside the image
+
+The variables below are read by the build system **inside** the container. The
+driver sets `OCJS_OUTPUT_DIR` itself; the rest are maintainer-facing, relevant
+when you build the image from source rather than consume it.
+
+<Callout type="info">
+  **Maintainer track.** Nothing here is part of the custom-build path. Your
+  build is configured by `libcascade.config.ts`.
+</Callout>
+
+### Compile-time flags
+
+| Variable | Default | Effect |
+|---|---|---|
+| `OCJS_EXCEPTIONS` | `1` | Compile every translation unit with `-fwasm-exceptions`. Mixed builds fail at link. |
+| `OCJS_SIMD` | `1` | Compile every translation unit with `-msimd128` (baseline SIMD). |
+| `OCJS_RELAXED_SIMD` | `0` | Additionally emit `-mrelaxed-simd`. Safari 26.x lacks support; keep a baseline build for Safari. |
+| `OCJS_LTO` | `0` | Enable LLVM LTO. The measured full build grew 21%, so shipped presets keep it off. |
+| `OCJS_STRICT_TYPES` | `0` (warn-only) | The link-time `.d.ts` post-processor always prints a triage summary to stderr when it rewrites signatures to `unknown`. Set `=1` to escalate that condition to a build failure. |
+
+### Build orchestration
+
+| Variable | Default | Effect |
+|---|---|---|
+| `OCJS_CONFIG` | `single-threaded` | Named preset from `configurations.json`. |
+| `OCJS_COMPILE_WORKERS` | Up to 8 | Max parallel binding-object compile workers. Changes execution only, not cache identity. |
+| `BUILD_DIR` | `./build` | Canonical intermediate root. Custom values are rejected because Nx owns the fixed output graph. |
+| `OCJS_OUTPUT_DIR` | `/src` in the container | Destination for the uncached materialization step. `libcascade build` sets this to a mounted scratch directory and moves the artifacts into `dist/` afterwards. |
+
+### Image internals
+
+| Variable | Default | Effect |
+|---|---|---|
+| `OCJS_DEPS_VERSION` | from `DEPS.json` | Override the dependency pinning (OCCT, freetype, rapidjson). |
+| `OCJS_EMSDK_DIR` | `/deps/emsdk` | Location of the Emscripten SDK inside the image. |
+| `OCJS_PYTHON` | `python3` | Python interpreter for the bindgen. |
+| `OCJS_VERBOSE` | `0` | Print every compile / link command. |
+| `OCJS_DUMP_CACHE_KEYS` | `0` | Print cache-key contents on a miss, to debug spurious invalidation. |
+
+## Related
+
+- [CLI reference](./cli) — the commands these variables affect.
+- [Config reference](./config) — the only channel for build configuration.
+- [Named compile-time configurations](./configurations) — the `OCJS_*` preset list.
+- [Two-channel config model](../concepts/two-channel-config-model) — why compile-time and link-time config are separate.

@@ -1,0 +1,412 @@
+{
+  "name": "ocjs",
+  "$schema": "./node_modules/nx/schemas/project-schema.json",
+  "root": ".",
+  "targets": {
+    "setup": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "options": {
+        "command": "./scripts/clone-deps.sh --dest deps",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "apply-patches": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "dependsOn": ["setup"],
+      "inputs": [
+        "patchScripts",
+        "buildScript",
+        "{projectRoot}/scripts/patch-state.py",
+        "depsVersion",
+        { "env": "OCJS_CONFIG" },
+        { "runtime": "git -C deps/OCCT rev-parse HEAD 2>/dev/null || echo missing" }
+      ],
+      "outputs": ["{projectRoot}/build/patches-applied.json"],
+      "options": {
+        "command": "./build-wasm.sh apply-patches",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "pch": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "dependsOn": ["apply-patches"],
+      "inputs": [
+        "compileConfig",
+        "toolchain",
+        "buildScript",
+        "patchScripts",
+        "generatorCode",
+        "depsVersion",
+        { "env": "OCJS_CONFIG" },
+        { "dependentTasksOutputFiles": "**/patches-applied.json", "transitive": false }
+      ],
+      "outputs": [
+        "{projectRoot}/build/pch.h.pch",
+        "{projectRoot}/build/pch.h",
+        "{projectRoot}/build/occt-includes/",
+        "{projectRoot}/build/build-flags.json"
+      ],
+      "options": {
+        "command": "./build-wasm.sh pch",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "docs": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "dependsOn": ["apply-patches"],
+      "inputs": [
+        "{projectRoot}/src/extract-docs.py",
+        "{projectRoot}/src/occt-docs.doxyfile",
+        { "dependentTasksOutputFiles": "**/patches-applied.json", "transitive": false },
+        { "runtime": "doxygen --version 2>/dev/null || echo missing" }
+      ],
+      "outputs": ["{projectRoot}/build/occt-docs.json"],
+      "options": {
+        "command": "./build-wasm.sh docs",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "generate": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "dependsOn": ["docs", "pch"],
+      "inputs": [
+        "generatorCode",
+        "buildScript",
+        "depsVersion",
+        { "env": "OCJS_CONFIG" },
+        { "env": "OCJS_BINDGEN_CONFIG" },
+        { "runtime": "shasum -a 256 \"${OCJS_BINDGEN_CONFIG:-bindgen-filters.yaml}\" 2>/dev/null || echo missing-config" },
+        { "dependentTasksOutputFiles": "**/occt-docs.json", "transitive": false },
+        { "dependentTasksOutputFiles": "**/patches-applied.json", "transitive": true }
+      ],
+      "outputs": [
+        "{projectRoot}/build/bindings/",
+        "{projectRoot}/build/bindings-manifest.json",
+        "{projectRoot}/build/ncollection-manifest.json",
+        "{projectRoot}/build/any-type-report.json"
+      ],
+      "options": {
+        "command": "./build-wasm.sh generate",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "compile-bindings": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "dependsOn": ["pch", "generate"],
+      "inputs": [
+        "compileConfig",
+        "toolchain",
+        "buildScript",
+        "compileBindingsScript",
+        { "env": "OCJS_CONFIG" },
+        { "dependentTasksOutputFiles": "**/*.cpp", "transitive": false },
+        { "dependentTasksOutputFiles": "**/bindings-manifest.json", "transitive": false },
+        { "dependentTasksOutputFiles": "**/patches-applied.json", "transitive": true },
+        { "dependentTasksOutputFiles": "**/pch.h.pch", "transitive": false }
+      ],
+      "outputs": ["{projectRoot}/build/compiled-bindings/"],
+      "options": {
+        "command": "./build-wasm.sh bindings",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "compile-sources": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "dependsOn": ["pch", "apply-patches"],
+      "inputs": [
+        "compileConfig",
+        "toolchain",
+        "buildScript",
+        "patchScripts",
+        "depsVersion",
+        { "runtime": "cmake --version 2>/dev/null || echo missing" },
+        { "env": "OCJS_CONFIG" },
+        { "dependentTasksOutputFiles": "**/patches-applied.json", "transitive": false },
+        { "dependentTasksOutputFiles": "**/build-flags.json", "transitive": false }
+      ],
+      "outputs": ["{projectRoot}/build/occt-libraries/"],
+      "options": {
+        "command": "./build-wasm.sh sources",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "compile": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "dependsOn": ["compile-bindings", "compile-sources"],
+      "options": {
+        "command": "echo 'Compilation complete'",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "dts": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "dependsOn": ["generate"],
+      "options": {
+        "command": "./build-wasm.sh dts \"${OCJS_YAML}\"",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "bind-symbols": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "dependsOn": ["pch"],
+      "inputs": [
+        "bindSymbolsScript",
+        "buildScript",
+        "toolchain",
+        "depsVersion",
+        { "env": "OCJS_YAML" },
+        { "env": "OCJS_CONFIG" },
+        { "runtime": "shasum -a 256 \"${OCJS_YAML:-/dev/null}\" 2>/dev/null || echo no-yaml" },
+        { "dependentTasksOutputFiles": "**/patches-applied.json", "transitive": false }
+      ],
+      "outputs": ["{projectRoot}/build/additional-bind-symbols.json"],
+      "options": {
+        "command": "./build-wasm.sh bind-symbols \"${OCJS_YAML}\"",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "link-core": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "dependsOn": ["compile-bindings", "compile-sources", "generate", "bind-symbols"],
+      "inputs": [
+        "compileConfig",
+        "linkConfig",
+        "toolchain",
+        "buildScript",
+        "linkScript",
+        "patchScripts",
+        { "env": "OCJS_YAML" },
+        { "env": "OCJS_CONFIG" },
+        { "env": "OCJS_STRICT_TYPES" },
+        { "runtime": "shasum -a 256 \"${OCJS_YAML:-/dev/null}\" 2>/dev/null || echo no-yaml" },
+        { "runtime": "shasum -a 256 \"{projectRoot}/src/vendor/pristine-libembind.js\" 2>/dev/null || echo no-pristine" },
+        { "dependentTasksOutputFiles": "**/compiled-bindings/**/*.cpp.o", "transitive": false },
+        { "dependentTasksOutputFiles": "**/compiled-bindings/**/*.identity", "transitive": false },
+        { "dependentTasksOutputFiles": "**/occt-libraries/**/*.a", "transitive": false },
+        { "dependentTasksOutputFiles": "**/occt-libraries/manifest.json", "transitive": false },
+        { "dependentTasksOutputFiles": "**/bindings/**/*.d.ts.json", "transitive": false },
+        { "dependentTasksOutputFiles": "**/ncollection-manifest.json", "transitive": false },
+        { "dependentTasksOutputFiles": "**/additional-bind-symbols.json", "transitive": false }
+      ],
+      "outputs": [
+        "{projectRoot}/build/link-core/",
+        "{projectRoot}/build/link-core.manifest.json",
+        "{projectRoot}/build/link-core.link-report.json"
+      ],
+      "options": {
+        "command": "./build-wasm.sh link-core \"${OCJS_YAML}\"",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "materialize": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "dependsOn": ["link-core"],
+      "options": {
+        "command": "./build-wasm.sh materialize \"${OCJS_YAML}\"",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "validate": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "dependsOn": ["materialize"],
+      "options": {
+        "command": ".venv/bin/python scripts/validate-build.py \"${OCJS_YAML}\" \"${OCJS_OUTPUT_DIR:-dist}\" --build-dir build",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "provenance": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "dependsOn": ["validate"],
+      "options": {
+        "command": "./build-wasm.sh provenance \"${OCJS_YAML}\"",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "link": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "dependsOn": ["provenance"],
+      "options": {
+        "command": "echo 'Link, validation, and provenance complete'",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "dependsOn": ["link"],
+      "options": {
+        "command": "echo 'Build complete. Outputs in dist/'"
+      }
+    },
+    "api-reference": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "dependsOn": ["provenance"],
+      "inputs": [
+        "{projectRoot}/scripts/generate-api-reference.mjs",
+        "{projectRoot}/scripts/lib/dts-parser.mjs",
+        "{projectRoot}/scripts/lib/source-date-epoch.mjs",
+        { "dependentTasksOutputFiles": "**/*.d.ts.json", "transitive": true },
+        "{projectRoot}/dist/opencascade_single.d.ts",
+        "{projectRoot}/dist/opencascade_single.js.symbols",
+        "{projectRoot}/dist/opencascade_single.build-manifest.json",
+        "{projectRoot}/dist/opencascade_single.provenance.json",
+        "{projectRoot}/package.json",
+        { "env": "OCJS_EXPECTED_SHA" },
+        { "env": "OCJS_PACKAGE_VERSION" },
+        { "env": "OCJS_SOURCE_COMMIT" },
+        { "env": "SOURCE_DATE_EPOCH" }
+      ],
+      "outputs": ["{projectRoot}/dist/api-reference.json"],
+      "options": {
+        "command": "node scripts/generate-api-reference.mjs",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "docs-sync": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "dependsOn": ["api-reference"],
+      "options": {
+        "command": "node docs-site/scripts/sync-api-reference.mjs",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "lint-js": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "options": {
+        "command": "npm run lint",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "lint-python": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "options": {
+        "command": ".venv/bin/ruff check src scripts tests",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "lint-shell": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "options": {
+        "command": "bash -n build-wasm.sh scripts/*.sh && shellcheck build-wasm.sh scripts/*.sh",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "lint-workflows": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "options": {
+        "command": ".venv/bin/actionlint -ignore 'unexpected key \"queue\" for \"concurrency\" section' .github/workflows/*.yml",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "options": {
+        "command": "npm test",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "test-ci": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "options": {
+        "command": "npm run test:ci",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "test-regression": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "options": {
+        "command": "npm run test:regression",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "options": {
+        "command": "npm run typecheck",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "test-python-unit": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "dependsOn": ["setup"],
+      "options": {
+        "command": "OCJS_ROOT=\"$PWD\" OCCT_ROOT=\"$PWD/deps/OCCT\" RAPIDJSON_ROOT=\"$PWD/deps/rapidjson\" FREETYPE_ROOT=\"$PWD/deps/freetype\" EMSDK=\"$PWD/deps/emsdk\" .venv/bin/pytest tests/unit tests/bindgen",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "test-python-integration": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "options": {
+        "command": "OCJS_ROOT=\"$PWD\" OCCT_ROOT=\"$PWD/deps/OCCT\" RAPIDJSON_ROOT=\"$PWD/deps/rapidjson\" FREETYPE_ROOT=\"$PWD/deps/freetype\" EMSDK=\"$PWD/deps/emsdk\" .venv/bin/pytest tests/integration tests/sentinel",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "test-docker": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "options": {
+        "command": "npm run test:docker",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "test-package": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "options": {
+        "command": "npm run test:package",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "quality": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "dependsOn": [
+        "lint-js",
+        "lint-python",
+        "lint-shell",
+        "lint-workflows",
+        "test-ci",
+        "test-python-unit"
+      ],
+      "options": {
+        "command": "echo 'Quality checks passed'",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "docker-e2e": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "options": {
+        "command": "./scripts/docker-e2e-validate.sh",
+        "cwd": "{projectRoot}"
+      }
+    }
+  }
+}

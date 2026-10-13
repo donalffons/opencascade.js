@@ -1,0 +1,84 @@
+{
+  "schema": 2,
+  "project": "ocjs",
+  "generatedAt": "2026-05-14T10:46:52.392Z",
+  "manifest": {
+    "wasm_bytes": 41127360,
+    "dts_bytes": 11657365,
+    "js_bytes": 74751,
+    "validation_passed": true,
+    "requested": 12,
+    "compiled": 12,
+    "ncollection_auto": 0,
+    "occt_yaml": "full.yml",
+    "built_at": "2026-05-14T06:18:31Z"
+  },
+  "totals": {
+    "modules": 1,
+    "toolkits": 1,
+    "packages": 2,
+    "classes": 3,
+    "searchEntries": 5,
+    "parseSkipped": 0
+  },
+  "quickLinks": [
+    { "name": "Fix_Point", "kind": "class", "p": "FixtureModule/TKFixture/Fix", "s": "FixtureModule__TKFixture__Fix.json" }
+  ],
+  "modules": [
+    {
+      "name": "FixtureModule",
+      "headline": "Test fixture module.",
+      "classCount": 3,
+      "toolkitCount": 1,
+      "toolkits": [
+        {
+          "name": "TKFixture",
+          "headline": "Fixture toolkit.",
+          "classCount": 3,
+          "packages": [
+            {
+              "name": "Fix",
+              "shard": "FixtureModule__TKFixture__Fix.json",
+              "classes": [
+                {
+                  "name": "Fix_Point",
+                  "kind": "class",
+                  "extends": [],
+                  "summary": "Sample point with x and y coordinates.",
+                  "members": { "constructors": 1, "staticMethods": 0, "instanceMethods": 2, "properties": 0 }
+                },
+                {
+                  "name": "Fix_Vec",
+                  "kind": "class",
+                  "extends": ["Fix_Point"],
+                  "summary": "Vector derived from {@link Fix_Point | `Fix_Point`}.",
+                  "members": { "constructors": 1, "staticMethods": 0, "instanceMethods": 1, "properties": 0 }
+                }
+              ]
+            },
+            {
+              "name": "Bar",
+              "shard": "FixtureModule__TKFixture__Bar.json",
+              "classes": [
+                {
+                  "name": "Bar_Tool",
+                  "kind": "class",
+                  "extends": [],
+                  "summary": "Bar helper.",
+                  "members": { "constructors": 1, "staticMethods": 1, "instanceMethods": 0, "properties": 0 }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "searchIndex": [
+    { "n": "Fix_Point", "k": "class", "p": "FixtureModule/TKFixture/Fix", "s": "FixtureModule__TKFixture__Fix", "a": "Fix_Point", "q": "Fix_Point" },
+    { "n": "Fix_Vec", "k": "class", "p": "FixtureModule/TKFixture/Fix", "s": "FixtureModule__TKFixture__Fix", "a": "Fix_Vec", "q": "Fix_Vec" },
+    { "n": "Bar_Tool", "k": "class", "p": "FixtureModule/TKFixture/Bar", "s": "FixtureModule__TKFixture__Bar", "a": "Bar_Tool", "q": "Bar_Tool" },
+    { "n": "translate", "k": "method", "p": "FixtureModule/TKFixture/Fix", "s": "FixtureModule__TKFixture__Fix", "a": "Fix_Point__inst__0", "q": "Fix_Point.translate" },
+    { "n": "scale", "k": "method", "p": "FixtureModule/TKFixture/Fix", "s": "FixtureModule__TKFixture__Fix", "a": "Fix_Point__inst__1", "q": "Fix_Point.scale" }
+  ]
+}

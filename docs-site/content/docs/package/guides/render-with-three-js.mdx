@@ -1,0 +1,72 @@
+---
+title: Render with three.js
+description: OCCT shape → GLB → three.js GLTFLoader with orbit controls and lights.
+---
+
+libcascade produces GLB bytes through OCCT's XCAF + `RWGltf_CafWriter`
+pipeline. three.js consumes GLB via `GLTFLoader`. The whole flow is in-browser —
+no server round-trip.
+
+## End-to-end snippet
+
+```typescript title="src/render.ts"
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+export const renderGlb = (canvas: HTMLCanvasElement, glb: Uint8Array): (() => void) => {
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+  renderer.setPixelRatio(globalThis.devicePixelRatio);
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x111111);
+
+  const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 5000);
+  camera.position.set(100, 100, 100);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  const dir = new THREE.DirectionalLight(0xffffff, 1);
+  dir.position.set(1, 1, 1);
+  scene.add(dir);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.target.set(0, 0, 0);
+
+  new GLTFLoader().parse(glb.buffer, '', (gltf) => scene.add(gltf.scene));
+
+  renderer.setAnimationLoop(() => {
+    controls.update();
+    renderer.render(scene, camera);
+  });
+
+  return () => renderer.dispose();
+};
+```
+
+## Why XCAF (and not raw triangle arrays)
+
+OCCT can hand you raw `Poly_Triangulation` arrays per face, but the XCAF + GLB
+path:
+
+- preserves per-face colors and PBR materials,
+- writes valid glTF metadata (asset version, extensions used),
+- handles multi-shape assemblies as separate primitives,
+- emits indexed buffers so three.js doesn't need to dedupe vertices.
+
+See [Export glTF / GLB](./export-gltf) for the full pipeline including PBR materials.
+
+## Common rendering issues
+
+| Symptom | Likely cause | Fix |
+|---|---|---|
+| Faceted curves (no smooth shading) | Mesh deflection too coarse | Tighten `BRepMesh_IncrementalMesh` linear deflection (e.g. 0.05) |
+| Black model | No lights | Add ambient + directional light; check `dir.position` is non-zero |
+| Model offset from origin | Shape has a transform baked in | Verify `TopLoc_Location` or apply `shape.Moved(loc, false)` |
+| GLB loads but invisible | Camera inside model | `camera.position.set(100, 100, 100)` and `controls.target.set(0, 0, 0)` |
+
+## Helper libraries
+
+For batch shape conversion (multi-shape assemblies, edges-as-fat-lines,
+hover-highlight), [`replicad-threejs-helper`](https://github.com/sgenoud/replicad)
+wraps the common patterns and works with `libcascade` directly.

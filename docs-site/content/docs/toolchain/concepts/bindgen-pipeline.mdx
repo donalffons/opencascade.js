@@ -1,0 +1,135 @@
+---
+title: Bindgen pipeline
+description: How libclang → embind → wasm-ld combine to produce the bound TypeScript surface.
+---
+
+<Callout type="info">
+  **Maintainer track.** Read this if you rebuild libcascade from source or extend it
+  with custom C++. If you `pnpm add libcascade` and call the published
+  wasm from JS, you can skip this page — the consumer-facing rules live in
+  [Calling OCCT from JS](/docs/package/concepts/calling-occt-from-js) and
+  [Return shapes](/docs/package/concepts/return-shapes).
+</Callout>
+
+The libcascade bindings generator is a Python orchestrator over libclang and
+emscripten's embind. This page maps the stages and the artifacts they emit.
+
+## Stage diagram
+
+<Mermaid chart={`flowchart TB
+  subgraph "Stage 1 — bindgen (libclang)"
+    A1[OCCT headers] --> A2[libclang AST walk]
+    A2 --> A3[bindings.py / generateBindings.py]
+    A3 --> A4["build/bindings/<M>/<T>/<P>/<Class>.hxx"]
+    A3 --> A5["build/bindings/<M>/<T>/<P>/<Class>.d.ts.json"]
+  end
+  subgraph "Stage 2 — compile (em++)"
+    A4 --> B1[em++ -c per class]
+    B1 --> B2["build/bindings/.../<Class>.o (cached)"]
+  end
+  subgraph "Stage 3 — link (wasm-ld)"
+    B2 --> C1[wasm-ld + emcc glue]
+    C1 --> C2[dist/opencascade_single.wasm]
+    C1 --> C3[dist/opencascade_single.js]
+    A5 --> C4["dist/opencascade_single.d.ts (build intermediate)"]
+  end
+  subgraph "Stage 4 — package assembly"
+    C4 --> D1[libcascade assemble]
+    D1 --> D2[dist/types.d.ts + dist/variant.d.ts]
+  end
+`} />
+
+## Stage 1 — bindgen
+
+The in-image `bindings` stage invokes the Python bindgen which:
+
+1. Walks every header reachable from the rendered yml's `bindings:` list via libclang.
+2. Builds an AST per class, applies the `bindgen-filters.yaml` exclusions, and
+   classifies each member as constructor / static method / instance method /
+   property.
+3. Resolves typedefs (including the OCCT `occ::handle<>` family) against a
+   shared cache.
+4. Emits one `.hxx` per class with `EMSCRIPTEN_BINDINGS(...)` registrations and
+   one `.d.ts.json` shard per class describing the TypeScript shape.
+
+The bindgen is deterministic: same headers + same filter YAML = identical
+output bytes.
+
+## Stage 2 — compile
+
+`em++` compiles each `.hxx` to a `.o`. The cache key is the `.hxx` content
+hash plus the compile-time flag fingerprint. Cached `.o` files survive across
+consumer builds — that's the speedup that makes a custom-trimmed build take
+60 seconds instead of 30 minutes.
+
+## Stage 3 — link
+
+`emcc` links the selected `.o` files — the ones your config's `bindings` array
+resolved to — against the pre-compiled OCCT library archives in `dist/libs/`. The
+output:
+
+- `<name>.wasm` — the wasm binary.
+- `<name>.js` — the emscripten loader glue.
+- `<name>.d.ts` — the merged TypeScript declarations (from `.d.ts.json` shards
+  filtered to the bound symbol set).
+- `<name>.build-manifest.json` — symbol coverage report (requested vs compiled,
+  wasm bytes, validation flags).
+
+`<name>.d.ts` is a build intermediate. `libcascade assemble` verifies that the
+variant declarations agree, then publishes the shared surface as `types.d.ts`
+and `variant.d.ts`; npm packages do not ship per-variant declaration files.
+
+## How custom C++ enters the pipeline
+
+A `customBindings` entry with the default `scope: 'all'` is concatenated into
+one translation unit which flows through a smaller variant of stages 1+2 —
+bindgen discovers Handle/NCollection references, `em++` compiles, and the
+result links into the final wasm alongside the auto-generated bindings.
+
+`scope: 'main'` skips bindgen entirely. Those `.cpp` contents compile as raw
+Embind registrations and may include their helper implementations. See
+[Extend with C++](../guides/extend-with-cpp).
+
+## When the pipeline fails
+
+| Symptom | Stage | Fix |
+|---|---|---|
+| `libclang: cannot find <Standard_Real.hxx>` | 1 | OCCT headers not mounted into the Docker image |
+| `undefined symbol: _ZN10TopoDS_...` | 3 | Remove a `bindings` entry whose `.o` no longer exists, or the class transitively needs another class you trimmed |
+| `BindingError: invalid type` at runtime | 3 | Duplicate `EMSCRIPTEN_BINDINGS(<name>)` group across a `scope: 'main'` file and a generated `.hxx` |
+| Codegen emits `any` for a known type | 1 | The link step always prints a triage summary to stderr when this happens. The build still proceeds by default; set `OCJS_STRICT_TYPES=1` in CI to fail the build instead of shipping a poisoned `.d.ts`. File an issue with the printed triage summary. |
+| Codegen emits `unknown` / surfaces an unbound reference | 1 | Same gate as above. Warning printed by default; `OCJS_STRICT_TYPES=1` escalates to a hard failure for CI consumers. |
+
+## What the pipeline produces — JS-side contract
+
+The artifacts above are an implementation detail. The contract those artifacts
+expose to JS consumers — overload-dispatched calls, in-place class outputs,
+`returnValue` envelopes, Handle elision — lives in two consumer-facing
+concept pages:
+
+- [Calling OCCT from JS](/docs/package/concepts/calling-occt-from-js) — overload dispatch, enums,
+  defaults, and the `TopoDS` downcast bridge.
+- [Return shapes](/docs/package/concepts/return-shapes) — class outputs, envelopes, `returnValue`,
+  and Handle elision.
+
+## Docker stage mapping
+
+The pipeline stages map directly to the published Docker stages described in
+[Docker image](../reference/docker-image#image-stages):
+
+| Pipeline stage         | Docker stage              | Published tag        |
+| ---------------------- | ------------------------- | -------------------- |
+| 1 — discover           | `bindgen-base`            | `:bindgen-base`      |
+| 2 — emit (TUs + .d.ts) | `bindgen-base`            | `:bindgen-base`      |
+| 3 — compile + link     | `compiled-{threading}` + `final-{threading}` | `:single-threaded`, `:multi-threaded` |
+
+`:bindgen-base` is both a build stage and a published image — it carries the
+patched OCCT tree, the PCH, and the `.d.ts.json` index but not the
+pre-compiled `.o` files. Custom-bindings consumers pull `:bindgen-base`,
+re-run `generate` against their own YAML, and compile from there.
+
+## Related
+
+- [Extend with C++](../guides/extend-with-cpp) — how to inject custom C++ into the pipeline.
+- [Trim symbols](../guides/trim-symbols) — controlling which classes survive into stage 3.
+- [YAML schema](../reference/yaml-schema) — every YAML key the pipeline consumes.

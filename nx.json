@@ -1,0 +1,115 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "nxCloudAccessToken": "",
+  "namedInputs": {
+    "compileConfig": [
+      "{projectRoot}/build-configs/configurations.json",
+      { "env": "OCJS_CONFIG" },
+      { "env": "OCJS_OPT" },
+      { "env": "OCJS_EXTRA_CFLAGS" },
+      { "env": "OCJS_LTO" },
+      { "env": "OCJS_EXCEPTIONS" },
+      { "env": "OCJS_EH_MODE" },
+      { "env": "OCJS_SIMD" },
+      { "env": "OCJS_RELAXED_SIMD" },
+      { "env": "THREADING" },
+      { "env": "OCJS_DEFINES" },
+      { "env": "OCJS_UNDEFINES" }
+    ],
+    "linkConfig": [
+      { "env": "OCJS_WASM_OPT_LEVEL" },
+      { "env": "OCJS_CLOSURE" },
+      { "env": "OCJS_CONVERGE" },
+      { "env": "OCJS_SKIP_WASM_OPT" },
+      { "env": "BINARYEN_EXTRA_PASSES" },
+      { "env": "OCJS_MALLOC" },
+      { "env": "OCJS_LINK_OPT" }
+    ],
+    "toolchain": [
+      { "runtime": "emcc --version 2>/dev/null || echo not-installed" },
+      { "runtime": "wasm-opt --version 2>/dev/null || echo not-installed" }
+    ],
+    "depsVersion": [
+      "{projectRoot}/DEPS.json",
+      "{projectRoot}/pyproject.toml",
+      "{projectRoot}/uv.lock"
+    ],
+    "generatorCode": [
+      "{projectRoot}/src/**/*.py",
+      "{projectRoot}/scripts/generate-bindings.py",
+      "{projectRoot}/bindgen-filters.yaml"
+    ],
+    "buildScript": ["{projectRoot}/build-wasm.sh"],
+    "patchScripts": ["{projectRoot}/src/patches/*.py", "{projectRoot}/src/patches/*.patch"],
+    "compileBindingsScript": [
+      "{projectRoot}/src/compileBindings.py",
+      "{projectRoot}/src/ocjs_bindgen/config/**/*.py"
+    ],
+    "linkScript": [
+      "{projectRoot}/src/ocjs_bindgen/link/**/*.py",
+      "{projectRoot}/src/ocjs_bindgen/config/**/*.py"
+    ],
+    "bindSymbolsScript": [
+      "{projectRoot}/src/ocjs_bindgen/bind_symbols/**/*.py",
+      "{projectRoot}/src/ocjs_bindgen/embind_builtins.py",
+      "{projectRoot}/src/ocjs_bindgen/ast/**/*",
+      "{projectRoot}/src/ocjs_bindgen/config/**/*.py"
+    ]
+  },
+  "release": {
+    "groups": {
+      "ocjs": {
+        "projects": ["ocjs"],
+        "projectsRelationship": "fixed",
+        "versionPlans": {
+          "ignorePatternsForPlanCheck": [
+            ".agents/**",
+            "docs-site/**",
+            "docs/**",
+            "tests/**",
+            "starter-templates/**",
+            "experiments/**",
+            ".github/ISSUE_TEMPLATE/**",
+            ".github/PULL_REQUEST_TEMPLATE.md",
+            ".github/workflows/claude.yml",
+            ".github/workflows/ghcr-retention.yml",
+            ".github/workflows/mirror-upstream-pr-head.yml",
+            "BENCHMARKS.md",
+            "CONTRIBUTING.md",
+            "MAINTAINER.md",
+            "SECURITY.md"
+          ]
+        },
+        "version": {
+          "specifierSource": "version-plans",
+          "currentVersionResolver": "disk",
+          "deleteVersionPlans": true
+        },
+        "changelog": {
+          "file": "CHANGELOG.md",
+          "createRelease": false,
+          "renderOptions": {
+            "authors": true,
+            "commitReferences": true,
+            "versionTitleDate": true
+          }
+        },
+        "releaseTag": {
+          "pattern": "v{version}",
+          "requireSemver": true,
+          "strictPreid": true
+        }
+      }
+    },
+    "changelog": {
+      "workspaceChangelog": false,
+      "projectChangelogs": false
+    },
+    "git": {
+      "commit": false,
+      "tag": false,
+      "push": false,
+      "stageChanges": false
+    }
+  }
+}

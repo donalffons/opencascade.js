@@ -1,0 +1,23 @@
+{
+  "name": "libcascade-vite-three-glb",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "description": "v3 starter: build a Shape with libcascade, mesh to GLB, render with three.js inside Vite.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173 --host 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "smoke": "node ../_shared/smoke-render.mjs --url http://localhost:4173 --canvas '#libcascade-canvas' --screenshot smoke.png --require-request opencascade_single --forbid-request opencascade_multi"
+  },
+  "dependencies": {
+    "libcascade": "file:../..",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.184.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.13"
+  }
+}

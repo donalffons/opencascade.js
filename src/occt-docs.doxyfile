@@ -1,0 +1,65 @@
+# Minimal Doxygen config for XML-only documentation extraction from OCCT headers.
+# Derived from OCCT's dox/resources/occt_rm.doxyfile.
+# Used by extract-docs.py to produce occt-docs.json for TypeScript JSDoc generation.
+
+DOXYFILE_ENCODING      = UTF-8
+PROJECT_NAME           = "OCCT"
+
+# Input: set via environment or override at invocation time
+INPUT                  = $(OCCT_ROOT)/src
+RECURSIVE              = YES
+FILE_PATTERNS          = *.hxx *.pxx
+EXCLUDE_PATTERNS       = */Handle_*.hxx */Draw/* */ViewerTest/*
+
+# Extraction settings (match OCCT's occt_rm.doxyfile)
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_LOCAL_CLASSES  = NO
+EXTRACT_LOCAL_METHODS  = NO
+
+# Comment parsing
+MULTILINE_CPP_IS_BRIEF = YES
+INHERIT_DOCS           = YES
+REPEAT_BRIEF           = YES
+
+# Preprocessing (critical: must match OCCT's predefined macros)
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+PREDEFINED             = Standard_EXPORT \
+                         Standard_NODISCARD \
+                         Standard_OVERRIDE:=override \
+                         __Standard_API \
+                         __Draw_API \
+                         "Handle(a):=Handle<a>" \
+                         DEFINE_STANDARD_ALLOC \
+                         DEFINE_NCOLLECTION_ALLOC \
+                         "Standard_DEPRECATED=//! @deprecated "
+SEARCH_INCLUDES        = YES
+INCLUDE_FILE_PATTERNS  = *.hxx *.pxx
+SKIP_FUNCTION_MACROS   = YES
+
+# Output: XML only, no HTML/LaTeX/RTF/man
+OUTPUT_DIRECTORY       = $(OCJS_ROOT)/build/doxygen-xml
+GENERATE_XML           = YES
+XML_PROGRAMLISTING     = NO
+XML_NS_MEMB_FILE_SCOPE = NO
+GENERATE_HTML          = NO
+GENERATE_LATEX         = NO
+GENERATE_RTF           = NO
+GENERATE_MAN           = NO
+
+# Performance: skip everything we don't need
+HAVE_DOT               = NO
+CREATE_SUBDIRS         = NO
+HIDE_FRIEND_COMPOUNDS  = YES
+COLLABORATION_GRAPH    = NO
+INCLUDE_GRAPH          = NO
+INCLUDED_BY_GRAPH      = NO
+GRAPHICAL_HIERARCHY    = NO
+GENERATE_LEGEND        = NO
+OPTIMIZE_OUTPUT_FOR_C  = YES
+
+# Quiet mode
+QUIET                  = YES
+WARNINGS               = NO

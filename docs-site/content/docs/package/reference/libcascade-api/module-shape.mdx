@@ -1,0 +1,76 @@
+---
+title: Module shape
+description: Runtime values, type-only named imports, filesystem ownership, and memory access.
+---
+
+The root entry's default export is an initialised instance. All OCCT runtime
+values live on it, and each one is also a named value export of the same
+module.
+
+```typescript
+import oc, { type TopoDS_Shape } from 'libcascade';
+using box = new oc.BRepPrimAPI_MakeBox(10, 10, 10);
+const shape: TopoDS_Shape = box.Shape();
+```
+
+Named imports resolve to real values as well as types, so
+`import { BRepPrimAPI_MakeBox } from 'libcascade'` and `oc.BRepPrimAPI_MakeBox`
+are the same binding.
+
+## Bound classes and namespaces
+
+Classes are direct instance properties. OCCT namespaces such as `TopoDS`,
+`Interface_Static`, and `XCAFDoc_DocumentTool` are static-method objects:
+
+```typescript
+oc.Interface_Static.SetIVal('write.step.schema', 5);
+const edge = oc.TopoDS.Edge(genericShape);
+```
+
+## Filesystem (`oc.FS`)
+
+Use the Emscripten virtual filesystem for OCCT file readers and writers:
+
+```typescript
+const path = '/result.step';
+writer.Write(path);
+const bytes = oc.FS.readFile(path) as Uint8Array;
+oc.FS.unlink(path);
+return bytes;
+```
+
+`FS.readFile()` returns an owned `Uint8Array`; its bytes remain valid after
+the file is unlinked. Copy only when your own API needs an independent buffer.
+
+| Method | Purpose |
+|---|---|
+| `FS.readFile(path)` | Read owned bytes |
+| `FS.writeFile(path, bytes)` | Write an input file |
+| `FS.unlink(path)` | Remove a virtual path |
+| `FS.mkdir(path)` | Create a directory |
+| `FS.readdir(path)` | List a directory |
+
+## Linear memory (`oc.wasmMemory`)
+
+Advanced pointer interop uses typed arrays created from the live
+`WebAssembly.Memory` buffer:
+
+```typescript
+const bytes = new Uint8Array(oc.wasmMemory.buffer);
+const values = new Float64Array(oc.wasmMemory.buffer);
+```
+
+A call that allocates may grow memory and detach an existing view. Create a
+fresh typed array from `oc.wasmMemory.buffer` after such calls. Most consumers
+never need direct memory access.
+
+## Exception helpers
+
+Exception helpers are also instance properties. See
+[Exception classes](./exception-classes) and
+[Debugging WASM exceptions](../../guides/debugging-wasm-exceptions).
+
+## Module re-init
+
+Calling `createInstance()` from `libcascade/init` creates another WASM instance with a separate C++ heap.
+Memoise it when an application should share one runtime.

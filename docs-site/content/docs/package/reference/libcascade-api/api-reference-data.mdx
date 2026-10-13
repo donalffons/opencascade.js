@@ -1,0 +1,43 @@
+---
+title: API reference data
+description: Consume the deterministic libcascade API feed at build time.
+---
+
+Every published package includes `libcascade/api-reference.json`. The feed is the
+portable build-time source for the bound OCCT hierarchy, declarations,
+provenance, and exact input hashes used by this site.
+
+```ts
+import reference from 'libcascade/api-reference.json' with { type: 'json' };
+
+console.log(reference.package.version);
+console.log(reference.source.commit);
+console.log(reference.modules);
+```
+
+The schema identifier is `ocjs-api-reference-v1`. Consumers should reject
+unknown schema identifiers and verify `package.name`, `package.version`, and
+the full 40-character source commit before generating derived data.
+
+The feed deliberately excludes site concerns such as route slugs, anchors,
+quick links, and search indexes. Those are derived locally. In this repository,
+`npm exec nx -- run ocjs:docs-sync` reads the installed package by default, or
+accepts an already-downloaded package directory or tarball:
+
+Replace `{{version}}` with the package version in the downloaded filename.
+
+```bash
+npm exec nx -- run ocjs:docs-sync -- --from ./libcascade-{{version}}.tgz
+```
+
+For a complete local docs build from a downloaded CI or npm tarball, keep that
+source available to every automatic pre-script:
+
+```bash
+OCJS_API_REFERENCE_SOURCE=../libcascade-{{version}}.tgz \
+  pnpm --dir docs-site build
+```
+
+The command is offline after the package is available, replaces stale output
+atomically, removes deleted symbols, and is byte-idempotent for an unchanged
+feed.

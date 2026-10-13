@@ -1,0 +1,19 @@
+extends: existence
+message: "Time-relative claim '%s' dates the text — state the contract that holds instead."
+level: error
+ignorecase: true
+tokens:
+  - '\bcurrently\b'
+  - '\btoday\b'
+  - '\bat present\b'
+  - '\bfor now\b'
+  - '\bnot yet\b'
+  - '\b(has|have) yet\b'
+  - '\bfuture work\b'
+  - '\bin the future\b'
+  - '\bplanned\b'
+  - '\bwill eventually\b'
+  - '\bused to\b'
+  - '\bpreviously\b'
+  - '\broadmap\b'
+  - '\bforward-looking placeholder\b'

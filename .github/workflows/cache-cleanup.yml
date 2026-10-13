@@ -1,0 +1,29 @@
+name: pull-request cache cleanup
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete closed pull request caches
+        env:
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+          MERGE_REF: refs/pull/${{ github.event.pull_request.number }}/merge
+        run: |
+          cache_ids_file="$(mktemp)"
+          trap 'rm -f "$cache_ids_file"' EXIT
+          gh api --paginate "repos/$GH_REPO/actions/caches?ref=$MERGE_REF&per_page=100" \
+            --jq '.actions_caches[].id' > "$cache_ids_file"
+          while read -r cache_id; do
+            output="$(gh api --method DELETE "repos/$GH_REPO/actions/caches/$cache_id" 2>&1)" || {
+              grep -q '(HTTP 404)' <<< "$output" || { printf '%s\n' "$output" >&2; exit 1; }
+            }
+          done < "$cache_ids_file"

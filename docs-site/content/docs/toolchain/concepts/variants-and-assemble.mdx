@@ -1,0 +1,303 @@
+---
+title: Variants and assemble
+description: One bindings list, N binaries, one types.d.ts — the eager root, shared selector, fixed-variant initializers, and exports fragment.
+---
+
+A custom build usually ships more than one binary from the same symbol set: a
+single-threaded one that loads anywhere, and a pthread-enabled one for hosts
+that are cross-origin isolated. `variants` expresses that in the config, and
+`libcascade assemble` turns the resulting artifacts into a package surface.
+
+## Variants share one bindings list
+
+```typescript notypecheck
+variants: [
+  { name: 'single', settings: { EVAL_CTORS: 2 } },
+  {
+    name: 'multi',
+    compilerFlags: { threads: true },
+    settings: { PTHREAD_POOL_SIZE: 'navigator.hardwareConcurrency', SHARED_MEMORY: true },
+  },
+],
+```
+
+Two binaries, one `bindings` array, a handful of flags of difference. Nothing
+templates one config into two.
+
+Note what the multi variant does *not* declare. `compilerFlags: { threads: true }`
+renders `-pthread`, and the `requires: ['threads']` that drives image selection
+and the generated capability probe is **inferred** from exactly that — a build
+against shared memory cannot run without `SharedArrayBuffer`, so the capability
+is a consequence of the flags rather than something you restate. Declare
+`requires` yourself only to add a capability the flags do not imply.
+
+That sharing is load-bearing. When variants can drift in their symbol lists,
+their generated `.d.ts` files drift too, and a consumer holding a
+`TopoDS_Shape` from one variant cannot pass it to a function typed against the
+other — the two `OpenCascadeInstance` types are structurally incomparable
+despite describing the same classes. Sharing the list makes one shared surface
+possible.
+
+A per-variant `bindings` extension is allowed but discouraged for exactly that
+reason.
+
+## A capability is both a build and a runtime fact
+
+A variant's `threads` capability does two things:
+
+- **At build time** it selects the multi-threaded container image for that
+  variant.
+- **At load time** it becomes the capability the generated selector probes:
+  `SharedArrayBuffer` present ∧ (`globalThis.crossOriginIsolated` ?? running
+  under Node).
+
+Capabilities are inferred from the variant's effective build flags —
+`compilerFlags.threads`, a `-pthread` raw flag, or a `SHARED_MEMORY` /
+`USE_PTHREADS` setting all imply `threads`. An explicit `requires` array is
+unioned with what was inferred, so it can add a capability but never remove
+one: a build that genuinely needs shared memory cannot be configured to skip
+its own probe.
+
+A variant with no capabilities is loadable everywhere.
+
+## What `assemble` writes
+
+```bash
+npx libcascade assemble
+```
+
+| File | Role |
+| --- | --- |
+| `types.d.ts` | One d.ts unioning every variant's surface. Symbols only some variants bind are typed optional. |
+| `init.js` / `init.d.ts` | The `./init` subpath — `createInstance`, the selector, and the override symbol. |
+| `init.<variant>.js` / `init.<variant>.d.ts` | The `./<variant>/init` subpath — a fixed-variant runtime and type contract. Multi-variant packages only. |
+| `index.js` / `index.d.ts` | The eager root — one selected, initialized instance with self-located WASM and named OCCT values. |
+| `variant.d.ts` | Types for the raw per-variant glue subpaths (`./single`, `./multi`, …). |
+| `exports.json` | The `exports` fragment to merge into `package.json`. |
+
+The shared d.ts and the eager barrel are rendered from one symbol list computed
+once, so the declaration and the runtime export cannot disagree.
+
+## `createInstance`
+
+`./init` is the entry every consumer can use, in every mode:
+
+```typescript notypecheck
+import { createInstance } from 'my-occt-package/init';
+
+const oc = await createInstance();                      // most capable variant
+const single = await createInstance({ variant: 'single' });
+const capped = await createInstance({ variant: 'multi', threadCount: 4 });
+```
+
+| Option | Effect |
+| --- | --- |
+| `variant` | Load a named variant instead of the selected one. |
+| `threadCount` | Size OCCT's default thread pool and raise its launch cap to match. Omitted, OCCT sizes the pool itself. |
+| `locateFile` | Emscripten's WASM URL resolver, for bundlers that relocate the binary. |
+| `wasmBinary` | Pre-fetched bytes, instead of a network fetch. |
+| `wasmMemory` | A `WebAssembly.Memory` you own. |
+
+It owns the plumbing every consumer would otherwise reimplement:
+
+- **Glue self-reference.** Emscripten spawns pthread workers from the glue's
+  own URL; `createInstance` passes it as `mainScriptUrlOrBlob` so you do not
+  have to know that name.
+- **Node `file:` URL → path conversion.** Node's `Worker` takes a path, and a
+  `file:` URL's pathname keeps a leading slash before a Windows drive letter
+  that Node rejects.
+- **OCCT thread-pool sizing.** For a `threads` variant it calls
+  `OSD_ThreadPool.DefaultPool(…)` and `SetNbDefaultThreadsToLaunch(…)` so the
+  lazily-created default pool does not stay smaller than the worker count baked
+  into the binary.
+- **An actionable error** when you ask for a variant this host cannot run,
+  naming the unmet capability and how to provide it.
+
+## `./<variant>/init` — one variant, one glue
+
+A multi-variant package also generates a **pinned** entry per variant:
+
+```typescript notypecheck
+import { createInstance } from 'my-occt-package/single/init';
+
+const oc = await createInstance(); // always the single variant
+```
+
+It exports `createInstance` and owns the same loading plumbing, but it has no
+selector surface: the import path fixes the variant. It rejects a `variant`
+option, ignores the shared override symbol, and names exactly one glue file.
+Its declarations follow the same contract: the single-threaded entry omits
+both `variant` and `threadCount`; the threaded entry accepts `threadCount` but
+still omits `variant`.
+
+That matters because of how bundlers treat asset URLs. The shared `./init` must
+be able to *reach* every variant — the choice is made at runtime — so it
+contains one `new URL('./<glue>.js', import.meta.url)` per variant. Vite's
+`vite:asset-import-meta-url` transform emits an asset for every one of those at
+transform time, **before** tree-shaking, and no branch is ever statically dead.
+An app that only ever loads the single variant therefore still ships the multi
+variant's glue JS — 60–80 KB it never fetches. The pinned entry contains one
+such URL, so nothing else is emitted.
+
+The `.wasm` is unaffected either way. The glue import is deliberately opaque to
+bundlers, so only the binary a consumer references itself — via
+`./<variant>/wasm` or `locateFile` — enters a build. That property holds for
+both entries and is pinned by a Vite host-app test in the toolchain suite.
+
+| | `./init` | `./<variant>/init` |
+| --- | --- | --- |
+| Variant | selected at load time | fixed at import time |
+| Glue assets in the bundle | one per declared variant | one |
+| Capability probe + actionable error | yes | yes |
+| `variant` option | accepted | rejected |
+| `Symbol.for('<pkg>.select')` override | picks the variant | ignored |
+
+Pick `./init` when the app should adapt to the host (a library, or a page that
+may or may not be cross-origin isolated). Pick `./<variant>/init` when the
+answer is already known — a Node CLI that always wants threads, a page that
+deliberately serves the single-threaded build — and the bytes matter.
+
+Single-variant packages get no pinned entry: their `./init` already resolves
+exactly one glue.
+
+A pinned entry knows about one variant and nothing else. Passing any `variant`
+option is a type error and a runtime error. The shared override symbol has no
+effect because the module contains no selector.
+
+## The root is always eager
+
+The root selects one capability-compatible variant, self-locates that
+variant's WASM asset, initialises it with top-level `await`, and re-exports
+every bound symbol as a named value:
+
+```typescript notypecheck
+import oc, { BRepPrimAPI_MakeBox } from 'libcascade';
+
+using box = new BRepPrimAPI_MakeBox(10, 10, 10);
+using also = new oc.BRepPrimAPI_MakeBox(10, 10, 10);
+```
+
+Named value exports are what make `gp_Pnt` usable as a value in an external
+editor instead of failing with "cannot be used as a value".
+
+Importing `./init` never evaluates the eager root, so a consumer who wants the
+lazy API never pays for an instantiation they did not ask for.
+
+## Selection and the override symbol
+
+The selector picks the **most capable** variant whose `requires` all probe
+true; configuration order breaks ties. To force a choice, set the override
+before importing the root or calling `createInstance`:
+
+```javascript notypecheck
+globalThis[Symbol.for('libcascade.select')] = 'single';
+```
+
+The symbol key is `<your package name>.select`. It is a pre-import override:
+set it in a module that runs first, not after the root has already evaluated.
+
+## The exports fragment
+
+```bash
+npx libcascade assemble --write-exports
+```
+
+```json title="package.json (generated subpaths)"
+{
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+    "./init": { "types": "./dist/init.d.ts", "default": "./dist/init.js" },
+    "./single": { "types": "./dist/variant.d.ts", "default": "./dist/myapp_single.js" },
+    "./single/init": { "types": "./dist/init.single.d.ts", "default": "./dist/init.single.js" },
+    "./single/wasm": "./dist/myapp_single.wasm",
+    "./multi": { "types": "./dist/variant.d.ts", "default": "./dist/myapp_multi.js" },
+    "./multi/init": { "types": "./dist/init.multi.d.ts", "default": "./dist/init.multi.js" },
+    "./multi/wasm": "./dist/myapp_multi.wasm"
+  }
+}
+```
+
+Each pinned entry has a small declaration file that removes selectors and
+options the fixed variant cannot accept.
+
+The merge keeps every subpath you declared yourself — hand-written aliases such
+as `./wasm` or `./api-reference.json` keep resolving. It also replaces
+generated entries in `files` with the exact current surface while preserving
+hand-maintained files.
+
+## What `dist/` holds, and what ships
+
+`dist/` is not a publish manifest. It holds three classes of file, and **`files`
+in `package.json` is the authoritative statement of which ones ship**:
+
+| Class | Files | Ships |
+| --- | --- | --- |
+| Shipped surface | `types.d.ts`, `init.js` / `init.d.ts`, `init.<variant>.js` / `init.<variant>.d.ts`, `index.js` / `index.d.ts`, `variant.d.ts`, `<outputName>.js`, `<outputName>.wasm` | Yes — this is what `exports` points at |
+| Durable records | `<outputName>.build-manifest.json`, `<outputName>.provenance.json`, `<outputName>.js.symbols` | Your call — `libcascade` ships all three so consumers can audit the build |
+| In-repo build products | `<outputName>.d.ts` (one per variant), `exports.json` | No |
+
+The per-variant `<outputName>.d.ts` files look like leftovers next to the
+generated `types.d.ts`, and they are not. They are the container `dts` step's
+artifact, with two real consumers:
+
+- **`assemble` parses every one of them** to build the shared `types.d.ts`.
+  Delete them and `assemble` cannot run.
+- **The bindgen's own type tests import them directly.** In this repository, 30
+  files under `tests/` do `import type { … } from '../dist/opencascade_single'`,
+  because the per-variant d.ts *is* the artifact under test. They cannot be
+  repointed at `types.d.ts`, which is a different thing — a cross-variant union.
+
+So they are build products consumed in-repo that do not publish. Leave
+them in `dist/` and leave them out of `files`; `exports.json` is likewise a
+review aid for `--write-exports` and never ships.
+
+## Consumer prerequisites for a threads variant
+
+### Cross-origin isolation
+
+Browsers gate `SharedArrayBuffer` behind cross-origin isolation. Every page
+that loads the threaded binary must be served with:
+
+```http
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Embedder-Policy: require-corp
+```
+
+Without them the capability probe fails, the selector falls back to a variant
+without `requires`, and an explicit `createInstance({ variant: 'multi' })`
+throws with that remediation in the message. Node exposes `SharedArrayBuffer`
+unconditionally — no headers needed.
+
+### Vite needs ES-module workers
+
+Emscripten spawns its pthread workers as ES modules with top-level await.
+Vite's default worker format is `iife`, which cannot emit them:
+
+```typescript title="vite.config.ts" notypecheck
+export default {
+  worker: { format: 'es' },
+};
+```
+
+### Bundlers and the glue
+
+The generated `init` entries reference each glue with `new URL(…,
+import.meta.url)`, so bundlers emit it as a first-class asset, but load it
+through an import that is deliberately opaque to them
+(`import(/* webpackIgnore: true */ /* @vite-ignore */ href)`). Cutting that
+graph edge is what keeps the `.wasm` out. A statically analysable import makes
+a bundler follow the glue, and a pthread build contains
+`new Worker(new URL(<glue>, import.meta.url))`, so the glue gets re-bundled as
+a worker entry and every variant's binary comes with it.
+
+No configuration is needed either way. The glue resolves its `.wasm` sibling relative to its own
+URL; pass `locateFile` only when your deployment moves the binary away from the
+glue. See
+[Bundler and locateFile](../../package/guides/bundler-locatefile) for
+per-bundler recipes.
+
+## Related
+
+- [Config reference](../reference/config) — variants and their build settings.
+- [CLI reference](../reference/cli) — `assemble` flags.
+- [Custom multi-threaded build](../guides/multi-threading) — the threads variant end to end.

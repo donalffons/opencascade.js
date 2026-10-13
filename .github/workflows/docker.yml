@@ -1,0 +1,1959 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Publish a canary or resume one exact release commit
+        required: true
+        default: canary
+        type: choice
+        options: [canary, resume-release]
+      version:
+        description: Exact SemVer for resume-release
+        required: false
+        type: string
+      release_sha:
+        description: Exact current main SHA for resume-release
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || format('run-{0}', github.run_id) }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  REGISTRY_IMAGE: ghcr.io/taucad/opencascade.js
+
+jobs:
+  preflight:
+    name: preflight
+    runs-on: ubuntu-latest
+    outputs:
+      channel: ${{ steps.release.outputs.channel }}
+      full_sha: ${{ steps.release.outputs.full_sha }}
+      ghcr_promote: ${{ steps.release.outputs.ghcr_promote }}
+      is_release: ${{ steps.release.outputs.is_release }}
+      kind: ${{ steps.release.outputs.kind }}
+      npm_publish: ${{ steps.release.outputs.npm_publish }}
+      prerelease: ${{ steps.release.outputs.prerelease }}
+      reproducibility_required: ${{ steps.release.outputs.reproducibility_required }}
+      release_tag: ${{ steps.release.outputs.release_tag }}
+      source_date_epoch: ${{ steps.release.outputs.source_date_epoch }}
+      version: ${{ steps.release.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+
+      - name: Preserve protected release policy
+        run: install -m 0755 scripts/ci-release.mjs "$RUNNER_TEMP/ci-release.mjs"
+
+      - name: Select exact source
+        id: source
+        env:
+          OPERATION: ${{ inputs.operation || 'canary' }}
+          RELEASE_SHA: ${{ inputs.release_sha }}
+          REQUESTED_VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          selected_sha="$GITHUB_SHA"
+          if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ] && [ "$OPERATION" = resume-release ]; then
+            [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+            test -n "$REQUESTED_VERSION"
+            test "$RELEASE_SHA" = "$GITHUB_SHA" || {
+              echo "release_sha must equal the dispatch GITHUB_SHA; historical resumes cannot produce truthful npm provenance" >&2
+              exit 1
+            }
+            git cat-file -e "$RELEASE_SHA^{commit}"
+            git fetch origin main
+            git merge-base --is-ancestor "$RELEASE_SHA" origin/main
+            selected_sha="$RELEASE_SHA"
+            git checkout --detach "$selected_sha"
+          elif [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then
+            test "$OPERATION" = canary
+            test -z "$RELEASE_SHA"
+            test -z "$REQUESTED_VERSION"
+          fi
+          echo "selected_sha=$selected_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install locked Node tools
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Validate event and derive immutable release metadata
+        id: release
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          EVENT: ${{ github.event_name }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          OPERATION: ${{ inputs.operation || 'canary' }}
+          REF: ${{ github.ref }}
+          REQUESTED_VERSION: ${{ inputs.version }}
+          SHA: ${{ steps.source.outputs.selected_sha }}
+        run: |
+          set -euo pipefail
+          epoch="$(git show -s --format=%ct "$SHA")"
+          metadata_sha="$SHA"
+          if [ "$EVENT" = pull_request ]; then
+            [[ "$BASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+            [[ "$HEAD_SHA" =~ ^[0-9a-f]{40}$ ]]
+            git diff --name-only "$BASE_SHA" "$HEAD_SHA" > "$RUNNER_TEMP/changed-files.txt"
+            metadata_sha="$HEAD_SHA"
+          elif git rev-parse "$SHA^" >/dev/null 2>&1; then
+            git diff --name-only "$SHA^" "$SHA" > "$RUNNER_TEMP/changed-files.txt"
+          else
+            git diff-tree --root --no-commit-id --name-only -r "$SHA" > "$RUNNER_TEMP/changed-files.txt"
+          fi
+          node "$RUNNER_TEMP/ci-release.mjs" \
+            --event "$EVENT" \
+            --operation "$OPERATION" \
+            --ref "$REF" \
+            --requested-version "$REQUESTED_VERSION" \
+            --sha "$SHA" \
+            --commit-epoch "$epoch" \
+            --package-version "$(node -p "require('./package.json').version")" \
+            --commit-subject "$(git show -s --format=%s "$metadata_sha")" \
+            --changed-files-file "$RUNNER_TEMP/changed-files.txt"
+
+      - name: Fast syntax checks
+        run: |
+          node --check scripts/ci-release.mjs
+          node --check scripts/browser-runtime-matrix.mjs
+          node --check scripts/generate-api-reference.mjs
+          node --check scripts/package-candidate.mjs
+          node --check scripts/prepare-release.mjs
+          node --check scripts/ghcr-retention.mjs
+          node --check scripts/ghcr-promotion.mjs
+          node --check scripts/lib/*.mjs
+          node --check docs-site/scripts/*.mjs
+          bash -n build-wasm.sh scripts/*.sh
+
+  quality:
+    name: quality
+    needs: preflight
+    runs-on: ubuntu-latest
+    env:
+      UV_PYTHON_INSTALL_DIR: ${{ github.workspace }}/.uv-python
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          ref: ${{ needs.preflight.outputs.full_sha }}
+
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install locked Node tools
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Cheap JavaScript and shell quality
+        run: |
+          npm run lint
+          npm run test:ci
+          bash -n build-wasm.sh scripts/*.sh
+          shellcheck build-wasm.sh scripts/*.sh
+
+      - name: Require Version Plans for package-affecting pull requests
+        if: github.event_name == 'pull_request'
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          subject="$(git show -s --format=%s "$HEAD")"
+          if [[ "$subject" == "chore(release): ocjs v"* ]]; then
+            git diff --name-only "$BASE" "$HEAD" > "$RUNNER_TEMP/release-files.txt"
+            node scripts/ci-release.mjs \
+              --event push \
+              --ref refs/heads/main \
+              --sha "$HEAD" \
+              --commit-epoch "$(git show -s --format=%ct "$HEAD")" \
+              --package-version "$(node -p "require('./package.json').version")" \
+              --commit-subject "$subject" \
+              --changed-files-file "$RUNNER_TEMP/release-files.txt" >/dev/null
+          else
+            npx nx release plan:check --base="$BASE" --head="$HEAD"
+          fi
+
+      - name: Install uv
+        run: |
+          python3 -m pip install --user uv==0.11.29
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Restore verified quality dependencies
+        id: quality-cache
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: |
+            .ci-tools/bin/actionlint
+            .uv-python
+            .venv
+            deps
+          key: quality-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('DEPS.json', 'pyproject.toml', 'uv.lock', 'scripts/clone-deps.sh', 'scripts/install-ci-tool.sh', 'scripts/prune-llvm.sh') }}
+
+      - name: Install pinned actionlint
+        run: scripts/install-ci-tool.sh --tool actionlint --dest .ci-tools
+
+      - name: Workflow quality
+        run: |
+          .ci-tools/bin/actionlint \
+            -ignore 'unexpected key "queue" for "concurrency" section' \
+            .github/workflows/*.yml
+
+      - name: Materialize pinned build dependencies
+        env:
+          OCJS_FORCE_PYTHON_SYNC: 1
+          OCJS_STRICT_DEPS: 1
+        run: |
+          scripts/clone-deps.sh --dest deps --python-profile development
+          scripts/prune-llvm.sh deps/llvm-17
+
+      - name: Save verified quality dependencies
+        if: steps.quality-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: |
+            .ci-tools/bin/actionlint
+            .uv-python
+            .venv
+            deps
+          key: ${{ steps.quality-cache.outputs.cache-primary-key }}
+
+      - name: Python quality and unit tests
+        env:
+          EMSDK: ${{ github.workspace }}/deps/emsdk
+          FREETYPE_ROOT: ${{ github.workspace }}/deps/freetype
+          OCCT_ROOT: ${{ github.workspace }}/deps/OCCT
+          OCJS_ROOT: ${{ github.workspace }}
+          RAPIDJSON_ROOT: ${{ github.workspace }}/deps/rapidjson
+        run: |
+          .venv/bin/ruff check src scripts tests
+          .venv/bin/pytest tests/unit tests/bindgen
+
+  docs-prose:
+    name: docs · prose
+    needs: preflight
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.preflight.outputs.full_sha }}
+
+      - name: Restore pinned Vale
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: .ci-tools/bin/vale
+          key: vale-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('DEPS.json', 'scripts/install-ci-tool.sh') }}
+
+      - name: Install pinned Vale
+        run: scripts/install-ci-tool.sh --tool vale --dest .ci-tools
+
+      - name: Vale
+        run: .ci-tools/bin/vale --config=docs-site/.vale.ini docs-site/content/docs README.md
+
+  candidate-validation:
+    name: candidate · ${{ matrix.stage }} · arm64
+    if: github.event_name == 'pull_request'
+    needs: preflight
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 240
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        stage: [final-single, final-multi, bindgen-base]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.preflight.outputs.full_sha }}
+
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install test runner
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1
+        with:
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: false
+          swap-storage: false
+          tool-cache: false
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4
+
+      - name: Build candidate for validation
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7
+        with:
+          context: .
+          target: ${{ matrix.stage }}
+          platforms: linux/arm64
+          load: true
+          tags: ocjs:e2e-${{ matrix.stage }}
+          build-args: |
+            SOURCE_DATE_EPOCH=0
+            REVISION=${{ needs.preflight.outputs.full_sha }}
+            OCJS_SOURCE_DATE_EPOCH=${{ needs.preflight.outputs.source_date_epoch }}
+            VERSION=${{ needs.preflight.outputs.version }}
+          # Seed binding objects from the latest release image; compileBindings.py
+          # reuses only objects whose identity matches (see Dockerfile Stage 1d).
+          # The release tags move only on release, so the compiled-* layer cache
+          # stays valid between releases. Reproducibility builds pass no seed.
+          build-contexts: |
+            binding-objects-seed-single-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:single-threaded
+            binding-objects-seed-multi-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:multi-threaded
+          cache-from: type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-arm64-${{ matrix.stage }}
+          provenance: false
+          sbom: false
+
+      - name: Build Python validation target
+        if: matrix.stage == 'final-single'
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7
+        with:
+          context: .
+          target: validation-single
+          platforms: linux/arm64
+          load: true
+          tags: ocjs:e2e-validation-single
+          build-args: |
+            SOURCE_DATE_EPOCH=0
+            REVISION=${{ needs.preflight.outputs.full_sha }}
+            OCJS_SOURCE_DATE_EPOCH=${{ needs.preflight.outputs.source_date_epoch }}
+            VERSION=${{ needs.preflight.outputs.version }}
+          build-contexts: |
+            binding-objects-seed-single-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:single-threaded
+            binding-objects-seed-multi-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:multi-threaded
+          cache-from: type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-arm64-final-single
+          provenance: false
+          sbom: false
+
+      - name: Candidate e2e
+        env:
+          OCJS_DOCKER_PLATFORM: linux/arm64
+          OCJS_E2E_IMAGE: ocjs:e2e-${{ matrix.stage }}
+          OCJS_E2E_STAGE: ${{ matrix.stage }}
+          OCJS_E2E_BUILD_CONFIG: ${{ matrix.stage == 'final-multi' && 'build-configs/full_multi.yml' || 'build-configs/full.yml' }}
+          # compiled-single-threaded already compiles this content; main keeps
+          # bindgen-base's from-scratch custom build before publishing.
+          OCJS_E2E_BINDGEN_CUSTOM_BUILD: '0'
+          OCJS_E2E_OUTPUT_DIR: ${{ runner.temp }}/e2e
+          OCJS_EXPECTED_SHA: ${{ needs.preflight.outputs.full_sha }}
+          SOURCE_DATE_EPOCH: ${{ needs.preflight.outputs.source_date_epoch }}
+        run: scripts/docker-e2e-validate.sh
+
+      - name: Published image excludes CI-only Python tools
+        env:
+          IMAGE: ocjs:e2e-${{ matrix.stage }}
+        run: |
+          docker run --rm --entrypoint bash "$IMAGE" -lc '
+            test ! -e /opencascade.js/.venv/bin/actionlint
+            test ! -e /opencascade.js/.venv/bin/pytest
+            test ! -e /opencascade.js/.venv/bin/ruff
+            /opencascade.js/.venv/bin/python -c \
+              "import importlib.util; assert importlib.util.find_spec(\"pytest\") is None; assert importlib.util.find_spec(\"ruff\") is None"
+          '
+
+      - name: Docker consumer behavior
+        env:
+          IMAGE: ocjs:e2e-${{ matrix.stage }}
+          OCJS_DOCKER_STAGE: ${{ matrix.stage }}
+          OCJS_DOCKER_TESTS: 1
+          OCJS_DOCKER_OUTPUT_DIR: ${{ runner.temp }}/e2e
+        run: |
+          if [ "$OCJS_DOCKER_STAGE" = final-single ]; then
+            export OCJS_DOCKER_SINGLE_IMAGE="$IMAGE"
+            npm run test:docker
+          elif [ "$OCJS_DOCKER_STAGE" = final-multi ]; then
+            export OCJS_DOCKER_MULTI_IMAGE="$IMAGE"
+            npm run test:docker
+          fi
+
+      - name: Python integration and sentinel checks
+        if: matrix.stage == 'final-single'
+        env:
+          IMAGE: ocjs:e2e-${{ matrix.stage }}
+          TEST_IMAGE: ocjs:e2e-validation-single
+          DIST: ${{ runner.temp }}/e2e
+          REPLICAD_DIST: ${{ runner.temp }}/replicad
+          TEST_DIST: ${{ runner.temp }}/python-dist
+        run: |
+          mkdir -p "$REPLICAD_DIST" "$TEST_DIST"
+          docker run --rm \
+            -u "$(id -u):$(id -g)" \
+            -v "$PWD/build-configs/replicad-validation.yml:/src/build-config.yml:ro" \
+            -v "$REPLICAD_DIST:/output" \
+            -e OCJS_OUTPUT_DIR=/output \
+            "$IMAGE" link build-config.yml
+          cp "$DIST"/* "$REPLICAD_DIST"/* "$TEST_DIST"/
+          docker run --rm \
+            --entrypoint bash \
+            -v "$PWD:/host:ro" \
+            -v "$TEST_DIST:/opencascade.js/dist:ro" \
+            "$TEST_IMAGE" -lc '
+              rm -rf /opencascade.js/tests
+              rm -rf /opencascade.js/scripts
+              cp -R /host/tests /opencascade.js/tests
+              cp -R /host/scripts /opencascade.js/scripts
+              cp /host/Dockerfile /opencascade.js/Dockerfile
+              cp -R /host/.github /opencascade.js/.github
+              cd /opencascade.js
+              rm -rf build/bindings
+              npx nx run ocjs:generate --skip-nx-cache
+              npx vitest run tests/no-clobber-validation.test.ts
+              OCJS_YAML=/host/build-configs/replicad-validation.yml \
+                npx nx run ocjs:bind-symbols --skip-nx-cache
+              OCJS_OUTPUT_DIR=/opencascade.js/dist \
+                .venv/bin/pytest tests/integration tests/sentinel
+            '
+
+      - name: Generate package-owned API reference
+        if: matrix.stage == 'final-single'
+        env:
+          DIST: ${{ runner.temp }}/e2e
+          FULL_SHA: ${{ needs.preflight.outputs.full_sha }}
+          IMAGE: ocjs:e2e-${{ matrix.stage }}
+          SOURCE_DATE_EPOCH: ${{ needs.preflight.outputs.source_date_epoch }}
+          VERSION: ${{ needs.preflight.outputs.version }}
+        run: |
+          docker run --rm \
+            --entrypoint bash \
+            -v "$DIST:/opencascade.js/dist" \
+            -e OCJS_EXPECTED_SHA="$FULL_SHA" \
+            -e OCJS_PACKAGE_VERSION="$VERSION" \
+            -e SOURCE_DATE_EPOCH \
+            "$IMAGE" -lc \
+              'cd /opencascade.js && npx nx run ocjs:api-reference --skip-nx-cache --excludeTaskDependencies'
+          test -s "$DIST/api-reference.json"
+
+      - name: Upload ST/MT package outputs
+        if: matrix.stage != 'bindgen-base'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: npm-dist-${{ matrix.stage == 'final-single' && 'single' || 'multi' }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/e2e/*
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 2
+
+  candidate-build:
+    name: candidate · ${{ matrix.stage }} · ${{ matrix.arch }}
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: preflight
+    runs-on: ${{ matrix.arch == 'arm64' && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
+    timeout-minutes: 240
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        stage: [final-single, final-multi, bindgen-base]
+        arch: [amd64, arm64]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.preflight.outputs.full_sha }}
+
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install test runner
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1
+        with:
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: false
+          swap-storage: false
+          tool-cache: false
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0 # v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build candidate for e2e
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7
+        with:
+          context: .
+          target: ${{ matrix.stage }}
+          platforms: ${{ matrix.arch == 'arm64' && 'linux/arm64' || 'linux/amd64' }}
+          load: true
+          tags: ocjs:e2e-${{ matrix.stage }}
+          build-args: |
+            SOURCE_DATE_EPOCH=0
+            REVISION=${{ needs.preflight.outputs.full_sha }}
+            OCJS_SOURCE_DATE_EPOCH=${{ needs.preflight.outputs.source_date_epoch }}
+            VERSION=${{ needs.preflight.outputs.version }}
+          # Seed binding objects from the latest release image; compileBindings.py
+          # reuses only objects whose identity matches (see Dockerfile Stage 1d).
+          # The release tags move only on release, so the compiled-* layer cache
+          # stays valid between releases. Reproducibility builds pass no seed.
+          build-contexts: |
+            binding-objects-seed-single-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:single-threaded
+            binding-objects-seed-multi-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:multi-threaded
+          cache-from: |
+            type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-${{ matrix.arch }}-${{ matrix.stage }}
+          cache-to: type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-${{ matrix.arch }}-${{ matrix.stage }},mode=max
+          provenance: false
+          sbom: false
+
+      - name: Candidate e2e
+        env:
+          OCJS_DOCKER_PLATFORM: ${{ matrix.arch == 'arm64' && 'linux/arm64' || 'linux/amd64' }}
+          OCJS_E2E_IMAGE: ocjs:e2e-${{ matrix.stage }}
+          OCJS_E2E_STAGE: ${{ matrix.stage }}
+          OCJS_E2E_BUILD_CONFIG: ${{ matrix.stage == 'final-multi' && 'build-configs/full_multi.yml' || 'build-configs/full.yml' }}
+          OCJS_E2E_OUTPUT_DIR: ${{ runner.temp }}/e2e
+          OCJS_EXPECTED_SHA: ${{ needs.preflight.outputs.full_sha }}
+          SOURCE_DATE_EPOCH: ${{ needs.preflight.outputs.source_date_epoch }}
+        run: scripts/docker-e2e-validate.sh
+
+      - name: Published image excludes CI-only Python tools
+        env:
+          IMAGE: ocjs:e2e-${{ matrix.stage }}
+        run: |
+          docker run --rm --entrypoint bash "$IMAGE" -lc '
+            test ! -e /opencascade.js/.venv/bin/actionlint
+            test ! -e /opencascade.js/.venv/bin/pytest
+            test ! -e /opencascade.js/.venv/bin/ruff
+            /opencascade.js/.venv/bin/python -c \
+              "import importlib.util; assert importlib.util.find_spec(\"pytest\") is None; assert importlib.util.find_spec(\"ruff\") is None"
+          '
+
+      - name: Build Python validation target
+        if: matrix.arch == 'amd64' && matrix.stage == 'final-single'
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7
+        with:
+          context: .
+          target: validation-single
+          platforms: linux/amd64
+          load: true
+          tags: ocjs:e2e-validation-single
+          build-args: |
+            SOURCE_DATE_EPOCH=0
+            REVISION=${{ needs.preflight.outputs.full_sha }}
+            OCJS_SOURCE_DATE_EPOCH=${{ needs.preflight.outputs.source_date_epoch }}
+            VERSION=${{ needs.preflight.outputs.version }}
+          build-contexts: |
+            binding-objects-seed-single-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:single-threaded
+            binding-objects-seed-multi-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:multi-threaded
+          cache-from: |
+            type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-amd64-final-single
+          provenance: false
+          sbom: false
+
+      - name: Docker consumer behavior
+        if: matrix.arch == 'arm64'
+        env:
+          IMAGE: ocjs:e2e-${{ matrix.stage }}
+          OCJS_DOCKER_STAGE: ${{ matrix.stage }}
+          OCJS_DOCKER_TESTS: 1
+          OCJS_DOCKER_OUTPUT_DIR: ${{ runner.temp }}/e2e
+        run: |
+          if [ "$OCJS_DOCKER_STAGE" = final-single ]; then
+            export OCJS_DOCKER_SINGLE_IMAGE="$IMAGE"
+            npm run test:docker
+          elif [ "$OCJS_DOCKER_STAGE" = final-multi ]; then
+            export OCJS_DOCKER_MULTI_IMAGE="$IMAGE"
+            npm run test:docker
+          fi
+
+      - name: Python integration and sentinel checks
+        if: matrix.arch == 'amd64' && matrix.stage == 'final-single'
+        env:
+          IMAGE: ocjs:e2e-${{ matrix.stage }}
+          TEST_IMAGE: ocjs:e2e-validation-single
+          DIST: ${{ runner.temp }}/e2e
+          REPLICAD_DIST: ${{ runner.temp }}/replicad
+          TEST_DIST: ${{ runner.temp }}/python-dist
+        run: |
+          mkdir -p "$REPLICAD_DIST" "$TEST_DIST"
+          docker run --rm \
+            -u "$(id -u):$(id -g)" \
+            -v "$PWD/build-configs/replicad-validation.yml:/src/build-config.yml:ro" \
+            -v "$REPLICAD_DIST:/output" \
+            -e OCJS_OUTPUT_DIR=/output \
+            "$IMAGE" link build-config.yml
+          cp "$DIST"/* "$REPLICAD_DIST"/* "$TEST_DIST"/
+          docker run --rm \
+            --entrypoint bash \
+            -v "$PWD:/host:ro" \
+            -v "$TEST_DIST:/opencascade.js/dist:ro" \
+            "$TEST_IMAGE" -lc '
+              rm -rf /opencascade.js/tests
+              rm -rf /opencascade.js/scripts
+              cp -R /host/tests /opencascade.js/tests
+              cp -R /host/scripts /opencascade.js/scripts
+              cp /host/Dockerfile /opencascade.js/Dockerfile
+              cp -R /host/.github /opencascade.js/.github
+              cd /opencascade.js
+              rm -rf build/bindings
+              npx nx run ocjs:generate --skip-nx-cache
+              npx vitest run tests/no-clobber-validation.test.ts
+              OCJS_YAML=/host/build-configs/replicad-validation.yml \
+                npx nx run ocjs:bind-symbols --skip-nx-cache
+              OCJS_OUTPUT_DIR=/opencascade.js/dist \
+                .venv/bin/pytest tests/integration tests/sentinel
+            '
+
+      - name: Generate package-owned API reference
+        if: matrix.arch == 'amd64' && matrix.stage == 'final-single'
+        env:
+          DIST: ${{ runner.temp }}/e2e
+          FULL_SHA: ${{ needs.preflight.outputs.full_sha }}
+          IMAGE: ocjs:e2e-${{ matrix.stage }}
+          SOURCE_DATE_EPOCH: ${{ needs.preflight.outputs.source_date_epoch }}
+          VERSION: ${{ needs.preflight.outputs.version }}
+        run: |
+          docker run --rm \
+            --entrypoint bash \
+            -v "$DIST:/opencascade.js/dist" \
+            -e OCJS_EXPECTED_SHA="$FULL_SHA" \
+            -e OCJS_PACKAGE_VERSION="$VERSION" \
+            -e SOURCE_DATE_EPOCH \
+            "$IMAGE" -lc \
+              'cd /opencascade.js && npx nx run ocjs:api-reference --skip-nx-cache --excludeTaskDependencies'
+          test -s "$DIST/api-reference.json"
+
+      - name: Upload ST/MT package outputs
+        if: matrix.arch == 'amd64' && matrix.stage != 'bindgen-base'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: npm-dist-${{ matrix.stage == 'final-single' && 'single' || 'multi' }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/e2e/*
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 2
+
+      - name: Push tested candidate by digest
+        id: push
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7
+        with:
+          context: .
+          target: ${{ matrix.stage }}
+          platforms: ${{ matrix.arch == 'arm64' && 'linux/arm64' || 'linux/amd64' }}
+          outputs: type=image,name=${{ env.REGISTRY_IMAGE }},push-by-digest=true,name-canonical=true,push=true
+          build-args: |
+            SOURCE_DATE_EPOCH=0
+            REVISION=${{ needs.preflight.outputs.full_sha }}
+            OCJS_SOURCE_DATE_EPOCH=${{ needs.preflight.outputs.source_date_epoch }}
+            VERSION=${{ needs.preflight.outputs.version }}
+          build-contexts: |
+            binding-objects-seed-single-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:single-threaded
+            binding-objects-seed-multi-threaded=docker-image://${{ env.REGISTRY_IMAGE }}:multi-threaded
+          cache-from: |
+            type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-${{ matrix.arch }}-${{ matrix.stage }}
+          cache-to: type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-${{ matrix.arch }}-${{ matrix.stage }},mode=max
+          provenance: true
+          sbom: true
+
+      - name: Export digest identity
+        env:
+          DIGEST: ${{ steps.push.outputs.digest }}
+        run: |
+          mkdir -p "${{ runner.temp }}/digests"
+          touch "${{ runner.temp }}/digests/${DIGEST#sha256:}"
+
+      - name: Upload digest identity
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: digest-${{ matrix.stage }}-${{ matrix.arch }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/digests/*
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 2
+
+  candidate-gate:
+    name: candidate
+    if: always()
+    needs: [candidate-validation, candidate-build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require the applicable candidate matrix
+        env:
+          VALIDATION: ${{ needs.candidate-validation.result }}
+          BUILD: ${{ needs.candidate-build.result }}
+        run: |
+          if [ "$VALIDATION" = success ] && [ "$BUILD" = skipped ]; then exit 0; fi
+          if [ "$BUILD" = success ] && [ "$VALIDATION" = skipped ]; then exit 0; fi
+          echo "candidate matrices: validation=$VALIDATION build=$BUILD" >&2
+          exit 1
+
+  package-assemble:
+    name: package · assemble and pack once
+    needs: [preflight, quality, candidate-gate]
+    if: >-
+      always() &&
+      needs.preflight.result == 'success' &&
+      needs.quality.result == 'success' &&
+      needs.candidate-gate.result == 'success'
+    runs-on: ubuntu-latest
+    outputs:
+      artifact: npm-candidate-${{ github.run_id }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.preflight.outputs.full_sha }}
+
+      - name: Download single-threaded outputs
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: npm-dist-single-${{ github.run_id }}
+          path: ${{ runner.temp }}/single
+
+      - name: Download multi-threaded outputs
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: npm-dist-multi-${{ github.run_id }}
+          path: ${{ runner.temp }}/multi
+
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Pin npm pack implementation
+        run: npm install --global npm@11.5.1
+
+      - name: Install locked test tools
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Assemble exact same-run dist
+        env:
+          OCJS_EXPECTED_SHA: ${{ needs.preflight.outputs.full_sha }}
+        run: |
+          rm -rf dist
+          mkdir dist
+          cp "${{ runner.temp }}/single/"* dist/
+          cp "${{ runner.temp }}/multi/"* dist/
+          npm run build:toolchain
+          node packages/toolchain/bin/libcascade.mjs assemble --write-exports
+          git diff --exit-code -- package.json
+          node scripts/package-candidate.mjs dist
+
+      - name: Full runtime, regression, and declaration gates
+        run: |
+          npm test -- --exclude tests/no-clobber-validation.test.ts
+          npm run test:regression
+          npm run typecheck
+
+      - name: Apply ephemeral version and pack once
+        env:
+          VERSION: ${{ needs.preflight.outputs.version }}
+        run: |
+          npm version "$VERSION" --no-git-tag-version --allow-same-version --ignore-scripts
+          npm pack --ignore-scripts --json > "${{ runner.temp }}/pack.json"
+          node scripts/package-candidate.mjs --pack-json "${{ runner.temp }}/pack.json"
+          filename="$(node -p "JSON.parse(require('fs').readFileSync('${{ runner.temp }}/pack.json'))[0].filename")"
+          mv "$filename" "${{ runner.temp }}/candidate.tgz"
+          sha256sum "${{ runner.temp }}/candidate.tgz" | cut -d' ' -f1 > "${{ runner.temp }}/candidate.sha256"
+          printf 'sha512-' > "${{ runner.temp }}/candidate.sha512"
+          openssl dgst -sha512 -binary "${{ runner.temp }}/candidate.tgz" | base64 -w0 >> "${{ runner.temp }}/candidate.sha512"
+          printf '\n' >> "${{ runner.temp }}/candidate.sha512"
+
+      - name: Write candidate identity
+        env:
+          CHANNEL: ${{ needs.preflight.outputs.channel }}
+          FULL_SHA: ${{ needs.preflight.outputs.full_sha }}
+          SOURCE_DATE_EPOCH: ${{ needs.preflight.outputs.source_date_epoch }}
+          VERSION: ${{ needs.preflight.outputs.version }}
+        run: |
+          node -e "
+            const fs = require('node:fs');
+            fs.writeFileSync(process.env.RUNNER_TEMP + '/candidate.json', JSON.stringify({
+              channel: process.env.CHANNEL,
+              fullSha: process.env.FULL_SHA,
+              runId: process.env.GITHUB_RUN_ID,
+              sourceDateEpoch: process.env.SOURCE_DATE_EPOCH,
+              version: process.env.VERSION,
+            }, null, 2) + '\n');
+          "
+
+      - name: Upload immutable npm candidate
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: npm-candidate-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/candidate.tgz
+            ${{ runner.temp }}/candidate.sha256
+            ${{ runner.temp }}/candidate.sha512
+            ${{ runner.temp }}/candidate.json
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 7
+
+  package-runtime:
+    name: package · installed runtime
+    needs: [preflight, package-assemble]
+    if: >-
+      always() &&
+      needs.preflight.result == 'success' &&
+      needs.package-assemble.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.preflight.outputs.full_sha }}
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ needs.package-assemble.outputs.artifact }}
+          path: ${{ runner.temp }}/candidate
+      - name: Test installed tarball
+        env:
+          OCJS_PACKAGE_TARBALL: ${{ runner.temp }}/candidate/candidate.tgz
+        run: npm run test:package
+
+  package-browser:
+    name: package · browser runtime matrix
+    needs: [preflight, package-assemble]
+    if: >-
+      always() &&
+      needs.preflight.result == 'success' &&
+      needs.package-assemble.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.preflight.outputs.full_sha }}
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ needs.package-assemble.outputs.artifact }}
+          path: ${{ runner.temp }}/candidate
+      - name: Test ST and MT in Chromium, Firefox, and WebKit
+        env:
+          OCJS_PACKAGE_TARBALL: ${{ runner.temp }}/candidate/candidate.tgz
+        run: scripts/test-candidate-browser.sh
+
+  package-templates:
+    name: package · active templates
+    needs: [preflight, package-assemble]
+    if: >-
+      always() &&
+      needs.preflight.result == 'success' &&
+      needs.package-assemble.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.preflight.outputs.full_sha }}
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ needs.package-assemble.outputs.artifact }}
+          path: ${{ runner.temp }}/candidate
+      - name: Build and smoke all active templates
+        env:
+          OCJS_PACKAGE_TARBALL: ${{ runner.temp }}/candidate/candidate.tgz
+        run: scripts/test-candidate-templates.sh
+
+  package-docs:
+    name: package · docs consumer
+    needs: [preflight, package-assemble]
+    if: >-
+      always() &&
+      needs.preflight.result == 'success' &&
+      needs.package-assemble.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.preflight.outputs.full_sha }}
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ needs.package-assemble.outputs.artifact }}
+          path: ${{ runner.temp }}/candidate
+      - name: Test docs against candidate
+        env:
+          OCJS_PACKAGE_TARBALL: ${{ runner.temp }}/candidate/candidate.tgz
+          OCJS_EXPECTED_SHA: ${{ needs.preflight.outputs.full_sha }}
+          SOURCE_DATE_EPOCH: ${{ needs.preflight.outputs.source_date_epoch }}
+        run: scripts/test-candidate-docs.sh
+
+  package-gate:
+    name: package
+    needs: [package-runtime, package-browser, package-templates, package-docs]
+    if: >-
+      always() &&
+      needs.package-runtime.result == 'success' &&
+      needs.package-browser.result == 'success' &&
+      needs.package-templates.result == 'success' &&
+      needs.package-docs.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Exact npm candidate passed every consumer"
+
+  ghcr-promote:
+    name: ghcr · ${{ matrix.stage }}
+    if: >-
+      always() &&
+      needs.preflight.outputs.ghcr_promote == 'true' &&
+      needs.preflight.result == 'success' &&
+      needs.candidate-build.result == 'success' &&
+      needs.package-gate.result == 'success' &&
+      (needs.preflight.outputs.reproducibility_required != 'true' || needs.release-reproducibility.result == 'success') &&
+      (needs.preflight.outputs.kind == 'main' || needs.npm-publish.result == 'success')
+    needs: [preflight, candidate-build, package-gate, release-reproducibility, npm-publish]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    strategy:
+      fail-fast: false
+      matrix:
+        stage: [final-single, final-multi, bindgen-base]
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.preflight.outputs.full_sha }}
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: '24.10.0'
+      - name: Install locked Node tools
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Download tested digests
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          pattern: digest-${{ matrix.stage }}-*-${{ github.run_id }}
+          path: ${{ runner.temp }}/digests
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4
+      - name: Log in to GHCR
+        uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0 # v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install cosign
+        uses: sigstore/cosign-installer@3454372f43399081ed03b604cb2d021dabca52bb # v3
+      - name: Attach consumer-facing tags
+        env:
+          FULL_SHA: ${{ needs.preflight.outputs.full_sha }}
+          KIND: ${{ needs.preflight.outputs.kind }}
+          STAGE: ${{ matrix.stage }}
+          VERSION: ${{ needs.preflight.outputs.version }}
+        run: |
+          set -euo pipefail
+          promotion="$(node scripts/ghcr-promotion.mjs tags "$KIND" "$STAGE" "$VERSION" "$FULL_SHA")"
+          mapfile -t immutable_tags < <(jq -r '.immutable[]' <<< "$promotion")
+          mapfile -t mutable_tags < <(jq -r '.mutable[]' <<< "$promotion")
+          sources=()
+          for arch in amd64 arm64; do
+            dir="${RUNNER_TEMP}/digests/digest-${STAGE}-${arch}-${GITHUB_RUN_ID}"
+            shopt -s nullglob
+            files=("$dir"/*)
+            test "${#files[@]}" -eq 1
+            sources+=("${REGISTRY_IMAGE}@sha256:$(basename "${files[0]}")")
+          done
+          for tag in "${immutable_tags[@]}"; do
+            bash scripts/promote-ghcr-tag.sh \
+              immutable "$REGISTRY_IMAGE" "$tag" "$FULL_SHA" "$VERSION" "${sources[@]}"
+          done
+          if [ "$KIND" = main ]; then
+            for tag in "${mutable_tags[@]}"; do
+              bash scripts/promote-ghcr-tag.sh \
+                mutable "$REGISTRY_IMAGE" "$tag" "$FULL_SHA" "$VERSION" "${sources[@]}"
+            done
+          fi
+
+  release-reproducibility:
+    name: release · reproducibility
+    if: needs.preflight.outputs.reproducibility_required == 'true'
+    needs: [preflight, quality, docs-prose]
+    uses: ./.github/workflows/reproducibility.yml
+    with:
+      expected_sha: ${{ needs.preflight.outputs.full_sha }}
+      source_date_epoch: ${{ needs.preflight.outputs.source_date_epoch }}
+      version: ${{ needs.preflight.outputs.version }}
+
+  npm-publish:
+    name: npm · publish
+    if: >-
+      always() &&
+      needs.preflight.outputs.npm_publish == 'true' &&
+      needs.preflight.result == 'success' &&
+      needs.package-assemble.result == 'success' &&
+      needs.package-gate.result == 'success' &&
+      (needs.preflight.outputs.reproducibility_required != 'true' || needs.release-reproducibility.result == 'success')
+    needs: [preflight, package-assemble, package-gate, release-reproducibility]
+    runs-on: ubuntu-latest
+    concurrency:
+      group: npm-${{ needs.preflight.outputs.channel }}
+      # Queue every immutable publication. actionlint 1.7.12 predates
+      # this GitHub workflow-syntax property, so the local lint target ignores
+      # only its unknown-property diagnostic.
+      queue: max
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Download tested tarball only
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ needs.package-assemble.outputs.artifact }}
+          path: ${{ runner.temp }}/candidate
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: '24.10.0'
+          registry-url: https://registry.npmjs.org
+      - name: Use OIDC-capable npm
+        run: npm install --global npm@11.5.1
+      - name: Verify artifact digest
+        working-directory: ${{ runner.temp }}/candidate
+        run: echo "$(cat candidate.sha256)  candidate.tgz" | sha256sum --check
+      - name: Publish or prove idempotency
+        env:
+          CHANNEL: ${{ needs.preflight.outputs.channel }}
+          FULL_SHA: ${{ needs.preflight.outputs.full_sha }}
+          SOURCE_DATE_EPOCH: ${{ needs.preflight.outputs.source_date_epoch }}
+          VERSION: ${{ needs.preflight.outputs.version }}
+        working-directory: ${{ runner.temp }}/candidate
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const candidate = JSON.parse(fs.readFileSync('candidate.json', 'utf8'));
+          const expected = {
+            channel: process.env.CHANNEL,
+            fullSha: process.env.FULL_SHA,
+            runId: process.env.GITHUB_RUN_ID,
+            sourceDateEpoch: process.env.SOURCE_DATE_EPOCH,
+            version: process.env.VERSION,
+          };
+          for (const [key, value] of Object.entries(expected)) {
+            if (candidate[key] !== value) {
+              throw new Error(`candidate ${key} is ${candidate[key]}, expected ${value}`);
+            }
+          }
+          NODE
+          if npm view "libcascade@$VERSION" version >/dev/null 2>&1; then
+            mkdir -p existing
+            npm pack "libcascade@$VERSION" --ignore-scripts --pack-destination existing >/dev/null
+            existing="$(find existing -name '*.tgz' -type f -print -quit)"
+            test "$(sha256sum "$existing" | cut -d' ' -f1)" = "$(cat candidate.sha256)"
+            for provenance in \
+              package/dist/opencascade_single.provenance.json \
+              package/dist/opencascade_multi.provenance.json; do
+              test "$(tar -xOf "$existing" "$provenance" | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>process.stdout.write(JSON.parse(s).source.opencascadejsCommit))")" = "$FULL_SHA"
+            done
+            export ATTESTATION_URL
+            ATTESTATION_URL="$(npm view "libcascade@$VERSION" dist.attestations.url)"
+            node --input-type=module <<'NODE'
+          const response = await fetch(process.env.ATTESTATION_URL);
+          if (!response.ok) throw new Error(`npm attestation endpoint returned ${response.status}`);
+          const { attestations = [] } = await response.json();
+          const statements = attestations.map(({ bundle }) =>
+            JSON.parse(Buffer.from(bundle.dsseEnvelope.payload, 'base64url')),
+          );
+          const slsa = statements.find(({ predicateType }) =>
+            predicateType === 'https://slsa.dev/provenance/v1',
+          );
+          if (!slsa) throw new Error('published version has no SLSA provenance statement');
+          const workflow = slsa.predicate.buildDefinition.externalParameters.workflow;
+          if (workflow.repository !== 'https://github.com/taucad/opencascade.js') {
+            throw new Error(`unexpected provenance repository: ${workflow.repository}`);
+          }
+          if (workflow.path !== '.github/workflows/docker.yml') {
+            throw new Error(`unexpected provenance workflow: ${workflow.path}`);
+          }
+          const source = slsa.predicate.buildDefinition.resolvedDependencies.find(
+            ({ digest }) => digest?.gitCommit,
+          );
+          if (source?.digest.gitCommit !== process.env.FULL_SHA) {
+            throw new Error(`unexpected provenance commit: ${source?.digest.gitCommit}`);
+          }
+          NODE
+            test "$(npm view libcascade dist-tags --json | jq -r --arg channel "$CHANNEL" '.[$channel]')" = "$VERSION"
+            echo "Exact version already exists with matching bytes and source identity"
+          else
+            npm publish ./candidate.tgz --ignore-scripts --access public --tag "$CHANNEL" --provenance
+          fi
+
+  registry-verify:
+    name: registries
+    if: >-
+      always() &&
+      needs.preflight.outputs.npm_publish == 'true' &&
+      needs.preflight.result == 'success' &&
+      needs.package-assemble.result == 'success' &&
+      needs.ghcr-promote.result == 'success' &&
+      needs.npm-publish.result == 'success'
+    needs: [preflight, package-assemble, ghcr-promote, npm-publish]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.preflight.outputs.full_sha }}
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ needs.package-assemble.outputs.artifact }}
+          path: ${{ runner.temp }}/candidate
+      - name: Download tested digests
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          pattern: digest-*-*-${{ github.run_id }}
+          path: ${{ runner.temp }}/digests
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: '24.10.0'
+          registry-url: https://registry.npmjs.org
+      - name: Install locked Node tools
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Use the publication npm version
+        run: npm install --global npm@11.5.1
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4
+      - name: Log in to GHCR
+        uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0 # v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install cosign
+        uses: sigstore/cosign-installer@3454372f43399081ed03b604cb2d021dabca52bb # v3
+      - name: Verify exact registry bytes, provenance, signatures, and runtime
+        env:
+          CHANNEL: ${{ needs.preflight.outputs.channel }}
+          FULL_SHA: ${{ needs.preflight.outputs.full_sha }}
+          KIND: ${{ needs.preflight.outputs.kind }}
+          VERSION: ${{ needs.preflight.outputs.version }}
+        working-directory: ${{ runner.temp }}/candidate
+        run: |
+          set -euo pipefail
+          for _ in $(seq 1 30); do
+            npm view "libcascade@$VERSION" version >/dev/null 2>&1 && break
+            sleep 10
+          done
+          test "$(npm view "libcascade@$VERSION" dist.integrity)" = "$(cat candidate.sha512)"
+          test "$(npm view libcascade dist-tags --json | jq -r --arg channel "$CHANNEL" '.[$channel]')" = "$VERSION"
+          export ATTESTATION_URL
+          ATTESTATION_URL="$(npm view "libcascade@$VERSION" dist.attestations.url)"
+          node --input-type=module <<'NODE'
+          const response = await fetch(process.env.ATTESTATION_URL);
+          if (!response.ok) throw new Error(`npm attestation endpoint returned ${response.status}`);
+          const { attestations = [] } = await response.json();
+          const statements = attestations.map(({ bundle }) =>
+            JSON.parse(Buffer.from(bundle.dsseEnvelope.payload, 'base64url')),
+          );
+          const slsa = statements.find(({ predicateType }) =>
+            predicateType === 'https://slsa.dev/provenance/v1',
+          );
+          if (!slsa) throw new Error('published version has no SLSA provenance statement');
+          const workflow = slsa.predicate.buildDefinition.externalParameters.workflow;
+          if (workflow.repository !== 'https://github.com/taucad/opencascade.js') {
+            throw new Error(`unexpected provenance repository: ${workflow.repository}`);
+          }
+          if (workflow.path !== '.github/workflows/docker.yml') {
+            throw new Error(`unexpected provenance workflow: ${workflow.path}`);
+          }
+          const source = slsa.predicate.buildDefinition.resolvedDependencies.find(
+            ({ digest }) => digest?.gitCommit,
+          );
+          if (source?.digest.gitCommit !== process.env.FULL_SHA) {
+            throw new Error(`unexpected provenance commit: ${source?.digest.gitCommit}`);
+          }
+          NODE
+          mkdir install
+          cd install
+          npm init --yes >/dev/null
+          npm install --ignore-scripts --no-audit --no-fund "libcascade@$VERSION"
+          npm audit signatures
+          cat > verify-runtime.mjs <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import { fileURLToPath } from 'node:url';
+          // The package root is the *eager* entry since `libcascade assemble`:
+          // it top-level-awaits its own instance and exports OCCT names as
+          // values, so it is not a factory. `./init` is the factory surface.
+          import { createInstance } from 'libcascade/init';
+          const root = path.dirname(fileURLToPath(import.meta.resolve('libcascade/wasm')));
+          for (const variant of ['single', 'multi']) {
+            const oc = await createInstance({ variant, locateFile: file => path.join(root, file) });
+            const box = new oc.BRepPrimAPI_MakeBox(1, 2, 3);
+            const shape = box.Shape();
+            try {
+              if (shape.IsNull()) process.exit(1);
+            } finally {
+              shape.delete();
+              box.delete();
+              oc.PThread?.terminateAllThreads?.();
+            }
+          }
+          for (const name of ['opencascade_single.provenance.json', 'opencascade_multi.provenance.json']) {
+            const p = JSON.parse(fs.readFileSync(path.join(root, name)));
+            if (p.source.opencascadejsCommit !== process.env.FULL_SHA) process.exit(1);
+          }
+          NODE
+          node verify-runtime.mjs
+          cd ..
+
+          native_digests() {
+            local reference="$1"
+            local digests
+            digests="$(
+              docker buildx imagetools inspect "$reference" --raw |
+                jq -r '
+                  if (.manifests? | type) == "array" then
+                    .manifests[] |
+                    select(.annotations["vnd.docker.reference.type"] != "attestation-manifest") |
+                    .digest
+                  else empty end
+                '
+            )"
+            if [ -n "$digests" ]; then
+              printf '%s\n' "$digests"
+            else
+              printf '%s\n' "${reference##*@}"
+            fi
+          }
+          for stage in final-single final-multi bindgen-base; do
+            case "$stage" in
+              final-single) prefix=single-threaded ;;
+              final-multi) prefix=multi-threaded ;;
+              bindgen-base) prefix=bindgen-base ;;
+            esac
+            case "$KIND" in
+              stable-release|beta-release|manual-canary) tag="$VERSION-$prefix" ;;
+              *) echo "Unsupported registry verification kind: $KIND" >&2; exit 1 ;;
+            esac
+
+            sources=()
+            for arch in amd64 arm64; do
+              dir="${RUNNER_TEMP}/digests/digest-${stage}-${arch}-${GITHUB_RUN_ID}"
+              shopt -s nullglob
+              files=("$dir"/*)
+              test "${#files[@]}" -eq 1
+              sources+=("${REGISTRY_IMAGE}@sha256:$(basename "${files[0]}")")
+            done
+            expected_native_digests="$(
+              for source in "${sources[@]}"; do native_digests "$source"; done |
+                sort -u |
+                paste -sd, -
+            )"
+            published_native_digests="$(
+              native_digests "${REGISTRY_IMAGE}:$tag" |
+                sort -u |
+                paste -sd, -
+            )"
+            test "$published_native_digests" = "$expected_native_digests"
+            IFS=, read -r -a published_digests <<< "$published_native_digests"
+            for digest in "${published_digests[@]}"; do
+              labels="$(
+                docker buildx imagetools inspect "${REGISTRY_IMAGE}@${digest}" \
+                  --format '{{json .Image.Config.Labels}}'
+              )"
+              test "$(jq -r '."org.opencontainers.image.source"' <<< "$labels")" = "https://github.com/taucad/opencascade.js"
+              test "$(jq -r '."org.opencontainers.image.revision"' <<< "$labels")" = "$FULL_SHA"
+              test "$(jq -r '."org.opencontainers.image.version"' <<< "$labels")" = "$VERSION"
+            done
+            cosign verify \
+              --certificate-identity-regexp '^https://github.com/taucad/opencascade\.js/\.github/workflows/docker\.yml@refs/(heads|tags)/.+' \
+              --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+              "$REGISTRY_IMAGE:$tag"
+          done
+          if [ "$KIND" = stable-release ]; then
+            for stage in final-single final-multi bindgen-base; do
+              case "$stage" in
+                final-single) prefix=single-threaded ;;
+                final-multi) prefix=multi-threaded ;;
+                bindgen-base) prefix=bindgen-base ;;
+              esac
+              promotion="$(
+                node "$GITHUB_WORKSPACE/scripts/ghcr-promotion.mjs" \
+                  tags "$KIND" "$stage" "$VERSION" "$FULL_SHA"
+              )"
+              mapfile -t mutable_tags < <(jq -r '.mutable[]' <<< "$promotion")
+              for tag in "${mutable_tags[@]}"; do
+                bash "$GITHUB_WORKSPACE/scripts/promote-ghcr-tag.sh" \
+                  mutable "$REGISTRY_IMAGE" "$tag" "$FULL_SHA" "$VERSION" \
+                  "$REGISTRY_IMAGE:$VERSION-$prefix"
+              done
+            done
+          fi
+          {
+            echo "## Published candidate"
+            echo
+            echo '```sh'
+            echo "npm install libcascade@$VERSION"
+            echo '```'
+            echo
+            echo '```sh'
+            cat <<EOF
+          docker pull "$REGISTRY_IMAGE:$VERSION-single-threaded"
+          docker pull "$REGISTRY_IMAGE:$VERSION-multi-threaded"
+          docker pull "$REGISTRY_IMAGE:$VERSION-bindgen-base"
+          EOF
+            echo '```'
+            echo
+            echo "- Source: \`$FULL_SHA\`"
+            echo "- npm provenance: \`.github/workflows/docker.yml\`"
+            echo "- GHCR signatures: verified for all three promoted stages"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  toolchain-metadata:
+    name: toolchain · release metadata
+    if: >-
+      always() &&
+      needs.preflight.outputs.npm_publish == 'true' &&
+      needs.preflight.result == 'success' &&
+      needs.package-assemble.result == 'success' &&
+      needs.registry-verify.result == 'success'
+    needs: [preflight, package-assemble, registry-verify]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.preflight.outputs.full_sha }}
+      - name: Download verified libcascade candidate
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ needs.package-assemble.outputs.artifact }}
+          path: ${{ runner.temp }}/candidate
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - name: Install locked Node tools
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Free disk space for the pinned image
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1
+        with:
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: false
+          swap-storage: false
+          tool-cache: false
+      - name: Regenerate and validate exact release metadata
+        env:
+          FULL_SHA: ${{ needs.preflight.outputs.full_sha }}
+          VERSION: ${{ needs.preflight.outputs.version }}
+        run: |
+          set -euo pipefail
+          node packages/toolchain/scripts/validate-release.mjs environment
+          mkdir -p "$RUNNER_TEMP/libcascade"
+          tar -xzf "$RUNNER_TEMP/candidate/candidate.tgz" \
+            --strip-components=1 -C "$RUNNER_TEMP/libcascade"
+          rm -rf dist
+          cp -R "$RUNNER_TEMP/libcascade/dist" dist
+          npm version "$VERSION" --workspace=@libcascade/toolchain \
+            --no-git-tag-version --allow-same-version --ignore-scripts
+          npm run generate:toolchain -- "$VERSION"
+          node packages/toolchain/scripts/validate-release.mjs metadata \
+            --version="$VERSION" --full-sha="$FULL_SHA" --dist=dist
+          npm run build:toolchain
+      - name: Upload verified toolchain metadata
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: toolchain-metadata-${{ github.run_id }}
+          path: |
+            packages/toolchain/generated/*
+            packages/toolchain/package.json
+            packages/toolchain/dist
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 7
+
+  toolchain-package:
+    name: toolchain · package
+    if: >-
+      always() &&
+      needs.preflight.outputs.npm_publish == 'true' &&
+      needs.preflight.result == 'success' &&
+      needs.toolchain-metadata.result == 'success'
+    needs: [preflight, toolchain-metadata]
+    runs-on: ubuntu-latest
+    outputs:
+      artifact: toolchain-candidate-${{ github.run_id }}
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.preflight.outputs.full_sha }}
+      - name: Download verified toolchain build
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: toolchain-metadata-${{ github.run_id }}
+          path: packages/toolchain
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: '24.10.0'
+          registry-url: https://registry.npmjs.org
+      - name: Pin npm pack implementation
+        run: npm install --global npm@11.5.1
+      - name: Pack and verify exact exports
+        env:
+          CHANNEL: ${{ needs.preflight.outputs.channel }}
+          FULL_SHA: ${{ needs.preflight.outputs.full_sha }}
+          SOURCE_DATE_EPOCH: ${{ needs.preflight.outputs.source_date_epoch }}
+          VERSION: ${{ needs.preflight.outputs.version }}
+        working-directory: packages/toolchain
+        run: |
+          set -euo pipefail
+          npm pack --ignore-scripts --json --pack-destination "$RUNNER_TEMP" > "$RUNNER_TEMP/toolchain-pack.json"
+          filename="$(node -p "JSON.parse(require('fs').readFileSync(process.env.RUNNER_TEMP + '/toolchain-pack.json'))[0].filename")"
+          mv "$RUNNER_TEMP/$filename" "$RUNNER_TEMP/toolchain-candidate.tgz"
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const [pack] = JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP + '/toolchain-pack.json'));
+          const files = new Set(pack.files.map(({ path }) => path));
+          const manifest = JSON.parse(fs.readFileSync('package.json'));
+          if (manifest.name !== '@libcascade/toolchain') throw new Error(`unexpected package: ${manifest.name}`);
+          if (manifest.version !== process.env.VERSION) {
+            throw new Error(`toolchain version ${manifest.version} does not match ${process.env.VERSION}`);
+          }
+          const targets = [
+            ...Object.values(manifest.bin),
+            ...Object.values(manifest.exports).flatMap((entry) =>
+              typeof entry === 'string' ? [entry] : Object.values(entry),
+            ),
+          ].map((target) => target.replace(/^\.\//, ''));
+          const missing = targets.filter((target) => !files.has(target));
+          if (missing.length > 0) throw new Error(`packed exports are missing: ${missing.join(', ')}`);
+          fs.writeFileSync(process.env.RUNNER_TEMP + '/toolchain-candidate.json', JSON.stringify({
+            channel: process.env.CHANNEL,
+            fullSha: process.env.FULL_SHA,
+            name: manifest.name,
+            runId: process.env.GITHUB_RUN_ID,
+            sourceDateEpoch: process.env.SOURCE_DATE_EPOCH,
+            version: manifest.version,
+          }, null, 2) + '\n');
+          NODE
+          sha256sum "$RUNNER_TEMP/toolchain-candidate.tgz" | cut -d' ' -f1 > "$RUNNER_TEMP/toolchain-candidate.sha256"
+          printf 'sha512-' > "$RUNNER_TEMP/toolchain-candidate.sha512"
+          openssl dgst -sha512 -binary "$RUNNER_TEMP/toolchain-candidate.tgz" | base64 -w0 >> "$RUNNER_TEMP/toolchain-candidate.sha512"
+          printf '\n' >> "$RUNNER_TEMP/toolchain-candidate.sha512"
+      - name: Upload immutable toolchain candidate
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: toolchain-candidate-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/toolchain-candidate.tgz
+            ${{ runner.temp }}/toolchain-candidate.sha256
+            ${{ runner.temp }}/toolchain-candidate.sha512
+            ${{ runner.temp }}/toolchain-candidate.json
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 7
+
+  toolchain-publish:
+    name: toolchain · npm publish
+    if: >-
+      always() &&
+      needs.preflight.outputs.npm_publish == 'true' &&
+      needs.preflight.result == 'success' &&
+      needs.toolchain-package.result == 'success'
+    needs: [preflight, toolchain-package]
+    runs-on: ubuntu-latest
+    concurrency:
+      group: npm-${{ needs.preflight.outputs.channel }}
+      queue: max
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Download tested toolchain tarball only
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ needs.toolchain-package.outputs.artifact }}
+          path: ${{ runner.temp }}/candidate
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: '24.10.0'
+          registry-url: https://registry.npmjs.org
+      - name: Use OIDC-capable npm
+        run: npm install --global npm@11.5.1
+      - name: Verify artifact digest
+        working-directory: ${{ runner.temp }}/candidate
+        run: echo "$(cat toolchain-candidate.sha256)  toolchain-candidate.tgz" | sha256sum --check
+      - name: Publish or prove idempotency
+        env:
+          CHANNEL: ${{ needs.preflight.outputs.channel }}
+          FULL_SHA: ${{ needs.preflight.outputs.full_sha }}
+          SOURCE_DATE_EPOCH: ${{ needs.preflight.outputs.source_date_epoch }}
+          VERSION: ${{ needs.preflight.outputs.version }}
+        working-directory: ${{ runner.temp }}/candidate
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const candidate = JSON.parse(fs.readFileSync('toolchain-candidate.json'));
+          const expected = {
+            channel: process.env.CHANNEL,
+            fullSha: process.env.FULL_SHA,
+            name: '@libcascade/toolchain',
+            runId: process.env.GITHUB_RUN_ID,
+            sourceDateEpoch: process.env.SOURCE_DATE_EPOCH,
+            version: process.env.VERSION,
+          };
+          for (const [key, value] of Object.entries(expected)) {
+            if (candidate[key] !== value) {
+              throw new Error(`candidate ${key} is ${candidate[key]}, expected ${value}`);
+            }
+          }
+          NODE
+          if npm view "@libcascade/toolchain@$VERSION" version >/dev/null 2>&1; then
+            mkdir -p existing
+            npm pack "@libcascade/toolchain@$VERSION" --ignore-scripts --pack-destination existing >/dev/null
+            existing="$(find existing -name '*.tgz' -type f -print -quit)"
+            test "$(sha256sum "$existing" | cut -d' ' -f1)" = "$(cat toolchain-candidate.sha256)"
+            test "$(npm view "@libcascade/toolchain@$VERSION" dist.integrity)" = "$(cat toolchain-candidate.sha512)"
+            export ATTESTATION_URL
+            ATTESTATION_URL="$(npm view "@libcascade/toolchain@$VERSION" dist.attestations.url)"
+            node --input-type=module <<'NODE'
+          const response = await fetch(process.env.ATTESTATION_URL);
+          if (!response.ok) throw new Error(`npm attestation endpoint returned ${response.status}`);
+          const { attestations = [] } = await response.json();
+          const statements = attestations.map(({ bundle }) =>
+            JSON.parse(Buffer.from(bundle.dsseEnvelope.payload, 'base64url')),
+          );
+          const slsa = statements.find(({ predicateType }) =>
+            predicateType === 'https://slsa.dev/provenance/v1',
+          );
+          if (!slsa) throw new Error('published version has no SLSA provenance statement');
+          const workflow = slsa.predicate.buildDefinition.externalParameters.workflow;
+          if (workflow.repository !== 'https://github.com/taucad/opencascade.js') {
+            throw new Error(`unexpected provenance repository: ${workflow.repository}`);
+          }
+          if (workflow.path !== '.github/workflows/docker.yml') {
+            throw new Error(`unexpected provenance workflow: ${workflow.path}`);
+          }
+          const source = slsa.predicate.buildDefinition.resolvedDependencies.find(
+            ({ digest }) => digest?.gitCommit,
+          );
+          if (source?.digest.gitCommit !== process.env.FULL_SHA) {
+            throw new Error(`unexpected provenance commit: ${source?.digest.gitCommit}`);
+          }
+          NODE
+            test "$(npm view "@libcascade/toolchain" dist-tags --json | jq -r --arg channel "$CHANNEL" '.[$channel]')" = "$VERSION"
+            echo "Exact toolchain version already exists with matching bytes and source identity"
+          else
+            npm publish ./toolchain-candidate.tgz --ignore-scripts --access public --tag "$CHANNEL" --provenance
+          fi
+
+  toolchain-registry-verify:
+    name: toolchain · registry
+    if: >-
+      always() &&
+      needs.preflight.outputs.npm_publish == 'true' &&
+      needs.preflight.result == 'success' &&
+      needs.toolchain-package.result == 'success' &&
+      needs.toolchain-publish.result == 'success'
+    needs: [preflight, toolchain-package, toolchain-publish]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Download tested toolchain candidate
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ needs.toolchain-package.outputs.artifact }}
+          path: ${{ runner.temp }}/candidate
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: '24.10.0'
+          registry-url: https://registry.npmjs.org
+      - name: Use the publication npm version
+        run: npm install --global npm@11.5.1
+      - name: Verify exact registry bytes, provenance, signatures, and exports
+        env:
+          CHANNEL: ${{ needs.preflight.outputs.channel }}
+          FULL_SHA: ${{ needs.preflight.outputs.full_sha }}
+          VERSION: ${{ needs.preflight.outputs.version }}
+        working-directory: ${{ runner.temp }}/candidate
+        run: |
+          set -euo pipefail
+          for _ in $(seq 1 30); do
+            npm view "@libcascade/toolchain@$VERSION" version >/dev/null 2>&1 && break
+            sleep 10
+          done
+          test "$(npm view "@libcascade/toolchain@$VERSION" dist.integrity)" = "$(cat toolchain-candidate.sha512)"
+          test "$(npm view "@libcascade/toolchain" dist-tags --json | jq -r --arg channel "$CHANNEL" '.[$channel]')" = "$VERSION"
+          export ATTESTATION_URL
+          ATTESTATION_URL="$(npm view "@libcascade/toolchain@$VERSION" dist.attestations.url)"
+          node --input-type=module <<'NODE'
+          const response = await fetch(process.env.ATTESTATION_URL);
+          if (!response.ok) throw new Error(`npm attestation endpoint returned ${response.status}`);
+          const { attestations = [] } = await response.json();
+          const statements = attestations.map(({ bundle }) =>
+            JSON.parse(Buffer.from(bundle.dsseEnvelope.payload, 'base64url')),
+          );
+          const slsa = statements.find(({ predicateType }) =>
+            predicateType === 'https://slsa.dev/provenance/v1',
+          );
+          if (!slsa) throw new Error('published version has no SLSA provenance statement');
+          const workflow = slsa.predicate.buildDefinition.externalParameters.workflow;
+          if (workflow.repository !== 'https://github.com/taucad/opencascade.js') {
+            throw new Error(`unexpected provenance repository: ${workflow.repository}`);
+          }
+          if (workflow.path !== '.github/workflows/docker.yml') {
+            throw new Error(`unexpected provenance workflow: ${workflow.path}`);
+          }
+          const source = slsa.predicate.buildDefinition.resolvedDependencies.find(
+            ({ digest }) => digest?.gitCommit,
+          );
+          if (source?.digest.gitCommit !== process.env.FULL_SHA) {
+            throw new Error(`unexpected provenance commit: ${source?.digest.gitCommit}`);
+          }
+          NODE
+          mkdir install
+          cd install
+          npm init --yes >/dev/null
+          npm install --ignore-scripts --no-audit --no-fund "@libcascade/toolchain@$VERSION"
+          npm audit signatures
+          node --input-type=module <<'NODE'
+          const toolchain = await import('@libcascade/toolchain');
+          const driver = await import('@libcascade/toolchain/driver');
+          if (typeof toolchain.defineBuild !== 'function') throw new Error('root export did not resolve');
+          if (typeof driver.createContainerDriver !== 'function') throw new Error('driver export did not resolve');
+          NODE
+          ./node_modules/.bin/libcascade --help >/dev/null
+          {
+            echo "## Published toolchain"
+            echo
+            echo "- Install: \`npm install --save-dev @libcascade/toolchain@$VERSION\`"
+            echo "- Source: \`$FULL_SHA\`"
+            echo "- npm provenance: \`.github/workflows/docker.yml\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  release-finalize:
+    name: release · tag and GitHub Release
+    if: >-
+      always() &&
+      needs.preflight.outputs.is_release == 'true' &&
+      needs.preflight.result == 'success' &&
+      needs.registry-verify.result == 'success' &&
+      needs.toolchain-registry-verify.result == 'success'
+    needs: [preflight, registry-verify, toolchain-registry-verify]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout verified release commit
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          ref: ${{ needs.preflight.outputs.full_sha }}
+
+      - name: Create or verify annotated tag
+        env:
+          FULL_SHA: ${{ needs.preflight.outputs.full_sha }}
+          TAG: ${{ needs.preflight.outputs.release_tag }}
+        run: |
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
+            git fetch origin "refs/tags/$TAG:refs/tags/$TAG"
+            test "$(git cat-file -t "refs/tags/$TAG")" = tag
+            test "$(git rev-list -n 1 "$TAG")" = "$FULL_SHA"
+          else
+            git config user.name github-actions[bot]
+            git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+            git tag -a "$TAG" "$FULL_SHA" -m "$TAG"
+            git push origin "refs/tags/$TAG"
+          fi
+
+      - name: Create or verify GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PRERELEASE: ${{ needs.preflight.outputs.prerelease }}
+          TAG: ${{ needs.preflight.outputs.release_tag }}
+          VERSION: ${{ needs.preflight.outputs.version }}
+        run: |
+          awk -v version="$VERSION" '
+            $0 ~ "^#{1,2} v?" version "([ (]|$)" { found=1; next }
+            found && /^#{1,2} / { exit }
+            found { print }
+            END { if (!found) exit 2 }
+          ' CHANGELOG.md > "$RUNNER_TEMP/release-notes.md"
+          test -s "$RUNNER_TEMP/release-notes.md"
+          if gh release view "$TAG" --json tagName,name,isDraft,isPrerelease,url,body > "$RUNNER_TEMP/release.json" 2>/dev/null; then
+            test "$(jq -r .tagName "$RUNNER_TEMP/release.json")" = "$TAG"
+            test "$(jq -r .name "$RUNNER_TEMP/release.json")" = "$TAG"
+            test "$(jq -r .isDraft "$RUNNER_TEMP/release.json")" = false
+            test "$(jq -r .isPrerelease "$RUNNER_TEMP/release.json")" = "$PRERELEASE"
+            jq -r .body "$RUNNER_TEMP/release.json" > "$RUNNER_TEMP/existing-release-notes.md"
+            diff -u "$RUNNER_TEMP/release-notes.md" "$RUNNER_TEMP/existing-release-notes.md"
+          else
+            args=("$TAG" --verify-tag --title "$TAG" --notes-file "$RUNNER_TEMP/release-notes.md")
+            if [ "$PRERELEASE" = true ]; then args+=(--prerelease); fi
+            gh release create "${args[@]}"
+          fi
+          {
+            echo "## Verified release"
+            echo
+            echo "- Version: \`$VERSION\`"
+            echo "- Install: \`npm install libcascade@$VERSION\`"
+            echo "- npm: https://www.npmjs.com/package/libcascade/v/$VERSION"
+            echo "- GitHub: https://github.com/$GITHUB_REPOSITORY/releases/tag/$TAG"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  ci-gate:
+    name: CI gate
+    if: always()
+    needs: [preflight, quality, docs-prose, candidate-gate, package-gate, registry-verify, toolchain-metadata, toolchain-package, toolchain-publish, toolchain-registry-verify, release-finalize]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Require validation and applicable publication
+        env:
+          CANDIDATE: ${{ needs.candidate-gate.result }}
+          DOCS_PROSE: ${{ needs.docs-prose.result }}
+          PACKAGE: ${{ needs.package-gate.result }}
+          PREFLIGHT: ${{ needs.preflight.result }}
+          PUBLISH: ${{ needs.preflight.outputs.npm_publish }}
+          QUALITY: ${{ needs.quality.result }}
+          REGISTRY: ${{ needs.registry-verify.result }}
+          RELEASE: ${{ needs.release-finalize.result }}
+          TOOLCHAIN_METADATA: ${{ needs.toolchain-metadata.result }}
+          TOOLCHAIN_PACKAGE: ${{ needs.toolchain-package.result }}
+          TOOLCHAIN_PUBLISH: ${{ needs.toolchain-publish.result }}
+          TOOLCHAIN_REGISTRY: ${{ needs.toolchain-registry-verify.result }}
+          IS_RELEASE: ${{ needs.preflight.outputs.is_release }}
+        run: |
+          test "$PREFLIGHT" = success
+          test "$QUALITY" = success
+          test "$CANDIDATE" = success
+          test "$DOCS_PROSE" = success
+          test "$PACKAGE" = success
+          if [ "$PUBLISH" = true ]; then
+            test "$REGISTRY" = success
+            test "$TOOLCHAIN_METADATA" = success
+            test "$TOOLCHAIN_PACKAGE" = success
+            test "$TOOLCHAIN_PUBLISH" = success
+            test "$TOOLCHAIN_REGISTRY" = success
+          else
+            test "$REGISTRY" = skipped
+            test "$TOOLCHAIN_METADATA" = skipped
+            test "$TOOLCHAIN_PACKAGE" = skipped
+            test "$TOOLCHAIN_PUBLISH" = skipped
+            test "$TOOLCHAIN_REGISTRY" = skipped
+          fi
+          if [ "$IS_RELEASE" = true ]; then
+            test "$RELEASE" = success
+          else
+            test "$RELEASE" = skipped
+          fi
+
+  vercel-preview:
+    name: vercel · preview
+    if: >-
+      always() &&
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      needs.preflight.result == 'success' &&
+      needs.package-assemble.result == 'success' &&
+      needs.ci-gate.result == 'success'
+    needs: [preflight, package-assemble, ci-gate]
+    runs-on: ubuntu-latest
+    environment: Preview
+    permissions:
+      contents: read
+    env:
+      VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.preflight.outputs.full_sha }}
+
+      - name: Download exact docs candidate
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ needs.package-assemble.outputs.artifact }}
+          path: ${{ runner.temp }}/candidate
+
+      - name: Build and deploy prebuilt preview
+        env:
+          FULL_SHA: ${{ needs.preflight.outputs.full_sha }}
+          TARBALL: ${{ runner.temp }}/candidate/candidate.tgz
+        run: |
+          node - "$PWD/docs-site/package.json" "$TARBALL" <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const [manifestPath, tarball] = process.argv.slice(2);
+          const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+          manifest.dependencies.libcascade = `file:${path.resolve(tarball)}`;
+          fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+          NODE
+          cd docs-site
+          corepack enable
+          corepack pnpm@9.15.9 install --ignore-workspace --no-frozen-lockfile --ignore-scripts
+          cd ..
+          export OCJS_API_REFERENCE_SOURCE="$TARBALL"
+          npx --yes vercel@56.5.0 pull --yes --environment=preview --token="$VERCEL_TOKEN"
+          npx --yes vercel@56.5.0 build --token="$VERCEL_TOKEN"
+          url="$(npx --yes vercel@56.5.0 deploy --prebuilt --archive=tgz --token="$VERCEL_TOKEN")"
+          feed_hash="$(
+            tar -xOf "$TARBALL" package/dist/api-reference.json |
+              node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>process.stdout.write(JSON.parse(s).inputs.bindings.sha256))"
+          )"
+          {
+            echo "## Vercel preview"
+            echo
+            echo "- URL: $url"
+            echo "- Source: \`$FULL_SHA\`"
+            echo "- API bindings: \`$feed_hash\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  vercel-production:
+    name: vercel · production
+    if: >-
+      always() &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      needs.preflight.result == 'success' &&
+      needs.package-assemble.result == 'success' &&
+      needs.ci-gate.result == 'success'
+    needs: [preflight, package-assemble, ci-gate]
+    runs-on: ubuntu-latest
+    environment: Production
+    concurrency:
+      group: vercel-production
+      cancel-in-progress: false
+    permissions:
+      contents: read
+    env:
+      VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ needs.preflight.outputs.full_sha }}
+
+      - name: Download exact docs candidate
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ needs.package-assemble.outputs.artifact }}
+          path: ${{ runner.temp }}/candidate
+
+      - name: Build exact production candidate
+        env:
+          TARBALL: ${{ runner.temp }}/candidate/candidate.tgz
+        run: |
+          node - "$PWD/docs-site/package.json" "$TARBALL" <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const [manifestPath, tarball] = process.argv.slice(2);
+          const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+          manifest.dependencies.libcascade = `file:${path.resolve(tarball)}`;
+          fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+          NODE
+          cd docs-site
+          corepack enable
+          corepack pnpm@9.15.9 install --ignore-workspace --no-frozen-lockfile --ignore-scripts
+          cd ..
+          export OCJS_API_REFERENCE_SOURCE="$TARBALL"
+          npx --yes vercel@56.5.0 pull --yes --environment=production --token="$VERCEL_TOKEN"
+          npx --yes vercel@56.5.0 build --prod --token="$VERCEL_TOKEN"
+
+      - name: Deploy only while this run is current main
+        env:
+          FULL_SHA: ${{ needs.preflight.outputs.full_sha }}
+          GH_TOKEN: ${{ github.token }}
+          TARBALL: ${{ runner.temp }}/candidate/candidate.tgz
+        run: |
+          current="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)"
+          if [ "$current" != "$FULL_SHA" ]; then
+            {
+              echo "## Vercel production skipped"
+              echo
+              echo "Run source \`$FULL_SHA\` is stale; current main is \`$current\`."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          url="$(npx --yes vercel@56.5.0 deploy --prebuilt --archive=tgz --prod --token="$VERCEL_TOKEN")"
+          feed_hash="$(
+            tar -xOf "$TARBALL" package/dist/api-reference.json |
+              node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>process.stdout.write(JSON.parse(s).inputs.bindings.sha256))"
+          )"
+          {
+            echo "## Vercel production"
+            echo
+            echo "- URL: $url"
+            echo "- Source: \`$FULL_SHA\`"
+            echo "- API bindings: \`$feed_hash\`"
+          } >> "$GITHUB_STEP_SUMMARY"

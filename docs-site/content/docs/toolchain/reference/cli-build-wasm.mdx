@@ -1,0 +1,110 @@
+---
+title: build-wasm.sh (internals)
+description: Maintainer reference for the in-image build orchestrator — validate, bindings, link, pch, clean, exit codes.
+---
+
+<Callout type="info">
+  **Internals.** Custom builds are driven by the `libcascade` CLI — see
+  [CLI reference](./cli). `build-wasm.sh` is the orchestrator **inside** the
+  container image and in a from-source checkout; it is what the container's
+  entrypoint dispatches to. Read this when you are building the image itself.
+</Callout>
+
+`build-wasm.sh` is the orchestration entry point for the libcascade build pipeline.
+Each subcommand maps to a stage of the bindgen → compile → link sequence.
+
+## Synopsis
+
+```bash
+./build-wasm.sh <subcommand> [options] [<config-yaml>]
+```
+
+## Subcommands
+
+### `validate`
+
+```bash
+./build-wasm.sh validate build-configs/my-config.yml
+```
+
+Parses the YAML against `src/customBuildSchema.py` and fails non-zero on any
+malformed entry, unknown key, duplicated symbol, or missing
+`additionalCppFiles` path. Does **not** run the C++ pipeline.
+
+### `bindings`
+
+```bash
+./build-wasm.sh bindings
+```
+
+Runs the libclang-driven bindgen against the OCCT headers, emitting one
+`.hxx` per class under `build/bindings/<Module>/<Toolkit>/<Package>/` plus
+sidecar `.d.ts.json` shards.
+
+Cache: re-uses prior output when header contents and bindgen-filter
+fingerprint match. Force regeneration with `--force`.
+
+### `pch`
+
+```bash
+./build-wasm.sh pch
+```
+
+Builds the precompiled header used by every bindings TU. Always passes
+`-Xclang -fno-pch-timestamp` so Nx/Docker cache restores don't invalidate the
+PCH on disk-mtime drift.
+
+### `link`
+
+```bash
+./build-wasm.sh link build-configs/my-config.yml
+```
+
+Compiles every `.hxx` referenced by the YAML's `bindings:` list (cached `.o`
+files reused), links them against the precompiled OCCT objects under
+`dist/libs/`, and emits the final wasm + JS + `.d.ts` + manifest sibling to
+the YAML.
+
+### `clean`
+
+```bash
+./build-wasm.sh clean           # rm build/, cache/, dist/
+./build-wasm.sh clean --cache   # rm cache/ only
+./build-wasm.sh clean --dist    # rm dist/ only
+```
+
+## Exit codes
+
+| Code | Meaning |
+|---|---|
+| 0 | Success |
+| 1 | YAML validation failure |
+| 2 | bindgen failure (libclang error) |
+| 3 | Compile failure |
+| 4 | Link failure (undefined symbol or unresolved reference) |
+| 5 | Missing input file |
+| 64 | Invalid usage (unknown subcommand or flag) |
+
+## Common flags
+
+| Flag | Effect |
+|---|---|
+| `--config <name>` | Override `OCJS_CONFIG` for this run — selects a named preset from `build-configs/configurations.json`. |
+| `--force` | Bypass cache; rebuild from scratch |
+| `--verbose` | Equivalent to `OCJS_VERBOSE=1` |
+| `--jobs N` | Set `OCJS_PARALLEL_JOBS=N` |
+
+## Typical CI invocation
+
+```bash
+./build-wasm.sh validate build-configs/my-config.yml
+./build-wasm.sh link --jobs 8 build-configs/my-config.yml
+sha256sum dist/my-config.wasm
+```
+
+## Related
+
+- [CLI reference](./cli) — the `libcascade` bin, which is what custom builds use.
+- [Bindgen pipeline](../concepts/bindgen-pipeline) — stage diagram and artifact layout.
+- [Driver environment](./env-vars) — the `OCJS_*` catalogue this script reads.
+- [Container yml contract](./yaml-schema) — the yml this script consumes.

@@ -1,0 +1,6 @@
+extends: existence
+message: "Emojis are reserved for the page-actions component — keep body content emoji-free."
+level: warning
+tokens:
+  - '[\x{1F300}-\x{1FAFF}]'
+  - '[\x{2600}-\x{27BF}]'

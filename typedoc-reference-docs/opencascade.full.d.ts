@@ -1,1 +1,0 @@
-../dist/opencascade.full.d.ts

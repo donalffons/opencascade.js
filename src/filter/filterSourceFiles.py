@@ -1,8 +1,3 @@
-def filterSourceFile(filename):
-  # fatal error: 'TargetConditionals.h' file not found
-  if filename.endswith(".mm"):
-    return False
+"""Compatibility shim — re-exports from `ocjs_bindgen.filters.source_files` (PR 2.5)."""
 
-  if filename.endswith(".cxx") or filename.endswith(".cpp") or filename.endswith(".c"):
-    return True
-  return False
+from ocjs_bindgen.filters.source_files import filterSourceFile  # noqa: F401

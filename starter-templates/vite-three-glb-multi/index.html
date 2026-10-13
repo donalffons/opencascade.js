@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>libcascade multi + three.js GLB starter</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #1a1a1a;
+        color: #ddd;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+      #app {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        height: 100%;
+      }
+      header {
+        padding: 0.75rem 1rem;
+        background: #222;
+        border-bottom: 1px solid #333;
+      }
+      #libcascade-canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .status {
+        font-size: 0.85rem;
+        opacity: 0.7;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <strong>libcascade multi + three.js</strong>
+        <span class="status" id="status">booting…</span>
+      </header>
+      <canvas id="libcascade-canvas"></canvas>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+name: ghcr-retention
+
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+    inputs:
+      delete:
+        description: Delete the versions selected by the dry run
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  retain:
+    name: ghcr · retention
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Set up Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - name: Install locked test tools
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify retention policy
+        run: npx vitest run tests/ci/ci-contracts.test.ts
+      - name: Select and optionally delete expired versions
+        env:
+          DELETE_REQUESTED: ${{ github.event_name == 'schedule' || inputs.delete }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          args=()
+          if [ "$DELETE_REQUESTED" = true ]; then
+            args+=(--delete)
+          fi
+          node scripts/ghcr-retention.mjs "${args[@]}"

@@ -1,0 +1,6 @@
+extends: existence
+message: "Pages must open with a concrete sentence stating purpose, not 'Welcome to…'."
+level: error
+ignorecase: true
+tokens:
+  - '\bWelcome to\b'

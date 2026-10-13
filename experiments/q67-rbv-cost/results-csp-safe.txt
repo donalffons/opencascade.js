@@ -1,0 +1,11 @@
+Node: 24.10.0 V8: 13.6.233.10-node.28
+  E2 EM_JS uncached (re-lookup)      median= 1534 ns/op  (samples: 1525, 1532, 1534, 1537, 1537)
+  E2 EM_JS cached val handles        median= 1233 ns/op  (samples: 1222, 1231, 1233, 1235, 1412)
+  E2 no-dispose (lower bound)        median= 1091 ns/op  (samples: 1079, 1081, 1091, 1092, 1302)
+  E  Function(src) cached            median= 1261 ns/op  (samples: 1253, 1260, 1261, 1264, 1274)
+  E  Function(src) fresh             median= 2418 ns/op  (samples: 2403, 2406, 2418, 2431, 2433)
+  V7 embind free fn (no-op disp)     median= 1635 ns/op  (samples: 1617, 1627, 1635, 1645, 1823)
+
+E2 cached vs E2 uncached:    0.804x  (Δ=-301 ns/op)
+E2 cached vs E cached:       0.978x  (Δ=-28 ns/op)
+E2 cached dispose cost:      142 ns/op above bare val::object()

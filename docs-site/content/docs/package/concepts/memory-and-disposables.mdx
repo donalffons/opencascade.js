@@ -1,0 +1,226 @@
+---
+title: Memory and disposables
+description: How OCCT wraps the wasm heap — `using` syntax, Symbol.dispose, leak diagnostics, pool patterns.
+---
+
+Every OCCT object you allocate in JS — `gp_Pnt`, `TopoDS_Shape`,
+`BRepPrimAPI_MakeBox`, every handle, every container — owns memory inside the
+WebAssembly linear memory. Failing to release it leaks the wasm heap, which
+grows up to the 4 GB wasm32 ceiling and then crashes the runtime.
+
+## The `using` rule
+
+Declare every disposable OCCT object with `using` so the runtime invokes
+`[Symbol.dispose]()` when control leaves the scope.
+
+```typescript
+{
+  using box = new oc.BRepPrimAPI_MakeBox(10, 10, 10);
+  using shape = box.Shape(); // also disposable
+  // ... use box / shape ...
+} // ← both disposed here, in reverse declaration order
+```
+
+The libcascade source repository includes an oxlint rule, `ocjs-lint/require-using-on-disposable`,
+that flags any plain `const`/`let` declaration of a disposable as an error.
+It's wired into the in-repo `eslint.config.mjs` for the smoke-test suite but
+is **not** auto-installed by `pnpm add libcascade` — the published npm tarball ships
+the wasm, JS loader, `.d.ts`, API-reference feed, manifests, provenance, and
+changelogs. If you want the rule in your own project, copy it from the libcascade
+repo into your local lint setup.
+
+## Primitive-only result objects
+
+Result objects whose fields are all primitives (no nested OCCT objects) do
+**not** emit `[Symbol.dispose]`. You can use them without `using`:
+
+```typescript
+const bounds = surface.Bounds(0, 0, 0, 0);
+console.log(bounds.U1, bounds.U2, bounds.V1, bounds.V2);
+```
+
+An OCCT class is still disposable even when it represents a small value. For
+example, `gp_Pnt` owns a wasm-side C++ object, so both constructed and returned
+points need `using`:
+
+```typescript
+using point = p0.Transformed(transform);
+console.log(point.X(), point.Y(), point.Z());
+```
+
+Coordinate accessors like `X` / `Y` / `Z` are methods, not properties — see
+[Calling OCCT from JS](./calling-occt-from-js#methods-returning-values-use-)
+for the pattern.
+
+Containers with at least one disposable child auto-emit a `[Symbol.dispose]`
+that walks the children and disposes each. The lint rule above handles the
+classification automatically.
+
+## When `using` is not required
+
+`using` is required for anything that owns wasm memory and surfaces a
+`[Symbol.dispose]`. Four common shapes do **not** need a `using` on the call
+site — see [Return shapes](./return-shapes#when-do-i-need-using) for the full
+decision table.
+
+- **`void` methods with class-only outputs** — `curve.D0(u, pt)` returns
+  `void`; the `using` lives on the input `pt`, not the call result.
+- **Primitive / enum-only envelopes** — `surface.Bounds(0,0,0,0)` returns a
+  plain `{ U1, U2, V1, V2 }` object with no disposer; bind it with `const`.
+- **Native primitive returns** — `pnt.X()`, `list.Size()`, `face.IsNull()`
+  return numbers / booleans, never disposables.
+- **Forwarding ownership out of a helper** — when a function passes ownership
+  to its caller, the helper returns the disposable without `using` so the
+  caller binds it. The `DisposableStack.move()` pattern below is the
+  canonical OCCT idiom.
+
+## Composing lifetimes with `DisposableStack`
+
+The TC39 explicit-resource-management proposal also ships a built-in
+`DisposableStack` — a LIFO container that adopts disposables and disposes
+each one when the stack itself is disposed. Two OCCT-specific patterns
+recur often enough to keep in your toolbox.
+
+### `stack.use(...)` — adopt a multi-handle return value as one resource
+
+Some BRep_Tool overloads return an RBV envelope that owns several embind
+handles (e.g. `PolygonOnTriangulation` in its 2-arg form returns a
+`{ P, T }` pair). Binding the whole envelope through `using` is the
+easy path, but if you only want to forward it once and free everything in
+one shot — `stack.use()` adopts the envelope and lets the parent stack
+cascade through its `[Symbol.dispose]`.
+
+```typescript
+using stack = new DisposableStack();
+const r = stack.use(oc.BRep_Tool.PolygonOnTriangulation(edge, loc));
+// ... read r.P / r.T / r.L ...
+// stack disposes here, which disposes r, which disposes P/T/L in turn.
+```
+
+### `stack.move()` — transfer ownership out of a search loop
+
+The hardest OCCT lifetime puzzle is "iterate through a topology looking
+for a match; on hit, hand the owning handles to the caller; on miss, free
+everything before the next iteration". `using` alone can't express this
+because a `using` binding always disposes at scope exit. `DisposableStack`
+solves it: each iteration creates a fresh stack, adopts every interim
+handle, and on success `move()`s the stack into the return value (which
+empties the iteration-scoped stack so its scope-exit dispose is a no-op).
+
+```typescript
+import type {
+  Poly_Triangulation,
+  TopLoc_Location,
+  TopoDS_Edge,
+  TopoDS_Shape,
+} from 'libcascade';
+
+function findFirstTriangulatedEdge(shape: TopoDS_Shape):
+  DisposableStack & { edge: TopoDS_Edge; tri: Poly_Triangulation; loc: TopLoc_Location } {
+  const oc = getOC();
+  using explorer = new oc.TopExp_Explorer(shape, oc.TopAbs_ShapeEnum.TopAbs_EDGE, oc.TopAbs_ShapeEnum.TopAbs_SHAPE);
+
+  while (explorer.More()) {
+    using iterStack = new DisposableStack();
+    using current = explorer.Current();
+    const edge = iterStack.use(oc.TopoDS.Edge(current));
+    const loc = iterStack.use(new oc.TopLoc_Location());
+    // ... walk faces, look up triangulation ...
+    const tri = iterStack.use(oc.BRep_Tool.Triangulation(face, loc, 0));
+    if (!tri.isNull()) {
+      // Match: transfer ownership. `iterStack` is now empty, its scope-exit
+      // dispose is a no-op, and the returned stack owns edge/tri/loc.
+      return Object.assign(iterStack.move(), { edge, tri, loc });
+    }
+    explorer.Next();
+    // No match: `iterStack` disposes here, freeing edge/loc/tri this round.
+  }
+  throw new Error('no triangulated edge');
+}
+
+// Caller side — one `using` collects three handles:
+using ctx = findFirstTriangulatedEdge(shape);
+// The 3-arg PolygonOnTriangulation overload returns a native Handle smart
+// pointer (disposable). For the elision overload that returns the {P, T, L}
+// envelope, see the `stack.use()` example above.
+using polygon = oc.BRep_Tool.PolygonOnTriangulation(ctx.edge, ctx.tri, ctx.loc);
+```
+
+`DisposableStack` is part of the JS standard library wherever
+`[Symbol.dispose]` is — no libcascade-specific runtime is involved. See
+[MDN: DisposableStack](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DisposableStack)
+for the full surface (`defer`, `adopt`, `disposed`, etc.).
+
+## Pool pattern for hot loops
+
+In a render loop you may allocate the same OCCT object hundreds of times per
+second. Allocate once, reuse, dispose once:
+
+```typescript
+class TransformPool {
+  private readonly transforms = new Map<string, typeof oc.gp_Trsf>();
+
+  get(key: string): typeof oc.gp_Trsf {
+    let trsf = this.transforms.get(key);
+    if (!trsf) {
+      trsf = new oc.gp_Trsf();
+      this.transforms.set(key, trsf);
+    }
+    return trsf;
+  }
+
+  [Symbol.dispose]() {
+    for (const trsf of this.transforms.values()) trsf[Symbol.dispose]();
+    this.transforms.clear();
+  }
+}
+
+using pool = new TransformPool();
+for (let i = 0; i < 1000; i++) {
+  const trsf = pool.get(`rot-${i % 8}`);
+  trsf.SetRotation(axis, i * 0.01);
+  // ...
+}
+```
+
+## Diagnosing leaks
+
+Wasm heap grows monotonically — to detect a leak, measure the live memory
+buffer before and after a representative workload.
+
+```typescript
+const before = oc.wasmMemory.buffer.byteLength;
+runWorkload();
+const after = oc.wasmMemory.buffer.byteLength;
+console.log(`heap delta: ${(after - before) / 1024} KB`);
+```
+
+For deep audits, build with `-sASSERTIONS=2 -fsanitize=leak` (debug builds
+only) and the runtime prints a leak summary on `process.exit()`.
+
+## What `[Symbol.dispose]` actually does
+
+Calls the wrapped object's C++ destructor through the embind glue. For
+handles, this decrements the refcount; for value types, it frees the C++
+allocation. The JS wrapper object becomes invalid — subsequent method calls
+throw an embind error (text varies, typically along the lines of
+`BindingError: <T> instance already deleted`).
+
+## Pitfalls
+
+- **`using` inside an `if (cond)` branch** disposes when control exits the
+  branch, not when the outer block ends. Move the declaration up if you need
+  it across the branch.
+- **Returning a `using` value** disposes it before the caller sees it. Use a
+  plain `const` for return values and disposal at the call site.
+- **Passing a disposed object as a parameter** throws on every method.
+  Disciplined `using` placement is the cheapest defence.
+
+## Related
+
+- [Calling OCCT from JS](./calling-occt-from-js) — overload dispatch, enums,
+  defaults, and the `TopoDS` downcast bridge.
+- [Return shapes](./return-shapes) — when a call returns an envelope, a
+  native value, or an in-place class output, and which of those need `using`.
+- [Handles and collections](./handles-and-collections) — `isNull` / `nullify`
+  on smart pointers and the `NCollection_*` container family.

@@ -1,0 +1,6 @@
+Node: 24.10.0 V8: 13.6.233.10-node.28
+  V6 cached  (cpp dispose, no JS)      1307 ns/op
+  V6 fresh   (new Function/call)       2436 ns/op
+  V7 embind free fn (no dispose)       2053 ns/op
+
+Speed-up V6_cached vs V6_fresh: 1.86x

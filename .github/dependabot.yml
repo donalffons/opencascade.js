@@ -1,0 +1,38 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ['*']
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      root:
+        patterns: ['*']
+
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      python:
+        patterns: ['*']
+
+  - package-ecosystem: npm
+    directories:
+      - /docs-site
+      - /starter-templates/next-three-glb
+      - /starter-templates/node-step-export
+      - /starter-templates/vite-three-glb
+      - /starter-templates/vite-three-glb-multi
+    schedule:
+      interval: weekly
+    groups:
+      consumers:
+        patterns: ['*']
